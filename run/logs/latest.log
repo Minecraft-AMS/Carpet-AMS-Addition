@@ -1,0 +1,48 @@
+[14:41:32] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.18.2 with Fabric Loader 0.13.3
+[14:41:32] [main/INFO] (FabricLoader) Loading 38 mods:
+	- amscarpet 0.0.1
+	- carpet 1.4.67
+	- fabric 0.48.0+1.18.2
+	- fabric-api-base 0.4.4+d7c144a860
+	- fabric-api-lookup-api-v1 1.5.7+d7c144a860
+	- fabric-biome-api-v1 8.0.3+801ec85b60
+	- fabric-command-api-v1 1.1.9+d7c144a860
+	- fabric-commands-v0 0.2.8+b4f4f6cd60
+	- fabric-containers-v0 0.1.21+d7c144a860
+	- fabric-content-registries-v0 3.0.2+d82b939260
+	- fabric-crash-report-info-v1 0.1.11+3ac43d9560
+	- fabric-data-generation-api-v1 2.0.7+6d3e563660
+	- fabric-dimensions-v1 2.1.17+2540745460
+	- fabric-entity-events-v1 1.4.8+d7c144a860
+	- fabric-events-interaction-v0 0.4.19+d7c144a860
+	- fabric-events-lifecycle-v0 0.2.13+d7c144a860
+	- fabric-game-rule-api-v1 1.0.13+d7c144a860
+	- fabric-gametest-api-v1 1.0.15+2540745460
+	- fabric-item-api-v1 1.3.3+691a79b560
+	- fabric-item-groups-v0 0.3.10+3ac43d9560
+	- fabric-lifecycle-events-v1 2.0.2+2540745460
+	- fabric-loot-tables-v1 1.0.11+d7c144a860
+	- fabric-mining-level-api-v1 2.0.4+d1027f7d60
+	- fabric-networking-api-v1 1.0.21+d882b91560
+	- fabric-networking-v0 0.3.8+b4f4f6cd60
+	- fabric-object-builder-api-v1 2.0.3+40c91ec860
+	- fabric-particles-v1 0.2.12+526dc1ac60
+	- fabric-registry-sync-v0 0.9.8+0d9ab37260
+	- fabric-rendering-data-attachment-v1 0.3.7+d7c144a860
+	- fabric-rendering-fluids-v1 2.0.2+54e5b2ec60
+	- fabric-resource-conditions-api-v1 2.0.2+d1027f7d60
+	- fabric-resource-loader-v0 0.4.18+2de5574560
+	- fabric-screen-handler-api-v1 1.1.14+40c91ec860
+	- fabric-transfer-api-v1 1.5.14+cca23f9360
+	- fabric-transitive-access-wideners-v1 1.0.0+40c91ec860
+	- fabricloader 0.13.3
+	- java 17
+	- minecraft 1.18.2
+[14:41:33] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.5 Source=file:/C:/Users/22704/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.11.2+mixin.0.8.5/f4ae569d559b5e3244b67321945261d83ff7ad8e/sponge-mixin-0.11.2+mixin.0.8.5.jar Service=Knot/Fabric Env=SERVER
+[14:41:33] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
+[14:41:33] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
+[14:41:33] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
+[14:41:36] [main/WARN] (FabricLoader/Mixin) @Inject(@At("INVOKE")) Shift.BY=3 on fabric-lifecycle-events-v1.mixins.json:server.WorldChunkMixin::handler$zld000$onLoadBlockEntity exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
+[14:41:40] [main/ERROR] (Minecraft) Failed to load properties from file: server.properties
+[14:41:40] [main/WARN] (Minecraft) Failed to load eula.txt
+[14:41:40] [main/INFO] (Minecraft) You need to agree to the EULA in order to run the server. Go to eula.txt for more info.

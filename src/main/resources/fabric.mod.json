@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "amscarpet.mixins.json"
   ],
 
   "depends": {
