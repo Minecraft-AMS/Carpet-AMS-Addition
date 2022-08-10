@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "amscarpet",
-  "version": "0.0.1",
+  "version": "0.0.3",
 
   "name": "Carpet AMS Addition",
   "description": "添加了一些生存实用功能（可能不是很原版）",

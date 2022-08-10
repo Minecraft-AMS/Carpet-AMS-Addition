@@ -7,7 +7,12 @@ import java.util.Comparator;
 
 
 public class NoteBlockChunkLoader {
-            public static final ChunkTicketType<ChunkPos> NOTE_BLOCK = ChunkTicketType.create("note_block", Comparator.comparingLong(ChunkPos::toLong), 300);
+            public static final ChunkTicketType<ChunkPos>
+                    NOTE_BLOCK = ChunkTicketType.create
+                    (
+                            "note_block", Comparator.comparingLong(ChunkPos::toLong),
+                            300
+                    );
 }
 
 
