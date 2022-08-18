@@ -10,6 +10,5 @@ fabric 1.18.2 JE<br>
 <br>
 3、Cactusfarm（0t仙人掌农场）【恢复0t仙人掌催熟机制，像1.15一样】<br>
 <br>
-此模组在完善当中，暂时不会适配其他版本，如果有适配版本的需要可通过我们的服务器官网：mcams.club 来联系我<br>
-<br>
-注：A Minecraft Server服务器并不会使用所有功能<br>
+注：此模组在完善当中，暂时不会适配其他版本<br>
+A Minecraft Server服务器并不会使用所有功能<br>
