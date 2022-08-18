@@ -19,8 +19,13 @@ public class AmsServerSettings
 
     @Rule(
             desc = "让弓可以同时拥有无限与经验修补",
-            extra = {"Infinity&&Enchanted-Bow"},
             category = {AMS,FEATURE,SURVIVAL}
     )
     public static boolean InfinityEanchantedBow = false;
+
+    @Rule(
+            desc = "恢复0t仙人掌催熟机制，像1.15一样",
+            category = {AMS, FEATURE, SURVIVAL}
+    )
+    public static boolean Cactusfarm = false;
 }

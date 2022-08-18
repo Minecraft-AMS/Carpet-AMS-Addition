@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "amscarpet",
-  "version": "0.0.3",
+  "version": "0.0.4",
 
   "name": "Carpet AMS Addition",
-  "description": "添加了一些生存实用功能（可能不是很原版）",
+  "description": "TOO VANILLA",
   "authors": [
     "1024_byte"
   ],
   "contact": {
-    "homepage": "mcams.club",
-    "sources": "mcams.club"
+    "homepage": "https://mcams.club/",
+    "sources": "https://mcams.club/"
   },
 
   "license": "LGPL-3.0",

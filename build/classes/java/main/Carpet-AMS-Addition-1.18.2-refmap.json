@@ -1,0 +1,20 @@
+{
+  "mappings": {
+    "club/mcams/carpet/mixin/CactusfarmMixin": {
+      "scheduledTick": "Lnet/minecraft/class_2266;method_9588(Lnet/minecraft/class_2680;Lnet/minecraft/class_3218;Lnet/minecraft/class_2338;Ljava/util/Random;)V"
+    },
+    "club/mcams/carpet/mixin/NoteBlockChunkLoaderMixin": {
+      "playNote": "Lnet/minecraft/class_2428;method_10367(Lnet/minecraft/class_1937;Lnet/minecraft/class_2338;)V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "club/mcams/carpet/mixin/CactusfarmMixin": {
+        "scheduledTick": "Lnet/minecraft/class_2266;method_9588(Lnet/minecraft/class_2680;Lnet/minecraft/class_3218;Lnet/minecraft/class_2338;Ljava/util/Random;)V"
+      },
+      "club/mcams/carpet/mixin/NoteBlockChunkLoaderMixin": {
+        "playNote": "Lnet/minecraft/class_2428;method_10367(Lnet/minecraft/class_1937;Lnet/minecraft/class_2338;)V"
+      }
+    }
+  }
+}
