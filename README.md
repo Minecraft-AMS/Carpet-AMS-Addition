@@ -12,4 +12,4 @@ fabric 1.18.2 JE<br>
 <br>
 注:此模组在完善当中，暂时不会适配其他版本<br>
 <br>
-   A Minecraft Server服务器并不会使用所有功能<br>
+   A Minecraft Server并不会使用所有功能<br>
