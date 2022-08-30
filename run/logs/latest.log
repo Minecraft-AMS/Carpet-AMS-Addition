@@ -1,6 +1,6 @@
-[10:29:37] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.18.2 with Fabric Loader 0.13.3
-[10:29:37] [main/INFO] (FabricLoader) Loading 50 mods:
-	- amscarpet 0.0.1
+[17:23:21] [main/INFO] (FabricLoader/GameProvider) Loading Minecraft 1.18.2 with Fabric Loader 0.13.3
+[17:23:21] [main/INFO] (FabricLoader) Loading 50 mods:
+	- amscarpet 0.0.4
 	- carpet 1.4.67
 	- fabric 0.48.0+1.18.2
 	- fabric-api-base 0.4.4+d7c144a860
@@ -50,13 +50,13 @@
 	- java 17
 	- minecraft 1.18.2
 	- modmenu 3.2.3
-[10:29:40] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.5 Source=file:/C:/Users/22704/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.11.2+mixin.0.8.5/f4ae569d559b5e3244b67321945261d83ff7ad8e/sponge-mixin-0.11.2+mixin.0.8.5.jar Service=Knot/Fabric Env=CLIENT
-[10:29:40] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
-[10:29:40] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
-[10:29:40] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
-[10:29:44] [main/WARN] (FabricLoader/Mixin) @Inject(@At("INVOKE")) Shift.BY=3 on fabric-lifecycle-events-v1.mixins.json:client.WorldChunkMixin::handler$bbg000$onLoadBlockEntity exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
-[10:29:47] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[10:29:48] [Render thread/ERROR] (Minecraft) Failed to verify authentication
+[17:23:29] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.5 Source=file:/C:/Users/22704/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.11.2+mixin.0.8.5/f4ae569d559b5e3244b67321945261d83ff7ad8e/sponge-mixin-0.11.2+mixin.0.8.5.jar Service=Knot/Fabric Env=CLIENT
+[17:23:29] [main/INFO] (FabricLoader/Mixin) Loaded Fabric development mappings for mixin remapper!
+[17:23:29] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_16
+[17:23:29] [main/INFO] (FabricLoader/Mixin) Compatibility level set to JAVA_17
+[17:23:35] [main/WARN] (FabricLoader/Mixin) @Inject(@At("INVOKE")) Shift.BY=3 on fabric-lifecycle-events-v1.mixins.json:client.WorldChunkMixin::handler$zfc000$onLoadBlockEntity exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
+[17:23:44] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[17:23:46] [Render thread/ERROR] (Minecraft) Failed to verify authentication
 com.mojang.authlib.exceptions.InvalidCredentialsException: Status: 401
 	at com.mojang.authlib.exceptions.MinecraftClientHttpException.toAuthenticationException(MinecraftClientHttpException.java:56) ~[authlib-3.3.39.jar:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:132) ~[authlib-3.3.39.jar:?]
@@ -78,72 +78,82 @@ Caused by: com.mojang.authlib.exceptions.MinecraftClientHttpException: Status: 4
 	at com.mojang.authlib.minecraft.client.MinecraftClient.get(MinecraftClient.java:48) ~[authlib-3.3.39.jar:?]
 	at com.mojang.authlib.yggdrasil.YggdrasilUserApiService.fetchProperties(YggdrasilUserApiService.java:113) ~[authlib-3.3.39.jar:?]
 	... 13 more
-[10:29:48] [Render thread/INFO] (Minecraft) Setting user: Player233
-[10:29:50] [Render thread/INFO] (Indigo) [Indigo] Registering Indigo renderer!
-[10:29:50] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.2.2 build 10
-[10:29:56] [Render thread/INFO] (Minecraft) Narrator library for x64 successfully loaded
-[10:29:56] [Render thread/INFO] (Minecraft) Reloading ResourceManager: Default, Fabric Mods (Fabric Loot Tables (v1), Carpet Mod, Fabric Key Binding API (v1), Fabric API Base, Fabric Containers (v0), Fabric Events Lifecycle (v0), Fabric Screen API (v1), Fabric Dimensions API (v1), Fabric Resource Conditions API (v1), Fabric Entity Events (v1), Fabric Networking API (v1), Fabric Key Bindings (v0), Mod Menu, Fabric Registry Sync (v0), Fabric Content Registries (v0), Fabric Events Interaction (v0), Fabric Renderer Registries (v1), Fabric Renderer - Indigo, Fabric API Lookup API (v1), Fabric Transfer API (v1), Fabric Resource Loader (v0), Fabric Networking (v0), Fabric Data Generation API (v1), Fabric Game Rule API (v1), Fabric Particles (v1), Fabric Rendering (v1), Fabric Item Groups (v0), Fabric Screen Handler API (v1), Fabric Rendering Fluids (v1), Fabric BlockRenderLayer Registration (v1), Fabric Loader, Fabric Command API (v1), Fabric Rendering (v0), Carpet AMS Addition, Fabric Biome API (v1), Fabric Object Builder API (v1), Fabric Textures (v0), Fabric Renderer API (v1), Fabric Models (v0), Fabric Transitive Access Wideners (v1), Fabric Commands (v0), Fabric Crash Report Info (v1), Fabric Item API (v1), Fabric Rendering Data Attachment (v1), Fabric Lifecycle Events (v1), Fabric API, Fabric Mining Level API (v1), Fabric Game Test API (v1))
-[10:29:58] [Realms Notification Availability checker #1/INFO] (Minecraft) Could not authorize you against Realms server: Invalid session id
-[10:29:59] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on 耳机 (Realtek(R) Audio)
-[10:29:59] [Render thread/INFO] (Minecraft) Sound engine started
-[10:30:00] [Render thread/INFO] (Minecraft) Created: 1024x1024x4 minecraft:textures/atlas/blocks.png-atlas
-[10:30:00] [Render thread/INFO] (Minecraft) Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
-[10:30:00] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
-[10:30:00] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
-[10:30:00] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
-[10:30:00] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
-[10:30:00] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
-[10:30:01] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
-[10:30:01] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
-[10:30:01] [Render thread/INFO] (Minecraft) Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
-[10:30:05] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[10:30:05] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[10:30:05] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[10:30:05] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[10:30:05] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[10:30:06] [Render thread/INFO] (Minecraft) Loaded 7 recipes
-[10:30:06] [Render thread/INFO] (Minecraft) Loaded 1141 advancements
-[10:30:06] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
-[10:30:06] [Render thread/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 61 new biomes in 1.765 ms
-[10:30:06] [Server thread/INFO] (Minecraft) Starting integrated minecraft server version 1.18.2
-[10:30:06] [Server thread/INFO] (Minecraft) Generating keypair
-[10:30:06] [Server thread/INFO] (carpet) [CM]: loaded setting InfinityEanchantedBow as true from carpet.conf
-[10:30:06] [Server thread/INFO] (carpet) [CM]: loaded setting language as zh_cn from carpet.conf
-[10:30:06] [Server thread/INFO] (Minecraft) Preparing start region for dimension minecraft:overworld
-[10:30:07] [Render thread/INFO] (Minecraft) 准备生成区域中：0%
-[10:30:07] [Render thread/INFO] (Minecraft) 准备生成区域中：0%
-[10:30:07] [Render thread/INFO] (Minecraft) 准备生成区域中：3%
-[10:30:08] [Render thread/INFO] (Minecraft) 准备生成区域中：84%
-[10:30:08] [Render thread/INFO] (Minecraft) Time elapsed: 1812 ms
-[10:30:08] [Server thread/INFO] (Minecraft) Changing view distance to 5, from 10
-[10:30:08] [Server thread/INFO] (Minecraft) Changing simulation distance to 5, from 0
-[10:30:09] [Server thread/INFO] (Minecraft) Player233[local:E:ab280bc7] logged in with entity id 1 at (-13.96765753598995, 56.0, 18.472065748839196)
-[10:30:09] [Server thread/INFO] (Minecraft) Player233加入了游戏
-[10:30:09] [Render thread/INFO] (Minecraft) Loaded 3 advancements
-[10:30:18] [Server thread/INFO] (Minecraft) [Player233: 目前启用的 Carpet Mod 选项:]
-[10:30:18] [Server thread/INFO] (Minecraft) [Player233: - InfinityEanchantedBow [true] [false]]
-[10:30:18] [Server thread/INFO] (Minecraft) [Player233: - 语言 (language) [none] [zh_cn] [zh_tw]]
-[10:30:18] [Server thread/INFO] (Minecraft) [Player233: Carpet Mod 版本: 1.4.67+v220318]
-[10:30:18] [Server thread/INFO] (Minecraft) [Player233: 浏览分类:
-[AMS] [生存] [extras] [试验性] [指令] [创造] [发射器] [特性] [优化] [Scarpet脚本语言] [客户端] [TNT] [漏洞修复]]
-[10:30:18] [Render thread/INFO] (Minecraft) [CHAT] 目前启用的 Carpet Mod 选项:
-[10:30:18] [Render thread/INFO] (Minecraft) [CHAT] - InfinityEanchantedBow [true] [false]
-[10:30:18] [Render thread/INFO] (Minecraft) [CHAT] - 语言 (language) [none] [zh_cn] [zh_tw]
-[10:30:18] [Render thread/INFO] (Minecraft) [CHAT] Carpet Mod 版本: 1.4.67+v220318
-[10:30:18] [Render thread/INFO] (Minecraft) [CHAT] 浏览分类:\n[AMS] [生存] [extras] [试验性] [指令] [创造] [发射器] [特性] [优化] [Scarpet脚本语言] [客户端] [TNT] [漏洞修复]
-[10:30:21] [Server thread/INFO] (Minecraft) [Player233: InfinityEanchantedBow: false, [永久更改?]]
-[10:30:21] [Render thread/INFO] (Minecraft) [CHAT] InfinityEanchantedBow: false, [永久更改?]
-[10:34:06] [Render thread/INFO] (Minecraft) Stopping!
-[10:34:06] [Server thread/INFO] (Minecraft) Player233 lost connection: 连接中止
-[10:34:06] [Server thread/INFO] (Minecraft) Player233退出了游戏
-[10:34:06] [Server thread/INFO] (Minecraft) Stopping singleplayer server as player logged out
-[10:34:07] [Server thread/INFO] (Minecraft) Stopping server
-[10:34:07] [Server thread/INFO] (Minecraft) Saving players
-[10:34:07] [Server thread/INFO] (Minecraft) Saving worlds
-[10:34:07] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
-[10:34:07] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
-[10:34:07] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
-[10:34:07] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (新的世界): All chunks are saved
-[10:34:07] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[10:34:07] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[10:34:07] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
+[17:23:46] [Render thread/INFO] (Minecraft) Setting user: Player537
+[17:23:47] [Render thread/INFO] (Indigo) [Indigo] Registering Indigo renderer!
+[17:23:48] [Render thread/INFO] (Minecraft) Backend library: LWJGL version 3.2.2 build 10
+[17:23:56] [Render thread/INFO] (Minecraft) Narrator library for x64 successfully loaded
+[17:23:56] [Render thread/INFO] (Minecraft) Reloading ResourceManager: Default, Fabric Mods (Fabric Containers (v0), Fabric Item API (v1), Fabric Loot Tables (v1), Fabric Game Test API (v1), Fabric Rendering (v1), Fabric Biome API (v1), Fabric Content Registries (v0), Fabric Models (v0), Fabric Mining Level API (v1), Fabric Item Groups (v0), Fabric Screen API (v1), Fabric Resource Loader (v0), Fabric Key Bindings (v0), Fabric Command API (v1), Fabric Networking (v0), Fabric Renderer API (v1), Fabric Rendering Data Attachment (v1), Fabric Transitive Access Wideners (v1), Fabric BlockRenderLayer Registration (v1), Fabric Commands (v0), Fabric Key Binding API (v1), Fabric Events Lifecycle (v0), Fabric API Lookup API (v1), Fabric Renderer Registries (v1), Fabric Transfer API (v1), Fabric Crash Report Info (v1), Fabric Particles (v1), Fabric Rendering Fluids (v1), Fabric Lifecycle Events (v1), Carpet Mod, Fabric Registry Sync (v0), Fabric API Base, Fabric Dimensions API (v1), Fabric Data Generation API (v1), Fabric Resource Conditions API (v1), Fabric Game Rule API (v1), Fabric Networking API (v1), Fabric Rendering (v0), Fabric Renderer - Indigo, Fabric Textures (v0), Fabric API, Mod Menu, Fabric Loader, Carpet AMS Addition, Fabric Object Builder API (v1), Fabric Entity Events (v1), Fabric Events Interaction (v0), Fabric Screen Handler API (v1))
+[17:23:58] [Realms Notification Availability checker #1/INFO] (Minecraft) Could not authorize you against Realms server: Invalid session id
+[17:24:00] [Render thread/INFO] (Minecraft) OpenAL initialized on device OpenAL Soft on 耳机 (Realtek(R) Audio)
+[17:24:00] [Render thread/INFO] (Minecraft) Sound engine started
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 1024x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 256x128x4 minecraft:textures/atlas/signs.png-atlas
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 1024x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/particles.png-atlas
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[17:24:01] [Render thread/INFO] (Minecraft) Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[17:24:13] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[17:24:13] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[17:24:13] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[17:24:13] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[17:24:13] [Render thread/WARN] (Minecraft) Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[17:24:14] [Render thread/INFO] (Minecraft) Loaded 7 recipes
+[17:24:14] [Render thread/INFO] (Minecraft) Loaded 1141 advancements
+[17:24:15] [Render thread/INFO] (Minecraft) Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[17:24:15] [Render thread/INFO] (BiomeModificationImpl) Applied 0 biome modifications to 0 of 61 new biomes in 1.905 ms
+[17:24:15] [Server thread/INFO] (Minecraft) Starting integrated minecraft server version 1.18.2
+[17:24:15] [Server thread/INFO] (Minecraft) Generating keypair
+[17:24:16] [Server thread/INFO] (Minecraft) Preparing start region for dimension minecraft:overworld
+[17:24:16] [Render thread/INFO] (Minecraft) 准备生成区域中：0%
+[17:24:16] [Render thread/INFO] (Minecraft) 准备生成区域中：0%
+[17:24:17] [Render thread/INFO] (Minecraft) 准备生成区域中：1%
+[17:24:17] [Render thread/INFO] (Minecraft) 准备生成区域中：1%
+[17:24:18] [Render thread/INFO] (Minecraft) 准备生成区域中：2%
+[17:24:18] [Render thread/INFO] (Minecraft) 准备生成区域中：10%
+[17:24:19] [Render thread/INFO] (Minecraft) 准备生成区域中：11%
+[17:24:19] [Render thread/INFO] (Minecraft) 准备生成区域中：11%
+[17:24:20] [Render thread/INFO] (Minecraft) 准备生成区域中：30%
+[17:24:20] [Render thread/INFO] (Minecraft) 准备生成区域中：37%
+[17:24:21] [Render thread/INFO] (Minecraft) 准备生成区域中：50%
+[17:24:21] [Render thread/INFO] (Minecraft) 准备生成区域中：60%
+[17:24:22] [Render thread/INFO] (Minecraft) 准备生成区域中：72%
+[17:24:22] [Render thread/INFO] (Minecraft) 准备生成区域中：72%
+[17:24:23] [Render thread/INFO] (Minecraft) 准备生成区域中：89%
+[17:24:23] [Render thread/INFO] (Minecraft) Time elapsed: 7103 ms
+[17:24:23] [Server thread/INFO] (Minecraft) Changing view distance to 5, from 10
+[17:24:23] [Server thread/INFO] (Minecraft) Changing simulation distance to 5, from 0
+[17:24:23] [Server thread/INFO] (Minecraft) Player537[local:E:a6dae36b] logged in with entity id 31 at (5.5, -60.0, 9.5)
+[17:24:23] [Server thread/INFO] (Minecraft) Player537加入了游戏
+[17:24:23] [Render thread/INFO] (Minecraft) Loaded 0 advancements
+[17:24:44] [Render thread/INFO] (Minecraft) Loaded 3 advancements
+[17:24:49] [Server thread/INFO] (Minecraft) [Player537: Cactusfarm: true, [change permanently?]]
+[17:24:49] [Render thread/INFO] (Minecraft) [CHAT] Cactusfarm: true, [change permanently?]
+[17:24:56] [Render thread/INFO] (Minecraft) Loaded 4 advancements
+[17:26:42] [Server thread/INFO] (Minecraft) Saving and pausing game...
+[17:26:42] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[17:26:42] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[17:26:42] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[17:26:46] [Server thread/INFO] (Minecraft) Saving and pausing game...
+[17:26:46] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[17:26:46] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[17:26:46] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[17:26:46] [Server thread/INFO] (Minecraft) Player537 lost connection: 连接中止
+[17:26:46] [Server thread/INFO] (Minecraft) Player537退出了游戏
+[17:26:46] [Server thread/INFO] (Minecraft) Stopping singleplayer server as player logged out
+[17:26:46] [Server thread/INFO] (Minecraft) Stopping server
+[17:26:46] [Server thread/INFO] (Minecraft) Saving players
+[17:26:46] [Server thread/INFO] (Minecraft) Saving worlds
+[17:26:47] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:overworld
+[17:26:47] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_nether
+[17:26:47] [Server thread/INFO] (Minecraft) Saving chunks for level 'ServerLevel[新的世界]'/minecraft:the_end
+[17:26:47] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (新的世界): All chunks are saved
+[17:26:47] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[17:26:47] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[17:26:47] [Server thread/INFO] (Minecraft) ThreadedAnvilChunkStorage: All dimensions are saved
+[17:27:35] [Render thread/INFO] (Minecraft) Deleting level 新的世界
+[17:27:35] [Render thread/INFO] (Minecraft) Attempt 1...
+[17:27:36] [Render thread/INFO] (Minecraft) Stopping!
