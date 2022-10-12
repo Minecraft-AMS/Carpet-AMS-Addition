@@ -22,10 +22,10 @@
 
 一些链接：
 
-1、NoteBlockChunkLoader：功能实现代码来自memorydream<br>
+1、NoteBlockChunkLoader：主要功能实现代码来自memorydream<br>
 需要1.15.x - 1.16.x版本请前往：https://github.com/GC-server-CN/NoteBlockChunkLoader
 
-2、zeroTick：0t催熟系列功能实现代码来自keuin<br>
+2、zeroTick：0t催熟系列主要功能实现代码来自keuin<br>
 需要1.16.4/1.16.5版本请前往：https://github.com/hit-mc/OhMyVanillaMinecraft
 
 注：由于一些功能是低版本模组升级而来，不确定有没有严重问题，由于能力有限所以此mod不负责后续问题处理
