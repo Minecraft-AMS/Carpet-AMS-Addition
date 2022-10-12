@@ -19,13 +19,43 @@ public class AmsServerSettings
 
     @Rule(
             desc = "让弓可以同时拥有无限与经验修补",
-            category = {AMS,FEATURE,SURVIVAL}
+            category = {AMS,FEATURE}
     )
-    public static boolean InfinityEanchantedBow = false;
+    public static boolean SuperBow = false;
 
     @Rule(
-            desc = "恢复0t仙人掌催熟机制，像1.15一样",
+            desc = "0t仙人掌催熟",
             category = {AMS, FEATURE, SURVIVAL}
     )
-    public static boolean Cactusfarm = false;
+    public static boolean zeroTickCactus = false;
+
+    @Rule(
+            desc = "0t竹子催熟",
+            category = {AMS, FEATURE, SURVIVAL}
+    )
+    public static boolean zeroTickBamboo = false;
+
+    @Rule(
+            desc = "0t紫颂花催熟",
+            category = {AMS, FEATURE, SURVIVAL}
+    )
+    public static boolean zeroTickChorusFlower = false;
+
+    @Rule(
+            desc = "0t甘蔗催熟",
+            category = {AMS, FEATURE, SURVIVAL}
+    )
+    public static boolean zeroTickSugarCane = false;
+
+    @Rule(
+            desc = "0t海带、缠怨藤、垂泪藤",
+            category = {AMS, FEATURE, SURVIVAL}
+    )
+    public static boolean zeroTickStem = false;
+
+    @Rule(
+            desc = "0t催熟总开关",
+            category = {AMS, FEATURE, SURVIVAL}
+    )
+    public static boolean ALLzeroTick = false;
 }

@@ -20,7 +20,7 @@ public abstract class NoteBlockChunkLoaderMixin
     @Inject(at = @At("HEAD"), method = "playNote")
     private void loadChunk(World world, BlockPos pos, CallbackInfo info)
     {
-        if(AmsServerSettings.NoteBlockChunkLoader == true)
+        if(AmsServerSettings.NoteBlockChunkLoader)
         {
             ChunkPos cp = new ChunkPos(pos.getX() >> 4, pos.getZ() >> 4);
             ((ServerWorld) world).getChunkManager().addTicket(NoteBlockChunkLoader.NOTE_BLOCK, cp, 3, cp);

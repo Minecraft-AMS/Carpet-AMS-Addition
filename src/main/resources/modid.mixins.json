@@ -5,8 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "NoteBlockChunkLoaderMixin",
-    "InfinityEnchantmentBowMixin",
-    "CactusfarmMixin"
+    "SuperBow"
   ],
   "client": [
 
