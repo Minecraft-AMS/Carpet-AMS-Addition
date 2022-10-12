@@ -1,2 +1,0 @@
-v1	named	intermediary
-METHOD	club/mcams/carpet/mixin/CactusfarmMixin	(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V	randomTick	method_9514
