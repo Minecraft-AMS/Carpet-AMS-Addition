@@ -1,0 +1,9 @@
+v1	named	intermediary
+METHOD	club/mcams/carpet/mixin/ALLzeroTick/BambooBlockMixin	(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V	randomTick	method_9514
+METHOD	club/mcams/carpet/mixin/ALLzeroTick/CactusBlockMixin	(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V	randomTick	method_9514
+METHOD	club/mcams/carpet/mixin/ALLzeroTick/ChorusFlowerBlockMixin	(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V	randomTick	method_9514
+METHOD	club/mcams/carpet/mixin/ALLzeroTick/SugarCaneBlockMixin	(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V	randomTick	method_9514
+METHOD	club/mcams/carpet/mixin/zeroTick/BambooBlockMixin	(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V	randomTick	method_9514
+METHOD	club/mcams/carpet/mixin/zeroTick/CactusBlockMixin	(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V	randomTick	method_9514
+METHOD	club/mcams/carpet/mixin/zeroTick/ChorusFlowerBlockMixin	(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V	randomTick	method_9514
+METHOD	club/mcams/carpet/mixin/zeroTick/SugarCaneBlockMixin	(Lnet/minecraft/block/BlockState;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)V	randomTick	method_9514
