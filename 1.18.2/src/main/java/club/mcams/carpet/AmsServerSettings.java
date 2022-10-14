@@ -58,4 +58,10 @@ public class AmsServerSettings
             category = {AMS, FEATURE, SURVIVAL}
     )
     public static boolean ALLzeroTick = false;
+
+    @Rule(
+            desc = "末影龙复活过程检测优化",
+            category = {AMS, OPTIMIZATION}
+    )
+    public static boolean optimizationDragonRespawn = false;
 }

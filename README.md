@@ -21,6 +21,8 @@
 
 8、ALLzeroTick【0t催熟总开关，使用该选项时确保其他关于0t催熟特性的功能为关闭状态】
 
+9、optimizedDragonRespawn【专为高版本末地石农场设计的优化选项，只寻找范围内一个合法门并进行填充】
+
 一些链接：
 
 1、NoteBlockChunkLoader：主要功能实现代码来自memorydream<br>
