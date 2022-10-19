@@ -15,7 +15,8 @@
     "ALLzeroTick.BambooBlockMixin",
     "ALLzeroTick.CactusBlockMixin",
     "ALLzeroTick.ChorusFlowerBlockMixin",
-    "ALLzeroTick.SugarCaneBlockMixin"
+    "ALLzeroTick.SugarCaneBlockMixin",
+    "optimizedDragonRespawn"
   ],
   "client": [
 
