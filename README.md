@@ -21,6 +21,8 @@
 
 8、ALLzeroTick【0t催熟总开关，使用该选项时确保其他关于0t催熟特性的功能为关闭状态】
 
+9、optimizedDragonRespawn【大幅度优化了判定代码的性能表现,可能影响原版特性】
+
 一些链接：
 
 1、NoteBlockChunkLoader：主要功能实现代码来自memorydream<br>
