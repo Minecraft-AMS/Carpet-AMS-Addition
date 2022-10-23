@@ -4,6 +4,10 @@ plugins {
 }
 repositories {
 	maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+	maven {
 		url 'https://masa.dy.fi/maven'
 	}
 	maven {
