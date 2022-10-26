@@ -31,18 +31,20 @@ public abstract class AbstractPlantPartBlockMixin extends Block {
             ),
             cancellable = true
     )
-    private void scheduleTick_mixin1(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickStem)
+    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.zeroTickStem || AmsServerSettings.zeroTickAllPlants) {
             ci.cancel();
+        }
     }
 
     @Inject(
             method = "scheduledTick",
             at = @At("TAIL")
     )
-    private void scheduleTick_mixin2(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+    private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         AbstractPlantPartBlock $this = (AbstractPlantPartBlock) (Object) this;
-        if (AmsServerSettings.zeroTickStem && ($this instanceof AbstractPlantStemBlock))
+        if ($this instanceof AbstractPlantStemBlock && (AmsServerSettings.zeroTickStem || AmsServerSettings.zeroTickAllPlants)) {
             $this.randomTick(state, world, pos, random);
+        }
     }
 }

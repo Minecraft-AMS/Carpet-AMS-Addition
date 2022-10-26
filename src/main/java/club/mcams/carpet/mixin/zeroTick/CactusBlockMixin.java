@@ -33,8 +33,8 @@ public abstract class CactusBlockMixin extends Block {
             ),
             cancellable = true
     )
-    private void scheduleTick_mixin1(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickCactus)
+    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.zeroTickCactus || AmsServerSettings.zeroTickAllPlants)
             ci.cancel();
     }
 
@@ -42,8 +42,8 @@ public abstract class CactusBlockMixin extends Block {
             method = "scheduledTick",
             at = @At("TAIL")
     )
-    private void scheduleTick_mixin2(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickCactus)
+    private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.zeroTickCactus || AmsServerSettings.zeroTickAllPlants)
             this.randomTick(state, world, pos, random);
     }
 }

@@ -33,17 +33,19 @@ public abstract class SugarCaneBlockMixin extends Block {
             ),
             cancellable = true
     )
-    private void scheduleTick_mixin1(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickSugarCane)
+    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.zeroTickSugarCane || AmsServerSettings.zeroTickAllPlants) {
             ci.cancel();
+        }
     }
 
     @Inject(
             method = "scheduledTick",
             at = @At("TAIL")
     )
-    private void scheduleTick_mixin2(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickSugarCane)
+    private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.zeroTickSugarCane || AmsServerSettings.zeroTickAllPlants) {
             this.randomTick(state, world, pos, random);
+        }
     }
 }

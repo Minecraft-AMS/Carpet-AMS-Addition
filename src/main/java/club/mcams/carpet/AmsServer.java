@@ -47,7 +47,7 @@ public class AmsServer implements CarpetExtension, ModInitializer {
 
     public static void globalInfo(String str) {
         info(str);
-        Util.broadcastToAllPlayers(str + "\n");
+        Util.broadcastToAllPlayers(str);
     }
 
     @Override

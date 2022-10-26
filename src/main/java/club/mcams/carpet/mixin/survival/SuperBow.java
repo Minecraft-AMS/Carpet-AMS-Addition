@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin;
+package club.mcams.carpet.mixin.survival;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;

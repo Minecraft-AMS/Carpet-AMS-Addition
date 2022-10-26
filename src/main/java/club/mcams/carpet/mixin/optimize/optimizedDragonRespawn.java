@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin;
+package club.mcams.carpet.mixin.optimize;
 
 import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.block.Blocks;

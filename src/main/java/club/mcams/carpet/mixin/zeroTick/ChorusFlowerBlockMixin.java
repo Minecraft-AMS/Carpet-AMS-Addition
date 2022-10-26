@@ -33,8 +33,8 @@ public abstract class ChorusFlowerBlockMixin extends Block {
             ),
             cancellable = true
     )
-    private void scheduleTick_mixin1(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickChorusFlower)
+    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.zeroTickChorusFlower || AmsServerSettings.zeroTickAllPlants)
             ci.cancel();
     }
 
@@ -42,8 +42,8 @@ public abstract class ChorusFlowerBlockMixin extends Block {
             method = "scheduledTick",
             at = @At("TAIL")
     )
-    private void scheduleTick_mixin2(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickChorusFlower)
+    private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.zeroTickChorusFlower || AmsServerSettings.zeroTickAllPlants)
             this.randomTick(state, world, pos, random);
     }
 }

@@ -57,7 +57,7 @@ public class AmsServerSettings
             desc = "0t催熟总开关",
             category = {AMS, FEATURE, SURVIVAL}
     )
-    public static boolean ALLzeroTick = false;
+    public static boolean zeroTickAllPlants = false;
 
     @Rule(
             desc = "末影龙复活过程检测优化",

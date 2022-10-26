@@ -33,17 +33,19 @@ public abstract class BambooBlockMixin extends Block {
             ),
             cancellable = true
     )
-    private void scheduleTick_mixin1(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickBamboo)
+    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.zeroTickBamboo || AmsServerSettings.zeroTickAllPlants) {
             ci.cancel();
+        }
     }
 
     @Inject(
             method = "scheduledTick",
             at = @At("TAIL")
     )
-    private void scheduleTick_mixin2(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickBamboo)
+    private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.zeroTickBamboo || AmsServerSettings.zeroTickAllPlants) {
             this.randomTick(state, world, pos, random);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin;
+package club.mcams.carpet.mixin.survival;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.function.NoteBlockChunkLoader;
