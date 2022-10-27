@@ -49,8 +49,7 @@ public abstract class EnderDragonFightMixin {
         if (AmsServerSettings.optimizationDragonRespawn) {
             /* Remove the check for multiple portals to reduce the lag */
             if (this.dragonKilled && this.dragonSpawnState == null) {
-                BlockPattern.Result result = this.findEndPortal();
-                logPortalFind();
+                BlockPattern.Result result = logPortalFind();
                 if (result != null) {
                     for (int i = 0; i < this.endPortalPattern.getWidth(); ++i) {
                         for (int j = 0; j < this.endPortalPattern.getHeight(); ++j) {
