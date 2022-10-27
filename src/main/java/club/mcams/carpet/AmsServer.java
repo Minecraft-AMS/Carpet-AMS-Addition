@@ -3,56 +3,41 @@ package club.mcams.carpet;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+import club.mcams.carpet.command.InteractionCommand;
+import club.mcams.carpet.function.Interactions;
+import club.mcams.carpet.logging.amscarpetLoggerRegistry;
+import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AmsServer implements CarpetExtension, ModInitializer {
-    private static final Logger LOGGER = LoggerFactory.getLogger("TMCLoggerMod");
 
-    private static int indent = 0;
-    private static String indentString = "";
-
-    public static void increaseIndent() {
-        indent++;
-        indentString = " ".repeat(indent * 4);
+    @Override
+    public void registerLoggers() {
+        amscarpetLoggerRegistry.registerLoggers();
     }
 
-    public static void decreaseIndent() {
-        if (indent >= 0) {
-            indent--;
-            indentString = " ".repeat(indent * 4);
-        }
+    @Override
+    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
+        InteractionCommand.register(dispatcher);
     }
 
-    public static Logger getLogger() {
-        return LOGGER;
+    @Override
+    public void onPlayerLoggedIn(ServerPlayerEntity player) {
+        Interactions.onPlayerConnect(player);
     }
 
-    public static void debug(String str) {
-        LOGGER.debug(indentString + str);
-    }
-
-    public static void error(String str) {
-        LOGGER.error(indentString + str);
-    }
-
-    public static void info(String str) {
-        LOGGER.info(indentString + str);
-    }
-
-    public static void warn(String str) {
-        LOGGER.warn(indentString + str);
-    }
-
-    public static void globalInfo(String str) {
-        info(str);
-        Util.broadcastToAllPlayers(str);
+    @Override
+    public void onPlayerLoggedOut(ServerPlayerEntity player) {
+        Interactions.onPlayerDisconnect(player);
     }
 
     @Override
     public String version() {
-        return "carpet-extra";
+        return "carpet-ams-addition";
     }
 
     public static void loadExtension() {

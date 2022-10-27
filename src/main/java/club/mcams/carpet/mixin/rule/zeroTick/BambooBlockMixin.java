@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin.zeroTick;
+package club.mcams.carpet.mixin.rule.zeroTick;
 
 import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.block.BambooBlock;

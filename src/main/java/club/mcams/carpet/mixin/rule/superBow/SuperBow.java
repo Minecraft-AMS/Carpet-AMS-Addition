@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin.survival;
+package club.mcams.carpet.mixin.rule.superBow;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
