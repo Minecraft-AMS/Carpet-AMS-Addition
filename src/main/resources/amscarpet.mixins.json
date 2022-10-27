@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "interation.AbstractMinecartEntityMixin",
+    "interation.EntityMixin",
     "interation.EntityPredicatesMixin",
     "interation.ExperienceOrbEntityMixin",
     "interation.LivingEntityMixin",

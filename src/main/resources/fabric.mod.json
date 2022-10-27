@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "amscarpet",
-  "version": "0.0.6",
+  "version": "0.1.1",
   "name": "Carpet AMS Addition",
   "description": "A Minecraft Server",
   "authors": [
