@@ -33,19 +33,11 @@
 
 `optimizedDragonRespawn`: 大幅度优化了龙战判定代码的性能表现，可能影响原版特性。
 
-### 交互控制/Interaction Commands
+### 区块加载控制/Ghost Commands
 
-控制玩家与游戏世界的交互行为，如区块加载等等。玩家上下线时会将交互状态重置回默认状态以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)
+控制玩家的区块加载。玩家上下线时会将交互状态重置回默认状态以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)
 的发生
-格式：`/interaction [interaction_name] [true/false]`
-
-#### 交互列表
-
-- `all`: 全部交互
-- `chunkloading`: 区块加载，注意新的区块过不去
-- `entities`：实体交互，如碰撞等
-- `blocks`：方块交互
-- `updates`：放置方块等操作不会产生更新
+格式：`/ghost [true/false]`
 
 ### 相关链接
 
@@ -55,7 +47,7 @@
 2. `zeroTick`
    系列主要功能实现代码来自1.16.4/1.16.5的[OhMyVanillaMinecraf](https://github.com/hit-mc/OhMyVanillaMinecraft)
 
-3. `interaction`交互控制功能实现代码来自1.16.5/1.17.1的[Intricarpet](https://github.com/lntricate1/intricarpet)
+3. `ghost`交互控制功能实现代码来自1.16.5/1.17.1的[Intricarpet](https://github.com/lntricate1/intricarpet)
 
 ### 致谢
 

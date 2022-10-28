@@ -63,5 +63,11 @@ public class AmsServerSettings
             desc = "末影龙复活过程检测优化",
             category = {AMS, OPTIMIZATION}
     )
-    public static boolean optimizationDragonRespawn = false;
+    public static boolean optimizedDragonRespawn = false;
+
+    @Rule(
+            desc = "玩家区块加载控制",
+            category = {AMS, COMMAND}
+    )
+    public static String commandGhost = "false";
 }

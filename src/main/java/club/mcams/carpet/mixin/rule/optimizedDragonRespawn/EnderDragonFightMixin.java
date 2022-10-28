@@ -11,13 +11,12 @@ import net.minecraft.entity.boss.dragon.EnderDragonSpawnState;
 import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.BaseText;
-import net.minecraft.util.math.BlockPos;
+import org.slf4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
@@ -44,13 +43,18 @@ public abstract class EnderDragonFightMixin {
     @Shadow
     protected abstract void generateEndPortal(boolean previouslyKilled);
 
+    @Shadow
+    @Final
+    private static Logger LOGGER;
+
     @Inject(at = @At("HEAD"), method = "respawnDragon(Ljava/util/List;)V", cancellable = true)
     private void respawnDragon(List<EndCrystalEntity> crystals, CallbackInfo ci) {
-        if (AmsServerSettings.optimizationDragonRespawn) {
+        if (AmsServerSettings.optimizedDragonRespawn) {
             /* Remove the check for multiple portals to reduce the lag */
             if (this.dragonKilled && this.dragonSpawnState == null) {
-                BlockPattern.Result result = logPortalFind();
+                BlockPattern.Result result = findEndPortal();
                 if (result != null) {
+                    logPortalFind();
                     for (int i = 0; i < this.endPortalPattern.getWidth(); ++i) {
                         for (int j = 0; j < this.endPortalPattern.getHeight(); ++j) {
                             for (int k = 0; k < this.endPortalPattern.getDepth(); ++k) {
@@ -71,29 +75,13 @@ public abstract class EnderDragonFightMixin {
         }
     }
 
-    @Redirect(method = "respawnDragon(Ljava/util/List;)V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/boss/dragon/EnderDragonFight;findEndPortal()Lnet/minecraft/block/pattern/BlockPattern$Result;"
-            ))
-    private BlockPattern.Result findEndPortalMixin(EnderDragonFight instance) {
-        return logPortalFind();
-    }
-    private BlockPattern.Result logPortalFind() {
-        long startTime = System.currentTimeMillis();
-        BlockPattern.Result result = findEndPortal();
-        if (result != null) {
-            List<BaseText> messages = new ArrayList<>();
-            BlockPos portalLocation = result.translate(3, 3, 3).getBlockPos();
-            LoggerRegistry.getLogger("dragonPortalLocation").log(() ->
-            {
-                messages.add(Messenger.c(
-                        Messenger.dblt("l", portalLocation.getX(), portalLocation.getY(), portalLocation.getZ()),
-                        "(", "d " + (System.currentTimeMillis() - startTime), "g ms)",
-                        Messenger.c("p  [Tp]", String.format("!/tp %d %d %d", portalLocation.getX(), portalLocation.getY(), portalLocation.getZ()))));
-                return messages.toArray(new BaseText[0]);
-            });
-        }
-        return result;
+    private void logPortalFind() {
+        List<BaseText> messages = new ArrayList<>();
+        LoggerRegistry.getLogger("dragonPortalLocation").log(() ->
+        {
+            messages.add(Messenger.c(
+                    "w Located portals"));
+            return messages.toArray(new BaseText[0]);
+        });
     }
 }

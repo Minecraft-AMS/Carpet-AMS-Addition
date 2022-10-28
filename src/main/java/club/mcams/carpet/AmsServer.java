@@ -3,15 +3,13 @@ package club.mcams.carpet;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-import club.mcams.carpet.command.InteractionCommand;
-import club.mcams.carpet.function.Interactions;
+import club.mcams.carpet.command.GhostCommand;
+import club.mcams.carpet.function.Ghost;
 import club.mcams.carpet.logging.amscarpetLoggerRegistry;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class AmsServer implements CarpetExtension, ModInitializer {
 
@@ -22,17 +20,17 @@ public class AmsServer implements CarpetExtension, ModInitializer {
 
     @Override
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
-        InteractionCommand.register(dispatcher);
+        GhostCommand.register(dispatcher);
     }
 
     @Override
     public void onPlayerLoggedIn(ServerPlayerEntity player) {
-        Interactions.onPlayerConnect(player);
+        Ghost.onPlayerConnect(player);
     }
 
     @Override
     public void onPlayerLoggedOut(ServerPlayerEntity player) {
-        Interactions.onPlayerDisconnect(player);
+        Ghost.onPlayerDisconnect(player);
     }
 
     @Override
