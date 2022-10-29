@@ -55,4 +55,6 @@
 
 - 感谢[memorydream](https://github.com/memorydream)，[keuin](https://github.com/keuin)
   ，[lntricate1](https://github.com/lntricate1)的项目代码提供参考
+- 感谢gnembon和Fallen_Breath对carpet, carpet-extra和carpet-TIS-addition的实现代码
 - 感谢[401Unauthorized](https://github.com/YehowahLiu)在解决开发问题上的无私帮助
+- 感谢alpha_hhh和Menggui233帮助测试和提建议

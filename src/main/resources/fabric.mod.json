@@ -13,7 +13,7 @@
     "sources": "https://mcams.club/"
   },
   "license": "LGPL-3.0",
-  "icon": "assets/amscarpet/icon.png",
+  "icon": "assets/carpet-ams-addition/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [

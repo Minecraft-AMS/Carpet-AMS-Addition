@@ -23,7 +23,7 @@ public class BellBlockMixin {
             at = @At("HEAD")
     )
     private void ringByTriggeredMixin(Entity entity, World world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        if (Objects.equals(AmsServerSettings.blockChunkLoader, "bell_block")) {
+        if (Objects.equals(AmsServerSettings.blockChunkLoader, "bell_block") && world instanceof ServerWorld) {
             ChunkPos cp = new ChunkPos(pos.getX() >> 4, pos.getZ() >> 4);
             ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BELL_BLOCK, cp, 3, cp);
         }

@@ -13,7 +13,7 @@ import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
-public class amscarpetCommandRegistry {
+public class AmsCarpetCommandRegistry {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("chunkloading")
                 .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.commandChunkLoading))
