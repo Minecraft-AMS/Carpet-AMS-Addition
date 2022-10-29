@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin;
+package club.mcams.carpet.mixin.rule.superBow;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
@@ -18,7 +18,7 @@ public class SuperBow extends Enchantment {
 
     @Override
     public boolean canAccept(Enchantment other) {
-        if(AmsServerSettings.SuperBow){
+        if (AmsServerSettings.superBow) {
             return other instanceof MendingEnchantment || super.canAccept(other);
         }
         return false;

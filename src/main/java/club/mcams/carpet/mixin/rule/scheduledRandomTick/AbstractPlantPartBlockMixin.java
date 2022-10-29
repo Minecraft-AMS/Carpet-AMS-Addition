@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin.zeroTick;
+package club.mcams.carpet.mixin.rule.scheduledRandomTick;
 
 import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.block.AbstractPlantPartBlock;
@@ -31,18 +31,20 @@ public abstract class AbstractPlantPartBlockMixin extends Block {
             ),
             cancellable = true
     )
-    private void scheduleTick_mixin1(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickStem)
+    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants) {
             ci.cancel();
+        }
     }
 
     @Inject(
             method = "scheduledTick",
             at = @At("TAIL")
     )
-    private void scheduleTick_mixin2(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+    private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         AbstractPlantPartBlock $this = (AbstractPlantPartBlock) (Object) this;
-        if (AmsServerSettings.zeroTickStem && ($this instanceof AbstractPlantStemBlock))
+        if ($this instanceof AbstractPlantStemBlock && (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants)) {
             $this.randomTick(state, world, pos, random);
+        }
     }
 }

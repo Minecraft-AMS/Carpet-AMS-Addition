@@ -1,9 +1,9 @@
-package club.mcams.carpet.mixin.zeroTick;
+package club.mcams.carpet.mixin.rule.scheduledRandomTick;
 
 import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CactusBlock;
+import net.minecraft.block.ChorusFlowerBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
-@Mixin(CactusBlock.class)
-public abstract class CactusBlockMixin extends Block {
+@Mixin(ChorusFlowerBlock.class)
+public abstract class ChorusFlowerBlockMixin extends Block {
 
-    public CactusBlockMixin(Settings settings) {
+    public ChorusFlowerBlockMixin(Settings settings) {
         super(settings);
     }
 
@@ -33,8 +33,8 @@ public abstract class CactusBlockMixin extends Block {
             ),
             cancellable = true
     )
-    private void scheduleTick_mixin1(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickCactus)
+    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.scheduledRandomTickChorusFlower || AmsServerSettings.scheduledRandomTickAllPlants)
             ci.cancel();
     }
 
@@ -42,8 +42,8 @@ public abstract class CactusBlockMixin extends Block {
             method = "scheduledTick",
             at = @At("TAIL")
     )
-    private void scheduleTick_mixin2(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickCactus)
+    private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+        if (AmsServerSettings.scheduledRandomTickChorusFlower || AmsServerSettings.scheduledRandomTickAllPlants)
             this.randomTick(state, world, pos, random);
     }
 }

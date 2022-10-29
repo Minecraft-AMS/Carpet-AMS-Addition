@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "amscarpet",
-  "version": "0.0.6",
+  "version": "0.1.1",
   "name": "Carpet AMS Addition",
   "description": "A Minecraft Server",
   "authors": [
@@ -13,7 +13,7 @@
     "sources": "https://mcams.club/"
   },
   "license": "LGPL-3.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/carpet-ams-addition/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
