@@ -15,8 +15,6 @@
 
 ### 规则/Rules
 
-`NoteBlockChunkLoader`: 当音符盒被激活时会加载3x3的区块持续15s，无论音符盒是否能够发出声音。
-
 `SuperBow`: 可以让弓同时拥有无限和经验修补附魔。
 
 `zeroTickCactus`: 使计划刻仍可以给予随机刻进行强制催熟仙人掌。
@@ -33,11 +31,15 @@
 
 `optimizedDragonRespawn`: 大幅度优化了龙战判定代码的性能表现，可能影响原版特性。
 
-### 区块加载控制/Ghost Commands
+`blockChunkLoader [block_type]`: 当红石激活特定
 
-控制玩家的区块加载。玩家上下线时会将交互状态重置回默认状态以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)
-的发生
-格式：`/ghost [true/false]`
+### 区块加载控制/Chunk Loading Commands
+
+控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。
+
+玩家上下线时会将交互状态重置回加载以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)。
+
+格式：`/chunkloading [true/false]`
 
 ### 相关链接
 
@@ -47,7 +49,7 @@
 2. `zeroTick`
    系列主要功能实现代码来自1.16.4/1.16.5的[OhMyVanillaMinecraf](https://github.com/hit-mc/OhMyVanillaMinecraft)
 
-3. `ghost`交互控制功能实现代码来自1.16.5/1.17.1的[Intricarpet](https://github.com/lntricate1/intricarpet)
+3. `chunkloading`交互控制功能实现代码来自1.16.5/1.17.1的[Intricarpet](https://github.com/lntricate1/intricarpet)
 
 ### 致谢
 

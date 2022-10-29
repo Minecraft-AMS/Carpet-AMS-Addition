@@ -7,25 +7,19 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Ghost {
+public class ChunkLoading {
     public static Map<String, Boolean> onlinePlayerMap = new HashMap<>();
-    public static Map<String, Boolean> offlinePlayerMap = new HashMap<>();
 
     public static void setPlayerInteraction(String playerName, boolean b, boolean online) {
         if (playerFromName(playerName) == null) return;
         if (online) {
             onlinePlayerMap.put(playerName, b);
-        } else {
-            offlinePlayerMap.put(playerName, b);
         }
     }
 
     public static void onPlayerConnect(PlayerEntity player) {
         String playerName = player.getName().getString();
-        if (offlinePlayerMap.containsKey(playerName)) {
-            setPlayerInteraction(playerName, true, true);
-            offlinePlayerMap.remove(playerName);
-        }
+        setPlayerInteraction(playerName, true, true);
     }
 
     public static void onPlayerDisconnect(PlayerEntity player) {

@@ -2,7 +2,7 @@ package club.mcams.carpet.command;
 
 import carpet.utils.Messenger;
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.function.Ghost;
+import club.mcams.carpet.function.ChunkLoading;
 import club.mcams.carpet.util.CommandHelper;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
@@ -13,10 +13,10 @@ import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
-public class GhostCommand {
+public class amscarpetCommandRegistry {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(literal("ghost")
-                .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.commandGhost))
+        dispatcher.register(literal("chunkloading")
+                .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.commandChunkLoading))
                 .executes((c) -> listPlayerInteractions(c.getSource(), c.getSource().getName()))
                 .then(argument("boolean", BoolArgumentType.bool()).
                         executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getName(), getBool(c, "boolean")))
@@ -30,8 +30,8 @@ public class GhostCommand {
             Messenger.m(source, "r No player specified");
             return 0;
         }
-        Ghost.setPlayerInteraction(playerName, !b, true);
-        Messenger.m(source, "w Set interaction ", "g " + "chunkloading", "w  to ", "g " + b);
+        ChunkLoading.setPlayerInteraction(playerName, b, true);
+        Messenger.m(source, "w Set interaction ", "g " + "chunk loading", "w  to ", "g " + b);
         return 1;
     }
 
@@ -41,10 +41,10 @@ public class GhostCommand {
             Messenger.m(source, "r No player specified");
             return 0;
         }
-        boolean playerInteractions = Ghost.onlinePlayerMap.getOrDefault(playerName, true);
+        boolean playerInteractions = ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true);
 
-        if (playerInteractions) Messenger.m(source, "w " + "chunk loading" + ": ", "g false");
-        else Messenger.m(source, "w " + "chunk loading" + ": ", "g true");
+        if (playerInteractions) Messenger.m(source, "w " + "chunk loading" + ": ", "g true");
+        else Messenger.m(source, "w " + "chunk loading" + ": ", "g false");
         return 1;
     }
 }

@@ -1,6 +1,12 @@
 package club.mcams.carpet;
 
+import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
+import carpet.settings.Validator;
+import net.minecraft.server.command.ServerCommandSource;
+
+import java.util.List;
+
 import static carpet.settings.RuleCategory.*;
 
 /**
@@ -11,63 +17,83 @@ public class AmsServerSettings
     public static final String AMS="AMS";
 
     @Rule(
-            desc ="音符盒被触发时加载附近区块 3x3 15s",
-            extra = {"noteblock chunk loader"},
-            category = {AMS,FEATURE}
+            desc = "Enabling making super bows with both infinite and mending enchants",
+            category = {AMS, FEATURE}
     )
-    public static boolean NoteBlockChunkLoader = false;
+    public static boolean superBow = false;
 
     @Rule(
-            desc = "让弓可以同时拥有无限与经验修补",
-            category = {AMS,FEATURE}
-    )
-    public static boolean SuperBow = false;
-
-    @Rule(
-            desc = "0t仙人掌催熟",
+            desc = "Make cactus accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
     public static boolean zeroTickCactus = false;
 
     @Rule(
-            desc = "0t竹子催熟",
+            desc = "Make bamboo accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
     public static boolean zeroTickBamboo = false;
 
     @Rule(
-            desc = "0t紫颂花催熟",
+            desc = "Make chorus flower accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
     public static boolean zeroTickChorusFlower = false;
 
     @Rule(
-            desc = "0t甘蔗催熟",
+            desc = "Make sugar cane accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
     public static boolean zeroTickSugarCane = false;
 
     @Rule(
-            desc = "0t海带、缠怨藤、垂泪藤",
+            desc = "Make stems accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
     public static boolean zeroTickStem = false;
 
     @Rule(
-            desc = "0t催熟总开关",
+            desc = "Make all plants accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
     public static boolean zeroTickAllPlants = false;
 
     @Rule(
-            desc = "末影龙复活过程检测优化",
+            desc = "Optimize dragon respawning",
+            extra = {"May slightly affect the vanilla feature"},
             category = {AMS, OPTIMIZATION}
     )
     public static boolean optimizedDragonRespawn = false;
 
     @Rule(
-            desc = "玩家区块加载控制",
+            desc = "Load nearby 3x3 chunks for 15 seconds when a certain block is triggered",
+            options = {"false", "note_block", "bell_block"},
+            validate = BlockLoaderValidator.class,
+            category = {AMS, FEATURE}
+    )
+    public static String blockChunkLoader = "false";
+
+    private static class BlockLoaderValidator extends Validator<String> {
+        private static final List<String> OPTIONS = List.of("false", "note_block", "bell_block");
+
+        @Override
+        public String validate(ServerCommandSource source, ParsedRule<String> currentRule, String newValue, String userString) {
+            if (!OPTIONS.contains(newValue)) {
+                return null;
+            }
+            return newValue;
+        }
+
+        @Override
+        public String description() {
+            return "Can be limited to 'ops' only, true/false for everyone/no one, or a custom permission level";
+        }
+    }
+
+    @Rule(
+            desc = "Control chunk loading for players at any gamemodes",
             category = {AMS, COMMAND}
     )
-    public static String commandGhost = "false";
+    public static String commandChunkLoading = "false";
+
 }

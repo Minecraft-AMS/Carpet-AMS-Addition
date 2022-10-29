@@ -18,7 +18,7 @@ public class SuperBow extends Enchantment {
 
     @Override
     public boolean canAccept(Enchantment other) {
-        if(AmsServerSettings.SuperBow){
+        if (AmsServerSettings.superBow) {
             return other instanceof MendingEnchantment || super.canAccept(other);
         }
         return false;
