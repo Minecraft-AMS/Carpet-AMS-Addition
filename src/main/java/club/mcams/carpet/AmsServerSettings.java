@@ -26,37 +26,37 @@ public class AmsServerSettings
             desc = "Make cactus accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
-    public static boolean zeroTickCactus = false;
+    public static boolean scheduledRandomTickCactus = false;
 
     @Rule(
             desc = "Make bamboo accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
-    public static boolean zeroTickBamboo = false;
+    public static boolean scheduledRandomTickBamboo = false;
 
     @Rule(
             desc = "Make chorus flower accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
-    public static boolean zeroTickChorusFlower = false;
+    public static boolean scheduledRandomTickChorusFlower = false;
 
     @Rule(
             desc = "Make sugar cane accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
-    public static boolean zeroTickSugarCane = false;
+    public static boolean scheduledRandomTickSugarCane = false;
 
     @Rule(
             desc = "Make stems accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
-    public static boolean zeroTickStem = false;
+    public static boolean scheduledRandomTickStem = false;
 
     @Rule(
             desc = "Make all plants accepts scheduled tick as random tick",
             category = {AMS, FEATURE, SURVIVAL}
     )
-    public static boolean zeroTickAllPlants = false;
+    public static boolean scheduledRandomTickAllPlants = false;
 
     @Rule(
             desc = "Optimize dragon respawning",

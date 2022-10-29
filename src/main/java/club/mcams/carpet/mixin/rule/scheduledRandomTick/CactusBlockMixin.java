@@ -1,9 +1,9 @@
-package club.mcams.carpet.mixin.rule.zeroTick;
+package club.mcams.carpet.mixin.rule.scheduledRandomTick;
 
 import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ChorusFlowerBlock;
+import net.minecraft.block.CactusBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
-@Mixin(ChorusFlowerBlock.class)
-public abstract class ChorusFlowerBlockMixin extends Block {
+@Mixin(CactusBlock.class)
+public abstract class CactusBlockMixin extends Block {
 
-    public ChorusFlowerBlockMixin(Settings settings) {
+    public CactusBlockMixin(Settings settings) {
         super(settings);
     }
 
@@ -34,7 +34,7 @@ public abstract class ChorusFlowerBlockMixin extends Block {
             cancellable = true
     )
     private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickChorusFlower || AmsServerSettings.zeroTickAllPlants)
+        if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants)
             ci.cancel();
     }
 
@@ -43,7 +43,7 @@ public abstract class ChorusFlowerBlockMixin extends Block {
             at = @At("TAIL")
     )
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickChorusFlower || AmsServerSettings.zeroTickAllPlants)
+        if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants)
             this.randomTick(state, world, pos, random);
     }
 }

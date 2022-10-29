@@ -1,9 +1,9 @@
-package club.mcams.carpet.mixin.rule.zeroTick;
+package club.mcams.carpet.mixin.rule.scheduledRandomTick;
 
 import club.mcams.carpet.AmsServerSettings;
+import net.minecraft.block.BambooBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CactusBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
-@Mixin(CactusBlock.class)
-public abstract class CactusBlockMixin extends Block {
+@Mixin(BambooBlock.class)
+public abstract class BambooBlockMixin extends Block {
 
-    public CactusBlockMixin(Settings settings) {
+    public BambooBlockMixin(Settings settings) {
         super(settings);
     }
 
@@ -34,8 +34,9 @@ public abstract class CactusBlockMixin extends Block {
             cancellable = true
     )
     private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickCactus || AmsServerSettings.zeroTickAllPlants)
+        if (AmsServerSettings.scheduledRandomTickBamboo || AmsServerSettings.scheduledRandomTickAllPlants) {
             ci.cancel();
+        }
     }
 
     @Inject(
@@ -43,7 +44,8 @@ public abstract class CactusBlockMixin extends Block {
             at = @At("TAIL")
     )
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickCactus || AmsServerSettings.zeroTickAllPlants)
+        if (AmsServerSettings.scheduledRandomTickBamboo || AmsServerSettings.scheduledRandomTickAllPlants) {
             this.randomTick(state, world, pos, random);
+        }
     }
 }

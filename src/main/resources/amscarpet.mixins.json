@@ -9,11 +9,11 @@
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.optimizedDragonRespawn.EnderDragonFightMixin",
     "rule.superBow.SuperBow",
-    "rule.zeroTick.AbstractPlantPartBlockMixin",
-    "rule.zeroTick.BambooBlockMixin",
-    "rule.zeroTick.CactusBlockMixin",
-    "rule.zeroTick.ChorusFlowerBlockMixin",
-    "rule.zeroTick.SugarCaneBlockMixin"
+    "rule.scheduledRandomTick.AbstractPlantPartBlockMixin",
+    "rule.scheduledRandomTick.BambooBlockMixin",
+    "rule.scheduledRandomTick.CactusBlockMixin",
+    "rule.scheduledRandomTick.ChorusFlowerBlockMixin",
+    "rule.scheduledRandomTick.SugarCaneBlockMixin"
   ],
   "client": [
   ],

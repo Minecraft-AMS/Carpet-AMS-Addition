@@ -1,26 +1,28 @@
-package club.mcams.carpet.mixin.rule.zeroTick;
+package club.mcams.carpet.mixin.rule.scheduledRandomTick;
 
 import club.mcams.carpet.AmsServerSettings;
-import net.minecraft.block.AbstractPlantPartBlock;
-import net.minecraft.block.AbstractPlantStemBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SugarCaneBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
-@Mixin(AbstractPlantPartBlock.class)
-public abstract class AbstractPlantPartBlockMixin extends Block {
+@Mixin(SugarCaneBlock.class)
+public abstract class SugarCaneBlockMixin extends Block {
 
-    public AbstractPlantPartBlockMixin(Settings settings) {
+    public SugarCaneBlockMixin(Settings settings) {
         super(settings);
     }
 
+    @Shadow
+    public abstract void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random);
 
     @Inject(
             method = "scheduledTick",
@@ -32,7 +34,7 @@ public abstract class AbstractPlantPartBlockMixin extends Block {
             cancellable = true
     )
     private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.zeroTickStem || AmsServerSettings.zeroTickAllPlants) {
+        if (AmsServerSettings.scheduledRandomTickSugarCane || AmsServerSettings.scheduledRandomTickAllPlants) {
             ci.cancel();
         }
     }
@@ -42,9 +44,8 @@ public abstract class AbstractPlantPartBlockMixin extends Block {
             at = @At("TAIL")
     )
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        AbstractPlantPartBlock $this = (AbstractPlantPartBlock) (Object) this;
-        if ($this instanceof AbstractPlantStemBlock && (AmsServerSettings.zeroTickStem || AmsServerSettings.zeroTickAllPlants)) {
-            $this.randomTick(state, world, pos, random);
+        if (AmsServerSettings.scheduledRandomTickSugarCane || AmsServerSettings.scheduledRandomTickAllPlants) {
+            this.randomTick(state, world, pos, random);
         }
     }
 }

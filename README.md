@@ -17,17 +17,17 @@
 
 `SuperBow`: 可以让弓同时拥有无限和经验修补附魔。
 
-`zeroTickCactus`: 使计划刻仍可以给予随机刻进行强制催熟仙人掌。
+`scheduledRandomTickCactus`: 使计划刻仍可以给予随机刻进行强制催熟仙人掌。
 
-`zeroTickBamboo`: 使计划刻仍可以给予随机刻进行强制催熟竹子。
+`scheduledRandomTickBamboo`: 使计划刻仍可以给予随机刻进行强制催熟竹子。
 
-`zeroTickChorusFlower`: 使计划刻仍可以给予随机刻进行强制催熟紫颂花。
+`scheduledRandomTickChorusFlower`: 使计划刻仍可以给予随机刻进行强制催熟紫颂花。
 
-`zeroTickSugarCane`: 使计划刻仍可以给予随机刻进行强制催熟甘蔗。
+`scheduledRandomTickSugarCane`: 使计划刻仍可以给予随机刻进行强制催熟甘蔗。
 
-`zeroTickStem`: 使计划刻仍可以给予随机刻进行强制催熟海带、缠怨藤、垂泪藤。
+`scheduledRandomTickStem`: 使计划刻仍可以给予随机刻进行强制催熟海带、缠怨藤、垂泪藤。
 
-`zeroTickAllPlants`: 使计划刻仍可以给予随机刻进行强制催熟以上提到的所有作物。
+`scheduledRandomTickAllPlants`: 使计划刻仍可以给予随机刻进行强制催熟以上提到的所有作物。
 
 `optimizedDragonRespawn`: 大幅度优化了龙战判定代码的性能表现，可能影响原版特性。
 
@@ -46,7 +46,7 @@
 1. `NoteBlockChunkLoader`
    主要功能实现代码来自1.15.x-1.16.x的[NoteBlockChunkLoader](https://github.com/GC-server-CN/NoteBlockChunkLoader)
 
-2. `zeroTick`
+2. `scheduledRandomTick`
    系列主要功能实现代码来自1.16.4/1.16.5的[OhMyVanillaMinecraf](https://github.com/hit-mc/OhMyVanillaMinecraft)
 
 3. `chunkloading`交互控制功能实现代码来自1.16.5/1.17.1的[Intricarpet](https://github.com/lntricate1/intricarpet)
