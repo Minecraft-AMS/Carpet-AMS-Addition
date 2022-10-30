@@ -1,5 +1,6 @@
 package club.mcams.carpet;
 
+
 import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
 import carpet.settings.Validator;
@@ -95,5 +96,4 @@ public class AmsServerSettings
             category = {AMS, COMMAND}
     )
     public static String commandChunkLoading = "false";
-
 }
