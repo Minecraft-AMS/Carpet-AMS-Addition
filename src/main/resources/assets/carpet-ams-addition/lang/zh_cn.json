@@ -18,6 +18,6 @@
   "rule.optimizedDragonRespawn.extra.0": "对原版实现有微小修改",
   "rule.blockChunkLoader.name": "触发方块区块加载",
   "rule.blockChunkLoader.desc": "方块被触发时将加载周围3x3区块15s",
-  "rule.commandChunkLoader.name": "区块加载控制",
-  "rule.commandChunkLoader.desc": "控制任意游戏模式下玩家对周围区块的加载"
+  "rule.commandChunkLoading.name": "区块加载控制",
+  "rule.commandChunkLoading.desc": "控制任意游戏模式下玩家对周围区块的加载"
 }
