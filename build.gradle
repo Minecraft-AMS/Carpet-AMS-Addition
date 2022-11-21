@@ -1,9 +1,10 @@
 plugins {
 	id 'maven-publish'
 	id 'fabric-loom' version '1.0-SNAPSHOT' apply false
-//
-//	// https://github.com/Juuxel/LoomQuiltflower
+
+//	 https://github.com/Juuxel/LoomQuiltflower
 //	id 'io.github.juuxel.loom-quiltflower' version '1.7.4' apply false
+
 	id 'com.replaymod.preprocess' version '897c4096e2'
 }
 
