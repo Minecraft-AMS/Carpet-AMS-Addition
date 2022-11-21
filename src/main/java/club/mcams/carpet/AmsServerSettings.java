@@ -75,7 +75,7 @@ public class AmsServerSettings {
     )
     public static String blockChunkLoader = "false";
 
-    //if MC >= 1000000
+    //#if MC >= 1000000
     @CraftingRule(recipes = "enchanted_golden_apples.json")
     @Rule(
             desc = "Enchanted Golden Apples can be crafted with 8 Gold Blocks again",
