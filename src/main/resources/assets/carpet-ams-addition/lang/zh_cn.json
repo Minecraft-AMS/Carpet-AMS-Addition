@@ -19,5 +19,9 @@
   "rule.blockChunkLoader.name": "触发方块区块加载",
   "rule.blockChunkLoader.desc": "方块被触发时将加载周围3x3区块15s",
   "rule.commandChunkLoading.name": "区块加载控制",
-  "rule.commandChunkLoading.desc": "控制任意游戏模式下玩家对周围区块的加载"
+  "rule.commandChunkLoading.desc": "控制任意游戏模式下玩家对周围区块的加载",
+  "rule.CraftableEnchantedGoldenApples.name": "可合成附魔金苹果",
+  "rule.CraftableEnchantedGoldenApples.desc": "使用老版本的方式来合成附魔金苹果（8金块+1苹果）",
+  "rule.BetterCraftableBoneBlock.name": "更好的骨块合成",
+  "rule.BetterCraftableBoneBlock.desc": "使用9个骨头可以合成出3个骨块(一点都不卡！)"
 }
