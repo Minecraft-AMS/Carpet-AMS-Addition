@@ -3,6 +3,7 @@ package club.mcams.carpet;
 import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
 import carpet.settings.Validator;
+import club.mcams.carpet.util.recipes.CraftingRule;
 import net.minecraft.server.command.ServerCommandSource;
 
 import java.util.List;
@@ -12,9 +13,10 @@ import static carpet.settings.RuleCategory.*;
 /**
  * Here is your example Settings class you can plug to use carpetmod /carpet settings command
  */
-public class AmsServerSettings
-{
-    public static final String AMS="AMS";
+
+public class AmsServerSettings {
+    public static final String AMS = "AMS";
+    public static final String CRAFTING = "CRAFTING";
 
     @Rule(
             desc = "Enabling making super bows with both infinite and mending enchants",
@@ -72,16 +74,27 @@ public class AmsServerSettings
             category = {AMS, FEATURE}
     )
     public static String blockChunkLoader = "false";
+    @CraftingRule(recipes = "enchanted_golden_apples.json")
+    @Rule(
+            desc = "Enchanted Golden Apples can be crafted with 8 Gold Blocks again",
+            category = {CRAFTING, SURVIVAL, AMS}
+    )
+    public static boolean craftableEnchantedGoldenApples = false;
+
+    @Rule(
+            desc = "Control chunk loading for players at any gamemodes",
+            category = {AMS, COMMAND}
+    )
+    public static String commandChunkLoading = "false";
+    @CraftingRule(recipes = "bone_block.json")
+    @Rule(
+            desc = "Use nine bones to crafted three bone_blocks",
+            category = {CRAFTING, SURVIVAL, AMS}
+    )
+    public static boolean betterCraftableBoneBlock = false;
 
     private static class BlockLoaderValidator extends Validator<String> {
-        private static final List<String> OPTIONS = List.of(
-                "false"
-                ,"note_block"
-                //#if MC>=11520
-                ,"bell_block"
-                //#endif
-
-        );
+        private static final List<String> OPTIONS = List.of("false", "note_block", "bell_block");
 
         @Override
         public String validate(ServerCommandSource source, ParsedRule<String> currentRule, String newValue, String userString) {
@@ -96,11 +109,5 @@ public class AmsServerSettings
             return "Can be limited to 'ops' only, true/false for everyone/no one, or a custom permission level";
         }
     }
-
-    @Rule(
-            desc = "Control chunk loading for players at any gamemodes",
-            category = {AMS, COMMAND}
-    )
-    public static String commandChunkLoading = "false";
 
 }
