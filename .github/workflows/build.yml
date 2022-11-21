@@ -46,7 +46,7 @@ jobs:
 
       - name: Run Mixin Audit Check
         if: ${{ inputs.mixin_audit }}
-        timeout-minutes: 10
+        timeout-minutes: 30
         run: |
           mkdir -p ./run
           echo eula=true > ./run/eula.txt
