@@ -1,5 +1,7 @@
 # Carpet-AMS-Addition
 
+[![Dev Builds](https://github.com/wendavid552/Carpet-AMS-Addition/actions/workflows/gradle.yml/badge.svg)](https://github.com/wendavid552/Carpet-AMS-Addition/actions/workflows/gradle.yml)
+
 一个简易的基于Carpet mod的拓展
 
 **由于一些功能是低版本模组升级而来，不确定有没有严重问题，由于能力有限该mod不保证能完全解决后续问题**
