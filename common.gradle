@@ -51,10 +51,12 @@ loom {
     runs {
         mixinAudit {
             server()
+            vmArgs '-Dcarpetamsaddition.mixin_audit=true'
             ideConfigGenerated false
         }
         mixinAuditClient {
             client()
+            vmArgs '-Dcarpetamsaddition.mixin_audit=true'
             ideConfigGenerated false
         }
     }
