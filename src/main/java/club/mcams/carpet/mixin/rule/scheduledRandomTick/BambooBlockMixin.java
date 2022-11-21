@@ -12,14 +12,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC>=11900
+//$$import net.minecraft.util.math.random.Random;
+//#else
 import java.util.Random;
+//#endif
 
 @Mixin(BambooBlock.class)
-public abstract class BambooBlockMixin extends Block {
-
-    public BambooBlockMixin(Settings settings) {
-        super(settings);
-    }
+public abstract class BambooBlockMixin{
 
     @Shadow
     public abstract void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random);

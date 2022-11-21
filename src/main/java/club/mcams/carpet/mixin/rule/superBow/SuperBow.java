@@ -5,7 +5,7 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.InfinityEnchantment;
 import net.minecraft.enchantment.MendingEnchantment;
 import net.minecraft.entity.EquipmentSlot;
-
+import net.minecraft.util.Rarity;
 import club.mcams.carpet.AmsServerSettings;
 
 import org.spongepowered.asm.mixin.Mixin;

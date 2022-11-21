@@ -4,5 +4,7 @@ carpet.settings.RuleCategory carpet.api.settings.RuleCategory
 carpet.settings.SettingsManager carpet.api.settings.SettingsManager
 carpet.settings.Validator carpet.api.settings.Validator
 
+carpet.script.bundled.BundledModule carpet.script.Module
+
 net.minecraft.text.BaseText net.minecraft.text.MutableText
 net.minecraft.world.dimension.DimensionType isUltrawarm() ultrawarm()

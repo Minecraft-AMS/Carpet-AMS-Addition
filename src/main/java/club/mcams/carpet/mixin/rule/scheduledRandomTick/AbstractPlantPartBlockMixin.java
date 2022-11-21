@@ -12,16 +12,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC>=11900
+//$$import net.minecraft.util.math.random.Random;
+//#else
 import java.util.Random;
+//#endif
 
 @Mixin(AbstractPlantPartBlock.class)
-public abstract class AbstractPlantPartBlockMixin extends Block {
-
-    public AbstractPlantPartBlockMixin(Settings settings) {
-        super(settings);
-    }
-
-
+public abstract class AbstractPlantPartBlockMixin{
     @Inject(
             method = "scheduledTick",
             at = @At(

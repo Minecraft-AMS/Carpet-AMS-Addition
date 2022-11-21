@@ -31,6 +31,6 @@ public final class CommandHelper {
                 return source.hasPermissionLevel(Integer.parseInt(commandLevelString));
             default:
                 return false;
-        };
+        }
     }
 }
