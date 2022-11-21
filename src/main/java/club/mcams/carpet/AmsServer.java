@@ -24,6 +24,9 @@ import net.minecraft.server.command.ReloadCommand;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.WorldSavePath;
+//#if MC>=11900
+//$$ import net.minecraft.command.CommandRegistryAccess;
+//#endif
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,10 +53,18 @@ public class AmsServer implements CarpetExtension, ModInitializer {
         AmsCarpetLoggerRegistry.registerLoggers();
     }
 
+
+    //#if MC>=11900
+    //$$    @Override
+    //$$    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
+    //$$        AmsCarpetCommandRegistry.register(dispatcher);
+    //$$    }
+    //#else
     @Override
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
         AmsCarpetCommandRegistry.register(dispatcher);
     }
+    //#endif
 
     @Override
     public void onPlayerLoggedIn(ServerPlayerEntity player) {
