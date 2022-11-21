@@ -3,6 +3,8 @@ carpet.settings.ParsedRule get() carpet.api.settings.CarpetRule value()
 carpet.settings.RuleCategory carpet.api.settings.RuleCategory
 carpet.settings.SettingsManager carpet.api.settings.SettingsManager
 carpet.settings.Validator carpet.api.settings.Validator
+carpet.api.settings.SettingsManager getRule() carpet.api.settings.SettingsManager getCarpetRule()
+carpet.CarpetServer.settingsManager addRuleObserver() carpet.api.settings.SettingsManager registerRuleObserver()
 
 carpet.script.bundled.BundledModule carpet.script.Module
 
