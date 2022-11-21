@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Random;
 //#endif
 
-@Mixin(AbstractPlantStemBlock.class)
+@Mixin(AbstractPlantPartBlock.class)
 public abstract class AbstractPlantPartBlockMixin{
     @Inject(
             method = "scheduledTick",
@@ -36,8 +36,8 @@ public abstract class AbstractPlantPartBlockMixin{
             at = @At("TAIL")
     )
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (((AbstractPlantPartBlock) (Object) this) instanceof AbstractPlantStemBlock && (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants)) {
-            ((AbstractPlantPartBlock) (Object) this).randomTick(state, world, pos, random);
+        if (state.getBlock() instanceof AbstractPlantStemBlock && (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants)) {
+            state.randomTick(world, pos, random);
         }
     }
 }
