@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "id": "amscarpet",
-  "version": "0.1.1",
+  "id": "carpet-ams-addition",
+  "version": "${version}",
   "name": "Carpet AMS Addition",
   "description": "A Minecraft Server",
   "authors": [
@@ -13,7 +13,7 @@
     "sources": "https://mcams.club/"
   },
   "license": "LGPL-3.0",
-  "icon": "assets/carpet-ams-addition/icon.png",
+  "icon": "assets/ams/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -25,10 +25,8 @@
   ],
   "depends": {
     "fabricloader": ">=0.7.1",
-    "fabric": "*",
-    "minecraft": "1.17.x",
-    "java": ">=16",
-    "carpet": ">=1.4.51"
+    "minecraft": "${minecraft_dependency}",
+    "carpet": "${carpet_dependency}"
   },
   "custom": {
     "modmenu": {

@@ -1,5 +1,7 @@
 # Carpet-AMS-Addition
 
+[![Dev Builds](https://github.com/wendavid552/Carpet-AMS-Addition/actions/workflows/gradle.yml/badge.svg)](https://github.com/wendavid552/Carpet-AMS-Addition/actions/workflows/gradle.yml)
+
 一个简易的基于Carpet mod的拓展
 
 **由于一些功能是低版本模组升级而来，不确定有没有严重问题，由于能力有限该mod不保证能完全解决后续问题**
@@ -31,7 +33,10 @@
 
 `optimizedDragonRespawn`: 大幅度优化了龙战判定代码的性能表现，可能影响原版特性。
 
-`blockChunkLoader [block_type]`: 当红石激活特定
+`blockChunkLoader [block_type]`: 当红石激活特定方块(音符盒/钟)时强加载所在区块300gt，可选项包括`false`(不使用加载)
+,`note_block`(音符盒)和`bell_block`(钟)
+
+`CraftableEnchantedGoldenApples`
 
 ### 区块加载控制/Chunk Loading Commands
 

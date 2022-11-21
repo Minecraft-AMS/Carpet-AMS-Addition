@@ -3,7 +3,6 @@ package club.mcams.carpet.mixin.rule.scheduledRandomTick;
 import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.block.AbstractPlantPartBlock;
 import net.minecraft.block.AbstractPlantStemBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -12,16 +11,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC>=11900
+//$$import net.minecraft.util.math.random.Random;
+//#else
 import java.util.Random;
+//#endif
 
 @Mixin(AbstractPlantPartBlock.class)
-public abstract class AbstractPlantPartBlockMixin extends Block {
-
-    public AbstractPlantPartBlockMixin(Settings settings) {
-        super(settings);
-    }
-
-
+public abstract class AbstractPlantPartBlockMixin{
     @Inject(
             method = "scheduledTick",
             at = @At(
@@ -42,9 +39,8 @@ public abstract class AbstractPlantPartBlockMixin extends Block {
             at = @At("TAIL")
     )
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        AbstractPlantPartBlock $this = (AbstractPlantPartBlock) (Object) this;
-        if ($this instanceof AbstractPlantStemBlock && (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants)) {
-            $this.randomTick(state, world, pos, random);
+        if (state.getBlock() instanceof AbstractPlantStemBlock && (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants)) {
+            state.randomTick(world, pos, random);
         }
     }
 }

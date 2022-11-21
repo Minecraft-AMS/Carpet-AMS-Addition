@@ -1,0 +1,14 @@
+[
+  {
+    "subproject_dir": "1.16.5",
+    "game_versions": "1.16.4\n1.16.5"
+  },
+  {
+    "subproject_dir": "1.17.1",
+    "game_versions": "1.17.1"
+  },
+  {
+    "subproject_dir": "1.18.x",
+    "game_versions": "1.18.2"
+  }
+]
