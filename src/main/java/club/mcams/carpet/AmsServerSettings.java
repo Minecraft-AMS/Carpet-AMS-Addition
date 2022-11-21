@@ -74,7 +74,14 @@ public class AmsServerSettings
     public static String blockChunkLoader = "false";
 
     private static class BlockLoaderValidator extends Validator<String> {
-        private static final List<String> OPTIONS = List.of("false", "note_block", "bell_block");
+        private static final List<String> OPTIONS = List.of(
+                "false"
+                ,"note_block"
+                //#if MC>=11520
+                ,"bell_block"
+                //#endif
+
+        );
 
         @Override
         public String validate(ServerCommandSource source, ParsedRule<String> currentRule, String newValue, String userString) {
