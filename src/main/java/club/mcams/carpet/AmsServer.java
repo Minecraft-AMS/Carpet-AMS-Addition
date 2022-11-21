@@ -9,6 +9,7 @@ import club.mcams.carpet.command.AmsCarpetCommandRegistry;
 import club.mcams.carpet.function.ChunkLoading;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.util.AmsCarpetTranslations;
+import club.mcams.carpet.util.AutoMixinAuditExecutor;
 import club.mcams.carpet.util.JsonHelper;
 import club.mcams.carpet.util.Logging;
 import club.mcams.carpet.util.recipes.CraftingRule;
@@ -18,6 +19,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ReloadCommand;
@@ -88,6 +90,7 @@ public class AmsServer implements CarpetExtension, ModInitializer {
     @Override
     public void onInitialize() {
         AmsServer.loadExtension();
+        AutoMixinAuditExecutor.run();
     }
 
     @Override
