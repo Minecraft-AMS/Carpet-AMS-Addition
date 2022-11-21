@@ -1,6 +1,6 @@
 # Carpet-AMS-Addition
 
-[![Dev Builds](https://github.com/wendavid552/Carpet-AMS-Addition/actions/workflows/gradle.yml/badge.svg)](https://github.com/wendavid552/Carpet-AMS-Addition/actions/workflows/gradle.yml)
+[![Dev Builds](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/actions/workflows/gradle.yml/badge.svg)](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/actions/workflows/gradle.yml)
 
 一个简易的基于Carpet mod的拓展
 
