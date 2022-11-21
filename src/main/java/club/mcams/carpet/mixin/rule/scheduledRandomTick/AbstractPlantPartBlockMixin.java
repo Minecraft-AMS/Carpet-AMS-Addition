@@ -11,6 +11,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+//#if MC>=11900
+//$$import net.minecraft.util.math.random.Random;
+//#else
 import java.util.Random;
 //#endif
 
