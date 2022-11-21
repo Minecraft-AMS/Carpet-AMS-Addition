@@ -1,77 +1,45 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
 	id 'maven-publish'
-}
-repositories {
-    maven {
-        url = 'https://maven.fabricmc.net/'
-    }
-    maven {
-        url 'https://masa.dy.fi/maven'
-    }
-    maven {
-        url "https://maven.parchmentmc.org"
-    }
+	id 'fabric-loom' version '1.0-SNAPSHOT' apply false
+//
+//	// https://github.com/Juuxel/LoomQuiltflower
+//	id 'io.github.juuxel.loom-quiltflower' version '1.7.4' apply false
+	id 'com.replaymod.preprocess' version '897c4096e2'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+preprocess {
+	def mc114      = createNode('1.14.4' , 1_14_04, 'yarn')
+	def mc115      = createNode('1.15.2' , 1_15_02, 'yarn')
+	def mc116      = createNode('1.16.5' , 1_16_05, 'yarn')
+	def mc117      = createNode('1.17.1' , 1_17_01, 'yarn')
+	def mc118      = createNode('1.18.x' , 1_18_02, 'yarn')
+	def mc119      = createNode('1.19.x' , 1_19_02, 'yarn')
+	def mcFuture   = createNode('future' , 1_19_03, 'yarn')
 
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
-
-
-dependencies {
-	// To change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	//mappings loom.officialMojangMappings()   Mojang官方映射
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "carpet:fabric-carpet:${project.minecraft_version}-${project.carpet_core_version}"
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	mc114.link(mc115   , file('versions/mapping-1.15-1.14.txt'))
+	mc115.link(mc116   , file('versions/mapping-1.16-1.15.txt'))
+	mc116.link(mc117   , file('versions/mapping-1.17-1.16.txt'))
+	mc117.link(mc118   , file('versions/mapping-1.18-1.17.txt'))
+	mc118.link(mc119   , file('versions/mapping-1.18-1.19.txt'))
+	mc119.link(mcFuture, file('versions/mapping-1.19-future.txt'))
 }
 
-processResources {
-	inputs.property "version", project.version
-
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
+task buildAndGather {
+	subprojects {
+		dependsOn project.name + ':build'
 	}
-}
-
-tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
-}
-
-java {
-	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-	// if it is present.
-	// If you remove this line, sources will not be generated.
-	withSourcesJar()
-}
-
-jar {
-	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
-	}
-}
-
-// configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			from components.java
+	doFirst {
+		println 'Gathering builds'
+		copy {
+			subprojects {
+				def libDir = project.projectDir.toPath().resolve('build/libs')
+				from(libDir) {
+					include '*.jar'
+					exclude '*-dev.jar', '*-sources.jar'
+				}
+				into 'build/libs/'
+				duplicatesStrategy DuplicatesStrategy.INCLUDE
+			}
 		}
-	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
 	}
 }
