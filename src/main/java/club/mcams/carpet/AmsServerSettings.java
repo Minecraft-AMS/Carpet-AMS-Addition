@@ -83,11 +83,6 @@ public class AmsServerSettings {
     )
     public static boolean craftableEnchantedGoldenApples = false;
 
-    @Rule(
-            desc = "Control chunk loading for players at any gamemodes",
-            category = {AMS, COMMAND}
-    )
-    public static String commandChunkLoading = "false";
     @CraftingRule(recipes = "bone_block.json")
     @Rule(
             desc = "Use nine bones to crafted three bone_blocks",
@@ -96,6 +91,11 @@ public class AmsServerSettings {
     public static boolean betterCraftableBoneBlock = false;
 
     //#endif
+    @Rule(
+            desc = "Control chunk loading for players at any gamemodes",
+            category = {AMS, COMMAND}
+    )
+    public static String commandChunkLoading = "false";
     private static class BlockLoaderValidator extends Validator<String> {
         private static final List<String> OPTIONS = List.of("false", "note_block", "bell_block");
 
