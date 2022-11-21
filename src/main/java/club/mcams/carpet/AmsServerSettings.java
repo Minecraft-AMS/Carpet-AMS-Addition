@@ -74,6 +74,8 @@ public class AmsServerSettings {
             category = {AMS, FEATURE}
     )
     public static String blockChunkLoader = "false";
+
+    //if MC >= 1000000
     @CraftingRule(recipes = "enchanted_golden_apples.json")
     @Rule(
             desc = "Enchanted Golden Apples can be crafted with 8 Gold Blocks again",
@@ -93,6 +95,7 @@ public class AmsServerSettings {
     )
     public static boolean betterCraftableBoneBlock = false;
 
+    //#endif
     private static class BlockLoaderValidator extends Validator<String> {
         private static final List<String> OPTIONS = List.of("false", "note_block", "bell_block");
 

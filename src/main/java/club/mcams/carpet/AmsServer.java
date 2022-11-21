@@ -5,35 +5,32 @@ import carpet.CarpetExtension;
 import carpet.CarpetServer;
 import carpet.script.bundled.BundledModule;
 import carpet.settings.ParsedRule;
-
 import club.mcams.carpet.command.AmsCarpetCommandRegistry;
 import club.mcams.carpet.function.ChunkLoading;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.util.AmsCarpetTranslations;
 import club.mcams.carpet.util.JsonHelper;
-import club.mcams.carpet.util.recipes.CraftingRule;
 import club.mcams.carpet.util.Logging;
-
+import club.mcams.carpet.util.recipes.CraftingRule;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import com.mojang.brigadier.CommandDispatcher;
-
 import net.fabricmc.api.ModInitializer;
-
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ReloadCommand;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.WorldSavePath;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,9 +39,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class AmsServer implements CarpetExtension, ModInitializer {
 
@@ -114,6 +108,7 @@ public class AmsServer implements CarpetExtension, ModInitializer {
         minecraftServer = server;
     }
 
+    //#if MC >= 1000000000
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
         String datapackPath = server.getSavePath(WorldSavePath.DATAPACKS).toString();
@@ -157,7 +152,7 @@ public class AmsServer implements CarpetExtension, ModInitializer {
                     //#if MC>=11900
                     //$$executeWithPrefix
                     //#else
-                    execute
+                            execute
                     //#endif
                             (server.getCommandSource(), "/datapack enable \"file/AmsData\"");
         }
@@ -352,6 +347,7 @@ public class AmsServer implements CarpetExtension, ModInitializer {
             Logging.logStackTrace(e);
         }
     }
+    //#endif
 
 //    public static void savePlayerData(ServerPlayerEntity player) {
 //        File playerDataDir = minecraftServer.getSavePath(WorldSavePath.PLAYERDATA).toFile();
