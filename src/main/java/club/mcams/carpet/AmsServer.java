@@ -122,7 +122,6 @@ public class AmsServer implements CarpetExtension, ModInitializer {
         minecraftServer = server;
     }
 
-    //#if MC >= 1000000000
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
         String datapackPath = server.getSavePath(WorldSavePath.DATAPACKS).toString();
@@ -174,7 +173,12 @@ public class AmsServer implements CarpetExtension, ModInitializer {
 
     private void registerCraftingRule(String ruleName, String[] recipes, String recipeNamespace, String dataPath) {
         updateCraftingRule(
-                CarpetServer.settingsManager.getRule(ruleName),
+                CarpetServer.settingsManager.
+                        //#if MC>=11900
+                        //$$getCarpetRule(ruleName),
+                        //#else
+                                getRule(ruleName),
+                //#endif
                 recipes,
                 recipeNamespace,
                 dataPath,
@@ -182,7 +186,13 @@ public class AmsServer implements CarpetExtension, ModInitializer {
         );
 
         CarpetServer.settingsManager.addRuleObserver((source, rule, s) -> {
-            if (rule.name.equals(ruleName)) {
+            if (rule.
+                    //#if MC>=11900
+                    //$$name()
+                    //#else
+                            name
+                    //#endif
+                    .equals(ruleName)) {
                 updateCraftingRule(rule, recipes, recipeNamespace, dataPath, ruleName);
                 reload();
             }
@@ -361,7 +371,6 @@ public class AmsServer implements CarpetExtension, ModInitializer {
             Logging.logStackTrace(e);
         }
     }
-    //#endif
 
 //    public static void savePlayerData(ServerPlayerEntity player) {
 //        File playerDataDir = minecraftServer.getSavePath(WorldSavePath.PLAYERDATA).toFile();
