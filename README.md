@@ -36,9 +36,9 @@
 `blockChunkLoader [block_type]`: 当红石激活特定方块(音符盒/钟)时强加载所在区块300gt，可选项包括`false`(不使用加载)
 ,`note_block`(音符盒)和`bell_block`(钟)
 
-`CraftableEnchantedGoldenApples`:可制作附魔金苹果。
+`CraftableEnchantedGoldenApples`: 可制作附魔金苹果。
 
-`BetterCraftableBoneBlock`:更好的合成骨块（9个骨头合成三个骨块，主要为了降低卡顿）。
+`BetterCraftableBoneBlock`: 更好的合成骨块（9个骨头合成三个骨块，主要为了降低卡顿）。
 
 ### 区块加载控制/Chunk Loading Commands
 
