@@ -1,11 +1,12 @@
 package club.mcams.carpet.util;
 
-import carpet.utils.Messenger;
 import club.mcams.carpet.AmsServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.BaseText;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.MixinEnvironment;
+
+import static club.mcams.carpet.util.Messenger.*;
 
 public class MixinUtil {
     public static boolean audit(@Nullable ServerCommandSource source) {
@@ -13,7 +14,7 @@ public class MixinUtil {
         BaseText response;
         try {
             MixinEnvironment.getCurrentEnvironment().audit();
-            response = Messenger.s("Mixin environment audited successfully");
+            response = s("Mixin environment audited successfully");
             ok = true;
         } catch (Exception e) {
             AmsServer.LOGGER.error("Error when auditing mixin", e);

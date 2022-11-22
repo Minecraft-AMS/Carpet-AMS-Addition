@@ -23,7 +23,7 @@ jobs:
     outputs:
       matrix: ${{ steps.setmatrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.5.0
 
       - name: Display context
         run: | 
@@ -55,10 +55,10 @@ jobs:
       matrix: ${{fromJson(needs.matrix_prep.outputs.matrix)}}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2.5.0
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v3.0.1
         with:
           name: build-artifacts
           path: build-artifacts
@@ -88,20 +88,20 @@ jobs:
 
       - name: Read Properties mod_version
         id: mod_version
-        uses: christian-draeger/read-properties@1.0.1
+        uses: christian-draeger/read-properties@1.1.1
         with:
           path: gradle.properties
           property: mod_version
 
       - name: Read Properties minecraft_version
         id: minecraft_version
-        uses: christian-draeger/read-properties@1.0.1
+        uses: christian-draeger/read-properties@1.1.1
         with:
           path: ${{ format('versions/{0}/gradle.properties', matrix.subproject_dir) }}
           property: minecraft_version
 
       - name: Publish Minecraft Mods
-        uses: Kir-Antipov/mc-publish@v2.1
+        uses: Kir-Antipov/mc-publish@v3.2
         with:
           github-tag: ${{ steps.release_info.outputs.tag_name }}
           github-token: ${{ secrets.GITHUB_TOKEN }}

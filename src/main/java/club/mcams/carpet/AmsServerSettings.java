@@ -14,6 +14,7 @@ import static carpet.settings.RuleCategory.*;
  * Here is your example Settings class you can plug to use carpetmod /carpet settings command
  */
 
+@SuppressWarnings({"CanBeFinal", "removal"})
 public class AmsServerSettings {
     public static final String AMS = "AMS";
     public static final String CRAFTING = "CRAFTING";
@@ -75,7 +76,6 @@ public class AmsServerSettings {
     )
     public static String blockChunkLoader = "false";
 
-    //#if MC >= 1000000
     @CraftingRule(recipes = "enchanted_golden_apples.json")
     @Rule(
             desc = "Enchanted Golden Apples can be crafted with 8 Gold Blocks again",
@@ -90,7 +90,6 @@ public class AmsServerSettings {
     )
     public static boolean betterCraftableBoneBlock = false;
 
-    //#endif
     @Rule(
             desc = "Control chunk loading for players at any gamemodes",
             category = {AMS, COMMAND}
