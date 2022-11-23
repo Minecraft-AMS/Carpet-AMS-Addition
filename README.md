@@ -1,6 +1,6 @@
 # Carpet-AMS-Addition
 
-[![Dev Builds](https://github.com/wendavid552/Carpet-AMS-Addition/actions/workflows/gradle.yml/badge.svg)](https://github.com/wendavid552/Carpet-AMS-Addition/actions/workflows/gradle.yml)
+[![Dev Builds](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/actions/workflows/gradle.yml/badge.svg)](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/actions/workflows/gradle.yml)
 
 一个简易的基于Carpet mod的拓展
 
@@ -10,8 +10,13 @@
 
 ## 支持版本/Supported Version
 
-- `1.18.2`（主要维护版本，因为AMS在这个版本）
+- `22w46a`
+- `1.19.2`
+- `1.18.2`（主要维护版本）
 - `1.17.1`
+- `1.16.4/1.16.5`
+
+实际上1.16~22w46a之间的任何版本理论上应该都兼容，若有版本支持问题请提Issue.
 
 ## 功能/Feature
 
@@ -36,7 +41,9 @@
 `blockChunkLoader [block_type]`: 当红石激活特定方块(音符盒/钟)时强加载所在区块300gt，可选项包括`false`(不使用加载)
 ,`note_block`(音符盒)和`bell_block`(钟)
 
-`CraftableEnchantedGoldenApples`
+`CraftableEnchantedGoldenApples`: 可制作附魔金苹果。
+
+`BetterCraftableBoneBlock`: 更好的合成骨块（9个骨头合成三个骨块，主要为了降低卡顿）。
 
 ### 区块加载控制/Chunk Loading Commands
 
