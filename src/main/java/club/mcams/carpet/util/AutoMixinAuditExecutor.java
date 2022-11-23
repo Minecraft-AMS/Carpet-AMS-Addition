@@ -2,7 +2,6 @@ package club.mcams.carpet.util;
 
 import club.mcams.carpet.AmsServer;
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.FabricLoader;
 
 public class AutoMixinAuditExecutor {
     private static final String KEYWORD_PROPERTY = "carpetamsaddition.mixin_audit";
