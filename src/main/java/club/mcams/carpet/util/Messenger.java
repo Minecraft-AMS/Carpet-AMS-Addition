@@ -3,7 +3,7 @@ package club.mcams.carpet.util;
 //$$ import net.minecraft.util.Util;
 //#endif
 //#if MC >= 11900
-//$$ import net.minecraft.text.Text
+//$$ import net.minecraft.text.Text;
 //#endif
 
 import net.minecraft.text.BaseText;
