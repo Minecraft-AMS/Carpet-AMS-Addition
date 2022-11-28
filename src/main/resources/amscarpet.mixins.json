@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "club.mcams.carpet.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "interaction.ThreadedAnvilChunkStorageMixin",
+    "rule.blockChunkLoader.BellBlockMixin",
+    "rule.blockChunkLoader.NoteBlockMixin",
+    "rule.optimizedDragonRespawn.EnderDragonFightMixin",
+    "rule.superBow.SuperBow",
+    "rule.scheduledRandomTick.AbstractPlantPartBlockMixin",
+    "rule.scheduledRandomTick.BambooBlockMixin",
+    "rule.scheduledRandomTick.CactusBlockMixin",
+    "rule.scheduledRandomTick.ChorusFlowerBlockMixin",
+    "rule.scheduledRandomTick.SugarCaneBlockMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

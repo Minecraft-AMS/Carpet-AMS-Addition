@@ -1,0 +1,12 @@
+carpet.settings.ParsedRule carpet.api.settings.CarpetRule
+carpet.settings.ParsedRule get() carpet.api.settings.CarpetRule value()
+carpet.settings.RuleCategory carpet.api.settings.RuleCategory
+carpet.settings.SettingsManager carpet.api.settings.SettingsManager
+carpet.settings.Validator carpet.api.settings.Validator
+carpet.api.settings.SettingsManager getRule() carpet.api.settings.SettingsManager getCarpetRule()
+carpet.CarpetServer.settingsManager addRuleObserver() carpet.api.settings.SettingsManager registerRuleObserver()
+
+carpet.script.bundled.BundledModule carpet.script.Module
+
+net.minecraft.text.BaseText net.minecraft.text.MutableText
+net.minecraft.world.dimension.DimensionType isUltrawarm() ultrawarm()
