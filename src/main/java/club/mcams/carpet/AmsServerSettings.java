@@ -76,6 +76,12 @@ public class AmsServerSettings {
     )
     public static String blockChunkLoader = "false";
 
+    @Rule(
+            desc = "When bone_block on the piston, activated and the piston head normally extended,Piston head can load 3x3 chunks(15s)",
+            category = {AMS, FEATURE}
+    )
+    public static boolean pistonblockchunkloader = false;
+
     @CraftingRule(recipes = "enchanted_golden_apples.json")
     @Rule(
             desc = "Enchanted Golden Apples can be crafted with 8 Gold Blocks again",
