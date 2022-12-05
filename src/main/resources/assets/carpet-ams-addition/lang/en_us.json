@@ -24,7 +24,7 @@
   "rule.betterCraftableBoneBlock.desc": "Use nine bones to crafted three bone_blocks",
   "rule.noteBlockChunkLoader.name": "noteBlockChunkLoader",
   "rule.noteBlockChunkLoader.desc": "Load nearby 3x3 chunks for 15 seconds when a note block is triggered",
-  "rule.bellChunkLoader.name": "bellChunkLoader",
+  "rule.bellBlockChunkLoader.name": "bellBlockChunkLoader",
   "rule.bellBlockChunkLoader.desc": "Load nearby 3x3 chunks for 15 seconds when a bell is triggered",
   "rule.pistonBlockChunkLoader.name": "pistonBlockChunkLoader",
   "rule.pistonBlockChunkLoader.desc": "Load nearby 3x3 chunks for 15 seconds when a piston with a bone block at its top extends"

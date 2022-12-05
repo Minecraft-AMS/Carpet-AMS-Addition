@@ -20,7 +20,7 @@
 
 ### 规则/Rules
 
-`SuperBow`: 可以让弓同时拥有无限和经验修补附魔。
+`superBow`: 可以让弓同时拥有无限和经验修补附魔。
 
 `scheduledRandomTickCactus`: 使计划刻仍可以给予随机刻进行强制催熟仙人掌。
 

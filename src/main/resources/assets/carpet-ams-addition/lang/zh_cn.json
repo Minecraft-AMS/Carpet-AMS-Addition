@@ -23,7 +23,7 @@
   "rule.betterCraftableBoneBlock.desc": "使用9个骨头可以合成出3个骨块(一点都不卡！)",
   "rule.noteBlockChunkLoader.name": "音符盒区块加载",
   "rule.noteBlockChunkLoader.desc": "音符盒方块被激活时将加载周围3x3区块15s",
-  "rule.bellChunkLoader.name": "钟区块加载",
+  "rule.bellBlockChunkLoader.name": "钟区块加载",
   "rule.bellBlockChunkLoader.desc": "钟方块被激活时将加载周围3x3区块15s",
   "rule.pistonBlockChunkLoader.name": "活塞区块加载",
   "rule.pistonBlockChunkLoader.desc": "活塞被激活时将加载周围3x3区块15s"
