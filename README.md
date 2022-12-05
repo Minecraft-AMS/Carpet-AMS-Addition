@@ -36,10 +36,7 @@
 
 `optimizedDragonRespawn`: 大幅度优化了龙战判定代码的性能表现，可能影响原版特性。
 
-`blockChunkLoader [block_type]`: 当红石激活特定方块(音符盒/钟)时强加载所在区块300gt，可选项包括`false`(不使用加载)
-,`note_block`(音符盒)和`bell_block`(钟)
-
-`pistonblockchunkloader`: 在活塞上放置一个骨块，当活塞被激活且正常伸出时，以活塞头为中心加载3x3区块，持续15s。
+`noteBlockChunkLoader/bellBlockChunkLoader/pistonBlockChunkLoader`: 当红石激活特定方块(音符盒/钟/上面放置骨块的活塞)时强加载所在区块300gt，可选项包括`false`(不使用加载)
 
 `CraftableEnchantedGoldenApples`: 可制作附魔金苹果。
 

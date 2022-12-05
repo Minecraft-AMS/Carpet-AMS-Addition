@@ -19,12 +19,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Objects;
-
 @Mixin(NoteBlock.class)
 public abstract class NoteBlockMixin {
     @Inject(at = @At("HEAD"), method = "playNote")
-    private void loadChunk(
+    private void playNoteMixin(
             //#if MC>=11900
             //$$ Entity entity,
             //#endif
@@ -32,9 +30,9 @@ public abstract class NoteBlockMixin {
             //$$ BlockState blockState,
             //#endif
             World world, BlockPos pos, CallbackInfo info) {
-        if (Objects.equals(AmsServerSettings.blockChunkLoader, "note_block")) {
-            ChunkPos cp = new ChunkPos(pos.getX() >> 4, pos.getZ() >> 4);
-            ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.NOTE_BLOCK, cp, 3, cp);
+        if (AmsServerSettings.noteBlockChunkLoader && !world.isClient) {
+            ChunkPos chunkPos = new ChunkPos(pos);
+            ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
         }
     }
 }

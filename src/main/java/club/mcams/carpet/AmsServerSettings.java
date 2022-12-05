@@ -1,12 +1,7 @@
 package club.mcams.carpet;
 
-import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
-import carpet.settings.Validator;
 import club.mcams.carpet.util.recipes.CraftingRule;
-import net.minecraft.server.command.ServerCommandSource;
-
-import java.util.List;
 
 import static carpet.settings.RuleCategory.*;
 
@@ -69,18 +64,20 @@ public class AmsServerSettings {
     public static boolean optimizedDragonRespawn = false;
 
     @Rule(
-            desc = "Load nearby 3x3 chunks for 15 seconds when a certain block is triggered",
-            options = {"false", "note_block", "bell_block"},
-            validate = BlockLoaderValidator.class,
+            desc = "Load nearby 3x3 chunks for 15 seconds when a note block is triggered",
             category = {AMS, FEATURE}
     )
-    public static String blockChunkLoader = "false";
-
+    public static boolean noteBlockChunkLoader = false;
     @Rule(
-            desc = "When bone_block on the piston, activated and the piston head normally extended,Piston head can load 3x3 chunks(15s)",
+            desc = "Load nearby 3x3 chunks for 15 seconds when a bell is triggered",
             category = {AMS, FEATURE}
     )
-    public static boolean pistonblockchunkloader = false;
+    public static boolean bellBlockChunkLoader = false;
+    @Rule(
+            desc = "Load nearby 3x3 chunks for 15 seconds when a piston with a bone block at its top extends",
+            category = {AMS, FEATURE}
+    )
+    public static boolean pistonBlockChunkLoader = false;
 
     @CraftingRule(recipes = "enchanted_golden_apples.json")
     @Rule(
@@ -101,21 +98,5 @@ public class AmsServerSettings {
             category = {AMS, COMMAND}
     )
     public static String commandChunkLoading = "false";
-    private static class BlockLoaderValidator extends Validator<String> {
-        private static final List<String> OPTIONS = List.of("false", "note_block", "bell_block");
-
-        @Override
-        public String validate(ServerCommandSource source, ParsedRule<String> currentRule, String newValue, String userString) {
-            if (!OPTIONS.contains(newValue)) {
-                return null;
-            }
-            return newValue;
-        }
-
-        @Override
-        public String description() {
-            return "Can be limited to 'ops' only, true/false for everyone/no one, or a custom permission level";
-        }
-    }
 
 }

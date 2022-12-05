@@ -16,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Objects;
-
 @Mixin(BellBlock.class)
 public class BellBlockMixin {
     @Inject(
@@ -25,9 +23,9 @@ public class BellBlockMixin {
             at = @At("HEAD")
     )
     private void ringByTriggeredMixin(Entity entity, World world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        if (Objects.equals(AmsServerSettings.blockChunkLoader, "bell_block") && world instanceof ServerWorld) {
-            ChunkPos cp = new ChunkPos(pos.getX() >> 4, pos.getZ() >> 4);
-            ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BELL_BLOCK, cp, 3, cp);
+        if (AmsServerSettings.bellBlockChunkLoader && !world.isClient) {
+            ChunkPos chunkPos = new ChunkPos(pos);
+            ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
         }
     }
 }
