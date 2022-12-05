@@ -98,5 +98,4 @@ public class AmsServerSettings {
             category = {AMS, COMMAND}
     )
     public static String commandChunkLoading = "false";
-
 }

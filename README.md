@@ -38,6 +38,8 @@
 
 `noteBlockChunkLoader/bellBlockChunkLoader/pistonBlockChunkLoader`: 当红石激活特定方块(音符盒/钟/上面放置骨块的活塞)时强加载所在区块300gt，可选项包括`false`(不使用加载)
 
+`pistonblockchunkloader`: 在活塞上放置一个骨块，当活塞被激活且正常伸出时，以活塞头为中心加载3x3区块，持续15s。
+
 `CraftableEnchantedGoldenApples`: 可制作附魔金苹果。
 
 `BetterCraftableBoneBlock`: 更好的合成骨块（9个骨头合成三个骨块，主要为了降低卡顿）。
