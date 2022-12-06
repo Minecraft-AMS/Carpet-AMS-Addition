@@ -75,7 +75,8 @@ public class AmsServerSettings {
     public static boolean bellBlockChunkLoader = false;
     @Rule(
             desc = "Load nearby 3x3 chunks for 15 seconds when a piston with a bone block at its top extends",
-            category = {AMS, FEATURE}
+            category = {AMS, FEATURE},
+            extra={"The loading chunk is determined by the head of the piston"}
     )
     public static boolean pistonBlockChunkLoader = false;
 
