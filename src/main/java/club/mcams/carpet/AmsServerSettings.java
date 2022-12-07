@@ -79,11 +79,14 @@ public class AmsServerSettings {
     )
     public static boolean pistonBlockChunkLoader = false;
 
+    ////////////////////////////////////////////////配方////////////////////////////////////////////////
+
     @CraftingRule(recipes = "enchanted_golden_apples.json")
     @Rule(
             desc = "Enchanted Golden Apples can be crafted with 8 Gold Blocks again",
             category = {CRAFTING, SURVIVAL, AMS}
     )
+
     public static boolean craftableEnchantedGoldenApples = false;
 
     @CraftingRule(recipes = "bone_block.json")
@@ -93,10 +96,31 @@ public class AmsServerSettings {
     )
     public static boolean betterCraftableBoneBlock = false;
 
+    ////////////////////////////////////////////////配方////////////////////////////////////////////////
+
     @Rule(
             desc = "Control chunk loading for players at any gamemodes",
             category = {AMS, COMMAND}
     )
     public static String commandChunkLoading = "false";
+
+    @Rule(
+            desc = "Players can use water buckets to place water in nether",
+            category = {AMS, FEATURE}
+    )
+    public static boolean netherWaterPlacement = false;
+    //#if MC<11700
+    //$$//    @Rule(
+    //$$//            desc = "Change the hardness of deepslate to stone",
+    //$$//            category = {AMS, FEATURE, SURVIVAL}
+    //$$//    )
+    //$$//    public static boolean breakableDeepslate = false;
+    //#else
+    @Rule(
+            desc = "Change the hardness of deepslate to stone",
+            category = {AMS, FEATURE, SURVIVAL}
+    )
+    public static boolean breakableDeepslate = false;
+    //#endif
 
 }

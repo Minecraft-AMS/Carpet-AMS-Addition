@@ -1,6 +1,10 @@
 {
   "rule.superBow.name": "superBow",
   "rule.superBow.desc": "Enabling making super bows with both infinite and mending enchants",
+  "rule.netherWaterPlacement.name": "netherWaterPlacement",
+  "rule.breakableDeepslate.name": "BreakableDeepslate",
+  "rule.breakableDeepslate.desc": "Change the hardness of deepslate to stone",
+  "rule.netherWaterPlacement.desc": "Players can use water buckets to place water in nether",
   "rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",
   "rule.scheduledRandomTickBamboo.name": "scheduledRandomTickBamboo",

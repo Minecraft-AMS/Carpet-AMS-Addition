@@ -1,6 +1,10 @@
 {
   "rule.superBow.name": "超级弓",
   "rule.superBow.desc": "让弓能同时打上无限和经验修补两种附魔",
+  "rule.netherWaterPlacement.name": "地狱可放水",
+  "rule.netherWaterPlacement.desc": "玩家可以在地狱使用水桶放置水",
+  "rule.breakableDeepslate.name": "易碎深板岩",
+  "rule.breakableDeepslate.desc": "改变深板岩的硬度使其和普通石头一致",
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",
   "rule.scheduledRandomTickBamboo.name": "计划刻催熟竹子",
@@ -23,9 +27,8 @@
   "rule.betterCraftableBoneBlock.desc": "使用9个骨头可以合成出3个骨块(一点都不卡！)",
   "rule.noteBlockChunkLoader.name": "音符盒区块加载",
   "rule.noteBlockChunkLoader.desc": "音符盒方块被激活时将加载周围3x3区块15s",
-  "rule.bellChunkLoader.name": "钟区块加载",
+  "rule.bellBlockChunkLoader.name": "钟区块加载",
   "rule.bellBlockChunkLoader.desc": "钟方块被激活时将加载周围3x3区块15s",
-  "rule.pistonBlockChunkLoader.name": "活塞区块加载",
-  "rule.pistonBlockChunkLoader.desc": "活塞被激活时将加载周围3x3区块15s"
-
+  "rule.pistonBlockChunkLoader.name": "活塞头区块加载",
+  "rule.pistonBlockChunkLoader.desc": "活塞或黏性活塞被激活且能正常伸出时以活塞头将到达的区块为中心加载3x3区块持续15s"
 }

@@ -55,7 +55,6 @@ public class AmsServer implements CarpetExtension, ModInitializer {
         AmsCarpetLoggerRegistry.registerLoggers();
     }
 
-
     //#if MC>=11900
     //$$    @Override
     //$$    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {

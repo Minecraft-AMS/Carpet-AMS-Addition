@@ -3,7 +3,10 @@ package club.mcams.carpet.mixin.rule.blockChunkLoader;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.function.BlockChunkLoader;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FacingBlock;
+import net.minecraft.block.PistonBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -14,7 +17,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 
 @Mixin(PistonBlock.class)
 public abstract class PistonBlockMixin
