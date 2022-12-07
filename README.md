@@ -42,6 +42,10 @@
 
 `betterCraftableBoneBlock`: 使用骨头直接合成骨块。
 
+`netherWaterPlacement`: 玩家可以在地狱使用水桶放置水。
+
+`breakableDeepslate`: 改变深板岩的硬度使其和普通石头一致。
+
 ### 区块加载控制/Chunk Loading Commands
 
 控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。
