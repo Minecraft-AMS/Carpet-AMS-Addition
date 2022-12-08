@@ -20,31 +20,39 @@
 
 ### 规则/Rules
 
-`SuperBow`: 可以让弓同时拥有无限和经验修补附魔。
+`SuperBow`: 开启后，可以让弓同时拥有无限和经验修补附魔。
 
-`scheduledRandomTickCactus`: 使计划刻仍可以给予随机刻进行强制催熟仙人掌。
+`scheduledRandomTickAllPlants`: 开启后，使计划刻事件可触发以下所有植物的随机刻生长行为，用于恢复1.16版本的强制催熟特性。亦可通过以下指令单独控制特定植物是否可强制催熟。
 
-`scheduledRandomTickBamboo`: 使计划刻仍可以给予随机刻进行强制催熟竹子。
+- `scheduledRandomTickCactus`: 开启后，使计划刻事件可触发仙人掌的随机刻生长行为。
 
-`scheduledRandomTickChorusFlower`: 使计划刻仍可以给予随机刻进行强制催熟紫颂花。
+- `scheduledRandomTickBamboo`: 开启后，使计划刻事件可触发竹子的随机刻生长行为。
 
-`scheduledRandomTickSugarCane`: 使计划刻仍可以给予随机刻进行强制催熟甘蔗。
+- `scheduledRandomTickChorusFlower`: 开启后，使计划刻事件可触发紫颂花的随机刻生长行为。
 
-`scheduledRandomTickStem`: 使计划刻仍可以给予随机刻进行强制催熟海带、缠怨藤、垂泪藤。
+- `scheduledRandomTickSugarCane`: 开启后，使计划刻事件可触发甘蔗的随机刻生长行为。
 
-`scheduledRandomTickAllPlants`: 使计划刻仍可以给予随机刻进行强制催熟以上提到的所有作物。
+- `scheduledRandomTickStem`: 开启后，使计划刻事件可触发海带、缠怨藤、垂泪藤的随机刻生长行为。
 
-`optimizedDragonRespawn`: 大幅度优化了龙战判定代码的性能表现，可能影响原版特性。
+`optimizedDragonRespawn`: 大幅度优化了龙战判定代码的性能表现，为基于末地祭坛设计的末地石农场提供性能优化。注意：本选项开启后可能影响原版特性。
 
-`noteBlockChunkLoader/bellBlockChunkLoader/pistonBlockChunkLoader`: 当红石激活`音符盒`/`钟`，或`上面放置骨块的活塞`的活塞头伸出时强加载所在区块300gt，其中活塞头伸出加载的区块范围以活塞头将伸到的位置为中心。
+`blockChunkLoader`: 当上边沿红石信号激活特定方块(基于选项)时，为特定方块所在的区块添加加载等级为30的加载票（即为周围3*3的区块提供强加载，与地狱门加载器表现类似），持续时间为300gt。该选项有以下三个选项，具体说明如下：
 
-`craftableEnchantedGoldenApples`: 可制作附魔金苹果（老版本的合成方式）。
+- `false`: 不开启任何方块加载功能
 
-`betterCraftableBoneBlock`: 使用骨头直接合成骨块（9个骨头合成3个骨块）。
+- `note_block`: 当上边沿红石信号激活音符盒时，为该音符盒所在区块添加类型为"note_block"的加载票。
 
-`netherWaterPlacement`: 玩家可以在地狱使用水桶放置水。
+- `bell_block`: 当上边沿红石信号激活钟时，为钟方块所在区块添加类型为"bell_block"的加载票。
 
-`breakableDeepslate`: 改变深板岩的硬度使其和普通石头一致。
+`pistonBlockChunkLoader`: 开启后，对于一个正上方放有骨块的普通活塞或黏性活塞，当该活塞产生活塞头的推出/拉回事件时，在创建推出/拉回事件的那一游戏刻为**活塞头方块所在区块**添加类型为"piston_block"，加载等级为30的加载票，持续时间为300gt。注意，黏性活塞的失败收回事件（如尝试拉回超过12个方块时）也可创建加载票。
+
+`CraftableEnchantedGoldenApples`: 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
+
+`BetterCraftableBoneBlock`: 开启后，可更好的合成骨块（可用9个骨头合成三个骨块，大幅降低合成卡顿）。
+
+`netherWaterPlacement`: 开启后，玩家可通过使用水桶的方式在地狱维度中放置水源。
+
+`breakableDeepslate`: 开启后，深板岩的挖掘硬度将与石头相同（均可在急迫二效果下用效率5钻石镐进行瞬间挖掘）。
 
 ### 区块加载控制/Chunk Loading Commands
 
