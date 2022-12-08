@@ -75,3 +75,4 @@
 - 感谢gnembon和Fallen_Breath对carpet, carpet-extra和carpet-TIS-addition的实现代码
 - 感谢[401Unauthorized](https://github.com/YehowahLiu)在解决开发问题上的无私帮助
 - 感谢alpha_hhh和Menggui233帮助测试和提建议
+- 感谢[rokuuuchan](https://github.com/nirvanaxiao6)对readme文档的细节补充
