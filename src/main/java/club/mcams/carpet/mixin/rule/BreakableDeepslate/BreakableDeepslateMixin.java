@@ -15,30 +15,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-//#if MC<11700
-//$$//@Mixin({AbstractBlockState.class})
-//$$//public abstract class BreakableDeepslateMixin {
-//$$//	@Shadow
-//$$//	public abstract Block getBlock();
-//$$//	@Inject(method = {"getHardness"}, at = {@At("TAIL")}, cancellable = true)
-//$$//	public void getBlockHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
-//$$//		if (this.getBlock() == Blocks.DEEPSLATE && AmsServerSettings.breakableDeepslate){
-//$$//			cir.setReturnValue(1.5F);
-//$$//		}
-//$$//	}
-//$$//}
-//#else
-
 @Mixin({AbstractBlockState.class})
 public abstract class BreakableDeepslateMixin {
 	@Shadow
 	public abstract Block getBlock();
 	@Inject(method = {"getHardness"}, at = {@At("TAIL")}, cancellable = true)
 	public void getBlockHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
-		if (this.getBlock() == Blocks.DEEPSLATE && AmsServerSettings.breakableDeepslate){
+		//#if MC<11700
+		//&&if (this.getBlock() == Blocks.STONE && AmsServerSettings.breakableDeepslate){
+		//&&			cir.setReturnValue(1.5F);
+		//&&		}
+		//#else
+		if(this.getBlock() == Blocks.DEEPSLATE && AmsServerSettings.breakableDeepslate){
 			cir.setReturnValue(1.5F);
 		}
+		//#endif
 	}
 }
 
-//#endif
