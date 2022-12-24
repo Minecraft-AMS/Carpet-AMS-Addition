@@ -19,7 +19,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
+//import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ReloadCommand;
@@ -167,7 +167,11 @@ public class AmsServer implements CarpetExtension, ModInitializer {
                     //#else
                             execute
                     //#endif
-                            (server.getCommandSource(), "/datapack enable \"file/AmsData\"");
+                            (server.getCommandSource(),
+                                    //#if MC<11900
+                                    //$$"/"+
+                                    //#endif
+                                    "datapack enable \"file/AmsData\"");
         }
     }
 
