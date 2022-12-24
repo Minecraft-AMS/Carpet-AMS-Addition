@@ -23,10 +23,10 @@
   "rule.betterCraftableBoneBlock.name": "更好的骨块合成",
   "rule.betterCraftableBoneBlock.desc": "使用9个骨头可以合成出3个骨块(一点都不卡！)",
   "rule.noteBlockChunkLoader.name": "音符盒区块加载",
-  "rule.noteBlockChunkLoader.desc": "音符盒方块被激活时将强加载所在区块300gt",
+  "rule.noteBlockChunkLoader.desc": "音符盒方块被激活时将强加载所在3x3区块300gt",
   "rule.bellBlockChunkLoader.name": "钟区块加载",
-  "rule.bellBlockChunkLoader.desc": "钟方块被激活时将强加载所在区块300gt",
+  "rule.bellBlockChunkLoader.desc": "钟方块被激活时将强加载所在3x3区块300gt",
   "rule.pistonBlockChunkLoader.name": "活塞区块加载",
-  "rule.pistonBlockChunkLoader.desc": "上有骨块的活塞伸出时将强加载所在区块300gt",
+  "rule.pistonBlockChunkLoader.desc": "上有骨块的活塞伸出时将强加载所在3x3区块300gt",
   "rule.pistonBlockChunkLoader.extra.0": "活塞加载区块以活塞头将伸出位置所在区块为准"
 }

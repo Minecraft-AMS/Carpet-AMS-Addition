@@ -23,10 +23,10 @@
   "rule.betterCraftableBoneBlock.name": "betterCraftableBoneBlock",
   "rule.betterCraftableBoneBlock.desc": "Use nine bones to crafted three bone_blocks",
   "rule.noteBlockChunkLoader.name": "noteBlockChunkLoader",
-  "rule.noteBlockChunkLoader.desc": "Load the chunk for 300gt when a note block in this chunk is triggered",
+  "rule.noteBlockChunkLoader.desc": "Load nearby 3x3 chunk for 300gt when a note block in this chunk is triggered",
   "rule.bellBlockChunkLoader.name": "bellBlockChunkLoader",
-  "rule.bellBlockChunkLoader.desc": "Load the chunk for 300gt when a bell block in this chunk is triggered",
+  "rule.bellBlockChunkLoader.desc": "Load nearby 3x3 chunk for 300gt when a bell block in this chunk is triggered",
   "rule.pistonBlockChunkLoader.name": "pistonBlockChunkLoader",
-  "rule.pistonBlockChunkLoader.desc": "Load the chunk for 300gt when a piston with a bone block at its top extends its head",
+  "rule.pistonBlockChunkLoader.desc": "Load nearby 3x3 chunk for 300gt when a piston with a bone block at its top extends its head",
   "rule.pistonBlockChunkLoader.extra.0": "The loading chunk is determined by the head of the piston"
 }
