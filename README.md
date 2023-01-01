@@ -8,7 +8,7 @@
 
 ## 支持版本/Supported Version
 
-- `22w46a`
+- `1.19.3`
 - `1.19.2`
 - `1.18.2`（主要维护版本）
 - `1.17.1`
@@ -38,9 +38,6 @@
 
 `noteBlockChunkLoader/bellBlockChunkLoader/pistonBlockChunkLoader`: 当红石激活`音符盒`/`钟`，或`上面放置骨块的活塞`的活塞头伸出时强加载所在区块300gt，其中活塞头伸出加载的区块范围以活塞头将伸到的位置为中心。
 
-`craftableEnchantedGoldenApples`: 可制作附魔金苹果。
-
-`betterCraftableBoneBlock`: 使用骨头直接合成骨块。
 
 ### 区块加载控制/Chunk Loading Commands
 
