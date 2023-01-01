@@ -1,7 +1,6 @@
 package club.mcams.carpet;
 
 import carpet.settings.Rule;
-import club.mcams.carpet.util.recipes.CraftingRule;
 
 import static carpet.settings.RuleCategory.*;
 
@@ -9,10 +8,9 @@ import static carpet.settings.RuleCategory.*;
  * Here is your example Settings class you can plug to use carpetmod /carpet settings command
  */
 
-@SuppressWarnings({"CanBeFinal", "removal"})
+@SuppressWarnings({"removal"})
 public class AmsServerSettings {
     public static final String AMS = "AMS";
-    public static final String CRAFTING = "CRAFTING";
 
     @Rule(
             desc = "Enabling making super bows with both infinite and mending enchants",
@@ -79,20 +77,6 @@ public class AmsServerSettings {
             extra={"The loading chunk is determined by the head of the piston"}
     )
     public static boolean pistonBlockChunkLoader = false;
-
-    @CraftingRule(recipes = "enchanted_golden_apples.json")
-    @Rule(
-            desc = "Enchanted Golden Apples can be crafted with 8 Gold Blocks again",
-            category = {CRAFTING, SURVIVAL, AMS}
-    )
-    public static boolean craftableEnchantedGoldenApples = false;
-
-    @CraftingRule(recipes = "bone_block.json")
-    @Rule(
-            desc = "Use nine bones to crafted three bone_blocks",
-            category = {CRAFTING, SURVIVAL, AMS}
-    )
-    public static boolean betterCraftableBoneBlock = false;
 
     @Rule(
             desc = "Control chunk loading for players at any gamemodes",
