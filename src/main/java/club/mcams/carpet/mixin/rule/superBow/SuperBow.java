@@ -9,6 +9,9 @@ import net.minecraft.util.Rarity;
 import club.mcams.carpet.AmsServerSettings;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(InfinityEnchantment.class)
 public class SuperBow extends Enchantment {
@@ -16,11 +19,11 @@ public class SuperBow extends Enchantment {
         super(weight, EnchantmentTarget.BOW, slotTypes);
     }
 
-    @Override
-    public boolean canAccept(Enchantment other) {
+    @Inject(at=@At("HEAD"),method="canAccept", cancellable = true)
+    public void canAccept(Enchantment other, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.superBow) {
-            return other instanceof MendingEnchantment || super.canAccept(other);
+            cir.setReturnValue(other instanceof MendingEnchantment || super.canAccept(other));
+            cir.cancel();
         }
-        return false;
     }
 }
