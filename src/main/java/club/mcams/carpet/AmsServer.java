@@ -14,6 +14,9 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+//#if MC>=11900
+//$$ import net.minecraft.command.CommandRegistryAccess;
+//#endif
 import net.minecraft.util.WorldSavePath;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -27,7 +30,7 @@ import java.util.Map;
 public class AmsServer implements CarpetExtension, ModInitializer {
 
     public static final Logger LOGGER = LogManager.getLogger("Ams");
-    private static MinecraftServer minecraftServer;
+//    private static MinecraftServer minecraftServer;
 
     @Override
     public void registerLoggers() {
@@ -96,9 +99,9 @@ public class AmsServer implements CarpetExtension, ModInitializer {
         }
     }
 
-    @Override
-    public void onServerLoaded(MinecraftServer server) {
-        minecraftServer = server;
-    }
+//    @Override
+//    public void onServerLoaded(MinecraftServer server) {
+//        minecraftServer = server;
+//    }
 }
 
