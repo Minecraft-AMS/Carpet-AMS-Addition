@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "carpet-ams-addition",
+  "version": "${version}",
+  "name": "Carpet AMS Addition",
+  "description": "增加了一些可能不是很有用的功能",
+  "authors": [
+    "1024_byteeeee",
+    "WenDavid"
+  ],
+  "contact": {
+    "homepage": "https://mcams.club/",
+    "sources": "https://mcams.club/"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/carpet-ams-addition/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "club.mcams.carpet.AmsServerMod"
+    ]
+  },
+  "mixins": [
+    "amscarpet.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.7.1",
+    "minecraft": "${minecraft_dependency}",
+    "carpet": "${carpet_dependency}"
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "carpet"
+    },
+    "suggests": {
+      "another-mod": "*"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "parent": "ams:root",
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "rewards": {
+    "recipes": [
+
+    ]
+  }
+}

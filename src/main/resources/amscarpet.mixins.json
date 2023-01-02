@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "club.mcams.carpet.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "carpet.CarpetServerMixin",
+    "carpet.SettingsManagerMixin",
+    "interaction.ThreadedAnvilChunkStorageMixin",
+    "rule.blockChunkLoader.BellBlockMixin",
+    "rule.blockChunkLoader.NoteBlockMixin",
+    "rule.blockChunkLoader.NoteBlockProMixin",
+    "rule.blockChunkLoader.PistonBlockMixin",
+    "rule.breakableDeepslate.BreakableDeepslateMixin",
+    "rule.breakableObsidian.BreakableObsidianMixin",
+    "rule.canBreakBedRock.CanBreakBedRockDropMixin",
+    "rule.canBreakBedRock.CanBreakBedRockMixin",
+    "rule.canBreakEndPortalFrame.CanBreakEndPortalFrameDropMixin",
+    "rule.canBreakEndPortalFrame.CanBreakEndPortalFrameMixin",
+    "rule.destroysEverything.destroysEverythingMixin",
+    "rule.extinguishedCampfire.ExtinguishedCampfireMixin",
+    "rule.fakePeace.FakePeaceMixin",
+    "rule.movableBlocks.MovableBlocksMixin",
+    "rule.netherWaterPlacement.NetherWaterPlacementMixin",
+    "rule.optimizedDragonRespawn.EnderDragonFightMixin",
+    "rule.scheduledRandomTick.AbstractPlantPartBlockMixin",
+    "rule.scheduledRandomTick.BambooBlockMixin",
+    "rule.scheduledRandomTick.CactusBlockMixin",
+    "rule.scheduledRandomTick.ChorusFlowerBlockMixin",
+    "rule.scheduledRandomTick.SugarCaneBlockMixin",
+    "rule.sharedVillagerDiscounts.GetValueForInvoker",
+    "rule.sharedVillagerDiscounts.VillagerGossipsMixin",
+    "rule.superBow.SuperBowMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
