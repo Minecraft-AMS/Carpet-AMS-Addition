@@ -19,7 +19,8 @@
 [ --->>>Carpet-AMS-Addition-1.15.2<<<--- ](https://github.com/1024-byteeeee/Carpet-AMS-Addition-1.15.2)
 
 ## 补充说明
-Carpet-AMS-Addition中的功能，虽然存在但不代表我们在AMS服务器内使用它。
+- 部分功能需要客户端与服务器都装有该模组
+- Carpet-AMS-Addition中的功能，虽然存在但不代表我们在AMS服务器内使用它。
 
 ## 许可
 此项目在 LGPL-v3.0 许可证下可用,您可以随意从中学习并将其纳入您自己的项目中
