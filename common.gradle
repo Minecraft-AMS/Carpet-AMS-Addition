@@ -29,7 +29,9 @@ dependencies {
 
     // mods
     modImplementation "carpet:fabric-carpet:${project.carpet_core_version}"
-
+    
+    // runtime mods
+	modRuntimeOnly "com.github.astei:lazydfu:0.1.2"
 }
 
 loom {
