@@ -5,12 +5,7 @@ public class AmsRuleCategory {
     public static final String CRAFTING = "crafting";
     public static final String AMS_MOVABLE = "AMS_movable";
     public static final String AMS_CHUNKLOADER = "AMS_chunkLoader";
-
-    /**
-     * Rules with this {@link RuleCategory} will have a client-side
-     * counterpart, so they can be set independently without the server
-     * being Carpet's
-     */
+//==================================================================
     public static final String BUGFIX = "bugfix";
     public static final String SURVIVAL = "survival";
     public static final String CREATIVE = "creative";
