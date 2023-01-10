@@ -4,7 +4,6 @@
   "package": "club.mcams.carpet.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "carpet.CarpetServerMixin",
     "carpet.SettingsManagerMixin",
     "interaction.ThreadedAnvilChunkStorageMixin",
     "rule.blockChunkLoader.BellBlockMixin",
