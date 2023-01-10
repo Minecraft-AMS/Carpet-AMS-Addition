@@ -1,6 +1,6 @@
 package club.mcams.carpet;
 
-import club.mcams.carpet.util.AutoMixinAuditExecutor;
+import club.mcams.carpet.util.AutoMixinAuditExecutor.AutoMixinAuditExecutor;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -14,7 +14,7 @@ public class AmsServerMod implements ModInitializer {
     public void onInitialize() {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
         AutoMixinAuditExecutor.run();
-        //AmsServer.loadExtension();
+        AmsServer.init();
     }
     public static String getModId()
     {

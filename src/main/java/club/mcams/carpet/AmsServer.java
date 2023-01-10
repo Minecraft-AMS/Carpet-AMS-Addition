@@ -3,10 +3,13 @@ package club.mcams.carpet;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-import carpet.script.bundled.BundledModule;
-import carpet.settings.ParsedRule;
 //#if MC>=11900
-//$$import carpet.api.settings.RuleHelper;
+//$$ import carpet.api.settings.CarpetRule;
+//$$ import carpet.api.settings.RuleHelper;
+//$$ import carpet.script.Module;
+//#else
+import carpet.settings.ParsedRule;
+import carpet.script.bundled.BundledModule;
 //#endif
 
 import club.mcams.carpet.command.AmsCarpetCommandRegistry;
@@ -64,13 +67,14 @@ public class AmsServer implements CarpetExtension {
     public void onPlayerLoggedOut(ServerPlayerEntity player) {
         ChunkLoading.onPlayerDisconnect(player);
     }
-    public static AmsServer getInstance() {
-        return INSTANCE;
+    public static void init() {
+        CarpetServer.manageExtension(INSTANCE);
     }
-    public void registerExtension() {
-        CarpetServer.manageExtension(this);
+
+    @Override
+    public Map<String, String> canHasTranslations(String lang) {
+        return AmsCarpetTranslations.getTranslationFromResourcePath(lang);
     }
-    //public static void loadExtension() {CarpetServer.manageExtension(new AmsServer());}
 
     @Override
     public void onGameStarted() {
@@ -123,11 +127,6 @@ public class AmsServer implements CarpetExtension {
     @Override
     public void registerLoggers() {
         AmsCarpetLoggerRegistry.registerLoggers();
-    }
-
-    @Override
-    public Map<String, String> canHasTranslations(String lang) {
-        return AmsCarpetTranslations.getTranslationFromResourcePath(lang);
     }
 
     @Override
