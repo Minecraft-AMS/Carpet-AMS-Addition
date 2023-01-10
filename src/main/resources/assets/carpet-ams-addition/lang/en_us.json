@@ -1,5 +1,8 @@
 {
-  "carpet.category.CRAFTING": "CRAFTING",
+  "category.AMS": "AMS",
+  "category.crafting": "crafting",
+  "category.AMS_movable": "AMS_movable",
+  "category.AMS_chunkLoader": "AMS_chunkLoader",
 
   "rule.superBow.name": "superBow",
   "rule.superBow.desc": "Enabling making super bows with both infinite and mending enchants",

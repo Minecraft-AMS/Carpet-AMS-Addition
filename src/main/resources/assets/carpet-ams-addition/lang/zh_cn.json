@@ -1,5 +1,8 @@
 {
-  "carpet.category.CRAFTING": "制造",
+  "category.AMS": "AMS",
+  "category.crafting": "制造",
+  "category.AMS_movable": "AMS_可移动方块",
+  "category.AMS_chunkLoader": "AMS_区块加载",
 
   "rule.superBow.name": "超级弓",
   "rule.superBow.desc": "让弓能同时打上无限和经验修补两种附魔",
