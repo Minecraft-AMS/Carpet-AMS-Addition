@@ -75,7 +75,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
 
 ## 音符盒区块加载Pro (noteBlockChunkLoaderPro)
 
@@ -84,7 +84,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
 
 ## 钟区块加载 (bellBlockChunkLoader)
 
@@ -93,7 +93,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
 
 
 
@@ -104,7 +104,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false`, `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
 
 
 
@@ -216,7 +216,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
 
@@ -227,7 +227,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
 
@@ -238,7 +238,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
 
@@ -249,7 +249,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
 
@@ -260,7 +260,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
 
@@ -271,7 +271,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
 
@@ -282,7 +282,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
 
@@ -295,7 +295,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
 
@@ -306,7 +306,7 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
 
