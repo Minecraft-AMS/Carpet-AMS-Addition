@@ -14,7 +14,11 @@ import org.apache.commons.io.IOUtils;
 
 public class AmsCarpetTranslations {
     public static Map<String, String> getTranslationFromResourcePath(String lang) {
+        //#if MC<11900
         InputStream langFile = AmsCarpetTranslations.class.getClassLoader().getResourceAsStream("assets/carpet-ams-addition/lang/%s.json".formatted(lang));
+        //#else
+        //$$ InputStream langFile = AmsCarpetTranslations.class.getClassLoader().getResourceAsStream("assets/carpet-ams-addition/lang11900Up/%s.json".formatted(lang));
+        //#endif
         if (langFile == null) {
             // we don't have that language
             return Collections.emptyMap();
