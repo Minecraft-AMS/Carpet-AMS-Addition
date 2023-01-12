@@ -26,6 +26,11 @@
   "rule.destroysEverything.desc": "让所有方块的爆炸抗性为0",
   "rule.noBoom.name": "防爆",
   "rule.noBoom.desc": "防爆",
+  "rule.optimizedDragonRespawn.name": "龙战优化",
+  "rule.optimizedDragonRespawn.desc": "大幅度优化龙战定位末地门过程，为基于末地门的末地石农场设计",
+  "rule.safeFlight.name": "安全飞行",
+  "rule.safeFlight.desc": "玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害",
+
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",
   "rule.scheduledRandomTickBamboo.name": "计划刻催熟竹子",
@@ -38,9 +43,8 @@
   "rule.scheduledRandomTickStem.desc": "当海带、缠怨藤、垂泪藤方块收到计划刻时仍会给予生长随机刻",
   "rule.scheduledRandomTickAllPlants.name": "计划刻催熟所有作物",
   "rule.scheduledRandomTickAllPlants.desc": "当所有作物方块收到计划刻时仍会给予生长随机刻",
-  "rule.optimizedDragonRespawn.name": "龙战优化",
-  "rule.optimizedDragonRespawn.desc": "大幅度优化龙战定位末地门过程，为基于末地门的末地石农场设计",
-  "rule.optimizedDragonRespawn.extra.0": "对原版实现有微小修改", "rule.commandChunkLoading.name": "区块加载控制",
+
+  "rule.commandChunkLoading.name": "区块加载控制",
   "rule.commandChunkLoading.desc": "控制任意游戏模式下玩家对周围区块的加载",
   "rule.noteBlockChunkLoader.name": "音符盒区块加载",
   "rule.noteBlockChunkLoader.desc": "音符盒方块被激活时将加载周围3x3区块15s",
@@ -50,6 +54,7 @@
   "rule.bellBlockChunkLoader.desc": "钟方块被激活时将加载周围3x3区块15s",
   "rule.pistonBlockChunkLoader.name": "活塞头区块加载",
   "rule.pistonBlockChunkLoader.desc": "活塞或黏性活塞被激活且能正常伸出时以活塞头将到达的区块为中心加载3x3区块持续15s",
+
   "rule.movableEnderChest.name": "可移动末影箱",
   "rule.movableEnderChest.desc": "让末影箱可以被活塞/黏性活塞推动",
   "rule.movableEndPortalFrame.name": "可移动末地传送门框架",
@@ -68,6 +73,7 @@
   "rule.movableReinforcedDeepslate.desc": "让强化深板岩可以被活塞/黏性活塞推动",
   "rule.movableAnvil.name": "可移动铁砧",
   "rule.movableAnvil.desc": "让铁砧可以被活塞/黏性活塞推动",
+
   "rule.craftableEnchantedGoldenApples.name": "可合成附魔金苹果",
   "rule.craftableEnchantedGoldenApples.desc": "使用老版本的方式来合成附魔金苹果（8金块+1苹果）",
   "rule.craftableBundle.name": "可合成收纳袋",

@@ -207,7 +207,14 @@
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
+## 安全飞行(safeFlight)
 
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+开启后，玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害。
 
 ## 可移动末影箱(movableEnderChest)
 

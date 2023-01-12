@@ -248,6 +248,19 @@ public class AmsServerSettings {
 
     @Rule(
             //#if MC<11900
+            desc = "players don't get hurt by flying into walls",
+            category = {AMS, FEATURE, SURVIVAL}
+            //#else
+            //$$ categories = {AMS, FEATURE, AMS_MOVABLE}
+            //#endif
+    )
+    public static boolean safeFlight = false;
+
+    /**
+     * 可移动方块规则
+     */
+    @Rule(
+            //#if MC<11900
             desc = "Makes ender_chests movable",
             category = {AMS, FEATURE, AMS_MOVABLE}
             //#else
@@ -317,15 +330,8 @@ public class AmsServerSettings {
     public static boolean movableBeacon = false;
 
     //#if MC>=11900
-    @Rule(
-            //#if MC<11900
-            desc = "Makes reinforced_deepslate movable",
-            category = {AMS, FEATURE, AMS_MOVABLE}
-            //#else
-            //$$ categories = {AMS, FEATURE, AMS_MOVABLE}
-            //#endif
-    )
-    public static boolean movableReinforcedDeepslate = false;
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
+    //$$ public static boolean movableReinforcedDeepslate = false;
     //#endif
 
     @Rule(
