@@ -5,6 +5,7 @@
 ## 超级弓 (superBow)
 
 开启后，可以让弓同时拥有无限和经验修补附魔。
+> 谁能拒绝一把同时拥有无限和经验修补地弓呢?
 
 - 类型: `boolean`
 
@@ -13,7 +14,6 @@
 - 参考选项: `false` , `true`
 
 - 分类: `AMS` , `FEATURE`
-
   
 
 ## 计划刻催熟所有作物 (scheduledRandomTickAllPlants)
@@ -41,7 +41,6 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-
 ## 龙战优化 (optimizedDragonRespawn)
 
 大幅度优化了龙战判定代码的性能表现，为基于末地祭坛设计的末地石农场提供性能优化。注意：本选项开启后可能影响原版特性。
@@ -50,7 +49,6 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `OPTIMIZATION`
-
 
 
 ### 区块加载控制 (commandChunkLoading)
@@ -67,7 +65,6 @@
 - 分类: `AMS` , `COMMAND`
 
 
-
 ## 音符盒区块加载 (noteBlockChunkLoader)
 
 开启后，当上边沿红石信号激活音符盒时，为该音符盒所在区块添加类型为"note_block"，加载等级为30的加载票，持续时间为300gt（15s）。
@@ -77,6 +74,7 @@
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
 
+
 ## 音符盒区块加载Pro (noteBlockChunkLoaderPro)
 
 开启后，当上边沿红石信号激活音符盒且音符盒上方放置了一个骨块时，为该音符盒所在区块添加类型为"note_block"，加载等级为30的加载票，持续时间为300gt（15s）。
@@ -85,6 +83,7 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
+
 
 ## 钟区块加载 (bellBlockChunkLoader)
 
@@ -96,10 +95,10 @@
 - 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
 
 
-
 ## 活塞头区块加载 (pistonBlockChunkLoader)
 
 开启后，对于一个正上方放有骨块的普通活塞或黏性活塞，当该活塞产生活塞头的推出/拉回事件时，在创建推出/拉回事件的那一游戏刻为**活塞头方块所在区块**添加类型为"piston_block"，加载等级为30的加载票，持续时间为300gt（15s）。注意，黏性活塞的失败收回事件（如尝试拉回超过12个方块时）也可创建加载票。
+> 如果不想使用地狱门加载链的话，此规则可作为替代方案。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -107,10 +106,10 @@
 - 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
 
 
-
 ## 地狱可放水 (netherWaterPlacement)
 
 开启后，玩家可通过使用水桶的方式在地狱维度中放置水源。
+> 很古老的需求。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -118,60 +117,59 @@
 - 分类: `AMS` , `FEATURE`
 
 
-
 ## 易碎深板岩 (breakableDeepslate)
 
 开启后，深板岩的挖掘硬度将与石头相同（均可在急迫二效果下用效率5钻石镐进行瞬间挖掘）。
+> 如果挖沟时面对无法秒破的深板岩很恼火那么可以使用此规则来偷个懒。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
-
 
 
 ## 易碎黑曜石 (breakableObsidian)
 
 开启后，黑曜石的挖掘硬度将与深板岩相同。
+> 可以用来在面对大量黑曜石时偷个懒。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
-
 
 
 ## 可开采末地传送门框架 (canBreakEndPortalFrame)
 
 开启后，玩家可以使用钻石镐或下届合金镐来开采末地传送门框架。
+> 或许可以用一种及其不原版的方式来把末地门移动到我想要的位置。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
-
 
 
 ## 可开采基岩(canBreakBedRock)
 
 开启后，玩家将可以使用钻石镐或下届合金镐来开采基岩，使用钻石镐时挖掘硬度为888，使用下届合金镐时挖掘硬度为666。
+> 如果不小心破了一个不该破的基岩，那么可以利用这条规则多花点时间去弥补不该出现的洞。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
-
 
 
 ## 伪和平(fakePeace)
 
 开启后，所有生物不会生成，但不影响困难难度（类似伪和平）。
+> 用于在镜像服快速的实现不刷怪物且不切换难度。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
-
 
 
 ## 炸毁所有方块(destroysEverything)
@@ -182,7 +180,6 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
-
 
 
 ## 共享打折(sharedVillagerDiscounts)
@@ -197,24 +194,26 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-
 ## 熄灭的篝火(extinguishedCampfire)
 
 开启后，当玩家放置篝火时，篝火处于熄灭状态。
+> 有时施工我更希望我放下它时它是灭的。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
 
 ## 安全飞行(safeFlight)
 
+开启后，玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害。
+
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
-开启后，玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害。
 
 ## 可移动末影箱(movableEnderChest)
 
@@ -224,7 +223,6 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
-
 
 
 ## 可移动末地传送门框架(movableEndPortalFrame)
@@ -237,7 +235,6 @@
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
-
 ## 可移动黑曜石(movableObsidian)
 
 开启后，黑曜石可以被活塞/黏性活塞推动。
@@ -246,7 +243,6 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
-
 
 
 ## 可移动哭泣的黑曜石(movableCryingObsidian)
@@ -259,16 +255,15 @@
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
-
 ## 可移动基岩(movableBedRock)
 
 开启后，基岩可以被活塞/黏性活塞推动。
+> 或许可以一步一步慢慢地将不该出现的洞补上。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
-
 
 
 ## 可移动附魔台(movableEnchantingTable)
@@ -281,7 +276,6 @@
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
-
 ## 可移动信标(movableBeacon)
 
 开启后，信标可以被活塞/黏性活塞推动。
@@ -290,7 +284,6 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
-
 
 
 ## 可移动强化深板岩(movableReinforcedDeepslate)
@@ -305,7 +298,6 @@
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
 
 
-
 ## 可移动铁砧(movableAnvil)
 
 开启后，铁砧可以被活塞/黏性活塞推动。
@@ -314,7 +306,6 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
-
 
 
 ## 可合成附魔金苹果(CraftableEnchantedGoldenApples)
@@ -327,38 +318,37 @@
 - 分类: `AMS` , `SURVIVAL` , `CRAFTING`
 
 
-
 ## 更好的合成骨块(betterCraftableBoneBlock)
 
 开启后，可更好的合成骨块（可用9个骨头合成三个骨块，大幅降低合成卡顿）。
+> MSPT---/FPS+++
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `SURVIVAL` , `CRAFTING`
-
 
 
 ## 可合成收纳袋(craftableBundle)
 
 开启后，玩家可以在Minecraft 1.17/1.18/1.19中合成收纳袋。
+> 做好了为什么不用
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `SURVIVAL` , `CRAFTING`
-
 
 
 ## 可合成幽匿感测体(craftableSculkSensor)
 
 开启后，玩家可以在Minecraft 1.17/1.18中合成幽匿感测体。
+> 做好了为什么不用
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `SURVIVAL` , `CRAFTING`
-
 
 
 ## 可合成鞘翅(craftableElytra)
