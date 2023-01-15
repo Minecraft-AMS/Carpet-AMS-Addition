@@ -54,8 +54,9 @@
 ### 区块加载控制 (commandChunkLoading)
 
 控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。
-
 玩家上下线时会将交互状态重置回加载以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)。
+<br>
+命令：/chunkloading
 
 <该规则从 [Intricarpet](https://github.com/lntricate1/intricarpet) 移植>
 
@@ -213,6 +214,17 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+
+## 骨块更新抑制器(boneBlockUpdateSuppressor)
+
+开启后，骨块将会成为一个更新抑制器。
+<该规则 `Minecraft Version < 1.19` 可用>
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE`
 
 
 ## 可移动末影箱(movableEnderChest)
