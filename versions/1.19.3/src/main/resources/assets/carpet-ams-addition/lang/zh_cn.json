@@ -28,8 +28,8 @@
   "carpet.rule.noBoom.desc": "防爆",
   "carpet.rule.optimizedDragonRespawn.name": "龙战优化",
   "carpet.rule.optimizedDragonRespawn.desc": "大幅度优化龙战定位末地门过程，为基于末地门的末地石农场设计",
-  "rule.safeFlight.name": "安全飞行",
-  "rule.safeFlight.desc": "玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害",
+  "carpet.rule.safeFlight.name": "安全飞行",
+  "carpet.rule.safeFlight.desc": "玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害",
 
   "carpet.rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "carpet.rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",

@@ -28,8 +28,8 @@
   "carpet.rule.noBoom.desc": "anti-explosion",
   "carpet.rule.optimizedDragonRespawn.name": "optimizedDragonRespawn",
   "carpet.rule.optimizedDragonRespawn.desc": "Optimize dragon respawning",
-  "rule.safeFlight.name": "safeFlight",
-  "rule.safeFlight.desc": "players don't get hurt by flying into walls",
+  "carpet.rule.safeFlight.name": "safeFlight",
+  "carpet.rule.safeFlight.desc": "players don't get hurt by flying into walls",
 
   "carpet.rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "carpet.rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",
