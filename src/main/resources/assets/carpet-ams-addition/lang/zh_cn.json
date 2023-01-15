@@ -30,6 +30,8 @@
   "rule.optimizedDragonRespawn.desc": "大幅度优化龙战定位末地门过程，为基于末地门的末地石农场设计",
   "rule.safeFlight.name": "安全飞行",
   "rule.safeFlight.desc": "玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害",
+  "rule.boneBlockUpdateSuppressor.name": "骨块更新抑制器",
+  "rule.boneBlockUpdateSuppressor.desc": "让骨块成为一个更新抑制器",
 
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",

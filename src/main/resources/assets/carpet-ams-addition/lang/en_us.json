@@ -30,6 +30,8 @@
   "rule.optimizedDragonRespawn.desc": "Optimize dragon respawning",
   "rule.safeFlight.name": "safeFlight",
   "rule.safeFlight.desc": "players don't get hurt by flying into walls",
+  "rule.boneBlockUpdateSuppressor.name": "boneBlockUpdateSuppressor",
+  "rule.boneBlockUpdateSuppressor.desc": "Let the bone_block be update suppressor",
 
   "rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",
