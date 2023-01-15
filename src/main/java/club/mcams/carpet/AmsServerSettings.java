@@ -251,10 +251,18 @@ public class AmsServerSettings {
             desc = "players don't get hurt by flying into walls",
             category = {AMS, FEATURE, SURVIVAL}
             //#else
-            //$$ categories = {AMS, FEATURE, AMS_MOVABLE}
+            //$$ categories = {AMS, FEATURE, SURVIVAL}
             //#endif
     )
     public static boolean safeFlight = false;
+
+    //#if MC<11900
+    @Rule(
+            desc = "Let the bone_block be update suppressor",
+            category = {AMS, FEATURE}
+    )
+    public static boolean boneBlockUpdateSuppressor = false;
+    //#endif
 
     /**
      * 可移动方块规则
