@@ -8,15 +8,11 @@
     "interaction.ThreadedAnvilChunkStorageMixin",
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
-    "rule.blockChunkLoader.NoteBlockProMixin",
     "rule.blockChunkLoader.PistonBlockMixin",
     "rule.boneBlockUpdateSuppressor.boneBlockUpdateSuppressor",
-    "rule.breakableDeepslate.AbstractBlockStateMixin",
-    "rule.breakableObsidian.AbstractBlockStateMixin",
-    "rule.canBreakBedRock.AbstractBlockMixin",
-    "rule.canBreakBedRock.BlocksRedirect",
-    "rule.canBreakEndPortalFrame.AbstractBlockMixin",
-    "rule.canBreakEndPortalFrame.BlocksRedirect",
+    "rule.breakableBlock.AbstractBlockStateMixin",
+    "rule.canBreakBlock.AbstractBlockMixin",
+    "rule.canBreakBlock.BlocksRedirect",
     "rule.destroysEverything.BlockMixin",
     "rule.extinguishedCampfire.CampfireBlockMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
@@ -33,8 +29,8 @@
     "rule.sharedVillagerDiscounts.VillagerGossipsMixin",
     "rule.superBow.InfinityEnchantmentMixin"
   ],
-  "client": [
-  ],
+  "client": [],
+  "server": [],
   "injectors": {
     "defaultRequire": 1
   }
