@@ -4,6 +4,7 @@ import club.mcams.carpet.util.recipes.CraftingRule;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 //#if MC<11900
 import carpet.settings.Rule;
+import com.sun.jna.WString;
 //#else
 //$$ import carpet.api.settings.Rule;
 //#endif
@@ -95,24 +96,36 @@ public class AmsServerSettings {
     public static boolean optimizedDragonRespawn = false;
 
     @Rule(
+            options = {"bone_block", "note_block", "OFF"},
             //#if MC<11900
             desc = "Load nearby 3x3 chunks for 15 seconds when a note block is triggered",
+            extra = {
+                    "[bone_block] - When bone_block is on the note_block",
+                    "[note_block] - Only note_block",
+                    "[OFF] - Disable the rule"
+            },
             category = {AMS, FEATURE, AMS_CHUNKLOADER}
             //#else
             //$$ categories = {AMS, FEATURE, AMS_CHUNKLOADER}
             //#endif
     )
-    public static boolean noteBlockChunkLoader = false;
+    public static String noteBlockChunkLoader = "OFF";
 
     @Rule(
+            options = {"bone_block", "bedrock", "OFF"},
             //#if MC<11900
-            desc = "Load nearby 3x3 chunks for 15 seconds when a note_block with a bone block at its top extends",
+            desc = "Load nearby 3x3 chunks for 15 seconds when a piston is triggered",
+            extra = {
+                    "[bone_block] - When bone_block is on the piston",
+                    "[bedrock] - When bedrock is under the piston",
+                    "[OFF] - Disable the rule"
+            },
             category = {AMS, FEATURE, AMS_CHUNKLOADER}
             //#else
             //$$ categories = {AMS, FEATURE, AMS_CHUNKLOADER}
             //#endif
     )
-    public static boolean noteBlockChunkLoaderPro = false;
+    public static String pistonBlockChunkLoader = "OFF";
 
     @Rule(
             //#if MC<11900
@@ -123,16 +136,6 @@ public class AmsServerSettings {
             //#endif
     )
     public static boolean bellBlockChunkLoader = false;
-
-    @Rule(
-            //#if MC<11900
-            desc = "Load nearby 3x3 chunks for 15 seconds when a piston with a bone block at its top extends",
-            category = {AMS, FEATURE, AMS_CHUNKLOADER}
-            //#else
-            //$$ categories = {AMS, FEATURE, AMS_CHUNKLOADER}
-            //#endif
-    )
-    public static boolean pistonBlockChunkLoader = false;
 
     @Rule(
             //#if MC<11900
@@ -205,16 +208,6 @@ public class AmsServerSettings {
             //#endif
     )
     public static boolean destroysEverything = false;
-
-    @Rule(
-            //#if MC<11900
-            desc = "anti-explosion",
-            category = {AMS, FEATURE, SURVIVAL, TNT}
-            //#else
-            //$$ categories = {AMS, FEATURE, SURVIVAL, TNT}
-            //#endif
-    )
-    public static boolean noBoom = false;
 
     @Rule(
             //#if MC<11900
