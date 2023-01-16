@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin.rule.canBreakEndPortalFrame;
+package club.mcams.carpet.mixin.rule.canBreakBlock;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -22,7 +22,9 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(AbstractBlock.class)
 public abstract class AbstractBlockMixin {
-    final float setHardness = 5.0F;
+    final float Netherite_pickaxe_Hardness = 666.0F;
+    final float Diamond_pickaxe_Hardness = 888.0F;
+    final float GeneralHardness = 5.0F;
     @Inject(at = @At(value = "JUMP", opcode = Opcodes.IFNE, shift = At.Shift.AFTER),
             method = "Lnet/minecraft/block/AbstractBlock;calcBlockBreakingDelta(" +
                     "Lnet/minecraft/block/BlockState;" +
@@ -31,12 +33,17 @@ public abstract class AbstractBlockMixin {
                     "Lnet/minecraft/util/math/BlockPos;)F",
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILSOFT)
-    public void allowEndPortalFrameBreaking(BlockState state, PlayerEntity player, BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir, float hardness) {
+    public void allowBedrockBreaking(BlockState state, PlayerEntity player, BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir, float hardness) {
         ItemStack stack = player.getStackInHand(Hand.MAIN_HAND);
+        if (state.getBlock() == Blocks.BEDROCK && (stack.getItem() == Items.NETHERITE_PICKAXE) && AmsServerSettings.canBreakBedRock) {
+            cir.setReturnValue(player.getBlockBreakingSpeed(state) / Netherite_pickaxe_Hardness);
+        }
+        else if(state.getBlock() == Blocks.BEDROCK && (stack.getItem() == Items.DIAMOND_PICKAXE) && AmsServerSettings.canBreakBedRock){
+            cir.setReturnValue(player.getBlockBreakingSpeed(state) / Diamond_pickaxe_Hardness);
+        }
         if (state.getBlock() == Blocks.END_PORTAL_FRAME && ((stack.getItem() == Items.NETHERITE_PICKAXE) || (stack.getItem() == Items.DIAMOND_PICKAXE)) && AmsServerSettings.canBreakEndPortalFrame) {
-            cir.setReturnValue(player.getBlockBreakingSpeed(state) / setHardness);
+            cir.setReturnValue(player.getBlockBreakingSpeed(state) / GeneralHardness);
         }
     }
 }
-
 

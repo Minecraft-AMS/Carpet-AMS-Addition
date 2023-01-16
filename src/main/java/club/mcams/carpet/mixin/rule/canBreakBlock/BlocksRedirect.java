@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin.rule.canBreakEndPortalFrame;
+package club.mcams.carpet.mixin.rule.canBreakBlock;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Blocks;
@@ -12,10 +12,19 @@ import org.spongepowered.asm.mixin.injection.Slice;
 public abstract class BlocksRedirect {
     @Redirect(
             method = "<clinit>",
+            slice = @Slice(from = @At(value = "CONSTANT", args = "stringValue=bedrock")),
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$Settings;dropsNothing()Lnet/minecraft/block/AbstractBlock$Settings;", ordinal = 0)
+    )
+    private static AbstractBlock.Settings bedrockDrop(AbstractBlock.Settings instance) {
+        return instance;
+    }
+
+    @Redirect(
+            method = "<clinit>",
             slice = @Slice(from = @At(value = "CONSTANT", args = "stringValue=end_portal_frame")),
             at = @At(value = "INVOKE", target = "Lnet/minecraft/block/AbstractBlock$Settings;dropsNothing()Lnet/minecraft/block/AbstractBlock$Settings;", ordinal = 0)
     )
-    private static AbstractBlock.Settings EndPortalFrameDrop(AbstractBlock.Settings instance) {
+    private static AbstractBlock.Settings endPortalFrameDrop(AbstractBlock.Settings instance) {
         return instance;
     }
 }

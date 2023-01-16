@@ -1,5 +1,5 @@
 
-package club.mcams.carpet.mixin.rule.breakableDeepslate;
+package club.mcams.carpet.mixin.rule.breakableBlock;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -26,6 +26,9 @@ public abstract class AbstractBlockStateMixin {
 			cir.setReturnValue(1.5F);
 		}
 		//#endif
+		if(this.getBlock() == Blocks.OBSIDIAN && AmsServerSettings.breakableObsidian) {
+			cir.setReturnValue(3.0F);
+		}
 	}
 }
 

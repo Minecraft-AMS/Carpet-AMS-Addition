@@ -14,9 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BlockMixin {
     @Inject(method = "getBlastResistance", at = @At("TAIL"), cancellable = true)
     public void getBlastResistance(CallbackInfoReturnable<Float> cir) {
-        if(AmsServerSettings.noBoom) {
-            cir.setReturnValue(114514114514.114514F);
-        }
         if(AmsServerSettings.destroysEverything){
             cir.setReturnValue(0.0F);
         }
