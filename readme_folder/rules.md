@@ -120,7 +120,7 @@
 - 分类: `AMS` , `FEATURE`
 
 
-## 易碎深板岩 (breakableDeepslate)
+## 💻易碎深板岩 (breakableDeepslate)
 
 开启后，深板岩的挖掘硬度将与石头相同（均可在急迫二效果下用效率5钻石镐进行瞬间挖掘）。
 > 如果挖沟时面对无法秒破的深板岩很恼火那么可以使用此规则来偷个懒。
@@ -131,7 +131,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## 易碎黑曜石 (breakableObsidian)
+## 💻易碎黑曜石 (breakableObsidian)
 
 开启后，黑曜石的挖掘硬度将与深板岩相同。
 > 可以用来在面对大量黑曜石时偷个懒。
@@ -142,7 +142,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## 可开采末地传送门框架 (canBreakEndPortalFrame)
+## 💻可开采末地传送门框架 (canBreakEndPortalFrame)
 
 开启后，玩家可以使用钻石镐或下届合金镐来开采末地传送门框架。
 > 或许可以用一种及其不原版的方式来把末地门移动到我想要的位置。
@@ -153,7 +153,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## 可开采基岩(canBreakBedRock)
+## 💻可开采基岩(canBreakBedRock)
 
 开启后，玩家将可以使用钻石镐或下届合金镐来开采基岩，使用钻石镐时挖掘硬度为888，使用下届合金镐时挖掘硬度为666。
 > 如果不小心破了一个不该破的基岩，那么可以利用这条规则多花点时间去弥补不该出现的洞。
