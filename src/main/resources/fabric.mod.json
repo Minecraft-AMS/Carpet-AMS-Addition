@@ -24,16 +24,12 @@
     "amscarpet.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.7.1",
     "minecraft": "${minecraft_dependency}",
     "carpet": "${carpet_dependency}"
   },
   "custom": {
     "modmenu": {
       "parent": "carpet"
-    },
-    "suggests": {
-      "another-mod": "*"
     }
   }
 }
