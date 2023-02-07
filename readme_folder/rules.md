@@ -72,13 +72,15 @@
 <br>
 `bone_block`: 音符盒上有骨块时可以触发加载。
 <br>
+`wither_skeleton_skull`: 音符盒上有凋灵骷髅头（可以是挂在墙上的也可以是放在音符盒上的）时可以触发加载。
+<br>
 `note_block`: 无需条件，只有音符盒即可加载。
 <br>
 `OFF`: 禁用该规则。
 
 - 类型: `String`
 - 默认值: `false`
-- 参考选项: `bone_block` , `note_block` , `OFF`
+- 参考选项: `bone_block` , `wither_skeleton_skull` , `note_block` , `OFF`
 - 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
 
 

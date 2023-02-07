@@ -96,11 +96,12 @@ public class AmsServerSettings {
     public static boolean optimizedDragonRespawn = false;
 
     @Rule(
-            options = {"bone_block", "note_block", "OFF"},
+            options = {"bone_block", "wither_skeleton_skull", "note_block", "OFF"},
             //#if MC<11900
             desc = "Load nearby 3x3 chunks for 15 seconds when a note block is triggered",
             extra = {
                     "[bone_block] - When bone_block is on the note_block",
+                    "[wither_skeleton_skull] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall",
                     "[note_block] - Only note_block",
                     "[OFF] - Disable the rule"
             },

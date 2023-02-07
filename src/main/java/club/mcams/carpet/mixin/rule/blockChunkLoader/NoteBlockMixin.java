@@ -44,5 +44,12 @@ public abstract class NoteBlockMixin {
                 ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
             }
         }
+        if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull") && !world.isClient) {
+            BlockState noteBlock = world.getBlockState(pos.up(1));
+            if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull") && (noteBlock.isOf(Blocks.WITHER_SKELETON_SKULL)) || (noteBlock.isOf(Blocks.WITHER_SKELETON_WALL_SKULL))) {
+                ChunkPos chunkPos = new ChunkPos(pos.up(1));
+                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
+            }
+        }
     }
 }
