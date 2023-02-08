@@ -27,7 +27,8 @@
     "rule.scheduledRandomTick.SugarCaneBlockMixin",
     "rule.sharedVillagerDiscounts.GetValueForInvoker",
     "rule.sharedVillagerDiscounts.VillagerGossipsMixin",
-    "rule.superBow.InfinityEnchantmentMixin"
+    "rule.superBow.InfinityEnchantmentMixin",
+    "rule.destroysBlock.destroysBlockMixin"
   ],
   "client": [],
   "server": [],

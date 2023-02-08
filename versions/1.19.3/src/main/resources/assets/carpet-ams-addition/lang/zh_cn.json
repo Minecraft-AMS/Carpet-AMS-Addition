@@ -28,6 +28,14 @@
   "carpet.rule.optimizedDragonRespawn.desc": "大幅度优化龙战定位末地门过程，为基于末地门的末地石农场设计",
   "carpet.rule.safeFlight.name": "安全飞行",
   "carpet.rule.safeFlight.desc": "玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害",
+  "carpet.rule.destroysObsidian.name": "炸毁黑曜石",
+  "carpet.rule.destroysObsidian.desc": "爆炸可以摧毁黑曜石",
+  "carpet.rule.destroysCryingObsidian.name": "炸毁哭泣的黑曜石",
+  "carpet.rule.destroysCryingObsidian.desc": "爆炸可以摧毁哭泣的黑曜石",
+  "carpet.rule.destroysReinforcedDeepslate.name": "炸毁强化深板岩",
+  "carpet.rule.destroysReinforcedDeepslate.desc": "爆炸可以摧毁强化深板岩",
+  "carpet.rule.destroysBedRock.name": "炸毁基岩",
+  "carpet.rule.destroysBedRock.desc": "爆炸可以摧毁基岩",
 
   "carpet.rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "carpet.rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",
@@ -86,5 +94,7 @@
   "carpet.rule.betterCraftableBoneBlock.name": "更好的骨块合成",
   "carpet.rule.betterCraftableBoneBlock.desc": "使用9个骨头可以合成出3个骨块(一点都不卡！)",
   "carpet.rule.craftableElytra.name": "可合成鞘翅",
-  "carpet.rule.craftableElytra.desc": "添加了鞘翅的合成配方"
+  "carpet.rule.craftableElytra.desc": "添加了鞘翅的合成配方",
+  "carpet.rule.betterCraftableDispenser.name": "更好的合成发射器",
+  "carpet.rule.betterCraftableDispenser.desc": "可以使用弓和投掷器来合成发射器"
 }

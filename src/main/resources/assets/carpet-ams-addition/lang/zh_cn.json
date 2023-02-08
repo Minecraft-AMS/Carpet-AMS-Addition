@@ -30,6 +30,14 @@
   "rule.safeFlight.desc": "玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害",
   "rule.boneBlockUpdateSuppressor.name": "骨块更新抑制器",
   "rule.boneBlockUpdateSuppressor.desc": "让骨块成为一个更新抑制器",
+  "rule.destroysObsidian.name": "炸毁黑曜石",
+  "rule.destroysObsidian.desc": "爆炸可以摧毁黑曜石",
+  "rule.destroysCryingObsidian.name": "炸毁哭泣的黑曜石",
+  "rule.destroysCryingObsidian.desc": "爆炸可以摧毁哭泣的黑曜石",
+  "rule.destroysReinforcedDeepslate.name": "炸毁强化深板岩",
+  "rule.destroysReinforcedDeepslate.desc": "爆炸可以摧毁强化深板岩",
+  "rule.destroysBedRock.name": "炸毁基岩",
+  "rule.destroysBedRock.desc": "爆炸可以摧毁基岩",
 
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",
@@ -88,5 +96,7 @@
   "rule.betterCraftableBoneBlock.name": "更好的骨块合成",
   "rule.betterCraftableBoneBlock.desc": "使用9个骨头可以合成出3个骨块(一点都不卡！)",
   "rule.craftableElytra.name": "可合成鞘翅",
-  "rule.craftableElytra.desc": "添加了鞘翅的合成配方"
+  "rule.craftableElytra.desc": "添加了鞘翅的合成配方",
+  "rule.betterCraftableDispenser.name": "更好的合成发射器",
+  "rule.betterCraftableDispenser.desc": "可以使用弓和投掷器来合成发射器"
 }

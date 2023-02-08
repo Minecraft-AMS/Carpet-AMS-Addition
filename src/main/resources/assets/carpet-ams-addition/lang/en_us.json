@@ -30,6 +30,14 @@
   "rule.safeFlight.desc": "players don't get hurt by flying into walls",
   "rule.boneBlockUpdateSuppressor.name": "boneBlockUpdateSuppressor",
   "rule.boneBlockUpdateSuppressor.desc": "Let the bone_block be update suppressor",
+  "rule.destroysObsidian.name": "destroysObsidian",
+  "rule.destroysObsidian.desc": "Explosion can destroy Obsidian",
+  "rule.destroysCryingObsidian.name": "destroysCryingObsidian",
+  "rule.destroysCryingObsidian.desc": "Explosion can destroy crying_obsidian",
+  "rule.destroysReinforcedDeepslate.name": "destroysReinforcedDeepslate",
+  "rule.destroysReinforcedDeepslate.desc": "Explosion can destroy ReinforcedDeepslate",
+  "rule.destroysBedRock.name": "destroysBedrock",
+  "rule.destroysBedRock.desc": "Explosion can destroy bedrock",
 
   "rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",
@@ -88,5 +96,7 @@
   "rule.betterCraftableBoneBlock.name": "betterCraftableBoneBlock",
   "rule.betterCraftableBoneBlock.desc": "Use nine bones to crafted three bone_blocks",
   "rule.craftableElytra.name": "craftableElytra",
-  "rule.craftableElytra.desc": "Add elytra recipes in minecraft"
+  "rule.craftableElytra.desc": "Add elytra recipes in minecraft",
+  "rule.betterCraftableDispenser.name": "betterCraftableDispenser",
+  "rule.betterCraftableDispenser.desc": "Use bow and dropper to crafted dispenser"
 }

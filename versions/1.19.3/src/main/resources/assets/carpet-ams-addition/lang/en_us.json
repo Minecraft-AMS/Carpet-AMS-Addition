@@ -28,6 +28,14 @@
   "carpet.rule.optimizedDragonRespawn.desc": "Optimize dragon respawning",
   "carpet.rule.safeFlight.name": "safeFlight",
   "carpet.rule.safeFlight.desc": "players don't get hurt by flying into walls",
+  "carpet.rule.destroysObsidian.name": "destroysObsidian",
+  "carpet.rule.destroysObsidian.desc": "Explosion can destroy Obsidian",
+  "carpet.rule.destroysCryingObsidian.name": "destroysCryingObsidian",
+  "carpet.rule.destroysCryingObsidian.desc": "Explosion can destroy crying_obsidian",
+  "carpet.rule.destroysReinforcedDeepslate.name": "destroysReinforcedDeepslate",
+  "carpet.rule.destroysReinforcedDeepslate.desc": "Explosion can destroy ReinforcedDeepslate",
+  "carpet.rule.destroysBedRock.name": "destroysBedRock",
+  "carpet.rule.destroysBedRock.desc": "Explosion can destroy bedrock",
 
   "carpet.rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "carpet.rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",
@@ -86,5 +94,7 @@
   "carpet.rule.betterCraftableBoneBlock.name": "betterCraftableBoneBlock",
   "carpet.rule.betterCraftableBoneBlock.desc": "Use nine bones to crafted three bone_blocks",
   "carpet.rule.craftableElytra.name": "craftableElytra",
-  "carpet.rule.craftableElytra.desc": "Add elytra recipes in minecraft"
+  "carpet.rule.craftableElytra.desc": "Add elytra recipes in minecraft",
+  "carpet.rule.betterCraftableDispenser.name": "betterCraftableDispenser",
+  "carpet.rule.betterCraftableDispenser.desc": "Use bow and dropper to crafted dispenser"
 }
