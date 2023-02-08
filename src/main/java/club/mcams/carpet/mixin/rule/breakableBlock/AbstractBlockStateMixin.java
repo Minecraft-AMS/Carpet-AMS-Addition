@@ -22,7 +22,7 @@ public abstract class AbstractBlockStateMixin {
 	@Inject(method = "getHardness", at = @At("TAIL"), cancellable = true)
 	public void getBlockHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
 		//#if MC>=11700
-		if(this.getBlock() == Blocks.DEEPSLATE && AmsServerSettings.breakableDeepslate){
+		if(this.getBlock() == Blocks.DEEPSLATE && AmsServerSettings.breakableDeepslate) {
 			cir.setReturnValue(1.5F);
 		}
 		//#endif

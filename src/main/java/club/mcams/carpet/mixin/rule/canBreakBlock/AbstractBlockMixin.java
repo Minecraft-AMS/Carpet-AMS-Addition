@@ -13,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
 import org.objectweb.asm.Opcodes;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,7 +37,7 @@ public abstract class AbstractBlockMixin {
         if (state.getBlock() == Blocks.BEDROCK && (stack.getItem() == Items.NETHERITE_PICKAXE) && AmsServerSettings.canBreakBedRock) {
             cir.setReturnValue(player.getBlockBreakingSpeed(state) / Netherite_pickaxe_Hardness);
         }
-        else if(state.getBlock() == Blocks.BEDROCK && (stack.getItem() == Items.DIAMOND_PICKAXE) && AmsServerSettings.canBreakBedRock){
+        else if(state.getBlock() == Blocks.BEDROCK && (stack.getItem() == Items.DIAMOND_PICKAXE) && AmsServerSettings.canBreakBedRock) {
             cir.setReturnValue(player.getBlockBreakingSpeed(state) / Diamond_pickaxe_Hardness);
         }
         if (state.getBlock() == Blocks.END_PORTAL_FRAME && ((stack.getItem() == Items.NETHERITE_PICKAXE) || (stack.getItem() == Items.DIAMOND_PICKAXE)) && AmsServerSettings.canBreakEndPortalFrame) {
