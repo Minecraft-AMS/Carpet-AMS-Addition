@@ -187,6 +187,47 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
 
 
+## 炸毁黑曜石(destroysObsidian)
+
+开启后，爆炸将能够摧毁黑曜石。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
+
+
+## 炸毁哭泣的黑曜石(destroysCryingObsidian)
+
+开启后，爆炸将能够摧毁哭泣的黑曜石。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
+
+
+## 炸毁基岩(destroysBedRock)
+
+开启后，爆炸将能够摧毁基岩。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
+
+
+## 炸毁强化深板岩(destroysReinforcedDeepslate)
+
+开启后，爆炸将能够摧毁强化深板岩。
+<该规则 `Minecraft Version >= 1.19` 可用>
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
+
+
 ## 共享打折(sharedVillagerDiscounts)
 
 开启后，玩家将僵尸村民治疗为村民后的获得的折扣将共享给所有玩家。
@@ -370,6 +411,16 @@
 ## 可合成鞘翅(craftableElytra)
 
 开启后，玩家可以在Minecraft中合成鞘翅。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `SURVIVAL` , `CRAFTING`
+
+
+## 更好的合成发射器(betterCraftableDispenser)
+
+开启后，玩家可以使用 弓 + 投掷器 来合成发射器。
 
 - 类型: `boolean`
 - 默认值: `false`
