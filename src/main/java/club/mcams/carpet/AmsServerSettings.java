@@ -4,7 +4,6 @@ import club.mcams.carpet.util.recipes.CraftingRule;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 //#if MC<11900
 import carpet.settings.Rule;
-import com.sun.jna.WString;
 //#else
 //$$ import carpet.api.settings.Rule;
 //#endif
@@ -258,6 +257,41 @@ public class AmsServerSettings {
     public static boolean boneBlockUpdateSuppressor = false;
     //#endif
 
+    @Rule(
+            //#if MC<11900
+            desc = "Explosion can destroy obsidian",
+            category = {AMS, FEATURE, SURVIVAL, TNT}
+            //#else
+            //$$ categories = {AMS, FEATURE, SURVIVAL, TNT}
+            //#endif
+    )
+    public static boolean destroysObsidian = false;
+
+    @Rule(
+            //#if MC<11900
+            desc = "Explosion can destroy crying_obsidian",
+            category = {AMS, FEATURE, SURVIVAL, TNT}
+            //#else
+            //$$ categories = {AMS, FEATURE, SURVIVAL, TNT}
+            //#endif
+    )
+    public static boolean destroysCryingObsidian = false;
+
+    //#if MC>11800
+    //$$    @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
+    //$$    public static boolean destroysReinforcedDeepslate = false;
+    //#endif
+
+    @Rule(
+            //#if MC<11900
+            desc = "Explosion can destroy bedrock",
+            category = {AMS, FEATURE, SURVIVAL, TNT}
+            //#else
+            //$$ categories = {AMS, FEATURE, SURVIVAL, TNT}
+            //#endif
+    )
+    public static boolean destroysBedRock = false;
+
     /**
      * 可移动方块规则
      */
@@ -408,4 +442,15 @@ public class AmsServerSettings {
             //#endif
     )
     public static boolean craftableElytra = false;
+
+    @CraftingRule(recipes = "dispenser.json")
+    @Rule(
+            //#if MC<11900
+            desc = "Use bow and dropper to crafted dispenser",
+            category = {CRAFTING, SURVIVAL, AMS}
+            //#else
+            //$$ categories = {CRAFTING, SURVIVAL, AMS}
+            //#endif
+    )
+    public static boolean betterCraftableDispenser = false;
 }
