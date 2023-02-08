@@ -8,6 +8,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 
+/**
+ * 该规则会影响原版获取基岩的探索，因此该规则可能会在未来移除
+ */
 @Mixin(Blocks.class)
 public abstract class BlocksRedirect {
     @Redirect(

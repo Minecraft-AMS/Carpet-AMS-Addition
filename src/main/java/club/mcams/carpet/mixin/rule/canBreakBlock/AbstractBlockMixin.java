@@ -19,6 +19,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+/**
+ * 该规则会影响原版获取基岩的探索，因此该规则可能会在未来移除
+ */
 @Mixin(AbstractBlock.class)
 public abstract class AbstractBlockMixin {
     final float Netherite_pickaxe_Hardness = 666.0F;
