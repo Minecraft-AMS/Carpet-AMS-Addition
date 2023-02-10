@@ -12,7 +12,7 @@ import carpet.settings.ParsedRule;
 import carpet.script.bundled.BundledModule;
 //#endif
 
-import club.mcams.carpet.command.AmsCarpetCommandRegistry;
+import club.mcams.carpet.commands.chunkloadingCommandRegistry;
 import club.mcams.carpet.function.ChunkLoading;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.util.AmsCarpetTranslations;
@@ -110,12 +110,12 @@ public class AmsServer implements CarpetExtension {
     //#if MC>=11900
     //$$    @Override
     //$$    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
-    //$$        AmsCarpetCommandRegistry.register(dispatcher);
+    //$$        chunkloadingCommandRegistry.register(dispatcher);
     //$$    }
     //#else
     @Override
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
-        AmsCarpetCommandRegistry.register(dispatcher);
+        chunkloadingCommandRegistry.register(dispatcher);
     }
     //#endif
 
