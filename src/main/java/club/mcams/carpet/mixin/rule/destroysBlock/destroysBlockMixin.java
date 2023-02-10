@@ -39,7 +39,7 @@ import com.google.common.collect.Sets;
 
 import java.util.*;
 
-@Mixin(Explosion.class)
+@Mixin(value = Explosion.class, priority = 888)
 public abstract class destroysBlockMixin {
 
     @Shadow
@@ -97,7 +97,7 @@ public abstract class destroysBlockMixin {
     @Final
     private ExplosionBehavior behavior;
 
-    @Inject(method = "collectBlocksAndDamageEntities", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "collectBlocksAndDamageEntities", at = @At("HEAD"), cancellable = true)
     public void collectBlocksAndDamageEntities(CallbackInfo ci) {
         //#if MC>=11700
         this.world.emitGameEvent(this.entity, GameEvent.EXPLODE, new BlockPos(this.x, this.y, this.z));
