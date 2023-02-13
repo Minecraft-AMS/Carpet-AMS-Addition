@@ -6,6 +6,7 @@
   "mixins": [
     "MinecraftServerMixin",
     "optimizedDragonRespawn.BlockPatternMixin",
+    "optimizedDragonRespawn.BlockPatternTranslateInvoker",
     "optimizedDragonRespawn.EnderDragonFightMixin"
   ],
   "client": [

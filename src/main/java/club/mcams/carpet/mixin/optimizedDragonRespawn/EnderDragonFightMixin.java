@@ -1,7 +1,6 @@
 package club.mcams.carpet.mixin.optimizedDragonRespawn;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.util.TextUtil;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.EndGatewayBlockEntity;
 import net.minecraft.block.entity.EndPortalBlockEntity;
@@ -27,17 +26,11 @@ import java.util.List;
 
 @Mixin(value = EnderDragonFight.class, priority = 995)
 public abstract class EnderDragonFightMixin {
-    @Shadow
-    @Final
-    private ServerWorld world;
+    @Shadow @Final private ServerWorld world;
 
-    @Shadow
-    @Final
-    private BlockPattern endPortalPattern;
+    @Shadow @Final private BlockPattern endPortalPattern;
 
-    @Nullable
-    @Shadow
-    private BlockPos exitPortalLocation;
+    @Nullable @Shadow private BlockPos exitPortalLocation;
 
     private int cacheChunkIteratorX = -8;
     private int cacheChunkIteratorZ = -8;
