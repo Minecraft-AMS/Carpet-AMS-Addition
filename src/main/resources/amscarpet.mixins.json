@@ -4,10 +4,11 @@
   "package": "club.mcams.carpet.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "MinecraftServerMixin",
+    "optimizedDragonRespawn.BlockPatternMixin",
     "optimizedDragonRespawn.EnderDragonFightMixin"
   ],
   "client": [
-
   ],
   "injectors": {
     "defaultRequire": 1
