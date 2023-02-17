@@ -75,7 +75,7 @@ public abstract class EnderDragonFightMixin {
                 i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.ORIGIN).getY();
             }
             boolean notFirstSearch = false;
-            for(j = i; j >= this.world.getBottomY(); --j) {
+            for(j = i; j >= 0; --j) {
                 BlockPattern.Result result2;
                 if(AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
 //                TextUtil.broadcastToAllPlayers("2Invoke partial searchAround "+ new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()).toString());
