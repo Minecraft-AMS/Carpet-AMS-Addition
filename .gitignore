@@ -1,4 +1,4 @@
-.*/
-run/
+.gradle/
+.idea/
 build/
-gradle.properties
+run/

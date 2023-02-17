@@ -1,32 +1,66 @@
 # Carpet-AMS-Addition
+
 一个简易的基于Carpet mod的拓展
 
-目前支持的Minecraft版本：1.17.1\1.18.2
+**由于一些功能是低版本模组升级而来，不确定有没有严重问题，由于能力有限该mod不保证能完全解决后续问题**
 
-目前已有功能：<br>
+假如遇到了兼容性问题/破坏了游戏机制/影响了游戏性能/想要特定某个版本可以尽情提issue，我们会尽可能解决w!
 
-1、NoteBlockChunkLoader【当音符盒被激活时会加载3x3的区块持续15s，无论音符盒是否能够发出声音】
+## 支持版本/Supported Version
 
-2、SuperBow【可以让弓同时拥有无限和经验修补附魔】
+- `1.19.3`
+- `1.19.2`
+- `1.18.2`（主要维护版本）
+- `1.17.1`
+- `1.16.4/1.16.5`
 
-3、zeroTickCactus【0t强制催熟仙人掌】
+实际上1.16~22w46a之间的任何版本理论上应该都兼容，若有版本支持问题请提Issue.
 
-4、zeroTickBamboo【0t强制催熟竹子】
+## 功能/Feature
 
-5、zeroTickChorusFlower【0t强制催熟紫颂花】
+### 规则/Rules
 
-6、zeroTickSugarCane【0t强制催熟甘蔗】
+`superBow`: 可以让弓同时拥有无限和经验修补附魔。
 
-7、zeroTickStem【0t强制催熟海带、缠怨藤、垂泪藤】
+`scheduledRandomTickCactus`: 使计划刻仍可以给予随机刻进行强制催熟仙人掌。
 
-8、ALLzeroTick【0t催熟总开关，使用该选项时确保其他关于0t催熟特性的功能为关闭状态】
+`scheduledRandomTickBamboo`: 使计划刻仍可以给予随机刻进行强制催熟竹子。
 
-一些链接：
+`scheduledRandomTickChorusFlower`: 使计划刻仍可以给予随机刻进行强制催熟紫颂花。
 
-1、NoteBlockChunkLoader：主要功能实现代码来自memorydream<br>
-需要1.15.x - 1.16.x版本请前往：https://github.com/GC-server-CN/NoteBlockChunkLoader
+`scheduledRandomTickSugarCane`: 使计划刻仍可以给予随机刻进行强制催熟甘蔗。
 
-2、zeroTick：0t催熟系列主要功能实现代码来自keuin<br>
-需要1.16.4/1.16.5版本请前往：https://github.com/hit-mc/OhMyVanillaMinecraft
+`scheduledRandomTickStem`: 使计划刻仍可以给予随机刻进行强制催熟海带、缠怨藤、垂泪藤。
 
-注：由于一些功能是低版本模组升级而来，不确定有没有严重问题，由于能力有限所以此mod不负责后续问题处理
+`scheduledRandomTickAllPlants`: 使计划刻仍可以给予随机刻进行强制催熟以上提到的所有作物。
+
+`optimizedDragonRespawn`: 大幅度优化了龙战判定代码的性能表现，基本不影响原版特性。
+
+`noteBlockChunkLoader/bellBlockChunkLoader/pistonBlockChunkLoader`: 当红石激活`音符盒`/`钟`，或`上面放置骨块的活塞`的活塞头伸出时强加载所在区块300gt，其中活塞头伸出加载的区块范围以活塞头将伸到的位置为中心。
+
+
+### 区块加载控制/Chunk Loading Commands
+
+控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。
+
+玩家上下线时会将交互状态重置回加载以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)。
+
+格式：`/chunkloading [true/false]`
+
+### 相关链接
+
+1. `NoteBlockChunkLoader`
+   主要功能实现代码来自1.15.x-1.16.x的[NoteBlockChunkLoader](https://github.com/GC-server-CN/NoteBlockChunkLoader)
+
+2. `scheduledRandomTick`
+   系列主要功能实现代码来自1.16.4/1.16.5的[OhMyVanillaMinecraf](https://github.com/hit-mc/OhMyVanillaMinecraft)
+
+3. `chunkloading`交互控制功能实现代码来自1.16.5/1.17.1的[Intricarpet](https://github.com/lntricate1/intricarpet)
+
+### 致谢
+
+- 感谢[memorydream](https://github.com/memorydream)，[keuin](https://github.com/keuin)
+  ，[lntricate1](https://github.com/lntricate1)的项目代码提供参考
+- 感谢gnembon和Fallen_Breath对carpet, carpet-extra和carpet-TIS-addition的实现代码
+- 感谢[401Unauthorized](https://github.com/YehowahLiu)在解决开发问题上的无私帮助
+- 感谢alpha_hhh和Menggui233帮助测试和提建议
