@@ -27,11 +27,9 @@ import java.util.List;
 @Mixin(value = EnderDragonFight.class, priority = 995)
 public abstract class EnderDragonFightMixin {
     @Shadow @Final private ServerWorld world;
-
     @Shadow @Final private BlockPattern endPortalPattern;
-
     @Nullable @Shadow private BlockPos exitPortalLocation;
-
+    @Shadow private boolean doLegacyCheck;
     private int cacheChunkIteratorX = -8;
     private int cacheChunkIteratorZ = -8;
     private int cacheOriginIteratorY = -1;
@@ -69,39 +67,40 @@ public abstract class EnderDragonFightMixin {
                 }
             }
         }
-
-        if(AmsServerSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
-            i = cacheOriginIteratorY;
-        }
-        else {
-            i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.ORIGIN).getY();
-        }
-        boolean notFirstSearch = false;
-        for(j = i; j >= this.world.getBottomY(); --j) {
-            BlockPattern.Result result2;
-            if(AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
+        if(this.doLegacyCheck){
+            if(AmsServerSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
+                i = cacheOriginIteratorY;
+            }
+            else {
+                i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.ORIGIN).getY();
+            }
+            boolean notFirstSearch = false;
+            for(j = i; j >= this.world.getBottomY(); --j) {
+                BlockPattern.Result result2;
+                if(AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
 //                TextUtil.broadcastToAllPlayers("2Invoke partial searchAround "+ new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()).toString());
                 result2 = this.endPortalPattern.partialSearchAround(this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
             }
             else{
 //                TextUtil.broadcastToAllPlayers("2Invoke searchAround "+ new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()).toString());
-                result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
-            }
-            if (result2 != null) {
-                if (this.exitPortalLocation == null) {
-                    this.exitPortalLocation = result2.translate(3, 3, 3).getBlockPos();
+                    result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
                 }
-                cacheOriginIteratorY = j;
-                return result2;
+                if (result2 != null) {
+                    if (this.exitPortalLocation == null) {
+                        this.exitPortalLocation = result2.translate(3, 3, 3).getBlockPos();
+                    }
+                    cacheOriginIteratorY = j;
+                    return result2;
+                }
+                notFirstSearch = true;
             }
-            notFirstSearch = true;
         }
 
         return null;
     }
 
     @Inject(
-            method = "Lnet/minecraft/entity/boss/dragon/EnderDragonFight;respawnDragon(Ljava/util/List;)V",
+            method = "respawnDragon(Ljava/util/List;)V",
             at = @At("HEAD")
     )
     private void resetCache(List<EndCrystalEntity> crystals, CallbackInfo ci) {
