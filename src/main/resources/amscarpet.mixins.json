@@ -11,8 +11,6 @@
     "rule.blockChunkLoader.PistonBlockMixin",
     "rule.boneBlockUpdateSuppressor.boneBlockUpdateSuppressor",
     "rule.breakableBlock.AbstractBlockStateMixin",
-    "rule.canBreakBlock.AbstractBlockMixin",
-    "rule.canBreakBlock.BlocksRedirect",
     "rule.destroysEverything.BlockMixin",
     "rule.extinguishedCampfire.CampfireBlockMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
