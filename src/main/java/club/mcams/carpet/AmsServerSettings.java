@@ -171,26 +171,6 @@ public class AmsServerSettings {
 
     @Rule(
             //#if MC<11900
-            desc = "Players can use diamond_pickaxe or netherite_pickaxe to dig bedrock",
-            category = {AMS, FEATURE, SURVIVAL}
-            //#else
-            //$$ categories = {AMS, FEATURE, SURVIVAL}
-            //#endif
-    )
-    public static boolean canBreakBedRock = false;
-
-    @Rule(
-            //#if MC<11900
-            desc = "Players can use diamond_pickaxe or netherite_pickaxe to dig end_portal_frame",
-            category = {AMS, FEATURE, SURVIVAL}
-            //#else
-            //$$ categories = {AMS, FEATURE, SURVIVAL}
-            //#endif
-    )
-    public static boolean canBreakEndPortalFrame = false;
-
-    @Rule(
-            //#if MC<11900
             desc = "Change the hardness of obsdian to deepslate",
             category = {AMS, FEATURE, SURVIVAL}
             //#else
