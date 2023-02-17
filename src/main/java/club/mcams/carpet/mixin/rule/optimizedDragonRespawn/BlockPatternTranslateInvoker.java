@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin.optimizedDragonRespawn;
+package club.mcams.carpet.mixin.rule.optimizedDragonRespawn;
 
 import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.util.math.BlockPos;

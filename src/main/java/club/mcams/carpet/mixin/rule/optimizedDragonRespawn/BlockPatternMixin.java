@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin.optimizedDragonRespawn;
+package club.mcams.carpet.mixin.rule.optimizedDragonRespawn;
 
 import club.mcams.carpet.fake.BlockPatternPartialSearchAroundInvoker;
 import com.google.common.cache.LoadingCache;
