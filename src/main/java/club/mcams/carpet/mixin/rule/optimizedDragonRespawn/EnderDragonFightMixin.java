@@ -67,7 +67,7 @@ public abstract class EnderDragonFightMixin {
                 }
             }
         }
-        if(this.doLegacyCheck){
+        if(this.doLegacyCheck || this.exitPortalLocation == null){
             if(AmsServerSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
                 i = cacheOriginIteratorY;
             }
