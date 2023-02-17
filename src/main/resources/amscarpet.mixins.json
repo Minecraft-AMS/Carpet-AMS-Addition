@@ -8,15 +8,14 @@
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.blockChunkLoader.PistonBlockMixin",
-    "rule.optimizedDragonRespawn.BlockPatternMixin",
-    "rule.optimizedDragonRespawn.BlockPatternTranslateInvoker",
-    "rule.optimizedDragonRespawn.EnderDragonFightMixin"
-    "rule.superBow.SuperBow",
+    "rule.optimizedDragonRespawn.BlockPatternTestTransformInvoker",
+    "rule.optimizedDragonRespawn.EnderDragonFightMixin",
     "rule.scheduledRandomTick.AbstractPlantPartBlockMixin",
     "rule.scheduledRandomTick.BambooBlockMixin",
     "rule.scheduledRandomTick.CactusBlockMixin",
     "rule.scheduledRandomTick.ChorusFlowerBlockMixin",
-    "rule.scheduledRandomTick.SugarCaneBlockMixin"
+    "rule.scheduledRandomTick.SugarCaneBlockMixin",
+    "rule.superBow.SuperBow"
   ],
   "client": [
   ],

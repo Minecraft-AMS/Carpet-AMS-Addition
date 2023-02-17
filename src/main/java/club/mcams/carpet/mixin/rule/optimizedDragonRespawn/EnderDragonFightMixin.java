@@ -78,11 +78,9 @@ public abstract class EnderDragonFightMixin {
             for(j = i; j >= 0; --j) {
                 BlockPattern.Result result2;
                 if(AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
-//                TextUtil.broadcastToAllPlayers("2Invoke partial searchAround "+ new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()).toString());
-                result2 = this.endPortalPattern.partialSearchAround(this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
-            }
-            else{
-//                TextUtil.broadcastToAllPlayers("2Invoke searchAround "+ new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()).toString());
+                    result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
+                }
+                else{
                     result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
                 }
                 if (result2 != null) {

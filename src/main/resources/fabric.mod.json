@@ -29,9 +29,6 @@
     "carpet": "${carpet_dependency}"
   },
   "custom": {
-    "loom:injected_interfaces": {
-      "net/minecraft/class_2700": ["club/mcams/carpet/fake/BlockPatternPartialSearchAroundInvoker"]
-    },
     "modmenu": {
       "parent": "carpet"
     },
