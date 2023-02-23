@@ -155,7 +155,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## 炸毁所有方块(destroysEverything)
+## 炸毁所有方块(blowUpEverything)
 
 开启后，所有方块的爆炸抗性均为 0。
 
@@ -165,7 +165,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
 
 
-## 炸毁黑曜石(destroysObsidian)
+## 炸毁黑曜石(blowUpObsidian)
 
 开启后，爆炸将能够摧毁黑曜石。
 
@@ -175,7 +175,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
 
 
-## 炸毁哭泣的黑曜石(destroysCryingObsidian)
+## 炸毁哭泣的黑曜石(blowUpCryingObsidian)
 
 开启后，爆炸将能够摧毁哭泣的黑曜石。
 
@@ -185,7 +185,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
 
 
-## 炸毁基岩(destroysBedRock)
+## 炸毁基岩(blowUpBedRock)
 
 开启后，爆炸将能够摧毁基岩。
 
@@ -195,7 +195,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
 
 
-## 炸毁强化深板岩(destroysReinforcedDeepslate)
+## 炸毁强化深板岩(blowUpReinforcedDeepslate)
 
 开启后，爆炸将能够摧毁强化深板岩。
 <该规则 `Minecraft Version >= 1.19` 可用>
