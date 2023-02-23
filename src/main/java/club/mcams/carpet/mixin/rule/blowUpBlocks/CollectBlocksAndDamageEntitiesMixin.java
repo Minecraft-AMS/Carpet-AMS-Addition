@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin.rule.destroysBlock;
+package club.mcams.carpet.mixin.rule.blowUpBlocks;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -40,7 +40,7 @@ import com.google.common.collect.Sets;
 import java.util.*;
 
 @Mixin(value = Explosion.class, priority = 888)
-public abstract class destroysBlockMixin {
+public abstract class CollectBlocksAndDamageEntitiesMixin {
 
     @Shadow
     @Final
@@ -135,17 +135,17 @@ public abstract class destroysBlockMixin {
                             }
 
                             MinecraftServer server = this.world.getServer();
-                            if ((h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h)) || (this.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN && AmsServerSettings.destroysObsidian)) {
+                            if ((h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h)) || (this.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN && AmsServerSettings.blowUpObsidian)) {
                                 set.add(blockPos);
                             }
-                            if ((h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h)) || (this.world.getBlockState(blockPos).getBlock() == Blocks.CRYING_OBSIDIAN && AmsServerSettings.destroysCryingObsidian)) {
+                            if ((h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h)) || (this.world.getBlockState(blockPos).getBlock() == Blocks.CRYING_OBSIDIAN && AmsServerSettings.blowUpCryingObsidian)) {
                                 set.add(blockPos);
                             }
-                            if ((h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h)) || (this.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK && AmsServerSettings.destroysBedRock)) {
+                            if ((h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h)) || (this.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK && AmsServerSettings.blowUpBedRock)) {
                                 set.add(blockPos);
                             }
                             //#if MC>11800
-                            //$$if ((h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h)) || (this.world.getBlockState(blockPos).getBlock() == Blocks.REINFORCED_DEEPSLATE && AmsServerSettings.destroysReinforcedDeepslate)) {
+                            //$$if ((h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h)) || (this.world.getBlockState(blockPos).getBlock() == Blocks.REINFORCED_DEEPSLATE && AmsServerSettings.blowUpReinforcedDeepslate)) {
                             //$$ set.add(blockPos);
                             //$$}
                             //#endif
