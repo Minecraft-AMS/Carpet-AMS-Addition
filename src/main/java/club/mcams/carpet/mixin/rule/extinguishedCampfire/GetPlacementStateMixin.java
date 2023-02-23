@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(CampfireBlock.class)
-public abstract class CampfireBlockMixin extends BlockWithEntity {
-    protected CampfireBlockMixin(Settings builder) {
+public abstract class GetPlacementStateMixin extends BlockWithEntity {
+    protected GetPlacementStateMixin(Settings builder) {
         super(builder);
     }
     @Inject(method = "<init>*", at = @At("RETURN"))

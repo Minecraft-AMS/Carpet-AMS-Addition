@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractBlock.class)
-public abstract class boneBlockUpdateSuppressor {
+public abstract class NeighborUpdateMixin {
     //#if MC<11900
     @Inject(method = "neighborUpdate", at = @At("TAIL"))
     private void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify, CallbackInfo ci) {
