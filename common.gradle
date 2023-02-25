@@ -35,13 +35,15 @@ dependencies {
     modRuntimeOnly(mcVersion < 11900 ? "com.github.astei:lazydfu:0.1.2" : "com.github.Fallen-Breath:lazydfu:a7cfc44c0c")
 //
 //    // library mods
-//    include(modImplementation("com.github.Fallen-Breath:conditional-mixin:${project.conditionalmixin_version}"))
+    include(modImplementation("com.github.Fallen-Breath:conditional-mixin:${project.conditionalmixin_version}"))
 //
 //    // libraries
 //    testImplementation "junit:junit:${project.junit_version}"
 }
 
 loom {
+    accessWidenerPath = file("carpet-ams-addition.accesswidener")
+
     runConfigs.all {
         runDir '../../run'
         vmArgs '-Dmixin.debug.export=true'
@@ -91,6 +93,8 @@ group = project.parent.maven_group
 archivesBaseName = project.parent.archives_base_name + '-mc' + project.minecraft_version
 
 processResources {
+    from "carpet-ams-addition.accesswidener"
+
     inputs.property "version", fullModVersion
 
     filesMatching("fabric.mod.json") {

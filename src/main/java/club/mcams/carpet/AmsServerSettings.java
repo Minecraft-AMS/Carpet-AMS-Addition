@@ -84,4 +84,9 @@ public class AmsServerSettings {
     )
     public static String commandChunkLoading = "false";
 
+    @Rule(
+            desc = "Coarse dirt will turn to sand when placing directly above a block that has pointed dripstone underneath in hot biomes",
+            category = {AMS, FEATURE, SURVIVAL}
+    )
+    public static boolean coarseDirtDriedToSand = false;
 }
