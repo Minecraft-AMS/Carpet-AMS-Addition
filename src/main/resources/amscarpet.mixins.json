@@ -8,6 +8,8 @@
     "interaction.ThreadedAnvilChunkStorageMixin",
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
+    "rule.livingEntityBrainLeakFix.EntityMixin",
+    "rule.livingEntityBrainLeakFix.IBrainMixin",
     "rule.blockChunkLoader.PistonBlockMixin",
     "rule.optimizedDragonRespawn.BlockPatternTestTransformInvoker",
     "rule.optimizedDragonRespawn.EnderDragonFightMixin",

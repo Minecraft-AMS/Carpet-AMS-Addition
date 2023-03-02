@@ -1,6 +1,12 @@
 package club.mcams.carpet;
 
+import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
+import carpet.settings.Validator;
+import club.mcams.carpet.util.recipes.CraftingRule;
+import net.minecraft.server.command.ServerCommandSource;
+
+import java.util.List;
 
 import static carpet.settings.RuleCategory.*;
 
@@ -60,6 +66,12 @@ public class AmsServerSettings {
             category = {AMS, OPTIMIZATION}
     )
     public static boolean optimizedDragonRespawn = false;
+
+    @Rule(
+            desc = "Fix memory leak in living entity brain",
+            category = {AMS, BUGFIX}
+    )
+    public static boolean livingEntityBrainLeakFix = true;
 
     @Rule(
             desc = "Load nearby 3x3 chunks for 15 seconds when a note block is triggered",
