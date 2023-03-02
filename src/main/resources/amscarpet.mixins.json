@@ -7,13 +7,15 @@
     "interaction.ThreadedAnvilChunkStorageMixin",
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
+    "rule.livingEntityBrainLeakFix.EntityMixin",
+    "rule.livingEntityBrainLeakFix.IBrainMixin",
     "rule.optimizedDragonRespawn.EnderDragonFightMixin",
-    "rule.superBow.SuperBow",
     "rule.scheduledRandomTick.AbstractPlantPartBlockMixin",
     "rule.scheduledRandomTick.BambooBlockMixin",
     "rule.scheduledRandomTick.CactusBlockMixin",
     "rule.scheduledRandomTick.ChorusFlowerBlockMixin",
-    "rule.scheduledRandomTick.SugarCaneBlockMixin"
+    "rule.scheduledRandomTick.SugarCaneBlockMixin",
+    "rule.superBow.SuperBow"
   ],
   "client": [
   ],

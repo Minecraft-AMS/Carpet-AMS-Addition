@@ -69,12 +69,19 @@ public class AmsServerSettings {
     public static boolean optimizedDragonRespawn = false;
 
     @Rule(
+            desc = "Fix memory leak in living entity brain",
+            category = {AMS, BUGFIX}
+    )
+    public static boolean livingEntityBrainLeakFix = true;
+
+    @Rule(
             desc = "Load nearby 3x3 chunks for 15 seconds when a certain block is triggered",
             options = {"false", "note_block", "bell_block"},
             validate = BlockLoaderValidator.class,
             category = {AMS, FEATURE}
     )
     public static String blockChunkLoader = "false";
+
 
     @CraftingRule(recipes = "enchanted_golden_apples.json")
     @Rule(
