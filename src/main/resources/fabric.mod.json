@@ -20,6 +20,7 @@
       "club.mcams.carpet.AmsServer"
     ]
   },
+  "accessWidener": "carpet-ams-addition.accesswidener",
   "mixins": [
     "amscarpet.mixins.json"
   ],

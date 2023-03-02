@@ -29,27 +29,25 @@ import java.util.Optional;
 @Mixin(PointedDripstoneBlock.class)
 public abstract class MixinPointedDripstoneBlock {
     @Inject(
-            method="Lnet/minecraft/block/PointedDripstoneBlock;getFluid(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)Ljava/util/Optional;",
-            at=@At("RETURN")
+            method = "getFluid",
+            at = @At("RETURN"),
+            cancellable = true
     )
     private static void getFluidsWetCoarseDirt(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Optional<Fluid>> cir) {
-        if (AmsServerSettings.coarseDirtDriedToSand && cir.getReturnValue().isPresent() && cir.getReturnValue().get()
-                //#if MC >=11900
-                //$$ .fluid
-                //#endif
-                        == Fluids.EMPTY) {
+        if (AmsServerSettings.coarseDirtDriedToSand && cir.getReturnValue().isPresent() && ((Fluid) cir.getReturnValue().get()) == Fluids.EMPTY) {
             cir.setReturnValue(
                     IMixinPointedDripstoneBlock.invoke_getSupportingPos(world, pos, state, 11)
                             .map(posSupported -> {
                                 BlockPos blockPos = posSupported.up();
                                 BlockState blockState = world.getBlockState(blockPos);
-                                Biome biome = world.getBiome(blockPos).value();
-                                Fluid fluid = blockState.isOf(Blocks.COARSE_DIRT) && biome.isHot(blockPos) ? Fluids.WATER : world.getFluidState(blockPos).getFluid();
-                                //#if MC >=11900
-                                //$$ return new DrippingFluid(blockPos, fluid, blockState);
-                                //#else
+                                Biome biome = world.getBiome(blockPos)
+                                        //#if MC>=11800
+                                        .value()
+                                        //#endif
+                                        ;
+                                Fluid fluid = blockState.isOf(Blocks.COARSE_DIRT) && biome.getTemperature() > 1.0F ? Fluids.WATER : world.getFluidState(blockPos).getFluid();
+
                                 return fluid;
-                                //#endif
                             })
             );
         }

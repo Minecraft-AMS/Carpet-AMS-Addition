@@ -12,10 +12,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Entity.class)
 public class EntityMixin {
     @Inject(
-            method = "Lnet/minecraft/entity/Entity;remove(Lnet/minecraft/entity/Entity$RemovalReason;)V",
+            method = "remove",
             at = @At("RETURN")
     )
-    private void onRemove(Entity.RemovalReason reason, CallbackInfo ci) {
+    private void onRemove(
+            //#if MC >=11700
+            Entity.RemovalReason reason,
+            //#endif
+            CallbackInfo ci) {
         if (((Entity) (Object) this) instanceof LivingEntity && AmsServerSettings.livingEntityBrainLeakFix) {
             Brain<?> brain = ((LivingEntity) ((Object) this)).getBrain();
             ((IBrainMixin) brain).getMemories().keySet().forEach(brain::forget);
