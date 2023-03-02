@@ -9,6 +9,7 @@
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.blockChunkLoader.PistonBlockMixin",
+    "rule.coarseDirtDriedToSand.IMixinPointedDripstoneBlock",
     "rule.coarseDirtDriedToSand.MixinPointedDripstoneBlock",
     "rule.livingEntityBrainLeakFix.EntityMixin",
     "rule.livingEntityBrainLeakFix.IBrainMixin",
