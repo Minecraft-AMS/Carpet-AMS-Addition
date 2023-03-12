@@ -92,5 +92,5 @@
   "carpet.rule.craftableElytra.name": "craftableElytra",
   "carpet.rule.craftableElytra.desc": "Add elytra recipes in minecraft",
   "carpet.rule.betterCraftableDispenser.name": "betterCraftableDispenser",
-  "carpet.rule.betterCraftableDispenser.desc": "Use bow and dropper to crafted dispenser"
+  "carpet.rule.betterCraftableDispenser.desc": "Better craftable dispenser"
 }

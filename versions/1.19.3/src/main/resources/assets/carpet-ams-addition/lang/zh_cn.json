@@ -92,5 +92,5 @@
   "carpet.rule.craftableElytra.name": "可合成鞘翅",
   "carpet.rule.craftableElytra.desc": "添加了鞘翅的合成配方",
   "carpet.rule.betterCraftableDispenser.name": "更好的合成发射器",
-  "carpet.rule.betterCraftableDispenser.desc": "可以使用弓和投掷器来合成发射器"
+  "carpet.rule.betterCraftableDispenser.desc": "使用更灵活的配方来合成发射器"
 }

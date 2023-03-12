@@ -379,7 +379,7 @@ public class AmsServerSettings {
     @CraftingRule(recipes = "bundle.json")
     @Rule(
             //#if MC<11900
-            desc = "crafted bundle in minecraft 1.17/1.18/1.19",
+            desc = "Crafted bundle in minecraft 1.17/1.18/1.19",
             category = {CRAFTING, SURVIVAL, AMS}
             //#else
             //$$ categories = {CRAFTING, SURVIVAL, AMS}
@@ -392,7 +392,7 @@ public class AmsServerSettings {
     @CraftingRule(recipes = "sculk_sensor.json")
     @Rule(
             //#if MC<11900
-            desc = "crafted sculk_sensor in minecraft 1.17/1.18",
+            desc = "Crafted sculk_sensor in minecraft 1.17/1.18",
             category = {CRAFTING, SURVIVAL, AMS}
             //#else
             //$$ categories = {CRAFTING, SURVIVAL, AMS}
@@ -415,7 +415,7 @@ public class AmsServerSettings {
     @CraftingRule(recipes = "elytra.json")
     @Rule(
             //#if MC<11900
-            desc = "crafted elytra in minecraft",
+            desc = "Crafted elytra in minecraft",
             category = {CRAFTING, SURVIVAL, AMS}
             //#else
             //$$ categories = {CRAFTING, SURVIVAL, AMS}
@@ -423,10 +423,10 @@ public class AmsServerSettings {
     )
     public static boolean craftableElytra = false;
 
-    @CraftingRule(recipes = "dispenser.json")
+    @CraftingRule(recipes = {"dispenser1.json", "dispenser2.json"})
     @Rule(
             //#if MC<11900
-            desc = "Use bow and dropper to crafted dispenser",
+            desc = "Better craftable dispenser",
             category = {CRAFTING, SURVIVAL, AMS}
             //#else
             //$$ categories = {CRAFTING, SURVIVAL, AMS}

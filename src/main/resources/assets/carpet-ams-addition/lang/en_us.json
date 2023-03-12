@@ -94,5 +94,5 @@
   "rule.craftableElytra.name": "craftableElytra",
   "rule.craftableElytra.desc": "Add elytra recipes in minecraft",
   "rule.betterCraftableDispenser.name": "betterCraftableDispenser",
-  "rule.betterCraftableDispenser.desc": "Use bow and dropper to crafted dispenser"
+  "rule.betterCraftableDispenser.desc": "Better craftable dispenser"
 }
