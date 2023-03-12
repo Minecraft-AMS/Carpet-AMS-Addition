@@ -31,4 +31,4 @@
 - Carpet-AMS-Addition中的功能，虽然存在但不代表我们在AMS服务器内使用它。
 
 ## 许可
-此项目在 LGPL-v3.0 许可证下可用,您可以随意从中学习并将其纳入您自己的项目中
+此项目在 [ LGPL-v3.0 ](https://choosealicense.com/licenses/lgpl-3.0/) 许可证下可用,您可以随意从中学习并将其纳入您自己的项目中。
