@@ -266,7 +266,7 @@ Crying obsidian can be moved by piston or sticky piston.
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `FEATURE`, `AMS_movable`
 
-## movablBedRock
+## movableBedRock
 
 Bedrock can be moved by piston or sticky piston.
 >Who can refuse a flat bedrock ground without any defect?
