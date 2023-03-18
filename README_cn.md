@@ -1,5 +1,7 @@
 # Carpet-AMS-Addition
 
+**中文** | [**English**](README_en.md)
+
 ## 支持版本
 
 - `1.19.3`
@@ -17,9 +19,9 @@
 
 ## 文档
 
-- [规则](/readme_folder/rules.md)
-- [指令](/readme_folder/commands.md)
-- [致谢](/readme_folder/3q.md)
+- [规则](/readme_folder/rules_cn.md)
+- [指令](/readme_folder/commands_cn.md)
+- [致谢](/readme_folder/thanks_cn.md)
 
 ## 获取1.15.2版本的 Carpet-AMS-Addition：
 
@@ -31,4 +33,4 @@
 - Carpet-AMS-Addition中的功能，虽然存在但不代表我们在AMS服务器内使用它。
 
 ## 许可
-此项目在 LGPL-v3.0 许可证下可用,您可以随意从中学习并将其纳入您自己的项目中
+此项目在 [ LGPL-v3.0 ](https://choosealicense.com/licenses/lgpl-3.0/) 许可证下可用,您可以随意从中学习并将其纳入您自己的项目中。
