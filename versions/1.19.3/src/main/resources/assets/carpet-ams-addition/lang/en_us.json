@@ -60,7 +60,8 @@
   "carpet.rule.pistonBlockChunkLoader.desc": "Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head)",
   "carpet.rule.pistonBlockChunkLoader.extra.0": "[bone_block] - When bone_block is on the piston",
   "carpet.rule.pistonBlockChunkLoader.extra.1": "[bedrock] - When bedrock is under the piston",
-  "carpet.rule.pistonBlockChunkLoader.extra.2": "[OFF] - Disable the rule",
+  "carpet.rule.pistonBlockChunkLoader.extra.2": "[all] - When bone_block is on the piston or bedrock is under the piston",
+  "carpet.rule.pistonBlockChunkLoader.extra.3": "[OFF] - Disable the rule",
 
   "carpet.rule.movableEnderChest.name": "movableEnderChest",
   "carpet.rule.movableEnderChest.desc": "Makes ender_chests movable",

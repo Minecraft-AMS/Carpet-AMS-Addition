@@ -89,13 +89,14 @@ the option is interpreted as follow:
 
 - `bone_block`: The piston must have a bone block just above it.
 - `bedrock`: The piston must have a bedrock just under it.
+- `all`: When boe_block is on the piston or bed rock is under the piston.
 - `OFF`: Disable the rule.
   
 &emsp;
 
 - Type: `String`
 - Default: `OFF`
-- Suggested options: `bone_block`, `bedrock`, `OFF`
+- Suggested options: `bone_block`, `bedrock`, `all`, `OFF`
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
 ## netherWaterPlacement

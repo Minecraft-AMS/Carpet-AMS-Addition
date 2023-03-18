@@ -9,10 +9,8 @@
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.blockChunkLoader.PistonBlockMixin",
-    "rule.boneBlockUpdateSuppressor.NeighborUpdateMixin",
-    "rule.softBlock.AbstractBlockStateMixin",
-    "rule.weakBlocks.CollectBlocksAndDamageEntitiesMixin",
     "rule.blowUpEverything.GetBlastResistanceMixin",
+    "rule.boneBlockUpdateSuppressor.NeighborUpdateMixin",
     "rule.extinguishedCampfire.GetPlacementStateMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
     "rule.movableBlocks.PistonBlockMixin",
@@ -27,7 +25,9 @@
     "rule.scheduledRandomTick.SugarCaneBlockMixin",
     "rule.sharedVillagerDiscounts.GetValueForInvoker",
     "rule.sharedVillagerDiscounts.VillagerGossipsMixin",
-    "rule.superBow.InfinityEnchantmentMixin"
+    "rule.softBlock.AbstractBlockStateMixin",
+    "rule.superBow.InfinityEnchantmentMixin",
+    "rule.weakBlocks.CollectBlocksAndDamageEntitiesMixin"
   ],
   "client": [],
   "server": [],

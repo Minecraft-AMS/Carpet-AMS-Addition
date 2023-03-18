@@ -62,7 +62,8 @@
   "rule.pistonBlockChunkLoader.desc": "活塞或黏性活塞被激活且能正常伸出时以活塞头将到达的区块为中心加载3x3区块持续15s",
   "rule.pistonBlockChunkLoader.extra.0": "[bone_block] - 当活塞/黏性活塞上方有骨块时",
   "rule.pistonBlockChunkLoader.extra.1": "[bedrock] - 当活塞/黏性活塞下方有基岩时",
-  "rule.pistonBlockChunkLoader.extra.2": "[OFF] - 禁用该规则",
+  "rule.pistonBlockChunkLoader.extra.2": "[all] - 当活塞/黏性活塞上方有骨块或下方有基岩时",
+  "rule.pistonBlockChunkLoader.extra.3": "[OFF] - 禁用该规则",
 
   "rule.movableEnderChest.name": "可移动末影箱",
   "rule.movableEnderChest.desc": "让末影箱可以被活塞/黏性活塞推动",

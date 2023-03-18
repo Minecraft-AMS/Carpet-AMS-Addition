@@ -112,12 +112,13 @@ public class AmsServerSettings {
     public static String noteBlockChunkLoader = "OFF";
 
     @Rule(
-            options = {"bone_block", "bedrock", "OFF"},
+            options = {"bone_block", "bedrock", "all", "OFF"},
             //#if MC<11900
             desc = "Load nearby 3x3 chunks for 15 seconds when a piston is triggered",
             extra = {
                     "[bone_block] - When bone_block is on the piston",
                     "[bedrock] - When bedrock is under the piston",
+                    "[all] - When boe_block is on the piston or bed rock is under the piston",
                     "[OFF] - Disable the rule"
             },
             category = {AMS, FEATURE, AMS_CHUNKLOADER}

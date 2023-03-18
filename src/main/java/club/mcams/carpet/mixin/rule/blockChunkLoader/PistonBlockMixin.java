@@ -24,7 +24,7 @@ import java.util.Objects;
 public abstract class PistonBlockMixin {
     @Inject(method = "onSyncedBlockEvent", at = @At("HEAD"))
     private void onSyncedBlockEvent(BlockState state, World world, BlockPos pos, int type, int data, CallbackInfoReturnable<Boolean> cir) {
-        if(Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bone_block") && !world.isClient) {
+        if((Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bone_block") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && !world.isClient) {
             Direction direction = state.get(FacingBlock.FACING);
             BlockState pistonBlock = world.getBlockState(pos.up(1));
             if (Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bone_block") && pistonBlock.isOf(Blocks.BONE_BLOCK)) {
@@ -32,7 +32,8 @@ public abstract class PistonBlockMixin {
                 ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
             }
         }
-        if(Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bedrock") && !world.isClient) {
+
+        if((Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bedrock") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && !world.isClient) {
             Direction direction = state.get(FacingBlock.FACING);
             BlockState pistonBlock = world.getBlockState(pos.down(1));
             if (Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bedrock") && pistonBlock.isOf(Blocks.BEDROCK)) {

@@ -102,12 +102,14 @@
 <br>
 `bedrock`: 活塞\黏性活塞下有基岩时触发加载。
 <br>
+`all`: 活塞\黏性活塞下有骨块或基岩时触发加载。
+<br>
 `OFF`: 禁用该规则。
 > 如果不想使用地狱门加载链的话，此规则可作为替代方案。
 
 - 类型: `String`
 - 默认值: `false`
-- 参考选项: `bone_block`, `bedrock` , `OFF`
+- 参考选项: `bone_block` , `bedrock` , `all` , `OFF`
 - 分类: `AMS` , `FEATURE` , `AMS_chunkLoader`
 
 
