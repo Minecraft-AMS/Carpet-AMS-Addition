@@ -166,7 +166,7 @@ public class AmsServerSettings {
             //$$ categories = {AMS, FEATURE, SURVIVAL}
             //#endif
     )
-    public static boolean breakableDeepslate = false;
+    public static boolean softDeepslate = false;
     //#endif
 
     @Rule(
@@ -177,7 +177,7 @@ public class AmsServerSettings {
             //$$ categories = {AMS, FEATURE, SURVIVAL}
             //#endif
     )
-    public static boolean breakableObsidian = false;
+    public static boolean softObsidian = false;
 
     @Rule(
             //#if MC<11900
@@ -245,7 +245,7 @@ public class AmsServerSettings {
             //$$ categories = {AMS, FEATURE, SURVIVAL, TNT}
             //#endif
     )
-    public static boolean blowUpObsidian = false;
+    public static boolean weakObsidian = false;
 
     @Rule(
             //#if MC<11900
@@ -255,11 +255,11 @@ public class AmsServerSettings {
             //$$ categories = {AMS, FEATURE, SURVIVAL, TNT}
             //#endif
     )
-    public static boolean blowUpCryingObsidian = false;
+    public static boolean weakCryingObsidian = false;
 
     //#if MC>11800
     //$$    @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
-    //$$    public static boolean blowUpReinforcedDeepslate = false;
+    //$$    public static boolean weakReinforcedDeepslate = false;
     //#endif
 
     @Rule(
@@ -270,7 +270,7 @@ public class AmsServerSettings {
             //$$ categories = {AMS, FEATURE, SURVIVAL, TNT}
             //#endif
     )
-    public static boolean blowUpBedRock = false;
+    public static boolean weakBedRock = false;
 
     /**
      * 可移动方块规则

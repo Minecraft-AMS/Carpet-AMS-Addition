@@ -1,4 +1,4 @@
-package club.mcams.carpet.mixin.rule.blowUpBlocks;
+package club.mcams.carpet.mixin.rule.weakBlocks;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -115,11 +115,11 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
                                 MinecraftServer server = this.world.getServer();
                                 if ((
                                         h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h))
-                                        || (this.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN && AmsServerSettings.blowUpObsidian)
-                                        || (this.world.getBlockState(blockPos).getBlock() == Blocks.CRYING_OBSIDIAN && AmsServerSettings.blowUpCryingObsidian)
-                                        || (this.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK && AmsServerSettings.blowUpBedRock)
+                                        || (this.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN && AmsServerSettings.weakObsidian)
+                                        || (this.world.getBlockState(blockPos).getBlock() == Blocks.CRYING_OBSIDIAN && AmsServerSettings.weakCryingObsidian)
+                                        || (this.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK && AmsServerSettings.weakBedRock)
                                         //#if MC>11800
-                                        //$$ || (this.world.getBlockState(blockPos).getBlock() == Blocks.REINFORCED_DEEPSLATE && AmsServerSettings.blowUpReinforcedDeepslate)
+                                        //$$ || (this.world.getBlockState(blockPos).getBlock() == Blocks.REINFORCED_DEEPSLATE && AmsServerSettings.weakReinforcedDeepslate)
                                         //#endif
                                 ) {
                                     set.add(blockPos);

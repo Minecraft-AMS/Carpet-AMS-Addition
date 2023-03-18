@@ -1,5 +1,5 @@
 
-package club.mcams.carpet.mixin.rule.breakableBlock;
+package club.mcams.carpet.mixin.rule.softBlock;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -22,11 +22,11 @@ public abstract class AbstractBlockStateMixin {
 	@Inject(method = "getHardness", at = @At("TAIL"), cancellable = true)
 	public void getBlockHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
 		//#if MC>=11700
-		if(this.getBlock() == Blocks.DEEPSLATE && AmsServerSettings.breakableDeepslate) {
+		if(this.getBlock() == Blocks.DEEPSLATE && AmsServerSettings.softDeepslate) {
 			cir.setReturnValue(1.5F);
 		}
 		//#endif
-		if(this.getBlock() == Blocks.OBSIDIAN && AmsServerSettings.breakableObsidian) {
+		if(this.getBlock() == Blocks.OBSIDIAN && AmsServerSettings.softObsidian) {
 			cir.setReturnValue(3.0F);
 		}
 	}
