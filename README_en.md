@@ -1,5 +1,7 @@
 # Carpet-AMS-addition
 
+[**中文**](README.md) | [**English**]
+
 ## Support version
 
 - `1.19.3`
