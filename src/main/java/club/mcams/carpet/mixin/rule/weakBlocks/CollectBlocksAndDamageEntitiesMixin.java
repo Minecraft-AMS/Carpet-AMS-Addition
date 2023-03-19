@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 //#if MC>=11700
@@ -22,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //#if MC>=11900
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+//$$ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 //#endif
 
 import com.google.common.collect.Sets;
@@ -53,17 +54,17 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
     private double z;
 
     //#if MC<11900
-    //$$  @Mutable
-    //$$  @Shadow
-    //$$  @Final
-    //$$  private List<BlockPos> affectedBlocks;
-    //#endif
-
-    //#if MC>11800
     @Mutable
     @Shadow
     @Final
-    private ObjectArrayList<BlockPos> affectedBlocks;
+    private List<BlockPos> affectedBlocks;
+    //#endif
+
+    //#if MC>11800
+    //$$ @Mutable
+    //$$ @Shadow
+    //$$ @Final
+    //$$ private ObjectArrayList<BlockPos> affectedBlocks;
     //#endif
 
     @Shadow
@@ -77,7 +78,7 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
     @Inject(method = "collectBlocksAndDamageEntities", at = @At("RETURN"), cancellable = true)
     public void collectBlocksAndDamageEntities(CallbackInfo ci) {
         //#if MC>=11700
-        this.world.emitGameEvent(this.entity, GameEvent.EXPLODE, new BlockPos((int) this.x, (int) this.y, (int) this.z));
+        this.world.emitGameEvent(this.entity, GameEvent.EXPLODE, new BlockPos((int)this.x, (int)this.y, (int)this.z));
         //#endif
         Set<BlockPos> set = Sets.newHashSet();
         int k;
@@ -98,8 +99,8 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
                         double n = this.y;
                         double o = this.z;
 
-                        for(; h > 0.0F; h -= 0.22500001F) {
-                            BlockPos blockPos = new BlockPos((int) m, (int) n, (int) o);
+                        for(float var21 = 0.3F; h > 0.0F; h -= 0.22500001F) {
+                            BlockPos blockPos = new BlockPos((int)m, (int)n, (int)o);
                             BlockState blockState = this.world.getBlockState(blockPos);
                             FluidState fluidState = this.world.getFluidState(blockPos);
                             if (!this.world.isInBuildLimit(blockPos)) {
@@ -111,14 +112,15 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
                                 h -= (optional.get() + 0.3F) * 0.3F;
                             }
 
+                            MinecraftServer server = this.world.getServer();
                             if ((
                                     h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h))
                                     || (this.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN && AmsServerSettings.weakObsidian)
                                     || (this.world.getBlockState(blockPos).getBlock() == Blocks.CRYING_OBSIDIAN && AmsServerSettings.weakCryingObsidian)
                                     || (this.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK && AmsServerSettings.weakBedRock)
-                                    //#if MC>=11900
-                                    //$$ || (this.world.getBlockState(blockPos).getBlock() == Blocks.REINFORCED_DEEPSLATE && AmsServerSettings.weakReinforcedDeepslate)
-                                    //#endif
+                                //#if MC>11800
+                                //$$ || (this.world.getBlockState(blockPos).getBlock() == Blocks.REINFORCED_DEEPSLATE && AmsServerSettings.weakReinforcedDeepslate)
+                                //#endif
                             ) {
                                 set.add(blockPos);
                             }
