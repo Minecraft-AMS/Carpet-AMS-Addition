@@ -237,8 +237,8 @@ When enabled, villager trades will be prevented from locking up.
 
 - Type: `boolean`
 - Default: `false`
-- Suggested options: `false` , `true`
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
 
 ## movableEnderChest
