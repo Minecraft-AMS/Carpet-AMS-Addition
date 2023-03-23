@@ -233,12 +233,12 @@ When enabled, bone block will be a update suppressor.
 
 ## infiniteTrades
 
-When enabled，prevents villager trades from locking up.
+When enabled, villager trades will be prevented from locking up.
 
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
 
 
 ## movableEnderChest
