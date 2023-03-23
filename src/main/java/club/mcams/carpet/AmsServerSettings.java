@@ -273,6 +273,16 @@ public class AmsServerSettings {
     )
     public static boolean weakBedRock = false;
 
+    @Rule(
+            //#if MC<11900
+            desc = "This rule prevents villager trades from locking up",
+            category = {AMS, FEATURE, SURVIVAL}
+            //#else
+            //$$ categories = {AMS, FEATURE, SURVIVAL}
+            //#endif
+    )
+    public static boolean infiniteTrades = false;
+
     /**
      * 可移动方块规则
      */

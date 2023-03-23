@@ -34,6 +34,8 @@
   "rule.weakReinforcedDeepslate.desc": "爆炸可以摧毁强化深板岩",
   "rule.weakBedRock.name": "炸毁基岩",
   "rule.weakBedRock.desc": "爆炸可以摧毁基岩",
+  "rule.infiniteTrades.name": "无限交易",
+  "rule.infiniteTrades.desc": "防止村民交易被锁定",
 
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",

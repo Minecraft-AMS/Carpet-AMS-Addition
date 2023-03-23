@@ -230,6 +230,17 @@ When enabled, bone block will be a update suppressor.
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `FEATURE`
 
+
+## infiniteTrades
+
+When enabled，prevents villager trades from locking up.
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.

@@ -252,6 +252,16 @@
 - 分类: `AMS` , `FEATURE`
 
 
+## 无限交易(infiniteTrades)
+
+开启后，村民交易将不会被锁定。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+
 ## 可移动末影箱(movableEnderChest)
 
 开启后，末影箱可以被活塞/黏性活塞推动。

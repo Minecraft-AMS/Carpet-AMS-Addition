@@ -32,6 +32,8 @@
   "carpet.rule.weakReinforcedDeepslate.desc": "Explosion can destroy ReinforcedDeepslate",
   "carpet.rule.weakBedRock.name": "destroysBedRock",
   "carpet.rule.weakBedRock.desc": "Explosion can destroy bedrock",
+  "carpet.rule.infiniteTrades.name": "infiniteTrades",
+  "carpet.rule.infiniteTrades.desc": "Prevents villager trades from locking up",
 
   "carpet.rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "carpet.rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",

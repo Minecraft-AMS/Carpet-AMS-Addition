@@ -15,6 +15,7 @@
     "rule.fakePeace.AbstractBlockStateMixin",
     "rule.movableBlocks.PistonBlockMixin",
     "rule.netherWaterPlacement.DimensionTypeMixin",
+    "rule.infiniteTrades.MerchantEntityMixin",
     "rule.optimizedDragonRespawn.BlockPatternTestTransformInvoker",
     "rule.optimizedDragonRespawn.EnderDragonFightMixin",
     "rule.safeFlight.ServerPlayerEntityMixin",
