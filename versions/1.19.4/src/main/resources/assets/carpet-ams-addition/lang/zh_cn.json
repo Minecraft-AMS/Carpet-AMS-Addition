@@ -34,6 +34,12 @@
   "carpet.rule.weakBedRock.desc": "爆炸可以摧毁基岩",
   "carpet.rule.infiniteTrades.name": "无限交易",
   "carpet.rule.infiniteTrades.desc": "防止村民交易被锁定",
+  "carpet.rule.invulnerable.name": "无懈可击",
+  "carpet.rule.invulnerable.desc": "玩家将免受一切伤害",
+  "carpet.rule.creativeOneHitKill.name": "创造模式一击必杀",
+  "carpet.rule.creativeOneHitKill.desc": "当玩家在创造模式下时可以做到一击必杀\n当玩家处于潜行状态时，周围的实体也会被杀死",
+  "carpet.rule.safeVoid.name": "安全的虚空",
+  "carpet.rule.safeVoid.desc": "玩家将不会受到来自虚空的伤害",
 
   "carpet.rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "carpet.rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",
@@ -95,5 +101,7 @@
   "carpet.rule.craftableElytra.name": "可合成鞘翅",
   "carpet.rule.craftableElytra.desc": "添加了鞘翅的合成配方",
   "carpet.rule.betterCraftableDispenser.name": "更好的合成发射器",
-  "carpet.rule.betterCraftableDispenser.desc": "使用更灵活的配方来合成发射器"
+  "carpet.rule.betterCraftableDispenser.desc": "使用更灵活的配方来合成发射器",
+  "carpet.rule.betterCraftablePolishedBlackStoneButton.name": "更好的合成磨制黑石按钮",
+  "carpet.rule.betterCraftablePolishedBlackStoneButton.desc": "使用深板岩来合成磨制黑石按钮"
 }

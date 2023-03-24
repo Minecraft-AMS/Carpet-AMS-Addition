@@ -34,6 +34,12 @@
   "carpet.rule.weakBedRock.desc": "Explosion can destroy bedrock",
   "carpet.rule.infiniteTrades.name": "infiniteTrades",
   "carpet.rule.infiniteTrades.desc": "Prevents villager trades from locking up",
+  "carpet.rule.invulnerable.name": "invulnerable",
+  "carpet.rule.invulnerable.desc": "Players will be invulnerable",
+  "carpet.rule.creativeOneHitKill.name": "creativeOneHitKill",
+  "carpet.rule.creativeOneHitKill.desc": "Allows players in Creative mode to kill entities in one hit\nIf the player is sneaking, other entities around the target get killed too",
+  "carpet.rule.safeVoid.name": "safeVoid",
+  "carpet.rule.safeVoid.desc": "Players will not receive void damage",
 
   "carpet.rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "carpet.rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",
@@ -95,5 +101,7 @@
   "carpet.rule.craftableElytra.name": "craftableElytra",
   "carpet.rule.craftableElytra.desc": "Add elytra recipes in minecraft",
   "carpet.rule.betterCraftableDispenser.name": "betterCraftableDispenser",
-  "carpet.rule.betterCraftableDispenser.desc": "Better craftable dispenser"
+  "carpet.rule.betterCraftableDispenser.desc": "Better craftable dispenser",
+  "carpet.rule.betterCraftablePolishedBlackStoneButton.name": "betterCraftablePolishedBlackStoneButton",
+  "carpet.rule.betterCraftablePolishedBlackStoneButton.desc": "Use deepslate to crafted polished_blackstone_button in minecraft"
 }

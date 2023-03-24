@@ -36,6 +36,12 @@
   "rule.weakBedRock.desc": "爆炸可以摧毁基岩",
   "rule.infiniteTrades.name": "无限交易",
   "rule.infiniteTrades.desc": "防止村民交易被锁定",
+  "rule.invulnerable.name": "无懈可击",
+  "rule.invulnerable.desc": "玩家将免受一切伤害",
+  "rule.creativeOneHitKill.name": "创造模式一击必杀",
+  "rule.creativeOneHitKill.desc": "当玩家在创造模式下时可以做到一击必杀\n当玩家处于潜行状态时，周围的实体也会被杀死",
+  "rule.safeVoid.name": "安全的虚空",
+  "rule.safeVoid.desc": "玩家将不会受到来自虚空的伤害",
 
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",
@@ -97,5 +103,7 @@
   "rule.craftableElytra.name": "可合成鞘翅",
   "rule.craftableElytra.desc": "添加了鞘翅的合成配方",
   "rule.betterCraftableDispenser.name": "更好的合成发射器",
-  "rule.betterCraftableDispenser.desc": "使用更灵活的配方来合成发射器"
+  "rule.betterCraftableDispenser.desc": "使用更灵活的配方来合成发射器",
+  "rule.betterCraftablePolishedBlackStoneButton.name": "更好的合成磨制黑石按钮",
+  "rule.betterCraftablePolishedBlackStoneButton.desc": "使用深板岩来合成磨制黑石按钮"
 }
