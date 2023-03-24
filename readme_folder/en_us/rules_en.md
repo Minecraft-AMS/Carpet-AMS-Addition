@@ -241,6 +241,38 @@ When enabled, villager trades will be prevented from locking up.
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
 
+## invulnerable
+
+When enabled, Players will be invulnerable.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE`
+
+
+## safeVoid
+
+When enabled, Players will not receive void damage.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+
+
+## creativeOneHitKill
+
+When enabled, Allows players in Creative mode to kill entities in one hit, If the player is sneaking, other entities around the target get killed too.
+
+<Ported from [lunaar-carpet-addons](https://github.com/Lunaar-SMP/lunaar-carpet-addons)>
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `CREATIVE`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.
@@ -376,6 +408,16 @@ Bone block can be crafted better. Directed use 9 bones to craft 3 bone blocks.
 ## betterCraftableDispenser
 
 Dispenser can be crafted more flexible. It can be crafted using bow and dropper, or using raw material of bow and dropper.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+
+
+## betterCraftablePolishedBlackStoneButton
+
+Use deepslate to crafted polished_blackstone_button in minecraft.
 
 - Type: `boolean`
 - Default: `false`

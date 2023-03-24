@@ -283,6 +283,37 @@ public class AmsServerSettings {
     )
     public static boolean infiniteTrades = false;
 
+    @Rule(
+            //#if MC<11900
+            desc = "Players will be invulnerable",
+            category = {AMS, FEATURE}
+            //#else
+            //$$ categories = {AMS, FEATURE}
+            //#endif
+    )
+    public static boolean invulnerable = false;
+
+    @Rule(
+            //#if MC<11900
+            desc = "Players will not receive void damage",
+            category = {AMS, FEATURE, SURVIVAL}
+            //#else
+            //$$ categories = {AMS, FEATURE}
+            //#endif
+    )
+    public static boolean safeVoid = false;
+
+    @Rule(
+            //#if MC<11900
+            desc = "Allows players in Creative mode to kill entities in one hit\n" +
+                    "If the player is sneaking, other entities around the target get killed too",
+            category = {AMS, FEATURE, CREATIVE}
+            //#else
+            //$$ categories = {AMS, FEATURE, CREATIVE}
+            //#endif
+    )
+    public static boolean creativeOneHitKill = false;
+
     /**
      * 可移动方块规则
      */
@@ -444,4 +475,17 @@ public class AmsServerSettings {
             //#endif
     )
     public static boolean betterCraftableDispenser = false;
+
+    //#if MC>=11700
+    @CraftingRule(recipes = "polished_blackstone_button.json")
+    @Rule(
+            //#if MC<11900
+            desc = "Use deepslate to crafted polished_blackstone_button in minecraft",
+            category = {CRAFTING, SURVIVAL, AMS}
+            //#else
+            //$$ categories = {CRAFTING, SURVIVAL, AMS}
+            //#endif
+    )
+    public static boolean betterCraftablePolishedBlackStoneButton = false;
+    //#endif
 }

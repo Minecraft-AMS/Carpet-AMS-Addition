@@ -262,6 +262,38 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
+## 无懈可击(invulnerable)
+
+开启后，玩家将免受一切伤害。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE`
+
+
+## 安全的虚空(safeVoid)
+
+开启后，玩家将不会受到来自虚空的伤害。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+
+## 创造模式一击必杀(creativeOneHitKill)
+
+开启后，当玩家在创造模式下时可以做到一击必杀，当玩家处于潜行状态时，周围的实体也会被杀死。
+
+<该规则从 [lunaar-carpet-addons](https://github.com/Lunaar-SMP/lunaar-carpet-addons) 移植>
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `CREATIVE`
+
+
 ## 可移动末影箱(movableEnderChest)
 
 开启后，末影箱可以被活塞/黏性活塞推动。
@@ -416,3 +448,13 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `SURVIVAL` , `CRAFTING`
+
+
+## 更好的合成磨制黑石按钮(betterCraftablePolishedBlackStoneButton)
+
+使用深板岩来合成磨制黑石按钮。
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
