@@ -1,0 +1,12 @@
+{
+  "type":"crafting_shapeless",
+  "ingredients":[
+    {
+      "item":"minecraft:deepslate"
+    }
+  ],
+  "result":{
+    "item":"minecraft:polished_blackstone_button",
+    "count":1
+  }
+}
