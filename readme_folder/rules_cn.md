@@ -454,7 +454,7 @@
 
 使用深板岩来合成磨制黑石按钮。
 
-- Type: `boolean`
-- Default: `false`
-- Suggested options: `false`, `true`
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
