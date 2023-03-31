@@ -273,6 +273,16 @@ When enabled, Allows players in Creative mode to kill entities in one hit, If th
 - Categroies: `AMS` , `FEATURE` , `CREATIVE`
 
 
+## largeEnderChest
+
+When enabled, Doubles the size of your ender_chest.
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.

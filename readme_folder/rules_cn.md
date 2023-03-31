@@ -294,6 +294,16 @@
 - 分类: `AMS` , `FEATURE` , `CREATIVE`
 
 
+## 大末影箱(largeEnderChest)
+
+开启后，让你的末影箱容量增加一倍（与大箱子相同）。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+
 ## 可移动末影箱(movableEnderChest)
 
 开启后，末影箱可以被活塞/黏性活塞推动。

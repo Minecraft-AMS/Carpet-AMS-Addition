@@ -314,6 +314,16 @@ public class AmsServerSettings {
     )
     public static boolean creativeOneHitKill = false;
 
+    @Rule(
+            //#if MC<11900
+            desc = "Doubles the size of your ender_chest",
+            category = {AMS, FEATURE, SURVIVAL}
+            //#else
+            //$$ categories = {AMS, FEATURE}
+            //#endif
+    )
+    public static boolean largeEnderChest = false;
+
     /**
      * 可移动方块规则
      */

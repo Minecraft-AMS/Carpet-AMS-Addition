@@ -42,6 +42,8 @@
   "rule.creativeOneHitKill.desc": "Allows players in Creative mode to kill entities in one hit\nIf the player is sneaking, other entities around the target get killed too",
   "rule.safeVoid.name": "safeVoid",
   "rule.safeVoid.desc": "Players will not receive void damage",
+  "rule.largeEnderChest.name": "largeEnderChest",
+  "rule.largeEnderChest.desc": "Doubles the size of your ender_chest",
 
   "rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",

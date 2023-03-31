@@ -42,6 +42,8 @@
   "rule.creativeOneHitKill.desc": "当玩家在创造模式下时可以做到一击必杀\n当玩家处于潜行状态时，周围的实体也会被杀死",
   "rule.safeVoid.name": "安全的虚空",
   "rule.safeVoid.desc": "玩家将不会受到来自虚空的伤害",
+  "rule.largeEnderChest.name": "大末影箱",
+  "rule.largeEnderChest.desc": "让你的末影箱容量增加一倍（与大箱子相同）",
 
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",
