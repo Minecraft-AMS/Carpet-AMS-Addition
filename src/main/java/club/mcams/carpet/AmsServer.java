@@ -24,8 +24,8 @@ import com.google.common.collect.Lists;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
 import com.google.gson.JsonParser;
+
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.resource.ResourcePackManager;
@@ -100,11 +100,6 @@ public class AmsServer implements CarpetExtension {
                 Logging.logStackTrace(e);
             }
         }
-    }
-
-    @Override
-    public void onTick(MinecraftServer server) {
-
     }
 
     //#if MC>=11900

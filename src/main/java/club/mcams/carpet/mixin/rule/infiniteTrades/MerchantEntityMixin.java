@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MerchantEntity.class)
-public class MerchantEntityMixin {
+public abstract class MerchantEntityMixin {
     @Inject(method = "trade", at = @At("RETURN"), cancellable = true)
     public void trade(TradeOffer offer, CallbackInfo ci) {
         if (AmsServerSettings.infiniteTrades) {
