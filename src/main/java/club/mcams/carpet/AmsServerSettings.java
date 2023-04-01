@@ -415,6 +415,7 @@ public class AmsServerSettings {
     /**
      * 合成表规则
      */
+    @SuppressWarnings("unused")
     @CraftingRule(recipes = "enchanted_golden_apples.json")
     @Rule(
             //#if MC<11900
@@ -424,10 +425,10 @@ public class AmsServerSettings {
             //$$ categories = {CRAFTING, SURVIVAL, AMS}
             //#endif
     )
-
     public static boolean craftableEnchantedGoldenApples = false;
 
     //#if MC>=11700
+    @SuppressWarnings("unused")
     @CraftingRule(recipes = "bundle.json")
     @Rule(
             //#if MC<11900
@@ -441,6 +442,7 @@ public class AmsServerSettings {
     //#endif
 
     //#if MC<11900 && MC>=11700
+    @SuppressWarnings("unused")
     @CraftingRule(recipes = "sculk_sensor.json")
     @Rule(
             //#if MC<11900
@@ -453,6 +455,7 @@ public class AmsServerSettings {
     public static boolean craftableSculkSensor = false;
     //#endif
 
+    @SuppressWarnings("unused")
     @CraftingRule(recipes = "bone_block.json")
     @Rule(
             //#if MC<11900
@@ -464,6 +467,7 @@ public class AmsServerSettings {
     )
     public static boolean betterCraftableBoneBlock = false;
 
+    @SuppressWarnings("unused")
     @CraftingRule(recipes = "elytra.json")
     @Rule(
             //#if MC<11900
@@ -475,6 +479,7 @@ public class AmsServerSettings {
     )
     public static boolean craftableElytra = false;
 
+    @SuppressWarnings("unused")
     @CraftingRule(recipes = {"dispenser1.json", "dispenser2.json"})
     @Rule(
             //#if MC<11900
@@ -487,6 +492,7 @@ public class AmsServerSettings {
     public static boolean betterCraftableDispenser = false;
 
     //#if MC>=11700
+    @SuppressWarnings("unused")
     @CraftingRule(recipes = "polished_blackstone_button.json")
     @Rule(
             //#if MC<11900
