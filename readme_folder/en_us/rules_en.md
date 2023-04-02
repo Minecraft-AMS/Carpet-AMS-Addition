@@ -136,7 +136,7 @@ Hardness of obsidian will be set to 3, which is equal to the hardness of origina
 
 No mob will spawn without change difficulty.
 
-> Why not use doMobSpawn provided by Mojang?
+> Why not use doMobSpawning provided by Mojang?
 
 - Type: `boolean`
 - Default: `false`
@@ -192,7 +192,7 @@ Explosion can destroy reinforced deepslate.
 
 ## sharedVillagerDiscounts
 
-Villagers cured will give trade discounts to every player.
+Villagers cured from zombified villager will give trade discounts to every player.
 
 <Ported from [totos-carpet-tweaks](https://github.com/totorewa/totos-carpet-tweaks)>
 
@@ -277,10 +277,10 @@ When enabled, Allows players in Creative mode to kill entities in one hit, If th
 
 When enabled, Doubles the size of your ender_chest.
 
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
 
 
 ## movableEnderChest
