@@ -275,12 +275,22 @@ When enabled, Allows players in Creative mode to kill entities in one hit, If th
 
 ## largeEnderChest
 
-When enabled, Doubles the size of your ender_chest.
+When enabled, Doubles the size of your EnderChest.
 
 - Type: `boolean`
 - Default: `false`
 - Suggested options: `false` , `true`
 - Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+
+
+## bambooModelNoOffset
+
+When enabled, The block model of bamboo will not generate offset.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `OPTIMIZATION`
 
 
 ## movableEnderChest

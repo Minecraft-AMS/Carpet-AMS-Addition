@@ -304,6 +304,16 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
+## 竹子模型无偏移(bambooModelNoOffset)
+
+开启后，让竹子的模型不会产生偏移。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `OPTIMIZATION`
+
+
 ## 可移动末影箱(movableEnderChest)
 
 开启后，末影箱可以被活塞/黏性活塞推动。

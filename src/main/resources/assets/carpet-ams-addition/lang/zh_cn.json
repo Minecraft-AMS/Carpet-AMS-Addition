@@ -44,6 +44,8 @@
   "rule.safeVoid.desc": "玩家将不会受到来自虚空的伤害",
   "rule.largeEnderChest.name": "大末影箱",
   "rule.largeEnderChest.desc": "让你的末影箱容量增加一倍（与大箱子相同）",
+  "rule.bambooModelNoOffset.name": "竹子模型无偏移",
+  "rule.bambooModelNoOffset.desc": "让竹子的模型不会产生偏移",
 
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",

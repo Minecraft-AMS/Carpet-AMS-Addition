@@ -298,7 +298,7 @@ public class AmsServerSettings {
             desc = "Players will not receive void damage",
             category = {AMS, FEATURE, SURVIVAL}
             //#else
-            //$$ categories = {AMS, FEATURE}
+            //$$ categories = {AMS, FEATURE, SURVIVAL}
             //#endif
     )
     public static boolean safeVoid = false;
@@ -316,13 +316,23 @@ public class AmsServerSettings {
 
     @Rule(
             //#if MC<11900
-            desc = "Doubles the size of your ender_chest",
+            desc = "Doubles the size of your EnderChest",
             category = {AMS, FEATURE, SURVIVAL}
             //#else
-            //$$ categories = {AMS, FEATURE}
+            //$$ categories = {AMS, FEATURE, SURVIVAL}
             //#endif
     )
     public static boolean largeEnderChest = false;
+
+    @Rule(
+            //#if MC<11900
+            desc = "The block model of bamboo will not generate offset",
+            category = {AMS, FEATURE, OPTIMIZATION}
+            //#else
+            //$$ categories = {AMS, FEATURE, OPTIMIZATION}
+            //#endif
+    )
+    public static boolean bambooModelNoOffset = false;
 
     /**
      * 可移动方块规则

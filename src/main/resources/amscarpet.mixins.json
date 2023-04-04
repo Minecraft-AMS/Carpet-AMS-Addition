@@ -6,6 +6,7 @@
   "mixins": [
     "carpet.SettingsManagerMixin",
     "interaction.ThreadedAnvilChunkStorageMixin",
+    "rule.bambooModelNoOffset.BambooBlockMixin",
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.blockChunkLoader.PistonBlockMixin",
