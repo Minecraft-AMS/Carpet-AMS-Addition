@@ -283,7 +283,7 @@ When enabled, Doubles the size of your EnderChest.
 - Categroies: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## bambooModelNoOffset
+## 💻bambooModelNoOffset
 
 When enabled, The block model of bamboo will not generate offset.
 
