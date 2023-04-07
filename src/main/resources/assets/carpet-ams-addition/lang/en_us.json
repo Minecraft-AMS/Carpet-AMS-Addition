@@ -46,6 +46,10 @@
   "rule.largeEnderChest.desc": "Doubles the size of your EnderChest",
   "rule.bambooModelNoOffset.name": "bambooModelNoOffset",
   "rule.bambooModelNoOffset.desc": "The block model of bamboo will not generate offset",
+  "rule.bambooCollisionBoxDisabled.name": "bambooCollisionBoxDisabled",
+  "rule.bambooCollisionBoxDisabled.desc": "Allow players to pass through bamboo",
+  "rule.CampfireSmokeParticleDisabled.name": "CampfireSmokeParticleDisabled",
+  "rule.CampfireSmokeParticleDisabled.desc": "Disable campfire smoke particles",
 
   "rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",

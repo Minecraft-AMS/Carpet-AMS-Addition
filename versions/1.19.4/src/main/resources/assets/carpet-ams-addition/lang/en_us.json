@@ -44,6 +44,10 @@
   "carpet.rule.largeEnderChest.desc": "Doubles the size of your EnderChest",
   "carpet.rule.bambooModelNoOffset.name": "bambooModelNoOffset",
   "carpet.rule.bambooModelNoOffset.desc": "The block model of bamboo will not generate offset",
+  "carpet.rule.bambooCollisionBoxDisabled.name": "bambooCollisionBoxDisabled",
+  "carpet.rule.bambooCollisionBoxDisabled.desc": "Allow players to pass through bamboo",
+  "carpet.rule.campfireSmokeParticleDisabled.name": "CampfireSmokeParticleDisabled",
+  "carpet.rule.campfireSmokeParticleDisabled.desc": "Disable campfire smoke particles",
 
   "carpet.rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "carpet.rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",

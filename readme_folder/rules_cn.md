@@ -314,6 +314,26 @@
 - 分类: `AMS` , `FEATURE` , `OPTIMIZATION`
 
 
+## 💻禁用竹子碰撞箱(bambooCollisionBoxDisabled)
+
+开启后，玩家可以穿过竹子。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE`
+
+
+## 💻禁用篝火烟雾粒子(campfireSmokeParticleDisabled)
+
+开启后，篝火将不会产生烟雾粒子。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE`
+
+
 ## 可移动末影箱(movableEnderChest)
 
 开启后，末影箱可以被活塞/黏性活塞推动。

@@ -44,6 +44,10 @@
   "carpet.rule.largeEnderChest.desc": "让你的末影箱容量增加一倍（与大箱子相同）",
   "carpet.rule.bambooModelNoOffset.name": "竹子模型无偏移",
   "carpet.rule.bambooModelNoOffset.desc": "让竹子的模型不会产生偏移",
+  "carpet.rule.bambooCollisionBoxDisabled.name": "禁用竹子碰撞箱",
+  "carpet.rule.bambooCollisionBoxDisabled.desc": "允许玩家穿过竹子",
+  "carpet.rule.campfireSmokeParticleDisabled.name": "禁用篝火烟雾粒子",
+  "carpet.rule.campfireSmokeParticleDisabled.desc": "篝火将不会产生烟雾粒子",
 
   "carpet.rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "carpet.rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",

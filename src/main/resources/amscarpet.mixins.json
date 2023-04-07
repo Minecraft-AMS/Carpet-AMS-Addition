@@ -6,6 +6,7 @@
   "mixins": [
     "carpet.SettingsManagerMixin",
     "interaction.ThreadedAnvilChunkStorageMixin",
+    "rule.bambooCollisionBoxDisable.BambooBlockMixin",
     "rule.bambooModelNoOffset.BambooBlockMixin",
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
@@ -14,7 +15,7 @@
     "rule.boneBlockUpdateSuppressor.NeighborUpdateMixin",
     "rule.creativeOneHitKill.EntityAccessorMixin",
     "rule.creativeOneHitKill.PlayerEntityMixin",
-    "rule.extinguishedCampfire.GetPlacementStateMixin",
+    "rule.extinguishedCampfire_campfireSmokeParticleDisabled.GetPlacementStateMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
     "rule.infiniteTrades.MerchantEntityMixin",
     "rule.largeEnderChest.EnderChestBlockMinix",

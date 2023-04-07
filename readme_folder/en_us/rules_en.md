@@ -293,6 +293,26 @@ When enabled, The block model of bamboo will not generate offset.
 - Categroies: `AMS` , `FEATURE` , `OPTIMIZATION`
 
 
+## 💻bambooCollisionBoxDisabled
+
+When enabled, players can pass through bamboo.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE`
+
+
+## 💻campfireSmokeParticleDisabled
+
+When enabled, Campfire will not produce smoke particles.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.
