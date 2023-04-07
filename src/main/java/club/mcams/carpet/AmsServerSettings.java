@@ -334,6 +334,26 @@ public class AmsServerSettings {
     )
     public static boolean bambooModelNoOffset = false;
 
+    @Rule(
+            //#if MC<11900
+            desc = "Allow players to pass through bamboo",
+            category = {AMS, FEATURE}
+            //#else
+            //$$ categories = {AMS, FEATURE}
+            //#endif
+    )
+    public static boolean bambooCollisionBoxDisabled = false;
+
+    @Rule(
+            //#if MC<11900
+            desc = "Disable campfire smoke particles",
+            category = {AMS, FEATURE}
+            //#else
+            //$$ categories = {AMS, FEATURE}
+            //#endif
+    )
+    public static boolean campfireSmokeParticleDisabled = false;
+
     /**
      * 可移动方块规则
      */
