@@ -37,7 +37,7 @@
   "rule.infiniteTrades.name": "infiniteTrades",
   "rule.infiniteTrades.desc": "Prevents villager trades from locking up",
   "rule.invulnerable.name": "invulnerable",
-  "rule.invulnerable.desc": "Players will be invulnerable",
+  "rule.invulnerable.desc": "Players will be invulnerable except receiving void damage",
   "rule.creativeOneHitKill.name": "creativeOneHitKill",
   "rule.creativeOneHitKill.desc": "Allows players in Creative mode to kill entities in one hit\nIf the player is sneaking, other entities around the target get killed too",
   "rule.largeEnderChest.name": "largeEnderChest",

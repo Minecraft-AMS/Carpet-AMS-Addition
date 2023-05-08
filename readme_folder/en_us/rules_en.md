@@ -244,7 +244,7 @@ When enabled, villager trades will be prevented from locking up.
 
 ## invulnerable
 
-When enabled, Players will be invulnerable.
+When enabled, players will be invulnerable except receiving void damage.
 
 - Type: `boolean`
 - Default: `false`

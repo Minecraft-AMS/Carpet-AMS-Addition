@@ -35,7 +35,7 @@
   "carpet.rule.infiniteTrades.name": "无限交易",
   "carpet.rule.infiniteTrades.desc": "防止村民交易被锁定",
   "carpet.rule.invulnerable.name": "无懈可击",
-  "carpet.rule.invulnerable.desc": "玩家将免受一切伤害",
+  "carpet.rule.invulnerable.desc": "玩家将免受除虚空伤害外的一切伤害",
   "carpet.rule.creativeOneHitKill.name": "创造模式一击必杀",
   "carpet.rule.creativeOneHitKill.desc": "当玩家在创造模式下时可以做到一击必杀\n当玩家处于潜行状态时，周围的实体也会被杀死",
   "carpet.rule.largeEnderChest.name": "大末影箱",

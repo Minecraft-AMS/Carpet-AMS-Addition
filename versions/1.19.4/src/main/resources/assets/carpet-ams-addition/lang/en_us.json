@@ -35,7 +35,7 @@
   "carpet.rule.infiniteTrades.name": "infiniteTrades",
   "carpet.rule.infiniteTrades.desc": "Prevents villager trades from locking up",
   "carpet.rule.invulnerable.name": "invulnerable",
-  "carpet.rule.invulnerable.desc": "Players will be invulnerable",
+  "carpet.rule.invulnerable.desc": "Players will be invulnerable except receiving void damage",
   "carpet.rule.creativeOneHitKill.name": "creativeOneHitKill",
   "carpet.rule.creativeOneHitKill.desc": "Allows players in Creative mode to kill entities in one hit\nIf the player is sneaking, other entities around the target get killed too",
   "carpet.rule.largeEnderChest.name": "largeEnderChest",
