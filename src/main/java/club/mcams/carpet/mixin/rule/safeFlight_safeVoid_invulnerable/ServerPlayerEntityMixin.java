@@ -20,20 +20,16 @@ public abstract class ServerPlayerEntityMixin {
         //#if MC>11900
         //$$ if(AmsServerSettings.safeFlight && damageSource.isOf(DamageTypes.FLY_INTO_WALL)) {
         //#else
-        if(AmsServerSettings.safeFlight && damageSource.equals(DamageSource.FLY_INTO_WALL)) {
+        if (AmsServerSettings.safeFlight && damageSource.equals(DamageSource.FLY_INTO_WALL)) {
             //#endif
             cir.setReturnValue(true);
             cir.cancel();
         }
         //#if MC>11900
-        //$$ if(AmsServerSettings.safeVoid && damageSource.isOf(DamageTypes.OUT_OF_WORLD)) {
+        //$$ if(AmsServerSettings.invulnerable && !damageSource.isOf(DamageTypes.OUT_OF_WORLD)) {
         //#else
-        if(AmsServerSettings.safeVoid && damageSource.equals(DamageSource.OUT_OF_WORLD)) {
+        if (AmsServerSettings.invulnerable && !damageSource.equals(DamageSource.OUT_OF_WORLD)) {
             //#endif
-            cir.setReturnValue(true);
-            cir.cancel();
-        }
-        if(AmsServerSettings.invulnerable) {
             cir.setReturnValue(true);
             cir.cancel();
         }
