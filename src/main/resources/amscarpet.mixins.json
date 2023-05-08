@@ -25,7 +25,6 @@
     "rule.netherWaterPlacement.DimensionTypeMixin",
     "rule.optimizedDragonRespawn.BlockPatternTestTransformInvoker",
     "rule.optimizedDragonRespawn.EnderDragonFightMixin",
-    "rule.safeFlight_safeVoid_invulnerable.ServerPlayerEntityMixin",
     "rule.scheduledRandomTick.AbstractPlantPartBlockMixin",
     "rule.scheduledRandomTick.BambooBlockMixin",
     "rule.scheduledRandomTick.CactusBlockMixin",

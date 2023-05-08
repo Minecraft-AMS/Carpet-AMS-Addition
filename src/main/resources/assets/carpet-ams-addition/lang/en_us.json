@@ -48,8 +48,8 @@
   "rule.bambooModelNoOffset.desc": "The block model of bamboo will not generate offset",
   "rule.bambooCollisionBoxDisabled.name": "bambooCollisionBoxDisabled",
   "rule.bambooCollisionBoxDisabled.desc": "Allow players to pass through bamboo",
-  "rule.CampfireSmokeParticleDisabled.name": "CampfireSmokeParticleDisabled",
-  "rule.CampfireSmokeParticleDisabled.desc": "Disable campfire smoke particles",
+  "rule.campfireSmokeParticleDisabled.name": "CampfireSmokeParticleDisabled",
+  "rule.campfireSmokeParticleDisabled.desc": "Disable campfire smoke particles",
 
   "rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",

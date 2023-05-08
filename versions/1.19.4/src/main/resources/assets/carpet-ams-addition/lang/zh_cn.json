@@ -97,6 +97,12 @@
   "carpet.rule.movableReinforcedDeepslate.desc": "让强化深板岩可以被活塞/黏性活塞推动",
   "carpet.rule.movableAnvil.name": "可移动铁砧",
   "carpet.rule.movableAnvil.desc": "让铁砧可以被活塞/黏性活塞推动",
+  "carpet.rule.movableSculkCatalyst.name": "可移动幽匿催发体",
+  "carpet.rule.movableSculkCatalyst.desc": "让幽匿催发体可以被活塞/黏性活塞推动",
+  "carpet.rule.movableSculkSensor.name": "可移动幽匿感测体",
+  "carpet.rule.movableSculkSensor.desc": "让幽匿感测体可以被活塞/黏性活塞推动",
+  "carpet.rule.movableSculkShrieker.name": "可移动幽匿尖啸体",
+  "carpet.rule.movableSculkShrieker.desc": "让幽匿尖啸体可以被活塞/黏性活塞推动",
 
   "carpet.rule.craftableEnchantedGoldenApples.name": "可合成附魔金苹果",
   "carpet.rule.craftableEnchantedGoldenApples.desc": "使用老版本的方式来合成附魔金苹果（8金块+1苹果）",

@@ -426,6 +426,33 @@
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
 
+## 可移动幽匿催发体(movableSculkCatalyst)
+
+开启后，幽匿催发体可以被活塞/黏性活塞推动。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
+
+## 可移动幽匿感测体(movableSculkSensor)
+
+开启后，幽匿感测体可以被活塞/黏性活塞推动。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
+
+## 可移动幽匿尖啸体(movableSculkShrieker)
+
+开启后，幽匿尖啸体可以被活塞/黏性活塞推动。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
+
 
 ## 可合成附魔金苹果(craftableEnchantedGoldenApples)
 

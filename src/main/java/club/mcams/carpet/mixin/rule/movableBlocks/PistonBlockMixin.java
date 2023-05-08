@@ -23,7 +23,7 @@ public abstract class PistonBlockMixin {
     private static void MovableBlocks(BlockState state, World world, BlockPos pos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
         //#endif
         if (
-                        (AmsServerSettings.movableEnderChest && state.isOf(Blocks.ENDER_CHEST)) ||
+                (AmsServerSettings.movableEnderChest && state.isOf(Blocks.ENDER_CHEST)) ||
                         (AmsServerSettings.movableEndPortalFrame && state.isOf(Blocks.END_PORTAL_FRAME)) ||
                         (AmsServerSettings.movableObsidian && state.isOf(Blocks.OBSIDIAN)) ||
                         (AmsServerSettings.movableCryingObsidian && state.isOf(Blocks.CRYING_OBSIDIAN)) ||
@@ -31,9 +31,12 @@ public abstract class PistonBlockMixin {
                         (AmsServerSettings.movableEnchantingTable && state.isOf(Blocks.ENCHANTING_TABLE)) ||
                         (AmsServerSettings.movableBeacon && state.isOf(Blocks.BEACON)) ||
                         (AmsServerSettings.movableAnvil && state.isOf(Blocks.ANVIL))
-            //#if MC>=11900
-            //$$ || (AmsServerSettings.movableReinforcedDeepslate && state.isOf(Blocks.REINFORCED_DEEPSLATE))
-            //#endif
+                        //#if MC>=11900
+                        //$$ || (AmsServerSettings.movableReinforcedDeepslate && state.isOf(Blocks.REINFORCED_DEEPSLATE))
+                        //$$ || (AmsServerSettings.movableSculkCatalyst && state.isOf(Blocks.SCULK_CATALYST))
+                        //$$ || (AmsServerSettings.movableSculkSensor && state.isOf(Blocks.SCULK_SENSOR))
+                        //$$ || (AmsServerSettings.movableSculkShrieker && state.isOf(Blocks.SCULK_SHRIEKER))
+                        //#endif
         ) {
             //#if MC<11700
             //$$ if (direction == Direction.DOWN && blockPos.getY() == 0) {

@@ -97,6 +97,12 @@
   "carpet.rule.movableReinforcedDeepslate.desc": "Makes reinforced_deepslate movable",
   "carpet.rule.movableAnvil.name": "movableAnvil",
   "carpet.rule.movableAnvil.desc": "Makes anvil movable",
+  "carpet.rule.movableSculkCatalyst.name": "movableSculkCatalyst",
+  "carpet.rule.movableSculkCatalyst.desc": "Makes sculk_catalyst movable",
+  "carpet.rule.movableSculkSensor.name": "Makes sculk_catalyst movable",
+  "carpet.rule.movableSculkSensor.desc": "Makes sculk_sensor movable",
+  "carpet.rule.movableSculkShrieker.name": "Makes sculk_shrieker movable",
+  "carpet.rule.movableSculkShrieker.desc": "Makes sculk_shrieker movable",
 
   "carpet.rule.craftableEnchantedGoldenApples.name": "craftableEnchantedGoldenApples",
   "carpet.rule.craftableEnchantedGoldenApples.desc": "Enchanted Golden Apples can be crafted with 8 Gold Blocks again",

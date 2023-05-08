@@ -92,6 +92,7 @@ the option is interpreted as follow:
 - `all`: When boe_block is on the piston or bed rock is under the piston.
 - `OFF`: Disable the rule.
   
+
 &emsp;
 
 - Type: `String`
@@ -390,6 +391,33 @@ Reinforced deepslate can be moved by piston or sticky piston.
 ## movableAnvil
 
 Anvil can be moved by piston or sticky piston.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `FEATURE`, `AMS_movable`
+
+## movableSculkCatalyst
+
+Sculk catalyst can be moved by piston or sticky piston.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `FEATURE`, `AMS_movable`
+
+## movableSculkSensor
+
+Sculk sensor can be moved by piston or sticky piston.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `FEATURE`, `AMS_movable`
+
+## movableSculkShrieker
+
+Sculk shrieker can be moved by piston or sticky piston.
 
 - Type: `boolean`
 - Default: `false`

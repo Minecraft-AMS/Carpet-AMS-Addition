@@ -432,6 +432,21 @@ public class AmsServerSettings {
     //$$ public static boolean movableReinforcedDeepslate = false;
     //#endif
 
+    //#if MC>=11900
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
+    //$$ public static boolean movableSculkCatalyst = false;
+    //#endif
+
+    //#if MC>=11900
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
+    //$$ public static boolean movableSculkSensor = false;
+    //#endif
+
+    //#if MC>=11900
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
+    //$$ public static boolean movableSculkShrieker = false;
+    //#endif
+
     @Rule(
             //#if MC<11900
             desc = "Makes anvil movable",
