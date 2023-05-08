@@ -69,7 +69,7 @@ glDebugVerbosity:1
 skipMultiplayerWarning:true
 skipRealms32bitWarning:false
 hideMatchedNames:true
-joinedFirstServer:true
+joinedFirstServer:false
 hideBundleTutorial:false
 syncChunkWrites:true
 showAutosaveIndicator:true
