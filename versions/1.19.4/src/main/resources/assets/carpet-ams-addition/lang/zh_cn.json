@@ -38,8 +38,6 @@
   "carpet.rule.invulnerable.desc": "玩家将免受一切伤害",
   "carpet.rule.creativeOneHitKill.name": "创造模式一击必杀",
   "carpet.rule.creativeOneHitKill.desc": "当玩家在创造模式下时可以做到一击必杀\n当玩家处于潜行状态时，周围的实体也会被杀死",
-  "carpet.rule.safeVoid.name": "安全的虚空",
-  "carpet.rule.safeVoid.desc": "玩家将不会受到来自虚空的伤害",
   "carpet.rule.largeEnderChest.name": "大末影箱",
   "carpet.rule.largeEnderChest.desc": "让你的末影箱容量增加一倍（与大箱子相同）",
   "carpet.rule.bambooModelNoOffset.name": "竹子模型无偏移",

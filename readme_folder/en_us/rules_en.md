@@ -252,16 +252,6 @@ When enabled, Players will be invulnerable.
 - Categroies: `AMS` , `FEATURE`
 
 
-## safeVoid
-
-When enabled, Players will not receive void damage.
-
-- Type: `boolean`
-- Default: `false`
-- Suggested options: `false` , `true`
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
-
-
 ## creativeOneHitKill
 
 When enabled, Allows players in Creative mode to kill entities in one hit, If the player is sneaking, other entities around the target get killed too.

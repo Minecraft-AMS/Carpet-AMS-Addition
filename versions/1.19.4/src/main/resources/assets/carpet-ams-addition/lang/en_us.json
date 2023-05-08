@@ -38,8 +38,6 @@
   "carpet.rule.invulnerable.desc": "Players will be invulnerable",
   "carpet.rule.creativeOneHitKill.name": "creativeOneHitKill",
   "carpet.rule.creativeOneHitKill.desc": "Allows players in Creative mode to kill entities in one hit\nIf the player is sneaking, other entities around the target get killed too",
-  "carpet.rule.safeVoid.name": "safeVoid",
-  "carpet.rule.safeVoid.desc": "Players will not receive void damage",
   "carpet.rule.largeEnderChest.name": "largeEnderChest",
   "carpet.rule.largeEnderChest.desc": "Doubles the size of your EnderChest",
   "carpet.rule.bambooModelNoOffset.name": "bambooModelNoOffset",

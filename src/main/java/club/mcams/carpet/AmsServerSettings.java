@@ -295,16 +295,6 @@ public class AmsServerSettings {
 
     @Rule(
             //#if MC<11900
-            desc = "Players will not receive void damage",
-            category = {AMS, FEATURE, SURVIVAL}
-            //#else
-            //$$ categories = {AMS, FEATURE, SURVIVAL}
-            //#endif
-    )
-    public static boolean safeVoid = false;
-
-    @Rule(
-            //#if MC<11900
             desc = "Allows players in Creative mode to kill entities in one hit\n" +
                     "If the player is sneaking, other entities around the target get killed too",
             category = {AMS, FEATURE, CREATIVE}

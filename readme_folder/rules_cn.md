@@ -272,16 +272,6 @@
 - 分类: `AMS` , `FEATURE`
 
 
-## 安全的虚空(safeVoid)
-
-开启后，玩家将不会受到来自虚空的伤害。
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE` , `SURVIVAL`
-
-
 ## 创造模式一击必杀(creativeOneHitKill)
 
 开启后，当玩家在创造模式下时可以做到一击必杀，当玩家处于潜行状态时，周围的实体也会被杀死。

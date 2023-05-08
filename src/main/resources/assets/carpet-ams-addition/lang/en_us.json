@@ -40,8 +40,6 @@
   "rule.invulnerable.desc": "Players will be invulnerable",
   "rule.creativeOneHitKill.name": "creativeOneHitKill",
   "rule.creativeOneHitKill.desc": "Allows players in Creative mode to kill entities in one hit\nIf the player is sneaking, other entities around the target get killed too",
-  "rule.safeVoid.name": "safeVoid",
-  "rule.safeVoid.desc": "Players will not receive void damage",
   "rule.largeEnderChest.name": "largeEnderChest",
   "rule.largeEnderChest.desc": "Doubles the size of your EnderChest",
   "rule.bambooModelNoOffset.name": "bambooModelNoOffset",
