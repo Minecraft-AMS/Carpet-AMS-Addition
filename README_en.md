@@ -7,8 +7,8 @@
 |       Game Versionn       | Development Status |                                             Last Supported Version                                              |
 |:-------------------------:|:------------------:|:---------------------------------------------------------------------------------------------------------------:|
 |          1.19.4           |         ✔          |                                                       ---                                                       |
-|          1.19.3           |         ✖          | [Carpet-AMS-Addition-mc1.19.3-v1.5.2](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.5.2) |
-|          1.19.2           |         ✖          | [Carpet-AMS-Addition-mc1.19.2-v1.5.2](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.5.2) |
+|          1.19.3           |         ✖          | [Carpet-AMS-Addition-mc1.19.3-v1.5.3]([https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.5.2](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3)) |
+|          1.19.2           |         ✖          | [Carpet-AMS-Addition-mc1.19.2-v1.5.3]([https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.5.2](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3)) |
 | **<u>1.18.2(master)</u>** |         ✔          |                                                       ---                                                       |
 |          1.17.1           |         ✔          |                                                       ---                                                       |
 |          1.16.5           |         ✔          |                                                       ---                                                       |
