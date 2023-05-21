@@ -60,7 +60,7 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
     private List<BlockPos> affectedBlocks;
     //#endif
 
-    //#if MC>11800
+    //#if MC>=11900
     //$$ @Mutable
     //$$ @Shadow
     //$$ @Final
@@ -75,6 +75,7 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
     @Final
     private ExplosionBehavior behavior;
 
+    @SuppressWarnings("unused")
     @Inject(method = "collectBlocksAndDamageEntities", at = @At("RETURN"), cancellable = true)
     public void collectBlocksAndDamageEntities(CallbackInfo ci) {
         //#if MC>=11700
@@ -87,9 +88,9 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
             for(k = 0; k < 16; ++k) {
                 for(l = 0; l < 16; ++l) {
                     if (j == 0 || j == 15 || k == 0 || k == 15 || l == 0 || l == 15) {
-                        double d = (float)j / 15.0F * 2.0F - 1.0F;
-                        double e = (float)k / 15.0F * 2.0F - 1.0F;
-                        double f = (float)l / 15.0F * 2.0F - 1.0F;
+                        double d = (double)((float)j / 15.0F * 2.0F - 1.0F);
+                        double e = (double)((float)k / 15.0F * 2.0F - 1.0F);
+                        double f = (double)((float)l / 15.0F * 2.0F - 1.0F);
                         double g = Math.sqrt(d * d + e * e + f * f);
                         d /= g;
                         e /= g;
@@ -100,18 +101,20 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
                         double o = this.z;
 
                         for(float var21 = 0.3F; h > 0.0F; h -= 0.22500001F) {
-                            BlockPos blockPos = new BlockPos((int)m, (int)n, (int)o);
+                            //#if MC<11900
+                            BlockPos blockPos = new BlockPos(m, n, o);
+                            //#else
+                            //$$ BlockPos blockPos = BlockPos.ofFloored(m, n, o);
+                            //#endif
                             BlockState blockState = this.world.getBlockState(blockPos);
                             FluidState fluidState = this.world.getFluidState(blockPos);
                             if (!this.world.isInBuildLimit(blockPos)) {
                                 break;
                             }
-
                             Optional<Float> optional = this.behavior.getBlastResistance((Explosion)(Object)this, this.world, blockPos, blockState, fluidState);
                             if (optional.isPresent()) {
-                                h -= (optional.get() + 0.3F) * 0.3F;
+                                h -= ((Float)optional.get() + 0.3F) * 0.3F;
                             }
-
                             MinecraftServer server = this.world.getServer();
                             if ((
                                     h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h))
