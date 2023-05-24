@@ -1,7 +1,10 @@
 plugins {
 	id 'maven-publish'
-	id 'fabric-loom' version '1.0-SNAPSHOT' apply false
-	id 'com.replaymod.preprocess' version '114514.114514'
+	// https://www.fabricmc.net/develop/
+	id 'fabric-loom' version '1.2-SNAPSHOT' apply false
+	// https://github.com/ReplayMod/preprocessor
+	// https://github.com/Fallen-Breath/preprocessor
+	id 'com.replaymod.preprocess' version 'e1050f4d72'
 }
 
 preprocess {
