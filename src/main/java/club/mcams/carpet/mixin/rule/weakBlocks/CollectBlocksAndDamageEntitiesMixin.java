@@ -14,6 +14,9 @@ import net.minecraft.world.event.GameEvent;
 //#endif
 import net.minecraft.world.explosion.Explosion;
 import net.minecraft.world.explosion.ExplosionBehavior;
+//#if MC>=11900
+//$$ import net.minecraft.util.math.Vec3d;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -78,64 +81,73 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
     @SuppressWarnings("unused")
     @Inject(method = "collectBlocksAndDamageEntities", at = @At("RETURN"), cancellable = true)
     public void collectBlocksAndDamageEntities(CallbackInfo ci) {
-        //#if MC>=11700
-        this.world.emitGameEvent(this.entity, GameEvent.EXPLODE, new BlockPos((int)this.x, (int)this.y, (int)this.z));
-        //#endif
-        Set<BlockPos> set = Sets.newHashSet();
-        int k;
-        int l;
-        for(int j = 0; j < 16; ++j) {
-            for(k = 0; k < 16; ++k) {
-                for(l = 0; l < 16; ++l) {
-                    if (j == 0 || j == 15 || k == 0 || k == 15 || l == 0 || l == 15) {
-                        double d = (double)((float)j / 15.0F * 2.0F - 1.0F);
-                        double e = (double)((float)k / 15.0F * 2.0F - 1.0F);
-                        double f = (double)((float)l / 15.0F * 2.0F - 1.0F);
-                        double g = Math.sqrt(d * d + e * e + f * f);
-                        d /= g;
-                        e /= g;
-                        f /= g;
-                        float h = this.power * (0.7F + this.world.random.nextFloat() * 0.6F);
-                        double m = this.x;
-                        double n = this.y;
-                        double o = this.z;
+        //#if MC<11900
+        if(AmsServerSettings.weakBedRock || AmsServerSettings.weakObsidian || AmsServerSettings.weakCryingObsidian) {
+            //#endif
+            //#if MC>=11900
+            //$$if(AmsServerSettings.weakBedRock || AmsServerSettings.weakObsidian || AmsServerSettings.weakCryingObsidian || AmsServerSettings.weakReinforcedDeepslate) {
+            //#endif
+            //#if MC>=11700 && MC<=11900
+            this.world.emitGameEvent(this.entity, GameEvent.EXPLODE, new BlockPos(this.x, this.y, this.z));
+            //#elseif MC>=11900
+            //$$ this.world.emitGameEvent(this.entity, GameEvent.EXPLODE, new Vec3d(this.x, this.y, this.z));
+            //#endif
+            Set<BlockPos> set = Sets.newHashSet();
+            int k;
+            int l;
+            for (int j = 0; j < 16; ++j) {
+                for (k = 0; k < 16; ++k) {
+                    for (l = 0; l < 16; ++l) {
+                        if (j == 0 || j == 15 || k == 0 || k == 15 || l == 0 || l == 15) {
+                            double d = (double) ((float) j / 15.0F * 2.0F - 1.0F);
+                            double e = (double) ((float) k / 15.0F * 2.0F - 1.0F);
+                            double f = (double) ((float) l / 15.0F * 2.0F - 1.0F);
+                            double g = Math.sqrt(d * d + e * e + f * f);
+                            d /= g;
+                            e /= g;
+                            f /= g;
+                            float h = this.power * (0.7F + this.world.random.nextFloat() * 0.6F);
+                            double m = this.x;
+                            double n = this.y;
+                            double o = this.z;
 
-                        for(float var21 = 0.3F; h > 0.0F; h -= 0.22500001F) {
-                            //#if MC<11900
-                            BlockPos blockPos = new BlockPos(m, n, o);
-                            //#else
-                            //$$ BlockPos blockPos = BlockPos.ofFloored(m, n, o);
-                            //#endif
-                            BlockState blockState = this.world.getBlockState(blockPos);
-                            FluidState fluidState = this.world.getFluidState(blockPos);
-                            if (!this.world.isInBuildLimit(blockPos)) {
-                                break;
-                            }
-                            Optional<Float> optional = this.behavior.getBlastResistance((Explosion)(Object)this, this.world, blockPos, blockState, fluidState);
-                            if (optional.isPresent()) {
-                                h -= ((Float)optional.get() + 0.3F) * 0.3F;
-                            }
-                            MinecraftServer server = this.world.getServer();
-                            if ((
-                                    h > 0.0F && this.behavior.canDestroyBlock(((Explosion)(Object)this), this.world, blockPos, blockState, h))
-                                    || (this.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN && AmsServerSettings.weakObsidian)
-                                    || (this.world.getBlockState(blockPos).getBlock() == Blocks.CRYING_OBSIDIAN && AmsServerSettings.weakCryingObsidian)
-                                    || (this.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK && AmsServerSettings.weakBedRock)
-                                //#if MC>11800
-                                //$$ || (this.world.getBlockState(blockPos).getBlock() == Blocks.REINFORCED_DEEPSLATE && AmsServerSettings.weakReinforcedDeepslate)
+                            for (float var21 = 0.3F; h > 0.0F; h -= 0.22500001F) {
+                                //#if MC<11900
+                                BlockPos blockPos = new BlockPos(m, n, o);
+                                //#else
+                                //$$ BlockPos blockPos = BlockPos.ofFloored(m, n, o);
                                 //#endif
-                            ) {
-                                set.add(blockPos);
+                                BlockState blockState = this.world.getBlockState(blockPos);
+                                FluidState fluidState = this.world.getFluidState(blockPos);
+                                if (!this.world.isInBuildLimit(blockPos)) {
+                                    break;
+                                }
+                                Optional<Float> optional = this.behavior.getBlastResistance((Explosion) (Object) this, this.world, blockPos, blockState, fluidState);
+                                if (optional.isPresent()) {
+                                    h -= ((Float) optional.get() + 0.3F) * 0.3F;
+                                }
+                                MinecraftServer server = this.world.getServer();
+                                if ((
+                                        h > 0.0F && this.behavior.canDestroyBlock(((Explosion) (Object) this), this.world, blockPos, blockState, h))
+                                        || (this.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN && AmsServerSettings.weakObsidian)
+                                        || (this.world.getBlockState(blockPos).getBlock() == Blocks.CRYING_OBSIDIAN && AmsServerSettings.weakCryingObsidian)
+                                        || (this.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK && AmsServerSettings.weakBedRock)
+                                    //#if MC>11800
+                                    //$$ || (this.world.getBlockState(blockPos).getBlock() == Blocks.REINFORCED_DEEPSLATE && AmsServerSettings.weakReinforcedDeepslate)
+                                    //#endif
+                                ) {
+                                    set.add(blockPos);
+                                }
+                                m += d * 0.30000001192092896D;
+                                n += e * 0.30000001192092896D;
+                                o += f * 0.30000001192092896D;
                             }
-                            m += d * 0.30000001192092896D;
-                            n += e * 0.30000001192092896D;
-                            o += f * 0.30000001192092896D;
                         }
                     }
                 }
             }
+            this.affectedBlocks.addAll(set);
+            ci.cancel();
         }
-        this.affectedBlocks.addAll(set);
-        ci.cancel();
     }
 }
