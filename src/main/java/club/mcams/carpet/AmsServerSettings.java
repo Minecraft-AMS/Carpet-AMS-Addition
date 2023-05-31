@@ -275,6 +275,16 @@ public class AmsServerSettings {
 
     @Rule(
             //#if MC<11900
+            desc = "Explosion can destroy all blocks except anvil and bedrock",
+            category = {AMS, FEATURE, SURVIVAL, TNT}
+            //#else
+            //$$ categories = {AMS, FEATURE, SURVIVAL, TNT}
+            //#endif
+    )
+    public static boolean enhancedWorldEater = false;
+
+    @Rule(
+            //#if MC<11900
             desc = "This rule prevents villager trades from locking up",
             category = {AMS, FEATURE, SURVIVAL}
             //#else

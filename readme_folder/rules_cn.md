@@ -197,6 +197,16 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
 
 
+## 增强型世界吞噬者(enhancedWorldEater)
+
+开启后，爆炸可以摧毁除了铁砧与基岩外的所有方块。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `TNT`
+
+
 ## 炸毁强化深板岩(weakReinforcedDeepslate)
 
 开启后，爆炸将能够摧毁强化深板岩。

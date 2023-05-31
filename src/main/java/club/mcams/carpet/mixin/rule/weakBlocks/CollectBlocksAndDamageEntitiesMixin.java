@@ -25,6 +25,7 @@ import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 //#if MC>=11900
 //$$ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 //#endif
@@ -82,10 +83,10 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
     @Inject(method = "collectBlocksAndDamageEntities", at = @At("RETURN"), cancellable = true)
     public void collectBlocksAndDamageEntities(CallbackInfo ci) {
         //#if MC<11900
-        if(AmsServerSettings.weakBedRock || AmsServerSettings.weakObsidian || AmsServerSettings.weakCryingObsidian) {
+        if(AmsServerSettings.weakBedRock || AmsServerSettings.weakObsidian || AmsServerSettings.weakCryingObsidian || AmsServerSettings.enhancedWorldEater) {
             //#endif
             //#if MC>=11900
-            //$$if(AmsServerSettings.weakBedRock || AmsServerSettings.weakObsidian || AmsServerSettings.weakCryingObsidian || AmsServerSettings.weakReinforcedDeepslate) {
+            //$$if(AmsServerSettings.weakBedRock || AmsServerSettings.weakObsidian || AmsServerSettings.weakCryingObsidian || AmsServerSettings.enhancedWorldEater || AmsServerSettings.weakReinforcedDeepslate) {
             //#endif
             //#if MC>=11700 && MC<=11900
             this.world.emitGameEvent(this.entity, GameEvent.EXPLODE, new BlockPos(this.x, this.y, this.z));
@@ -132,6 +133,7 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
                                         || (this.world.getBlockState(blockPos).getBlock() == Blocks.OBSIDIAN && AmsServerSettings.weakObsidian)
                                         || (this.world.getBlockState(blockPos).getBlock() == Blocks.CRYING_OBSIDIAN && AmsServerSettings.weakCryingObsidian)
                                         || (this.world.getBlockState(blockPos).getBlock() == Blocks.BEDROCK && AmsServerSettings.weakBedRock)
+                                        || ((this.world.getBlockState(blockPos).getBlock() != Blocks.BEDROCK && this.world.getBlockState(blockPos).getBlock() != Blocks.ANVIL && this.world.getBlockState(blockPos).getBlock() != Blocks.CHIPPED_ANVIL && this.world.getBlockState(blockPos).getBlock() != Blocks.DAMAGED_ANVIL) && AmsServerSettings.enhancedWorldEater)
                                     //#if MC>11800
                                     //$$ || (this.world.getBlockState(blockPos).getBlock() == Blocks.REINFORCED_DEEPSLATE && AmsServerSettings.weakReinforcedDeepslate)
                                     //#endif

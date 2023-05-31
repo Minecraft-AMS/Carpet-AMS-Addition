@@ -181,6 +181,15 @@ Explosion can destroy bedrock.
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
 
+## enhancedWorldEater
+
+Explosion can destroy all blocks except anvil and bedrock.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
+
 ## weakReinforcedDeepslate
 
 Explosion can destroy reinforced deepslate.

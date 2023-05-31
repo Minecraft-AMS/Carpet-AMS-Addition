@@ -32,6 +32,8 @@
   "carpet.rule.weakReinforcedDeepslate.desc": "爆炸可以摧毁强化深板岩",
   "carpet.rule.weakBedRock.name": "炸毁基岩",
   "carpet.rule.weakBedRock.desc": "爆炸可以摧毁基岩",
+  "carpet.rule.enhancedWorldEater.name": "增强型世界吞噬者",
+  "carpet.rule.enhancedWorldEater.desc": "爆炸可以摧毁除了铁砧与基岩外的所有方块",
   "carpet.rule.infiniteTrades.name": "无限交易",
   "carpet.rule.infiniteTrades.desc": "防止村民交易被锁定",
   "carpet.rule.invulnerable.name": "无懈可击",

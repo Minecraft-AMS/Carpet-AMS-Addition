@@ -34,6 +34,8 @@
   "rule.weakReinforcedDeepslate.desc": "爆炸可以摧毁强化深板岩",
   "rule.weakBedRock.name": "炸毁基岩",
   "rule.weakBedRock.desc": "爆炸可以摧毁基岩",
+  "rule.enhancedWorldEater.name": "增强型世界吞噬者",
+  "rule.enhancedWorldEater.desc": "爆炸可以摧毁除了铁砧与基岩外的所有方块",
   "rule.infiniteTrades.name": "无限交易",
   "rule.infiniteTrades.desc": "防止村民交易被锁定",
   "rule.invulnerable.name": "无懈可击",

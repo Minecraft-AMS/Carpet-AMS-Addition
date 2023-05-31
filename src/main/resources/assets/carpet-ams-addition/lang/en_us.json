@@ -34,6 +34,8 @@
   "rule.weakReinforcedDeepslate.desc": "Explosion can destroy ReinforcedDeepslate",
   "rule.weakBedRock.name": "destroysBedrock",
   "rule.weakBedRock.desc": "Explosion can destroy bedrock",
+  "rule.enhancedWorldEater.name": "enhancedWorldEater",
+  "rule.enhancedWorldEater.desc": "Explosion can destroy all blocks except anvil and bedrock",
   "rule.infiniteTrades.name": "infiniteTrades",
   "rule.infiniteTrades.desc": "Prevents villager trades from locking up",
   "rule.invulnerable.name": "invulnerable",

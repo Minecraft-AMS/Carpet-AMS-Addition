@@ -32,6 +32,8 @@
   "carpet.rule.weakReinforcedDeepslate.desc": "Explosion can destroy ReinforcedDeepslate",
   "carpet.rule.weakBedRock.name": "destroysBedRock",
   "carpet.rule.weakBedRock.desc": "Explosion can destroy bedrock",
+  "carpet.rule.enhancedWorldEater.name": "enhancedWorldEater",
+  "carpet.rule.enhancedWorldEater.desc": "Explosion can destroy all blocks except anvil and bedrock",
   "carpet.rule.infiniteTrades.name": "infiniteTrades",
   "carpet.rule.infiniteTrades.desc": "Prevents villager trades from locking up",
   "carpet.rule.invulnerable.name": "invulnerable",
