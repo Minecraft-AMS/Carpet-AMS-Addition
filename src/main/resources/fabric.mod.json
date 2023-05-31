@@ -26,10 +26,5 @@
   "depends": {
     "minecraft": "${minecraft_dependency}",
     "carpet": "${carpet_dependency}"
-  },
-  "custom": {
-    "modmenu": {
-      "parent": "carpet"
-    }
   }
 }
