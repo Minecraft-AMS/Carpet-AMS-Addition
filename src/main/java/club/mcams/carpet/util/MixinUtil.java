@@ -1,6 +1,7 @@
 package club.mcams.carpet.util;
 
 import club.mcams.carpet.AmsServer;
+import static club.mcams.carpet.util.Messenger.*;
 
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.BaseText;
@@ -8,9 +9,8 @@ import net.minecraft.text.BaseText;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
-import static club.mcams.carpet.util.Messenger.*;
-
 public class MixinUtil {
+    //#if MC<=11900
     public static boolean audit(@Nullable ServerCommandSource source) {
         boolean ok;
         BaseText response;
@@ -28,4 +28,5 @@ public class MixinUtil {
         }
         return ok;
     }
+    //#endif
 }

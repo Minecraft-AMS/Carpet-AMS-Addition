@@ -11,7 +11,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(DimensionType.class)
 public abstract class DimensionTypeMixin {
+    //#if MC>=12000
+    //$$ @Inject(method = "ultrawarm", at = @At("TAIL"), cancellable = true)
+    //#else
     @Inject(method = "isUltrawarm", at = @At("TAIL"), cancellable = true)
+    //#endif
     public void isUltrawarm(CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.netherWaterPlacement) {
             cir.setReturnValue(false);

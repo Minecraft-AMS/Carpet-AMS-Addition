@@ -39,6 +39,7 @@ public abstract class EnderDragonFightMixin {
      * @author WenDavid
      * @reason Optimize the search of end portal
      */
+
     @Overwrite
     private @Nullable BlockPattern.Result findEndPortal() {
         int i,j;
@@ -73,16 +74,32 @@ public abstract class EnderDragonFightMixin {
                 i = cacheOriginIteratorY;
             }
             else {
+                //#if MC>=12000
+                //$$ i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN)).getY();
+                //#else
                 i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.ORIGIN).getY();
+                //#endif
             }
             boolean notFirstSearch = false;
             for(j = i; j >= 0; --j) {
+                //#if MC>=12000
+                //$$ BlockPattern.Result result2 = null;
+                //#else
                 BlockPattern.Result result2;
+                //#endif
                 if(AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
+                    //#if MC>=12000
+                    //&& result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN)).getY();, j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
+                    //#elseORIGIN
                     result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
+                    //#endif
                 }
                 else{
+                    //#if MC>=12000
+                    //$$ result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getX(), j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
+                    //#else
                     result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
+                    //#endif
                 }
                 if (result2 != null) {
                     if (this.exitPortalLocation == null) {

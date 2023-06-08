@@ -13,7 +13,9 @@ public class AmsServerMod implements ModInitializer {
     @Override
     public void onInitialize() {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
+        //#if MC<=11900
         AutoMixinAuditExecutor.run();
+        //#endif
         AmsServer.init();
     }
     public static String getModId()
