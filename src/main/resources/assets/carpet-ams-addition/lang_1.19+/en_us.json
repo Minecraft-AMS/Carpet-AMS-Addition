@@ -48,6 +48,10 @@
   "carpet.rule.bambooCollisionBoxDisabled.desc": "Allow players to pass through bamboo",
   "carpet.rule.campfireSmokeParticleDisabled.name": "CampfireSmokeParticleDisabled",
   "carpet.rule.campfireSmokeParticleDisabled.desc": "Disable campfire smoke particles",
+  "carpet.rule.antiFireTotem.name": "antiFireTotem",
+  "carpet.rule.antiFireTotem.desc": "Totem will not be destroyed by flames and magma",
+  "carpet.rule.itemAntiExplosion.name": "itemAntiExplosion",
+  "carpet.rule.itemAntiExplosion.desc": "Dropped items will not be destroyed by explosions",
 
   "carpet.rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "carpet.rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",

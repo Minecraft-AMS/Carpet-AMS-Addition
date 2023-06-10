@@ -334,14 +334,34 @@
 - 分类: `AMS` , `FEATURE`
 
 
-## 可移动末影箱(movableEnderChest)
+## 防火图腾(antiFireTotem)
 
-开启后，末影箱可以被活塞/黏性活塞推动。
+开启后，图腾将不会被火焰或者岩浆烧毁。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE` , `AMS_movable`
+- 分类: `AMS` , `FEATURE`
+
+
+## 防火图腾(antiFireTotem)
+
+开启后，图腾将不会被火焰或者岩浆烧毁。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE`
+
+
+## 掉落物防爆(itemAntiExplosion)
+
+开启后，掉落物将不会被爆炸摧毁。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `TNT`
 
 
 ## 可移动末地传送门框架(movableEndPortalFrame)

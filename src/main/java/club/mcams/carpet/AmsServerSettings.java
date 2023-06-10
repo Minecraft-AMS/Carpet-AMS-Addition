@@ -354,6 +354,26 @@ public class AmsServerSettings {
     )
     public static boolean campfireSmokeParticleDisabled = false;
 
+    @Rule(
+            //#if MC<11900
+            desc = "Totem will not be destroyed by flames and magma",
+            category = {AMS, FEATURE}
+            //#else
+            //$$ categories = {AMS, FEATURE}
+            //#endif
+    )
+    public static boolean antiFireTotem = false;
+
+    @Rule(
+            //#if MC<11900
+            desc = "Dropped items will not be destroyed by explosions",
+            category = {AMS, FEATURE, TNT}
+            //#else
+            //$$ categories = {AMS, FEATURE}
+            //#endif
+    )
+    public static boolean itemAntiExplosion = false;
+
     /**
      * 可移动方块规则
      */

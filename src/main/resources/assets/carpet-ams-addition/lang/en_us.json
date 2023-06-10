@@ -50,6 +50,10 @@
   "rule.bambooCollisionBoxDisabled.desc": "Allow players to pass through bamboo",
   "rule.campfireSmokeParticleDisabled.name": "CampfireSmokeParticleDisabled",
   "rule.campfireSmokeParticleDisabled.desc": "Disable campfire smoke particles",
+  "rule.antiFireTotem.name": "antiFireTotem",
+  "rule.antiFireTotem.desc": "Totem will not be destroyed by flames and magma",
+  "rule.itemAntiExplosion.name": "itemAntiExplosion",
+  "rule.itemAntiExplosion.desc": "Dropped items will not be destroyed by explosions",
 
   "rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",

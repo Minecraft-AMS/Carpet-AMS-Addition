@@ -35,6 +35,7 @@
     "rule.sharedVillagerDiscounts.VillagerGossipsMixin",
     "rule.softBlock.AbstractBlockStateMixin",
     "rule.superBow.InfinityEnchantmentMixin",
+    "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.weakBlocks.CollectBlocksAndDamageEntitiesMixin"
   ],
   "client": [],

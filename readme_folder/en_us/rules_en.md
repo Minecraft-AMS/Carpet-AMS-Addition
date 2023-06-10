@@ -312,6 +312,24 @@ When enabled, Campfire will not produce smoke particles.
 - Suggested options: `false` , `true`
 - Categroies: `AMS` , `FEATURE`
 
+## *antiFireTotem*
+
+When enabled, Totem will not be destroyed by flames and magma.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `FEATURE`
+
+## **itemAntiExplosion**
+
+When enabled, Dropped items will not be destroyed by explosions.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `FEATURE`, `TNT`
+
 
 ## movableEnderChest
 

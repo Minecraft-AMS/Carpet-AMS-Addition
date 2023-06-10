@@ -50,6 +50,10 @@
   "rule.bambooCollisionBoxDisabled.desc": "允许玩家穿过竹子",
   "rule.campfireSmokeParticleDisabled.name": "禁用篝火烟雾粒子",
   "rule.campfireSmokeParticleDisabled.desc": "篝火将不会产生烟雾粒子",
+  "rule.antiFireTotem.name": "防火图腾",
+  "rule.antiFireTotem.desc": "图腾将不会被火焰或者岩浆烧毁",
+  "rule.itemAntiExplosion.name": "掉落物防爆",
+  "rule.itemAntiExplosion.desc": "掉落物将不会被爆炸摧毁",
 
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",
