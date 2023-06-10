@@ -344,16 +344,6 @@
 - 分类: `AMS` , `FEATURE`
 
 
-## 防火图腾(antiFireTotem)
-
-开启后，图腾将不会被火焰或者岩浆烧毁。
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE`
-
-
 ## 掉落物防爆(itemAntiExplosion)
 
 开启后，掉落物将不会被爆炸摧毁。
