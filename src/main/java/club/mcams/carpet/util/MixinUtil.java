@@ -10,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
 public class MixinUtil {
-    //#if MC<=11900
     public static boolean audit(@Nullable ServerCommandSource source) {
         boolean ok;
         BaseText response;
@@ -24,9 +23,8 @@ public class MixinUtil {
             ok = false;
         }
         if (source != null) {
-            source.sendFeedback(response, false);
+            Messenger.tell(source, response);
         }
         return ok;
     }
-    //#endif
 }

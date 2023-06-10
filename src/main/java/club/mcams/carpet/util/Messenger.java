@@ -6,6 +6,7 @@ package club.mcams.carpet.util;
 //$$ import net.minecraft.text.Text;
 //#endif
 
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.BaseText;
 import net.minecraft.text.LiteralText;
 
@@ -19,5 +20,23 @@ public final class Messenger {
                 new LiteralText
                         //#endif
                         (text.toString());
+    }
+
+    private static void __tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
+        source.sendFeedback(
+                //#if MC >= 12000
+                //$$ () ->
+                //#endif
+                text, broadcastToOps
+        );
+    }
+
+    public static void tell(ServerCommandSource source, BaseText text, boolean broadcastToOps)
+    {
+        __tell(source, text, broadcastToOps);
+    }
+
+    public static void tell(ServerCommandSource source, BaseText text) {
+        tell(source, text, false);
     }
 }
