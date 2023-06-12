@@ -9,6 +9,7 @@ import net.minecraft.util.math.Direction;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
+
 @Mixin(BlockPattern.class)
 public interface BlockPatternTestTransformInvoker {
     @Invoker("testTransform")

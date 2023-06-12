@@ -1,6 +1,7 @@
 package club.mcams.carpet.mixin.rule.optimizedDragonRespawn;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.function.BlockPatternHelper;
 
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.EndGatewayBlockEntity;
@@ -90,7 +91,7 @@ public abstract class EnderDragonFightMixin {
                 if(AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
                     //#if MC>=12000
                     //&& result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN)).getY();, j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
-                    //#elseORIGIN
+                    //#else
                     result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
                     //#endif
                 }

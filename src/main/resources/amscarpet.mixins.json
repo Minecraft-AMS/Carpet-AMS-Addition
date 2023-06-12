@@ -6,6 +6,7 @@
   "mixins": [
     "carpet.SettingsManagerMixin",
     "interaction.ThreadedAnvilChunkStorageMixin",
+    "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.bambooCollisionBoxDisable.BambooBlockMixin",
     "rule.bambooModelNoOffset.BambooBlockMixin",
     "rule.blockChunkLoader.BellBlockMixin",
@@ -35,7 +36,6 @@
     "rule.sharedVillagerDiscounts.VillagerGossipsMixin",
     "rule.softBlock.AbstractBlockStateMixin",
     "rule.superBow.InfinityEnchantmentMixin",
-    "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.weakBlocks.CollectBlocksAndDamageEntitiesMixin"
   ],
   "client": [],
