@@ -119,10 +119,10 @@ carpetamsaddition:
         name: 音符盒区块加载
         desc: 音符盒方块被激活时将加载周围3x3区块15s
         extra:
-          '0': bone_block 音符盒上方有骨块可以触发加载
-          '1': wither_skeleton_skull 音符盒上有凋灵骷髅头（可以是挂在墙上的也可以是放在音符盒上的）时可以触发加载
-          '2': note_block 无需条件，只有音符盒即可加载
-          '3': OFF 禁用该规则
+          '0': '[bone_block] - 音符盒上方有骨块可以触发加载'
+          '1': '[wither_skeleton_skull] - 音符盒上有凋灵骷髅头（可以是挂在墙上的也可以是放在音符盒上的）时可以触发加载'
+          '2': '[note_block]：无需条件，只有音符盒即可加载'
+          '3': '[OFF] - 禁用该规则'
       bellBlockChunkLoader:
         name: 钟区块加载
         desc: 钟方块被激活时将加载周围3x3区块15s
@@ -130,10 +130,10 @@ carpetamsaddition:
         name: 活塞头区块加载
         desc: 活塞或黏性活塞被激活且能正常伸出时以活塞头将到达的区块为中心加载3x3区块持续15s
         extra:
-          '0':  bone_block 当活塞/黏性活塞上方有骨块时
-          '1':  bedrock 当活塞/黏性活塞下方有基岩时
-          '2':  all 当活塞/黏性活塞上方有骨块或下方有基岩时
-          '3':  OFF 禁用该规则
+          '0': '[bone_block] - 当活塞/黏性活塞上方有骨块时'
+          '1': '[bedrock] - 当活塞/黏性活塞下方有基岩时'
+          '2': '[all] - 当活塞/黏性活塞上方有骨块或下方有基岩时'
+          '3': '[OFF] - 禁用该规则'
 
 #可移动方块规则
       movableEnderChest:

@@ -87,6 +87,9 @@ carpetamsaddition:
       itemAntiExplosion:
         name: itemAntiExplosion
         desc: Dropped items will not be destroyed by explosions
+      creativeShulkerBoxDropsDisable:
+        name: creativeShulkerBoxDropsDisable
+        desc: Breaking a shulker box with items in creative mode will not cause drops
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -116,10 +119,10 @@ carpetamsaddition:
         name: noteBlockChunkLoader
         desc: Load nearby 3x3 chunks for 15 seconds when a note block is triggered
         extra:
-          '0': bone_block When bone_block is on the note_block
-          '1': bedrock When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall
-          '2': all Only note_block
-          '3': OFF Disable the rule
+          '0': '[bone_block] - When bone_block is on the note_block'
+          '1': '[bedrock] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall'
+          '2': '[all] - Only note_block'
+          '3': '[OFF] - Disable the rule'
       bellBlockChunkLoader:
         name: bellBlockChunkLoader
         desc: Load nearby 3x3 chunks for 15 seconds when a bell is triggered
@@ -127,13 +130,10 @@ carpetamsaddition:
         name: pistonBlockChunkLoader
         desc:  Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head)
         extra:
-          '0': bone_block When bone_block is on the piston
-          '1': bedrock When bedrock is under the piston
-          '2': all When bone_block is on the piston or bedrock is under the piston
-          '3': OFF Disable the rule
-      creativeShulkerBoxDropsDisable:
-        name: creativeShulkerBoxDropsDisable
-        desc: Breaking a shulker box with items in creative mode will not cause drops
+          '0': '[bone_block] - When bone_block is on the piston'
+          '1': '[bedrock] - When bedrock is under the piston'
+          '2': '[all] - When bone_block is on the piston or bedrock is under the piston'
+          '3': '[OFF] - Disable the rule'
 
 #可移动方块规则
       movableEnderChest:
