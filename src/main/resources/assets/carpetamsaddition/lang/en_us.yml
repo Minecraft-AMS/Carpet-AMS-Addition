@@ -1,0 +1,200 @@
+carpetamsaddition:
+
+  # ------------------------------------------------------
+  #   Translation below will be passed to fabric carpet
+  # ------------------------------------------------------
+  
+  carpet_translations:
+    category:
+      AMS: AMS
+      crafting: crafting
+      AMS_movable: AMS_movable
+      AMS_chunkLoader: AMS_chunkLoader
+
+    rule:
+      superBow:
+        name: superBow
+        desc: Enabling making super bows with both infinite and mending enchants
+      sharedVillagerDiscounts:
+        name: sharedVillagerDiscounts
+        desc: Share villagers discount to all players
+      fakePeace:
+        name: fakePeace
+        desc: Simulation fake Peace
+      extinguishedCampfire:
+        name: extinguishedCampfire
+        desc: The campfire is extinguished when the player places it
+      netherWaterPlacement:
+        name: netherWaterPlacement
+        desc: Players can use water buckets to place water in nether
+      softDeepslate:
+        name: softDeepslate
+        desc: Change the hardness of deepslate to stone
+      softObsidian:
+        name: softObsidian
+        desc: Change the hardness of obsidian to deepslate
+      blowUpEverything:
+        name: blowUpEverything
+        desc: Set all blocks BlastResistance to 0
+      optimizedDragonRespawn:
+        name: optimizedDragonRespawn
+        desc: Optimize dragon respawning
+      safeFlight:
+        name: safeFlight
+        desc: players don't get hurt by flying into walls
+      boneBlockUpdateSuppressor:
+        name: boneBlockUpdateSuppressor
+        desc: Let the bone_block be update suppressor
+      weakObsidian:
+        name: weakObsidian
+        desc: Explosion can destroy Obsidian
+      weakCryingObsidian:
+        name: weakCryingObsidian
+        desc: Explosion can destroy crying_obsidian
+      weakReinforcedDeepslate:
+        name: weakReinforcedDeepslate
+        desc: Explosion can destroy ReinforcedDeepslate
+      weakBedRock:
+        name: weakBedRock
+        desc: Explosion can destroy bedrock
+      enhancedWorldEater:
+        name: enhancedWorldEater
+        desc: Explosion can destroy all blocks except anvil and bedrock
+      infiniteTrades:
+        name: infiniteTrades
+        desc: Prevents villager trades from locking up
+      invulnerable:
+        name: invulnerable
+        desc: Players will be protected from all damage except Void Damage
+      creativeOneHitKill:
+        name: creativeOneHitKill
+        desc: Allows players in Creative mode to kill entities in one hit\nIf the player is sneaking, other entities around the target get killed too
+      largeEnderChest:
+        name: largeEnderChest
+        desc: Doubles the size of your EnderChest
+      bambooModelNoOffset:
+        name: bambooModelNoOffset
+        desc: The block model of bamboo will not generate offset
+      bambooCollisionBoxDisabled:
+        name: bambooCollisionBoxDisabled
+        desc: Allow players to pass through bamboo
+      campfireSmokeParticleDisabled:
+        name: campfireSmokeParticleDisabled
+        desc: Disable campfire smoke particles
+      antiFireTotem:
+        name: antiFireTotem
+        desc: Totem will not be destroyed by flames and magma
+      itemAntiExplosion:
+        name: itemAntiExplosion
+        desc: Dropped items will not be destroyed by explosions
+
+# 计划刻催熟规则：
+      scheduledRandomTickCactus:
+        name: scheduledRandomTickCactus
+        desc: Make cactus accepts scheduled tick as random tick
+      scheduledRandomTickBamboo:
+        name: scheduledRandomTickBamboo
+        desc: Make bamboo accepts scheduled tick as random tick
+      scheduledRandomTickChorusFlower:
+        name: scheduledRandomTickChorusFlower
+        desc: Make chorus flower accepts scheduled tick as random tick
+      scheduledRandomTickSugarCane:
+        name: scheduledRandomTickSugarCane
+        desc: Make sugar cane accepts scheduled tick as random tick
+      scheduledRandomTickStem:
+        name: scheduledRandomTickStem
+        desc: Make stems accepts scheduled tick as random tick
+      scheduledRandomTickAllPlants:
+        name: scheduledRandomTickAllPlants
+        desc: Make all plants accepts scheduled tick as random tick
+
+#区块加载规则
+      commandChunkLoading:
+        name: commandChunkLoading
+        desc: Control chunk loading for players at any gamemodes
+      noteBlockChunkLoader:
+        name: noteBlockChunkLoader
+        desc: Load nearby 3x3 chunks for 15 seconds when a note block is triggered
+        extra:
+          '0': bone_block When bone_block is on the note_block
+          '1': bedrock When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall
+          '2': all Only note_block
+          '3': OFF Disable the rule
+      bellBlockChunkLoader:
+        name: bellBlockChunkLoader
+        desc: Load nearby 3x3 chunks for 15 seconds when a bell is triggered
+      pistonBlockChunkLoader:
+        name: pistonBlockChunkLoader
+        desc:  Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head)
+        extra:
+          '0': bone_block When bone_block is on the piston
+          '1': bedrock When bedrock is under the piston
+          '2': all When bone_block is on the piston or bedrock is under the piston
+          '3': OFF Disable the rule
+      creativeShulkerBoxDropsDisable:
+        name: creativeShulkerBoxDropsDisable
+        desc: Breaking a shulker box with items in creative mode will not cause drops
+
+#可移动方块规则
+      movableEnderChest:
+        name: movableEnderChest
+        desc: Makes ender_chests movable
+      movableEndPortalFrame:
+        name: movableEndPortalFrame
+        desc: Makes end_portal_frame movable
+      movableObsidian:
+        name: movableObsidian
+        desc: Makes obsidian movable
+      movableCryingObsidian:
+        name: movableCryingObsidian
+        desc: Makes crying_obsidian movable
+      movableBedRock:
+        name: movableBedRock
+        desc: Makes bedrock movable
+      movableEnchantingTable:
+        name: movableEnchantingTable
+        desc: Makes enchanting_table movable
+      movableBeacon:
+        name: movableBeacon
+        desc: Makes beacon movable
+      movableReinforcedDeepslate:
+        name: movableReinforcedDeepslate
+        desc: Makes reinforced_deepslate movable
+      movableAnvil:
+        name: movableAnvil
+        desc: Makes anvil movable
+      movableSculkCatalyst:
+        name: movableAnvil
+        desc: Makes sculk_catalyst movable
+      movableSculkSensor:
+        name: movableSculkSensor
+        desc: Makes sculk_sensor movable
+      movableSculkShrieker:
+        name: movableCalibratedSculkSensor
+        desc: Makes sculk_shrieker
+      movableCalibratedSculkSensor:
+        name: movableCalibratedSculkSensor
+        desc: Makes calibrated_sculk_sensor movableSculkShrieker
+
+#合成配方规则
+      craftableEnchantedGoldenApples:
+        name: craftableEnchantedGoldenApples
+        desc: Enchanted Golden Apples can be crafted with 8 Gold Blocks again
+      craftableBundle:
+        name: craftableBundle
+        desc: Crafted bundle in minecraft 1.17/1.18/1.19
+      craftableSculkSensor:
+        name: craftableSculkSensor
+        desc: Crafted sculk_sensor in minecraft 1.17/1.18
+      betterCraftableBoneBlock:
+        name: betterCraftableBoneBlock
+        desc: Use nine bones to crafted three bone_blocks
+      craftableElytra:
+        name: craftableElytra
+        desc: Add elytra recipes in minecraft
+      betterCraftableDispenser:
+        name: betterCraftableDispenser
+        desc: Better craftable dispenser
+      betterCraftablePolishedBlackStoneButton:
+        name: betterCraftablePolishedBlackStoneButton
+        desc: Use deepslate to crafted polished_blackstone_button in minecraft

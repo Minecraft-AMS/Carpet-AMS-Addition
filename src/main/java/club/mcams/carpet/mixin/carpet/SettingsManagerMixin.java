@@ -37,7 +37,7 @@ public abstract class SettingsManagerMixin {
     )
     private void printVersion(ServerCommandSource source, CallbackInfoReturnable<Integer> cir) {
         Messenger.m(source,
-                String.format("g %s ", AmsServer.MOD_NAME),
+                String.format("g %s ", AmsServer.fancyName),
                 String.format("g %s: ", tr("ui.version",  "version")),
                 String.format("g %s", AmsServerMod.getVersion())
         );

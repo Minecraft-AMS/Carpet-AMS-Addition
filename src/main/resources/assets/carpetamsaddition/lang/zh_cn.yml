@@ -1,0 +1,200 @@
+carpetamsaddition:
+
+  # ------------------------------------------------------
+  #   Translation below will be passed to fabric carpet
+  # ------------------------------------------------------
+  
+  carpet_translations:
+    category:
+      AMS: AMS
+      crafting: 制造
+      AMS_movable: AMS_可移动方块
+      AMS_chunkLoader: AMS_区块加载
+
+    rule:
+      superBow:
+        name: 超级弓
+        desc: 让弓能同时打上无限和经验修补两种附魔
+      sharedVillagerDiscounts:
+        name: 共享打折
+        desc: 玩家将僵尸村民治疗为村民后的获得的折扣将共享给所有玩家
+      fakePeace:
+        name: 伪和平
+        desc: 伪和平
+      extinguishedCampfire:
+        name: 熄灭的篝火
+        desc: 当玩家放置篝火时，篝火处于熄灭状态
+      netherWaterPlacement:
+        name: 地狱可放水
+        desc: 玩家可以在地狱使用水桶放置水
+      softDeepslate:
+        name: 易碎深板岩
+        desc: 改变深板岩的硬度使其和普通石头一致
+      softObsidian:
+        name: 易碎黑曜石
+        desc: 改变黑曜石的硬度使其和深板岩一致
+      blowUpEverything:
+        name: 炸毁所有方块
+        desc: 让所有方块的爆炸抗性为0
+      optimizedDragonRespawn:
+        name: 龙战优化
+        desc: 大幅度优化龙战定位末地门过程，为基于末地门的末地石农场设计
+      safeFlight:
+        name: 安全飞行
+        desc: 玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害
+      boneBlockUpdateSuppressor:
+        name: 骨块更新抑制器
+        desc: 让骨块成为一个更新抑制器
+      weakObsidian:
+        name: 炸毁黑曜石
+        desc: 爆炸可以摧毁黑曜石
+      weakCryingObsidian:
+        name: 炸毁哭泣的黑曜石
+        desc: 爆炸可以摧毁哭泣的黑曜石
+      weakReinforcedDeepslate:
+        name: 炸毁强化深板岩
+        desc: 爆炸可以摧毁强化深板岩
+      weakBedRock:
+        name: 炸毁基岩
+        desc: 爆炸可以摧毁基岩
+      enhancedWorldEater:
+        name: 增强型世界吞噬者
+        desc: 爆炸可以摧毁除了铁砧与基岩外的所有方块
+      infiniteTrades:
+        name: 无限交易
+        desc: 防止村民交易被锁定
+      invulnerable:
+        name: 无懈可击
+        desc: 玩家将免受除虚空伤害外的一切伤害
+      creativeOneHitKill:
+        name: 创造模式一击必杀
+        desc: 当玩家在创造模式下时可以做到一击必杀\n当玩家处于潜行状态时，周围的实体也会被杀死
+      largeEnderChest:
+        name: 大末影箱
+        desc: 让你的末影箱容量增加一倍（与大箱子相同）
+      bambooModelNoOffset:
+        name: 竹子模型无偏移
+        desc: 让竹子的模型不会产生偏移
+      bambooCollisionBoxDisabled:
+        name: 禁用竹子碰撞箱
+        desc: 允许玩家穿过竹子
+      campfireSmokeParticleDisabled:
+        name: 禁用篝火烟雾粒子
+        desc: 篝火将不会产生烟雾粒子
+      antiFireTotem:
+        name: 防火图腾
+        desc: 图腾将不会被火焰或者岩浆烧毁
+      itemAntiExplosion:
+        name: 掉落物防爆
+        desc: 掉落物将不会被爆炸摧毁
+      creativeShulkerBoxDropsDisable:
+        name: 创造模式潜影盒无掉落
+        desc: 当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落
+
+# 计划刻催熟规则：
+      scheduledRandomTickCactus:
+        name: 计划刻催熟仙人掌
+        desc: 当仙人掌方块收到计划刻时仍会给予生长随机刻
+      scheduledRandomTickBamboo:
+        name: 计划刻催熟竹子
+        desc: 当竹子方块收到计划刻时仍会给予生长随机刻
+      scheduledRandomTickChorusFlower:
+        name: 计划刻催熟紫颂花
+        desc: 当紫颂花方块收到计划刻时仍会给予生长随机刻
+      scheduledRandomTickSugarCane:
+        name: 计划刻催熟甘蔗
+        desc: 当甘蔗方块收到计划刻时仍会给予生长随机刻
+      scheduledRandomTickStem:
+        name: 计划刻催熟海带、缠怨藤、垂泪藤
+        desc: 当海带、缠怨藤、垂泪藤方块收到计划刻时仍会给予生长随机刻
+      scheduledRandomTickAllPlants:
+        name: 计划刻催熟所有作物
+        desc: 当所有作物方块收到计划刻时仍会给予生长随机刻
+
+#区块加载规则
+      commandChunkLoading:
+        name: 区块加载控制
+        desc: 控制任意游戏模式下玩家对周围区块的加载
+      noteBlockChunkLoader:
+        name: 音符盒区块加载
+        desc: 音符盒方块被激活时将加载周围3x3区块15s
+        extra:
+          '0': bone_block 音符盒上方有骨块可以触发加载
+          '1': wither_skeleton_skull 音符盒上有凋灵骷髅头（可以是挂在墙上的也可以是放在音符盒上的）时可以触发加载
+          '2': note_block 无需条件，只有音符盒即可加载
+          '3': OFF 禁用该规则
+      bellBlockChunkLoader:
+        name: 钟区块加载
+        desc: 钟方块被激活时将加载周围3x3区块15s
+      pistonBlockChunkLoader:
+        name: 活塞头区块加载
+        desc: 活塞或黏性活塞被激活且能正常伸出时以活塞头将到达的区块为中心加载3x3区块持续15s
+        extra:
+          '0':  bone_block 当活塞/黏性活塞上方有骨块时
+          '1':  bedrock 当活塞/黏性活塞下方有基岩时
+          '2':  all 当活塞/黏性活塞上方有骨块或下方有基岩时
+          '3':  OFF 禁用该规则
+
+#可移动方块规则
+      movableEnderChest:
+        name: 可移动末影箱
+        desc: 让末影箱可以被活塞/黏性活塞推动
+      movableEndPortalFrame:
+        name: 可移动末地传送门框架
+        desc: 让末地传送门框架可以被活塞/黏性活塞推动
+      movableObsidian:
+        name: 可移动黑曜石
+        desc: 让黑曜石可以被活塞/黏性活塞推动
+      movableCryingObsidian:
+        name: 可移动哭泣的黑曜石
+        desc: 让哭泣的黑曜石可以被活塞/黏性活塞推动
+      movableBedRock:
+        name: 可移动基岩
+        desc: 让基岩可以被活塞/黏性活塞推动
+      movableEnchantingTable:
+        name: 可移动附魔台
+        desc: 让附魔台可以被活塞/黏性活塞推动
+      movableBeacon:
+        name: 可移动信标
+        desc: 让信标可以被活塞/黏性活塞推动
+      movableReinforcedDeepslate:
+        name: 可移动强化深板岩
+        desc: 让强化深板岩可以被活塞/黏性活塞推动
+      movableAnvil:
+        name: 可移动铁砧
+        desc: 让铁砧可以被活塞/黏性活塞推动
+      movableSculkCatalyst:
+        name: 可移动幽匿催发体
+        desc: 让幽匿催发体可以被活塞/黏性活塞推动
+      movableSculkSensor:
+        name: 可移动幽匿感测体
+        desc: 让幽匿感测体可以被活塞/黏性活塞推动
+      movableSculkShrieker:
+        name: 可移动幽匿尖啸体
+        desc: 让幽匿尖啸体可以被活塞/黏性活塞推动
+      movableCalibratedSculkSensor:
+        name: 可移动校频幽匿感测体
+        desc: 让校频幽匿感测体可以被活塞/黏性活塞推动
+
+#合成配方规则
+      craftableEnchantedGoldenApples:
+        name: 可合成附魔金苹果
+        desc: 使用老版本的方式来合成附魔金苹果（8金块+1苹果）
+      craftableBundle:
+        name: 可合成收纳袋
+        desc: 玩家可以在Minecraft 1.17/1.18/1.19中合成收纳袋
+      craftableSculkSensor:
+        name: 可合成幽匿感测体
+        desc: 玩家可以在Minecraft 1.17/1.18中合成幽匿感测体
+      betterCraftableBoneBlock:
+        name: 更好的骨块合成
+        desc: 使用9个骨头可以合成出3个骨块(一点都不卡！)
+      craftableElytra:
+        name: 可合成鞘翅
+        desc: 添加了鞘翅的合成配方
+      betterCraftableDispenser:
+        name: 更好的合成发射器
+        desc: 使用更灵活的配方来合成发射器
+      betterCraftablePolishedBlackStoneButton:
+        name: 更好的合成磨制黑石按钮
+        desc: 使用深板岩来合成磨制黑石按钮

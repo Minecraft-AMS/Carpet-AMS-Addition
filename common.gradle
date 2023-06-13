@@ -29,6 +29,10 @@ dependencies {
 
     // mods
     modImplementation "carpet:fabric-carpet:${project.carpet_core_version}"
+
+    // libraries
+    implementation "org.yaml:snakeyaml:${project.snakeyaml_version}"
+    include "org.yaml:snakeyaml:${project.snakeyaml_version}"
 }
 
 loom {

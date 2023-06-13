@@ -37,7 +37,16 @@
     "rule.sharedVillagerDiscounts.VillagerGossipsMixin",
     "rule.softBlock.AbstractBlockStateMixin",
     "rule.superBow.InfinityEnchantmentMixin",
-    "rule.weakBlocks.CollectBlocksAndDamageEntitiesMixin"
+    "rule.weakBlocks.CollectBlocksAndDamageEntitiesMixin",
+    "setting.ParsedRuleAccessor",
+    "setting.SettingsManagerAccessor",
+    "translations.ClientSettingsC2SPacketAccessor",
+    "translations.HUDControllerMixin",
+    "translations.LoggerMixin",
+    "translations.ServerPlayerEntityMixin",
+    "translations.StyleAccessor",
+    "translations.TranslatableTextAccessor",
+    "translations.TranslatableTextMixin"
   ],
   "client": [],
   "server": [],
