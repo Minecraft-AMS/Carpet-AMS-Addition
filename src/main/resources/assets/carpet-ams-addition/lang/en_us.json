@@ -54,6 +54,8 @@
   "rule.antiFireTotem.desc": "Totem will not be destroyed by flames and magma",
   "rule.itemAntiExplosion.name": "itemAntiExplosion",
   "rule.itemAntiExplosion.desc": "Dropped items will not be destroyed by explosions",
+  "rule.creativeShulkerBoxDropsDisable.name": "creativeShulkerBoxDropsDisable",
+  "rule.creativeShulkerBoxDropsDisable.desc": "Breaking a shulker box with items in creative mode will not cause drops",
 
   "rule.scheduledRandomTickCactus.name": "scheduledRandomTickCactus",
   "rule.scheduledRandomTickCactus.desc": "Make cactus accepts scheduled tick as random tick",

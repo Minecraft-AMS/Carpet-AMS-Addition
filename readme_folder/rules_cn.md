@@ -354,6 +354,16 @@
 - 分类: `AMS` , `FEATURE` , `TNT`
 
 
+## 创造模式潜影盒无掉落(*creativeShulkerBoxDropsDisable*)
+
+开启后，当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS`, `FEATURE`, `CREATIVE`
+
+
 ## 可移动末地传送门框架(movableEndPortalFrame)
 
 开启后，末地传送门框架可以被活塞/黏性活塞推动。

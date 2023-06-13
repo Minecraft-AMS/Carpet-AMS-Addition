@@ -54,6 +54,8 @@
   "rule.antiFireTotem.desc": "图腾将不会被火焰或者岩浆烧毁",
   "rule.itemAntiExplosion.name": "掉落物防爆",
   "rule.itemAntiExplosion.desc": "掉落物将不会被爆炸摧毁",
+  "rule.creativeShulkerBoxDropsDisable.name": "创造模式潜影盒无掉落",
+  "rule.creativeShulkerBoxDropsDisable.desc": "当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落",
 
   "rule.scheduledRandomTickCactus.name": "计划刻催熟仙人掌",
   "rule.scheduledRandomTickCactus.desc": "当仙人掌方块收到计划刻时仍会给予生长随机刻",

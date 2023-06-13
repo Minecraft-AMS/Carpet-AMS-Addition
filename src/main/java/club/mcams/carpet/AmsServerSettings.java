@@ -369,10 +369,20 @@ public class AmsServerSettings {
             desc = "Dropped items will not be destroyed by explosions",
             category = {AMS, FEATURE, TNT}
             //#else
-            //$$ categories = {AMS, FEATURE}
+            //$$ categories = {AMS, FEATURE, TNT}
             //#endif
     )
     public static boolean itemAntiExplosion = false;
+
+    @Rule(
+            //#if MC<11900
+            desc = "Breaking a shulker box with items in creative mode will not cause drops.",
+            category = {AMS, FEATURE, CREATIVE}
+            //#else
+            //$$ categories = {AMS, FEATURE, CREATIVE}
+            //#endif
+    )
+    public static boolean creativeShulkerBoxDropsDisable = false;
 
     /**
      * 可移动方块规则

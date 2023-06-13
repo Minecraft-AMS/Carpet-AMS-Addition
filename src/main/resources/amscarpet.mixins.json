@@ -16,6 +16,7 @@
     "rule.boneBlockUpdateSuppressor.NeighborUpdateMixin",
     "rule.creativeOneHitKill.EntityAccessorMixin",
     "rule.creativeOneHitKill.PlayerEntityMixin",
+    "rule.creativeShulkerBoxDropsDisable.ShulkerBoxBlockMixin",
     "rule.extinguishedCampfire_campfireSmokeParticleDisabled.GetPlacementStateMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
     "rule.infiniteTrades.MerchantEntityMixin",

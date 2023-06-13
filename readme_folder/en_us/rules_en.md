@@ -330,6 +330,15 @@ When enabled, Dropped items will not be destroyed by explosions.
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `FEATURE`, `TNT`
 
+## **creativeShulkerBoxDropsDisable**
+
+When enabled, Breaking a shulker box with items in creative mode will not cause drops.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `FEATURE`, `CREATIVE`
+
 
 ## movableEnderChest
 
