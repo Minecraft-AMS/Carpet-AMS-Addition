@@ -34,10 +34,16 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, OPTIMIZATION})
     public static boolean optimizedDragonRespawn = false;
 
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    @Rule(
+            options = {"bone_block", "wither_skeleton_skull", "note_block", "OFF"},
+            categories = {AMS, FEATURE, AMS_CHUNKLOADER}
+    )
     public static String noteBlockChunkLoader = "OFF";
 
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    @Rule(
+            options = {"bone_block", "bedrock", "all", "OFF"},
+            categories = {AMS, FEATURE, AMS_CHUNKLOADER}
+    )
     public static String pistonBlockChunkLoader = "OFF";
 
     @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
