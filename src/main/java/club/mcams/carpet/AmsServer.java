@@ -12,27 +12,23 @@ import carpet.settings.ParsedRule;
 import carpet.script.bundled.BundledModule;
 //#endif
 
-import club.mcams.carpet.commands.chunkloadingCommandRegistry;
-import club.mcams.carpet.function.ChunkLoading;
-import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
-import club.mcams.carpet.util.AmsCarpetTranslations;
+import club.mcams.carpet.settings.CarpetRuleRegistrar;
+import club.mcams.carpet.translations.AMSTranslations;
+import club.mcams.carpet.translations.TranslationConstants;
 import club.mcams.carpet.util.Logging;
 import club.mcams.carpet.util.recipes.CraftingRule;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import com.mojang.brigadier.CommandDispatcher;
-
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ReloadCommand;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.WorldSavePath;
 //#if MC>=11900
 //$$ import net.minecraft.command.CommandRegistryAccess;
@@ -56,33 +52,43 @@ public class AmsServer implements CarpetExtension {
 
     public static MinecraftServer minecraftServer;
     private static final AmsServer INSTANCE = new AmsServer();
+    public static final String fancyName = "Carpet AMS Addition";
     public static final String name = AmsServerMod.getModId();
-    public static final String MOD_NAME = "Carpet AMS Addition";
-    public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
-
-    @Override
-    public String version() {
-        return name;
-    }
-    public void onPlayerLoggedOut(ServerPlayerEntity player) {
-        ChunkLoading.onPlayerDisconnect(player);
-    }
-    public static void init() {
-        CarpetServer.manageExtension(INSTANCE);
-    }
+    public static final String compactName = name.replace("-","");  // carpetamsaddition
+    public static final Logger LOGGER = LogManager.getLogger(fancyName);
 
     @Override
     public Map<String, String> canHasTranslations(String lang) {
-        return AmsCarpetTranslations.getTranslationFromResourcePath(lang);
+        Map<String, String> trimmedTranslation = Maps.newHashMap();
+        String prefix = TranslationConstants.CARPET_TRANSLATIONS_KEY_PREFIX;
+        AMSTranslations.getTranslation(lang).forEach((key, value) -> {
+            if (key.startsWith(prefix)) {
+                String newKey = key.substring(prefix.length());
+                //#if MC>=11900
+                //$$ newKey = "carpet." + newKey;
+                //#endif
+                trimmedTranslation.put(newKey, value);
+            }
+        });
+        return trimmedTranslation;
+    }
+
+    @Override
+    public String version() {
+        return AmsServerMod.getModId();
+    }
+    public static void init() {
+        CarpetServer.manageExtension(INSTANCE);
+        AMSTranslations.loadTranslations();
     }
 
     @Override
     public void onGameStarted() {
         // let's /carpet handle our few simple settings
-        CarpetServer.settingsManager.parseSettingsClass(AmsServerSettings.class);
-        LOGGER.info(MOD_NAME + " " + "v" + AmsServerMod.getVersion() + " 载入成功");
+        LOGGER.info(fancyName + " " + "v" + AmsServerMod.getVersion() + " 载入成功");
         LOGGER.info("开源链接：https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
         LOGGER.info("BUG反馈：https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
+        CarpetRuleRegistrar.register(CarpetServer.settingsManager, AmsServerSettings.class);
     }
 
     @Override
@@ -102,28 +108,9 @@ public class AmsServer implements CarpetExtension {
         }
     }
 
-    //#if MC>=11900
-    //$$    @Override
-    //$$    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
-    //$$        chunkloadingCommandRegistry.register(dispatcher);
-    //$$    }
-    //#else
-    @Override
-    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
-        chunkloadingCommandRegistry.register(dispatcher);
-    }
-    //#endif
-
-    @Override
-    public void onPlayerLoggedIn(ServerPlayerEntity player) {
-        ChunkLoading.onPlayerConnect(player);
-    }
-
-    @Override
-    public void registerLoggers() {
-        AmsCarpetLoggerRegistry.registerLoggers();
-    }
-
+    /**
+     * From Rug Mod
+     */
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
         String datapackPath = server.getSavePath(WorldSavePath.DATAPACKS).toString();
@@ -141,13 +128,13 @@ public class AmsServer implements CarpetExtension {
             Files.createDirectories(new File(datapackPath + "data/ams/recipes").toPath());
             Files.createDirectories(new File(datapackPath + "data/ams/advancements").toPath());
             Files.createDirectories(new File(datapackPath + "data/minecraft/recipes").toPath());
-            copyFile("assets/carpet-ams-addition/AmsRecipeTweakPack/pack.mcmeta", datapackPath + "pack.mcmeta");
+            copyFile("assets/carpetamsaddition/AmsRecipeTweakPack/pack.mcmeta", datapackPath + "pack.mcmeta");
         } catch (IOException e) {
             Logging.logStackTrace(e);
         }
 
         copyFile(
-                "assets/carpet-ams-addition/AmsRecipeTweakPack/ams/advancements/root.json",
+                "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/root.json",
                 datapackPath + "data/ams/advancements/root.json"
         );
 
@@ -174,19 +161,19 @@ public class AmsServer implements CarpetExtension {
     private void registerCraftingRule(String ruleName, String[] recipes, String recipeNamespace, String dataPath) {
         updateCraftingRule(CarpetServer.settingsManager.getRule(ruleName),recipes,recipeNamespace,dataPath,ruleName);
         CarpetServer.settingsManager.addRuleObserver
-        ((source, rule, s) -> {
-            //#if MC>=11900
-            //$$if (rule.name().equals(ruleName)) {
-            //$$    updateCraftingRule(rule, recipes, recipeNamespace, dataPath, ruleName);
-            //$$    reload();
-            //$$}
-            //#else
-            if (rule.name.equals(ruleName)) {
-                updateCraftingRule(rule, recipes, recipeNamespace, dataPath, ruleName);
-                reload();
-            }
-            //#endif
-        });
+                ((source, rule, s) -> {
+                    //#if MC>=11900
+                    //$$if (rule.name().equals(ruleName)) {
+                    //$$    updateCraftingRule(rule, recipes, recipeNamespace, dataPath, ruleName);
+                    //$$    reload();
+                    //$$}
+                    //#else
+                    if (rule.name.equals(ruleName)) {
+                        updateCraftingRule(rule, recipes, recipeNamespace, dataPath, ruleName);
+                        reload();
+                    }
+                    //#endif
+                });
     }
 
     private void updateCraftingRule(
@@ -280,7 +267,7 @@ public class AmsServer implements CarpetExtension {
     private void copyRecipes(String[] recipes, String recipeNamespace, String datapackPath, String ruleName) {
         for (String recipeName : recipes) {
             copyFile(
-                    "assets/carpet-ams-addition/AmsRecipeTweakPack/" + recipeNamespace + "/recipes/" + recipeName,
+                    "assets/carpetamsaddition/AmsRecipeTweakPack/" + recipeNamespace + "/recipes/" + recipeName,
                     datapackPath + recipeNamespace + "/recipes/" + recipeName
             );
         }
@@ -310,7 +297,7 @@ public class AmsServer implements CarpetExtension {
 
     private void writeAdvancement(String datapackPath, String ruleName, String[] recipes) {
         copyFile(
-                "assets/carpet-ams-addition/AmsRecipeTweakPack/ams/advancements/recipe_rule.json",
+                "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/recipe_rule.json",
                 datapackPath + "ams/advancements/" + ruleName + ".json"
         );
 
@@ -355,39 +342,36 @@ public class AmsServer implements CarpetExtension {
             Logging.logStackTrace(e);
         }
     }
-        //#if MC>=11900
-        private static JsonObject readJson(String filePath) {
-            try {
-                FileReader reader = new FileReader(filePath);
-                return JsonParser.parseReader(reader).getAsJsonObject();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            return null;
+    //#if MC>=11900
+    private static JsonObject readJson(String filePath) {
+        try {
+            FileReader reader = new FileReader(filePath);
+            return JsonParser.parseReader(reader).getAsJsonObject();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
-        //#else
-        //$$ private static JsonObject readJson(String filePath) {
-        //$$    JsonParser jsonParser = new JsonParser();
-        //$$    try {
-        //$$        FileReader reader = new FileReader(filePath);
-        //$$        return jsonParser.parse(reader).getAsJsonObject();
-        //$$    } catch (FileNotFoundException e) {
-        //$$        e.printStackTrace();
-        //$$    }
-        //$$    return null;
-        //$$}
-        //#endif
+        return null;
+    }
+    //#else
+    //$$ private static JsonObject readJson(String filePath) {
+    //$$    JsonParser jsonParser = new JsonParser();
+    //$$    try {
+    //$$        FileReader reader = new FileReader(filePath);
+    //$$        return jsonParser.parse(reader).getAsJsonObject();
+    //$$    } catch (FileNotFoundException e) {
+    //$$        e.printStackTrace();
+    //$$    }
+    //$$    return null;
+    //$$}
+    //#endif
 
-        private static void writeJson(JsonObject jsonObject, String filePath) {
-            try {
-                FileWriter writer = new FileWriter(filePath);
-                writer.write(new GsonBuilder().setPrettyPrinting().create().toJson(jsonObject));
-                writer.close();
-            } catch (IOException e) {
-                Logging.logStackTrace(e);
-            }
+    private static void writeJson(JsonObject jsonObject, String filePath) {
+        try {
+            FileWriter writer = new FileWriter(filePath);
+            writer.write(new GsonBuilder().setPrettyPrinting().create().toJson(jsonObject));
+            writer.close();
+        } catch (IOException e) {
+            Logging.logStackTrace(e);
         }
     }
-
-
-
+}

@@ -23,7 +23,7 @@ public abstract class PistonBlockMixin {
     private static void MovableBlocks(BlockState state, World world, BlockPos pos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
         //#endif
         if (
-                (AmsServerSettings.movableEnderChest && state.isOf(Blocks.ENDER_CHEST)) ||
+                        (AmsServerSettings.movableEnderChest && state.isOf(Blocks.ENDER_CHEST)) ||
                         (AmsServerSettings.movableEndPortalFrame && state.isOf(Blocks.END_PORTAL_FRAME)) ||
                         (AmsServerSettings.movableObsidian && state.isOf(Blocks.OBSIDIAN)) ||
                         (AmsServerSettings.movableCryingObsidian && state.isOf(Blocks.CRYING_OBSIDIAN)) ||
@@ -36,6 +36,9 @@ public abstract class PistonBlockMixin {
                         //$$ || (AmsServerSettings.movableSculkCatalyst && state.isOf(Blocks.SCULK_CATALYST))
                         //$$ || (AmsServerSettings.movableSculkSensor && state.isOf(Blocks.SCULK_SENSOR))
                         //$$ || (AmsServerSettings.movableSculkShrieker && state.isOf(Blocks.SCULK_SHRIEKER))
+                        //#endif
+                        //#if MC>=12000
+                        //$$ || (AmsServerSettings.movableCalibratedSculkSensor && state.isOf(Blocks.CALIBRATED_SCULK_SENSOR))
                         //#endif
         ) {
             //#if MC<11700

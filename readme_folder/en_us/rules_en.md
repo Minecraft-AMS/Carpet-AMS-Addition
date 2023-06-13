@@ -450,6 +450,15 @@ Sculk shrieker can be moved by piston or sticky piston.
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `FEATURE`, `AMS_movable`
 
+## movableCalibratedSculkSensor
+
+Calibrated Sculk Sensor can be moved by piston or sticky piston.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `AMS_movable`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
@@ -507,7 +516,6 @@ Dispenser can be crafted more flexible. It can be crafted using bow and dropper,
 - Default: `false`
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
-
 
 ## betterCraftablePolishedBlackStoneButton
 

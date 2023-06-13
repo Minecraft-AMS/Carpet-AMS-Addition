@@ -1,8 +1,4 @@
 .gradle/
 .idea/
 build/
-
-/run/*
-!/run/eula.txt
-!/run/options.txt
-!/run/server.properties
+logs/
