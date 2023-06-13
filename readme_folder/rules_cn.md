@@ -5,7 +5,6 @@
 ## 超级弓 (superBow)
 
 开启后，可以让弓同时拥有无限和经验修补附魔。
-> 谁能拒绝一把同时拥有无限和经验修补的弓呢?
 
 - 类型: `boolean`
 
@@ -116,7 +115,6 @@
 ## 地狱可放水 (netherWaterPlacement)
 
 开启后，玩家可通过使用水桶的方式在地狱维度中放置水源。
-> 很古老的需求。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -127,7 +125,6 @@
 ## 💻易碎深板岩 (softDeepslate)
 
 开启后，深板岩的挖掘硬度将与石头相同（均可在急迫二效果下用效率5钻石镐进行瞬间挖掘）。
-> 如果挖沟时面对无法秒破的深板岩很恼火那么可以使用此规则来偷个懒。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -138,7 +135,6 @@
 ## 💻易碎黑曜石 (softObsidian)
 
 开启后，黑曜石的挖掘硬度将与深板岩相同。
-> 可以用来在面对大量黑曜石时偷个懒。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -149,7 +145,6 @@
 ## 伪和平(fakePeace)
 
 开启后，所有生物不会生成，但不影响困难难度（类似伪和平）。
-> 用于在镜像服快速的实现不刷怪物且不切换难度。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -455,6 +450,7 @@
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
 
+
 ## 可移动幽匿感测体(movableSculkSensor)
 
 开启后，幽匿感测体可以被活塞/黏性活塞推动。
@@ -463,6 +459,17 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
+
+
+## 可移动校频幽匿感测体(movableCalibratedSculkSensor)
+
+开启后，校频幽匿感测体可以被活塞/黏性活塞推动。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `AMS_movable`
+
 
 ## 可移动幽匿尖啸体(movableSculkShrieker)
 

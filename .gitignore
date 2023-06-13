@@ -1,6 +1,7 @@
 .gradle/
 .idea/
 build/
+logs/
 
 /run/*
 !/run/eula.txt
