@@ -6,6 +6,7 @@
 
 |       Game Versionn       | Development Status |                                                  Last Supported Version                                                   |
 |:-------------------------:|:------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
+|          1.20.1           |         ✔          |                                                            ---                                                            |
 |           1.20            |         ✔          |                                                            ---                                                            |
 |          1.19.4           |         ✔          |                                                            ---                                                            |
 |          1.19.3           |         ✖          | [Carpet-AMS-Addition-mc1.19.3-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
