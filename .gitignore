@@ -2,8 +2,3 @@
 .idea/
 build/
 logs/
-
-/run/*
-!/run/eula.txt
-!/run/options.txt
-!/run/server.properties
