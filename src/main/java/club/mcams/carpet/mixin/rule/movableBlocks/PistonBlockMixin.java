@@ -36,6 +36,8 @@ public abstract class PistonBlockMixin {
                         //$$ || (AmsServerSettings.movableSculkCatalyst && state.isOf(Blocks.SCULK_CATALYST))
                         //$$ || (AmsServerSettings.movableSculkSensor && state.isOf(Blocks.SCULK_SENSOR))
                         //$$ || (AmsServerSettings.movableSculkShrieker && state.isOf(Blocks.SCULK_SHRIEKER))
+                        //#endif
+                        //#if MC>=12000
                         //$$ || (AmsServerSettings.movableCalibratedSculkSensor && state.isOf(Blocks.CALIBRATED_SCULK_SENSOR))
                         //#endif
         ) {
