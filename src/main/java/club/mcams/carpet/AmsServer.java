@@ -1,3 +1,23 @@
+/*
+ * This file is part of the Carpet AMS Addition project, licensed under the
+ * GNU Lesser General Public License v3.0
+ *
+ * Copyright (C) 2023  A Minecraft Server and contributors
+ *
+ * Carpet AMS Addition is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Carpet AMS Addition is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 
 package club.mcams.carpet;
 
@@ -86,7 +106,7 @@ public class AmsServer implements CarpetExtension {
     public void onGameStarted() {
         // let's /carpet handle our few simple settings
         LOGGER.info(fancyName + " " + "v" + AmsServerMod.getVersion() + " 载入成功");
-        LOGGER.info("开源链接：https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
+        LOGGER.info("�?源链接：https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
         LOGGER.info("BUG反馈：https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
         CarpetRuleRegistrar.register(CarpetServer.settingsManager, AmsServerSettings.class);
     }

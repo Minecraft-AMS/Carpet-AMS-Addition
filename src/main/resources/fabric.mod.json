@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "carpet-ams-addition",
+  "id": "${id}",
   "version": "${version}",
-  "name": "Carpet AMS Addition",
+  "name": "${name}",
   "description": "一个简陋的，东拼西凑的，及其不原版的Carpet拓展。",
   "authors": [
     "1024_byteeeee",

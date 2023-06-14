@@ -1,48 +1,60 @@
 apply plugin: 'maven-publish'
+apply plugin: 'com.github.hierynomus.license'
 apply plugin: 'fabric-loom'
+// apply plugin: 'io.github.juuxel.loom-quiltflower'
 apply plugin: 'com.replaymod.preprocess'
+apply plugin: 'me.fallenbreath.yamlang'
 
 int mcVersion = 1
 
 preprocess {
-    mcVersion = vars.get()["MC"]
-    tabIndentation = true
+	mcVersion = vars.get()["MC"] as int
+	tabIndentation = true
 }
 
 repositories {
-    maven {
-        url 'https://masa.dy.fi/maven'
-    }
-    maven {
-        url 'https://jitpack.io'
-    }
-    maven {
-        url 'https://www.cursemaven.com'
-    }
+	maven {
+		url 'https://masa.dy.fi/maven'
+	}
+	maven {
+		url 'https://jitpack.io'
+	}
+	maven {
+		url 'https://www.cursemaven.com'
+	}
+}
+
+// https://github.com/FabricMC/fabric-loader/issues/783
+configurations {
+	modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
 }
 
 dependencies {
-    // loom
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	// loom
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    // mods
+	// mods
     modImplementation "carpet:fabric-carpet:${project.carpet_core_version}"
 
     // libraries
     implementation "org.yaml:snakeyaml:${project.snakeyaml_version}"
     include "org.yaml:snakeyaml:${project.snakeyaml_version}"
+
+	// dependencies
+//	include(modImplementation(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
 }
 
 loom {
-    runConfigs.all {
-        runDir '../../run'
-        vmArgs '-Dmixin.debug.export=true'
-        ideConfigGenerated true
-    }
+	runConfigs.all {
+		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
+		ideConfigGenerated = true
+		runDir '../../run'
+		vmArgs '-Dmixin.debug.export=true'
+	}
 
-    runs {
+	runs {
         mixinAudit {
             server()
             vmArgs '-Dcarpetamsaddition.mixin_audit=true'
@@ -57,80 +69,124 @@ loom {
 }
 
 remapJar {
-    remapperIsolation = true
+	remapperIsolation = true
 }
 
 if (mcVersion >= 11800) {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 else if (mcVersion >= 11700) {
-    sourceCompatibility = JavaVersion.VERSION_16
-    targetCompatibility = JavaVersion.VERSION_16
+	sourceCompatibility = JavaVersion.VERSION_16
+	targetCompatibility = JavaVersion.VERSION_16
 }
 else {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 String versionSuffix = ''
+// detect github action environment variables
+// https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
 if (System.getenv("BUILD_RELEASE") != "true") {
-    String buildNumber = System.getenv("BUILD_ID")
-    versionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SNAPSHOT'
+	String buildNumber = System.getenv("BUILD_ID")
+	versionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SHAPSHOT'
 }
 String fullModVersion = project.mod_version + versionSuffix
 
 version = 'v' + fullModVersion
-group = project.parent.maven_group
-archivesBaseName = project.parent.archives_base_name + '-mc' + project.minecraft_version
+group = project.maven_group
+archivesBaseName = project.archives_base_name + '-mc' + project.minecraft_version
 
 processResources {
-    inputs.property "version", fullModVersion
+	inputs.property "version", fullModVersion
 
-    filesMatching("fabric.mod.json") {
-        def valueMap = [
-                "version": fullModVersion,
-                "carpet_dependency": project.carpet_dependency,
-                "minecraft_dependency": project.minecraft_dependency
-        ]
-        expand valueMap
-    }
+	filesMatching("fabric.mod.json") {
+		def valueMap = [
+				"id": project.mod_id,
+				"name": project.mod_name,
+				"version": fullModVersion,
+				"carpet_dependency": project.carpet_dependency,
+				"minecraft_dependency": project.minecraft_dependency,
+		]
+		expand valueMap
+	}
+}
+
+// https://github.com/Fallen-Breath/yamlang
+yamlang {
+	targetSourceSets = [sourceSets.main]
+	inputDir = 'assets/template_mod/lang'
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
 // this fixes some edge cases with special characters not displaying correctly
 // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
 tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-    options.compilerArgs << "-Xlint:deprecation"
+	options.encoding = "UTF-8"
 }
 
 java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
-    withSourcesJar()
+	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+	// if it is present.
+	// If you remove this line, sources will not be generated.
+	withSourcesJar()
 }
 
 jar {
-    from("../../LICENSE") {
-        rename { it }
-    }
+	from(rootProject.file('LICENSE')) {
+		rename { "${it}_${project.archivesBaseName}"}
+	}
 }
+
+// https://github.com/hierynomus/license-gradle-plugin
+license {
+	// use "gradle licenseFormat" to apply license headers
+	header = rootProject.file('HEADER.txt')
+	include '**/*.java'
+	skipExistingHeaders = true
+
+	headerDefinitions {
+		// ref: https://github.com/mathieucarbou/license-maven-plugin/blob/4c42374bb737378f5022a3a36849d5e23ac326ea/license-maven-plugin/src/main/java/com/mycila/maven/plugin/license/header/HeaderType.java#L48
+		// modification: add a newline at the end
+		SLASHSTAR_STYLE_NEWLINE {
+			firstLine = "/*"
+			beforeEachLine = " * "
+			endLine = " */" + System.lineSeparator()
+			afterEachLine = ""
+			skipLinePattern = null
+			firstLineDetectionPattern = "(\\s|\\t)*/\\*.*\$"
+			lastLineDetectionPattern = ".*\\*/(\\s|\\t)*\$"
+			allowBlankLines = false
+			isMultiline = true
+			padLines = false
+		}
+	}
+	mapping {
+		java = 'SLASHSTAR_STYLE_NEWLINE'
+	}
+	ext {
+		name = project.mod_name
+		author = 'A Minecraft Server'
+		year = Calendar.getInstance().get(Calendar.YEAR).toString()
+	}
+}
+classes.dependsOn licenseFormatMain
+testClasses.dependsOn licenseFormatTest
 
 // configure the maven publication
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId archivesBaseName
+	publications {
+		mavenJava(MavenPublication) {
+			artifactId archivesBaseName
 
-            from components.java
-        }
-    }
+			from components.java
+		}
+	}
 
-    // select the repositories you want to publish to
-    repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
-    }
+	// select the repositories you want to publish to
+	repositories {
+		// uncomment to publish to the local maven
+		// mavenLocal()
+	}
 }
