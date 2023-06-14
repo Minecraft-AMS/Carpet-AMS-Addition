@@ -149,9 +149,7 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, CREATIVE})
     public static boolean creativeShulkerBoxDropsDisable = false;
 
-    /**
-     * 可移动方块规�?
-     */
+    // 可移动方块规则
     @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
     public static boolean movableEnderChest = false;
 
@@ -207,7 +205,7 @@ public class AmsServerSettings {
     public static boolean movableAnvil = false;
 
     /**
-     * 合成表规�?
+     * 合成表规�?
      */
     @SuppressWarnings("unused")
     @CraftingRule(recipes = "enchanted_golden_apples.json")

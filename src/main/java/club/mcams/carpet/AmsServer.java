@@ -106,7 +106,7 @@ public class AmsServer implements CarpetExtension {
     public void onGameStarted() {
         // let's /carpet handle our few simple settings
         LOGGER.info(fancyName + " " + "v" + AmsServerMod.getVersion() + " 载入成功");
-        LOGGER.info("�?源链接：https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
+        LOGGER.info("开源链接：https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
         LOGGER.info("BUG反馈：https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
         CarpetRuleRegistrar.register(CarpetServer.settingsManager, AmsServerSettings.class);
     }
