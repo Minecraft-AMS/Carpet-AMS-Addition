@@ -14,5 +14,3 @@ on:
 jobs:
   build:
     uses: ./.github/workflows/build.yml
-    with:
-      mixin_audit: true
