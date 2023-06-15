@@ -27,6 +27,7 @@ import club.mcams.carpet.util.compat.DimensionWrapper;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.*;
@@ -110,16 +111,42 @@ public class Messenger {
         return (BaseText) text.shallowCopy();
     }
 
+    private static void __tell(ServerCommandSource source, BaseText text, boolean broadcastToOps)
+    {
+        source.sendFeedback(
+                //#if MC >= 12000
+                //$$ () ->
+                //#endif
+                text, broadcastToOps
+        );
+    }
+
+    public static void tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
+        __tell(source, text, broadcastToOps);
+    }
+    public static void tell(PlayerEntity player, BaseText text, boolean broadcastToOps) {
+        tell(player.getCommandSource(), text, broadcastToOps);
+    }
     public static void tell(ServerCommandSource source, BaseText text) {
-        Entity entity = source.getEntity();
-        text = entity instanceof ServerPlayerEntity ?
-                AMSTranslations.translate(text, (ServerPlayerEntity) entity) :
-                AMSTranslations.translate(text);
-        //#if MC>=12000
-        //$$ source.sendFeedback((Supplier<Text>) text, false);
-        //#else
-        source.sendFeedback(text, false);
-        //#endif
+        tell(source, text, false);
+    }
+    public static void tell(PlayerEntity player, BaseText text)
+    {
+        tell(player, text, false);
+    }
+
+    public static void tell(ServerCommandSource source, Iterable<BaseText> texts, boolean broadcastToOps) {
+        texts.forEach(text -> tell(source, text, broadcastToOps));
+    }
+    public static void tell(PlayerEntity player, Iterable<BaseText> texts, boolean broadcastToOps) {
+        texts.forEach(text -> tell(player, text, broadcastToOps));
+    }
+    public static void tell(ServerCommandSource source, Iterable<BaseText> texts) {
+        tell(source, texts, false);
+    }
+    public static void tell(PlayerEntity player, Iterable<BaseText> texts)
+    {
+        tell(player, texts, false);
     }
 
     public static BaseText formatting(BaseText text, Formatting... formattings) {
