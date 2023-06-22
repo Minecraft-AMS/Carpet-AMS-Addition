@@ -349,9 +349,19 @@
 - 分类: `AMS` , `FEATURE` , `TNT`
 
 
-## 创造模式潜影盒无掉落(*creativeShulkerBoxDropsDisable*)
+## 创造模式潜影盒无掉落(creativeShulkerBoxDropsDisable)
 
 开启后，当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS`, `FEATURE`, `CREATIVE`
+
+
+## 基岩版飞行(bedRockFlying)
+
+开启后，玩家飞行时的表现与基岩版一致。
 
 - 类型: `boolean`
 - 默认值: `false`

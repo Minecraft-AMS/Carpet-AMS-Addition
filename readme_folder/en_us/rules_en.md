@@ -340,6 +340,16 @@ When enabled, Breaking a shulker box with items in creative mode will not cause 
 - Categroies: `AMS`, `FEATURE`, `CREATIVE`
 
 
+## **bedRockFlying**
+
+Flight in creative mode is consistent with the bedrock version.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categroies: `AMS`, `FEATURE`, `CREATIVE`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.

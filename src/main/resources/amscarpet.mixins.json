@@ -46,7 +46,8 @@
     "translations.ServerPlayerEntityMixin",
     "translations.StyleAccessor",
     "translations.TranslatableTextAccessor",
-    "translations.TranslatableTextMixin"
+    "translations.TranslatableTextMixin",
+    "rule.bedRockFlying.ClientPlayerEntityMixin"
   ],
   "client": [],
   "server": [],

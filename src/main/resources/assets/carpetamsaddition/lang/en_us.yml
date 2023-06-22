@@ -90,6 +90,9 @@ carpetamsaddition:
       creativeShulkerBoxDropsDisable:
         name: creativeShulkerBoxDropsDisable
         desc: Breaking a shulker box with items in creative mode will not cause drops
+      bedRockFlying:
+        name: bedRockFlying
+        desc: Flight in creative mode is consistent with the bedrock version
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
