@@ -8,6 +8,9 @@ pluginManagement {
 			name = 'Jitpack'
 			url = "https://jitpack.io"
 		}
+		maven {
+			url 'https://maven.aliyun.com/repository/public/'
+		}
 		mavenCentral()
 		gradlePluginPortal()
 	}
@@ -15,7 +18,7 @@ pluginManagement {
 		eachPlugin {
 			switch (requested.id.id) {
 				case "com.replaymod.preprocess": {
-					useModule("com.github.Fallen-Breath:preprocessor:${requested.version}")
+					useModule("com.github.1024-byteeeee:preprocessor:${requested.version}")
 					break
 				}
 			}
