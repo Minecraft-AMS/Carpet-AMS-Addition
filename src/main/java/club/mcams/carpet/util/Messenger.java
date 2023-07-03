@@ -21,7 +21,6 @@
 package club.mcams.carpet.util;
 
 import club.mcams.carpet.mixin.translations.StyleAccessor;
-import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.util.compat.DimensionWrapper;
 
@@ -29,7 +28,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.ChunkPos;
@@ -38,12 +36,11 @@ import net.minecraft.util.math.Vec3i;
 
 import com.google.common.collect.ImmutableMap;
 
-import org.jetbrains.annotations.Nullable;
-
 //#if MC>=11900
 //$$ import java.util.function.Supplier;
 //#endif
 
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Reference: Carpet TIS Addition
@@ -130,6 +127,7 @@ public class Messenger {
     public static void tell(ServerCommandSource source, BaseText text) {
         tell(source, text, false);
     }
+
     public static void tell(PlayerEntity player, BaseText text)
     {
         tell(player, text, false);
