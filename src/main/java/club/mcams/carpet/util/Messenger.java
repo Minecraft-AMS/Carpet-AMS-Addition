@@ -21,6 +21,7 @@
 package club.mcams.carpet.util;
 
 import club.mcams.carpet.mixin.translations.StyleAccessor;
+import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.util.compat.DimensionWrapper;
 
@@ -28,6 +29,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.ChunkPos;
