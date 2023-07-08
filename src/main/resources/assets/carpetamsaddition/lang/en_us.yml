@@ -93,6 +93,15 @@ carpetamsaddition:
       bedRockFlying:
         name: bedRockFlying
         desc: Flight in creative mode is consistent with the bedrock version
+      shulkerHitLevitationDisable:
+        name: shulkerHitLevitationDisable
+        desc: When hit by a shulker, the player only takes damage and does not gain the levitation effect
+      immuneShulkerBullet:
+        name: immuneShulkerBullet
+        desc: Players are now completely immune to bullets fired by shulkers
+      kirinArm:
+        name: kirinArm
+        desc: Players can instantly break any block except bedrock with bare hands
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

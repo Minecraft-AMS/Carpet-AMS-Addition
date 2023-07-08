@@ -369,6 +369,36 @@
 - 分类: `AMS`, `FEATURE`, `CREATIVE`
 
 
+## 禁止潜影贝给予漂浮效果(shulkerHitLevitationDisable)
+
+开启后，玩家被潜影贝击中时只会受到伤害而不会获得漂浮BUFF。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+
+## 免疫潜影贝飞弹(immuneShulkerBullet)
+
+开启后，玩家将完全免疫潜影贝发射的飞弹。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+
+## 麒麟臂(kirinArm)
+
+开启后，玩家可以徒手秒破除基岩外的任何方块。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+
 ## 可移动末地传送门框架(movableEndPortalFrame)
 
 开启后，末地传送门框架可以被活塞/黏性活塞推动。

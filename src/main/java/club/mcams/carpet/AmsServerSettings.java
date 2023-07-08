@@ -152,6 +152,15 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, CREATIVE})
     public static boolean bedRockFlying = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean shulkerHitLevitationDisable = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean immuneShulkerBullet = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean kirinArm = false;
+
     // 可移动方块规则
     @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
     public static boolean movableEnderChest = false;

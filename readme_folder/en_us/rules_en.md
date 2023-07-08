@@ -350,6 +350,36 @@ Flight in creative mode is consistent with the bedrock version.
 - Categroies: `AMS`, `FEATURE`, `CREATIVE`
 
 
+## shulkerHitLevitationDisable
+
+When enabled, When hit by a shulker, the player only takes damage and does not gain the levitation effect.
+
+- Type `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+
+## immuneShulkerBullet
+
+When enabled, Players are now completely immune to bullets fired by shulkers.
+
+- Type `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+
+## kirinArm
+
+When enabled, Players can instantly break any block except bedrock with bare hands.
+
+- Type `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.

@@ -9,6 +9,7 @@
     "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.bambooCollisionBoxDisable.BambooBlockMixin",
     "rule.bambooModelNoOffset.BambooBlockMixin",
+    "rule.bedRockFlying.ClientPlayerEntityMixin",
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.blockChunkLoader.PistonBlockMixin",
@@ -20,6 +21,7 @@
     "rule.extinguishedCampfire_campfireSmokeParticleDisabled.GetPlacementStateMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
     "rule.infiniteTrades.MerchantEntityMixin",
+    "rule.kirinArm.AbstractBlockStateMixin",
     "rule.largeEnderChest.EnderChestBlockMixin",
     "rule.largeEnderChest.PlayerEntityMixin",
     "rule.largeEnderChest.SimpleInventoryAccessor",
@@ -35,6 +37,7 @@
     "rule.scheduledRandomTick.SugarCaneBlockMixin",
     "rule.sharedVillagerDiscounts.GetValueForInvoker",
     "rule.sharedVillagerDiscounts.VillagerGossipsMixin",
+    "rule.shulkerHitLevitationDisable_immuneShulkerBullet.ShulkerBulletEntityMixin",
     "rule.softBlock.AbstractBlockStateMixin",
     "rule.superBow.InfinityEnchantmentMixin",
     "rule.weakBlocks.CollectBlocksAndDamageEntitiesMixin",
@@ -46,8 +49,7 @@
     "translations.ServerPlayerEntityMixin",
     "translations.StyleAccessor",
     "translations.TranslatableTextAccessor",
-    "translations.TranslatableTextMixin",
-    "rule.bedRockFlying.ClientPlayerEntityMixin"
+    "translations.TranslatableTextMixin"
   ],
   "client": [],
   "server": [],

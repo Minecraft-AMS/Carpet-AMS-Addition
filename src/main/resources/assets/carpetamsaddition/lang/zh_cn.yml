@@ -93,6 +93,15 @@ carpetamsaddition:
       bedRockFlying:
         name: 基岩版飞行
         desc: 创造模式下飞行与基岩版一致
+      shulkerHitLevitationDisable:
+        name: 禁止潜影贝给予漂浮效果
+        desc: 玩家被潜影贝击中时只会受到伤害而不会获得漂浮BUFF
+      immuneShulkerBullet:
+        name: 免疫潜影贝飞弹
+        desc: 玩家将完全免疫潜影贝发射的飞弹
+      kirinArm:
+        name: 麒麟臂
+        desc: 玩家可以徒手秒破除基岩外的任何方块
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
