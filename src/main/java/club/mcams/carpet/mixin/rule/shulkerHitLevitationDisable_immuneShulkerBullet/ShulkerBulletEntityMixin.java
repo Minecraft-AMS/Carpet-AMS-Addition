@@ -62,7 +62,7 @@ public abstract class ShulkerBulletEntityMixin extends Entity {
 
     @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
     private void immuneShulkerBullet(EntityHitResult entityHitResult, CallbackInfo ci) {
-        if(AmsServerSettings.immuneShulkerBullet) {
+        if(AmsServerSettings.immuneShulkerBullet && (entityHitResult.getEntity() instanceof PlayerEntity)) {
             ci.cancel();
         }
     }
