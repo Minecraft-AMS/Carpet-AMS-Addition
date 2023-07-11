@@ -349,7 +349,7 @@
 - 分类: `AMS` , `FEATURE` , `TNT`
 
 
-## 创造模式潜影盒无掉落(creativeShulkerBoxDropsDisable)
+## 创造模式潜影盒无掉落(creativeShulkerBoxDropsDisabled)
 
 开启后，当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落。
 
@@ -369,7 +369,7 @@
 - 分类: `AMS`, `FEATURE`, `CREATIVE`
 
 
-## 禁止潜影贝给予漂浮效果(shulkerHitLevitationDisable)
+## 禁止潜影贝给予漂浮效果(shulkerHitLevitationDisabled)
 
 开启后，玩家被潜影贝击中时只会受到伤害而不会获得漂浮BUFF。
 
@@ -397,6 +397,21 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 凋零蓝头控制器 (blueSkullController)
+
+开启后，可以选择让凋零总是发射蓝头还是从不发射蓝头。
+<br>
+`SURELY`: 总是发射蓝头。
+<br>
+`NEVER`: 从不发射蓝头。
+<br>
+`VANILLA`: 原版表现。
+
+- 类型: `String`
+- 默认值: `VANILLA`
+- 参考选项: `SURELY` , `NEVER` , `VANILLA` 
+- 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
 ## 可移动末地传送门框架(movableEndPortalFrame)

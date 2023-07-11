@@ -330,7 +330,7 @@ When enabled, Dropped items will not be destroyed by explosions.
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `FEATURE`, `TNT`
 
-## **creativeShulkerBoxDropsDisable**
+## **creativeShulkerBoxDropsDisabled**
 
 When enabled, Breaking a shulker box with items in creative mode will not cause drops.
 
@@ -350,7 +350,7 @@ Flight in creative mode is consistent with the bedrock version.
 - Categroies: `AMS`, `FEATURE`, `CREATIVE`
 
 
-## shulkerHitLevitationDisable
+## shulkerHitLevitationDisabled
 
 When enabled, When hit by a shulker, the player only takes damage and does not gain the levitation effect.
 
@@ -378,6 +378,21 @@ When enabled, Players can instantly break any block except bedrock with bare han
 - Default: `false`
 - Suggested options: `false` , `true`
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## blueSkullController
+
+When enabled，You can choose whether to have Withering always shoot blue skulls or never shoot blue skull.
+<br>
+`SURELY`: Always shoot blue skulls。
+<br>
+`NEVER`: Never shoot blue skull。
+<br>
+`VANILLA`: VANILLA。
+
+- Type: `String`
+- Default值: `VANILLA`
+- Suggested options: `SURELY` , `NEVER` , `VANILLA` 
+- Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
 ## movableEnderChest

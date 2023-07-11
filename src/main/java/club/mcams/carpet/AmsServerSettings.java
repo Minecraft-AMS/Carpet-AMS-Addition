@@ -147,13 +147,13 @@ public class AmsServerSettings {
     public static boolean itemAntiExplosion = false;
 
     @Rule(categories = {AMS, FEATURE, CREATIVE})
-    public static boolean creativeShulkerBoxDropsDisable = false;
+    public static boolean creativeShulkerBoxDropsDisabled = false;
 
     @Rule(categories = {AMS, FEATURE, CREATIVE})
     public static boolean bedRockFlying = false;
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean shulkerHitLevitationDisable = false;
+    public static boolean shulkerHitLevitationDisabled = false;
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean immuneShulkerBullet = false;
@@ -161,7 +161,12 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean kirinArm = false;
 
-    // 可移动方块规则
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    public static blueSkullProbability blueSkullController = blueSkullProbability.VANILLA;
+
+    /**
+     * 可移动方块规则
+     */
     @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
     public static boolean movableEnderChest = false;
 
@@ -217,7 +222,7 @@ public class AmsServerSettings {
     public static boolean movableAnvil = false;
 
     /**
-     * 合成表规�?
+     * 合成表规则
      */
     @SuppressWarnings("unused")
     @CraftingRule(recipes = "enchanted_golden_apples.json")
@@ -259,4 +264,10 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, CRAFTING, SURVIVAL})
     public static boolean betterCraftablePolishedBlackStoneButton = false;
     //#endif
+
+    public enum blueSkullProbability {
+        VANILLA,
+        SURELY,
+        NEVER
+    }
 }

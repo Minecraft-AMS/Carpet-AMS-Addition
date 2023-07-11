@@ -87,13 +87,13 @@ carpetamsaddition:
       itemAntiExplosion:
         name: itemAntiExplosion
         desc: Dropped items will not be destroyed by explosions
-      creativeShulkerBoxDropsDisable:
+      creativeShulkerBoxDropsDisabled:
         name: creativeShulkerBoxDropsDisable
         desc: Breaking a shulker box with items in creative mode will not cause drops
       bedRockFlying:
         name: bedRockFlying
         desc: Flight in creative mode is consistent with the bedrock version
-      shulkerHitLevitationDisable:
+      shulkerHitLevitationDisabled:
         name: shulkerHitLevitationDisable
         desc: When hit by a shulker, the player only takes damage and does not gain the levitation effect
       immuneShulkerBullet:
@@ -102,6 +102,13 @@ carpetamsaddition:
       kirinArm:
         name: kirinArm
         desc: Players can instantly break any block except bedrock with bare hands
+      blueSkullController:
+        name: blueSkullController
+        desc: Control the probability of wither and emitting blue skull
+        extra:
+          '0': '[SURELY] - Always shoot blue skulls'
+          '1': '[NEVER] - Never shoot blue skull'
+          '2': '[VANILLA] - VANILLA'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

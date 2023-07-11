@@ -87,13 +87,13 @@ carpetamsaddition:
       itemAntiExplosion:
         name: 掉落物防爆
         desc: 掉落物将不会被爆炸摧毁
-      creativeShulkerBoxDropsDisable:
+      creativeShulkerBoxDropsDisabled:
         name: 创造模式潜影盒无掉落
         desc: 当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落
       bedRockFlying:
         name: 基岩版飞行
         desc: 创造模式下飞行与基岩版一致
-      shulkerHitLevitationDisable:
+      shulkerHitLevitationDisabled:
         name: 禁止潜影贝给予漂浮效果
         desc: 玩家被潜影贝击中时只会受到伤害而不会获得漂浮BUFF
       immuneShulkerBullet:
@@ -102,6 +102,13 @@ carpetamsaddition:
       kirinArm:
         name: 麒麟臂
         desc: 玩家可以徒手秒破除基岩外的任何方块
+      blueSkullController:
+        name: 凋零蓝头控制器
+        desc: 控制凋零发射蓝色骷髅的概率
+        extra:
+          '0': '[SURELY] - 总是发射蓝头'
+          '1': '[NEVER] - 从不发射蓝头'
+          '2': '[VANILLA] - 原版表现'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -133,7 +140,7 @@ carpetamsaddition:
         extra:
           '0': '[bone_block] - 音符盒上方有骨块可以触发加载'
           '1': '[wither_skeleton_skull] - 音符盒上有凋灵骷髅头（可以是挂在墙上的也可以是放在音符盒上的）时可以触发加载'
-          '2': '[note_block]：无需条件，只有音符盒即可加载'
+          '2': '[note_block] - 无需条件，只有音符盒即可加载'
           '3': '[OFF] - 禁用该规则'
       bellBlockChunkLoader:
         name: 钟区块加载
