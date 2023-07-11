@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.shulkerHitLevitationDisable_immuneShulkerBullet;
+package club.mcams.carpet.mixin.rule.shulkerHitLevitationDisabled_immuneShulkerBullet;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -45,7 +45,7 @@ public abstract class ShulkerBulletEntityMixin extends Entity {
     }
     @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
     private void shulkerHitLevitationDisable(EntityHitResult entityHitResult, CallbackInfo ci) {
-        if (AmsServerSettings.shulkerHitLevitationDisable && (entityHitResult.getEntity() instanceof PlayerEntity)) {
+        if (AmsServerSettings.shulkerHitLevitationDisabled && (entityHitResult.getEntity() instanceof PlayerEntity)) {
             Entity entity = entityHitResult.getEntity();
             LivingEntity entity1024 = (LivingEntity) entity;
             //#if MC<=11800
