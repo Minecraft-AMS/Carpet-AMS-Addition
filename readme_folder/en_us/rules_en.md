@@ -399,10 +399,10 @@ When enabled，You can choose whether to have Withering always shoot blue skulls
 
 When enabled, Random teleportation by EnderMan is prohibited.
 
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
 ## movableEnderChest
