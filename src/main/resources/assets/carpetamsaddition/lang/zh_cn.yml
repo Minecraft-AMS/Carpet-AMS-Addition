@@ -109,6 +109,9 @@ carpetamsaddition:
           '0': '[SURELY] - 总是发射蓝头'
           '1': '[NEVER] - 从不发射蓝头'
           '2': '[VANILLA] - 原版表现'
+      enderManTeleportRandomlyDisabled:
+        name: 禁止末影人随机传送
+        desc: 禁止末影人随机传送
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

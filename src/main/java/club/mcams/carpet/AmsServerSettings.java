@@ -164,6 +164,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static blueSkullProbability blueSkullController = blueSkullProbability.VANILLA;
 
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    public static boolean enderManTeleportRandomlyDisabled = false;
+
     /**
      * 可移动方块规则
      */

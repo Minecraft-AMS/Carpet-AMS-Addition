@@ -109,6 +109,9 @@ carpetamsaddition:
           '0': '[SURELY] - Always shoot blue skulls'
           '1': '[NEVER] - Never shoot blue skull'
           '2': '[VANILLA] - VANILLA'
+      enderManTeleportRandomlyDisabled:
+        name: enderManTeleportRandomlyDisabled
+        desc: Random teleportation by EnderMan is prohibited
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

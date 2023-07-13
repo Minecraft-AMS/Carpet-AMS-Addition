@@ -395,6 +395,16 @@ When enabled，You can choose whether to have Withering always shoot blue skulls
 - Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
+## enderManTeleportRandomlyDisabled
+
+When enabled, Random teleportation by EnderMan is prohibited.
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.

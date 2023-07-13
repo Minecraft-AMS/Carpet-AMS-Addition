@@ -414,6 +414,16 @@
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
+## 禁止末影人随机传送 (enderManTeleportRandomlyDisabled)
+
+开启后，末影人不会随机传送。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
+
+
 ## 可移动末地传送门框架(movableEndPortalFrame)
 
 开启后，末地传送门框架可以被活塞/黏性活塞推动。
