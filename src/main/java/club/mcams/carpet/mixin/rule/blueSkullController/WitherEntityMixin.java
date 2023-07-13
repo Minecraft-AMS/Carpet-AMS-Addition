@@ -37,7 +37,7 @@ public abstract class WitherEntityMixin {
             //#if MC>=11700
             method = "shootSkullAt(ILnet/minecraft/entity/LivingEntity;)V",
             //#else
-            //$$ method = "shootSkullAt",
+            //$$ method = "method_6878",
             //#endif
             constant = @Constant(floatValue = 0.001F)
     )
