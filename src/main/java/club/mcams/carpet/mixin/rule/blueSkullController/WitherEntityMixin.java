@@ -31,10 +31,14 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(net.minecraft.entity.boss.WitherEntity.class)
+@Mixin(value = net.minecraft.entity.boss.WitherEntity.class, priority = 168)
 public abstract class WitherEntityMixin {
     @ModifyConstant(
+            //#if MC>=11700
             method = "shootSkullAt(ILnet/minecraft/entity/LivingEntity;)V",
+            //#else
+            //$$ method = "shootSkullAt",
+            //#endif
             constant = @Constant(floatValue = 0.001F)
     )
     private float shootSkull(float constant) {
