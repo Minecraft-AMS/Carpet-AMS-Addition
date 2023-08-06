@@ -322,13 +322,16 @@ public class AmsServer implements CarpetExtension {
         );
 
         JsonObject advancementJson = readJson(datapackPath + "ams/advancements/" + ruleName + ".json");
-        assert advancementJson != null;
-        JsonArray recipeRewards = advancementJson.getAsJsonObject("rewards").getAsJsonArray("recipes");
-
-        for (String recipeName : recipes) {
-            recipeRewards.add("ams:" + recipeName.replace(".json", ""));
+        if (advancementJson != null) {
+            JsonArray recipeRewards = advancementJson.getAsJsonObject("rewards").getAsJsonArray("recipes");
+            for (String recipeName : recipes) {
+                recipeRewards.add("ams:" + recipeName.replace(".json", ""));
+            }
+            writeJson(advancementJson, datapackPath + "ams/advancements/" + ruleName + ".json");
+        } else {
+            JsonObject defaultJson = new JsonObject();
+            writeJson(defaultJson, datapackPath + "ams/advancements/" + ruleName + ".json");
         }
-        writeJson(advancementJson, datapackPath + "ams/advancements/" + ruleName + ".json");
     }
 
     private void removeAdvancement(String datapackPath, String ruleName) {
