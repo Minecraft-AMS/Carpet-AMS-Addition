@@ -167,6 +167,12 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static boolean enderManTeleportRandomlyDisabled = false;
 
+    @Rule(
+            options = {"VANILLA", "Ⅰ", "Ⅱ", "Ⅲ"},
+            categories = {AMS, FEATURE, EXPERIMENTAL}
+    )
+    public static String fasterMovement = "VANILLA";
+
     /**
      * 可移动方块规则
      */

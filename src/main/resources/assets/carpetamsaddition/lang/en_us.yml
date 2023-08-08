@@ -112,6 +112,14 @@ carpetamsaddition:
       enderManTeleportRandomlyDisabled:
         name: enderManTeleportRandomlyDisabled
         desc: Random teleportation by EnderMan is prohibited
+      fasterMovement:
+        name: fasterMovement
+        desc: Three gears are provided to allow players to move faster
+        extra:
+          'Ⅰ': '[Ⅰ]'
+          'Ⅱ': '[Ⅱ]'
+          'Ⅲ': '[Ⅲ]'
+          'VANILLA': '[VANILLA]'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

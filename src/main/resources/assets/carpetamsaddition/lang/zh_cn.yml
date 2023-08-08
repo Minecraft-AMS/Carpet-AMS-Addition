@@ -112,6 +112,14 @@ carpetamsaddition:
       enderManTeleportRandomlyDisabled:
         name: 禁止末影人随机传送
         desc: 禁止末影人随机传送
+      fasterMovement:
+        name: 快速移动
+        desc: 提供了三个挡位让玩家移动速度变快
+        extra:
+          'Ⅰ': '[Ⅰ]'
+          'Ⅱ': '[Ⅱ]'
+          'Ⅲ': '[Ⅲ]'
+          'VANILLA': '[VANILLA]'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -424,6 +424,16 @@
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
+## 更快移动 (fasterMovement)
+
+提供了三个挡位，让玩家移动速度更快。
+
+- 类型: `String`
+- 默认值: `VANILLA`
+- 参考选项: `Ⅰ` , `Ⅱ`, `Ⅲ`, `VANILLA`
+- 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
+
+
 ## 可移动末地传送门框架(movableEndPortalFrame)
 
 开启后，末地传送门框架可以被活塞/黏性活塞推动。

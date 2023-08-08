@@ -405,6 +405,16 @@ When enabled, Random teleportation by EnderMan is prohibited.
 - Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
+## fasterMovement
+
+Three gears are provided to allow players to move faster.
+
+- Type: `String`
+- Default: `VANILLA`
+- Suggested options: `Ⅰ` , `Ⅱ`, `Ⅲ`, `VANILLA`
+- Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.

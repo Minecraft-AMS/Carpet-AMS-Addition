@@ -22,6 +22,7 @@
     "rule.enderManTeleportRandomlyDisabled.EndermanEntityMixin",
     "rule.extinguishedCampfire_campfireSmokeParticleDisabled.GetPlacementStateMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
+    "rule.fasterMovement.PlayerEntityMixin",
     "rule.infiniteTrades.MerchantEntityMixin",
     "rule.kirinArm.AbstractBlockStateMixin",
     "rule.largeEnderChest.EnderChestBlockMixin",
