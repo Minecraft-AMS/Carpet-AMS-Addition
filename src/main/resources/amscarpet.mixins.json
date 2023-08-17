@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "carpet.SettingsManagerMixin",
-    "interaction.ThreadedAnvilChunkStorageMixin",
+    "rule.commandChunkLoading.ThreadedAnvilChunkStorageMixin",
     "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.bambooCollisionBoxDisabled.BambooBlockMixin",
     "rule.bambooModelNoOffset.BambooBlockMixin",

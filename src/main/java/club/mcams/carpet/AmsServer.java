@@ -32,6 +32,8 @@ import carpet.settings.ParsedRule;
 import carpet.script.bundled.BundledModule;
 //#endif
 
+import club.mcams.carpet.commands.AmsCarpetCommandRegistry;
+import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
@@ -46,9 +48,11 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ReloadCommand;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.WorldSavePath;
 //#if MC>=11900
 //$$ import net.minecraft.command.CommandRegistryAccess;
@@ -78,6 +82,32 @@ public class AmsServer implements CarpetExtension {
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
 
     @Override
+    public String version() {
+        return AmsServerMod.getModId();
+    }
+    public static void init() {
+        CarpetServer.manageExtension(INSTANCE);
+        AMSTranslations.loadTranslations();
+    }
+
+    @Override
+    public void registerLoggers() {
+        AmsCarpetLoggerRegistry.registerLoggers();
+    }
+
+    //#if MC>=11900
+    //$$    @Override
+    //$$    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
+    //$$        AmsCarpetCommandRegistry.register(dispatcher);
+    //$$    }
+    //#else
+    @Override
+    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
+        AmsCarpetCommandRegistry.register(dispatcher);
+    }
+    //#endif
+
+    @Override
     public Map<String, String> canHasTranslations(String lang) {
         Map<String, String> trimmedTranslation = Maps.newHashMap();
         String prefix = TranslationConstants.CARPET_TRANSLATIONS_KEY_PREFIX;
@@ -91,15 +121,6 @@ public class AmsServer implements CarpetExtension {
             }
         });
         return trimmedTranslation;
-    }
-
-    @Override
-    public String version() {
-        return AmsServerMod.getModId();
-    }
-    public static void init() {
-        CarpetServer.manageExtension(INSTANCE);
-        AMSTranslations.loadTranslations();
     }
 
     @Override
