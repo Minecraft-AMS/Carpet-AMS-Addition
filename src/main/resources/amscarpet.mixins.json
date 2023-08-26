@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "carpet.SettingsManagerMixin",
-    "rule.commandChunkLoading.ThreadedAnvilChunkStorageMixin",
+    "rule.amsUpdateSuppressionCrashFix.MinecraftServerMixin",
+    "rule.amsUpdateSuppressionCrashFix.WorldMixin",
     "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.bambooCollisionBoxDisabled.BambooBlockMixin",
     "rule.bambooModelNoOffset.BambooBlockMixin",
@@ -16,6 +17,7 @@
     "rule.blowUpEverything.GetBlastResistanceMixin",
     "rule.blueSkullController.WitherEntityMixin",
     "rule.boneBlockUpdateSuppressor.NeighborUpdateMixin",
+    "rule.commandChunkLoading.ThreadedAnvilChunkStorageMixin",
     "rule.creativeOneHitKill.EntityAccessorMixin",
     "rule.creativeOneHitKill.PlayerEntityMixin",
     "rule.creativeShulkerBoxDropsDisabled.ShulkerBoxBlockMixin",

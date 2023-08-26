@@ -193,7 +193,7 @@ Explosion can destroy all blocks except anvil and bedrock.
 ## weakReinforcedDeepslate
 
 Explosion can destroy reinforced deepslate.
-<Only available for Minecraft \>= 1.19>
+<Only available for Minecraft >= 1.19>
 
 - Type: `boolean`
 - Default: `false`
@@ -231,9 +231,9 @@ Hitting surface will cause no damage to player when flying with elytra.
 
 ## boneBlockUpdateSuppressor
 
-When enabled, bone block will be a update suppressor.
+When enabled, bone block will be a update suppressor (Does not cause the server to crash).
 
-<Only available for Minecraft \< 1.19 >
+<Only available for Minecraft < 1.19 >
 
 - Type: `boolean`
 - Default: `false`
@@ -413,6 +413,19 @@ Three gears are provided to allow players to move faster.
 - Default: `VANILLA`
 - Suggested options: `Ⅰ` , `Ⅱ`, `Ⅲ`, `VANILLA`
 - Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
+
+
+## amsUpdateSuppressionCrashFix
+
+When enabled, Update suppression does not cause the server to crash.
+
+<Only available for Minecraft < 1.19 >
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
+
 
 
 ## movableEnderChest

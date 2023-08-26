@@ -248,7 +248,7 @@
 
 ## 骨块更新抑制器(boneBlockUpdateSuppressor)
 
-开启后，骨块将会成为一个更新抑制器。
+开启后，骨块将会成为一个更新抑制器(不会导致服务器崩溃)。
 <该规则 `Minecraft Version < 1.19` 可用>
 
 - 类型: `boolean`
@@ -432,6 +432,17 @@
 - 默认值: `VANILLA`
 - 参考选项: `Ⅰ` , `Ⅱ`, `Ⅲ`, `VANILLA`
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
+
+
+## 更新抑制崩溃修复 (amsUpdateSuppressionCrashFix)
+
+开启后，更新抑制不会导致服务器崩溃。
+<该规则 `Minecraft Version < 1.19` 可用>
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
 
 
 ## 可移动末地传送门框架(movableEndPortalFrame)
