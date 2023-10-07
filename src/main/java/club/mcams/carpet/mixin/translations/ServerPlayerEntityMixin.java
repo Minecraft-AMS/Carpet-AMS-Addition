@@ -22,29 +22,42 @@ package club.mcams.carpet.mixin.translations;
 
 import club.mcams.carpet.translations.ServerPlayerEntityWithClientLanguage;
 
+//#if MC>=12002
+//$$ import net.minecraft.network.packet.c2s.common.SyncedClientOptions;
+//#else
 import net.minecraft.network.packet.c2s.play.ClientSettingsC2SPacket;
+//#endif
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerPlayerEntity.class)
 public class ServerPlayerEntityMixin implements ServerPlayerEntityWithClientLanguage {
+    @Unique
     private String clientLanguage$AMS = "en_US";
 
-    //#if MC>=11800
-    @Inject(method = "setClientSettings", at = @At("HEAD"))
-    private void recordClientLanguage(ClientSettingsC2SPacket packet, CallbackInfo ci) {
-        this.clientLanguage$AMS = packet.language();
-    }
+    //#if MC>=12002
+    //$$ @Inject(method = "setClientOptions", at = @At("HEAD"))
     //#else
-    //$$ @Inject(method = "setClientSettings", at = @At("HEAD"))
-    //$$ private void recordClientLanguage(ClientSettingsC2SPacket packet, CallbackInfo ci) {
-    //$$     this.clientLanguage$AMS = ((ClientSettingsC2SPacketAccessor) packet).getLanguage$AMS();
-    //$$ }
+    @Inject(method = "setClientSettings", at = @At("HEAD"))
     //#endif
+    //#if MC>=12002
+    //$$ private void recordClientLanguage(SyncedClientOptions settings, CallbackInfo ci) {
+    //#else
+    private void recordClientLanguage(ClientSettingsC2SPacket packet, CallbackInfo ci) {
+        //#endif
+        //#if MC>=12002
+        //$$ this.clientLanguage$AMS = settings.language();
+        //#elseif MC<11800
+        //$$ this.clientLanguage$AMS = ((ClientSettingsC2SPacketAccessor) packet).getLanguage$AMS();
+        //#else
+        this.clientLanguage$AMS = packet.language();
+        //#endif
+    }
 
     @Override
     public String getClientLanguage$AMS() {

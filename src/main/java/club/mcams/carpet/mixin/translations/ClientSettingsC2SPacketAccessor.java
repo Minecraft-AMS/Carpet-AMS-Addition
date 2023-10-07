@@ -28,6 +28,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @SuppressWarnings("unused")
 @Mixin(ClientSettingsC2SPacket.class)
 public interface ClientSettingsC2SPacketAccessor {
+    //#if MC<11800
     @Accessor(value = "language")
     String getLanguage$AMS();
+    //#endif
 }
