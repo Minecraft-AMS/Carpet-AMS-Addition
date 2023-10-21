@@ -21,6 +21,7 @@
     "rule.creativeOneHitKill.EntityAccessorMixin",
     "rule.creativeOneHitKill.PlayerEntityMixin",
     "rule.creativeShulkerBoxDropsDisabled.ShulkerBoxBlockMixin",
+    "rule.easyWitherSkeletonSkullDrop.WitherSkeletonEntityMixin",
     "rule.enderManTeleportRandomlyDisabled.EndermanEntityMixin",
     "rule.extinguishedCampfire_campfireSmokeParticleDisabled.GetPlacementStateMixin",
     "rule.fakePeace.AbstractBlockStateMixin",

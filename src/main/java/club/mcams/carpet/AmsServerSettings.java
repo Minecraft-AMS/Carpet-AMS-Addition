@@ -178,6 +178,9 @@ public class AmsServerSettings {
     public static boolean amsUpdateSuppressionCrashFix = false;
     //#endif
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean easyWitherSkeletonSkullDrop = false;
+
     /**
      * 可移动方块规则
      */

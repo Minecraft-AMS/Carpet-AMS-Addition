@@ -123,6 +123,9 @@ carpetamsaddition:
       amsUpdateSuppressionCrashFix:
         name: 更新抑制崩溃修复
         desc: 防止更新抑制导致服务器崩溃
+      easyWitherSkeletonSkullDrop:
+        name: 轻松掉落凋零骷髅头
+        desc: 击杀凋零骷髅会百分百掉落凋零骷髅头
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

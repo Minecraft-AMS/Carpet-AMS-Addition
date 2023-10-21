@@ -427,6 +427,15 @@ When enabled, Update suppression does not cause the server to crash.
 - Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
 
 
+## easyWitherSkeletonSkullDrop
+
+When enabled, 100% Wither Skeleton Skull Drop.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+
 
 ## movableEnderChest
 

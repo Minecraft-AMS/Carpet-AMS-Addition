@@ -123,6 +123,9 @@ carpetamsaddition:
       amsUpdateSuppressionCrashFix:
         name: amsUpdateSuppressionCrashFix
         desc: Fixes updates suppression causing server crashes
+      easyWitherSkeletonSkullDrop:
+        name: easyWitherSkeletonSkullDrop
+        desc: 100% Wither Skeleton Skull Drop
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

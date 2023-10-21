@@ -445,6 +445,16 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
 
 
+## 轻松掉落凋零骷髅头 (easyWitherSkeletonSkullDrop)
+
+开启后，击杀凋零骷髅会百分百掉落凋零骷髅头。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+
 ## 可移动末地传送门框架(movableEndPortalFrame)
 
 开启后，末地传送门框架可以被活塞/黏性活塞推动。
