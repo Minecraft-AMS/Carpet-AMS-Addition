@@ -231,7 +231,7 @@ Hitting surface will cause no damage to player when flying with elytra.
 
 ## boneBlockUpdateSuppressor
 
-When enabled, bone block will be a update suppressor (Does not cause the server to crash).
+When enabled, bone block will be a update suppressor (When using it, it is recommended to start the Update Suppression Crash Fix feature to prevent crashes).
 
 <Only available for Minecraft < 1.19 >
 

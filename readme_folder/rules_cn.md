@@ -248,7 +248,7 @@
 
 ## 骨块更新抑制器(boneBlockUpdateSuppressor)
 
-开启后，骨块将会成为一个更新抑制器(不会导致服务器崩溃)。
+开启后，骨块将会成为一个更新抑制器 (使用时建议开始updateSuppressionCrashFix功能防止崩溃)。
 <该规则 `Minecraft Version < 1.19` 可用>
 
 - 类型: `boolean`

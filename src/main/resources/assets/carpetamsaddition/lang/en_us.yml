@@ -44,7 +44,7 @@ carpetamsaddition:
         desc: players don't get hurt by flying into walls
       boneBlockUpdateSuppressor:
         name: boneBlockUpdateSuppressor
-        desc: Let the bone_block be update suppressor (Does not cause the server to crash)
+        desc: Let the bone_block be update suppressor (When using it, it is recommended to start the Update Suppression Crash Fix feature to prevent crashes)
       weakObsidian:
         name: weakObsidian
         desc: Explosion can destroy Obsidian
@@ -120,9 +120,6 @@ carpetamsaddition:
           'Ⅱ': '[Ⅱ]'
           'Ⅲ': '[Ⅲ]'
           'VANILLA': '[VANILLA]'
-      amsUpdateSuppressionCrashFix:
-        name: amsUpdateSuppressionCrashFix
-        desc: Fixes updates suppression causing server crashes
       easyWitherSkeletonSkullDrop:
         name: easyWitherSkeletonSkullDrop
         desc: 100% Wither Skeleton Skull Drop

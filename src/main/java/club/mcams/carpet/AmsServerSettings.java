@@ -173,11 +173,6 @@ public class AmsServerSettings {
     )
     public static String fasterMovement = "VANILLA";
 
-    //#if MC<11900
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL})
-    public static boolean amsUpdateSuppressionCrashFix = false;
-    //#endif
-
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean easyWitherSkeletonSkullDrop = false;
 

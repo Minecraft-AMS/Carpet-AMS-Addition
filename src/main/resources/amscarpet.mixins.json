@@ -5,8 +5,6 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "carpet.SettingsManagerMixin",
-    "rule.amsUpdateSuppressionCrashFix.MinecraftServerMixin",
-    "rule.amsUpdateSuppressionCrashFix.WorldMixin",
     "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.bambooCollisionBoxDisabled.BambooBlockMixin",
     "rule.bambooModelNoOffset.BambooBlockMixin",
