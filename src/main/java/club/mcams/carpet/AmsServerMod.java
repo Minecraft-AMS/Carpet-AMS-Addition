@@ -36,6 +36,7 @@ public class AmsServerMod implements ModInitializer {
         AutoMixinAuditExecutor.run();
         AmsServer.init();
     }
+
     public static String getModId()
     {
         return MOD_ID;
