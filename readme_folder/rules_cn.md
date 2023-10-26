@@ -434,20 +434,19 @@
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
-## 更新抑制崩溃修复 (amsUpdateSuppressionCrashFix)
+## 轻松掉落凋零骷髅头 (easyWitherSkeletonSkullDrop)
 
-开启后，更新抑制不会导致服务器崩溃。
-<该规则 `Minecraft Version < 1.19` 可用>
+开启后，击杀凋零骷髅会百分百掉落凋零骷髅头。
 
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## 轻松掉落凋零骷髅头 (easyWitherSkeletonSkullDrop)
+## 禁用铁砧交互 (anvilInteractionDisabled)
 
-开启后，击杀凋零骷髅会百分百掉落凋零骷髅头。
+开启后，玩家无法打开铁砧的UI界面。
 
 - 类型: `boolean`
 - 默认值: `false`

@@ -176,6 +176,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean easyWitherSkeletonSkullDrop = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean anvilInteractionDisabled = false;
+
     /**
      * 可移动方块规则
      */

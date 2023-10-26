@@ -44,6 +44,7 @@
     "rule.shulkerHitLevitationDisabled_immuneShulkerBullet.ShulkerBulletEntityMixin",
     "rule.softBlock.AbstractBlockStateMixin",
     "rule.superBow.InfinityEnchantmentMixin",
+    "rule.anvilInteractionDisabled.AnvilBlockMixin",
     "rule.weakBlocks.CollectBlocksAndDamageEntitiesMixin",
     "setting.ParsedRuleAccessor",
     "setting.SettingsManagerAccessor",

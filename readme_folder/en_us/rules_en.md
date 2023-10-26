@@ -415,21 +415,19 @@ Three gears are provided to allow players to move faster.
 - Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
-## amsUpdateSuppressionCrashFix
+## easyWitherSkeletonSkullDrop
 
-When enabled, Update suppression does not cause the server to crash.
-
-<Only available for Minecraft < 1.19 >
+When enabled, 100% Wither Skeleton Skull Drop.
 
 - Type: `boolean`
 - Default: `false`
 - Suggested options: `false` , `true`
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## easyWitherSkeletonSkullDrop
+## anvilInteractionDisabled
 
-When enabled, 100% Wither Skeleton Skull Drop.
+When enabled, Players cannot open the UI of the Anvil.
 
 - Type: `boolean`
 - Default: `false`

@@ -44,7 +44,7 @@ carpetamsaddition:
         desc: players don't get hurt by flying into walls
       boneBlockUpdateSuppressor:
         name: boneBlockUpdateSuppressor
-        desc: Let the bone_block be update suppressor (When using it, it is recommended to start the Update Suppression Crash Fix feature to prevent crashes)
+        desc: Let the bone_block be update suppressor (When using it, it is recommended to start the updateSuppressionCrashFix feature to prevent crashes)
       weakObsidian:
         name: weakObsidian
         desc: Explosion can destroy Obsidian
@@ -123,6 +123,9 @@ carpetamsaddition:
       easyWitherSkeletonSkullDrop:
         name: easyWitherSkeletonSkullDrop
         desc: 100% Wither Skeleton Skull Drop
+      anvilInteractionDisabled:
+        name: anvilInteractionDisabled
+        desc: Players cannot open the UI of the Anvil
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
