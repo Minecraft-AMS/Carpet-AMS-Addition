@@ -6,4 +6,11 @@
 
 `/chunkloading [true/false]`
 
-开关玩家自身加载
+开关玩家自身加载。
+
+
+### 规则：anvilInteractionDisabled
+
+`/anvilInteractionDisabledSwitch`
+
+控制玩家是否可与铁砧交互。
