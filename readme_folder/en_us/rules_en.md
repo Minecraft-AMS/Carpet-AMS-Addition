@@ -428,6 +428,7 @@ When enabled, 100% Wither Skeleton Skull Drop.
 ## anvilInteractionDisabled
 
 When enabled, Players cannot open the UI of the Anvil.
+Command: /anvilInteractionDisabledSwitch
 
 - Type: `boolean`
 - Default: `false`

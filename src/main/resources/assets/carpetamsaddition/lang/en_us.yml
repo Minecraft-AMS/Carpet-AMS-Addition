@@ -125,7 +125,7 @@ carpetamsaddition:
         desc: 100% Wither Skeleton Skull Drop
       anvilInteractionDisabled:
         name: anvilInteractionDisabled
-        desc: Players cannot open the UI of the Anvil
+        desc: 'Players cannot open the UI of the Anvil Command: /anvilInteractionDisabledSwitch'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

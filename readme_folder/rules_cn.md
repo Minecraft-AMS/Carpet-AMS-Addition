@@ -447,6 +447,7 @@
 ## 禁用铁砧交互 (anvilInteractionDisabled)
 
 开启后，玩家无法打开铁砧的UI界面。
+命令：/anvilInteractionDisabledSwitch
 
 - 类型: `boolean`
 - 默认值: `false`
