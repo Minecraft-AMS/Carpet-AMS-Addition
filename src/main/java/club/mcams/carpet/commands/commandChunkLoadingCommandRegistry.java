@@ -35,7 +35,7 @@ import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 
 import carpet.utils.Messenger;
 
-public class AmsCarpetCommandRegistry {
+public class commandChunkLoadingCommandRegistry {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("chunkloading")
                 .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.commandChunkLoading))
