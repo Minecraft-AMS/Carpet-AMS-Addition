@@ -8,7 +8,6 @@
     "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.bambooCollisionBoxDisabled.BambooBlockMixin",
     "rule.bambooModelNoOffset.BambooBlockMixin",
-    "rule.bedRockFlying.ClientPlayerEntityMixin",
     "rule.blockChunkLoader.BellBlockMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.blockChunkLoader.PistonBlockMixin",
@@ -56,7 +55,9 @@
     "translations.TranslatableTextAccessor",
     "translations.TranslatableTextMixin"
   ],
-  "client": [],
+  "client": [
+    "rule.bedRockFlying.ClientPlayerEntityMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1
