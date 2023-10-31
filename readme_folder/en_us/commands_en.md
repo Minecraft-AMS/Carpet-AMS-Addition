@@ -1,13 +1,15 @@
 # Commands
 
-### rule: commandChunkLoading
+## Rules
+
+### commandChunkLoading
 
 `/chunkloading [true/false]`
 
 Control chunk loading of player. Can only manipulate yourself.
 
 
-### rule：anvilInteractionDisabled
+### anvilInteractionDisabled
 
 `/anvilInteractionDisabledSwitch`
 

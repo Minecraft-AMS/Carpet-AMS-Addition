@@ -2,14 +2,16 @@
 
 # 指令
 
-### 规则: commadChunkLoading
+## 规则
+
+### 区块加载控制(commadChunkLoading)
 
 `/chunkloading [true/false]`
 
 开关玩家自身加载。
 
 
-### 规则：anvilInteractionDisabled
+### 禁用铁砧交互(anvilInteractionDisabled)
 
 `/anvilInteractionDisabledSwitch`
 
