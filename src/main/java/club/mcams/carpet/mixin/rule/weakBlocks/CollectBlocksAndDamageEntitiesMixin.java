@@ -99,7 +99,7 @@ public abstract class CollectBlocksAndDamageEntitiesMixin {
     @Final
     private ExplosionBehavior behavior;
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "RedundantCast"})
     @Inject(method = "collectBlocksAndDamageEntities", at = @At("RETURN"), cancellable = true)
     public void collectBlocksAndDamageEntities(CallbackInfo ci) {
         //#if MC<11900
