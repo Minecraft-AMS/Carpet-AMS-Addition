@@ -23,8 +23,11 @@ package club.mcams.carpet.mixin.rule.creativeShulkerBoxDropsDisabled;
 import club.mcams.carpet.AmsServerSettings;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -38,7 +41,8 @@ public class ShulkerBoxBlockMixin {
     @Inject(method = "onBreak", at = @At("HEAD"), cancellable = true)
     private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
         if (AmsServerSettings.creativeShulkerBoxDropsDisabled && player.isCreative()) {
-            world.breakBlock(pos, false);
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+            world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
             ci.cancel();
         }
     }
