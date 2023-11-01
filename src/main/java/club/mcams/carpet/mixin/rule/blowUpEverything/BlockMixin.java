@@ -18,30 +18,24 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.boneBlockUpdateSuppressor;
+
+package club.mcams.carpet.mixin.rule.blowUpEverything;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(AbstractBlock.class)
-public abstract class NeighborUpdateMixin {
-    //#if MC<11900
-    @Inject(method = "neighborUpdate", at = @At("TAIL"))
-    private void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify, CallbackInfo ci) {
-        if(AmsServerSettings.boneBlockUpdateSuppressor && state.isOf(Blocks.BONE_BLOCK)) {
-            throw new StackOverflowError("Carpet-AMS-Addition UpdateSuppressor");
+@Mixin(Block.class)
+public abstract class BlockMixin {
+    @Inject(method = "getBlastResistance", at = @At("TAIL"), cancellable = true)
+    public void getBlastResistance(CallbackInfoReturnable<Float> cir) {
+        if(AmsServerSettings.blowUpEverything){
+            cir.setReturnValue(0.0F);
         }
     }
-    //#endif
 }
