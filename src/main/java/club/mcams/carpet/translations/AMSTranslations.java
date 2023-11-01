@@ -48,6 +48,7 @@ import java.util.Set;
 /**
  * Reference: Carpet TIS Addition
  */
+@SuppressWarnings({"unused"})
 public class AMSTranslations {
     private static final String LANG_DIR = String.format("assets/%s/lang", TranslationConstants.TRANSLATION_NAMESPACE);
 
@@ -135,7 +136,8 @@ public class AMSTranslations {
             //#if MC>=11900
             //$$ TranslatableTextContent translatableText = (TranslatableTextContent) text.getContent();
             //#else
-            TranslatableText translatableText = (TranslatableText) text;
+            TranslatableText translatableText;
+            translatableText = (TranslatableText) text;
             //#endif
             if (translatableText.getKey().startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
                 String formattedString = translateKeyToFormattedString(lang, translatableText.getKey());

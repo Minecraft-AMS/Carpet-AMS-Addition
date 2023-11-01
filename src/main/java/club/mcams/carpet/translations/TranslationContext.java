@@ -22,6 +22,7 @@ package club.mcams.carpet.translations;
 
 import net.minecraft.text.BaseText;
 
+@SuppressWarnings("unused")
 public class TranslationContext {
     private final Translator translator;
 

@@ -23,6 +23,7 @@ package club.mcams.carpet.translations;
 import club.mcams.carpet.util.Messenger;
 import net.minecraft.text.BaseText;
 
+@SuppressWarnings("unused")
 public class Translator {
     private final String translationPath;
 

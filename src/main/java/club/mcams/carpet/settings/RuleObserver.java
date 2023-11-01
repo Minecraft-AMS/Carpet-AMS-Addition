@@ -26,6 +26,7 @@ import carpet.settings.Validator;
 
 import net.minecraft.server.command.ServerCommandSource;
 
+@SuppressWarnings("unused")
 public abstract class RuleObserver<T> extends Validator<T> {
     @Override
     public T validate(ServerCommandSource source, ParsedRule<T> currentRule, T newValue, String string) {

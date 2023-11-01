@@ -27,6 +27,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unused")
 public class ChunkLoading {
     public static Map<String, Boolean> onlinePlayerMap = new HashMap<>();
 

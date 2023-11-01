@@ -60,6 +60,7 @@ public abstract class PlayerEntityMixin implements EntityAccessorMixin {
             ),
             cancellable = true
     )
+    @SuppressWarnings("resource")
     public void creativeOneHitKill(Entity target, CallbackInfo ci) {
         if (AmsServerSettings.creativeOneHitKill
                 && !this.accessorGetWorld().isClient

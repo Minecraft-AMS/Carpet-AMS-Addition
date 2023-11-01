@@ -45,6 +45,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Reference: Carpet TIS Addition
  */
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Messenger {
     private static final Translator translator = new Translator("util");
 

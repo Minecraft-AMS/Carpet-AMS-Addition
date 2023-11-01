@@ -30,6 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+@SuppressWarnings("unused")
 public class FileUtil {
     public static String readFile(String path) throws IOException {
         InputStream inputStream = FileUtil.class.getClassLoader().getResourceAsStream(path);
