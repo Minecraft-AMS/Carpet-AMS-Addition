@@ -125,8 +125,16 @@ carpetamsaddition:
         desc: 击杀凋零骷髅会百分百掉落凋零骷髅头
       anvilInteractionDisabled:
         name: 禁用铁砧交互
-        desc: '玩家无法打开铁砧的UI界面 命令: /anvilInteractionDisabledSwitch'
-
+        desc: 玩家无法打开铁砧的UI界面
+        extra:
+          '0': '指令: /anvilInteractionDisabledSwitch'
+      opPlayerNoCheatExtra:
+        name: op玩家不准作弊拓展
+        desc: 禁用部分指令以避免op玩家意外地作弊
+        extra:
+          '0': '建议与Carpet TIS Addition的opPlayerNoCheat一同使用'
+          '1': '影响的指令列表: /difficulty, /kill, /time, /weather'
+          '2': '(Carpet TIS Addition)影响的指令列表：/gamemode, /tp, /teleport, /give, /setblock, /summon'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

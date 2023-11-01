@@ -436,6 +436,20 @@ Command: /anvilInteractionDisabledSwitch
 - Categroies: `AMS` , `FEATURE` , `SURVIVAL`
 
 
+## opPlayerNoCheatExtra
+
+When enabled, Disable some command to prevent accidentally cheating, It is recommended to use it with opPlayerNoCheat from Carpet TIS Addition.
+<br/>
+Affects command list: /difficulty, /kill, /time, /weather.
+<br/>
+(Carpet TIS Addition)Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.

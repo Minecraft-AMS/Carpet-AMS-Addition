@@ -452,7 +452,21 @@
 - 类型: `boolean`
 - 默认值: `false`
 - 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
+
+
+## op玩家不准作弊拓展 (opPlayerNoCheatExtra)
+
+开启后，禁用部分指令以避免op玩家意外地作弊, 建议与Carpet TIS Addition的opPlayerNoCheat一同使用。
+<br/>
+影响的指令列表: /difficulty, /kill, /time, /weather
+<br/>
+(Carpet TIS Addition)影响的指令列表：/gamemode, /tp, /teleport, /give, /setblock, /summon
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
 
 
 ## 可移动末地传送门框架(movableEndPortalFrame)
@@ -536,6 +550,7 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE` , `AMS_movable`
+
 
 ## 可移动幽匿催发体(movableSculkCatalyst)
 

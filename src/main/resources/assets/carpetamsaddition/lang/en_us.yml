@@ -125,8 +125,17 @@ carpetamsaddition:
         desc: 100% Wither Skeleton Skull Drop
       anvilInteractionDisabled:
         name: anvilInteractionDisabled
-        desc: 'Players cannot open the UI of the Anvil Command: /anvilInteractionDisabledSwitch'
-
+        desc: 'Players cannot open the UI of the Anvil'
+        extra:
+          '0': 'Command: /anvilInteractionDisabledSwitch'
+      opPlayerNoCheatExtra:
+        name: opPlayerNoCheatExtra
+        desc: Disable some command to prevent accidentally cheating
+        extra:
+          '0': 'It is recommended to use it with opPlayerNoCheat from Carpet TIS Addition'
+          '1': 'Affects command list: /difficulty, /kill, /time, /weather'
+          '2': '(Carpet TIS Addition)Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon'
+          
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
         name: scheduledRandomTickCactus
