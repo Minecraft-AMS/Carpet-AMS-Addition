@@ -38,7 +38,6 @@ import static carpet.utils.Translations.tr;
 
 @Mixin(SettingsManager.class)
 public abstract class SettingsManagerMixin {
-    @SuppressWarnings("DefaultAnnotationParam")
     @Inject(
             method = "listAllSettings",
             slice = @Slice(
