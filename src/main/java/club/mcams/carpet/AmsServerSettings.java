@@ -75,8 +75,10 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean netherWaterPlacement = false;
 
+    //#if MC>=11700
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean softDeepslate = false;
+    //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean softObsidian = false;
@@ -182,7 +184,7 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL, COMMAND})
     public static boolean opPlayerNoCheatExtra = false;
 
-    /**
+    /*
      * 可移动方块规则
      */
     @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
@@ -239,7 +241,7 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
     public static boolean movableAnvil = false;
 
-    /**
+    /*
      * 合成表规则
      */
     @SuppressWarnings("unused")
