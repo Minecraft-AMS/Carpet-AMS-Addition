@@ -18,8 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-package club.mcams.carpet.mixin.rule.kirinArm;
+package club.mcams.carpet.mixin.rule.softBlock_kirinArm;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -37,13 +36,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractBlockState.class)
 public abstract class AbstractBlockStateMixin {
-    @Shadow
-    public abstract Block getBlock();
-    @Inject(method = "getHardness", at = @At("TAIL"), cancellable = true)
-    public void getBlockHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
-        if(AmsServerSettings.kirinArm && this.getBlock() != Blocks.BEDROCK) {
-            cir.setReturnValue(0.0F);
-        }
-    }
+	@Shadow
+	public abstract Block getBlock();
+
+	@Inject(method = "getHardness", at = @At("TAIL"), cancellable = true)
+	public void getBlockHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
+		if (this.getBlock() != Blocks.BEDROCK && AmsServerSettings.kirinArm) {
+			float JUSTDOIT = 0.0F;
+			cir.setReturnValue(JUSTDOIT);
+		}
+		//#if MC>=11700
+		if(this.getBlock() == Blocks.DEEPSLATE && AmsServerSettings.softDeepslate) {
+			cir.setReturnValue(Blocks.STONE.getDefaultState().getHardness(world, pos));
+		}
+		//#endif
+		if(this.getBlock() == Blocks.OBSIDIAN && AmsServerSettings.softObsidian) {
+			cir.setReturnValue(Blocks.END_STONE.getDefaultState().getHardness(world, pos));
+		}
+	}
 }
 
