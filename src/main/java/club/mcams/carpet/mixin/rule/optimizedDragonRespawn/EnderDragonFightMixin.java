@@ -35,10 +35,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraft.world.gen.feature.EndPortalFeature;
 
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.*;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -52,8 +49,11 @@ public abstract class EnderDragonFightMixin {
     @Shadow @Final private BlockPattern endPortalPattern;
     @Nullable @Shadow private BlockPos exitPortalLocation;
     @Shadow private boolean doLegacyCheck;
+    @Unique
     private int cacheChunkIteratorX = -8;
+    @Unique
     private int cacheChunkIteratorZ = -8;
+    @Unique
     private int cacheOriginIteratorY = -1;
 
     /**
@@ -110,7 +110,7 @@ public abstract class EnderDragonFightMixin {
                 //#endif
                 if(AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
                     //#if MC>=12000
-                    //&& result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN)).getY();, j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
+                    //&& result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN)).getX();, j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
                     //#else
                     result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
                     //#endif
