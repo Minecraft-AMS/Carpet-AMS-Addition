@@ -61,12 +61,14 @@ public abstract class BlockMixin {
         }
 
         if(AmsServerSettings.enhancedWorldEater && (
-                        stateManager.getDefaultState().getBlock() == Blocks.ANVIL
-                                && stateManager.getDefaultState().getBlock() == Blocks.CHIPPED_ANVIL
-                                && stateManager.getDefaultState().getBlock() == Blocks.DAMAGED_ANVIL
+                        stateManager.getDefaultState().getBlock() != Blocks.ANVIL
+                                && stateManager.getDefaultState().getBlock() != Blocks.CHIPPED_ANVIL
+                                && stateManager.getDefaultState().getBlock() != Blocks.DAMAGED_ANVIL
+                                && stateManager.getDefaultState().getBlock() != Blocks.BEDROCK
                 )
         ) {
-            cir.setReturnValue(Blocks.STONE.getBlastResistance());
+            float BOOM = 1.114514F;
+            cir.setReturnValue(BOOM);
         }
 
         /*
