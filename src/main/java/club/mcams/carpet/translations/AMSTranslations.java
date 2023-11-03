@@ -48,14 +48,12 @@ import java.util.Set;
 /**
  * Reference: Carpet TIS Addition
  */
-@SuppressWarnings({"unused"})
+@SuppressWarnings({"unused", "unchecked"})
 public class AMSTranslations {
     private static final String LANG_DIR = String.format("assets/%s/lang", TranslationConstants.TRANSLATION_NAMESPACE);
-
     public static final Map<String, Map<String, String>> translations = Maps.newLinkedHashMap();
     public static final Set<String> languages = Sets.newHashSet();
 
-    @SuppressWarnings("unchecked")
     private static List<String> getAvailableTranslations() {
         try {
             String dataStr = FileUtil.readFile(LANG_DIR + "/meta/languages.yml");
