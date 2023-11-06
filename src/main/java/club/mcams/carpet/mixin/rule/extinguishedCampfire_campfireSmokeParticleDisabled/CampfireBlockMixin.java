@@ -44,8 +44,8 @@ import java.util.Random;
 //#endif
 
 @Mixin(CampfireBlock.class)
-public abstract class GetPlacementStateMixin extends BlockWithEntity {
-    protected GetPlacementStateMixin(Settings builder) {
+public abstract class CampfireBlockMixin extends BlockWithEntity {
+    protected CampfireBlockMixin(Settings builder) {
         super(builder);
     }
 
