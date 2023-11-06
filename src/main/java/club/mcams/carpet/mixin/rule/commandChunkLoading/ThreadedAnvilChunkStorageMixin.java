@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.commandChunkLoading;
 
-import club.mcams.carpet.function.ChunkLoading;
+import club.mcams.carpet.helpers.rule.commandChunkLoading.ChunkLoading;
 
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ThreadedAnvilChunkStorage;

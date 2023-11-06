@@ -19,7 +19,7 @@
  */
 
 
-package club.mcams.carpet.function;
+package club.mcams.carpet.helpers.rule.BlockChunkLoader;
 
 import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.util.math.ChunkPos;

@@ -21,8 +21,9 @@
 package club.mcams.carpet.logging;
 
 import carpet.logging.Logger;
-public class AmsCarpetLoggerRegistry {
 
+@SuppressWarnings("unused")
+public class AmsCarpetLoggerRegistry {
     public static void registerLoggers() {
 //        LoggerRegistry.registerLogger("dragonPortalLocation", standardLogger("dragonPortalLocation", null, null));
     }

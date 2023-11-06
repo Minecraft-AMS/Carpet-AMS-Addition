@@ -83,6 +83,15 @@ public class AmsServer implements CarpetExtension {
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
 
     @Override
+    public void onGameStarted() {
+        // let's /carpet handle our few simple settings
+        LOGGER.info(fancyName + " " + "v" + AmsServerMod.getVersion() + " 载入成功");
+        LOGGER.info("开源链接：https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
+        LOGGER.info("BUG反馈：https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
+        CarpetRuleRegistrar.register(CarpetServer.settingsManager, AmsServerSettings.class);
+    }
+
+    @Override
     public String version() {
         return AmsServerMod.getModId();
     }
@@ -124,15 +133,6 @@ public class AmsServer implements CarpetExtension {
             }
         });
         return trimmedTranslation;
-    }
-
-    @Override
-    public void onGameStarted() {
-        // let's /carpet handle our few simple settings
-        LOGGER.info(fancyName + " " + "v" + AmsServerMod.getVersion() + " 载入成功");
-        LOGGER.info("开源链接：https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
-        LOGGER.info("BUG反馈：https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
-        CarpetRuleRegistrar.register(CarpetServer.settingsManager, AmsServerSettings.class);
     }
 
     @Override

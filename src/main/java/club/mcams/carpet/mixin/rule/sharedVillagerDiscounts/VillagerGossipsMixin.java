@@ -48,7 +48,9 @@ public abstract class VillagerGossipsMixin {
         if (AmsServerSettings.sharedVillagerDiscounts && filter.test(MAJOR_POSITIVE)) {
             GetValueForInvoker targetReputation = (GetValueForInvoker)entityReputation.get(target);
             int otherRepertory = 0;
-            if (targetReputation != null) { otherRepertory = targetReputation._getValueFor(vgt -> filter.test(vgt) && !vgt.equals(MAJOR_POSITIVE)); }
+            if (targetReputation != null) {
+                otherRepertory = targetReputation._getValueFor(vgt -> filter.test(vgt) && !vgt.equals(MAJOR_POSITIVE));
+            }
             int majorPositiveRepertory = entityReputation.values().stream().mapToInt(r -> ((GetValueForInvoker) r)._getValueFor(vgt -> vgt.equals(MAJOR_POSITIVE))).sum();
             cir.setReturnValue(otherRepertory + Math.min(majorPositiveRepertory, MAJOR_POSITIVE.maxValue * MAJOR_POSITIVE.multiplier));
         }

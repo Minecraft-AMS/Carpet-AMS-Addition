@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.function;
+package club.mcams.carpet.helpers.rule.optimizedDragonRespawn;
 
 import club.mcams.carpet.mixin.rule.optimizedDragonRespawn.BlockPatternTestTransformInvoker;
 

@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.optimizedDragonRespawn;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.function.BlockPatternHelper;
+import club.mcams.carpet.helpers.rule.optimizedDragonRespawn.BlockPatternHelper;
 
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.EndGatewayBlockEntity;

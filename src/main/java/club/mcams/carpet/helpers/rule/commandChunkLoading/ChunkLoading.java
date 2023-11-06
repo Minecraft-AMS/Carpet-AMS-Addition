@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.function;
+package club.mcams.carpet.helpers.rule.commandChunkLoading;
 
 import carpet.CarpetServer;
 import net.minecraft.entity.player.PlayerEntity;

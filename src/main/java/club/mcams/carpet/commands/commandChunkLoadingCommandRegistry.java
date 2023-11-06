@@ -21,7 +21,7 @@
 package club.mcams.carpet.commands;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.function.ChunkLoading;
+import club.mcams.carpet.helpers.rule.commandChunkLoading.ChunkLoading;
 import club.mcams.carpet.util.CommandHelper;
 
 import net.minecraft.entity.player.PlayerEntity;

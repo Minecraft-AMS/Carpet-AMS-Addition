@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.blockChunkLoader;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.function.BlockChunkLoader;
+import club.mcams.carpet.helpers.rule.BlockChunkLoader.BlockChunkLoader;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

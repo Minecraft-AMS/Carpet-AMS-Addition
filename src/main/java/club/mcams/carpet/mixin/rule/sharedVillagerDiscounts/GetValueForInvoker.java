@@ -30,5 +30,5 @@ import java.util.function.Predicate;
 @Mixin(targets = "net.minecraft.village.VillagerGossips$Reputation")
 public interface GetValueForInvoker {
     @Invoker("getValueFor")
-    public int _getValueFor(Predicate<VillageGossipType> gossipTypeFilter);
+    int _getValueFor(Predicate<VillageGossipType> gossipTypeFilter);
 }
