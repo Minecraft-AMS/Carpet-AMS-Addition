@@ -5,6 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "carpet.SettingsManagerMixin",
+    "rule.amsUpdateSuppressionCrashFix.MinecraftServerMixin",
+    "rule.amsUpdateSuppressionCrashFix.WorldMixin",
     "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.anvilInteractionDisabled.AnvilBlockMixin",
     "rule.bambooCollisionBoxDisabled.BambooBlockMixin",
@@ -20,7 +22,7 @@
     "rule.creativeShulkerBoxDropsDisabled.ShulkerBoxBlockMixin",
     "rule.easyWitherSkeletonSkullDrop.WitherSkeletonEntityMixin",
     "rule.enderManTeleportRandomlyDisabled.EndermanEntityMixin",
-    "rule.extinguishedCampfire_campfireSmokeParticleDisabled.GetPlacementStateMixin",
+    "rule.extinguishedCampfire_campfireSmokeParticleDisabled.CampfireBlockMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
     "rule.fasterMovement.PlayerEntityMixin",
     "rule.infiniteTrades.MerchantEntityMixin",
