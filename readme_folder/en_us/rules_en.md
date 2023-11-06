@@ -450,6 +450,19 @@ Affects command list: /difficulty, /kill, /time, /weather.
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
 
 
+## amsUpdateSuppressionCrashFix
+
+When enabled, Update suppression does not cause the server to crash.
+
+<Ported from [carpet-extra](https://github.com/gnembon/carpet-extra)>
+<Only available for Minecraft < 1.19 >
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
+
+
 ## movableEnderChest
 
 Ender chest can be moved by piston or sticky piston.

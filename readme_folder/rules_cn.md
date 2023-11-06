@@ -469,6 +469,20 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
 
 
+## 更新抑制崩溃修复 (amsUpdateSuppressionCrashFix)
+
+开启后，更新抑制不会导致服务器崩溃。
+<br/>
+<该规则从 [carpet-extra](https://github.com/gnembon/carpet-extra) 移植>
+<br/>
+<该规则 `Minecraft Version < 1.19` 可用>
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
+
+
 ## 可移动末地传送门框架(movableEndPortalFrame)
 
 开启后，末地传送门框架可以被活塞/黏性活塞推动。

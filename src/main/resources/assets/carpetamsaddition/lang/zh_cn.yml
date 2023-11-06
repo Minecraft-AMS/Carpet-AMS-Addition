@@ -135,6 +135,9 @@ carpetamsaddition:
           '0': '建议与Carpet TIS Addition的opPlayerNoCheat一同使用'
           '1': '影响的指令列表: /difficulty, /kill, /time, /weather'
           '2': '(Carpet TIS Addition)影响的指令列表：/gamemode, /tp, /teleport, /give, /setblock, /summon'
+      amsUpdateSuppressionCrashFix:
+        name: 更新抑制崩溃修复
+        desc: 防止更新抑制导致服务器崩溃
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
