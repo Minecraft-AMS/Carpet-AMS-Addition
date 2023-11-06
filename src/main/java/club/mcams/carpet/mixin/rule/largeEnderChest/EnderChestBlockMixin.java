@@ -24,6 +24,9 @@ import java.util.OptionalInt;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
 import net.minecraft.block.EnderChestBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.GenericContainerScreenHandler;
@@ -34,9 +37,7 @@ import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(EnderChestBlock.class)
 public abstract class EnderChestBlockMixin {
@@ -44,26 +45,19 @@ public abstract class EnderChestBlockMixin {
     @Final
     private static Text CONTAINER_NAME;
 
-    @Redirect(
+    @WrapOperation(
             method = "onUse",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/entity/player/PlayerEntity;openHandledScreen(Lnet/minecraft/screen/NamedScreenHandlerFactory;)Ljava/util/OptionalInt;"),
-            require = 0
+                    target = "Lnet/minecraft/entity/player/PlayerEntity;openHandledScreen(Lnet/minecraft/screen/NamedScreenHandlerFactory;)Ljava/util/OptionalInt;")
     )
-	private OptionalInt onUse(PlayerEntity playerEntity, NamedScreenHandlerFactory factory) {
-        return openHandledScreen(playerEntity);
-    }
-
-	@Unique
-	private OptionalInt openHandledScreen(PlayerEntity playerEntity) {
-        if(AmsServerSettings.largeEnderChest) {
+	private OptionalInt onUse(PlayerEntity playerEntity, NamedScreenHandlerFactory factory, Operation<OptionalInt> original) {
+        if (AmsServerSettings.largeEnderChest) {
             return playerEntity.openHandledScreen(
                     new SimpleNamedScreenHandlerFactory((syncId, playerInventory, playerEntityInner)
-                    -> GenericContainerScreenHandler.createGeneric9x6(syncId, playerInventory, playerEntityInner.getEnderChestInventory()), CONTAINER_NAME));
+                            -> GenericContainerScreenHandler.createGeneric9x6(syncId, playerInventory, playerEntityInner.getEnderChestInventory()), CONTAINER_NAME));
+        } else {
+            return original.call(playerEntity, factory);
         }
-        return playerEntity.openHandledScreen(
-                new SimpleNamedScreenHandlerFactory((syncId, playerInventory, playerEntityInner)
-                -> GenericContainerScreenHandler.createGeneric9x3(syncId, playerInventory, playerEntityInner.getEnderChestInventory()), CONTAINER_NAME));
     }
 }

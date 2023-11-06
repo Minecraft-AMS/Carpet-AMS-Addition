@@ -22,46 +22,53 @@ package club.mcams.carpet.mixin.rule.blueSkullController;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = net.minecraft.entity.boss.WitherEntity.class, priority = 168)
-public abstract class WitherEntityMixin {
-    @ModifyConstant(
-            //#if MC>=11700
-            method = "shootSkullAt(ILnet/minecraft/entity/LivingEntity;)V",
-            //#else
-            //$$ method = "method_6878",
-            //#endif
-            constant = @Constant(floatValue = 0.001F)
-    )
-    private float shootSkull(float constant) {
+public abstract class WitherEntityMixin extends HostileEntity {
+    protected WitherEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
+        super(entityType, world);
+    }
+
+    @Shadow
+    protected abstract void shootSkullAt(int headIndex, double targetX, double targetY, double targetZ, boolean charged);
+
+    //#if MC>=11700
+    @Inject(method = "shootSkullAt(ILnet/minecraft/entity/LivingEntity;)V", at = @At("HEAD"), cancellable = true)
+    //#else
+    //$$ @Inject(method = "method_6878", at = @At("HEAD"), cancellable = true)
+    //#endif
+    private void shootSkullAt(int headIndex, LivingEntity target, CallbackInfo ci) {
         if(AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.SURELY) {
-            return 1F;
-        } else {
-            return constant;
+            this.shootSkullAt(headIndex, target.getX(), target.getY() + (double)target.getStandingEyeHeight() * 0.5, target.getZ(), true);
+            ci.cancel();
         }
     }
 
-    @Redirect(
+    @WrapOperation(
             method = "mobTick",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/World;getDifficulty()Lnet/minecraft/world/Difficulty;"
             )
     )
-    private Difficulty modifyDifficulty(World instance) {
+    private Difficulty modifyDifficulty(World instance, Operation<Difficulty> original) {
         if(AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.NEVER) {
             return Difficulty.EASY;
         } else {
-            return instance.getDifficulty();
+            return original.call(instance);
         }
     }
 }
-
