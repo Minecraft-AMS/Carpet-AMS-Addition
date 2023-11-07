@@ -138,6 +138,17 @@ carpetamsaddition:
       amsUpdateSuppressionCrashFix:
         name: 更新抑制崩溃修复
         desc: 防止更新抑制导致服务器崩溃
+      cakeBlockDropOnBreak:
+        name: 可掉落蛋糕
+        desc: 蛋糕在被破坏时可以掉落蛋糕（蛋糕是完整的情况下才会掉落）
+      noCakeEating:
+        name: 不准吃蛋糕
+        desc: 玩家不可以吃蛋糕
+      redstoneComponentSound:
+        name: 红石元件音效
+        desc: 玩家右键红石元件时会播放声音
+        extra:
+          '0': '影响的元件：阳光传感器、红石粉、中继器'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

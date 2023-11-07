@@ -453,14 +453,47 @@ Affects command list: /difficulty, /kill, /time, /weather.
 ## amsUpdateSuppressionCrashFix
 
 When enabled, Update suppression does not cause the server to crash.
-
+<br/>
 <Ported from [carpet-extra](https://github.com/gnembon/carpet-extra)>
+<br/>
 <Only available for Minecraft < 1.19 >
 
 - Type: `boolean`
 - Default: `false`
 - Suggested options: `false` , `true`
 - Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
+
+
+## cakeBlockDropOnBreak
+
+When enabled, When the cake is destroyed, it can drop cake (the cake will only drop when it is intact).
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+
+
+## noCakeEating
+
+When enabled, Players are not allowed to consume cake.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+
+
+## redstoneComponentSound
+
+When enabled, When players right-click on the redstone component, it will emit a sound
+<br/>
+Affected components: daylight detector, redstone dust, repeater
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE`
 
 
 ## movableEnderChest

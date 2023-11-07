@@ -189,6 +189,15 @@ public class AmsServerSettings {
     public static boolean amsUpdateSuppressionCrashFix = false;
     //#endif
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean cakeBlockDropOnBreak = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean noCakeEating = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean redstoneComponentSound = false;
+
     /*
      * 可移动方块规则
      */

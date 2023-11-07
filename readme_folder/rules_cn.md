@@ -483,6 +483,38 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
 
 
+## 可掉落蛋糕 (cakeBlockDropOnBreak)
+
+开启后，蛋糕在被破坏时可以掉落蛋糕（蛋糕是完整的情况下才会掉落）。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+
+## 不准吃蛋糕 (noCakeEating)
+
+开启后，玩家不可以吃蛋糕
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE` , `SURVIVAL`
+
+
+## 红石元件音效 (redstoneComponentSound)
+
+开启后，玩家右键红石元件时会播放声音。
+<br/>
+影响的元件：阳光传感器、红石粉、中继器。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE`
+
+
 ## 可移动末地传送门框架(movableEndPortalFrame)
 
 开启后，末地传送门框架可以被活塞/黏性活塞推动。

@@ -138,7 +138,18 @@ carpetamsaddition:
       amsUpdateSuppressionCrashFix:
         name: amsUpdateSuppressionCrashFix
         desc: Fixes updates suppression causing server crashes
-          
+      cakeBlockDropOnBreak:
+        name: cakeBlockDropOnBreak
+        desc: When the cake is destroyed, it can drop cake (the cake will only drop when it is intact)
+      noCakeEating:
+        name: noCakeEating
+        desc: Players are not allowed to consume cake
+      redstoneComponentSound:
+        name: redstoneComponentSound
+        desc: When players right-click on the redstone component, it will emit a sound
+        extra:
+          '0': 'Affected components: daylight detector, redstone dust, repeater'
+
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
         name: scheduledRandomTickCactus
