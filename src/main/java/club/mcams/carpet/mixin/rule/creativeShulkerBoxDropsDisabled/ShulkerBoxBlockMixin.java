@@ -42,7 +42,7 @@ public abstract class ShulkerBoxBlockMixin {
     private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
         if (AmsServerSettings.creativeShulkerBoxDropsDisabled && player.isCreative()) {
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
-            world.playSound(null, pos, SoundEvents.BLOCK_ANVIL_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
+            world.playSound(player, pos, SoundEvents.BLOCK_ANVIL_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
             ci.cancel();
         }
     }
