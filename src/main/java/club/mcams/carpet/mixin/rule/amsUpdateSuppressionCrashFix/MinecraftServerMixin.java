@@ -47,7 +47,7 @@ public class MinecraftServerMixin {
                     target = "Lnet/minecraft/server/world/ServerWorld;tick(Ljava/util/function/BooleanSupplier;)V"
             )
     )
-    private void ficUpdateSuppressionCrashTick(ServerWorld serverWorld, BooleanSupplier shouldKeepTicking, Operation<Void> original){
+    private void tickWorlds(ServerWorld serverWorld, BooleanSupplier shouldKeepTicking, Operation<Void> original) {
         if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
             try {
                 serverWorld.tick(shouldKeepTicking);
@@ -58,9 +58,7 @@ public class MinecraftServerMixin {
                 logUpdateSuppression();
             }
         }
-
         if (!AmsServerSettings.amsUpdateSuppressionCrashFix) {
-            serverWorld.tick(shouldKeepTicking);
             original.call(serverWorld, shouldKeepTicking);
         }
     }
