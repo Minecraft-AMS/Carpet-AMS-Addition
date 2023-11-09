@@ -19,6 +19,9 @@
   "icon": "assets/carpetamsaddition/icon.png",
   "environment": "*",
   "entrypoints": {
+    "preLaunch": [
+      "club.mcams.carpet.AmsServerPreLaunch"
+    ],
     "main": [
       "club.mcams.carpet.AmsServerMod"
     ]
