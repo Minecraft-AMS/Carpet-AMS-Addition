@@ -440,7 +440,7 @@ Command: /anvilInteractionDisabledSwitch
 
 When enabled, Disable some command to prevent accidentally cheating, It is recommended to use it with opPlayerNoCheat from Carpet TIS Addition.
 <br/>
-Affects command list: /difficulty, /kill, /time, /weather.
+Affects command list: /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode
 <br/>
 (Carpet TIS Addition)Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon
 

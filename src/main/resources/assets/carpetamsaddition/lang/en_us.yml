@@ -133,7 +133,7 @@ carpetamsaddition:
         desc: Disable some command to prevent accidentally cheating
         extra:
           '0': 'It is recommended to use it with opPlayerNoCheat from Carpet TIS Addition'
-          '1': 'Affects command list: /difficulty, /kill, /time, /weather'
+          '1': 'Affects command list: /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode'
           '2': '(Carpet TIS Addition)Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon'
       amsUpdateSuppressionCrashFix:
         name: amsUpdateSuppressionCrashFix
@@ -149,6 +149,9 @@ carpetamsaddition:
         desc: When players right-click on the redstone component, it will emit a sound
         extra:
           '0': 'Affected components: daylight detector, redstone dust, repeater'
+      test:
+        name: test
+        desc: test
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

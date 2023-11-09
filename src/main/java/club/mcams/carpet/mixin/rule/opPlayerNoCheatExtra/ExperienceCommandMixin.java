@@ -22,31 +22,31 @@ package club.mcams.carpet.mixin.rule.opPlayerNoCheatExtra;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.server.command.WeatherCommand;
+import net.minecraft.server.command.ExperienceCommand;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(WeatherCommand.class)
-public abstract class WeatherCommandMixin {
-    @Inject(method = "executeClear", at = @At("HEAD"))
-    private static void executeClear(CallbackInfoReturnable<Integer> cir) {
+@Mixin(ExperienceCommand.class)
+public abstract class ExperienceCommandMixin {
+    @Inject(method = "executeAdd", at = @At("HEAD"))
+    private static void executeAdd(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }
     }
 
-    @Inject(method = "executeRain", at = @At("HEAD"))
-    private static void executeRain(CallbackInfoReturnable<Integer> cir) {
+    @Inject(method = "executeQuery", at = @At("HEAD"))
+    private static void executeQuery(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }
     }
 
-    @Inject(method = "executeThunder", at = @At("HEAD"))
-    private static void executeThunder(CallbackInfoReturnable<Integer> cir) {
+    @Inject(method = "executeSet", at = @At("HEAD"))
+    private static void executeSet(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }

@@ -459,7 +459,7 @@
 
 开启后，禁用部分指令以避免op玩家意外地作弊, 建议与Carpet TIS Addition的opPlayerNoCheat一同使用。
 <br/>
-影响的指令列表: /difficulty, /kill, /time, /weather
+影响的指令列表: /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode
 <br/>
 (Carpet TIS Addition)影响的指令列表：/gamemode, /tp, /teleport, /give, /setblock, /summon
 

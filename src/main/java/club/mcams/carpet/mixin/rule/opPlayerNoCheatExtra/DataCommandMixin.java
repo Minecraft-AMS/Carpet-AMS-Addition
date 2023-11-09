@@ -22,31 +22,45 @@ package club.mcams.carpet.mixin.rule.opPlayerNoCheatExtra;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.server.command.WeatherCommand;
+import net.minecraft.server.command.DataCommand;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(WeatherCommand.class)
-public abstract class WeatherCommandMixin {
-    @Inject(method = "executeClear", at = @At("HEAD"))
-    private static void executeClear(CallbackInfoReturnable<Integer> cir) {
+@Mixin(DataCommand.class)
+public abstract class DataCommandMixin {
+    @Inject(method = "executeGet(Lnet/minecraft/server/command/ServerCommandSource;Lnet/minecraft/command/DataCommandObject;)I", at = @At("HEAD"))
+    private static void executeGet(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }
     }
 
-    @Inject(method = "executeRain", at = @At("HEAD"))
-    private static void executeRain(CallbackInfoReturnable<Integer> cir) {
+    @Inject(method = "executeInsert", at = @At("HEAD"))
+    private static void executeInsert(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }
     }
 
-    @Inject(method = "executeThunder", at = @At("HEAD"))
-    private static void executeThunder(CallbackInfoReturnable<Integer> cir) {
+    @Inject(method = "executeMerge", at = @At("HEAD"))
+    private static void executeMerge(CallbackInfoReturnable<Integer> cir) {
+        if (AmsServerSettings.opPlayerNoCheatExtra) {
+            cir.cancel();
+        }
+    }
+
+    @Inject(method = "executeModify", at = @At("HEAD"))
+    private static void executeModify(CallbackInfoReturnable<Integer> cir) {
+        if (AmsServerSettings.opPlayerNoCheatExtra) {
+            cir.cancel();
+        }
+    }
+
+    @Inject(method = "executeRemove", at = @At("HEAD"))
+    private static void executeRemove(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }

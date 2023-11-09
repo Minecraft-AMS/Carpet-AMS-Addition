@@ -133,7 +133,7 @@ carpetamsaddition:
         desc: 禁用部分指令以避免op玩家意外地作弊
         extra:
           '0': '建议与Carpet TIS Addition的opPlayerNoCheat一同使用'
-          '1': '影响的指令列表: /difficulty, /kill, /time, /weather'
+          '1': '影响的指令列表: /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode'
           '2': '(Carpet TIS Addition)影响的指令列表：/gamemode, /tp, /teleport, /give, /setblock, /summon'
       amsUpdateSuppressionCrashFix:
         name: 更新抑制崩溃修复
@@ -257,3 +257,6 @@ carpetamsaddition:
       betterCraftablePolishedBlackStoneButton:
         name: 更好的合成磨制黑石按钮
         desc: 使用深板岩来合成磨制黑石按钮
+      test:
+        name: test
+        desc: test

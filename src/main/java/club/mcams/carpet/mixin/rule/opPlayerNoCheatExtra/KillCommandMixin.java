@@ -21,32 +21,19 @@
 package club.mcams.carpet.mixin.rule.opPlayerNoCheatExtra;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.util.Messenger;
-import static club.mcams.carpet.AmsServer.fancyName;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.server.command.KillCommand;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.*;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Collection;
-
 @Mixin(KillCommand.class)
 public abstract class KillCommandMixin {
     @Inject(method = "execute", at = @At("HEAD"))
-    private static void execute(ServerCommandSource source, Collection<? extends Entity> targets, CallbackInfoReturnable<Integer> cir) {
-        if(AmsServerSettings.opPlayerNoCheatExtra) {
-            //#if MC>11800
-            //$$ Messenger.tell(source, Text.literal("<" + fancyName + "> "+ "Disabled by opPlayerNoCheatExtra")
-            //#else
-            Messenger.tell(source, (BaseText) new LiteralText("<" + fancyName + "> "+ "Disabled by opPlayerNoCheatExtra")
-                    //#endif
-                    .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFF0000))), true);
+    private static void execute(CallbackInfoReturnable<Integer> cir) {
+        if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }
     }

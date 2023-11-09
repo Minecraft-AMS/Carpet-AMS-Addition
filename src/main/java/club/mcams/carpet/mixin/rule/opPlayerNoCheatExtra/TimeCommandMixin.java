@@ -21,12 +21,8 @@
 package club.mcams.carpet.mixin.rule.opPlayerNoCheatExtra;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.util.Messenger;
-import static club.mcams.carpet.AmsServer.fancyName;
 
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.command.TimeCommand;
-import net.minecraft.text.*;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,40 +32,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(TimeCommand.class)
 public abstract class TimeCommandMixin {
     @Inject(method = "executeAdd", at = @At("HEAD"))
-    private static void executeAdd(ServerCommandSource source, int time, CallbackInfoReturnable<Integer> cir) {
-        if(AmsServerSettings.opPlayerNoCheatExtra) {
-            //#if MC>11800
-            //$$ Messenger.tell(source, Text.literal("<" + fancyName + "> "+ "Disabled by opPlayerNoCheatExtra")
-            //#else
-            Messenger.tell(source, (BaseText) new LiteralText("<" + fancyName + "> "+ "Disabled by opPlayerNoCheatExtra")
-                    //#endif
-                    .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFF0000))), true);
+    private static void executeAdd(CallbackInfoReturnable<Integer> cir) {
+        if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }
     }
 
     @Inject(method = "executeSet", at = @At("HEAD"))
-    private static void executeSet(ServerCommandSource source, int time, CallbackInfoReturnable<Integer> cir) {
-        if(AmsServerSettings.opPlayerNoCheatExtra) {
-            //#if MC>11800
-            //$$ Messenger.tell(source, Text.literal("<" + fancyName + "> "+ "Disabled by opPlayerNoCheatExtra")
-            //#else
-            Messenger.tell(source, (BaseText) new LiteralText("<" + fancyName + "> "+ "Disabled by opPlayerNoCheatExtra")
-                    //#endif
-                    .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFF0000))), true);
+    private static void executeSet(CallbackInfoReturnable<Integer> cir) {
+        if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }
     }
 
     @Inject(method = "executeQuery", at = @At("HEAD"))
-    private static void executeQuery(ServerCommandSource source, int time, CallbackInfoReturnable<Integer> cir) {
-        if(AmsServerSettings.opPlayerNoCheatExtra) {
-            //#if MC>11800
-            //$$ Messenger.tell(source, Text.literal("<" + fancyName + "> "+ "Disabled by opPlayerNoCheatExtra")
-            //#else
-            Messenger.tell(source, (BaseText) new LiteralText("<" + fancyName + "> "+ "Disabled by opPlayerNoCheatExtra")
-                    //#endif
-                    .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFF0000))), true);
+    private static void executeQuery(CallbackInfoReturnable<Integer> cir) {
+        if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }
     }
