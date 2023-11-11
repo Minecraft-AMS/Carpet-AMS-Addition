@@ -38,12 +38,14 @@ public abstract class DataCommandMixin {
         }
     }
 
+    //#if MC<11900
     @Inject(method = "executeInsert", at = @At("HEAD"))
     private static void executeInsert(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
         }
     }
+    //#endif
 
     @Inject(method = "executeMerge", at = @At("HEAD"))
     private static void executeMerge(CallbackInfoReturnable<Integer> cir) {

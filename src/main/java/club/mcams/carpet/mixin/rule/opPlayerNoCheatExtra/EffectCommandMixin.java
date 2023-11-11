@@ -31,7 +31,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(EffectCommand.class)
 public abstract class EffectCommandMixin {
+    //#if MC<11900
     @Inject(method = "executeClear(Lnet/minecraft/server/command/ServerCommandSource;Ljava/util/Collection;Lnet/minecraft/entity/effect/StatusEffect;)I", at = @At("HEAD"))
+    //#else
+    //$$ @Inject(method = "executeClear(Lnet/minecraft/server/command/ServerCommandSource;Ljava/util/Collection;Lnet/minecraft/registry/entry/RegistryEntry;)I", at = @At("HEAD"))
+    //#endif
     private static void executeClear1(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.opPlayerNoCheatExtra) {
             cir.cancel();
