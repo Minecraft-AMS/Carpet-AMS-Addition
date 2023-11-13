@@ -32,7 +32,6 @@
 
 ## 补充说明
 - 前置模组尽可能使用高的版本。
-- 规则文档内带有 💻 标识的为需客户端支持。
 - Carpet-AMS-Addition中的功能，虽然存在但不代表我们在AMS服务器内使用它。
 - 由于英文水平有限，目前所有翻译均来自 [Chat-GPT](https://openai.com/blog/chatgpt) （除了很久很久以前
   [nirvanaxiao6](https://github.com/nirvanaxiao6)撰写的第一篇英文文档）。:)
