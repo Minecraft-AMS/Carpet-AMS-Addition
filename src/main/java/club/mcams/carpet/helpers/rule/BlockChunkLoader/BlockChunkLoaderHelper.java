@@ -21,18 +21,27 @@
 
 package club.mcams.carpet.helpers.rule.BlockChunkLoader;
 
+import club.mcams.carpet.AmsServerSettings;
+
 import net.minecraft.server.world.ChunkTicketType;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.ChunkPos;
 
 import java.util.Comparator;
 
-public class BlockChunkLoader {
+public class BlockChunkLoaderHelper {
     public static final ChunkTicketType<ChunkPos>
             BLOCK_LOADER = ChunkTicketType.create
             (
                     "block_loader", Comparator.comparingLong(ChunkPos::toLong),
                     300
             );
+
+    public static void resetIdleTimeout(ServerWorld world) {
+        if (AmsServerSettings.blockChunkLoaderKeepTickEntities) {
+            world.resetIdleTimeout();
+        }
+    }
 }
 
 

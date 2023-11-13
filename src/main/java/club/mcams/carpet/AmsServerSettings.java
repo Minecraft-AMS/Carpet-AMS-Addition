@@ -110,9 +110,8 @@ public class AmsServerSettings {
     public static boolean weakCryingObsidian = false;
 
     //#if MC>=11900
-    @SuppressWarnings("unused")
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
-    public static boolean weakReinforcedDeepslate = false;
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
+    //$$ public static boolean weakReinforcedDeepslate = false;
     //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
@@ -184,7 +183,7 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL, COMMAND})
     public static boolean opPlayerNoCheatExtra = false;
 
-    //#if MC<11900
+    //#if MC<=11800
     @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL})
     public static boolean amsUpdateSuppressionCrashFix = false;
     //#endif
@@ -197,6 +196,12 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean blockChunkLoaderKeepTickEntities = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean keepEntityUpdate = false;
 
     /*
      * 可移动方块规则
@@ -223,33 +228,28 @@ public class AmsServerSettings {
     public static boolean movableBeacon = false;
 
     //#if MC>=11900
-    @SuppressWarnings("unused")
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableReinforcedDeepslate = false;
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
+    //$$ public static boolean movableReinforcedDeepslate = false;
     //#endif
 
     //#if MC>=11900
-    @SuppressWarnings("unused")
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableSculkCatalyst = false;
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
+    //$$ public static boolean movableSculkCatalyst = false;
     //#endif
 
     //#if MC>=11900
-    @SuppressWarnings("unused")
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableSculkSensor = false;
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
+    //$$ public static boolean movableSculkSensor = false;
     //#endif
 
     //#if MC>=11900
-    @SuppressWarnings("unused")
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableSculkShrieker = false;
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
+    //$$ public static boolean movableSculkShrieker = false;
     //#endif
 
     //#if MC>=12000
-    @SuppressWarnings("unused")
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableCalibratedSculkSensor = false;
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
+    //$$ public static boolean movableCalibratedSculkSensor = false;
     //#endif
 
     @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})

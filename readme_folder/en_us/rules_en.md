@@ -1,7 +1,7 @@
 \>\>\> [BACK](/README_en.md)
 
 # Rules
-NOTE: Rules with 💻 emoji present that correctly executing these rules requires Carpet-AMS-Addition on the client side.
+
 ## superBow
 
 Let enchantments Infinity and Mending be compatible with each other on bow.
@@ -70,6 +70,10 @@ the option is interpreted as follow:
 - Suggested options: `bone_block`, `wither_skeleton_skull`, `note_block`, `OFF`
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
+&emsp;
+
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
+
 ## bellBlockChunkLoader
 
 When a bell block is triggered by rising edge of redstone signal, the chunk which the bell block located will be added a ticket with level 30 and type 'bell_block', which will expire after 300gt. Bell blocks have no special requirement to add tickets.
@@ -78,6 +82,10 @@ When a bell block is triggered by rising edge of redstone signal, the chunk whic
 - Default: `false`
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
+&emsp;
+
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
 
 ## pistonBlockChunkLoader
 
@@ -91,7 +99,11 @@ the option is interpreted as follow:
 - `bedrock`: The piston must have a bedrock just under it.
 - `all`: When boe_block is on the piston or bed rock is under the piston.
 - `OFF`: Disable the rule.
-  
+
+&emsp;
+
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
+
 
 &emsp;
 
@@ -111,7 +123,7 @@ Player can place water source in the nether by using water bucket.
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `FEATURE`
 
-## 💻softDeepslate
+## softDeepslate
 
 Hardness of deepslate will be set to 1.5, which is equal to the hardness of stone. Other words, player with Haste II using an Efficiency V diamond pickaxe can break deepslate instantly.
 
@@ -122,7 +134,7 @@ Hardness of deepslate will be set to 1.5, which is equal to the hardness of ston
 - Suggested options: `false`, `true`
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 💻softObsidian
+## softObsidian
 
 Hardness of obsidian will be set to 3, which is equal to the hardness of original deepslate.
 
@@ -283,7 +295,7 @@ When enabled, Doubles the size of your EnderChest.
 - Categroies: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## 💻bambooModelNoOffset
+## bambooModelNoOffset
 
 When enabled, The block model of bamboo will not generate offset.
 
@@ -293,7 +305,7 @@ When enabled, The block model of bamboo will not generate offset.
 - Categroies: `AMS` , `FEATURE` , `OPTIMIZATION`
 
 
-## 💻bambooCollisionBoxDisabled
+## bambooCollisionBoxDisabled
 
 When enabled, players can pass through bamboo.
 
@@ -303,7 +315,7 @@ When enabled, players can pass through bamboo.
 - Categroies: `AMS` , `FEATURE`
 
 
-## 💻campfireSmokeParticleDisabled
+## campfireSmokeParticleDisabled
 
 When enabled, Campfire will not produce smoke particles.
 
@@ -489,6 +501,28 @@ When enabled, Players are not allowed to consume cake.
 When enabled, When players right-click on the redstone component, it will emit a sound
 <br/>
 Affected components: daylight detector, redstone dust, repeater
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE`
+
+
+## blockChunkLoaderKeepTickEntities
+
+After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.
+<br/>
+Affected rules: `noteBlockChunkLoader`, `pistonBlockChunkLoader`, `bellBlockChunkLoader`
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE`
+
+
+## keepEntityUpdate
+
+After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction.
 
 - Type: `boolean`
 - Default: `false`

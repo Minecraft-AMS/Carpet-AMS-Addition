@@ -76,6 +76,9 @@
 `note_block`: 无需条件，只有音符盒即可加载。
 <br>
 `OFF`: 禁用该规则。
+<br/>
+<br/>
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
 
 - 类型: `String`
 - 默认值: `false`
@@ -86,6 +89,9 @@
 ## 钟区块加载 (bellBlockChunkLoader)
 
 开启后，当上边沿红石信号激活钟时，为钟方块所在区块添加类型为"bell_block"，加载等级为30的加载票，持续时间为300gt（15s）。
+<br/>
+<br/>
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
 
 - 类型: `boolean`
 - 默认值: `false`
@@ -104,6 +110,9 @@
 `all`: 活塞\黏性活塞下有骨块或基岩时触发加载。
 <br>
 `OFF`: 禁用该规则。
+<br/>
+<br/>
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
 > 如果不想使用地狱门加载链的话，此规则可作为替代方案。
 
 - 类型: `String`
@@ -122,7 +131,7 @@
 - 分类: `AMS` , `FEATURE`
 
 
-## 💻易碎深板岩 (softDeepslate)
+## 易碎深板岩 (softDeepslate)
 
 开启后，深板岩的挖掘硬度将与石头相同（均可在急迫二效果下用效率5钻石镐进行瞬间挖掘）。
 
@@ -132,7 +141,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## 💻易碎黑曜石 (softObsidian)
+## 易碎黑曜石 (softObsidian)
 
 开启后，黑曜石的挖掘硬度将与深板岩相同。
 
@@ -299,7 +308,7 @@
 - 分类: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## 💻竹子模型无偏移(bambooModelNoOffset)
+## 竹子模型无偏移(bambooModelNoOffset)
 
 开启后，让竹子的模型不会产生偏移。
 
@@ -309,7 +318,7 @@
 - 分类: `AMS` , `FEATURE` , `OPTIMIZATION`
 
 
-## 💻禁用竹子碰撞箱(bambooCollisionBoxDisabled)
+## 禁用竹子碰撞箱(bambooCollisionBoxDisabled)
 
 开启后，玩家可以穿过竹子。
 
@@ -319,7 +328,7 @@
 - 分类: `AMS` , `FEATURE`
 
 
-## 💻禁用篝火烟雾粒子(campfireSmokeParticleDisabled)
+## 禁用篝火烟雾粒子(campfireSmokeParticleDisabled)
 
 开启后，篝火将不会产生烟雾粒子。
 
@@ -508,6 +517,28 @@
 开启后，玩家右键红石元件时会播放声音。
 <br/>
 影响的元件：阳光传感器、红石粉、中继器。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE`
+
+
+## 方块区块加载保持实体更新 (blockChunkLoaderKeepTickEntities)
+
+在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制。
+<br/>
+受影响的规则：`noteBlockChunkLoader`、`pistonBlockChunkLoader`、`bellBlockChunkLoader`
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE`
+
+
+## 保持实体更新 (keepEntityUpdate)
+
+在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制。
 
 - 类型: `boolean`
 - 默认值: `false`

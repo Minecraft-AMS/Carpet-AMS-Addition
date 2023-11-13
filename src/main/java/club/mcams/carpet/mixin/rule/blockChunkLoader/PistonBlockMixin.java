@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.blockChunkLoader;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.BlockChunkLoader.BlockChunkLoader;
+import club.mcams.carpet.helpers.rule.BlockChunkLoader.BlockChunkLoaderHelper;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FacingBlock;
@@ -49,7 +49,8 @@ public abstract class PistonBlockMixin {
             BlockState pistonBlock = world.getBlockState(pos.up(1));
             if ((Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bone_block") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && pistonBlock.isOf(Blocks.BONE_BLOCK)) {
                 ChunkPos chunkPos = new ChunkPos(pos.offset(direction));
-                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
+                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
+                BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
             }
         }
 
@@ -58,7 +59,8 @@ public abstract class PistonBlockMixin {
             BlockState pistonBlock = world.getBlockState(pos.down(1));
             if ((Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bedrock") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && pistonBlock.isOf(Blocks.BEDROCK)) {
                 ChunkPos chunkPos = new ChunkPos(pos.offset(direction));
-                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
+                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
+                BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
             }
         }
     }

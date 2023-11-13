@@ -148,7 +148,17 @@ carpetamsaddition:
         name: 红石元件音效
         desc: 玩家右键红石元件时会播放声音
         extra:
-          '0': '影响的元件：阳光传感器、红石粉、中继器'
+          '0': '影响的元件：'
+          '1': '阳光传感器、红石粉、中继器'
+      blockChunkLoaderKeepTickEntities:
+        name: 方块区块加载保持实体更新
+        desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制
+        extra:
+          '0': '受影响的规则：'
+          '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
+      keepEntityUpdate:
+        name: 保持实体更新
+        desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -182,9 +192,14 @@ carpetamsaddition:
           '1': '[wither_skeleton_skull] - 音符盒上有凋灵骷髅头（可以是挂在墙上的也可以是放在音符盒上的）时可以触发加载'
           '2': '[note_block] - 无需条件，只有音符盒即可加载'
           '3': '[OFF] - 禁用该规则'
+          '4': '由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作'
+          '5': '你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题'
       bellBlockChunkLoader:
         name: 钟区块加载
         desc: 钟方块被激活时将加载周围3x3区块15s
+        extra:
+          '1': '由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作'
+          '2': '你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题'
       pistonBlockChunkLoader:
         name: 活塞头区块加载
         desc: 活塞或黏性活塞被激活且能正常伸出时以活塞头将到达的区块为中心加载3x3区块持续15s
@@ -193,6 +208,8 @@ carpetamsaddition:
           '1': '[bedrock] - 当活塞/黏性活塞下方有基岩时'
           '2': '[all] - 当活塞/黏性活塞上方有骨块或下方有基岩时'
           '3': '[OFF] - 禁用该规则'
+          '4': '由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作'
+          '5': '你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题'
 
 #可移动方块规则
       movableEnderChest:

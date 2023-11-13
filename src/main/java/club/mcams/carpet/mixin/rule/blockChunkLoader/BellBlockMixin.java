@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.blockChunkLoader;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.BlockChunkLoader.BlockChunkLoader;
+import club.mcams.carpet.helpers.rule.BlockChunkLoader.BlockChunkLoaderHelper;
 
 import net.minecraft.block.BellBlock;
 import net.minecraft.entity.Entity;
@@ -54,7 +54,8 @@ public abstract class BellBlockMixin {
             World world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.bellBlockChunkLoader && !world.isClient) {
             ChunkPos chunkPos = new ChunkPos(pos);
-            ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
+            ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
+            BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
         }
     }
 }

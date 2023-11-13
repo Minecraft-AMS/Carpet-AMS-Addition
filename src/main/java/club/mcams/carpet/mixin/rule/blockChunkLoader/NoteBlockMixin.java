@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.blockChunkLoader;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.BlockChunkLoader.BlockChunkLoader;
+import club.mcams.carpet.helpers.rule.BlockChunkLoader.BlockChunkLoaderHelper;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -55,20 +55,25 @@ public abstract class NoteBlockMixin {
             World world, BlockPos pos, CallbackInfo info) {
         if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "note_block") && !world.isClient) {
             ChunkPos chunkPos = new ChunkPos(pos);
-            ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
+            ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
+            BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
         }
+
         if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block") && !world.isClient) {
             BlockState noteBlock = world.getBlockState(pos.up(1));
             if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block") && noteBlock.isOf(Blocks.BONE_BLOCK)) {
                 ChunkPos chunkPos = new ChunkPos(pos.up(1));
-                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
+                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
+                BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
             }
         }
+
         if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull") && !world.isClient) {
             BlockState noteBlock = world.getBlockState(pos.up(1));
             if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull") && (noteBlock.isOf(Blocks.WITHER_SKELETON_SKULL)) || (noteBlock.isOf(Blocks.WITHER_SKELETON_WALL_SKULL))) {
                 ChunkPos chunkPos = new ChunkPos(pos.up(1));
-                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoader.BLOCK_LOADER, chunkPos, 3, chunkPos);
+                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
+                BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
             }
         }
     }
