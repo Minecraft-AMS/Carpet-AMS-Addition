@@ -3,13 +3,12 @@
   "id": "${id}",
   "version": "${version}",
   "name": "${name}",
-  "description": "一个简陋的，东拼西凑的，及其不原版的Carpet拓展。",
+  "description": "A fabric-carpet extension mod. It offers some interesting and useful features.",
   "authors": [
     "1024_byteeeee",
     "WenDavid",
     "Rokuuuchan",
     "SunnySlopes"
-
   ],
   "contact": {
     "homepage": "https://mcams.club/",
