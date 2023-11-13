@@ -1,6 +1,6 @@
 {
   "required": true,
-  "minVersion": "0.8",
+  "minVersion": "0.8.5",
   "package": "club.mcams.carpet.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
@@ -27,6 +27,7 @@
     "rule.fakePeace.AbstractBlockStateMixin",
     "rule.fasterMovement.PlayerEntityMixin",
     "rule.infiniteTrades.MerchantEntityMixin",
+    "rule.keepEntityUpdate.ServerWorldMixin",
     "rule.largeEnderChest.EnderChestBlockMixin",
     "rule.largeEnderChest.PlayerEntityMixin",
     "rule.largeEnderChest.SimpleInventoryAccessor",
