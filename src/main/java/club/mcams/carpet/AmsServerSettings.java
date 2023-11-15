@@ -169,10 +169,13 @@ public class AmsServerSettings {
     public static boolean enderManTeleportRandomlyDisabled = false;
 
     @Rule(
-            options = {"VANILLA", "Ⅰ", "Ⅱ", "Ⅲ"},
+            options = {"VANILLA", "Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"},
             categories = {AMS, FEATURE, EXPERIMENTAL}
     )
     public static String fasterMovement = "VANILLA";
+
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    public static fasterMovementDimension fasterMovementController = fasterMovementDimension.ALL;
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean easyWitherSkeletonSkullDrop = false;
@@ -303,5 +306,12 @@ public class AmsServerSettings {
         VANILLA,
         SURELY,
         NEVER
+    }
+
+    public enum fasterMovementDimension {
+        OVERWORLD,
+        NETHER,
+        END,
+        ALL
     }
 }

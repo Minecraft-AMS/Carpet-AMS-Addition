@@ -23,6 +23,7 @@ package club.mcams.carpet.mixin.rule.fasterMovement;
 import club.mcams.carpet.AmsServerSettings;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,12 +36,25 @@ import java.util.Objects;
 public abstract class PlayerEntityMixin {
     @Inject(method = "getMovementSpeed", at = @At("HEAD"), cancellable = true)
     public void getMovementSpeed(CallbackInfoReturnable<Float> cir) {
-        if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅰ")) {
-            cir.setReturnValue(0.2F);
-        } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅱ")) {
-            cir.setReturnValue(0.3F);
-        } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅲ")) {
-            cir.setReturnValue(0.4F);
+        PlayerEntity player = (PlayerEntity)(Object)this;
+        World world = player.getEntityWorld();
+        if (
+                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.END && world.getRegistryKey() == World.END) ||
+                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.NETHER && world.getRegistryKey() == World.NETHER) ||
+                        (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.OVERWORLD  && world.getRegistryKey() == World.OVERWORLD) ||
+                        (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.ALL)
+        ) {
+            if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅰ")) {
+                cir.setReturnValue(0.2F);
+            } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅱ")) {
+                cir.setReturnValue(0.3F);
+            } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅲ")) {
+                cir.setReturnValue(0.4F);
+            } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅳ")) {
+                cir.setReturnValue(0.5F);
+            } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅴ")) {
+                cir.setReturnValue(0.6F);
+            }
         }
     }
 }

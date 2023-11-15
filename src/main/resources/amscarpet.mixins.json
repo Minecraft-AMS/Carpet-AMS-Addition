@@ -31,6 +31,7 @@
     "rule.largeEnderChest.EnderChestBlockMixin",
     "rule.largeEnderChest.PlayerEntityMixin",
     "rule.largeEnderChest.SimpleInventoryAccessor",
+    "rule.largeShulkerBox.ShulkerBoxBlockMixin",
     "rule.movableBlocks.PistonBlockMixin",
     "rule.netherWaterPlacement.DimensionTypeMixin",
     "rule.noCakeEating.CakeBlockMixin",

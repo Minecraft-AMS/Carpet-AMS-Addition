@@ -114,12 +114,17 @@ carpetamsaddition:
         desc: Random teleportation by EnderMan is prohibited
       fasterMovement:
         name: fasterMovement
-        desc: Three gears are provided to allow players to move faster
+        desc: Five gears are provided to allow players to move faster
         extra:
-          'Ⅰ': '[Ⅰ]'
-          'Ⅱ': '[Ⅱ]'
-          'Ⅲ': '[Ⅲ]'
-          'VANILLA': '[VANILLA]'
+          '0': You can use fasterMovementController rule to control in which dimensions this rule is effective. By default, it is effective in all dimensions.
+      fasterMovementController:
+        name: fasterMovementController
+        desc: Used to control in which dimensions fasterMovement rule is effective.
+        extra:
+          '0': '[overworld] - Only effective in the Overworld'
+          '1': '[nether] - Only effective in the Nether'
+          '2': '[end] - Only effective in the End'
+          '3': '[all] - Effective in all dimensions'
       easyWitherSkeletonSkullDrop:
         name: easyWitherSkeletonSkullDrop
         desc: 100% Wither Skeleton Skull Drop
@@ -240,7 +245,7 @@ carpetamsaddition:
         name: movableAnvil
         desc: Makes anvil movable
       movableSculkCatalyst:
-        name: movableAnvil
+        name: movableSculkCatalyst
         desc: Makes sculk_catalyst movable
       movableSculkSensor:
         name: movableSculkSensor

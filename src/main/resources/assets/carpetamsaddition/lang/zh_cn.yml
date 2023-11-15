@@ -114,12 +114,17 @@ carpetamsaddition:
         desc: 禁止末影人随机传送
       fasterMovement:
         name: 快速移动
-        desc: 提供了三个挡位让玩家移动速度变快
+        desc: 提供了五个挡位让玩家移动速度变快
         extra:
-          'Ⅰ': '[Ⅰ]'
-          'Ⅱ': '[Ⅱ]'
-          'Ⅲ': '[Ⅲ]'
-          'VANILLA': '[VANILLA]'
+          '0': 你可以使用fasterMovementController规则来控制该规则在哪个维度生效，默认所有维度生效
+      fasterMovementController:
+        name: 快速移动规则控制器
+        desc: 用于控制快速移动规则在那个维度生效
+        extra:
+          '0': '[overworld] - 只在主世界生效'
+          '1': '[nether] - 只在地狱生效'
+          '2': '[end] - 只在末地生效'
+          '3': '[all] - 所有维度生效'
       easyWitherSkeletonSkullDrop:
         name: 轻松掉落凋零骷髅头
         desc: 击杀凋零骷髅会百分百掉落凋零骷髅头
