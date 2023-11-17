@@ -439,7 +439,17 @@
 
 - 类型: `String`
 - 默认值: `VANILLA`
-- 参考选项: `Ⅰ` , `Ⅱ`, `Ⅲ`, `VANILLA`
+- 参考选项: `Ⅰ` , `Ⅱ`, `Ⅲ`, `Ⅳ`, `Ⅴ`, `VANILLA`
+- 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
+
+
+## 更快移动规则控制器 (fasterMovementController)
+
+用于控制快速移动规则在那个维度生效。
+
+- 类型: `String`
+- 默认值: `all`
+- 参考选项: `overworld`, `nether`, `end`, `all`
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 

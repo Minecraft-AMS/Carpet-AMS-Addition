@@ -419,11 +419,22 @@ When enabled, Random teleportation by EnderMan is prohibited.
 
 ## fasterMovement
 
-Three gears are provided to allow players to move faster.
+Five gears are provided to allow players to move faster.
+> You can use fasterMovementController rule to control in which dimensions this rule is effective. By default, it is effective in all dimensions.
 
 - Type: `String`
 - Default: `VANILLA`
-- Suggested options: `Ⅰ` , `Ⅱ`, `Ⅲ`, `VANILLA`
+- Suggested options: `Ⅰ` , `Ⅱ`, `Ⅲ`, `Ⅳ`, `Ⅴ`, `VANILLA`
+- Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
+
+
+## fasterMovementController
+
+Used to control in which dimensions fasterMovement rule is effective.
+
+- Type: `String`
+- Default: `all`
+- Suggested options: `overworld` , `nether`, `end`, `all`
 - Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
