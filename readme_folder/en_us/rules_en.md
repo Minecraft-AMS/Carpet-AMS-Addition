@@ -402,7 +402,7 @@ When enabled，You can choose whether to have Withering always shoot blue skulls
 `VANILLA`: VANILLA。
 
 - Type: `String`
-- Default值: `VANILLA`
+- Default: `VANILLA`
 - Suggested options: `SURELY` , `NEVER` , `VANILLA` 
 - Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
@@ -467,10 +467,10 @@ Affects command list: /difficulty, /kill, /time, /weather, /fill, /setblock, /en
 <br/>
 (Carpet TIS Addition)Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon
 
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false` , `true`
-- 分类: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
 
 
 ## amsUpdateSuppressionCrashFix
