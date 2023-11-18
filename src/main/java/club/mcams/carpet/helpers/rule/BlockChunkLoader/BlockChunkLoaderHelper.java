@@ -38,7 +38,7 @@ public class BlockChunkLoaderHelper {
             );
 
     public static void resetIdleTimeout(ServerWorld world) {
-        if (AmsServerSettings.blockChunkLoaderKeepTickEntities) {
+        if (AmsServerSettings.blockChunkLoaderKeepTickUpdate) {
             world.resetIdleTimeout();
         }
     }
