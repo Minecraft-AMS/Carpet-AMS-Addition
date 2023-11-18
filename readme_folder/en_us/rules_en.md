@@ -519,7 +519,7 @@ Affected components: daylight detector, redstone dust, repeater
 - Categroies: `AMS` , `FEATURE`
 
 
-## blockChunkLoaderKeepTickEntities
+## blockChunkLoaderKeepTickUpdate
 
 After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.
 <br/>
@@ -539,6 +539,27 @@ After 300 ticks without any players in the current dimension on the server, Mine
 - Default: `false`
 - Suggested options: `false` , `true`
 - Categroies: `AMS` , `FEATURE`
+
+
+## largeShulkerBox
+
+Doubles the size of your ShulkerBox.
+<br/>
+<br/>
+The current rule is not yet perfect. Please follow the steps below when using this rule:
+<br/>
+1 - To ensure that no shulker boxes are loaded.
+<br/>
+2 - Enter the command: `/carpet setDefault largeShulkerBox true`, to turn on the rule.
+<br/>
+3 - Restart the server/single-player world.
+<br/>
+4 - Disabling the rule follows the same process.
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false` , `true`
+- Categroies: `AMS` , `FEATURE`, `EXPERIMENTAL`
 
 
 ## movableEnderChest

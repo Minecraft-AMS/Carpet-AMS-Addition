@@ -201,10 +201,13 @@ public class AmsServerSettings {
     public static boolean redstoneComponentSound = false;
 
     @Rule(categories = {AMS, FEATURE})
-    public static boolean blockChunkLoaderKeepTickEntities = false;
+    public static boolean blockChunkLoaderKeepTickUpdate = false;
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean keepEntityUpdate = false;
+
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    public static boolean largeShulkerBox = false;
 
     /*
      * 可移动方块规则

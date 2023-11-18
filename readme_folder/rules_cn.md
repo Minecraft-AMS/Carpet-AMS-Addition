@@ -534,7 +534,7 @@
 - 分类: `AMS` , `FEATURE`
 
 
-## 方块区块加载保持实体更新 (blockChunkLoaderKeepTickEntities)
+## 方块区块加载保持实体更新 (blockChunkLoaderKeepTickUpdate)
 
 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制。
 <br/>
@@ -554,6 +554,26 @@
 - 默认值: `false`
 - 参考选项: `false` , `true`
 - 分类: `AMS` , `FEATURE`
+
+
+## 大潜影盒 (largeShulkerBox)
+
+让潜影盒容量增加一倍（与大箱子相同）。
+<br/>
+该规则目前并不完善，使用该规则请遵守如下步骤：
+<br/>
+1 - 确保没有潜影盒被加载。
+<br/>
+2 - 输入指令：`/carpet setDefault largeShulkerBox true` 开启规则。
+<br/>
+3 - 重启服务器/单人世界。
+<br/>
+4 - 关闭该规则同理。
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false` , `true`
+- 分类: `AMS` , `FEATURE`, `EXPERIMENTAL`
 
 
 ## 可移动末地传送门框架(movableEndPortalFrame)

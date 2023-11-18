@@ -155,7 +155,7 @@ carpetamsaddition:
         extra:
           '0': '影响的元件：'
           '1': '阳光传感器、红石粉、中继器'
-      blockChunkLoaderKeepTickEntities:
+      blockChunkLoaderKeepTickUpdate:
         name: 方块区块加载保持实体更新
         desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制
         extra:
@@ -164,6 +164,16 @@ carpetamsaddition:
       keepEntityUpdate:
         name: 保持实体更新
         desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制
+      largeShulkerBox:
+        name: 大潜影盒
+        desc: 让潜影盒容量增加一倍（与大箱子相同）
+        extra:
+          '0': '该规则目前并不完善，使用该规则请遵守如下步骤：'
+          '1': '1 - 确保没有潜影盒被加载'
+          '2': '2 - 输入指令：/carpet setDefault largeShulkerBox true 开启规则'
+          '3': '3 - 重启服务器/单人世界'
+          '4': '4 - 关闭该规则同理'
+
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -279,6 +289,3 @@ carpetamsaddition:
       betterCraftablePolishedBlackStoneButton:
         name: 更好的合成磨制黑石按钮
         desc: 使用深板岩来合成磨制黑石按钮
-      test:
-        name: test
-        desc: test
