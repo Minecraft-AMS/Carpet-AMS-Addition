@@ -155,7 +155,7 @@ carpetamsaddition:
         extra:
           '0': 'Affected components: '
           '1': 'daylight detector, redstone dust, repeater'
-      blockChunkLoaderKeepTickEntities:
+      blockChunkLoaderKeepTickUpdate:
         name: blockChunkLoaderKeepTickEntities
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.
         extra:
