@@ -90,7 +90,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Inject(method = "getAvailableSlots", at = @At("HEAD"), cancellable = true)
     public void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
         if (AmsServerSettings.largeShulkerBox) {
-            int[] availableSlots = IntStream.range(0, 9 * 6).toArray();
+            int[] availableSlots = IntStream.range(0, size()).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();
         }
