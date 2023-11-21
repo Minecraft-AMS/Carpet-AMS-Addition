@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../lib/plugins/filter/after_post_render/index.ts"],"names":[],"mappings":";AAEA,iBAAS,CAAC,GAAS,EAAE,EAAE;IACrB,MAAM,EAAE,MAAM,EAAE,GAAG,GAAG,CAAC,MAAM,CAAC;IAE9B,MAAM,CAAC,QAAQ,CAAC,mBAAmB,EAAE,OAAO,CAAC,iBAAiB,CAAC,CAAC,CAAC;IACjE,MAAM,CAAC,QAAQ,CAAC,mBAAmB,EAAE,OAAO,CAAC,WAAW,CAAC,CAAC,CAAC;AAC7D,CAAC,CAAC"}
