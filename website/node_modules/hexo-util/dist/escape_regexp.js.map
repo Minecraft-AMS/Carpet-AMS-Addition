@@ -1,0 +1,1 @@
+{"version":3,"file":"escape_regexp.js","sourceRoot":"","sources":["../lib/escape_regexp.ts"],"names":[],"mappings":";AAAA,SAAS,YAAY,CAAC,GAAW;IAC/B,IAAI,OAAO,GAAG,KAAK,QAAQ;QAAE,MAAM,IAAI,SAAS,CAAC,uBAAuB,CAAC,CAAC;IAE1E,qCAAqC;IACrC,OAAO,GAAG,CAAC,OAAO,CAAC,uBAAuB,EAAE,MAAM,CAAC,CAAC;AACtD,CAAC;AAED,iBAAS,YAAY,CAAC"}

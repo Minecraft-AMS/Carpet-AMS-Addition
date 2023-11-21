@@ -1,0 +1,29 @@
+"use strict";
+const hexo_util_1 = require("hexo-util");
+let EXTERNAL_LINK_POST_ENABLED = true;
+const rATag = /<a(?:\s+?|\s+?[^<>]+?\s+?)href=["']((?:https?:|\/\/)[^<>"']+)["'][^<>]*>/gi;
+const rTargetAttr = /target=/i;
+const rRelAttr = /rel=/i;
+const rRelStrAttr = /rel=["']([^<>"']*)["']/i;
+function externalLinkFilter(data) {
+    if (!EXTERNAL_LINK_POST_ENABLED)
+        return;
+    const { external_link, url } = this.config;
+    if (!external_link.enable || external_link.field !== 'post') {
+        EXTERNAL_LINK_POST_ENABLED = false;
+        return;
+    }
+    data.content = data.content.replace(rATag, (str, href) => {
+        if (!(0, hexo_util_1.isExternalLink)(href, url, external_link.exclude) || rTargetAttr.test(str))
+            return str;
+        if (rRelAttr.test(str)) {
+            str = str.replace(rRelStrAttr, (relStr, rel) => {
+                return rel.includes('noopenner') ? relStr : `rel="${rel} noopener"`;
+            });
+            return str.replace('href=', 'target="_blank" href=');
+        }
+        return str.replace('href=', 'target="_blank" rel="noopener" href=');
+    });
+}
+module.exports = externalLinkFilter;
+//# sourceMappingURL=external_link.js.map

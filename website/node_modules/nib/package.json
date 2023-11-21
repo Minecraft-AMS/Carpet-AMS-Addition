@@ -1,0 +1,36 @@
+{
+  "name": "nib",
+  "description": "Stylus mixins and utilities",
+  "version": "1.2.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stylus/nib.git"
+  },
+  "peerDependencies": {
+    "stylus": "*"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "connect": "^3.7.0",
+    "mocha": "^10.0.0",
+    "pug": "^3.0.2",
+    "serve-static": "^1.15.0",
+    "stylus": "^0.57.0"
+  },
+  "author": "TJ Holowaychuk <tj@vision-media.ca>",
+  "maintainers": [
+    {
+      "name": "iChenLei",
+      "email": "chenleicoder@foxmail.com"
+    }
+  ],
+  "main": "lib/nib.js",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "mocha",
+    "test-server": "node test/server.js"
+  }
+}
