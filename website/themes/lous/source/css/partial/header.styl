@@ -1,0 +1,25 @@
+.header-container
+    margin-top: 20px
+    display: flex
+    justify-content: center
+
+.header-menu-list
+    width: 100%
+    margin: 0 10px
+    ul
+        text-align: left
+        list-style-type: none
+        margin: 0
+        padding: 0
+        display: inline-flex
+    li:not(:last-child)
+        margin-right: 15px
+
+@media screen and (max-width: 600px)
+    .header-menu-list
+        ul
+            text-align: center
+            display: flex
+            flex-direction: column
+        li:not(:last-child)
+            margin-right: 0px

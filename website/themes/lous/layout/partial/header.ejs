@@ -1,0 +1,13 @@
+<header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            <% for (let name in theme.menu) { %>
+                <li>
+                    <a href="<%- url_for(theme.menu[name]) %>"><%= name %></a>
+                </li>
+            <% } %>
+            </ul>
+        </div>
+    </div>
+</header>

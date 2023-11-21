@@ -1,0 +1,21 @@
+<footer>
+    <div class="footer-container">
+        <div class="footer-meta">
+            <% if (theme.copyright) { %>
+                <div class="footer-meta-copyright">
+                    &copy; <%= date(new Date(), 'YYYY') %> <%= theme.copyright.name || config.author %>.
+                </div>
+            <% } %>
+            <% if (theme.license) { %>
+                <div class="footer-meta-licenese">
+                    Licensed under <a href="<%- url_for(theme.license.url) %>"><%= theme.license.name %></a>
+                </div>
+            <% } %>
+            <% if (theme.rss) { %>
+                <div class="footer-meta-rss">
+                    <a href="<%- url_for(theme.rss.path) %>"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</footer>

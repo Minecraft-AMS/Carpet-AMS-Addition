@@ -1,0 +1,12 @@
+<% if (theme.mathjax && theme.mathjax.enable) { %>
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        }
+    };
+</script>
+<script id="MathJax-script" async src="<%= theme.mathjax.cdn || 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.min.js' %>"></script>
+<% } else if(theme.katex && theme.katex.enable) { %>
+    <link rel="stylesheet" href="<%= theme.katex.cdn || 'https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css' %>">
+<% } %>  

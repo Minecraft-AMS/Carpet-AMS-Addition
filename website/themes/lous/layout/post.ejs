@@ -1,0 +1,27 @@
+<main>
+    <div class="main-container">
+        <div class="post-details">
+            <% if (is_post()) { %>
+            <div class="post-title">
+                <h1><%= page.title %></h1>
+            </div>
+            <div class="post-meta">
+                <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date"><%= date(page.date, 'YYYY/MM/DD') %></span>
+            </div>
+            <% } %>
+            <div class="post-content">
+                <%- page.content %>
+            </div>
+        </div>
+    </div>
+</main>
+<% if (theme.utterances && theme.utterances.enable && page.comments) { %>
+<script src="https://utteranc.es/client.js"
+    repo="<%= theme.utterances.repo %>"
+    issue-term="<%= theme.utterances.issueTerm %>"
+    theme="<%= theme.utterances.theme %>"
+    crossorigin="anonymous"
+    async>
+</script>
+<% } %>
+<%- partial('partial/scripts/math') %>
