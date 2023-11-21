@@ -29,6 +29,7 @@
 - [规则](/readme_folder/rules_cn.md)
 - [指令](/readme_folder/commands_cn.md)
 - [致谢](/readme_folder/thanks_cn.md)
+- https://minecraft-ams.github.io/carpetamsaddition/
 
 ## 补充说明
 - 前置模组尽可能使用高的版本。

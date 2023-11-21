@@ -29,6 +29,7 @@
 - [Rules](/readme_folder/en_us/rules_en.md)
 - [Commands](/readme_folder/en_us/commands_en.md)
 - [Thanks](/readme_folder/en_us/thanks_en.md)
+- https://minecraft-ams.github.io/carpetamsaddition/
 
 ## Notes
 
