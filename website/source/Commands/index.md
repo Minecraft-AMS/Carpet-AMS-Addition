@@ -1,6 +1,6 @@
 
 
-### [[English](/carpetamsaddition/Commands_en)]
+### [ 中文 | [English](/carpetamsaddition/en_us/Commands_en) ]
 
 # <center>------ 指 令 ------</center>
 

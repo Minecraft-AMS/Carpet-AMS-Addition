@@ -1,4 +1,4 @@
-### [[English](/carpetamsaddition/Development_en)]
+### [ 中文 | [English](/carpetamsaddition/en_us/Development_en) ]
 
 # <center>------ 开 发 ------</center>
 

@@ -1,4 +1,4 @@
-### [[English](/carpetamsaddition/Rules_en)]
+### [ 中文 | [English](/carpetamsaddition/en_us/Rules_en) ]
 
 # <center>------ 规 则 ------</center>
 
@@ -37,7 +37,7 @@
 
 - `scheduledRandomTickStem`: 开启后，使计划刻事件可触发海带、缠怨藤、垂泪藤的随机刻生长行为。
 
-  <该规则从 [OhMyVanillaMinecraf](https://github.com/hit-mc/OhMyVanillaMinecraft) 移植>
+  <该规则从 [OhMyVanillaMinecraft](https://github.com/hit-mc/OhMyVanillaMinecraft) 移植>
 
 - 类型: `boolean`
 
