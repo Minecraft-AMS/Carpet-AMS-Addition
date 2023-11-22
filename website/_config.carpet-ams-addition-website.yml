@@ -1,0 +1,35 @@
+favicon: images/icon.png
+
+menu:
+  发布[Release]: /
+  规则[Rules]: /Rules
+  指令[Commands]: /Commands
+  开发[Development]: /Development
+  下载[Download]: /Download
+  开源[Open Source]: /OpenSource
+
+copyright:
+  name: A Minecraft Server
+
+license:
+  name: LGPL-3.0
+  url: https://choosealicense.com/licenses/lgpl-3.0/
+
+rss:
+  path: https://mcams.club/
+
+mathjax:
+  enable: false
+
+katex:
+  enable: false
+
+utterances:
+  enable: false
+  repo: owner/repo
+  issueTerm: pathname
+  theme: github-light
+
+analytics:
+  enable: false
+  gtag: G-XXXXXXXXXXXX
