@@ -26,10 +26,8 @@
 
 ## Documents
 
-- [Rules](/readme_folder/en_us/rules_en.md)
-- [Commands](/readme_folder/en_us/commands_en.md)
-- [Thanks](/readme_folder/en_us/thanks_en.md)
-- https://minecraft-ams.github.io/carpetamsaddition/
+Access the website to view all the relevant information about carpet-ams-addition:<br>
+https://minecraft-ams.github.io/carpetamsaddition/
 
 ## Notes
 
@@ -40,4 +38,4 @@
 
 ## License
 
-This project is available under the LGPLv3.0 license. Feel free to learn from it and incorporate it in your own projects.
+This project is available under the [ LGPL-v3.0 ](https://choosealicense.com/licenses/lgpl-3.0/) license. Feel free to learn from it and incorporate it in your own projects.

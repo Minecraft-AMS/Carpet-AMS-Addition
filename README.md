@@ -25,11 +25,8 @@
 | Fabric-Carpet | https://github.com/gnembon/fabric-carpet |
 
 ## 文档
-
-- [规则](/readme_folder/rules_cn.md)
-- [指令](/readme_folder/commands_cn.md)
-- [致谢](/readme_folder/thanks_cn.md)
-- https://minecraft-ams.github.io/carpetamsaddition/
+访问网页查看所有关于Carpet-AMS-Addition的相关信息：<br>
+https://minecraft-ams.github.io/carpetamsaddition/
 
 ## 补充说明
 - 前置模组尽可能使用高的版本。
