@@ -1020,6 +1020,43 @@ The current rule is not yet perfect. Please follow the steps below when using th
 
 - Categroies: `AMS` , `FEATURE`, `EXPERIMENTAL`
 
+## maxBlockInteractionDistance
+
+
+Change the maximum block interaction distance allowed by the server, set to `-1` to disable this rule
+
+- Type: `double`
+
+
+
+- Default: `-1`
+
+
+
+- Suggested options: `0 - 512`, `-1`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## maxClientBlockReachDistance
+
+Change the maximum block placement distance allowed by the client, set to `-1` to disable this rule.
+
+- Type: `float`
+
+
+
+- Default: `-1`
+
+
+
+- Suggested options: `0 - 512`, `-1`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 
 ## movableEnderChest
 

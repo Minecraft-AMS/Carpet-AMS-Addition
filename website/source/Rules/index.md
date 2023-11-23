@@ -1018,6 +1018,42 @@
 
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
+## maxBlockInteractionDistance（最大方块交互距离）
+
+更改服务器允许的最大方块交互距离，设置为 `-1` 禁用该规则。
+
+- 类型: `double`
+
+
+
+- 默认值: `-1`
+
+
+
+- 参考选项: `0 - 512`, `-1`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## maxClientBlockReachDistance（客户端最大方块放置距离）
+
+更改客户端允许的最大方块放置距离，设置为 `-1` 禁用该规则。
+
+- 类型: `float`
+
+
+
+- 默认值: `-1`
+
+
+
+- 参考选项: `0 - 512`, `-1`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 
 ## 可移动末地传送门框架(movableEndPortalFrame)
 
