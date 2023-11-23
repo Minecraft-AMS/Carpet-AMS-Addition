@@ -32,6 +32,8 @@
     "rule.largeEnderChest.PlayerEntityMixin",
     "rule.largeEnderChest.SimpleInventoryAccessor",
     "rule.largeShulkerBox.ShulkerBoxBlockEntityMixin",
+    "rule.maxBlockInteractionDistance.ServerPlayerInteractionManagerMixin",
+    "rule.maxBlockInteractionDistance.ServerPlayNetworkHandlerMixin",
     "rule.movableBlocks.PistonBlockMixin",
     "rule.netherWaterPlacement.DimensionTypeMixin",
     "rule.noCakeEating.CakeBlockMixin",
@@ -75,7 +77,8 @@
     "translations.TranslatableTextMixin"
   ],
   "client": [
-    "rule.bedRockFlying.ClientPlayerEntityMixin"
+    "rule.bedRockFlying.ClientPlayerEntityMixin",
+    "rule.maxClientBlockReachDistance.ClientPlayerInteractionManagerMixin"
   ],
   "server": [],
   "injectors": {

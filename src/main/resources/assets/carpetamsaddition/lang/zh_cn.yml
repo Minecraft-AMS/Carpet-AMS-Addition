@@ -173,7 +173,16 @@ carpetamsaddition:
           '2': '2 - 输入指令：/carpet setDefault largeShulkerBox true 开启规则'
           '3': '3 - 重启服务器/单人世界'
           '4': '4 - 关闭该规则同理'
-
+      maxBlockInteractionDistance:
+        name: 最大方块交互距离
+        desc: 更改服务器允许的最大方块交互距离，设置为“-1”禁用该规则
+        extra:
+          '0': '允许设定的范围：0 - 512'
+      maxClientBlockReachDistance:
+        name: 客户端最大方块放置距离
+        desc: 更改客户端允许的最大方块放置距离，设置为“-1”禁用该规则
+        extra:
+          '0': '允许设定的范围：0 - 512'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -129,6 +129,14 @@ carpetamsaddition:
           '2': '2 - Enter the command: /carpet setDefault largeShulkerBox true, to turn on the rule'
           '3': '3 - Restart the server/single-player world'
           '4': '4 - Disabling the rule follows the same process'
+      maxBlockInteractionDistance:
+        desc: Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule
+        extra:
+          '0': 'The range of values: 0 - 512'
+      maxClientBlockReachDistance:
+        desc: Change the maximum block placement distance allowed by the client, set to "-1" to disable this rule
+        extra:
+          '0': 'The range of values: 0 - 512'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -24,9 +24,8 @@ import club.mcams.carpet.util.recipes.CraftingRule;
 import club.mcams.carpet.settings.Rule;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
-/**
- * Here is your example Settings class you can plug to use carpetmod /carpet settings command
- */
+import club.mcams.carpet.validators.rule.maxBlockInteractionDistance.maxBlockInteractionDistanceValidator;
+import club.mcams.carpet.validators.rule.maxClientBlockReachDistance.maxClientBlockReachDistanceValidator;
 
 public class AmsServerSettings {
 
@@ -208,6 +207,18 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static boolean largeShulkerBox = false;
+
+    @Rule(
+            categories = {AMS, FEATURE, SURVIVAL},
+            validators = maxBlockInteractionDistanceValidator.class
+    )
+    public static double maxBlockInteractionDistance = -1.0;
+
+    @Rule(
+            categories = {AMS, FEATURE, SURVIVAL},
+            validators = maxClientBlockReachDistanceValidator.class
+    )
+    public static double maxClientBlockReachDistance = -1.0;
 
     /*
      * 可移动方块规则
