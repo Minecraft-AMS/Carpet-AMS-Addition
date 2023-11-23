@@ -37,6 +37,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {
+
     @Shadow
     @Final
     protected StateManager<Block, BlockState> stateManager;
@@ -67,7 +68,7 @@ public abstract class BlockMixin {
                                 && stateManager.getDefaultState().getBlock() != Blocks.BEDROCK
                 )
         ) {
-            float BOOM = 1.114514F;
+            float BOOM = 3.0F;
             cir.setReturnValue(BOOM);
         }
 
