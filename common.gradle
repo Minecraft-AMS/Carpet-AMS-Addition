@@ -28,7 +28,6 @@ configurations {
 }
 
 dependencies {
-
 	// loom
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
@@ -40,7 +39,7 @@ dependencies {
     // libraries
     implementation "org.yaml:snakeyaml:${project.snakeyaml_version}"
     include "org.yaml:snakeyaml:${project.snakeyaml_version}"
-	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.0")))
+	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.2.1")))
 }
 
 loom {
