@@ -109,8 +109,6 @@
 
 `OFF`: 禁用该规则。
 
-
-
 由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
 
 
@@ -164,8 +162,6 @@
 `all`: 活塞\黏性活塞下有骨块或基岩时触发加载。
 
 `OFF`: 禁用该规则。
-
-
 
 由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
 
@@ -1018,7 +1014,7 @@
 
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
-## maxBlockInteractionDistance（最大方块交互距离）
+## 最大方块交互距离（maxBlockInteractionDistance）
 
 更改服务器允许的最大方块交互距离，设置为 `-1` 禁用该规则。
 
@@ -1036,7 +1032,7 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## maxClientBlockReachDistance（客户端最大方块放置距离）
+## 客户端最大方块放置距离（maxClientBlockReachDistance）
 
 更改客户端允许的最大方块放置距离，设置为 `-1` 禁用该规则。
 
@@ -1053,6 +1049,60 @@
 
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 可采集基岩（mineBedrock）
+
+开启后，玩家可以采集基岩。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 可采集末地传送门框架（mineEndPortalFrame）
+
+开启后，玩家可以采集末地传送门框架。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 可移动末影箱(movableEnderChest)
+
+开启后，末影箱可以被活塞/黏性活塞推动。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `AMS_movable`
 
 
 ## 可移动末地传送门框架(movableEndPortalFrame)

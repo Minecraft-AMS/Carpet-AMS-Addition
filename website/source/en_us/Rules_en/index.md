@@ -120,7 +120,7 @@ the option is interpreted as follow:
 
 - `OFF`: Disable the rule.
 
-&emsp;
+
 
 - Type: `String`
 
@@ -135,8 +135,6 @@ the option is interpreted as follow:
 
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
-
-&emsp;
 
 Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
 
@@ -158,15 +156,11 @@ When a bell block is triggered by rising edge of redstone signal, the chunk whic
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
-&emsp;
-
 Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
 
 ## pistonBlockChunkLoader
 
 When a piston (also available for sticky piston) successfully push or pull its head, the chunk which the piston head (the moving block representing piston head) located will be added a ticket with level 30 and type 'piston_block', which will expire after 300gt. The ticket will be added at the tick when the moving block is created. Pistons that can be used to add ticket must meet the requirement set by the rule option.
-
-
 
 the option is interpreted as follow:
 
@@ -183,8 +177,6 @@ the option is interpreted as follow:
 
 
 - `OFF`: Disable the rule.
-
-
 
 Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
 
@@ -298,7 +290,6 @@ Blast resistence of every block will be set to 0.
 ## weakObsidian
 
 Explosion can destroy obsidian. 
-Warning: This function (also for other similar rules) will slightly reduce performance when calculating explosion.
 
 - Type: `boolean`
 
@@ -1056,6 +1047,42 @@ Change the maximum block placement distance allowed by the client, set to `-1` t
 
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## mineBedrock
+
+When enabled, Players can mine bedrock.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## mineEndPortalFrame
+
+When enabled, Players can mine bedrock.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
 
 
 ## movableEnderChest
