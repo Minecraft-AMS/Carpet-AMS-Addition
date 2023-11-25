@@ -220,6 +220,12 @@ public class AmsServerSettings {
     )
     public static double maxClientBlockReachDistance = -1.0;
 
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean mineBedrock = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean mineEndPortalFrame = false;
+
     /*
      * 可移动方块规则
      */

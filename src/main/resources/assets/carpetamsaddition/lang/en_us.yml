@@ -137,6 +137,10 @@ carpetamsaddition:
         desc: Change the maximum block placement distance allowed by the client, set to "-1" to disable this rule
         extra:
           '0': 'The range of values: 0 - 512'
+      mineBedrock:
+        desc: Players can mine bedrock
+      mineEndPortalFrame:
+        desc: Players can collect End portal frames
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

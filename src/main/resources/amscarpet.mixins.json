@@ -34,6 +34,8 @@
     "rule.largeShulkerBox.ShulkerBoxBlockEntityMixin",
     "rule.maxBlockInteractionDistance.ServerPlayerInteractionManagerMixin",
     "rule.maxBlockInteractionDistance.ServerPlayNetworkHandlerMixin",
+    "rule.mineBedrock_mineEndPortalFrame.AbstractBlockStateMixin",
+    "rule.mineBedrock_mineEndPortalFrame.BlockMixin",
     "rule.movableBlocks.PistonBlockMixin",
     "rule.netherWaterPlacement.DimensionTypeMixin",
     "rule.noCakeEating.CakeBlockMixin",

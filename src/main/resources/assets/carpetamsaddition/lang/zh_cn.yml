@@ -183,6 +183,12 @@ carpetamsaddition:
         desc: 更改客户端允许的最大方块放置距离，设置为“-1”禁用该规则
         extra:
           '0': '允许设定的范围：0 - 512'
+      mineBedrock:
+        name: 可采集基岩
+        desc: 玩家可以采集基岩
+      mineEndPortalFrame:
+        name: 可采集末地传送门框架
+        desc: 玩家可以采集末地传送门框架
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
