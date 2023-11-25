@@ -23,30 +23,22 @@ package club.mcams.carpet.mixin.rule.maxBlockInteractionDistance;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.maxBlockInteractionDistance.MaxInteractionDistanceMathHelper;
 
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 
 //#if MC>11800
-//$$ import org.objectweb.asm.Opcodes;
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 //$$ import org.spongepowered.asm.mixin.injection.At;
-//$$ import static net.minecraft.server.network.ServerPlayNetworkHandler.MAX_BREAK_SQUARED_DISTANCE;
 //#endif
 
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+//#if MC<11900
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+//#endif
+import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ServerPlayerInteractionManager.class)
 public abstract class ServerPlayerInteractionManagerMixin {
-
-    @Shadow
-    @Final
-    protected ServerPlayerEntity player;
-
     //#if MC<11900
     @ModifyConstant(
             method = "processBlockBreakingAction",
