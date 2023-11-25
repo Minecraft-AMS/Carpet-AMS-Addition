@@ -210,15 +210,17 @@ public class AmsServerSettings {
 
     @Rule(
             categories = {AMS, FEATURE, SURVIVAL},
-            validators = maxBlockInteractionDistanceValidator.class
+            validators = maxBlockInteractionDistanceValidator.class,
+            strict = false
     )
-    public static double maxBlockInteractionDistance = -1.0;
+    public static double maxBlockInteractionDistance = -1.0D;
 
     @Rule(
             categories = {AMS, FEATURE, SURVIVAL},
-            validators = maxClientBlockReachDistanceValidator.class
+            validators = maxClientBlockReachDistanceValidator.class,
+            strict = false
     )
-    public static double maxClientBlockReachDistance = -1.0;
+    public static double maxClientBlockReachDistance = -1.0D;
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean mineBedrock = false;

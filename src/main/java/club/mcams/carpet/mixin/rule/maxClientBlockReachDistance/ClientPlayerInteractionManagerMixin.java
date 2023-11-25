@@ -40,7 +40,7 @@ public abstract class ClientPlayerInteractionManagerMixin {
 
     @ModifyReturnValue(method = "getReachDistance()F", at = @At("RETURN"))
     private float getActualReachDistance(final float original) {
-        if (AmsServerSettings.maxClientBlockReachDistance != -1.0F && this.client.player != null) {
+        if (AmsServerSettings.maxClientBlockReachDistance != -1.0D && this.client.player != null) {
             return (float) AmsServerSettings.maxClientBlockReachDistance;
         } else {
             return original;

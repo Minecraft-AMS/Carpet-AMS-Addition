@@ -44,13 +44,13 @@ public abstract class ServerPlayerInteractionManagerMixin {
             method = "processBlockBreakingAction",
             require = 1,
             allow = 1,
-            constant = @Constant(doubleValue = 36.0)
+            constant = @Constant(doubleValue = 36.0D)
     )
     private double getActualReachDistance(final double reachDistance) {
-        if (AmsServerSettings.maxBlockInteractionDistance == -1.0) {
-            return reachDistance;
-        } else {
+        if (AmsServerSettings.maxBlockInteractionDistance != -1.0D) {
             return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+        } else {
+            return reachDistance;
         }
     }
     //#else
@@ -62,10 +62,10 @@ public abstract class ServerPlayerInteractionManagerMixin {
     //$$         )
     //$$ )
     //$$ private double getActualReachDistance(Operation<Double> original) {
-    //$$     if (AmsServerSettings.maxBlockInteractionDistance == -1.0) {
-    //$$         return original.call();
-    //$$     } else {
+    //$$     if (AmsServerSettings.maxBlockInteractionDistance != -1.0D) {
     //$$         return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+    //$$     } else {
+    //$$         return original.call();
     //$$     }
     //$$ }
     //#endif
