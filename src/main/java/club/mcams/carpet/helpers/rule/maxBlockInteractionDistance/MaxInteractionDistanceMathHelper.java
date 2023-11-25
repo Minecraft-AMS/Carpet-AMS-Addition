@@ -26,10 +26,6 @@ import net.minecraft.util.math.MathHelper;
 
 public class MaxInteractionDistanceMathHelper {
     public static double getMaxSquaredReachDistance() {
-        //#if MC<11700
-        //$$ return MathHelper.square((float) AmsServerSettings.maxBlockInteractionDistance);
-        //#else
-        return MathHelper.square(AmsServerSettings.maxBlockInteractionDistance);
-        //#endif
+       return MathHelper.square((float) AmsServerSettings.maxBlockInteractionDistance);
     }
 }
