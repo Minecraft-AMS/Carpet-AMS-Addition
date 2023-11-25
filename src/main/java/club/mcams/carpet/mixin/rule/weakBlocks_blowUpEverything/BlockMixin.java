@@ -68,7 +68,7 @@ public abstract class BlockMixin {
                                 && stateManager.getDefaultState().getBlock() != Blocks.BEDROCK
                 )
         ) {
-            float BOOM = 3.0F;
+            float BOOM = 9.0F;
             cir.setReturnValue(BOOM);
         }
 
