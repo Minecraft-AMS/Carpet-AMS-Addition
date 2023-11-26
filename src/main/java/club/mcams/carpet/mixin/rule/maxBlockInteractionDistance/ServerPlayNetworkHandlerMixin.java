@@ -59,8 +59,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/network/ServerPlayerEntity;squaredDistanceTo(DDD)D"
-            ),
-            cancellable = true)
+            )
+    )
     private void onPlayerInteractBlock(PlayerInteractBlockC2SPacket packet, CallbackInfo ci) {
         if (AmsServerSettings.maxBlockInteractionDistance != -1D) {
             BlockHitResult blockHitResult = packet.getBlockHitResult();
@@ -72,9 +72,16 @@ public abstract class ServerPlayNetworkHandlerMixin {
             //#endif
             Hand hand = packet.getHand();
             ItemStack itemStack = this.player.getStackInHand(hand);
-            if (this.requestedTeleportPos == null && this.player.squaredDistanceTo((double)blockPos.getX() + 0.5D, (double)blockPos.getY() + 0.5D, (double)blockPos.getZ() + 0.5D) < MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance() && serverWorld.canPlayerModifyAt(this.player, blockPos)) {
+            double distance = this.player.squaredDistanceTo(
+            (double) blockPos.getX() + 0.5D, (double) blockPos.getY() + 0.5D, (double) blockPos.getZ() + 0.5D
+            );
+            if (
+                this.requestedTeleportPos == null &&
+                distance >= 64.0D &&
+                distance < MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance() &&
+                serverWorld.canPlayerModifyAt(this.player, blockPos)
+            ) {
                 this.player.interactionManager.interactBlock(this.player, serverWorld, itemStack, hand, blockHitResult);
-                ci.cancel();
             }
         }
     }
