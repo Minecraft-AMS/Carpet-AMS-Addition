@@ -52,7 +52,7 @@ public abstract class PistonBlockMixin {
             Set<String> moreCustomMovableBlock = new HashSet<>(Arrays.asList(AmsServerSettings.customMovableBlock.split(",")));
             String blockName1 = state.getBlock().toString();
             String blockName2 = null;
-            String regex = "\\{(.*?)\\}";
+            String regex = "\\{(.*?)\\}";   //Block{minecraft:bedrock} -> minecraft:bedrock
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(blockName1);
             if (matcher.find()) {
