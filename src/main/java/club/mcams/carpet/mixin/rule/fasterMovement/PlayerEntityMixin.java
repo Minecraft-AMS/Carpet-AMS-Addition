@@ -39,10 +39,10 @@ public abstract class PlayerEntityMixin {
         PlayerEntity player = (PlayerEntity)(Object)this;
         World world = player.getEntityWorld();
         if (
-                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.END && world.getRegistryKey() == World.END) ||
-                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.NETHER && world.getRegistryKey() == World.NETHER) ||
-                        (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.OVERWORLD  && world.getRegistryKey() == World.OVERWORLD) ||
-                        (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.ALL)
+            (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.END && world.getRegistryKey() == World.END) ||
+            (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.NETHER && world.getRegistryKey() == World.NETHER) ||
+            (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.OVERWORLD  && world.getRegistryKey() == World.OVERWORLD) ||
+            (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.ALL)
         ) {
             if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅰ")) {
                 cir.setReturnValue(0.2F);

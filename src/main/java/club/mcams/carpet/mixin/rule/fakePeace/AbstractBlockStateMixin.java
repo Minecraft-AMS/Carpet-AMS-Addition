@@ -37,8 +37,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractBlock.AbstractBlockState.class)
 public abstract class AbstractBlockStateMixin {
+
     @Shadow
     public abstract Block getBlock();
+
     @Inject(method = "allowsSpawning", at = @At("TAIL"), cancellable = true)
     private void allowsSpawning(BlockView world, BlockPos pos, EntityType<?> type, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.fakePeace && getBlock() != Blocks.VOID_AIR) {

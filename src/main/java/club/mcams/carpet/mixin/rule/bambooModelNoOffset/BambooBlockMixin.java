@@ -35,7 +35,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(net.minecraft.block.AbstractBlock.AbstractBlockState.class)
 public abstract class BambooBlockMixin {
-    @Shadow public abstract Block getBlock();
+
+    @Shadow
+    public abstract Block getBlock();
+
     @Inject(method = "getModelOffset(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/Vec3d;", at = @At("HEAD"), cancellable = true)
     public void getModelOffset(BlockView world, BlockPos pos, CallbackInfoReturnable<Vec3d> cir) {
         if(AmsServerSettings.bambooModelNoOffset && (this.getBlock() == Blocks.BAMBOO || this.getBlock() == Blocks.BAMBOO_SAPLING)) {

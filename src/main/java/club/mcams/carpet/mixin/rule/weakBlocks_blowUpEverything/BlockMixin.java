@@ -61,12 +61,12 @@ public abstract class BlockMixin {
             cir.setReturnValue(Blocks.STONE.getBlastResistance());
         }
 
-        if(AmsServerSettings.enhancedWorldEater && (
-                        stateManager.getDefaultState().getBlock() != Blocks.ANVIL
-                                && stateManager.getDefaultState().getBlock() != Blocks.CHIPPED_ANVIL
-                                && stateManager.getDefaultState().getBlock() != Blocks.DAMAGED_ANVIL
-                                && stateManager.getDefaultState().getBlock() != Blocks.BEDROCK
-                )
+        if(
+            AmsServerSettings.enhancedWorldEater &&
+            (stateManager.getDefaultState().getBlock() != Blocks.ANVIL
+            && stateManager.getDefaultState().getBlock() != Blocks.CHIPPED_ANVIL
+            && stateManager.getDefaultState().getBlock() != Blocks.DAMAGED_ANVIL
+            && stateManager.getDefaultState().getBlock() != Blocks.BEDROCK)
         ) {
             float BOOM = 9.0F;
             cir.setReturnValue(BOOM);

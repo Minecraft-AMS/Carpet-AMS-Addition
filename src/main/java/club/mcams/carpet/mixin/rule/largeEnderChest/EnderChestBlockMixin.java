@@ -41,6 +41,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(EnderChestBlock.class)
 public abstract class EnderChestBlockMixin {
+
     @Shadow
     @Final
     private static Text CONTAINER_NAME;

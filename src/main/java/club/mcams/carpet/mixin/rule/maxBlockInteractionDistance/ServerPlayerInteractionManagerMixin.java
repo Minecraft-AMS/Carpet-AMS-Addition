@@ -243,4 +243,3 @@ public abstract class ServerPlayerInteractionManagerMixin {
     //$$ }
     //#endif
 }
-

@@ -45,14 +45,28 @@ import java.util.List;
 
 @Mixin(value = EnderDragonFight.class, priority = 888)
 public abstract class EnderDragonFightMixin {
-    @Shadow @Final private ServerWorld world;
-    @Shadow @Final private BlockPattern endPortalPattern;
-    @Nullable @Shadow private BlockPos exitPortalLocation;
-    @Shadow private boolean doLegacyCheck;
+
+    @Shadow
+    @Final
+    private ServerWorld world;
+
+    @Shadow
+    @Final
+    private BlockPattern endPortalPattern;
+
+    @Nullable
+    @Shadow
+    private BlockPos exitPortalLocation;
+
+    @Shadow
+    private boolean doLegacyCheck;
+
     @Unique
     private int cacheChunkIteratorX = -8;
+
     @Unique
     private int cacheChunkIteratorZ = -8;
+
     @Unique
     private int cacheOriginIteratorY = -1;
 
