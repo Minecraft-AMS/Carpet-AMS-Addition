@@ -377,7 +377,7 @@
 
 开启后，玩家将僵尸村民治疗为村民后的获得的折扣将共享给所有玩家。
 
-<该规则从 [totos-carpet-tweaks]（https://github.com/totorewa/totos-carpet-tweaks） 移植>
+<该规则从 [totos-carpet-tweaks](https://github.com/totorewa/totos-carpet-tweaks) 移植>
 
 - 类型: `boolean`
 
