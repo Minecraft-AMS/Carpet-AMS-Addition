@@ -209,6 +209,7 @@ public class AmsServerSettings {
     public static boolean largeShulkerBox = false;
 
     @Rule(
+            options = {"-1"},
             categories = {AMS, FEATURE, SURVIVAL},
             validators = maxBlockInteractionDistanceValidator.class,
             strict = false
@@ -216,6 +217,7 @@ public class AmsServerSettings {
     public static double maxBlockInteractionDistance = -1.0D;
 
     @Rule(
+            options = {"-1"},
             categories = {AMS, FEATURE, SURVIVAL},
             validators = maxClientBlockReachDistanceValidator.class,
             strict = false
@@ -228,57 +230,12 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean mineEndPortalFrame = false;
 
-    /*
-     * 可移动方块规则
-     */
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableEnderChest = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableEndPortalFrame = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableObsidian = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableCryingObsidian = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableBedRock = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableEnchantingTable = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableBeacon = false;
-
-    //#if MC>=11900
-    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    //$$ public static boolean movableReinforcedDeepslate = false;
-    //#endif
-
-    //#if MC>=11900
-    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    //$$ public static boolean movableSculkCatalyst = false;
-    //#endif
-
-    //#if MC>=11900
-    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    //$$ public static boolean movableSculkSensor = false;
-    //#endif
-
-    //#if MC>=11900
-    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    //$$ public static boolean movableSculkShrieker = false;
-    //#endif
-
-    //#if MC>=12000
-    //$$ @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    //$$ public static boolean movableCalibratedSculkSensor = false;
-    //#endif
-
-    @Rule(categories = {AMS, FEATURE, AMS_MOVABLE})
-    public static boolean movableAnvil = false;
+    @Rule(
+            options = {"VANILLA", "minecraft:bedrock", "minecraft:bedrock,minecraft:obsidian"},
+            categories = {AMS, FEATURE},
+            strict = false
+    )
+    public static String customMovableBlock = "VANILLA";
 
     /*
      * 合成表规则

@@ -141,6 +141,13 @@ carpetamsaddition:
         desc: Players can mine bedrock
       mineEndPortalFrame:
         desc: Players can collect End portal frames
+      customMovableBlock:
+        desc: Customize the non-pushable block to make it pushable
+        extra:
+          '0': 'Command format:'
+          '1': '/carpet customMovableBlock minecraft:BlockName'
+          '2': 'You can also set multiple blocks simultaneously by separating them with commas:'
+          '3': '/carpet customMovableBlock minecraft:BlockName1,minecraft:BlockName2'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -182,34 +189,6 @@ carpetamsaddition:
           '3': '[OFF] - Disable the rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
           '5': 'You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
-
-#可移动方块规则
-      movableEnderChest:
-        desc: Makes ender_chests movable
-      movableEndPortalFrame:
-        desc: Makes end_portal_frame movable
-      movableObsidian:
-        desc: Makes obsidian movable
-      movableCryingObsidian:
-        desc: Makes crying_obsidian movable
-      movableBedRock:
-        desc: Makes bedrock movable
-      movableEnchantingTable:
-        desc: Makes enchanting_table movable
-      movableBeacon:
-        desc: Makes beacon movable
-      movableReinforcedDeepslate:
-        desc: Makes reinforced_deepslate movable
-      movableAnvil:
-        desc: Makes anvil movable
-      movableSculkCatalyst:
-        desc: Makes sculk_catalyst movable
-      movableSculkSensor:
-        desc: Makes sculk_sensor movable
-      movableSculkShrieker:
-        desc: Makes sculk_shrieker
-      movableCalibratedSculkSensor:
-        desc: Makes calibrated_sculk_sensor movableSculkShrieker
 
 #合成配方规则
       craftableEnchantedGoldenApples:
