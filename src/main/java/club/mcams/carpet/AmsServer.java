@@ -18,7 +18,6 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 package club.mcams.carpet;
 
 import carpet.CarpetExtension;
@@ -106,11 +105,11 @@ public class AmsServer implements CarpetExtension {
     }
 
     //#if MC>=11900
-    //$$    @Override
-    //$$    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
-    //$$        commandChunkLoadingCommandRegistry.register(dispatcher);
-    //$$        anvilInteractionDisabledCommandRegistry.register(dispatcher);
-    //$$    }
+    //$$ @Override
+    //$$ public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
+    //$$   commandChunkLoadingCommandRegistry.register(dispatcher);
+    //$$   anvilInteractionDisabledCommandRegistry.register(dispatcher);
+    //$$ }
     //#else
     @Override
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
@@ -390,6 +389,7 @@ public class AmsServer implements CarpetExtension {
         }
     }
     //#if MC>=11900
+    @SuppressWarnings("all")
     private static JsonObject readJson(String filePath) {
         try {
             FileReader reader = new FileReader(filePath);
@@ -400,6 +400,7 @@ public class AmsServer implements CarpetExtension {
         return null;
     }
     //#else
+    //$$ @SuppressWarnings("all")
     //$$ private static JsonObject readJson(String filePath) {
     //$$    JsonParser jsonParser = new JsonParser();
     //$$    try {

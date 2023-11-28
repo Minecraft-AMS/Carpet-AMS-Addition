@@ -188,8 +188,8 @@ public class Messenger {
         BaseText entityBaseName = (BaseText) entity.getType().getName();
         BaseText entityDisplayName = (BaseText) entity.getName();
         BaseText hoverText = Messenger.c(
-                translator.tr("entity_type", entityBaseName, s(EntityType.getId(entity.getType()).toString())), newLine(),
-                getTeleportHint(entityDisplayName)
+            translator.tr("entity_type", entityBaseName, s(EntityType.getId(entity.getType()).toString())), newLine(),
+            getTeleportHint(entityDisplayName)
         );
         return fancy(style, entityDisplayName, hoverText, new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, TextUtil.tp(entity)));
     }
@@ -203,9 +203,9 @@ public class Messenger {
     }
 
     private static final ImmutableMap<DimensionWrapper, BaseText> DIMENSION_NAME = ImmutableMap.of(
-            DimensionWrapper.OVERWORLD, tr("createWorld.customize.preset.overworld"),
-            DimensionWrapper.THE_NETHER, tr("advancements.nether.root.title"),
-            DimensionWrapper.THE_END, tr("advancements.end.root.title")
+        DimensionWrapper.OVERWORLD, tr("createWorld.customize.preset.overworld"),
+        DimensionWrapper.THE_NETHER, tr("advancements.nether.root.title"),
+        DimensionWrapper.THE_END, tr("advancements.end.root.title")
     );
 
     public static BaseText dimension(DimensionWrapper dim) {
