@@ -37,7 +37,7 @@
 
 - `scheduledRandomTickStem`: 开启后，使计划刻事件可触发海带、缠怨藤、垂泪藤的随机刻生长行为。
 
-  <该规则从 [OhMyVanillaMinecraft]（https://github.com/hit-mc/OhMyVanillaMinecraft） 移植>
+  <该规则从 [OhMyVanillaMinecraft](https://github.com/hit-mc/OhMyVanillaMinecraft) 移植>
 
 - 类型: `boolean`
 
@@ -76,11 +76,11 @@
 ### 区块加载控制（commandChunkLoading）
 
 控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。
-玩家上下线时会将交互状态重置回加载以避免[MC-157812]（https://bugs.mojang.com/browse/MC-157812）。
+玩家上下线时会将交互状态重置回加载以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)。
 
 命令：/chunkloading
 
-<该规则从 [Intricarpet]（https://github.com/lntricate1/intricarpet） 移植>
+<该规则从 [Intricarpet](https://github.com/lntricate1/intricarpet) 移植>
 
 - 类型: `boolean`
 
@@ -494,7 +494,7 @@
 
 开启后，当玩家在创造模式下时可以做到一击必杀，当玩家处于潜行状态时，周围的实体也会被杀死。
 
-<该规则从 [lunaar-carpet-addons]（https://github.com/Lunaar-SMP/lunaar-carpet-addons） 移植>
+<该规则从 [lunaar-carpet-addons](https://github.com/Lunaar-SMP/lunaar-carpet-addons) 移植>
 
 - 类型: `boolean`
 
@@ -867,7 +867,7 @@
 
 开启后，更新抑制不会导致服务器崩溃。
 
-<该规则从 [carpet-extra]（https://github.com/gnembon/carpet-extra） 移植>
+<该规则从 [carpet-extra](https://github.com/gnembon/carpet-extra) 移植>
 
 <该规则 `Minecraft Version < 1.19` 可用>
 
