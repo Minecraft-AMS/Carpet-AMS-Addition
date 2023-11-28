@@ -1,10 +1,10 @@
-### [ 中文 | [English]（/carpetamsaddition/en_us/Rules_en） ]
+### [ 中文 | [English](/carpetamsaddition/en_us/Rules_en) ]
 
 # <center>------ 规 则 ------</center>
 
 &emsp;
 
-## 超级弓 （superBow）
+## 超级弓（superBow）
 
 开启后，可以让弓同时拥有无限和经验修补附魔。
 
@@ -23,7 +23,7 @@
 - 分类: `AMS`, `FEATURE`
 
 
-## 计划刻催熟所有作物 （scheduledRandomTickAllPlants）
+## 计划刻催熟所有作物（scheduledRandomTickAllPlants）
 
 开启后，使计划刻事件可触发以下所有植物的随机刻生长行为，用于恢复1.15版本的强制催熟特性。亦可通过以下指令单独控制特定植物是否可强制催熟。
 
@@ -54,7 +54,7 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 
-## 龙战优化 （optimizedDragonRespawn）
+## 龙战优化（optimizedDragonRespawn）
 
 大幅度优化了龙战判定代码的性能表现，为基于末地祭坛设计的末地石农场提供性能优化。注意：本选项开启后可能影响原版特性。
 
@@ -73,7 +73,7 @@
 - 分类: `AMS`, `OPTIMIZATION`
 
 
-### 区块加载控制 （commandChunkLoading）
+### 区块加载控制（commandChunkLoading）
 
 控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。
 玩家上下线时会将交互状态重置回加载以避免[MC-157812]（https://bugs.mojang.com/browse/MC-157812）。
@@ -97,7 +97,7 @@
 - 分类: `AMS`, `COMMAND`
 
 
-## 音符盒区块加载 （noteBlockChunkLoader）
+## 音符盒区块加载（noteBlockChunkLoader）
 
 开启后，当上边沿红石信号激活音符盒时，为该音符盒所在区块添加类型为"note_block"，加载等级为30的加载票，持续时间为300gt（15s）。
 
@@ -128,7 +128,7 @@
 - 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
 
-## 钟区块加载 （bellBlockChunkLoader）
+## 钟区块加载（bellBlockChunkLoader）
 
 开启后，当上边沿红石信号激活钟时，为钟方块所在区块添加类型为"bell_block"，加载等级为30的加载票，持续时间为300gt（15s）。
 
@@ -151,7 +151,7 @@
 - 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
 
-## 活塞头区块加载 （pistonBlockChunkLoader）
+## 活塞头区块加载（pistonBlockChunkLoader）
 
 开启后，当该活塞/黏性活塞产生活塞头的推出/拉回事件时，在创建推出/拉回事件的那一游戏刻为**活塞头方块所在区块**添加类型为"piston_block"，加载等级为30的加载票，持续时间为300gt（15s）。注意，黏性活塞的失败收回事件（如尝试拉回超过12个方块时）也可创建加载票。
 
@@ -182,7 +182,7 @@
 - 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
 
-## 地狱可放水 （netherWaterPlacement）
+## 地狱可放水（netherWaterPlacement）
 
 开启后，玩家可通过使用水桶的方式在地狱维度中放置水源。
 
@@ -201,7 +201,7 @@
 - 分类: `AMS`, `FEATURE`
 
 
-## 易碎深板岩 （softDeepslate）
+## 易碎深板岩（softDeepslate）
 
 开启后，深板岩的挖掘硬度将与石头相同（均可在急迫二效果下用效率5钻石镐进行瞬间挖掘）。
 
@@ -220,7 +220,7 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 
-## 易碎黑曜石 （softObsidian）
+## 易碎黑曜石（softObsidian）
 
 开启后，黑曜石的挖掘硬度将与深板岩相同。
 
@@ -434,7 +434,7 @@
 
 ## 骨块更新抑制器（boneBlockUpdateSuppressor）
 
-开启后，骨块将会成为一个更新抑制器 （使用时建议开始updateSuppressionCrashFix功能防止崩溃）。
+开启后，骨块将会成为一个更新抑制器（使用时建议开始updateSuppressionCrashFix功能防止崩溃）。
 <该规则 `Minecraft Version < 1.19` 可用>
 
 - 类型: `boolean`
@@ -719,7 +719,7 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 凋零蓝头控制器 （blueSkullController）
+## 凋零蓝头控制器（blueSkullController）
 
 开启后，可以选择让凋零总是发射蓝头还是从不发射蓝头。
 
@@ -744,7 +744,7 @@
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
-## 禁止末影人随机传送 （enderManTeleportRandomlyDisabled）
+## 禁止末影人随机传送（enderManTeleportRandomlyDisabled）
 
 开启后，末影人不会随机传送。
 
@@ -763,7 +763,7 @@
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
-## 更快移动 （fasterMovement）
+## 更快移动（fasterMovement）
 
 提供了五个挡位，让玩家移动速度更快。
 
@@ -782,7 +782,7 @@
 - 分类: `AMS`, `FEATURE` , `EXPERIMENTAL`
 
 
-## 更快移动规则控制器 （fasterMovementController）
+## 更快移动规则控制器（fasterMovementController）
 
 用于控制更快移动规则在那个维度生效。
 
@@ -801,7 +801,7 @@
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
 
-## 轻松掉落凋零骷髅头 （easyWitherSkeletonSkullDrop）
+## 轻松掉落凋零骷髅头（easyWitherSkeletonSkullDrop）
 
 开启后，击杀凋零骷髅会百分百掉落凋零骷髅头。
 
@@ -820,7 +820,7 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 
-## 禁用铁砧交互 （anvilInteractionDisabled）
+## 禁用铁砧交互（anvilInteractionDisabled）
 
 开启后，玩家无法打开铁砧的UI界面。
 命令：/anvilInteractionDisabledSwitch
@@ -840,7 +840,7 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
 
 
-## op玩家不准作弊拓展 （opPlayerNoCheatExtra）
+## op玩家不准作弊拓展（opPlayerNoCheatExtra）
 
 开启后，禁用部分指令以避免op玩家意外地作弊, 建议与Carpet TIS Addition的opPlayerNoCheat一同使用。
 
@@ -863,7 +863,7 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
 
 
-## 更新抑制崩溃修复 （amsUpdateSuppressionCrashFix）
+## 更新抑制崩溃修复（amsUpdateSuppressionCrashFix）
 
 开启后，更新抑制不会导致服务器崩溃。
 
@@ -886,7 +886,7 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `EXPERIMENTAL`
 
 
-## 可掉落蛋糕 （cakeBlockDropOnBreak）
+## 可掉落蛋糕（cakeBlockDropOnBreak）
 
 开启后，蛋糕在被破坏时可以掉落蛋糕（蛋糕是完整的情况下才会掉落）。
 
@@ -905,7 +905,7 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 
-## 不准吃蛋糕 （noCakeEating）
+## 不准吃蛋糕（noCakeEating）
 
 开启后，玩家不可以吃蛋糕
 
@@ -924,7 +924,7 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 
-## 红石元件音效 （redstoneComponentSound）
+## 红石元件音效（redstoneComponentSound）
 
 开启后，玩家右键红石元件时会播放声音。
 
@@ -947,7 +947,7 @@
 
 
 
-## 方块区块加载保持实体更新 （blockChunkLoaderKeepTickUpdate）
+## 方块区块加载保持实体更新（blockChunkLoaderKeepTickUpdate）
 
 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制。
 受影响的规则：`noteBlockChunkLoader`、`pistonBlockChunkLoader`、`bellBlockChunkLoader`
@@ -967,7 +967,7 @@
 - 分类: `AMS`, `FEATURE`
 
 
-## 保持实体更新 （keepEntityUpdate）
+## 保持实体更新（keepEntityUpdate）
 
 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制。
 
@@ -986,7 +986,7 @@
 - 分类: `AMS`, `FEATURE`
 
 
-## 大潜影盒 （largeShulkerBox）
+## 大潜影盒（largeShulkerBox）
 
 让潜影盒容量增加一倍（与大箱子相同）。
 

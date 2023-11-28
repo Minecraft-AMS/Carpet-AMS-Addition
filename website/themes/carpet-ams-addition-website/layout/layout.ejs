@@ -8,12 +8,11 @@
         <div class="footer-wrapper"><%- partial('partial/footer') %></div>
     </div>
 </body>
-<!-- 背景动画 -->
-<script type="text/javascript" color="0,0,0" opacity='1' zIndex="-2" count="88" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-<!-- 
-color: 线条颜色，默认：‘0，0，0’；三个数字分别为(R,G,B),注意使用，分割
-opacity: 线条透明度0~1,默认0.5
-count: 线条总数量，默认150
-zIndex: 背景的z-Index属性，css用于控制所在层的位置，默认-1 
--->
+<!--动态线条背景-->
+<% if (theme.canvas_nest.enable){ %>
+    <script type="text/javascript" color="<%=theme.canvas_nest.color %>" opacity="<%=theme.canvas_nest.opacity %>" 
+        zIndex="<%=theme.canvas_nest.zIndex %>" count="<%=theme.canvas_nest.count %>" 
+        src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+<% } %>
 </html>

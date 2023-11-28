@@ -33,3 +33,12 @@ utterances:
 analytics:
   enable: false
   gtag: G-XXXXXXXXXXXX
+ 
+canvas_nest:
+  enable: true
+  color: '0，0，0'
+  pointColor: '0，0，0'
+  opacity: '0.8'
+  count: '99'
+  zIndex: '-1'
+
