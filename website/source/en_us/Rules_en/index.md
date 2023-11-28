@@ -1084,240 +1084,28 @@ When enabled, Players can mine bedrock.
 
 - Categroies: `AMS`, `FEATURE`
 
+## customMovableBlock
 
-## movableEnderChest
+Customize the non-pushable block to make it pushable.
+Command format:
+/carpet customMovableBlock minecraft:BlockName
+You can also set multiple blocks simultaneously by separating them with commas:
+/carpet customMovableBlock minecraft:BlockName1,minecraft:BlockName2
 
-Ender chest can be moved by piston or sticky piston.
 
-- Type: `boolean`
+- Type: `String`
 
 
 
-- Default: `false`
+- Default: `VANILLA`
 
 
 
-- Suggested options: `false`, `true`
+- Suggested options: `VANILLA`, `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
 
 
 
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableEndPortalFrame
-
-End portal frame can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableObsidian
-
-Obsidian can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableCryingObsidian
-
-Crying obsidian can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableBedRock
-
-Bedrock can be moved by piston or sticky piston.
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableEnchantingTable
-
-Enchanting table can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableBeacon
-
-Beacon can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableReinforcedDeepslate
-
-Reinforced deepslate can be moved by piston or sticky piston.
-<Only available for Minecraft \>= 1.19>
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableAnvil
-
-Anvil can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableSculkCatalyst
-
-Sculk catalyst can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableSculkSensor
-
-Sculk sensor can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableSculkShrieker
-
-Sculk shrieker can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `AMS_movable`
-
-## movableCalibratedSculkSensor
-
-Calibrated Sculk Sensor can be moved by piston or sticky piston.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false` , `true`
-
-
-
-- Categroies: `AMS` , `FEATURE` , `AMS_movable`
+- Categroies: `AMS`, `FEATURE`
 
 ## craftableEnchantedGoldApple
 

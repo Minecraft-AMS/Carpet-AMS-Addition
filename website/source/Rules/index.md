@@ -1086,253 +1086,27 @@
 
 - 分类: `AMS`, `FEATURE`
 
-## 可移动末影箱（movableEnderChest）
+## 自定义可移动方块（customMovableBlock）
 
-开启后，末影箱可以被活塞/黏性活塞推动。
+可自定义的让不能被推动的方块变得能被推动。
+命令格式：
+/carpet customMovableBlock minecraft:BlockName
+你也可以同时设置多个方块使用 `,` 隔开即可：
+/carpet customMovableBlock inecraft:BlockName1,minecraft:BlockName2
 
-- 类型: `boolean`
+- 类型: `String`
 
 
 
-- 默认值: `false`
+- 默认值: `VANILLA`
 
 
 
-- 参考选项: `false`, `true`
+- 参考选项: `VANILLA`, `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
 
 
 
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动末地传送门框架（movableEndPortalFrame）
-
-开启后，末地传送门框架可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动黑曜石（movableObsidian）
-
-开启后，黑曜石可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动哭泣的黑曜石（movableCryingObsidian）
-
-开启后，哭泣的黑曜石可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动基岩（movableBedRock）
-
-开启后，基岩可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动附魔台（movableEnchantingTable）
-
-开启后，附魔台可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动信标（movableBeacon）
-
-开启后，信标可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-  
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动强化深板岩（movableReinforcedDeepslate）
-
-开启后，强化深板岩可以被活塞/黏性活塞推动。
-
-<该规则 `Minecraft Version >= 1.19` 可用>
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动铁砧（movableAnvil）
-
-开启后，铁砧可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动幽匿催发体（movableSculkCatalyst）
-
-开启后，幽匿催发体可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动幽匿感测体（movableSculkSensor）
-
-开启后，幽匿感测体可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动校频幽匿感测体（movableCalibratedSculkSensor）
-
-开启后，校频幽匿感测体可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
-
-
-## 可移动幽匿尖啸体（movableSculkShrieker）
-
-开启后，幽匿尖啸体可以被活塞/黏性活塞推动。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `AMS_movable`
+- 分类: `AMS`, `FEATURE`
 
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
