@@ -34,7 +34,7 @@ https://minecraft-ams.github.io/carpetamsaddition/
 - Use as higher version of required mods as possible.
 - Even some functions are provided by Carpet-AMS-Addition, we, AMS Server, will not use these function in our survival server.
 - Due to my limited proficiency in English, all English document translations are currently provided by [Chat-GPT](https://openai.com/blog/chatgpt), including this sentence (
-  Apart from the very first English document authored by [nirvanaxiao6](https://github.com/nirvanaxiao6) a long, long time ago) :)
+  Apart from the very first English document authored by [nirvanaxiao6](https://github.com/nirvanaxiao6) a long, long time ago).
 
 ## License
 
