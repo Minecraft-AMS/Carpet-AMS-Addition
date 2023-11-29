@@ -155,15 +155,6 @@ carpetamsaddition:
         extra:
           '0': '影响的元件：'
           '1': '阳光传感器、红石粉、中继器'
-      blockChunkLoaderKeepTickUpdate:
-        name: 方块区块加载保持实体更新
-        desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制
-        extra:
-          '0': '受影响的规则：'
-          '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
-      keepEntityUpdate:
-        name: 保持实体更新
-        desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制
       largeShulkerBox:
         name: 大潜影盒
         desc: 让潜影盒容量增加一倍（与大箱子相同）
@@ -248,6 +239,15 @@ carpetamsaddition:
           '3': '[OFF] - 禁用该规则'
           '4': '由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作'
           '5': '你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题'
+      blockChunkLoaderKeepTickUpdate:
+        name: 方块区块加载保持实体更新
+        desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制
+        extra:
+          '0': '受影响的规则：'
+          '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
+      keepEntityUpdate:
+        name: 保持实体更新
+        desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制
 
 #合成配方规则
       craftableEnchantedGoldenApples:

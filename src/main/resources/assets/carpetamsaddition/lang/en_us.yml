@@ -114,13 +114,6 @@ carpetamsaddition:
         extra:
           '0': 'Affected components: '
           '1': 'daylight detector, redstone dust, repeater'
-      blockChunkLoaderKeepTickUpdate:
-        desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.
-        extra:
-          '0': 'Affected rules: '
-          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
-      keepEntityUpdate:
-        desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction.
       largeShulkerBox:
         desc: Doubles the size of your ShulkerBox
         extra:
@@ -170,8 +163,8 @@ carpetamsaddition:
         desc: Load nearby 3x3 chunks for 15 seconds when a note block is triggered
         extra:
           '0': '[bone_block] - When bone_block is on the note_block'
-          '1': '[bedrock] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall'
-          '2': '[all] - Only note_block'
+          '1': '[When wither_skeleton_skull] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall'
+          '2': '[note_block] - Only note_block'
           '3': '[OFF] - Disable the rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
           '5': 'You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
@@ -189,6 +182,13 @@ carpetamsaddition:
           '3': '[OFF] - Disable the rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
           '5': 'You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
+      blockChunkLoaderKeepTickUpdate:
+        desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded
+        extra:
+          '0': 'Affected rules: '
+          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
+      keepEntityUpdate:
+        desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction
 
 #合成配方规则
       craftableEnchantedGoldenApples:
