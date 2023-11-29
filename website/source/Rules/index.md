@@ -94,7 +94,7 @@
 
 
 
-- 分类: `AMS`, `COMMAND`
+- 分类: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
 
 ## 音符盒区块加载（noteBlockChunkLoader）
@@ -109,7 +109,7 @@
 
 `OFF`: 禁用该规则。
 
-由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
 
 
 
@@ -132,7 +132,7 @@
 
 开启后，当上边沿红石信号激活钟时，为钟方块所在区块添加类型为"bell_block"，加载等级为30的加载票，持续时间为300gt（15s）。
 
-由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
 
 
 
@@ -163,7 +163,7 @@
 
 `OFF`: 禁用该规则。
 
-由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用blockChunkLoaderKeepTickEntities或keepEntityUpdate规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
 
 
 
@@ -176,6 +176,45 @@
 
 
 - 参考选项: `bone_block`, `bedrock`, `all`, `OFF`
+
+
+
+- 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
+
+## 方块区块加载保持实体更新（blockChunkLoaderKeepTickUpdate）
+
+在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制。
+受影响的规则：`noteBlockChunkLoader`、`pistonBlockChunkLoader`、`bellBlockChunkLoader`
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
+
+## 保持实体更新（keepEntityUpdate）
+
+在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
 
 
 
@@ -943,48 +982,6 @@
 
 
 - 分类: `AMS`, `FEATURE`
-
-
-
-
-## 方块区块加载保持实体更新（blockChunkLoaderKeepTickUpdate）
-
-在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制。
-受影响的规则：`noteBlockChunkLoader`、`pistonBlockChunkLoader`、`bellBlockChunkLoader`
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`
-
-
-## 保持实体更新（keepEntityUpdate）
-
-在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`
-
 
 ## 大潜影盒（largeShulkerBox）
 

@@ -98,7 +98,7 @@ Command: /chunkloading
 
 
 
-- Categroies: `AMS`, `COMMAND`
+- Categroies: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
 ## noteBlockChunkLoader
 
@@ -136,7 +136,7 @@ the option is interpreted as follow:
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate` rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
 
 ## bellBlockChunkLoader
 
@@ -156,7 +156,7 @@ When a bell block is triggered by rising edge of redstone signal, the chunk whic
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate `rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
 
 ## pistonBlockChunkLoader
 
@@ -178,7 +178,7 @@ the option is interpreted as follow:
 
 - `OFF`: Disable the rule.
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate `rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
 
 
 
@@ -192,6 +192,45 @@ Due to after 300 ticks without any players in the current dimension on the serve
 
 
 - Suggested options: `bone_block`, `bedrock`, `all`, `OFF`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
+## blockChunkLoaderKeepTickUpdate
+
+After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.
+
+Affected rules: `noteBlockChunkLoader`, `pistonBlockChunkLoader`, `bellBlockChunkLoader`
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false` , `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
+
+## keepEntityUpdate
+
+After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
 
 
 
@@ -928,46 +967,6 @@ When enabled, Players are not allowed to consume cake.
 When enabled, When players right-click on the redstone component, it will emit a sound
 
 Affected components: daylight detector, redstone dust, repeater
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false` , `true`
-
-
-
-- Categroies: `AMS` , `FEATURE`
-
-
-## blockChunkLoaderKeepTickUpdate
-
-After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.
-
-Affected rules: `noteBlockChunkLoader`, `pistonBlockChunkLoader`, `bellBlockChunkLoader`
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false` , `true`
-
-
-
-- Categroies: `AMS` , `FEATURE`
-
-
-## keepEntityUpdate
-
-After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction.
 
 - Type: `boolean`
 
