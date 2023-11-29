@@ -68,6 +68,12 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
     public static boolean bellBlockChunkLoader = false;
 
+    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    public static boolean blockChunkLoaderKeepTickUpdate = false;
+
+    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    public static boolean keepEntityUpdate = false;
+
     @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
     public static String commandChunkLoading = "false";
 
@@ -198,12 +204,6 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
-
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean blockChunkLoaderKeepTickUpdate = false;
-
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean keepEntityUpdate = false;
 
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static boolean largeShulkerBox = false;
