@@ -163,16 +163,16 @@ carpetamsaddition:
         desc: Load nearby 3x3 chunks for 15 seconds when a note block is triggered
         extra:
           '0': '[bone_block] - When bone_block is on the note_block'
-          '1': '[When wither_skeleton_skull] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall'
+          '1': '[wither_skeleton_skull] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall'
           '2': '[note_block] - Only note_block'
           '3': '[OFF] - Disable the rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
+          '5': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
       bellBlockChunkLoader:
         desc: Load nearby 3x3 chunks for 15 seconds when a bell is triggered
         extra:
           '1': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '2': 'You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
+          '2': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
       pistonBlockChunkLoader:
         desc:  Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head)
         extra:
@@ -181,7 +181,7 @@ carpetamsaddition:
           '2': '[all] - When bone_block is on the piston or bedrock is under the piston'
           '3': '[OFF] - Disable the rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepTickEntities or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
+          '5': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
       blockChunkLoaderKeepTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded
         extra:
