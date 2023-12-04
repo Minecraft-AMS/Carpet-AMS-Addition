@@ -237,6 +237,9 @@ public class AmsServerSettings {
     )
     public static String customMovableBlock = "VANILLA";
 
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean easyMaxLevelBeacon = false;
+
     /*
      * 合成表规则
      */

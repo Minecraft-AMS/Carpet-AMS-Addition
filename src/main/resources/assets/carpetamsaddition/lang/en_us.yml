@@ -130,6 +130,7 @@ carpetamsaddition:
         desc: Change the maximum block placement distance allowed by the client, set to "-1" to disable this rule
         extra:
           '0': 'The range of values: 0 - 512'
+          '1': 'Need to disable the tweakBlockReachOverride feature in Tweakeroo'
       mineBedrock:
         desc: Players can mine bedrock
       mineEndPortalFrame:
@@ -141,6 +142,8 @@ carpetamsaddition:
           '1': '/carpet customMovableBlock minecraft:BlockName'
           '2': 'You can also set multiple blocks simultaneously by separating them with commas:'
           '3': '/carpet customMovableBlock minecraft:BlockName1,minecraft:BlockName2'
+      easyMaxLevelBeacon:
+        desc: Activate full-level beacon with just one base block
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

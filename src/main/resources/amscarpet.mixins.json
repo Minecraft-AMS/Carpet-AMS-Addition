@@ -67,6 +67,7 @@
     "rule.shulkerHitLevitationDisabled_immuneShulkerBullet.ShulkerBulletEntityMixin",
     "rule.softBlock_kirinArm.AbstractBlockStateMixin",
     "rule.superBow.InfinityEnchantmentMixin",
+    "rule.easyMaxLevelBeacon.BeaconBlockEntityMixin",
     "rule.weakBlocks_blowUpEverything.BlockMixin",
     "setting.ParsedRuleAccessor",
     "setting.SettingsManagerAccessor",
