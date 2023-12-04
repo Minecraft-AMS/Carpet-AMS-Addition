@@ -25,7 +25,7 @@ import net.minecraft.server.ServerTask;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("all")
 public final class CommandHelper {
     private CommandHelper() {}
     /**
