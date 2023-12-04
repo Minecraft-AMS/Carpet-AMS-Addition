@@ -1033,6 +1033,8 @@
 
 更改客户端允许的最大方块放置距离，设置为 `-1` 禁用该规则。
 
+需要关闭Tweakeroo的tweakBlockReachOverride功能。
+
 - 类型: `float`
 
 
@@ -1100,6 +1102,24 @@
 
 
 - 参考选项: `VANILLA`, `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 简易满级信标（eazyMaxLevelBeacon）
+
+开启后，只需一个底座方块就能激活满级信标。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
 
 
 

@@ -1033,6 +1033,10 @@ Change the maximum block interaction distance allowed by the server, set to `-1`
 
 Change the maximum block placement distance allowed by the client, set to `-1` to disable this rule.
 
+
+Need to disable the tweakBlockReachOverride feature in Tweakeroo.
+
+
 - Type: `float`
 
 
@@ -1101,6 +1105,24 @@ You can also set multiple blocks simultaneously by separating them with commas:
 
 
 - Suggested options: `VANILLA`, `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## eazyMaxLevelBeacon
+
+When enabled, Activate full-level beacon with just one base block.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
 
 
 
