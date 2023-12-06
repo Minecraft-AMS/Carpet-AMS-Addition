@@ -316,102 +316,6 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
 
 
-## 炸毁黑曜石（weakObsidian）
-
-开启后，爆炸将能够摧毁黑曜石。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
-
-## 炸毁哭泣的黑曜石（weakCryingObsidian）
-
-开启后，爆炸将能够摧毁哭泣的黑曜石。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
-
-## 炸毁基岩（weakBedRock）
-
-开启后，爆炸将能够摧毁基岩。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
-
-## 增强型世界吞噬者（enhancedWorldEater）
-
-开启后，爆炸可以摧毁除了铁砧与基岩外的所有方块。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
-
-## 炸毁强化深板岩（weakReinforcedDeepslate）
-
-开启后，爆炸将能够摧毁强化深板岩。
-<该规则 `Minecraft Version >= 1.19` 可用>
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
-
 ## 共享打折（sharedVillagerDiscounts）
 
 开启后，玩家将僵尸村民治疗为村民后的获得的折扣将共享给所有玩家。
@@ -1120,6 +1024,49 @@
 
 
 - 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 再生成龙蛋（regeneratingDragonEgg）
+
+开启后，玩家每次击败末影龙都会生成一个龙蛋。
+
+> 为了为了Dnsolx的蛋
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 自定义炸毁方块（customBlowUpBlock）
+
+自定义任何方块的爆炸抗性使其与石头相同。
+
+命令格式：
+/carpet customBlowUpBlockminecraft:BlockName
+你也可以同时设置多个方块使用 `,` 隔开即可：
+/carpet customBlowUpBlockinecraft:BlockName1,minecraft:BlockName2
+
+- 类型: `String`
+
+
+
+- 默认值: `VANILLA`
+
+
+
+- 参考选项: `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
 
 
 

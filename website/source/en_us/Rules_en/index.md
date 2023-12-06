@@ -326,97 +326,6 @@ Blast resistence of every block will be set to 0.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
 
-## weakObsidian
-
-Explosion can destroy obsidian. 
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
-## weakCryingObsidian
-
-Explosion can destroy crying obsidian.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
-## weakBedRock
-
-Explosion can destroy bedrock.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
-## enhancedWorldEater
-
-Explosion can destroy all blocks except anvil and bedrock.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
-## weakReinforcedDeepslate
-
-Explosion can destroy reinforced deepslate.
-<Only available for Minecraft >= 1.19>
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
-
 ## sharedVillagerDiscounts
 
 Villagers cured from zombified villager will give trade discounts to every player.
@@ -1123,6 +1032,48 @@ When enabled, Activate full-level beacon with just one base block.
 
 
 - Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## regeneratingDragonEgg
+
+When enabled，Every time a player defeats the Ender Dragon, a dragon egg will be generated.
+
+> For Dnsolx eggs
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## customBlowUpBlock
+
+Customize the explosion resistance of any block to be equivalent to stone.
+Command format:
+/carpet customBlowUpBlockminecraft:BlockName
+You can also set multiple blocks simultaneously by separating them with commas:
+/carpet customBlowUpBlockminecraft:BlockName1,minecraft:BlockName2
+
+- Type: `String`
+
+
+
+- Default: `VANILLA`
+
+
+
+- Suggested options: `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
 
 
 
