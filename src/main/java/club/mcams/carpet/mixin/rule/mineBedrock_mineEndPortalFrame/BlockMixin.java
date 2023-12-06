@@ -30,18 +30,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import static net.minecraft.block.Block.dropStack;
 
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+//#if MC>12002
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#else
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static net.minecraft.block.Block.dropStack;
+//#endif
+import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {
     @Inject(method = "onBreak", at = @At("HEAD"))
+    //#if MC>12002
+    //$$ public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
+    //#else
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
+    //#endif
         if (AmsServerSettings.mineBedrock && state.getBlock() == Blocks.BEDROCK) {
             ItemStack bedrockStack = new ItemStack(Items.BEDROCK);
             dropStack(world, pos, bedrockStack);

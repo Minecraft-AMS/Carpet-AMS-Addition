@@ -22,7 +22,9 @@ package club.mcams.carpet.commands;
 
 import club.mcams.carpet.AmsServerSettings;
 
+//#if MC<=11800
 import net.minecraft.text.LiteralText;
+//#endif
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;

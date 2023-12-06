@@ -31,19 +31,31 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+//#if MC>12002
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#else
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#endif
+import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ShulkerBoxBlock.class)
 public abstract class ShulkerBoxBlockMixin {
     @Inject(method = "onBreak", at = @At("HEAD"), cancellable = true)
-    private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
+    //#if MC>12002
+    //$$ public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
+    //#else
+    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
+    //#endif
         if (AmsServerSettings.creativeShulkerBoxDropsDisabled && player.isCreative()) {
             world.setBlockState(pos, Blocks.AIR.getDefaultState());
             world.playSound(player, pos, SoundEvents.BLOCK_ANVIL_BREAK, SoundCategory.BLOCKS, 1.0f, 0.8f);
+            //#if MC>12002
+            //$$ cir.cancel();
+            //#else
             ci.cancel();
+            //#endif
         }
     }
 }
