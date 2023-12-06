@@ -45,21 +45,6 @@ carpetamsaddition:
       boneBlockUpdateSuppressor:
         name: 骨块更新抑制器
         desc: 让骨块成为一个更新抑制器(使用时建议开始updateSuppressionCrashFix功能防止崩溃)
-      weakObsidian:
-        name: 炸毁黑曜石
-        desc: 爆炸可以摧毁黑曜石
-      weakCryingObsidian:
-        name: 炸毁哭泣的黑曜石
-        desc: 爆炸可以摧毁哭泣的黑曜石
-      weakReinforcedDeepslate:
-        name: 炸毁强化深板岩
-        desc: 爆炸可以摧毁强化深板岩
-      weakBedRock:
-        name: 炸毁基岩
-        desc: 爆炸可以摧毁基岩
-      enhancedWorldEater:
-        name: 增强型世界吞噬者
-        desc: 爆炸可以摧毁除了铁砧与基岩外的所有方块
       infiniteTrades:
         name: 无限交易
         desc: 防止村民交易被锁定
@@ -187,11 +172,24 @@ carpetamsaddition:
         extra:
           '0': '命令格式：'
           '1': '/carpet customMovableBlock minecraft:BlockName'
-          '2': '你也可以同时设置多个方块使用 "," 隔开即可：'
+          '2': '你也可以同时设置多个方块，使用 "," 隔开即可：'
           '3': '/carpet customMovableBlock minecraft:BlockName1,minecraft:BlockName2'
       easyMaxLevelBeacon:
         name: 简易满级信标
         desc: 只需一个底座方块就能激活满级信标
+      customBlowUpBlock:
+        name: 自定义炸毁方块
+        desc: 自定义任何方块的爆炸抗性使其与石头相同
+        extra:
+          '0': '命令格式：'
+          '1': '/carpet customBlowUpBlock minecraft:BlockName'
+          '2': '你也可以同时设置多个方块，使用 "," 隔开即可：'
+          '3': '/carpet customBlowUpBlock minecraft:BlockName1,minecraft:BlockName2'
+      regeneratingDragonEgg:
+        name: 再生成龙蛋
+        desc: 玩家每次击败末影龙都会生成一个龙蛋
+        extra:
+          '0': '为了Dnsolx的蛋'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

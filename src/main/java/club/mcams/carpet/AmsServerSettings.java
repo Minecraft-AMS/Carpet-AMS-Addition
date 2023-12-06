@@ -108,23 +108,6 @@ public class AmsServerSettings {
     public static boolean boneBlockUpdateSuppressor = false;
     //#endif
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
-    public static boolean weakObsidian = false;
-
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
-    public static boolean weakCryingObsidian = false;
-
-    //#if MC>=11900
-    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
-    //$$ public static boolean weakReinforcedDeepslate = false;
-    //#endif
-
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
-    public static boolean weakBedRock = false;
-
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, TNT})
-    public static boolean enhancedWorldEater = false;
-
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean infiniteTrades = false;
 
@@ -239,6 +222,16 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean easyMaxLevelBeacon = false;
+
+    @Rule(
+            options = {"VANILLA", "minecraft:bedrock", "minecraft:bedrock,minecraft:obsidian"},
+            categories = {AMS, FEATURE, TNT},
+            strict = false
+    )
+    public static String customBlowUpBlock = "VANILLA";
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean regeneratingDragonEgg = false;
 
     /*
      * 合成表规则

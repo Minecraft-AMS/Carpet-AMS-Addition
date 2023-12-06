@@ -34,16 +34,6 @@ carpetamsaddition:
         desc: players don't get hurt by flying into walls
       boneBlockUpdateSuppressor:
         desc: Let the bone_block be update suppressor (When using it, it is recommended to start the updateSuppressionCrashFix feature to prevent crashes)
-      weakObsidian:
-        desc: Explosion can destroy Obsidian
-      weakCryingObsidian:
-        desc: Explosion can destroy crying_obsidian
-      weakReinforcedDeepslate:
-        desc: Explosion can destroy ReinforcedDeepslate
-      weakBedRock:
-        desc: Explosion can destroy bedrock
-      enhancedWorldEater:
-        desc: Explosion can destroy all blocks except anvil and bedrock
       infiniteTrades:
         desc: Prevents villager trades from locking up
       invulnerable:
@@ -144,6 +134,17 @@ carpetamsaddition:
           '3': '/carpet customMovableBlock minecraft:BlockName1,minecraft:BlockName2'
       easyMaxLevelBeacon:
         desc: Activate full-level beacon with just one base block
+      customBlowUpBlock:
+        desc: Customize the explosion resistance of any block to be equivalent to stone
+        extra:
+          '0': 'Command format:'
+          '1': '/carpet customBlowUpBlock minecraft:BlockName'
+          '2': 'You can also set multiple blocks simultaneously by separating them with commas:'
+          '3': '/carpet customBlowUpBlock minecraft:BlockName1,minecraft:BlockName2'
+      regeneratingDragonEgg:
+        desc: Every time a player defeats the Ender Dragon, a dragon egg will be generated
+        extra:
+          '0': 'For Dnsolx eggs'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
