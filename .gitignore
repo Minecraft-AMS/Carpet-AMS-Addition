@@ -30,4 +30,5 @@ bin/
 
 # fabric
 
-run/
+run/*
+!run/options.txt
