@@ -135,7 +135,7 @@ carpetamsaddition:
       easyMaxLevelBeacon:
         desc: Activate full-level beacon with just one base block
       customBlowUpBlock:
-        desc: Customize the explosion resistance of any block to be equivalent to stone
+        desc: Set the explosion resistance of any block to be the same as stone (this rule will not take effect when the enhancedWorldEater rule is enabled)
         extra:
           '0': 'Command format:'
           '1': '/carpet customBlowUpBlock minecraft:BlockName'
@@ -145,8 +145,13 @@ carpetamsaddition:
         desc: Every time a player defeats the Ender Dragon, a dragon egg will be generated
         extra:
           '0': 'For Dnsolx eggs'
+      enhancedWorldEater:
+        desc: Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the customBlowUpBlock rule when enabled)
+        extra:
+          '0': 'Block list:'
+          '1': 'Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway'
 
-# 计划刻催熟规则：
+      # 计划刻催熟规则：
       scheduledRandomTickCactus:
         desc: Make cactus accepts scheduled tick as random tick
       scheduledRandomTickBamboo:

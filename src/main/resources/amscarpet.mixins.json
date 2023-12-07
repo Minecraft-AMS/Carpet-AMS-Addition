@@ -27,6 +27,7 @@
     "rule.easyMaxLevelBeacon.BeaconBlockEntityMixin",
     "rule.easyWitherSkeletonSkullDrop.WitherSkeletonEntityMixin",
     "rule.enderManTeleportRandomlyDisabled.EndermanEntityMixin",
+    "rule.enhancedWorldEater.BlockMixin",
     "rule.extinguishedCampfire_campfireSmokeParticleDisabled.CampfireBlockMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
     "rule.fasterMovement.PlayerEntityMixin",

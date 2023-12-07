@@ -24,8 +24,9 @@ import club.mcams.carpet.util.recipes.CraftingRule;
 import club.mcams.carpet.settings.Rule;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
-import club.mcams.carpet.validators.rule.maxBlockInteractionDistance.maxBlockInteractionDistanceValidator;
-import club.mcams.carpet.validators.rule.maxClientBlockReachDistance.maxClientBlockReachDistanceValidator;
+import club.mcams.carpet.validators.rule.enhancedWorldEater.BlastResistanceValidator;
+import club.mcams.carpet.validators.rule.maxBlockInteractionDistance.MaxBlockInteractionDistanceValidator;
+import club.mcams.carpet.validators.rule.maxClientBlockReachDistance.MaxClientBlockReachDistanceValidator;
 
 public class AmsServerSettings {
 
@@ -194,7 +195,7 @@ public class AmsServerSettings {
     @Rule(
             options = {"-1"},
             categories = {AMS, FEATURE, SURVIVAL},
-            validators = maxBlockInteractionDistanceValidator.class,
+            validators = MaxBlockInteractionDistanceValidator.class,
             strict = false
     )
     public static double maxBlockInteractionDistance = -1.0D;
@@ -202,7 +203,7 @@ public class AmsServerSettings {
     @Rule(
             options = {"-1"},
             categories = {AMS, FEATURE, SURVIVAL},
-            validators = maxClientBlockReachDistanceValidator.class,
+            validators = MaxClientBlockReachDistanceValidator.class,
             strict = false
     )
     public static double maxClientBlockReachDistance = -1.0D;
@@ -232,6 +233,14 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean regeneratingDragonEgg = false;
+
+    @Rule(
+            options = {"-1"},
+            categories = {AMS, FEATURE, TNT},
+            validators = BlastResistanceValidator.class,
+            strict = false
+    )
+    public static double enhancedWorldEater = -1.0D;
 
     /*
      * 合成表规则

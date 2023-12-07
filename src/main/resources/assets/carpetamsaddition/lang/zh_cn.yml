@@ -179,7 +179,7 @@ carpetamsaddition:
         desc: 只需一个底座方块就能激活满级信标
       customBlowUpBlock:
         name: 自定义炸毁方块
-        desc: 自定义任何方块的爆炸抗性使其与石头相同
+        desc: 自定义任何方块的爆炸抗性使其与石头相同（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）
         extra:
           '0': '命令格式：'
           '1': '/carpet customBlowUpBlock minecraft:BlockName'
@@ -190,6 +190,12 @@ carpetamsaddition:
         desc: 玩家每次击败末影龙都会生成一个龙蛋
         extra:
           '0': '为了Dnsolx的蛋'
+      enhancedWorldEater:
+        name: 增强型世界吞噬者
+        desc: 通过自定义除以下方块的爆炸抗性来让世界吞噬者一路畅通（该规则开启时，自定义炸毁方块(customBlowUpBlock)规则将不会生效）
+        extra:
+          '0': '方块列表：'
+          '1': '爆炸抗性 < 17.0F的方块、基岩、铁砧、末地传送门框架、末地传送门、折跃门'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
