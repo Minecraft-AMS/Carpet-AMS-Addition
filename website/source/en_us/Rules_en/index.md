@@ -1037,6 +1037,28 @@ When enabled, Activate full-level beacon with just one base block.
 
 - Categroies: `AMS`, `FEATURE`
 
+## customBlowUpBlock
+
+Set the explosion resistance of any block to be the same as stone (this rule will not take effect when the enhancedWorldEater rule is enabled).
+Command format:
+/carpet customBlowUpBlockminecraft:BlockName
+You can also set multiple blocks simultaneously by separating them with commas:
+/carpet customBlowUpBlockminecraft:BlockName1,minecraft:BlockName2
+
+- Type: `String`
+
+
+
+- Default: `VANILLA`
+
+
+
+- Suggested options: `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
 ## regeneratingDragonEgg
 
 When enabled，Every time a player defeats the Ender Dragon, a dragon egg will be generated.
@@ -1057,27 +1079,27 @@ When enabled，Every time a player defeats the Ender Dragon, a dragon egg will b
 
 - Categroies: `AMS`, `FEATURE`
 
-## customBlowUpBlock
+## enhancedWorldEater
 
-Customize the explosion resistance of any block to be equivalent to stone.
-Command format:
-/carpet customBlowUpBlockminecraft:BlockName
-You can also set multiple blocks simultaneously by separating them with commas:
-/carpet customBlowUpBlockminecraft:BlockName1,minecraft:BlockName2
+Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the `customBlowUpBlock ` rule when enabled)
 
-- Type: `String`
+Block list:
 
+Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway
 
-
-- Default: `VANILLA`
+- Type: `double`
 
 
 
-- Suggested options: `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
+- Default: `-1`
 
 
 
-- Categroies: `AMS`, `FEATURE`
+- Suggested options: `-1` , `0 - 16`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `TNT`
 
 ## craftableEnchantedGoldApple
 

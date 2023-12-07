@@ -1029,29 +1029,9 @@
 
 - 分类: `AMS`, `FEATURE`
 
-## 再生成龙蛋（regeneratingDragonEgg）
-
-开启后，玩家每次击败末影龙都会生成一个龙蛋。
-
-> 为了为了Dnsolx的蛋
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`
-
 ## 自定义炸毁方块（customBlowUpBlock）
 
-自定义任何方块的爆炸抗性使其与石头相同。
+自定义任何方块的爆炸抗性使其与石头相同（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）。
 
 命令格式：
 /carpet customBlowUpBlockminecraft:BlockName
@@ -1072,7 +1052,47 @@
 
 - 分类: `AMS`, `FEATURE`
 
+## 再生成龙蛋（regeneratingDragonEgg）
 
+开启后，玩家每次击败末影龙都会生成一个龙蛋。
+
+> 为了Dnsolx的蛋
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 增强型世界吞噬者（enhancedWorldEater）
+
+通过自定义除以下方块的爆炸抗性来让世界吞噬者一路畅通（该规则开启时，`自定义炸毁方块(customBlowUpBlock)` 规则将不会生效）。
+
+方块列表：
+
+爆炸抗性 < 17.0F的方块、基岩、铁砧、末地传送门框架、末地传送门、折跃门
+
+- 类型: `double`
+
+
+
+- 默认值: `-1`
+
+
+
+- 参考选项:  `-1`, `0 - 16`
+
+
+
+- 分类: `AMS`, `FEATURE`, `TNT`
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
