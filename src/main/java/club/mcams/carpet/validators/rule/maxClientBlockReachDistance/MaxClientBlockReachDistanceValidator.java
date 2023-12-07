@@ -22,12 +22,13 @@ package club.mcams.carpet.validators.rule.maxClientBlockReachDistance;
 
 import carpet.settings.ParsedRule;
 import carpet.settings.Validator;
+
 import net.minecraft.server.command.ServerCommandSource;
 
-public class maxClientBlockReachDistanceValidator extends Validator<Double> {
+public class MaxClientBlockReachDistanceValidator extends Validator<Double> {
     @Override
     public Double validate(ServerCommandSource serverCommandSource, ParsedRule<Double> parsedRule, Double aDouble, String s) {
-        if ((aDouble >= 0 && aDouble <= 512) || aDouble == -1) {
+        if ((aDouble >= 0.0D && aDouble <= 512.0D) || aDouble == -1.0D) {
             return aDouble;
         } else {
             return null;

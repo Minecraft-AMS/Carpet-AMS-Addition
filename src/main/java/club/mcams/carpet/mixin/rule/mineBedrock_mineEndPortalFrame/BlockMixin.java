@@ -50,13 +50,17 @@ public abstract class BlockMixin {
     public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
     //#endif
         if (AmsServerSettings.mineBedrock && state.getBlock() == Blocks.BEDROCK) {
-            ItemStack bedrockStack = new ItemStack(Items.BEDROCK);
-            dropStack(world, pos, bedrockStack);
+            if (!player.isCreative()) {
+                ItemStack bedrockStack = new ItemStack(Items.BEDROCK);
+                dropStack(world, pos, bedrockStack);
+            }
         }
 
         if (AmsServerSettings.mineEndPortalFrame && state.getBlock() == Blocks.END_PORTAL_FRAME) {
-            ItemStack endPortalFrameStack = new ItemStack(Items.END_PORTAL_FRAME);
-            dropStack(world, pos, endPortalFrameStack);
+            if (!player.isCreative()) {
+                ItemStack endPortalFrameStack = new ItemStack(Items.END_PORTAL_FRAME);
+                dropStack(world, pos, endPortalFrameStack);
+            }
         }
     }
 }
