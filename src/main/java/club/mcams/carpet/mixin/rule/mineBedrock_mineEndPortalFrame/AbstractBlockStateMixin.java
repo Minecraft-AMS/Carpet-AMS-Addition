@@ -43,7 +43,7 @@ public abstract class AbstractBlockStateMixin {
     @Inject(method = "getHardness", at = @At("HEAD"), cancellable = true)
     public void getHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
         if (AmsServerSettings.mineBedrock && this.getBlock() == Blocks.BEDROCK) {
-            cir.setReturnValue(Blocks.OBSIDIAN.getDefaultState().getHardness(world, pos));
+            cir.setReturnValue(Blocks.RESPAWN_ANCHOR.getDefaultState().getHardness(world, pos));
         }
 
         if (AmsServerSettings.mineEndPortalFrame && this.getBlock() == Blocks.END_PORTAL_FRAME) {

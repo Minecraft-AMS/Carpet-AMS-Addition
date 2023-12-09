@@ -117,7 +117,18 @@ public abstract class ServerPlayerInteractionManagerMixin {
     @Shadow
     public abstract void finishMining(BlockPos pos, PlayerActionC2SPacket.Action action, String reason);
 
-    @Inject(method = "processBlockBreakingAction", at = @At("HEAD"), cancellable = true)
+    @Inject(
+            method = "processBlockBreakingAction",
+            at = @At(
+                    value = "INVOKE",
+                    //#if MC>=11800
+                    target = "Lnet/minecraft/server/MinecraftServer;getPlayerManager()Lnet/minecraft/server/PlayerManager;"
+                    //#else
+                    //$$ target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V"
+                    //#endif
+            ),
+            cancellable = true
+    )
     private void processBlockBreakingAction(BlockPos pos, PlayerActionC2SPacket.Action action, Direction direction, int worldHeight, CallbackInfo ci) {
         if (AmsServerSettings.maxBlockInteractionDistance != -1) {
             double d = this.player.getX() - ((double)pos.getX() + 0.5);
