@@ -32,8 +32,15 @@ carpetamsaddition:
         desc: Optimize dragon respawning
       safeFlight:
         desc: players don't get hurt by flying into walls
-      boneBlockUpdateSuppressor:
-        desc: Let the bone_block be update suppressor (When using it, it is recommended to start the updateSuppressionCrashFix feature to prevent crashes)
+      customBlockUpdateSuppressor:
+        desc: Customize a block to be an update suppressor
+        extra:
+          '0': 'The "amsUpdateSuppressionCrashFix" rule will also be enabled when it is opened'
+          '1': 'Not all blocks can be set as update suppressor'
+          '2': 'To disable/enable forced startup, use the following command: '
+          '3': '/amsUpdateSuppressionCrashFixForceMode true/false'
+          '4': 'Command format:'
+          '5': '/carpet customBlockUpdateSuppressor minecraft:BlockName'
       infiniteTrades:
         desc: Prevents villager trades from locking up
       invulnerable:
@@ -95,6 +102,10 @@ carpetamsaddition:
           '2': '(Carpet TIS Addition)Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon'
       amsUpdateSuppressionCrashFix:
         desc: Fixes updates suppression causing server crashes
+        extra:
+          '0': 'It will be enabled by default along with "customBlockUpdateSuppressor"'
+          '1': 'To disable/enable forced startup, use the following command: '
+          '3': '/amsUpdateSuppressionCrashFixForceMode true/false'
       cakeBlockDropOnBreak:
         desc: When the cake is destroyed, it can drop cake (the cake will only drop when it is intact)
       noCakeEating:
@@ -150,6 +161,10 @@ carpetamsaddition:
         extra:
           '0': 'Block list:'
           '1': 'Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway'
+      sneakToEditSign:
+        desc: Players can sneak and right-click on a sign to edit it
+        extra:
+          '0': 'In Minecraft >= 1.20, the behavior is such that players must sneak in order to edit a sign'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

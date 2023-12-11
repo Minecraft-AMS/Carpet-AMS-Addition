@@ -18,29 +18,33 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.boneBlockUpdateSuppressor;
+package club.mcams.carpet.mixin.rule.sneakToEditSign;
 
+//#if MC>=12000
+//$$ import club.mcams.carpet.util.compat.DummyClass;
+//#endif
+
+//#if MC<12000
 import club.mcams.carpet.AmsServerSettings;
-
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
-import org.spongepowered.asm.mixin.Mixin;
+import net.minecraft.block.entity.SignBlockEntity;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#endif
 
-@Mixin(AbstractBlock.class)
-public abstract class AbstractBlockMixin {
-    //#if MC<11900
-    @Inject(method = "neighborUpdate", at = @At("TAIL"))
-    private void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify, CallbackInfo ci) {
-        if(AmsServerSettings.boneBlockUpdateSuppressor && state.isOf(Blocks.BONE_BLOCK)) {
-            throw new StackOverflowError("Carpet-AMS-Addition UpdateSuppressor");
+import org.spongepowered.asm.mixin.Mixin;
+
+//#if MC<12000
+@Mixin(SignBlockEntity.class)
+//#else
+//$$ @Mixin(DummyClass.class)
+//#endif
+public abstract class SignBlockEntityMixin {
+    //#if MC<12000
+    @Inject(method = "isEditable", at = @At("HEAD"), cancellable = true)
+    private void isEditable(CallbackInfoReturnable<Boolean> cir) {
+        if (AmsServerSettings.sneakToEditSign) {
+            cir.setReturnValue(true);
         }
     }
     //#endif

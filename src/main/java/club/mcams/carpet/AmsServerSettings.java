@@ -104,10 +104,12 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean safeFlight = false;
 
-    //#if MC<11900
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean boneBlockUpdateSuppressor = false;
-    //#endif
+    @Rule(
+            options = {"none", "minecraft:bone_block", "minecraft:diamond_ore", "minecraft:magma_block"},
+            categories = {AMS, FEATURE},
+            strict = false
+    )
+    public static String customBlockUpdateSuppressor = "none";
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean infiniteTrades = false;
@@ -175,10 +177,8 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL, COMMAND})
     public static boolean opPlayerNoCheatExtra = false;
 
-    //#if MC<=11800
     @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL})
     public static boolean amsUpdateSuppressionCrashFix = false;
-    //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean cakeBlockDropOnBreak = false;
@@ -241,6 +241,9 @@ public class AmsServerSettings {
             strict = false
     )
     public static double enhancedWorldEater = -1.0D;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean sneakToEditSign = false;
 
     /*
      * 合成表规则
