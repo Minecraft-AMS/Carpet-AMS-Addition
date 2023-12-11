@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.commands;
+package club.mcams.carpet.commands.rule.anvilInteractionDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
 
