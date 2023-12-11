@@ -20,6 +20,11 @@
 
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
+//#if MC>=11900
+//$$ import club.mcams.carpet.util.compat.DummyClass;
+//#endif
+
+//#if MC<11900
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
 
@@ -28,26 +33,38 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+//#endif
 
+import org.spongepowered.asm.mixin.Mixin;
+
+//#if MC<11900
 @Mixin(World.class)
-public class WorldMixin {
+//#else
+//$$ @Mixin(DummyClass.class)
+//#endif
+public abstract class WorldMixin {
     //#if MC<11900
     @Inject(
             method = "updateNeighbor",
             at = @At(
-                    value="INVOKE",
+                    value = "INVOKE",
                     target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
             ),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    public void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state,Throwable throwable) {
-        if(AmsServerSettings.amsUpdateSuppressionCrashFix && (throwable instanceof ThrowableSuppression || throwable instanceof StackOverflowError)) {
-            throw new ThrowableSuppression("Update suppression");
+    public void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state, Throwable throwable) {
+        if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
+            if (throwable instanceof ClassCastException || throwable instanceof StackOverflowError) {
+                //#if MC<11900
+                throw new ThrowableSuppression("[StackOverflowError] Update suppression");
+                //#else
+                //$$ throw new ThrowableSuppression("[ClassCastException] Update suppression");
+                //#endif
+            }
         }
     }
     //#endif

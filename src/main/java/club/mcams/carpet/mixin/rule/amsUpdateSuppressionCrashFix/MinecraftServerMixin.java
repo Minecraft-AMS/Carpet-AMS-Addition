@@ -39,11 +39,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.function.BooleanSupplier;
 
 @Mixin(MinecraftServer.class)
-public class MinecraftServerMixin {
-    //#if MC<11900
+public abstract class MinecraftServerMixin {
     @WrapOperation(
             method = "tickWorlds",
-            at = @At(value = "INVOKE",
+            at = @At(
+                    value = "INVOKE",
                     target = "Lnet/minecraft/server/world/ServerWorld;tick(Ljava/util/function/BooleanSupplier;)V"
             )
     )
@@ -67,5 +67,4 @@ public class MinecraftServerMixin {
     public void logUpdateSuppression() {
         Messenger.print_server_message((MinecraftServer) (Object) this, "You caused a server crash.");
     }
-    //#endif
 }
