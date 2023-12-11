@@ -374,11 +374,21 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 自定义方块更新抑制器（customBlockUpdateSuppressor）
 
-## 骨块更新抑制器（boneBlockUpdateSuppressor）
+开启后，骨块将会成为一个更新抑制器。
 
-开启后，骨块将会成为一个更新抑制器（使用时建议开始updateSuppressionCrashFix功能防止崩溃）。
-<该规则 `Minecraft Version < 1.19` 可用>
+默认开启时会强制打开 `amsUpdateSuppressionCrashFix ` 规则。
+
+不是所有的方块都能设置为更新抑制器。
+
+使用如下指令来禁用/启用强制启动:
+
+/amsUpdateSuppressionCrashFixForceMode true/false
+
+命令格式：
+
+/carpet customBlockUpdateSuppressor minecraft:BlockName
 
 - 类型: `boolean`
 
@@ -810,9 +820,11 @@
 
 开启后，更新抑制不会导致服务器崩溃。
 
-<该规则从 [carpet-extra](https://github.com/gnembon/carpet-extra) 移植>
+默认会随 `customBlockUpdateSuppressor ` 一同开启。
 
-<该规则 `Minecraft Version < 1.19` 可用>
+使用如下指令来禁用/启用强制启动:
+
+/amsUpdateSuppressionCrashFixForceMode true/false
 
 - 类型: `boolean`
 
@@ -1093,6 +1105,24 @@
 
 
 - 分类: `AMS`, `FEATURE`, `TNT`
+## 潜行编辑告示牌（sneakToEditSign）
+
+开启后，玩家可以潜行时右键告示牌来编辑它，Minecraft >= 1.20 时表现为必须潜行右键。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

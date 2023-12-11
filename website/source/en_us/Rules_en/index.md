@@ -382,11 +382,21 @@ Hitting surface will cause no damage to player when flying with elytra.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
-## boneBlockUpdateSuppressor
+## customBlockUpdateSuppressor
 
-When enabled, bone block will be a update suppressor (When using it, it is recommended to start the Update Suppression Crash Fix feature to prevent crashes).
+Customize a block to be an update suppressor.
 
-<Only available for Minecraft < 1.19 >
+The `amsUpdateSuppressionCrashFix ` rule will also be enabled when it is opened
+
+Not all blocks can be set as update suppressor.
+
+To disable/enable forced startup, use the following command: 
+
+/amsUpdateSuppressionCrashFixForceMode true/false
+
+Command format:
+
+/carpet customBlockUpdateSuppressor minecraft:BlockName
 
 - Type: `boolean`
 
@@ -814,9 +824,11 @@ Affects command list: /difficulty, /kill, /time, /weather, /fill, /setblock, /en
 
 When enabled, Update suppression does not cause the server to crash.
 
-<Ported from [carpet-extra](https://github.com/gnembon/carpet-extra)>
+It will be enabled by default along with `customBlockUpdateSuppressor`.
 
-<Only available for Minecraft < 1.19 >
+To disable/enable forced startup, use the following command: 
+
+/amsUpdateSuppressionCrashFixForceMode true/false
 
 - Type: `boolean`
 
@@ -1100,6 +1112,24 @@ Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Port
 
 
 - Categroies: `AMS`, `FEATURE`, `TNT`
+
+## sneakToEditSign
+
+When enabled，Players can sneak and right-click on a sign to edit it, In `Minecraft >= 1.20`, the behavior is such that players must sneak in order to edit a sign.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
 
 ## craftableEnchantedGoldApple
 

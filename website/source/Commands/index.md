@@ -18,3 +18,9 @@
 `/anvilInteractionDisabledSwitch`
 
 控制玩家是否可与铁砧交互。
+
+### 更新抑制崩溃修复（amsUpdateSuppressionCrashFix）
+
+`/amsUpdateSuppressionCrashFixForceMode true/false`
+
+控制是否在开启 `自定义方块更新抑制器（customBlockUpdateSuppressor）` 规则开启时时强制开启。
