@@ -33,15 +33,15 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+//#if MC<11900
+import java.util.Random;
+//#endif
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-//#if MC<11900
-import java.util.Random;
-//#endif
 
 @Mixin(CampfireBlock.class)
 public abstract class CampfireBlockMixin extends BlockWithEntity {

@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.anvilInteractionDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
-import static club.mcams.carpet.commands.anvilInteractionDisabledCommandRegistry.anvilInteractionDisabledSwitch;
+import static club.mcams.carpet.commands.rule.anvilInteractionDisabled.anvilInteractionDisabledCommandRegistry.anvilInteractionDisabledSwitch;
 
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.BlockState;

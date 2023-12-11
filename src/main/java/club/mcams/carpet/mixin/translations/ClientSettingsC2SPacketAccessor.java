@@ -22,10 +22,14 @@ package club.mcams.carpet.mixin.translations;
 
 import net.minecraft.network.packet.c2s.play.ClientSettingsC2SPacket;
 
-import org.spongepowered.asm.mixin.Mixin;
+//#if MC<11800
 import org.spongepowered.asm.mixin.gen.Accessor;
+//#endif
+import org.spongepowered.asm.mixin.Mixin;
 
+//#if MC>=11800
 @SuppressWarnings("unused")
+//#endif
 @Mixin(ClientSettingsC2SPacket.class)
 public interface ClientSettingsC2SPacketAccessor {
     //#if MC<11800
