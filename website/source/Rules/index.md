@@ -376,9 +376,9 @@
 
 ## 自定义方块更新抑制器（customBlockUpdateSuppressor）
 
-开启后，骨块将会成为一个更新抑制器。
+自定义一个方块成为更新抑制器。
 
-默认开启时会强制打开 `amsUpdateSuppressionCrashFix ` 规则。
+默认开启时会同步打开 `更新抑制崩溃修复（amsUpdateSuppressionCrashFix）` 规则。
 
 不是所有的方块都能设置为更新抑制器。
 
@@ -390,15 +390,15 @@
 
 /carpet customBlockUpdateSuppressor minecraft:BlockName
 
-- 类型: `boolean`
+- 类型: `String`
 
 
 
-- 默认值: `false`
+- 默认值: `none`
 
 
 
-- 参考选项: `false`, `true`
+- 参考选项: `none`, `minecraft:bone_block`, `minecraft:diamond_ore`, `minecraft:magma_block`
 
 
 

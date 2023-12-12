@@ -386,7 +386,7 @@ Hitting surface will cause no damage to player when flying with elytra.
 
 Customize a block to be an update suppressor.
 
-The `amsUpdateSuppressionCrashFix ` rule will also be enabled when it is opened
+The `amsUpdateSuppressionCrashFix `rule will also be enabled when it is opened
 
 Not all blocks can be set as update suppressor.
 
@@ -406,7 +406,7 @@ Command format:
 
 
 
-- Suggested options: `false`, `true`
+- Suggested options: `none`, `minecraft:bone_block`, `minecraft:diamond_ore`, `minecraft:magma_block`
 
 
 
