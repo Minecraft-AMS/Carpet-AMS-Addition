@@ -18,10 +18,9 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.util.AutoMixinAuditExecutor;
+package club.mcams.carpet.util;
 
 import club.mcams.carpet.AmsServer;
-import club.mcams.carpet.util.MixinUtil;
 
 import net.fabricmc.loader.api.FabricLoader;
 
