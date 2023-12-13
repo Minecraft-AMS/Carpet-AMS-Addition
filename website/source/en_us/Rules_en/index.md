@@ -822,7 +822,7 @@ Affects command list: /difficulty, /kill, /time, /weather, /fill, /setblock, /en
 
 ## amsUpdateSuppressionCrashFix
 
-When enabled, Update suppression does not cause the server to crash.
+When enabled, Update suppression does not cause the server to crash, while providing the coordinates and dimensions where the update suppression occurred.
 
 It will be enabled by default along with `customBlockUpdateSuppressor`.
 
@@ -1115,7 +1115,7 @@ Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Port
 
 ## sneakToEditSign
 
-When enabled，Players can sneak and right-click on a sign to edit it, In `Minecraft >= 1.20`, the behavior is such that players must sneak in order to edit a sign.
+When enabled，Players can sneak with empty hands to edit already placed signs by using the interact key, In `Minecraft >= 1.20`, the behavior is such that players must sneak in order to edit a sign.
 
 - Type: `boolean`
 

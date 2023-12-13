@@ -818,9 +818,9 @@
 
 ## 更新抑制崩溃修复（amsUpdateSuppressionCrashFix）
 
-开启后，更新抑制不会导致服务器崩溃。
+开启后，更新抑制不会导致服务器崩溃，同时提供发生更新抑制的坐标与维度。
 
-默认会随 `customBlockUpdateSuppressor ` 一同开启。
+默认会随 `customBlockUpdateSuppressor ` 一同开启。。
 
 使用如下指令来禁用/启用强制启动:
 
@@ -1107,7 +1107,7 @@
 - 分类: `AMS`, `FEATURE`, `TNT`
 ## 潜行编辑告示牌（sneakToEditSign）
 
-开启后，玩家可以潜行时右键告示牌来编辑它，Minecraft >= 1.20 时表现为必须潜行右键。
+开启后，玩家可以在潜行状态且双手为空时对已经放置的告示牌按使用键来编辑它，Minecraft >= 1.20 时表现为必须潜行。
 
 - 类型: `boolean`
 
