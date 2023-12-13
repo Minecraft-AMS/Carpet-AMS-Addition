@@ -20,10 +20,9 @@
 
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
-import carpet.utils.Messenger;
-
+import club.mcams.carpet.util.Messenger;
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionPosition;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -33,10 +32,11 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.crash.CrashException;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.function.BooleanSupplier;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Mixin(MinecraftServer.class)
 public abstract class MinecraftServerMixin {
@@ -52,19 +52,29 @@ public abstract class MinecraftServerMixin {
             try {
                 serverWorld.tick(shouldKeepTicking);
             } catch (CrashException e) {
-                if (!(e.getCause() instanceof ThrowableSuppression)) throw e;
-                logUpdateSuppression();
-            } catch (ThrowableSuppression ignored) {
-                logUpdateSuppression();
+                if (!(e.getCause() instanceof ThrowableSuppressionPosition)) {
+                    throw e;
+                }
+            } catch (ThrowableSuppressionPosition ts) {
+                String line = "§c§o------------------------------";
+                String crashMessage = "Update Suppression in: ";
+                String pos = ts.getPosition().toString();
+                String dimension = ts.getDimension().toString();
+                Pattern patternPos = Pattern.compile("\\{(.*)}");
+                Matcher matcher = patternPos.matcher(pos);
+                Pattern patternDim = Pattern.compile("minecraft:dimension / (.*?)]");
+                Matcher matcherDim = patternDim.matcher(dimension);
+                if (matcher.find()) {
+                    pos = matcher.group(1); // BlockPos{x=14, y=4, z=46} -> x=14, y=4, z=46
+                }
+                if (matcherDim.find()) {
+                    dimension = matcherDim.group(1); // ResourceKey[minecraft:dimension / minecraft:the_end] -> minecraft:the_end
+                }
+                Messenger.sendServerMessage((MinecraftServer) (Object) this,
+        line + "\n" +crashMessage + "\n" + "location: " + pos + "\n" + "Dimension: " + dimension + "\n" + line);
             }
-        }
-        if (!AmsServerSettings.amsUpdateSuppressionCrashFix) {
+        } else {
             original.call(serverWorld, shouldKeepTicking);
         }
-    }
-
-    @Unique
-    public void logUpdateSuppression() {
-        Messenger.print_server_message((MinecraftServer) (Object) this, "You caused a server crash.");
     }
 }

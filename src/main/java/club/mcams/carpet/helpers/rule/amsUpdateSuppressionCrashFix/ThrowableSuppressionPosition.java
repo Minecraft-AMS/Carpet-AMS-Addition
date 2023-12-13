@@ -20,8 +20,27 @@
 
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
-public class ThrowableSuppression extends RuntimeException{
-    public ThrowableSuppression(String message) {
+import club.mcams.carpet.util.compat.DimensionWrapper;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
+
+public class ThrowableSuppressionPosition extends RuntimeException {
+    public ThrowableSuppressionPosition(BlockPos position, DimensionWrapper dimension, String message) {
         super(message);
+        this.position = position;
+        this.dimension = dimension.getValue();
+    }
+
+    private final BlockPos position;
+    private final RegistryKey<World> dimension;
+
+    public BlockPos getPosition() {
+        return position;
+    }
+
+    public RegistryKey<World> getDimension() {
+        return dimension;
     }
 }

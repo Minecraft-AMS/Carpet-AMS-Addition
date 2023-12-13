@@ -27,9 +27,11 @@ import club.mcams.carpet.util.compat.DimensionWrapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
@@ -42,9 +44,12 @@ import com.google.common.collect.ImmutableMap;
 
 import org.jetbrains.annotations.Nullable;
 
+import static club.mcams.carpet.AmsServer.LOGGER;
+
 /**
  * Reference: Carpet TIS Addition
  */
+//TODO: 暂时先不管这里，能用就行
 @SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Messenger {
     private static final Translator translator = new Translator("util");
@@ -275,5 +280,25 @@ public class Messenger {
 
     public static Style parseCarpetStyle(String style) {
         return carpet.utils.Messenger.parseStyle(style);
+    }
+
+    public static void sendServerMessage(MinecraftServer server, String message) {
+        BaseText text = c("gi "+ message);
+        if (server == null) {
+            LOGGER.error("Message not delivered: " + message);
+        } else {
+            //#if MC<11900
+            server.sendSystemMessage(new LiteralText(message), Util.NIL_UUID);
+            //#else
+            //$$ server.sendMessage(Text.literal(message));
+            //#endif
+            for (PlayerEntity entityplayer : server.getPlayerManager().getPlayerList()) {
+                //#if MC<11900
+                entityplayer.sendSystemMessage(text, Util.NIL_UUID);
+                //#else
+                //$$ entityplayer.sendMessage(text);
+                //#endif
+            }
+        }
     }
 }

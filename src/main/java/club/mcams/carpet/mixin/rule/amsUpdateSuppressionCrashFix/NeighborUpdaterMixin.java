@@ -24,8 +24,9 @@ import club.mcams.carpet.util.compat.DummyClass;
 
 //#if MC>=11900
 //$$ import net.minecraft.world.block.NeighborUpdater;
+//$$ import club.mcams.carpet.util.compat.DimensionWrapper;
 //$$ import club.mcams.carpet.AmsServerSettings;
-//$$ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
+//$$ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionPosition;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -55,8 +56,9 @@ public interface NeighborUpdaterMixin {
 //$$    )
 //$$    private static void tryNeighborUpdate(World world, BlockState state, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, CallbackInfo ci, Throwable throwable) {
 //$$        if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
-//$$            if (throwable instanceof ClassCastException || throwable instanceof StackOverflowError) {
-//$$                throw new ThrowableSuppression("Update suppression");
+//$$            if (throwable instanceof ClassCastException || throwable instanceof StackOverflowError || throwable instanceof OutOfMemoryError) {
+//$$                DimensionWrapper dimension = DimensionWrapper.of(world);
+//$$                throw new ThrowableSuppressionPosition(sourcePos, dimension, "Update suppression");
 //$$            }
 //$$        }
 //$$    }

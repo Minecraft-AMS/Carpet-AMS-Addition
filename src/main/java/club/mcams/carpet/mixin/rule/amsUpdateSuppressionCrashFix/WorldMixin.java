@@ -26,7 +26,8 @@ package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 //#if MC<11900
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
+import club.mcams.carpet.util.compat.DimensionWrapper;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionPosition;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -58,12 +59,14 @@ public abstract class WorldMixin {
     )
     public void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state, Throwable throwable) {
         if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
-            if (throwable instanceof ClassCastException || throwable instanceof StackOverflowError) {
-                //#if MC<11900
-                throw new ThrowableSuppression("[StackOverflowError] Update suppression");
-                //#else
-                //$$ throw new ThrowableSuppression("[ClassCastException] Update suppression");
-                //#endif
+            if (
+                throwable instanceof ClassCastException ||
+                throwable instanceof StackOverflowError ||
+                throwable instanceof OutOfMemoryError
+            ) {
+                World world = (World) (Object) this;
+                DimensionWrapper dimension = DimensionWrapper.of(world);
+                throw new ThrowableSuppressionPosition(sourcePos, dimension, "Update suppression");
             }
         }
     }
