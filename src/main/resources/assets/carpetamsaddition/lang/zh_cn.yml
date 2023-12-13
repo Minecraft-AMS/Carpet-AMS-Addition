@@ -48,10 +48,10 @@ carpetamsaddition:
         extra:
           '0': '默认开启时会强制打开 "amsUpdateSuppressionCrashFix" 规则'
           '1': '不是所有的方块都能设置为更新抑制器'
-          '3': '使用如下指令来禁用/启用强制启动: '
-          '4': '/amsUpdateSuppressionCrashFixForceMode true/false'
-          '5': '命令格式：'
-          '6': '/carpet customBlockUpdateSuppressor minecraft:BlockName'
+          '2': '使用如下指令来禁用/启用强制启动: '
+          '3': '/amsUpdateSuppressionCrashFixForceMode true/false'
+          '4': '命令格式：'
+          '5': '/carpet customBlockUpdateSuppressor minecraft:BlockName'
       infiniteTrades:
         name: 无限交易
         desc: 防止村民交易被锁定
@@ -134,11 +134,11 @@ carpetamsaddition:
           '2': '(Carpet TIS Addition)影响的指令列表：/gamemode, /tp, /teleport, /give, /setblock, /summon'
       amsUpdateSuppressionCrashFix:
         name: 更新抑制崩溃修复
-        desc: 防止更新抑制导致服务器崩溃
+        desc: 防止更新抑制导致服务器崩溃，同时提供发生更新抑制的坐标与维度
         extra:
           '0': '默认会随 "customBlockUpdateSuppressor" 一同开启'
           '1': '使用如下指令来禁用/启用强制启动: '
-          '3': '/amsUpdateSuppressionCrashFixForceMode true/false'
+          '2': '/amsUpdateSuppressionCrashFixForceMode true/false'
       cakeBlockDropOnBreak:
         name: 可掉落蛋糕
         desc: 蛋糕在被破坏时可以掉落蛋糕（蛋糕是完整的情况下才会掉落）
@@ -209,9 +209,9 @@ carpetamsaddition:
           '1': '爆炸抗性 < 17.0F的方块、基岩、铁砧、末地传送门框架、末地传送门、折跃门'
       sneakToEditSign:
         name: 潜行编辑告示牌
-        desc: 玩家可以潜行时右键告示牌来编辑它
+        desc: 玩家可以在潜行状态且双手为空时对已经放置的告示牌按使用键来编辑它
         extra:
-          '0': 'Minecraft >= 1.20时表现为必须潜行右键'
+          '0': 'Minecraft >= 1.20时表现为必须潜行'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -5,6 +5,8 @@ carpetamsaddition:
   # ------------------------------------------------------
   
   carpet_translations:
+
+
     category:
       AMS: AMS
       crafting: crafting
@@ -101,11 +103,11 @@ carpetamsaddition:
           '1': 'Affects command list: /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode'
           '2': '(Carpet TIS Addition)Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon'
       amsUpdateSuppressionCrashFix:
-        desc: Fixes updates suppression causing server crashes
+        desc: Prevent update suppression from causing server crashes, while providing the coordinates and dimensions where the update suppression occurred
         extra:
           '0': 'It will be enabled by default along with "customBlockUpdateSuppressor"'
           '1': 'To disable/enable forced startup, use the following command: '
-          '3': '/amsUpdateSuppressionCrashFixForceMode true/false'
+          '2': '/amsUpdateSuppressionCrashFixForceMode true/false'
       cakeBlockDropOnBreak:
         desc: When the cake is destroyed, it can drop cake (the cake will only drop when it is intact)
       noCakeEating:
@@ -162,7 +164,7 @@ carpetamsaddition:
           '0': 'Block list:'
           '1': 'Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway'
       sneakToEditSign:
-        desc: Players can sneak and right-click on a sign to edit it
+        desc: Players can sneak with empty hands to edit already placed signs by using the interact key
         extra:
           '0': 'In Minecraft >= 1.20, the behavior is such that players must sneak in order to edit a sign'
 
