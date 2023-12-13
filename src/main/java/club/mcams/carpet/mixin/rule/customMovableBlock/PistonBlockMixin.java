@@ -50,15 +50,14 @@ public abstract class PistonBlockMixin {
         //#endif
         if (!Objects.equals(AmsServerSettings.customMovableBlock, "VANILLA")) {
             Set<String> moreCustomMovableBlock = new HashSet<>(Arrays.asList(AmsServerSettings.customMovableBlock.split(",")));
-            String blockName1 = state.getBlock().toString();
-            String blockName2 = null;
-            String regex = "\\{(.*?)\\}";   //Block{minecraft:bedrock} -> minecraft:bedrock
+            String blockName = state.getBlock().toString();
+            String regex = "\\{(.*?)}";   //Block{minecraft:bedrock} -> minecraft:bedrock
             Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(blockName1);
+            Matcher matcher = pattern.matcher(blockName);
             if (matcher.find()) {
-                blockName2 = matcher.group(1);
+                blockName = matcher.group(1);
             }
-            if (moreCustomMovableBlock.contains(blockName2)) {
+            if (moreCustomMovableBlock.contains(blockName)) {
                 //#if MC<11700
                 //$$ if (direction == Direction.DOWN && blockPos.getY() == 0) {
                 //#else

@@ -52,15 +52,14 @@ public abstract class BlockMixin {
     private void getBlastResistance(CallbackInfoReturnable<Float> cir) {
         if (!Objects.equals(AmsServerSettings.customBlowUpBlock, "VANILLA") && AmsServerSettings.enhancedWorldEater == -1.0F) {
             Set<String> moreCustomBlowUpBlock = new HashSet<>(Arrays.asList(AmsServerSettings.customBlowUpBlock.split(",")));
-            String blockName1 = stateManager.getDefaultState().getBlock().toString();
-            String blockName2 = null;
-            String regex = "\\{(.*?)\\}";   //Block{minecraft:bedrock} -> minecraft:bedrock
+            String blockName = stateManager.getDefaultState().getBlock().toString();
+            String regex = "\\{(.*?)}";   //Block{minecraft:bedrock} -> minecraft:bedrock
             Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(blockName1);
+            Matcher matcher = pattern.matcher(blockName);
             if (matcher.find()) {
-                blockName2 = matcher.group(1);
+                blockName = matcher.group(1);
             }
-            if (moreCustomBlowUpBlock.contains(blockName2)) {
+            if (moreCustomBlowUpBlock.contains(blockName)) {
                 cir.setReturnValue(Blocks.STONE.getBlastResistance());
             }
         }

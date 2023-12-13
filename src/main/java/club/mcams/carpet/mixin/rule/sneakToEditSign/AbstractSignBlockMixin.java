@@ -43,11 +43,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AbstractSignBlock.class)
 public abstract class AbstractSignBlockMixin {
     //#if MC<12000
-    @Inject(method = "onUse", at = @At("HEAD"))
+    @Inject(
+            method = "onUse",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/entity/player/PlayerEntity;getStackInHand(Lnet/minecraft/util/Hand;)Lnet/minecraft/item/ItemStack;"
+            ),
+            cancellable = true
+    )
     private void onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if (AmsServerSettings.sneakToEditSign && player.isSneaking()) {
+        if (
+            AmsServerSettings.sneakToEditSign &&
+            player.isSneaking() &&
+            player.getMainHandStack().isEmpty() &&
+            player.getOffHandStack().isEmpty()
+        ) {
             SignBlockEntity signBlockEntity = (SignBlockEntity) world.getBlockEntity(pos);
             player.openEditSignScreen(signBlockEntity);
+            cir.setReturnValue(ActionResult.SUCCESS);
         }
     }
     //#else

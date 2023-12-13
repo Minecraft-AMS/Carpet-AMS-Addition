@@ -47,15 +47,14 @@ public abstract class AbstractBlockMixin {
             if (amsUpdateSuppressionCrashFixForceMode) {
                 AmsServerSettings.amsUpdateSuppressionCrashFix = true;
             }
-            String blockName1 = state.getBlock().toString();
-            String blockName2 = null;
-            String regex = "\\{(.*?)\\}";   //Block{minecraft:bedrock} -> minecraft:bedrock
+            String blockName = state.getBlock().toString();
+            String regex = "\\{(.*?)}";   //Block{minecraft:bedrock} -> minecraft:bedrock
             Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(blockName1);
+            Matcher matcher = pattern.matcher(blockName);
             if (matcher.find()) {
-                blockName2 = matcher.group(1);
+                blockName = matcher.group(1);
             }
-            if (Objects.equals(AmsServerSettings.customBlockUpdateSuppressor, blockName2)) {
+            if (Objects.equals(AmsServerSettings.customBlockUpdateSuppressor, blockName)) {
                 //#if MC<11900
                 throw new StackOverflowError("[Carpet-AMS-Addition]: StackOverflowError");
                 //#else

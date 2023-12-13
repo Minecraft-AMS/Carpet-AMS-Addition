@@ -20,7 +20,7 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.util.AutoMixinAuditExecutor.AutoMixinAuditExecutor;
+import club.mcams.carpet.util.AutoMixinAuditExecutor;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -44,5 +44,4 @@ public class AmsServerMod implements ModInitializer {
     public static String getVersion() {
         return version;
     }
-
 }
