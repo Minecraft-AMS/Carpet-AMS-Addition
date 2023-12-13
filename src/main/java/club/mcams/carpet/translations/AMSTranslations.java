@@ -48,7 +48,8 @@ import java.util.Set;
 /**
  * Reference: Carpet TIS Addition
  */
-@SuppressWarnings({"unused", "unchecked"})
+//TODO: 暂时先不管这里，能用就行
+@SuppressWarnings("unchecked")
 public class AMSTranslations {
     private static final String LANG_DIR = String.format("assets/%s/lang", TranslationConstants.TRANSLATION_NAMESPACE);
     public static final Map<String, Map<String, String>> translations = Maps.newLinkedHashMap();
@@ -115,10 +116,6 @@ public class AMSTranslations {
 
     public static BaseText translate(BaseText text, ServerPlayerEntity player) {
         return translate(text, ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase());
-    }
-
-    public static BaseText translate(BaseText text) {
-        return translate(text, getServerLanguage());
     }
 
     public static BaseText translate(BaseText text, String lang) {

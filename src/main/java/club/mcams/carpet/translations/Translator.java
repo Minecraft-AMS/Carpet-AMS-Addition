@@ -24,6 +24,7 @@ import club.mcams.carpet.util.Messenger;
 import net.minecraft.text.BaseText;
 
 @SuppressWarnings("unused")
+//TODO: 暂时先不管这里，能用就行
 public class Translator {
     private final String translationPath;
 
