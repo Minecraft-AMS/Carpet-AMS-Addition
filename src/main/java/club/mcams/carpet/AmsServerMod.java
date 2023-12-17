@@ -20,7 +20,7 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.util.AutoMixinAuditExecutor;
+import club.mcams.carpet.utils.AutoMixinAuditExecutor;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;

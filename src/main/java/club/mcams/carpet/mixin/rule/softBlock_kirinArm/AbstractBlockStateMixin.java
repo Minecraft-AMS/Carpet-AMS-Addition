@@ -41,7 +41,7 @@ public abstract class AbstractBlockStateMixin {
 	public abstract Block getBlock();
 
 	@Inject(method = "getHardness", at = @At("TAIL"), cancellable = true)
-	public void getBlockHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
+	private void getBlockHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
 		if (this.getBlock() != Blocks.BEDROCK && AmsServerSettings.kirinArm) {
 			float JUSTDOIT = 0.0F;
 			cir.setReturnValue(JUSTDOIT);

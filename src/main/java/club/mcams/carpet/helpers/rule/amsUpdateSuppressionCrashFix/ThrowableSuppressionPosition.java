@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
-import club.mcams.carpet.util.compat.DimensionWrapper;
+import club.mcams.carpet.utils.compat.DimensionWrapper;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;

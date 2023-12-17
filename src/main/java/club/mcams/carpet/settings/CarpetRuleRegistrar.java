@@ -89,6 +89,7 @@ public class CarpetRuleRegistrar {
     //$$     }
     //$$ }
     //#else
+
     @SuppressWarnings("rawtypes")
     private void parseRule(Field field, Rule rule) {
         carpet.settings.Rule cmRule = new carpet.settings.Rule() {

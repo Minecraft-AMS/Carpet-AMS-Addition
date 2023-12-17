@@ -21,12 +21,12 @@
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 //#if MC>=11900
-//$$ import club.mcams.carpet.util.compat.DummyClass;
+//$$ import club.mcams.carpet.utils.compat.DummyClass;
 //#endif
 
 //#if MC<11900
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.util.compat.DimensionWrapper;
+import club.mcams.carpet.utils.compat.DimensionWrapper;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionPosition;
 
 import net.minecraft.block.Block;
@@ -57,7 +57,7 @@ public abstract class WorldMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILHARD
     )
-    public void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state, Throwable throwable) {
+    private void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state, Throwable throwable) {
         if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
             if (
                 throwable instanceof ClassCastException ||
@@ -66,7 +66,8 @@ public abstract class WorldMixin {
             ) {
                 World world = (World) (Object) this;
                 DimensionWrapper dimension = DimensionWrapper.of(world);
-                throw new ThrowableSuppressionPosition(sourcePos, dimension, "Update suppression");
+                String message = "\n" + "Update Suppression in: " + "\n" + "location: " + sourcePos + "\n" +  "Dimension: " + dimension + "\n";
+                throw new ThrowableSuppressionPosition(sourcePos, dimension, message);
             }
         }
     }

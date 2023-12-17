@@ -35,7 +35,7 @@ import java.util.Objects;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
     @Inject(method = "getMovementSpeed", at = @At("HEAD"), cancellable = true)
-    public void getMovementSpeed(CallbackInfoReturnable<Float> cir) {
+    private void getMovementSpeed(CallbackInfoReturnable<Float> cir) {
         PlayerEntity player = (PlayerEntity)(Object)this;
         World world = player.getEntityWorld();
         if (

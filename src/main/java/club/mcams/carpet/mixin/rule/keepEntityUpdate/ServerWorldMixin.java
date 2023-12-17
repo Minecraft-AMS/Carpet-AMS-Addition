@@ -39,7 +39,7 @@ public abstract class ServerWorldMixin {
     public abstract void resetIdleTimeout();
 
     @Inject(method = "tick", at = @At("HEAD"))
-    public void tick(BooleanSupplier shouldKeepTicking, CallbackInfo ci) {
+    private void tick(BooleanSupplier shouldKeepTicking, CallbackInfo ci) {
         if (AmsServerSettings.keepEntityUpdate) {
             this.resetIdleTimeout();
         }

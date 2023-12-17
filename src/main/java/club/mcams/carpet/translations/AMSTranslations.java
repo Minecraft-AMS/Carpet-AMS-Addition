@@ -22,11 +22,11 @@ package club.mcams.carpet.translations;
 
 import carpet.CarpetSettings;
 
-import club.mcams.carpet.util.Messenger;
+import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.mixin.translations.StyleAccessor;
 import club.mcams.carpet.mixin.translations.TranslatableTextAccessor;
-import club.mcams.carpet.util.FileUtil;
+import club.mcams.carpet.utils.FileUtil;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -40,29 +40,23 @@ import org.jetbrains.annotations.Nullable;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-/**
- * Reference: Carpet TIS Addition
- */
-//TODO: 暂时先不管这里，能用就行
-@SuppressWarnings("unchecked")
 public class AMSTranslations {
     private static final String LANG_DIR = String.format("assets/%s/lang", TranslationConstants.TRANSLATION_NAMESPACE);
     public static final Map<String, Map<String, String>> translations = Maps.newLinkedHashMap();
     public static final Set<String> languages = Sets.newHashSet();
 
+    @SuppressWarnings("unchecked")
     private static List<String> getAvailableTranslations() {
         try {
             String dataStr = FileUtil.readFile(LANG_DIR + "/meta/languages.yml");
             Map<String, Object> yamlMap = new Yaml().load(dataStr);
-            return (List<String>) yamlMap.get("languages");
+            List<String> languages = (List<String>) yamlMap.get("languages");
+            return languages != null ? languages : new ArrayList<>();
         } catch (Exception e) {
-            AmsServer.LOGGER.warn("Failed to load translations");
-            return Lists.newArrayList();
+            AmsServer.LOGGER.warn("Failed to load translations", e);
+            return new ArrayList<>();
         }
     }
 
@@ -123,66 +117,94 @@ public class AMSTranslations {
     }
 
     public static BaseText translate(BaseText text, String lang, boolean suppressWarnings) {
-        //#if MC>=11900
-        //$$ if (text.getContent() instanceof TranslatableTextContent) {
-        //#else
-        if (text instanceof TranslatableText) {
-            //#endif
-            //#if MC>=11900
-            //$$ TranslatableTextContent translatableText = (TranslatableTextContent) text.getContent();
-            //#else
-            TranslatableText translatableText;
-            translatableText = (TranslatableText) text;
-            //#endif
-            if (translatableText.getKey().startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
-                String formattedString = translateKeyToFormattedString(lang, translatableText.getKey());
-                if (formattedString == null) {
-                    // not supported language
-                    formattedString = translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, translatableText.getKey());
-                }
+        if (isTranslatable(text)) {
+            TranslatableText translatableText = getTranslatableText(text);
+            String translationKey = translatableText.getKey();
+            if (isTranslationKeyValid(translationKey)) {
+                String formattedString = getFormattedTranslation(lang, translationKey);
                 if (formattedString != null) {
-                    BaseText origin = text;
-                    //#if MC>=11900
-                    //$$ TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) (Messenger.tr(formattedString, translatableText.getArgs())).getContent();
-                    //#else
-                    TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) (new TranslatableText(formattedString, translatableText.getArgs()));
-                    //#endif
-                    try {
-                        List<StringVisitable> translations = Lists.newArrayList();
-                        //#if MC>=11800
-                        fixedTranslatableText.invokeForEachPart(formattedString, translations::add);
-                        //#else
-                        //$$ fixedTranslatableText.invokeSetTranslation(formattedString);
-                        //#endif
-                        text = Messenger.c(translations.stream().map(stringVisitable -> {
-                            if (stringVisitable instanceof BaseText) {
-                                return (BaseText) stringVisitable;
-                            }
-                            return Messenger.s(stringVisitable.getString());
-                        }).toArray());
-                    } catch (TranslationException e) {
-                        text = Messenger.s(formattedString);
-                    }
-                    text.getSiblings().addAll(origin.getSiblings());
-                    text.setStyle(origin.getStyle());
+                    text = updateTextWithTranslation(text, formattedString, translatableText);
                 } else if (!suppressWarnings) {
-                    AmsServer.LOGGER.warn("Unknown translation key {}", translatableText.getKey());
+                    AmsServer.LOGGER.warn("Unknown translation key {}", translationKey);
                 }
             }
         }
+        translateHoverText(text, lang);
+        translateSiblingTexts(text, lang);
+        return text;
+    }
 
-        // translate hover text
+    private static boolean isTranslatable(BaseText text) {
+        //#if MC>=11900
+        //$$ return text.getContent() instanceof TranslatableTextContent;
+        //#else
+        return text instanceof TranslatableText;
+        //#endif
+    }
+
+    private static TranslatableText getTranslatableText(BaseText text) {
+        //#if MC>=11900
+        //$$ return (TranslatableTextContent) text.getContent();
+        //#else
+        return (TranslatableText) text;
+        //#endif
+    }
+
+    private static boolean isTranslationKeyValid(String key) {
+        return key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX);
+    }
+
+    private static String getFormattedTranslation(String lang, String key) {
+        String formattedString = translateKeyToFormattedString(lang, key);
+        if (formattedString == null) {
+            formattedString = translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, key);
+        }
+        return formattedString;
+    }
+
+    private static BaseText updateTextWithTranslation(BaseText originalText, String formattedString, TranslatableText translatableText) {
+        BaseText newText;
+        TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) (Messenger.tr(formattedString, translatableText.getArgs()));
+        try {
+            List<StringVisitable> translations = Lists.newArrayList();
+            //#if MC>=11800
+            fixedTranslatableText.invokeForEachPart(formattedString, translations::add);
+            //#else
+            //$$ fixedTranslatableText.invokeSetTranslation(formattedString);
+            //#endif
+            newText = Messenger.c((Object) translations.stream().map(stringVisitable -> {
+                if (stringVisitable instanceof BaseText) {
+                    return (BaseText) stringVisitable;
+                }
+                return Messenger.s(stringVisitable.getString());
+            }).toArray(BaseText[]::new));
+        } catch (TranslationException e) {
+            newText = Messenger.s(formattedString);
+        }
+        newText.getSiblings().addAll(originalText.getSiblings());
+        newText.setStyle(originalText.getStyle());
+        return newText;
+    }
+
+    @SuppressWarnings("all")
+    private static BaseText translateHoverText(BaseText text, String lang) {
         HoverEvent hoverEvent = ((StyleAccessor) text.getStyle()).getHoverEventField();
         if (hoverEvent != null) {
             Object hoverText = hoverEvent.getValue(hoverEvent.getAction());
             if (hoverEvent.getAction() == HoverEvent.Action.SHOW_TEXT && hoverText instanceof BaseText) {
-                text.setStyle(text.getStyle().withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, translate((BaseText) hoverText, lang))));
+                ((BaseText) hoverText).setStyle(((BaseText) hoverText).getStyle().withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, translate((BaseText) hoverText, lang, false))));
             }
         }
+        return text;
+    }
 
-        // translate sibling texts
+    @SuppressWarnings("all")
+    private static BaseText translateSiblingTexts(BaseText text, String lang) {
         List<Text> siblings = text.getSiblings();
-        siblings.replaceAll(text1 -> translate((BaseText) text1, lang));
+        siblings.replaceAll(text1 -> {
+            translate((BaseText) text1, lang, false);
+            return text1;
+        });
         return text;
     }
 }

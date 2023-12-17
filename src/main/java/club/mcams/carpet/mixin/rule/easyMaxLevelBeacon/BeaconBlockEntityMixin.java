@@ -46,7 +46,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 
 @Mixin(BeaconBlockEntity.class)
 public abstract class BeaconBlockEntityMixin extends BlockEntity{
-    public BeaconBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    private BeaconBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         //#if MC<11700
         //$$ super(type);
         //#else

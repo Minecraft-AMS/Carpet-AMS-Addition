@@ -22,54 +22,50 @@ package club.mcams.carpet.commands.rule.anvilInteractionDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
 
-//#if MC<=11800
-import net.minecraft.text.LiteralText;
-//#endif
+import club.mcams.carpet.utils.CommandPermissionLevelHelper;
+import club.mcams.carpet.utils.compat.LiteralTextUtil;
+
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
+import net.minecraft.server.command.ServerCommandSource;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.BoolArgumentType;
 
-import net.minecraft.server.command.ServerCommandSource;
+import java.util.Objects;
+
+import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class anvilInteractionDisabledCommandRegistry {
-    public static boolean anvilInteractionDisabledSwitch = false;
+    public static boolean anvilInteractionDisabled = false;
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-            dispatcher.register(literal("anvilInteractionDisabledSwitch")
-                    .requires(source -> source.hasPermissionLevel(0))
-                    .executes(context -> {
-                        if(AmsServerSettings.anvilInteractionDisabled) {
-                            anvilInteractionDisabledSwitch = !anvilInteractionDisabledSwitch;
-                            if(anvilInteractionDisabledSwitch) {
-                                //#if MC>11800
-                                //$$ Text disableMessage = Text.literal("[ Anvil Interaction Disable ]")
-                                //#else
-                                Text disableMessage = new LiteralText("[ Anvil Interaction Disable ]")
-                                        //#endif
-                                        .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFF0000)));
-                                context.getSource().getPlayer().sendMessage(disableMessage, true);
-                            } else {
-                                //#if MC>11800
-                                //$$ Text enableMessage = Text.literal("[ Anvil Interaction Enable ]")
-                                //#else
-                                Text enableMessage = new LiteralText("[ Anvil Interaction Enable ]")
-                                        //#endif
-                                        .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0x00FF00)));
-                                context.getSource().getPlayer().sendMessage(enableMessage, true);
-                            }
-                        } else {
-                            //#if MC>11800
-                            //$$ Text notEnableMessage = Text.literal("[ Carpet Rule anvilInteractionDisabled Not enabled ]")
-                            //#else
-                            Text notEnableMessage = new LiteralText("[ Carpet Rule anvilInteractionDisabled Not enabled ]")
-                                    //#endif
-                                    .setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFC5454)));
-                            context.getSource().getPlayer().sendMessage(notEnableMessage, true);
-                        }
-                        return 1;
-                    }));
+        dispatcher.register(literal("anvilInteractionDisabled")
+            .requires(source -> source.hasPermissionLevel(permissionLevel()))
+            .then(argument("mode", BoolArgumentType.bool())
+                .executes(context -> {
+                    boolean mode = BoolArgumentType.getBool(context, "mode");
+                    anvilInteractionDisabled = mode;
+                    Text message =
+                            mode ?
+                            createColoredText("[ Anvil Interaction Disable ]") :
+                            createColoredText("[ Anvil Interaction Enable ]");
+                    Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
+                    return 1;
+                })
+            )
+        );
+    }
+
+    private static int permissionLevel() {
+        return AmsServerSettings.anvilInteractionDisabled ?
+                CommandPermissionLevelHelper.zero() :
+                CommandPermissionLevelHelper.Forbidden();
+    }
+
+    private static Text createColoredText(String text) {
+        return LiteralTextUtil.compatText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFFFFF)).withBold(true));
     }
 }

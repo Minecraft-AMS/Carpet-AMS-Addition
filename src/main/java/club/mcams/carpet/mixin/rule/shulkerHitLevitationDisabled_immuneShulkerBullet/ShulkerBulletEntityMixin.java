@@ -22,12 +22,13 @@ package club.mcams.carpet.mixin.rule.shulkerHitLevitationDisabled_immuneShulkerB
 
 import club.mcams.carpet.AmsServerSettings;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ShulkerBulletEntity;
 import net.minecraft.util.hit.EntityHitResult;
@@ -38,30 +39,34 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+
 @Mixin(ShulkerBulletEntity.class)
 public abstract class ShulkerBulletEntityMixin extends Entity {
     public ShulkerBulletEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
-    @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
-    private void shulkerHitLevitationDisable(EntityHitResult entityHitResult, CallbackInfo ci) {
-        if (AmsServerSettings.shulkerHitLevitationDisabled && (entityHitResult.getEntity() instanceof PlayerEntity)) {
-            Entity entity = entityHitResult.getEntity();
-            LivingEntity entity1024 = (LivingEntity) entity;
-            //#if MC<=11800
-            boolean damage = entity.damage(DamageSource.mobProjectile(this, entity1024).setProjectile(), 4.0F);
-            //#else
-            //$$ boolean damage = entity.damage(this.getDamageSources().mobProjectile(this, entity1024), 4.0F);
-            //#endif
-            if (damage) {
-                ((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(StatusEffects.LUCK, 0));
-            }
-            ci.cancel();
-        }
+
+    @WrapOperation(
+            method = "onEntityHit",
+            at = @At(
+                    value = "INVOKE",
+                    //#if MC<11700
+                    //$$ target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z")
+                    //#else
+                    target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z")
+                    //#endif
+    )
+    //#if MC<11700
+    //$$ private boolean onEntityHit1(LivingEntity instance, StatusEffectInstance effect, Operation<Boolean> original) {
+    //$$ return !AmsServerSettings.shulkerHitLevitationDisabled && original.call(instance, effect);
+    //#else
+    private boolean onEntityHit1(LivingEntity instance, StatusEffectInstance effect, Entity source, Operation<Boolean> original) {
+        return !AmsServerSettings.shulkerHitLevitationDisabled && original.call(instance, effect, source);
+    //#endif
     }
 
     @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
-    private void immuneShulkerBullet(EntityHitResult entityHitResult, CallbackInfo ci) {
+    private void onEntityHit2(EntityHitResult entityHitResult, CallbackInfo ci) {
         if(AmsServerSettings.immuneShulkerBullet && (entityHitResult.getEntity() instanceof PlayerEntity)) {
             ci.cancel();
         }

@@ -36,9 +36,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ServerPlayerEntity.class)
 public abstract class ServerPlayerEntityMixin {
     @Inject(method = "isInvulnerableTo",at = @At("TAIL"), cancellable = true)
-    public void isInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+    private void isInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         //#if MC>11900
-        //$$ if(AmsServerSettings.safeFlight && damageSource.isOf(DamageTypes.FLY_INTO_WALL)) {
+        //$$ if (AmsServerSettings.safeFlight && damageSource.isOf(DamageTypes.FLY_INTO_WALL)) {
         //#else
         if (AmsServerSettings.safeFlight && damageSource.equals(DamageSource.FLY_INTO_WALL)) {
             //#endif
@@ -46,7 +46,7 @@ public abstract class ServerPlayerEntityMixin {
             cir.cancel();
         }
         //#if MC>11900
-        //$$ if(AmsServerSettings.invulnerable && !damageSource.isOf(DamageTypes.OUT_OF_WORLD)) {
+        //$$ if (AmsServerSettings.invulnerable && !damageSource.isOf(DamageTypes.OUT_OF_WORLD)) {
         //#else
         if (AmsServerSettings.invulnerable && !damageSource.equals(DamageSource.OUT_OF_WORLD)) {
             //#endif

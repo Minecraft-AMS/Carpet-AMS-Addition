@@ -44,9 +44,9 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class ShulkerBoxBlockMixin {
     @Inject(method = "onBreak", at = @At("HEAD"), cancellable = true)
     //#if MC>12002
-    //$$ public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
+    //$$ private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
     //#else
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
+    private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
     //#endif
         if (AmsServerSettings.creativeShulkerBoxDropsDisabled && player.isCreative()) {
             world.setBlockState(pos, Blocks.AIR.getDefaultState());

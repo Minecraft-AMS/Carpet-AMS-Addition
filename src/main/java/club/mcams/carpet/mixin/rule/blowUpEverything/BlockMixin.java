@@ -31,11 +31,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 @Mixin(Block.class)
 public abstract class BlockMixin {
     @ModifyReturnValue(method = "getBlastResistance", at = @At("RETURN"))
-    public float getBlastResistance(float original) {
-        if (AmsServerSettings.blowUpEverything) {
-            return 0.114514F;
-        } else {
-            return original;
-        }
+    private float getBlastResistance(float original) {
+        return AmsServerSettings.blowUpEverything ? 0.114514F : original;
     }
 }

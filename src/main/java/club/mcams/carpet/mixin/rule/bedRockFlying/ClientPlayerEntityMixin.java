@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin extends Entity {
-    public ClientPlayerEntityMixin(EntityType<?> type, World world) {
+    private ClientPlayerEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
@@ -46,7 +46,7 @@ public abstract class ClientPlayerEntityMixin extends Entity {
     protected abstract boolean hasMovementInput();
 
     @Inject(method = "move", at = @At("TAIL"),cancellable = true)
-    public void onMove(MovementType movementType, Vec3d movement, CallbackInfo ci) {
+    private void onMove(MovementType movementType, Vec3d movement, CallbackInfo ci) {
         ClientPlayerEntity currentInstance = (ClientPlayerEntity) (Object) this;
         if(
             AmsServerSettings.bedRockFlying &&

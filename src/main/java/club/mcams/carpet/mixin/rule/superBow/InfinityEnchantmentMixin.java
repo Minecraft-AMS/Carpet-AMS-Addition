@@ -38,8 +38,9 @@ public abstract class InfinityEnchantmentMixin extends Enchantment {
     public InfinityEnchantmentMixin(Rarity weight, EquipmentSlot... slotTypes) {
         super(weight, EnchantmentTarget.BOW, slotTypes);
     }
+
     @Inject(method = "canAccept", at = @At("HEAD"), cancellable = true)
-    public void canAccept(Enchantment other, CallbackInfoReturnable<Boolean> cir) {
+    private void canAccept(Enchantment other, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.superBow) {
             cir.setReturnValue(other instanceof MendingEnchantment || super.canAccept(other));
         }

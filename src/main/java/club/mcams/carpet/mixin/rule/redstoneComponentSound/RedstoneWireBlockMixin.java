@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(RedstoneWireBlock.class)
 public abstract class RedstoneWireBlockMixin {
     @Inject(method = "onUse", at = @At(value = "RETURN", ordinal = 1))
-    public void playSound(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+    private void playSound(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (AmsServerSettings.redstoneComponentSound) {
             world.playSound(player, pos, SoundEvents.BLOCK_SAND_STEP, SoundCategory.BLOCKS, 0.8f, 2.5f);
         }

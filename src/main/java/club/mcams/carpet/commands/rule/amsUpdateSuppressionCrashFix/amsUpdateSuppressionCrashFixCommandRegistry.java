@@ -20,10 +20,8 @@
 
 package club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix;
 
-//#if MC<=11800
-import net.minecraft.text.LiteralText;
-//#endif
-import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.CommandPermissionLevelHelper;
+import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -33,17 +31,17 @@ import net.minecraft.server.command.ServerCommandSource;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 
-import java.util.Objects;
-
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
+
+import java.util.Objects;
 
 public class amsUpdateSuppressionCrashFixCommandRegistry {
     public static boolean amsUpdateSuppressionCrashFixForceMode = false;
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("amsUpdateSuppressionCrashFixForceMode")
-            .requires(source -> source.hasPermissionLevel(0))
+            .requires(source -> source.hasPermissionLevel(CommandPermissionLevelHelper.two()))
             .then(argument("mode", BoolArgumentType.bool())
                 .executes(context -> {
                     boolean mode = BoolArgumentType.getBool(context, "mode");
@@ -60,10 +58,6 @@ public class amsUpdateSuppressionCrashFixCommandRegistry {
     }
 
     private static Text createColoredText(String text) {
-        //#if MC<=11800
-        return new LiteralText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(65280)));
-        //#else
-        //$$ return Text.literal(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(65280)));
-        //#endif
+        return LiteralTextUtil.compatText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFFFFF)).withBold(true));
     }
 }

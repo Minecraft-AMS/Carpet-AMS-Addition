@@ -66,7 +66,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     //#else
     @Inject(method = "<init>(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
-    public void init1(CallbackInfo ci) {
+    private void init1(CallbackInfo ci) {
         this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
     }
 
@@ -75,12 +75,12 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     //#else
     @Inject(method = "<init>(Lnet/minecraft/util/DyeColor;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
-    public void init2(CallbackInfo ci) {
+    private void init2(CallbackInfo ci) {
         this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
     }
 
     @Inject(method = "size", at = @At("HEAD"), cancellable = true)
-    public void size(CallbackInfoReturnable<Integer> cir) {
+    private void size(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.largeShulkerBox) {
             cir.setReturnValue(9 * 6);
             cir.cancel();
@@ -88,7 +88,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     }
 
     @Inject(method = "getAvailableSlots", at = @At("HEAD"), cancellable = true)
-    public void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
+    private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
         if (AmsServerSettings.largeShulkerBox) {
             int[] availableSlots = IntStream.range(0, size()).toArray();
             cir.setReturnValue(availableSlots);
@@ -97,7 +97,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     }
 
     @Inject(method = "createScreenHandler", at = @At("HEAD"), cancellable = true)
-    public void createScreenHandler(int syncId, PlayerInventory playerInventory, CallbackInfoReturnable<ScreenHandler> cir) {
+    private void createScreenHandler(int syncId, PlayerInventory playerInventory, CallbackInfoReturnable<ScreenHandler> cir) {
         if (AmsServerSettings.largeShulkerBox) {
             cir.setReturnValue(new largeShulkerBoxScreenHandler(syncId, playerInventory, this));
             cir.cancel();

@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 //#if MC<=12002 || MC>=12002
-import club.mcams.carpet.util.compat.DummyClass;
+import club.mcams.carpet.utils.compat.DummyClass;
 //#endif
 
 //#if MC>=11900 && MC<12002

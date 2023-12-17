@@ -45,9 +45,9 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class BlockMixin {
     @Inject(method = "onBreak", at = @At("HEAD"))
     //#if MC>12002
-    //$$ public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
+    //$$ private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
     //#else
-    public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
+    private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
     //#endif
         if (AmsServerSettings.mineBedrock && state.getBlock() == Blocks.BEDROCK) {
             if (!player.isCreative()) {

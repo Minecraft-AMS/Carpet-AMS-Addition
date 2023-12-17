@@ -20,11 +20,11 @@
 
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
-import club.mcams.carpet.util.compat.DummyClass;
+import club.mcams.carpet.utils.compat.DummyClass;
 
 //#if MC>=11900
 //$$ import net.minecraft.world.block.NeighborUpdater;
-//$$ import club.mcams.carpet.util.compat.DimensionWrapper;
+//$$ import club.mcams.carpet.utils.compat.DimensionWrapper;
 //$$ import club.mcams.carpet.AmsServerSettings;
 //$$ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionPosition;
 //$$ import org.spongepowered.asm.mixin.injection.At;
@@ -47,19 +47,24 @@ import org.spongepowered.asm.mixin.Mixin;
 public interface NeighborUpdaterMixin {
 //#if MC>11800
 //$$    @Inject(
-//$$            method = "tryNeighborUpdate",
-//$$            at = @At(
-//$$                    value = "INVOKE",
+//$$           method = "tryNeighborUpdate",
+//$$           at = @At(
+//$$                   value = "INVOKE",
 //$$                    target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
-//$$            ),
-//$$            locals = LocalCapture.CAPTURE_FAILHARD
+//$$           ),
+//$$           locals = LocalCapture.CAPTURE_FAILHARD
 //$$    )
 //$$    private static void tryNeighborUpdate(World world, BlockState state, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, CallbackInfo ci, Throwable throwable) {
 //$$        if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
-//$$            if (throwable instanceof ClassCastException || throwable instanceof StackOverflowError || throwable instanceof OutOfMemoryError) {
-//$$                DimensionWrapper dimension = DimensionWrapper.of(world);
-//$$                throw new ThrowableSuppressionPosition(sourcePos, dimension, "Update suppression");
-//$$            }
+//$$           if (
+//$$               throwable instanceof ClassCastException ||
+//$$               throwable instanceof StackOverflowError ||
+//$$               throwable instanceof OutOfMemoryError
+//$$           ) {
+//$$               DimensionWrapper dimension = DimensionWrapper.of(world);
+//$$               String message = "\n" + "Update Suppression in: " + "\n" + "Location: " + sourcePos + "\n" +  "Dimension: " + dimension + "\n";
+//$$               throw new ThrowableSuppressionPosition(sourcePos, dimension, message);
+//$$           }
 //$$        }
 //$$    }
 //#endif

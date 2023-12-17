@@ -33,13 +33,13 @@ import carpet.script.bundled.BundledModule;
 
 import club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.amsUpdateSuppressionCrashFixCommandRegistry;
 import club.mcams.carpet.commands.rule.anvilInteractionDisabled.anvilInteractionDisabledCommandRegistry;
-import club.mcams.carpet.commands.rule.commandChunkLoading.commandChunkLoadingCommandRegistry;
+import club.mcams.carpet.commands.rule.playerChunkLoadController.playerChunkLoadControllerCommandRegistry;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
-import club.mcams.carpet.util.Logging;
-import club.mcams.carpet.util.recipes.CraftingRule;
+import club.mcams.carpet.utils.Logging;
+import club.mcams.carpet.utils.recipes.CraftingRule;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Lists;
@@ -50,6 +50,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import com.mojang.brigadier.CommandDispatcher;
+
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ReloadCommand;
@@ -95,6 +96,7 @@ public class AmsServer implements CarpetExtension {
     public String version() {
         return AmsServerMod.getModId();
     }
+
     public static void init() {
         CarpetServer.manageExtension(INSTANCE);
         AMSTranslations.loadTranslations();
@@ -108,18 +110,14 @@ public class AmsServer implements CarpetExtension {
     //#if MC>=11900
     //$$ @Override
     //$$ public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
-    //$$   amsUpdateSuppressionCrashFixCommandRegistry.register(dispatcher);
-    //$$   commandChunkLoadingCommandRegistry.register(dispatcher);
-    //$$   anvilInteractionDisabledCommandRegistry.register(dispatcher);
-    //$$ }
     //#else
     @Override
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
         amsUpdateSuppressionCrashFixCommandRegistry.register(dispatcher);
-        commandChunkLoadingCommandRegistry.register(dispatcher);
+        playerChunkLoadControllerCommandRegistry.register(dispatcher);
         anvilInteractionDisabledCommandRegistry.register(dispatcher);
-    }
     //#endif
+    }
 
     @Override
     public Map<String, String> canHasTranslations(String lang) {
@@ -154,9 +152,6 @@ public class AmsServer implements CarpetExtension {
         }
     }
 
-    /**
-     * From Rug Mod
-     */
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
         String datapackPath = server.getSavePath(WorldSavePath.DATAPACKS).toString();
@@ -196,30 +191,24 @@ public class AmsServer implements CarpetExtension {
         }
         reload();
         if (isFirstLoad) {
-            //#if MC>=11900
-            //$$server.getCommandManager().executeWithPrefix(server.getCommandSource(), "/datapack enable \"file/AmsData\"");
-            //#else
             server.getCommandManager().execute(server.getCommandSource(), "/datapack enable \"file/AmsData\"");
-            //#endif
         }
     }
 
     private void registerCraftingRule(String ruleName, String[] recipes, String recipeNamespace, String dataPath) {
         updateCraftingRule(CarpetServer.settingsManager.getRule(ruleName),recipes,recipeNamespace,dataPath,ruleName);
-        CarpetServer.settingsManager.addRuleObserver
-                ((source, rule, s) -> {
-                    //#if MC>=11900
-                    //$$if (rule.name().equals(ruleName)) {
-                    //$$    updateCraftingRule(rule, recipes, recipeNamespace, dataPath, ruleName);
-                    //$$    reload();
-                    //$$}
-                    //#else
-                    if (rule.name.equals(ruleName)) {
-                        updateCraftingRule(rule, recipes, recipeNamespace, dataPath, ruleName);
-                        reload();
-                    }
-                    //#endif
-                });
+        CarpetServer.settingsManager.addRuleObserver(
+            (source, rule, s) -> {
+                //#if MC>=11900
+                //$$if (rule.name().equals(ruleName)) {
+                //#else
+                if (rule.name.equals(ruleName)) {
+                //#endif
+                    updateCraftingRule(rule, recipes, recipeNamespace, dataPath, ruleName);
+                    reload();
+                }
+            }
+        );
     }
 
     private void updateCraftingRule(
@@ -231,8 +220,8 @@ public class AmsServer implements CarpetExtension {
     ) {
         ruleName = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, ruleName);
         //#if MC>=11900
-        //$$if (rule.type() == String.class) {
-        //$$String value = RuleHelper.toRuleString(rule.value());
+        //$$ if (rule.type() == String.class) {
+        //$$ String value = RuleHelper.toRuleString(rule.value());
         //#else
         if (rule.type == String.class) {
             String value = rule.getAsString();
@@ -274,13 +263,11 @@ public class AmsServer implements CarpetExtension {
                     removeAdvancement(datapackPath, advancement);
                 }
             }
-
             if (!value.equals("off")) {
                 List<String> tempRecipes = Lists.newArrayList();
                 for (String recipeName : recipes) {
                     tempRecipes.add(recipeName + "_" + value + ".json");
                 }
-
                 copyRecipes(tempRecipes.toArray(new String[0]), recipeNamespace, datapackPath, ruleName + "_" + value);
             }
         }
@@ -288,7 +275,7 @@ public class AmsServer implements CarpetExtension {
         //$$else if (rule.type() == Integer.class && (Integer) rule.value() > 0) {
         //#else
         else if (rule.type == int.class && (Integer) rule.get() > 0) {
-            //#endif
+        //#endif
             copyRecipes(recipes, recipeNamespace, datapackPath, ruleName);
             int value = (Integer) rule.get();
             for (String recipeName : recipes) {
@@ -303,7 +290,7 @@ public class AmsServer implements CarpetExtension {
         //$$else if (rule.type() == Boolean.class && RuleHelper.getBooleanValue(rule)) {
         //#else
         else if (rule.type == boolean.class && rule.getBoolValue()) {
-            //#endif
+        //#endif
             copyRecipes(recipes, recipeNamespace, datapackPath, ruleName);
         } else {
             deleteRecipes(recipes, recipeNamespace, datapackPath, ruleName, true);
@@ -392,25 +379,23 @@ public class AmsServer implements CarpetExtension {
         }
     }
     //#if MC>=11900
-    @SuppressWarnings("all")
     private static JsonObject readJson(String filePath) {
         try {
             FileReader reader = new FileReader(filePath);
             return JsonParser.parseReader(reader).getAsJsonObject();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.error("File not found: {}", filePath, e);
         }
         return null;
     }
     //#else
-    //$$ @SuppressWarnings("all")
     //$$ private static JsonObject readJson(String filePath) {
     //$$    JsonParser jsonParser = new JsonParser();
     //$$    try {
     //$$        FileReader reader = new FileReader(filePath);
     //$$        return jsonParser.parse(reader).getAsJsonObject();
     //$$    } catch (FileNotFoundException e) {
-    //$$        e.printStackTrace();
+    //$$        LOGGER.error("File not found: {}", filePath, e);
     //$$    }
     //$$    return null;
     //$$}

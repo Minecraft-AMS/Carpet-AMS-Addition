@@ -43,7 +43,7 @@ public abstract class ItemEntityMixin {
     public abstract ItemStack getStack();
 
     @Inject(method = "isFireImmune", at = @At("HEAD"), cancellable = true)
-    public void isFireImmune(CallbackInfoReturnable<Boolean> cir) {
+    private void isFireImmune(CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.antiFireTotem && this.getStack().getItem() == Items.TOTEM_OF_UNDYING) {
             cir.setReturnValue(true);
             cir.cancel();
@@ -51,7 +51,7 @@ public abstract class ItemEntityMixin {
     }
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-    public void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    private void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         //#if MC>=11900
         //$$ if(AmsServerSettings.itemAntiExplosion && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
         //#else

@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.sneakToEditSign;
 
 //#if MC>=12000
-//$$ import club.mcams.carpet.util.compat.DummyClass;
+//$$ import club.mcams.carpet.utils.compat.DummyClass;
 //#endif
 
 //#if MC<12000

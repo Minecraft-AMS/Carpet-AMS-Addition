@@ -45,17 +45,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CampfireBlock.class)
 public abstract class CampfireBlockMixin extends BlockWithEntity {
-    protected CampfireBlockMixin(Settings builder) {
+    private CampfireBlockMixin(Settings builder) {
         super(builder);
     }
 
     @Inject(method = "<init>*", at = @At("RETURN"))
-    protected void initProxy(CallbackInfo info) {
+    private void initProxy(CallbackInfo info) {
         this.setDefaultState(this.getDefaultState().with(CampfireBlock.LIT, false));
     }
 
     @Inject(method = "getPlacementState", at = @At("RETURN"), cancellable = true)
-    protected void getPlacementStateProxy(ItemPlacementContext context, CallbackInfoReturnable<BlockState> cir) {
+    private void getPlacementStateProxy(ItemPlacementContext context, CallbackInfoReturnable<BlockState> cir) {
         if (cir.getReturnValue() != null && AmsServerSettings.extinguishedCampfire) {
             cir.setReturnValue(cir.getReturnValue().with(CampfireBlock.LIT, false));
             cir.cancel();

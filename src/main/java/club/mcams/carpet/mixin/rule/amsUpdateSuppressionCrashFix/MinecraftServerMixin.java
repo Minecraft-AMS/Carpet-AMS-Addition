@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
-import club.mcams.carpet.util.Messenger;
+import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionPosition;
 
@@ -50,7 +50,7 @@ public abstract class MinecraftServerMixin {
     private void tickWorlds(ServerWorld serverWorld, BooleanSupplier shouldKeepTicking, Operation<Void> original) {
         if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
             try {
-                serverWorld.tick(shouldKeepTicking);
+                original.call(serverWorld, shouldKeepTicking);
             } catch (CrashException e) {
                 if (!(e.getCause() instanceof ThrowableSuppressionPosition)) {
                     throw e;
@@ -71,7 +71,7 @@ public abstract class MinecraftServerMixin {
                     dimension = matcherDim.group(1); // ResourceKey[minecraft:dimension / minecraft:the_end] -> minecraft:the_end
                 }
                 Messenger.sendServerMessage((MinecraftServer) (Object) this,
-        line + "\n" +crashMessage + "\n" + "location: " + pos + "\n" + "Dimension: " + dimension + "\n" + line);
+        "\n" + line + "\n" +crashMessage + "\n" + "Location: " + pos + "\n" + "Dimension: " + dimension + "\n" + line);
             }
         } else {
             original.call(serverWorld, shouldKeepTicking);

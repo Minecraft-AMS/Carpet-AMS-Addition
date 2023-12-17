@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.bambooModelNoOffset;
 
 import club.mcams.carpet.AmsServerSettings;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;

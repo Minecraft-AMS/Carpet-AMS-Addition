@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(CakeBlock.class)
 public abstract class CakeBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
-    public void noEat(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+    private void noEat(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (AmsServerSettings.noCakeEating) {
             cir.setReturnValue(ActionResult.FAIL);
         }

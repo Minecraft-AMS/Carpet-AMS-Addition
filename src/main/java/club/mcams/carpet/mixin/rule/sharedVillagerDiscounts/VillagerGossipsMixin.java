@@ -46,7 +46,7 @@ public abstract class VillagerGossipsMixin {
     private Map<UUID, Object> entityReputation;
 
     @Inject(method = "getReputationFor(Ljava/util/UUID;Ljava/util/function/Predicate;)I", at = @At("HEAD"), cancellable = true)
-    public void getReputation(UUID target, Predicate<VillageGossipType> filter, CallbackInfoReturnable<Integer> cir) {
+    private void getReputation(UUID target, Predicate<VillageGossipType> filter, CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.sharedVillagerDiscounts && filter.test(MAJOR_POSITIVE)) {
             GetValueForInvoker targetReputation = (GetValueForInvoker)entityReputation.get(target);
             int otherRepertory = 0;

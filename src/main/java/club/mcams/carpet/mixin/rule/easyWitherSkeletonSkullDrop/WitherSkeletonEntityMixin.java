@@ -26,7 +26,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.world.World;
 
@@ -40,11 +39,10 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
     protected WitherSkeletonEntityMixin(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
         super(entityType, world);
     }
-    @Inject(method = "dropEquipment", at = @At("TAIL"), cancellable = true)
+    @Inject(method = "dropEquipment", at = @At("TAIL"))
     private void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops, CallbackInfo ci) {
         if (AmsServerSettings.easyWitherSkeletonSkullDrop && allowDrops) {
-            this.dropStack(new ItemStack(Items.WITHER_SKELETON_SKULL));
-            ci.cancel();
+            this.dropItem(Items.WITHER_SKELETON_SKULL);
         }
     }
 }

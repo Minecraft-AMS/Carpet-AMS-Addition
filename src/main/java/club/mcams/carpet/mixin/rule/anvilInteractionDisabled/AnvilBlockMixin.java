@@ -20,17 +20,8 @@
 
 package club.mcams.carpet.mixin.rule.anvilInteractionDisabled;
 
-import club.mcams.carpet.AmsServerSettings;
-import static club.mcams.carpet.commands.rule.anvilInteractionDisabled.anvilInteractionDisabledCommandRegistry.anvilInteractionDisabledSwitch;
-
 import net.minecraft.block.AnvilBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,13 +31,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AnvilBlock.class)
 public abstract class AnvilBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
-    public void onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if(anvilInteractionDisabledSwitch) {
-            cir.setReturnValue(ActionResult.FAIL);
+    private void onUse(CallbackInfoReturnable<ActionResult> cir) {
+        if (club.mcams.carpet.commands.rule.anvilInteractionDisabled.anvilInteractionDisabledCommandRegistry.anvilInteractionDisabled) {
+            cir.setReturnValue(ActionResult.PASS);
             cir.cancel();
-        }
-        if(!AmsServerSettings.anvilInteractionDisabled) {
-            anvilInteractionDisabledSwitch = false;
         }
     }
 }
