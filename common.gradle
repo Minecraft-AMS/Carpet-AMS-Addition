@@ -39,7 +39,7 @@ dependencies {
     // libraries
     implementation "org.yaml:snakeyaml:${project.snakeyaml_version}"
     include "org.yaml:snakeyaml:${project.snakeyaml_version}"
-	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.3.2")))
+	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 }
 
 loom {
