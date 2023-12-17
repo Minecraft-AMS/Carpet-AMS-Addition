@@ -61,7 +61,8 @@ public abstract class PlayerManagerMixin {
     private void onPlayerDisconnects(ServerPlayerEntity player, CallbackInfo info) {
         if (AmsServerSettings.fancyFakePlayerName && player instanceof EntityPlayerMPFake && !((EntityPlayerMPFake) player).isAShadow) {
             BotTeamController.kickFakePlayerFromBotTeam(player);
-        } else {
+        }
+        if (!AmsServerSettings.fancyFakePlayerName && player instanceof EntityPlayerMPFake && !((EntityPlayerMPFake) player).isAShadow) {
             BotTeamController.removeBotTeam(player);
         }
     }
