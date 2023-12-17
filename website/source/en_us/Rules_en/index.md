@@ -78,13 +78,11 @@ Greatly optimized the code related to dragon fight starting. Provide performance
 
 - Categroies: `AMS`, `OPTIMIZATION`
 
-## commandChunkLoading
+## playerChunkLoadController
 
 Control chunkloading of player. Won't remove player detection of deminsion like main island loading in the end. Will be reset after player loging out to avoid [MC-157812](https://bugs.mojang.com/browse/MC-157812).
 
-Command: /chunkloading
-
-<Ported from [Intricarpet](https://github.com/lntricate1/intricarpet)>
+Command: /playerChunkLoading true/false
 
 - Type: `boolean`
 
@@ -136,7 +134,7 @@ the option is interpreted as follow:
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate` rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate` rules to solve this issue.
 
 ## bellBlockChunkLoader
 
@@ -156,7 +154,7 @@ When a bell block is triggered by rising edge of redstone signal, the chunk whic
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate `rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate `rules to solve this issue.
 
 ## pistonBlockChunkLoader
 
@@ -178,7 +176,7 @@ the option is interpreted as follow:
 
 - `OFF`: Disable the rule.
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate `rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate `rules to solve this issue.
 
 
 
@@ -797,13 +795,11 @@ Command: /anvilInteractionDisabledSwitch
 - Categroies: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## opPlayerNoCheatExtra
+## preventAdministratorCheat
 
-When enabled, Disable some command to prevent accidentally cheating, It is recommended to use it with opPlayerNoCheat from Carpet TIS Addition.
+Disable some command to prevent accidentally cheating.
 
-Affects command list: /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode
-
-(Carpet TIS Addition)Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon
+Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode
 
 - Type: `boolean`
 
@@ -824,9 +820,7 @@ Affects command list: /difficulty, /kill, /time, /weather, /fill, /setblock, /en
 
 When enabled, Update suppression does not cause the server to crash, while providing the coordinates and dimensions where the update suppression occurred.
 
-It will be enabled by default along with `customBlockUpdateSuppressor`.
-
-To disable/enable forced startup, use the following command: 
+Use the following command to control whether it is forcibly enabled when `customBlockUpdateSuppressor ` is enabled, with a permission level of 2: 
 
 /amsUpdateSuppressionCrashFixForceMode true/false
 
@@ -1116,6 +1110,44 @@ Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Port
 ## sneakToEditSign
 
 When enabled，Players can sneak with empty hands to edit already placed signs by using the interact key, In `Minecraft >= 1.20`, the behavior is such that players must sneak in order to edit a sign.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## fancyFakePlayerName
+
+Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn't need to be input when using the command, but the suffix is indeed present.
+
+Example：1024_byteeeee -> [bot] 1024_byteeeee_bot
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## fakePlayerNoScoreboardCounter
+
+The scoreboard will hide the fake player.
 
 - Type: `boolean`
 

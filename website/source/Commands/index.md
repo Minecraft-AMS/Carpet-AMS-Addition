@@ -8,14 +8,14 @@
 
 ### 区块加载控制（commadChunkLoading）
 
-`/chunkloading [true/false]`
+`/playerChunkLoading [true/false]`
 
 开关玩家自身加载。
 
 
 ### 禁用铁砧交互（anvilInteractionDisabled)
 
-`/anvilInteractionDisabledSwitch`
+`/anvilInteractionDisabled [true/false]`
 
 控制玩家是否可与铁砧交互。
 

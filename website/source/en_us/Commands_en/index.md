@@ -8,14 +8,14 @@
 
 ### commandChunkLoading
 
-`/chunkloading [true/false]`
+`/playerChunkLoading [true/false]`
 
 Control chunk loading of player. Can only manipulate yourself.
 
 
 ### anvilInteractionDisabled
 
-`/anvilInteractionDisabledSwitch`
+`/anvilInteractionDisabled [true/false]`
 
 Controls whether the player can interact with the anvil.
 

@@ -53,7 +53,6 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-
 ## 龙战优化（optimizedDragonRespawn）
 
 大幅度优化了龙战判定代码的性能表现，为基于末地祭坛设计的末地石农场提供性能优化。注意：本选项开启后可能影响原版特性。
@@ -73,14 +72,12 @@
 - 分类: `AMS`, `OPTIMIZATION`
 
 
-### 区块加载控制（commandChunkLoading）
+## 区块加载控制（playerChunkLoadController）
 
 控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。
 玩家上下线时会将交互状态重置回加载以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)。
 
-命令：/chunkloading
-
-<该规则从 [Intricarpet](https://github.com/lntricate1/intricarpet) 移植>
+命令：/playerChunkLoading true/false
 
 - 类型: `boolean`
 
@@ -109,7 +106,7 @@
 
 `OFF`: 禁用该规则。
 
-由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题。
 
 
 
@@ -132,7 +129,7 @@
 
 开启后，当上边沿红石信号激活钟时，为钟方块所在区块添加类型为"bell_block"，加载等级为30的加载票，持续时间为300gt（15s）。
 
-由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题。
 
 
 
@@ -163,7 +160,7 @@
 
 `OFF`: 禁用该规则。
 
-由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题，但个人建议采用放置假人的方式来解决这个问题。
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题。
 
 
 
@@ -793,13 +790,11 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
 
 
-## op玩家不准作弊拓展（opPlayerNoCheatExtra）
+## 防止管理员作弊（preventAdministratorCheat）
 
-开启后，禁用部分指令以避免op玩家意外地作弊, 建议与Carpet TIS Addition的opPlayerNoCheat一同使用。
+禁用部分指令以避免op玩家意外地作弊。
 
-影响的指令列表: /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode
-
-（Carpet TIS Addition）影响的指令列表：/gamemode, /tp, /teleport, /give, /setblock, /summon
+影响的指令列表: /gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode
 
 - 类型: `boolean`
 
@@ -820,9 +815,7 @@
 
 开启后，更新抑制不会导致服务器崩溃，同时提供发生更新抑制的坐标与维度。
 
-默认会随 `customBlockUpdateSuppressor ` 一同开启。。
-
-使用如下指令来禁用/启用强制启动:
+使用如下指令来控制其是否在"customBlockUpdateSuppressor"开启时强制启动，权限等级为2:
 
 /amsUpdateSuppressionCrashFixForceMode true/false
 
@@ -1108,6 +1101,42 @@
 ## 潜行编辑告示牌（sneakToEditSign）
 
 开启后，玩家可以在潜行状态且双手为空时对已经放置的告示牌按使用键来编辑它，Minecraft >= 1.20 时表现为必须潜行。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 花哨的假人名称（fancyFakePlayerName）
+
+为carpet mod所召唤出来的假人加上绿色的前缀与后缀，输入命令时不用输入前缀，而后缀则是真实存在的。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 假人不计入计分板（fakePlayerNoScoreboardCounter）
+
+开启后，计分板将会屏蔽假人。
 
 - 类型: `boolean`
 
