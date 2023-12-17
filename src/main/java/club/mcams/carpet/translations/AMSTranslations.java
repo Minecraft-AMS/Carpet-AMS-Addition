@@ -109,7 +109,11 @@ public class AMSTranslations {
     }
 
     public static BaseText translate(BaseText text, ServerPlayerEntity player) {
-        return translate(text, ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase());
+        if (player instanceof ServerPlayerEntityWithClientLanguage) {
+            String lang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
+            return translate(text, lang);
+        }
+        return text;
     }
 
     public static BaseText translate(BaseText text, String lang) {
