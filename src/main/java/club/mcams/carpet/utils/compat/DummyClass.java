@@ -27,7 +27,8 @@ public class DummyClass {
         2、opPlayerNoCheat规则重命名为preventAdministratorCheat且包含Carpet TIS Addition所禁用的指令，不再作为Carpet TIS Addition的拓展
         3、amsUpdateSuppressionCrashFix规则不再默认在customBlockUpdateSuppression开启时强制开启，但依然可以通过/amsUpdateSuppressionCrashFixForceMode true/false命令来控制是否强制开启
         4、commandChunkLoading规则重命名为playerChunkLoadController规则，且指令更改为/playerChunkLoading true/false
-        5、MixinExtras v0.3.1 -> v0.3.2
-        6、一堆代码上的调整与优化（偷个懒不写了 :<）
+        5、anvilInteractionDisabled规则的命令更改为/anvilInteractionDisabled true/false
+        6、MixinExtras v0.3.1 -> v0.3.2
+        7、一堆代码上的调整与优化以及规则描述的更改（偷个懒不写了 :<）
      */
 }
