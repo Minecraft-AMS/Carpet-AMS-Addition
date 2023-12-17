@@ -18,40 +18,28 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.commandChunkLoading;
+package club.mcams.carpet.helpers.rule.playerChunkLoadController;
 
-import carpet.CarpetServer;
-import net.minecraft.entity.player.PlayerEntity;
+import club.mcams.carpet.AmsServer;
+
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings("unused")
 public class ChunkLoading {
     public static Map<String, Boolean> onlinePlayerMap = new HashMap<>();
 
     public static void setPlayerInteraction(String playerName, boolean b, boolean online) {
-        if (playerFromName(playerName) == null) return;
+        if (playerFromName(playerName) == null) {
+            return;
+        }
         if (online) {
             onlinePlayerMap.put(playerName, b);
         }
     }
 
-    public static void onPlayerConnect(PlayerEntity player) {
-        String playerName = player.getName().getString();
-        setPlayerInteraction(playerName, true, true);
-    }
-
-    public static void onPlayerDisconnect(PlayerEntity player) {
-        String playerName = player.getName().getString();
-        if (onlinePlayerMap.containsKey(playerName)) {
-            setPlayerInteraction(playerName, true, false);
-            onlinePlayerMap.remove(playerName);
-        }
-    }
-
     protected static ServerPlayerEntity playerFromName(String name) {
-        return CarpetServer.minecraft_server.getPlayerManager().getPlayer(name);
+        return AmsServer.minecraftServer.getPlayerManager().getPlayer(name);
     }
 }

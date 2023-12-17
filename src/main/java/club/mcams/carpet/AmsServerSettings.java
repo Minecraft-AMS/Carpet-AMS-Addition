@@ -20,8 +20,10 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.util.recipes.CraftingRule;
+import club.mcams.carpet.utils.recipes.CraftingRule;
 import club.mcams.carpet.settings.Rule;
+
+import static carpet.settings.RuleCategory.*;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
 import club.mcams.carpet.validators.rule.enhancedWorldEater.BlastResistanceValidator;
@@ -76,7 +78,7 @@ public class AmsServerSettings {
     public static boolean keepEntityUpdate = false;
 
     @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
-    public static String commandChunkLoading = "false";
+    public static boolean playerChunkLoadController = false;
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean netherWaterPlacement = false;
@@ -175,7 +177,7 @@ public class AmsServerSettings {
     public static boolean anvilInteractionDisabled = false;
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL, COMMAND})
-    public static boolean opPlayerNoCheatExtra = false;
+    public static boolean preventAdministratorCheat = false;
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL})
     public static boolean amsUpdateSuppressionCrashFix = false;
@@ -244,6 +246,12 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean sneakToEditSign = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean fancyFakePlayerName = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean fakePlayerNoScoreboardCounter = false;
 
     /*
      * 合成表规则

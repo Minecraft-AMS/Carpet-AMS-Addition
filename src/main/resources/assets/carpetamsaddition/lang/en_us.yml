@@ -6,7 +6,6 @@ carpetamsaddition:
   
   carpet_translations:
 
-
     category:
       AMS: AMS
       crafting: crafting
@@ -95,19 +94,17 @@ carpetamsaddition:
       anvilInteractionDisabled:
         desc: 'Players cannot open the UI of the Anvil'
         extra:
-          '0': 'Command: /anvilInteractionDisabledSwitch'
-      opPlayerNoCheatExtra:
+          '0': 'Command: /anvilInteractionDisabled'
+      preventAdministratorCheat:
         desc: Disable some command to prevent accidentally cheating
         extra:
-          '0': 'It is recommended to use it with opPlayerNoCheat from Carpet TIS Addition'
-          '1': 'Affects command list: /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode'
-          '2': '(Carpet TIS Addition)Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon'
+          '0': 'Affects command list: '
+          '1': '/gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode'
       amsUpdateSuppressionCrashFix:
         desc: Prevent update suppression from causing server crashes, while providing the coordinates and dimensions where the update suppression occurred
         extra:
-          '0': 'It will be enabled by default along with "customBlockUpdateSuppressor"'
-          '1': 'To disable/enable forced startup, use the following command: '
-          '2': '/amsUpdateSuppressionCrashFixForceMode true/false'
+          '0': 'Use the following command to control whether it is forcibly enabled when "customBlockUpdateSuppressor" is enabled, with a permission level of 2:'
+          '1': '/amsUpdateSuppressionCrashFixForceMode true/false'
       cakeBlockDropOnBreak:
         desc: When the cake is destroyed, it can drop cake (the cake will only drop when it is intact)
       noCakeEating:
@@ -167,6 +164,12 @@ carpetamsaddition:
         desc: Players can sneak with empty hands to edit already placed signs by using the interact key
         extra:
           '0': 'In Minecraft >= 1.20, the behavior is such that players must sneak in order to edit a sign'
+      fancyFakePlayerName:
+        desc: Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn't need to be input when using the command, but the suffix is indeed present
+        extra:
+          '0': 'Example：1024_byteeeee -> [bot] 1024_byteeeee_bot'
+      fakePlayerNoScoreboardCounter:
+        desc: The scoreboard will hide the fake player
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -183,8 +186,11 @@ carpetamsaddition:
         desc: Make all plants accepts scheduled tick as random tick
 
 #区块加载规则
-      commandChunkLoading:
+      playerChunkLoadController:
         desc: Control chunk loading for players at any gamemodes
+        extra:
+          '0': 'Command:'
+          '1': '/playerChunkLoading true/false'
       noteBlockChunkLoader:
         desc: Load nearby 3x3 chunks for 15 seconds when a note block is triggered
         extra:
@@ -193,12 +199,12 @@ carpetamsaddition:
           '2': '[note_block] - Only note_block'
           '3': '[OFF] - Disable the rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
+          '5': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue.'
       bellBlockChunkLoader:
         desc: Load nearby 3x3 chunks for 15 seconds when a bell is triggered
         extra:
           '1': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '2': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
+          '2': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue.'
       pistonBlockChunkLoader:
         desc:  Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head)
         extra:
@@ -207,7 +213,7 @@ carpetamsaddition:
           '2': '[all] - When bone_block is on the piston or bedrock is under the piston'
           '3': '[OFF] - Disable the rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue, but I personally recommend using the method of placing fake players to work around this problem.'
+          '5': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue.'
       blockChunkLoaderKeepTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded
         extra:
