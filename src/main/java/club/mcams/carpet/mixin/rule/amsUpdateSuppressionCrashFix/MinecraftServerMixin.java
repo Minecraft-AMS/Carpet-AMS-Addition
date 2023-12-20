@@ -20,9 +20,8 @@
 
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
-import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionPosition;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -35,8 +34,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.function.BooleanSupplier;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Mixin(MinecraftServer.class)
 public abstract class MinecraftServerMixin {
@@ -52,27 +49,10 @@ public abstract class MinecraftServerMixin {
             try {
                 original.call(serverWorld, shouldKeepTicking);
             } catch (CrashException e) {
-                if (!(e.getCause() instanceof ThrowableSuppressionPosition)) {
+                if (!(e.getCause() instanceof ThrowableSuppression)) {
                     throw e;
                 }
-            } catch (ThrowableSuppressionPosition ts) {
-                String line = "§c§o------------------------------";
-                String crashMessage = "Update Suppression in: ";
-                String pos = ts.getPosition().toString();
-                String dimension = ts.getDimension().toString();
-                Pattern patternPos = Pattern.compile("\\{(.*)}");
-                Matcher matcher = patternPos.matcher(pos);
-                Pattern patternDim = Pattern.compile("minecraft:dimension / (.*?)]");
-                Matcher matcherDim = patternDim.matcher(dimension);
-                if (matcher.find()) {
-                    pos = matcher.group(1); // BlockPos{x=14, y=4, z=46} -> x=14, y=4, z=46
-                }
-                if (matcherDim.find()) {
-                    dimension = matcherDim.group(1); // ResourceKey[minecraft:dimension / minecraft:the_end] -> minecraft:the_end
-                }
-                Messenger.sendServerMessage((MinecraftServer) (Object) this,
-        "\n" + line + "\n" +crashMessage + "\n" + "Location: " + pos + "\n" + "Dimension: " + dimension + "\n" + line);
-            }
+            } catch (ThrowableSuppression ignored) {}
         } else {
             original.call(serverWorld, shouldKeepTicking);
         }

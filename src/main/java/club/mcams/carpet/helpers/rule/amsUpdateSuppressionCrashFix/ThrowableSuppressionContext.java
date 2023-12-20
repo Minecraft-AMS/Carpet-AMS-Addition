@@ -20,27 +20,32 @@
 
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
+import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
-public class ThrowableSuppressionPosition extends RuntimeException {
-    public ThrowableSuppressionPosition(BlockPos position, DimensionWrapper dimension, String message) {
-        super(message);
-        this.position = position;
-        this.dimension = dimension.getValue();
+public class ThrowableSuppressionContext {
+
+    private static String getSuppressionPos(BlockPos pos) {
+        return pos.getX() + ", " + pos.getY() + ", " + pos.getZ();
     }
 
-    private final BlockPos position;
-    private final RegistryKey<World> dimension;
-
-    public BlockPos getPosition() {
-        return position;
+    private static DimensionWrapper getSuppressionDimension(World world) {
+        return DimensionWrapper.of(world);
     }
 
-    public RegistryKey<World> getDimension() {
-        return dimension;
+    public static String suppressionMessageText(BlockPos pos, World world) {
+        final String minecraftStyle = "§c§o";
+        return minecraftStyle + "\n" +
+                "Update Suppression in: \n" +
+                "Location: " + getSuppressionPos(pos) + "\n" +
+                "Dimension: " + getSuppressionDimension(world) + "\n";
+    }
+
+    public static void sendMessageToServer(BlockPos pos, World world) {
+        Messenger.sendServerMessage(AmsServer.minecraftServer, suppressionMessageText(pos, world));
     }
 }

@@ -26,14 +26,12 @@ package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 //#if MC<11900
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.utils.compat.DimensionWrapper;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionPosition;
-
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionContext;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -65,9 +63,8 @@ public abstract class WorldMixin {
                 throwable instanceof OutOfMemoryError
             ) {
                 World world = (World) (Object) this;
-                DimensionWrapper dimension = DimensionWrapper.of(world);
-                String message = "\n" + "Update Suppression in: " + "\n" + "location: " + sourcePos + "\n" +  "Dimension: " + dimension + "\n";
-                throw new ThrowableSuppressionPosition(sourcePos, dimension, message);
+                ThrowableSuppressionContext.sendMessageToServer(sourcePos, world);
+                throw new ThrowableSuppression(ThrowableSuppressionContext.suppressionMessageText(sourcePos, world));
             }
         }
     }

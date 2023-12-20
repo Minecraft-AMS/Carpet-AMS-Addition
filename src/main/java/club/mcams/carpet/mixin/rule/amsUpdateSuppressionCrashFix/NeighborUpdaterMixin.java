@@ -20,13 +20,16 @@
 
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
+//#if MC<11900
 import club.mcams.carpet.utils.compat.DummyClass;
+//#endif
 
 //#if MC>=11900
 //$$ import net.minecraft.world.block.NeighborUpdater;
 //$$ import club.mcams.carpet.utils.compat.DimensionWrapper;
 //$$ import club.mcams.carpet.AmsServerSettings;
-//$$ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionPosition;
+//$$ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
+//$$ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionContext;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -61,9 +64,8 @@ public interface NeighborUpdaterMixin {
 //$$               throwable instanceof StackOverflowError ||
 //$$               throwable instanceof OutOfMemoryError
 //$$           ) {
-//$$               DimensionWrapper dimension = DimensionWrapper.of(world);
-//$$               String message = "\n" + "Update Suppression in: " + "\n" + "Location: " + sourcePos + "\n" +  "Dimension: " + dimension + "\n";
-//$$               throw new ThrowableSuppressionPosition(sourcePos, dimension, message);
+//$$               ThrowableSuppressionContext.sendMessageToServer(pos, world);
+//$$               throw new ThrowableSuppression(ThrowableSuppressionContext.suppressionMessageText(pos, world));
 //$$           }
 //$$        }
 //$$    }
