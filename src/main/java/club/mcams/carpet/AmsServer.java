@@ -113,10 +113,10 @@ public class AmsServer implements CarpetExtension {
     //#else
     @Override
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
+    //#endif
         amsUpdateSuppressionCrashFixCommandRegistry.register(dispatcher);
         playerChunkLoadControllerCommandRegistry.register(dispatcher);
         anvilInteractionDisabledCommandRegistry.register(dispatcher);
-    //#endif
     }
 
     @Override
