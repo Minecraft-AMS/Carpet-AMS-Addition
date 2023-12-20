@@ -1163,6 +1163,24 @@ The scoreboard will hide the fake player.
 
 - Categroies: `AMS`, `FEATURE`
 
+## noFamilyPlanning
+
+Allow players to continuously feed animals to breed them.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

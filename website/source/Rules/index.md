@@ -1152,6 +1152,24 @@
 
 - 分类: `AMS`, `FEATURE`
 
+## 没有计划生育（noFamilyPlanning）
+
+允许玩家一直喂食动物来繁殖它们。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
