@@ -5,7 +5,6 @@ carpetamsaddition:
   # ------------------------------------------------------
   
   carpet_translations:
-
     category:
       AMS: AMS
       crafting: 制造
@@ -219,6 +218,9 @@ carpetamsaddition:
       fakePlayerNoScoreboardCounter:
         name: 假人不计入计分板
         desc: 计分板将会屏蔽假人
+      noFamilyPlanning:
+        name: 没有计划生育
+        desc: 允许玩家一直喂食动物来繁殖它们
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -245,7 +247,7 @@ carpetamsaddition:
         name: 区块加载控制
         desc: 控制任意游戏模式下玩家对周围区块的加载
         extra:
-          '0': 'Command:'
+          '0': '指令:'
           '1': '/playerChunkLoading true/false'
       noteBlockChunkLoader:
         name: 音符盒区块加载

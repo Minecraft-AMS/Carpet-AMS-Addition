@@ -253,6 +253,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean fakePlayerNoScoreboardCounter = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean noFamilyPlanning = false;
+
     /*
      * 合成表规则
      */
