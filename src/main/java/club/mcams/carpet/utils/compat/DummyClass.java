@@ -22,13 +22,10 @@ package club.mcams.carpet.utils.compat;
 
 public class DummyClass {
     /*
-        Carpet AMS Addition v2.18.0 更新内容
-        1、新增fancyFakePlayerName与fakePlayerNoScoreboardCounter规则
-        2、opPlayerNoCheat规则重命名为preventAdministratorCheat且包含Carpet TIS Addition所禁用的指令，不再作为Carpet TIS Addition的拓展
-        3、amsUpdateSuppressionCrashFix规则不再默认在customBlockUpdateSuppression开启时强制开启，但依然可以通过/amsUpdateSuppressionCrashFixForceMode true/false命令来控制是否强制开启
-        4、commandChunkLoading规则重命名为playerChunkLoadController规则，且指令更改为/playerChunkLoading true/false
-        5、anvilInteractionDisabled规则的命令更改为/anvilInteractionDisabled true/false
-        6、MixinExtras v0.3.1 -> v0.3.2
-        7、一堆代码上的调整与优化以及规则描述的更改（偷个懒不写了 :<）
+        Carpet AMS Addition v2.19.0 更新内容
+        修复了开启 `更新抑制防崩溃（amsUpdateSuppressionCrashFix）` 时玩家使用正常手段造成更新抑制不会发出消息的bug
+        修复了一处翻译错误
+        修复了 `Minecraft >= 1.19.4` 时无法使用Carpet AMS Addition所添加的命令的bug
+        新增了 `没有计划生育（noFamilyPlanning）` 规则
      */
 }
