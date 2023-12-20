@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(PlayerCommand.class)
-public abstract class EntityPlayerMPFakeMixin {
+public abstract class CarpetMod_PlayerCommandMixin {
     @WrapOperation(method = "spawn",
             at = @At(
                     value = "INVOKE",
