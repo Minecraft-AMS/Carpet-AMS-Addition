@@ -190,8 +190,7 @@ public class AMSTranslations {
         return newText;
     }
 
-    @SuppressWarnings("all")
-    private static BaseText translateHoverText(BaseText text, String lang) {
+    private static void translateHoverText(BaseText text, String lang) {
         HoverEvent hoverEvent = ((StyleAccessor) text.getStyle()).getHoverEventField();
         if (hoverEvent != null) {
             Object hoverText = hoverEvent.getValue(hoverEvent.getAction());
@@ -199,16 +198,13 @@ public class AMSTranslations {
                 ((BaseText) hoverText).setStyle(((BaseText) hoverText).getStyle().withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, translate((BaseText) hoverText, lang, false))));
             }
         }
-        return text;
     }
 
-    @SuppressWarnings("all")
-    private static BaseText translateSiblingTexts(BaseText text, String lang) {
+    private static void translateSiblingTexts(BaseText text, String lang) {
         List<Text> siblings = text.getSiblings();
         siblings.replaceAll(text1 -> {
             translate((BaseText) text1, lang, false);
             return text1;
         });
-        return text;
     }
 }

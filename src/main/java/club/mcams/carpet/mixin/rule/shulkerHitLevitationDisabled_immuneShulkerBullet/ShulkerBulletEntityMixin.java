@@ -39,7 +39,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-
 @Mixin(ShulkerBulletEntity.class)
 public abstract class ShulkerBulletEntityMixin extends Entity {
     public ShulkerBulletEntityMixin(EntityType<?> type, World world) {
@@ -51,10 +50,11 @@ public abstract class ShulkerBulletEntityMixin extends Entity {
             at = @At(
                     value = "INVOKE",
                     //#if MC<11700
-                    //$$ target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z")
+                    //$$ target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"
                     //#else
-                    target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z")
+                    target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"
                     //#endif
+            )
     )
     //#if MC<11700
     //$$ private boolean onEntityHit1(LivingEntity instance, StatusEffectInstance effect, Operation<Boolean> original) {

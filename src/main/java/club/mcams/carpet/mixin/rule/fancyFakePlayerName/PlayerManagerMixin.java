@@ -52,7 +52,7 @@ public abstract class PlayerManagerMixin {
     //#else
     private void onPlayerConnects(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
     //#endif
-        if (AmsServerSettings.fancyFakePlayerName&& player instanceof EntityPlayerMPFake && !((EntityPlayerMPFake) player).isAShadow) {
+        if (AmsServerSettings.fancyFakePlayerName && player instanceof EntityPlayerMPFake && !((EntityPlayerMPFake) player).isAShadow) {
             FancyNameHelper.addBotTeamNamePrefix(player);
         }
     }
