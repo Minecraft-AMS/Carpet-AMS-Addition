@@ -27,8 +27,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Entity.class)
-public interface EntityAccessorMixin
-{
+public interface EntityAccessorMixin {
     @Accessor("world")
     World accessorGetWorld();
 

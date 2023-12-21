@@ -70,8 +70,7 @@ public class Messenger {
         return (BaseText) text.shallowCopy();
     }
 
-    private static void __tell(ServerCommandSource source, BaseText text, boolean broadcastToOps)
-    {
+    private static void __tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
         //#if MC>=12000
         //$$ source.sendFeedback(() -> text, broadcastToOps);
         //#else
