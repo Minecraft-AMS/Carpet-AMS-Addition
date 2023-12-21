@@ -16,7 +16,7 @@
 
   
 
-- Due to poor English proficiency, all English translations are currently provided by [Chat-GPT](https://openai.com/blog/chatgpt)（(except for the very first English document written by [nirvanaxiao6](https://github.com/nirvanaxiao6) a long time ago）
+- Due to poor English proficiency, all English translations are currently provided by [Chat-GPT](https://openai.com/blog/chatgpt)（except for the very first English document written by [nirvanaxiao6](https://github.com/nirvanaxiao6) a long time ago）
 
 
 

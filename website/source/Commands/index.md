@@ -23,4 +23,4 @@
 
 `/amsUpdateSuppressionCrashFixForceMode true/false`
 
-控制是否在开启 `自定义方块更新抑制器（customBlockUpdateSuppressor）` 规则开启时时强制开启。
+控制是否在开启 `自定义方块更新抑制器（customBlockUpdateSuppressor）` 规则开启时是否强制开启。
