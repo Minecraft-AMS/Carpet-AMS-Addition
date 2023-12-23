@@ -27,8 +27,8 @@ import static carpet.settings.RuleCategory.*;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
 import club.mcams.carpet.validators.rule.enhancedWorldEater.BlastResistanceValidator;
-import club.mcams.carpet.validators.rule.maxBlockInteractionDistance.MaxBlockInteractionDistanceValidator;
-import club.mcams.carpet.validators.rule.maxClientBlockReachDistance.MaxClientBlockReachDistanceValidator;
+import club.mcams.carpet.validators.rule.maxPlayerInteractionDistance.MaxInteractionDistanceValidator;
+import club.mcams.carpet.validators.rule.maxClientInteractionReachDistance.MaxClientInteractionReachDistanceValidator;
 
 public class AmsServerSettings {
 
@@ -197,18 +197,18 @@ public class AmsServerSettings {
     @Rule(
             options = {"-1"},
             categories = {AMS, FEATURE, SURVIVAL},
-            validators = MaxBlockInteractionDistanceValidator.class,
+            validators = MaxInteractionDistanceValidator.class,
             strict = false
     )
-    public static double maxBlockInteractionDistance = -1.0D;
+    public static double maxPlayerInteractionDistance = -1.0D;
 
     @Rule(
             options = {"-1"},
             categories = {AMS, FEATURE, SURVIVAL},
-            validators = MaxClientBlockReachDistanceValidator.class,
+            validators = MaxClientInteractionReachDistanceValidator.class,
             strict = false
     )
-    public static double maxClientBlockReachDistance = -1.0D;
+    public static double maxClientInteractionReachDistance = -1.0D;
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean mineBedrock = false;
@@ -255,6 +255,12 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean noFamilyPlanning = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean hopperSuctionDisabled = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean noEnchantedGoldenAppleEating = false;
 
     /*
      * 合成表规则

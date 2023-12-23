@@ -158,14 +158,14 @@ carpetamsaddition:
           '2': '2 - 输入指令：/carpet setDefault largeShulkerBox true 开启规则'
           '3': '3 - 重启服务器/单人世界'
           '4': '4 - 关闭该规则同理'
-      maxBlockInteractionDistance:
-        name: 最大方块交互距离
-        desc: 更改服务器允许的最大方块交互距离，设置为“-1”禁用该规则
+      maxPlayerInteractionDistance:
+        name: 最大玩家交互距离
+        desc: 更改服务器允许的最大交互距离，设置为“-1”禁用该规则
         extra:
           '0': '允许设定的范围：0 - 512'
-      maxClientBlockReachDistance:
-        name: 客户端最大方块放置距离
-        desc: 更改客户端允许的最大方块放置距离，设置为“-1”禁用该规则
+      maxClientInteractionReachDistance:
+        name: 客户端最大交互距离
+        desc: 更改客户端允许的最大交互距离，设置为“-1”禁用该规则
         extra:
           '0': '允许设定的范围：0 - 512'
           '1': '需要关闭Tweakeroo的tweakBlockReachOverride功能'
@@ -221,6 +221,12 @@ carpetamsaddition:
       noFamilyPlanning:
         name: 没有计划生育
         desc: 允许玩家一直喂食动物来繁殖它们
+      hopperSuctionDisabled:
+        name: 禁止漏斗吸入
+        desc: 漏斗将不会吸入物品
+      noEnchantedGoldenAppleEating:
+        name: 不准吃附魔金苹果
+        desc: 防止玩家意外吃掉附魔金苹果
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
