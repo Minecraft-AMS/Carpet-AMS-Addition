@@ -22,10 +22,15 @@ package club.mcams.carpet.utils.compat;
 
 public class DummyClass {
     /*
-        Carpet AMS Addition v2.19.0 更新内容
-        修复了开启 `更新抑制防崩溃（amsUpdateSuppressionCrashFix）` 时玩家使用正常手段造成更新抑制不会发出消息的bug
-        修复了一处翻译错误
-        修复了 `Minecraft >= 1.19.4` 时无法使用Carpet AMS Addition所添加的命令的bug
-        新增了 `没有计划生育（noFamilyPlanning）` 规则
+        Carpet AMS Addition v2.20.0 更新内容
+
+        新增规则 `禁止漏斗吸入（hopperSuctionDisabled）` 开启后，漏斗将不会吸入物品
+
+        新增规则 `不准吃附魔金苹果（noEnchantedGoldenAppleEating）` 开启后，玩家无法食用附魔金苹果
+
+        重命名规则 `最大方块交互距离（maxBlockInteractionDistance）` -> `最大玩家交互距离（maxPlayerInteractionDistance）`
+        且该规则现在会影响到玩家与生物的交互距离。
+
+        重命名规则 `客户端最大方块放置距离（maxClientBlockReachDistance）` -> `客户端最大交互距离（maxClientInteractionReachDistance）`
      */
 }
