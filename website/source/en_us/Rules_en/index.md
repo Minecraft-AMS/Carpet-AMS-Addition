@@ -925,10 +925,10 @@ The current rule is not yet perfect. Please follow the steps below when using th
 
 - Categroies: `AMS` , `FEATURE`, `EXPERIMENTAL`
 
-## maxBlockInteractionDistance
+## maxPlayerInteractionDistance
 
 
-Change the maximum block interaction distance allowed by the server, set to `-1` to disable this rule
+Change the maximum interaction distance allowed by the server, set to `-1` to disable this rule
 
 - Type: `double`
 
@@ -944,9 +944,9 @@ Change the maximum block interaction distance allowed by the server, set to `-1`
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
-## maxClientBlockReachDistance
+## maxClientInteractionReachDistance
 
-Change the maximum block placement distance allowed by the client, set to `-1` to disable this rule.
+Change the maximum interaction distance allowed by the client, set to `-1` to disable this rule.
 
 
 Need to disable the tweakBlockReachOverride feature in Tweakeroo.
@@ -1166,6 +1166,42 @@ The scoreboard will hide the fake player.
 ## noFamilyPlanning
 
 Allow players to continuously feed animals to breed them.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## hopperSuctionDisabled
+
+When enabled，The hopper will not suck in items.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## noEnchantedGoldenAppleEating
+
+Prevent players from accidentally eating Enchanted Golden Apples.
 
 - Type: `boolean`
 

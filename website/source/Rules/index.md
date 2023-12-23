@@ -920,9 +920,9 @@
 
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
-## 最大方块交互距离（maxBlockInteractionDistance）
+## 最大玩家交互距离（maxPlayerInteractionDistance）
 
-更改服务器允许的最大方块交互距离，设置为 `-1` 禁用该规则。
+更改服务器允许的最大交互距离，设置为 `-1` 禁用该规则。
 
 - 类型: `double`
 
@@ -938,9 +938,9 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 客户端最大方块放置距离（maxClientBlockReachDistance）
+## 客户端最大方块放置距离（maxClientInteractionReachDistance）
 
-更改客户端允许的最大方块放置距离，设置为 `-1` 禁用该规则。
+更改客户端允许的最大交互距离，设置为 `-1` 禁用该规则。
 
 需要关闭Tweakeroo的tweakBlockReachOverride功能。
 
@@ -1155,6 +1155,42 @@
 ## 没有计划生育（noFamilyPlanning）
 
 允许玩家一直喂食动物来繁殖它们。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 禁止漏斗吸入（hopperSuctionDisabled）
+
+开启后，漏斗将不会吸入物品。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 不准吃附魔金苹果（noEnchantedGoldenAppleEating）
+
+防止玩家意外吃掉附魔金苹果。
 
 - 类型: `boolean`
 
