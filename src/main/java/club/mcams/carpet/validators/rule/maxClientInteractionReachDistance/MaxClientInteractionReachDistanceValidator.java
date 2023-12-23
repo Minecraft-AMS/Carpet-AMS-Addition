@@ -18,14 +18,14 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.validators.rule.maxBlockInteractionDistance;
+package club.mcams.carpet.validators.rule.maxClientInteractionReachDistance;
 
 import carpet.settings.ParsedRule;
 import carpet.settings.Validator;
 
 import net.minecraft.server.command.ServerCommandSource;
 
-public class MaxBlockInteractionDistanceValidator extends Validator<Double> {
+public class MaxClientInteractionReachDistanceValidator extends Validator<Double> {
     @Override
     public Double validate(ServerCommandSource serverCommandSource, ParsedRule<Double> parsedRule, Double aDouble, String s) {
         if ((aDouble >= 0.0D && aDouble <= 512.0D) || aDouble == -1.0D) {
@@ -34,7 +34,6 @@ public class MaxBlockInteractionDistanceValidator extends Validator<Double> {
             return null;
         }
     }
-
     @Override
     public String description() {
         return "The value must be 0 - 512 or -1";

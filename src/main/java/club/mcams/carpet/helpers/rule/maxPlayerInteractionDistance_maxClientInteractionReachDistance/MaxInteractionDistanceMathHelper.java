@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.maxBlockInteractionDistance;
+package club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -26,6 +26,6 @@ import net.minecraft.util.math.MathHelper;
 
 public class MaxInteractionDistanceMathHelper {
     public static double getMaxSquaredReachDistance() {
-       return MathHelper.square((float) AmsServerSettings.maxBlockInteractionDistance);
+       return MathHelper.square((float) AmsServerSettings.maxPlayerInteractionDistance);
     }
 }

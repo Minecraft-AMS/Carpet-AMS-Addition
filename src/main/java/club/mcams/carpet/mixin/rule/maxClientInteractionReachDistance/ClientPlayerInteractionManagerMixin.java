@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.maxClientBlockReachDistance;
+package club.mcams.carpet.mixin.rule.maxClientInteractionReachDistance;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -39,9 +39,9 @@ public abstract class ClientPlayerInteractionManagerMixin {
     private MinecraftClient client;
 
     @ModifyReturnValue(method = "getReachDistance()F", at = @At("RETURN"))
-    private float getActualReachDistance(final float original) {
-        if (AmsServerSettings.maxClientBlockReachDistance != -1.0D && this.client.player != null) {
-            return (float) AmsServerSettings.maxClientBlockReachDistance;
+    private float getReachDistance(final float original) {
+        if (AmsServerSettings.maxClientInteractionReachDistance != -1.0D && this.client.player != null) {
+            return (float) AmsServerSettings.maxClientInteractionReachDistance;
         } else {
             return original;
         }
