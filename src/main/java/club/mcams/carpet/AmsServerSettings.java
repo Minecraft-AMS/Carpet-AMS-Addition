@@ -83,14 +83,6 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean netherWaterPlacement = false;
 
-    //#if MC>=11700
-    @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean softDeepslate = false;
-    //#endif
-
-    @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean softObsidian = false;
-
     @Rule(categories = {AMS, FEATURE, TNT})
     public static boolean blowUpEverything = false;
 
@@ -227,11 +219,11 @@ public class AmsServerSettings {
     public static boolean easyMaxLevelBeacon = false;
 
     @Rule(
-            options = {"VANILLA", "minecraft:bedrock", "minecraft:bedrock,minecraft:obsidian"},
+            options = {"VANILLA", "minecraft:bedrock/2.0", "minecraft:bedrock,minecraft:obsidian/2.0"},
             categories = {AMS, FEATURE, TNT},
             strict = false
     )
-    public static String customBlowUpBlock = "VANILLA";
+    public static String customBlockBlastResistance = "VANILLA";
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean regeneratingDragonEgg = false;
@@ -261,6 +253,22 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean noEnchantedGoldenAppleEating = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean useItemCooldownDisabled = false;
+
+    @Rule(
+            options = {"0", "1", "2", "3"},
+            categories = {AMS, FEATURE, SURVIVAL}
+    )
+    public static int flippinCactusSoundEffect = 0;
+
+    @Rule(
+            options = {"VANILLA", "minecraft:bedrock/2.0", "minecraft:bedrock,minecraft:obsidian/2.0"},
+            categories = {AMS, FEATURE, SURVIVAL},
+            strict = false
+    )
+    public static String customBlockHardness = "VANILLA";
 
     /*
      * 合成表规则
@@ -305,6 +313,16 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, CRAFTING, SURVIVAL})
     public static boolean betterCraftablePolishedBlackStoneButton = false;
     //#endif
+
+    //#if MC>=11700
+    @CraftingRule(recipes = {"light.json"})
+    @Rule(categories = {AMS, CRAFTING, SURVIVAL})
+    public static boolean craftableLight = false;
+    //#endif
+
+    @CraftingRule(recipes = {"barrier.json"})
+    @Rule(categories = {AMS, CRAFTING, SURVIVAL})
+    public static boolean craftableBarrier = false;
 
     public enum blueSkullProbability {
         VANILLA,

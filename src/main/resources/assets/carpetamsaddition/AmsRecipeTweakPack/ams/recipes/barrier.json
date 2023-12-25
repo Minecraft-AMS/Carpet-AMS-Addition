@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":[
+    "   ",
+    "OGC",
+    "   "
+  ],
+  "key":{
+    "O":{
+      "item":"minecraft:obsidian"
+    },
+    "G":{
+      "item":"minecraft:glass"
+    },
+    "C":{
+      "item":"minecraft:crying_obsidian"
+    }
+  },
+  "result":{
+    "item":"minecraft:barrier",
+    "count":2
+  }
+}

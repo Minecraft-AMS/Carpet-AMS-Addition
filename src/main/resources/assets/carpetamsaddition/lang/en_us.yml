@@ -143,13 +143,13 @@ carpetamsaddition:
           '3': '/carpet customMovableBlock minecraft:BlockName1,minecraft:BlockName2'
       easyMaxLevelBeacon:
         desc: Activate full-level beacon with just one base block
-      customBlowUpBlock:
-        desc: Set the explosion resistance of any block to be the same as stone (this rule will not take effect when the enhancedWorldEater rule is enabled)
+      customBlockBlastResistance:
+        desc: Customizing blast resistance for any block (this rule will not take effect when the enhancedWorldEater rule is enabled)
         extra:
           '0': 'Command format:'
-          '1': '/carpet customBlowUpBlock minecraft:BlockName'
+          '1': '/carpet customBlowUpBlock minecraft:BlockName/BlastResistance'
           '2': 'You can also set multiple blocks simultaneously by separating them with commas:'
-          '3': '/carpet customBlowUpBlock minecraft:BlockName1,minecraft:BlockName2'
+          '3': '/carpet customBlowUpBlock minecraft:BlockName1/BlastResistance,minecraft:BlockName2/BlastResistance'
       regeneratingDragonEgg:
         desc: Every time a player defeats the Ender Dragon, a dragon egg will be generated
         extra:
@@ -175,6 +175,17 @@ carpetamsaddition:
         desc: The hopper will not suck in items
       noEnchantedGoldenAppleEating:
         desc: Prevent players from accidentally eating Enchanted Golden Apples
+      useItemCooldownDisabled:
+        desc: Remove cooldown time for using items
+      flippinCactusSoundEffect:
+        desc: When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing three different sound options, Setting it to 0 disables the sound effects)
+      customBlockHardness:
+        desc: Customizing mining hardness for any block
+        extra:
+          '0': 'Command format:'
+          '1': '/carpet customBlowUpBlock minecraft:BlockName/Hardness'
+          '2': 'You can also set multiple blocks simultaneously by separating them with commas:'
+          '3': '/carpet customBlowUpBlock minecraft:BlockName1/Hardness,minecraft:BlockName2/Hardness'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -242,3 +253,7 @@ carpetamsaddition:
         desc: Better craftable dispenser
       betterCraftablePolishedBlackStoneButton:
         desc: Use deepslate to crafted polished_blackstone_button in minecraft
+      craftableLight:
+        desc: Add light block recipes in minecraft, when enabled, light blocks will have no mining hardness
+      craftableBarrier:
+        desc: Add barrier recipes in minecraft, when enabled, barrier blocks will have no mining hardness

@@ -186,14 +186,14 @@ carpetamsaddition:
       easyMaxLevelBeacon:
         name: 简易满级信标
         desc: 只需一个底座方块就能激活满级信标
-      customBlowUpBlock:
-        name: 自定义炸毁方块
-        desc: 自定义任何方块的爆炸抗性使其与石头相同（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）
+      customBlockBlastResistance:
+        name: 自定义方块爆炸抗性
+        desc: 自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）
         extra:
           '0': '命令格式：'
-          '1': '/carpet customBlowUpBlock minecraft:BlockName'
+          '1': '/carpet customBlowUpBlock minecraft:BlockName/BlastResistance'
           '2': '你也可以同时设置多个方块，使用 "," 隔开即可：'
-          '3': '/carpet customBlowUpBlock minecraft:BlockName1,minecraft:BlockName2'
+          '3': '/carpet customBlowUpBlock minecraft:BlockName1/BlastResistance,minecraft:BlockName2/BlastResistance'
       regeneratingDragonEgg:
         name: 再生成龙蛋
         desc: 玩家每次击败末影龙都会生成一个龙蛋
@@ -227,6 +227,20 @@ carpetamsaddition:
       noEnchantedGoldenAppleEating:
         name: 不准吃附魔金苹果
         desc: 防止玩家意外吃掉附魔金苹果
+      useItemCooldownDisabled:
+        name: 禁用物品使用冷却
+        desc: 让使用物品没有冷却时间
+      flippinCactusSoundEffect:
+        name: 仙人掌扳手音效
+        desc: 在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了三种不同音效，设置为0禁用音效）
+      customBlockHardness:
+        name: 自定义方块硬度
+        desc: 自定义任何方块的挖掘硬度
+        extra:
+          '0': '命令格式：'
+          '1': '/carpet customBlockHardness minecraft:BlockName/Hardness'
+          '2': '你也可以同时设置多个方块，使用 "," 隔开即可：'
+          '3': '/carpet customBlockHardness minecraft:BlockName1/Hardness,minecraft:BlockName2/Hardness'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -313,3 +327,9 @@ carpetamsaddition:
       betterCraftablePolishedBlackStoneButton:
         name: 更好的合成磨制黑石按钮
         desc: 使用深板岩来合成磨制黑石按钮
+      craftableLight:
+        name: 可合成光源方块
+        desc: 添加了光源方块的合成配方，启用时光源方块将不会有挖掘硬度
+      craftableBarrier:
+        name: 可合成屏障方块
+        desc: 添加了屏障方块的合成配方，启用时屏障方块将不会有挖掘硬度
