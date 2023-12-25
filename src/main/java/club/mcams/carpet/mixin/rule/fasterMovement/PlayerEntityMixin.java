@@ -22,6 +22,9 @@ package club.mcams.carpet.mixin.rule.fasterMovement;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 
@@ -33,27 +36,41 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin {
+public abstract class PlayerEntityMixin extends LivingEntity {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+        super(entityType, world);
+    }
+
+    @SuppressWarnings("EnhancedSwitchMigration")
     @Inject(method = "getMovementSpeed", at = @At("HEAD"), cancellable = true)
     private void getMovementSpeed(CallbackInfoReturnable<Float> cir) {
-        PlayerEntity player = (PlayerEntity)(Object)this;
-        World world = player.getEntityWorld();
-        if (
-            (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.END && world.getRegistryKey() == World.END) ||
-            (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.NETHER && world.getRegistryKey() == World.NETHER) ||
-            (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.OVERWORLD  && world.getRegistryKey() == World.OVERWORLD) ||
-            (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.ALL)
-        ) {
-            if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅰ")) {
-                cir.setReturnValue(0.2F);
-            } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅱ")) {
-                cir.setReturnValue(0.3F);
-            } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅲ")) {
-                cir.setReturnValue(0.4F);
-            } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅳ")) {
-                cir.setReturnValue(0.5F);
-            } else if (Objects.equals(AmsServerSettings.fasterMovement, "Ⅴ")) {
-                cir.setReturnValue(0.6F);
+        if (!Objects.equals(AmsServerSettings.fasterMovement, "VANILLA")) {
+            PlayerEntity player = (PlayerEntity)(Object)this;
+            World world = player.getEntityWorld();
+            if (
+                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.END && world.getRegistryKey() == World.END) ||
+                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.NETHER && world.getRegistryKey() == World.NETHER) ||
+                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.OVERWORLD  && world.getRegistryKey() == World.OVERWORLD) ||
+                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.ALL)
+            ) {
+                float speed = (float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
+                switch (AmsServerSettings.fasterMovement) {
+                    case "Ⅰ":
+                        speed = 0.2F;
+                        break;
+                    case "Ⅱ":
+                        speed = 0.3F;
+                        break;
+                    case "Ⅲ":
+                        speed = 0.4F;
+                        break;
+                    case "Ⅳ":
+                        speed = 0.5F;
+                        break;
+                    case "Ⅴ":
+                        speed = 0.6F;
+                }
+                cir.setReturnValue(speed);
             }
         }
     }

@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.customBlockUpdateSuppressor;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.RegexTools;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -34,8 +35,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.amsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode;
 
@@ -47,13 +46,7 @@ public abstract class AbstractBlockMixin {
             if (amsUpdateSuppressionCrashFixForceMode) {
                 AmsServerSettings.amsUpdateSuppressionCrashFix = true;
             }
-            String blockName = state.getBlock().toString();
-            String regex = "\\{(.*?)}";   //Block{minecraft:bedrock} -> minecraft:bedrock
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(blockName);
-            if (matcher.find()) {
-                blockName = matcher.group(1);
-            }
+            String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); //Block{minecraft:bedrock} -> minecraft:bedrock
             if (Objects.equals(AmsServerSettings.customBlockUpdateSuppressor, blockName)) {
                 //#if MC<11900
                 throw new StackOverflowError("[Carpet-AMS-Addition]: StackOverflowError");

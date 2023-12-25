@@ -25,9 +25,7 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.CommandPermissionLevelHelper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import net.minecraft.server.command.ServerCommandSource;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -50,8 +48,8 @@ public class anvilInteractionDisabledCommandRegistry {
                     anvilInteractionDisabled = mode;
                     Text message =
                             mode ?
-                            createColoredText("[ Anvil Interaction Disable ]") :
-                            createColoredText("[ Anvil Interaction Enable ]");
+                            LiteralTextUtil.createColoredText("[ Anvil Interaction Disable ]", 0xFFFFFF, true) :
+                            LiteralTextUtil.createColoredText("[ Anvil Interaction Enable ]", 0xFFFFFF, true);
                     Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
                     return 1;
                 })
@@ -63,9 +61,5 @@ public class anvilInteractionDisabledCommandRegistry {
         return AmsServerSettings.anvilInteractionDisabled ?
                 CommandPermissionLevelHelper.zero() :
                 CommandPermissionLevelHelper.Forbidden();
-    }
-
-    private static Text createColoredText(String text) {
-        return LiteralTextUtil.compatText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFFFFF)).withBold(true));
     }
 }

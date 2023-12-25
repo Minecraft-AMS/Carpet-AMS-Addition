@@ -20,9 +20,12 @@
 
 package club.mcams.carpet.commands.rule.playerChunkLoadController;
 
+import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.playerChunkLoadController.ChunkLoading;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.utils.Messenger;
+import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
@@ -47,11 +50,27 @@ public class playerChunkLoadControllerCommandRegistry {
     private static int setPlayerInteraction(ServerCommandSource source, String playerName, boolean b) {
         PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
         ChunkLoading.setPlayerInteraction(playerName, b, true);
-        return player == null ? 0 : 1;
+        if (player == null) {
+            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified");
+            return 0;
+        } else {
+            player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading " + b), 0xFF69B4, true), false);
+            return 1;
+        }
     }
 
     private static int listPlayerInteractions(ServerCommandSource source, String playerName) {
+        boolean playerInteractions = ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true);
         PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
-        return player == null ? 0 : 1;
+        if (player == null) {
+            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified");
+            return 0;
+        }
+        if (playerInteractions) {
+            player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading: true"), 0xFF69B4, true), false);
+        } else {
+            player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading: false"), 0xFF69B4, true), false);
+        }
+        return 1;
     }
 }

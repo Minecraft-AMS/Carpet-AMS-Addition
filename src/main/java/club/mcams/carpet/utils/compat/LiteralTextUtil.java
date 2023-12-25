@@ -34,4 +34,8 @@ public class LiteralTextUtil {
     //$$     return Text.literal(text);
     //$$ }
     //#endif
+
+    public static Text createColoredText(String text, int rgb, boolean isBold) {
+        return compatText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgb)).withBold(isBold));
+    }
 }

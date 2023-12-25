@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.customMovableBlock;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.RegexTools;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PistonBlock;
@@ -37,8 +38,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Mixin(PistonBlock.class)
 public abstract class PistonBlockMixin {
@@ -50,13 +49,7 @@ public abstract class PistonBlockMixin {
         //#endif
         if (!Objects.equals(AmsServerSettings.customMovableBlock, "VANILLA")) {
             Set<String> moreCustomMovableBlock = new HashSet<>(Arrays.asList(AmsServerSettings.customMovableBlock.split(",")));
-            String blockName = state.getBlock().toString();
-            String regex = "\\{(.*?)}";   //Block{minecraft:bedrock} -> minecraft:bedrock
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(blockName);
-            if (matcher.find()) {
-                blockName = matcher.group(1);
-            }
+            String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); //Block{minecraft:bedrock} -> minecraft:bedrock
             if (moreCustomMovableBlock.contains(blockName)) {
                 //#if MC<11700
                 //$$ if (direction == Direction.DOWN && blockPos.getY() == 0) {
@@ -68,7 +61,7 @@ public abstract class PistonBlockMixin {
                     //$$ } else if (direction == Direction.UP && blockPos.getY() == world.getHeight() - 1) {
                     //#else
                 } else if (direction == Direction.UP && pos.getY() == world.getTopY() - 1) {
-                    //#endif
+                //#endif
                     cir.setReturnValue(false);
                 } else {
                     cir.setReturnValue(true);

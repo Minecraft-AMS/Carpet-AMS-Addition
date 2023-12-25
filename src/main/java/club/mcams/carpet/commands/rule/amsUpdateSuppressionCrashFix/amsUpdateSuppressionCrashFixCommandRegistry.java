@@ -23,9 +23,7 @@ package club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix;
 import club.mcams.carpet.utils.CommandPermissionLevelHelper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
 import net.minecraft.server.command.ServerCommandSource;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -48,16 +46,12 @@ public class amsUpdateSuppressionCrashFixCommandRegistry {
                     amsUpdateSuppressionCrashFixForceMode = mode;
                     Text message =
                             mode ?
-                            createColoredText("[ force mode ]") :
-                            createColoredText("[ lazy mode ]");
+                            LiteralTextUtil.createColoredText("[ force mode ]", 0xFFFFFF, true) :
+                            LiteralTextUtil.createColoredText("[ lazy mode ]", 0xFFFFFF, true);
                     Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
                     return 1;
                 })
             )
         );
-    }
-
-    private static Text createColoredText(String text) {
-        return LiteralTextUtil.compatText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(0xFFFFFF)).withBold(true));
     }
 }
