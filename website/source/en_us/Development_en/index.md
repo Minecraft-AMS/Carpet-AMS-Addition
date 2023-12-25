@@ -8,7 +8,7 @@
 
   
 
-- It uses[preprocessor](https://github.com/ReplayMod/preprocessor)((forked version by [Fallen_Breath](https://github.com/Fallen-Breath))to maintain all Minecraft versions on a single branch
+- It uses [preprocessor](https://github.com/ReplayMod/preprocessor)(forked version by [Fallen_Breath](https://github.com/Fallen-Breath)) to maintain all Minecraft versions on a single branch
 
   
 

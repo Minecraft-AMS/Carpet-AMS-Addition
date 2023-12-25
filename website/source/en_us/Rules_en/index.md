@@ -252,42 +252,6 @@ Player can place water source in the nether by using water bucket.
 
 - Categroies: `AMS`, `FEATURE`
 
-## softDeepslate
-
-Hardness of deepslate will be set to 1.5, which is equal to the hardness of stone. Other words, player with Haste II using an Efficiency V diamond pickaxe can break deepslate instantly.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
-
-## softObsidian
-
-Hardness of obsidian will be set to 3, which is equal to the hardness of original deepslate.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
-
 ## fakePeace
 
 No mob will spawn without change difficulty.
@@ -1043,15 +1007,15 @@ When enabled, Activate full-level beacon with just one base block.
 
 - Categroies: `AMS`, `FEATURE`
 
-## customBlowUpBlock
+## customBlockBlastResistance
 
-Set the explosion resistance of any block to be the same as stone (this rule will not take effect when the enhancedWorldEater rule is enabled).
+Customizing blast resistance for any block (this rule will not take effect when the enhancedWorldEater rule is enabled).
 Command format:
-/carpet customBlowUpBlockminecraft:BlockName
+/carpet customBlockBlastResistance minecraft:BlockName/BlastResistance
 You can also set multiple blocks simultaneously by separating them with commas:
-/carpet customBlowUpBlockminecraft:BlockName1,minecraft:BlockName2
+/carpet customBlockBlastResistance minecraft:BlockName1/BlastResistance,minecraft:BlockName2/BlastResistance
 
-- Type: `String`
+- Type: `String`, `float`
 
 
 
@@ -1059,7 +1023,7 @@ You can also set multiple blocks simultaneously by separating them with commas:
 
 
 
-- Suggested options: `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
+- Suggested options: `minecraft:bedrock/2.0`, `minecraft:bedrock,minecraft:obsidian/2.0`
 
 
 
@@ -1217,6 +1181,65 @@ Prevent players from accidentally eating Enchanted Golden Apples.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## useItemCooldownDisabled
+
+Remove cooldown time for using items.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## flippinCactusSoundEffect
+
+When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing three different sound options, Setting it to 0 disables the sound effects).
+
+- Type: `int`
+
+
+
+- Default: `0`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## customBlockHardness
+
+Customizing mining hardness for any block.
+
+Command format:
+/carpet customBlowUpBlock minecraft:BlockName/Hardness
+You can also set multiple blocks simultaneously by separating them with commas:
+/carpet customBlowUpBlock minecraft:BlockName1/Hardness,minecraft:BlockName2/Hardness
+
+- Type: `String`, `float`
+
+
+
+- Default: `VANILLA`
+
+
+
+- Suggested options: `minecraft:bedrock/2.0`, `minecraft:bedrock,minecraft:obsidian/2.0`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
@@ -1330,6 +1353,42 @@ Dispenser can be crafted more flexible. It can be crafted using bow and dropper,
 ## betterCraftablePolishedBlackStoneButton
 
 Use deepslate to crafted polished_blackstone_button in minecraft.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## craftableLight
+
+Add light block recipes in minecraft, when enabled, light blocks will have no mining hardness.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## craftableBarrier
+
+Add barrier recipes in minecraft, when enabled, barrier blocks will have no mining hardness.
 
 - Type: `boolean`
 

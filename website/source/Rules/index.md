@@ -237,44 +237,6 @@
 - 分类: `AMS`, `FEATURE`
 
 
-## 易碎深板岩（softDeepslate）
-
-开启后，深板岩的挖掘硬度将与石头相同（均可在急迫二效果下用效率5钻石镐进行瞬间挖掘）。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`
-
-
-## 易碎黑曜石（softObsidian）
-
-开启后，黑曜石的挖掘硬度将与深板岩相同。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`
-
-
 ## 伪和平（fakePeace）
 
 开启后，所有生物不会生成，但不影响困难难度（类似伪和平）。
@@ -1034,16 +996,16 @@
 
 - 分类: `AMS`, `FEATURE`
 
-## 自定义炸毁方块（customBlowUpBlock）
+## 自定义方块爆炸抗性（customBlockBlastResistance）
 
-自定义任何方块的爆炸抗性使其与石头相同（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）。
+自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）。
 
 命令格式：
-/carpet customBlowUpBlockminecraft:BlockName
+/carpet customBlockBlastResistanceminecraft:BlockName/BlastResistance
 你也可以同时设置多个方块使用 `,` 隔开即可：
-/carpet customBlowUpBlockinecraft:BlockName1,minecraft:BlockName2
+/carpet customBlockBlastResistanceminecraft:BlockName1/BlastResistance,minecraft:BlockName2/BlastResistance
 
-- 类型: `String`
+- 类型: `String`, `float`
 
 
 
@@ -1051,7 +1013,7 @@
 
 
 
-- 参考选项: `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
+- 参考选项: `minecraft:bedrock/2.0`, `minecraft:bedrock,minecraft:obsidian/2.0`
 
 
 
@@ -1206,6 +1168,65 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 禁用物品使用冷却（useItemCooldownDisabled）
+
+让使用物品没有冷却时间。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 仙人掌扳手音效（flippinCactusSoundEffect）
+
+在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了三种不同音效，设置为0禁用音效）。
+
+- 类型: `int`
+
+
+
+- 默认值: `0`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 自定义方块硬度（customBlockHardness）
+
+自定义任何方块的挖掘硬度。
+
+命令格式：
+/carpet customBlockHardness minecraft:BlockName/Hardness
+你也可以同时设置多个方块使用 `,` 隔开即可：
+/carpet customBlockHardness minecraft:BlockName1/Hardness,minecraft:BlockName2/Hardness
+
+- 类型: `String`, `float`
+
+
+
+- 默认值: `VANILLA`
+
+
+
+- 参考选项: `minecraft:bedrock/2.0`, `minecraft:bedrock,minecraft:obsidian/2.0`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
@@ -1321,6 +1342,42 @@
 ## 更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）
 
 使用深板岩来合成磨制黑石按钮。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## 可合成光源方块（craftableLight）
+
+添加了光源方块的合成配方，启用时光源方块将不会有挖掘硬度。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## 可合成屏障方块（craftableBarrier）
+
+添加了屏障方块的合成配方，启用时屏障方块将不会有挖掘硬度。
 
 - 类型: `boolean`
 
