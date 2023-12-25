@@ -219,7 +219,7 @@ public class AmsServerSettings {
     public static boolean easyMaxLevelBeacon = false;
 
     @Rule(
-            options = {"VANILLA", "minecraft:bedrock/2.0", "minecraft:bedrock,minecraft:obsidian/2.0"},
+            options = {"VANILLA", "minecraft:bedrock/2.0", "minecraft:bedrock/2.0,minecraft:obsidian/2.0"},
             categories = {AMS, FEATURE, TNT},
             strict = false
     )
@@ -264,7 +264,7 @@ public class AmsServerSettings {
     public static int flippinCactusSoundEffect = 0;
 
     @Rule(
-            options = {"VANILLA", "minecraft:bedrock/2.0", "minecraft:bedrock,minecraft:obsidian/2.0"},
+            options = {"VANILLA", "minecraft:bedrock/2.0", "minecraft:bedrock/2.0,minecraft:obsidian/2.0"},
             categories = {AMS, FEATURE, SURVIVAL},
             strict = false
     )
