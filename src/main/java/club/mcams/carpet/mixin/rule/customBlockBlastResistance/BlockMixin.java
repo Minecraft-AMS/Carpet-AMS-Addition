@@ -18,13 +18,13 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.customBlowUpBlock;
+package club.mcams.carpet.mixin.rule.customBlockBlastResistance;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.RegexTools;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.state.StateManager;
 
 import org.spongepowered.asm.mixin.Final;
@@ -34,12 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {
@@ -50,17 +45,11 @@ public abstract class BlockMixin {
 
     @Inject(method = "getBlastResistance", at = @At("HEAD"), cancellable = true)
     private void getBlastResistance(CallbackInfoReturnable<Float> cir) {
-        if (!Objects.equals(AmsServerSettings.customBlowUpBlock, "VANILLA") && AmsServerSettings.enhancedWorldEater == -1.0F) {
-            Set<String> moreCustomBlowUpBlock = new HashSet<>(Arrays.asList(AmsServerSettings.customBlowUpBlock.split(",")));
-            String blockName = stateManager.getDefaultState().getBlock().toString();
-            String regex = "\\{(.*?)}";   //Block{minecraft:bedrock} -> minecraft:bedrock
-            Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(blockName);
-            if (matcher.find()) {
-                blockName = matcher.group(1);
-            }
-            if (moreCustomBlowUpBlock.contains(blockName)) {
-                cir.setReturnValue(Blocks.STONE.getBlastResistance());
+        if (!Objects.equals(AmsServerSettings.customBlockBlastResistance, "VANILLA") && AmsServerSettings.enhancedWorldEater == -1.0F) {
+            String blockName = RegexTools.getBlockRegisterName(stateManager.getDefaultState().getBlock().toString());
+            Map<String, Float> moreCustomBlowUpBlock = RegexTools.parseFloatValues(AmsServerSettings.customBlockBlastResistance);
+            if (moreCustomBlowUpBlock.containsKey(blockName)) {
+                cir.setReturnValue(moreCustomBlowUpBlock.get(blockName));
             }
         }
     }
