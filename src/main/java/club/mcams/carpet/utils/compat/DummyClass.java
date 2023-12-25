@@ -22,15 +22,48 @@ package club.mcams.carpet.utils.compat;
 
 public class DummyClass {
     /*
-        Carpet AMS Addition v2.20.0 更新内容
+        Carpet AMS Addition v2.21.0 更新内容
 
-        新增规则 `禁止漏斗吸入（hopperSuctionDisabled）` 开启后，漏斗将不会吸入物品
+        # 新增规则
 
-        新增规则 `不准吃附魔金苹果（noEnchantedGoldenAppleEating）` 开启后，玩家无法食用附魔金苹果
+        - `禁用物品使用冷却（useItemCooldownDisabled）` 开启后，使用物品没有冷却时间
 
-        重命名规则 `最大方块交互距离（maxBlockInteractionDistance）` -> `最大玩家交互距离（maxPlayerInteractionDistance）`
-        且该规则现在会影响到玩家与生物的交互距离。
+        - `仙人掌扳手音效（flippinCactusSoundEffect）` 在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了三种不同音效，设置为0禁用音效）
 
-        重命名规则 `客户端最大方块放置距离（maxClientBlockReachDistance）` -> `客户端最大交互距离（maxClientInteractionReachDistance）`
+        - `可合成光源方块（craftableLight）` 添加了光源方块的合成配方，启用时光源方块将不会有挖掘硬度
+
+        - `可合成屏障方块（craftableBarrier）` 添加了屏障方块的合成配方，启用时屏障方块将不会有挖掘硬度
+
+        - `自定义方块爆炸抗性（customBlockBlastResistance）` 可以同时自定义是什么方块这个方块的爆炸抗性是多少，详情见规则文档
+
+        - `自定义方块硬度（customBlockHardness）` 可以同时自定义是什么方块这个方块的挖掘硬度是多少，详情见规则文档
+
+        # 更改
+
+        - 重命名：`自定义炸毁方块（customBlowUpBlock）` -> `自定义方块爆炸抗性（customBlockBlastResistance）`
+
+        - 移除了 `易碎黑曜石（softObsidian）` 与 `易碎深板岩（softDeepslate）` 规则，取而代之的是 `自定义方块硬度（customBlockHardness）` 规则
+
+        ---
+
+        # New Rules
+
+        - `useItemCooldownDisabled` When enabled, there is no cooldown time for using items
+
+        - `flippinCactusSoundEffect` When enabling the `flippinCactus` rule in the Carpet mod, using the cactus wrench will emit a sound (providing three different sound effects, set to 0 to disable sound)
+
+        - `craftableLight` Add light block recipes in minecraft, when enabled, light blocks will have no mining hardness
+
+        - `craftableBarrier` Add barrier recipes in minecraft, when enabled, barrier blocks will have no mining hardness
+
+        - `customBlockBlastResistance` You have the option to customize the block and its explosion resistance simultaneously. For more detailed information, please refer to the rule document
+
+        - `customBlockHardness` You have the option to customize the block and its mining hardness simultaneously. For more detailed information, please refer to the rule document
+
+        # Changes
+
+        - Rename: `customBlowUpBlock` -> `customBlockBlastResistance`
+
+        - The `softObsidian` and `softDeepslate` rules have been removed, and they have been replaced with the `customBlockHardness` rule
      */
 }
