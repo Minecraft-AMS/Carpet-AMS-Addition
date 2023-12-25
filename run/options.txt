@@ -22,7 +22,7 @@ mouseSensitivity:0.40316900610923767
 fov:0.0
 screenEffectScale:0.5
 fovEffectScale:1.0
-gamma:16.0
+gamma:1.0
 renderDistance:12
 entityDistanceScaling:1.0
 guiScale:4
@@ -32,9 +32,9 @@ difficulty:2
 graphicsMode:0
 ao:2
 biomeBlendRadius:4
-renderClouds:false
-resourcePacks:["vanilla"]
-incompatibleResourcePacks:["file/Faithful-红石显示-1024自用plus.zip","file/Faithful-红石显示-1024自用附加包.zip","file/Clean Bedrock.zip","cullleaves/smartleaves","file/Faithful-红石显示-1024自用plus.zip","file/Faithful-红石显示-1024自用附加包.zip","file/Clean Bedrock.zip","cullleaves/smartleaves"]
+renderClouds:true
+resourcePacks:["vanilla","programer_art"]
+incompatibleResourcePacks:[]
 lastServer:124.227.80.185:25227
 lang:zh_cn
 chatVisibility:0
@@ -100,7 +100,7 @@ key_key.hotbar.6:key.keyboard.6
 key_key.hotbar.7:key.keyboard.7
 key_key.hotbar.8:key.keyboard.8
 key_key.hotbar.9:key.keyboard.9
-soundCategory_master:0.026490066
+soundCategory_master:0.33692053
 soundCategory_music:0.0
 soundCategory_record:0.02640845
 soundCategory_weather:0.0
