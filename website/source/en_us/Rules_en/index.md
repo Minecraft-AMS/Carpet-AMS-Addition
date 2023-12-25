@@ -1372,6 +1372,8 @@ Use deepslate to crafted polished_blackstone_button in minecraft.
 
 Add light block recipes in minecraft, when enabled, light blocks will have no mining hardness.
 
+< This rule is available for `Minecraft >= 1.17` >
+
 - Type: `boolean`
 
 
