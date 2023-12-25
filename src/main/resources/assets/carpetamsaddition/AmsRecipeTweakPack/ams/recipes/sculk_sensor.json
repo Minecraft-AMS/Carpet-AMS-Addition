@@ -6,11 +6,14 @@
     "DDD"
   ],
   "key":{
-    "D":{"item":"minecraft:deepslate"
+    "D":{
+      "item":"minecraft:deepslate"
     },
-    "R":{"item":"minecraft:redstone"
+    "R":{
+      "item":"minecraft:redstone"
     },
-    "Q":{"item":"minecraft:quartz"
+    "Q":{
+      "item":"minecraft:quartz"
     }
   },
   "result":{

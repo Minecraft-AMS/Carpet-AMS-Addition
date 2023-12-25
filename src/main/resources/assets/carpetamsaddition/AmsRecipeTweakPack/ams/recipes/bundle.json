@@ -6,9 +6,11 @@
     "RRR"
   ],
   "key":{
-    "S":{"item":"minecraft:string"
+    "S":{
+      "item":"minecraft:string"
     },
-    "R":{"item":"minecraft:rabbit_hide"
+    "R":{
+      "item":"minecraft:rabbit_hide"
     }
   },
   "result":{

@@ -6,11 +6,14 @@
     " SX"
   ],
   "key":{
-    "D":{"item":"minecraft:dropper"
+    "D":{
+      "item":"minecraft:dropper"
     },
-    "S":{"item":"minecraft:stick"
+    "S":{
+      "item":"minecraft:stick"
     },
-    "X":{"item":"minecraft:string"
+    "X":{
+      "item":"minecraft:string"
     }
   },
   "result":{

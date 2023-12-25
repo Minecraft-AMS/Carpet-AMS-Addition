@@ -6,13 +6,17 @@
     "PLP"
   ],
   "key":{
-    "P":{"item":"minecraft:phantom_membrane"
+    "P":{
+      "item":"minecraft:phantom_membrane"
     },
-    "S":{"item":"minecraft:stick"
+    "S":{
+      "item":"minecraft:stick"
     },
-    "*":{"item":"minecraft:saddle"
+    "*":{
+      "item":"minecraft:saddle"
     },
-    "L":{"item":"minecraft:string"
+    "L":{
+      "item":"minecraft:string"
     }
   },
   "result":{

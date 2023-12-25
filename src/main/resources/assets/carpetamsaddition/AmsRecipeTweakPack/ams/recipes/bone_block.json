@@ -6,7 +6,8 @@
     "###"
   ],
   "key":{
-    "#":{"item":"minecraft:bone"
+    "#":{
+      "item":"minecraft:bone"
     }
   },
   "result":{
