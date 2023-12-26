@@ -233,6 +233,9 @@ carpetamsaddition:
       flippinCactusSoundEffect:
         name: 仙人掌扳手音效
         desc: 在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了三种不同音效，设置为0禁用音效）
+      undyingCoral:
+        name: 禁用珊瑚失活
+        desc: 让珊瑚扇和珊瑚块不会因缺水失活
       customBlockHardness:
         name: 自定义方块硬度
         desc: 自定义任何方块的挖掘硬度

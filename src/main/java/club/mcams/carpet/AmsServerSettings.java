@@ -257,6 +257,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean useItemCooldownDisabled = false;
 
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean undyingCoral = false;
+
     @Rule(
             options = {"0", "1", "2", "3"},
             categories = {AMS, FEATURE, SURVIVAL}

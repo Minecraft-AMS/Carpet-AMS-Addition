@@ -179,6 +179,8 @@ carpetamsaddition:
         desc: Remove cooldown time for using items
       flippinCactusSoundEffect:
         desc: When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing three different sound options, Setting it to 0 disables the sound effects)
+      undyingCoral:
+        desc: Prevent coral blocks and coral fans from dying
       customBlockHardness:
         desc: Customizing mining hardness for any block
         extra:
