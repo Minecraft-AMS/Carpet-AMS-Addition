@@ -346,19 +346,15 @@ Hitting surface will cause no damage to player when flying with elytra.
 
 ## customBlockUpdateSuppressor
 
-Customize a block to be an update suppressor.
-
-The `amsUpdateSuppressionCrashFix `rule will also be enabled when it is opened
-
-Not all blocks can be set as update suppressor.
-
-To disable/enable forced startup, use the following command: 
-
-/amsUpdateSuppressionCrashFixForceMode true/false
+Customize a block to be an update suppressor (Not all blocks can be set as update suppressor).
 
 Command format:
 
 /carpet customBlockUpdateSuppressor minecraft:BlockName
+
+Use the following command to control whether the "amsUpdateSuppressionCrashFix" rule is automatically enabled when this rule is enabled: 
+
+/amsUpdateSuppressionCrashFixForceMode true/false
 
 - Type: `boolean`
 
@@ -742,9 +738,9 @@ When enabled, 100% Wither Skeleton Skull Drop.
 ## anvilInteractionDisabled
 
 When enabled, Players cannot open the UI of the Anvil.
-Command: /anvilInteractionDisabledSwitch
+Command: /anvilInteractionDisabledSwitch true/false
 
-- Type: `boolean`
+- Type: `String`
 
 
 
@@ -752,11 +748,11 @@ Command: /anvilInteractionDisabledSwitch
 
 
 
-- Suggested options: `false` , `true`
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
 
 
 
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
 
 
 ## preventAdministratorCheat
@@ -1009,25 +1005,22 @@ When enabled, Activate full-level beacon with just one base block.
 
 ## customBlockBlastResistance
 
-Customizing blast resistance for any block (this rule will not take effect when the enhancedWorldEater rule is enabled).
-Command format:
-/carpet customBlockBlastResistance minecraft:BlockName/BlastResistance
-You can also set multiple blocks simultaneously by separating them with commas:
-/carpet customBlockBlastResistance minecraft:BlockName1/BlastResistance,minecraft:BlockName2/BlastResistance
+Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled).
+After enabling the rules, use the `/customBlockBlastResistance helper` command to view the usage instructions.
 
-- Type: `String`, `float`
+- Type: `String`
 
 
 
-- Default: `VANILLA`
+- Default: `false`
 
 
 
-- Suggested options: `minecraft:bedrock/2.0`, `minecraft:bedrock,minecraft:obsidian/2.0`
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
 
 
 
-- Categroies: `AMS`, `FEATURE`
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`, `COMMAND`
 
 ## regeneratingDragonEgg
 
@@ -1219,22 +1212,55 @@ When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will 
 
 ## customBlockHardness
 
-Customizing mining hardness for any block.
+Use command to customizing mining hardness for any block.
 
-Command format:
-/carpet customBlowUpBlock minecraft:BlockName/Hardness
-You can also set multiple blocks simultaneously by separating them with commas:
-/carpet customBlowUpBlock minecraft:BlockName1/Hardness,minecraft:BlockName2/Hardness
+After enabling the rules, use the /customBlockBlastResistance helper command to view the usage instructions.
 
-- Type: `String`, `float`
+- Type: `String`
 
 
 
-- Default: `VANILLA`
+- Default: `false`
 
 
 
-- Suggested options: `minecraft:bedrock/2.0`, `minecraft:bedrock,minecraft:obsidian/2.0`
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
+
+## undyingCoral
+
+Prevent coral blocks and coral fans from dying.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## enderDragonNoDestroyBlock
+
+Make the Ender Dragon unable to destroy any blocks.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
 
 
 

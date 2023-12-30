@@ -335,19 +335,15 @@
 
 ## 自定义方块更新抑制器（customBlockUpdateSuppressor）
 
-自定义一个方块成为更新抑制器。
-
-默认开启时会同步打开 `更新抑制崩溃修复（amsUpdateSuppressionCrashFix）` 规则。
-
-不是所有的方块都能设置为更新抑制器。
-
-使用如下指令来禁用/启用强制启动:
-
-/amsUpdateSuppressionCrashFixForceMode true/false
+自定义一个方块成为更新抑制器（不是所有的方块都能设置为更新抑制器）。
 
 命令格式：
 
 /carpet customBlockUpdateSuppressor minecraft:BlockName
+
+使用如下指令来控制是否在启用该规则时自动开启 `amsUpdateSuppressionCrashFix ` 规则: 
+
+/amsUpdateSuppressionCrashFixForceMode true/false
 
 - 类型: `String`
 
@@ -735,9 +731,9 @@
 ## 禁用铁砧交互（anvilInteractionDisabled）
 
 开启后，玩家无法打开铁砧的UI界面。
-命令：/anvilInteractionDisabledSwitch
+命令：/anvilInteractionDisabledSwitch true/false
 
-- 类型: `boolean`
+- 类型: `String`
 
 
 
@@ -745,7 +741,7 @@
 
 
 
-- 参考选项: `false`, `true`
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
 
 
 
@@ -998,26 +994,23 @@
 
 ## 自定义方块爆炸抗性（customBlockBlastResistance）
 
-自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）。
+用指令自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）。
 
-命令格式：
-/carpet customBlockBlastResistanceminecraft:BlockName/BlastResistance
-你也可以同时设置多个方块使用 `,` 隔开即可：
-/carpet customBlockBlastResistanceminecraft:BlockName1/BlastResistance,minecraft:BlockName2/BlastResistance
+开启规则后使用 `/customBlockBlastResistance` 命令查看使用说明
 
-- 类型: `String`, `float`
+- 类型: `String`
 
 
 
-- 默认值: `VANILLA`
+- 默认值: `false`
 
 
 
-- 参考选项: `minecraft:bedrock/2.0`, `minecraft:bedrock,minecraft:obsidian/2.0`
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
 
 
 
-- 分类: `AMS`, `FEATURE`
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`, `COMMAND`
 
 ## 再生成龙蛋（regeneratingDragonEgg）
 
@@ -1206,22 +1199,55 @@
 
 ## 自定义方块硬度（customBlockHardness）
 
-自定义任何方块的挖掘硬度。
+使用指令来自定义任何方块的挖掘硬度。
 
-命令格式：
-/carpet customBlockHardness minecraft:BlockName/Hardness
-你也可以同时设置多个方块使用 `,` 隔开即可：
-/carpet customBlockHardness minecraft:BlockName1/Hardness,minecraft:BlockName2/Hardness
+开启规则后使用 `/customBlockHardness help` 命令来查看使用说明
 
-- 类型: `String`, `float`
+- 类型: `String`
 
 
 
-- 默认值: `VANILLA`
+- 默认值: `false`
 
 
 
-- 参考选项: `minecraft:bedrock/2.0`, `minecraft:bedrock,minecraft:obsidian/2.0`
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
+
+## 禁用珊瑚失活（undyingCoral）
+
+让珊瑚扇和珊瑚块不会因缺水失活。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 禁止末影龙破坏方块（enderDragonNoDestroyBlock）
+
+使末影龙不能破坏任何方块。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
 
 
 
