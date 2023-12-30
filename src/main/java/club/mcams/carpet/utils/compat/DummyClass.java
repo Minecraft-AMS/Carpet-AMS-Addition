@@ -22,48 +22,41 @@ package club.mcams.carpet.utils.compat;
 
 public class DummyClass {
     /*
-        Carpet AMS Addition v2.21.0 更新内容
+        Carpet AMS Addition v2.22.0 更新内容
 
         # 新增规则
 
-        - `禁用物品使用冷却（useItemCooldownDisabled）` 开启后，使用物品没有冷却时间
+        - `禁用珊瑚失活（undyingCoral）` 让珊瑚扇和珊瑚块不会因缺水失活。
 
-        - `仙人掌扳手音效（flippinCactusSoundEffect）` 在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了三种不同音效，设置为0禁用音效）
-
-        - `可合成光源方块（craftableLight）` 添加了光源方块的合成配方，启用时光源方块将不会有挖掘硬度
-
-        - `可合成屏障方块（craftableBarrier）` 添加了屏障方块的合成配方，启用时屏障方块将不会有挖掘硬度
-
-        - `自定义方块爆炸抗性（customBlockBlastResistance）` 可以同时自定义是什么方块这个方块的爆炸抗性是多少，详情见规则文档
-
-        - `自定义方块硬度（customBlockHardness）` 可以同时自定义是什么方块这个方块的挖掘硬度是多少，详情见规则文档
+        - `禁止末影龙破坏方块（enderDragonNoDestroyBlock）` 使末影龙不能破坏任何方块。 [#58](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/58)
 
         # 更改
 
-        - 重命名：`自定义炸毁方块（customBlowUpBlock）` -> `自定义方块爆炸抗性（customBlockBlastResistance）`
+        - 重构了 `自定义方块爆炸抗性（customBlockBlastResistance）` 与 `自定义方块硬度（customBlockHardness）` 规则，现在使用单独的指令来进行方块的增删改查，详情见文档。
 
-        - 移除了 `易碎黑曜石（softObsidian）` 与 `易碎深板岩（softDeepslate）` 规则，取而代之的是 `自定义方块硬度（customBlockHardness）` 规则
+        - 现在 `禁用铁砧交互（anvilInteractionDisabled）` 规则的权限等级是可定义的。
+
+        # 修复
+
+        - 修复了一些规则描述中的错误。
 
         ---
 
         # New Rules
 
-        - `useItemCooldownDisabled` When enabled, there is no cooldown time for using items
+        - `undyingCoral` Prevent coral blocks and coral fans from dying.
 
-        - `flippinCactusSoundEffect` When enabling the `flippinCactus` rule in the Carpet mod, using the cactus wrench will emit a sound (providing three different sound effects, set to 0 to disable sound)
-
-        - `craftableLight` Add light block recipes in minecraft, when enabled, light blocks will have no mining hardness
-
-        - `craftableBarrier` Add barrier recipes in minecraft, when enabled, barrier blocks will have no mining hardness
-
-        - `customBlockBlastResistance` You have the option to customize the block and its explosion resistance simultaneously. For more detailed information, please refer to the rule document
-
-        - `customBlockHardness` You have the option to customize the block and its mining hardness simultaneously. For more detailed information, please refer to the rule document
+        - `enderDragonNoDestroyBlock` Make the Ender Dragon unable to destroy any blocks. [#58](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/58)
 
         # Changes
 
-        - Rename: `customBlowUpBlock` -> `customBlockBlastResistance`
+        - The `customBlockBlastResistance ` and `customBlockHardness ` rules have been refactored. They now use separate commands for adding, removing, modifying, and querying blocks. See the documentation for details.
 
-        - The `softObsidian` and `softDeepslate` rules have been removed, and they have been replaced with the `customBlockHardness` rule
+        - Now the permission level for the `anvilInteractionDisabled ` rule is customizable.
+
+        # Fix
+
+        - Fixed some errors in the descriptions of rules.
+
      */
 }

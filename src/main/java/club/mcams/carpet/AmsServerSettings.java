@@ -165,8 +165,11 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean easyWitherSkeletonSkullDrop = false;
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, COMMAND})
-    public static boolean anvilInteractionDisabled = false;
+    @Rule(
+            options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+            categories = {AMS, FEATURE, SURVIVAL, COMMAND}
+    )
+    public static String anvilInteractionDisabled = "false";
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL, COMMAND})
     public static boolean preventAdministratorCheat = false;
@@ -219,11 +222,10 @@ public class AmsServerSettings {
     public static boolean easyMaxLevelBeacon = false;
 
     @Rule(
-            options = {"VANILLA", "minecraft:bedrock/2.0", "minecraft:bedrock/2.0,minecraft:obsidian/2.0"},
-            categories = {AMS, FEATURE, TNT},
-            strict = false
+            options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+            categories = {AMS, FEATURE, SURVIVAL, TNT, COMMAND}
     )
-    public static String customBlockBlastResistance = "VANILLA";
+    public static String customBlockBlastResistance = "false";
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean regeneratingDragonEgg = false;
@@ -257,9 +259,6 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean useItemCooldownDisabled = false;
 
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean undyingCoral = false;
-
     @Rule(
             options = {"0", "1", "2", "3"},
             categories = {AMS, FEATURE, SURVIVAL}
@@ -267,11 +266,16 @@ public class AmsServerSettings {
     public static int flippinCactusSoundEffect = 0;
 
     @Rule(
-            options = {"VANILLA", "minecraft:bedrock/2.0", "minecraft:bedrock/2.0,minecraft:obsidian/2.0"},
-            categories = {AMS, FEATURE, SURVIVAL},
-            strict = false
+            options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+            categories = {AMS, FEATURE, SURVIVAL, COMMAND}
     )
-    public static String customBlockHardness = "VANILLA";
+    public static String customBlockHardness = "false";
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean undyingCoral = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean enderDragonNoDestroyBlock = false;
 
     /*
      * 合成表规则

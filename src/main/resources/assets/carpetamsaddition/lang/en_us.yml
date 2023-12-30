@@ -33,14 +33,12 @@ carpetamsaddition:
       safeFlight:
         desc: players don't get hurt by flying into walls
       customBlockUpdateSuppressor:
-        desc: Customize a block to be an update suppressor
+        desc: Customize a block to be an update suppressor (Not all blocks can be set as update suppressor)
         extra:
-          '0': 'The "amsUpdateSuppressionCrashFix" rule will also be enabled when it is opened'
-          '1': 'Not all blocks can be set as update suppressor'
-          '2': 'To disable/enable forced startup, use the following command: '
-          '3': '/amsUpdateSuppressionCrashFixForceMode true/false'
           '4': 'Command format:'
           '5': '/carpet customBlockUpdateSuppressor minecraft:BlockName'
+          '2': 'Use the following command to control whether the "amsUpdateSuppressionCrashFix" rule is automatically enabled when this rule is enabled: '
+          '3': '/amsUpdateSuppressionCrashFixForceMode true/false'
       infiniteTrades:
         desc: Prevents villager trades from locking up
       invulnerable:
@@ -93,7 +91,7 @@ carpetamsaddition:
       anvilInteractionDisabled:
         desc: 'Players cannot open the UI of the Anvil'
         extra:
-          '0': 'Command: /anvilInteractionDisabled'
+          '0': 'Command: /anvilInteractionDisabled true/false'
       preventAdministratorCheat:
         desc: Disable some command to prevent accidentally cheating
         extra:
@@ -144,12 +142,9 @@ carpetamsaddition:
       easyMaxLevelBeacon:
         desc: Activate full-level beacon with just one base block
       customBlockBlastResistance:
-        desc: Customizing blast resistance for any block (this rule will not take effect when the enhancedWorldEater rule is enabled)
+        desc: Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled)
         extra:
-          '0': 'Command format:'
-          '1': '/carpet customBlowUpBlock minecraft:BlockName/BlastResistance'
-          '2': 'You can also set multiple blocks simultaneously by separating them with commas:'
-          '3': '/carpet customBlowUpBlock minecraft:BlockName1/BlastResistance,minecraft:BlockName2/BlastResistance'
+          '0': 'After enabling the rules, use the /customBlockBlastResistance helper command to view the usage instructions'
       regeneratingDragonEgg:
         desc: Every time a player defeats the Ender Dragon, a dragon egg will be generated
         extra:
@@ -179,15 +174,14 @@ carpetamsaddition:
         desc: Remove cooldown time for using items
       flippinCactusSoundEffect:
         desc: When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing three different sound options, Setting it to 0 disables the sound effects)
+      customBlockHardness:
+        desc: Use command to customizing mining hardness for any block
+        extra:
+          '0': 'After enabling the rules, use the /customBlockBlastResistance helper command to view the usage instructions'
       undyingCoral:
         desc: Prevent coral blocks and coral fans from dying
-      customBlockHardness:
-        desc: Customizing mining hardness for any block
-        extra:
-          '0': 'Command format:'
-          '1': '/carpet customBlowUpBlock minecraft:BlockName/Hardness'
-          '2': 'You can also set multiple blocks simultaneously by separating them with commas:'
-          '3': '/carpet customBlowUpBlock minecraft:BlockName1/Hardness,minecraft:BlockName2/Hardness'
+      enderDragonNoDestroyBlock:
+        desc: Make the Ender Dragon unable to destroy any blocks
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

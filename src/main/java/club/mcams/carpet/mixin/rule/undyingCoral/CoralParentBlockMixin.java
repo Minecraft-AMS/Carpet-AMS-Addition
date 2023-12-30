@@ -18,31 +18,23 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.utils;
+package club.mcams.carpet.mixin.rule.undyingCoral;
 
-@SuppressWarnings("unused")
-public class CommandPermissionLevelHelper {
-    public static int zero() {
-        return 0;
-    }
+import club.mcams.carpet.AmsServerSettings;
 
-    public static int one() {
-        return 1;
-    }
+import net.minecraft.block.CoralParentBlock;
 
-    public static int two() {
-        return 2;
-    }
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-    public static int three() {
-        return 3;
-    }
-
-    public static int four() {
-        return 4;
-    }
-
-    public static int Forbidden() {
-        return 1024;
+@Mixin(CoralParentBlock.class)
+public abstract class CoralParentBlockMixin {
+    @Inject(method = "checkLivingConditions", at = @At("HEAD"), cancellable = true)
+    private void checkLivingConditionsMixin(CallbackInfo ci) {
+        if (AmsServerSettings.undyingCoral) {
+            ci.cancel();
+        }
     }
 }
