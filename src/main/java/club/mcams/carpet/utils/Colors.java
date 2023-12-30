@@ -18,24 +18,25 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.utils.compat;
+package club.mcams.carpet.utils;
 
-import net.minecraft.text.*;
-
-public class LiteralTextUtil {
-    //#if MC<11900
-    public static LiteralText compatText(String text) {
-        return new LiteralText(text);
-    }
-    //#endif
-
-    //#if MC>=11900
-    //$$ public static MutableText compatText(String text) {
-    //$$     return Text.literal(text);
-    //$$ }
-    //#endif
-
-    public static Text createColoredText(String text, int rgb, boolean isBold, boolean isItalic) {
-        return compatText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgb)).withBold(isBold).withItalic(isItalic));
-    }
+@SuppressWarnings("unused")
+public class Colors {
+    public static int BLACK = 0;
+    public static int DARK_BLUE = 170;
+    public static int DARK_GREEN = 43520;
+    public static int DARK_AQUA = 43690;
+    public static int DARK_RED = 11141120;
+    public static int DARK_PURPLE = 11141290;
+    public static int GOLD = 16755200;
+    public static int GRAY = 11184810;
+    public static int DARK_GRAY = 5592405;
+    public static int BLUE = 5592575;
+    public static int GREEN = 5635925;
+    public static int AQUA = 5636095;
+    public static int RED = 16733525;
+    public static int LIGHT_PURPLE = 16733695;
+    public static int YELLOW =  16777045;
+    public static int WHITE = 16777215;
+    public static int HOTPINK = 0xFF1493;
 }

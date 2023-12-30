@@ -20,7 +20,8 @@
 
 package club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix;
 
-import club.mcams.carpet.utils.CommandPermissionLevelHelper;
+import club.mcams.carpet.utils.Colors;
+import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
 import net.minecraft.text.Text;
@@ -39,19 +40,17 @@ public class amsUpdateSuppressionCrashFixCommandRegistry {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("amsUpdateSuppressionCrashFixForceMode")
-            .requires(source -> source.hasPermissionLevel(CommandPermissionLevelHelper.two()))
-            .then(argument("mode", BoolArgumentType.bool())
-                .executes(context -> {
-                    boolean mode = BoolArgumentType.getBool(context, "mode");
-                    amsUpdateSuppressionCrashFixForceMode = mode;
-                    Text message =
-                            mode ?
-                            LiteralTextUtil.createColoredText("[ force mode ]", 0xFFFFFF, true) :
-                            LiteralTextUtil.createColoredText("[ lazy mode ]", 0xFFFFFF, true);
-                    Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
-                    return 1;
-                })
-            )
-        );
+        .requires(source -> CommandHelper.canUseCommand(source, 2))
+        .then(argument("mode", BoolArgumentType.bool())
+        .executes(context -> {
+            boolean mode = BoolArgumentType.getBool(context, "mode");
+            amsUpdateSuppressionCrashFixForceMode = mode;
+            Text message =
+                    mode ?
+                    LiteralTextUtil.createColoredText("[ force mode ]", Colors.WHITE, true, false) :
+                    LiteralTextUtil.createColoredText("[ lazy mode ]", Colors.WHITE, true, false);
+            Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
+            return 1;
+        })));
     }
 }

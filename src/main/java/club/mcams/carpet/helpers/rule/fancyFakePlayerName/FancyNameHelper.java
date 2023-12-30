@@ -30,6 +30,7 @@ import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 
 public class FancyNameHelper {
@@ -40,7 +41,7 @@ public class FancyNameHelper {
             Team team = scoreboard.getTeam("bot");
             if (team == null) {
                 team = scoreboard.addTeam("bot");
-                team.setPrefix(LiteralTextUtil.compatText("[§lbot§r] "));
+                team.setPrefix(LiteralTextUtil.compatText("[bot] ").setStyle(Style.EMPTY.withBold(true)));
                 team.setColor(Formatting.DARK_GREEN);
             }
             scoreboard.addPlayerToTeam(player.getGameProfile().getName(), team);

@@ -21,6 +21,7 @@
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 
@@ -28,7 +29,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class ThrowableSuppressionContext {
-
     private static String getSuppressionPos(BlockPos pos) {
         return pos.getX() + ", " + pos.getY() + ", " + pos.getZ();
     }
@@ -38,14 +38,12 @@ public class ThrowableSuppressionContext {
     }
 
     public static String suppressionMessageText(BlockPos pos, World world) {
-        final String minecraftStyle = "§c§o";
-        return minecraftStyle + "\n" +
-                "Update Suppression in: \n" +
-                "Location: " + getSuppressionPos(pos) + "\n" +
-                "Dimension: " + getSuppressionDimension(world) + "\n";
+        DimensionWrapper dimension = getSuppressionDimension(world);
+        String location = getSuppressionPos(pos);
+        return "Update suppression location @ " + dimension + " -> " + "[ " + location + " ]";  //Update suppression location @ minecraft:overworld -> [ 1, 0, -24 ]
     }
 
     public static void sendMessageToServer(BlockPos pos, World world) {
-        Messenger.sendServerMessage(AmsServer.minecraftServer, suppressionMessageText(pos, world));
+        Messenger.sendServerMessage(AmsServer.minecraftServer, suppressionMessageText(pos, world), Colors.RED);
     }
 }

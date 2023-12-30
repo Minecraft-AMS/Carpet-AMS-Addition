@@ -20,8 +20,6 @@
 
 package club.mcams.carpet.utils;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,16 +32,5 @@ public class RegexTools {
             return matcher.group(1);
         }
         return sourceName;
-    }
-
-    public static Map<String, Float> parseFloatValues(String customBlock) {
-        Map<String, Float> moreCustomBlock = new HashMap<>();
-        for (String s : customBlock.split(",")) {
-            String[] parts = s.split("/");      //minecraft:bedrock/2.0 -> 获取 2.0
-            if (parts.length == 2) {
-                moreCustomBlock.put(parts[0], Float.parseFloat(parts[1]));
-            }
-        }
-        return moreCustomBlock;
     }
 }

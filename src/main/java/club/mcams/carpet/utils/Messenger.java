@@ -113,21 +113,20 @@ public class Messenger {
         return carpet.utils.Messenger.parseStyle(style);
     }
 
-    public static void sendServerMessage(MinecraftServer server, String message) {
-        BaseText text = c("gi "+ message);
+    public static void sendServerMessage(MinecraftServer server, String message, int rbg) {
         if (server == null) {
             LOGGER.error("Message not delivered: " + message);
         } else {
             //#if MC<11900
-            server.sendSystemMessage(LiteralTextUtil.compatText(message), Util.NIL_UUID);
+            server.sendSystemMessage(LiteralTextUtil.createColoredText(message, rbg, false, false), Util.NIL_UUID);
             //#else
-            //$$ server.sendMessage(LiteralTextUtil.compatText(message));
+            //$$ server.sendMessage(LiteralTextUtil.createColoredText(message, rbg, false, false));
             //#endif
             for (PlayerEntity entityplayer : server.getPlayerManager().getPlayerList()) {
                 //#if MC<11900
-                entityplayer.sendSystemMessage(text, Util.NIL_UUID);
+                entityplayer.sendSystemMessage(LiteralTextUtil.createColoredText(message, rbg, false, true), Util.NIL_UUID);
                 //#else
-                //$$ entityplayer.sendMessage(text);
+                //$$ entityplayer.sendMessage(LiteralTextUtil.createColoredText(message, rbg, false, true));
                 //#endif
             }
         }

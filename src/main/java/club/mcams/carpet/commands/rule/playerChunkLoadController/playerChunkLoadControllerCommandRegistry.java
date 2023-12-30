@@ -23,6 +23,7 @@ package club.mcams.carpet.commands.rule.playerChunkLoadController;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.playerChunkLoadController.ChunkLoading;
+import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
@@ -42,7 +43,7 @@ public class playerChunkLoadControllerCommandRegistry {
             .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.playerChunkLoadController))
             .executes((c) -> listPlayerInteractions(c.getSource(), c.getSource().getName()))
             .then(argument("boolean", BoolArgumentType.bool()).
-                    executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getName(), getBool(c, "boolean")))
+            executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getName(), getBool(c, "boolean")))
             )
         );
     }
@@ -51,10 +52,10 @@ public class playerChunkLoadControllerCommandRegistry {
         PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
         ChunkLoading.setPlayerInteraction(playerName, b, true);
         if (player == null) {
-            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified");
+            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified", Colors.HOTPINK);
             return 0;
         } else {
-            player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading " + b), 0xFF69B4, true), false);
+            player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading " + b), Colors.HOTPINK, true, false), false);
             return 1;
         }
     }
@@ -63,13 +64,13 @@ public class playerChunkLoadControllerCommandRegistry {
         boolean playerInteractions = ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true);
         PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
         if (player == null) {
-            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified");
+            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified", Colors.HOTPINK);
             return 0;
         }
         if (playerInteractions) {
-            player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading: true"), 0xFF69B4, true), false);
+            player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading: true"), Colors.HOTPINK, true, false), false);
         } else {
-            player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading: false"), 0xFF69B4, true), false);
+            player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading: false"), Colors.HOTPINK, true, false), false);
         }
         return 1;
     }
