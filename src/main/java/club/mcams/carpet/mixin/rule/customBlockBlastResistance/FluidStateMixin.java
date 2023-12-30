@@ -22,34 +22,31 @@ package club.mcams.carpet.mixin.rule.customBlockBlastResistance;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.state.StateManager;
+import net.minecraft.fluid.FluidState;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.*;
+import java.util.Objects;
 
 import static club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
 
-@Mixin(Block.class)
-public abstract class BlockMixin {
+@Mixin(FluidState.class)
+public abstract class FluidStateMixin {
 
-    @Final
     @Shadow
-    protected StateManager<Block, BlockState> stateManager;
+    public abstract BlockState getBlockState();
 
     @Inject(method = "getBlastResistance", at = @At("HEAD"), cancellable = true)
     private void getBlastResistance(CallbackInfoReturnable<Float> cir) {
         if (!Objects.equals(AmsServerSettings.customBlockBlastResistance, "false") && AmsServerSettings.enhancedWorldEater == -1.0F) {
-            BlockState blockState = stateManager.getDefaultState().getBlock().getDefaultState();
-            if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(blockState)) {
-                cir.setReturnValue(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(blockState));
+            BlockState fluidState = this.getBlockState().getBlock().getDefaultState();
+            if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(fluidState)) {
+                cir.setReturnValue(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(fluidState));
             }
         }
     }

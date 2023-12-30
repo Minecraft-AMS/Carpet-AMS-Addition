@@ -22,9 +22,11 @@ package club.mcams.carpet.commands.rule.anvilInteractionDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import club.mcams.carpet.utils.CommandPermissionLevelHelper;
+import club.mcams.carpet.utils.Colors;
+import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.text.Text;
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -34,32 +36,24 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import java.util.Objects;
 
 import static net.minecraft.server.command.CommandManager.argument;
-import static net.minecraft.server.command.CommandManager.literal;
 
 public class anvilInteractionDisabledCommandRegistry {
     public static boolean anvilInteractionDisabled = false;
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(literal("anvilInteractionDisabled")
-            .requires(source -> source.hasPermissionLevel(permissionLevel()))
+        dispatcher.register(
+            CommandManager.literal("anvilInteractionDisabled")
+            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.anvilInteractionDisabled))
             .then(argument("mode", BoolArgumentType.bool())
-                .executes(context -> {
-                    boolean mode = BoolArgumentType.getBool(context, "mode");
-                    anvilInteractionDisabled = mode;
-                    Text message =
-                            mode ?
-                            LiteralTextUtil.createColoredText("[ Anvil Interaction Disable ]", 0xFFFFFF, true) :
-                            LiteralTextUtil.createColoredText("[ Anvil Interaction Enable ]", 0xFFFFFF, true);
-                    Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
-                    return 1;
-                })
-            )
-        );
-    }
-
-    private static int permissionLevel() {
-        return AmsServerSettings.anvilInteractionDisabled ?
-                CommandPermissionLevelHelper.zero() :
-                CommandPermissionLevelHelper.Forbidden();
+            .executes(context -> {
+                boolean mode = BoolArgumentType.getBool(context, "mode");
+                anvilInteractionDisabled = mode;
+                Text message =
+                        mode ?
+                        LiteralTextUtil.createColoredText("[ Anvil Interaction Disable ]", Colors.WHITE, true, false) :
+                        LiteralTextUtil.createColoredText("[ Anvil Interaction Enable ]", Colors.WHITE, true, false);
+                Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
+                return 1;
+        })));
     }
 }

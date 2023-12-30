@@ -31,9 +31,9 @@ import carpet.settings.ParsedRule;
 import carpet.script.bundled.BundledModule;
 //#endif
 
-import club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.amsUpdateSuppressionCrashFixCommandRegistry;
-import club.mcams.carpet.commands.rule.anvilInteractionDisabled.anvilInteractionDisabledCommandRegistry;
-import club.mcams.carpet.commands.rule.playerChunkLoadController.playerChunkLoadControllerCommandRegistry;
+import club.mcams.carpet.commands.RegisterCommands;
+import club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
+import club.mcams.carpet.commands.rule.customBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
@@ -107,16 +107,19 @@ public class AmsServer implements CarpetExtension {
         AmsCarpetLoggerRegistry.registerLoggers();
     }
 
-    //#if MC>=11900
-    //$$ @Override
-    //$$ public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
-    //#else
     @Override
-    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher) {
-    //#endif
-        amsUpdateSuppressionCrashFixCommandRegistry.register(dispatcher);
-        playerChunkLoadControllerCommandRegistry.register(dispatcher);
-        anvilInteractionDisabledCommandRegistry.register(dispatcher);
+    public void registerCommands(
+        CommandDispatcher<ServerCommandSource> dispatcher
+        //#if MC>=11900
+        //$$ , final CommandRegistryAccess commandBuildContext
+        //#endif
+    ) {
+        RegisterCommands.registerCommands(
+            dispatcher
+            //#if MC>=11900
+            //$$ , commandBuildContext
+            //#endif
+        );
     }
 
     @Override
@@ -138,6 +141,8 @@ public class AmsServer implements CarpetExtension {
     @Override
     public void onServerLoaded(MinecraftServer server) {
         minecraftServer = server;
+        CustomBlockBlastResistanceCommandRegistry.loadFromJson(CustomBlockBlastResistanceCommandRegistry.getPath(server));
+        CustomBlockHardnessCommandRegistry.loadFromJson(CustomBlockHardnessCommandRegistry.getPath(server));
     }
 
     @Override

@@ -21,12 +21,10 @@
 package club.mcams.carpet.mixin.rule.customBlockHardness;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.utils.RegexTools;
 
 import net.minecraft.block.AbstractBlock.AbstractBlockState;
 import net.minecraft.block.Block;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
+import net.minecraft.block.BlockState;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -34,8 +32,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Map;
 import java.util.Objects;
+
+import static club.mcams.carpet.commands.rule.customBlockHardness.CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP;
 
 @Mixin(AbstractBlockState.class)
 public abstract class AbstractBlockStateMixin {
@@ -44,12 +43,11 @@ public abstract class AbstractBlockStateMixin {
     public abstract Block getBlock();
 
     @Inject(method = "getHardness", at = @At("HEAD"), cancellable = true)
-    private void getHardness(BlockView world, BlockPos pos, CallbackInfoReturnable<Float> cir) {
-        if (!Objects.equals(AmsServerSettings.customBlockHardness, "VANILLA")) {
-            String blockName = RegexTools.getBlockRegisterName(this.getBlock().toString());
-            Map<String, Float> moreCustomBlockHardness = RegexTools.parseFloatValues(AmsServerSettings.customBlockHardness);
-            if (moreCustomBlockHardness.containsKey(blockName)) {
-                cir.setReturnValue(moreCustomBlockHardness.get(blockName));
+    private void getHardness(CallbackInfoReturnable<Float> cir) {
+        if (!Objects.equals(AmsServerSettings.customBlockHardness, "false")) {
+            BlockState blockState = this.getBlock().getDefaultState();
+            if (CUSTOM_BLOCK_HARDNESS_MAP.containsKey(blockState)) {
+                cir.setReturnValue(CUSTOM_BLOCK_HARDNESS_MAP.get(blockState));
             }
         }
     }
