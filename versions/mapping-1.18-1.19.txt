@@ -11,3 +11,4 @@ carpet.script.bundled.BundledModule carpet.script.Module
 net.minecraft.text.BaseText net.minecraft.text.MutableText
 net.minecraft.world.dimension.DimensionType isUltrawarm() ultrawarm()
 net.minecraft.server.command.CommandManager execute() executeWithPrefix()
+net.minecraft.registry.Registry net.minecraft.registry.Registries
