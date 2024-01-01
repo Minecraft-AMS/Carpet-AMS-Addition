@@ -20,12 +20,14 @@
 
 package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
 
-import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.rule.preventAdministratorCheat.PermissionHelper;
 
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.command.SetBlockCommand;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 @Mixin(SetBlockCommand.class)
@@ -37,7 +39,7 @@ public abstract class SetBlockCommandMixin {
                     target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
             )
     )
-    private static boolean SetBlockCommand(boolean original) {
-        return original && !AmsServerSettings.preventAdministratorCheat;
+    private static boolean SetBlockCommand(boolean original, ServerCommandSource source) {
+        return original && PermissionHelper.canCheat(source);
     }
 }

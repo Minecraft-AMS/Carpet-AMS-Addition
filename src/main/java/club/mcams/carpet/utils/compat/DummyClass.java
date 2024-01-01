@@ -22,37 +22,12 @@ package club.mcams.carpet.utils.compat;
 
 public class DummyClass {
 /*
-    Carpet AMS Addition v2.23.0 更新内容
-
-    # 新增规则
-
-    - `轻松堆肥（easyCompost）` 让每次堆肥都可以成功。
-
-    - `易采集龙蛋（easyMineDragonEgg）` 让龙蛋不会瞬移，玩家可以直接挖掉龙蛋来收集它。 [#68](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/discussions/68)
-
-    # 更改
-
-    - 为游戏内的一些提示消息增加了中文翻译。
+    Carpet AMS Addition v2.23.1 ? 更新内容
 
     # 修复
+    修复了 `防止管理员作弊（preventAdministratorCheat）` 规则开启时服务器后台也无法使用被禁用的命令的情况（导致无法使用MCDR的here，where插件）。
 
-    - 修复了一些规则描述中的错误。
-
-    ---
-
-    # New Rules
-
-    - `easyCompost` Make every composting successful
-
-    - `easyMineDragonEgg` Makes the dragon egg not teleport, Players can mine dragon eggs to collect them. [#68](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/discussions/68)
-
-    # Changes
-
-    - Added Chinese translations for some in-game prompt messages.
-
-    # Fix
-
-    - Fixed some errors in the descriptions of rules.
-
+    # 更改
+    现在，`/gamerule` 指令也被 `防止管理员作弊（preventAdministratorCheat）` 规则禁用。
  */
 }

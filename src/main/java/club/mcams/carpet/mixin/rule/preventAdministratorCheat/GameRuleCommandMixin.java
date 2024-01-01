@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2024  A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -22,24 +22,24 @@ package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
 
 import club.mcams.carpet.helpers.rule.preventAdministratorCheat.PermissionHelper;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
+import net.minecraft.server.command.GameRuleCommand;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.command.WeatherCommand;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-
-@Mixin(WeatherCommand.class)
-public abstract class WeatherCommandMixin {
+@Mixin(GameRuleCommand.class)
+public abstract class GameRuleCommandMixin {
     @ModifyExpressionValue(
-            method = "method_13832",
+            method = "method_13393",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
             )
     )
-    private static boolean WeatherCommand(boolean original, ServerCommandSource source) {
+    private static boolean GameRuleCommand(boolean original, ServerCommandSource source) {
         return original && PermissionHelper.canCheat(source);
     }
 }

@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2024  A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,28 +18,14 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
+package club.mcams.carpet.helpers.rule.preventAdministratorCheat;
 
-import club.mcams.carpet.helpers.rule.preventAdministratorCheat.PermissionHelper;
-
+import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.command.TimeCommand;
+import net.minecraft.server.network.ServerPlayerEntity;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-
-@Mixin(TimeCommand.class)
-public abstract class TimeCommandMixin {
-    @ModifyExpressionValue(
-            method = "method_13791",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-            )
-    )
-    private static boolean TimeCommand(boolean original, ServerCommandSource source) {
-        return original && PermissionHelper.canCheat(source);
+public class PermissionHelper {
+    public static boolean canCheat(ServerCommandSource source) {
+        return !(source.getEntity() instanceof ServerPlayerEntity) || !AmsServerSettings.preventAdministratorCheat;
     }
 }

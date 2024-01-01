@@ -20,12 +20,14 @@
 
 package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
 
-import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.rule.preventAdministratorCheat.PermissionHelper;
 
 import net.minecraft.server.command.ExperienceCommand;
+import net.minecraft.server.command.ServerCommandSource;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 @Mixin(ExperienceCommand.class)
@@ -37,8 +39,8 @@ public abstract class ExperienceCommandMixin {
                     target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
             )
     )
-    private static boolean ExperienceCommand1(boolean original) {
-        return original && !AmsServerSettings.preventAdministratorCheat;
+    private static boolean ExperienceCommand1(boolean original, ServerCommandSource source) {
+        return original && PermissionHelper.canCheat(source);
     }
 
     @ModifyExpressionValue(
@@ -48,7 +50,7 @@ public abstract class ExperienceCommandMixin {
                     target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
             )
     )
-    private static boolean ExperienceCommand2(boolean original) {
-        return original && !AmsServerSettings.preventAdministratorCheat;
+    private static boolean ExperienceCommand2(boolean original, ServerCommandSource source) {
+        return original && PermissionHelper.canCheat(source);
     }
 }

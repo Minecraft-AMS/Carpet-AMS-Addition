@@ -153,7 +153,7 @@ carpetamsaddition:
         desc: 禁用部分指令以避免op玩家意外地作弊
         extra:
           '0': '影响的指令列表: '
-          '1': '/gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode'
+          '1': '/gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode, /gamerule'
       amsUpdateSuppressionCrashFix:
         name: 更新抑制崩溃修复
         desc: 防止更新抑制导致服务器崩溃，同时提供发生更新抑制的坐标与维度

@@ -121,7 +121,7 @@ carpetamsaddition:
         desc: Disable some command to prevent accidentally cheating
         extra:
           '0': 'Affects command list: '
-          '1': '/gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode'
+          '1': '/gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode, /gamerule'
       amsUpdateSuppressionCrashFix:
         desc: Prevent update suppression from causing server crashes, while providing the coordinates and dimensions where the update suppression occurred
         extra:
