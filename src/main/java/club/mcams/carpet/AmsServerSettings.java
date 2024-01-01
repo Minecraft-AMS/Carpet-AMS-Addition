@@ -277,6 +277,12 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean enderDragonNoDestroyBlock = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean easyCompost = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean mineDragonEgg = false;
+
     /*
      * 合成表规则
      */
