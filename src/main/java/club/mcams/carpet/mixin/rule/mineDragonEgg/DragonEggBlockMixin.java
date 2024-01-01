@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class DragonEggBlockMixin {
     @Inject(method = "teleport", at = @At("HEAD"), cancellable = true)
     private void teleport(CallbackInfo ci) {
-        if (AmsServerSettings.mineDragonEgg) {
+        if (AmsServerSettings.easyMineDragonEgg) {
             ci.cancel();
         }
     }

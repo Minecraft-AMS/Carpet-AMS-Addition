@@ -281,7 +281,7 @@ public class AmsServerSettings {
     public static boolean easyCompost = false;
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean mineDragonEgg = false;
+    public static boolean easyMineDragonEgg = false;
 
     /*
      * 合成表规则
