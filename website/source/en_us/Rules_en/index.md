@@ -759,7 +759,7 @@ Command: /anvilInteractionDisabledSwitch true/false
 
 Disable some command to prevent accidentally cheating.
 
-Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode
+Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode, /gamerule
 
 - Type: `boolean`
 

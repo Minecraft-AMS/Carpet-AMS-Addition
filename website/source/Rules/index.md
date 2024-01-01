@@ -752,7 +752,7 @@
 
 禁用部分指令以避免op玩家意外地作弊。
 
-影响的指令列表: /gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode
+影响的指令列表: /gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode, /gamerule
 
 - 类型: `boolean`
 
