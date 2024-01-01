@@ -52,7 +52,7 @@ public class PlayerChunkLoadControllerCommandRegistry {
         PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
         ChunkLoading.setPlayerInteraction(playerName, b, true);
         if (player == null) {
-            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified", Colors.HOTPINK);
+            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified", Colors.HOTPINK, true, false);
             return 0;
         } else {
             player.sendMessage(LiteralTextUtil.createColoredText((playerName + " chunk loading " + b), Colors.HOTPINK, true, false), false);
@@ -64,7 +64,7 @@ public class PlayerChunkLoadControllerCommandRegistry {
         boolean playerInteractions = ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true);
         PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
         if (player == null) {
-            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified", Colors.HOTPINK);
+            Messenger.sendServerMessage(AmsServer.minecraftServer, "No player specified", Colors.HOTPINK, true, false);
             return 0;
         }
         if (playerInteractions) {

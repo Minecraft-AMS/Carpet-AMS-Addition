@@ -86,7 +86,6 @@ public class Messenger {
         tell(source, text, false);
     }
 
-
     public static BaseText formatting(BaseText text, Formatting... formattings) {
         text.formatted(formattings);
         return text;
@@ -113,20 +112,20 @@ public class Messenger {
         return carpet.utils.Messenger.parseStyle(style);
     }
 
-    public static void sendServerMessage(MinecraftServer server, String message, int rbg) {
+    public static void sendServerMessage(MinecraftServer server, String message, int rbg, boolean isBold, boolean isItalic) {
         if (server == null) {
             LOGGER.error("Message not delivered: " + message);
         } else {
             //#if MC<11900
-            server.sendSystemMessage(LiteralTextUtil.createColoredText(message, rbg, false, false), Util.NIL_UUID);
+            server.sendSystemMessage(LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic), Util.NIL_UUID);
             //#else
-            //$$ server.sendMessage(LiteralTextUtil.createColoredText(message, rbg, false, false));
+            //$$ server.sendMessage(LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic));
             //#endif
             for (PlayerEntity entityplayer : server.getPlayerManager().getPlayerList()) {
                 //#if MC<11900
-                entityplayer.sendSystemMessage(LiteralTextUtil.createColoredText(message, rbg, false, true), Util.NIL_UUID);
+                entityplayer.sendSystemMessage(LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic), Util.NIL_UUID);
                 //#else
-                //$$ entityplayer.sendMessage(LiteralTextUtil.createColoredText(message, rbg, false, true));
+                //$$ entityplayer.sendMessage(LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic));
                 //#endif
             }
         }

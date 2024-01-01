@@ -20,11 +20,10 @@
 
 package club.mcams.carpet.commands.rule.customBlockBlastResistance;
 
-import carpet.CarpetSettings;
-
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.config.rule.customBlockHardnessAndBlastResistance.SaveToJson;
+import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.RegexTools;
@@ -57,12 +56,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class CustomBlockBlastResistanceCommandRegistry {
+    private final static Translator translator = new Translator("command.customBlockBlastResistance");
     public final static Map<BlockState, Float> CUSTOM_BLOCK_BLAST_RESISTANCE_MAP = new HashMap<>();
     private final static String MESSAGE_HEAD = "<customBlockBlastResistance> ";
 
@@ -139,7 +138,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
                     MESSAGE_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + hardness,
-                    Colors.RED, true, true
+                    Colors.RED, true, false
                 ),
                 false
             );
@@ -147,8 +146,8 @@ public class CustomBlockBlastResistanceCommandRegistry {
         } else {
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
-                    MESSAGE_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + " not found !",
-                    Colors.RED, false, true
+                    MESSAGE_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + translator.tr("not_found").getString(),
+                    Colors.RED, true
                 ),
                 false
             );
@@ -162,8 +161,8 @@ public class CustomBlockBlastResistanceCommandRegistry {
         SaveToJson.save(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
         player.sendMessage(
             LiteralTextUtil.createColoredText(
-                MESSAGE_HEAD + "All custom block blast resistance values have been removed.",
-                Colors.RED, false, true
+                MESSAGE_HEAD + translator.tr("removeAll").getString(),
+                Colors.RED, true
             ),
             false
         );
@@ -173,7 +172,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
     private static int list(PlayerEntity player) {
         player.sendMessage(
             LiteralTextUtil.createColoredText(
-                "[Block/Blast resistance]\n-------------------------------",
+                translator.tr("list").getString() + "\n-------------------------------",
                 Colors.GREEN, true, false
             ),
             false
@@ -186,7 +185,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
                     blockName + "/" + hardness,
-                    Colors.GREEN, false, false
+                    Colors.GREEN
                 ),
                 false
             );
@@ -194,24 +193,21 @@ public class CustomBlockBlastResistanceCommandRegistry {
         return 1;
     }
 
-    /* TODO: 不想做翻译键，能拖一天是一天 */
-    @SuppressWarnings("TextBlockMigration")
     private static int help(PlayerEntity player) {
-        String helpText;
-        if (Objects.equals(CarpetSettings.language, "zh_cn")) {
-            helpText =
-            "/customBlockBlastResistance set <block> <hardness>  ->  添加或修改方块及其爆炸抗性\n" +
-            "/customBlockBlastResistance remove <block>  ->  从列表中移除方块\n" +
-            "/customBlockBlastResistance removeAll  ->  移除列表中的所有方块\n" +
-            "/customBlockBlastResistance list  ->  显示所有添加的方块";
-        } else {
-            helpText =
-            "/customBlockBlastResistance set <block> <hardness>  ->  Add or modify blocks and their blast resistance\n" +
-            "/customBlockBlastResistance remove <block>  ->  Remove a block from the list\n" +
-            "/customBlockBlastResistance removeAll  ->  Remove all blocks from the list\n" +
-            "/customBlockBlastResistance list  ->  Display all added blocks";
-        }
-        player.sendMessage(LiteralTextUtil.createColoredText(helpText, Colors.GRAY, false, false), false);
+        String setHelpText = translator.tr("help.set").getString();
+        String removeHelpText = translator.tr("help.remove").getString();
+        String removeAllHelpText = translator.tr("help.removeAll").getString();
+        String listHelpText = translator.tr("help.list").getString();
+        player.sendMessage(
+            LiteralTextUtil.createColoredText(
+                setHelpText + "\n" +
+                removeHelpText + "\n" +
+                removeAllHelpText + "\n" +
+                listHelpText,
+                Colors.GRAY
+            ),
+            false
+        );
         return 1;
     }
 

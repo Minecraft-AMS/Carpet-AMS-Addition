@@ -21,42 +21,38 @@
 package club.mcams.carpet.utils.compat;
 
 public class DummyClass {
-    /*
-        Carpet AMS Addition v2.22.0 更新内容
+/*
+    Carpet AMS Addition v2.23.0 更新内容
 
-        # 新增规则
+    # 新增规则
 
-        - `禁用珊瑚失活（undyingCoral）` 让珊瑚扇和珊瑚块不会因缺水失活。
+    - `轻松堆肥（easyCompost）` 让每次堆肥都可以成功。
 
-        - `禁止末影龙破坏方块（enderDragonNoDestroyBlock）` 使末影龙不能破坏任何方块。 [#58](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/58)
+    - `易采集龙蛋（easyMineDragonEgg）` 让龙蛋不会瞬移，玩家可以直接挖掉龙蛋来收集它。 [#68](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/discussions/68)
 
-        # 更改
+    # 更改
 
-        - 重构了 `自定义方块爆炸抗性（customBlockBlastResistance）` 与 `自定义方块硬度（customBlockHardness）` 规则，现在使用单独的指令来进行方块的增删改查，详情见文档。
+    - 为游戏内的一些提示消息增加了中文翻译。
 
-        - 现在 `禁用铁砧交互（anvilInteractionDisabled）` 规则的权限等级是可定义的。
+    # 修复
 
-        # 修复
+    - 修复了一些规则描述中的错误。
 
-        - 修复了一些规则描述中的错误。
+    ---
 
-        ---
+    # New Rules
 
-        # New Rules
+    - `easyCompost` Make every composting successful
 
-        - `undyingCoral` Prevent coral blocks and coral fans from dying.
+    - `easyMineDragonEgg` Makes the dragon egg not teleport, Players can mine dragon eggs to collect them. [#68](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/discussions/68)
 
-        - `enderDragonNoDestroyBlock` Make the Ender Dragon unable to destroy any blocks. [#58](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/58)
+    # Changes
 
-        # Changes
+    - Added Chinese translations for some in-game prompt messages.
 
-        - The `customBlockBlastResistance ` and `customBlockHardness ` rules have been refactored. They now use separate commands for adding, removing, modifying, and querying blocks. See the documentation for details.
+    # Fix
 
-        - Now the permission level for the `anvilInteractionDisabled ` rule is customizable.
+    - Fixed some errors in the descriptions of rules.
 
-        # Fix
-
-        - Fixed some errors in the descriptions of rules.
-
-     */
+ */
 }

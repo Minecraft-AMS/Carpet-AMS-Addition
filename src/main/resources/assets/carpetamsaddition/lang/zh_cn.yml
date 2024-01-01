@@ -1,9 +1,34 @@
 carpetamsaddition:
+  rule:
+    amsUpdateSuppressionCrashFix:
+      location: '更新抑制位置'
 
-  # ------------------------------------------------------
-  #   Translation below will be passed to fabric carpet
-  # ------------------------------------------------------
-  
+  command:
+    amsUpdateSuppressionCrashFixForceMode:
+      lazy_mod: '[ lazy 模式 ]'
+      force_mod: '[ force 模式 ]'
+    anvilInteractionDisabled:
+      disable: '[ 铁砧交互已关闭 ]'
+      enable: '[ 铁砧交互已开启 ]'
+    customBlockBlastResistance:
+      not_found: ' 不存在 !'
+      removeAll: '所有自定义方块及其爆炸抗性已从列表删除'
+      list: '[ 方块 / 爆炸抗性 ]'
+      help:
+        set: '/customBlockBlastResistance set <block> <hardness>  ->  添加或修改方块及其爆炸抗性'
+        remove: '/customBlockBlastResistance remove <block>  ->  从列表中移除方块'
+        removeAll: '/customBlockBlastResistance removeAll  ->  移除列表中的所有方块'
+        list: '/customBlockBlastResistance list  ->  显示所有添加的方块'
+    customBlockHardness:
+      not_found: ' 不存在 !'
+      removeAll: '所有自定义方块及其硬度已从列表删除'
+      list: '[ 方块 / 硬度 ]'
+      help:
+        set: '/customBlockHardness set <block> <hardness>  ->  添加或修改方块及其硬度'
+        remove: '/customBlockHardness remove <block>  ->  从列表中移除方块'
+        removeAll: '/customBlockHardness removeAll  ->  移除列表中的所有方块'
+        list: '/customBlockHardness list  ->  显示所有添加的方块'
+
   carpet_translations:
     category:
       AMS: AMS
@@ -239,6 +264,12 @@ carpetamsaddition:
       enderDragonNoDestroyBlock:
         name: 禁止末影龙破坏方块
         desc: 使末影龙不能破坏任何方块
+      easyCompost:
+        name: 轻松堆肥
+        desc: 让每次堆肥都可以成功
+      easyMineDragonEgg:
+        name: 易采集龙蛋
+        desc: 让龙蛋不会瞬移，玩家可以直接挖掉龙蛋来收集它
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

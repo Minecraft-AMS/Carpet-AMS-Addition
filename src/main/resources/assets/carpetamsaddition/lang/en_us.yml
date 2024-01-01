@@ -1,9 +1,34 @@
 carpetamsaddition:
+  rule:
+    amsUpdateSuppressionCrashFix:
+      location: 'Update suppression location'
 
-  # ------------------------------------------------------
-  #   Translation below will be passed to fabric carpet
-  # ------------------------------------------------------
-  
+  command:
+    amsUpdateSuppressionCrashFixForceMode:
+      lazy_mod: '[ lazy mode ]'
+      force_mod: '[ force mode ]'
+    anvilInteractionDisabled:
+      disable: '[ Anvil Interaction Disable ]'
+      enable: '[ Anvil Interaction Enable ]'
+    customBlockBlastResistance:
+      not_found: ' not found !'
+      removeAll: 'All custom block blast resistance values have been removed.'
+      list: '[ Block / Blast resistance ]'
+      help:
+        set: '/customBlockBlastResistance set <block> <hardness>  ->  Add or modify blocks and their blast resistance'
+        remove: '/customBlockBlastResistance remove <block>  ->  Remove a block from the list'
+        removeAll: '/customBlockBlastResistance removeAll  ->  Remove all blocks from the list'
+        list: '/customBlockBlastResistance list  ->  Display all added blocks'
+    customBlockHardness:
+      not_found: ' not found !'
+      removeAll: 'All custom block hardness values have been removed.'
+      list: '[ Block / Hardness ]'
+      help:
+        set: '/customBlockHardness set <block> <hardness>  ->  Add or modify blocks and their hardness'
+        remove: '/customBlockHardness remove <block>  ->  Remove a block from the list'
+        removeAll: '/customBlockHardness removeAll  ->  Remove all blocks from the list'
+        list: '/customBlockHardness list  ->  Display all added blocks'
+
   carpet_translations:
     category:
       AMS: AMS
@@ -182,6 +207,10 @@ carpetamsaddition:
         desc: Prevent coral blocks and coral fans from dying
       enderDragonNoDestroyBlock:
         desc: Make the Ender Dragon unable to destroy any blocks
+      easyCompost:
+        desc: Make every composting successful
+      easyMineDragonEgg:
+        desc: Makes the dragon egg not teleport, Players can mine dragon eggs to collect them
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

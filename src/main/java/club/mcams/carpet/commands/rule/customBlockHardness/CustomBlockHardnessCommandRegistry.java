@@ -20,10 +20,9 @@
 
 package club.mcams.carpet.commands.rule.customBlockHardness;
 
-import carpet.CarpetSettings;
-
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.RegexTools;
@@ -57,12 +56,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class CustomBlockHardnessCommandRegistry {
+    private final static Translator translator = new Translator("command.customBlockHardness");
     public static final Map<BlockState, Float> CUSTOM_BLOCK_HARDNESS_MAP = new HashMap<>();
     private static final String MESSAGE_HEAD = "<customBlockHardness> ";
 
@@ -147,8 +146,8 @@ public class CustomBlockHardnessCommandRegistry {
         } else {
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
-                    MESSAGE_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + " not found !",
-                    Colors.RED, false, true
+                    MESSAGE_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + translator.tr("not_found").getString(),
+                    Colors.RED, true, false
                 ),
                 false
             );
@@ -162,7 +161,7 @@ public class CustomBlockHardnessCommandRegistry {
         SaveToJson.save(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
         player.sendMessage(
             LiteralTextUtil.createColoredText(
-                MESSAGE_HEAD + "All custom block hardness values have been removed.",
+                MESSAGE_HEAD + translator.tr("removeAll").getString(),
                 Colors.RED, false, true
             ),
             false
@@ -173,7 +172,7 @@ public class CustomBlockHardnessCommandRegistry {
     private static int list(PlayerEntity player) {
         player.sendMessage(
             LiteralTextUtil.createColoredText(
-                "[Block/Hardness]\n-------------------------------",
+                translator.tr("list") + "\n-------------------------------",
                 Colors.GREEN, true, false
             ),
             false
@@ -186,7 +185,7 @@ public class CustomBlockHardnessCommandRegistry {
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
                     blockName + "/" + hardness,
-                    Colors.GREEN, false, false
+                    Colors.GREEN
                 ),
                 false
             );
@@ -194,24 +193,21 @@ public class CustomBlockHardnessCommandRegistry {
         return 1;
     }
 
-    /* TODO: 不想做翻译键，能拖一天是一天 */
-    @SuppressWarnings("TextBlockMigration")
     private static int help(PlayerEntity player) {
-        String helpText;
-        if (Objects.equals(CarpetSettings.language, "zh_cn")) {
-            helpText =
-            "/customBlockHardness set <block> <hardness>  ->  添加或修改方块及其硬度\n" +
-            "/customBlockHardness remove <block>  ->  从列表中移除方块\n" +
-            "/customBlockHardness removeAll  ->  移除列表中的所有方块\n" +
-            "/customBlockHardness list  ->  显示所有添加的方块";
-        } else {
-            helpText =
-            "/customBlockHardness set <block> <hardness>  ->  Add or modify blocks and their hardness\n" +
-            "/customBlockHardness remove <block>  ->  Remove a block from the list\n" +
-            "/customBlockHardness removeAll  ->  Remove all blocks from the list\n" +
-            "/customBlockHardness list  ->  Display all added blocks\n";
-        }
-        player.sendMessage(LiteralTextUtil.createColoredText(helpText, Colors.GRAY, false, false), false);
+        String setHelpText = translator.tr("help.set").getString();
+        String removeHelpText = translator.tr("help.remove").getString();
+        String removeAllHelpText = translator.tr("help.removeAll").getString();
+        String listHelpText = translator.tr("help.list").getString();
+        player.sendMessage(
+            LiteralTextUtil.createColoredText(
+                setHelpText + "\n" +
+                removeHelpText + "\n" +
+                removeAllHelpText + "\n" +
+                listHelpText,
+                Colors.GRAY
+            ),
+            false
+        );
         return 1;
     }
 

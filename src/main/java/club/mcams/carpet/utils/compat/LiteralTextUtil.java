@@ -35,6 +35,14 @@ public class LiteralTextUtil {
     //$$ }
     //#endif
 
+    public static Text createColoredText(String text, int rgb) {
+        return compatText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgb)));
+    }
+
+    public static Text createColoredText(String text, int rgb, boolean isItalic) {
+        return compatText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgb)).withItalic(isItalic));
+    }
+
     public static Text createColoredText(String text, int rgb, boolean isBold, boolean isItalic) {
         return compatText(text).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(rgb)).withBold(isBold).withItalic(isItalic));
     }
