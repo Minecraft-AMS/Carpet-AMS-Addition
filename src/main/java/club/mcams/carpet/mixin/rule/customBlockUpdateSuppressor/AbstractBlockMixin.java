@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
-import static club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.amsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode;
+import static club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode;
 
 @Mixin(AbstractBlock.class)
 public abstract class AbstractBlockMixin {

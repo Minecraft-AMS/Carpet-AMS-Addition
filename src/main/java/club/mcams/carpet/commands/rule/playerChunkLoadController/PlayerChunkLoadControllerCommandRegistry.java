@@ -37,7 +37,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 
-public class playerChunkLoadControllerCommandRegistry {
+public class PlayerChunkLoadControllerCommandRegistry {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("playerChunkLoading")
             .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.playerChunkLoadController))

@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class AnvilBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     private void onUse(CallbackInfoReturnable<ActionResult> cir) {
-        if (club.mcams.carpet.commands.rule.anvilInteractionDisabled.anvilInteractionDisabledCommandRegistry.anvilInteractionDisabled) {
+        if (club.mcams.carpet.commands.rule.anvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry.anvilInteractionDisabled) {
             cir.setReturnValue(ActionResult.PASS);
             cir.cancel();
         }

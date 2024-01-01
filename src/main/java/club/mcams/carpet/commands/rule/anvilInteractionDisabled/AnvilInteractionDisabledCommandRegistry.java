@@ -37,7 +37,7 @@ import java.util.Objects;
 
 import static net.minecraft.server.command.CommandManager.argument;
 
-public class anvilInteractionDisabledCommandRegistry {
+public class AnvilInteractionDisabledCommandRegistry {
     public static boolean anvilInteractionDisabled = false;
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {

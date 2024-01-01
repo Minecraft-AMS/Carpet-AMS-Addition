@@ -35,7 +35,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 import java.util.Objects;
 
-public class amsUpdateSuppressionCrashFixCommandRegistry {
+public class AmsUpdateSuppressionCrashFixCommandRegistry {
     public static boolean amsUpdateSuppressionCrashFixForceMode = false;
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
