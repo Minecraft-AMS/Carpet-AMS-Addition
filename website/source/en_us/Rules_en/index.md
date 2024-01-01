@@ -1266,6 +1266,42 @@ Make the Ender Dragon unable to destroy any blocks.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## easyCompost
+
+Make every composting successful.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## easyMineDragonEgg
+
+Makes the dragon egg not teleport, Players can mine dragon eggs to collect them.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
