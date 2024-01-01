@@ -28,7 +28,7 @@ import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.RegexTools;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
-import club.mcams.carpet.config.rule.customBlockHardness_customBlockBlastResistance.SaveToJson;
+import club.mcams.carpet.config.rule.customBlockHardnessAndBlastResistance.SaveToJson;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -64,7 +64,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class CustomBlockHardnessCommandRegistry {
     public static final Map<BlockState, Float> CUSTOM_BLOCK_HARDNESS_MAP = new HashMap<>();
-    private final static String MESSAGE_HEAD = "<customBlockHardness> ";
+    private static final String MESSAGE_HEAD = "<customBlockHardness> ";
 
     //#if MC<11900
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
@@ -126,7 +126,7 @@ public class CustomBlockHardnessCommandRegistry {
             );
         }
         CUSTOM_BLOCK_HARDNESS_MAP.put(state, hardness);
-        SaveToJson.saveToJson(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
+        SaveToJson.save(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
         return 1;
     }
 
@@ -135,7 +135,7 @@ public class CustomBlockHardnessCommandRegistry {
         if (CUSTOM_BLOCK_HARDNESS_MAP.containsKey(state)) {
             float hardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
             CUSTOM_BLOCK_HARDNESS_MAP.remove(state);
-            SaveToJson.saveToJson(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
+            SaveToJson.save(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
                     MESSAGE_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + hardness,
@@ -159,7 +159,7 @@ public class CustomBlockHardnessCommandRegistry {
     private static int removeAll(MinecraftServer server, PlayerEntity player) {
         String CONFIG_FILE_PATH = getPath(server);
         CUSTOM_BLOCK_HARDNESS_MAP.clear();
-        SaveToJson.saveToJson(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
+        SaveToJson.save(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
         player.sendMessage(
             LiteralTextUtil.createColoredText(
                 MESSAGE_HEAD + "All custom block hardness values have been removed.",
@@ -173,7 +173,7 @@ public class CustomBlockHardnessCommandRegistry {
     private static int list(PlayerEntity player) {
         player.sendMessage(
             LiteralTextUtil.createColoredText(
-                "[Block/Hardness]\n-------------------------",
+                "[Block/Hardness]\n-------------------------------",
                 Colors.GREEN, true, false
             ),
             false

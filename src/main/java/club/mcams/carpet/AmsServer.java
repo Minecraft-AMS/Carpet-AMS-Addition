@@ -32,8 +32,7 @@ import carpet.script.bundled.BundledModule;
 //#endif
 
 import club.mcams.carpet.commands.RegisterCommands;
-import club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
-import club.mcams.carpet.commands.rule.customBlockHardness.CustomBlockHardnessCommandRegistry;
+import club.mcams.carpet.config.LoadConfigFromJson;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
@@ -141,8 +140,7 @@ public class AmsServer implements CarpetExtension {
     @Override
     public void onServerLoaded(MinecraftServer server) {
         minecraftServer = server;
-        CustomBlockBlastResistanceCommandRegistry.loadFromJson(CustomBlockBlastResistanceCommandRegistry.getPath(server));
-        CustomBlockHardnessCommandRegistry.loadFromJson(CustomBlockHardnessCommandRegistry.getPath(server));
+        LoadConfigFromJson.load(server);
     }
 
     @Override
@@ -365,7 +363,6 @@ public class AmsServer implements CarpetExtension {
         resourcePackManager.scanPacks();
         Collection<String> collection = Lists.newArrayList(resourcePackManager.getEnabledNames());
         collection.add("AmsData");
-
         ReloadCommand.tryReloadDataPacks(collection, minecraftServer.getCommandSource());
     }
 

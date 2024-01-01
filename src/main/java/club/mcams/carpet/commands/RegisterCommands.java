@@ -51,6 +51,5 @@ public class RegisterCommands {
         //$$ CustomBlockHardnessCommandRegistry.register(dispatcher, commandBuildContext);
         //$$ CustomBlockBlastResistanceCommandRegistry.register(dispatcher, commandBuildContext);
         //#endif
-
     }
 }

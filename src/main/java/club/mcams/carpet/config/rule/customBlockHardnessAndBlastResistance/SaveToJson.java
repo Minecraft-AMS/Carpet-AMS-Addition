@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.config.rule.customBlockHardness_customBlockBlastResistance;
+package club.mcams.carpet.config.rule.customBlockHardnessAndBlastResistance;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.utils.RegexTools;
@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class SaveToJson {
     @SuppressWarnings("ReadWriteStringCanBeUsed")
-    public static void saveToJson(Map<BlockState, Float> customBlockMap, String configFilePath) {
+    public static void save(Map<BlockState, Float> customBlockMap, String configFilePath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Map<String, Float> simplifiedMap = new HashMap<>();
         for (Map.Entry<BlockState, Float> entry : customBlockMap.entrySet()) {

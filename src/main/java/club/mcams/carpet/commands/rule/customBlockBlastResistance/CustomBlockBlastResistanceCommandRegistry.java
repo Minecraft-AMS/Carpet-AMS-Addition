@@ -24,7 +24,7 @@ import carpet.CarpetSettings;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.config.rule.customBlockHardness_customBlockBlastResistance.SaveToJson;
+import club.mcams.carpet.config.rule.customBlockHardnessAndBlastResistance.SaveToJson;
 import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.RegexTools;
@@ -126,7 +126,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             );
         }
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, blastResistance);
-        SaveToJson.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+        SaveToJson.save(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
         return 1;
     }
 
@@ -135,7 +135,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float hardness = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.remove(state);
-            SaveToJson.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+            SaveToJson.save(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
                     MESSAGE_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + hardness,
@@ -159,7 +159,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
     private static int removeAll(MinecraftServer server, PlayerEntity player) {
         String CONFIG_FILE_PATH = getPath(server);
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
-        SaveToJson.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+        SaveToJson.save(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
         player.sendMessage(
             LiteralTextUtil.createColoredText(
                 MESSAGE_HEAD + "All custom block blast resistance values have been removed.",
@@ -173,7 +173,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
     private static int list(PlayerEntity player) {
         player.sendMessage(
             LiteralTextUtil.createColoredText(
-                "[Block/Blast resistance]\n-------------------------",
+                "[Block/Blast resistance]\n-------------------------------",
                 Colors.GREEN, true, false
             ),
             false

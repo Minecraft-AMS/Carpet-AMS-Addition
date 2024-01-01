@@ -133,8 +133,8 @@ carpetamsaddition:
         name: 更新抑制崩溃修复
         desc: 防止更新抑制导致服务器崩溃，同时提供发生更新抑制的坐标与维度
         extra:
-          '1': '使用如下指令来控制其是否在"customBlockUpdateSuppressor"开启时强制启动，权限等级为2:'
-          '2': '/amsUpdateSuppressionCrashFixForceMode true/false'
+          '0': '使用如下指令来控制其是否在"customBlockUpdateSuppressor"开启时强制启动，权限等级为2:'
+          '1': '/amsUpdateSuppressionCrashFixForceMode true/false'
       cakeBlockDropOnBreak:
         name: 可掉落蛋糕
         desc: 蛋糕在被破坏时可以掉落蛋糕（蛋糕是完整的情况下才会掉落）
@@ -281,8 +281,8 @@ carpetamsaddition:
         name: 钟区块加载
         desc: 钟方块被激活时将加载周围3x3区块15s
         extra:
-          '1': '由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作'
-          '2': '你可以启用blockChunkLoaderKeepTickUpdate或keepEntityUpdate规则来解决这个问题'
+          '0': '由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作'
+          '1': '你可以启用blockChunkLoaderKeepTickUpdate或keepEntityUpdate规则来解决这个问题'
       pistonBlockChunkLoader:
         name: 活塞头区块加载
         desc: 活塞或黏性活塞被激活且能正常伸出时以活塞头将到达的区块为中心加载3x3区块持续15s

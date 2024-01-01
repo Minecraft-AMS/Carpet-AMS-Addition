@@ -35,10 +35,10 @@ carpetamsaddition:
       customBlockUpdateSuppressor:
         desc: Customize a block to be an update suppressor (Not all blocks can be set as update suppressor)
         extra:
-          '4': 'Command format:'
-          '5': '/carpet customBlockUpdateSuppressor minecraft:BlockName'
-          '2': 'Use the following command to control whether the "amsUpdateSuppressionCrashFix" rule is automatically enabled when this rule is enabled: '
-          '3': '/amsUpdateSuppressionCrashFixForceMode true/false'
+          '1': 'Command format:'
+          '2': '/carpet customBlockUpdateSuppressor minecraft:BlockName'
+          '3': 'Use the following command to control whether the "amsUpdateSuppressionCrashFix" rule is automatically enabled when this rule is enabled: '
+          '4': '/amsUpdateSuppressionCrashFixForceMode true/false'
       infiniteTrades:
         desc: Prevents villager trades from locking up
       invulnerable:
@@ -215,8 +215,8 @@ carpetamsaddition:
       bellBlockChunkLoader:
         desc: Load nearby 3x3 chunks for 15 seconds when a bell is triggered
         extra:
-          '1': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '2': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue.'
+          '0': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
+          '1': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue.'
       pistonBlockChunkLoader:
         desc:  Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head)
         extra:
