@@ -22,6 +22,7 @@ package club.mcams.carpet.config;
 
 import club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
 import club.mcams.carpet.commands.rule.customBlockHardness.CustomBlockHardnessCommandRegistry;
+
 import net.minecraft.server.MinecraftServer;
 
 public class LoadConfigFromJson {
