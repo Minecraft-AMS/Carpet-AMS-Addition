@@ -22,7 +22,7 @@ package club.mcams.carpet.utils.compat;
 
 public class DummyClass {
 /*
-    Carpet AMS Addition v2.23.1 ? 更新内容
+    Carpet AMS Addition v2.23.1 更新内容
 
     # 修复
     修复了 `防止管理员作弊（preventAdministratorCheat）` 规则开启时服务器后台也无法使用被禁用的命令的情况（导致无法使用MCDR的here，where插件）。
