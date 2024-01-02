@@ -690,7 +690,7 @@ Five gears are provided to allow players to move faster.
 
 
 
-- Suggested options: `Ⅰ` , `Ⅱ`, `Ⅲ`, `Ⅳ`, `Ⅴ`, `VANILLA`
+- Suggested options: `Ⅰ`, `Ⅱ`, `Ⅲ`, `Ⅳ`, `Ⅴ`, `VANILLA`
 
 
 
