@@ -22,12 +22,25 @@ package club.mcams.carpet.utils.compat;
 
 public class DummyClass {
 /*
-    Carpet AMS Addition v2.23.1 更新内容
 
-    # 修复
-    修复了 `防止管理员作弊（preventAdministratorCheat）` 规则开启时服务器后台也无法使用被禁用的命令的情况（导致无法使用MCDR的here，where插件）。
+    Carpet AMS Addition v2.24.0 更新内容
+
+    # 新增规则
+    - 可繁殖鹦鹉（breedableParrots）自定义一种食物来喂食鹦鹉繁殖它们（你也可以用石头来喂它们，如果你真的这么想的话）。
 
     # 更改
-    现在，`/gamerule` 指令也被 `防止管理员作弊（preventAdministratorCheat）` 规则禁用。
+    - 由于更改方块的挖掘硬度过于需要客户端的参与，以下规则已被移除，且不建议安装旧版本继续使用他们：
+    麒麟臂（kirinArm）
+    可采集基岩（mineBedrock）
+    可采集末地传送门框架（mineEndPortalFrame）
+    自定义方块硬度（customBlockHardness）
+    可合成屏障方块（craftableBarrier）
+    可合成光源方块（craftableLight）
+
+    - 为验证器增加翻译
+
+    # 修复
+    - 修复了 `自定义方块爆炸抗性（customBlockBlastResistance）` 规则的翻译键错误。
+
  */
 }
