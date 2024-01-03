@@ -144,9 +144,6 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean immuneShulkerBullet = false;
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean kirinArm = false;
-
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static blueSkullProbability blueSkullController = blueSkullProbability.VANILLA;
 
@@ -205,12 +202,6 @@ public class AmsServerSettings {
     )
     public static double maxClientInteractionReachDistance = -1.0D;
 
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean mineBedrock = false;
-
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean mineEndPortalFrame = false;
-
     @Rule(
             options = {"VANILLA", "minecraft:bedrock", "minecraft:bedrock,minecraft:obsidian"},
             categories = {AMS, FEATURE},
@@ -232,7 +223,7 @@ public class AmsServerSettings {
 
     @Rule(
             options = {"-1"},
-            categories = {AMS, FEATURE, TNT},
+            categories = {AMS, SURVIVAL, FEATURE, TNT},
             validators = BlastResistanceValidator.class,
             strict = false
     )
@@ -265,12 +256,6 @@ public class AmsServerSettings {
     )
     public static int flippinCactusSoundEffect = 0;
 
-    @Rule(
-            options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
-            categories = {AMS, FEATURE, SURVIVAL, COMMAND}
-    )
-    public static String customBlockHardness = "false";
-
     @Rule(categories = {AMS, FEATURE})
     public static boolean undyingCoral = false;
 
@@ -282,6 +267,13 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean easyMineDragonEgg = false;
+
+    @Rule(
+            options = {"none", "apple", "stone", "wheat_seed"},
+            categories = {AMS, FEATURE},
+            strict = false
+    )
+    public static String breedableParrots = "none";
 
     /*
      * 合成表规则
@@ -326,16 +318,6 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, CRAFTING, SURVIVAL})
     public static boolean betterCraftablePolishedBlackStoneButton = false;
     //#endif
-
-    //#if MC>=11700
-    @CraftingRule(recipes = {"light.json"})
-    @Rule(categories = {AMS, CRAFTING, SURVIVAL})
-    public static boolean craftableLight = false;
-    //#endif
-
-    @CraftingRule(recipes = {"barrier.json"})
-    @Rule(categories = {AMS, CRAFTING, SURVIVAL})
-    public static boolean craftableBarrier = false;
 
     public enum blueSkullProbability {
         VANILLA,

@@ -19,15 +19,14 @@ carpetamsaddition:
         remove: '/customBlockBlastResistance remove <block>  ->  从列表中移除方块'
         removeAll: '/customBlockBlastResistance removeAll  ->  移除列表中的所有方块'
         list: '/customBlockBlastResistance list  ->  显示所有添加的方块'
-    customBlockHardness:
-      not_found: ' 不存在 !'
-      removeAll: '所有自定义方块及其硬度已从列表删除'
-      list: '[ 方块 / 硬度 ]'
-      help:
-        set: '/customBlockHardness set <block> <hardness>  ->  添加或修改方块及其硬度'
-        remove: '/customBlockHardness remove <block>  ->  从列表中移除方块'
-        removeAll: '/customBlockHardness removeAll  ->  移除列表中的所有方块'
-        list: '/customBlockHardness list  ->  显示所有添加的方块'
+
+  validator:
+    enhancedWorldEater:
+      value_range: '设定的值必须为 0 - 16 或 -1'
+    maxClientInteractionReachDistance:
+      value_range: '设定的值必须为 0 - 512 或 -1'
+    maxPlayerInteractionDistance:
+      value_range: '设定的值必须为 0 - 512 或 -1'
 
   carpet_translations:
     category:
@@ -114,9 +113,6 @@ carpetamsaddition:
       immuneShulkerBullet:
         name: 免疫潜影贝飞弹
         desc: 玩家将完全免疫潜影贝发射的飞弹
-      kirinArm:
-        name: 麒麟臂
-        desc: 玩家可以徒手秒破除基岩外的任何方块
       blueSkullController:
         name: 凋零蓝头控制器
         desc: 控制凋零发射蓝色骷髅的概率
@@ -192,12 +188,6 @@ carpetamsaddition:
         extra:
           '0': '允许设定的范围：0 - 512'
           '1': '需要关闭Tweakeroo的tweakBlockReachOverride功能'
-      mineBedrock:
-        name: 可采集基岩
-        desc: 玩家可以采集基岩
-      mineEndPortalFrame:
-        name: 可采集末地传送门框架
-        desc: 玩家可以采集末地传送门框架
       customMovableBlock:
         name: 自定义可移动方块
         desc: 可自定义的让不能被推动的方块变得能被推动
@@ -253,11 +243,6 @@ carpetamsaddition:
       flippinCactusSoundEffect:
         name: 仙人掌扳手音效
         desc: 在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了三种不同音效，设置为0禁用音效）
-      customBlockHardness:
-        name: 自定义方块硬度
-        desc: 使用指令来自定义任何方块的挖掘硬度
-        extra:
-          '0': '开启规则后使用/customBlockHardness help命令来查看使用说明'
       undyingCoral:
         name: 禁用珊瑚失活
         desc: 让珊瑚扇和珊瑚块不会因缺水失活
@@ -270,6 +255,9 @@ carpetamsaddition:
       easyMineDragonEgg:
         name: 易采集龙蛋
         desc: 让龙蛋不会瞬移，玩家可以直接挖掉龙蛋来收集它
+      breedableParrots:
+        name: 可繁殖鹦鹉
+        desc: 自定义一种食物来喂食鹦鹉繁殖它们（你也可以用石头来喂它们，如果你真的这么想的话）
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

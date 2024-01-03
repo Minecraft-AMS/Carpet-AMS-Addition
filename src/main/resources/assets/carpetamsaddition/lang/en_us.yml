@@ -19,15 +19,14 @@ carpetamsaddition:
         remove: '/customBlockBlastResistance remove <block>  ->  Remove a block from the list'
         removeAll: '/customBlockBlastResistance removeAll  ->  Remove all blocks from the list'
         list: '/customBlockBlastResistance list  ->  Display all added blocks'
-    customBlockHardness:
-      not_found: ' not found !'
-      removeAll: 'All custom block hardness values have been removed.'
-      list: '[ Block / Hardness ]'
-      help:
-        set: '/customBlockHardness set <block> <hardness>  ->  Add or modify blocks and their hardness'
-        remove: '/customBlockHardness remove <block>  ->  Remove a block from the list'
-        removeAll: '/customBlockHardness removeAll  ->  Remove all blocks from the list'
-        list: '/customBlockHardness list  ->  Display all added blocks'
+
+  validator:
+    enhancedWorldEater:
+      value_range: 'The value must be 0 - 16 or -1'
+    maxClientInteractionReachDistance:
+      value_range: 'The value must be 0 - 512 or -1'
+    maxPlayerInteractionDistance:
+      value_range: 'The value must be 0 - 512 or -1'
 
   carpet_translations:
     category:
@@ -90,8 +89,6 @@ carpetamsaddition:
         desc: When hit by a shulker, the player only takes damage and does not gain the levitation effect
       immuneShulkerBullet:
         desc: Players are now completely immune to bullets fired by shulkers
-      kirinArm:
-        desc: Players can instantly break any block except bedrock with bare hands
       blueSkullController:
         desc: Control the probability of wither and emitting blue skull
         extra:
@@ -153,10 +150,6 @@ carpetamsaddition:
         extra:
           '0': 'The range of values: 0 - 512'
           '1': 'Need to disable the tweakBlockReachOverride feature in Tweakeroo'
-      mineBedrock:
-        desc: Players can mine bedrock
-      mineEndPortalFrame:
-        desc: Players can collect End portal frames
       customMovableBlock:
         desc: Customize the non-pushable block to make it pushable
         extra:
@@ -199,10 +192,6 @@ carpetamsaddition:
         desc: Remove cooldown time for using items
       flippinCactusSoundEffect:
         desc: When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing three different sound options, Setting it to 0 disables the sound effects)
-      customBlockHardness:
-        desc: Use command to customizing mining hardness for any block
-        extra:
-          '0': 'After enabling the rules, use the /customBlockBlastResistance helper command to view the usage instructions'
       undyingCoral:
         desc: Prevent coral blocks and coral fans from dying
       enderDragonNoDestroyBlock:
@@ -211,6 +200,8 @@ carpetamsaddition:
         desc: Make every composting successful
       easyMineDragonEgg:
         desc: Makes the dragon egg not teleport, Players can mine dragon eggs to collect them
+      breedableParrots:
+        desc: Customize a food to feed the parrots and breed them (You can also feed them with stones if you really want to)
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -278,7 +269,3 @@ carpetamsaddition:
         desc: Better craftable dispenser
       betterCraftablePolishedBlackStoneButton:
         desc: Use deepslate to crafted polished_blackstone_button in minecraft
-      craftableLight:
-        desc: Add light block recipes in minecraft, when enabled, light blocks will have no mining hardness
-      craftableBarrier:
-        desc: Add barrier recipes in minecraft, when enabled, barrier blocks will have no mining hardness
