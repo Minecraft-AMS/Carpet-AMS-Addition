@@ -37,7 +37,6 @@ import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
-import club.mcams.carpet.utils.Logging;
 import club.mcams.carpet.utils.recipes.CraftingRule;
 
 import com.google.common.base.CaseFormat;
@@ -150,7 +149,7 @@ public class AmsServer implements CarpetExtension {
             try {
                 FileUtils.deleteDirectory(datapackPath);
             } catch (IOException e) {
-                Logging.logStackTrace(e);
+                LOGGER.error("Error deleting directory: " + datapackPath, e);
             }
         }
     }
@@ -162,7 +161,7 @@ public class AmsServer implements CarpetExtension {
             try {
                 FileUtils.deleteDirectory(new File(datapackPath + "/Ams_flexibleData/"));
             } catch (IOException e) {
-                Logging.logStackTrace(e);
+                LOGGER.error("Failed to delete directory Ams_flexibleData: " + e.getMessage());
             }
         }
         datapackPath += "/AmsData/";
@@ -174,7 +173,7 @@ public class AmsServer implements CarpetExtension {
             Files.createDirectories(new File(datapackPath + "data/minecraft/recipes").toPath());
             copyFile("assets/carpetamsaddition/AmsRecipeTweakPack/pack.mcmeta", datapackPath + "pack.mcmeta");
         } catch (IOException e) {
-            Logging.logStackTrace(e);
+            LOGGER.error("Failed to create directories or copy files: " + e.getMessage());
         }
 
         copyFile(
@@ -242,7 +241,7 @@ public class AmsServer implements CarpetExtension {
                 } ));
                 fileStream.close();
             } catch (IOException e) {
-                Logging.logStackTrace(e);
+                LOGGER.error("Failed to list recipes in directory: " + e.getMessage());
             }
 
             deleteRecipes(installedRecipes.toArray(new String[0]), recipeNamespace, datapackPath, ruleName, false);
@@ -260,7 +259,7 @@ public class AmsServer implements CarpetExtension {
                     } ));
                     fileStream.close();
                 } catch (IOException e) {
-                    Logging.logStackTrace(e);
+                    LOGGER.error("Failed to list advancements in directory: " + e.getMessage());
                 }
                 for (String advancement : installedAdvancements.toArray(new String[0])) {
                     removeAdvancement(datapackPath, advancement);
@@ -323,7 +322,7 @@ public class AmsServer implements CarpetExtension {
             try {
                 Files.deleteIfExists(new File(datapackPath + recipeNamespace + "/recipes", recipeName).toPath());
             } catch (IOException e) {
-                Logging.logStackTrace(e);
+                LOGGER.error("Failed to delete recipe file " + recipeName + ": " + e.getMessage());
             }
         }
         if (removeAdvancement && recipeNamespace.equals("ams")) {
@@ -354,7 +353,7 @@ public class AmsServer implements CarpetExtension {
         try {
             Files.deleteIfExists(new File(datapackPath + "ams/advancements/" + ruleName + ".json").toPath());
         } catch (IOException e) {
-            Logging.logStackTrace(e);
+            LOGGER.error("Failed to delete advancement file: " + ruleName + ".json: " + e.getMessage());
         }
     }
 
@@ -374,10 +373,9 @@ public class AmsServer implements CarpetExtension {
             assert source != null;
             Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            Logging.logStackTrace(e);
+            LOGGER.error("Resource '" + resourcePath + "' not found.");
         } catch (NullPointerException e) {
-            LOGGER.error("Resource '" + resourcePath + "' is null:");
-            Logging.logStackTrace(e);
+            LOGGER.error("Resource '" + resourcePath + "' is null.");
         }
     }
     //#if MC>=11900
@@ -409,7 +407,7 @@ public class AmsServer implements CarpetExtension {
             writer.write(new GsonBuilder().setPrettyPrinting().create().toJson(jsonObject));
             writer.close();
         } catch (IOException e) {
-            Logging.logStackTrace(e);
+            LOGGER.error("Failed to write JSON to file '" + filePath + "': " + e.getMessage());
         }
     }
 }

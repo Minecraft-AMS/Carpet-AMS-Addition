@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2024  A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,22 +18,13 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.settings;
+package club.mcams.carpet.config.rule.customBlockBlastResistance;
 
-import carpet.settings.ParsedRule;
-import carpet.settings.Validator;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.WorldSavePath;
 
-import net.minecraft.server.command.ServerCommandSource;
-
-@SuppressWarnings("unused")
-public abstract class RuleObserver<T> extends Validator<T> {
-    @Override
-    public T validate(ServerCommandSource source, ParsedRule<T> currentRule, T newValue, String string) {
-        if (currentRule.get() != newValue) {
-            this.onValueChanged(currentRule.get(), newValue);
-        }
-        return newValue;
+public class BlockBlastResistanceConfigPath {
+    public static String getPath(MinecraftServer server) {
+        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_block_Blast_Resistance" + ".json").toString();
     }
-
-    abstract public void onValueChanged(T oldValue, T newValue);
 }

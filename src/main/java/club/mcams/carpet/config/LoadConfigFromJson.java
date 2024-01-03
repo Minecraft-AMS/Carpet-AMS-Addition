@@ -20,14 +20,19 @@
 
 package club.mcams.carpet.config;
 
-import club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
-import club.mcams.carpet.commands.rule.customBlockHardness.CustomBlockHardnessCommandRegistry;
-
 import net.minecraft.server.MinecraftServer;
+
+import club.mcams.carpet.config.rule.customBlockBlastResistance.BlockBlastResistanceConfigPath;
+import club.mcams.carpet.config.rule.customBlockBlastResistance.LoadBlockBlastResistanceMapFromJson;
+import static club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
 
 public class LoadConfigFromJson {
     public static void load(MinecraftServer server) {
-        CustomBlockBlastResistanceCommandRegistry.loadFromJson(CustomBlockBlastResistanceCommandRegistry.getPath(server));
-        CustomBlockHardnessCommandRegistry.loadFromJson(CustomBlockHardnessCommandRegistry.getPath(server));
+        clearMap();
+        LoadBlockBlastResistanceMapFromJson.load(BlockBlastResistanceConfigPath.getPath(server));
+    }
+
+    private static void clearMap() {
+        CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
     }
 }

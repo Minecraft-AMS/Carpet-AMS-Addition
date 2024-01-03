@@ -20,18 +20,16 @@
 
 package club.mcams.carpet.commands;
 
-
-import club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
-import com.mojang.brigadier.CommandDispatcher;
-
 import net.minecraft.server.command.ServerCommandSource;
 //#if MC>=11900
 //$$ import net.minecraft.command.CommandRegistryAccess;
 //#endif
 
+import com.mojang.brigadier.CommandDispatcher;
+
+import club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
 import club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry;
 import club.mcams.carpet.commands.rule.anvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry;
-import club.mcams.carpet.commands.rule.customBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.commands.rule.playerChunkLoadController.PlayerChunkLoadControllerCommandRegistry;
 
 public class RegisterCommands {
@@ -42,13 +40,14 @@ public class RegisterCommands {
         //#endif
     ) {
         AmsUpdateSuppressionCrashFixCommandRegistry.register(dispatcher);
+
         PlayerChunkLoadControllerCommandRegistry.register(dispatcher);
+
         AnvilInteractionDisabledCommandRegistry.register(dispatcher);
+
         //#if MC<11900
-        CustomBlockHardnessCommandRegistry.register(dispatcher);
         CustomBlockBlastResistanceCommandRegistry.register(dispatcher);
         //#else
-        //$$ CustomBlockHardnessCommandRegistry.register(dispatcher, commandBuildContext);
         //$$ CustomBlockBlastResistanceCommandRegistry.register(dispatcher, commandBuildContext);
         //#endif
     }
