@@ -616,25 +616,6 @@ When enabled, Players are now completely immune to bullets fired by shulkers.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
-
-## kirinArm
-
-When enabled, Players can instantly break any block except bedrock with bare hands.
-
-- Type `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false` , `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
-
 ## blueSkullController
 
 When enabled，You can choose whether to have Withering always shoot blue skulls or never shoot blue skull.
@@ -926,42 +907,6 @@ Need to disable the tweakBlockReachOverride feature in Tweakeroo.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
-## mineBedrock
-
-When enabled, Players can mine bedrock.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`
-
-## mineEndPortalFrame
-
-When enabled, Players can mine bedrock.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`
-
 ## customMovableBlock
 
 Customize the non-pushable block to make it pushable.
@@ -1062,7 +1007,7 @@ Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Port
 
 
 
-- Categroies: `AMS`, `FEATURE`, `TNT`
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL` `TNT`
 
 ## sneakToEditSign
 
@@ -1210,26 +1155,6 @@ When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will 
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
-## customBlockHardness
-
-Use command to customizing mining hardness for any block.
-
-After enabling the rules, use the /customBlockBlastResistance helper command to view the usage instructions.
-
-- Type: `String`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
-
 ## undyingCoral
 
 Prevent coral blocks and coral fans from dying.
@@ -1301,6 +1226,24 @@ Makes the dragon egg not teleport, Players can mine dragon eggs to collect them.
 
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## breedableParrots
+
+Customize a food to feed the parrots and breed them (You can also feed them with stones if you really want to).
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
 
 ## craftableEnchantedGoldApple
 
@@ -1415,44 +1358,6 @@ Dispenser can be crafted more flexible. It can be crafted using bow and dropper,
 ## betterCraftablePolishedBlackStoneButton
 
 Use deepslate to crafted polished_blackstone_button in minecraft.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
-
-## craftableLight
-
-Add light block recipes in minecraft, when enabled, light blocks will have no mining hardness.
-
-< This rule is available for `Minecraft >= 1.17` >
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
-
-## craftableBarrier
-
-Add barrier recipes in minecraft, when enabled, barrier blocks will have no mining hardness.
 
 - Type: `boolean`
 

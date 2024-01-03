@@ -608,25 +608,6 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-
-## 麒麟臂（kirinArm）
-
-开启后，玩家可以徒手秒破除基岩外的任何方块。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false` , `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`
-
 ## 凋零蓝头控制器（blueSkullController）
 
 开启后，可以选择让凋零总是发射蓝头还是从不发射蓝头。
@@ -916,42 +897,6 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 可采集基岩（mineBedrock）
-
-开启后，玩家可以采集基岩。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`
-
-## 可采集末地传送门框架（mineEndPortalFrame）
-
-开启后，玩家可以采集末地传送门框架。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`
-
 ## 自定义可移动方块（customMovableBlock）
 
 可自定义的让不能被推动的方块变得能被推动。
@@ -1052,7 +997,7 @@
 
 
 
-- 分类: `AMS`, `FEATURE`, `TNT`
+- 分类: `AMS`, `FEATURE`, `SURVIVAL` `TNT`
 ## 潜行编辑告示牌（sneakToEditSign）
 
 开启后，玩家可以在潜行状态且双手为空时对已经放置的告示牌按使用键来编辑它，Minecraft >= 1.20 时表现为必须潜行。
@@ -1197,26 +1142,6 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 自定义方块硬度（customBlockHardness）
-
-使用指令来自定义任何方块的挖掘硬度。
-
-开启规则后使用 `/customBlockHardness help` 命令来查看使用说明
-
-- 类型: `String`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
-
 ## 禁用珊瑚失活（undyingCoral）
 
 让珊瑚扇和珊瑚块不会因缺水失活。
@@ -1288,6 +1213,24 @@
 
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 可繁殖鹦鹉（breedableParrots）
+
+自定义一种食物来喂食鹦鹉繁殖它们（你也可以用石头来喂它们，如果你真的这么想的话）。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
@@ -1404,44 +1347,6 @@
 ## 更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）
 
 使用深板岩来合成磨制黑石按钮。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
-
-## 可合成光源方块（craftableLight）
-
-添加了光源方块的合成配方，启用时光源方块将不会有挖掘硬度。
-
-< 该规则 `Minecraft >= 1.17` 可用 >
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
-
-## 可合成屏障方块（craftableBarrier）
-
-添加了屏障方块的合成配方，启用时屏障方块将不会有挖掘硬度。
 
 - 类型: `boolean`
 
