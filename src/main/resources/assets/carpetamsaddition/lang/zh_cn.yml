@@ -120,7 +120,7 @@ carpetamsaddition:
           '0': '[SURELY] - 总是发射蓝头'
           '1': '[NEVER] - 从不发射蓝头'
           '2': '[VANILLA] - 原版表现'
-      enderManTeleportRandomlyDisabled:
+      endermanTeleportRandomlyDisabled:
         name: 禁止末影人随机传送
         desc: 禁止末影人随机传送
       fasterMovement:
@@ -242,7 +242,7 @@ carpetamsaddition:
         desc: 让使用物品没有冷却时间
       flippinCactusSoundEffect:
         name: 仙人掌扳手音效
-        desc: 在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了三种不同音效，设置为0禁用音效）
+        desc: 在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了五种不同音效，设置为 0 禁用音效）
       undyingCoral:
         name: 禁用珊瑚失活
         desc: 让珊瑚扇和珊瑚块不会因缺水失活
@@ -258,6 +258,21 @@ carpetamsaddition:
       breedableParrots:
         name: 可繁殖鹦鹉
         desc: 自定义一种食物来喂食鹦鹉繁殖它们（你也可以用石头来喂它们，如果你真的这么想的话）
+      kirinArm:
+        name: 麒麟臂
+        desc: 让玩家可以瞬间开采所有可挖掘方块
+      sensibleEnderman:
+        name: 懂事的末影人
+        desc: 让末影人只会拾起西瓜和南瓜
+      endermanPickUpDisabled:
+        name: 禁止末影人拾起方块
+        desc: 禁止末影人拾起方块
+      mitePearl:
+        name: 螨虫珍珠
+        desc: 每一次使用末影珍珠都会生成一只末影螨
+      enderPearlSoundEffect:
+        name: 末影珍珠音效
+        desc: 玩家在使用末影珍珠进行传送时会播放音效
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

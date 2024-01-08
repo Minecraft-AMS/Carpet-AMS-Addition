@@ -148,7 +148,7 @@ public class AmsServerSettings {
     public static blueSkullProbability blueSkullController = blueSkullProbability.VANILLA;
 
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
-    public static boolean enderManTeleportRandomlyDisabled = false;
+    public static boolean endermanTeleportRandomlyDisabled = false;
 
     @Rule(
             options = {"VANILLA", "Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"},
@@ -251,7 +251,7 @@ public class AmsServerSettings {
     public static boolean useItemCooldownDisabled = false;
 
     @Rule(
-            options = {"0", "1", "2", "3"},
+            options = {"0", "1", "2", "3", "4", "5"},
             categories = {AMS, FEATURE, SURVIVAL}
     )
     public static int flippinCactusSoundEffect = 0;
@@ -269,11 +269,28 @@ public class AmsServerSettings {
     public static boolean easyMineDragonEgg = false;
 
     @Rule(
-            options = {"none", "apple", "stone", "wheat_seed"},
+            options = {"none", "apple", "stone"},
             categories = {AMS, FEATURE},
             strict = false
     )
     public static String breedableParrots = "none";
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean kirinArm = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean sensibleEnderman = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean endermanPickUpDisabled = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean mitePearl = false;
+
+    //#if MC<12000
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean enderPearlSoundEffect = false;
+    //#endif
 
     /*
      * 合成表规则

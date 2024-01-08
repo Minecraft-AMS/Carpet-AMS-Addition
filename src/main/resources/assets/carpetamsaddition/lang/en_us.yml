@@ -95,8 +95,8 @@ carpetamsaddition:
           '0': '[SURELY] - Always shoot blue skulls'
           '1': '[NEVER] - Never shoot blue skull'
           '2': '[VANILLA] - VANILLA'
-      enderManTeleportRandomlyDisabled:
-        desc: Random teleportation by EnderMan is prohibited
+      endermanTeleportRandomlyDisabled:
+        desc: Random teleportation by Enderman is prohibited
       fasterMovement:
         desc: Five gears are provided to allow players to move faster
         extra:
@@ -191,7 +191,7 @@ carpetamsaddition:
       useItemCooldownDisabled:
         desc: Remove cooldown time for using items
       flippinCactusSoundEffect:
-        desc: When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing three different sound options, Setting it to 0 disables the sound effects)
+        desc: When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing five different sound options, Setting it to 0 disables the sound effects)
       undyingCoral:
         desc: Prevent coral blocks and coral fans from dying
       enderDragonNoDestroyBlock:
@@ -202,6 +202,16 @@ carpetamsaddition:
         desc: Makes the dragon egg not teleport, Players can mine dragon eggs to collect them
       breedableParrots:
         desc: Customize a food to feed the parrots and breed them (You can also feed them with stones if you really want to)
+      kirinArm:
+        desc: Allowing players to instantly mine all mineable blocks
+      sensibleEnderman:
+        desc: Make Endermen only pick up watermelons and pumpkins
+      endermanPickUpDisabled:
+        desc: Preventing Endermen from picking up blocks
+      mitePearl:
+        desc: Using an Ender Pearl each time will spawn an Endermite
+      enderPearlSoundEffect:
+        desc: A sound effect will be played when the player uses an ender pearl for teleportation
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
