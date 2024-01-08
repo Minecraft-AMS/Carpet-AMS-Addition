@@ -45,18 +45,19 @@ import org.spongepowered.asm.mixin.Mixin;
 //#endif
 public abstract class SixWayEntryMixin {
 //#if MC>=11900 && MC<12002
-//$$    @WrapOperation(
-//$$            method = "update",
-//$$            at = @At(
-//$$                    value = "INVOKE",
-//$$                    target = "Lnet/minecraft/block/BlockState;neighborUpdate(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;Lnet/minecraft/util/math/BlockPos;Z)V"
-//$$            )
-//$$    )
-//$$    private void update(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, Operation<Void> original) {
-//$$        if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
-//$$            NeighborUpdater.tryNeighborUpdate(world, state, pos, sourceBlock, sourcePos, notify);
-//$$        }
-//$$        original.call(state, world, pos, sourceBlock, sourcePos, notify);
-//$$    }
+//$$ @WrapOperation(
+//$$         method = "update",
+//$$         at = @At(
+//$$                 value = "INVOKE",
+//$$                 target = "Lnet/minecraft/block/BlockState;neighborUpdate(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;Lnet/minecraft/util/math/BlockPos;Z)V"
+//$$         )
+//$$ )
+//$$ private void update(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, Operation<Void> original) {
+//$$     if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
+//$$         NeighborUpdater.tryNeighborUpdate(world, state, pos, sourceBlock, sourcePos, notify);
+//$$     } else {
+//$$         original.call(state, world, pos, sourceBlock, sourcePos, notify);
+//$$     }
+//$$ }
 //#endif
 }

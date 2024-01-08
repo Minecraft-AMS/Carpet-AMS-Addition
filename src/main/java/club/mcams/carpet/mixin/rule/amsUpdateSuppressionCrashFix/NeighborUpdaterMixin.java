@@ -49,25 +49,25 @@ import org.spongepowered.asm.mixin.Mixin;
 //#endif
 public interface NeighborUpdaterMixin {
 //#if MC>11800
-//$$    @Inject(
-//$$           method = "tryNeighborUpdate",
-//$$           at = @At(
-//$$                   value = "INVOKE",
-//$$                    target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
-//$$           ),
-//$$           locals = LocalCapture.CAPTURE_FAILHARD
-//$$    )
-//$$    private static void tryNeighborUpdate(World world, BlockState state, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, CallbackInfo ci, Throwable throwable) {
-//$$        if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
-//$$           if (
-//$$               throwable instanceof ClassCastException ||
-//$$               throwable instanceof StackOverflowError ||
-//$$               throwable instanceof OutOfMemoryError
-//$$           ) {
-//$$               ThrowableSuppressionContext.sendMessageToServer(pos, world);
-//$$               throw new ThrowableSuppression(ThrowableSuppressionContext.suppressionMessageText(pos, world));
-//$$           }
+//$$ @Inject(
+//$$        method = "tryNeighborUpdate",
+//$$        at = @At(
+//$$                value = "INVOKE",
+//$$                 target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
+//$$        ),
+//$$        locals = LocalCapture.CAPTURE_FAILHARD
+//$$ )
+//$$ private static void tryNeighborUpdate(World world, BlockState state, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, CallbackInfo ci, Throwable throwable) {
+//$$     if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
+//$$        if (
+//$$            throwable instanceof ClassCastException ||
+//$$            throwable instanceof StackOverflowError ||
+//$$            throwable instanceof OutOfMemoryError
+//$$        ) {
+//$$            ThrowableSuppressionContext.sendMessageToServer(pos, world);
+//$$            throw new ThrowableSuppression(ThrowableSuppressionContext.suppressionMessageText(pos, world));
 //$$        }
-//$$    }
+//$$     }
+//$$ }
 //#endif
 }
