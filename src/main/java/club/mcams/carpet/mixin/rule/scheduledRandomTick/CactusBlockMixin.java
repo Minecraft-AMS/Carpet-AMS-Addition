@@ -41,6 +41,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CactusBlock.class)
 public abstract class CactusBlockMixin{
+
     @Shadow
     public abstract void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random);
 
@@ -53,15 +54,12 @@ public abstract class CactusBlockMixin{
             ),
             cancellable = true
     )
-    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+    private void scheduleTickMixinInvoke(CallbackInfo ci) {
         if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants)
             ci.cancel();
     }
 
-    @Inject(
-            method = "scheduledTick",
-            at = @At("TAIL")
-    )
+    @Inject(method = "scheduledTick", at = @At("TAIL"))
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants)
             this.randomTick(state, world, pos, random);

@@ -7,6 +7,7 @@ carpet.api.settings.SettingsManager getRule() carpet.api.settings.SettingsManage
 carpet.CarpetServer.settingsManager addRuleObserver() carpet.api.settings.SettingsManager registerRuleObserver()
 
 carpet.script.bundled.BundledModule carpet.script.Module
+carpet.helpers.BlockRotator flip_block() flipBlock()
 
 net.minecraft.text.BaseText net.minecraft.text.MutableText
 net.minecraft.world.dimension.DimensionType isUltrawarm() ultrawarm()

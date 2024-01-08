@@ -26,21 +26,39 @@ public class DummyClass {
     Carpet AMS Addition v2.24.0 更新内容
 
     # 新增规则
-    - 可繁殖鹦鹉（breedableParrots）自定义一种食物来喂食鹦鹉繁殖它们（你也可以用石头来喂它们，如果你真的这么想的话）。
+
+    - `懂事的末影人（sensibleEnderman）` 让末影人只会拾起西瓜和南瓜。
+
+    - `禁止末影人拾起方块（endermanPickUpDisabled）` 禁止末影人拾起方块。
+
+    - `螨虫珍珠（mitePearl）` 每一次使用末影珍珠都会生成一只末影螨。
+
+    - `末影珍珠音效（enderPearlSoundEffect）` 玩家在使用末影珍珠进行传送时会播放音效。
 
     # 更改
-    - 由于更改方块的挖掘硬度过于需要客户端的参与，以下规则已被移除，且不建议安装旧版本继续使用他们：
-    麒麟臂（kirinArm）
-    可采集基岩（mineBedrock）
-    可采集末地传送门框架（mineEndPortalFrame）
-    自定义方块硬度（customBlockHardness）
-    可合成屏障方块（craftableBarrier）
-    可合成光源方块（craftableLight）
 
-    - 为验证器增加翻译
+    - SnakeYaml -> YamlBeans
 
     # 修复
-    - 修复了 `自定义方块爆炸抗性（customBlockBlastResistance）` 规则的翻译键错误。
+
+    - 修复了在开启 `更新抑制防崩溃（amsUpdateSuppressionCrashFix）` 时会复制红石粉的问题。 [#82](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/82)
+
+    ---
+
+    # New Rules
+
+    - `sensibleEnderman` Make Endermen only pick up watermelons and pumpkins.
+    - `endermanPickUpDisabled` Preventing Endermen from picking up blocks.
+    - `mitePearl` Using an Ender Pearl each time will spawn an Endermite.
+    - `enderPearlSoundEffect` A sound effect will be played when the player uses an ender pearl for teleportation.
+
+    # Changes
+
+    - SnakeYaml -> YamlBeans
+
+    # Fix
+
+    - Fixed an issue where redstone dust would be duplicated when the `amsUpdateSuppressionCrashFix` was enabled. [#82](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/82)
 
  */
 }

@@ -47,18 +47,19 @@ public abstract class ClientPlayerEntityMixin extends Entity {
 
     @Inject(method = "move", at = @At("TAIL"),cancellable = true)
     private void onMove(MovementType movementType, Vec3d movement, CallbackInfo ci) {
-        ClientPlayerEntity currentInstance = (ClientPlayerEntity) (Object) this;
-        if(
-            AmsServerSettings.bedRockFlying &&
-            movementType == MovementType.SELF &&
-            //#if MC>=11700
-            currentInstance.getAbilities().flying &&
-            //#else if MC<11700
-            //$$ currentInstance.abilities.flying &&
-            //#endif
-            !this.hasMovementInput()) {
-            currentInstance.setVelocity(Vec3d.ZERO);
+        if (AmsServerSettings.bedRockFlying) {
+            ClientPlayerEntity currentInstance = (ClientPlayerEntity) (Object) this;
+            if(
+                movementType == MovementType.SELF &&
+                //#if MC>=11700
+                currentInstance.getAbilities().flying &&
+                //#else if MC<11700
+                //$$ currentInstance.abilities.flying &&
+                //#endif
+                !this.hasMovementInput()) {
+                currentInstance.setVelocity(Vec3d.ZERO);
+                ci.cancel();
+            }
         }
-        ci.cancel();
     }
 }

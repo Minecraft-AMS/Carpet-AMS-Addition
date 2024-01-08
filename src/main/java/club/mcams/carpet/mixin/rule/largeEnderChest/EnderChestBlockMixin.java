@@ -55,8 +55,8 @@ public abstract class EnderChestBlockMixin {
 	private OptionalInt onUse(PlayerEntity playerEntity, NamedScreenHandlerFactory factory, Operation<OptionalInt> original) {
         if (AmsServerSettings.largeEnderChest) {
             return playerEntity.openHandledScreen(
-                    new SimpleNamedScreenHandlerFactory((syncId, playerInventory, playerEntityInner)
-                            -> GenericContainerScreenHandler.createGeneric9x6(syncId, playerInventory, playerEntityInner.getEnderChestInventory()), CONTAINER_NAME));
+                new SimpleNamedScreenHandlerFactory((syncId, playerInventory, playerEntityInner)
+                    -> GenericContainerScreenHandler.createGeneric9x6(syncId, playerInventory, playerEntityInner.getEnderChestInventory()), CONTAINER_NAME));
         } else {
             return original.call(playerEntity, factory);
         }

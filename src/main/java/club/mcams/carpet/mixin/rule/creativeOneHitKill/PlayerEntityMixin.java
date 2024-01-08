@@ -53,18 +53,20 @@ public abstract class PlayerEntityMixin implements EntityAccessorMixin {
     @Inject(
             method = "attack",
             at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/Entity;handleAttack(Lnet/minecraft/entity/Entity;)Z",
-                    shift = At.Shift.BY,
-                    by = -2
+                value = "INVOKE",
+                target = "Lnet/minecraft/entity/Entity;handleAttack(Lnet/minecraft/entity/Entity;)Z",
+                shift = At.Shift.BY,
+                by = -2
             ),
             cancellable = true
     )
-    private void creativeOneHitKill(Entity target, CallbackInfo ci) {
-        if (AmsServerSettings.creativeOneHitKill
-                && !this.accessorGetWorld().isClient
-                && this.abilities.creativeMode
-                && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(target)) {
+    private void attack(Entity target, CallbackInfo ci) {
+        if (
+            AmsServerSettings.creativeOneHitKill &&
+            !this.accessorGetWorld().isClient &&
+            this.abilities.creativeMode &&
+            EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(target)
+        ) {
             Consumer<Entity> instaKill = (target2) -> {
                 if (target2 instanceof EnderDragonPart) {
                     Arrays.stream(((EnderDragonPart) target2).owner.getBodyParts()).forEach(Entity::kill);
@@ -77,12 +79,12 @@ public abstract class PlayerEntityMixin implements EntityAccessorMixin {
             this.accessorGetWorld().playSound(null, this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(),
                     SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, this.getSoundCategory(), 1.0F, 1.0F);
             if (this.invokerIsSneaking()) {
-                this.accessorGetWorld().getNonSpectatingEntities(Entity.class,
-                        target.getBoundingBox().expand(2.0D, 0.50D, 2.0D)).stream()
-                        .filter(entity -> entity.isAttackable() && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(entity))
-                        .forEach(instaKill);
+                this.accessorGetWorld().
+                getNonSpectatingEntities(Entity.class, target.getBoundingBox().expand(2.0D, 0.50D, 2.0D)).stream().
+                filter(entity -> entity.isAttackable() && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(entity)).
+                forEach(instaKill);
                 this.accessorGetWorld().playSound(null, this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(),
-                        SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, this.getSoundCategory(), 1.0F, 1.0F);
+                SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, this.getSoundCategory(), 1.0F, 1.0F);
             }
             ci.cancel();
         }

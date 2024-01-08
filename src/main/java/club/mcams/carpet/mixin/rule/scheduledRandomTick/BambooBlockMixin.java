@@ -54,16 +54,13 @@ public abstract class BambooBlockMixin{
             ),
             cancellable = true
     )
-    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+    private void scheduleTickMixinInvoke(CallbackInfo ci) {
         if (AmsServerSettings.scheduledRandomTickBamboo || AmsServerSettings.scheduledRandomTickAllPlants) {
             ci.cancel();
         }
     }
 
-    @Inject(
-            method = "scheduledTick",
-            at = @At("TAIL")
-    )
+    @Inject(method = "scheduledTick", at = @At("TAIL"))
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         if (AmsServerSettings.scheduledRandomTickBamboo || AmsServerSettings.scheduledRandomTickAllPlants) {
             this.randomTick(state, world, pos, random);

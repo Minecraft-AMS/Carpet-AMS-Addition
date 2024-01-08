@@ -18,23 +18,28 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.enderManTeleportRandomlyDisabled;
+package club.mcams.carpet.mixin.rule.infiniteTrades;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.village.TradeOffer;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(EndermanEntity.class)
-public abstract class EndermanEntityMixin {
-    @Inject(method = "teleportRandomly", at = @At("HEAD"), cancellable = true)
-    private void teleportRandomly(CallbackInfoReturnable<Boolean> cir) {
-        if(AmsServerSettings.enderManTeleportRandomlyDisabled) {
-            cir.setReturnValue(false);
+@Mixin(TradeOffer.class)
+public abstract class TradeOfferMixin {
+
+    @Shadow
+    private int uses;
+
+    @Inject(method = "use", at = @At("TAIL"))
+    private void trade(CallbackInfo ci) {
+        if (AmsServerSettings.infiniteTrades) {
+            this.uses = 0;
         }
     }
 }

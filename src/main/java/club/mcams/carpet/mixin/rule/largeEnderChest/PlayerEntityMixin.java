@@ -20,14 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.largeEnderChest;
 
-import com.mojang.authlib.GameProfile;
+import club.mcams.carpet.AmsServerSettings;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -46,9 +44,11 @@ public abstract class PlayerEntityMixin {
 	public abstract EnderChestInventory getEnderChestInventory();
 
 	@Inject(method = "<init>", at = @At("RETURN"))
-	private void expandEnderChest(final World world, final BlockPos pos, final float yaw, final GameProfile gameProfile, final CallbackInfo ci) {
+	private void expandEnderChest(final CallbackInfo ci) {
+		if (AmsServerSettings.largeEnderChest) {
 			SimpleInventoryAccessor accessor = (SimpleInventoryAccessor) getEnderChestInventory();
 			accessor.setSize(EXPANDED_ENDERCHEST_SIZE);
 			accessor.setStacks(DefaultedList.ofSize(EXPANDED_ENDERCHEST_SIZE, ItemStack.EMPTY));
+		}
 	}
 }

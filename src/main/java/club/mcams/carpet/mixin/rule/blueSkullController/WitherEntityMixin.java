@@ -25,9 +25,7 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 
@@ -37,10 +35,7 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = net.minecraft.entity.boss.WitherEntity.class, priority = 168)
-public abstract class WitherEntityMixin extends HostileEntity {
-    protected WitherEntityMixin(EntityType<? extends HostileEntity> entityType, World world) {
-        super(entityType, world);
-    }
+public abstract class WitherEntityMixin {
 
     @Shadow
     protected abstract void shootSkullAt(int headIndex, double targetX, double targetY, double targetZ, boolean charged);

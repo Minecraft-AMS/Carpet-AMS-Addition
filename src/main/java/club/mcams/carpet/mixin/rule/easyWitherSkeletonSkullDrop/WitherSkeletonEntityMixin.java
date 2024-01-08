@@ -39,6 +39,7 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
     protected WitherSkeletonEntityMixin(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
         super(entityType, world);
     }
+
     @Inject(method = "dropEquipment", at = @At("TAIL"))
     private void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops, CallbackInfo ci) {
         if (AmsServerSettings.easyWitherSkeletonSkullDrop && allowDrops) {

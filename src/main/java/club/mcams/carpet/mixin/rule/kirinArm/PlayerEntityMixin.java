@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2024  A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,25 +18,24 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.infiniteTrades;
+package club.mcams.carpet.mixin.rule.kirinArm;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.passive.MerchantEntity;
-import net.minecraft.village.TradeOffer;
+import net.minecraft.entity.player.PlayerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(MerchantEntity.class)
-public abstract class MerchantEntityMixin {
-    @Inject(method = "trade", at = @At("RETURN"), cancellable = true)
-    private void trade(TradeOffer offer, CallbackInfo ci) {
-        if (AmsServerSettings.infiniteTrades) {
-            offer.resetUses();
-            ci.cancel();
+@Mixin(PlayerEntity.class)
+public abstract class PlayerEntityMixin {
+    @Inject(method = "getBlockBreakingSpeed", at = @At("HEAD"), cancellable = true)
+    private void getBlockBreakingSpeed(CallbackInfoReturnable<Float> cir) {
+        if (AmsServerSettings.kirinArm) {
+            cir.setReturnValue(Float.MAX_VALUE);
+            cir.cancel();
         }
     }
 }

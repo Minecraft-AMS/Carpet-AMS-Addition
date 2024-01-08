@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void eatFood(CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
+    private void use(CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         if (AmsServerSettings.noEnchantedGoldenAppleEating) {
             ItemStack stack = (ItemStack) (Object) this;
             if (stack.getItem() == Items.ENCHANTED_GOLDEN_APPLE) {

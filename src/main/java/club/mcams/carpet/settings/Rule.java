@@ -29,8 +29,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Rule
-{
+public @interface Rule {
     String[] categories();
 
     String[] options() default {};

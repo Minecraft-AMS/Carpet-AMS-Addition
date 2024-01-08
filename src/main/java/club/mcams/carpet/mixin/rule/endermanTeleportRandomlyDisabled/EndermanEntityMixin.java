@@ -18,22 +18,23 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.fakePeace;
+package club.mcams.carpet.mixin.rule.endermanTeleportRandomlyDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-
-import net.minecraft.block.AbstractBlock;
+import net.minecraft.entity.mob.EndermanEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(AbstractBlock.AbstractBlockState.class)
-public abstract class AbstractBlockStateMixin {
-    @ModifyReturnValue(method = "allowsSpawning", at = @At("RETURN"))
-    private boolean allowsSpawning(boolean original) {
-        return AmsServerSettings.fakePeace ? false : original;
+@Mixin(EndermanEntity.class)
+public abstract class EndermanEntityMixin {
+    @Inject(method = "teleportRandomly", at = @At("HEAD"), cancellable = true)
+    private void teleportRandomly(CallbackInfoReturnable<Boolean> cir) {
+        if (AmsServerSettings.endermanTeleportRandomlyDisabled) {
+            cir.setReturnValue(false);
+        }
     }
 }

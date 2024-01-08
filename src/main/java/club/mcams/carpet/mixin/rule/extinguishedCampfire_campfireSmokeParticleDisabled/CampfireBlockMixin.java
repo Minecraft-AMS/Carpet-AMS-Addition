@@ -28,7 +28,6 @@ import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.CampfireBlock;
-import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -55,7 +54,7 @@ public abstract class CampfireBlockMixin extends BlockWithEntity {
     }
 
     @Inject(method = "getPlacementState", at = @At("RETURN"), cancellable = true)
-    private void getPlacementStateProxy(ItemPlacementContext context, CallbackInfoReturnable<BlockState> cir) {
+    private void getPlacementStateProxy(CallbackInfoReturnable<BlockState> cir) {
         if (cir.getReturnValue() != null && AmsServerSettings.extinguishedCampfire) {
             cir.setReturnValue(cir.getReturnValue().with(CampfireBlock.LIT, false));
             cir.cancel();

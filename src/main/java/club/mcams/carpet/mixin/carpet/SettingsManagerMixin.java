@@ -55,10 +55,11 @@ public abstract class SettingsManagerMixin {
             remap = false
     )
     private void printVersion(ServerCommandSource source, CallbackInfoReturnable<Integer> cir) {
-        Messenger.m(source,
-                String.format("g %s ", AmsServer.fancyName),
-                String.format("g %s: ", tr("ui.version",  "version")),
-                String.format("g %s", AmsServerMod.getVersion())
+        Messenger.m(
+            source,
+            String.format("g %s ", AmsServer.fancyName),
+            String.format("g %s: ", tr("ui.version",  "version")),
+            String.format("g %s", AmsServerMod.getVersion())
         );
     }
 }

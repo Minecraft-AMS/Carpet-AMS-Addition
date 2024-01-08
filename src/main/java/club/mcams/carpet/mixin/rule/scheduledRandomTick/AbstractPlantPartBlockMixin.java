@@ -50,16 +50,13 @@ public abstract class AbstractPlantPartBlockMixin{
             ),
             cancellable = true
     )
-    private void scheduleTickMixinInvoke(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
+    private void scheduleTickMixinInvoke(CallbackInfo ci) {
         if (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants) {
             ci.cancel();
         }
     }
 
-    @Inject(
-            method = "scheduledTick",
-            at = @At("TAIL")
-    )
+    @Inject(method = "scheduledTick", at = @At("TAIL"))
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
         if (state.getBlock() instanceof AbstractPlantStemBlock && (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants)) {
             state.randomTick(world, pos, random);

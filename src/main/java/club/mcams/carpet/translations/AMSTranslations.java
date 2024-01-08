@@ -28,6 +28,8 @@ import club.mcams.carpet.mixin.translations.StyleAccessor;
 import club.mcams.carpet.mixin.translations.TranslatableTextAccessor;
 import club.mcams.carpet.utils.FileUtil;
 
+import com.esotericsoftware.yamlbeans.YamlReader;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -37,9 +39,10 @@ import net.minecraft.text.*;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.*;
 
 public class AMSTranslations {
@@ -49,9 +52,16 @@ public class AMSTranslations {
 
     @SuppressWarnings("unchecked")
     private static List<String> getAvailableTranslations() {
+        String yamlData;
         try {
-            String dataStr = FileUtil.readFile(LANG_DIR + "/meta/languages.yml");
-            Map<String, Object> yamlMap = new Yaml().load(dataStr);
+            yamlData = FileUtil.readFile(LANG_DIR + "/meta/languages.yml");
+        } catch (Exception e) {
+            AmsServer.LOGGER.warn("Failed to read file", e);
+            return new ArrayList<>();
+        }
+
+        try (Reader reader = new StringReader(yamlData)) {
+            Map<String, Object> yamlMap = (Map<String, Object>) new YamlReader(reader).read();
             List<String> languages = (List<String>) yamlMap.get("languages");
             return languages != null ? languages : new ArrayList<>();
         } catch (Exception e) {
@@ -64,6 +74,7 @@ public class AMSTranslations {
         getAvailableTranslations().forEach(AMSTranslations::loadTranslation);
     }
 
+    @SuppressWarnings("unchecked")
     public static void loadTranslation(String language) {
         String path = String.format("%s/%s.yml", LANG_DIR, language);
         String data;
@@ -73,11 +84,15 @@ public class AMSTranslations {
             AmsServer.LOGGER.warn("Failed to load translation: " + language);
             return;
         }
-        Map<String, Object> yaml = new Yaml().load(data);
-        Map<String, String> translation = Maps.newLinkedHashMap();
-        build(translation, yaml, "");
-        translations.put(language, translation);
-        languages.add(language);
+        try (Reader reader = new StringReader(data)) {
+            Map<String, Object> yaml = (Map<String, Object>) new YamlReader(reader).read();
+            Map<String, String> translation = Maps.newLinkedHashMap();
+            build(translation, yaml, "");
+            translations.put(language, translation);
+            languages.add(language);
+        } catch (IOException e) {
+            AmsServer.LOGGER.warn("Failed to load translation: " + language, e);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -121,17 +136,19 @@ public class AMSTranslations {
     }
 
     public static BaseText translate(BaseText text, String lang, boolean suppressWarnings) {
-        if (isTranslatable(text)) {
-            TranslatableText translatableText = getTranslatableText(text);
-            String translationKey = translatableText.getKey();
-            if (isTranslationKeyValid(translationKey)) {
-                String formattedString = getFormattedTranslation(lang, translationKey);
-                if (formattedString != null) {
-                    text = updateTextWithTranslation(text, formattedString, translatableText);
-                } else if (!suppressWarnings) {
-                    AmsServer.LOGGER.warn("Unknown translation key {}", translationKey);
-                }
-            }
+        if (!isTranslatable(text)) {
+            return text;
+        }
+        TranslatableText translatableText = getTranslatableText(text);
+        String translationKey = translatableText.getKey();
+        if (!isTranslationKeyValid(translationKey)) {
+            return text;
+        }
+        String formattedString = getFormattedTranslation(lang, translationKey);
+        if (formattedString != null) {
+            text = updateTextWithTranslation(text, formattedString, translatableText);
+        } else if (!suppressWarnings) {
+            AmsServer.LOGGER.warn("Unknown translation key {}", translationKey);
         }
         translateHoverText(text, lang);
         translateSiblingTexts(text, lang);
@@ -167,8 +184,17 @@ public class AMSTranslations {
     }
 
     private static BaseText updateTextWithTranslation(BaseText originalText, String formattedString, TranslatableText translatableText) {
-        BaseText newText;
         TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) (Messenger.tr(formattedString, translatableText.getArgs()));
+        BaseText newText = createNewText(formattedString, fixedTranslatableText);
+        if (newText == null) {
+            return Messenger.s(formattedString);
+        }
+        newText.getSiblings().addAll(originalText.getSiblings());
+        newText.setStyle(originalText.getStyle());
+        return newText;
+    }
+
+    private static BaseText createNewText(String formattedString, TranslatableTextAccessor fixedTranslatableText) {
         try {
             List<StringVisitable> translations = Lists.newArrayList();
             //#if MC>=11800
@@ -176,35 +202,36 @@ public class AMSTranslations {
             //#else
             //$$ fixedTranslatableText.invokeSetTranslation(formattedString);
             //#endif
-            newText = Messenger.c((Object) translations.stream().map(stringVisitable -> {
+            return Messenger.c((Object) translations.stream().map(stringVisitable -> {
                 if (stringVisitable instanceof BaseText) {
                     return (BaseText) stringVisitable;
                 }
                 return Messenger.s(stringVisitable.getString());
             }).toArray(BaseText[]::new));
         } catch (TranslationException e) {
-            newText = Messenger.s(formattedString);
+            return null;
         }
-        newText.getSiblings().addAll(originalText.getSiblings());
-        newText.setStyle(originalText.getStyle());
-        return newText;
     }
 
+    @SuppressWarnings("PatternVariableCanBeUsed")
     private static void translateHoverText(BaseText text, String lang) {
         HoverEvent hoverEvent = ((StyleAccessor) text.getStyle()).getHoverEventField();
-        if (hoverEvent != null) {
-            Object hoverText = hoverEvent.getValue(hoverEvent.getAction());
-            if (hoverEvent.getAction() == HoverEvent.Action.SHOW_TEXT && hoverText instanceof BaseText) {
-                ((BaseText) hoverText).setStyle(((BaseText) hoverText).getStyle().withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, translate((BaseText) hoverText, lang, false))));
-            }
+        if (hoverEvent == null || hoverEvent.getAction() != HoverEvent.Action.SHOW_TEXT) {
+            return;
         }
+        Object hoverText = hoverEvent.getValue(hoverEvent.getAction());
+        if (!(hoverText instanceof BaseText)) {
+            return;
+        }
+        BaseText hoverBaseText = (BaseText) hoverText;
+        hoverBaseText.setStyle(
+            hoverBaseText.getStyle().withHoverEvent(
+                new HoverEvent(HoverEvent.Action.SHOW_TEXT, translate(hoverBaseText, lang, false))
+            )
+        );
     }
 
     private static void translateSiblingTexts(BaseText text, String lang) {
-        List<Text> siblings = text.getSiblings();
-        siblings.replaceAll(text1 -> {
-            translate((BaseText) text1, lang, false);
-            return text1;
-        });
+        text.getSiblings().replaceAll(sibling -> translate((BaseText) sibling, lang, false));
     }
 }

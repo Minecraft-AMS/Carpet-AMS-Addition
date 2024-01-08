@@ -26,7 +26,6 @@ import net.minecraft.block.Blocks;
 //#if MC>=12000
 //$$ import net.minecraft.util.math.BlockPos;
 //#endif
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonFight;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.Heightmap;
@@ -56,7 +55,7 @@ public abstract class EnderDragonFightMixin {
     private boolean previouslyKilled;
 
     @Inject(method = "dragonKilled", at = @At("HEAD"))
-    private void dragonKilled(EnderDragonEntity dragon, CallbackInfo ci) {
+    private void dragonKilled(CallbackInfo ci) {
         if (AmsServerSettings.regeneratingDragonEgg && this.previouslyKilled) {
             //#if MC>=12000
             //$$ this.world.setBlockState(this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.offsetOrigin(this.origin)), Blocks.DRAGON_EGG.getDefaultState());
