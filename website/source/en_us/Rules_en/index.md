@@ -638,7 +638,7 @@ When enabled，You can choose whether to have Withering always shoot blue skulls
 - Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
-## enderManTeleportRandomlyDisabled
+## endermanTeleportRandomlyDisabled
 
 When enabled, Random teleportation by EnderMan is prohibited.
 
@@ -1139,7 +1139,7 @@ Remove cooldown time for using items.
 
 ## flippinCactusSoundEffect
 
-When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing three different sound options, Setting it to 0 disables the sound effects).
+When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing five different sound options, Setting it to 0 disables the sound effects).
 
 - Type: `int`
 
@@ -1149,7 +1149,7 @@ When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will 
 
 
 
-- Suggested options: `0`, `1`, `2`, `3`
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `5`
 
 
 
@@ -1230,6 +1230,78 @@ Makes the dragon egg not teleport, Players can mine dragon eggs to collect them.
 ## breedableParrots
 
 Customize a food to feed the parrots and breed them (You can also feed them with stones if you really want to).
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## sensibleEnderman
+
+Make Endermen only pick up watermelons and pumpkins.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## endermanPickUpDisabled
+
+Preventing Endermen from picking up blocks.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## mitePearl
+
+Using an Ender Pearl each time will spawn an Endermite.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## enderPearlSoundEffect
+
+A sound effect will be played when the player uses an ender pearl for teleportation.
 
 - Type: `boolean`
 

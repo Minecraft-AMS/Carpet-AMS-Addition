@@ -633,7 +633,7 @@
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 
-## 禁止末影人随机传送（enderManTeleportRandomlyDisabled）
+## 禁止末影人随机传送（endermanTeleportRandomlyDisabled）
 
 开启后，末影人不会随机传送。
 
@@ -1126,7 +1126,7 @@
 
 ## 仙人掌扳手音效（flippinCactusSoundEffect）
 
-在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了三种不同音效，设置为0禁用音效）。
+在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了五种不同音效，设置为0禁用音效）。
 
 - 类型: `int`
 
@@ -1136,7 +1136,7 @@
 
 
 
-- 参考选项: `0`, `1`, `2`, `3`
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `5`
 
 
 
@@ -1217,6 +1217,78 @@
 ## 可繁殖鹦鹉（breedableParrots）
 
 自定义一种食物来喂食鹦鹉繁殖它们（你也可以用石头来喂它们，如果你真的这么想的话）。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 懂事的末影人（sensibleEnderman）
+
+让末影人只会拾起西瓜和南瓜。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 禁止末影人拾起方块（endermanPickUpDisabled）
+
+禁止末影人拾起方块。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 螨虫珍珠（mitePearl）
+
+每一次使用末影珍珠都会生成一只末影螨。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 末影珍珠音效（enderPearlSoundEffect）
+
+玩家在使用末影珍珠进行传送时会播放音效。
 
 - 类型: `boolean`
 
