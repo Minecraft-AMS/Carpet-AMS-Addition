@@ -37,8 +37,8 @@ dependencies {
     modImplementation "carpet:fabric-carpet:${project.carpet_core_version}"
 
 	// Dependencies
-	implementation "org.yaml:snakeyaml:${project.snakeyaml_version}"
-	include "org.yaml:snakeyaml:${project.snakeyaml_version}"
+	implementation "com.esotericsoftware.yamlbeans:yamlbeans:${project.yamlbeans_version}"
+	include "com.esotericsoftware.yamlbeans:yamlbeans:${project.yamlbeans_version}"
 	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 }
 
