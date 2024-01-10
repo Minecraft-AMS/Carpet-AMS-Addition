@@ -21,13 +21,12 @@
 package club.mcams.carpet.commands.rule.customBlockBlastResistance;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.config.rule.customBlockBlastResistance.BlockBlastResistanceConfigPath;
-import club.mcams.carpet.config.rule.customBlockBlastResistance.SaveBlockBlastResistanceMapToJson;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.RegexTools;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
+import club.mcams.carpet.config.rule.customBlockBlastResistance.CustomBlockBlastResistanceConfig;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
@@ -93,7 +92,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
     }
 
     private static int set(BlockState state, float blastResistance, MinecraftServer server, PlayerEntity player) {
-        String CONFIG_FILE_PATH = BlockBlastResistanceConfigPath.getPath(server);
+        String CONFIG_FILE_PATH = CustomBlockBlastResistanceConfig.getPath(server);
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float oldBlastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             player.sendMessage(
@@ -114,16 +113,16 @@ public class CustomBlockBlastResistanceCommandRegistry {
             );
         }
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, blastResistance);
-        SaveBlockBlastResistanceMapToJson.save(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+        CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
         return 1;
     }
 
     private static int remove(BlockState state, MinecraftServer server, PlayerEntity player) {
-        String CONFIG_FILE_PATH = BlockBlastResistanceConfigPath.getPath(server);
+        String CONFIG_FILE_PATH = CustomBlockBlastResistanceConfig.getPath(server);
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float blastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.remove(state);
-            SaveBlockBlastResistanceMapToJson.save(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+            CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
                     MESSAGE_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance,
@@ -145,9 +144,9 @@ public class CustomBlockBlastResistanceCommandRegistry {
     }
 
     private static int removeAll(MinecraftServer server, PlayerEntity player) {
-        String CONFIG_FILE_PATH = BlockBlastResistanceConfigPath.getPath(server);
+        String CONFIG_FILE_PATH = CustomBlockBlastResistanceConfig.getPath(server);
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
-        SaveBlockBlastResistanceMapToJson.save(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+        CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
         player.sendMessage(
             LiteralTextUtil.createColoredText(
                 MESSAGE_HEAD + translator.tr("removeAll").getString(),
