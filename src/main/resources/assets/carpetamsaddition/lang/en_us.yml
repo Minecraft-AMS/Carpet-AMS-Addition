@@ -19,6 +19,14 @@ carpetamsaddition:
         remove: '/customBlockBlastResistance remove <block>  ->  Remove a block from the list'
         removeAll: '/customBlockBlastResistance removeAll  ->  Remove all blocks from the list'
         list: '/customBlockBlastResistance list  ->  Display all added blocks'
+    here:
+      overworld: 'overworld'
+      nether: 'nether'
+      the_end: 'the_end'
+    where:
+      overworld: 'overworld'
+      nether: 'nether'
+      the_end: 'the_end'
 
   validator:
     enhancedWorldEater:
@@ -212,6 +220,10 @@ carpetamsaddition:
         desc: Using an Ender Pearl each time will spawn an Endermite
       enderPearlSoundEffect:
         desc: A sound effect will be played when the player uses an ender pearl for teleportation
+      commandHere:
+        desc: Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location
+      commandWhere:
+        desc: Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

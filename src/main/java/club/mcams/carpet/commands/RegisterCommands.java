@@ -20,6 +20,8 @@
 
 package club.mcams.carpet.commands;
 
+import club.mcams.carpet.commands.rule.here.HereCommandRegistry;
+import club.mcams.carpet.commands.rule.where.WhereCommandRegistry;
 import net.minecraft.server.command.ServerCommandSource;
 //#if MC>=11900
 //$$ import net.minecraft.command.CommandRegistryAccess;
@@ -50,5 +52,9 @@ public class RegisterCommands {
         //#else
         //$$ CustomBlockBlastResistanceCommandRegistry.register(dispatcher, commandBuildContext);
         //#endif
+
+        HereCommandRegistry.register(dispatcher);
+
+        WhereCommandRegistry.register(dispatcher);
     }
 }

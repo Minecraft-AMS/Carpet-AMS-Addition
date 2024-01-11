@@ -19,6 +19,14 @@ carpetamsaddition:
         remove: '/customBlockBlastResistance remove <block>  ->  从列表中移除方块'
         removeAll: '/customBlockBlastResistance removeAll  ->  移除列表中的所有方块'
         list: '/customBlockBlastResistance list  ->  显示所有添加的方块'
+    here:
+      overworld: '主世界'
+      nether: '下界'
+      the_end: '末地'
+    where:
+      overworld: '主世界'
+      nether: '下界'
+      the_end: '末地'
 
   validator:
     enhancedWorldEater:
@@ -273,6 +281,12 @@ carpetamsaddition:
       enderPearlSoundEffect:
         name: 末影珍珠音效
         desc: 玩家在使用末影珍珠进行传送时会播放音效
+      commandHere:
+        name: 我在哪
+        desc: 使用/here命令发送当前自身所在维度、坐标、对应的主世界/下界坐标
+      commandWhere:
+        name: 你在哪
+        desc: 使用/where命令获取指定玩家所在维度、坐标、对应的主世界/下界坐标
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
