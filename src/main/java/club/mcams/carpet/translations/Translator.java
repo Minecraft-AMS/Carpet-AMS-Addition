@@ -27,11 +27,6 @@ import net.minecraft.text.BaseText;
 public class Translator {
     private final String translationPath;
 
-    @SuppressWarnings("unused")
-    public Translator getDerivedTranslator(String derivedName) {
-        return new Translator(this.translationPath + "." + derivedName);
-    }
-
     public Translator(String translationPath) {
         this.translationPath = translationPath;
     }

@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2024  A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,30 +18,27 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.setting;
+package club.mcams.carpet.utils.compat;
 
-//#if MC>=11900
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#else
-import carpet.settings.ParsedRule;
-import carpet.settings.Rule;
-import org.spongepowered.asm.mixin.gen.Invoker;
-import java.lang.reflect.Field;
-//#endif
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.text.Text;
+import net.minecraft.util.Util;
 
-import org.spongepowered.asm.mixin.Mixin;
-
-//#if MC<11900
-@Mixin(ParsedRule.class)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
-public interface ParsedRuleAccessor {
-    //#if MC<11900
-    @SuppressWarnings("rawtypes")
-    @Invoker(value = "<init>", remap = false)
-    static ParsedRule invokeConstructor(Field field, Rule rule, carpet.settings.SettingsManager settingsManager) {
-        throw new RuntimeException();
+public class SendSystemMessageUtil {
+    public static void serverSend(MinecraftServer server, Text text) {
+        //#if MC<11900
+        server.sendSystemMessage(text, Util.NIL_UUID);
+        //#else
+        //$$ server.sendMessage(text);
+        //#endif
     }
-    //#endif
+
+    public static void playerSend(PlayerEntity player, Text text) {
+        //#if MC<11900
+        player.sendSystemMessage(text, Util.NIL_UUID);
+        //#else
+        //$$ player.sendMessage(text);
+        //#endif
+    }
 }

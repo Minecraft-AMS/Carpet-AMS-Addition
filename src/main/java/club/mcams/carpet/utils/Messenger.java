@@ -22,15 +22,15 @@ package club.mcams.carpet.utils;
 
 import club.mcams.carpet.mixin.translations.StyleAccessor;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
+import club.mcams.carpet.utils.compat.SendSystemMessageUtil;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Util;
 
-import static club.mcams.carpet.AmsServer.LOGGER;
+import java.util.Objects;
 
 public class Messenger {
     // Compound Text
@@ -113,21 +113,18 @@ public class Messenger {
     }
 
     public static void sendServerMessage(MinecraftServer server, String message, int rbg, boolean isBold, boolean isItalic) {
-        if (server == null) {
-            LOGGER.error("Message not delivered: " + message);
-        } else {
-            //#if MC<11900
-            server.sendSystemMessage(LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic), Util.NIL_UUID);
-            //#else
-            //$$ server.sendMessage(LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic));
-            //#endif
-            for (PlayerEntity entityplayer : server.getPlayerManager().getPlayerList()) {
-                //#if MC<11900
-                entityplayer.sendSystemMessage(LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic), Util.NIL_UUID);
-                //#else
-                //$$ entityplayer.sendMessage(LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic));
-                //#endif
-            }
-        }
+        Objects.requireNonNull(server, "Server is null, message not delivered !");
+        sendMessageToConsole(server, LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic));
+        server.getPlayerManager().getPlayerList().forEach(player ->
+            sendMessageToPlayer(player, LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic))
+        );
+    }
+
+    private static void sendMessageToConsole(MinecraftServer minecraftServer, Text text) {
+        SendSystemMessageUtil.serverSend(minecraftServer, text);
+    }
+
+    private static void sendMessageToPlayer(PlayerEntity player, Text text) {
+        SendSystemMessageUtil.playerSend(player, text);
     }
 }
