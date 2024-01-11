@@ -1317,6 +1317,42 @@ A sound effect will be played when the player uses an ender pearl for teleportat
 
 - Categroies: `AMS`, `FEATURE`
 
+## commandHere
+
+Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `COMMAND`
+
+## commandWhere
+
+Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `COMMAND`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

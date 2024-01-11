@@ -49,26 +49,14 @@ Control whether forced startup is enabled when the `customBlockUpdateSuppressor 
 
   Display all added blocks.
 
-### customBlockHardness
+### commandHere
 
-- `/customBlockHardness set <block> <hardness>`
+- `/here`
 
-  Add or modify blocks and their hardness.
+send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location.
 
-  
+### commandWhere
 
-- `/customBlockHardness remove <block>`
+- `/where`
 
-  Remove a block from the list.
-
-  
-
-- `/customBlockHardness removeAll`
-
-  Remove all blocks from the list.
-
-  
-
-- `/customBlockHardness list`
-
-  Display all added blocks.
+get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates.

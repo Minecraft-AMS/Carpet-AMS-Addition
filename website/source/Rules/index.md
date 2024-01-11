@@ -1304,6 +1304,42 @@
 
 - 分类: `AMS`, `FEATURE`
 
+## 我在哪（commandHere）
+
+使用 "/here" 命令发送当前自身所在维度、坐标、对应的主世界/下界坐标。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `COMMAND`
+
+## 你在哪（commandWhere）
+
+使用 "/where" 命令获取指定玩家所在维度、坐标、对应的主世界/下界坐标。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `COMMAND`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

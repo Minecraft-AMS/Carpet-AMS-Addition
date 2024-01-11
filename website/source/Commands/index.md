@@ -49,26 +49,14 @@
 
   显示所有添加的方块。
 
-### 自定义方块硬度（customBlockHardness）
+### 我在哪（commandHere）
 
-- `/customBlockHardness set <block> <hardness>`
+- `/here`
 
-  添加或修改方块及其硬度
+发送当前自身所在维度、坐标、对应的主世界/下界坐标。
 
-  
+### 你在哪（commandWhere）
 
-- `/customBlockHardness remove <block>`
+- `/where`
 
-  从列表中移除方块。
-
-  
-
-- `/customBlockHardness removeAll`
-
-  移除列表中的所有方块。
-
-  
-
-- `/customBlockHardness list`
-
-  显示所有添加的方块。
+获取指定玩家所在维度、坐标、对应的主世界/下界坐标。
