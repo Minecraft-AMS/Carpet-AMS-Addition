@@ -21,16 +21,19 @@
 
 
 ## 前置
+
 |      前置       |                    链接                    |
 |:-------------:|:----------------------------------------:|
 |  Fabric API   |    https://github.com/FabricMC/fabric    |
 | Fabric-Carpet | https://github.com/gnembon/fabric-carpet |
 
 ## 文档
+
 访问网页查看所有关于Carpet-AMS-Addition的相关信息：<br>
 https://minecraft-ams.github.io/carpetamsaddition/
 
 ## 补充说明
+
 - 前置模组尽可能使用高的版本。
 - Carpet-AMS-Addition中的功能，虽然存在但不代表我们在AMS服务器内使用它。
 - 由于英文水平有限，目前所有翻译均来自 [Chat-GPT](https://openai.com/blog/chatgpt) （除了很久很久以前
