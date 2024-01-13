@@ -20,7 +20,7 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.utils.recipes.CraftingRule;
+import club.mcams.carpet.settings.CraftingRule;
 import club.mcams.carpet.settings.Rule;
 
 import static carpet.settings.RuleCategory.*;

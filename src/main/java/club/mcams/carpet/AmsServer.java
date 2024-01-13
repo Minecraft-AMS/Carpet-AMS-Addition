@@ -37,7 +37,8 @@ import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
-import club.mcams.carpet.utils.recipes.CraftingRule;
+import club.mcams.carpet.utils.CountRulesUtil;
+import club.mcams.carpet.settings.CraftingRule;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Lists;
@@ -75,16 +76,17 @@ import java.util.stream.Stream;
 public class AmsServer implements CarpetExtension {
 
     public static MinecraftServer minecraftServer;
-    private static final AmsServer INSTANCE = new AmsServer();
+    public static final int ruleCount = CountRulesUtil.countRules();
     public static final String fancyName = "Carpet AMS Addition";
     public static final String name = AmsServerMod.getModId();
     public static final String compactName = name.replace("-","");  // carpetamsaddition
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
+    private static final AmsServer INSTANCE = new AmsServer();
 
     @Override
     public void onGameStarted() {
         // let's /carpet handle our few simple settings
-        LOGGER.info(fancyName + " " + "v" + AmsServerMod.getVersion() + " loaded!");
+        LOGGER.info(String.format("%s v%s loaded! (Total rules: %d)", fancyName, AmsServerMod.getVersion(), ruleCount));
         LOGGER.info("open source: https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
         LOGGER.info("issues: https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
         CarpetRuleRegistrar.register(CarpetServer.settingsManager, AmsServerSettings.class);
@@ -177,18 +179,18 @@ public class AmsServer implements CarpetExtension {
         }
 
         copyFile(
-                "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/root.json",
-                datapackPath + "data/ams/advancements/root.json"
+            "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/root.json",
+            datapackPath + "data/ams/advancements/root.json"
         );
 
         for (Field f : AmsServerSettings.class.getDeclaredFields()) {
             CraftingRule craftingRule = f.getAnnotation(CraftingRule.class);
             if (craftingRule == null) continue;
             registerCraftingRule(
-                    craftingRule.name().isEmpty() ? f.getName() : craftingRule.name(),
-                    craftingRule.recipes(),
-                    craftingRule.recipeNamespace(),
-                    datapackPath + "data/"
+                craftingRule.name().isEmpty() ? f.getName() : craftingRule.name(),
+                craftingRule.recipes(),
+                craftingRule.recipeNamespace(),
+                datapackPath + "data/"
             );
         }
         reload();
@@ -198,11 +200,11 @@ public class AmsServer implements CarpetExtension {
     }
 
     private void registerCraftingRule(String ruleName, String[] recipes, String recipeNamespace, String dataPath) {
-        updateCraftingRule(CarpetServer.settingsManager.getRule(ruleName),recipes,recipeNamespace,dataPath,ruleName);
+        updateCraftingRule(CarpetServer.settingsManager.getRule(ruleName), recipes, recipeNamespace, dataPath, ruleName);
         CarpetServer.settingsManager.addRuleObserver(
             (source, rule, s) -> {
                 //#if MC>=11900
-                //$$if (rule.name().equals(ruleName)) {
+                //$$ if (rule.name().equals(ruleName)) {
                 //#else
                 if (rule.name.equals(ruleName)) {
                 //#endif
@@ -214,11 +216,11 @@ public class AmsServer implements CarpetExtension {
     }
 
     private void updateCraftingRule(
-            ParsedRule<?> rule,
-            String[] recipes,
-            String recipeNamespace,
-            String datapackPath,
-            String ruleName
+        ParsedRule<?> rule,
+        String[] recipes,
+        String recipeNamespace,
+        String datapackPath,
+        String ruleName
     ) {
         ruleName = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, ruleName);
         //#if MC>=11900
@@ -274,7 +276,7 @@ public class AmsServer implements CarpetExtension {
             }
         }
         //#if MC>=11900
-        //$$else if (rule.type() == Integer.class && (Integer) rule.value() > 0) {
+        //$$ else if (rule.type() == Integer.class && (Integer) rule.value() > 0) {
         //#else
         else if (rule.type == int.class && (Integer) rule.get() > 0) {
         //#endif
@@ -289,7 +291,7 @@ public class AmsServer implements CarpetExtension {
             }
         }
         //#if MC>=11900
-        //$$else if (rule.type() == Boolean.class && RuleHelper.getBooleanValue(rule)) {
+        //$$ else if (rule.type() == Boolean.class && RuleHelper.getBooleanValue(rule)) {
         //#else
         else if (rule.type == boolean.class && rule.getBoolValue()) {
         //#endif
@@ -302,8 +304,8 @@ public class AmsServer implements CarpetExtension {
     private void copyRecipes(String[] recipes, String recipeNamespace, String datapackPath, String ruleName) {
         for (String recipeName : recipes) {
             copyFile(
-                    "assets/carpetamsaddition/AmsRecipeTweakPack/" + recipeNamespace + "/recipes/" + recipeName,
-                    datapackPath + recipeNamespace + "/recipes/" + recipeName
+                "assets/carpetamsaddition/AmsRecipeTweakPack/" + recipeNamespace + "/recipes/" + recipeName,
+                datapackPath + recipeNamespace + "/recipes/" + recipeName
             );
         }
         if (recipeNamespace.equals("ams")) {
@@ -312,11 +314,11 @@ public class AmsServer implements CarpetExtension {
     }
 
     private void deleteRecipes(
-            String[] recipes,
-            String recipeNamespace,
-            String datapackPath,
-            String ruleName,
-            boolean removeAdvancement
+        String[] recipes,
+        String recipeNamespace,
+        String datapackPath,
+        String ruleName,
+        boolean removeAdvancement
     ) {
         for (String recipeName : recipes) {
             try {
@@ -332,8 +334,8 @@ public class AmsServer implements CarpetExtension {
 
     private void writeAdvancement(String datapackPath, String ruleName, String[] recipes) {
         copyFile(
-                "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/recipe_rule.json",
-                datapackPath + "ams/advancements/" + ruleName + ".json"
+            "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/recipe_rule.json",
+            datapackPath + "ams/advancements/" + ruleName + ".json"
         );
 
         JsonObject advancementJson = readJson(datapackPath + "ams/advancements/" + ruleName + ".json");
@@ -378,28 +380,23 @@ public class AmsServer implements CarpetExtension {
             LOGGER.error("Resource '" + resourcePath + "' is null.");
         }
     }
-    //#if MC>=11900
+
     private static JsonObject readJson(String filePath) {
+        //#if MC<11800
+        //$$ JsonParser jsonParser = new JsonParser();
+        //#endif
         try {
             FileReader reader = new FileReader(filePath);
+            //#if MC<11800
+            //$$ return jsonParser.parse(reader).getAsJsonObject();
+            //#else
             return JsonParser.parseReader(reader).getAsJsonObject();
+            //#endif
         } catch (FileNotFoundException e) {
             LOGGER.error("File not found: {}", filePath, e);
         }
         return null;
     }
-    //#else
-    //$$ private static JsonObject readJson(String filePath) {
-    //$$    JsonParser jsonParser = new JsonParser();
-    //$$    try {
-    //$$        FileReader reader = new FileReader(filePath);
-    //$$        return jsonParser.parse(reader).getAsJsonObject();
-    //$$    } catch (FileNotFoundException e) {
-    //$$        LOGGER.error("File not found: {}", filePath, e);
-    //$$    }
-    //$$    return null;
-    //$$}
-    //#endif
 
     private static void writeJson(JsonObject jsonObject, String filePath) {
         try {
