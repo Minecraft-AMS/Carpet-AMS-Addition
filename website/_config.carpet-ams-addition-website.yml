@@ -35,7 +35,7 @@ analytics:
   gtag: G-XXXXXXXXXXXX
  
 canvas_nest:
-  enable: true
+  enable: false
   color: '0，0，0'
   pointColor: '0，0，0'
   opacity: '0.8'

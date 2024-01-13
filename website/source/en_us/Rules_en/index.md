@@ -1319,7 +1319,7 @@ A sound effect will be played when the player uses an ender pearl for teleportat
 
 ## commandHere
 
-Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location.
+Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect.
 
 - Type: `String`
 
@@ -1337,7 +1337,7 @@ Use the "/here" command to send the current dimension, coordinates, and correspo
 
 ## commandWhere
 
-Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates.
+Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect.
 
 - Type: `String`
 

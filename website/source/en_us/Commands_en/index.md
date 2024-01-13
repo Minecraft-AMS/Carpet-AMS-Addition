@@ -53,10 +53,10 @@ Control whether forced startup is enabled when the `customBlockUpdateSuppressor 
 
 - `/here`
 
-send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location.
+send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect.
 
 ### commandWhere
 
 - `/where`
 
-get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates.
+get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect.
