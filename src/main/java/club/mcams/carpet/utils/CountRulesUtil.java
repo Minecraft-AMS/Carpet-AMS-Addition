@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2024  A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,13 +18,22 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package test.java.club.mcams.carpet;
+package club.mcams.carpet.utils;
 
-import club.mcams.carpet.translations.AMSTranslations;
+import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.settings.Rule;
 
-public class TranslationTest {
-    public static void main(String[] args) {
-        AMSTranslations.loadTranslations();
-        System.out.println(AMSTranslations.getTranslation("zh_cn"));
+import java.lang.reflect.Field;
+
+public class CountRulesUtil {
+    public static int countRules() {
+        int ruleCount = 0;
+        Field[] fields = AmsServerSettings.class.getDeclaredFields();
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(Rule.class)) {
+                ruleCount++;
+            }
+        }
+        return ruleCount;
     }
 }
