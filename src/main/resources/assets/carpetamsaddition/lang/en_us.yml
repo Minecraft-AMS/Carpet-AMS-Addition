@@ -221,9 +221,9 @@ carpetamsaddition:
       enderPearlSoundEffect:
         desc: A sound effect will be played when the player uses an ender pearl for teleportation
       commandHere:
-        desc: Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location
+        desc: Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect
       commandWhere:
-        desc: Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates
+        desc: Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

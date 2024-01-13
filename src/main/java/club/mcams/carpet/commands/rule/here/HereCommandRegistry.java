@@ -28,6 +28,9 @@ import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 import club.mcams.carpet.helpers.rule.here.GetCommandSourcePos;
 
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -42,13 +45,18 @@ public class HereCommandRegistry {
         dispatcher.register(
             CommandManager.literal("here")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandHere))
-            .executes(context -> sendMessage(context.getSource(), context.getSource().getServer()))
+            .executes(context -> sendMessage(context.getSource(), context.getSource().getServer(), context.getSource().getPlayer()))
         );
     }
 
-    private static int sendMessage(ServerCommandSource source, MinecraftServer minecraftServer) {
+    private static int sendMessage(ServerCommandSource source, MinecraftServer minecraftServer, PlayerEntity player) {
+        highlightPlayer(player);
         Messenger.sendServerMessage(minecraftServer, message(source), Colors.AQUA, false, false);
         return 1;
+    }
+
+    private static void highlightPlayer(PlayerEntity player) {
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 600));
     }
 
     private static String getPlayerName(ServerCommandSource source) {

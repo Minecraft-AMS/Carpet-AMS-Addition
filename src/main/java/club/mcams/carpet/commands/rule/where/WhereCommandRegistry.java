@@ -29,6 +29,8 @@ import club.mcams.carpet.utils.compat.DimensionWrapper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -51,8 +53,13 @@ public class WhereCommandRegistry {
     }
 
     private static int sendMessage(PlayerEntity senderPlayer, PlayerEntity targetPlayer) {
+        highlightPlayer(targetPlayer);
         senderPlayer.sendMessage(LiteralTextUtil.createColoredText(message(targetPlayer), Colors.AQUA), false);
         return 1;
+    }
+
+    private static void highlightPlayer(PlayerEntity player) {
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 600));
     }
 
     private static String getPlayerName(PlayerEntity player) {
