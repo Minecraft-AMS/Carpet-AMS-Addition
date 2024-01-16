@@ -20,10 +20,11 @@
 
 package club.mcams.carpet.config;
 
-import club.mcams.carpet.config.rule.customBlockBlastResistance.CustomBlockBlastResistanceConfig;
+import club.mcams.carpet.config.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceConfig;
+
 import net.minecraft.server.MinecraftServer;
 
-import static club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
+import static club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
 
 public class LoadConfigFromJson {
     public static void load(MinecraftServer server) {

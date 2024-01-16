@@ -18,15 +18,15 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.commands.rule.playerChunkLoadController;
+package club.mcams.carpet.commands.rule.commandPlayerChunkLoadController;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.playerChunkLoadController.ChunkLoading;
 import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
+import club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
@@ -40,10 +40,10 @@ import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 public class PlayerChunkLoadControllerCommandRegistry {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(literal("playerChunkLoading")
-            .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.playerChunkLoadController))
+            .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.commandPlayerChunkLoadController))
             .executes((c) -> listPlayerInteractions(c.getSource(), c.getSource().getName()))
-            .then(argument("boolean", BoolArgumentType.bool()).
-            executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getName(), getBool(c, "boolean")))
+            .then(argument("boolean", BoolArgumentType.bool())
+            .executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getName(), getBool(c, "boolean")))
             )
         );
     }

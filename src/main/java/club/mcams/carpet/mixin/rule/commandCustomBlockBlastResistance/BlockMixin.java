@@ -18,28 +18,38 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.playerChunkLoadController;
+package club.mcams.carpet.mixin.rule.commandCustomBlockBlastResistance;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.playerChunkLoadController.ChunkLoading;
 
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ThreadedAnvilChunkStorage;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.state.StateManager;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ThreadedAnvilChunkStorage.class)
-public abstract class ThreadedAnvilChunkStorageMixin {
-    @Inject(method = "doesNotGenerateChunks", at = @At("HEAD"), cancellable = true)
-    private void doesNotGenerateChunks(ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
-        if (AmsServerSettings.playerChunkLoadController) {
-            String playerName = player.getName().getString();
-            if (!ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true)) {
-                cir.setReturnValue(true);
-                cir.cancel();
+import java.util.*;
+
+import static club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
+
+@Mixin(Block.class)
+public abstract class BlockMixin {
+
+    @Final
+    @Shadow
+    protected StateManager<Block, BlockState> stateManager;
+
+    @Inject(method = "getBlastResistance", at = @At("HEAD"), cancellable = true)
+    private void getBlastResistance(CallbackInfoReturnable<Float> cir) {
+        if (!Objects.equals(AmsServerSettings.commandCustomBlockBlastResistance, "false") && AmsServerSettings.enhancedWorldEater == -1.0F) {
+            BlockState blockState = stateManager.getDefaultState().getBlock().getDefaultState();
+            if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(blockState)) {
+                cir.setReturnValue(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(blockState));
             }
         }
     }

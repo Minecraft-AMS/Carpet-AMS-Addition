@@ -31,11 +31,11 @@ import java.util.Comparator;
 
 public class BlockChunkLoaderHelper {
     public static final ChunkTicketType<ChunkPos>
-            BLOCK_LOADER = ChunkTicketType.create
-            (
-                    "block_loader", Comparator.comparingLong(ChunkPos::toLong),
-                    300
-            );
+        BLOCK_LOADER = ChunkTicketType.create
+        (
+            "block_loader", Comparator.comparingLong(ChunkPos::toLong),
+            300
+        );
 
     public static void resetIdleTimeout(ServerWorld world) {
         if (AmsServerSettings.blockChunkLoaderKeepTickUpdate) {

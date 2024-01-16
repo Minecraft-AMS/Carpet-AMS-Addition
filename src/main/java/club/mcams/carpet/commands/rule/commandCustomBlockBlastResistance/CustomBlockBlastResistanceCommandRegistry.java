@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.commands.rule.customBlockBlastResistance;
+package club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
@@ -26,7 +26,7 @@ import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.RegexTools;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
-import club.mcams.carpet.config.rule.customBlockBlastResistance.CustomBlockBlastResistanceConfig;
+import club.mcams.carpet.config.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceConfig;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
@@ -60,7 +60,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
     //#endif
         dispatcher.register(
             CommandManager.literal("customBlockBlastResistance")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.customBlockBlastResistance))
+            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomBlockBlastResistance))
             .then(literal("set")
             //#if MC<11900
             .then(argument("block", BlockStateArgumentType.blockState())

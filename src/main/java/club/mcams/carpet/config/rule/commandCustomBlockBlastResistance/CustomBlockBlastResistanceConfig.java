@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.config.rule.customBlockBlastResistance;
+package club.mcams.carpet.config.rule.commandCustomBlockBlastResistance;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.utils.RegexTools;
@@ -41,7 +41,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import static club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
+import static club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
 
 @SuppressWarnings("ReadWriteStringCanBeUsed")
 public class CustomBlockBlastResistanceConfig {

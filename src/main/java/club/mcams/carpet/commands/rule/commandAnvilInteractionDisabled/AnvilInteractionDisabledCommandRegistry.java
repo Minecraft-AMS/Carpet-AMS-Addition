@@ -18,17 +18,17 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.commands.rule.anvilInteractionDisabled;
+package club.mcams.carpet.commands.rule.commandAnvilInteractionDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
-import net.minecraft.server.command.CommandManager;
 import net.minecraft.text.Text;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -45,7 +45,7 @@ public class AnvilInteractionDisabledCommandRegistry {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
             CommandManager.literal("anvilInteractionDisabled")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.anvilInteractionDisabled))
+            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandAnvilInteractionDisabled))
             .then(argument("mode", BoolArgumentType.bool())
             .executes(context -> {
                 boolean mode = BoolArgumentType.getBool(context, "mode");

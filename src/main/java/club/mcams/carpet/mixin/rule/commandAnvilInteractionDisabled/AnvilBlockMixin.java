@@ -18,36 +18,23 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.customBlockBlastResistance;
+package club.mcams.carpet.mixin.rule.commandAnvilInteractionDisabled;
 
-import club.mcams.carpet.AmsServerSettings;
-
-import net.minecraft.block.BlockState;
-import net.minecraft.fluid.FluidState;
+import net.minecraft.block.AnvilBlock;
+import net.minecraft.util.ActionResult;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Objects;
-
-import static club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
-
-@Mixin(FluidState.class)
-public abstract class FluidStateMixin {
-
-    @Shadow
-    public abstract BlockState getBlockState();
-
-    @Inject(method = "getBlastResistance", at = @At("HEAD"), cancellable = true)
-    private void getBlastResistance(CallbackInfoReturnable<Float> cir) {
-        if (!Objects.equals(AmsServerSettings.customBlockBlastResistance, "false") && AmsServerSettings.enhancedWorldEater == -1.0F) {
-            BlockState fluidState = this.getBlockState().getBlock().getDefaultState();
-            if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(fluidState)) {
-                cir.setReturnValue(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(fluidState));
-            }
+@Mixin(AnvilBlock.class)
+public abstract class AnvilBlockMixin {
+    @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
+    private void onUse(CallbackInfoReturnable<ActionResult> cir) {
+        if (club.mcams.carpet.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry.anvilInteractionDisabled) {
+            cir.setReturnValue(ActionResult.PASS);
+            cir.cancel();
         }
     }
 }

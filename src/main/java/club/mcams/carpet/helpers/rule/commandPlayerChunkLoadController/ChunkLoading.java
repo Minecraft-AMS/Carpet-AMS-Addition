@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.playerChunkLoadController;
+package club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController;
 
 import club.mcams.carpet.AmsServer;
 

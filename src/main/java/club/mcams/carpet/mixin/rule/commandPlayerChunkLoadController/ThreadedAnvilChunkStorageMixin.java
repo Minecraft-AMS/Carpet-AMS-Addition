@@ -18,23 +18,29 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.anvilInteractionDisabled;
+package club.mcams.carpet.mixin.rule.commandPlayerChunkLoadController;
 
-import net.minecraft.block.AnvilBlock;
-import net.minecraft.util.ActionResult;
+import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
+
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ThreadedAnvilChunkStorage;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(AnvilBlock.class)
-public abstract class AnvilBlockMixin {
-    @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
-    private void onUse(CallbackInfoReturnable<ActionResult> cir) {
-        if (club.mcams.carpet.commands.rule.anvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry.anvilInteractionDisabled) {
-            cir.setReturnValue(ActionResult.PASS);
-            cir.cancel();
+@Mixin(ThreadedAnvilChunkStorage.class)
+public abstract class ThreadedAnvilChunkStorageMixin {
+    @Inject(method = "doesNotGenerateChunks", at = @At("HEAD"), cancellable = true)
+    private void doesNotGenerateChunks(ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
+        if (AmsServerSettings.commandPlayerChunkLoadController) {
+            String playerName = player.getName().getString();
+            if (!ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true)) {
+                cir.setReturnValue(true);
+                cir.cancel();
+            }
         }
     }
 }

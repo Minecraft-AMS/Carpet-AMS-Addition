@@ -20,8 +20,8 @@
 
 package club.mcams.carpet.commands;
 
-import club.mcams.carpet.commands.rule.here.HereCommandRegistry;
-import club.mcams.carpet.commands.rule.where.WhereCommandRegistry;
+import club.mcams.carpet.commands.rule.commandHere.HereCommandRegistry;
+import club.mcams.carpet.commands.rule.commandWhere.WhereCommandRegistry;
 import net.minecraft.server.command.ServerCommandSource;
 //#if MC>=11900
 //$$ import net.minecraft.command.CommandRegistryAccess;
@@ -29,10 +29,10 @@ import net.minecraft.server.command.ServerCommandSource;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import club.mcams.carpet.commands.rule.customBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
+import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
 import club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry;
-import club.mcams.carpet.commands.rule.anvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry;
-import club.mcams.carpet.commands.rule.playerChunkLoadController.PlayerChunkLoadControllerCommandRegistry;
+import club.mcams.carpet.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry;
+import club.mcams.carpet.commands.rule.commandPlayerChunkLoadController.PlayerChunkLoadControllerCommandRegistry;
 
 public class RegisterCommands {
     public static void registerCommands(
