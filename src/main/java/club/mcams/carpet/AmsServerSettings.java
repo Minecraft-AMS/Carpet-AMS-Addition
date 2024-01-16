@@ -78,7 +78,7 @@ public class AmsServerSettings {
     public static boolean keepEntityUpdate = false;
 
     @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
-    public static boolean playerChunkLoadController = false;
+    public static boolean commandPlayerChunkLoadController = false;
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean netherWaterPlacement = false;
@@ -166,7 +166,7 @@ public class AmsServerSettings {
             options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
             categories = {AMS, FEATURE, SURVIVAL, COMMAND}
     )
-    public static String anvilInteractionDisabled = "false";
+    public static String commandAnvilInteractionDisabled = "false";
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL, COMMAND})
     public static boolean preventAdministratorCheat = false;
@@ -216,7 +216,7 @@ public class AmsServerSettings {
             options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
             categories = {AMS, FEATURE, SURVIVAL, TNT, COMMAND}
     )
-    public static String customBlockBlastResistance = "false";
+    public static String commandCustomBlockBlastResistance = "false";
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean regeneratingDragonEgg = false;
@@ -303,6 +303,12 @@ public class AmsServerSettings {
             categories = {AMS, COMMAND}
     )
     public static String commandWhere = "false";
+
+    @Rule(
+            options = {"MainHandOnly", "NoPickUp", "false"},
+            categories = {AMS, FEATURE, SURVIVAL}
+    )
+    public static String fakePlayerPickUpController = "false";
 
     /*
      * 合成表规则

@@ -147,7 +147,7 @@ carpetamsaddition:
       easyWitherSkeletonSkullDrop:
         name: 轻松掉落凋零骷髅头
         desc: 击杀凋零骷髅会百分百掉落凋零骷髅头
-      anvilInteractionDisabled:
+      commandAnvilInteractionDisabled:
         name: 禁用铁砧交互
         desc: 玩家无法打开铁砧的UI界面
         extra:
@@ -207,7 +207,7 @@ carpetamsaddition:
       easyMaxLevelBeacon:
         name: 简易满级信标
         desc: 只需一个底座方块就能激活满级信标
-      customBlockBlastResistance:
+      commandCustomBlockBlastResistance:
         name: 自定义方块爆炸抗性
         desc: 使用指令自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）
         extra:
@@ -287,6 +287,13 @@ carpetamsaddition:
       commandWhere:
         name: 你在哪
         desc: 使用/where命令获取指定玩家所在维度、坐标、对应的主世界/下界坐标，同时给予目标玩家30s的发光效果。
+      fakePlayerPickUpController:
+        name: 假人拾取控制器
+        desc: 提供了两种模式来控制假人是否可以拾取物品
+        extra:
+          '0': '[MainHandOnly] - 仅主手可拾取物品'
+          "1": '[NoPickUp] - 完全无法拾取物品'
+          "2": '[false] - 禁用规则'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -309,7 +316,7 @@ carpetamsaddition:
         desc: 当所有作物方块收到计划刻时仍会给予生长随机刻
 
 #区块加载规则
-      playerChunkLoadController:
+      commandPlayerChunkLoadController:
         name: 区块加载控制
         desc: 控制任意游戏模式下玩家对周围区块的加载
         extra:
