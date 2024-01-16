@@ -6,14 +6,14 @@
 
 &emsp;
 
-### commandChunkLoading
+### commandPlayerChunkLoadController
 
 `/playerChunkLoading [true/false]`
 
 Control chunk loading of player. Can only manipulate yourself.
 
 
-### anvilInteractionDisabled
+### commandAnvilInteractionDisabled
 
 `/anvilInteractionDisabled [true/false]`
 
@@ -25,7 +25,7 @@ Controls whether the player can interact with the anvil.
 
 Control whether forced startup is enabled when the `customBlockUpdateSuppressor ` rule is enabled.
 
-### customBlockBlastResistance
+### commandCustomBlockBlastResistance
 
 - `/customBlockBlastResistance set <block> <hardness>`
 

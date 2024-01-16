@@ -1340,6 +1340,36 @@
 
 - 分类: `AMS`, `COMMAND`
 
+## 假人拾取控制器（fakePlayerPickUpController）
+
+提供了两种模式来控制假人是否可以拾取物品。
+
+- [MainHandOnly] - 仅主手可拾取物品
+
+
+
+- [NoPickUp] - 完全无法拾取物品
+
+
+
+- [false] - 禁用规则
+
+
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `MainHandOnly`, `NoPickUp`, `false`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

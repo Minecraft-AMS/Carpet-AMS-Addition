@@ -78,7 +78,7 @@ Greatly optimized the code related to dragon fight starting. Provide performance
 
 - Categroies: `AMS`, `OPTIMIZATION`
 
-## playerChunkLoadController
+## commandPlayerChunkLoadController
 
 Control chunkloading of player. Won't remove player detection of deminsion like main island loading in the end. Will be reset after player loging out to avoid [MC-157812](https://bugs.mojang.com/browse/MC-157812).
 
@@ -716,7 +716,7 @@ When enabled, 100% Wither Skeleton Skull Drop.
 - Categroies: `AMS` , `FEATURE` , `SURVIVAL`
 
 
-## anvilInteractionDisabled
+## commandAnvilInteractionDisabled
 
 When enabled, Players cannot open the UI of the Anvil.
 Command: /anvilInteractionDisabledSwitch true/false
@@ -948,7 +948,7 @@ When enabled, Activate full-level beacon with just one base block.
 
 - Categroies: `AMS`, `FEATURE`
 
-## customBlockBlastResistance
+## commandCustomBlockBlastResistance
 
 Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled).
 After enabling the rules, use the `/customBlockBlastResistance helper` command to view the usage instructions.
@@ -1352,6 +1352,36 @@ Use the "/where" command to get the specified player's dimension, coordinates, a
 
 
 - Categroies: `AMS`, `COMMAND`
+
+## fakePlayerPickUpController
+
+Two modes are provided to control whether fake player can pick up items.
+
+- [MainHandOnly] - Only the main hand can pick up items
+
+
+
+- [NoPickUp] - Unable to pick up items at all
+
+
+
+- [false] - Disable rule
+
+
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `MainHandOnly`, `NoPickUp`, `false`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## craftableEnchantedGoldApple
 
