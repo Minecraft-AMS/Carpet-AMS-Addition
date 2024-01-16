@@ -104,7 +104,7 @@ jobs:
           echo 'EOF' >> $GITHUB_OUTPUT
 
       - name: Publish Minecraft Mods
-        uses: Kir-Antipov/mc-publish@v3.2
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: q4fx1eTg
           modrinth-token: ${{ secrets.MODRINTH_API_TOKEN }}
