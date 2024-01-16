@@ -18,15 +18,14 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.commands.rule.here;
+package club.mcams.carpet.commands.rule.commandHere;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
-import club.mcams.carpet.helpers.rule.here.GetCommandSourcePos;
+import club.mcams.carpet.helpers.rule.commandHere.GetCommandSourcePos;
 
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -51,7 +50,7 @@ public class HereCommandRegistry {
 
     private static int sendMessage(ServerCommandSource source, MinecraftServer minecraftServer, PlayerEntity player) {
         highlightPlayer(player);
-        Messenger.sendServerMessage(minecraftServer, message(source), Colors.AQUA, false, false);
+        Messenger.sendServerMessage(minecraftServer, message(source));
         return 1;
     }
 
@@ -65,7 +64,7 @@ public class HereCommandRegistry {
 
     private static String getCurrentPos(ServerCommandSource source) {
         int[] pos = GetCommandSourcePos.getPos(source);
-        return String.format("[ %d, %d, %d ]", pos[0], pos[1], pos[2]);
+        return String.format("%d, %d, %d", pos[0], pos[1], pos[2]);
     }
 
     private static String getOtherPos(ServerCommandSource source) {
@@ -73,9 +72,9 @@ public class HereCommandRegistry {
         int[] pos = GetCommandSourcePos.getPos(source);
         String otherPos = null;
         if (dimension.getValue() == World.NETHER) {
-            otherPos = String.format("[ %d, %d, %d ]", pos[0] * 8, pos[1] * 8, pos[2] * 8);
+            otherPos = String.format("%d, %d, %d", pos[0] * 8, pos[1] * 8, pos[2] * 8);
         } else if (dimension.getValue() == World.OVERWORLD) {
-            otherPos = String.format("[ %d, %d, %d ]", pos[0] / 8, pos[1] / 8, pos[2] / 8);
+            otherPos = String.format("%d, %d, %d", pos[0] / 8, pos[1] / 8, pos[2] / 8);
         }
         return otherPos;
     }
@@ -87,11 +86,11 @@ public class HereCommandRegistry {
         String otherPos = getOtherPos(source);
         String message = null;
         if (dimension.getValue() == World.END) {
-            message = String.format("[%s] %s @ %s", translator.tr("the_end").getString(), playerName, currentPos);
+            message = String.format("§d[%s] §e%s §b@ §d[ %s ]", translator.tr("the_end").getString(), playerName, currentPos);
         } else if (dimension.getValue() == World.OVERWORLD) {
-            message = String.format("[%s] %s @ %s -> %s", translator.tr("overworld").getString(), playerName, currentPos, otherPos);
+            message = String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", translator.tr("overworld").getString(), playerName, currentPos, otherPos);
         } else if (dimension.getValue() == World.NETHER) {
-            message = String.format("[%s] %s @ %s -> %s", translator.tr("nether").getString(), playerName, currentPos, otherPos);
+            message = String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", translator.tr("nether").getString(), playerName, currentPos, otherPos);
         }
         return message;
     }

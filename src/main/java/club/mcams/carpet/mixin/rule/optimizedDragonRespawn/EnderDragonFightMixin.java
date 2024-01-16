@@ -88,7 +88,6 @@ public abstract class EnderDragonFightMixin {
                 for(BlockEntity blockEntity : worldChunk.getBlockEntities().values()) {
                     if(AmsServerSettings.optimizedDragonRespawn && blockEntity instanceof EndGatewayBlockEntity) continue;
                     if (blockEntity instanceof EndPortalBlockEntity) {
-//                        TextUtil.broadcastToAllPlayers("Invoke searchAround "+ blockEntity.getPos().toString());
                         BlockPattern.Result result = this.endPortalPattern.searchAround(this.world, blockEntity.getPos());
                         if (result != null) {
                             BlockPos blockPos = result.translate(3, 3, 3).getBlockPos();
@@ -124,12 +123,12 @@ public abstract class EnderDragonFightMixin {
                 //#endif
                 if(AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
                     //#if MC>=12000
-                    //&& result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN)).getX();, j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
+                    //$$ result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getX(), j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
                     //#else
                     result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
                     //#endif
                 }
-                else{
+                else {
                     //#if MC>=12000
                     //$$ result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getX(), j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
                     //#else

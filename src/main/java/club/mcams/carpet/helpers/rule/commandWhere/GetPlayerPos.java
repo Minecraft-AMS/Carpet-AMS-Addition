@@ -18,15 +18,15 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.here;
+package club.mcams.carpet.helpers.rule.commandWhere;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.entity.player.PlayerEntity;
 
-public class GetCommandSourcePos {
-    public static int[] getPos(ServerCommandSource source) {
-        int x = (int) source.getPosition().getX();
-        int y = (int) source.getPosition().getY();
-        int z = (int) source.getPosition().getZ();
+public class GetPlayerPos {
+    public static int[] getPos(PlayerEntity player) {
+        int x = (int) player.getX();
+        int y = (int) player.getY();
+        int z = (int) player.getZ();
         return new int[]{x, y, z};
     }
 }

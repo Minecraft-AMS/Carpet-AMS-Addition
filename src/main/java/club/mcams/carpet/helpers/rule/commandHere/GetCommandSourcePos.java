@@ -18,15 +18,15 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.preventAdministratorCheat;
-
-import club.mcams.carpet.AmsServerSettings;
+package club.mcams.carpet.helpers.rule.commandHere;
 
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 
-public class PermissionHelper {
-    public static boolean canCheat(ServerCommandSource source) {
-        return !(source.getEntity() instanceof ServerPlayerEntity) || !AmsServerSettings.preventAdministratorCheat;
+public class GetCommandSourcePos {
+    public static int[] getPos(ServerCommandSource source) {
+        int x = (int) source.getPosition().getX();
+        int y = (int) source.getPosition().getY();
+        int z = (int) source.getPosition().getZ();
+        return new int[]{x, y, z};
     }
 }

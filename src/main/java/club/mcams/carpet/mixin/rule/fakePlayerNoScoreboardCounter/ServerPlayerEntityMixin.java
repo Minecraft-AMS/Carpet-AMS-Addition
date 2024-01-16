@@ -20,15 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.fakePlayerNoScoreboardCounter;
 
-import carpet.patches.EntityPlayerMPFake;
-
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.FakePlayerHelper;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -37,13 +34,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerPlayerEntityMixin {
     @Inject(method = "increaseStat", at = @At("HEAD"), cancellable = true)
     private void increaseStat(CallbackInfo ci) {
-        if (AmsServerSettings.fakePlayerNoScoreboardCounter && isFackPlayer((ServerPlayerEntity)(Object)this)) {
+        if (AmsServerSettings.fakePlayerNoScoreboardCounter && FakePlayerHelper.isFackPlayer((ServerPlayerEntity)(Object)this)) {
             ci.cancel();
         }
-    }
-
-    @Unique
-    private static boolean isFackPlayer(PlayerEntity player) {
-        return player instanceof EntityPlayerMPFake;
     }
 }

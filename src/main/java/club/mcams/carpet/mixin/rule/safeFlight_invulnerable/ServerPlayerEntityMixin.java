@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.safeFlight_safeVoid_invulnerable;
+package club.mcams.carpet.mixin.rule.safeFlight_invulnerable;
 
 import club.mcams.carpet.AmsServerSettings;
 

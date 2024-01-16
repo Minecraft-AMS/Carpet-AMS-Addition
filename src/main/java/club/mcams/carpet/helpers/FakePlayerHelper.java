@@ -18,15 +18,14 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.where;
+package club.mcams.carpet.helpers;
+
+import carpet.patches.EntityPlayerMPFake;
 
 import net.minecraft.entity.player.PlayerEntity;
 
-public class GetPlayerPos {
-    public static int[] getPos(PlayerEntity player) {
-        int x = (int) player.getX();
-        int y = (int) player.getY();
-        int z = (int) player.getZ();
-        return new int[]{x, y, z};
+public class FakePlayerHelper {
+    public static boolean isFackPlayer(PlayerEntity player) {
+        return player instanceof EntityPlayerMPFake;
     }
 }

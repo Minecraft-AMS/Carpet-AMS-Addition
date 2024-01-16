@@ -27,8 +27,8 @@ import club.mcams.carpet.utils.compat.SendSystemMessageUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
+import net.minecraft.text.*;
 
 import java.util.Objects;
 
@@ -112,12 +112,18 @@ public class Messenger {
         return carpet.utils.Messenger.parseStyle(style);
     }
 
-    public static void sendServerMessage(MinecraftServer server, String message, int rbg, boolean isBold, boolean isItalic) {
+    public static void sendServerMessage(MinecraftServer server, Text text) {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
-        sendMessageToConsole(server, LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic));
-        server.getPlayerManager().getPlayerList().forEach(player ->
-            sendMessageToPlayer(player, LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic))
-        );
+        sendMessageToConsole(server, text);
+        server.getPlayerManager().getPlayerList().forEach(player -> sendMessageToPlayer(player, text));
+    }
+
+    public static void sendServerMessage(MinecraftServer server, String message, int rbg, boolean isBold, boolean isItalic) {
+        sendServerMessage(server, LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic));
+    }
+
+    public static void sendServerMessage(MinecraftServer server, String message) {
+        sendServerMessage(server, LiteralTextUtil.compatText(message));
     }
 
     private static void sendMessageToConsole(MinecraftServer minecraftServer, Text text) {

@@ -18,12 +18,11 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.commands.rule.where;
+package club.mcams.carpet.commands.rule.commandWhere;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.where.GetPlayerPos;
+import club.mcams.carpet.helpers.rule.commandWhere.GetPlayerPos;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
@@ -54,7 +53,7 @@ public class WhereCommandRegistry {
 
     private static int sendMessage(PlayerEntity senderPlayer, PlayerEntity targetPlayer) {
         highlightPlayer(targetPlayer);
-        senderPlayer.sendMessage(LiteralTextUtil.createColoredText(message(targetPlayer), Colors.AQUA), false);
+        senderPlayer.sendMessage(LiteralTextUtil.compatText(message(targetPlayer)), false);
         return 1;
     }
 
@@ -68,7 +67,7 @@ public class WhereCommandRegistry {
 
     private static String getCurrentPos(PlayerEntity player) {
         int[] pos = GetPlayerPos.getPos(player);
-        return String.format("[ %d, %d, %d ]", pos[0], pos[1], pos[2]);
+        return String.format("%d, %d, %d", pos[0], pos[1], pos[2]);
     }
 
     private static String getOtherPos(PlayerEntity player) {
@@ -76,9 +75,9 @@ public class WhereCommandRegistry {
         int[] pos = GetPlayerPos.getPos(player);
         String otherPos = null;
         if (dimension.getValue() == World.NETHER) {
-            otherPos = String.format("[ %d, %d, %d ]", pos[0] * 8, pos[1] * 8, pos[2] * 8);
+            otherPos = String.format("%d, %d, %d", pos[0] * 8, pos[1] * 8, pos[2] * 8);
         } else if (dimension.getValue() == World.OVERWORLD) {
-            otherPos = String.format("[ %d, %d, %d ]", pos[0] / 8, pos[1] / 8, pos[2] / 8);
+            otherPos = String.format("%d, %d, %d", pos[0] / 8, pos[1] / 8, pos[2] / 8);
         }
         return otherPos;
     }
@@ -90,11 +89,11 @@ public class WhereCommandRegistry {
         String otherPos = getOtherPos(player);
         String message = null;
         if (dimension.getValue() == World.END) {
-            message = String.format("[%s] %s @ %s", translator.tr("the_end").getString(), playerName, currentPos);
+            message = String.format("§d[%s] §e%s §b@ §d%s", translator.tr("the_end").getString(), playerName, currentPos);
         } else if (dimension.getValue() == World.OVERWORLD) {
-            message = String.format("[%s] %s @ %s -> %s", translator.tr("overworld").getString(), playerName, currentPos, otherPos);
+            message = String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", translator.tr("overworld").getString(), playerName, currentPos, otherPos);
         } else if (dimension.getValue() == World.NETHER) {
-            message = String.format("[%s] %s @ %s -> %s", translator.tr("nether").getString(), playerName, currentPos, otherPos);
+            message = String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", translator.tr("nether").getString(), playerName, currentPos, otherPos);
         }
         return message;
     }

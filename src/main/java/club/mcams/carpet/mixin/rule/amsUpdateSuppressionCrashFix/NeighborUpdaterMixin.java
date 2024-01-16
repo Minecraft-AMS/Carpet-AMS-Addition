@@ -25,7 +25,6 @@ import club.mcams.carpet.utils.compat.DummyClass;
 //#endif
 
 //#if MC>=11900
-//$$ import net.minecraft.world.block.NeighborUpdater;
 //$$ import club.mcams.carpet.utils.compat.DimensionWrapper;
 //$$ import club.mcams.carpet.AmsServerSettings;
 //$$ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
@@ -34,6 +33,7 @@ import club.mcams.carpet.utils.compat.DummyClass;
 //$$ import org.spongepowered.asm.mixin.injection.Inject;
 //$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 //$$ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+//$$ import net.minecraft.world.block.NeighborUpdater;
 //$$ import net.minecraft.block.Block;
 //$$ import net.minecraft.block.BlockState;
 //$$ import net.minecraft.util.math.BlockPos;
