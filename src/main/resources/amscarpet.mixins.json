@@ -116,6 +116,7 @@
   ],
   "server": [],
   "injectors": {
+    "maxShiftBy": 2,
     "defaultRequire": 1
   }
 }
