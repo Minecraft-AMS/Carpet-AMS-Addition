@@ -21,16 +21,13 @@
 package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.screen.largeShulkerBox.largeShulkerBoxScreenHandler;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.block.entity.ShulkerBoxBlockEntity;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -92,14 +89,6 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
         if (AmsServerSettings.largeShulkerBox) {
             int[] availableSlots = IntStream.range(0, size()).toArray();
             cir.setReturnValue(availableSlots);
-            cir.cancel();
-        }
-    }
-
-    @Inject(method = "createScreenHandler", at = @At("HEAD"), cancellable = true)
-    private void createScreenHandler(int syncId, PlayerInventory playerInventory, CallbackInfoReturnable<ScreenHandler> cir) {
-        if (AmsServerSettings.largeShulkerBox) {
-            cir.setReturnValue(new largeShulkerBoxScreenHandler(syncId, playerInventory, this));
             cir.cancel();
         }
     }
