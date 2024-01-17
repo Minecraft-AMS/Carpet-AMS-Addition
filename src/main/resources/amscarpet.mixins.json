@@ -51,6 +51,7 @@
     "rule.largeEnderChest.PlayerEntityMixin",
     "rule.largeEnderChest.SimpleInventoryAccessor",
     "rule.largeShulkerBox.ShulkerBoxBlockEntityMixin",
+    "rule.largeShulkerBox.ShulkerBoxScreenHandlerMixin",
     "rule.maxPlayerInteractionDistance.ServerPlayerInteractionManagerMixin",
     "rule.maxPlayerInteractionDistance.ServerPlayNetworkHandlerMixin",
     "rule.mineDragonEgg.DragonEggBlockMixin",
