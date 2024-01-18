@@ -21,12 +21,14 @@
 package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
 import club.mcams.carpet.AmsServerSettings;
+
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.ShulkerBoxScreenHandler;
 import net.minecraft.screen.slot.ShulkerBoxSlot;
+
 import org.jetbrains.annotations.Nullable;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,21 +43,35 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         super(type, syncId);
     }
 
-    @ModifyArg(method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/ScreenHandler;<init>(Lnet/minecraft/screen/ScreenHandlerType;I)V"), index = 0)
+    @ModifyArg(
+            method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/screen/ScreenHandler;<init>(Lnet/minecraft/screen/ScreenHandlerType;I)V"
+            ),
+            index = 0
+    )
     private static ScreenHandlerType<?> getScreenHandlerType(ScreenHandlerType<?> type) {
         if (!AmsServerSettings.largeShulkerBox) {
             return type;
         }
-
         return ScreenHandlerType.GENERIC_9X6;
     }
 
-    @Inject(method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V", at = @At(value = "JUMP", opcode = Opcodes.GOTO, ordinal = 1, shift = At.Shift.BY, by = 2))
+    @Inject(
+            method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+            at = @At(
+                    value = "JUMP",
+                    opcode = Opcodes.GOTO,
+                    ordinal = 1,
+                    shift = At.Shift.BY,
+                    by = 2
+            )
+    )
     private void init(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
         if (!AmsServerSettings.largeShulkerBox || this.slots.size() != 9 * 3) {
             return;
         }
-
         checkSize(inventory, 9 * 6);
         for (int row = 3; row < 6; ++row) {
             for (int column = 0; column < 9; ++column) {
