@@ -44,13 +44,17 @@ public class HereCommandRegistry {
         dispatcher.register(
             CommandManager.literal("here")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandHere))
-            .executes(context -> sendMessage(context.getSource(), context.getSource().getServer(), context.getSource().getPlayer()))
+            .executes(context -> sendMessage(
+                context.getSource(),
+                context.getSource().getServer(),
+                context.getSource().getPlayer()
+            ))
         );
     }
 
     private static int sendMessage(ServerCommandSource source, MinecraftServer minecraftServer, PlayerEntity player) {
-        highlightPlayer(player);
         Messenger.sendServerMessage(minecraftServer, message(source));
+        highlightPlayer(player);
         return 1;
     }
 
@@ -72,9 +76,9 @@ public class HereCommandRegistry {
         int[] pos = GetCommandSourcePos.getPos(source);
         String otherPos = null;
         if (dimension.getValue() == World.NETHER) {
-            otherPos = String.format("%d, %d, %d", pos[0] * 8, pos[1] * 8, pos[2] * 8);
+            otherPos = String.format("%d, %d, %d", pos[0] * 8, pos[1], pos[2] * 8);
         } else if (dimension.getValue() == World.OVERWORLD) {
-            otherPos = String.format("%d, %d, %d", pos[0] / 8, pos[1] / 8, pos[2] / 8);
+            otherPos = String.format("%d, %d, %d", pos[0] / 8, pos[1], pos[2] / 8);
         }
         return otherPos;
     }

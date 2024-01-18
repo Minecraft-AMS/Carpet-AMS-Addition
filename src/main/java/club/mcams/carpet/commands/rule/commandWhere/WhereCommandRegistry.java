@@ -23,7 +23,9 @@ package club.mcams.carpet.commands.rule.commandWhere;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.commandWhere.GetPlayerPos;
 import club.mcams.carpet.translations.Translator;
+import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
@@ -31,6 +33,7 @@ import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.world.World;
@@ -47,14 +50,26 @@ public class WhereCommandRegistry {
             CommandManager.literal("where")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandWhere))
             .then(argument("player", EntityArgumentType.player())
-            .executes(context -> sendMessage(context.getSource().getPlayer(), EntityArgumentType.getPlayer(context, "player"))))
+            .executes(context -> sendMessage(
+                context.getSource().getServer(),
+                context.getSource().getPlayer(),
+                EntityArgumentType.getPlayer(context, "player")
+            )))
         );
     }
 
-    private static int sendMessage(PlayerEntity senderPlayer, PlayerEntity targetPlayer) {
-        highlightPlayer(targetPlayer);
+    private static int sendMessage(MinecraftServer minecraftServer, PlayerEntity senderPlayer, PlayerEntity targetPlayer) {
         senderPlayer.sendMessage(LiteralTextUtil.compatText(message(targetPlayer)), false);
+        sendWhoGetWhoMessage(minecraftServer, senderPlayer, targetPlayer);
+        highlightPlayer(targetPlayer);
         return 1;
+    }
+
+    private static void sendWhoGetWhoMessage(MinecraftServer minecraftServer, PlayerEntity senderPlayer, PlayerEntity targetPlayer) {
+        String senderPlayerName = getPlayerName(senderPlayer);
+        String targetPlayerName = getPlayerName(targetPlayer);
+        String message = translator.tr("who_get_who", senderPlayerName, targetPlayerName).getString();
+        Messenger.sendServerMessage(minecraftServer, message, Colors.GRAY, false, true);
     }
 
     private static void highlightPlayer(PlayerEntity player) {
@@ -75,9 +90,9 @@ public class WhereCommandRegistry {
         int[] pos = GetPlayerPos.getPos(player);
         String otherPos = null;
         if (dimension.getValue() == World.NETHER) {
-            otherPos = String.format("%d, %d, %d", pos[0] * 8, pos[1] * 8, pos[2] * 8);
+            otherPos = String.format("%d, %d, %d", pos[0] * 8, pos[1], pos[2] * 8);
         } else if (dimension.getValue() == World.OVERWORLD) {
-            otherPos = String.format("%d, %d, %d", pos[0] / 8, pos[1] / 8, pos[2] / 8);
+            otherPos = String.format("%d, %d, %d", pos[0] / 8, pos[1], pos[2] / 8);
         }
         return otherPos;
     }
