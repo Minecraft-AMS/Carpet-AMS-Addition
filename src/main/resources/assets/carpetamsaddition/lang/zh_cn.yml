@@ -27,6 +27,7 @@ carpetamsaddition:
       overworld: '主世界'
       nether: '下界'
       the_end: '末地'
+      who_get_who: '%s 获取了 %s 的位置'
 
   validator:
     enhancedWorldEater:
@@ -180,7 +181,7 @@ carpetamsaddition:
         name: 大潜影盒
         desc: 让潜影盒容量增加一倍（与大箱子相同）
         extra:
-          '0': '该规则目前并不完善，使用该规则请遵守如下步骤：'
+          '0': '使用该规则请遵循以下步骤：'
           '1': '1 - 确保没有潜影盒被加载'
           '2': '2 - 输入指令：/carpet setDefault largeShulkerBox true 开启规则'
           '3': '3 - 重启服务器/单人世界'

@@ -27,6 +27,7 @@ carpetamsaddition:
       overworld: 'overworld'
       nether: 'nether'
       the_end: 'the_end'
+      who_get_who: '%s got %s location'
 
   validator:
     enhancedWorldEater:
@@ -144,7 +145,7 @@ carpetamsaddition:
       largeShulkerBox:
         desc: Doubles the size of your ShulkerBox
         extra:
-          '0': 'The current rule is not yet perfect. Please follow the steps below when using this rule:'
+          '0': 'To use this rule, please follow the steps below:'
           '1': '1 - To ensure that no shulker boxes are loaded'
           '2': '2 - Enter the command: /carpet setDefault largeShulkerBox true, to turn on the rule'
           '3': '3 - Restart the server/single-player world'
