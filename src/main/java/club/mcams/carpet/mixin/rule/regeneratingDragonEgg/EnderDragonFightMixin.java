@@ -26,6 +26,7 @@ import net.minecraft.block.Blocks;
 //#if MC>=12000
 //$$ import net.minecraft.util.math.BlockPos;
 //#endif
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonFight;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.Heightmap;
@@ -37,6 +38,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.UUID;
 
 @Mixin(EnderDragonFight.class)
 public abstract class EnderDragonFightMixin {
@@ -54,9 +57,12 @@ public abstract class EnderDragonFightMixin {
     @Shadow
     private boolean previouslyKilled;
 
+    @Shadow
+    private UUID dragonUuid;
+
     @Inject(method = "dragonKilled", at = @At("HEAD"))
-    private void dragonKilled(CallbackInfo ci) {
-        if (AmsServerSettings.regeneratingDragonEgg && this.previouslyKilled) {
+    private void dragonKilled(EnderDragonEntity dragon, CallbackInfo ci) {
+        if (AmsServerSettings.regeneratingDragonEgg && this.previouslyKilled && dragon.getUuid().equals(this.dragonUuid)) {
             //#if MC>=12000
             //$$ this.world.setBlockState(this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.offsetOrigin(this.origin)), Blocks.DRAGON_EGG.getDefaultState());
             //#else
