@@ -842,7 +842,7 @@ Affected components: daylight detector, redstone dust, repeater
 ## largeShulkerBox
 
 Doubles the size of your ShulkerBox.
-The current rule is not yet perfect. Please follow the steps below when using this rule:
+To use this rule, please follow the steps below:
 
 1 - To ensure that no shulker boxes are loaded.
 
