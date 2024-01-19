@@ -72,7 +72,7 @@
 - 分类: `AMS`, `OPTIMIZATION`
 
 
-## 区块加载控制（playerChunkLoadController）
+## 区块加载控制（commandPlayerChunkLoadController）
 
 控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。
 玩家上下线时会将交互状态重置回加载以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)。
@@ -709,7 +709,7 @@
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 
-## 禁用铁砧交互（anvilInteractionDisabled）
+## 禁用铁砧交互（commandAnvilInteractionDisabled）
 
 开启后，玩家无法打开铁砧的UI界面。
 命令：/anvilInteractionDisabledSwitch true/false
@@ -937,11 +937,11 @@
 
 - 分类: `AMS`, `FEATURE`
 
-## 自定义方块爆炸抗性（customBlockBlastResistance）
+## 自定义方块爆炸抗性（commandCustomBlockBlastResistance）
 
 用指令自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）。
 
-开启规则后使用 `/customBlockBlastResistance` 命令查看使用说明
+开启规则后使用 `/customBlockBlastResistance help` 命令查看使用说明
 
 - 类型: `String`
 

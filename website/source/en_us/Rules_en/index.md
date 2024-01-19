@@ -951,7 +951,7 @@ When enabled, Activate full-level beacon with just one base block.
 ## commandCustomBlockBlastResistance
 
 Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled).
-After enabling the rules, use the `/customBlockBlastResistance helper` command to view the usage instructions.
+After enabling the rules, use the `/customBlockBlastResistance help` command to view the usage instructions.
 
 - Type: `String`
 
