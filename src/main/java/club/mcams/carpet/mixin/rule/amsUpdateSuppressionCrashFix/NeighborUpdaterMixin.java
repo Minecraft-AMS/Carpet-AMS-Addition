@@ -53,7 +53,7 @@ public interface NeighborUpdaterMixin {
 //$$        method = "tryNeighborUpdate",
 //$$        at = @At(
 //$$                value = "INVOKE",
-//$$                 target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
+//$$                target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
 //$$        ),
 //$$        locals = LocalCapture.CAPTURE_FAILHARD
 //$$ )
