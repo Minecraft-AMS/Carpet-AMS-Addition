@@ -34,6 +34,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -44,24 +45,26 @@ import java.util.Objects;
 public abstract class PistonBlockMixin {
     @Inject(method = "onSyncedBlockEvent", at = @At("HEAD"))
     private void onSyncedBlockEvent(BlockState state, World world, BlockPos pos, int type, int data, CallbackInfoReturnable<Boolean> cir) {
-        if((Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bone_block") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && !world.isClient) {
+        if (!Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "OFF")) {
             Direction direction = state.get(FacingBlock.FACING);
-            BlockState pistonBlock = world.getBlockState(pos.up(1));
-            if ((Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bone_block") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && pistonBlock.isOf(Blocks.BONE_BLOCK)) {
-                ChunkPos chunkPos = new ChunkPos(pos.offset(direction));
-                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
-                BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
+            BlockState pistonBlockUp = world.getBlockState(pos.up(1));
+            BlockState pistonBlockDown = world.getBlockState(pos.down(1));
+            ChunkPos chunkPos = new ChunkPos(pos.offset(direction));
+            if (optionIsBoneBlockOrAll(world) && pistonBlockUp.getBlock() == Blocks.BONE_BLOCK) {
+                BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
+            } else if (optionIsBedRockOrAll(world) && pistonBlockDown.getBlock() == Blocks.BEDROCK) {
+                BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
             }
         }
+    }
 
-        if((Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bedrock") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && !world.isClient) {
-            Direction direction = state.get(FacingBlock.FACING);
-            BlockState pistonBlock = world.getBlockState(pos.down(1));
-            if ((Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bedrock") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && pistonBlock.isOf(Blocks.BEDROCK)) {
-                ChunkPos chunkPos = new ChunkPos(pos.offset(direction));
-                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
-                BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
-            }
-        }
+    @Unique
+    private boolean optionIsBoneBlockOrAll(World world) {
+        return (Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bone_block") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && !world.isClient;
+    }
+
+    @Unique
+    private boolean optionIsBedRockOrAll(World world) {
+        return (Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "bedrock") || Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "all")) && !world.isClient;
     }
 }

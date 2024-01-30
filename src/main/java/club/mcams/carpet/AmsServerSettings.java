@@ -26,6 +26,8 @@ import club.mcams.carpet.settings.Rule;
 import static carpet.settings.RuleCategory.*;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
+import club.mcams.carpet.validators.rule.blockChunkLoaderTimeController.MaxTimeValidator;
+import club.mcams.carpet.validators.rule.commandPlayerChunkLoadController.MaxRangeValidator;
 import club.mcams.carpet.validators.rule.enhancedWorldEater.BlastResistanceValidator;
 import club.mcams.carpet.validators.rule.maxPlayerInteractionDistance.MaxInteractionDistanceValidator;
 import club.mcams.carpet.validators.rule.maxClientInteractionReachDistance.MaxClientInteractionReachDistanceValidator;
@@ -55,30 +57,6 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, OPTIMIZATION})
     public static boolean optimizedDragonRespawn = false;
-
-    @Rule(
-            options = {"bone_block", "wither_skeleton_skull", "note_block", "OFF"},
-            categories = {AMS, FEATURE, AMS_CHUNKLOADER}
-    )
-    public static String noteBlockChunkLoader = "OFF";
-
-    @Rule(
-            options = {"bone_block", "bedrock", "all", "OFF"},
-            categories = {AMS, FEATURE, AMS_CHUNKLOADER}
-    )
-    public static String pistonBlockChunkLoader = "OFF";
-
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
-    public static boolean bellBlockChunkLoader = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
-    public static boolean blockChunkLoaderKeepTickUpdate = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
-    public static boolean keepEntityUpdate = false;
-
-    @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
-    public static boolean commandPlayerChunkLoadController = false;
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean netherWaterPlacement = false;
@@ -309,6 +287,49 @@ public class AmsServerSettings {
             categories = {AMS, FEATURE, SURVIVAL}
     )
     public static String fakePlayerPickUpController = "false";
+
+    /*
+     * 区块加载规则
+     */
+    @Rule(
+            options = {"bone_block", "wither_skeleton_skull", "note_block", "OFF"},
+            categories = {AMS, FEATURE, AMS_CHUNKLOADER}
+    )
+    public static String noteBlockChunkLoader = "OFF";
+
+    @Rule(
+            options = {"bone_block", "bedrock", "all", "OFF"},
+            categories = {AMS, FEATURE, AMS_CHUNKLOADER}
+    )
+    public static String pistonBlockChunkLoader = "OFF";
+
+    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    public static boolean bellBlockChunkLoader = false;
+
+    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    public static boolean blockChunkLoaderKeepWorldTickUpdate = false;
+
+    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    public static boolean keepWorldTickUpdate = false;
+
+    @Rule(
+            options = {"300"},
+            categories = {AMS, FEATURE, AMS_CHUNKLOADER},
+            validators = MaxTimeValidator.class,
+            strict = false
+    )
+    public static int blockChunkLoaderTimeController = 300;
+
+    @Rule(
+            options = {"3"},
+            categories = {AMS, FEATURE, AMS_CHUNKLOADER},
+            validators = MaxRangeValidator.class,
+            strict = false
+    )
+    public static int blockChunkLoaderRangeController = 3;
+
+    @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
+    public static boolean commandPlayerChunkLoadController = false;
 
     /*
      * 合成表规则

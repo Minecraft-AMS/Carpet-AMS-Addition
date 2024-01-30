@@ -26,7 +26,6 @@ import club.mcams.carpet.helpers.rule.BlockChunkLoader.BlockChunkLoaderHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.NoteBlock;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
@@ -34,6 +33,7 @@ import net.minecraft.world.World;
 //$$ import net.minecraft.block.BlockState;
 //$$ import net.minecraft.entity.Entity;
 //#endif
+import net.minecraft.server.world.ServerWorld;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,36 +44,33 @@ import java.util.Objects;
 
 @Mixin(NoteBlock.class)
 public abstract class NoteBlockMixin {
-    @Inject(at = @At("HEAD"), method = "playNote")
+    @Inject(method = "playNote", at = @At("HEAD"))
     private void playNoteMixin(
-            //#if MC>=11900
-            //$$ Entity entity,
-            //#endif
-            //#if MC>=11903
-            //$$ BlockState blockState,
-            //#endif
-            World world, BlockPos pos, CallbackInfo info) {
-        if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "note_block") && !world.isClient) {
+        //#if MC>=11900
+        //$$ Entity entity,
+        //$$ BlockState blockState,
+        //#endif
+        World world,
+        BlockPos pos,
+        CallbackInfo info
+    ) {
+        if (!Objects.equals(AmsServerSettings.noteBlockChunkLoader, "OFF")) {
+            BlockState noteBlockUp = world.getBlockState(pos.up(1));
             ChunkPos chunkPos = new ChunkPos(pos);
-            ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
-            BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
-        }
-
-        if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block") && !world.isClient) {
-            BlockState noteBlock = world.getBlockState(pos.up(1));
-            if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block") && noteBlock.isOf(Blocks.BONE_BLOCK)) {
-                ChunkPos chunkPos = new ChunkPos(pos.up(1));
-                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
-                BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
-            }
-        }
-
-        if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull") && !world.isClient) {
-            BlockState noteBlock = world.getBlockState(pos.up(1));
-            if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull") && (noteBlock.isOf(Blocks.WITHER_SKELETON_SKULL)) || (noteBlock.isOf(Blocks.WITHER_SKELETON_WALL_SKULL))) {
-                ChunkPos chunkPos = new ChunkPos(pos.up(1));
-                ((ServerWorld) world).getChunkManager().addTicket(BlockChunkLoaderHelper.BLOCK_LOADER, chunkPos, 3, chunkPos);
-                BlockChunkLoaderHelper.resetIdleTimeout((ServerWorld) world);
+            if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "note_block") && !world.isClient) {
+                BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
+            } else if (
+                Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block") &&
+                noteBlockUp.getBlock() == Blocks.BONE_BLOCK &&
+                !world.isClient
+            ) {
+                BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
+            } else if (
+                Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull") &&
+                (noteBlockUp.getBlock() == Blocks.WITHER_SKELETON_SKULL || noteBlockUp.getBlock() == Blocks.WITHER_SKELETON_WALL_SKULL) &&
+                !world.isClient
+            ) {
+                BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
             }
         }
     }

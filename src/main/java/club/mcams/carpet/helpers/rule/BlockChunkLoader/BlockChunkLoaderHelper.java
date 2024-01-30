@@ -30,18 +30,26 @@ import net.minecraft.util.math.ChunkPos;
 import java.util.Comparator;
 
 public class BlockChunkLoaderHelper {
-    public static final ChunkTicketType<ChunkPos>
-        BLOCK_LOADER = ChunkTicketType.create
-        (
-            "block_loader", Comparator.comparingLong(ChunkPos::toLong),
-            300
-        );
-
-    public static void resetIdleTimeout(ServerWorld world) {
-        if (AmsServerSettings.blockChunkLoaderKeepTickUpdate) {
-            world.resetIdleTimeout();
+    public static void loadChunk(ServerWorld world, ChunkPos chunkPos) {
+        BlockChunkLoaderHelper.addTicket(world, chunkPos);
+        if (AmsServerSettings.blockChunkLoaderKeepWorldTickUpdate) {
+            BlockChunkLoaderHelper.resetIdleTimeout(world);
         }
     }
+
+    private static void addTicket(ServerWorld world, ChunkPos chunkPos) {
+        int loadTime = AmsServerSettings.blockChunkLoaderTimeController; // Default: 300gt
+        int loadRange = AmsServerSettings.blockChunkLoaderRangeController; // Default: 3x3
+        ChunkTicketType<ChunkPos> BLOCK_LOADER =
+            ChunkTicketType.create(
+                "block_loader",
+                Comparator.comparingLong(ChunkPos::toLong),
+                loadTime
+            );
+        world.getChunkManager().addTicket(BLOCK_LOADER, chunkPos, loadRange, chunkPos);
+    }
+
+    private static void resetIdleTimeout(ServerWorld world) {
+        world.resetIdleTimeout();
+    }
 }
-
-

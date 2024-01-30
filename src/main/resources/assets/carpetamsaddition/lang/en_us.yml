@@ -36,6 +36,10 @@ carpetamsaddition:
       value_range: 'The value must be 0 - 512 or -1'
     maxPlayerInteractionDistance:
       value_range: 'The value must be 0 - 512 or -1'
+    blockChunkLoaderTimeController:
+      value_range: 'The value must be 1 - 300'
+    blockChunkLoaderRangeController:
+      value_range: 'The value must be 1 - 32'
 
   carpet_translations:
     category:
@@ -253,35 +257,45 @@ carpetamsaddition:
           '0': 'Command:'
           '1': '/playerChunkLoading true/false'
       noteBlockChunkLoader:
-        desc: Load nearby 3x3 chunks for 15 seconds when a note block is triggered
+        desc: Load nearby 3x3 chunks for 15 seconds when a note block is triggered, You can use the rules of blockChunkLoaderTimeController and blockChunkLoaderRangeController to control their loading time and range
         extra:
           '0': '[bone_block] - When bone_block is on the note_block'
           '1': '[wither_skeleton_skull] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall'
           '2': '[note_block] - Only note_block'
           '3': '[OFF] - Disable the rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue.'
+          '5': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
       bellBlockChunkLoader:
-        desc: Load nearby 3x3 chunks for 15 seconds when a bell is triggered
+        desc: Load nearby 3x3 chunks for 15 seconds when a bell is triggered, You can use the rules of blockChunkLoaderTimeController and blockChunkLoaderRangeController to control their loading time and range
         extra:
           '0': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '1': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue.'
+          '1': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
       pistonBlockChunkLoader:
-        desc:  Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head)
+        desc:  Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head), You can use the rules of blockChunkLoaderTimeController and blockChunkLoaderRangeController to control their loading time and range
         extra:
           '0': '[bone_block] - When bone_block is on the piston'
           '1': '[bedrock] - When bedrock is under the piston'
           '2': '[all] - When bone_block is on the piston or bedrock is under the piston'
           '3': '[OFF] - Disable the rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepTickUpdate or keepEntityUpdate rules to solve this issue.'
-      blockChunkLoaderKeepTickUpdate:
+          '5': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
+      blockChunkLoaderKeepWorldTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded
         extra:
           '0': 'Affected rules: '
           '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
-      keepEntityUpdate:
+      keepWorldTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction
+      blockChunkLoaderTimeController:
+        desc: Used to control the loading time of block loader series rules
+        extra:
+          '0': 'Affected rules: '
+          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
+      blockChunkLoaderRangeController:
+        desc: Used to control the loading range of block loader series rules
+        extra:
+          '0': 'Affected rules: '
+          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
 
       #合成配方规则
       craftableEnchantedGoldenApples:
