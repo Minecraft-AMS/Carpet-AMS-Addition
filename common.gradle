@@ -12,13 +12,10 @@ preprocess {
 
 repositories {
 	maven {
-		url 'https://masa.dy.fi/maven'
+		url 'https://www.cursemaven.com'
 	}
 	maven {
 		url 'https://jitpack.io'
-	}
-	maven {
-		url 'https://www.cursemaven.com'
 	}
 }
 
