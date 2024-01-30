@@ -100,7 +100,7 @@ Command: /playerChunkLoading true/false
 
 ## noteBlockChunkLoader
 
-When a note block is triggered by rising edge of redstone signal, the chunk which the note block located will be added a ticket with level 30 and type 'note_block', which will expire after 300gt. Note blocks that can be used to add ticket must meet the requirement set by the rule option.
+When a note block is triggered by rising edge of redstone signal, the chunk which the note block located will be added a ticket with level 30 and type `note_block`, which will expire after 300gt. Note blocks that can be used to add ticket must meet the requirement set by the rule option, You can use the rules of `blockChunkLoaderTimeController` and `blockChunkLoaderRangeController` to control their loading time and range.
 
 the option is interpreted as follow:
 
@@ -134,11 +134,11 @@ the option is interpreted as follow:
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate` rules to solve this issue.
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepWorldTickUpdate `or `keepWorldTickUpdate` rules to solve this issue.
 
 ## bellBlockChunkLoader
 
-When a bell block is triggered by rising edge of redstone signal, the chunk which the bell block located will be added a ticket with level 30 and type 'bell_block', which will expire after 300gt. Bell blocks have no special requirement to add tickets.
+When a bell block is triggered by rising edge of redstone signal, the chunk which the bell block located will be added a ticket with level 30 and type `bell_block`, which will expire after 300gt. Bell blocks have no special requirement to add tickets, You can use the rules of `blockChunkLoaderTimeController` and `blockChunkLoaderRangeController` to control their loading time and range.
 
 - Type: `boolean`
 
@@ -154,11 +154,11 @@ When a bell block is triggered by rising edge of redstone signal, the chunk whic
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate `rules to solve this issue.
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepWorldTickUpdate `or `keepWorldTickUpdate `rules to solve this issue.
 
 ## pistonBlockChunkLoader
 
-When a piston (also available for sticky piston) successfully push or pull its head, the chunk which the piston head (the moving block representing piston head) located will be added a ticket with level 30 and type 'piston_block', which will expire after 300gt. The ticket will be added at the tick when the moving block is created. Pistons that can be used to add ticket must meet the requirement set by the rule option.
+When a piston (also available for sticky piston) successfully push or pull its head, the chunk which the piston head (the moving block representing piston head) located will be added a ticket with level 30 and type `piston_block`, which will expire after 300gt. The ticket will be added at the tick when the moving block is created. Pistons that can be used to add ticket must meet the requirement set by the rule option, You can use the rules of `blockChunkLoaderTimeController` and `blockChunkLoaderRangeController` to control their loading time and range.
 
 the option is interpreted as follow:
 
@@ -176,7 +176,7 @@ the option is interpreted as follow:
 
 - `OFF`: Disable the rule.
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepTickUpdate `or `keepEntityUpdate `rules to solve this issue.
+Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepWorldTickUpdate `or `keepWorldTickUpdate `rules to solve this issue.
 
 
 
@@ -195,7 +195,7 @@ Due to after 300 ticks without any players in the current dimension on the serve
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
-## blockChunkLoaderKeepTickUpdate
+## blockChunkLoaderKeepWorldTickUpdate
 
 After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.
 
@@ -216,7 +216,7 @@ Affected rules: `noteBlockChunkLoader`, `pistonBlockChunkLoader`, `bellBlockChun
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
 
-## keepEntityUpdate
+## keepWorldTickUpdate
 
 After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction.
 
@@ -229,6 +229,50 @@ After 300 ticks without any players in the current dimension on the server, Mine
 
 
 - Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
+## blockChunkLoaderTimeController
+
+Used to control the loading time of block loader series rules.
+
+Affected rules: 
+
+noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader
+
+- Type: `int`
+
+
+
+- Default: `300`
+
+
+
+- Suggested options: `1 - 300`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
+## blockChunkLoaderRangeController
+
+Used to control the loading range of block loader series rules.
+
+Affected rules: 
+
+noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader
+
+- Type: `int`
+
+
+
+- Default: `3`
+
+
+
+- Suggested options: `1 - 32`
 
 
 

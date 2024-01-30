@@ -96,7 +96,7 @@
 
 ## 音符盒区块加载（noteBlockChunkLoader）
 
-开启后，当上边沿红石信号激活音符盒时，为该音符盒所在区块添加类型为"note_block"，加载等级为30的加载票，持续时间为300gt（15s）。
+开启后，当上边沿红石信号激活音符盒时，为该音符盒所在区块添加类型为"note_block"，加载等级为30的加载票，持续时间为300gt（15s），你可以使用blockChunkLoaderTimeController与blockChunkLoaderRangeController规则来控制其加载时间与范围。
 
 `bone_block`: 音符盒上有骨块时可以触发加载。
 
@@ -106,7 +106,7 @@
 
 `OFF`: 禁用该规则。
 
-由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题。
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepWorldTickUpdate`或`keepWorldTickUpdate`规则来解决这个问题。
 
 
 
@@ -127,9 +127,9 @@
 
 ## 钟区块加载（bellBlockChunkLoader）
 
-开启后，当上边沿红石信号激活钟时，为钟方块所在区块添加类型为"bell_block"，加载等级为30的加载票，持续时间为300gt（15s）。
+开启后，当上边沿红石信号激活钟时，为钟方块所在区块添加类型为"bell_block"，加载等级为30的加载票，持续时间为300gt（15s），你可以使用blockChunkLoaderTimeController与blockChunkLoaderRangeController规则来控制其加载时间与范围。
 
-由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题。
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepWorldTickUpdate`或`keepWorldTickUpdate`规则来解决这个问题。
 
 
 
@@ -150,7 +150,7 @@
 
 ## 活塞头区块加载（pistonBlockChunkLoader）
 
-开启后，当该活塞/黏性活塞产生活塞头的推出/拉回事件时，在创建推出/拉回事件的那一游戏刻为**活塞头方块所在区块**添加类型为"piston_block"，加载等级为30的加载票，持续时间为300gt（15s）。注意，黏性活塞的失败收回事件（如尝试拉回超过12个方块时）也可创建加载票。
+开启后，当该活塞/黏性活塞产生活塞头的推出/拉回事件时，在创建推出/拉回事件的那一游戏刻为**活塞头方块所在区块**添加类型为"piston_block"，加载等级为30的加载票，持续时间为300gt（15s）。注意，黏性活塞的失败收回事件（如尝试拉回超过12个方块时）也可创建加载票，你可以使用blockChunkLoaderTimeController与blockChunkLoaderRangeController规则来控制其加载时间与范围。
 
 `bone_block`: 活塞\黏性活塞上有骨块时触发加载。
 
@@ -160,7 +160,7 @@
 
 `OFF`: 禁用该规则。
 
-由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepTickUpdate`或`keepEntityUpdate`规则来解决这个问题。
+由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepWorldTickUpdate`或`keepWorldTickUpdate`规则来解决这个问题。
 
 
 
@@ -179,7 +179,7 @@
 - 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
 
-## 方块区块加载保持实体更新（blockChunkLoaderKeepTickUpdate）
+## 方块区块加载保持实体更新（blockChunkLoaderKeepWorldTickUpdate）
 
 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制。
 受影响的规则：`noteBlockChunkLoader`、`pistonBlockChunkLoader`、`bellBlockChunkLoader`
@@ -199,7 +199,7 @@
 - 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
 
-## 保持实体更新（keepEntityUpdate）
+## 保持实体更新（keepWorldTickUpdate）
 
 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制。
 
@@ -216,6 +216,22 @@
 
 
 - 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
+## 方块加载时长控制器（blockChunkLoaderTimeController）
+
+用于控制方块加载系列规则的加载时长。
+
+受影响的规则：
+
+noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
+
+## 方块加载范围控制器（blockChunkLoaderRangeController）
+
+用于控制方块加载系列规则的加载范围。
+
+受影响的规则：
+
+noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 
 ## 地狱可放水（netherWaterPlacement）
