@@ -53,7 +53,7 @@ public class AMSTranslations {
     @SuppressWarnings("unchecked")
     private static List<String> getAvailableTranslations() {
         String yamlData;
-        try {
+        try {                           
             yamlData = FileUtil.readFile(LANG_DIR + "/meta/languages.yml");
         } catch (Exception e) {
             AmsServer.LOGGER.warn("Failed to read file", e);

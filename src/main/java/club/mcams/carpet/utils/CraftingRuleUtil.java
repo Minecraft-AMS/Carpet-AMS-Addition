@@ -203,8 +203,8 @@ public class CraftingRuleUtil {
 
     private static void writeAdvancement(String datapackPath, String ruleName, String[] recipes) {
         copyFile(
-                "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/recipe_rule.json",
-                datapackPath + "ams/advancements/" + ruleName + ".json"
+            "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/recipe_rule.json",
+            datapackPath + "ams/advancements/" + ruleName + ".json"
         );
         JsonObject advancementJson = readJson(datapackPath + "ams/advancements/" + ruleName + ".json");
         if (advancementJson != null) {
@@ -264,8 +264,8 @@ public class CraftingRuleUtil {
     private static void copyRecipes(String[] recipes, String recipeNamespace, String datapackPath, String ruleName) {
         for (String recipeName : recipes) {
             copyFile(
-                    "assets/carpetamsaddition/AmsRecipeTweakPack/" + recipeNamespace + "/recipes/" + recipeName,
-                    datapackPath + recipeNamespace + "/recipes/" + recipeName
+                "assets/carpetamsaddition/AmsRecipeTweakPack/" + recipeNamespace + "/recipes/" + recipeName,
+                datapackPath + recipeNamespace + "/recipes/" + recipeName
             );
         }
         if (recipeNamespace.equals("ams")) {

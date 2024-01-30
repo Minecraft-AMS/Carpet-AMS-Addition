@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.keepEntityUpdate;
+package club.mcams.carpet.mixin.rule.keepWorldTickUpdate;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -38,7 +38,7 @@ public abstract class ServerWorldMixin {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void tick(CallbackInfo ci) {
-        if (AmsServerSettings.keepEntityUpdate) {
+        if (AmsServerSettings.keepWorldTickUpdate) {
             this.resetIdleTimeout();
         }
     }
