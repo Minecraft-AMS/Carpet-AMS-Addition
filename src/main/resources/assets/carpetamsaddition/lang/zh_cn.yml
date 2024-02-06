@@ -169,6 +169,9 @@ carpetamsaddition:
         extra:
           '0': '使用如下指令来控制其是否在"customBlockUpdateSuppressor"开启时强制启动，权限等级为2:'
           '1': '/amsUpdateSuppressionCrashFixForceMode true/false'
+      ghastFireballExplosionDamageSourceFix:
+        name: 恶魂火球爆炸伤害源修复
+        desc: 修复MC-193297中，恶魂火球爆炸时不会正确传递伤害源
       cakeBlockDropOnBreak:
         name: 可掉落蛋糕
         desc: 蛋糕在被破坏时可以掉落蛋糕（蛋糕是完整的情况下才会掉落）

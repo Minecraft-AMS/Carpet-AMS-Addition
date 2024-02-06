@@ -137,6 +137,8 @@ carpetamsaddition:
         extra:
           '0': 'Use the following command to control whether it is forcibly enabled when "customBlockUpdateSuppressor" is enabled, with a permission level of 2:'
           '1': '/amsUpdateSuppressionCrashFixForceMode true/false'
+      ghastFireballExplosionDamageSourceFix:
+        desc: Fix MC-193297 that the large fireball does not create explosion with correct damage source
       cakeBlockDropOnBreak:
         desc: When the cake is destroyed, it can drop cake (the cake will only drop when it is intact)
       noCakeEating:

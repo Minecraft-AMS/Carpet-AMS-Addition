@@ -152,6 +152,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL})
     public static boolean amsUpdateSuppressionCrashFix = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL})
+    public static boolean ghastFireballExplosionDamageSourceFix = false;
+
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean cakeBlockDropOnBreak = false;
 

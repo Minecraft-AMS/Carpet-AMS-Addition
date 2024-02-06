@@ -44,6 +44,7 @@
     "rule.fancyFakePlayerName.PlayerManagerMixin",
     "rule.fasterMovement.PlayerEntityMixin",
     "rule.flippinCactusSoundEffect.BlockRotatorMixin",
+    "rule.ghastFireballExplosionDamageSourceFix.FireballEntityMixin",
     "rule.hopperSuctionDisabled.HopperBlockEntityMixin",
     "rule.infiniteTrades.TradeOfferMixin",
     "rule.keepWorldTickUpdate.ServerWorldMixin",
