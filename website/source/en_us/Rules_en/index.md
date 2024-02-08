@@ -823,6 +823,26 @@ Use the following command to control whether it is forcibly enabled when `custom
 
 - Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
 
+## ghastFireballExplosionDamageSourceFix
+
+Fix MC-193297 that the large fireball does not create explosion with correct damage source.
+
+<Available for Minecraft < 1.19.3>
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false` , `true`
+
+
+
+- Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`, `BUGFIX`
+
 
 ## cakeBlockDropOnBreak
 
@@ -1346,6 +1366,8 @@ Using an Ender Pearl each time will spawn an Endermite.
 ## enderPearlSoundEffect
 
 A sound effect will be played when the player uses an ender pearl for teleportation.
+
+<Available for Minecraft < 1.20>
 
 - Type: `boolean`
 
