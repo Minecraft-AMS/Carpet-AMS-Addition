@@ -42,11 +42,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BlockRotatorMixin {
     @SuppressWarnings("EnhancedSwitchMigration")
     @Inject(
-            method = "flip_block",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"
-            )
+        method = "flip_block",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"
+        )
     )
     private static void flipBlock(BlockState state, World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.flippinCactusSoundEffect != 0) {

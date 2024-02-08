@@ -44,12 +44,12 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
     }
 
     @ModifyArg(
-            method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/screen/ScreenHandler;<init>(Lnet/minecraft/screen/ScreenHandlerType;I)V"
-            ),
-            index = 0
+        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/screen/ScreenHandler;<init>(Lnet/minecraft/screen/ScreenHandlerType;I)V"
+        ),
+        index = 0
     )
     private static ScreenHandlerType<?> getScreenHandlerType(ScreenHandlerType<?> type) {
         if (!AmsServerSettings.largeShulkerBox) {
@@ -59,14 +59,14 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
     }
 
     @Inject(
-            method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
-            at = @At(
-                    value = "JUMP",
-                    opcode = Opcodes.GOTO,
-                    ordinal = 1,
-                    shift = At.Shift.BY,
-                    by = 2
-            )
+        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        at = @At(
+            value = "JUMP",
+            opcode = Opcodes.GOTO,
+            ordinal = 1,
+            shift = At.Shift.BY,
+            by = 2
+        )
     )
     private void init(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
         if (!AmsServerSettings.largeShulkerBox || this.slots.size() != 9 * 3) {
