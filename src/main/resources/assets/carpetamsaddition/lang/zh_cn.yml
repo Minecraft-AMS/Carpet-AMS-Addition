@@ -95,7 +95,7 @@ carpetamsaddition:
         desc: 玩家将免受除虚空伤害外的一切伤害
       creativeOneHitKill:
         name: 创造模式一击必杀
-        desc: 当玩家在创造模式下时可以做到一击必杀\n当玩家处于潜行状态时，周围的实体也会被杀死
+        desc: 当玩家在创造模式下时可以做到一击必杀，当玩家处于潜行状态时，周围的实体也会被杀死
       largeEnderChest:
         name: 大末影箱
         desc: 让你的末影箱容量增加一倍（与大箱子相同）

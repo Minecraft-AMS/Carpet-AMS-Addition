@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(AbstractPlantPartBlock.class)
-public abstract class AbstractPlantPartBlockMixin{
+public abstract class AbstractPlantPartBlockMixin {
     @Inject(
             method = "scheduledTick",
             at = @At(
