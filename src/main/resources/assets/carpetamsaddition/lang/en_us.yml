@@ -237,6 +237,8 @@ carpetamsaddition:
           '0': '[MainHandOnly] - Only the main hand can pick up items'
           "1": '[NoPickUp] - Unable to pick up items at all'
           "2": '[false] - Disable rule'
+      sneakToEatCake:
+        desc: Players can only eat cake while sneaking
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

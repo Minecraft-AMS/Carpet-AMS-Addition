@@ -302,6 +302,9 @@ carpetamsaddition:
           '0': '[MainHandOnly] - 仅主手可拾取物品'
           "1": '[NoPickUp] - 完全无法拾取物品'
           "2": '[false] - 禁用规则'
+      sneakToEatCake:
+        name: 潜行吃蛋糕
+        desc: 玩家只能在潜行状态下吃蛋糕
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

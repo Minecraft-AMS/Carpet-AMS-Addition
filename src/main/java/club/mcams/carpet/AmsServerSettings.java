@@ -293,6 +293,9 @@ public class AmsServerSettings {
     )
     public static String fakePlayerPickUpController = "false";
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean sneakToEatCake = false;
+
     /*
      * 区块加载规则
      */
