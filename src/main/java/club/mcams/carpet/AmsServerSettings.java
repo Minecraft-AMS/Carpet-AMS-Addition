@@ -137,6 +137,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static fasterMovementDimension fasterMovementController = fasterMovementDimension.ALL;
 
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    public static boolean fakePlayerInNetworkUpdateStage = false;
+
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean easyWitherSkeletonSkullDrop = false;
 
