@@ -98,6 +98,7 @@
     "rule.sharedVillagerDiscounts.GetValueForInvoker",
     "rule.sharedVillagerDiscounts.VillagerGossipsMixin",
     "rule.shulkerHitLevitationDisabled_immuneShulkerBullet.ShulkerBulletEntityMixin",
+    "rule.sneakToEatCake.sneakToEatCake",
     "rule.sneakToEditSign.AbstractSignBlockMixin",
     "rule.sneakToEditSign.SignBlockEntityMixin",
     "rule.superBow.InfinityEnchantmentMixin",

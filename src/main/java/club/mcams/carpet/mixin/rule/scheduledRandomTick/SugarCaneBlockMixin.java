@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(SugarCaneBlock.class)
-public abstract class SugarCaneBlockMixin{
+public abstract class SugarCaneBlockMixin {
 
     @Shadow
     public abstract void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random);

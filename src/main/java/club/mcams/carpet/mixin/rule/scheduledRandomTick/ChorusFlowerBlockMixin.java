@@ -40,7 +40,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChorusFlowerBlock.class)
-public abstract class ChorusFlowerBlockMixin{
+public abstract class ChorusFlowerBlockMixin {
 
     @Shadow
     public abstract void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random);

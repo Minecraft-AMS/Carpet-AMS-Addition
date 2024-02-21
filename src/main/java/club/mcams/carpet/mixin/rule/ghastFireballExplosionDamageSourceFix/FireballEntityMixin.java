@@ -20,34 +20,40 @@
 
 package club.mcams.carpet.mixin.rule.ghastFireballExplosionDamageSourceFix;
 
+import org.spongepowered.asm.mixin.Mixin;
+//#if MC<11900
 import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.FireballEntity;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+//#else
+//$$ import club.mcams.carpet.utils.compat.DummyClass;
+//#endif
 
-//For version <1.19.3
+//For version < 1.19.3
+//#if MC<11900
 @Mixin(FireballEntity.class)
+//#else
+//$$ @Mixin(DummyClass.class)
+//#endif
 public class FireballEntityMixin {
-    //#if MC<11903
+    //#if MC<11900
     @ModifyArg(
-            method="Lnet/minecraft/entity/projectile/FireballEntity;onCollision(Lnet/minecraft/util/hit/HitResult;)V",
-            at=@At(
-                    value="INVOKE",
-                    target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFZLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
-            ),
-            index=0
+        method= "onCollision(Lnet/minecraft/util/hit/HitResult;)V",
+        at=@At(
+            value="INVOKE",
+            target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFZLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
+        ),
+        index=0
     )
     public Entity fillUpExplosionOwner(@Nullable Entity entity) {
         if(AmsServerSettings.ghastFireballExplosionDamageSourceFix) {
             return (FireballEntity) (Object) this;
-        }
-        else {
+        } else {
             return entity;
         }
     }
-
     //#endif
 }

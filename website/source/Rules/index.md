@@ -788,6 +788,26 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `EXPERIMENTAL`
 
+## 恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）
+
+修复MC-193297中，恶魂火球爆炸时不会正确传递伤害源。
+
+<该规则 Minecraft < 1.19.3 可用>
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `EXPERIMENTAL`, `BUGFIX`
+
 
 ## 可掉落蛋糕（cakeBlockDropOnBreak）
 
@@ -1305,6 +1325,8 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 ## 末影珍珠音效（enderPearlSoundEffect）
 
 玩家在使用末影珍珠进行传送时会播放音效。
+
+<该规则 Minecraft < 1.20 可用>
 
 - 类型: `boolean`
 

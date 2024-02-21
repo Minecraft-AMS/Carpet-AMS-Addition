@@ -81,7 +81,7 @@ carpetamsaddition:
       invulnerable:
         desc: Players will be protected from all damage except Void Damage
       creativeOneHitKill:
-        desc: Allows players in Creative mode to kill entities in one hit\nIf the player is sneaking, other entities around the target get killed too
+        desc: Allows players in Creative mode to kill entities in one hit, If the player is sneaking, other entities around the target get killed too
       largeEnderChest:
         desc: Doubles the size of your EnderChest
       bambooModelNoOffset:
@@ -237,6 +237,8 @@ carpetamsaddition:
           '0': '[MainHandOnly] - Only the main hand can pick up items'
           "1": '[NoPickUp] - Unable to pick up items at all'
           "2": '[false] - Disable rule'
+      sneakToEatCake:
+        desc: Players can only eat cake while sneaking
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

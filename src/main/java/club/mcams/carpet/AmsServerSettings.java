@@ -155,8 +155,10 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL})
     public static boolean amsUpdateSuppressionCrashFix = false;
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL})
+    //#if MC<11900
+    @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL, BUGFIX})
     public static boolean ghastFireballExplosionDamageSourceFix = false;
+    //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean cakeBlockDropOnBreak = false;
@@ -293,6 +295,9 @@ public class AmsServerSettings {
             categories = {AMS, FEATURE, SURVIVAL}
     )
     public static String fakePlayerPickUpController = "false";
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean sneakToEatCake = false;
 
     /*
      * 区块加载规则
