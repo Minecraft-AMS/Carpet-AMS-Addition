@@ -197,6 +197,8 @@ carpetamsaddition:
           '0': 'Example：1024_byteeeee -> [bot] 1024_byteeeee_bot'
       fakePlayerNoScoreboardCounter:
         desc: The scoreboard will hide the fake player
+      fakePlayerInNetworkUpdateStage:
+        desc: Move the fake player computation to the network update stage thus align with the vanilla player
       noFamilyPlanning:
         desc: Allow players to continuously feed animals to breed them
       hopperSuctionDisabled:

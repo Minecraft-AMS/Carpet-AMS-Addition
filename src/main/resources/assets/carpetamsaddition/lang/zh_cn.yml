@@ -244,6 +244,9 @@ carpetamsaddition:
       fakePlayerNoScoreboardCounter:
         name: 假人不计入计分板
         desc: 计分板将会屏蔽假人
+      fakePlayerInNetworkUpdateStage:
+        name: 假人运算移动至网络更新阶段
+        desc: 将carpet原有假人运算移动到网络更新阶段，以与一般玩家尽量保持一致
       noFamilyPlanning:
         name: 没有计划生育
         desc: 允许玩家一直喂食动物来繁殖它们
