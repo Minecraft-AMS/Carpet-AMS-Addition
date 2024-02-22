@@ -20,10 +20,10 @@ preprocess {
 	mc117.link(mc118, file('versions/mapping-1.17-1.18.txt'))
 	mc118.link(mc119, file('versions/mapping-1.18-1.19.txt'))
 	mc119.link(mc1200, file('versions/mapping-1.19-1.20.txt'))
-	mc1200.link(mc1201, file('versions/mapping-1.19-1.20.txt'))
-	mc1201.link(mc1202, file('versions/mapping-1.19-1.20.txt'))
-	mc1202.link(mc1203, file('versions/mapping-1.19-1.20.txt'))
-	mc1203.link(mc1204, file('versions/mapping-1.19-1.20.txt'))
+	mc1200.link(mc1201, file('versions/mapping-1.20-1.20.1.txt'))
+	mc1201.link(mc1202, file('versions/mapping-1.20.1-1.20.2.txt'))
+	mc1202.link(mc1203, file('versions/mapping-1.20.2-1.20.3.txt'))
+	mc1203.link(mc1204, file('versions/mapping-1.20.3-1.20.4.txt'))
 }
 
 tasks.register('buildAndGather') {
