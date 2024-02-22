@@ -1449,6 +1449,26 @@ Two modes are provided to control whether fake player can pick up items.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## commandPlayerLeader
+
+Designate one or more players as guides, granting them a glowing effect.
+
+After enabling the rules, use the `/leader help` command to view the usage instructions
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `COMMAND`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

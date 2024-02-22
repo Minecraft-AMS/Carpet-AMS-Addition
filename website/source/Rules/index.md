@@ -1408,6 +1408,26 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 玩家导游（commandPlayerLeader）
+
+指定一名或多名玩家成为导游，使他们拥有发光效果。
+
+开启规则后使用 `/leader help` 命令查看使用说明
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `COMMAND`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

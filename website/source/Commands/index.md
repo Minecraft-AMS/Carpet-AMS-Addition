@@ -49,6 +49,12 @@
 
   显示所有添加的方块。
 
+
+
+- `/customBlockBlastResistance help`
+
+  查看使用说明。
+
 ### 我在哪（commandHere）
 
 - `/here`
@@ -60,3 +66,21 @@
 - `/where`
 
 获取指定玩家所在维度、坐标、对应的主世界/下界坐标，同时给予目标玩家30s的发光效果。
+
+### 玩家导游（commandPlayerLeader）
+
+- `/leader add <玩家名>`
+
+  添加一名导游。
+
+
+
+- `/leader remove <玩家名>`
+
+  移除一名导游。
+
+
+
+- `/leader help`
+
+  查看使用说明。

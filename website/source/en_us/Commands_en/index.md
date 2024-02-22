@@ -49,6 +49,12 @@ Control whether forced startup is enabled when the `customBlockUpdateSuppressor 
 
   Display all added blocks.
 
+
+
+- `/customBlockBlastResistance help`
+
+  View the usage instructions.
+
 ### commandHere
 
 - `/here`
@@ -60,3 +66,23 @@ send the current dimension, coordinates, and corresponding overworld/nether coor
 - `/where`
 
 get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect.
+
+### commandPlayerLeader
+
+- `/leader add <PlayerName>`
+
+  Add a tour guide.
+
+
+
+- `/leader remove <PlayerName>`
+
+  remove a tour guide.
+
+
+
+- `/leader help`
+
+  View the usage instructions.
+
+  
