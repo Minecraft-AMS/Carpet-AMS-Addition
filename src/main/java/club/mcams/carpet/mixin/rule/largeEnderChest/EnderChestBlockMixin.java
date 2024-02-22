@@ -47,16 +47,18 @@ public abstract class EnderChestBlockMixin {
     private static Text CONTAINER_NAME;
 
     @WrapOperation(
-            method = "onUse",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/player/PlayerEntity;openHandledScreen(Lnet/minecraft/screen/NamedScreenHandlerFactory;)Ljava/util/OptionalInt;")
+        method = "onUse",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;openHandledScreen(Lnet/minecraft/screen/NamedScreenHandlerFactory;)Ljava/util/OptionalInt;"
+        )
     )
 	private OptionalInt onUse(PlayerEntity playerEntity, NamedScreenHandlerFactory factory, Operation<OptionalInt> original) {
         if (AmsServerSettings.largeEnderChest) {
             return playerEntity.openHandledScreen(
                 new SimpleNamedScreenHandlerFactory((syncId, playerInventory, playerEntityInner)
-                    -> GenericContainerScreenHandler.createGeneric9x6(syncId, playerInventory, playerEntityInner.getEnderChestInventory()), CONTAINER_NAME));
+                    -> GenericContainerScreenHandler.createGeneric9x6(syncId, playerInventory, playerEntityInner.getEnderChestInventory()), CONTAINER_NAME)
+            );
         } else {
             return original.call(playerEntity, factory);
         }

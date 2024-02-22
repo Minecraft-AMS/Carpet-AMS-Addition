@@ -28,11 +28,11 @@ import static club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.
 
 public class LoadConfigFromJson {
     public static void load(MinecraftServer server) {
-        clearMap();
+        clearMemory();
         CustomBlockBlastResistanceConfig.loadFromJson(CustomBlockBlastResistanceConfig.getPath(server));
     }
 
-    private static void clearMap() {
+    private static void clearMemory() {
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
     }
 }

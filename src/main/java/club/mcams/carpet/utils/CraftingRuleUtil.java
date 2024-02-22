@@ -58,7 +58,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class CraftingRuleUtil {
-    public static void clearAmsDataDatapacks(MinecraftServer minecraftServer) {
+    public static void clearAmsDatapacks(MinecraftServer minecraftServer) {
         File datapackPath = new File(minecraftServer.getSavePath(WorldSavePath.DATAPACKS).toString() + "/AmsData/data/");
         if (Files.isDirectory(datapackPath.toPath())) {
             try {
@@ -69,7 +69,7 @@ public class CraftingRuleUtil {
         }
     }
 
-    public static void loadAmsDataDatapacks(MinecraftServer minecraftServer) {
+    public static void loadAmsDatapacks(MinecraftServer minecraftServer) {
         String datapackPath = minecraftServer.getSavePath(WorldSavePath.DATAPACKS).toString();
         if (Files.isDirectory(new File(datapackPath + "/Ams_flexibleData/").toPath())) {
             try {

@@ -25,7 +25,6 @@ import club.mcams.carpet.utils.compat.DummyClass;
 //#endif
 
 //#if MC>=11900
-//$$ import club.mcams.carpet.utils.compat.DimensionWrapper;
 //$$ import club.mcams.carpet.AmsServerSettings;
 //$$ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
 //$$ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionContext;

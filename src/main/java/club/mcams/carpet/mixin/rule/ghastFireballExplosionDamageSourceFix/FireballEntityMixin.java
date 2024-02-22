@@ -31,22 +31,23 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 //#else
 //$$ import club.mcams.carpet.utils.compat.DummyClass;
 //#endif
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-//For version < 1.19.3
+@GameVersion(version = "Minecraft < 1.19.3")
 //#if MC<11900
 @Mixin(FireballEntity.class)
 //#else
 //$$ @Mixin(DummyClass.class)
 //#endif
-public class FireballEntityMixin {
+public abstract class FireballEntityMixin {
     //#if MC<11900
     @ModifyArg(
-        method= "onCollision(Lnet/minecraft/util/hit/HitResult;)V",
-        at=@At(
-            value="INVOKE",
+        method = "onCollision(Lnet/minecraft/util/hit/HitResult;)V",
+        at = @At(
+            value ="INVOKE",
             target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFZLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
         ),
-        index=0
+        index = 0
     )
     public Entity fillUpExplosionOwner(@Nullable Entity entity) {
         if(AmsServerSettings.ghastFireballExplosionDamageSourceFix) {

@@ -43,8 +43,7 @@ public class PlayerChunkLoadControllerCommandRegistry {
             .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.commandPlayerChunkLoadController))
             .executes((c) -> listPlayerInteractions(c.getSource(), c.getSource().getName()))
             .then(argument("boolean", BoolArgumentType.bool())
-            .executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getName(), getBool(c, "boolean")))
-            )
+            .executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getName(), getBool(c, "boolean"))))
         );
     }
 

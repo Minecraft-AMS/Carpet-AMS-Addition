@@ -119,11 +119,11 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onServerClosed(MinecraftServer minecraftServer) {
-        CraftingRuleUtil.clearAmsDataDatapacks(minecraftServer);
+        CraftingRuleUtil.clearAmsDatapacks(minecraftServer);
     }
 
     @Override
     public void onServerLoadedWorlds(MinecraftServer minecraftServer) {
-        CraftingRuleUtil.loadAmsDataDatapacks(minecraftServer);
+        CraftingRuleUtil.loadAmsDatapacks(minecraftServer);
     }
 }
