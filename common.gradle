@@ -42,6 +42,7 @@ dependencies {
 	modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") //modrinth
 
 	// Dependencies
+	include(implementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
 	include(implementation("com.github.EsotericSoftware:yamlbeans:${project.yamlbeans_version}"))
 	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 }
