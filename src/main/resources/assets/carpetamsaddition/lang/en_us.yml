@@ -28,6 +28,13 @@ carpetamsaddition:
       nether: 'nether'
       the_end: 'the_end'
       who_get_who: '%s got %s location'
+    leader:
+      add: 'became a tour guide'
+      remove: 'not a tour guide anymore'
+      list: '[ Leader list ]'
+      help:
+        add: '/leader add <PlayerName>  ->  Add a tour guide'
+        remove: '/leader remove <PlayerName>  ->  Remove a tour guide'
 
   validator:
     enhancedWorldEater:
@@ -45,7 +52,6 @@ carpetamsaddition:
     category:
       AMS: AMS
       crafting: crafting
-      AMS_movable: AMS_movable
       AMS_chunkLoader: AMS_chunkLoader
 
     rule:
@@ -177,7 +183,7 @@ carpetamsaddition:
       commandCustomBlockBlastResistance:
         desc: Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled)
         extra:
-          '0': 'After enabling the rules, use the /customBlockBlastResistance helper command to view the usage instructions'
+          '0': 'After enabling the rules, use the /customBlockBlastResistance help command to view the usage instructions'
       regeneratingDragonEgg:
         desc: Every time a player defeats the Ender Dragon, a dragon egg will be generated
         extra:
@@ -239,6 +245,9 @@ carpetamsaddition:
           "2": '[false] - Disable rule'
       sneakToEatCake:
         desc: Players can only eat cake while sneaking
+      commandPlayerLeader:
+        desc: Designate one or more players as guides, granting them a glowing effect
+        extra: 'After enabling the rules, use the /leader help command to view the usage instructions'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

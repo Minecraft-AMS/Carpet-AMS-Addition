@@ -28,6 +28,13 @@ carpetamsaddition:
       nether: '下界'
       the_end: '末地'
       who_get_who: '%s 获取了 %s 的位置'
+    leader:
+      add: '成为了导游'
+      remove: '不再是导游了'
+      list: '[ 导游列表 ]'
+      help:
+        add: '/leader add <PlayerName>  ->  添加一名导游'
+        remove: '/leader remove <PlayerName>  ->  移除一名导游'
 
   validator:
     enhancedWorldEater:
@@ -45,7 +52,6 @@ carpetamsaddition:
     category:
       AMS: AMS
       crafting: 制造
-      AMS_movable: AMS_可移动方块
       AMS_chunkLoader: AMS_区块加载
 
     rule:
@@ -219,7 +225,7 @@ carpetamsaddition:
         name: 自定义方块爆炸抗性
         desc: 使用指令自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）
         extra:
-          '0': '开启规则后使用/customBlockBlastResistance命令查看使用说明'
+          '0': '开启规则后使用/customBlockBlastResistance help命令查看使用说明'
       regeneratingDragonEgg:
         name: 再生成龙蛋
         desc: 玩家每次击败末影龙都会生成一个龙蛋
@@ -305,6 +311,10 @@ carpetamsaddition:
       sneakToEatCake:
         name: 潜行吃蛋糕
         desc: 玩家只能在潜行状态下吃蛋糕
+      commandPlayerLeader:
+        name: 玩家导游
+        desc: 指定一名或多名玩家成为导游，使他们拥有发光效果
+        extra: '开启规则后使用 /leader help 命令查看使用说明'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

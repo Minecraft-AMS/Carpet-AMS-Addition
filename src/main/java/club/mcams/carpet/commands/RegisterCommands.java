@@ -21,6 +21,7 @@
 package club.mcams.carpet.commands;
 
 import club.mcams.carpet.commands.rule.commandHere.HereCommandRegistry;
+import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import club.mcams.carpet.commands.rule.commandWhere.WhereCommandRegistry;
 import net.minecraft.server.command.ServerCommandSource;
 //#if MC>=11900
@@ -56,5 +57,7 @@ public class RegisterCommands {
         HereCommandRegistry.register(dispatcher);
 
         WhereCommandRegistry.register(dispatcher);
+
+        LeaderCommandRegistry.register(dispatcher);
     }
 }
