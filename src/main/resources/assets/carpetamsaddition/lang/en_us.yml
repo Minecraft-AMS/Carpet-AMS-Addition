@@ -247,7 +247,8 @@ carpetamsaddition:
         desc: Players can only eat cake while sneaking
       commandPlayerLeader:
         desc: Designate one or more players as guides, granting them a glowing effect
-        extra: 'After enabling the rules, use the /leader help command to view the usage instructions'
+        extra:
+          "0": 'After enabling the rules, use the /leader help command to view the usage instructions'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
