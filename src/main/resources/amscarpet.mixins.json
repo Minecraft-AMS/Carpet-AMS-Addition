@@ -99,6 +99,7 @@
     "rule.sneakToEditSign.AbstractSignBlockMixin",
     "rule.sneakToEditSign.SignBlockEntityMixin",
     "rule.superBow.InfinityEnchantmentMixin",
+    "rule.playerNoNetherPortalCrossing.NetherPortalBlockMixin",
     "rule.undyingCoral.CoralBlockBlockMixin",
     "rule.undyingCoral.CoralParentBlockMixin",
     "rule.useItemCooldownDisabled.ItemCooldownManagerMixin",

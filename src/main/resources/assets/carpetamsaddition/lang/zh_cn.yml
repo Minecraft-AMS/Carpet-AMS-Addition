@@ -35,6 +35,12 @@ carpetamsaddition:
       help:
         add: '/leader add <PlayerName>  ->  添加一名导游'
         remove: '/leader remove <PlayerName>  ->  移除一名导游'
+    ping:
+      stop_ping: '已中断ping操作'
+      active_ping_is_null: '没有正在活动的ping操作'
+      help:
+        ping: '/ping <目标IP/域名> <ping的次数>  ->  ping某个主机'
+        stop: '/ping stop  ->  中断ping操作'
 
   validator:
     enhancedWorldEater:
@@ -306,8 +312,8 @@ carpetamsaddition:
         desc: 提供了两种模式来控制假人是否可以拾取物品
         extra:
           '0': '[MainHandOnly] - 仅主手可拾取物品'
-          "1": '[NoPickUp] - 完全无法拾取物品'
-          "2": '[false] - 禁用规则'
+          '1': '[NoPickUp] - 完全无法拾取物品'
+          '2': '[false] - 禁用规则'
       sneakToEatCake:
         name: 潜行吃蛋糕
         desc: 玩家只能在潜行状态下吃蛋糕
@@ -315,7 +321,15 @@ carpetamsaddition:
         name: 玩家导游
         desc: 指定一名或多名玩家成为导游，使他们拥有发光效果
         extra:
-          "0": '开启规则后使用 /leader help 命令查看使用说明'
+          '0': '开启规则后使用 /leader help 命令查看使用说明'
+      commandPing:
+        name: ping命令
+        desc: 玩家可以在游戏中使用ping命令
+        extra:
+          '0': '开启规则后使用 /ping help 命令查看使用说明'
+      playerNoNetherPortalTeleport:
+        name: 下界传送门不传送玩家
+        desc: 玩家无法通过下界传送门进行传送
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

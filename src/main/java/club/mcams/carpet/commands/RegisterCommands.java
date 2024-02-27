@@ -21,6 +21,7 @@
 package club.mcams.carpet.commands;
 
 import club.mcams.carpet.commands.rule.commandHere.HereCommandRegistry;
+import club.mcams.carpet.commands.rule.commandPing.pingCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import club.mcams.carpet.commands.rule.commandWhere.WhereCommandRegistry;
 import net.minecraft.server.command.ServerCommandSource;
@@ -59,5 +60,7 @@ public class RegisterCommands {
         WhereCommandRegistry.register(dispatcher);
 
         LeaderCommandRegistry.register(dispatcher);
+
+        pingCommandRegistry.register(dispatcher);
     }
 }

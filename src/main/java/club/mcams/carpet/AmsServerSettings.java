@@ -302,6 +302,15 @@ public class AmsServerSettings {
     )
     public static String commandPlayerLeader = "false";
 
+    @Rule(
+            options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+            categories = {AMS, COMMAND}
+    )
+    public static String commandPing = "false";
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean playerNoNetherPortalTeleport = false;
+
     /*
      * 区块加载规则
      */

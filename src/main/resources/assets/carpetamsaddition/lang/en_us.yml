@@ -35,6 +35,12 @@ carpetamsaddition:
       help:
         add: '/leader add <PlayerName>  ->  Add a tour guide'
         remove: '/leader remove <PlayerName>  ->  Remove a tour guide'
+    ping:
+      stop_ping: 'Ping operation stopped.'
+      active_ping_is_null: 'No active ping operation to stop.'
+      help:
+        ping: '/ping <targetIpOrDomainName> <pingQuantity>  ->  Ping a specific host'
+        stop: '/ping stop  ->  Interrupt the ping operation'
 
   validator:
     enhancedWorldEater:
@@ -241,14 +247,20 @@ carpetamsaddition:
         desc: Two modes are provided to control whether fake player can pick up items
         extra:
           '0': '[MainHandOnly] - Only the main hand can pick up items'
-          "1": '[NoPickUp] - Unable to pick up items at all'
-          "2": '[false] - Disable rule'
+          '1': '[NoPickUp] - Unable to pick up items at all'
+          '2': '[false] - Disable rule'
       sneakToEatCake:
         desc: Players can only eat cake while sneaking
       commandPlayerLeader:
         desc: Designate one or more players as guides, granting them a glowing effect
         extra:
-          "0": 'After enabling the rules, use the /leader help command to view the usage instructions'
+          '0': 'After enabling the rules, use the /leader help command to view the usage instructions'
+      commandPing:
+        desc: player can use the "ping" command in the game
+        extra:
+          '0': 'After enabling the rules, use the /ping help command to view the usage instructions'
+      playerNoNetherPortalTeleport:
+        desc: Players cannot teleport through nether portals
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
