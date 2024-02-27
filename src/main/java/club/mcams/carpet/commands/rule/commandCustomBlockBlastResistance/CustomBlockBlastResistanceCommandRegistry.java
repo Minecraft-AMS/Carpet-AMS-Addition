@@ -50,7 +50,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class CustomBlockBlastResistanceCommandRegistry {
     private static final Translator translator = new Translator("command.customBlockBlastResistance");
-    private static final String MESSAGE_HEAD = "<customBlockBlastResistance> ";
+    private static final String MSG_HEAD = "<customBlockBlastResistance> ";
     public static final Map<BlockState, Float> CUSTOM_BLOCK_BLAST_RESISTANCE_MAP = new HashMap<>();
 
     //#if MC<11900
@@ -97,7 +97,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             float oldBlastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
-                MESSAGE_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + oldBlastResistance +
+                MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + oldBlastResistance +
                 " -> " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance,
                 Colors.GREEN, true, false
                 ),
@@ -106,7 +106,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         } else {
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
-                MESSAGE_HEAD + "+ " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance,
+                MSG_HEAD + "+ " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance,
                 Colors.GREEN, true, false
                 ),
                 false
@@ -125,7 +125,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
-                    MESSAGE_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance,
+                    MSG_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance,
                     Colors.RED, true, false
                 ),
                 false
@@ -134,7 +134,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         } else {
             player.sendMessage(
                 LiteralTextUtil.createColoredText(
-                    MESSAGE_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + translator.tr("not_found").getString(),
+                    MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + translator.tr("not_found").getString(),
                     Colors.RED, true
                 ),
                 false
@@ -149,7 +149,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
         player.sendMessage(
             LiteralTextUtil.createColoredText(
-                MESSAGE_HEAD + translator.tr("removeAll").getString(),
+                MSG_HEAD + translator.tr("removeAll").getString(),
                 Colors.RED, true
             ),
             false
