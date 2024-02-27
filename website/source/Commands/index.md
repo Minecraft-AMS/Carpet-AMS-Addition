@@ -84,3 +84,15 @@
 - `/leader help`
 
   查看使用说明。
+
+### ping命令（commandPing）
+
+- `/ping <目标IP/域名> <ping的次数>`
+
+  ping某个主机。
+
+
+
+- `/ping stop`
+
+  中断ping操作。

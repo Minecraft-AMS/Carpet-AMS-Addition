@@ -1428,6 +1428,44 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 - 分类: `AMS`, `COMMAND`
 
+## ping命令（commandPing）
+
+玩家可以在游戏中使用ping命令。
+
+开启规则后使用 `/ping help` 命令查看使用说明
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `COMMAND`
+
+## 下界传送门不传送玩家（playerNoNetherPortalTeleport）
+
+玩家无法通过下界传送门进行传送。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

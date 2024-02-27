@@ -1469,6 +1469,44 @@ After enabling the rules, use the `/leader help` command to view the usage instr
 
 - Categroies: `AMS`, `COMMAND`
 
+## commandPing
+
+player can use the "ping" command in the game.
+
+After enabling the rules, use the `/ping help` command to view the usage instructions
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `COMMAND`
+
+## playerNoNetherPortalTeleport
+
+Players cannot teleport through nether portals.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

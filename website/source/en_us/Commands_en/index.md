@@ -85,4 +85,15 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 
   View the usage instructions.
 
-  
+### commandPing
+
+- `/ping <targetIpOrDomainName> <pingQuantity>`
+
+  Ping a specific host.
+
+
+
+- `/ping stop`
+
+  Interrupt the ping operation.
+
