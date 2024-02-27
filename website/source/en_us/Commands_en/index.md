@@ -85,7 +85,7 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 
   View the usage instructions.
 
-### commandPing
+### commandPacketInternetGroper
 
 - `/ping <targetIpOrDomainName> <pingQuantity>`
 

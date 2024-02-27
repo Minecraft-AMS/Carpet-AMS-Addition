@@ -85,7 +85,7 @@
 
   查看使用说明。
 
-### ping命令（commandPing）
+### ping命令（commandPacketInternetGroper）
 
 - `/ping <目标IP/域名> <ping的次数>`
 

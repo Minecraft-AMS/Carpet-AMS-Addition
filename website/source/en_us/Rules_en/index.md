@@ -1469,7 +1469,7 @@ After enabling the rules, use the `/leader help` command to view the usage instr
 
 - Categroies: `AMS`, `COMMAND`
 
-## commandPing
+## commandPacketInternetGroper
 
 player can use the "ping" command in the game.
 

@@ -1428,7 +1428,7 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 - 分类: `AMS`, `COMMAND`
 
-## ping命令（commandPing）
+## ping命令（commandPacketInternetGroper）
 
 玩家可以在游戏中使用ping命令。
 
