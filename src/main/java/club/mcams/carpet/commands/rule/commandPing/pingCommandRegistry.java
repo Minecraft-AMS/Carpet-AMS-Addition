@@ -51,7 +51,7 @@ public class pingCommandRegistry {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
             CommandManager.literal("ping")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandPing))
+            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandPacketInternetGroper))
             .then(argument("targetIpOrDomainName", StringArgumentType.string())
             .then(argument("pingQuantity", IntegerArgumentType.integer())
             .executes(context -> executePing(

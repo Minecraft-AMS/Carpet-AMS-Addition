@@ -322,7 +322,7 @@ carpetamsaddition:
         desc: 指定一名或多名玩家成为导游，使他们拥有发光效果
         extra:
           '0': '开启规则后使用 /leader help 命令查看使用说明'
-      commandPing:
+      commandPacketInternetGroper:
         name: ping命令
         desc: 玩家可以在游戏中使用ping命令
         extra:

@@ -306,7 +306,7 @@ public class AmsServerSettings {
             options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
             categories = {AMS, COMMAND}
     )
-    public static String commandPing = "false";
+    public static String commandPacketInternetGroper = "false";
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean playerNoNetherPortalTeleport = false;

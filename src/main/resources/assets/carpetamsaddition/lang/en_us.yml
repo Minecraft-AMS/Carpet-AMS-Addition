@@ -255,7 +255,7 @@ carpetamsaddition:
         desc: Designate one or more players as guides, granting them a glowing effect
         extra:
           '0': 'After enabling the rules, use the /leader help command to view the usage instructions'
-      commandPing:
+      commandPacketInternetGroper:
         desc: player can use the "ping" command in the game
         extra:
           '0': 'After enabling the rules, use the /ping help command to view the usage instructions'
