@@ -65,26 +65,12 @@ public class pingCommandRegistry {
     }
 
     private static int executePing(PlayerEntity player, String targetIpOrDomainName, int pingQuantity) {
-        Thread pingThread = new Thread(() -> {
-            int successfulPings = 0;
-            int failedPings = 0;
-            long totalDelay = 0;
-            try {
-                boolean isFirstPing = true;
-                for (int i = 0; i < pingQuantity; i++) {
-                    long delay = ping(player, targetIpOrDomainName, isFirstPing);
-                    if (delay >= 0) {
-                        successfulPings++;
-                        totalDelay += delay;
-                    } else {
-                        failedPings++;
-                    }
-                    isFirstPing = false;
-                    Thread.sleep(1000);
-                }
-                sendFinishMessage(player, pingQuantity, successfulPings, failedPings, successfulPings > 0 ? totalDelay / successfulPings : 0);
-            } catch (InterruptedException ignored) {}
-        });
+        PingThread thread = (PingThread) PING_THREADS.get(player);
+        // 如果重新ping时之前的线程没有执行完，则先将原有的线程终止
+        if (thread != null) {
+            thread.setInterrupted();
+        }
+        Thread pingThread = new PingThread(pingQuantity,player,targetIpOrDomainName);
         pingThread.start();
         PING_THREADS.put(player, pingThread);
         return 1;
@@ -132,9 +118,9 @@ public class pingCommandRegistry {
     private static int stopPing(PlayerEntity player) {
         String stopPing = translator.tr("stop_ping").getString();
         String activePingIsNull = translator.tr("active_ping_is_null").getString();
-        Thread pingThread = PING_THREADS.get(player);
-        if (pingThread != null && pingThread.isAlive()) {
-            pingThread.interrupt();
+        PingThread pingThread = (PingThread)PING_THREADS.get(player);
+        if (pingThread != null) {
+            pingThread.setInterrupted();
             player.sendMessage(LiteralTextUtil.compatText(String.format("§b%s §4%s", MSG_HEAD, stopPing)), false);
         } else {
             player.sendMessage(LiteralTextUtil.compatText(String.format("§b%s §4%s", MSG_HEAD, activePingIsNull)), false);
@@ -160,4 +146,46 @@ public class pingCommandRegistry {
             false
         );
     }
+   static class PingThread extends Thread {
+       private volatile boolean interrupted = false;
+       private final int pingQuantity;
+       private final PlayerEntity player;
+       private final String targetIpOrDomainName;
+       private PingThread(int pingQuantity, PlayerEntity player, String targetIpOrDomainName) {
+            this.pingQuantity = pingQuantity;
+            this.player = player;
+            this.targetIpOrDomainName = targetIpOrDomainName;
+       }
+       @Override
+       public void run() {
+           int successfulPings = 0;
+           int failedPings = 0;
+           long totalDelay = 0;
+           try {
+               boolean isFirstPing = true;
+               for (int i = 0; i < pingQuantity; i++) {
+                   if (interrupted){
+                       return;
+                   }
+                   long delay = ping(player, targetIpOrDomainName, isFirstPing);
+                   if (delay >= 0) {
+                       successfulPings++;
+                       totalDelay += delay;
+                   } else {
+                       failedPings++;
+                   }
+                   isFirstPing = false;
+                   Thread.sleep(1000);
+               }
+               sendFinishMessage(player, pingQuantity, successfulPings, failedPings, successfulPings > 0 ? totalDelay / successfulPings : 0);
+           } catch (InterruptedException ignored) {
+           } finally {
+               // 线程执行完毕后释放资源
+               PING_THREADS.remove(player);
+           }
+       }
+       private void setInterrupted(){
+           this.interrupted = true;
+       }
+   }
 }
