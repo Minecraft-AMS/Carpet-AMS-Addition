@@ -66,11 +66,10 @@ public class pingCommandRegistry {
 
     private static int executePing(PlayerEntity player, String targetIpOrDomainName, int pingQuantity) {
         PingThread thread = (PingThread) PING_THREADS.get(player);
-        // 如果重新ping时之前的线程没有执行完，则先将原有的线程终止
         if (thread != null) {
             thread.setInterrupted();
         }
-        Thread pingThread = new PingThread(pingQuantity,player,targetIpOrDomainName);
+        Thread pingThread = new PingThread(pingQuantity, player, targetIpOrDomainName);
         pingThread.start();
         PING_THREADS.put(player, pingThread);
         return 1;
@@ -146,7 +145,8 @@ public class pingCommandRegistry {
             false
         );
     }
-   static class PingThread extends Thread {
+
+    private static class PingThread extends Thread {
        private volatile boolean interrupted = false;
        private final int pingQuantity;
        private final PlayerEntity player;
@@ -156,6 +156,7 @@ public class pingCommandRegistry {
             this.player = player;
             this.targetIpOrDomainName = targetIpOrDomainName;
        }
+
        @Override
        public void run() {
            int successfulPings = 0;
@@ -180,10 +181,10 @@ public class pingCommandRegistry {
                sendFinishMessage(player, pingQuantity, successfulPings, failedPings, successfulPings > 0 ? totalDelay / successfulPings : 0);
            } catch (InterruptedException ignored) {
            } finally {
-               // 线程执行完毕后释放资源
                PING_THREADS.remove(player);
            }
        }
+
        private void setInterrupted(){
            this.interrupted = true;
        }
