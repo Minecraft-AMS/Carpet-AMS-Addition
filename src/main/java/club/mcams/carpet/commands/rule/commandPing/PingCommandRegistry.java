@@ -43,7 +43,7 @@ import java.util.Map;
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
-public class pingCommandRegistry {
+public class PingCommandRegistry {
     private static final Translator translator = new Translator("command.ping");
     private static final String MSG_HEAD = "<commandPing>";
     private static final Map<PlayerEntity, Thread> PING_THREADS = new HashMap<>();
