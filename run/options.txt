@@ -36,9 +36,6 @@ ao:2
 prioritizeChunkUpdates:0
 biomeBlendRadius:4
 renderClouds:false
-resourcePacks:["vanilla","Fabric Mods","file/Classic Faithful 32x Programmer Art - 1.18.2.zip","file/Faithful-红石显示-1024自用plus.zip","file/Faithful-红石显示-1024自用附加包.zip","file/TNT附加包-1024.zip","file/Clean Bedrock.zip","animatedfreeze/animatedfreeze"]
-incompatibleResourcePacks:["file/Faithful-红石显示-1024自用plus.zip","file/Faithful-红石显示-1024自用附加包.zip","file/Clean Bedrock.zip","animatedfreeze/animatedfreeze"]
-lastServer:124.227.80.185:25227
 lang:zh_cn
 soundDevice:OpenAL Soft on 扬声器 (7.1 Surround Sound)
 chatVisibility:0
