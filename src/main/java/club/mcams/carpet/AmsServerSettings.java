@@ -311,6 +311,22 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean playerNoNetherPortalTeleport = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean infiniteDurability = false;
+
+    @Rule(
+            options = {"false"},
+            categories = AMS,
+            strict = false
+    )
+    public static String welcomeMessage = "false";
+
+    @Rule(
+            options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+            categories = {AMS, COMMAND}
+    )
+    public static String commandGetSaveSize = "false";
+
     /*
      * 区块加载规则
      */

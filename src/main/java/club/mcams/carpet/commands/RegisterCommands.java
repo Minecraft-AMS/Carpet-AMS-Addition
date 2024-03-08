@@ -20,21 +20,22 @@
 
 package club.mcams.carpet.commands;
 
+import club.mcams.carpet.commands.rule.commandGetSaveSize.GetSaveSizeCommandRegistry;
 import club.mcams.carpet.commands.rule.commandHere.HereCommandRegistry;
-import club.mcams.carpet.commands.rule.commandPing.pingCommandRegistry;
+import club.mcams.carpet.commands.rule.commandPing.PingCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import club.mcams.carpet.commands.rule.commandWhere.WhereCommandRegistry;
+import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
+import club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry;
+import club.mcams.carpet.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry;
+import club.mcams.carpet.commands.rule.commandPlayerChunkLoadController.PlayerChunkLoadControllerCommandRegistry;
+
 import net.minecraft.server.command.ServerCommandSource;
 //#if MC>=11900
 //$$ import net.minecraft.command.CommandRegistryAccess;
 //#endif
 
 import com.mojang.brigadier.CommandDispatcher;
-
-import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
-import club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry;
-import club.mcams.carpet.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry;
-import club.mcams.carpet.commands.rule.commandPlayerChunkLoadController.PlayerChunkLoadControllerCommandRegistry;
 
 public class RegisterCommands {
     public static void registerCommands(
@@ -49,11 +50,12 @@ public class RegisterCommands {
 
         AnvilInteractionDisabledCommandRegistry.register(dispatcher);
 
-        //#if MC<11900
-        CustomBlockBlastResistanceCommandRegistry.register(dispatcher);
-        //#else
-        //$$ CustomBlockBlastResistanceCommandRegistry.register(dispatcher, commandBuildContext);
-        //#endif
+        CustomBlockBlastResistanceCommandRegistry.register(
+            dispatcher
+            //#if MC>=11900
+            //$$ , commandBuildContext
+            //#endif
+        );
 
         HereCommandRegistry.register(dispatcher);
 
@@ -61,6 +63,8 @@ public class RegisterCommands {
 
         LeaderCommandRegistry.register(dispatcher);
 
-        pingCommandRegistry.register(dispatcher);
+        PingCommandRegistry.register(dispatcher);
+
+        GetSaveSizeCommandRegistry.register(dispatcher);
     }
 }

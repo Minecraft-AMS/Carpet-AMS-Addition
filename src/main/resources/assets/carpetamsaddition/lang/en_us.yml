@@ -41,6 +41,10 @@ carpetamsaddition:
       help:
         ping: '/ping <targetIpOrDomainName> <pingQuantity>  ->  Ping a specific host'
         stop: '/ping stop  ->  Interrupt the ping operation'
+    getSaveSize:
+      size_msg: 'Current save size:'
+      save_success_msg: '[ Save world success ]'
+      save_fail_msg: '[ Save world failed ]'
 
   validator:
     enhancedWorldEater:
@@ -195,7 +199,7 @@ carpetamsaddition:
         extra:
           '0': 'For Dnsolx eggs'
       enhancedWorldEater:
-        desc: Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the customBlowUpBlock rule when enabled)
+        desc: Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the commandCustomBlockBlastResistance rule when enabled)
         extra:
           '0': 'Block list:'
           '1': 'Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway'
@@ -261,6 +265,12 @@ carpetamsaddition:
           '0': 'After enabling the rules, use the /ping help command to view the usage instructions'
       playerNoNetherPortalTeleport:
         desc: Players cannot teleport through nether portals
+      infiniteDurability:
+        desc: Use items without losing durability
+      welcomeMessage:
+        desc: When players join the server, send them a custom message
+      commandGetSaveSize:
+        desc: Use the "/getSaveSize" command to get the current save size
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -41,6 +41,10 @@ carpetamsaddition:
       help:
         ping: '/ping <目标IP/域名> <ping的次数>  ->  ping某个主机'
         stop: '/ping stop  ->  中断ping操作'
+    getSaveSize:
+      size_msg: '当前存档大小：'
+      save_success_msg: '[ 保存世界成功 ]'
+      save_fail_msg: '[ 保存世界失败 ]'
 
   validator:
     enhancedWorldEater:
@@ -239,7 +243,7 @@ carpetamsaddition:
           '0': '为了Dnsolx的蛋'
       enhancedWorldEater:
         name: 增强型世界吞噬者
-        desc: 通过自定义除以下方块的爆炸抗性来让世界吞噬者一路畅通（该规则开启时，自定义炸毁方块(customBlowUpBlock)规则将不会生效）
+        desc: 通过自定义除以下方块的爆炸抗性来让世界吞噬者一路畅通（该规则开启时，自定义炸毁方块(commandCustomBlockBlastResistance)规则将不会生效）
         extra:
           '0': '方块列表：'
           '1': '爆炸抗性 < 17.0F的方块、基岩、铁砧、末地传送门框架、末地传送门、折跃门'
@@ -330,6 +334,15 @@ carpetamsaddition:
       playerNoNetherPortalTeleport:
         name: 下界传送门不传送玩家
         desc: 玩家无法通过下界传送门进行传送
+      infiniteDurability:
+        name: 无限耐久
+        desc: 使用物品不会丢失耐久
+      welcomeMessage:
+        name: 欢迎消息
+        desc: 在玩家进入服务器时发送一条自定义消息给玩家
+      commandGetSaveSize:
+        name: 获取存档大小
+        desc: 使用 “/getSaveSize” 命令获取当前存档大小
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

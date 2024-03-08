@@ -31,6 +31,7 @@ import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
 import club.mcams.carpet.utils.CountRulesUtil;
 import club.mcams.carpet.utils.CraftingRuleUtil;
+import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
 import com.google.common.collect.Maps;
 
@@ -41,11 +42,13 @@ import net.minecraft.server.command.ServerCommandSource;
 //#if MC>=11900
 //$$ import net.minecraft.command.CommandRegistryAccess;
 //#endif
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class AmsServer implements CarpetExtension {
     public static MinecraftServer minecraftServer;
@@ -55,6 +58,11 @@ public class AmsServer implements CarpetExtension {
     public static final String compactName = name.replace("-","");  // carpetamsaddition
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
     private static final AmsServer INSTANCE = new AmsServer();
+
+    public static void init() {
+        CarpetServer.manageExtension(INSTANCE);
+        AMSTranslations.loadTranslations();
+    }
 
     @Override
     public void onGameStarted() {
@@ -68,11 +76,6 @@ public class AmsServer implements CarpetExtension {
     @Override
     public String version() {
         return AmsServerMod.getModId();
-    }
-
-    public static void init() {
-        CarpetServer.manageExtension(INSTANCE);
-        AMSTranslations.loadTranslations();
     }
 
     @Override
@@ -96,19 +99,11 @@ public class AmsServer implements CarpetExtension {
     }
 
     @Override
-    public Map<String, String> canHasTranslations(String lang) {
-        Map<String, String> trimmedTranslation = Maps.newHashMap();
-        String prefix = TranslationConstants.CARPET_TRANSLATIONS_KEY_PREFIX;
-        AMSTranslations.getTranslation(lang).forEach((key, value) -> {
-            if (key.startsWith(prefix)) {
-                String newKey = key.substring(prefix.length());
-                //#if MC>=11900
-                //$$ newKey = "carpet." + newKey;
-                //#endif
-                trimmedTranslation.put(newKey, value);
-            }
-        });
-        return trimmedTranslation;
+    public void onPlayerLoggedIn(ServerPlayerEntity player) {
+        if (!Objects.equals(AmsServerSettings.welcomeMessage, "false")) {
+            String welcomeMessage = AmsServerSettings.welcomeMessage;
+            player.sendMessage(LiteralTextUtil.compatText(welcomeMessage), false);
+        }
     }
 
     @Override
@@ -125,5 +120,21 @@ public class AmsServer implements CarpetExtension {
     @Override
     public void onServerLoadedWorlds(MinecraftServer minecraftServer) {
         CraftingRuleUtil.loadAmsDatapacks(minecraftServer);
+    }
+
+    @Override
+    public Map<String, String> canHasTranslations(String lang) {
+        Map<String, String> trimmedTranslation = Maps.newHashMap();
+        String prefix = TranslationConstants.CARPET_TRANSLATIONS_KEY_PREFIX;
+        AMSTranslations.getTranslation(lang).forEach((key, value) -> {
+            if (key.startsWith(prefix)) {
+                String newKey = key.substring(prefix.length());
+                //#if MC>=11900
+                //$$ newKey = "carpet." + newKey;
+                //#endif
+                trimmedTranslation.put(newKey, value);
+            }
+        });
+        return trimmedTranslation;
     }
 }
