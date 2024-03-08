@@ -96,3 +96,9 @@
 - `/ping stop`
 
   中断ping操作。
+
+### 获取存档大小（commandGetSaveSize）
+
+- `/getSaveSize`
+
+  获取存档大小。

@@ -1507,6 +1507,60 @@ Players cannot teleport through nether portals.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## infiniteDurability
+
+Use items without losing durability.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## welcomeMessage
+
+When players join the server, send them a custom message.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `Green and healthy`
+
+
+
+- Categroies: `AMS`
+
+## commandGetSaveSize
+
+Use the "/getSaveSize" command to get the current save size.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `COMMAND`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

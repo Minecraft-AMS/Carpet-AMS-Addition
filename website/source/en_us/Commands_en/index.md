@@ -97,3 +97,8 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 
   Interrupt the ping operation.
 
+### commandGetSaveSize
+
+- `/getSaveSize`
+
+  Get save size.

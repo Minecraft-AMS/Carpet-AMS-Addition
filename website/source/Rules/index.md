@@ -1466,6 +1466,60 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 无限耐久（infiniteDurability）
+
+使用物品不会丢失耐久。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 欢迎消息（welcomeMessage）
+
+在玩家进入服务器时发送一条自定义消息给玩家。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `绿色健康`
+
+
+
+- 分类: `AMS`
+
+## 获取存档大小（commandGetSaveSize）
+
+使用 “/getSaveSize” 命令获取当前存档大小。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `COMMAND`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
