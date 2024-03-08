@@ -21,20 +21,21 @@
 package club.mcams.carpet.mixin.rule.infiniteDurability;
 
 import club.mcams.carpet.AmsServerSettings;
-
 import net.minecraft.item.ItemStack;
-
+import net.minecraft.server.network.ServerPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Random;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
-    @Inject(method = "setDamage", at = @At("HEAD"), cancellable = true)
-    private void isDamageable(CallbackInfo ci) {
+    @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At("HEAD"), cancellable = true)
+    private void cancelDamage(int amount, Random random, ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.infiniteDurability) {
-            ci.cancel();
+            cir.setReturnValue(false);
         }
     }
 }
