@@ -20,17 +20,19 @@
 
 package club.mcams.carpet;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import club.mcams.carpet.settings.CraftingRule;
 import club.mcams.carpet.settings.Rule;
-
-import static carpet.settings.RuleCategory.*;
-import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
 import club.mcams.carpet.validators.rule.blockChunkLoaderTimeController.MaxTimeValidator;
 import club.mcams.carpet.validators.rule.commandPlayerChunkLoadController.MaxRangeValidator;
 import club.mcams.carpet.validators.rule.enhancedWorldEater.BlastResistanceValidator;
 import club.mcams.carpet.validators.rule.maxPlayerInteractionDistance.MaxInteractionDistanceValidator;
 import club.mcams.carpet.validators.rule.maxClientInteractionReachDistance.MaxClientInteractionReachDistanceValidator;
+
+import static carpet.settings.RuleCategory.*;
+import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
 public class AmsServerSettings {
 
@@ -153,6 +155,7 @@ public class AmsServerSettings {
     public static boolean amsUpdateSuppressionCrashFix = false;
 
     //#if MC<11900
+    @GameVersion(version = "Minecraft < 1.19.3")
     @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL, BUGFIX})
     public static boolean ghastFireballExplosionDamageSourceFix = false;
     //#endif

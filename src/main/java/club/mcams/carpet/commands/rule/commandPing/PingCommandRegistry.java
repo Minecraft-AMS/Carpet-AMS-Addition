@@ -23,7 +23,6 @@ package club.mcams.carpet.commands.rule.commandPing;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
@@ -34,6 +33,8 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Style;
+import net.minecraft.util.Formatting;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -130,7 +131,11 @@ public class PingCommandRegistry {
     private static int help(PlayerEntity player) {
         String pingHelp = translator.tr("help.ping").getString();
         String stopHelp = translator.tr("help.stop").getString();
-        player.sendMessage(LiteralTextUtil.createColoredText(pingHelp + "\n" + stopHelp, Colors.GRAY), false);
+        player.sendMessage(
+            LiteralTextUtil.compatText(pingHelp + "\n" + stopHelp).
+            setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
+            false
+        );
         return 1;
     }
 

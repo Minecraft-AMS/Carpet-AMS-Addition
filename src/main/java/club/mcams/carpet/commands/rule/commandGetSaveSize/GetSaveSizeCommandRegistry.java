@@ -22,7 +22,6 @@ package club.mcams.carpet.commands.rule.commandGetSaveSize;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
@@ -32,6 +31,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Style;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.WorldSavePath;
 
 import java.io.File;
@@ -76,7 +77,11 @@ public class GetSaveSizeCommandRegistry {
             //$$ boolean saveAllSuccess = server.save(false, true, true);
             //#endif
             saveAllMessage = saveAllSuccess ? SUCCESS_MSG : FAIL_MSG;
-            player.sendMessage(LiteralTextUtil.createColoredText(saveAllMessage, Colors.GRAY), false);
+            player.sendMessage(
+                LiteralTextUtil.compatText(saveAllMessage).
+                setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
+                false
+            );
         }
     }
 

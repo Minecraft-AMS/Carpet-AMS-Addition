@@ -22,7 +22,6 @@ package club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.RegexTools;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
@@ -41,6 +40,8 @@ import net.minecraft.server.command.ServerCommandSource;
 //$$ import net.minecraft.command.CommandRegistryAccess;
 //#endif
 import net.minecraft.command.argument.BlockStateArgumentType;
+import net.minecraft.text.Style;
+import net.minecraft.util.Formatting;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -96,19 +97,17 @@ public class CustomBlockBlastResistanceCommandRegistry {
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float oldBlastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             player.sendMessage(
-                LiteralTextUtil.createColoredText(
+                LiteralTextUtil.compatText(
                 MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + oldBlastResistance +
-                " -> " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance,
-                Colors.GREEN, true, false
-                ),
+                " -> " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
+                ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
                 false
             );
         } else {
             player.sendMessage(
-                LiteralTextUtil.createColoredText(
-                MSG_HEAD + "+ " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance,
-                Colors.GREEN, true, false
-                ),
+                LiteralTextUtil.compatText(
+                MSG_HEAD + "+ " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
+                ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
                 false
             );
         }
@@ -124,19 +123,17 @@ public class CustomBlockBlastResistanceCommandRegistry {
             CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.remove(state);
             CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
             player.sendMessage(
-                LiteralTextUtil.createColoredText(
-                    MSG_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance,
-                    Colors.RED, true, false
-                ),
+                LiteralTextUtil.compatText(
+                    MSG_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
+                ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
                 false
             );
             return 1;
         } else {
             player.sendMessage(
-                LiteralTextUtil.createColoredText(
-                    MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + translator.tr("not_found").getString(),
-                    Colors.RED, true
-                ),
+                LiteralTextUtil.compatText(
+                    MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + translator.tr("not_found").getString()
+                ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
                 false
             );
             return 0;
@@ -148,10 +145,9 @@ public class CustomBlockBlastResistanceCommandRegistry {
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
         CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
         player.sendMessage(
-            LiteralTextUtil.createColoredText(
-                MSG_HEAD + translator.tr("removeAll").getString(),
-                Colors.RED, true
-            ),
+            LiteralTextUtil.compatText(
+                MSG_HEAD + translator.tr("removeAll").getString()
+            ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
             false
         );
         return 1;
@@ -159,10 +155,9 @@ public class CustomBlockBlastResistanceCommandRegistry {
 
     private static int list(PlayerEntity player) {
         player.sendMessage(
-            LiteralTextUtil.createColoredText(
-                translator.tr("list").getString() + "\n-------------------------------",
-                Colors.GREEN, true, false
-            ),
+            LiteralTextUtil.compatText(
+                translator.tr("list").getString() + "\n-------------------------------"
+            ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
             false
         );
         for (Map.Entry<BlockState, Float> entry : CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.entrySet()) {
@@ -171,10 +166,8 @@ public class CustomBlockBlastResistanceCommandRegistry {
             Block block = state.getBlock();
             String blockName = RegexTools.getBlockRegisterName(block.toString());
             player.sendMessage(
-                LiteralTextUtil.createColoredText(
-                    blockName + " / " + blastResistance,
-                    Colors.GREEN
-                ),
+                LiteralTextUtil.compatText(blockName + " / " + blastResistance).
+                setStyle(Style.EMPTY.withColor(Formatting.GREEN)),
                 false
             );
         }
@@ -187,14 +180,13 @@ public class CustomBlockBlastResistanceCommandRegistry {
         String removeAllHelpText = translator.tr("help.removeAll").getString();
         String listHelpText = translator.tr("help.list").getString();
         player.sendMessage(
-            LiteralTextUtil.createColoredText(
+            LiteralTextUtil.compatText(
                 "\n" +
                 setHelpText + "\n" +
                 removeHelpText + "\n" +
                 removeAllHelpText + "\n" +
-                listHelpText,
-                Colors.GRAY
-            ),
+                listHelpText
+            ).setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
             false
         );
         return 1;

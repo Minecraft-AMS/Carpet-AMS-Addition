@@ -118,14 +118,6 @@ public class Messenger {
         server.getPlayerManager().getPlayerList().forEach(player -> sendMessageToPlayer(player, text));
     }
 
-    public static void sendServerMessage(MinecraftServer server, String message, int rbg, boolean isBold, boolean isItalic) {
-        sendServerMessage(server, LiteralTextUtil.createColoredText(message, rbg, isBold, isItalic));
-    }
-
-    public static void sendServerMessage(MinecraftServer server, String message) {
-        sendServerMessage(server, LiteralTextUtil.compatText(message));
-    }
-
     private static void sendMessageToConsole(MinecraftServer minecraftServer, Text text) {
         SendSystemMessageUtil.serverSend(minecraftServer, text);
     }

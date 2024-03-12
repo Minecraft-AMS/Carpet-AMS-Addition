@@ -21,15 +21,16 @@
 package club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.server.command.ServerCommandSource;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
+import net.minecraft.util.Formatting;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -49,8 +50,8 @@ public class AmsUpdateSuppressionCrashFixCommandRegistry {
             amsUpdateSuppressionCrashFixForceMode = mode;
             Text message =
                     mode ?
-                    LiteralTextUtil.createColoredText(translator.tr("force_mod").getString(), Colors.WHITE, true, false) :
-                    LiteralTextUtil.createColoredText(translator.tr("lazy_mod").getString(), Colors.WHITE, true, false);
+                    LiteralTextUtil.compatText(translator.tr("force_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)) :
+                    LiteralTextUtil.compatText(translator.tr("lazy_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.GREEN));
             Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
             return 1;
         })));

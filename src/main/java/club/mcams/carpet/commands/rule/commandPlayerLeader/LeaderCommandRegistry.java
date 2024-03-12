@@ -22,11 +22,10 @@ package club.mcams.carpet.commands.rule.commandPlayerLeader;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
-
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
+
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.command.argument.EntityArgumentType;
@@ -36,6 +35,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Style;
+import net.minecraft.util.Formatting;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -64,8 +65,9 @@ public class LeaderCommandRegistry {
         targetPlayer.addStatusEffect(HIGH_LIGHT);
         Messenger.sendServerMessage(
             server,
-            String.format("%s %s", getPlayerName(targetPlayer), translator.tr("add").getString()),
-            Colors.GRAY, false, false
+            LiteralTextUtil.compatText(
+                String.format("%s %s", getPlayerName(targetPlayer), translator.tr("add").getString())
+            ).setStyle(Style.EMPTY.withColor(Formatting.GRAY))
         );
         return 1;
     }
@@ -74,8 +76,9 @@ public class LeaderCommandRegistry {
         targetPlayer.removeStatusEffect(HIGH_LIGHT.getEffectType());
         Messenger.sendServerMessage(
             server,
-            String.format("%s %s", getPlayerName(targetPlayer), translator.tr("remove").getString()),
-            Colors.GRAY, false, false
+            LiteralTextUtil.compatText(
+                String.format("%s %s", getPlayerName(targetPlayer), translator.tr("remove").getString())
+            ).setStyle(Style.EMPTY.withColor(Formatting.GRAY))
         );
         return 1;
     }
@@ -84,9 +87,9 @@ public class LeaderCommandRegistry {
         String addHelp = translator.tr("help.add").getString();
         String removeHelp = translator.tr("help.remove").getString();
         player.sendMessage(
-            LiteralTextUtil.createColoredText(
-            addHelp + "\n" + removeHelp, Colors.GRAY, false, false
-            ), false
+            LiteralTextUtil.compatText(addHelp + "\n" + removeHelp).
+            setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
+            false
         );
         return 1;
     }

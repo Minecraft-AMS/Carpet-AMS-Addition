@@ -23,7 +23,6 @@ package club.mcams.carpet.commands.rule.commandWhere;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.commandWhere.GetPlayerPos;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Colors;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
@@ -36,6 +35,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Style;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -69,7 +70,11 @@ public class WhereCommandRegistry {
         String senderPlayerName = getPlayerName(senderPlayer);
         String targetPlayerName = getPlayerName(targetPlayer);
         String message = translator.tr("who_get_who", senderPlayerName, targetPlayerName).getString();
-        Messenger.sendServerMessage(minecraftServer, message, Colors.GRAY, false, true);
+        Messenger.sendServerMessage(
+            minecraftServer,
+            LiteralTextUtil.compatText(message).
+            setStyle(Style.EMPTY.withColor(Formatting.GRAY).withItalic(true))
+        );
     }
 
     private static void highlightPlayer(PlayerEntity player) {
