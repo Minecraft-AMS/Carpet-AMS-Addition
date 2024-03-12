@@ -2,6 +2,7 @@ carpetamsaddition:
   rule:
     amsUpdateSuppressionCrashFix:
       location: 'Update suppression location'
+      copy: 'copy coord to clipboard'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:

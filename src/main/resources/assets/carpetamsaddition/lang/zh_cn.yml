@@ -2,6 +2,7 @@ carpetamsaddition:
   rule:
     amsUpdateSuppressionCrashFix:
       location: '更新抑制位置'
+      copy: '复制坐标到剪切板'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:

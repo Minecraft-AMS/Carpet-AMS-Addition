@@ -22,10 +22,15 @@ package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Colors;
+import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
+import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
+import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -43,10 +48,22 @@ public class ThrowableSuppressionContext {
     public static String suppressionMessageText(BlockPos pos, World world) {
         DimensionWrapper dimension = getSuppressionDimension(world);
         String location = getSuppressionPos(pos);
-        return translator.tr("location").getString() + " @ " + dimension + " -> " + "[ " + location + " ]";  //Update suppression location @ minecraft:overworld -> [ 1, 0, -24 ]
+        // Update suppression location @ minecraft:overworld -> [ 1, 0, -24 ]
+        return String.format("%s @ %s -> [ %s ]", translator.tr("location").getString(), dimension, location);
     }
 
     public static void sendMessageToServer(BlockPos pos, World world) {
-        Messenger.sendServerMessage(AmsServer.minecraftServer, suppressionMessageText(pos, world), Colors.RED, false, true);
+        String message = suppressionMessageText(pos, world);
+        Text hoverText = LiteralTextUtil.compatText("§e" + translator.tr("copy").getString());
+        String copyCoordText = getSuppressionPos(pos).replace(",", ""); // 1, 0, -24 -> 1 0 -24
+        Messenger.sendServerMessage(
+        AmsServer.minecraftServer,
+        LiteralTextUtil.compatText(message).
+            setStyle(
+                Style.EMPTY.withItalic(true).withColor(Formatting.RED).
+                withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
+                withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
+            )
+        );
     }
 }
