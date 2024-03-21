@@ -23,8 +23,14 @@ package test.java.club.mcams.carpet;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.utils.CountRulesUtil;
 
+import java.io.File;
+
 public class ModTest {
     public static void main(String[] args) {
+        // 打印指定文件夹下的所有文件名
+        String directoryPath = "/*文件夹路径*/";
+        printFilesName(directoryPath);
+
         // 测试翻译
         AMSTranslations.loadTranslations();
         System.out.println(AMSTranslations.getTranslation("zh_cn"));
@@ -32,5 +38,21 @@ public class ModTest {
         // 获取当前可用规则数量
         int ruleCount = CountRulesUtil.countRules();
         System.out.println("@Rule: " + ruleCount);
+    }
+
+    public static void printFilesName(String path) {
+        File directory = new File(path);
+        if (directory.isDirectory()) {
+            File[] files = directory.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isDirectory()) {
+                        printFilesName(file.getAbsolutePath());
+                    } else {
+                        System.out.println(file.getName());
+                    }
+                }
+            }
+        }
     }
 }
