@@ -104,7 +104,7 @@
 
 `note_block`: 无需条件，只有音符盒即可加载。
 
-`OFF`: 禁用该规则。
+`false`: 禁用该规则。
 
 由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepWorldTickUpdate`或`keepWorldTickUpdate`规则来解决这个问题。
 
@@ -118,7 +118,7 @@
 
 
 
-- 参考选项: `bone_block`, `wither_skeleton_skull`, `note_block`, `OFF`
+- 参考选项: `bone_block`, `wither_skeleton_skull`, `note_block`, `false`
 
 
 
@@ -158,7 +158,7 @@
 
 `all`: 活塞\黏性活塞下有骨块或基岩时触发加载。
 
-`OFF`: 禁用该规则。
+`false`: 禁用该规则。
 
 由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用`blockChunkLoaderKeepWorldTickUpdate`或`keepWorldTickUpdate`规则来解决这个问题。
 
@@ -172,7 +172,7 @@
 
 
 
-- 参考选项: `bone_block`, `bedrock`, `all`, `OFF`
+- 参考选项: `bone_block`, `bedrock`, `all`, `false`
 
 
 
@@ -1486,9 +1486,13 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 ## 欢迎消息（welcomeMessage）
 
-在玩家进入服务器时发送一条自定义消息给玩家。
+在玩家进入服务器时发送一条自定义消息给玩家（使用json文件来自定义消息）。
 
-- 类型: `String`
+json位置：
+
+[ 存档文件夹 ]/carpetamsaddition/welcomeMessage.json
+
+- 类型: `boolean`
 
 
 
@@ -1496,7 +1500,7 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 
 
-- 参考选项: `绿色健康`
+- 参考选项: `false`, `true`
 
 
 
@@ -1519,6 +1523,44 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 
 - 分类: `AMS`, `COMMAND`
+
+## 地毯规则总是设置为默认（carpetAlwaysSetDefault）
+
+每当你设置carpet规则时，都会自动设置为默认值。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 禁用实验性内容检查（experimentalContentCheckDisabled）
+
+允许在游戏中通过添加数据包来游玩Minecraft的实验性内容。
+
+<该规则 Minecraft >= 1.19 可用>
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `EXPERIMENTAL`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
@@ -1635,6 +1677,28 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 ## 更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）
 
 使用深板岩来合成磨制黑石按钮。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## 开启1.21实验性内容合成配方（enableMinecraft1_21ExperimentalRecipes）
+
+解锁1.21实验性内容中所有物品的合成配方。
+
+使用此规则建议同步开启禁用实验性内容检查（experimentalContentCheckDisabled）防止客户端无法使用方块。
+
+<该规则 Minecraft 1.20.3 - 1.20.4 可用>
 
 - 类型: `boolean`
 

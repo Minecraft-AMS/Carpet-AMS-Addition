@@ -116,7 +116,7 @@ the option is interpreted as follow:
 
 
 
-- `OFF`: Disable the rule.
+- `false`: Disable the rule.
 
 
 
@@ -124,11 +124,11 @@ the option is interpreted as follow:
 
 
 
-- Default: `OFF`
+- Default: `false`
 
 
 
-- Suggested options: `bone_block`, `wither_skeleton_skull`, `note_block`, `OFF`
+- Suggested options: `bone_block`, `wither_skeleton_skull`, `note_block`, `false`
 
 
 
@@ -174,7 +174,7 @@ the option is interpreted as follow:
 
 
 
-- `OFF`: Disable the rule.
+- `false`: Disable the rule.
 
 Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepWorldTickUpdate `or `keepWorldTickUpdate `rules to solve this issue.
 
@@ -185,11 +185,11 @@ Due to after 300 ticks without any players in the current dimension on the serve
 
 
 
-- Default: `OFF`
+- Default: `false`
 
 
 
-- Suggested options: `bone_block`, `bedrock`, `all`, `OFF`
+- Suggested options: `bone_block`, `bedrock`, `all`, `false`
 
 
 
@@ -1527,9 +1527,13 @@ Use items without losing durability.
 
 ## welcomeMessage
 
-When players join the server, send them a custom message.
+When players join the server, send them a custom message (Use json files to customize messages).
 
-- Type: `String`
+json location:
+
+[ save path ]/carpetamsaddition/welcomeMessage.json
+
+- Type: `boolean`
 
 
 
@@ -1537,7 +1541,7 @@ When players join the server, send them a custom message.
 
 
 
-- Suggested options: `Green and healthy`
+- Suggested options: `false`, `true`
 
 
 
@@ -1560,6 +1564,44 @@ Use the "/getSaveSize" command to get the current save size.
 
 
 - Categroies: `AMS`, `COMMAND`
+
+## carpetAlwaysSetDefault
+
+Whenever you set the carpet rule, it will be automatically set to the default value.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## experimentalContentCheckDisabled
+
+Allow playing Minecraft experimental content in the game by adding data packs.
+
+< Available for Minecraft >= 1.19 >
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `EXPERIMENTAL`
 
 ## craftableEnchantedGoldApple
 
@@ -1674,6 +1716,28 @@ Dispenser can be crafted more flexible. It can be crafted using bow and dropper,
 ## betterCraftablePolishedBlackStoneButton
 
 Use deepslate to crafted polished_blackstone_button in minecraft.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## enableMinecraft1_21ExperimentalRecipes
+
+Unlock crafting recipes for all items in the 1.21 experimental content.
+
+Using this rule suggests synchronously enabling experimentalContentCheckDisabled to prevent clients from being unable to use blocks.
+
+< Available for Minecraft 1.20.3 - 1.20.4 >
 
 - Type: `boolean`
 
