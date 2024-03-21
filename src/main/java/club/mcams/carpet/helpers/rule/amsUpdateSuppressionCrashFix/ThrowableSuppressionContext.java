@@ -28,6 +28,7 @@ import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
+import net.minecraft.text.BaseText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -54,16 +55,15 @@ public class ThrowableSuppressionContext {
 
     public static void sendMessageToServer(BlockPos pos, World world) {
         String message = suppressionMessageText(pos, world);
-        Text hoverText = LiteralTextUtil.compatText("§e" + translator.tr("copy").getString());
+        BaseText hoverText = Messenger.s(translator.tr("copy").getString(), "y");
         String copyCoordText = getSuppressionPos(pos).replace(",", ""); // 1, 0, -24 -> 1 0 -24
+        final Text COPY_BUTTON = LiteralTextUtil.compatText(" [C] ").setStyle(
+            Style.EMPTY.withColor(Formatting.GREEN).withBold(true).
+            withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
+            withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
+        );
         Messenger.sendServerMessage(
         AmsServer.minecraftServer,
-        LiteralTextUtil.compatText(message).
-            setStyle(
-                Style.EMPTY.withItalic(true).withColor(Formatting.RED).
-                withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
-                withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
-            )
-        );
+        LiteralTextUtil.compatText(message).formatted(Formatting.RED, Formatting.ITALIC).append(COPY_BUTTON));
     }
 }

@@ -29,7 +29,6 @@ import net.minecraft.util.collection.DefaultedList;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -37,15 +36,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
 
-	@Unique
-	private static final int EXPANDED_ENDERCHEST_SIZE = 9 * 6;
-
 	@Shadow
 	public abstract EnderChestInventory getEnderChestInventory();
 
 	@Inject(method = "<init>", at = @At("RETURN"))
 	private void expandEnderChest(final CallbackInfo ci) {
 		if (AmsServerSettings.largeEnderChest) {
+			final int EXPANDED_ENDERCHEST_SIZE = 9 * 6;
 			SimpleInventoryAccessor accessor = (SimpleInventoryAccessor) getEnderChestInventory();
 			accessor.setSize(EXPANDED_ENDERCHEST_SIZE);
 			accessor.setStacks(DefaultedList.ofSize(EXPANDED_ENDERCHEST_SIZE, ItemStack.EMPTY));

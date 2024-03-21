@@ -25,16 +25,15 @@ import carpet.CarpetServer;
 
 import club.mcams.carpet.commands.RegisterCommands;
 import club.mcams.carpet.config.LoadConfigFromJson;
+import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
 import club.mcams.carpet.utils.CountRulesUtil;
 import club.mcams.carpet.utils.CraftingRuleUtil;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
 import com.google.common.collect.Maps;
-
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.server.MinecraftServer;
@@ -48,14 +47,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
-import java.util.Objects;
 
 public class AmsServer implements CarpetExtension {
     public static MinecraftServer minecraftServer;
     public static final int ruleCount = CountRulesUtil.countRules();
     public static final String fancyName = "Carpet AMS Addition";
     public static final String name = AmsServerMod.getModId();
-    public static final String compactName = name.replace("-","");  // carpetamsaddition
+    public static final String compactName = name.replace("-", "");  // carpetamsaddition
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
     private static final AmsServer INSTANCE = new AmsServer();
 
@@ -100,9 +98,8 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onPlayerLoggedIn(ServerPlayerEntity player) {
-        if (!Objects.equals(AmsServerSettings.welcomeMessage, "false")) {
-            String welcomeMessage = AmsServerSettings.welcomeMessage;
-            player.sendMessage(LiteralTextUtil.compatText(welcomeMessage), false);
+        if (AmsServerSettings.welcomeMessage) {
+            CustomWelcomeMessageConfig.handleMessage(player, AmsServer.minecraftServer);
         }
     }
 

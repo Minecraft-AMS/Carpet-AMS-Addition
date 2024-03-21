@@ -23,6 +23,7 @@ package club.mcams.carpet.mixin.rule.blockChunkLoader;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.BlockChunkLoader.BlockChunkLoaderHelper;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.NoteBlock;
@@ -36,6 +37,7 @@ import net.minecraft.world.World;
 import net.minecraft.server.world.ServerWorld;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -54,23 +56,32 @@ public abstract class NoteBlockMixin {
         BlockPos pos,
         CallbackInfo info
     ) {
-        if (!Objects.equals(AmsServerSettings.noteBlockChunkLoader, "OFF")) {
-            BlockState noteBlockUp = world.getBlockState(pos.up(1));
+        if (!Objects.equals(AmsServerSettings.noteBlockChunkLoader, "false")) {
+            handleChunkLoading(world, pos);
+        }
+    }
+
+    @Unique
+    private void handleChunkLoading(World world, BlockPos pos) {
+        if (!world.isClient) {
             ChunkPos chunkPos = new ChunkPos(pos);
-            if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "note_block") && !world.isClient) {
+            BlockState noteBlockUp = world.getBlockState(pos.up(1));
+            if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "note_block")) {
                 BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
-            } else if (
-                Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block") &&
-                noteBlockUp.getBlock() == Blocks.BONE_BLOCK &&
-                !world.isClient
-            ) {
+            } else if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block")) {
+                loadChunkIfMatch(world, chunkPos, noteBlockUp, Blocks.BONE_BLOCK);
+            } else if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull")) {
+                loadChunkIfMatch(world, chunkPos, noteBlockUp, Blocks.WITHER_SKELETON_SKULL, Blocks.WITHER_SKELETON_WALL_SKULL);
+            }
+        }
+    }
+
+    @Unique
+    private void loadChunkIfMatch(World world, ChunkPos chunkPos, BlockState blockState, Block... blocks) {
+        for (Block block : blocks) {
+            if (blockState.getBlock() == block) {
                 BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
-            } else if (
-                Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull") &&
-                (noteBlockUp.getBlock() == Blocks.WITHER_SKELETON_SKULL || noteBlockUp.getBlock() == Blocks.WITHER_SKELETON_WALL_SKULL) &&
-                !world.isClient
-            ) {
-                BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
+                break;
             }
         }
     }

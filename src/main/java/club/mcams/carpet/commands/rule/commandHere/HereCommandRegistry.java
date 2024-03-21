@@ -26,8 +26,8 @@ import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 import club.mcams.carpet.helpers.rule.commandHere.GetCommandSourcePos;
-
 import club.mcams.carpet.utils.compat.LiteralTextUtil;
+
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;

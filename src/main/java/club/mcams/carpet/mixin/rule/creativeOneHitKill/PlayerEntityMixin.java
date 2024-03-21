@@ -40,6 +40,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
+@SuppressWarnings("resource")
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin implements EntityAccessorMixin {
 
@@ -51,14 +52,14 @@ public abstract class PlayerEntityMixin implements EntityAccessorMixin {
     public abstract SoundCategory getSoundCategory();
 
     @Inject(
-            method = "attack",
-            at = @At(
-                value = "INVOKE",
-                target = "Lnet/minecraft/entity/Entity;handleAttack(Lnet/minecraft/entity/Entity;)Z",
-                shift = At.Shift.BY,
-                by = -2
-            ),
-            cancellable = true
+        method = "attack",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/Entity;handleAttack(Lnet/minecraft/entity/Entity;)Z",
+            shift = At.Shift.BY,
+            by = -2
+        ),
+        cancellable = true
     )
     private void attack(Entity target, CallbackInfo ci) {
         if (

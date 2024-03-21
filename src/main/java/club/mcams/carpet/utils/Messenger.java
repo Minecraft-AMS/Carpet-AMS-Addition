@@ -21,8 +21,7 @@
 package club.mcams.carpet.utils;
 
 import club.mcams.carpet.mixin.translations.StyleAccessor;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
-import club.mcams.carpet.utils.compat.SendSystemMessageUtil;
+import club.mcams.carpet.utils.compat.*;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
@@ -35,11 +34,7 @@ import java.util.Objects;
 public class Messenger {
     // Compound Text
     public static BaseText c(Object... fields) {
-        //#if MC>=11900
-        //$$ return (MutableText) carpet.utils.Messenger.c(fields);
-        //#else
-        return carpet.utils.Messenger.c(fields);
-        //#endif
+        return CarpetCompoundTextUtil.compatText(fields);
     }
 
     // Simple Text
@@ -59,11 +54,7 @@ public class Messenger {
 
     // Translation Text
     public static BaseText tr(String key, Object... args) {
-        //#if MC>=11900
-        //$$ return Text.translatable(key, args);
-        //#else
-        return new TranslatableText(key, args);
-        //#endif
+        return TranslatableTextUtil.compatText(key, args);
     }
 
     public static BaseText copy(BaseText text) {
@@ -71,11 +62,7 @@ public class Messenger {
     }
 
     private static void __tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
-        //#if MC>=12000
-        //$$ source.sendFeedback(() -> text, broadcastToOps);
-        //#else
-        source.sendFeedback(text, broadcastToOps);
-        //#endif
+        sendFeedbackUtil.compatFeedback(source, text, broadcastToOps);
     }
 
     public static void tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {

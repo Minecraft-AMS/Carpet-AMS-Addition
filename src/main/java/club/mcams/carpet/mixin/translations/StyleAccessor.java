@@ -20,7 +20,6 @@
 
 package club.mcams.carpet.mixin.translations;
 
-import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Style;
 import net.minecraft.text.TextColor;
 
@@ -59,7 +58,4 @@ public interface StyleAccessor {
 
     @Accessor("color")
     TextColor getColorField();
-
-    @Accessor("hoverEvent")
-    HoverEvent getHoverEventField();
 }

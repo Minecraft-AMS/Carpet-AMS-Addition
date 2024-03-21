@@ -24,7 +24,6 @@ import carpet.CarpetSettings;
 
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServer;
-import club.mcams.carpet.mixin.translations.StyleAccessor;
 import club.mcams.carpet.mixin.translations.TranslatableTextAccessor;
 import club.mcams.carpet.utils.FileUtil;
 
@@ -50,61 +49,54 @@ public class AMSTranslations {
     public static final Map<String, Map<String, String>> translations = Maps.newLinkedHashMap();
     public static final Set<String> languages = Sets.newHashSet();
 
-    @SuppressWarnings("unchecked")
-    private static List<String> getAvailableTranslations() {
-        String yamlData;
-        try {                           
-            yamlData = FileUtil.readFile(LANG_DIR + "/meta/languages.yml");
-        } catch (Exception e) {
-            AmsServer.LOGGER.warn("Failed to read file", e);
-            return new ArrayList<>();
+    public static void loadTranslations() {
+        try {
+            List<String> availableLanguages = getAvailableLanguages();
+            availableLanguages.forEach(language -> {
+                try {
+                    Map<String, String> translation = loadTranslationForLanguage(language);
+                    translations.put(language, translation);
+                    languages.add(language);
+                } catch (IOException e) {
+                    AmsServer.LOGGER.warn("Failed to load translation for language: " + language, e);
+                }
+            });
+        } catch (IOException e) {
+            AmsServer.LOGGER.warn("Failed to get available languages", e);
         }
+    }
 
+    @SuppressWarnings("unchecked")
+    private static List<String> getAvailableLanguages() throws IOException {
+        String yamlData = FileUtil.readFile(LANG_DIR + "/meta/languages.yml");
         try (Reader reader = new StringReader(yamlData)) {
             Map<String, Object> yamlMap = (Map<String, Object>) new YamlReader(reader).read();
-            List<String> languages = (List<String>) yamlMap.get("languages");
-            return languages != null ? languages : new ArrayList<>();
-        } catch (Exception e) {
-            AmsServer.LOGGER.warn("Failed to load translations", e);
-            return new ArrayList<>();
+            return (List<String>) yamlMap.getOrDefault("languages", new ArrayList<>());
         }
-    }
-
-    public static void loadTranslations() {
-        getAvailableTranslations().forEach(AMSTranslations::loadTranslation);
     }
 
     @SuppressWarnings("unchecked")
-    public static void loadTranslation(String language) {
-        String path = String.format("%s/%s.yml", LANG_DIR, language);
-        String data;
-        try {
-            data = FileUtil.readFile(path);
-        } catch (IOException e) {
-            AmsServer.LOGGER.warn("Failed to load translation: " + language);
-            return;
-        }
+    private static Map<String, String> loadTranslationForLanguage(String language) throws IOException {
+        String path = LANG_DIR + "/" + language + ".yml";
+        String data = FileUtil.readFile(path);
         try (Reader reader = new StringReader(data)) {
             Map<String, Object> yaml = (Map<String, Object>) new YamlReader(reader).read();
-            Map<String, String> translation = Maps.newLinkedHashMap();
-            build(translation, yaml, "");
-            translations.put(language, translation);
-            languages.add(language);
-        } catch (IOException e) {
-            AmsServer.LOGGER.warn("Failed to load translation: " + language, e);
+            Map<String, String> translation = new LinkedHashMap<>();
+            buildTranslationMap(translation, yaml, "");
+            return translation;
         }
     }
 
     @SuppressWarnings("unchecked")
-    public static void build(Map<String, String> translation, Map<String, Object> yaml, String prefix) {
+    private static void buildTranslationMap(Map<String, String> translation, Map<String, Object> yaml, String prefix) {
         yaml.forEach((key, value) -> {
-            String fullKey = prefix.isEmpty() ? key : (!key.equals(".") ? prefix + "." + key : prefix);
+            String fullKey = prefix.isEmpty() ? key : prefix + "." + key;
             if (value instanceof String) {
                 translation.put(fullKey, (String) value);
             } else if (value instanceof Map) {
-                build(translation, (Map<String, Object>) value, fullKey);
+                buildTranslationMap(translation, (Map<String, Object>) value, fullKey);
             } else {
-                throw new RuntimeException(String.format("Unknown type %s in with key %s", value.getClass(), fullKey));
+                throw new IllegalArgumentException("Unknown type " + value.getClass() + " for key " + fullKey);
             }
         });
     }
@@ -120,7 +112,7 @@ public class AMSTranslations {
 
     @Nullable
     public static String translateKeyToFormattedString(String lang, String key) {
-        return getTranslation(lang.toLowerCase()).get(key);
+        return getTranslation(lang).get(key);
     }
 
     public static BaseText translate(BaseText text, ServerPlayerEntity player) {
@@ -135,52 +127,34 @@ public class AMSTranslations {
         return translate(text, lang, false);
     }
 
+    @SuppressWarnings("PatternVariableCanBeUsed")
     public static BaseText translate(BaseText text, String lang, boolean suppressWarnings) {
-        if (!isTranslatable(text)) {
+        //#if MC>=11900
+        //$$ if (!(text.getContent() instanceof TranslatableTextContent)) {
+        //#else
+        if (!(text instanceof TranslatableText)) {
+        //#endif
             return text;
         }
-        TranslatableText translatableText = getTranslatableText(text);
+        //#if MC>=11900
+        //$$ TranslatableTextContent translatableText = (TranslatableTextContent) text.getContent();
+        //#else
+        TranslatableText translatableText = (TranslatableText) text;
+        //#endif
         String translationKey = translatableText.getKey();
-        if (!isTranslationKeyValid(translationKey)) {
+        if (!translationKey.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
             return text;
         }
-        String formattedString = getFormattedTranslation(lang, translationKey);
+        String formattedString = translateKeyToFormattedString(lang, translationKey);
+        if (formattedString == null) {
+            translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, translationKey);
+        }
         if (formattedString != null) {
             text = updateTextWithTranslation(text, formattedString, translatableText);
         } else if (!suppressWarnings) {
             AmsServer.LOGGER.warn("Unknown translation key {}", translationKey);
         }
-        translateHoverText(text, lang);
-        translateSiblingTexts(text, lang);
         return text;
-    }
-
-    private static boolean isTranslatable(BaseText text) {
-        //#if MC>=11900
-        //$$ return text.getContent() instanceof TranslatableTextContent;
-        //#else
-        return text instanceof TranslatableText;
-        //#endif
-    }
-
-    private static TranslatableText getTranslatableText(BaseText text) {
-        //#if MC>=11900
-        //$$ return (TranslatableTextContent) text.getContent();
-        //#else
-        return (TranslatableText) text;
-        //#endif
-    }
-
-    private static boolean isTranslationKeyValid(String key) {
-        return key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX);
-    }
-
-    private static String getFormattedTranslation(String lang, String key) {
-        String formattedString = translateKeyToFormattedString(lang, key);
-        if (formattedString == null) {
-            formattedString = translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, key);
-        }
-        return formattedString;
     }
 
     private static BaseText updateTextWithTranslation(BaseText originalText, String formattedString, TranslatableText translatableText) {
@@ -188,10 +162,11 @@ public class AMSTranslations {
         BaseText newText = createNewText(formattedString, fixedTranslatableText);
         if (newText == null) {
             return Messenger.s(formattedString);
+        } else {
+            newText.getSiblings().addAll(originalText.getSiblings());
+            newText.setStyle(originalText.getStyle());
+            return newText;
         }
-        newText.getSiblings().addAll(originalText.getSiblings());
-        newText.setStyle(originalText.getStyle());
-        return newText;
     }
 
     private static BaseText createNewText(String formattedString, TranslatableTextAccessor fixedTranslatableText) {
@@ -202,36 +177,18 @@ public class AMSTranslations {
             //#else
             //$$ fixedTranslatableText.invokeSetTranslation(formattedString);
             //#endif
-            return Messenger.c((Object) translations.stream().map(stringVisitable -> {
+            BaseText[] textArray = new BaseText[translations.size()];
+            for (int i = 0; i < translations.size(); i++) {
+                StringVisitable stringVisitable = translations.get(i);
                 if (stringVisitable instanceof BaseText) {
-                    return (BaseText) stringVisitable;
+                    textArray[i] = (BaseText) stringVisitable;
+                } else {
+                    textArray[i] = Messenger.s(stringVisitable.getString());
                 }
-                return Messenger.s(stringVisitable.getString());
-            }).toArray(BaseText[]::new));
+            }
+            return Messenger.c((Object) textArray);
         } catch (TranslationException e) {
             return null;
         }
-    }
-
-    @SuppressWarnings("PatternVariableCanBeUsed")
-    private static void translateHoverText(BaseText text, String lang) {
-        HoverEvent hoverEvent = ((StyleAccessor) text.getStyle()).getHoverEventField();
-        if (hoverEvent == null || hoverEvent.getAction() != HoverEvent.Action.SHOW_TEXT) {
-            return;
-        }
-        Object hoverText = hoverEvent.getValue(hoverEvent.getAction());
-        if (!(hoverText instanceof BaseText)) {
-            return;
-        }
-        BaseText hoverBaseText = (BaseText) hoverText;
-        hoverBaseText.setStyle(
-            hoverBaseText.getStyle().withHoverEvent(
-                new HoverEvent(HoverEvent.Action.SHOW_TEXT, translate(hoverBaseText, lang, false))
-            )
-        );
-    }
-
-    private static void translateSiblingTexts(BaseText text, String lang) {
-        text.getSiblings().replaceAll(sibling -> translate((BaseText) sibling, lang, false));
     }
 }
