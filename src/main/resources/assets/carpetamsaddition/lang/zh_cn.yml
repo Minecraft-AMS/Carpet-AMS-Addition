@@ -3,6 +3,9 @@ carpetamsaddition:
     amsUpdateSuppressionCrashFix:
       location: '更新抑制位置'
       copy: '复制坐标到剪切板'
+    welcomeMessage:
+      modify_content_in: '在该路径下修改内容：'
+      save_path: '[ 存档文件夹 ]'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:
@@ -340,10 +343,19 @@ carpetamsaddition:
         desc: 使用物品不会丢失耐久
       welcomeMessage:
         name: 欢迎消息
-        desc: 在玩家进入服务器时发送一条自定义消息给玩家
+        desc: 在玩家进入服务器时发送一条自定义消息给玩家（使用json文件来自定义消息）
+        extra:
+          '0': 'json位置：'
+          '1': '[ 存档文件夹 ]/carpetamsaddition/welcomeMessage.json'
       commandGetSaveSize:
         name: 获取存档大小
         desc: 使用 “/getSaveSize” 命令获取当前存档大小
+      carpetAlwaysSetDefault:
+        name: 地毯规则总是设置为默认
+        desc: 每当你设置carpet规则时，都会自动设置为默认值
+      experimentalContentCheckDisabled:
+        name: 禁用实验性内容检查
+        desc: 允许在游戏中通过添加数据包来游玩Minecraft的实验性内容
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -442,9 +454,8 @@ carpetamsaddition:
       betterCraftablePolishedBlackStoneButton:
         name: 更好的合成磨制黑石按钮
         desc: 使用深板岩来合成磨制黑石按钮
-      craftableLight:
-        name: 可合成光源方块
-        desc: 添加了光源方块的合成配方，启用时光源方块将不会有挖掘硬度
-      craftableBarrier:
-        name: 可合成屏障方块
-        desc: 添加了屏障方块的合成配方，启用时屏障方块将不会有挖掘硬度
+      enableMinecraft1_21ExperimentalRecipes:
+        name: 开启1.21实验性内容合成配方
+        desc: 解锁1.21实验性内容中所有物品的合成配方
+        extra:
+          '0': '使用此规则建议同步开启禁用实验性内容检查（experimentalContentCheckDisabled）防止客户端无法使用方块'

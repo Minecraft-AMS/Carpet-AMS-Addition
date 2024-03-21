@@ -3,6 +3,9 @@ carpetamsaddition:
     amsUpdateSuppressionCrashFix:
       location: 'Update suppression location'
       copy: 'copy coord to clipboard'
+    welcomeMessage:
+      modify_content_in: 'Modify the content in：'
+      save_path: '[ save path ]'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:
@@ -269,9 +272,16 @@ carpetamsaddition:
       infiniteDurability:
         desc: Use items without losing durability
       welcomeMessage:
-        desc: When players join the server, send them a custom message
+        desc: When players join the server, send them a custom message (Use json files to customize messages)
+        extra:
+          '0': 'json location:'
+          '1': '[ save path ]/carpetamsaddition/welcomeMessage.json'
       commandGetSaveSize:
         desc: Use the "/getSaveSize" command to get the current save size
+      carpetAlwaysSetDefault:
+        desc: Whenever you set the carpet rule, it will be automatically set to the default value
+      experimentalContentCheckDisabled:
+        desc: Allow playing Minecraft experimental content in the game by adding data packs
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -349,3 +359,7 @@ carpetamsaddition:
         desc: Better craftable dispenser
       betterCraftablePolishedBlackStoneButton:
         desc: Use deepslate to crafted polished_blackstone_button in minecraft
+      enableMinecraft1_21ExperimentalRecipes:
+        desc: Unlock crafting recipes for all items in the 1.21 experimental content
+        extra:
+          '0': 'Using this rule suggests synchronously enabling experimentalContentCheckDisabled to prevent clients from being unable to use blocks'

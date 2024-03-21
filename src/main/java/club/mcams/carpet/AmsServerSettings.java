@@ -317,12 +317,8 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean infiniteDurability = false;
 
-    @Rule(
-            options = {"false"},
-            categories = AMS,
-            strict = false
-    )
-    public static String welcomeMessage = "false";
+    @Rule(categories = AMS)
+    public static boolean welcomeMessage = false;
 
     @Rule(
             options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
@@ -330,20 +326,28 @@ public class AmsServerSettings {
     )
     public static String commandGetSaveSize = "false";
 
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean carpetAlwaysSetDefault = false;
+
+    //#if MC>=11900
+    //$$ @Rule(categories = {AMS, EXPERIMENTAL})
+    //$$ public static boolean experimentalContentCheckDisabled = false;
+    //#endif
+
     /*
      * 区块加载规则
      */
     @Rule(
-            options = {"bone_block", "wither_skeleton_skull", "note_block", "OFF"},
+            options = {"bone_block", "wither_skeleton_skull", "note_block", "false"},
             categories = {AMS, FEATURE, AMS_CHUNKLOADER}
     )
-    public static String noteBlockChunkLoader = "OFF";
+    public static String noteBlockChunkLoader = "false";
 
     @Rule(
-            options = {"bone_block", "bedrock", "all", "OFF"},
+            options = {"bone_block", "bedrock", "all", "false"},
             categories = {AMS, FEATURE, AMS_CHUNKLOADER}
     )
-    public static String pistonBlockChunkLoader = "OFF";
+    public static String pistonBlockChunkLoader = "false";
 
     @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
     public static boolean bellBlockChunkLoader = false;
@@ -415,6 +419,140 @@ public class AmsServerSettings {
     @CraftingRule(recipes = "polished_blackstone_button.json")
     @Rule(categories = {AMS, CRAFTING, SURVIVAL})
     public static boolean betterCraftablePolishedBlackStoneButton = false;
+    //#endif
+
+    //#if MC>=12003
+    @GameVersion(version = "Minecraft 1.20.3 - 1.20.4")
+    //$$ @SuppressWarnings("unused")
+    //$$ @CraftingRule(
+    //$$     recipes = {
+    //$$     "chiseled_copper.json",
+    //$$     "chiseled_copper_from_copper_block_stonecutting.json",
+    //$$     "chiseled_copper_from_cut_copper_stonecutting.json",
+    //$$     "chiseled_tuff.json",
+    //$$     "chiseled_tuff_bricks.json",
+    //$$     "chiseled_tuff_bricks_from_polished_tuff_stonecutting.json",
+    //$$     "chiseled_tuff_bricks_from_tuff_bricks_stonecutting.json",
+    //$$     "chiseled_tuff_bricks_from_tuff_stonecutting.json",
+    //$$     "chiseled_tuff_from_tuff_stonecutting.json",
+    //$$     "copper_bulb.json",
+    //$$     "copper_door.json",
+    //$$     "copper_grate.json",
+    //$$     "copper_grate_from_copper_block_stonecutting.json",
+    //$$     "copper_trapdoor.json",
+    //$$     "crafter.json",
+    //$$     "exposed_chiseled_copper.json",
+    //$$     "exposed_chiseled_copper_from_exposed_copper_stonecutting.json",
+    //$$     "exposed_chiseled_copper_from_exposed_cut_copper_stonecutting.json",
+    //$$     "exposed_copper_bulb.json",
+    //$$     "exposed_copper_door.json",
+    //$$     "exposed_copper_grate.json",
+    //$$     "exposed_copper_grate_from_exposed_copper_stonecutting.json",
+    //$$     "exposed_copper_trapdoor.json",
+    //$$     "oxidized_chiseled_copper.json",
+    //$$     "oxidized_chiseled_copper_from_oxidized_copper_stonecutting.json",
+    //$$     "oxidized_chiseled_copper_from_oxidized_cut_copper_stonecutting.json",
+    //$$     "oxidized_copper_bulb.json",
+    //$$     "oxidized_copper_door.json",
+    //$$     "oxidized_copper_grate.json",
+    //$$     "oxidized_copper_grate_from_oxidized_copper_stonecutting.json",
+    //$$     "oxidized_copper_trapdoor.json",
+    //$$     "polished_tuff.json",
+    //$$     "polished_tuff_from_tuff_stonecutting.json",
+    //$$     "polished_tuff_slab.json",
+    //$$     "polished_tuff_slab_from_polished_tuff_stonecutting.json",
+    //$$     "polished_tuff_slab_from_tuff_stonecutting.json",
+    //$$     "polished_tuff_stairs.json",
+    //$$     "polished_tuff_stairs_from_polished_tuff_stonecutting.json",
+    //$$     "polished_tuff_stairs_from_tuff_stonecutting.json",
+    //$$     "polished_tuff_wall.json",
+    //$$     "polished_tuff_wall_from_polished_tuff_stonecutting.json",
+    //$$     "polished_tuff_wall_from_tuff_stonecutting.json",
+    //$$     "tuff_bricks.json",
+    //$$     "tuff_bricks_from_polished_tuff_stonecutting.json",
+    //$$     "tuff_bricks_from_tuff_stonecutting.json",
+    //$$     "tuff_brick_slab.json",
+    //$$     "tuff_brick_slab_from_polished_tuff_stonecutting.json",
+    //$$     "tuff_brick_slab_from_tuff_bricks_stonecutting.json",
+    //$$     "tuff_brick_slab_from_tuff_stonecutting.json",
+    //$$     "tuff_brick_stairs.json",
+    //$$     "tuff_brick_stairs_from_polished_tuff_stonecutting.json",
+    //$$     "tuff_brick_stairs_from_tuff_bricks_stonecutting.json",
+    //$$     "tuff_brick_stairs_from_tuff_stonecutting.json",
+    //$$     "tuff_brick_wall.json",
+    //$$     "tuff_brick_wall_from_polished_tuff_stonecutting.json",
+    //$$     "tuff_brick_wall_from_tuff_bricks_stonecutting.json",
+    //$$     "tuff_brick_wall_from_tuff_stonecutting.json",
+    //$$     "tuff_slab.json",
+    //$$     "tuff_slab_from_tuff_stonecutting.json",
+    //$$     "tuff_stairs.json",
+    //$$     "tuff_stairs_from_tuff_stonecutting.json",
+    //$$     "tuff_wall.json",
+    //$$     "tuff_wall_from_tuff_stonecutting.json",
+    //$$     "waxed_chiseled_copper.json",
+    //$$     "waxed_chiseled_copper_from_honeycomb.json",
+    //$$     "waxed_chiseled_copper_from_waxed_copper_block_stonecutting.json",
+    //$$     "waxed_chiseled_copper_from_waxed_cut_copper_stonecutting.json",
+    //$$     "waxed_copper_bulb.json",
+    //$$     "waxed_copper_bulb_from_honeycomb.json",
+    //$$     "waxed_copper_door.json",
+    //$$     "waxed_copper_door_from_honeycomb.json",
+    //$$     "waxed_copper_grate.json",
+    //$$     "waxed_copper_grate_from_honeycomb.json",
+    //$$     "waxed_copper_grate_from_waxed_copper_block_stonecutting.json",
+    //$$     "waxed_copper_trapdoor.json",
+    //$$     "waxed_copper_trapdoor_from_honeycomb.json",
+    //$$     "waxed_exposed_chiseled_copper.json",
+    //$$     "waxed_exposed_chiseled_copper_from_honeycomb.json",
+    //$$     "waxed_exposed_chiseled_copper_from_waxed_exposed_copper_stonecutting.json",
+    //$$     "waxed_exposed_chiseled_copper_from_waxed_exposed_cut_copper_stonecutting.json",
+    //$$     "waxed_exposed_copper_bulb.json",
+    //$$     "waxed_exposed_copper_bulb_from_honeycomb.json",
+    //$$     "waxed_exposed_copper_door.json",
+    //$$     "waxed_exposed_copper_door_from_honeycomb.json",
+    //$$     "waxed_exposed_copper_grate.json",
+    //$$     "waxed_exposed_copper_grate_from_honeycomb.json",
+    //$$     "waxed_exposed_copper_grate_from_waxed_exposed_copper_stonecutting.json",
+    //$$     "waxed_exposed_copper_trapdoor.json",
+    //$$     "waxed_exposed_copper_trapdoor_from_honeycomb.json",
+    //$$     "waxed_oxidized_chiseled_copper.json",
+    //$$     "waxed_oxidized_chiseled_copper_from_honeycomb.json",
+    //$$     "waxed_oxidized_chiseled_copper_from_waxed_oxidized_copper_stonecutting.json",
+    //$$     "waxed_oxidized_chiseled_copper_from_waxed_oxidized_cut_copper_stonecutting.json",
+    //$$     "waxed_oxidized_copper_bulb.json",
+    //$$     "waxed_oxidized_copper_bulb_from_honeycomb.json",
+    //$$     "waxed_oxidized_copper_door.json",
+    //$$     "waxed_oxidized_copper_door_from_honeycomb.json",
+    //$$     "waxed_oxidized_copper_grate.json",
+    //$$     "waxed_oxidized_copper_grate_from_honeycomb.json",
+    //$$     "waxed_oxidized_copper_grate_from_waxed_oxidized_copper_stonecutting.json",
+    //$$     "waxed_oxidized_copper_trapdoor.json",
+    //$$     "waxed_oxidized_copper_trapdoor_from_honeycomb.json",
+    //$$     "waxed_weathered_chiseled_copper.json",
+    //$$     "waxed_weathered_chiseled_copper_from_honeycomb.json",
+    //$$     "waxed_weathered_chiseled_copper_from_waxed_weathered_copper_stonecutting.json",
+    //$$     "waxed_weathered_chiseled_copper_from_waxed_weathered_cut_copper_stonecutting.json",
+    //$$     "waxed_weathered_copper_bulb.json",
+    //$$     "waxed_weathered_copper_bulb_from_honeycomb.json",
+    //$$     "waxed_weathered_copper_door.json",
+    //$$     "waxed_weathered_copper_door_from_honeycomb.json",
+    //$$     "waxed_weathered_copper_grate.json",
+    //$$     "waxed_weathered_copper_grate_from_honeycomb.json",
+    //$$     "waxed_weathered_copper_grate_from_waxed_weathered_copper_stonecutting.json",
+    //$$     "waxed_weathered_copper_trapdoor.json",
+    //$$     "waxed_weathered_copper_trapdoor_from_honeycomb.json",
+    //$$     "weathered_chiseled_copper.json",
+    //$$     "weathered_chiseled_copper_from_weathered_copper_stonecutting.json",
+    //$$     "weathered_chiseled_copper_from_weathered_cut_copper_stonecutting.json",
+    //$$     "weathered_copper_bulb.json",
+    //$$     "weathered_copper_door.json",
+    //$$     "weathered_copper_grate.json",
+    //$$     "weathered_copper_grate_from_weathered_copper_stonecutting.json",
+    //$$     "weathered_copper_trapdoor.json"
+    //$$     }
+    //$$ )
+    //$$ @Rule(categories = {AMS, CRAFTING, SURVIVAL})
+    //$$ public static boolean enableMinecraft1_21ExperimentalRecipes = false;
     //#endif
 
     public enum blueSkullProbability {
