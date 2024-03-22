@@ -7,7 +7,6 @@ int mcVersion = 1
 
 preprocess {
 	mcVersion = vars.get()["MC"] as int
-	tabIndentation = true
 }
 
 repositories {
