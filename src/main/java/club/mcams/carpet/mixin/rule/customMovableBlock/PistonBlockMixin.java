@@ -42,11 +42,7 @@ import java.util.Set;
 @Mixin(PistonBlock.class)
 public abstract class PistonBlockMixin {
     @Inject(method = "isMovable", at = @At("HEAD"), cancellable = true)
-    //#if MC<11700
-    //$$ private static void MovableBlocks(BlockState state, World world, BlockPos blockPos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
-    //#else
-    private static void MovableBlocks(BlockState state, World world, BlockPos pos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
-        //#endif
+    private static void MovableBlocks(BlockState state, World world, BlockPos blockPos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.customMovableBlock, "VANILLA")) {
             Set<String> moreCustomMovableBlock = new HashSet<>(Arrays.asList(AmsServerSettings.customMovableBlock.split(",")));
             String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); //Block{minecraft:bedrock} -> minecraft:bedrock
@@ -54,13 +50,13 @@ public abstract class PistonBlockMixin {
                 //#if MC<11700
                 //$$ if (direction == Direction.DOWN && blockPos.getY() == 0) {
                 //#else
-                if (direction == Direction.DOWN && pos.getY() == world.getBottomY()) {
-                    //#endif
+                if (direction == Direction.DOWN && blockPos.getY() == world.getBottomY()) {
+                //#endif
                     cir.setReturnValue(false);
-                    //#if MC<11700
-                    //$$ } else if (direction == Direction.UP && blockPos.getY() == world.getHeight() - 1) {
-                    //#else
-                } else if (direction == Direction.UP && pos.getY() == world.getTopY() - 1) {
+                //#if MC<11700
+                //$$ } else if (direction == Direction.UP && blockPos.getY() == world.getHeight() - 1) {
+                //#else
+                } else if (direction == Direction.UP && blockPos.getY() == world.getTopY() - 1) {
                 //#endif
                     cir.setReturnValue(false);
                 } else {
