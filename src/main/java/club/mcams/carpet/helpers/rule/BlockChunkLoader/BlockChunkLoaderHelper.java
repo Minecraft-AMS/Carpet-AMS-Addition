@@ -30,22 +30,22 @@ import java.util.Comparator;
 
 public class BlockChunkLoaderHelper {
     public static void loadChunk(ServerWorld world, ChunkPos chunkPos) {
-        BlockChunkLoaderHelper.addTicket(world, chunkPos);
+        addTicket(world, chunkPos);
         if (AmsServerSettings.blockChunkLoaderKeepWorldTickUpdate) {
-            BlockChunkLoaderHelper.resetIdleTimeout(world);
+            resetIdleTimeout(world);
         }
     }
 
     private static void addTicket(ServerWorld world, ChunkPos chunkPos) {
         int loadTime = AmsServerSettings.blockChunkLoaderTimeController; // Default: 300gt
         int loadRange = AmsServerSettings.blockChunkLoaderRangeController; // Default: 3x3
-        ChunkTicketType<ChunkPos> BLOCK_LOADER =
+        ChunkTicketType<ChunkPos> blockLoader =
             ChunkTicketType.create(
                 "block_loader",
                 Comparator.comparingLong(ChunkPos::toLong),
                 loadTime
             );
-        world.getChunkManager().addTicket(BLOCK_LOADER, chunkPos, loadRange, chunkPos);
+        world.getChunkManager().addTicket(blockLoader, chunkPos, loadRange, chunkPos);
     }
 
     private static void resetIdleTimeout(ServerWorld world) {
