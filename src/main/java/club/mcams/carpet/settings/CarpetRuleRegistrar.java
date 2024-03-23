@@ -32,16 +32,16 @@ import club.mcams.carpet.mixin.setting.SettingsManagerAccessor;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
 import org.jetbrains.annotations.Nullable;
+import java.lang.annotation.Annotation;
 //#endif
 
 //#if MC>=11900
 //$$ import java.lang.reflect.Constructor;
-//$$ import org.jetbrains.annotations.NotNull;
+//$$ import java.lang.reflect.InvocationTargetException;
+//$$ import java.util.Arrays;
 //#endif
 
 import com.google.common.collect.Lists;
-
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
 
@@ -76,12 +76,26 @@ public class CarpetRuleRegistrar {
     //$$         ctr1.setAccessible(true);
     //$$         Object ruleAnnotation = ctr1.newInstance(false, null, null, null, rule.categories(), rule.options(), rule.strict(), "", rule.validators());
     //$$         Class<?> parsedRuleClass = Class.forName("carpet.settings.ParsedRule");
-    //$$         Constructor<?> ctr2 = parsedRuleClass.getDeclaredConstructors()[0];
+    //$$         Constructor<?> ctr2 = Arrays.stream(parsedRuleClass.getDeclaredConstructors())
+    //$$             .filter(ctr -> ctr.getParameterTypes().length == 3)
+    //$$             .filter(ctr -> ctr.getParameterTypes()[0] == Field.class)
+    //$$             .filter(ctr -> ctr.getParameterTypes()[1].isAssignableFrom(ruleAnnotationClass))
+    //$$             .filter(ctr -> ctr.getParameterTypes()[2] == SettingsManager.class)
+    //$$             .findFirst()
+    //$$             .orElseThrow(() -> new NoSuchMethodException("Failed to get matched ParsedRule constructor"));
     //$$         ctr2.setAccessible(true);
     //$$         Object carpetRule = ctr2.newInstance(field, ruleAnnotation, this.settingsManager);
-    //$$         this.rules.add((CarpetRule<?>) carpetRule);
-    //$$     } catch (Exception e) {
-    //$$         throw new RuntimeException(e);
+    //$$         if (carpetRule instanceof CarpetRule) {
+    //$$             this.rules.add((CarpetRule<?>) carpetRule);
+    //$$         } else {
+    //$$             throw new ClassCastException("Failed to cast to CarpetRule.");
+    //$$         }
+    //$$     } catch (InvocationTargetException e) {
+    //$$         throw new RuntimeException(e.getTargetException());
+    //$$     } catch (NoSuchMethodException | ClassNotFoundException e) {
+    //$$         throw new RuntimeException("Reflection error: " + e.getMessage(), e);
+    //$$     } catch (IllegalAccessException | InstantiationException | IllegalArgumentException e) {
+    //$$         throw new RuntimeException("Instantiation error: " + e.getMessage(), e);
     //$$     }
     //$$ }
     //#endif
