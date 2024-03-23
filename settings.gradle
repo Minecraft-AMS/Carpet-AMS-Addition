@@ -15,7 +15,7 @@ pluginManagement {
 		eachPlugin {
 			switch (requested.id.id) {
 				case "com.replaymod.preprocess": {
-					useModule("com.github.replaymod:preprocessor:${requested.version}")
+					useModule("com.github.1024-byteeeee:preprocessor:${requested.version}")
 					break
 				}
 			}
