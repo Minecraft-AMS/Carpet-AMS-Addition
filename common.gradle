@@ -36,13 +36,12 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// mods
-	modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") //modrinth
-	//modImplementation "carpet:fabric-carpet:${project.carpet_core_version}" //masa
+	//modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") //modrinth
+	modImplementation "carpet:fabric-carpet:${project.carpet_core_version}" //masa
 	//modImplementation("curse.maven:carpet-349239:${project.carpet_core_version}") //cursemaven
 
 	// library mods
 	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
-	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 
 	// Dependencies
 	include(implementation("com.github.EsotericSoftware:yamlbeans:${project.yamlbeans_version}"))
