@@ -6,6 +6,10 @@ carpetamsaddition:
     welcomeMessage:
       modify_content_in: '在该路径下修改内容：'
       save_path: '[ 存档文件夹 ]'
+    maxPlayerBlockInteractionRange:
+      disable_command: '由于已开启maxPlayerBlockInteractionRange规则，该指令已被禁用'
+    maxPlayerEntityInteractionRange:
+      disable_command: '由于已开启maxPlayerEntityInteractionRange规则，该指令已被禁用'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:
@@ -50,12 +54,18 @@ carpetamsaddition:
       save_success_msg: '[ 保存世界成功 ]'
       save_fail_msg: '[ 保存世界失败 ]'
 
+  logger:
+    serverRuntime:
+      server_runtime: '服务器运行时间'
+
   validator:
     enhancedWorldEater:
       value_range: '设定的值必须为 0 - 16 或 -1'
     maxClientInteractionReachDistance:
       value_range: '设定的值必须为 0 - 512 或 -1'
-    maxPlayerInteractionDistance:
+    maxPlayerBlockInteractionRange:
+      value_range: '设定的值必须为 0 - 512 或 -1'
+    maxPlayerEntityInteractionRange:
       value_range: '设定的值必须为 0 - 512 或 -1'
     blockChunkLoaderTimeController:
       value_range: '设定的值必须为 1 - 300'
@@ -213,9 +223,14 @@ carpetamsaddition:
           '2': '2 - 输入指令：/carpet setDefault largeShulkerBox true 开启规则'
           '3': '3 - 重启服务器/单人世界'
           '4': '4 - 关闭该规则同理'
-      maxPlayerInteractionDistance:
-        name: 最大玩家交互距离
-        desc: 更改服务器允许的最大交互距离，设置为“-1”禁用该规则
+      maxPlayerBlockInteractionRange:
+        name: 最大玩家方块交互距离
+        desc: 更改服务器允许玩家与方块的最大交互距离，设置为“-1”禁用该规则
+        extra:
+          '0': '允许设定的范围：0 - 512'
+      maxPlayerEntityInteractionRange:
+        name: 最大玩家实体交互距离
+        desc: 更改服务器允许玩家与实体的最大交互距离，设置为“-1”禁用该规则
         extra:
           '0': '允许设定的范围：0 - 512'
       maxClientInteractionReachDistance:

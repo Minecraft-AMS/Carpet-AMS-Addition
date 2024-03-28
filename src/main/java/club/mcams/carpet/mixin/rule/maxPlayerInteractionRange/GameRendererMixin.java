@@ -18,22 +18,33 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.maxPlayerInteractionDistance;
+package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
-
-import net.minecraft.client.MinecraftClient;
+//#if MC<12005
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import net.minecraft.client.render.GameRenderer;
-
+import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
+//#else
+//$$ import club.mcams.carpet.utils.compat.DummyClass;
+//#endif
 
+import org.spongepowered.asm.mixin.Mixin;
+
+//#if MC<12005
 @Mixin(value = GameRenderer.class, priority = 168)
+//#else
+//$$ @Mixin(DummyClass.class)
+//#endif
 public abstract class GameRendererMixin {
+
+//#if MC<12005
+@GameVersion(version = "Minecraft < 1.20.5")
 
     //#if MC>11800
     //$$ @Shadow
@@ -45,6 +56,11 @@ public abstract class GameRendererMixin {
     private MinecraftClient client;
     //#endif
 
+    //#if MC>=12005
+    //$$ @Shadow
+    //$$ protected abstract HitResult findCrosshairTarget(Entity par1, double par2, double par3, float par4);
+    //#endif
+
     @ModifyConstant(
             method = "updateTargetedEntity",
             require = 0,
@@ -52,8 +68,8 @@ public abstract class GameRendererMixin {
             constant = @Constant(doubleValue = 6.0D)
     )
     private double updateTargetedEntity1(final double constant) {
-        if (AmsServerSettings.maxPlayerInteractionDistance != -1.0D && this.client.player != null) {
-            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && this.client.player != null) {
+            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerEntityInteractionRange);
         }
         return constant;
     }
@@ -65,8 +81,8 @@ public abstract class GameRendererMixin {
             constant = @Constant(doubleValue = 3.0D)
     )
     private double updateTargetedEntity2(final double constant) {
-        if (AmsServerSettings.maxPlayerInteractionDistance != -1.0D && this.client.player != null) {
-            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && this.client.player != null) {
+            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerEntityInteractionRange);
         } else {
             return constant;
         }
@@ -79,10 +95,12 @@ public abstract class GameRendererMixin {
             constant = @Constant(doubleValue = 9.0D)
     )
     private double updateTargetedEntity3(final double constant) {
-        if (AmsServerSettings.maxPlayerInteractionDistance != -1.0D && this.client.player != null) {
-            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && this.client.player != null) {
+            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerEntityInteractionRange);
         } else {
             return constant;
         }
     }
+
+//#endif
 }

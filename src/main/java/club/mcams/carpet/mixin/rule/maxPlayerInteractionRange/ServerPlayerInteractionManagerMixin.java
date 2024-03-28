@@ -18,25 +18,36 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.maxPlayerInteractionDistance;
+package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
+//#if MC<12005
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
-
-import net.minecraft.server.network.ServerPlayerInteractionManager;
-
 //#if MC>11800
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //#endif
-
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import net.minecraft.server.network.ServerPlayerInteractionManager;
+//#else
+//$$ import club.mcams.carpet.utils.compat.DummyClass;
+//#endif
+
 import org.spongepowered.asm.mixin.Mixin;
 
+//#if MC<12005
 @Mixin(value = ServerPlayerInteractionManager.class, priority = 168)
+//#else
+//$$ @Mixin(DummyClass.class)
+//#endif
 public abstract class ServerPlayerInteractionManagerMixin {
+
+//#if MC<12005
+@GameVersion(version = "Minecraft < 1.20.5")
+
     //#if MC<11900
     @ModifyConstant(
             method = "processBlockBreakingAction",
@@ -45,8 +56,8 @@ public abstract class ServerPlayerInteractionManagerMixin {
             constant = @Constant(doubleValue = 36.0)
     )
     private double processBlockBreakingAction(final double constant) {
-        if (AmsServerSettings.maxPlayerInteractionDistance != -1.0D) {
-            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+        if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D) {
+            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerBlockInteractionRange);
         } else {
             return constant;
         }
@@ -60,11 +71,13 @@ public abstract class ServerPlayerInteractionManagerMixin {
     //$$         )
     //$$ )
     //$$ private double getActualReachDistance(Operation<Double> original) {
-    //$$     if (AmsServerSettings.maxPlayerInteractionDistance != -1.0D) {
-    //$$         return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+    //$$     if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D) {
+    //$$         return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerBlockInteractionRange);
     //$$     } else {
     //$$         return original.call();
     //$$     }
     //$$ }
     //#endif
+
+//#endif
 }

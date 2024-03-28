@@ -20,12 +20,16 @@
 
 package club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance;
 
-import club.mcams.carpet.AmsServerSettings;
-
+//#if MC<12005
 import net.minecraft.util.math.MathHelper;
+//#endif
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 public class MaxInteractionDistanceMathHelper {
-    public static double getMaxSquaredReachDistance() {
-       return MathHelper.square((float) AmsServerSettings.maxPlayerInteractionDistance);
+    //#if MC<12005
+    @GameVersion(version = "Minecraft < 1.20.5", desc = "目前只有低于1.20.5的版本用到")
+    public static double getMaxSquaredReachDistance(double value) {
+       return MathHelper.square((float) value);
     }
+    //#endif
 }

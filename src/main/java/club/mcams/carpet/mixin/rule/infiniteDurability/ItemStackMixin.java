@@ -25,14 +25,20 @@ import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.item.ItemStack;
 
 import org.spongepowered.asm.mixin.Mixin;
+//#if MC>=12005
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#else
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#endif
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
     @Inject(
-        //#if MC>=11900
+        //#if MC>=12005
+        //$$ method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;Ljava/lang/Runnable;)V",
+        //#elseif MC>=11900
         //$$ method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z",
         //#else
         method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z",
@@ -40,9 +46,19 @@ public abstract class ItemStackMixin {
         at = @At("HEAD"),
         cancellable = true
     )
-    private void damage(CallbackInfoReturnable<Boolean> cir) {
+    private void damage(
+        //#if MC>=12005
+        //$$CallbackInfo ci
+        //#else
+        CallbackInfoReturnable<Boolean> cir
+        //#endif
+    ) {
         if (AmsServerSettings.infiniteDurability) {
+            //#if MC>=12005
+            //$$ ci.cancel();
+            //#else
             cir.setReturnValue(false);
+            //#endif
         }
     }
 }

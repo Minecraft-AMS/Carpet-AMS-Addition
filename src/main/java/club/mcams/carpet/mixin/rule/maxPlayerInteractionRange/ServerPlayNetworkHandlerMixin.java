@@ -18,27 +18,37 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.maxPlayerInteractionDistance;
+package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
+//#if MC<12005
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
-
 //#if MC>11800
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.objectweb.asm.Opcodes;
 //#endif
-
-import net.minecraft.server.network.ServerPlayNetworkHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-
-import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
+//#else
+//$$ import club.mcams.carpet.utils.compat.DummyClass;
+//#endif
 
+import org.spongepowered.asm.mixin.Mixin;
+
+//#if MC<12005
 @Mixin(value = ServerPlayNetworkHandler.class, priority = 168)
+//#else
+//$$ @Mixin(DummyClass.class)
+//#endif
 public abstract class ServerPlayNetworkHandlerMixin {
+
+//#if MC<12005
+@GameVersion(version = "Minecraft < 1.20.5")
 
     @Shadow
     public ServerPlayerEntity player;
@@ -50,8 +60,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
             constant = @Constant(doubleValue = 64.0)
     )
     private double onPlayerInteractBlock1(double constant) {
-        if (AmsServerSettings.maxPlayerInteractionDistance != -1.0D) {
-            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+        if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D) {
+            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerBlockInteractionRange);
         } else {
             return constant;
         }
@@ -65,8 +75,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
             constant = @Constant(doubleValue = 36.0)
     )
     private double onPlayerInteractEntity(double constant) {
-        if (AmsServerSettings.maxPlayerInteractionDistance != -1.0D) {
-            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D) {
+            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerEntityInteractionRange);
         } else {
             return constant;
         }
@@ -83,8 +93,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
     //$$          )
     //$$  )
     //$$  private double onPlayerInteractBlock2(Operation<Double> original) {
-    //$$      if (AmsServerSettings.maxPlayerInteractionDistance != -1.0D) {
-    //$$          return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+    //$$      if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D) {
+    //$$          return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerBlockInteractionRange);
     //$$      } else {
     //$$          return original.call();
     //$$      }
@@ -99,11 +109,13 @@ public abstract class ServerPlayNetworkHandlerMixin {
     //$$         )
     //$$ )
     //$$ private double onPlayerInteractEntity(Operation<Double> original) {
-    //$$     if (AmsServerSettings.maxPlayerInteractionDistance != -1.0D) {
-    //$$         return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance();
+    //$$     if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D) {
+    //$$         return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerEntityInteractionRange);
     //$$     } else {
     //$$         return original.call();
     //$$     }
     //$$ }
     //#endif
+
+//#endif
 }

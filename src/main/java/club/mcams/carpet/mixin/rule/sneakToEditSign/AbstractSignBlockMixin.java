@@ -44,12 +44,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class AbstractSignBlockMixin {
     //#if MC<12000
     @Inject(
-            method = "onUse",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/entity/player/PlayerEntity;getStackInHand(Lnet/minecraft/util/Hand;)Lnet/minecraft/item/ItemStack;"
-            ),
-            cancellable = true
+        method = "onUse",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;getStackInHand(Lnet/minecraft/util/Hand;)Lnet/minecraft/item/ItemStack;"
+        ),
+        cancellable = true
     )
     private void onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (
@@ -65,15 +65,25 @@ public abstract class AbstractSignBlockMixin {
     }
     //#else
     //$$ @ModifyExpressionValue(
-    //$$        method = "onUse",
-    //$$        at = @At(
-    //$$                value = "INVOKE",
-    //$$                target = "Lnet/minecraft/entity/player/PlayerEntity;canModifyBlocks()Z"
-    //$$        )
-    //$$)
-    //$$public boolean onUse(boolean original, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-    //$$    return AmsServerSettings.sneakToEditSign ? original && player.isSneaking() : original;
-    //$$}
+    //$$     method = "onUse",
+    //$$     at = @At(
+    //$$         value = "INVOKE",
+    //$$         target = "Lnet/minecraft/entity/player/PlayerEntity;canModifyBlocks()Z"
+    //$$     )
+    //$$ )
+    //$$ public boolean onUse(
+    //$$     boolean original,
+    //$$     BlockState state,
+    //$$     World world,
+    //$$     BlockPos pos,
+    //$$     PlayerEntity player,
+    //$$     //#if MC<12005
+    //$$     //$$ Hand hand,
+    //$$     //#endif
+    //$$     BlockHitResult hit
+    //$$ ) {
+    //$$     return AmsServerSettings.sneakToEditSign ? original && player.isSneaking() : original;
+    //$$ }
     //#endif
 }
 

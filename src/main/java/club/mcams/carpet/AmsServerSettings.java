@@ -22,14 +22,15 @@ package club.mcams.carpet;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-import club.mcams.carpet.settings.CraftingRule;
-import club.mcams.carpet.settings.Rule;
-
+import club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
+import club.mcams.carpet.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.blockChunkLoaderTimeController.MaxTimeValidator;
 import club.mcams.carpet.validators.rule.commandPlayerChunkLoadController.MaxRangeValidator;
 import club.mcams.carpet.validators.rule.enhancedWorldEater.BlastResistanceValidator;
-import club.mcams.carpet.validators.rule.maxPlayerInteractionDistance.MaxInteractionDistanceValidator;
 import club.mcams.carpet.validators.rule.maxClientInteractionReachDistance.MaxClientInteractionReachDistanceValidator;
+
+import club.mcams.carpet.settings.CraftingRule;
+import club.mcams.carpet.settings.Rule;
 
 import static carpet.settings.RuleCategory.*;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
@@ -175,11 +176,21 @@ public class AmsServerSettings {
     @Rule(
             options = {"-1"},
             categories = {AMS, FEATURE, SURVIVAL},
-            validators = MaxInteractionDistanceValidator.class,
+            validators = MaxPlayerBlockInteractionRangeValidator.class,
             strict = false
     )
-    public static double maxPlayerInteractionDistance = -1.0D;
+    public static double maxPlayerBlockInteractionRange = -1.0D;
 
+    @Rule(
+            options = {"-1"},
+            categories = {AMS, FEATURE, SURVIVAL},
+            validators = MaxPlayerEntityInteractionRangeValidator.class,
+            strict = false
+    )
+    public static double maxPlayerEntityInteractionRange = -1.0D;
+
+    //#if MC<12005
+    @GameVersion(version = "Minecraft < 1.20.5", desc = "1.20.5后或许不再需要这个功能？")
     @Rule(
             options = {"-1"},
             categories = {AMS, FEATURE, SURVIVAL},
@@ -187,6 +198,7 @@ public class AmsServerSettings {
             strict = false
     )
     public static double maxClientInteractionReachDistance = -1.0D;
+    //#endif
 
     @Rule(
             options = {"VANILLA", "minecraft:bedrock", "minecraft:bedrock,minecraft:obsidian"},
@@ -422,7 +434,7 @@ public class AmsServerSettings {
     //#endif
 
     //#if MC>=12003
-    @GameVersion(version = "Minecraft 1.20.3 - 1.20.4")
+    @GameVersion(version = "Minecraft 1.20.3 - 1.20.5")
     //$$ @SuppressWarnings("unused")
     //$$ @CraftingRule(
     //$$     recipes = {

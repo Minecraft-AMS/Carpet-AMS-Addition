@@ -6,6 +6,10 @@ carpetamsaddition:
     welcomeMessage:
       modify_content_in: 'Modify the content in：'
       save_path: '[ save path ]'
+    maxPlayerBlockInteractionRange:
+      disable_command: 'The command has been disabled due to the maxPlayerBlockInteractionRange rule being enabled'
+    maxPlayerEntityInteractionRange:
+      disable_command: 'The command has been disabled due to the maxPlayerEntityInteractionRange rule being enabled'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:
@@ -50,12 +54,18 @@ carpetamsaddition:
       save_success_msg: '[ Save world success ]'
       save_fail_msg: '[ Save world failed ]'
 
+  logger:
+    serverRuntime:
+      server_runtime: 'Server Runtime'
+
   validator:
     enhancedWorldEater:
       value_range: 'The value must be 0 - 16 or -1'
     maxClientInteractionReachDistance:
       value_range: 'The value must be 0 - 512 or -1'
-    maxPlayerInteractionDistance:
+    maxPlayerBlockInteractionRange:
+      value_range: 'The value must be 0 - 512 or -1'
+    maxPlayerEntityInteractionRange:
       value_range: 'The value must be 0 - 512 or -1'
     blockChunkLoaderTimeController:
       value_range: 'The value must be 1 - 300'
@@ -176,8 +186,12 @@ carpetamsaddition:
           '2': '2 - Enter the command: /carpet setDefault largeShulkerBox true, to turn on the rule'
           '3': '3 - Restart the server/single-player world'
           '4': '4 - Disabling the rule follows the same process'
-      maxPlayerInteractionDistance:
-        desc: Change the maximum interaction distance allowed by the server, set to "-1" to disable this rule
+      maxPlayerBlockInteractionRange:
+        desc: Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule
+        extra:
+          '0': 'The range of values: 0 - 512'
+      maxPlayerEntityInteractionRange:
+        desc: Change the maximum entity interaction distance allowed by the server, set to "-1" to disable this rule
         extra:
           '0': 'The range of values: 0 - 512'
       maxClientInteractionReachDistance:

@@ -18,16 +18,17 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.validators.rule.maxPlayerInteractionDistance;
+package club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange;
 
 import carpet.settings.ParsedRule;
 import carpet.settings.Validator;
 
 import club.mcams.carpet.translations.Translator;
+
 import net.minecraft.server.command.ServerCommandSource;
 
-public class MaxInteractionDistanceValidator extends Validator<Double> {
-    private static final Translator translator = new Translator("validator.maxPlayerInteractionDistance");
+public class MaxPlayerBlockInteractionRangeValidator extends Validator<Double> {
+    private static final Translator translator = new Translator("validator.maxPlayerBlockInteractionRange");
 
     @Override
     public Double validate(ServerCommandSource serverCommandSource, ParsedRule<Double> parsedRule, Double aDouble, String s) {
