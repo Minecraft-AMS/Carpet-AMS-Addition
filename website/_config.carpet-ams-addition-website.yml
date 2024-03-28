@@ -3,6 +3,7 @@ favicon: images/icon.png
 menu:
   发布[Release]: /
   规则[Rules]: /Rules
+  记录器[Loggers]: /Loggers
   指令[Commands]: /Commands
   开发[Development]: /Development
   下载[Download]: /Download

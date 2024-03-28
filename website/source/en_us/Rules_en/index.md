@@ -930,10 +930,29 @@ To use this rule, please follow the steps below:
 
 - Categroies: `AMS` , `FEATURE`, `EXPERIMENTAL`
 
-## maxPlayerInteractionDistance
+## maxPlayerBlockInteractionRange
 
 
-Change the maximum interaction distance allowed by the server, set to `-1` to disable this rule
+Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule.
+
+- Type: `double`
+
+
+
+- Default: `-1`
+
+
+
+- Suggested options: `0 - 512`, `-1`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## maxPlayerEntityInteractionRange
+
+
+Change the maximum entity interaction distance allowed by the server, set to "-1" to disable this rule.
 
 - Type: `double`
 
@@ -953,11 +972,12 @@ Change the maximum interaction distance allowed by the server, set to `-1` to di
 
 Change the maximum interaction distance allowed by the client, set to `-1` to disable this rule.
 
-
 Need to disable the tweakBlockReachOverride feature in Tweakeroo.
 
+< Available for Minecraft < 1.20.5 >
 
-- Type: `float`
+
+- Type: `double`
 
 
 
@@ -1737,7 +1757,7 @@ Unlock crafting recipes for all items in the 1.21 experimental content.
 
 Using this rule suggests synchronously enabling experimentalContentCheckDisabled to prevent clients from being unable to use blocks.
 
-< Available for Minecraft 1.20.3 - 1.20.4 >
+< Available for Minecraft 1.20.3 - 1.20.5 >
 
 - Type: `boolean`
 

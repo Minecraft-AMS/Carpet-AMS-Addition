@@ -895,9 +895,27 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
-## 最大玩家交互距离（maxPlayerInteractionDistance）
+## 最大玩家方块交互距离（maxPlayerBlockInteractionRange）
 
-更改服务器允许的最大交互距离，设置为 `-1` 禁用该规则。
+更改服务器允许玩家与方块的最大交互距离，设置为“-1”禁用该规则。
+
+- 类型: `double`
+
+
+
+- 默认值: `-1`
+
+
+
+- 参考选项: `0 - 512`, `-1`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 最大玩家实体交互距离（maxPlayerEntityInteractionRange）
+
+更改服务器允许玩家与实体的最大交互距离，设置为“-1”禁用该规则。
 
 - 类型: `double`
 
@@ -919,7 +937,9 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 需要关闭Tweakeroo的tweakBlockReachOverride功能。
 
-- 类型: `float`
+<该规则 Minecraft < 1.20.5 可用>
+
+- 类型: `double`
 
 
 
@@ -1698,7 +1718,7 @@ json位置：
 
 使用此规则建议同步开启禁用实验性内容检查（experimentalContentCheckDisabled）防止客户端无法使用方块。
 
-<该规则 Minecraft 1.20.3 - 1.20.4 可用>
+<该规则 Minecraft 1.20.3 - 1.20.5 可用>
 
 - 类型: `boolean`
 
