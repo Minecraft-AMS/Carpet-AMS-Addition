@@ -48,7 +48,11 @@ public abstract class sneakToEatCake {
         //#if MC<11700
         //$$ CakeBlock cake,
         //#endif
-        WorldAccess world, BlockPos pos, BlockState state, PlayerEntity player, Operation<ActionResult> original
+        WorldAccess world,
+        BlockPos pos,
+        BlockState state,
+        PlayerEntity player,
+        Operation<ActionResult> original
     ) {
         if (AmsServerSettings.sneakToEatCake) {
             return player.isSneaking() ? original.call(world, pos, state, player) : ActionResult.FAIL;

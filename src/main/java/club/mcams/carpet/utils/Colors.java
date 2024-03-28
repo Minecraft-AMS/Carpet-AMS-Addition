@@ -41,7 +41,7 @@ public class Colors {
     public static int HOTPINK = 0xFF1493;
 
 /*
-//////////////////////////////////Minecraft Style//////////////////////////////////
+    //////////////////////////////////Minecraft Style//////////////////////////////////
     "\u001B[0;30m", // Black §0
     "\u001B[0;34m", // Dark Blue §1
     "\u001B[0;32m", // Dark Green §2
@@ -65,4 +65,30 @@ public class Colors {
     "\u001B[3m",       // Italic §o
     ANSI_RESET,        // Reset §r
 */
+
+/*
+    //////////////////////////////////Carpet Style//////////////////////////////////
+    ITALIC      ('i', (s, f) -> s.withItalic(true)),
+    STRIKE      ('s', (s, f) -> s.withFormatting(Formatting.STRIKETHROUGH)),
+    UNDERLINE   ('u', (s, f) -> s.withFormatting(Formatting.UNDERLINE)),
+    BOLD        ('b', (s, f) -> s.withBold(true)),
+    OBFUSCATE   ('o', (s, f) -> s.withFormatting(Formatting.OBFUSCATED)),
+
+    WHITE       ('w', (s, f) -> s.withColor(Formatting.WHITE)),
+    YELLOW      ('y', (s, f) -> s.withColor(Formatting.YELLOW)),
+    LIGHT_PURPLE('m', (s, f) -> s.withColor(Formatting.LIGHT_PURPLE)), // magenta
+    RED         ('r', (s, f) -> s.withColor(Formatting.RED)),
+    AQUA        ('c', (s, f) -> s.withColor(Formatting.AQUA)), // cyan
+    GREEN       ('l', (s, f) -> s.withColor(Formatting.GREEN)), // lime
+    BLUE        ('t', (s, f) -> s.withColor(Formatting.BLUE)), // light blue, teal
+    DARK_GRAY   ('f', (s, f) -> s.withColor(Formatting.DARK_GRAY)),
+    GRAY        ('g', (s, f) -> s.withColor(Formatting.GRAY)),
+    GOLD        ('d', (s, f) -> s.withColor(Formatting.GOLD)),
+    DARK_PURPLE ('p', (s, f) -> s.withColor(Formatting.DARK_PURPLE)), // purple
+    DARK_RED    ('n', (s, f) -> s.withColor(Formatting.DARK_RED)),  // brown
+    DARK_AQUA   ('q', (s, f) -> s.withColor(Formatting.DARK_AQUA)),
+    DARK_GREEN  ('e', (s, f) -> s.withColor(Formatting.DARK_GREEN)),
+    DARK_BLUE   ('v', (s, f) -> s.withColor(Formatting.DARK_BLUE)), // navy
+    BLACK       ('k', (s, f) -> s.withColor(Formatting.BLACK)),
+ */
 }

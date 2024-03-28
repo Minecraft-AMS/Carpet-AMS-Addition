@@ -46,11 +46,17 @@ import static net.minecraft.block.Block.dropStack;
 @Mixin(Block.class)
 public abstract class BlockMixin {
     @Inject(method = "onBreak", at = @At("HEAD"))
-    //#if MC>12002
-    //$$ private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
-    //#else
-    private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
-    //#endif
+    private void onBreak(
+        World world,
+        BlockPos pos,
+        BlockState state,
+        PlayerEntity player,
+        //#if MC>12002
+        //$$ CallbackInfoReturnable<BlockState> cir
+        //#else
+        CallbackInfo ci
+        //#endif
+    ) {
         if (AmsServerSettings.cakeBlockDropOnBreak && state.getBlock() == Blocks.CAKE && state.get(CakeBlock.BITES) == 0) {
             if (!player.isCreative()) {
                 ItemStack cakeStack = new ItemStack(Items.CAKE);
