@@ -20,34 +20,18 @@
 
 package club.mcams.carpet.logging;
 
-import carpet.logging.HUDLogger;
 import carpet.logging.LoggerRegistry;
 
 import club.mcams.carpet.logging.logger.ServerRuntimeHUDLogger;
 
-import java.lang.reflect.Field;
-
-public class AmsCarpetLoggerRegistry {
-    public static boolean __serverRuntime;
-
-    public static void registerLoggers() {
-        LoggerRegistry.registerLogger(ServerRuntimeHUDLogger.NAME, standardHUDLogger(ServerRuntimeHUDLogger.NAME, null, null));
+public class AmsCarpetHUDController {
+    public static void updateHUD() {
+        doHudLogging(AmsCarpetLoggerRegistry.__serverRuntime, ServerRuntimeHUDLogger.getInstance());
     }
 
-    public static HUDLogger standardHUDLogger(String logName, String def, String [] options) {
-        //#if MC<11700
-        //$$ return new HUDLogger(getLoggerField(logName), logName, def, options);
-        //#else
-        return new HUDLogger(getLoggerField(logName), logName, def, options, false);
-        //#endif
-    }
-
-    public static Field getLoggerField(String logName) {
-        try {
-            return AmsCarpetLoggerRegistry.class.getField("__" + logName);
-        }
-        catch (NoSuchFieldException e) {
-            throw new RuntimeException();
+    private static void doHudLogging(boolean condition, AbstractHUDLogger logger) {
+        if (condition) {
+            LoggerRegistry.getLogger(logger.getName()).log(logger::onHudUpdate);
         }
     }
 }

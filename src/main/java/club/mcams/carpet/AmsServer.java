@@ -50,6 +50,7 @@ import java.util.Map;
 
 public class AmsServer implements CarpetExtension {
     public static MinecraftServer minecraftServer;
+    public static long serverStartTimeMillis;
     public static final int ruleCount = CountRulesUtil.countRules();
     public static final String fancyName = "Carpet AMS Addition";
     public static final String name = AmsServerMod.getModId();
@@ -105,6 +106,7 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onServerLoaded(MinecraftServer server) {
+        serverStartTimeMillis = System.currentTimeMillis();
         minecraftServer = server;
         LoadConfigFromJson.load(server);
     }

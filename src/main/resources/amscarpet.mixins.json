@@ -4,6 +4,7 @@
   "package": "club.mcams.carpet.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "carpet.HUDControllerMixin",
     "carpet.SettingsManagerMixin",
     "rule.amsUpdateSuppressionCrashFix.MinecraftServerMixin",
     "rule.amsUpdateSuppressionCrashFix.NeighborUpdaterMixin",
@@ -58,8 +59,10 @@
     "rule.largeEnderChest.SimpleInventoryAccessor",
     "rule.largeShulkerBox.ShulkerBoxBlockEntityMixin",
     "rule.largeShulkerBox.ShulkerBoxScreenHandlerMixin",
-    "rule.maxPlayerInteractionDistance.ServerPlayerInteractionManagerMixin",
-    "rule.maxPlayerInteractionDistance.ServerPlayNetworkHandlerMixin",
+    "rule.maxPlayerInteractionRange.AttributeCommandMixin",
+    "rule.maxPlayerInteractionRange.EntityAttributeInstanceMixin",
+    "rule.maxPlayerInteractionRange.ServerPlayerInteractionManagerMixin",
+    "rule.maxPlayerInteractionRange.ServerPlayNetworkHandlerMixin",
     "rule.mineDragonEgg.DragonEggBlockMixin",
     "rule.mitePearl.EnderPearlEntityMixin",
     "rule.netherWaterPlacement.DimensionTypeMixin",
@@ -119,7 +122,7 @@
   "client": [
     "rule.bedRockFlying.ClientPlayerEntityMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
-    "rule.maxPlayerInteractionDistance.GameRendererMixin"
+    "rule.maxPlayerInteractionRange.GameRendererMixin"
   ],
   "server": [],
   "injectors": {
