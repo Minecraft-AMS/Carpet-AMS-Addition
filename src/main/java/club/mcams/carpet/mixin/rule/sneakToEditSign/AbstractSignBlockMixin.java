@@ -86,6 +86,3 @@ public abstract class AbstractSignBlockMixin {
     //$$ }
     //#endif
 }
-
-
-
