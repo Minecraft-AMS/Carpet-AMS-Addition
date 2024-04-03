@@ -25,11 +25,13 @@ import carpet.utils.Translations;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerMod;
+import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
 
 import net.minecraft.server.command.ServerCommandSource;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Slice;
@@ -37,6 +39,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SettingsManager.class)
 public abstract class SettingsManagerMixin {
+
+    @Unique
+    private static final Translator translator = new Translator("carpet.totalRules");
+
     @Inject(
         method = "listAllSettings",
         slice = @Slice(
@@ -60,7 +66,7 @@ public abstract class SettingsManagerMixin {
                 String.format("g %s ", AmsServer.fancyName),
                 String.format("g %s: ", Translations.tr("ui.version",  "version")),
                 String.format("g %s ", AmsServerMod.getVersion()),
-                String.format("g (Total rules: %d)", AmsServer.ruleCount)
+                String.format("g (%s: %d)", translator.tr("total_rules").getString(), AmsServer.ruleCount)
             )
         );
     }
