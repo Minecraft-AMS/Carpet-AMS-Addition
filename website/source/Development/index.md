@@ -8,7 +8,7 @@
 
   
 
-- 使用 [preprocessor](https://github.com/ReplayMod/preprocessor)([Fallen_Breath](https://github.com/Fallen-Breath)的fork版本)在单一分支下对所有的Minecraft版本进行维护
+- 使用 [preprocessor](https://github.com/ReplayMod/preprocessor) 在单一分支下对所有的Minecraft版本进行维护
 
   
 
@@ -26,20 +26,21 @@
 
 ## 版本支持
 
-|         游戏版本         | 开发状态 |                         最后支持版本                         |
-|:--------------------:| :------: | :----------------------------------------------------------: |
-|        1.20.4        |    ✔     |                             ---                              |
-|        1.20.3        |    ✔     |                             ---                              |
-|        1.20.2        |    ✔     |                             ---                              |
-|        1.20.1        |    ✔     |                             ---                              |
-|         1.20         |    ✔     |                             ---                              |
-|        1.19.4        |    ✔     |                             ---                              |
-|        1.19.3        |    ✖     | [Carpet-AMS-Addition-mc1.19.3-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
-|        1.19.2        |    ✖     | [Carpet-AMS-Addition-mc1.19.2-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
+|       游戏版本        | 开发状态 |                         最后支持版本                         |
+| :-------------------: | :------: | :----------------------------------------------------------: |
+|    1.20.5 (24w13a)    |    ✔     |                             ---                              |
+|        1.20.4         |    ✔     |                             ---                              |
+|        1.20.3         |    ✔     |                             ---                              |
+|        1.20.2         |    ✔     |                             ---                              |
+|        1.20.1         |    ✔     |                             ---                              |
+|         1.20          |    ✔     |                             ---                              |
+|        1.19.4         |    ✔     |                             ---                              |
+|        1.19.3         |    ✖     | [Carpet-AMS-Addition-mc1.19.3-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
+|        1.19.2         |    ✖     | [Carpet-AMS-Addition-mc1.19.2-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
 | **<u>1.18.2(主)</u>** |    ✔     |                             ---                              |
-|        1.17.1        |    ✔     |                             ---                              |
-|        1.16.5        |    ✔     |                             ---                              |
-|        1.15.2        |    ✖     | [ Carpet-AMS-Addition-mc1.15.2](https://github.com/1024-byteeeee/Carpet-AMS-Addition-1.15.2) |
+|        1.17.1         |    ✔     |                             ---                              |
+|        1.16.5         |    ✔     |                             ---                              |
+|        1.15.2         |    ✖     | [ Carpet-AMS-Addition-mc1.15.2](https://github.com/1024-byteeeee/Carpet-AMS-Addition-1.15.2) |
 
 &emsp;
 

@@ -1582,6 +1582,60 @@ json位置：
 
 - 分类: `AMS`, `EXPERIMENTAL`
 
+## 可施肥小花（fertilizableSmallFlower）
+
+使诸如蒲公英的小花也可以被骨粉催熟。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 无害化滴水石锥（harmlessPointedDripstone）
+
+让滴水石锥不会产生伤害。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 禁用滴水石锥碰撞箱（pointedDripstoneCollisionBoxDisabled）
+
+让滴水石锥不会产生伤害。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

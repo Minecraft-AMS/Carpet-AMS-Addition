@@ -8,7 +8,7 @@
 
   
 
-- It uses [preprocessor](https://github.com/ReplayMod/preprocessor)(forked version by [Fallen_Breath](https://github.com/Fallen-Breath)) to maintain all Minecraft versions on a single branch
+- It uses [preprocessor](https://github.com/ReplayMod/preprocessor) to maintain all Minecraft versions on a single branch
 
   
 
@@ -27,7 +27,8 @@
 ## Support Version
 
 |       Game Version        | Development Status |                    Last Supported Version                    |
-|:-------------------------:| :----------------: | :----------------------------------------------------------: |
+| :-----------------------: | :----------------: | :----------------------------------------------------------: |
+|      1.20.5 (24w13a)      |         ✔          |                             ---                              |
 |          1.20.4           |         ✔          |                             ---                              |
 |          1.20.3           |         ✔          |                             ---                              |
 |          1.20.2           |         ✔          |                             ---                              |

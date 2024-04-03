@@ -1623,6 +1623,60 @@ Allow playing Minecraft experimental content in the game by adding data packs.
 
 - Categroies: `AMS`, `EXPERIMENTAL`
 
+## fertilizableSmallFlower
+
+Allow small flowers such as dandelion can also be ripened by bone meal.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## harmlessPointedDripstone
+
+Let pointed dripstone do no damage.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## pointedDripstoneCollisionBoxDisabled
+
+Allow players to pass through pointed dripstone.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
