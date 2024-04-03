@@ -346,6 +346,15 @@ public class AmsServerSettings {
     //$$ public static boolean experimentalContentCheckDisabled = false;
     //#endif
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean fertilizableSmallFlower = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean harmlessPointedDripstone = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean pointedDripstoneCollisionBoxDisabled = false;
+
     /*
      * 区块加载规则
      */

@@ -1,4 +1,8 @@
 carpetamsaddition:
+  carpet:
+    totalRules:
+      total_rules: '规则总数'
+
   rule:
     amsUpdateSuppressionCrashFix:
       location: '更新抑制位置'
@@ -371,6 +375,15 @@ carpetamsaddition:
       experimentalContentCheckDisabled:
         name: 禁用实验性内容检查
         desc: 允许在游戏中通过添加数据包来游玩Minecraft的实验性内容
+      fertilizableSmallFlower:
+        name: 可施肥小花
+        desc: 使诸如蒲公英的小花也可以被骨粉催熟
+      harmlessPointedDripstone:
+        name: 无害化滴水石锥
+        desc: 让滴水石锥不会产生伤害
+      pointedDripstoneCollisionBoxDisabled:
+        name: 禁用滴水石锥碰撞箱
+        desc: 允许玩家穿过滴水石锥
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -1,4 +1,8 @@
 carpetamsaddition:
+  carpet:
+    totalRules:
+      total_rules: 'total rules'
+
   rule:
     amsUpdateSuppressionCrashFix:
       location: 'Update suppression location'
@@ -296,6 +300,12 @@ carpetamsaddition:
         desc: Whenever you set the carpet rule, it will be automatically set to the default value
       experimentalContentCheckDisabled:
         desc: Allow playing Minecraft experimental content in the game by adding data packs
+      fertilizableSmallFlower:
+        desc: Allow small flowers such as dandelion can also be ripened by bone meal
+      harmlessPointedDripstone:
+        desc: Let pointed dripstone do no damage
+      pointedDripstoneCollisionBoxDisabled:
+        desc: Allow players to pass through pointed dripstone
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
