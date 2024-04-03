@@ -46,15 +46,15 @@ public abstract class ShulkerBulletEntityMixin extends Entity {
     }
 
     @WrapOperation(
-            method = "onEntityHit",
-            at = @At(
-                    value = "INVOKE",
-                    //#if MC<11700
-                    //$$ target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"
-                    //#else
-                    target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"
-                    //#endif
-            )
+        method = "onEntityHit",
+        at = @At(
+            value = "INVOKE",
+            //#if MC<11700
+            //$$ target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"
+            //#else
+            target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"
+            //#endif
+        )
     )
     //#if MC<11700
     //$$ private boolean onEntityHit1(LivingEntity instance, StatusEffectInstance effect, Operation<Boolean> original) {

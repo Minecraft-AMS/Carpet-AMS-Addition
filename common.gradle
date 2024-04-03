@@ -104,11 +104,11 @@ processResources {
 
 	filesMatching("fabric.mod.json") {
 		def valueMap = [
-				"id": project.mod_id,
-				"name": project.mod_name,
-				"version": fullModVersion,
-				"carpet_dependency": project.carpet_dependency,
-				"minecraft_dependency": project.minecraft_dependency,
+			"id": project.mod_id,
+			"name": project.mod_name,
+			"version": fullModVersion,
+			"carpet_dependency": project.carpet_dependency,
+			"minecraft_dependency": project.minecraft_dependency,
 		]
 		expand valueMap
 	}
