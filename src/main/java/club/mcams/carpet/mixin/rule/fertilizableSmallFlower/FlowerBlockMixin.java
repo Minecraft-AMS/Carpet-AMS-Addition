@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.fertilizableFlower;
+package club.mcams.carpet.mixin.rule.fertilizableSmallFlower;
 
 import club.mcams.carpet.AmsServerSettings;
 
