@@ -2,31 +2,6 @@
 
 **中文** | [**English**](README_en.md)
 
-## 支持版本
-
-|         游戏版本         | 开发状态 |                                                          最后支持版本                                                           |
-|:--------------------:|:----:|:-------------------------------------------------------------------------------------------------------------------------:|
-|        1.20.4        |  ✔   |                                                            ---                                                            |
-|        1.20.3        |  ✔   |                                                            ---                                                            |
-|        1.20.2        |  ✔   |                                                            ---                                                            |
-|        1.20.1        |  ✔   |                                                            ---                                                            |
-|         1.20         |  ✔   |                                                            ---                                                            |
-|        1.19.4        |  ✔   |                                                            ---                                                            |
-|        1.19.3        |  ✖   | [Carpet-AMS-Addition-mc1.19.3-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
-|        1.19.2        |  ✖   | [Carpet-AMS-Addition-mc1.19.2-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
-| **<u>1.18.2(主)</u>** |  ✔   |                                                            ---                                                            |
-|        1.17.1        |  ✔   |                                                            ---                                                            |
-|        1.16.5        |  ✔   |                                                            ---                                                            |
-|        1.15.2        |  ✖   |               [ Carpet-AMS-Addition-mc1.15.2](https://github.com/1024-byteeeee/Carpet-AMS-Addition-1.15.2)                |
-
-
-## 前置
-
-|      前置       |                    链接                    |
-|:-------------:|:----------------------------------------:|
-|  Fabric API   |    https://github.com/FabricMC/fabric    |
-| Fabric-Carpet | https://github.com/gnembon/fabric-carpet |
-
 ## 文档
 
 访问网页查看所有关于Carpet-AMS-Addition的相关信息：<br>
