@@ -52,8 +52,7 @@ public class CustomBlockBlastResistanceConfig {
         if (Files.exists(path)) {
             try {
                 String json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
-                Type type = new TypeToken<Map<String, Float>>() {
-                }.getType();
+                Type type = new TypeToken<Map<String, Float>>() {}.getType();
                 Map<String, Float> simplifiedMap = gson.fromJson(json, type);
                 for (Map.Entry<String, Float> entry : simplifiedMap.entrySet()) {
                     BlockState state = Registry.BLOCK.get(new Identifier(entry.getKey())).getDefaultState();
