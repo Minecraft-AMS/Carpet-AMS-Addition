@@ -28,6 +28,7 @@ pluginManagement {
 		}
 	}
 }
+
 def versionsFilePath = 'minecraftVersions' + '.json'
 def versions = new JsonSlurper().parseText(file(versionsFilePath).text)
 versions.versions.each {
