@@ -26,7 +26,7 @@ jobs:
           echo target_release_tag = ${{ github.event.inputs.target_release_tag }}
 
       - id: setmatrix
-        uses: JoshuaTheMiller/conditional-build-matrix@v1.0.1
+        uses: JoshuaTheMiller/conditional-build-matrix@v2.0.1
         with:
           # inputFile: '.github/workflows/matrix_includes.json' # Default input file path
           filter: '[? `${{ github.event_name }}` == `release` || `${{ github.event.inputs.target_subproject }}` == `` || `"${{ github.event.inputs.target_subproject }}"` == subproject_dir ]'
