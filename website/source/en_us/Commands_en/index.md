@@ -102,3 +102,10 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 - `/getSaveSize`
 
   Get save size.
+
+### commandGetSystemInfo
+
+- `/getSystemInfo`
+
+  Get the system information of the server.
+

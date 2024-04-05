@@ -1604,6 +1604,8 @@ json位置：
 
 让滴水石锥不会产生伤害。
 
+<该规则 Minecraft >= 1.17 可用>
+
 - 类型: `boolean`
 
 
@@ -1622,6 +1624,8 @@ json位置：
 
 让滴水石锥不会产生伤害。
 
+<该规则 Minecraft >= 1.17 可用>
+
 - 类型: `boolean`
 
 
@@ -1635,6 +1639,42 @@ json位置：
 
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 禁止树叶生成（foliageGenerateDisabled）
+
+树叶不会以任何方式生成。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
+## 获取系统信息（commandGetSystemInfo）
+
+使用“/getSystemInfo”命令获取服务器的系统信息。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `COMMAND`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 

@@ -1645,6 +1645,8 @@ Allow small flowers such as dandelion can also be ripened by bone meal.
 
 Let pointed dripstone do no damage.
 
+< Available for Minecraft >= 1.17 >
+
 - Type: `boolean`
 
 
@@ -1663,6 +1665,8 @@ Let pointed dripstone do no damage.
 
 Allow players to pass through pointed dripstone.
 
+< Available for Minecraft >= 1.17 >
+
 - Type: `boolean`
 
 
@@ -1676,6 +1680,42 @@ Allow players to pass through pointed dripstone.
 
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## foliageGenerateDisabled
+
+The foliage will not generate in any way.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
+## commandGetSystemInfo
+
+Use the "/getSystemInfo" command to get the system information of the server.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `COMMAND`
 
 ## craftableEnchantedGoldApple
 

@@ -102,3 +102,9 @@
 - `/getSaveSize`
 
   获取存档大小。
+
+### 获取系统信息（commandGetSystemInfo）
+
+- `/getSystemInfo`
+
+  获取服务器的系统信息。
