@@ -57,6 +57,12 @@ carpetamsaddition:
       size_msg: 'Current save size:'
       save_success_msg: '[ Save world success ]'
       save_fail_msg: '[ Save world failed ]'
+    getSystemInfo:
+      os: 'OS:'
+      os_arch: 'Arch:'
+      available_processors: 'Available Processors:'
+      total_memory: 'Total Memory:'
+      free_memory: 'Free Memory:'
 
   logger:
     serverRuntime:
@@ -93,10 +99,6 @@ carpetamsaddition:
         desc: The campfire is extinguished when the player places it
       netherWaterPlacement:
         desc: Players can use water buckets to place water in nether
-      softDeepslate:
-        desc: Change the hardness of deepslate to stone
-      softObsidian:
-        desc: Change the hardness of obsidian to deepslate
       blowUpEverything:
         desc: Set all blocks BlastResistance to 0
       optimizedDragonRespawn:
@@ -306,6 +308,10 @@ carpetamsaddition:
         desc: Let pointed dripstone do no damage
       pointedDripstoneCollisionBoxDisabled:
         desc: Allow players to pass through pointed dripstone
+      foliageGenerateDisabled:
+        desc: The foliage will not generate in any way
+      commandGetSystemInfo:
+        desc: Use the "/getSystemInfo" command to get the system information of the server
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

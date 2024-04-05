@@ -57,6 +57,12 @@ carpetamsaddition:
       size_msg: '当前存档大小：'
       save_success_msg: '[ 保存世界成功 ]'
       save_fail_msg: '[ 保存世界失败 ]'
+    getSystemInfo:
+      os: '操作系统：'
+      os_arch: '架构：'
+      available_processors: '可用处理器：'
+      total_memory: '总内存：'
+      free_memory: '可用内存：'
 
   logger:
     serverRuntime:
@@ -98,12 +104,6 @@ carpetamsaddition:
       netherWaterPlacement:
         name: 地狱可放水
         desc: 玩家可以在地狱使用水桶放置水
-      softDeepslate:
-        name: 易碎深板岩
-        desc: 改变深板岩的硬度使其和普通石头一致
-      softObsidian:
-        name: 易碎黑曜石
-        desc: 改变黑曜石的硬度使其和深板岩一致
       blowUpEverything:
         name: 炸毁所有方块
         desc: 让所有方块的爆炸抗性为0
@@ -384,6 +384,12 @@ carpetamsaddition:
       pointedDripstoneCollisionBoxDisabled:
         name: 禁用滴水石锥碰撞箱
         desc: 允许玩家穿过滴水石锥
+      foliageGenerateDisabled:
+        name: 禁止树叶生成
+        desc: 树叶不会以任何方式生成
+      commandGetSystemInfo:
+        name: 获取系统信息
+        desc: 使用“/getSystemInfo”命令获取服务器的系统信息
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

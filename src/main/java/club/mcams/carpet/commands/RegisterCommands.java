@@ -21,6 +21,7 @@
 package club.mcams.carpet.commands;
 
 import club.mcams.carpet.commands.rule.commandGetSaveSize.GetSaveSizeCommandRegistry;
+import club.mcams.carpet.commands.rule.commandGetSystemInfo.GetSystemInfoCommandRegistry;
 import club.mcams.carpet.commands.rule.commandHere.HereCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPing.PingCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
@@ -66,5 +67,7 @@ public class RegisterCommands {
         PingCommandRegistry.register(dispatcher);
 
         GetSaveSizeCommandRegistry.register(dispatcher);
+
+        GetSystemInfoCommandRegistry.register(dispatcher);
     }
 }
