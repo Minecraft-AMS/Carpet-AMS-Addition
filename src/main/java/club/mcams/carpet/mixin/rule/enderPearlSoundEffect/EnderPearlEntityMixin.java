@@ -50,11 +50,11 @@ public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
     }
 
     @Inject(
-            method = "onCollision",
-            at = @At(
-                value = "INVOKE",
-                target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
-            )
+        method = "onCollision",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
+        )
     )
     private void onCollision(CallbackInfo ci) {
         if (AmsServerSettings.enderPearlSoundEffect) {

@@ -53,11 +53,11 @@ public abstract class WitherEntityMixin {
     }
 
     @WrapOperation(
-            method = "mobTick",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/World;getDifficulty()Lnet/minecraft/world/Difficulty;"
-            )
+        method = "mobTick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/World;getDifficulty()Lnet/minecraft/world/Difficulty;"
+        )
     )
     private Difficulty modifyDifficulty(World instance, Operation<Difficulty> original) {
         if(AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.NEVER) {

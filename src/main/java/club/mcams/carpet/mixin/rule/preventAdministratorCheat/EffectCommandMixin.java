@@ -33,11 +33,11 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 @Mixin(EffectCommand.class)
 public abstract class EffectCommandMixin {
     @ModifyExpressionValue(
-            method = "method_13235",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-            )
+        method = "method_13235",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
+        )
     )
     private static boolean EffectCommand(boolean original, ServerCommandSource source) {
         return original && PermissionHelper.canCheat(source);

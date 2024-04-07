@@ -33,11 +33,11 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 @Mixin(GameModeCommand.class)
 public abstract class GamemodeCommandMixin {
     @ModifyExpressionValue(
-            method = "method_13389",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-            )
+        method = "method_13389",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
+        )
     )
     private static boolean GameModeCommand(boolean original, ServerCommandSource source) {
         return original && PermissionHelper.canCheat(source);

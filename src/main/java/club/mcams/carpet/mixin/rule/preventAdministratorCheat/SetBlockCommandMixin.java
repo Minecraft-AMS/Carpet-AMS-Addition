@@ -33,11 +33,11 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 @Mixin(SetBlockCommand.class)
 public abstract class SetBlockCommandMixin {
     @ModifyExpressionValue(
-            method = "method_13627",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-            )
+        method = "method_13627",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
+        )
     )
     private static boolean SetBlockCommand(boolean original, ServerCommandSource source) {
         return original && PermissionHelper.canCheat(source);

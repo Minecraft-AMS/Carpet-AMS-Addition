@@ -39,15 +39,15 @@ public abstract class TranslatableTextMixin {
     private String key;
 
     @ModifyArg(
-            method = "updateTranslations",
-            at = @At(
-                    value = "INVOKE",
-                    //#if MC<11800
-                    //$$ target = "Lnet/minecraft/text/TranslatableText;setTranslation(Ljava/lang/String;)V"
-                    //#else
-                    target = "Lnet/minecraft/text/TranslatableText;forEachPart(Ljava/lang/String;Ljava/util/function/Consumer;)V"
-                    //#endif
-            )
+        method = "updateTranslations",
+        at = @At(
+            value = "INVOKE",
+            //#if MC<11800
+            //$$ target = "Lnet/minecraft/text/TranslatableText;setTranslation(Ljava/lang/String;)V"
+            //#else
+            target = "Lnet/minecraft/text/TranslatableText;forEachPart(Ljava/lang/String;Ljava/util/function/Consumer;)V"
+            //#endif
+        )
     )
     private String applyAMSTranslation(String vanillaTranslatedFormattingString) {
         if (this.key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX) && vanillaTranslatedFormattingString.equals(this.key)) {

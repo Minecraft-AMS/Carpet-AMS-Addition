@@ -48,12 +48,12 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class WorldMixin {
     //#if MC<11900
     @Inject(
-            method = "updateNeighbor",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
-            ),
-            locals = LocalCapture.CAPTURE_FAILHARD
+        method = "updateNeighbor",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
+        ),
+        locals = LocalCapture.CAPTURE_FAILHARD
     )
     private void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state, Throwable throwable) {
         if (AmsServerSettings.amsUpdateSuppressionCrashFix) {

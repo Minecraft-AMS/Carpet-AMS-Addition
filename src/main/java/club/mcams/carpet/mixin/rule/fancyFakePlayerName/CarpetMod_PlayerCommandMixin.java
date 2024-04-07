@@ -35,27 +35,27 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(PlayerCommand.class)
 public abstract class CarpetMod_PlayerCommandMixin {
     @WrapOperation(method = "spawn",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lcom/mojang/brigadier/arguments/StringArgumentType;getString(Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/lang/String;"
-            ),
-            //#if MC<11700
-            require = 2,
-            //#endif
-            remap = false
+        at = @At(
+            value = "INVOKE",
+            target = "Lcom/mojang/brigadier/arguments/StringArgumentType;getString(Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/lang/String;"
+        ),
+        //#if MC<11700
+        require = 2,
+        //#endif
+        remap = false
     )
     private static String spawn(CommandContext<?> context, String name, Operation<String> original) {
        return AmsServerSettings.fancyFakePlayerName ? FancyNameHelper.addBotNameSuffix(context, name) : original.call(context, name);
     }
 
     @WrapOperation(
-            method = "cantSpawn",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lcom/mojang/brigadier/arguments/StringArgumentType;getString(Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/lang/String;"
-            ),
-            require = 1,
-            remap = false
+        method = "cantSpawn",
+        at = @At(
+            value = "INVOKE",
+            target = "Lcom/mojang/brigadier/arguments/StringArgumentType;getString(Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/lang/String;"
+        ),
+        require = 1,
+        remap = false
     )
     private static String cantSpawn(CommandContext<?> context, String name, Operation<String> original) {
         return AmsServerSettings.fancyFakePlayerName ? FancyNameHelper.addBotNameSuffix(context, name) : original.call(context, name);

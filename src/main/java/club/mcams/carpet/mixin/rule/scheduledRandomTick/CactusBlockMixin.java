@@ -46,13 +46,13 @@ public abstract class CactusBlockMixin {
     public abstract void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random);
 
     @Inject(
-            method = "scheduledTick",
-            at = @At(
-                    value = "INVOKE",
-                    shift = At.Shift.AFTER,
-                    target = "Lnet/minecraft/server/world/ServerWorld;breakBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
-            ),
-            cancellable = true
+        method = "scheduledTick",
+        at = @At(
+            value = "INVOKE",
+            shift = At.Shift.AFTER,
+            target = "Lnet/minecraft/server/world/ServerWorld;breakBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
+        ),
+        cancellable = true
     )
     private void scheduleTickMixinInvoke(CallbackInfo ci) {
         if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants)

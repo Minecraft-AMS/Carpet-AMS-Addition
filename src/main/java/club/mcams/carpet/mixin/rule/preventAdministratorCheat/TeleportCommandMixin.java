@@ -33,11 +33,11 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 @Mixin(TeleportCommand.class)
 public abstract class TeleportCommandMixin {
     @ModifyExpressionValue(
-            method = {"method_13763", "method_13764"},
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-            )
+        method = {"method_13763", "method_13764"},
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
+        )
     )
     private static boolean TeleportCommand(boolean original, ServerCommandSource source) {
         return original && PermissionHelper.canCheat(source);

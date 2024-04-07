@@ -33,11 +33,11 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 @Mixin(WeatherCommand.class)
 public abstract class WeatherCommandMixin {
     @ModifyExpressionValue(
-            method = "method_13832",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-            )
+        method = "method_13832",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
+        )
     )
     private static boolean WeatherCommand(boolean original, ServerCommandSource source) {
         return original && PermissionHelper.canCheat(source);

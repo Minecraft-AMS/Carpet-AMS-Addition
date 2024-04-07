@@ -33,11 +33,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(GameRuleCommand.class)
 public abstract class GameRuleCommandMixin {
     @ModifyExpressionValue(
-            method = "method_13393",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-            )
+        method = "method_13393",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
+        )
     )
     private static boolean GameRuleCommand(boolean original, ServerCommandSource source) {
         return original && PermissionHelper.canCheat(source);

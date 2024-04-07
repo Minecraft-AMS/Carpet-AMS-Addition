@@ -42,15 +42,15 @@ public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
     }
 
     @Inject(
-            method = "onCollision",
-            at = @At(
-                    value = "INVOKE",
-                    //#if MC<11900
-                    target = "Ljava/util/Random;nextFloat()F"
-                    //#else
-                    //$$ target = "Lnet/minecraft/util/math/random/Random;nextFloat()F"
-                    //#endif
-            )
+        method = "onCollision",
+        at = @At(
+            value = "INVOKE",
+            //#if MC<11900
+            target = "Ljava/util/Random;nextFloat()F"
+            //#else
+            //$$ target = "Lnet/minecraft/util/math/random/Random;nextFloat()F"
+            //#endif
+        )
     )
     private void onCollision(CallbackInfo ci) {
         if (AmsServerSettings.mitePearl) {

@@ -33,11 +33,11 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 @Mixin(TimeCommand.class)
 public abstract class TimeCommandMixin {
     @ModifyExpressionValue(
-            method = "method_13791",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-            )
+        method = "method_13791",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
+        )
     )
     private static boolean TimeCommand(boolean original, ServerCommandSource source) {
         return original && PermissionHelper.canCheat(source);

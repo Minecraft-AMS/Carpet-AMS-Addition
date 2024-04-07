@@ -31,11 +31,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(EnderDragonEntity.class)
 public abstract class EnderDragonEntityMixin {
     @ModifyExpressionValue(
-            method = "destroyBlocks",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z"
-            )
+        method = "destroyBlocks",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z"
+        )
     )
     private boolean destroyBlocks(boolean original) {
         return original && !AmsServerSettings.enderDragonNoDestroyBlock;
