@@ -1717,6 +1717,44 @@ Use the "/getSystemInfo" command to get the system information of the server.
 
 - Categroies: `AMS`, `COMMAND`
 
+## ironGolemNoDropFlower
+
+Iron golems will not drop flowers.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## easyGetPitcherPod
+
+Players can harvest a random amount of pitcher pods by planting pitcher (The maximum quantity is customizable, while the minimum quantity is fixed at 2).
+
+< Available for Minecraft >= 1.20 >
+
+- Type: `int`
+
+
+
+- Default: `0`
+
+
+
+- Suggested options: `0 or 2 - 100`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

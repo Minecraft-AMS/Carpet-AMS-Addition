@@ -1676,6 +1676,44 @@ json位置：
 
 - 分类: `AMS`, `COMMAND`
 
+## 铁傀儡不掉落花（ironGolemNoDropFlower）
+
+铁傀儡不会掉落花。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 轻松获取瓶子草荚果（easyGetPitcherPod）
+
+玩家可以通过种植瓶子草来收获随机数量的瓶子草荚果（其最大数量是自定义的，最小数量为固定2个）。
+
+<该规则 Minecraft >= 1.20 可用>
+
+- 类型: `int`
+
+
+
+- 默认值: `0`
+
+
+
+- 参考选项: `0 或 2 - 100`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
