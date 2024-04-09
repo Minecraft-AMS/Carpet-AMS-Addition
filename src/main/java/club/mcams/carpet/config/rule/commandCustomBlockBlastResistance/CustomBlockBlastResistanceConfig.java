@@ -43,8 +43,8 @@ import java.util.Map;
 
 import static club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
 
-@SuppressWarnings("ReadWriteStringCanBeUsed")
 public class CustomBlockBlastResistanceConfig {
+    @SuppressWarnings("ReadWriteStringCanBeUsed")
     public static void loadFromJson(String configFilePath) {
         Gson gson = new Gson();
         Path path = Paths.get(configFilePath);
@@ -64,6 +64,7 @@ public class CustomBlockBlastResistanceConfig {
         }
     }
 
+    @SuppressWarnings("ReadWriteStringCanBeUsed")
     public static void saveToJson(Map<BlockState, Float> customBlockMap, String configFilePath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Map<String, Float> simplifiedMap = new HashMap<>();

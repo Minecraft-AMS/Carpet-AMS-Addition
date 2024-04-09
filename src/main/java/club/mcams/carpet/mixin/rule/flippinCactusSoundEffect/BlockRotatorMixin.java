@@ -40,7 +40,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlockRotator.class)
 public abstract class BlockRotatorMixin {
-    @SuppressWarnings("EnhancedSwitchMigration")
     @Inject(
         method = "flip_block",
         at = @At(
