@@ -81,6 +81,8 @@ carpetamsaddition:
       value_range: '设定的值必须为 1 - 300'
     blockChunkLoaderRangeController:
       value_range: '设定的值必须为 1 - 32'
+    easyGetPitcherPod:
+      value_range: '设定的值必须为 1 - 100 或 0'
 
   carpet_translations:
     category:
@@ -390,6 +392,14 @@ carpetamsaddition:
       commandGetSystemInfo:
         name: 获取系统信息
         desc: 使用“/getSystemInfo”命令获取服务器的系统信息
+      ironGolemNoDropFlower:
+        name: 铁傀儡不掉落花
+        desc: 铁傀儡不会掉落花
+      easyGetPitcherPod:
+        name: 轻松获取瓶子草荚果
+        desc: 玩家可以通过种植瓶子草来收获随机数量的瓶子草荚果（其最大数量是自定义的，最小数量为固定2个）
+        extra:
+          '0': '允许设定的范围：2 - 100 或 0'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

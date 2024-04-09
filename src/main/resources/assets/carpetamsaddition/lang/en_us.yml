@@ -81,6 +81,8 @@ carpetamsaddition:
       value_range: 'The value must be 1 - 300'
     blockChunkLoaderRangeController:
       value_range: 'The value must be 1 - 32'
+    easyGetPitcherPod:
+      value_range: 'The value must be 2 - 100 or 0'
 
   carpet_translations:
     category:
@@ -312,6 +314,12 @@ carpetamsaddition:
         desc: The foliage will not generate in any way
       commandGetSystemInfo:
         desc: Use the "/getSystemInfo" command to get the system information of the server
+      ironGolemNoDropFlower:
+        desc: Iron golems will not drop flowers
+      easyGetPitcherPod:
+        desc: Players can harvest a random amount of pitcher pods by planting pitcher (The maximum quantity is customizable, while the minimum quantity is fixed at 2)
+        extra:
+          '0': 'The range of values: 2 - 100 or 0'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
