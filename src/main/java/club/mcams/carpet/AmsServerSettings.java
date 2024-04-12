@@ -424,7 +424,7 @@ public class AmsServerSettings {
     public static boolean commandPlayerChunkLoadController = false;
 
     /*
-     * 合成表规�?
+     * 合成表规则
      */
     @SuppressWarnings("unused")
     @CraftingRule(recipes = "enchanted_golden_apples.json")
