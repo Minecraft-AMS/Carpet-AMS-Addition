@@ -44,7 +44,7 @@ dependencies {
 	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
 
 	// Dependencies
-	include(implementation("com.github.EsotericSoftware:yamlbeans:${project.yamlbeans_version}"))
+	include(implementation("com.esotericsoftware.yamlbeans:yamlbeans:${project.yamlbeans_version}"))
 }
 
 loom {
