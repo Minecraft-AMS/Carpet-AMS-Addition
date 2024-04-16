@@ -30,6 +30,7 @@ import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomB
 import club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry;
 import club.mcams.carpet.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerChunkLoadController.PlayerChunkLoadControllerCommandRegistry;
+import club.mcams.carpet.commands.rule.commandGoto.GotoCommandRegistry;
 
 import net.minecraft.server.command.ServerCommandSource;
 //#if MC>=11900
@@ -69,5 +70,7 @@ public class RegisterCommands {
         GetSaveSizeCommandRegistry.register(dispatcher);
 
         GetSystemInfoCommandRegistry.register(dispatcher);
+
+        GotoCommandRegistry.register(dispatcher);
     }
 }

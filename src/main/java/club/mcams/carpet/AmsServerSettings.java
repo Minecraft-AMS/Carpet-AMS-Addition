@@ -135,7 +135,7 @@ public class AmsServerSettings {
     public static boolean endermanTeleportRandomlyDisabled = false;
 
     @Rule(
-        options = {"VANILLA", "�?", "�?", "�?", "�?", "�?"},
+        options = {"VANILLA", "Ⅰ", "Ⅱ", "Ⅲ", "Ⅳ", "Ⅴ"},
         categories = {AMS, FEATURE, EXPERIMENTAL}
     )
     public static String fasterMovement = "VANILLA";
@@ -379,6 +379,12 @@ public class AmsServerSettings {
     //$$ )
     //$$ public static int easyGetPitcherPod = 0;
     //#endif
+
+    @Rule(
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, COMMAND}
+    )
+    public static String commandGoto = "false";
 
     /*
      * 区块加载规则

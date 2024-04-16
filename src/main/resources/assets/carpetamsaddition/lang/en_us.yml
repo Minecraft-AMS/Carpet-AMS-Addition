@@ -320,6 +320,8 @@ carpetamsaddition:
         desc: Players can harvest a random amount of pitcher pods by planting pitcher (The maximum quantity is customizable, while the minimum quantity is fixed at 2)
         extra:
           '0': 'The range of values: 2 - 100 or 0'
+      commandGoto:
+        desc: Use the "/goto" command to teleport to the specified dimension and coordinates
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
