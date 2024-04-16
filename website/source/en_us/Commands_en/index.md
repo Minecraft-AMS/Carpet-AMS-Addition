@@ -109,3 +109,9 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 
   Get the system information of the server.
 
+### commandGoto
+
+- `/goto <dimension> <x> <y> <z>`
+
+  teleport to the specified dimension and coordinates.
+

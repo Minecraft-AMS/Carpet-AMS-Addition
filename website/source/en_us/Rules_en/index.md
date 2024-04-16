@@ -1755,6 +1755,24 @@ Players can harvest a random amount of pitcher pods by planting pitcher (The max
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## commandGoto
+
+Use the "/goto" command to teleport to the specified dimension and coordinates.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `COMMAND`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

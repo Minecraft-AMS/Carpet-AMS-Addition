@@ -108,3 +108,11 @@
 - `/getSystemInfo`
 
   获取服务器的系统信息。
+
+### goto命令（commandGoto）
+
+- `/goto <维度> <x> <y> <z>`
+
+  传送到指定维度的指定坐标。
+
+​	
