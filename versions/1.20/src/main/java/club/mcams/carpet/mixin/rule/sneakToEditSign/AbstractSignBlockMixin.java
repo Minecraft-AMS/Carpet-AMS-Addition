@@ -22,22 +22,42 @@ package club.mcams.carpet.mixin.rule.sneakToEditSign;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.entity.SignBlockEntity;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
+import net.minecraft.block.AbstractSignBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft < 1.20")
-@Mixin(SignBlockEntity.class)
-public abstract class SignBlockEntityMixin {
-    @Inject(method = "isEditable", at = @At("HEAD"), cancellable = true)
-    private void isEditable(CallbackInfoReturnable<Boolean> cir) {
-        if (AmsServerSettings.sneakToEditSign) {
-            cir.setReturnValue(true);
-        }
+@GameVersion(version = "Minecraft >= 1.20")
+@Mixin(AbstractSignBlock.class)
+public abstract class AbstractSignBlockMixin {
+    @ModifyExpressionValue(
+        method = "onUse",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;canModifyBlocks()Z"
+        )
+    )
+    public boolean onUse(
+        boolean original,
+        BlockState state,
+        World world,
+        BlockPos pos,
+        PlayerEntity player,
+        //#if MC<12005
+        Hand hand,
+        //#endif
+        BlockHitResult hit
+    ) {
+        return AmsServerSettings.sneakToEditSign ? original && player.isSneaking() : original;
     }
 }

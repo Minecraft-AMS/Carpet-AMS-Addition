@@ -18,27 +18,12 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.utils;
+package club.mcams.carpet.mixin.rule.sneakToEditSign;
 
-import net.minecraft.server.command.ServerCommandSource;
+import club.mcams.carpet.utils.compat.DummyClass;
+import org.spongepowered.asm.mixin.Mixin;
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@SuppressWarnings("EnhancedSwitchMigration")
-public final class CommandHelper {
-    private CommandHelper() {}
-    public static boolean canUseCommand(ServerCommandSource source, Object commandLevel) {
-        if (commandLevel instanceof Boolean) return (Boolean) commandLevel;
-        String commandLevelString = commandLevel.toString();
-        switch (commandLevelString) {
-            case "true": return true;
-            case "false": return false;
-            case "ops": return source.hasPermissionLevel(2);
-            case "0":
-            case "1":
-            case "2":
-            case "3":
-            case "4":
-                return source.hasPermissionLevel(Integer.parseInt(commandLevelString));
-        }
-        return false;
-    }
-}
+@GameVersion(version = "Minecraft < 1.20")
+@Mixin(DummyClass.class)
+public abstract class SignBlockEntityMixin {}

@@ -20,35 +20,28 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-//#if MC<12005
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
+
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.network.ServerPlayNetworkHandler;
+
 //#if MC>11800
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //$$ import org.objectweb.asm.Opcodes;
 //#endif
+
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
-//#else
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#endif
-
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC<12005
-@Mixin(value = ServerPlayNetworkHandler.class, priority = 168)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
-public abstract class ServerPlayNetworkHandlerMixin {
-
-//#if MC<12005
 @GameVersion(version = "Minecraft < 1.20.5")
+@Mixin(value = ServerPlayNetworkHandler.class, priority = 168)
+public abstract class ServerPlayNetworkHandlerMixin {
 
     @Shadow
     public ServerPlayerEntity player;
@@ -116,6 +109,4 @@ public abstract class ServerPlayNetworkHandlerMixin {
     //$$     }
     //$$ }
     //#endif
-
-//#endif
 }

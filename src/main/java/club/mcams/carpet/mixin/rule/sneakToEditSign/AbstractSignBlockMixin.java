@@ -35,14 +35,10 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-//#if MC>=12000
-//$$ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-//#endif
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractSignBlock.class)
 public abstract class AbstractSignBlockMixin {
-    //#if MC<12000
     @Inject(
         method = "onUse",
         at = @At(
@@ -63,26 +59,4 @@ public abstract class AbstractSignBlockMixin {
             cir.setReturnValue(ActionResult.SUCCESS);
         }
     }
-    //#else
-    //$$ @ModifyExpressionValue(
-    //$$     method = "onUse",
-    //$$     at = @At(
-    //$$         value = "INVOKE",
-    //$$         target = "Lnet/minecraft/entity/player/PlayerEntity;canModifyBlocks()Z"
-    //$$     )
-    //$$ )
-    //$$ public boolean onUse(
-    //$$     boolean original,
-    //$$     BlockState state,
-    //$$     World world,
-    //$$     BlockPos pos,
-    //$$     PlayerEntity player,
-    //$$     //#if MC<12005
-    //$$     //$$ Hand hand,
-    //$$     //#endif
-    //$$     BlockHitResult hit
-    //$$ ) {
-    //$$     return AmsServerSettings.sneakToEditSign ? original && player.isSneaking() : original;
-    //$$ }
-    //#endif
 }

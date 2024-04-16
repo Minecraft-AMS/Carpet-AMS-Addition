@@ -20,71 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-//#if MC>=12005
-import net.minecraft.server.command.AttributeCommand;
-//$$ import net.minecraft.registry.entry.RegistryEntry;
-//$$ import club.mcams.carpet.translations.Translator;
-//$$ import club.mcams.carpet.AmsServerSettings;
-//$$ import club.mcams.carpet.utils.Messenger;
-//$$ import net.minecraft.entity.Entity;
-//$$ import net.minecraft.entity.attribute.EntityAttribute;
-//$$ import net.minecraft.entity.attribute.EntityAttributes;
-//$$ import net.minecraft.entity.player.PlayerEntity;
-//$$ import net.minecraft.server.command.ServerCommandSource;
-//$$ import net.minecraft.util.Formatting;
-//$$ import org.spongepowered.asm.mixin.Unique;
-//$$ import org.spongepowered.asm.mixin.injection.At;
-//$$ import org.spongepowered.asm.mixin.injection.Inject;
-//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#else
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#endif
+import club.mcams.carpet.utils.compat.DummyClass;
 
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC>=12005
-@Mixin(AttributeCommand.class)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
-public abstract class AttributeCommandMixin {
-//#if MC>=12005
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-    //$$ @Unique
-    //$$ private static final Translator translator = new Translator("rule");
-
-    //$$ @Unique
-    //$$ private static final String MSG_HEAD = "<Carpet AMS Addition> ";
-
-    //$$ @Inject(method = "executeBaseValueSet", at = @At("HEAD"), cancellable = true)
-    //$$ private static void executeBaseValueSet1(ServerCommandSource source, Entity target, RegistryEntry<EntityAttribute> attribute, double value, CallbackInfoReturnable<Integer> cir) {
-    //$$     if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D && attribute.equals(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE)) {
-    //$$         PlayerEntity player = source.getPlayer();
-    //$$         if (player != null) {
-    //$$             player.sendMessage(
-    //$$                 Messenger.s(
-    //$$                     MSG_HEAD + translator.tr("maxPlayerBlockInteractionRange.disable_command").getString()
-    //$$                 ).formatted(Formatting.RED)
-    //$$             );
-    //$$         }
-    //$$         cir.setReturnValue(null);
-    //$$     }
-    //$$ }
-
-    //$$ @Inject(method = "executeBaseValueSet", at = @At("HEAD"), cancellable = true)
-    //$$ private static void executeBaseValueSet2(ServerCommandSource source, Entity target, RegistryEntry<EntityAttribute> attribute, double value, CallbackInfoReturnable<Integer> cir) {
-    //$$     if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && attribute.equals(EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE)) {
-    //$$         PlayerEntity player = source.getPlayer();
-    //$$         if (player != null) {
-    //$$             player.sendMessage(
-    //$$                 Messenger.s(
-    //$$                     MSG_HEAD + translator.tr("maxPlayerEntityInteractionRange.disable_command").getString()
-    //$$                 ).formatted(Formatting.RED)
-    //$$             );
-    //$$         }
-    //$$         cir.setReturnValue(null);
-    //$$     }
-    //$$ }
-
-//#endif
-}
+@GameVersion(version = "Minecraft >= 1.20.5")
+@Mixin(DummyClass.class)
+public abstract class AttributeCommandMixin {}

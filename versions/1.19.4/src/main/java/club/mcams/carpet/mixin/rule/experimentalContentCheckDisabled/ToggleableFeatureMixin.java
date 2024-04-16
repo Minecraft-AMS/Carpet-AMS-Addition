@@ -18,31 +18,25 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.harmlessPointedDripstone;
+package club.mcams.carpet.mixin.rule.experimentalContentCheckDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.PointedDripstoneBlock;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.resource.featuretoggle.ToggleableFeature;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.17")
-@Mixin(PointedDripstoneBlock.class)
-public abstract class PointedDripstoneBlockMixin extends Block {
-    public PointedDripstoneBlockMixin(Settings settings) {
-        super(settings);
-    }
-
-    @Inject(method = "onLandedUpon", at = @At("HEAD"), cancellable = true)
-    private void onLandedUpon(CallbackInfo ci) {
-        if (AmsServerSettings.harmlessPointedDripstone) {
-            ci.cancel();
-        }
+@SuppressWarnings("SimplifiableConditionalExpression")
+@GameVersion(version = "Minecraft >= 1.19")
+@Mixin(ToggleableFeature.class)
+public interface ToggleableFeatureMixin {
+    @ModifyReturnValue(method = "isEnabled", at = @At("RETURN"))
+    private boolean getRequiredFeatures(boolean original) {
+        return AmsServerSettings.experimentalContentCheckDisabled ? true : original;
     }
 }

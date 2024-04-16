@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 //#if MC<11900
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.utils.compat.DummyInterface;
 //#endif
 
 //#if MC>=11900
@@ -42,7 +42,7 @@ import club.mcams.carpet.utils.compat.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
 
 //#if MC<11900
-@Mixin(DummyClass.class)
+@Mixin(DummyInterface.class)
 //#else
 //$$ @Mixin(NeighborUpdater.class)
 //#endif

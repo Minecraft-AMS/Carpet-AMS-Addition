@@ -20,32 +20,26 @@
 
 package club.mcams.carpet.mixin.rule.pointedDripstoneCollisionBoxDisabled;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-//#if MC>=11700
 import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.block.AbstractBlock;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-//#else
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.17")
-//#if MC>=11700
 @Mixin(AbstractBlock.AbstractBlockState.class)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
-public abstract class AbstractBlockMixin {
-//#if MC>=11700
+public abstract class AbstractBlockStateMixin {
+
     @Shadow
     public abstract Block getBlock();
 
@@ -57,5 +51,4 @@ public abstract class AbstractBlockMixin {
             return original;
         }
     }
-//#endif
 }

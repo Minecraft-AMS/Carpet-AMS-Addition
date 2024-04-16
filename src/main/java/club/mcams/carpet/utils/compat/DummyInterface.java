@@ -18,14 +18,6 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.experimentalContentCheckDisabled;
+package club.mcams.carpet.utils.compat;
 
-import club.mcams.carpet.utils.compat.DummyClass;
-
-import org.spongepowered.asm.mixin.Mixin;
-
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.19")
-@Mixin(DummyClass.class)
-public abstract class FeatureSetMixin {}
+public interface DummyInterface {}

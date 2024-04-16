@@ -20,34 +20,27 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-//#if MC<12005
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
+
 //#if MC>11800
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 //$$ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 //$$ import org.spongepowered.asm.mixin.injection.At;
 //#endif
+
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+
 import net.minecraft.server.network.ServerPlayerInteractionManager;
-//#else
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC<12005
-@Mixin(value = ServerPlayerInteractionManager.class, priority = 168)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
-public abstract class ServerPlayerInteractionManagerMixin {
-
-//#if MC<12005
 @GameVersion(version = "Minecraft < 1.20.5")
-
+@Mixin(value = ServerPlayerInteractionManager.class, priority = 168)
+public abstract class ServerPlayerInteractionManagerMixin {
     //#if MC<11900
     @ModifyConstant(
             method = "processBlockBreakingAction",
@@ -78,6 +71,4 @@ public abstract class ServerPlayerInteractionManagerMixin {
     //$$     }
     //$$ }
     //#endif
-
-//#endif
 }

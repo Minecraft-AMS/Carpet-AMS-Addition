@@ -20,30 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.experimentalContentCheckDisabled;
 
-//#if MC>=11900
-//$$ import club.mcams.carpet.AmsServerSettings;
-//$$ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-//$$ import net.minecraft.resource.featuretoggle.ToggleableFeature;
-//$$ import org.spongepowered.asm.mixin.injection.At;
-//#else
-import club.mcams.carpet.utils.compat.DummyClass;
-//#endif
+import club.mcams.carpet.utils.compat.DummyInterface;
 
 import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.19")
-//#if MC>=11900
-//$$ @Mixin(ToggleableFeature.class)
-//#else
-@Mixin(DummyClass.class)
-//#endif
-public interface ToggleableFeatureMixin {
-    //#if MC>=11900
-    //$$ @ModifyReturnValue(method = "isEnabled", at = @At("RETURN"))
-    //$$ private boolean getRequiredFeatures(boolean original) {
-    //$$     return AmsServerSettings.experimentalContentCheckDisabled ? true : original;
-    //$$ }
-    //#endif
-}
+@Mixin(DummyInterface.class)
+public interface ToggleableFeatureMixin {}

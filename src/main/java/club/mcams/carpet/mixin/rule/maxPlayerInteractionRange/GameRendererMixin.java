@@ -20,32 +20,24 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-//#if MC<12005
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.MinecraftClient;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
-//#else
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC<12005
-@Mixin(value = GameRenderer.class, priority = 168)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
-public abstract class GameRendererMixin {
-
-//#if MC<12005
 @GameVersion(version = "Minecraft < 1.20.5")
-
+@Mixin(value = GameRenderer.class, priority = 168)
+public abstract class GameRendererMixin {
     //#if MC>11800
     //$$ @Shadow
     //$$ @Final
@@ -54,11 +46,6 @@ public abstract class GameRendererMixin {
     @Shadow
     @Final
     private MinecraftClient client;
-    //#endif
-
-    //#if MC>=12005
-    //$$ @Shadow
-    //$$ protected abstract HitResult findCrosshairTarget(Entity par1, double par2, double par3, float par4);
     //#endif
 
     @ModifyConstant(
@@ -101,6 +88,4 @@ public abstract class GameRendererMixin {
             return constant;
         }
     }
-
-//#endif
 }

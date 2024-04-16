@@ -22,28 +22,22 @@ package club.mcams.carpet.mixin.rule.maxClientInteractionReachDistance;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-//#if MC<12005
 import club.mcams.carpet.AmsServerSettings;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import net.minecraft.client.MinecraftClient;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import org.spongepowered.asm.mixin.Final;
-import net.minecraft.client.network.ClientPlayerInteractionManager;
-//#else
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerInteractionManager;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 @GameVersion(version = "Minecraft < 1.20.5")
-//#if MC<12005
 @Mixin(ClientPlayerInteractionManager.class)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
+
 public abstract class ClientPlayerInteractionManagerMixin {
-//#if MC<12005
 
     @Shadow
     @Final
@@ -57,6 +51,4 @@ public abstract class ClientPlayerInteractionManagerMixin {
             return original;
         }
     }
-
-//#endif
 }

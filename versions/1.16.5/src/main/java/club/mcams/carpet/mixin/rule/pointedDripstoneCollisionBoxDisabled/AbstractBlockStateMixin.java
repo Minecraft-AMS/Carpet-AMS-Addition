@@ -18,31 +18,13 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.harmlessPointedDripstone;
+package club.mcams.carpet.mixin.rule.pointedDripstoneCollisionBoxDisabled;
 
-import club.mcams.carpet.AmsServerSettings;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.PointedDripstoneBlock;
-
+import club.mcams.carpet.utils.compat.DummyClass;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.17")
-@Mixin(PointedDripstoneBlock.class)
-public abstract class PointedDripstoneBlockMixin extends Block {
-    public PointedDripstoneBlockMixin(Settings settings) {
-        super(settings);
-    }
+@Mixin(DummyClass.class)
+public abstract class AbstractBlockStateMixin {}
 
-    @Inject(method = "onLandedUpon", at = @At("HEAD"), cancellable = true)
-    private void onLandedUpon(CallbackInfo ci) {
-        if (AmsServerSettings.harmlessPointedDripstone) {
-            ci.cancel();
-        }
-    }
-}
