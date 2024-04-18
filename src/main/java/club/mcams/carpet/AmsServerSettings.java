@@ -289,6 +289,7 @@ public class AmsServerSettings {
     public static boolean mitePearl = false;
 
     //#if MC<12000
+    @GameVersion(version = "Minecraft < 1.20")
     @Rule(categories = {AMS, FEATURE})
     public static boolean enderPearlSoundEffect = false;
     //#endif
@@ -345,6 +346,7 @@ public class AmsServerSettings {
     public static boolean carpetAlwaysSetDefault = false;
 
     //#if MC>=11900
+    @GameVersion(version = "Minecraft >= 1.19")
     //$$ @Rule(categories = {AMS, EXPERIMENTAL})
     //$$ public static boolean experimentalContentCheckDisabled = false;
     //#endif
@@ -355,8 +357,11 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean harmlessPointedDripstone = false;
 
+    //#if MC>=11700
+    @GameVersion(version = "Minecraft >= 1.17")
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean pointedDripstoneCollisionBoxDisabled = false;
+    //#endif
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean foliageGenerateDisabled = false;
@@ -371,6 +376,7 @@ public class AmsServerSettings {
     public static boolean ironGolemNoDropFlower = false;
 
     //#if MC>=12000
+    @GameVersion(version = "Minecraft >= 1.20")
     //$$ @Rule(
     //$$     options = {"0"},
     //$$     categories = {AMS, FEATURE, SURVIVAL},
@@ -438,6 +444,7 @@ public class AmsServerSettings {
     public static boolean craftableEnchantedGoldenApples = false;
 
     //#if MC>=11700
+    @GameVersion(version = "Minecraft >= 1.17")
     @SuppressWarnings("unused")
     @CraftingRule(recipes = "bundle.json")
     @Rule(categories = {AMS, CRAFTING, SURVIVAL})
@@ -445,6 +452,7 @@ public class AmsServerSettings {
     //#endif
 
     //#if MC<11900 && MC>=11700
+    @GameVersion(version = "Minecraft 1.17 - 1.18")
     @SuppressWarnings("unused")
     @CraftingRule(recipes = "sculk_sensor.json")
     @Rule(categories = {AMS, CRAFTING, SURVIVAL})
@@ -467,6 +475,7 @@ public class AmsServerSettings {
     public static boolean betterCraftableDispenser = false;
 
     //#if MC>=11700
+    @GameVersion(version = "Minecraft >= 1.17")
     @SuppressWarnings("unused")
     @CraftingRule(recipes = "polished_blackstone_button.json")
     @Rule(categories = {AMS, CRAFTING, SURVIVAL})

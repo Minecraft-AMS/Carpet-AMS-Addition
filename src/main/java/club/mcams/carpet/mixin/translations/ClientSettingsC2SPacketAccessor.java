@@ -27,9 +27,10 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 //#endif
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC>=11800
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft < 1.18")
 @SuppressWarnings("unused")
-//#endif
 @Mixin(ClientSettingsC2SPacket.class)
 public interface ClientSettingsC2SPacketAccessor {
     //#if MC<11800

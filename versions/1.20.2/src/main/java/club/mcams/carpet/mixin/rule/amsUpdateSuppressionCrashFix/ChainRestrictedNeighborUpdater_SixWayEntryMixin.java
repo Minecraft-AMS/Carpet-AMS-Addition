@@ -20,12 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
-import club.mcams.carpet.utils.compat.DummyInterface;
+import club.mcams.carpet.utils.compat.DummyClass;
 
 import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.19")
-@Mixin(DummyInterface.class)
-public interface NeighborUpdaterMixin {}
+@GameVersion(version = "Minecraft 1.19 - 1.20.1")
+@Mixin(DummyClass.class)
+public abstract class ChainRestrictedNeighborUpdater_SixWayEntryMixin {}

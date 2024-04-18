@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
+package club.mcams.carpet.mixin.setting;
 
 import club.mcams.carpet.utils.compat.DummyInterface;
 
@@ -26,6 +26,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.19")
+@GameVersion(version = "Minecraft < 1.19")
 @Mixin(DummyInterface.class)
-public interface NeighborUpdaterMixin {}
+public interface ParsedRuleAccessor {}

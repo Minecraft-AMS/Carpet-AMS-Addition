@@ -21,13 +21,14 @@
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionContext;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionContext;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.block.NeighborUpdater;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,27 +36,29 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Mixin(World.class)
-public abstract class WorldMixin {
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.19")
+@Mixin(NeighborUpdater.class)
+public interface NeighborUpdaterMixin {
     @Inject(
-        method = "updateNeighbor",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
-        ),
-        locals = LocalCapture.CAPTURE_FAILHARD
+       method = "tryNeighborUpdate",
+       at = @At(
+           value = "INVOKE",
+           target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
+       ),
+       locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state, Throwable throwable) {
+    private static void tryNeighborUpdate(World world, BlockState state, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, CallbackInfo ci, Throwable throwable) {
         if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
-            if (
-                throwable instanceof ClassCastException ||
-                throwable instanceof StackOverflowError ||
-                throwable instanceof OutOfMemoryError
-            ) {
-                World world = (World) (Object) this;
-                ThrowableSuppressionContext.sendMessageToServer(sourcePos, world);
-                throw new ThrowableSuppression(ThrowableSuppressionContext.suppressionMessageText(sourcePos, world));
-            }
+           if (
+               throwable instanceof ClassCastException ||
+               throwable instanceof StackOverflowError ||
+               throwable instanceof OutOfMemoryError
+           ) {
+               ThrowableSuppressionContext.sendMessageToServer(pos, world);
+               throw new ThrowableSuppression(ThrowableSuppressionContext.suppressionMessageText(pos, world));
+           }
         }
     }
 }

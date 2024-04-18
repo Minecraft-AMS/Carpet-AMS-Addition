@@ -37,6 +37,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft < 1.20")
 @Mixin(AbstractSignBlock.class)
 public abstract class AbstractSignBlockMixin {
     @Inject(

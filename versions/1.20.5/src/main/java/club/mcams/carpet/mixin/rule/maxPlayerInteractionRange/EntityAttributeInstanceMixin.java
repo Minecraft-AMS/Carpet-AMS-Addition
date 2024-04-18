@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(value = EntityAttributeInstance.class)
+@Mixin(value = EntityAttributeInstance.class, priority = 1688)
 public abstract class EntityAttributeInstanceMixin {
 
     @Shadow

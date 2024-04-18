@@ -18,22 +18,14 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.settings;
+package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
-import carpet.settings.ParsedRule;
-import carpet.settings.Validator;
+import club.mcams.carpet.utils.compat.DummyClass;
 
-import net.minecraft.server.command.ServerCommandSource;
+import org.spongepowered.asm.mixin.Mixin;
 
-@SuppressWarnings("unused")
-public abstract class RuleObserver<T> extends Validator<T> {
-    @Override
-    public T validate(ServerCommandSource source, ParsedRule<T> currentRule, T newValue, String string) {
-        if (currentRule.get() != newValue) {
-            this.onValueChanged(currentRule.get(), newValue);
-        }
-        return newValue;
-    }
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-    abstract public void onValueChanged(T oldValue, T newValue);
-}
+@GameVersion(version = "Minecraft <= 1.18")
+@Mixin(DummyClass.class)
+public abstract class WorldMixin {}

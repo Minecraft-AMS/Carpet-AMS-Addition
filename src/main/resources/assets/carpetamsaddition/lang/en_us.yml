@@ -11,9 +11,9 @@ carpetamsaddition:
       modify_content_in: 'Modify the content in：'
       save_path: '[ save path ]'
     maxPlayerBlockInteractionRange:
-      disable_command: 'The command has been disabled due to the maxPlayerBlockInteractionRange rule being enabled'
+      disable_command: 'This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
     maxPlayerEntityInteractionRange:
-      disable_command: 'The command has been disabled due to the maxPlayerEntityInteractionRange rule being enabled'
+      disable_command: 'This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:

@@ -38,6 +38,16 @@ import net.minecraft.world.World;
 public class ThrowableSuppressionContext {
     private static final Translator translator = new Translator("rule.amsUpdateSuppressionCrashFix");
 
+    public static void sendMessageToServer(BlockPos pos, World world) {
+        String suppressionMessage = suppressionMessageText(pos, world);
+        final Text copyButton = copyButton(pos);
+
+        Messenger.sendServerMessage(
+                AmsServer.minecraftServer,
+                Messenger.s(suppressionMessage).formatted(Formatting.RED, Formatting.ITALIC).append(copyButton)
+        );
+    }
+
     private static String getSuppressionPos(BlockPos pos) {
         return pos.getX() + ", " + pos.getY() + ", " + pos.getZ();
     }
@@ -53,17 +63,15 @@ public class ThrowableSuppressionContext {
         return String.format("%s @ %s -> [ %s ]", translator.tr("location").getString(), dimension, location);
     }
 
-    public static void sendMessageToServer(BlockPos pos, World world) {
-        String message = suppressionMessageText(pos, world);
+    public static Text copyButton(BlockPos pos) {
         BaseText hoverText = Messenger.s(translator.tr("copy").getString(), "y");
         String copyCoordText = getSuppressionPos(pos).replace(",", ""); // 1, 0, -24 -> 1 0 -24
-        final Text COPY_BUTTON = LiteralTextUtil.compatText(" [C] ").setStyle(
+
+        return
+            LiteralTextUtil.compatText(" [C] ").setStyle(
             Style.EMPTY.withColor(Formatting.GREEN).withBold(true).
             withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
             withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
         );
-        Messenger.sendServerMessage(
-        AmsServer.minecraftServer,
-        LiteralTextUtil.compatText(message).formatted(Formatting.RED, Formatting.ITALIC).append(COPY_BUTTON));
     }
 }

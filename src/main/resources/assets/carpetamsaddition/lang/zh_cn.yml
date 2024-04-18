@@ -11,9 +11,9 @@ carpetamsaddition:
       modify_content_in: '在该路径下修改内容：'
       save_path: '[ 存档文件夹 ]'
     maxPlayerBlockInteractionRange:
-      disable_command: '由于已开启maxPlayerBlockInteractionRange规则，该指令已被禁用'
+      disable_command: '由于已开启maxPlayerBlockInteractionRange规则，该改动不会生效'
     maxPlayerEntityInteractionRange:
-      disable_command: '由于已开启maxPlayerEntityInteractionRange规则，该指令已被禁用'
+      disable_command: '由于已开启maxPlayerEntityInteractionRange规则，该改动不会生效'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:

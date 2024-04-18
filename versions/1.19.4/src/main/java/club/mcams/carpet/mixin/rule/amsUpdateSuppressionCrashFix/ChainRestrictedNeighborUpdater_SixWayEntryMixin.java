@@ -21,41 +21,36 @@
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionContext;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.block.NeighborUpdater;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Mixin(World.class)
-public abstract class WorldMixin {
-    @Inject(
-        method = "updateNeighbor",
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft 1.19 - 1.20.1")
+@Mixin(targets = "net.minecraft.world.block.ChainRestrictedNeighborUpdater$SixWayEntry")
+public abstract class ChainRestrictedNeighborUpdater_SixWayEntryMixin {
+    @WrapOperation(
+        method = "update",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
-        ),
-        locals = LocalCapture.CAPTURE_FAILHARD
+            target = "Lnet/minecraft/block/BlockState;neighborUpdate(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/Block;Lnet/minecraft/util/math/BlockPos;Z)V"
+        )
     )
-    private void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state, Throwable throwable) {
+    private void update(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, Operation<Void> original) {
         if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
-            if (
-                throwable instanceof ClassCastException ||
-                throwable instanceof StackOverflowError ||
-                throwable instanceof OutOfMemoryError
-            ) {
-                World world = (World) (Object) this;
-                ThrowableSuppressionContext.sendMessageToServer(sourcePos, world);
-                throw new ThrowableSuppression(ThrowableSuppressionContext.suppressionMessageText(sourcePos, world));
-            }
+            NeighborUpdater.tryNeighborUpdate(world, state, pos, sourceBlock, sourcePos, notify);
+        } else {
+            original.call(state, world, pos, sourceBlock, sourcePos, notify);
         }
     }
 }

@@ -20,28 +20,22 @@
 
 package club.mcams.carpet.mixin.setting;
 
-//#if MC>=11900
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#else
 import carpet.settings.ParsedRule;
 import carpet.settings.Rule;
-import org.spongepowered.asm.mixin.gen.Invoker;
-import java.lang.reflect.Field;
-//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-//#if MC<11900
+import java.lang.reflect.Field;
+
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft < 1.19")
 @Mixin(ParsedRule.class)
-//#else
-//$$ @Mixin(DummyClass.class)
-//#endif
 public interface ParsedRuleAccessor {
-    //#if MC<11900
     @SuppressWarnings("rawtypes")
     @Invoker(value = "<init>", remap = false)
     static ParsedRule invokeConstructor(Field field, Rule rule, carpet.settings.SettingsManager settingsManager) {
         throw new RuntimeException();
     }
-    //#endif
 }

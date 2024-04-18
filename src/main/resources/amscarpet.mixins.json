@@ -6,9 +6,9 @@
   "mixins": [
     "carpet.HUDControllerMixin",
     "carpet.SettingsManagerMixin",
+    "rule.amsUpdateSuppressionCrashFix.ChainRestrictedNeighborUpdater_SixWayEntryMixin",
     "rule.amsUpdateSuppressionCrashFix.MinecraftServerMixin",
     "rule.amsUpdateSuppressionCrashFix.NeighborUpdaterMixin",
-    "rule.amsUpdateSuppressionCrashFix.SixWayEntryMixin",
     "rule.amsUpdateSuppressionCrashFix.WorldMixin",
     "rule.antiFireTotem_itemAntiExplosion.ItemEntityMixin",
     "rule.bambooCollisionBoxDisabled.BambooBlockMixin",
