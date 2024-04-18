@@ -68,8 +68,8 @@ public abstract class BlockMixin {
                  int maxDrops = AmsServerSettings.easyGetPitcherPod;
                  int dropCount = minDrops + random.nextInt(maxDrops - minDrops + 1);
                  for (int i = 0; i < dropCount; i++) {
-                     ItemStack cakeStack = new ItemStack(Items.PITCHER_POD);
-                     dropStack(world, pos, cakeStack);
+                     ItemStack pitcherPodStack = new ItemStack(Items.PITCHER_POD);
+                     dropStack(world, pos, pitcherPodStack);
                  }
              }
          }

@@ -43,8 +43,8 @@ public class ThrowableSuppressionContext {
         final Text copyButton = copyButton(pos);
 
         Messenger.sendServerMessage(
-                AmsServer.minecraftServer,
-                Messenger.s(suppressionMessage).formatted(Formatting.RED, Formatting.ITALIC).append(copyButton)
+            AmsServer.minecraftServer,
+            Messenger.s(suppressionMessage).formatted(Formatting.RED, Formatting.ITALIC).append(copyButton)
         );
     }
 
