@@ -69,9 +69,17 @@ public class GotoCommandRegistry {
         }
         ServerWorld dimension = DimensionArgumentType.getDimensionArgument(context, "dimension");
         if (player.getWorld().getRegistryKey() == ServerWorld.OVERWORLD && dimension.getRegistryKey() == ServerWorld.NETHER) {
+            //#if MC>=11900
+            //$$ return executeTeleport(player, dimension, new BlockPos((int) player.getX() / 8,(int) player.getY(),(int) player.getZ() / 8));
+            //#else
             return executeTeleport(player, dimension, new BlockPos(player.getX() / 8, player.getY(), player.getZ() / 8));
+            //#endif
         } else if (player.getWorld().getRegistryKey() == ServerWorld.NETHER && dimension.getRegistryKey() == ServerWorld.OVERWORLD){
+            //#if MC>=11900
+            //$$ return executeTeleport(player, dimension, new BlockPos((int) player.getX() * 8,(int) player.getY(),(int) player.getZ() * 8));
+            //#else
             return executeTeleport(player, dimension, new BlockPos(player.getX() * 8, player.getY(), player.getZ() * 8));
+            //#endif
         } else {
             return executeTeleport(player, dimension, player.getBlockPos());
         }
