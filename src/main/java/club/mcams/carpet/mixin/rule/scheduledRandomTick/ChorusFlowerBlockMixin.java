@@ -62,7 +62,8 @@ public abstract class ChorusFlowerBlockMixin {
 
     @Inject(method = "scheduledTick", at = @At("TAIL"))
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.scheduledRandomTickChorusFlower || AmsServerSettings.scheduledRandomTickAllPlants)
+        if (AmsServerSettings.scheduledRandomTickChorusFlower || AmsServerSettings.scheduledRandomTickAllPlants) {
             this.randomTick(state, world, pos, random);
+        }
     }
 }

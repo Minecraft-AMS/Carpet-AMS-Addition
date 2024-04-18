@@ -55,13 +55,15 @@ public abstract class CactusBlockMixin {
         cancellable = true
     )
     private void scheduleTickMixinInvoke(CallbackInfo ci) {
-        if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants)
+        if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants) {
             ci.cancel();
+        }
     }
 
     @Inject(method = "scheduledTick", at = @At("TAIL"))
     private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants)
+        if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants) {
             this.randomTick(state, world, pos, random);
+        }
     }
 }
