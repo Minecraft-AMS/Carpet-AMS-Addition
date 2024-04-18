@@ -1757,7 +1757,7 @@ Players can harvest a random amount of pitcher pods by planting pitcher (The max
 
 ## commandGoto
 
-Use the "/goto" command to teleport to the specified dimension and coordinates.
+Use the "/goto" command to teleport to the specified dimension and coordinates, When no coordinates are specified, it will teleport to the corresponding coordinates of the current player location.
 
 - Type: `String`
 

@@ -115,3 +115,8 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 
   teleport to the specified dimension and coordinates.
 
+
+
+- `/goto <dimension>`
+
+  Teleport to the corresponding coordinates of the current player location.
