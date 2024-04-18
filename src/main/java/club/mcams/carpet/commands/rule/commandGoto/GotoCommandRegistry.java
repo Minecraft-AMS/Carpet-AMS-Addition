@@ -24,8 +24,10 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.CommandHelper;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.command.argument.BlockPosArgumentType;
 import net.minecraft.command.argument.DimensionArgumentType;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -39,20 +41,16 @@ public class GotoCommandRegistry {
         CommandManager.literal("goto")
         .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGoto))
         .then(CommandManager.argument("dimension", DimensionArgumentType.dimension())
-        .then(CommandManager.argument("x", IntegerArgumentType.integer())
-        .then(CommandManager.argument("y", IntegerArgumentType.integer())
-        .then(CommandManager.argument("z", IntegerArgumentType.integer())
+                .executes(GotoCommandRegistry::executeTeleport)
+        .then(CommandManager.argument("destination", BlockPosArgumentType.blockPos())
         .executes(context -> executeTeleport(
             context.getSource().getPlayer(),
             DimensionArgumentType.getDimensionArgument(context, "dimension"),
-            IntegerArgumentType.getInteger(context, "x"),
-            IntegerArgumentType.getInteger(context, "y"),
-            IntegerArgumentType.getInteger(context, "z")
-        )))))));
+            BlockPosArgumentType.getBlockPos(context, "destination")
+        )))));
     }
 
-    private static int executeTeleport(ServerPlayerEntity player, ServerWorld targetDimension, int x, int y, int z) {
-        BlockPos destinationPos = new BlockPos(x, y, z);
+    private static int executeTeleport(ServerPlayerEntity player, ServerWorld targetDimension, BlockPos destinationPos) {
         player.teleport(
             targetDimension,
             destinationPos.getX(),
@@ -62,5 +60,28 @@ public class GotoCommandRegistry {
             player.getPitch(1)
         );
         return 1;
+    }
+
+    private static int executeTeleport(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+        ServerPlayerEntity player = context.getSource().getPlayer();
+        if (player == null){
+            return 0;
+        }
+        ServerWorld dimension = DimensionArgumentType.getDimensionArgument(context, "dimension");
+        if (player.getWorld().getRegistryKey() == ServerWorld.OVERWORLD && dimension.getRegistryKey() == ServerWorld.NETHER) {
+            //#if MC>=11900
+            //$$ return executeTeleport(player, dimension, new BlockPos((int) player.getX() / 8,(int) player.getY(),(int) player.getZ() / 8));
+            //#else
+            return executeTeleport(player, dimension, new BlockPos(player.getX() / 8, player.getY(), player.getZ() / 8));
+            //#endif
+        } else if (player.getWorld().getRegistryKey() == ServerWorld.NETHER && dimension.getRegistryKey() == ServerWorld.OVERWORLD){
+            //#if MC>=11900
+            //$$ return executeTeleport(player, dimension, new BlockPos((int) player.getX() * 8,(int) player.getY(),(int) player.getZ() * 8));
+            //#else
+            return executeTeleport(player, dimension, new BlockPos(player.getX() * 8, player.getY(), player.getZ() * 8));
+            //#endif
+        } else {
+            return executeTeleport(player, dimension, player.getBlockPos());
+        }
     }
 }
