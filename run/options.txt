@@ -44,9 +44,6 @@ ao:true
 prioritizeChunkUpdates:0
 biomeBlendRadius:4
 renderClouds:"false"
-resourcePacks:["vanilla","fabric","file/Classic Faithful 32x Programmer Art - 1.20.2.zip","file/Faithful-红石显示-1024自用附加包.zip","file/Faithful-红石显示-1024自用plus.zip","file/Clean Bedrock.zip","continuity:default","continuity:glass_pane_culling_fix","file/TNT附加包-1024.zip","animatedfreeze:animatedfreeze"]
-incompatibleResourcePacks:["appleskin","balm-fabric","jei","kleeslabs","tweakeroo","worldedit","xaerominimap","xaeroworldmap","file/Classic Faithful 32x Programmer Art - 1.20.2.zip","file/Faithful-红石显示-1024自用附加包.zip","file/Faithful-红石显示-1024自用plus.zip","file/Clean Bedrock.zip","continuity:default","continuity:glass_pane_culling_fix","file/TNT附加包-1024.zip","animatedfreeze:animatedfreeze"]
-lastServer:124.227.80.185:25227
 lang:zh_cn
 soundDevice:"OpenAL"
 chatVisibility:0
