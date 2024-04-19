@@ -44,7 +44,8 @@ public class GotoCommandRegistry {
         .then(CommandManager.argument("dimension", DimensionArgumentType.dimension())
         .executes(GotoCommandRegistry::executeSimpleTeleport)
         .then(CommandManager.argument("destination", BlockPosArgumentType.blockPos())
-        .executes(context -> executeTeleport(
+        .executes(
+            context -> executeTeleport(
             context.getSource().getPlayer(),
             DimensionArgumentType.getDimensionArgument(context, "dimension"),
             BlockPosArgumentType.getBlockPos(context, "destination")

@@ -54,14 +54,14 @@ public abstract class VillagerGossipsMixin {
                 for (Object r : entityReputation.values()) {
                     GetValueForInvoker invoker = (GetValueForInvoker) r;
                     if (invoker != targetReputation) {
-                        otherReputation += invoker._getValueFor(vgt -> filter.test(vgt) && !vgt.equals(MAJOR_POSITIVE));
+                        otherReputation += invoker.invokeGetValueFor(vgt -> filter.test(vgt) && !vgt.equals(MAJOR_POSITIVE));
                     }
                 }
             }
             int majorPositiveReputation = 0;
             for (Object r : entityReputation.values()) {
                 GetValueForInvoker invoker = (GetValueForInvoker) r;
-                majorPositiveReputation += invoker._getValueFor(vgt -> vgt.equals(MAJOR_POSITIVE));
+                majorPositiveReputation += invoker.invokeGetValueFor(vgt -> vgt.equals(MAJOR_POSITIVE));
             }
             int totalReputation = otherReputation + Math.min(majorPositiveReputation, MAJOR_POSITIVE.maxValue * MAJOR_POSITIVE.multiplier);
             cir.setReturnValue(totalReputation);

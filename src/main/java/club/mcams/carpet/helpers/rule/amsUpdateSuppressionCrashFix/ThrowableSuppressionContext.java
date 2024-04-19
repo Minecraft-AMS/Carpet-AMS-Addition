@@ -26,7 +26,6 @@ import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
 import net.minecraft.text.BaseText;
 import net.minecraft.text.Style;
@@ -68,7 +67,7 @@ public class ThrowableSuppressionContext {
         String copyCoordText = getSuppressionPos(pos).replace(",", ""); // 1, 0, -24 -> 1 0 -24
 
         return
-            LiteralTextUtil.compatText(" [C] ").setStyle(
+            Messenger.s(" [C] ").setStyle(
             Style.EMPTY.withColor(Formatting.GREEN).withBold(true).
             withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
             withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))

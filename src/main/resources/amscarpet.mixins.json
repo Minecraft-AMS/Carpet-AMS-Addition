@@ -129,6 +129,7 @@
     "translations.TranslatableTextMixin"
   ],
   "client": [
+    "rule.bedRockFlying.ClientPlayerEntityInvoker",
     "rule.bedRockFlying.ClientPlayerEntityMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
     "rule.maxPlayerInteractionRange.GameRendererMixin"

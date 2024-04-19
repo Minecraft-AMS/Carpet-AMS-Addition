@@ -20,29 +20,23 @@
 
 package club.mcams.carpet.mixin.rule.enderPearlSoundEffect;
 
-//#if MC>=12000
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#endif
-
-//#if MC<12000
 import club.mcams.carpet.AmsServerSettings;
+
 import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.World;
+
+import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#endif
 
-import org.spongepowered.asm.mixin.Mixin;
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-//#if MC>=12000
-//$$ @Mixin(DummyClass.class)
-//$$ public abstract class EnderPearlEntityMixin {}
-//#else
+@GameVersion(version = "Minecraft >= 1.20")
 @Mixin(EnderPearlEntity.class)
 public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
     public EnderPearlEntityMixin(EntityType<? extends ThrownItemEntity> entityType, World world) {
@@ -68,4 +62,3 @@ public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
         }
     }
 }
-//#endif

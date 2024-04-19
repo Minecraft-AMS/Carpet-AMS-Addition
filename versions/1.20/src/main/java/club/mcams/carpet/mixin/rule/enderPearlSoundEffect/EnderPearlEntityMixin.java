@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2024  A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,17 +18,14 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.sharedVillagerDiscounts;
+package club.mcams.carpet.mixin.rule.enderPearlSoundEffect;
 
-import net.minecraft.village.VillageGossipType;
+import club.mcams.carpet.utils.compat.DummyClass;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Invoker;
 
-import java.util.function.Predicate;
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@Mixin(targets = "net.minecraft.village.VillagerGossips$Reputation")
-public interface GetValueForInvoker {
-    @Invoker("getValueFor")
-    int invokeGetValueFor(Predicate<VillageGossipType> gossipTypeFilter);
-}
+@GameVersion(version = "Minecraft >= 1.20")
+@Mixin(DummyClass.class)
+public abstract class EnderPearlEntityMixin {}
