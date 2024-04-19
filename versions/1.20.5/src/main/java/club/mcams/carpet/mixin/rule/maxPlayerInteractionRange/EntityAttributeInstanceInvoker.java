@@ -20,28 +20,18 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-import club.mcams.carpet.AmsServerSettings;
-
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.registry.entry.RegistryEntry;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(value = EntityAttributeInstance.class, priority = 1688)
-public abstract class EntityAttributeInstanceMixin implements EntityAttributeInstanceInvoker {
-    @ModifyReturnValue(method = "getBaseValue", at = @At("RETURN"))
-    private double getPlayerBlockInteractionBaseValue(double original) {
-        return AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D && this.invokeGetAttribute().equals(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE) ? AmsServerSettings.maxPlayerBlockInteractionRange : original;
-    }
-
-    @ModifyReturnValue(method = "getBaseValue", at = @At("RETURN"))
-    private double getPlayerEntityInteractionBaseValue(double original) {
-        return AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && this.invokeGetAttribute().equals(EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE) ? AmsServerSettings.maxPlayerEntityInteractionRange : original;
-    }
+@Mixin(EntityAttributeInstance.class)
+public interface EntityAttributeInstanceInvoker {
+    @Invoker("getAttribute")
+    RegistryEntry<EntityAttribute> invokeGetAttribute();
 }

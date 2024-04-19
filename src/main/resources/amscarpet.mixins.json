@@ -67,6 +67,7 @@
     "rule.largeShulkerBox.ShulkerBoxBlockEntityMixin",
     "rule.largeShulkerBox.ShulkerBoxScreenHandlerMixin",
     "rule.maxPlayerInteractionRange.AttributeCommandMixin",
+    "rule.maxPlayerInteractionRange.EntityAttributeInstanceInvoker",
     "rule.maxPlayerInteractionRange.EntityAttributeInstanceMixin",
     "rule.maxPlayerInteractionRange.ServerPlayerInteractionManagerMixin",
     "rule.maxPlayerInteractionRange.ServerPlayNetworkHandlerMixin",

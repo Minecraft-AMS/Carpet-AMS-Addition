@@ -20,8 +20,10 @@
 
 package club.mcams.carpet.mixin.rule.fertilizableSmallFlower;
 
-//#if MC>=11700
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+import club.mcams.carpet.AmsServerSettings;
+
 //#if MC>=11900
 //$$ import net.minecraft.world.WorldView;
 //$$ import net.minecraft.util.math.random.Random;
@@ -29,7 +31,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import java.util.Random;
 import net.minecraft.world.BlockView;
 //#endif
-import club.mcams.carpet.AmsServerSettings;
+
 import net.minecraft.block.SporeBlossomBlock;
 import net.minecraft.world.World;
 import net.minecraft.block.BlockState;
@@ -38,24 +40,14 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import static net.minecraft.block.Block.dropStack;
-//#else
-//$$ import club.mcams.carpet.utils.compat.DummyClass;
-//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 
-//#if MC>=11700
+import static net.minecraft.block.Block.dropStack;
+
 @GameVersion(version = "Minecraft >= 1.17")
 @Mixin(SporeBlossomBlock.class)
 public abstract class SporeBlossomBlockMixin implements Fertilizable {
-//#else
-//$$ @Mixin(DummyClass.class)
-//$$ public abstract class SporeBlossomBlockMixin {
-//#endif
-
-//#if MC>=11700
-
     @Override
     //#if MC>=12002
     //$$ public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
@@ -63,7 +55,7 @@ public abstract class SporeBlossomBlockMixin implements Fertilizable {
     //$$ public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
     //#else
     public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-        //#endif
+    //#endif
         return AmsServerSettings.fertilizableSmallFlower;
     }
 
@@ -78,6 +70,4 @@ public abstract class SporeBlossomBlockMixin implements Fertilizable {
             dropStack(world, pos, new ItemStack((ItemConvertible) this));
         }
     }
-
-//#endif
 }
