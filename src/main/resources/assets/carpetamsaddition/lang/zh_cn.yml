@@ -1,6 +1,7 @@
 carpetamsaddition:
   carpet:
     totalRules:
+      version: '版本'
       total_rules: '规则总数'
 
   rule:

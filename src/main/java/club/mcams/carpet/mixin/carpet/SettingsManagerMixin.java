@@ -21,7 +21,6 @@
 package club.mcams.carpet.mixin.carpet;
 
 import carpet.settings.SettingsManager;
-import carpet.utils.Translations;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerMod;
@@ -64,7 +63,7 @@ public abstract class SettingsManagerMixin {
             source,
             Messenger.c(
                 String.format("g %s ", AmsServer.fancyName),
-                String.format("g %s: ", Translations.tr("ui.version",  "version")),
+                String.format("g %s: ", translator.tr("version").getString()),
                 String.format("g %s ", AmsServerMod.getVersion()),
                 String.format("g (%s: %d)", translator.tr("total_rules").getString(), AmsServer.ruleCount)
             )

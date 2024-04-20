@@ -1,6 +1,7 @@
 carpetamsaddition:
   carpet:
     totalRules:
+      version: 'version'
       total_rules: 'total rules'
 
   rule:
