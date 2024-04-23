@@ -15,6 +15,9 @@ carpetamsaddition:
       disable_command: '由于已开启maxPlayerBlockInteractionRange规则，该改动不会生效'
     maxPlayerEntityInteractionRange:
       disable_command: '由于已开启maxPlayerEntityInteractionRange规则，该改动不会生效'
+    sendPlayerDeathLocation:
+      location: '死亡位置'
+      copy: '复制坐标到剪切板'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:
@@ -381,9 +384,9 @@ carpetamsaddition:
       fertilizableSmallFlower:
         name: 可施肥小花
         desc: 使诸如蒲公英的小花也可以被骨粉催熟
-      harmlessPointedDripstone:
-        name: 无害化滴水石锥
-        desc: 让滴水石锥不会产生伤害
+      safePointedDripstone:
+        name: 安全的滴水石锥
+        desc: 玩家落在滴水石锥上时，不会受到它的附加伤害
       pointedDripstoneCollisionBoxDisabled:
         name: 禁用滴水石锥碰撞箱
         desc: 允许玩家穿过滴水石锥
@@ -406,6 +409,20 @@ carpetamsaddition:
         desc: 使用 /goto 命令快速传送到指定维度的指定坐标
         extra:
           '0': '没有指定坐标时会传送至当前玩家所在位置的对应坐标'
+      sendPlayerDeathLocation:
+        name: 发送玩家死亡位置
+        desc: 当玩家死亡时，会广播一条包含该玩家死亡坐标以及维度的消息
+        extra:
+          '0': '[false] - 禁用规则'
+          '1': '[all] - 总是发送消息'
+          '2': '[realPlayerOnly] - 只有真实玩家死亡时发送消息'
+          '3': '[fakePlayerOnly] - 只有假人死亡时发送消息'
+      perfectInvisibility:
+        name: 完美隐身
+        desc: 当玩家拥有隐身效果时将完全隐身，即使穿着全套盔甲
+      sneakInvisibility:
+        name: 潜行隐身
+        desc: 当玩家潜行时将对生物完全隐身，即使穿着全套盔甲
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -441,7 +458,7 @@ carpetamsaddition:
           '0': '[bone_block] - 音符盒上方有骨块可以触发加载'
           '1': '[wither_skeleton_skull] - 音符盒上有凋灵骷髅头（可以是挂在墙上的也可以是放在音符盒上的）时可以触发加载'
           '2': '[note_block] - 无需条件，只有音符盒即可加载'
-          '3': '[OFF] - 禁用该规则'
+          '3': '[false] - 禁用该规则'
           '4': '由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作'
           '5': '你可以启用blockChunkLoaderKeepWorldTickUpdate或keepWorldTickUpdate规则来解决这个问题'
       bellBlockChunkLoader:
@@ -457,7 +474,7 @@ carpetamsaddition:
           '0': '[bone_block] - 当活塞/黏性活塞上方有骨块时'
           '1': '[bedrock] - 当活塞/黏性活塞下方有基岩时'
           '2': '[all] - 当活塞/黏性活塞上方有骨块或下方有基岩时'
-          '3': '[OFF] - 禁用该规则'
+          '3': '[false] - 禁用该规则'
           '4': '由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作'
           '5': '你可以启用blockChunkLoaderKeepWorldTickUpdate或keepWorldTickUpdate规则来解决这个问题'
       blockChunkLoaderKeepWorldTickUpdate:

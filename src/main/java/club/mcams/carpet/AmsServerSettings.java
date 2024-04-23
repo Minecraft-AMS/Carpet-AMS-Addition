@@ -346,7 +346,7 @@ public class AmsServerSettings {
     public static boolean carpetAlwaysSetDefault = false;
 
     //#if MC>=11900
-    @GameVersion(version = "Minecraft >= 1.19")
+    //$$ @GameVersion(version = "Minecraft >= 1.19")
     //$$ @Rule(categories = {AMS, EXPERIMENTAL})
     //$$ public static boolean experimentalContentCheckDisabled = false;
     //#endif
@@ -355,7 +355,7 @@ public class AmsServerSettings {
     public static boolean fertilizableSmallFlower = false;
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean harmlessPointedDripstone = false;
+    public static boolean safePointedDripstone = false;
 
     //#if MC>=11700
     @GameVersion(version = "Minecraft >= 1.17")
@@ -376,7 +376,7 @@ public class AmsServerSettings {
     public static boolean ironGolemNoDropFlower = false;
 
     //#if MC>=12000
-    @GameVersion(version = "Minecraft >= 1.20")
+    //$$ @GameVersion(version = "Minecraft >= 1.20")
     //$$ @Rule(
     //$$     options = {"0"},
     //$$     categories = {AMS, FEATURE, SURVIVAL},
@@ -391,6 +391,18 @@ public class AmsServerSettings {
         categories = {AMS, COMMAND}
     )
     public static String commandGoto = "false";
+
+    @Rule(
+            options = {"false", "all", "realPlayerOnly", "fakePlayerOnly"},
+            categories = {AMS, SURVIVAL}
+    )
+    public static String sendPlayerDeathLocation = "false";
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean perfectInvisibility = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean sneakInvisibility = false;
 
     /*
      * 区块加载规则
@@ -483,7 +495,7 @@ public class AmsServerSettings {
     //#endif
 
     //#if MC>=12003
-    @GameVersion(version = "Minecraft 1.20.3 - 1.20.5")
+    //$$ @GameVersion(version = "Minecraft 1.20.3 - 1.20.5")
     //$$ @SuppressWarnings("unused")
     //$$ @CraftingRule(
     //$$     recipes = {

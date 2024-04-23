@@ -15,6 +15,9 @@ carpetamsaddition:
       disable_command: 'This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
     maxPlayerEntityInteractionRange:
       disable_command: 'This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
+    sendPlayerDeathLocation:
+      location: 'death location'
+      copy: 'copy coord to clipboard'
 
   command:
     amsUpdateSuppressionCrashFixForceMode:
@@ -307,8 +310,8 @@ carpetamsaddition:
         desc: Allow playing Minecraft experimental content in the game by adding data packs
       fertilizableSmallFlower:
         desc: Allow small flowers such as dandelion can also be ripened by bone meal
-      harmlessPointedDripstone:
-        desc: Let pointed dripstone do no damage
+      safePointedDripstone:
+        desc: When players land on pointed dripstone, they do not take additional damage from it
       pointedDripstoneCollisionBoxDisabled:
         desc: Allow players to pass through pointed dripstone
       foliageGenerateDisabled:
@@ -325,6 +328,17 @@ carpetamsaddition:
         desc: Use the "/goto" command to teleport to the specified dimension and coordinates
         extra:
           '0': 'When no coordinates are specified, it will teleport to the corresponding coordinates of the current player location'
+      sendPlayerDeathLocation:
+        desc: When a player dies, a message with their death coordinates and dimension will be broadcasted
+        extra:
+          '0': '[false] - Disable rule'
+          '1': '[all] - Always send messages'
+          '2': '[realPlayerOnly] - Messages will only be sent when real players die'
+          '3': '[fakePlayerOnly] - Messages will only be sent when fake players die'
+      perfectInvisibility:
+        desc: When the player is invisible, they will be completely hidden from mobs, even when wearing a full set of armor
+      sneakInvisibility:
+        desc: When the player is sneak, they will be completely hidden from mobs, even when wearing a full set of armor
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -352,7 +366,7 @@ carpetamsaddition:
           '0': '[bone_block] - When bone_block is on the note_block'
           '1': '[wither_skeleton_skull] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall'
           '2': '[note_block] - Only note_block'
-          '3': '[OFF] - Disable the rule'
+          '3': '[false] - Disable rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
           '5': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
       bellBlockChunkLoader:
@@ -366,7 +380,7 @@ carpetamsaddition:
           '0': '[bone_block] - When bone_block is on the piston'
           '1': '[bedrock] - When bedrock is under the piston'
           '2': '[all] - When bone_block is on the piston or bedrock is under the piston'
-          '3': '[OFF] - Disable the rule'
+          '3': '[false] - Disable rule'
           '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
           '5': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
       blockChunkLoaderKeepWorldTickUpdate:
