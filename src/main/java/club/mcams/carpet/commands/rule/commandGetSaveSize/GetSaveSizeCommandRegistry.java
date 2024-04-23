@@ -23,7 +23,7 @@ package club.mcams.carpet.commands.rule.commandGetSaveSize;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
+import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -55,7 +55,7 @@ public class GetSaveSizeCommandRegistry {
         long size = getFolderSize(getSaveFolder(server));
         String sizeString = formatSize(size);
         player.sendMessage(
-            LiteralTextUtil.compatText(
+            Messenger.s(
                 String.format(
                     "§e%s §a§l§n%s",
                     translator.tr("size_msg").getString(),
@@ -78,7 +78,7 @@ public class GetSaveSizeCommandRegistry {
             //#endif
             saveAllMessage = saveAllSuccess ? SUCCESS_MSG : FAIL_MSG;
             player.sendMessage(
-                LiteralTextUtil.compatText(saveAllMessage).
+                Messenger.s(saveAllMessage).
                 setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
                 false
             );

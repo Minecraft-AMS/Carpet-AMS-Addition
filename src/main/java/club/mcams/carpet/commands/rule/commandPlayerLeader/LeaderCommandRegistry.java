@@ -24,7 +24,6 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -65,7 +64,7 @@ public class LeaderCommandRegistry {
         targetPlayer.addStatusEffect(HIGH_LIGHT);
         Messenger.sendServerMessage(
             server,
-            LiteralTextUtil.compatText(
+            Messenger.s(
                 String.format("%s %s", getPlayerName(targetPlayer), translator.tr("add").getString())
             ).setStyle(Style.EMPTY.withColor(Formatting.GRAY))
         );
@@ -76,7 +75,7 @@ public class LeaderCommandRegistry {
         targetPlayer.removeStatusEffect(HIGH_LIGHT.getEffectType());
         Messenger.sendServerMessage(
             server,
-            LiteralTextUtil.compatText(
+            Messenger.s(
                 String.format("%s %s", getPlayerName(targetPlayer), translator.tr("remove").getString())
             ).setStyle(Style.EMPTY.withColor(Formatting.GRAY))
         );
@@ -87,7 +86,7 @@ public class LeaderCommandRegistry {
         String addHelp = translator.tr("help.add").getString();
         String removeHelp = translator.tr("help.remove").getString();
         player.sendMessage(
-            LiteralTextUtil.compatText(addHelp + "\n" + removeHelp).
+            Messenger.s(addHelp + "\n" + removeHelp).
             setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
             false
         );

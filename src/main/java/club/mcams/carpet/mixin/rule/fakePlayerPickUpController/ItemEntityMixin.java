@@ -38,7 +38,7 @@ import java.util.Objects;
 public abstract class ItemEntityMixin {
     @Inject(method = "onPlayerCollision", at = @At("HEAD"), cancellable = true)
     private void onCanReplaceCurrentItem(PlayerEntity player, CallbackInfo ci) {
-        if (!Objects.equals(AmsServerSettings.fakePlayerPickUpController, "false") && FakePlayerHelper.isFackPlayer(player)) {
+        if (!Objects.equals(AmsServerSettings.fakePlayerPickUpController, "false") && FakePlayerHelper.isFakePlayer(player)) {
             ItemStack mainHandStack = player.getMainHandStack();
             if (Objects.equals(AmsServerSettings.fakePlayerPickUpController, "MainHandOnly") && !mainHandStack.isEmpty()) {
                 ci.cancel();

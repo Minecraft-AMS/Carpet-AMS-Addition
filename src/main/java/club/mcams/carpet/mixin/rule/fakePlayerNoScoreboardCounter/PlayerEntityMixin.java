@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerEntityMixin {
     @Inject(method = "incrementStat(Lnet/minecraft/stat/Stat;)V", at = @At("HEAD"), cancellable = true)
     private void increaseStat(CallbackInfo ci) {
-        if (AmsServerSettings.fakePlayerNoScoreboardCounter && FakePlayerHelper.isFackPlayer((PlayerEntity)(Object)this)) {
+        if (AmsServerSettings.fakePlayerNoScoreboardCounter && FakePlayerHelper.isFakePlayer((PlayerEntity)(Object)this)) {
             ci.cancel();
         }
     }

@@ -24,7 +24,7 @@ import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
+import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -46,7 +46,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class PingCommandRegistry {
     private static final Translator translator = new Translator("command.ping");
-    private static final String MSG_HEAD = "<commandPing>";
+    private static final String MSG_HEAD = "<commandPacketInternetGroper>";
     private static final Map<PlayerEntity, Thread> PING_THREADS = new HashMap<>();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
@@ -81,7 +81,7 @@ public class PingCommandRegistry {
             InetAddress inetAddress = InetAddress.getByName(targetIpOrDomainName);
             if (isFirstPing) {
                 player.sendMessage(
-                    LiteralTextUtil.compatText(
+                    Messenger.s(
                         String.format(
                             "§b%s §ePing §b%s §e[ %s ] §e...",
                             MSG_HEAD, targetIpOrDomainName, inetAddress.getHostAddress()
@@ -96,7 +96,7 @@ public class PingCommandRegistry {
             if (isReachable) {
                 long delayTime = endTime - startTime;
                 player.sendMessage(
-                    LiteralTextUtil.compatText(
+                    Messenger.s(
                         String.format(
                             "§b%s §2Replay from §e[ %s ]§2 Time = %dms",
                             MSG_HEAD, inetAddress.getHostAddress(), delayTime
@@ -106,7 +106,7 @@ public class PingCommandRegistry {
                 );
                 return delayTime;
             } else {
-                player.sendMessage(LiteralTextUtil.compatText(String.format("§b%s §4Request time out.", MSG_HEAD)), false);
+                player.sendMessage(Messenger.s(String.format("§b%s §4Request time out.", MSG_HEAD)), false);
                 return -1;
             }
         } catch (IOException e) {
@@ -121,9 +121,9 @@ public class PingCommandRegistry {
         PingThread pingThread = (PingThread)PING_THREADS.get(player);
         if (pingThread != null) {
             pingThread.setInterrupted();
-            player.sendMessage(LiteralTextUtil.compatText(String.format("§b%s §4%s", MSG_HEAD, stopPing)), false);
+            player.sendMessage(Messenger.s(String.format("§b%s §4%s", MSG_HEAD, stopPing)), false);
         } else {
-            player.sendMessage(LiteralTextUtil.compatText(String.format("§b%s §4%s", MSG_HEAD, activePingIsNull)), false);
+            player.sendMessage(Messenger.s(String.format("§b%s §4%s", MSG_HEAD, activePingIsNull)), false);
         }
         return 1;
     }
@@ -132,7 +132,7 @@ public class PingCommandRegistry {
         String pingHelp = translator.tr("help.ping").getString();
         String stopHelp = translator.tr("help.stop").getString();
         player.sendMessage(
-            LiteralTextUtil.compatText(pingHelp + "\n" + stopHelp).
+            Messenger.s(pingHelp + "\n" + stopHelp).
             setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
             false
         );
@@ -141,7 +141,7 @@ public class PingCommandRegistry {
 
     private static void sendFinishMessage(PlayerEntity player, int totalPings, int successfulPings, int failedPings, long averageDelay) {
         player.sendMessage(
-            LiteralTextUtil.compatText(
+            Messenger.s(
                 String.format(
                     "§b%s §aSent = %d, Received = %d, Lost = %d, Average delay = %dms",
                     MSG_HEAD, totalPings, successfulPings, failedPings, averageDelay

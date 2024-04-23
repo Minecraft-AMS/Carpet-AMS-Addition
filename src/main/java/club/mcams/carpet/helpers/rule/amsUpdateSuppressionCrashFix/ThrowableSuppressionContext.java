@@ -62,7 +62,7 @@ public class ThrowableSuppressionContext {
         return String.format("%s @ %s -> [ %s ]", translator.tr("location").getString(), dimension, location);
     }
 
-    public static Text copyButton(BlockPos pos) {
+    private static Text copyButton(BlockPos pos) {
         BaseText hoverText = Messenger.s(translator.tr("copy").getString(), "y");
         String copyCoordText = getSuppressionPos(pos).replace(",", ""); // 1, 0, -24 -> 1 0 -24
 

@@ -18,12 +18,22 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.harmlessPointedDripstone;
+package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
-import club.mcams.carpet.utils.compat.DummyClass;
-import org.spongepowered.asm.mixin.Mixin;
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
-@GameVersion(version = "Minecraft >= 1.17")
-@Mixin(DummyClass.class)
-public abstract class PointedDripstoneBlockMixin {}
+public class ThrowableSuppressionException {
+    private static final List<Predicate<Throwable>> suppressionPredicates = new ArrayList<>();
+
+    public static boolean isUpdateSuppression(Throwable throwable) {
+        return suppressionPredicates.stream().anyMatch(predicate -> predicate.test(throwable));
+    }
+
+    static {
+        suppressionPredicates.add(throwable -> throwable instanceof ClassCastException);
+        suppressionPredicates.add(throwable -> throwable instanceof StackOverflowError);
+        suppressionPredicates.add(throwable -> throwable instanceof OutOfMemoryError);
+    }
+}

@@ -22,7 +22,7 @@ package club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
+import club.mcams.carpet.utils.Messenger;
 
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -50,8 +50,8 @@ public class AmsUpdateSuppressionCrashFixCommandRegistry {
             amsUpdateSuppressionCrashFixForceMode = mode;
             Text message =
                     mode ?
-                    LiteralTextUtil.compatText(translator.tr("force_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)) :
-                    LiteralTextUtil.compatText(translator.tr("lazy_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.GREEN));
+                    Messenger.s(translator.tr("force_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)) :
+                    Messenger.s(translator.tr("lazy_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.GREEN));
             Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
             return 1;
         })));

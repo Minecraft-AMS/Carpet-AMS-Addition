@@ -21,7 +21,7 @@
 package club.mcams.carpet.helpers.rule.fancyFakePlayerName;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
+import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -41,7 +41,7 @@ public class FancyNameHelper {
             Team team = scoreboard.getTeam("bot");
             if (team == null) {
                 team = scoreboard.addTeam("bot");
-                team.setPrefix(LiteralTextUtil.compatText("[bot] ").setStyle(Style.EMPTY.withBold(true)));
+                team.setPrefix(Messenger.s("[bot] ").setStyle(Style.EMPTY.withBold(true)));
                 team.setColor(Formatting.DARK_GREEN);
             }
             scoreboard.addPlayerToTeam(player.getGameProfile().getName(), team);

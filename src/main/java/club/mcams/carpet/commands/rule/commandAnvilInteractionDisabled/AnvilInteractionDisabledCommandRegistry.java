@@ -23,7 +23,7 @@ package club.mcams.carpet.commands.rule.commandAnvilInteractionDisabled;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
+import club.mcams.carpet.utils.Messenger;
 
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
@@ -52,8 +52,8 @@ public class AnvilInteractionDisabledCommandRegistry {
                 anvilInteractionDisabled = mode;
                 Text message =
                         mode ?
-                        LiteralTextUtil.compatText(translator.tr("disable").getString()).setStyle(Style.EMPTY.withColor(Formatting.RED)) :
-                        LiteralTextUtil.compatText(translator.tr("enable").getString()).setStyle(Style.EMPTY.withColor(Formatting.GREEN));
+                        Messenger.s(translator.tr("disable").getString()).setStyle(Style.EMPTY.withColor(Formatting.RED)) :
+                        Messenger.s(translator.tr("enable").getString()).setStyle(Style.EMPTY.withColor(Formatting.GREEN));
                 Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
                 return 1;
         })));

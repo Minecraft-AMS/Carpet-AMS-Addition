@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.20")
+@GameVersion(version = "Minecraft < 1.20")
 @Mixin(EnderPearlEntity.class)
 public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
     public EnderPearlEntityMixin(EntityType<? extends ThrownItemEntity> entityType, World world) {

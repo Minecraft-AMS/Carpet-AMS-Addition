@@ -26,7 +26,6 @@ import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
 
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -60,7 +59,7 @@ public class WhereCommandRegistry {
     }
 
     private static int sendMessage(MinecraftServer minecraftServer, PlayerEntity senderPlayer, PlayerEntity targetPlayer) {
-        senderPlayer.sendMessage(LiteralTextUtil.compatText(message(targetPlayer)), false);
+        senderPlayer.sendMessage(Messenger.s(message(targetPlayer)), false);
         sendWhoGetWhoMessage(minecraftServer, senderPlayer, targetPlayer);
         highlightPlayer(targetPlayer);
         return 1;
@@ -72,7 +71,7 @@ public class WhereCommandRegistry {
         String message = translator.tr("who_get_who", senderPlayerName, targetPlayerName).getString();
         Messenger.sendServerMessage(
             minecraftServer,
-            LiteralTextUtil.compatText(message).
+            Messenger.s(message).
             setStyle(Style.EMPTY.withColor(Formatting.GRAY).withItalic(true))
         );
     }

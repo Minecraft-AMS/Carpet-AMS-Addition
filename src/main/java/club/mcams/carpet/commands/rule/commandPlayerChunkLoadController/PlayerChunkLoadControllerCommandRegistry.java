@@ -24,7 +24,6 @@ import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
 import club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -55,13 +54,13 @@ public class PlayerChunkLoadControllerCommandRegistry {
         ChunkLoading.setPlayerInteraction(playerName, b, true);
         if (player == null) {
             Messenger.sendServerMessage(
-                AmsServer.minecraftServer, LiteralTextUtil.compatText("No player specified").
+                AmsServer.minecraftServer, Messenger.s("No player specified").
                 setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true))
             );
             return 0;
         } else {
             player.sendMessage(
-                LiteralTextUtil.compatText((playerName + " chunk loading " + b)).
+                Messenger.s((playerName + " chunk loading " + b)).
                 setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE).withBold(true)),
                 false
             );
@@ -74,20 +73,20 @@ public class PlayerChunkLoadControllerCommandRegistry {
         PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
         if (player == null) {
             Messenger.sendServerMessage(
-                AmsServer.minecraftServer, LiteralTextUtil.compatText("No player specified").
+                AmsServer.minecraftServer, Messenger.s("No player specified").
                 setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true))
             );
             return 0;
         }
         if (playerInteractions) {
             player.sendMessage(
-                LiteralTextUtil.compatText((playerName + " chunk loading: true")).
+                Messenger.s((playerName + " chunk loading: true")).
                 setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE).withBold(true)),
                 false
             );
         } else {
             player.sendMessage(
-                LiteralTextUtil.compatText((playerName + " chunk loading: false")).
+                Messenger.s((playerName + " chunk loading: false")).
                 setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE).withBold(true)),
                 false
             );

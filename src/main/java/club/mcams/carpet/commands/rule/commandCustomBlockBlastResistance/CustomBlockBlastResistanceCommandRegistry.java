@@ -23,8 +23,8 @@ package club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.RegexTools;
-import club.mcams.carpet.utils.compat.LiteralTextUtil;
 import club.mcams.carpet.config.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceConfig;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -97,16 +97,16 @@ public class CustomBlockBlastResistanceCommandRegistry {
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float oldBlastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             player.sendMessage(
-                LiteralTextUtil.compatText(
-                MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + oldBlastResistance +
+                Messenger.s(
+                    MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + oldBlastResistance +
                 " -> " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
                 ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
                 false
             );
         } else {
             player.sendMessage(
-                LiteralTextUtil.compatText(
-                MSG_HEAD + "+ " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
+                Messenger.s(
+                    MSG_HEAD + "+ " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
                 ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
                 false
             );
@@ -123,7 +123,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.remove(state);
             CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
             player.sendMessage(
-                LiteralTextUtil.compatText(
+                Messenger.s(
                     MSG_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
                 ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
                 false
@@ -131,7 +131,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             return 1;
         } else {
             player.sendMessage(
-                LiteralTextUtil.compatText(
+                Messenger.s(
                     MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + translator.tr("not_found").getString()
                 ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
                 false
@@ -145,7 +145,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
         CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
         player.sendMessage(
-            LiteralTextUtil.compatText(
+            Messenger.s(
                 MSG_HEAD + translator.tr("removeAll").getString()
             ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
             false
@@ -155,7 +155,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
 
     private static int list(PlayerEntity player) {
         player.sendMessage(
-            LiteralTextUtil.compatText(
+            Messenger.s(
                 translator.tr("list").getString() + "\n-------------------------------"
             ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
             false
@@ -166,7 +166,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             Block block = state.getBlock();
             String blockName = RegexTools.getBlockRegisterName(block.toString());
             player.sendMessage(
-                LiteralTextUtil.compatText(blockName + " / " + blastResistance).
+                Messenger.s(blockName + " / " + blastResistance).
                 setStyle(Style.EMPTY.withColor(Formatting.GREEN)),
                 false
             );
@@ -180,7 +180,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         String removeAllHelpText = translator.tr("help.removeAll").getString();
         String listHelpText = translator.tr("help.list").getString();
         player.sendMessage(
-            LiteralTextUtil.compatText(
+                Messenger.s(
                 "\n" +
                 setHelpText + "\n" +
                 removeHelpText + "\n" +
