@@ -1641,9 +1641,9 @@ Allow small flowers such as dandelion can also be ripened by bone meal.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
-## harmlessPointedDripstone
+## safePointedDripstone
 
-Let pointed dripstone do no damage.
+When players land on pointed dripstone, they do not take additional damage from it.
 
 < Available for Minecraft >= 1.17 >
 
@@ -1772,6 +1772,68 @@ Use the "/goto" command to teleport to the specified dimension and coordinates, 
 
 
 - Categroies: `AMS`, `COMMAND`
+
+## sendPlayerDeathLocation
+
+When a player dies, a message with their death coordinates and dimension will be broadcasted.
+
+`false`: Disable rule.
+
+`all`: Always send messages.
+
+`realPlayerOnly`: Messages will only be sent when real players die.
+
+`fakePlayerOnly`: Messages will only be sent when fake players die.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `all`, `realPlayerOnly`, `fakePlayerOnly`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`
+
+## perfectInvisibility
+
+When the player is invisible, they will be completely hidden from mobs, even when wearing a full set of armor.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## sneakInvisibility
+
+When the player is sneak, they will be completely hidden from mobs, even when wearing a full set of armor.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## craftableEnchantedGoldApple
 

@@ -1600,9 +1600,9 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 无害化滴水石锥（harmlessPointedDripstone）
+## 安全的滴水石锥（safePointedDripstone）
 
-让滴水石锥不会产生伤害。
+玩家落在滴水石锥上时，不会受到它的附加伤害。
 
 <该规则 Minecraft >= 1.17 可用>
 
@@ -1622,7 +1622,7 @@ json位置：
 
 ## 禁用滴水石锥碰撞箱（pointedDripstoneCollisionBoxDisabled）
 
-让滴水石锥不会产生伤害。
+开启后，玩家可以穿过滴水石锥。
 
 <该规则 Minecraft >= 1.17 可用>
 
@@ -1731,6 +1731,68 @@ json位置：
 
 
 - 分类: `AMS`, `COMMAND`
+
+## 发送玩家死亡位置（sendPlayerDeathLocation）
+
+当玩家死亡时，会广播一条包含该玩家死亡坐标以及维度的消息。
+
+`false`: 禁用规则。
+
+`all`: 总是发送消息。
+
+`realPlayerOnly`: 只有真实玩家死亡时发送消息。
+
+`fakePlayerOnly`: 只有假人死亡时发送消息。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `all`, `realPlayerOnly`, `fakePlayerOnly`
+
+
+
+- 分类: `AMS`, `SURVIVAL`
+
+## 完美隐身（perfectInvisibility）
+
+当玩家拥有隐身效果时将完全隐身，即使穿着全套盔甲。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 潜行隐身（sneakInvisibility）
+
+当玩家潜行时将对生物完全隐身，即使穿着全套盔甲。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
