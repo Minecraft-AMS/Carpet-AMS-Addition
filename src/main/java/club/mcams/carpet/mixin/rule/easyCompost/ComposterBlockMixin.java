@@ -39,11 +39,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ComposterBlock.class)
 public abstract class ComposterBlockMixin {
     @Inject(method = "addToComposter", at = @At("HEAD"), cancellable = true)
-    //#if MC>11900
-    //$$ private static void addToComposter(Entity user, BlockState state, WorldAccess world, BlockPos pos, ItemStack stack, CallbackInfoReturnable<BlockState> cir) {
-    //#else
-    private static void addToComposter(BlockState state, WorldAccess world, BlockPos pos, ItemStack item, CallbackInfoReturnable<BlockState> cir) {
-    //#endif
+    private static void addToComposter(
+        //#if MC>=11900
+        //$$ Entity entity,
+        //#endif
+        BlockState state,
+        WorldAccess world,
+        BlockPos pos,
+        ItemStack item,
+        CallbackInfoReturnable<BlockState> cir
+    ) {
         if (AmsServerSettings.easyCompost) {
             int level = state.get(ComposterBlock.LEVEL);
             int newLevel = Math.min(7, level + 1);
