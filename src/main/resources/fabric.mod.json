@@ -30,6 +30,7 @@
   "mixins": [
     "amscarpet.mixins.json"
   ],
+  "accessWidener": "carpetamsaddition.accesswidener",
   "depends": {
     "minecraft": "${minecraft_dependency}",
     "carpet": "${carpet_dependency}"

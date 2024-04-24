@@ -36,9 +36,9 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// mods
-	//modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") //modrinth
-	modImplementation "carpet:fabric-carpet:${project.carpet_core_version}" //masa
-	//modImplementation("curse.maven:carpet-349239:${project.carpet_core_version}") //cursemaven
+	//modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") // modrinth
+	modImplementation "carpet:fabric-carpet:${project.carpet_core_version}" // masa
+	//modImplementation("curse.maven:carpet-349239:${project.carpet_core_version}") // cursemaven
 
 	// library mods
 	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
@@ -67,25 +67,25 @@ loom {
             ideConfigGenerated false
         }
     }
+
+	accessWidenerPath = file("carpetamsaddition.accesswidener")
 }
 
 remapJar {
 	remapperIsolation = true
 }
 
+JavaVersion JAVA_VERSION
 if (mcVersion >= 12005) {
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	JAVA_VERSION = JavaVersion.VERSION_21
 } else if (mcVersion >= 11800) {
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
+	JAVA_VERSION = JavaVersion.VERSION_17
 } else if (mcVersion >= 11700) {
-	sourceCompatibility = JavaVersion.VERSION_16
-	targetCompatibility = JavaVersion.VERSION_16
+	JAVA_VERSION = JavaVersion.VERSION_16
 } else {
-	sourceCompatibility = JavaVersion.VERSION_1_8
-	targetCompatibility = JavaVersion.VERSION_1_8
+	JAVA_VERSION = JavaVersion.VERSION_1_8
 }
+JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_VERSION
 
 String versionSuffix = ''
 // detect github action environment variables
@@ -101,6 +101,8 @@ group = project.maven_group
 archivesBaseName = project.archives_base_name + '-mc' + project.minecraft_version + '-fabric'
 
 processResources {
+	from "carpetamsaddition.accesswidener"
+
 	inputs.property "version", fullModVersion
 
 	filesMatching("fabric.mod.json") {
@@ -112,6 +114,12 @@ processResources {
 			"minecraft_dependency": project.minecraft_dependency,
 		]
 		expand valueMap
+	}
+
+	filesMatching("amscarpet.mixins.json") {
+		filter {
+			text -> text.replace("/*JAVA_VERSION*/", "JAVA_${MIXIN_COMPATIBILITY_LEVEL.ordinal() + 1}")
+		}
 	}
 }
 
