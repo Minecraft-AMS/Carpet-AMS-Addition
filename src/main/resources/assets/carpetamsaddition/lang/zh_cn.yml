@@ -238,11 +238,13 @@ carpetamsaddition:
         desc: 更改服务器允许玩家与方块的最大交互距离，设置为“-1”禁用该规则
         extra:
           '0': '允许设定的范围：0 - 512'
+          '1': 'Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏'
       maxPlayerEntityInteractionRange:
         name: 最大玩家实体交互距离
         desc: 更改服务器允许玩家与实体的最大交互距离，设置为“-1”禁用该规则
         extra:
           '0': '允许设定的范围：0 - 512'
+          '1': 'Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏'
       maxClientInteractionReachDistance:
         name: 客户端最大交互距离
         desc: 更改客户端允许的最大交互距离，设置为“-1”禁用该规则
@@ -419,7 +421,7 @@ carpetamsaddition:
           '3': '[fakePlayerOnly] - 只有假人死亡时发送消息'
       perfectInvisibility:
         name: 完美隐身
-        desc: 当玩家拥有隐身效果时将完全隐身，即使穿着全套盔甲
+        desc: 当玩家拥有隐身效果时将对生物完全隐身，即使穿着全套盔甲
       sneakInvisibility:
         name: 潜行隐身
         desc: 当玩家潜行时将对生物完全隐身，即使穿着全套盔甲

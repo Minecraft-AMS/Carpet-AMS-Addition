@@ -202,10 +202,12 @@ carpetamsaddition:
         desc: Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule
         extra:
           '0': 'The range of values: 0 - 512'
+          '1': 'When Minecraft >= 1.20.5, players need to log back in after modifying values'
       maxPlayerEntityInteractionRange:
         desc: Change the maximum entity interaction distance allowed by the server, set to "-1" to disable this rule
         extra:
           '0': 'The range of values: 0 - 512'
+          '1': 'When Minecraft >= 1.20.5, players need to log back in after modifying values'
       maxClientInteractionReachDistance:
         desc: Change the maximum interaction distance allowed by the client, set to "-1" to disable this rule
         extra:
