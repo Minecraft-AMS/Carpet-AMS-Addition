@@ -932,8 +932,9 @@ To use this rule, please follow the steps below:
 
 ## maxPlayerBlockInteractionRange
 
-
 Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule.
+
+When Minecraft >= 1.20.5, players need to log back in after modifying values.
 
 - Type: `double`
 
@@ -951,8 +952,9 @@ Change the maximum block interaction distance allowed by the server, set to "-1"
 
 ## maxPlayerEntityInteractionRange
 
-
 Change the maximum entity interaction distance allowed by the server, set to "-1" to disable this rule.
+
+When Minecraft >= 1.20.5, players need to log back in after modifying values.
 
 - Type: `double`
 

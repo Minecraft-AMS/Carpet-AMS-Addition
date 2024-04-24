@@ -899,6 +899,8 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 更改服务器允许玩家与方块的最大交互距离，设置为“-1”禁用该规则。
 
+Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏。
+
 - 类型: `double`
 
 
@@ -916,6 +918,8 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 ## 最大玩家实体交互距离（maxPlayerEntityInteractionRange）
 
 更改服务器允许玩家与实体的最大交互距离，设置为“-1”禁用该规则。
+
+Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏。
 
 - 类型: `double`
 
