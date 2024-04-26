@@ -77,15 +77,18 @@ public abstract class PlayerEntityMixin implements EntityAccessorMixin {
                 }
             };
             instaKill.accept(target);
-            this.accessorGetWorld().playSound(null, this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(),
-                    SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, this.getSoundCategory(), 1.0F, 1.0F);
+            this.accessorGetWorld().playSound(
+                null, this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(),
+                SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, this.getSoundCategory(), 1.0F, 1.0F
+            );
             if (this.invokerIsSneaking()) {
                 this.accessorGetWorld().
                 getNonSpectatingEntities(Entity.class, target.getBoundingBox().expand(2.0D, 0.50D, 2.0D)).stream().
-                filter(entity -> entity.isAttackable() && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(entity)).
-                forEach(instaKill);
-                this.accessorGetWorld().playSound(null, this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(),
-                SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, this.getSoundCategory(), 1.0F, 1.0F);
+                filter(entity -> entity.isAttackable() && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(entity)).forEach(instaKill);
+                this.accessorGetWorld().playSound(
+                    null, this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(),
+                    SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, this.getSoundCategory(), 1.0F, 1.0F
+                );
             }
             ci.cancel();
         }

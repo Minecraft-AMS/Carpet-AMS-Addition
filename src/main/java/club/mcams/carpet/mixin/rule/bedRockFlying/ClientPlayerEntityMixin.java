@@ -34,19 +34,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayerEntity.class)
 public abstract class ClientPlayerEntityMixin implements ClientPlayerEntityInvoker {
-    @Inject(method = "move", at = @At("TAIL"),cancellable = true)
+    @Inject(method = "move", at = @At("TAIL"), cancellable = true)
     private void onMove(MovementType movementType, Vec3d movement, CallbackInfo ci) {
         if (AmsServerSettings.bedRockFlying) {
-            ClientPlayerEntity currentInstance = (ClientPlayerEntity) (Object) this;
+            ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
             if (
                 movementType == MovementType.SELF &&
                 //#if MC>=11700
-                currentInstance.getAbilities().flying &&
+                player.getAbilities().flying &&
                 //#else if MC<11700
-                //$$ currentInstance.abilities.flying &&
+                //$$ player.abilities.flying &&
                 //#endif
-                !this.invokerHasMovementInput()) {
-                currentInstance.setVelocity(Vec3d.ZERO);
+                !this.invokerHasMovementInput()
+            ) {
+                player.setVelocity(Vec3d.ZERO);
                 ci.cancel();
             }
         }

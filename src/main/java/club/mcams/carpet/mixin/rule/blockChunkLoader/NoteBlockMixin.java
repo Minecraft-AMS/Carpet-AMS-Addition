@@ -67,7 +67,7 @@ public abstract class NoteBlockMixin {
             ChunkPos chunkPos = new ChunkPos(pos);
             BlockState noteBlockUp = world.getBlockState(pos.up(1));
             if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "note_block")) {
-                BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
+                BlockChunkLoaderHelper.addNoteBlockTicket((ServerWorld) world, chunkPos);
             } else if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block")) {
                 loadChunkIfMatch(world, chunkPos, noteBlockUp, Blocks.BONE_BLOCK);
             } else if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull")) {
@@ -80,7 +80,7 @@ public abstract class NoteBlockMixin {
     private void loadChunkIfMatch(World world, ChunkPos chunkPos, BlockState blockState, Block... blocks) {
         for (Block block : blocks) {
             if (blockState.getBlock() == block) {
-                BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
+                BlockChunkLoaderHelper.addNoteBlockTicket((ServerWorld) world, chunkPos);
                 break;
             }
         }

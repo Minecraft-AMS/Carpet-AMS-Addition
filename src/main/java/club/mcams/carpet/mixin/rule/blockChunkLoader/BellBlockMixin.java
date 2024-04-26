@@ -57,7 +57,7 @@ public abstract class BellBlockMixin {
     ) {
         if (AmsServerSettings.bellBlockChunkLoader && !world.isClient) {
             ChunkPos chunkPos = new ChunkPos(pos);
-            BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
+            BlockChunkLoaderHelper.addBellBlockTicket((ServerWorld) world, chunkPos);
         }
     }
 }

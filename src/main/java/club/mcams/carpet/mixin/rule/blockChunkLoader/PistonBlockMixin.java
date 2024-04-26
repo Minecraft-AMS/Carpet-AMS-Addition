@@ -66,7 +66,7 @@ public abstract class PistonBlockMixin {
     private void loadChunkIfMatch(World world, ChunkPos chunkPos, BlockState blockState, Block... blocks) {
         for (Block block : blocks) {
             if (blockState.getBlock() == block) {
-                BlockChunkLoaderHelper.loadChunk((ServerWorld) world, chunkPos);
+                BlockChunkLoaderHelper.addPistonBlockTicket((ServerWorld) world, chunkPos);
                 break;
             }
         }
