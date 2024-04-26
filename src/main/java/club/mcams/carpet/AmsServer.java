@@ -22,6 +22,9 @@ package club.mcams.carpet;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+//#if MC>=12005
+//$$ import carpet.network.ServerNetworkHandler;
+//#endif
 
 import club.mcams.carpet.commands.RegisterCommands;
 import club.mcams.carpet.config.LoadConfigFromJson;
@@ -99,6 +102,9 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onPlayerLoggedIn(ServerPlayerEntity player) {
+        //#if MC>=12005
+        //$$ ServerNetworkHandler.onHello(player, "1.20.5");
+        //#endif
         if (AmsServerSettings.welcomeMessage) {
             CustomWelcomeMessageConfig.handleMessage(player, AmsServer.minecraftServer);
         }
