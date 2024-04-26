@@ -219,7 +219,7 @@
 
 ## 方块加载时长控制器（blockChunkLoaderTimeController）
 
-用于控制方块加载系列规则的加载时长。
+用于控制方块加载系列规则的加载时长（需要重启服务器）。
 
 受影响的规则：
 
@@ -227,7 +227,7 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 ## 方块加载范围控制器（blockChunkLoaderRangeController）
 
-用于控制方块加载系列规则的加载范围。
+用于控制方块加载系列规则的加载范围（需要重启服务器）。
 
 受影响的规则：
 
@@ -899,7 +899,9 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 更改服务器允许玩家与方块的最大交互距离，设置为“-1”禁用该规则。
 
-Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏。
+Minecraft >= 1.20.5 时可以使用maxPlayerBlockInteractionRangeScope规则来修改其作用域。
+
+global模式下修改值后需要玩家重新进入游戏。
 
 - 类型: `double`
 
@@ -919,7 +921,9 @@ Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏。
 
 更改服务器允许玩家与实体的最大交互距离，设置为“-1”禁用该规则。
 
-Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏。
+Minecraft >= 1.20.5 时可以使用maxPlayerEntityInteractionRangeScope规则来修改其作用域。
+
+global模式下修改值后需要玩家重新进入游戏。
 
 - 类型: `double`
 
@@ -935,13 +939,59 @@ Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏。
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 最大玩家方块交互距离作用域（maxPlayerBlockInteractionRangeScope）
+
+更改maxPlayerBlockInteractionRange规则的作用域。
+
+[server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行。
+
+[global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离。
+
+<该规则 Minecraft >= 1.20.5 可用>
+
+- 类型: `String`
+
+
+
+- 默认值: `server`
+
+
+
+- 参考选项: `server`, `global`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 最大玩家实体交互距离作用域（maxPlayerEntityInteractionRangeScope）
+
+更改maxPlayerEntityInteractionRange规则的作用域。
+
+[server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行。
+
+[global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离。
+
+<该规则 Minecraft >= 1.20.5 可用>
+
+- 类型: `String`
+
+
+
+- 默认值: `server`
+
+
+
+- 参考选项: `server`, `global`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 客户端最大方块放置距离（maxClientInteractionReachDistance）
 
 更改客户端允许的最大交互距离，设置为 `-1` 禁用该规则。
 
 需要关闭Tweakeroo的tweakBlockReachOverride功能。
-
-<该规则 Minecraft < 1.20.5 可用>
 
 - 类型: `double`
 

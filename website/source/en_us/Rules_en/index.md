@@ -236,7 +236,7 @@ After 300 ticks without any players in the current dimension on the server, Mine
 
 ## blockChunkLoaderTimeController
 
-Used to control the loading time of block loader series rules.
+Used to control the loading time of block loader series rules.  (need restart server)
 
 Affected rules: 
 
@@ -258,7 +258,7 @@ noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader
 
 ## blockChunkLoaderRangeController
 
-Used to control the loading range of block loader series rules.
+Used to control the loading range of block loader series rules.  (need restart server)
 
 Affected rules: 
 
@@ -934,7 +934,11 @@ To use this rule, please follow the steps below:
 
 Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule.
 
-When Minecraft >= 1.20.5, players need to log back in after modifying values.
+When Minecraft >= 1.20.5, you can use the rule "maxPlayerBlockInteractionRangeScope" to modify its scope.
+
+Changing a value in global mode requires the player to re-enter the game.
+
+
 
 - Type: `double`
 
@@ -954,7 +958,9 @@ When Minecraft >= 1.20.5, players need to log back in after modifying values.
 
 Change the maximum entity interaction distance allowed by the server, set to "-1" to disable this rule.
 
-When Minecraft >= 1.20.5, players need to log back in after modifying values.
+When Minecraft >= 1.20.5, you can use the rule "maxPlayerEntityInteractionRangeScope" to modify its scope.
+
+Changing a value in global mode requires the player to re-enter the game.
 
 - Type: `double`
 
@@ -970,13 +976,59 @@ When Minecraft >= 1.20.5, players need to log back in after modifying values.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## maxPlayerBlockInteractionRangeScope
+
+Change the scope of the "maxPlayerBlockInteractionRange" rule.
+
+[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.
+
+[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.
+
+< Available for Minecraft >= 1.20.5 >
+
+- Type: `String`
+
+
+
+- Default: `server`
+
+
+
+- Suggested options: `server`, `global`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## maxPlayerEntityInteractionRangeScope
+
+Change the scope of the "maxPlayerEntityInteractionRange" rule.
+
+[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.
+
+[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.
+
+< Available for Minecraft >= 1.20.5 >
+
+- Type: `String`
+
+
+
+- Default: `server`
+
+
+
+- Suggested options: `server`, `global`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## maxClientInteractionReachDistance
 
 Change the maximum interaction distance allowed by the client, set to `-1` to disable this rule.
 
 Need to disable the tweakBlockReachOverride feature in Tweakeroo.
-
-< Available for Minecraft < 1.20.5 >
 
 
 - Type: `double`
