@@ -202,12 +202,24 @@ carpetamsaddition:
         desc: Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule
         extra:
           '0': 'The range of values: 0 - 512'
-          '1': 'When Minecraft >= 1.20.5, players need to log back in after modifying values'
+          '1': 'When Minecraft >= 1.20.5, you can use the rule "maxPlayerBlockInteractionRangeScope" to modify its scope'
+          '2': 'Changing a value in global mode requires the player to re-enter the game'
       maxPlayerEntityInteractionRange:
         desc: Change the maximum entity interaction distance allowed by the server, set to "-1" to disable this rule
         extra:
           '0': 'The range of values: 0 - 512'
-          '1': 'When Minecraft >= 1.20.5, players need to log back in after modifying values'
+          '1': 'When Minecraft >= 1.20.5, you can use the rule "maxPlayerEntityInteractionRangeScope" to modify its scope'
+          '2': 'Changing a value in global mode requires the player to re-enter the game'
+      maxPlayerBlockInteractionRangeScope:
+        desc: Change the scope of the "maxPlayerBlockInteractionRange" rule
+        extra:
+          '0': '[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client'
+          '1': '[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client'
+      maxPlayerEntityInteractionRangeScope:
+        desc: Change the scope of the "maxPlayerEntityInteractionRange" rule
+        extra:
+          '0': '[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client'
+          '1': '[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client'
       maxClientInteractionReachDistance:
         desc: Change the maximum interaction distance allowed by the client, set to "-1" to disable this rule
         extra:
@@ -393,12 +405,12 @@ carpetamsaddition:
       keepWorldTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction
       blockChunkLoaderTimeController:
-        desc: Used to control the loading time of block loader series rules
+        desc: Used to control the loading time of block loader series rules (need restart server)
         extra:
           '0': 'Affected rules: '
           '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
       blockChunkLoaderRangeController:
-        desc: Used to control the loading range of block loader series rules
+        desc: Used to control the loading range of block loader series rules (need restart server)
         extra:
           '0': 'Affected rules: '
           '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'

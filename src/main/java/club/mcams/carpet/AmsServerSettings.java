@@ -192,8 +192,24 @@ public class AmsServerSettings {
     )
     public static double maxPlayerEntityInteractionRange = -1.0D;
 
-    //#if MC<12005
-    @GameVersion(version = "Minecraft < 1.20.5", desc = "1.20.5后或许不再需要这个功能？")
+    //#if MC>=12005
+    //$$ @GameVersion(version = "Minecraft >= 1.20.5")
+    //$$ @Rule(
+    //$$     options = {"server", "global"},
+    //$$     categories = {AMS, FEATURE, SURVIVAL}
+    //$$ )
+    //$$ public static String maxPlayerBlockInteractionRangeScope = "server";
+    //#endif
+
+    //#if MC>=12005
+    //$$ @GameVersion(version = "Minecraft >= 1.20.5")
+    //$$ @Rule(
+    //$$         options = {"server", "global"},
+    //$$         categories = {AMS, FEATURE, SURVIVAL}
+    //$$ )
+    //$$ public static String maxPlayerEntityInteractionRangeScope = "server";
+    //#endif
+
     @Rule(
         options = {"-1"},
         categories = {AMS, FEATURE, SURVIVAL},
@@ -201,7 +217,6 @@ public class AmsServerSettings {
         strict = false
     )
     public static double maxClientInteractionReachDistance = -1.0D;
-    //#endif
 
     @Rule(
         options = {"VANILLA", "minecraft:bedrock", "minecraft:bedrock,minecraft:obsidian"},

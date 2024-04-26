@@ -22,10 +22,10 @@ package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.player.PlayerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,31 +35,35 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import java.util.Objects;
 
 @GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(value = EntityAttributeInstance.class, priority = 1688)
-public abstract class EntityAttributeInstanceMixin implements EntityAttributeInstanceInvoker {
-    @ModifyReturnValue(method = "getBaseValue", at = @At("RETURN"))
-    private double getPlayerBlockInteractionBaseValue(double original) {
-        if (
-            AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D &&
-            Objects.equals(AmsServerSettings.maxPlayerBlockInteractionRangeScope, "global") &&
-            this.invokeGetAttribute().equals(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE)
-        ) {
+@Mixin(value = PlayerEntity.class, priority = 1688)
+public abstract class PlayerEntityMixin {
+    @WrapOperation(
+        method = "canInteractWithBlockAt",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;getBlockInteractionRange()D"
+        )
+    )
+    private double canInteractWithBlockAt(PlayerEntity player, Operation<Double> original) {
+        if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D && Objects.equals(AmsServerSettings.maxPlayerBlockInteractionRangeScope, "server")) {
             return AmsServerSettings.maxPlayerBlockInteractionRange;
         } else {
-            return original;
+            return original.call(player);
         }
     }
 
-    @ModifyReturnValue(method = "getBaseValue", at = @At("RETURN"))
-    private double getPlayerEntityInteractionBaseValue(double original) {
-        if (
-            AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D &&
-            Objects.equals(AmsServerSettings.maxPlayerEntityInteractionRangeScope, "global") &&
-            this.invokeGetAttribute().equals(EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE)
-        ) {
+    @WrapOperation(
+        method = "canInteractWithEntityIn",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;getEntityInteractionRange()D"
+        )
+    )
+    private double canInteractWithEntityAt(PlayerEntity player, Operation<Double> original) {
+        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && Objects.equals(AmsServerSettings.maxPlayerEntityInteractionRangeScope, "server")) {
             return AmsServerSettings.maxPlayerEntityInteractionRange;
         } else {
-            return original;
+            return original.call(player);
         }
     }
 }

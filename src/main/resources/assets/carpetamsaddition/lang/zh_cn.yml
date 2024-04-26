@@ -238,13 +238,27 @@ carpetamsaddition:
         desc: 更改服务器允许玩家与方块的最大交互距离，设置为“-1”禁用该规则
         extra:
           '0': '允许设定的范围：0 - 512'
-          '1': 'Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏'
+          '1': 'Minecraft >= 1.20.5 时可以使用maxPlayerBlockInteractionRangeScope规则来修改其作用域'
+          '2': 'global模式下修改值后需要玩家重新进入游戏'
       maxPlayerEntityInteractionRange:
         name: 最大玩家实体交互距离
         desc: 更改服务器允许玩家与实体的最大交互距离，设置为“-1”禁用该规则
         extra:
           '0': '允许设定的范围：0 - 512'
-          '1': 'Minecraft >= 1.20.5 时，修改值后需要玩家重新进入游戏'
+          '1': 'Minecraft >= 1.20.5 时可以使用maxPlayerEntityInteractionRangeScope规则来修改其作用域'
+          '2': 'global模式下修改值后需要玩家重新进入游戏'
+      maxPlayerBlockInteractionRangeScope:
+        name: 最大玩家方块交互距离作用域
+        desc: 更改maxPlayerBlockInteractionRange规则的作用域
+        extra:
+          '0': '[server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行'
+          '1': '[global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离'
+      maxPlayerEntityInteractionRangeScope:
+        name: 最大玩家实体交互距离作用域
+        desc: 更改maxPlayerEntityInteractionRange规则的作用域
+        extra:
+          '0': '[server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行'
+          '1': '[global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离'
       maxClientInteractionReachDistance:
         name: 客户端最大交互距离
         desc: 更改客户端允许的最大交互距离，设置为“-1”禁用该规则
@@ -490,13 +504,13 @@ carpetamsaddition:
         desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制
       blockChunkLoaderTimeController:
         name: 方块加载时长控制器
-        desc: 用于控制方块加载系列规则的加载时长
+        desc: 用于控制方块加载系列规则的加载时长（需要重启服务器）
         extra:
           '0': '受影响的规则：'
           '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
       blockChunkLoaderRangeController:
         name: 方块加载范围控制器
-        desc: 用于控制方块加载系列规则的加载范围
+        desc: 用于控制方块加载系列规则的加载范围（需要重启服务器）
         extra:
           '0': '受影响的规则：'
           '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
