@@ -30,7 +30,6 @@ import club.mcams.carpet.config.rule.commandCustomBlockBlastResistance.CustomBlo
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
@@ -98,15 +97,15 @@ public class CustomBlockBlastResistanceCommandRegistry {
             float oldBlastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             player.sendMessage(
                 Messenger.s(
-                    MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + oldBlastResistance +
-                " -> " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
+                    MSG_HEAD + getBlockRegisterName(state) + "/" + oldBlastResistance +
+                    " -> " + getBlockRegisterName(state) + "/" + blastResistance
                 ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
                 false
             );
         } else {
             player.sendMessage(
                 Messenger.s(
-                    MSG_HEAD + "+ " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
+                    MSG_HEAD + "+ " + getBlockRegisterName(state) + "/" + blastResistance
                 ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
                 false
             );
@@ -124,7 +123,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
             player.sendMessage(
                 Messenger.s(
-                    MSG_HEAD + "- " + RegexTools.getBlockRegisterName(state.getBlock().toString()) + "/" + blastResistance
+                    MSG_HEAD + "- " + getBlockRegisterName(state) + "/" + blastResistance
                 ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
                 false
             );
@@ -132,7 +131,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         } else {
             player.sendMessage(
                 Messenger.s(
-                    MSG_HEAD + RegexTools.getBlockRegisterName(state.getBlock().toString()) + translator.tr("not_found").getString()
+                    MSG_HEAD + getBlockRegisterName(state) + translator.tr("not_found").getString()
                 ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
                 false
             );
@@ -163,8 +162,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         for (Map.Entry<BlockState, Float> entry : CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.entrySet()) {
             BlockState state = entry.getKey();
             float blastResistance = entry.getValue();
-            Block block = state.getBlock();
-            String blockName = RegexTools.getBlockRegisterName(block.toString());
+            String blockName = getBlockRegisterName(state);
             player.sendMessage(
                 Messenger.s(blockName + " / " + blastResistance).
                 setStyle(Style.EMPTY.withColor(Formatting.GREEN)),
@@ -190,5 +188,9 @@ public class CustomBlockBlastResistanceCommandRegistry {
             false
         );
         return 1;
+    }
+
+    private static String getBlockRegisterName(BlockState state) {
+        return RegexTools.getBlockRegisterName(state.getBlock().toString());
     }
 }
