@@ -22,20 +22,17 @@ package club.mcams.carpet.mixin.rule.kirinArm;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
 import net.minecraft.entity.player.PlayerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin {
-    @Inject(method = "getBlockBreakingSpeed", at = @At("HEAD"), cancellable = true)
-    private void getBlockBreakingSpeed(CallbackInfoReturnable<Float> cir) {
-        if (AmsServerSettings.kirinArm) {
-            cir.setReturnValue(Float.MAX_VALUE);
-            cir.cancel();
-        }
+    @ModifyReturnValue(method = "getBlockBreakingSpeed", at = @At("RETURN"))
+    private float getBlockBreakingSpeed(float original) {
+        return AmsServerSettings.kirinArm ? Float.MAX_VALUE : original;
     }
 }
