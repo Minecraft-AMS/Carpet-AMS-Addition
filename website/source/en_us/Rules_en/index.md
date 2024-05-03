@@ -1889,6 +1889,26 @@ When the player is sneak, they will be completely hidden from mobs, even when we
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## commandCustomCommandPermissionLevel
+
+Customize the permission level of any commands.
+
+After enabling the rules, use the /customCommandPermissionLevel command to view the usage instructions.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `COMMAND`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

@@ -81,6 +81,18 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 
 
 
+- `/leader removeAll`
+
+  Remove all tour guide.
+
+
+
+- `/leader list`
+
+  View tour guide list.
+
+
+
 - `/leader help`
 
   View the usage instructions.
@@ -120,3 +132,33 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 - `/goto <dimension>`
 
   Teleport to the corresponding coordinates of the current player location.
+
+### commandCustomCommandPermissionLevel
+
+- `/customCommandPermissionLevel set <command> <permissionLevel>`
+
+  Set the permission level of a command.
+
+
+
+- `/customCommandPermissionLevel remove <command>`
+
+  Remove a modified command.
+
+
+
+- `/customCommandPermissionLevel removeAll`
+
+  Remove all modified commands.
+
+
+
+- `/customCommandPermissionLevel list`
+
+  View the list of modified commands.
+
+
+
+- `/customCommandPermissionLevel help`
+
+  View the usage instructions.

@@ -81,6 +81,18 @@
 
 
 
+- `/leader removeAll`
+
+  解雇所有导游。
+
+
+
+- `/leader list`
+
+  查看导游列表。
+
+
+
 - `/leader help`
 
   查看使用说明。
@@ -120,5 +132,35 @@
 - `/goto <维度>`
 
   传送至当前玩家所在位置的对应坐标。
+
+### 自定义命令权限等级（commandCustomCommandPermissionLevel）
+
+- `/customCommandPermissionLevel set <指令> <权限等级>`
+
+  设置某个指令的权限等级。
+
+
+
+- `/customCommandPermissionLevel remove <指令>`
+
+  删除某个被修改的指令。
+
+
+
+- `/customCommandPermissionLevel removeAll`
+
+  删除所有被修改的指令。
+
+
+
+- `/customCommandPermissionLevel list`
+
+  查看被修改的指令列表。
+
+
+
+- `/customCommandPermissionLevel help`
+
+  查看使用说明。
 
 ​	

@@ -1848,6 +1848,26 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 自定义命令权限等级（commandCustomCommandPermissionLevel）
+
+自定义任何命令的权限等级。
+
+开启规则后使用 /customCommandPermissionLevel help 命令查看使用说明。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `SURVIVAL`, `COMMAND`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
