@@ -27,6 +27,7 @@ import carpet.CarpetServer;
 //#endif
 
 import club.mcams.carpet.commands.RegisterCommands;
+import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import club.mcams.carpet.config.LoadConfigFromJson;
 import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
@@ -37,6 +38,7 @@ import club.mcams.carpet.utils.CountRulesUtil;
 import club.mcams.carpet.utils.CraftingRuleUtil;
 
 import com.google.common.collect.Maps;
+
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.server.MinecraftServer;
@@ -105,8 +107,25 @@ public class AmsServer implements CarpetExtension {
         //#if MC>=12005
         //$$ ServerNetworkHandler.onHello(player, "1.20.5");
         //#endif
+
         if (AmsServerSettings.welcomeMessage) {
             CustomWelcomeMessageConfig.handleMessage(player, AmsServer.minecraftServer);
+        }
+
+        if (
+            player.getActiveStatusEffects().equals(LeaderCommandRegistry.HIGH_LIGHT) &&
+            !LeaderCommandRegistry.LEADER_LIST.containsValue(player.getUuidAsString())
+        ) {
+            player.removeStatusEffect(LeaderCommandRegistry.HIGH_LIGHT.getEffectType());
+        }
+
+        if (LeaderCommandRegistry.LEADER_LIST.containsValue(player.getUuidAsString())) {
+            player.addStatusEffect(
+                LeaderCommandRegistry.HIGH_LIGHT
+                //#if MC>=11700
+                , player
+                //#endif
+            );
         }
     }
 

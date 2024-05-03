@@ -46,11 +46,16 @@ carpetamsaddition:
       who_get_who: '%s 获取了 %s 的位置'
     leader:
       add: '成为了导游'
+      is_already_leader: '已经是一名导游'
       remove: '不再是导游了'
+      is_not_leader: '不是一名导游'
+      removeAll: '所有的导游都被解雇了'
       list: '[ 导游列表 ]'
       help:
         add: '/leader add <PlayerName>  ->  添加一名导游'
         remove: '/leader remove <PlayerName>  ->  移除一名导游'
+        removeAll: '/leader removeAll  ->  解雇所有导游'
+        list: '/leader list  ->  查看导游列表'
     ping:
       stop_ping: '已中断ping操作'
       active_ping_is_null: '没有正在活动的ping操作'
@@ -67,6 +72,16 @@ carpetamsaddition:
       available_processors: '可用处理器：'
       total_memory: '总内存：'
       free_memory: '可用内存：'
+    customCommandPermissionLevel:
+      need_restart_server_msg: '重启服务器后生效'
+      not_found: ' 不存在于配置文件中'
+      removeAll: '已删除所有条目'
+      list: '[ 自定义指令权限等级列表 ]'
+      help:
+        set: '/customCommandPermissionLevel set <指令> <权限等级>  ->  设置某个指令的权限等级'
+        remove: '/customCommandPermissionLevel remove <指令>  ->  删除某个被修改的指令'
+        removeAll: '/customCommandPermissionLevel removeAll  ->  删除所有被修改的指令'
+        list: '/customCommandPermissionLevel list  ->  查看被修改的指令列表'
 
   logger:
     serverRuntime:
@@ -439,6 +454,11 @@ carpetamsaddition:
       sneakInvisibility:
         name: 潜行隐身
         desc: 当玩家潜行时将对生物完全隐身，即使穿着全套盔甲
+      commandCustomCommandPermissionLevel:
+        name: 自定义命令权限等级
+        desc: 自定义任何命令的权限等级
+        extra:
+          '0': '开启规则后使用 /customCommandPermissionLevel help 命令查看使用说明'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

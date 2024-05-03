@@ -92,7 +92,6 @@ public class CustomBlockBlastResistanceCommandRegistry {
     }
 
     private static int set(BlockState state, float blastResistance, MinecraftServer server, PlayerEntity player) {
-        String CONFIG_FILE_PATH = CustomBlockBlastResistanceConfig.getPath(server);
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float oldBlastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             player.sendMessage(
@@ -111,16 +110,15 @@ public class CustomBlockBlastResistanceCommandRegistry {
             );
         }
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, blastResistance);
-        CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+        saveToJson(server);
         return 1;
     }
 
     private static int remove(BlockState state, MinecraftServer server, PlayerEntity player) {
-        String CONFIG_FILE_PATH = CustomBlockBlastResistanceConfig.getPath(server);
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float blastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.remove(state);
-            CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+            saveToJson(server);
             player.sendMessage(
                 Messenger.s(
                     MSG_HEAD + "- " + getBlockRegisterName(state) + "/" + blastResistance
@@ -140,9 +138,8 @@ public class CustomBlockBlastResistanceCommandRegistry {
     }
 
     private static int removeAll(MinecraftServer server, PlayerEntity player) {
-        String CONFIG_FILE_PATH = CustomBlockBlastResistanceConfig.getPath(server);
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
-        CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+        saveToJson(server);
         player.sendMessage(
             Messenger.s(
                 MSG_HEAD + translator.tr("removeAll").getString()
@@ -192,5 +189,10 @@ public class CustomBlockBlastResistanceCommandRegistry {
 
     private static String getBlockRegisterName(BlockState state) {
         return RegexTools.getBlockRegisterName(state.getBlock().toString());
+    }
+
+    private static void saveToJson(MinecraftServer server) {
+        String CONFIG_FILE_PATH = CustomBlockBlastResistanceConfig.getPath(server);
+        CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
     }
 }

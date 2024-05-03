@@ -46,11 +46,16 @@ carpetamsaddition:
       who_get_who: '%s got %s location'
     leader:
       add: 'became a tour guide'
+      is_already_leader: 'is already leader'
       remove: 'not a tour guide anymore'
+      is_not_leader: 'is not leader'
+      removeAll: 'All the guides were dismissed'
       list: '[ Leader list ]'
       help:
         add: '/leader add <PlayerName>  ->  Add a tour guide'
         remove: '/leader remove <PlayerName>  ->  Remove a tour guide'
+        removeAll: '/leader removeAll  ->  Remove all tour guide'
+        list: '/leader list  ->  View tour guide list'
     ping:
       stop_ping: 'Ping operation stopped.'
       active_ping_is_null: 'No active ping operation to stop.'
@@ -67,6 +72,16 @@ carpetamsaddition:
       available_processors: 'Available Processors:'
       total_memory: 'Total Memory:'
       free_memory: 'Free Memory:'
+    customCommandPermissionLevel:
+      need_restart_server_msg: 'It will take effect after restarting the server'
+      not_found: ' Does not exist in the configuration file'
+      removeAll: 'All entries have been removed'
+      list: '[ Custom command permission level list ]'
+      help:
+        set: '/customCommandPermissionLevel set <command> <permissionLevel>  ->  Set the permission level of a command'
+        remove: '/customCommandPermissionLevel remove <command>  ->  Remove a modified command'
+        removeAll: '/customCommandPermissionLevel removeAll  ->  Remove all modified commands'
+        list: '/customCommandPermissionLevel list  ->  View the list of modified commands'
 
   logger:
     serverRuntime:
@@ -353,6 +368,10 @@ carpetamsaddition:
         desc: When the player is invisible, they will be completely hidden from mobs, even when wearing a full set of armor
       sneakInvisibility:
         desc: When the player is sneak, they will be completely hidden from mobs, even when wearing a full set of armor
+      commandCustomCommandPermissionLevel:
+        desc: Customize the permission level of any commands
+        extra:
+          '0': 'After enabling the rules, use the /customCommandPermissionLevel command to view the usage instructions'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

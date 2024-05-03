@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.commands;
 
+import club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
 import club.mcams.carpet.commands.rule.commandGetSaveSize.GetSaveSizeCommandRegistry;
 import club.mcams.carpet.commands.rule.commandGetSystemInfo.GetSystemInfoCommandRegistry;
 import club.mcams.carpet.commands.rule.commandHere.HereCommandRegistry;
@@ -72,5 +73,7 @@ public class RegisterCommands {
         GetSystemInfoCommandRegistry.register(dispatcher);
 
         GotoCommandRegistry.register(dispatcher);
+
+        CustomCommandPermissionLevelRegistry.register(dispatcher);
     }
 }

@@ -120,6 +120,7 @@
     "rule.sneakToEditSign.AbstractSignBlockMixin",
     "rule.sneakToEditSign.SignBlockEntityMixin",
     "rule.superBow.InfinityEnchantmentMixin",
+    "rule.commandCustomCommandPermissionLevel.CommandDispatcherMixin",
     "rule.undyingCoral.CoralBlockBlockMixin",
     "rule.undyingCoral.CoralParentBlockMixin",
     "rule.useItemCooldownDisabled.ItemCooldownManagerMixin",
