@@ -64,7 +64,7 @@ public class CraftingRuleUtil {
             try {
                 FileUtils.deleteDirectory(datapackPath);
             } catch (IOException e) {
-                AmsServer.LOGGER.error("Error deleting directory: " + datapackPath, e);
+                AmsServer.LOGGER.error("Error deleting directory: {}", datapackPath, e);
             }
         }
     }
@@ -75,7 +75,7 @@ public class CraftingRuleUtil {
             try {
                 FileUtils.deleteDirectory(new File(datapackPath + "/Ams_flexibleData/"));
             } catch (IOException e) {
-                AmsServer.LOGGER.error("Failed to delete directory Ams_flexibleData: " + e.getMessage());
+                AmsServer.LOGGER.error("Failed to delete directory Ams_flexibleData: {}", e.getMessage());
             }
         }
         datapackPath += "/AmsData/";
@@ -86,7 +86,7 @@ public class CraftingRuleUtil {
             Files.createDirectories(new File(datapackPath + "data/minecraft/recipes").toPath());
             copyFile("assets/carpetamsaddition/AmsRecipeTweakPack/pack.mcmeta", datapackPath + "pack.mcmeta");
         } catch (IOException e) {
-            AmsServer.LOGGER.error("Failed to create directories or copy files: " + e.getMessage());
+            AmsServer.LOGGER.error("Failed to create directories or copy files: {}", e.getMessage());
         }
         copyFile(
             "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/root.json",
@@ -146,7 +146,7 @@ public class CraftingRuleUtil {
                 } ));
                 fileStream.close();
             } catch (IOException e) {
-                AmsServer.LOGGER.error("Failed to list recipes in directory: " + e.getMessage());
+                AmsServer.LOGGER.error("Failed to list recipes in directory: {}", e.getMessage());
             }
             deleteRecipes(installedRecipes.toArray(new String[0]), recipeNamespace, datapackPath, ruleName, false);
             if (recipeNamespace.equals("ams")) {
@@ -162,7 +162,7 @@ public class CraftingRuleUtil {
                     } ));
                     fileStream.close();
                 } catch (IOException e) {
-                    AmsServer.LOGGER.error("Failed to list advancements in directory: " + e.getMessage());
+                    AmsServer.LOGGER.error("Failed to list advancements in directory: {}", e.getMessage());
                 }
                 for (String advancement : installedAdvancements.toArray(new String[0])) {
                     removeAdvancement(datapackPath, advancement);
@@ -223,7 +223,7 @@ public class CraftingRuleUtil {
         try {
             Files.deleteIfExists(new File(datapackPath + "ams/advancements/" + ruleName + ".json").toPath());
         } catch (IOException e) {
-            AmsServer.LOGGER.error("Failed to delete advancement file: " + ruleName + ".json: " + e.getMessage());
+            AmsServer.LOGGER.error("Failed to delete advancement file: {}.json: {}", ruleName, e.getMessage());
         }
     }
 
@@ -242,9 +242,9 @@ public class CraftingRuleUtil {
             assert source != null;
             Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            AmsServer.LOGGER.error("Resource '" + resourcePath + "' not found.");
+            AmsServer.LOGGER.error("Resource '{}' not found.", resourcePath);
         } catch (NullPointerException e) {
-            AmsServer.LOGGER.error("Resource '" + resourcePath + "' is null.");
+            AmsServer.LOGGER.error("Resource '{}' is null.", resourcePath);
         }
     }
 
@@ -253,7 +253,7 @@ public class CraftingRuleUtil {
             try {
                 Files.deleteIfExists(new File(datapackPath + recipeNamespace + "/recipes", recipeName).toPath());
             } catch (IOException e) {
-                AmsServer.LOGGER.error("Failed to delete recipe file " + recipeName + ": " + e.getMessage());
+                AmsServer.LOGGER.error("Failed to delete recipe file {}: {}", recipeName, e.getMessage());
             }
         }
         if (removeAdvancement && recipeNamespace.equals("ams")) {
@@ -296,7 +296,7 @@ public class CraftingRuleUtil {
             writer.write(new GsonBuilder().setPrettyPrinting().create().toJson(jsonObject));
             writer.close();
         } catch (IOException e) {
-            AmsServer.LOGGER.error("Failed to write JSON to file '" + filePath + "': " + e.getMessage());
+            AmsServer.LOGGER.error("Failed to write JSON to file '{}': {}", filePath, e.getMessage());
         }
     }
 }

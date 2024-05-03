@@ -22,20 +22,18 @@ package club.mcams.carpet.mixin.rule.noCakeEating;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
 import net.minecraft.block.CakeBlock;
 import net.minecraft.util.ActionResult;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CakeBlock.class)
 public abstract class CakeBlockMixin {
-    @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
-    private void noEat(CallbackInfoReturnable<ActionResult> cir) {
-        if (AmsServerSettings.noCakeEating) {
-            cir.setReturnValue(ActionResult.FAIL);
-        }
+    @ModifyReturnValue(method = "onUse", at = @At("RETURN"))
+    private ActionResult noEat(ActionResult original) {
+        return AmsServerSettings.noCakeEating ? ActionResult.FAIL : original;
     }
 }
