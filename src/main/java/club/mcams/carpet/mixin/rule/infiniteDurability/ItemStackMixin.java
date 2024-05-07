@@ -36,7 +36,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
     @Inject(
-        //#if MC>=12005
+        //#if MC>=12100
+        //$$ method = "damage(ILnet/minecraft/server/world/ServerWorld;Lnet/minecraft/server/network/ServerPlayerEntity;Ljava/lang/Runnable;)V",
+        //#elseif MC>=12005
         //$$ method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;Ljava/lang/Runnable;)V",
         //#elseif MC>=11900
         //$$ method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z",

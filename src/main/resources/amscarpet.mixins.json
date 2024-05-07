@@ -121,6 +121,7 @@
     "rule.sneakToEatCake.sneakToEatCake",
     "rule.sneakToEditSign.AbstractSignBlockMixin",
     "rule.sneakToEditSign.SignBlockEntityMixin",
+    "rule.superBow.EnchantmentMixin",
     "rule.superBow.InfinityEnchantmentMixin",
     "rule.undyingCoral.CoralBlockBlockMixin",
     "rule.undyingCoral.CoralParentBlockMixin",

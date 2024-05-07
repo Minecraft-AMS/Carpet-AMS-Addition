@@ -23,7 +23,6 @@ package club.mcams.carpet.mixin.rule.easyWitherSkeletonSkullDrop;
 import club.mcams.carpet.AmsServerSettings;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.item.Items;
@@ -41,8 +40,8 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
     }
 
     @Inject(method = "dropEquipment", at = @At("TAIL"))
-    private void dropEquipment(DamageSource source, int lootingMultiplier, boolean allowDrops, CallbackInfo ci) {
-        if (AmsServerSettings.easyWitherSkeletonSkullDrop && allowDrops) {
+    private void dropEquipment(CallbackInfo ci) {
+        if (AmsServerSettings.easyWitherSkeletonSkullDrop) {
             this.dropItem(Items.WITHER_SKELETON_SKULL);
         }
     }

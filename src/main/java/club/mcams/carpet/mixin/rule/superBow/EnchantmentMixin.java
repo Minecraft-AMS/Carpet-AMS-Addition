@@ -18,14 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.infiniteTrades;
+package club.mcams.carpet.mixin.rule.superBow;
 
-import net.minecraft.village.TradeOffer;
+import club.mcams.carpet.utils.compat.DummyClass;
+
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(TradeOffer.class)
-public interface TradeOfferAccessor {
-    @Accessor("uses")
-    void setUses(int size);
-}
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21")
+@Mixin(DummyClass.class)
+public abstract class EnchantmentMixin {}
