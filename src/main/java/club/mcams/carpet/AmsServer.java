@@ -104,8 +104,8 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onPlayerLoggedIn(ServerPlayerEntity player) {
-        //#if MC>=12005
-        //$$ ServerNetworkHandler.onHello(player, "1.20.5");
+        //#if MC==12005
+        //$$ ServerNetworkHandler.onHello(player, "carpet ams addition");
         //#endif
 
         if (AmsServerSettings.welcomeMessage) {
