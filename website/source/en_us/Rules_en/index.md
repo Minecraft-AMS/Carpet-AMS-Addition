@@ -1659,7 +1659,7 @@ Whenever you set the carpet rule, it will be automatically set to the default va
 
 ## experimentalContentCheckDisabled
 
-Allow playing Minecraft experimental content in the game by adding data packs.
+Allow playing Minecraft experimental content in the game by adding data packs  (need restart server). 
 
 < Available for Minecraft >= 1.19 >
 
@@ -2043,7 +2043,7 @@ Unlock crafting recipes for all items in the 1.21 experimental content.
 
 Using this rule suggests synchronously enabling experimentalContentCheckDisabled to prevent clients from being unable to use blocks.
 
-< Available for Minecraft 1.20.3 - 1.20.5 >
+< Available for Minecraft 1.20.3 - 1.20.6 >
 
 - Type: `boolean`
 

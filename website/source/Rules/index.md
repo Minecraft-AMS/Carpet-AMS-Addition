@@ -1618,7 +1618,7 @@ json位置：
 
 ## 禁用实验性内容检查（experimentalContentCheckDisabled）
 
-允许在游戏中通过添加数据包来游玩Minecraft的实验性内容。
+允许在游戏中通过添加数据包来游玩Minecraft的实验性内容（需要重启服务器）。
 
 <该规则 Minecraft >= 1.19 可用>
 
@@ -2004,7 +2004,7 @@ json位置：
 
 使用此规则建议同步开启禁用实验性内容检查（experimentalContentCheckDisabled）防止客户端无法使用方块。
 
-<该规则 Minecraft 1.20.3 - 1.20.5 可用>
+<该规则 Minecraft 1.20.3 - 1.20.6 可用>
 
 - 类型: `boolean`
 
