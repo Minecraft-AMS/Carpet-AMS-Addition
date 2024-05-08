@@ -28,7 +28,7 @@ import java.io.File;
 public class ModTest {
     public static void main(String[] args) {
         // 打印指定文件夹下的所有文件名
-        String directoryPath = "/*文件夹路径*/";
+        String directoryPath = "path";
         printFilesName(directoryPath);
 
         // 测试翻译
@@ -49,7 +49,7 @@ public class ModTest {
                     if (file.isDirectory()) {
                         printFilesName(file.getAbsolutePath());
                     } else {
-                        System.out.println(file.getName());
+                        System.out.println("\"" + file.getName() + "\",");
                     }
                 }
             }
