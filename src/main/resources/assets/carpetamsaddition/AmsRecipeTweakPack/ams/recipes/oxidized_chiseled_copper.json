@@ -11,6 +11,6 @@
     "#"
   ],
   "result": {
-    "item": "minecraft:oxidized_chiseled_copper"
+    "/*ams_recipes_item_id*/": "minecraft:oxidized_chiseled_copper"
   }
 }

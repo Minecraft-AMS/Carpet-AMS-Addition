@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 3,
-    "item": "minecraft:weathered_copper_door"
+    "/*ams_recipes_item_id*/": "minecraft:weathered_copper_door"
   }
 }

@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "minecraft:cut_copper"
   },
-  "result": "minecraft:chiseled_copper"
+  "result": {
+    "count": 1,
+    "/*ams_recipes_item_id*/": "minecraft:chiseled_copper"
+  }
 }

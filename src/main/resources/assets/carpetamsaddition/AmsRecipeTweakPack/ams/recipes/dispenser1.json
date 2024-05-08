@@ -9,7 +9,7 @@
     }
   ],
   "result":{
-    "item":"minecraft:dispenser",
+    "/*ams_recipes_item_id*/":"minecraft:dispenser",
     "count":1
   }
 }

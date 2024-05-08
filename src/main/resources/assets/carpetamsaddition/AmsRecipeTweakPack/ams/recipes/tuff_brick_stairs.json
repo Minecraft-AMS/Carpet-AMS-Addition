@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 4,
-    "item": "minecraft:tuff_brick_stairs"
+    "/*ams_recipes_item_id*/": "minecraft:tuff_brick_stairs"
   }
 }

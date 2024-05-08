@@ -19,6 +19,6 @@
   ],
   "result": {
     "count": 4,
-    "item": "minecraft:copper_bulb"
+    "/*ams_recipes_item_id*/": "minecraft:copper_bulb"
   }
 }

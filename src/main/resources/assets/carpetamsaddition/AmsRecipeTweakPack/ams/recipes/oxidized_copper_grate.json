@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 4,
-    "item": "minecraft:oxidized_copper_grate"
+    "/*ams_recipes_item_id*/": "minecraft:oxidized_copper_grate"
   }
 }

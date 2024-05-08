@@ -17,7 +17,7 @@
     }
   },
   "result":{
-    "item":"minecraft:sculk_sensor",
+    "/*ams_recipes_item_id*/":"minecraft:sculk_sensor",
     "count":1
   }
 }

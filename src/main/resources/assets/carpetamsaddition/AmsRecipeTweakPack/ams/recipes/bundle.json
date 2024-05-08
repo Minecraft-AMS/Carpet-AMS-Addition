@@ -14,7 +14,7 @@
     }
   },
   "result":{
-    "item":"minecraft:bundle",
+    "/*ams_recipes_item_id*/":"minecraft:bundle",
     "count":1
   }
 }

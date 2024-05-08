@@ -12,6 +12,6 @@
   ],
   "result": {
     "count": 6,
-    "item": "minecraft:polished_tuff_wall"
+    "/*ams_recipes_item_id*/": "minecraft:polished_tuff_wall"
   }
 }

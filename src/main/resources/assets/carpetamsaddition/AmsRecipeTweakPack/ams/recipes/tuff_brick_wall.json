@@ -12,6 +12,6 @@
   ],
   "result": {
     "count": 6,
-    "item": "minecraft:tuff_brick_wall"
+    "/*ams_recipes_item_id*/": "minecraft:tuff_brick_wall"
   }
 }

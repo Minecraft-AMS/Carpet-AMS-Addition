@@ -21,6 +21,6 @@
     "RDR"
   ],
   "result": {
-    "item": "minecraft:crafter"
+    "/*ams_recipes_item_id*/": "minecraft:crafter"
   }
 }

@@ -11,6 +11,6 @@
   ],
   "result": {
     "count": 6,
-    "item": "minecraft:polished_tuff_slab"
+    "/*ams_recipes_item_id*/": "minecraft:polished_tuff_slab"
   }
 }

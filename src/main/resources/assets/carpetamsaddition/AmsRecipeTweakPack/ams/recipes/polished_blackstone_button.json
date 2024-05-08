@@ -6,7 +6,7 @@
     }
   ],
   "result":{
-    "item":"minecraft:polished_blackstone_button",
+    "/*ams_recipes_item_id*/":"minecraft:polished_blackstone_button",
     "count":1
   }
 }

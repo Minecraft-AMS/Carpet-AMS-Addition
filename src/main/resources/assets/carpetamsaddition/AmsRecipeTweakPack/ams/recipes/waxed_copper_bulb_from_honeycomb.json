@@ -11,6 +11,6 @@
     }
   ],
   "result": {
-    "item": "minecraft:waxed_copper_bulb"
+    "/*ams_recipes_item_id*/": "minecraft:waxed_copper_bulb"
   }
 }

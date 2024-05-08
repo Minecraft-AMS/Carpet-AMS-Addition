@@ -11,7 +11,7 @@
     }
   },
   "result":{
-    "item":"minecraft:bone_block",
+    "/*ams_recipes_item_id*/":"minecraft:bone_block",
     "count":3
   }
 }

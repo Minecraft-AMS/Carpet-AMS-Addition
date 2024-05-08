@@ -19,6 +19,6 @@
   ],
   "result": {
     "count": 4,
-    "item": "minecraft:weathered_copper_bulb"
+    "/*ams_recipes_item_id*/": "minecraft:weathered_copper_bulb"
   }
 }

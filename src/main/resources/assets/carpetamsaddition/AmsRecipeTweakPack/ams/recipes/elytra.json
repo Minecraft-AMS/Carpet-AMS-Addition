@@ -20,7 +20,7 @@
     }
   },
   "result":{
-    "item":"minecraft:elytra",
+    "/*ams_recipes_item_id*/":"minecraft:elytra",
     "count":1
   }
 }
