@@ -30,7 +30,7 @@ public class AutoMixinAuditExecutor {
         if (FabricLoader.getInstance().isDevelopmentEnvironment() && "true".equals(System.getProperty(KEYWORD_PROPERTY))) {
             AmsServer.LOGGER.info("Triggered auto mixin audit");
             boolean ok = MixinUtil.audit(null);
-            AmsServer.LOGGER.info("Mixin audit result: " + (ok ? "successful" : "failed"));
+            AmsServer.LOGGER.info("Mixin audit result: {}", ok ? "successful" : "failed");
             System.exit(ok ? 0 : 1);
         }
     }

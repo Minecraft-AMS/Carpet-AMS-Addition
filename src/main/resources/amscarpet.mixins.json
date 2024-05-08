@@ -72,7 +72,7 @@
     "rule.maxPlayerInteractionRange.PlayerEntityMixin",
     "rule.maxPlayerInteractionRange.ServerPlayerInteractionManagerMixin",
     "rule.maxPlayerInteractionRange.ServerPlayNetworkHandlerMixin",
-    "rule.mineDragonEgg.DragonEggBlockMixin",
+    "rule.easyMineDragonEgg.DragonEggBlockMixin",
     "rule.mitePearl.EnderPearlEntityMixin",
     "rule.netherWaterPlacement.DimensionTypeMixin",
     "rule.noCakeEating.CakeBlockMixin",
