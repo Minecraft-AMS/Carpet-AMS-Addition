@@ -411,7 +411,7 @@ carpetamsaddition:
         desc: 每当你设置carpet规则时，都会自动设置为默认值
       experimentalContentCheckDisabled:
         name: 禁用实验性内容检查
-        desc: 允许在游戏中通过添加数据包来游玩Minecraft的实验性内容
+        desc: 允许在游戏中通过添加数据包来游玩Minecraft的实验性内容（需要重启服务器）
       fertilizableSmallFlower:
         name: 可施肥小花
         desc: 使诸如蒲公英的小花也可以被骨粉催熟

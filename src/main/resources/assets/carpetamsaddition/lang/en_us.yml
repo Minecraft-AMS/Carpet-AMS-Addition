@@ -336,7 +336,7 @@ carpetamsaddition:
       carpetAlwaysSetDefault:
         desc: Whenever you set the carpet rule, it will be automatically set to the default value
       experimentalContentCheckDisabled:
-        desc: Allow playing Minecraft experimental content in the game by adding data packs
+        desc: Allow playing Minecraft experimental content in the game by adding data packs (need restart server)
       fertilizableSmallFlower:
         desc: Allow small flowers such as dandelion can also be ripened by bone meal
       safePointedDripstone:
