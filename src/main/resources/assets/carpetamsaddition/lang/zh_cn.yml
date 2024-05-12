@@ -459,6 +459,15 @@ carpetamsaddition:
         desc: 自定义任何命令的权限等级
         extra:
           '0': '开启规则后使用 /customCommandPermissionLevel help 命令查看使用说明'
+      shulkerGolem:
+        name: 潜影贝傀儡
+        desc: 可以通过在潜影盒上放置一个雕刻南瓜来召唤一只潜影贝
+      headHunter:
+        name: 猎头
+        desc: 当玩家死亡时他们会掉落一个自己的头颅
+      commandGetPlayerSkull:
+        name: 获取玩家头颅
+        desc: 使用 “/getPlayerSkull” 命令来获取一名在线玩家的头颅
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -557,8 +566,3 @@ carpetamsaddition:
       betterCraftablePolishedBlackStoneButton:
         name: 更好的合成磨制黑石按钮
         desc: 使用深板岩来合成磨制黑石按钮
-      enableMinecraft1_21ExperimentalRecipes:
-        name: 开启1.21实验性内容合成配方
-        desc: 解锁1.21实验性内容中所有物品的合成配方
-        extra:
-          '0': '使用此规则建议同步开启禁用实验性内容检查（experimentalContentCheckDisabled）防止客户端无法使用方块'

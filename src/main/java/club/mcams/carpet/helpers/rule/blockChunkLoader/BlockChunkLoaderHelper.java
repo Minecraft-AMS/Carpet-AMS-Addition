@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.BlockChunkLoader;
+package club.mcams.carpet.helpers.rule.blockChunkLoader;
 
 import club.mcams.carpet.AmsServerSettings;
 

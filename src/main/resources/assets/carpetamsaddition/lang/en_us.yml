@@ -372,6 +372,12 @@ carpetamsaddition:
         desc: Customize the permission level of any commands
         extra:
           '0': 'After enabling the rules, use the /customCommandPermissionLevel command to view the usage instructions'
+      shulkerGolem:
+        desc: A shulker can be summoned by placing a carved pumpkin on the shulker box
+      headHunter:
+        desc: When a player dies, they will drop their own skull
+      commandGetPlayerSkull:
+        desc: Use the "/getPlayerSkull" command to get a online player skull
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -449,7 +455,3 @@ carpetamsaddition:
         desc: Better craftable dispenser
       betterCraftablePolishedBlackStoneButton:
         desc: Use deepslate to crafted polished_blackstone_button in minecraft
-      enableMinecraft1_21ExperimentalRecipes:
-        desc: Unlock crafting recipes for all items in the 1.21 experimental content
-        extra:
-          '0': 'Using this rule suggests synchronously enabling experimentalContentCheckDisabled to prevent clients from being unable to use blocks'
