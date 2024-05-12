@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.commandCustomBlockBlastResistance;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -35,8 +36,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.*;
 
-import static club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
-
 @Mixin(Block.class)
 public abstract class BlockMixin {
 
@@ -48,8 +47,8 @@ public abstract class BlockMixin {
     private void getBlastResistance(CallbackInfoReturnable<Float> cir) {
         if (!Objects.equals(AmsServerSettings.commandCustomBlockBlastResistance, "false") && AmsServerSettings.enhancedWorldEater == -1.0F) {
             BlockState blockState = stateManager.getDefaultState().getBlock().getDefaultState();
-            if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(blockState)) {
-                cir.setReturnValue(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(blockState));
+            if (CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(blockState)) {
+                cir.setReturnValue(CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(blockState));
             }
         }
     }
