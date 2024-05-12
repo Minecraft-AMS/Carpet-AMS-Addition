@@ -1909,6 +1909,60 @@ After enabling the rules, use the /customCommandPermissionLevel command to view 
 
 - Categroies: `AMS`, `SURVIVAL`, `COMMAND`
 
+## shulkerGolem
+
+A shulker can be summoned by placing a carved pumpkin on the shulker box.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## headHunter
+
+When a player dies, they will drop their own skull.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## commandGetPlayerSkull
+
+Use the "/getPlayerSkull" command to get a online player skull.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `COMMAND`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
@@ -2022,28 +2076,6 @@ Dispenser can be crafted more flexible. It can be crafted using bow and dropper,
 ## betterCraftablePolishedBlackStoneButton
 
 Use deepslate to crafted polished_blackstone_button in minecraft.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
-
-## enableMinecraft1_21ExperimentalRecipes
-
-Unlock crafting recipes for all items in the 1.21 experimental content.
-
-Using this rule suggests synchronously enabling experimentalContentCheckDisabled to prevent clients from being unable to use blocks.
-
-< Available for Minecraft 1.20.3 - 1.20.6 >
 
 - Type: `boolean`
 

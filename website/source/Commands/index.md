@@ -163,4 +163,8 @@
 
   查看使用说明。
 
-​	
+### 获取玩家头颅（commandGetPlayerSkull）
+
+- `/getPlayerSkull <玩家>`
+
+  获取指定在线玩家的头颅。

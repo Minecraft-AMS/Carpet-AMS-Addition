@@ -162,3 +162,9 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 - `/customCommandPermissionLevel help`
 
   View the usage instructions.
+
+### commandGetPlayerSkull
+
+- `/getPlayerSkull <player>`
+
+  Get the skull of a specified online player.

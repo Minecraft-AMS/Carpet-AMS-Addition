@@ -1868,6 +1868,64 @@ json位置：
 
 - 分类: `AMS`, `SURVIVAL`, `COMMAND`
 
+## 潜影贝傀儡（shulkerGolem）
+
+可以通过在潜影盒上放置一个雕刻南瓜来召唤一只潜影贝。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 猎头（headHunter）
+
+当玩家死亡时他们会掉落一个自己的头颅。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 获取玩家头颅（commandGetPlayerSkull）
+
+自定义任何命令的权限等级。
+
+使用 “/getPlayerSkull” 命令来获取一名在线玩家的头颅。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `SURVIVAL`, `COMMAND`
+
+
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
@@ -1983,28 +2041,6 @@ json位置：
 ## 更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）
 
 使用深板岩来合成磨制黑石按钮。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
-
-## 开启1.21实验性内容合成配方（enableMinecraft1_21ExperimentalRecipes）
-
-解锁1.21实验性内容中所有物品的合成配方。
-
-使用此规则建议同步开启禁用实验性内容检查（experimentalContentCheckDisabled）防止客户端无法使用方块。
-
-<该规则 Minecraft 1.20.3 - 1.20.6 可用>
 
 - 类型: `boolean`
 
