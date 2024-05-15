@@ -22,39 +22,31 @@ package club.mcams.carpet.mixin.rule.extinguishedCampfire_campfireSmokeParticleD
 
 import club.mcams.carpet.AmsServerSettings;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.CampfireBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CampfireBlock.class)
-public abstract class CampfireBlockMixin extends BlockWithEntity {
-    private CampfireBlockMixin(Settings builder) {
-        super(builder);
-    }
-
-    @Inject(method = "<init>*", at = @At("RETURN"))
-    private void initProxy(CallbackInfo info) {
-        this.setDefaultState(this.getDefaultState().with(CampfireBlock.LIT, false));
-    }
-
-    @Inject(method = "getPlacementState", at = @At("RETURN"), cancellable = true)
-    private void getPlacementStateProxy(CallbackInfoReturnable<BlockState> cir) {
-        if (cir.getReturnValue() != null && AmsServerSettings.extinguishedCampfire) {
-            cir.setReturnValue(cir.getReturnValue().with(CampfireBlock.LIT, false));
-            cir.cancel();
+public abstract class CampfireBlockMixin {
+    @ModifyReturnValue(method = "getPlacementState", at = @At("RETURN"))
+    private BlockState setPlacementState(BlockState original) {
+        if (AmsServerSettings.extinguishedCampfire && original != null) {
+            return original.with(CampfireBlock.LIT, false);
+        } else {
+            return original;
         }
     }
 
     @Inject(method = "spawnSmokeParticle", at = @At("HEAD"), cancellable = true)
-    private static void spawnSmokeParticle(CallbackInfo ci) {
-        if(AmsServerSettings.campfireSmokeParticleDisabled) {
-            ci.cancel();
+    private static void noSpawnSmokeParticle(CallbackInfo ci) {
+        if (AmsServerSettings.campfireSmokeParticleDisabled) {
+           ci.cancel();
         }
     }
 }
