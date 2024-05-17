@@ -44,7 +44,7 @@ public abstract class EntityMixin {
     public abstract ItemEntity dropStack(ItemStack stack);
 
     @Inject(method = "dropStack(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;", at = @At("HEAD"), cancellable = true)
-    private void onDeath(ItemStack stack, CallbackInfoReturnable<ItemEntity> cir) {
+    private void noDropPoppy(ItemStack stack, CallbackInfoReturnable<ItemEntity> cir) {
         if (AmsServerSettings.ironGolemNoDropFlower) {
             Entity entity = (Entity)(Object)this;
             if (entity instanceof IronGolemEntity && stack.getItem().equals(Items.POPPY)) {

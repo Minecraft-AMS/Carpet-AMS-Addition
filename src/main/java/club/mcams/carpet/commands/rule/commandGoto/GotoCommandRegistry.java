@@ -25,8 +25,6 @@ import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.minecraft.command.argument.BlockPosArgumentType;
 import net.minecraft.command.argument.DimensionArgumentType;
@@ -42,7 +40,10 @@ public class GotoCommandRegistry {
         CommandManager.literal("goto")
         .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGoto))
         .then(CommandManager.argument("dimension", DimensionArgumentType.dimension())
-        .executes(GotoCommandRegistry::executeSimpleTeleport)
+        .executes(
+            context -> executeSimpleTeleport(
+            context.getSource().getPlayer(), DimensionArgumentType.getDimensionArgument(context, "dimension")
+        ))
         .then(CommandManager.argument("destination", BlockPosArgumentType.blockPos())
         .executes(
             context -> executeTeleport(
@@ -60,11 +61,9 @@ public class GotoCommandRegistry {
         return 1;
     }
 
-    private static int executeSimpleTeleport(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        ServerPlayerEntity player = context.getSource().getPlayer();
-        ServerWorld targetWorld = DimensionArgumentType.getDimensionArgument(context, "dimension");
+    private static int executeSimpleTeleport(ServerPlayerEntity player, ServerWorld targetWorld) {
         DimensionWrapper currentDimension = DimensionWrapper.of(player.getWorld());
-        DimensionWrapper targetDimension = DimensionWrapper.of(DimensionArgumentType.getDimensionArgument(context, "dimension"));
+        DimensionWrapper targetDimension = DimensionWrapper.of(targetWorld);
         return executeTeleport(player, targetWorld, calculatePos(player, currentDimension, targetDimension));
     }
 

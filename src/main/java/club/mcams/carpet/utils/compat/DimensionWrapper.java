@@ -57,8 +57,12 @@ public class DimensionWrapper {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         DimensionWrapper that = (DimensionWrapper) o;
         return Objects.equals(dimensionType, that.dimensionType);
     }

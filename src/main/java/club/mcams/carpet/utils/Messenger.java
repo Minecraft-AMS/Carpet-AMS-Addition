@@ -21,9 +21,8 @@
 package club.mcams.carpet.utils;
 
 import club.mcams.carpet.mixin.translations.StyleAccessor;
-import club.mcams.carpet.utils.compat.*;
+import club.mcams.carpet.utils.compat.MessengerCompatFactory;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.Formatting;
@@ -34,12 +33,12 @@ import java.util.Objects;
 public class Messenger {
     // Compound Text
     public static BaseText c(Object... fields) {
-        return CarpetCompoundTextUtil.compatText(fields);
+        return MessengerCompatFactory.CarpetCompoundText(fields);
     }
 
     // Simple Text
     public static BaseText s(Object text) {
-        return LiteralTextUtil.compatText(text.toString());
+        return MessengerCompatFactory.LiteralText(text.toString());
     }
 
     // Simple Text with carpet style
@@ -54,7 +53,7 @@ public class Messenger {
 
     // Translation Text
     public static BaseText tr(String key, Object... args) {
-        return TranslatableTextUtil.compatText(key, args);
+        return MessengerCompatFactory.TranslatableText(key, args);
     }
 
     public static BaseText copy(BaseText text) {
@@ -62,7 +61,7 @@ public class Messenger {
     }
 
     private static void __tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
-        sendFeedbackUtil.compatFeedback(source, text, broadcastToOps);
+        MessengerCompatFactory.sendFeedBack(source, text, broadcastToOps);
     }
 
     public static void tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
@@ -101,15 +100,7 @@ public class Messenger {
 
     public static void sendServerMessage(MinecraftServer server, Text text) {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
-        sendMessageToConsole(server, text);
-        server.getPlayerManager().getPlayerList().forEach(player -> sendMessageToPlayer(player, text));
-    }
-
-    private static void sendMessageToConsole(MinecraftServer minecraftServer, Text text) {
-        SendSystemMessageUtil.serverSend(minecraftServer, text);
-    }
-
-    private static void sendMessageToPlayer(PlayerEntity player, Text text) {
-        SendSystemMessageUtil.playerSend(player, text);
+        MessengerCompatFactory.sendSystemMessage(server, text);
+        server.getPlayerManager().getPlayerList().forEach(player -> MessengerCompatFactory.sendSystemMessage(player, text));
     }
 }

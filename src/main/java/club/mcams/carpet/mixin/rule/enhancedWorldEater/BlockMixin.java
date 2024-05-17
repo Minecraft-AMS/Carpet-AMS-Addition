@@ -21,10 +21,10 @@
 package club.mcams.carpet.mixin.rule.enhancedWorldEater;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.rule.enhancedWorldEater.BlockBlackList;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.state.StateManager;
 
 import org.spongepowered.asm.mixin.Final;
@@ -47,16 +47,7 @@ public abstract class BlockMixin {
             Block block = stateManager.getDefaultState().getBlock();
             float BOOM = (float) AmsServerSettings.enhancedWorldEater;
             float startBlastResistance = cir.getReturnValue();
-            if (
-                startBlastResistance >= 17.0F &&
-                block != Blocks.BEDROCK &&
-                block != Blocks.ANVIL &&
-                block != Blocks.CHIPPED_ANVIL &&
-                block != Blocks.DAMAGED_ANVIL &&
-                block != Blocks.END_PORTAL_FRAME &&
-                block != Blocks.END_PORTAL &&
-                block != Blocks.END_GATEWAY
-            ) {
+            if (startBlastResistance >= 17.0F && !BlockBlackList.isIn(block)) {
                 cir.setReturnValue(BOOM);
             }
         }
