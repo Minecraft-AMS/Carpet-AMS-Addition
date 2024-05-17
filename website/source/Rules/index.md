@@ -1924,7 +1924,41 @@ json位置：
 
 - 分类: `AMS`, `SURVIVAL`, `COMMAND`
 
+## 快速升级村民（quickVillagerLevelUp）
 
+每次打开交易屏幕时村民都会升级。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 可再生下界合金碎片（renewableNetheriteScrap）
+
+自定义僵尸猪灵掉落下界合金碎片的概率。
+
+- 类型: `Double`
+
+
+
+- 默认值: `0.0`
+
+
+
+- 参考选项: `0.0`, `0.01`, `0.1`, `1.0`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
