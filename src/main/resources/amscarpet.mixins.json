@@ -102,10 +102,13 @@
     "rule.preventAdministratorCheat.TeleportCommandMixin",
     "rule.preventAdministratorCheat.TimeCommandMixin",
     "rule.preventAdministratorCheat.WeatherCommandMixin",
+    "rule.quickVillagerLevelUp.VillagerEntityInvoker",
+    "rule.quickVillagerLevelUp.VillagerEntityMixin",
     "rule.redstoneComponentSound.DaylightDetectorBlockMixin",
     "rule.redstoneComponentSound.RedstoneWireBlockMixin",
     "rule.redstoneComponentSound.RepeaterBlockMixin",
     "rule.regeneratingDragonEgg.EnderDragonFightMixin",
+    "rule.renewableNetherScrap.EntityMixin",
     "rule.safeFlight_invulnerable.ServerPlayerEntityMixin",
     "rule.safePointedDripstone.PointedDripstoneBlockMixin",
     "rule.scheduledRandomTick.AbstractPlantPartBlockMixin",
@@ -142,7 +145,8 @@
     "rule.bedRockFlying.ClientPlayerEntityMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
     "rule.maxClientInteractionReachDistance.GameRendererMixin",
-    "rule.maxPlayerInteractionRange.GameRendererMixin"
+    "rule.maxPlayerInteractionRange.GameRendererMixin",
+    "rule.test.TextFieldWidgetMixin"
   ],
   "server": [],
   "injectors": {

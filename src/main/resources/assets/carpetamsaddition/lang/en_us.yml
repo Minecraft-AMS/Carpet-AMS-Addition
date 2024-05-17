@@ -102,6 +102,8 @@ carpetamsaddition:
       value_range: 'The value must be 1 - 32'
     easyGetPitcherPod:
       value_range: 'The value must be 2 - 100 or 0'
+    renewableNetherScrap:
+      value_range: 'The value must be 0 - 1'
 
   carpet_translations:
     category:
@@ -378,6 +380,12 @@ carpetamsaddition:
         desc: When a player dies, they will drop their own skull
       commandGetPlayerSkull:
         desc: Use the "/getPlayerSkull" command to get a online player skull
+      quickVillagerLevelUp:
+        desc: Each time the trading screen is opened, the villager will level up
+      renewableNetheriteScrap:
+        desc: Customize the drop rate of netherite scrap from zombified piglin
+        extra:
+          '0': 'The range of values: 0 - 1'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -31,6 +31,7 @@ import club.mcams.carpet.validators.rule.maxClientInteractionReachDistance.MaxCl
 //#if MC>=12000
 //$$ import club.mcams.carpet.validators.rule.easyGetPitcherPod.CountValidator;
 //#endif
+import club.mcams.carpet.validators.rule.renewableNetherScrap.DropRateValidator;
 
 import club.mcams.carpet.settings.CraftingRule;
 import club.mcams.carpet.settings.Rule;
@@ -436,6 +437,17 @@ public class AmsServerSettings {
         categories = {AMS, SURVIVAL, COMMAND}
     )
     public static String commandGetPlayerSkull = "false";
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean quickVillagerLevelUp = false;
+
+    @Rule(
+        options = {"0.0", "0.01", "0.1", "1.0"},
+        categories = {AMS, FEATURE, SURVIVAL},
+        validators = DropRateValidator.class,
+        strict = false
+    )
+    public static double renewableNetheriteScrap = 0.0D;
 
     /*
      * 区块加载规则

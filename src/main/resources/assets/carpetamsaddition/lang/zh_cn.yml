@@ -102,6 +102,8 @@ carpetamsaddition:
       value_range: '设定的值必须为 1 - 32'
     easyGetPitcherPod:
       value_range: '设定的值必须为 1 - 100 或 0'
+    renewableNetherScrap:
+      value_range: '设定的值必须为 0 - 1'
 
   carpet_translations:
     category:
@@ -468,6 +470,14 @@ carpetamsaddition:
       commandGetPlayerSkull:
         name: 获取玩家头颅
         desc: 使用 “/getPlayerSkull” 命令来获取一名在线玩家的头颅
+      quickVillagerLevelUp:
+        name: 快速升级村民
+        desc: 每次打开交易屏幕时村民都会升级
+      renewableNetheriteScrap:
+        name: 可再生下界合金碎片
+        desc: 自定义僵尸猪灵掉落下界合金碎片的概率
+        extra:
+          '0': '允许设定的范围：0 - 1'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
