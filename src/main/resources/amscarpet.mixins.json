@@ -145,8 +145,7 @@
     "rule.bedRockFlying.ClientPlayerEntityMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
     "rule.maxClientInteractionReachDistance.GameRendererMixin",
-    "rule.maxPlayerInteractionRange.GameRendererMixin",
-    "rule.test.TextFieldWidgetMixin"
+    "rule.maxPlayerInteractionRange.GameRendererMixin"
   ],
   "server": [],
   "injectors": {
