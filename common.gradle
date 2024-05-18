@@ -14,9 +14,6 @@ repositories {
 		url = 'https://api.modrinth.com/maven'
 	}
 	maven {
-		url = 'https://www.cursemaven.com'
-	}
-	maven {
 		url = 'https://masa.dy.fi/maven'
 	}
 	maven {
@@ -38,7 +35,6 @@ dependencies {
 	// mods
 	//modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") // modrinth
 	modImplementation "carpet:fabric-carpet:${project.carpet_core_version}" // masa
-	//modImplementation("curse.maven:carpet-349239:${project.carpet_core_version}") // cursemaven
 
 	// library mods
 	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
