@@ -32,6 +32,7 @@
   ],
   "accessWidener": "carpetamsaddition.accesswidener",
   "depends": {
+    "fabricloader": ">=0.15.11",
     "minecraft": "${minecraft_dependency}",
     "carpet": "${carpet_dependency}"
   }
