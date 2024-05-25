@@ -6,7 +6,7 @@ carpetamsaddition:
 
   rule:
     amsUpdateSuppressionCrashFix:
-      location: 'Update suppression location'
+      msg: 'Update suppression location @ %s -> [ %s ] | reason: %s'
       copy: 'copy coord to clipboard'
     welcomeMessage:
       modify_content_in: 'Modify the content in：'

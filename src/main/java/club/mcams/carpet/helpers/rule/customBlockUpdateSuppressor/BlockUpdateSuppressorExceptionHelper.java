@@ -18,22 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
+package club.mcams.carpet.helpers.rule.customBlockUpdateSuppressor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
-
-public class ThrowableSuppressionException {
-    private static final List<Predicate<Throwable>> suppressionPredicates = new ArrayList<>();
-
-    public static boolean isUpdateSuppression(Throwable throwable) {
-        return suppressionPredicates.stream().anyMatch(predicate -> predicate.test(throwable));
-    }
-
-    static {
-        suppressionPredicates.add(throwable -> throwable instanceof ClassCastException);
-        suppressionPredicates.add(throwable -> throwable instanceof StackOverflowError);
-        suppressionPredicates.add(throwable -> throwable instanceof OutOfMemoryError);
+public class BlockUpdateSuppressorExceptionHelper {
+    public static void throwException() {
+        //#if MC<11900
+        throw new StackOverflowError("[Carpet-AMS-Addition]: StackOverflowError");
+        //#else
+        //$$ throw new ClassCastException("[Carpet-AMS-Addition]: ClassCastException");
+        //#endif
     }
 }

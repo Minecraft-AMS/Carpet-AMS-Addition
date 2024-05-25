@@ -22,8 +22,8 @@ package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionContext;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionException;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionContext;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionException;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -51,9 +51,9 @@ public interface NeighborUpdaterMixin {
        locals = LocalCapture.CAPTURE_FAILHARD
     )
     private static void tryNeighborUpdate(World world, BlockState state, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, CallbackInfo ci, Throwable throwable) {
-        if (AmsServerSettings.amsUpdateSuppressionCrashFix && ThrowableSuppressionException.isUpdateSuppression(throwable)) {
-           ThrowableSuppressionContext.sendMessageToServer(pos, world);
-           throw new ThrowableSuppression(ThrowableSuppressionContext.suppressionMessageText(pos, world));
+        if (AmsServerSettings.amsUpdateSuppressionCrashFix && UpdateSuppressionException.isUpdateSuppression(throwable)) {
+            UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
+           throw new ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));
         }
     }
 }

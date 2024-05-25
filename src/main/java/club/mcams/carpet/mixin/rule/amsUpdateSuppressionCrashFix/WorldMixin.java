@@ -21,9 +21,9 @@
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionContext;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppressionException;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionException;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionContext;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -50,10 +50,10 @@ public abstract class WorldMixin {
         locals = LocalCapture.CAPTURE_FAILHARD
     )
     private void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state, Throwable throwable) {
-        if (AmsServerSettings.amsUpdateSuppressionCrashFix && ThrowableSuppressionException.isUpdateSuppression(throwable)) {
+        if (AmsServerSettings.amsUpdateSuppressionCrashFix && UpdateSuppressionException.isUpdateSuppression(throwable)) {
             World world = (World) (Object) this;
-            ThrowableSuppressionContext.sendMessageToServer(sourcePos, world);
-            throw new ThrowableSuppression(ThrowableSuppressionContext.suppressionMessageText(sourcePos, world));
+            UpdateSuppressionContext.sendMessageToServer(sourcePos, world, throwable);
+            throw new ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(sourcePos, world, throwable));
         }
     }
 }

@@ -21,14 +21,13 @@
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionException;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.crash.CrashException;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -48,11 +47,11 @@ public abstract class MinecraftServerMixin {
         if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
             try {
                 original.call(serverWorld, shouldKeepTicking);
-            } catch (CrashException e) {
-                if (!(e.getCause() instanceof ThrowableSuppression)) {
-                    throw e;
+            } catch (Throwable throwable) {
+                if (UpdateSuppressionException.isUpdateSuppression(throwable)) {
+                    throw throwable;
                 }
-            } catch (ThrowableSuppression ignored) {}
+            }
         } else {
             original.call(serverWorld, shouldKeepTicking);
         }

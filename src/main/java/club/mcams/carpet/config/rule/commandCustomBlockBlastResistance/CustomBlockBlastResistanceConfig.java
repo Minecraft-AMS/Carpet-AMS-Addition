@@ -22,10 +22,12 @@ package club.mcams.carpet.config.rule.commandCustomBlockBlastResistance;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.utils.RegexTools;
+import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
@@ -41,22 +43,25 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import static club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP;
 
 public class CustomBlockBlastResistanceConfig {
     @SuppressWarnings("ReadWriteStringCanBeUsed")
     public static void loadFromJson(String configFilePath) {
         Gson gson = new Gson();
         Path path = Paths.get(configFilePath);
-        CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
+        CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
         if (Files.exists(path)) {
             try {
                 String json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
                 Type type = new TypeToken<Map<String, Float>>() {}.getType();
                 Map<String, Float> simplifiedMap = gson.fromJson(json, type);
                 for (Map.Entry<String, Float> entry : simplifiedMap.entrySet()) {
+                    //#if MC>=12100
+                    //$$ BlockState state = Registries.BLOCK.get(Identifier.of(entry.getKey())).getDefaultState();
+                    //#else
                     BlockState state = Registry.BLOCK.get(new Identifier(entry.getKey())).getDefaultState();
-                    CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, entry.getValue());
+                    //#endif
+                    CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, entry.getValue());
                 }
             } catch (IOException e) {
                 AmsServer.LOGGER.warn("Failed to load config", e);

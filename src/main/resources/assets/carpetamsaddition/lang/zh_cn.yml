@@ -6,7 +6,7 @@ carpetamsaddition:
 
   rule:
     amsUpdateSuppressionCrashFix:
-      location: '更新抑制位置'
+      msg: '更新抑制位置 @ %s -> [ %s ] | 原因：%s'
       copy: '复制坐标到剪切板'
     welcomeMessage:
       modify_content_in: '在该路径下修改内容：'

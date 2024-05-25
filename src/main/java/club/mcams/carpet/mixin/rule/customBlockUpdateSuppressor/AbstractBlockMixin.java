@@ -22,6 +22,7 @@ package club.mcams.carpet.mixin.rule.customBlockUpdateSuppressor;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.RegexTools;
+import club.mcams.carpet.helpers.rule.customBlockUpdateSuppressor.BlockUpdateSuppressorExceptionHelper;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -46,13 +47,9 @@ public abstract class AbstractBlockMixin {
             if (amsUpdateSuppressionCrashFixForceMode) {
                 AmsServerSettings.amsUpdateSuppressionCrashFix = true;
             }
-            String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); //Block{minecraft:bedrock} -> minecraft:bedrock
+            String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); // Block{minecraft:bedrock} -> minecraft:bedrock
             if (Objects.equals(AmsServerSettings.customBlockUpdateSuppressor, blockName)) {
-                //#if MC<11900
-                throw new StackOverflowError("[Carpet-AMS-Addition]: StackOverflowError");
-                //#else
-                //$$ throw new ClassCastException("[Carpet-AMS-Addition]: ClassCastException");
-                //#endif
+                BlockUpdateSuppressorExceptionHelper.throwException();
             }
         }
     }
