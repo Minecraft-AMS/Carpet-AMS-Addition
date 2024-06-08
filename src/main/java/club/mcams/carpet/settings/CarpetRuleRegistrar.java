@@ -27,11 +27,14 @@ import carpet.settings.SettingsManager;
 
 //#if MC<11900
 import carpet.settings.Validator;
+
 import club.mcams.carpet.mixin.setting.ParsedRuleAccessor;
 import club.mcams.carpet.mixin.setting.SettingsManagerAccessor;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
+
 import org.jetbrains.annotations.Nullable;
+
 import java.lang.annotation.Annotation;
 //#endif
 
@@ -42,6 +45,7 @@ import java.lang.annotation.Annotation;
 //#endif
 
 import com.google.common.collect.Lists;
+
 import java.lang.reflect.Field;
 import java.util.List;
 
