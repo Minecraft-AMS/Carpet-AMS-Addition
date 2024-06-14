@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BambooBlockMixin {
     @Inject(method = "getCollisionShape", at = @At("HEAD"), cancellable = true)
     private void getCollisionShape(CallbackInfoReturnable<VoxelShape> cir) {
-        if(AmsServerSettings.bambooCollisionBoxDisabled) {
+        if (AmsServerSettings.bambooCollisionBoxDisabled) {
             cir.setReturnValue(VoxelShapes.empty());
             cir.cancel();
         }
