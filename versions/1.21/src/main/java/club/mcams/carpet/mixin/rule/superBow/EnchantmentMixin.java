@@ -43,7 +43,7 @@ public abstract class EnchantmentMixin {
             value = "INVOKE",
             target = "Lnet/minecraft/registry/entry/RegistryEntry;equals(Ljava/lang/Object;)Z"
         ),
-        cancellable = true, remap = false
+        cancellable = true
     )
     private static void canBeCombined(RegistryEntry<Enchantment> first, RegistryEntry<Enchantment> second, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.superBow && first.getKey().isPresent() && second.getKey().isPresent()) {
