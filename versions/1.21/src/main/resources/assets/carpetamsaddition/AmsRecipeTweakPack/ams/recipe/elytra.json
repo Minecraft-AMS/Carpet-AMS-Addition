@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":[
+    "PSP",
+    "P*P",
+    "PLP"
+  ],
+  "key":{
+    "P":{
+      "item":"minecraft:phantom_membrane"
+    },
+    "S":{
+      "item":"minecraft:stick"
+    },
+    "*":{
+      "item":"minecraft:saddle"
+    },
+    "L":{
+      "item":"minecraft:string"
+    }
+  },
+  "result":{
+    "/*ams_recipes_item_id*/":"minecraft:elytra",
+    "count":1
+  }
+}

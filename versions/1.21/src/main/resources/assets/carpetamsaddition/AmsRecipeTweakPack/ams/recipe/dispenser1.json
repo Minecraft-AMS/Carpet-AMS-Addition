@@ -1,0 +1,16 @@
+{
+  "type":"crafting_shapeless",
+  "ingredients":[
+    {
+      "item":"minecraft:bow"
+    },
+    {
+      "item":"minecraft:dropper"
+    }
+  ],
+  "result":{
+    "/*ams_recipes_item_id*/":"minecraft:dispenser",
+    "count":1
+  }
+}
+
