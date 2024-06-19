@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":[
+    " SX",
+    "SDX",
+    " SX"
+  ],
+  "key":{
+    "D":{
+      "item":"minecraft:dropper"
+    },
+    "S":{
+      "item":"minecraft:stick"
+    },
+    "X":{
+      "item":"minecraft:string"
+    }
+  },
+  "result":{
+    "/*ams_recipes_item_id*/":"minecraft:dispenser",
+    "count":1
+  }
+}
+

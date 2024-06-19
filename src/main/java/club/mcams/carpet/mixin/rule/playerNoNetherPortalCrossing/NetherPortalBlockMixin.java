@@ -55,7 +55,11 @@ public abstract class NetherPortalBlockMixin {
         if (AmsServerSettings.playerNoNetherPortalTeleport && entity instanceof PlayerEntity) {
             return false;
         } else {
+            //#if MC>=12100
+            //$$ return original.call(entity, canUsePortals);
+            //#else
             return original.call(entity);
+            //#endif
         }
     }
 }

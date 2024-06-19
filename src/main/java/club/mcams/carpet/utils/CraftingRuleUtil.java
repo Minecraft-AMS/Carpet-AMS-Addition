@@ -58,6 +58,9 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class CraftingRuleUtil {
+    private static final String COMPAT_ADVANCEMENT_FOLDER_NAME;
+    private static final String COMPAT_RECIPE_FOLDER_NAME;
+
     public static void clearAmsDatapacks(MinecraftServer minecraftServer) {
         File datapackPath = new File(minecraftServer.getSavePath(WorldSavePath.DATAPACKS).toString() + "/AmsData/data/");
         if (Files.isDirectory(datapackPath.toPath())) {
@@ -81,16 +84,16 @@ public class CraftingRuleUtil {
         datapackPath += "/AmsData/";
         boolean isFirstLoad = !Files.isDirectory(new File(datapackPath).toPath());
         try {
-            Files.createDirectories(new File(datapackPath + "data/ams/recipes").toPath());
-            Files.createDirectories(new File(datapackPath + "data/ams/advancements").toPath());
-            Files.createDirectories(new File(datapackPath + "data/minecraft/recipes").toPath());
+            Files.createDirectories(new File(datapackPath + "data/ams/" + COMPAT_RECIPE_FOLDER_NAME).toPath());
+            Files.createDirectories(new File(datapackPath + "data/ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME).toPath());
+            Files.createDirectories(new File(datapackPath + "data/minecraft/" + COMPAT_RECIPE_FOLDER_NAME).toPath());
             copyFile("assets/carpetamsaddition/AmsRecipeTweakPack/pack.mcmeta", datapackPath + "pack.mcmeta");
         } catch (IOException e) {
             AmsServer.LOGGER.error("Failed to create directories or copy files: {}", e.getMessage());
         }
         copyFile(
-            "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/root.json",
-            datapackPath + "data/ams/advancements/root.json"
+            "assets/carpetamsaddition/AmsRecipeTweakPack/ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME + "/root.json",
+            datapackPath + "data/ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME + "/root.json"
         );
         for (Field f : AmsServerSettings.class.getDeclaredFields()) {
             CraftingRule craftingRule = f.getAnnotation(CraftingRule.class);
@@ -135,7 +138,11 @@ public class CraftingRuleUtil {
         //#endif
             List<String> installedRecipes = Lists.newArrayList();
             try {
-                Stream<Path> fileStream = Files.list(new File(datapackPath + recipeNamespace, "recipes").toPath());
+                //#if MC>=12100
+                //$$ Stream<Path> fileStream = Files.list(new File(datapackPath + recipeNamespace, COMPAT_RECIPE_FOLDER_NAME).toPath());
+                //#else
+                Stream<Path> fileStream = Files.list(new File(datapackPath + recipeNamespace, COMPAT_RECIPE_FOLDER_NAME).toPath());
+                //#endif
                 fileStream.forEach(( path -> {
                     for (String recipeName : recipes) {
                         String fileName = path.getFileName().toString();
@@ -152,7 +159,7 @@ public class CraftingRuleUtil {
             if (recipeNamespace.equals("ams")) {
                 List<String> installedAdvancements = Lists.newArrayList();
                 try {
-                    Stream<Path> fileStream = Files.list(new File(datapackPath, "ams/advancements").toPath());
+                    Stream<Path> fileStream = Files.list(new File(datapackPath, "ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME).toPath());
                     String finalRuleName = ruleName;
                     fileStream.forEach(( path -> {
                         String fileName = path.getFileName().toString().replace(".json", "");
@@ -184,7 +191,7 @@ public class CraftingRuleUtil {
             copyRecipes(recipes, recipeNamespace, datapackPath, ruleName);
             int value = (Integer) rule.get();
             for (String recipeName : recipes) {
-                String filePath = datapackPath + recipeNamespace + "/recipes/" + recipeName;
+                String filePath = datapackPath + recipeNamespace + "/" + COMPAT_RECIPE_FOLDER_NAME + "/" + recipeName;
                 JsonObject jsonObject = readJson(filePath);
                 assert jsonObject != null;
                 jsonObject.getAsJsonObject("result").addProperty("count", value);
@@ -203,25 +210,25 @@ public class CraftingRuleUtil {
 
     private static void writeAdvancement(String datapackPath, String ruleName, String[] recipes) {
         copyFile(
-            "assets/carpetamsaddition/AmsRecipeTweakPack/ams/advancements/recipe_rule.json",
-            datapackPath + "ams/advancements/" + ruleName + ".json"
+            "assets/carpetamsaddition/AmsRecipeTweakPack/ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME + "/recipe_rule.json",
+            datapackPath + "ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME + "/" + ruleName + ".json"
         );
-        JsonObject advancementJson = readJson(datapackPath + "ams/advancements/" + ruleName + ".json");
+        JsonObject advancementJson = readJson(datapackPath + "ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME + "/" + ruleName + ".json");
         if (advancementJson != null) {
             JsonArray recipeRewards = advancementJson.getAsJsonObject("rewards").getAsJsonArray("recipes");
             for (String recipeName : recipes) {
                 recipeRewards.add("ams:" + recipeName.replace(".json", ""));
             }
-            writeJson(advancementJson, datapackPath + "ams/advancements/" + ruleName + ".json");
+            writeJson(advancementJson, datapackPath + "ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME + "/" + ruleName + ".json");
         } else {
             JsonObject defaultJson = new JsonObject();
-            writeJson(defaultJson, datapackPath + "ams/advancements/" + ruleName + ".json");
+            writeJson(defaultJson, datapackPath + "ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME + "/" + ruleName + ".json");
         }
     }
 
     private static void removeAdvancement(String datapackPath, String ruleName) {
         try {
-            Files.deleteIfExists(new File(datapackPath + "ams/advancements/" + ruleName + ".json").toPath());
+            Files.deleteIfExists(new File(datapackPath + "ams/" + COMPAT_ADVANCEMENT_FOLDER_NAME + "/" + ruleName + ".json").toPath());
         } catch (IOException e) {
             AmsServer.LOGGER.error("Failed to delete advancement file: {}.json: {}", ruleName, e.getMessage());
         }
@@ -251,7 +258,7 @@ public class CraftingRuleUtil {
     private static void deleteRecipes(String[] recipes, String recipeNamespace, String datapackPath, String ruleName, boolean removeAdvancement) {
         for (String recipeName : recipes) {
             try {
-                Files.deleteIfExists(new File(datapackPath + recipeNamespace + "/recipes", recipeName).toPath());
+                Files.deleteIfExists(new File(datapackPath + recipeNamespace + "/" + COMPAT_RECIPE_FOLDER_NAME, recipeName).toPath());
             } catch (IOException e) {
                 AmsServer.LOGGER.error("Failed to delete recipe file {}: {}", recipeName, e.getMessage());
             }
@@ -264,8 +271,8 @@ public class CraftingRuleUtil {
     private static void copyRecipes(String[] recipes, String recipeNamespace, String datapackPath, String ruleName) {
         for (String recipeName : recipes) {
             copyFile(
-                "assets/carpetamsaddition/AmsRecipeTweakPack/" + recipeNamespace + "/recipes/" + recipeName,
-                datapackPath + recipeNamespace + "/recipes/" + recipeName
+                "assets/carpetamsaddition/AmsRecipeTweakPack/" + recipeNamespace + "/" + COMPAT_RECIPE_FOLDER_NAME + "/" + recipeName,
+                datapackPath + recipeNamespace + "/" + COMPAT_RECIPE_FOLDER_NAME + "/" + recipeName
             );
         }
         if (recipeNamespace.equals("ams")) {
@@ -298,5 +305,15 @@ public class CraftingRuleUtil {
         } catch (IOException e) {
             AmsServer.LOGGER.error("Failed to write JSON to file '{}': {}", filePath, e.getMessage());
         }
+    }
+
+    static {
+        //#if MC>=12100
+        //$$ COMPAT_ADVANCEMENT_FOLDER_NAME = "advancement";
+        //$$ COMPAT_RECIPE_FOLDER_NAME = "recipe";
+        //#else
+        COMPAT_ADVANCEMENT_FOLDER_NAME = "advancements";
+        COMPAT_RECIPE_FOLDER_NAME = "recipes";
+        //#endif
     }
 }

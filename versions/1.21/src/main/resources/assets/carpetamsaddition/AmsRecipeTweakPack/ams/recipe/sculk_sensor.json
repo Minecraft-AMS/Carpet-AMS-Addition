@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":[
+    "   ",
+    "RQR",
+    "DDD"
+  ],
+  "key":{
+    "D":{
+      "item":"minecraft:deepslate"
+    },
+    "R":{
+      "item":"minecraft:redstone"
+    },
+    "Q":{
+      "item":"minecraft:quartz"
+    }
+  },
+  "result":{
+    "/*ams_recipes_item_id*/":"minecraft:sculk_sensor",
+    "count":1
+  }
+}
