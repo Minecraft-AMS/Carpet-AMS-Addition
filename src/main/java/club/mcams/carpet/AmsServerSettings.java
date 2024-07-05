@@ -349,6 +349,12 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean infiniteDurability = false;
 
+    @Rule(
+            options = {"true", "false", "keepEndCrystal"},
+            categories = {AMS, FEATURE, SURVIVAL}
+    )
+    public static String preventEndSpikeRespawn = "false";
+
     @Rule(categories = AMS)
     public static boolean welcomeMessage = false;
 

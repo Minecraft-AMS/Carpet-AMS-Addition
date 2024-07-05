@@ -102,6 +102,8 @@
     "rule.preventAdministratorCheat.TeleportCommandMixin",
     "rule.preventAdministratorCheat.TimeCommandMixin",
     "rule.preventAdministratorCheat.WeatherCommandMixin",
+    "rule.preventEndSpikeRespawn.EnderDragonSpawnStateMixin",
+    "rule.preventEndSpikeRespawn.EndSpikeFeatureMixin",
     "rule.quickVillagerLevelUp.VillagerEntityInvoker",
     "rule.quickVillagerLevelUp.VillagerEntityMixin",
     "rule.redstoneComponentSound.DaylightDetectorBlockMixin",

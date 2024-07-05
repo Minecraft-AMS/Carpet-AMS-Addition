@@ -345,6 +345,8 @@ carpetamsaddition:
         desc: When players land on pointed dripstone, they do not take additional damage from it
       pointedDripstoneCollisionBoxDisabled:
         desc: Allow players to pass through pointed dripstone
+      preventEndSpikeRespawn:
+        desc: Prevent end spikes (obsidian spikes in the_end) from spawning
       foliageGenerateDisabled:
         desc: The foliage will not generate in any way
       commandGetSystemInfo:
