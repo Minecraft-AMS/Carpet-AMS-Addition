@@ -20,21 +20,16 @@
 
 package club.mcams.carpet.mixin.rule.preventEndSpikeRespawn;
 
-
 import club.mcams.carpet.AmsServerSettings;
+
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableWorld;
-import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.gen.feature.EndSpikeFeature;
-import net.minecraft.world.gen.feature.EndSpikeFeatureConfig;
-//#if MC>=11904
-//$$ import net.minecraft.util.math.random.Random;
-//#else
-import java.util.Random;
-//#endif
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -43,27 +38,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EndSpikeFeature.class)
 public class EndSpikeFeatureMixin {
     @WrapOperation(
-            method="generateSpike",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/gen/feature/EndSpikeFeature;setBlockState(Lnet/minecraft/world/ModifiableWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V"
-            )
+        method="generateSpike",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/gen/feature/EndSpikeFeature;setBlockState(Lnet/minecraft/world/ModifiableWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V"
+        )
     )
-    private void onSetBlockState(EndSpikeFeature instance, ModifiableWorld modifiableWorld, BlockPos blockPos, BlockState blockState, Operation<Void> original) {
+    private void onSetBlockState(EndSpikeFeature endSpikeFeature, ModifiableWorld modifiableWorld, BlockPos blockPos, BlockState blockState, Operation<Void> original) {
         if (AmsServerSettings.preventEndSpikeRespawn.equals("false")) {
-            original.call(instance, modifiableWorld, blockPos, blockState);
+            original.call(endSpikeFeature, modifiableWorld, blockPos, blockState);
         }
     }
 
     @Inject(
-            method="generateSpike",
-            cancellable = true,
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/world/ServerWorldAccess;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
-            )
+        method="generateSpike",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/ServerWorldAccess;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
+        ),
+        cancellable = true
     )
-    private void onSpawnEntity(ServerWorldAccess world, Random random, EndSpikeFeatureConfig config, EndSpikeFeature.Spike spike, CallbackInfo ci) {
+    private void onSpawnEntity(CallbackInfo ci) {
         if (AmsServerSettings.preventEndSpikeRespawn.equals("true")) {
             ci.cancel();
         }
