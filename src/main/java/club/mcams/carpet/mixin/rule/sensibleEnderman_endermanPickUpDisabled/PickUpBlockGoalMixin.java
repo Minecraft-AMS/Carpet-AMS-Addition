@@ -30,9 +30,19 @@ import java.util.Random;
 //$$ import net.minecraft.util.math.random.Random;
 //#endif
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.block.Block;
+//#if MC>=11904
+//$$ import net.minecraft.registry.tag.TagKey;
+//#elseif MC>=11800 && MC<11900
+import net.minecraft.tag.TagKey;
+//#else
+//$$ import net.minecraft.tag.Tag;
+//#endif
 import net.minecraft.util.hit.BlockHitResult;
 //#if MC>=11700
 import net.minecraft.world.event.GameEvent;
@@ -50,44 +60,38 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(targets = "net.minecraft.entity.mob.EndermanEntity$PickUpBlockGoal")
+@Mixin(targets = "net/minecraft/entity/mob/EndermanEntity$PickUpBlockGoal")
 public abstract class PickUpBlockGoalMixin {
 
     @Shadow
     @Final
     private EndermanEntity enderman;
-
-    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
-    private void tick(CallbackInfo ci) {
-        if (AmsServerSettings.sensibleEnderman) {
-            Random random = this.enderman.getRandom();
-            //#if MC<11900
-            World world = this.enderman.world;
+    @WrapOperation(method = "tick()V",at = @At(value = "INVOKE", target =
+            //#if MC<11700
+            //$$ "Lnet/minecraft/block/Block;isIn(Lnet/minecraft/tag/Tag;)Z"
+            //#elseif MC<11904 && MC>=11800
+            "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/tag/TagKey;)Z"
+            //#elseif MC<11904
+            //$$ "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/tag/Tag;)Z"
             //#else
-            //$$ World world = this.enderman.getWorld();
+            //$$ "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"
             //#endif
-            int i = MathHelper.floor(this.enderman.getX() - 2.0 + random.nextDouble() * 4.0);
-            int j = MathHelper.floor(this.enderman.getY() + random.nextDouble() * 3.0);
-            int k = MathHelper.floor(this.enderman.getZ() - 2.0 + random.nextDouble() * 4.0);
-            BlockPos blockPos = new BlockPos(i, j, k);
-            BlockState blockState = world.getBlockState(blockPos);
-            //#if MC>=11700
-            Vec3d vec3d = new Vec3d((double)this.enderman.getBlockX() + 0.5, (double)j + 0.5, (double)this.enderman.getBlockZ() + 0.5);
-            //#else
-            //$$ Vec3d vec3d = new Vec3d((double)this.enderman.getX() + 0.5, (double)j + 0.5, (double)this.enderman.getZ() + 0.5);
-            //#endif
-            Vec3d vec3d2 = new Vec3d((double)i + 0.5, (double)j + 0.5, (double)k + 0.5);
-            BlockHitResult blockHitResult = world.raycast(new RaycastContext(vec3d, vec3d2, RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.NONE, this.enderman));
-            boolean isBlockHit = blockHitResult.getBlockPos().equals(blockPos);
-            if ((blockState.getBlock() == Blocks.PUMPKIN || blockState.getBlock() == Blocks.MELON) && isBlockHit) {
-                world.removeBlock(blockPos, false);
-                //#if MC>=11700
-                world.emitGameEvent(this.enderman, GameEvent.BLOCK_DESTROY, blockPos);
-                //#endif
-                this.enderman.setCarriedBlock(blockState.getBlock().getDefaultState());
-            }
-            ci.cancel();
-        }
+    ))
+    private boolean isBlockInTag(
+                                 //#if MC<11700
+                                 //$$ Block instance,
+                                 //#else
+                                 BlockState instance,
+                                 //#endif
+                                 //#if MC>=11800 && MC<11900
+                                 TagKey tag,
+                                 //#elseif MC<11904
+                                 //$$ Tag tag,
+                                 //#else
+                                 //$$ TagKey tag,
+                                 //#endif
+                                 Operation<Boolean> original) {
+        return original.call(instance, tag);
     }
 
     @ModifyReturnValue(method = "canStart", at = @At("RETURN"))
