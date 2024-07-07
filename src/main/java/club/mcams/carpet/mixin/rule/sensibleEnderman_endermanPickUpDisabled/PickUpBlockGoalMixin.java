@@ -23,18 +23,11 @@ package club.mcams.carpet.mixin.rule.sensibleEnderman_endermanPickUpDisabled;
 import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-
-//#if MC<11900
-import java.util.Random;
-//#else
-//$$ import net.minecraft.util.math.random.Random;
-//#endif
-
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.mob.EndermanEntity;
 import net.minecraft.block.Block;
 //#if MC>=11904
 //$$ import net.minecraft.registry.tag.TagKey;
@@ -43,30 +36,17 @@ import net.minecraft.tag.TagKey;
 //#else
 //$$ import net.minecraft.tag.Tag;
 //#endif
-import net.minecraft.util.hit.BlockHitResult;
-//#if MC>=11700
-import net.minecraft.world.event.GameEvent;
-//#endif
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RaycastContext;
-import net.minecraft.world.World;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(targets = "net/minecraft/entity/mob/EndermanEntity$PickUpBlockGoal")
 public abstract class PickUpBlockGoalMixin {
-
-    @Shadow
-    @Final
-    private EndermanEntity enderman;
-    @WrapOperation(method = "tick()V",at = @At(value = "INVOKE", target =
+    @WrapOperation(
+        method = "tick()V",
+        at = @At(
+            value = "INVOKE",
+            target =
             //#if MC<11700
             //$$ "Lnet/minecraft/block/Block;isIn(Lnet/minecraft/tag/Tag;)Z"
             //#elseif MC<11904 && MC>=11800
@@ -76,22 +56,35 @@ public abstract class PickUpBlockGoalMixin {
             //#else
             //$$ "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"
             //#endif
-    ))
+        )
+    )
     private boolean isBlockInTag(
-                                 //#if MC<11700
-                                 //$$ Block instance,
-                                 //#else
-                                 BlockState instance,
-                                 //#endif
-                                 //#if MC>=11800 && MC<11900
-                                 TagKey tag,
-                                 //#elseif MC<11904
-                                 //$$ Tag tag,
-                                 //#else
-                                 //$$ TagKey tag,
-                                 //#endif
-                                 Operation<Boolean> original) {
-        return original.call(instance, tag);
+         //#if MC<11700
+         //$$ Block block,
+         //#else
+         BlockState blockState,
+         //#endif
+         //#if MC>=11800 && MC<11900
+         TagKey<Block> tag,
+         //#elseif MC<11904
+         //$$ Tag<Block> tag,
+         //#else
+         //$$ TagKey<Block> tag,
+         //#endif
+         Operation<Boolean> original
+    ) {
+        if (AmsServerSettings.sensibleEnderman) {
+            //#if MC>=11700
+            Block block = blockState.getBlock();
+            //#endif
+            return block.equals(Blocks.MELON) || block.equals(Blocks.CARVED_PUMPKIN);
+        } else {
+            //#if MC>=11700
+            return original.call(blockState, tag);
+            //#else
+            //$$ return original.call(block, tag);
+            //#endif
+        }
     }
 
     @ModifyReturnValue(method = "canStart", at = @At("RETURN"))
