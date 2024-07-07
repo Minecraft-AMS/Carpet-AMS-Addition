@@ -30,12 +30,15 @@ import net.minecraft.world.ModifiableWorld;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.gen.feature.EndSpikeFeature;
 import net.minecraft.world.gen.feature.EndSpikeFeatureConfig;
+//#if MC>=11904
+//$$ import net.minecraft.util.math.random.Random;
+//#else
+import java.util.Random;
+//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Random;
 
 @Mixin(EndSpikeFeature.class)
 public class EndSpikeFeatureMixin {
@@ -47,7 +50,6 @@ public class EndSpikeFeatureMixin {
             )
     )
     private void onSetBlockState(EndSpikeFeature instance, ModifiableWorld modifiableWorld, BlockPos blockPos, BlockState blockState, Operation<Void> original) {
-        System.out.println("Building Obsidian Empire");
         if (AmsServerSettings.preventEndSpikeRespawn.equals("false")) {
             original.call(instance, modifiableWorld, blockPos, blockState);
         }
@@ -62,7 +64,6 @@ public class EndSpikeFeatureMixin {
             )
     )
     private void onSpawnEntity(ServerWorldAccess world, Random random, EndSpikeFeatureConfig config, EndSpikeFeature.Spike spike, CallbackInfo ci) {
-        System.out.println("Building Obsidian Empire");
         if (AmsServerSettings.preventEndSpikeRespawn.equals("true")) {
             ci.cancel();
         }

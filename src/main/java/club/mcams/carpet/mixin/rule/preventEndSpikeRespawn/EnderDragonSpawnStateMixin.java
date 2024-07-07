@@ -25,6 +25,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.explosion.Explosion;
 import org.spongepowered.asm.mixin.Mixin;
@@ -52,10 +53,21 @@ public class EnderDragonSpawnStateMixin {
             method = "run",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
+                    target =
+                    //#if MC<11904
+                            "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
+                    //#else
+                    //$$    "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/World$ExplosionSourceType;)Lnet/minecraft/world/explosion/Explosion;"
+                    //#endif
             )
     )
-    private Explosion onCreateExplosion(ServerWorld instance, Entity entity, double x, double y, double z, float power, Explosion.DestructionType destructionType, Operation<Explosion> original) {
+    private Explosion onCreateExplosion(ServerWorld instance, Entity entity, double x, double y, double z, float power,
+                                        //#if MC<11904
+                                        Explosion.DestructionType destructionType,
+                                        //#else
+                                        //$$ World.ExplosionSourceType destructionType,
+                                        //#endif
+                                        Operation<Explosion> original) {
         if (AmsServerSettings.preventEndSpikeRespawn.equals("false")) {
             original.call(instance, entity, x, y, z, power, destructionType);
         }
