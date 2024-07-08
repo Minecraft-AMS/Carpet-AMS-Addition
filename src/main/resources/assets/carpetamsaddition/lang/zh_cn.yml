@@ -429,6 +429,9 @@ carpetamsaddition:
       foliageGenerateDisabled:
         name: 禁止树叶生成
         desc: 树叶不会以任何方式生成
+      stackableDiscounts:
+        name: 村民折扣叠加
+        desc: 重新引入<23w31a的打骨折机制，让治疗村民的折扣可以叠加
       commandGetSystemInfo:
         name: 获取系统信息
         desc: 使用“/getSystemInfo”命令获取服务器的系统信息

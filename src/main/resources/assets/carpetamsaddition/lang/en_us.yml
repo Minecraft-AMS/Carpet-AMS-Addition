@@ -302,6 +302,8 @@ carpetamsaddition:
         desc: Preventing Endermen from picking up blocks
       mitePearl:
         desc: Using an Ender Pearl each time will spawn an Endermite
+      stackableDiscounts:
+        desc: Reintroduce the stackable discounts feature in <23w31a
       enderPearlSoundEffect:
         desc: A sound effect will be played when the player uses an ender pearl for teleportation
       commandHere:

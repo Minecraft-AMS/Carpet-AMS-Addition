@@ -438,6 +438,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean headHunter = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean stackableDiscounts = false;
+
     @Rule(
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, SURVIVAL, COMMAND}
