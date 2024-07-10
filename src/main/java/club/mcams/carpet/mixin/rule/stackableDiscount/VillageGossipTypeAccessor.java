@@ -20,35 +20,18 @@
 
 package club.mcams.carpet.mixin.rule.stackableDiscount;
 
-import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.village.VillageGossipType;
-import net.minecraft.village.VillagerGossips;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
+import org.spongepowered.asm.mixin.Mutable;
+import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(VillageGossipType.class)
-public class VillageGossipTypeMixin {
-    @ModifyArgs(
-            method = "<clinit>",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/village/VillageGossipType;<init>(Ljava/lang/String;ILjava/lang/String;IIII)V"
-            )
-    )
-    private static void modifyVillageGossipInitialization(Args args) {
-        if (AmsServerSettings.stackableDiscounts) {
-            switch (args.<String>get(2)) {
-                case "minor_positive":
-                    args.set(4, 200);
-                    break;
-                case "major_positive":
-                    args.set(4, 100);
-                    args.set(6, 100);
-                    break;
-            }
-        }
-    }
+public interface VillageGossipTypeAccessor{
+    @Accessor(value = "maxValue")
+    @Mutable
+    void setMaxValue(int maxValue);
+
+    @Accessor(value = "shareDecrement")
+    @Mutable
+    void setShareDecrement(int shareDecrement);
 }
