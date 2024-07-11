@@ -66,6 +66,7 @@
     "rule.largeEnderChest.EnderChestBlockMixin",
     "rule.largeEnderChest.PlayerEntityMixin",
     "rule.largeEnderChest.SimpleInventoryAccessor",
+    "rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor",
     "rule.largeShulkerBox.ShulkerBoxBlockEntityMixin",
     "rule.largeShulkerBox.ShulkerBoxScreenHandlerMixin",
     "rule.maxPlayerInteractionRange.AttributeCommandMixin",

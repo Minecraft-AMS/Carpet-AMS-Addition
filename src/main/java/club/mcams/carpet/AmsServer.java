@@ -30,7 +30,6 @@ import club.mcams.carpet.commands.RegisterCommands;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import club.mcams.carpet.config.LoadConfigFromJson;
 import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
-import club.mcams.carpet.helpers.rule.stackableDiscount.StackableDiscountRuleObserver;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
@@ -76,7 +75,6 @@ public class AmsServer implements CarpetExtension {
         LOGGER.info("open source: https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
         LOGGER.info("issues: https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
         CarpetRuleRegistrar.register(CarpetServer.settingsManager, AmsServerSettings.class);
-        StackableDiscountRuleObserver.initStackableDiscountObserver();
     }
 
     @Override

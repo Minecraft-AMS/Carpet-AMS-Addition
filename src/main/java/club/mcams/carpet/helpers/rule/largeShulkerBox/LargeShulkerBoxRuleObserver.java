@@ -18,22 +18,21 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.stackableDiscount;
+package club.mcams.carpet.helpers.rule.largeShulkerBox;
 
-import club.mcams.carpet.mixin.rule.stackableDiscount.VillageGossipTypeAccessor;
+import club.mcams.carpet.mixin.rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor;
 import club.mcams.carpet.settings.SimpleRuleObserver;
-import net.minecraft.village.VillageGossipType;
 
-public class StackableDiscountRuleObserver extends SimpleRuleObserver {
+public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver {
     static void onRuleActivate() {
-        ((VillageGossipTypeAccessor) (Object)VillageGossipType.MINOR_POSITIVE).setMaxValue(200);
-        ((VillageGossipTypeAccessor) (Object)VillageGossipType.MAJOR_POSITIVE).setMaxValue(100);
-        ((VillageGossipTypeAccessor) (Object)VillageGossipType.MAJOR_POSITIVE).setShareDecrement(100);
+        //#if MC>=11700
+        ShulkerBoxBlockEntityAccessor.setInventorySize(54);
+        //#endif
     }
 
-    static void onRuleDeactivate() {
-        ((VillageGossipTypeAccessor) (Object)VillageGossipType.MINOR_POSITIVE).setMaxValue(25);
-        ((VillageGossipTypeAccessor) (Object)VillageGossipType.MAJOR_POSITIVE).setMaxValue(20);
-        ((VillageGossipTypeAccessor) (Object)VillageGossipType.MAJOR_POSITIVE).setShareDecrement(20);
+    public static void onRuleDeactivate() {
+        //#if MC>=11700
+        ShulkerBoxBlockEntityAccessor.setInventorySize(27);
+        //#endif
     }
 }

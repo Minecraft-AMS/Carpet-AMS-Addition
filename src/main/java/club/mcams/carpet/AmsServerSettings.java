@@ -20,6 +20,8 @@
 
 package club.mcams.carpet;
 
+import club.mcams.carpet.helpers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
+import club.mcams.carpet.helpers.rule.stackableDiscount.StackableDiscountRuleObserver;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
@@ -174,7 +176,7 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
-    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL}, observer= LargeShulkerBoxRuleObserver.class)
     public static boolean largeShulkerBox = false;
 
     @Rule(
@@ -439,7 +441,7 @@ public class AmsServerSettings {
     public static boolean headHunter = false;
 
     //#if MC>=12002
-    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL}, observer= StackableDiscountRuleObserver.class)
     //$$ public static boolean stackableDiscounts = false;
     //#endif
 

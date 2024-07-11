@@ -61,6 +61,7 @@ public class CarpetRuleRegistrar {
         CarpetRuleRegistrar registrar = new CarpetRuleRegistrar(settingsManager);
         registrar.parseSettingsClass(settingsClass);
         registrar.registerToCarpet();
+        registrar.registerObservers(settingsClass);
     }
 
     private void parseSettingsClass(Class<?> settingsClass) {
@@ -68,6 +69,33 @@ public class CarpetRuleRegistrar {
             Rule rule = field.getAnnotation(Rule.class);
             if (rule != null) {
                 this.parseRule(field, rule);
+            }
+        }
+    }
+
+    private void registerObservers(Class<?> settingsClass) {
+        for (Field field : settingsClass.getDeclaredFields()) {
+            Rule rule = field.getAnnotation(Rule.class);
+            if (rule != null) {
+                for (Class<? extends RuleObserver> observer : rule.observer()) {
+                    this.settingsManager.addRuleObserver(
+                            (source, parsedRule, value) -> {
+                                if (parsedRule.
+                                        //#if MC<11904
+                                        name
+                                        //#else
+                                        //$$ name()
+                                        //#endif
+                                        .equals(field.getName())) {
+                                    try {
+                                        observer.getMethod("onRuleChange", String.class).invoke(null, value);
+                                    } catch (ReflectiveOperationException e) {
+                                        AmsServer.LOGGER.warn("Failed to invoke observer {} for rule {}: {}", observer, field.getName(), e);
+                                    }
+                                }
+                            }
+                    );
+                }
             }
         }
     }
