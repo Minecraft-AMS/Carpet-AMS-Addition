@@ -22,6 +22,7 @@ package club.mcams.carpet.helpers.rule.stackableDiscount;
 
 import club.mcams.carpet.mixin.rule.stackableDiscount.VillageGossipTypeAccessor;
 import club.mcams.carpet.settings.SimpleRuleObserver;
+
 import net.minecraft.village.VillageGossipType;
 
 public class StackableDiscountRuleObserver extends SimpleRuleObserver {
