@@ -42,41 +42,41 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
     protected ShulkerBoxScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId) {
         super(type, syncId);
     }
-//
-//    @ModifyArg(
-//        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
-//        at = @At(
-//            value = "INVOKE",
-//            target = "Lnet/minecraft/screen/ScreenHandler;<init>(Lnet/minecraft/screen/ScreenHandlerType;I)V"
-//        ),
-//        index = 0
-//    )
-//    private static ScreenHandlerType<?> getScreenHandlerType(ScreenHandlerType<?> type) {
-//        if (!AmsServerSettings.largeShulkerBox) {
-//            return type;
-//        }
-//        return ScreenHandlerType.GENERIC_9X6;
-//    }
 
-//    @Inject(
-//        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
-//        at = @At(
-//            value = "JUMP",
-//            opcode = Opcodes.GOTO,
-//            ordinal = 1,
-//            shift = At.Shift.BY,
-//            by = 2
-//        )
-//    )
-//    private void init(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
-//        if (!AmsServerSettings.largeShulkerBox || this.slots.size() != 9 * 3) {
-//            return;
-//        }
-//        checkSize(inventory, 9 * 6);
-//        for (int row = 3; row < 6; ++row) {
-//            for (int column = 0; column < 9; ++column) {
-//                this.addSlot(new ShulkerBoxSlot(inventory, column + row * 9, 8 + column * 18, 18 + row * 18));
-//            }
-//        }
-//    }
+    @ModifyArg(
+        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/screen/ScreenHandler;<init>(Lnet/minecraft/screen/ScreenHandlerType;I)V"
+        ),
+        index = 0
+    )
+    private static ScreenHandlerType<?> getScreenHandlerType(ScreenHandlerType<?> type) {
+        if (!AmsServerSettings.largeShulkerBox) {
+            return type;
+        }
+        return ScreenHandlerType.GENERIC_9X6;
+    }
+
+    @Inject(
+        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        at = @At(
+            value = "JUMP",
+            opcode = Opcodes.GOTO,
+            ordinal = 1,
+            shift = At.Shift.BY,
+            by = 2
+        )
+    )
+    private void init(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
+        if (!AmsServerSettings.largeShulkerBox || this.slots.size() != 9 * 3) {
+            return;
+        }
+        checkSize(inventory, 9 * 6);
+        for (int row = 3; row < 6; ++row) {
+            for (int column = 0; column < 9; ++column) {
+                this.addSlot(new ShulkerBoxSlot(inventory, column + row * 9, 8 + column * 18, 18 + row * 18));
+            }
+        }
+    }
 }
