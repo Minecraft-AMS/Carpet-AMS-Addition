@@ -38,14 +38,14 @@ import java.util.Objects;
 
 @Mixin(CommandDispatcher.class)
 public abstract class CommandDispatcherMixin {
-    @Inject(method = "register", at = @At("HEAD"), remap = false)
-    private void register(LiteralArgumentBuilder<ServerCommandSource> command, CallbackInfoReturnable<LiteralCommandNode<ServerCommandSource>> cir) {
-        if (
-            !Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false") &&
-            CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(command.getLiteral())
-        ) {
-            int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(command.getLiteral());
-            command.requires(source -> source.hasPermissionLevel(level));
-        }
-    }
+//    @Inject(method = "register", at = @At("HEAD"), remap = false)
+//    private void register(LiteralArgumentBuilder<ServerCommandSource> command, CallbackInfoReturnable<LiteralCommandNode<ServerCommandSource>> cir) {
+//        if (
+//            !Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false") &&
+//            CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(command.getLiteral())
+//        ) {
+//            int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(command.getLiteral());
+//            command.requires(source -> source.hasPermissionLevel(level));
+//        }
+//    }
 }

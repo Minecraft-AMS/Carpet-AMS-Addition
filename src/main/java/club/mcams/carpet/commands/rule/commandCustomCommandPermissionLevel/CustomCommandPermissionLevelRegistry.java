@@ -21,15 +21,18 @@
 package club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.mixin.rule.commandCustomCommandPermissionLevel.CommandNodeInvoker;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.config.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelConfig;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
+import com.mojang.brigadier.tree.CommandNode;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
@@ -81,18 +84,29 @@ public class CustomCommandPermissionLevelRegistry {
                     String.format("%s%s %d -> %d", MSG_HEAD, command, oldPermissionLevel, permissionLevel)
                 ).formatted(Formatting.GREEN), false
             );
-            sendNeedRestartServerMessage(player);
+//            sendNeedRestartServerMessage(player);
         } else {
             player.sendMessage(
                 Messenger.s(
                     String.format("%s+ %s/%d", MSG_HEAD, command, permissionLevel)
                 ).formatted(Formatting.GREEN), false
             );
-            sendNeedRestartServerMessage(player);
+//            sendNeedRestartServerMessage(player);
         }
         COMMAND_PERMISSION_MAP.put(command, permissionLevel);
         saveToJson(server);
+        setPermission(server,player, command, permissionLevel);
         return 1;
+    }
+
+    private static void setPermission(MinecraftServer server, PlayerEntity player, String command, int permissionLevel) {
+        CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
+        ParseResults<ServerCommandSource> result = dispatcher.parse(command, player.getCommandSource());
+
+        CommandNode<ServerCommandSource> target = result.getContext().findSuggestionContext(result.getReader().getCursor()).parent;
+        ((CommandNodeInvoker<ServerCommandSource>)target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
+
+        CommandHelper.notifyPlayersCommandsChanged(server);
     }
 
     private static int remove(MinecraftServer server, PlayerEntity player, String command) {

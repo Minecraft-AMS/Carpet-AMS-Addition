@@ -20,11 +20,39 @@
 
 package club.mcams.carpet.utils;
 
+import carpet.CarpetSettings;
+import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.AmsServerMod;
+import club.mcams.carpet.AmsServerSettings;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.ServerTask;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 @SuppressWarnings("EnhancedSwitchMigration")
 public final class CommandHelper {
     private CommandHelper() {}
+
+    public static void notifyPlayersCommandsChanged(MinecraftServer server)
+    {
+        if (server == null || server.getPlayerManager() == null)
+        {
+            return;
+        }
+        server.send(new ServerTask(server.getTicks(), () ->
+        {
+            try {
+                for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+                    server.getCommandManager().sendCommandTree(player);
+                }
+            }
+            catch (NullPointerException e)
+            {
+                AmsServer.LOGGER.warn("Exception while refreshing commands, please report this to Carpet", e);
+            }
+        }));
+    }
+
     public static boolean canUseCommand(ServerCommandSource source, Object commandLevel) {
         if (commandLevel instanceof Boolean) return (Boolean) commandLevel;
         String commandLevelString = commandLevel.toString();
