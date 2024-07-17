@@ -390,6 +390,10 @@ carpetamsaddition:
         desc: Customize the drop rate of netherite scrap from zombified piglin
         extra:
           '0': 'The range of values: 0 - 1'
+      softDeepslate:
+        desc: Change the hardness of deepslate to stone
+      softObsidian:
+        desc: Change the hardness of obsidian and crying obsidian to end stone
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

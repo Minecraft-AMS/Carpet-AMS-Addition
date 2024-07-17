@@ -484,6 +484,12 @@ carpetamsaddition:
         desc: 自定义僵尸猪灵掉落下界合金碎片的概率
         extra:
           '0': '允许设定的范围：0 - 1'
+      softDeepslate:
+        name: 易碎深板岩
+        desc: 改变深板岩的硬度使其和普通石头一致
+      softObsidian:
+        name: 易碎黑曜石
+        desc: 改变黑曜石与哭泣的黑曜石的硬度使其和末地石一致
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
