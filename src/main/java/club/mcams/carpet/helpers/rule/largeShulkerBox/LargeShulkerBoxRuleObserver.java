@@ -24,13 +24,13 @@ import club.mcams.carpet.mixin.rule.largeShulkerBox.ShulkerBoxBlockEntityAccesso
 import club.mcams.carpet.settings.SimpleRuleObserver;
 
 public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver {
-    static void onRuleActivate() {
+    protected void onRuleActivate() {
         //#if MC>=11700
         ShulkerBoxBlockEntityAccessor.setInventorySize(54);
         //#endif
     }
 
-    public static void onRuleDeactivate() {
+    protected void onRuleDeactivate() {
         //#if MC>=11700
         ShulkerBoxBlockEntityAccessor.setInventorySize(27);
         //#endif

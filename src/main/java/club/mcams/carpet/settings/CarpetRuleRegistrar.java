@@ -57,7 +57,7 @@ public class CarpetRuleRegistrar {
         this.settingsManager = settingsManager;
     }
 
-    public static void register(SettingsManager settingsManager, Class<?> settingsClass) {
+    public static void register(SettingsManager settingsManager, Class<?> settingsClass){
         CarpetRuleRegistrar registrar = new CarpetRuleRegistrar(settingsManager);
         registrar.parseSettingsClass(settingsClass);
         registrar.registerToCarpet();
@@ -78,23 +78,25 @@ public class CarpetRuleRegistrar {
             Rule rule = field.getAnnotation(Rule.class);
             if (rule != null) {
                 for (Class<? extends RuleObserver> observer : rule.observer()) {
-                    this.settingsManager.addRuleObserver(
-                            (source, parsedRule, value) -> {
-                                if (parsedRule.
-                                        //#if MC<11904
-                                        name
-                                        //#else
-                                        //$$ name()
-                                        //#endif
-                                        .equals(field.getName())) {
-                                    try {
-                                        observer.getMethod("onRuleChange", String.class).invoke(null, value);
-                                    } catch (ReflectiveOperationException e) {
-                                        AmsServer.LOGGER.warn("Failed to invoke observer {} for rule {}: {}", observer, field.getName(), e);
+                    try {
+                        RuleObserver observerInstance = observer.getDeclaredConstructor().newInstance();
+                        this.settingsManager.addRuleObserver(
+                                (source, parsedRule, value) -> {
+                                    if (parsedRule.
+                                            //#if MC<11904
+                                                    name
+                                            //#else
+                                            //$$ name()
+                                            //#endif
+                                            .equals(field.getName())) {
+                                        observerInstance.onRuleChange(value);
                                     }
                                 }
-                            }
-                    );
+                        );
+                    }
+                    catch (Exception e) {
+                        AmsServer.LOGGER.error("Failed to register observer {} for rule {}: {}", observer, field.getName(), e);
+                    }
                 }
             }
         }

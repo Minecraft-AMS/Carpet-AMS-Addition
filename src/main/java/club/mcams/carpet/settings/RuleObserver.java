@@ -21,7 +21,5 @@
 package club.mcams.carpet.settings;
 
 public interface RuleObserver {
-    static void onRuleChange(String option) {
-        throw new AssertionError();
-    }
+    void onRuleChange(String option);
 }

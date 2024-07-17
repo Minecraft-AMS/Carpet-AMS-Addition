@@ -21,19 +21,16 @@
 package club.mcams.carpet.settings;
 
 public abstract class SimpleRuleObserver implements RuleObserver{
-    static void onRuleChange(String option) {
+    @Override
+    public void onRuleChange(String option) {
         if (Boolean.parseBoolean(option)) {
             onRuleActivate();
         } else {
-            onRuleDeActivate();
+            onRuleDeactivate();
         }
     }
 
-    static void onRuleActivate() {
-        throw new AssertionError();
-    }
+    protected abstract void onRuleActivate();
 
-    static void onRuleDeActivate(){
-        throw new AssertionError();
-    }
+    protected abstract void onRuleDeactivate();
 }

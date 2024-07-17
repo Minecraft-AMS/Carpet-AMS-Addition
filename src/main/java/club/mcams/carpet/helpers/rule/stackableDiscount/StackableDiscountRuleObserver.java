@@ -26,13 +26,13 @@ import club.mcams.carpet.settings.SimpleRuleObserver;
 import net.minecraft.village.VillageGossipType;
 
 public class StackableDiscountRuleObserver extends SimpleRuleObserver {
-    static void onRuleActivate() {
+    protected void onRuleActivate() {
         ((VillageGossipTypeAccessor) (Object)VillageGossipType.MINOR_POSITIVE).setMaxValue(200);
         ((VillageGossipTypeAccessor) (Object)VillageGossipType.MAJOR_POSITIVE).setMaxValue(100);
         ((VillageGossipTypeAccessor) (Object)VillageGossipType.MAJOR_POSITIVE).setShareDecrement(100);
     }
 
-    static void onRuleDeactivate() {
+    protected void onRuleDeactivate() {
         ((VillageGossipTypeAccessor) (Object)VillageGossipType.MINOR_POSITIVE).setMaxValue(25);
         ((VillageGossipTypeAccessor) (Object)VillageGossipType.MAJOR_POSITIVE).setMaxValue(20);
         ((VillageGossipTypeAccessor) (Object)VillageGossipType.MAJOR_POSITIVE).setShareDecrement(20);
