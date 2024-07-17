@@ -18,21 +18,20 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.largeShulkerBox;
+package club.mcams.carpet.validators.rule.largeShulkerBox;
 
 import club.mcams.carpet.mixin.rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor;
 import club.mcams.carpet.settings.SimpleRuleObserver;
 
-public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver {
-    protected void onRuleActivate() {
+public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver<Boolean> {
+    public void onValueChange(Boolean oldValue, Boolean newValue) {
         //#if MC>=11700
-        ShulkerBoxBlockEntityAccessor.setInventorySize(54);
-        //#endif
-    }
-
-    protected void onRuleDeactivate() {
-        //#if MC>=11700
-        ShulkerBoxBlockEntityAccessor.setInventorySize(27);
+        if(newValue) {
+            ShulkerBoxBlockEntityAccessor.setInventorySize(54);
+        }
+        else{
+            ShulkerBoxBlockEntityAccessor.setInventorySize(27);
+        }
         //#endif
     }
 }

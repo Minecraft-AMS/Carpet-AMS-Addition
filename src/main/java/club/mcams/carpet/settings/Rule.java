@@ -37,6 +37,4 @@ public @interface Rule {
     boolean strict() default true;
 
     Class<? extends Validator>[] validators() default {};
-
-    Class<? extends RuleObserver>[] observer() default {};
 }

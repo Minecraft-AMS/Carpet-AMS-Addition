@@ -20,17 +20,13 @@
 
 package club.mcams.carpet.settings;
 
-public abstract class SimpleRuleObserver implements RuleObserver{
+import carpet.settings.ParsedRule;
+import net.minecraft.server.command.ServerCommandSource;
+
+public abstract class SimpleRuleObserver<T> extends RuleObserver<T>{
     @Override
-    public void onRuleChange(String option) {
-        if (Boolean.parseBoolean(option)) {
-            onRuleActivate();
-        } else {
-            onRuleDeactivate();
-        }
+    public T validate(ServerCommandSource source, ParsedRule<T> currentRule, T newValue, String userInput) {
+        onValueChange(currentRule.get(), newValue);
+        return newValue;
     }
-
-    protected abstract void onRuleActivate();
-
-    protected abstract void onRuleDeactivate();
 }
