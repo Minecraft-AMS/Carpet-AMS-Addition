@@ -26,10 +26,9 @@ import club.mcams.carpet.settings.SimpleRuleObserver;
 public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver<Boolean> {
     public void onValueChange(Boolean oldValue, Boolean newValue) {
         //#if MC>=11700
-        if(newValue) {
+        if (newValue) {
             ShulkerBoxBlockEntityAccessor.setInventorySize(54);
-        }
-        else{
+        } else {
             ShulkerBoxBlockEntityAccessor.setInventorySize(27);
         }
         //#endif

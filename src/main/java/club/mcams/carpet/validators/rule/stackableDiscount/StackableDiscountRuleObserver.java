@@ -25,14 +25,17 @@ import club.mcams.carpet.settings.SimpleRuleObserver;
 
 import net.minecraft.village.VillageGossipType;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.20.2")
+@SuppressWarnings({"unused", "DataFlowIssue"})
 public class StackableDiscountRuleObserver extends SimpleRuleObserver<Boolean> {
     public void onValueChange(Boolean oldValue, Boolean newValue) {
-        if(newValue) {
+        if (newValue) {
             ((VillageGossipTypeAccessor) (Object) VillageGossipType.MINOR_POSITIVE).setMaxValue(200);
             ((VillageGossipTypeAccessor) (Object) VillageGossipType.MAJOR_POSITIVE).setMaxValue(100);
             ((VillageGossipTypeAccessor) (Object) VillageGossipType.MAJOR_POSITIVE).setShareDecrement(100);
-        }
-        else{
+        } else {
             ((VillageGossipTypeAccessor) (Object) VillageGossipType.MINOR_POSITIVE).setMaxValue(25);
             ((VillageGossipTypeAccessor) (Object) VillageGossipType.MAJOR_POSITIVE).setMaxValue(20);
             ((VillageGossipTypeAccessor) (Object) VillageGossipType.MAJOR_POSITIVE).setShareDecrement(20);
