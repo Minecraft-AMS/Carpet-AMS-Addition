@@ -349,6 +349,10 @@ carpetamsaddition:
         desc: Allow players to pass through pointed dripstone
       preventEndSpikeRespawn:
         desc: Prevent end spikes (obsidian spikes in the_end) from spawning
+        extra:
+          '0': '[true] - Prohibited from generating'
+          '1': '[false] - Disable Rule'
+          '2': '[keepEndCrystal] - Preserve crystal generation'
       foliageGenerateDisabled:
         desc: The foliage will not generate in any way
       commandGetSystemInfo:

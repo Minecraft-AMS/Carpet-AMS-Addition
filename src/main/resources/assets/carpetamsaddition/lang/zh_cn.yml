@@ -417,9 +417,13 @@ carpetamsaddition:
       fertilizableSmallFlower:
         name: 可施肥小花
         desc: 使诸如蒲公英的小花也可以被骨粉催熟
-      preventEndSpawnSpikeRespawn:
+      preventEndSpikeRespawn:
         name: 禁用末地黑曜石柱重新生成
         desc: 复活龙时末地的黑曜石柱子不会重新生成
+        extra:
+          '0': '[true] - 禁止生成'
+          '1': '[false] - 禁用规则'
+          '2': '[keepEndCrystal] - 保留水晶生成'
       safePointedDripstone:
         name: 安全的滴水石锥
         desc: 玩家落在滴水石锥上时，不会受到它的附加伤害
