@@ -1999,6 +1999,88 @@ Customize the drop rate of netherite scrap from zombified piglin.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## stackableDiscounts
+
+Reintroduce the stackable discounts feature in <23w31a.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## preventEndSpikeRespawn
+
+Prevent end spikes (obsidian spikes in the_end) from spawning.
+
+[true] - Prohibited from generating
+
+[false] - Disable Rule
+
+[keepEndCrystal] - Preserve crystal generation
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`, `keepEndCrystal`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## softDeepslate
+
+Change the hardness of deepslate to stone.
+
+< Requires client support >
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## softObsidian
+
+Change the hardness of obsidian and crying obsidian to end stone.
+
+< Requires client support >
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

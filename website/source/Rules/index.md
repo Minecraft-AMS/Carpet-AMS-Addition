@@ -1960,6 +1960,88 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 村民折扣叠加（stackableDiscounts）
+
+重新引入<23w31a的打骨折机制，让治疗村民的折扣可以叠加。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 禁用末地黑曜石柱重新生成（preventEndSpikeRespawn）
+
+复活龙时末地的黑曜石柱子不会重新生成。
+
+[true] - 禁止生成
+
+[false] - 禁用规则
+
+[keepEndCrystal] - 保留水晶生成
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`, `keepEndCrystal`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 易碎深板岩（softDeepslate）
+
+改变深板岩的硬度使其和普通石头一致。
+
+< 需要客户端支持 >
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 易碎黑曜石（softObsidian）
+
+改变黑曜石与哭泣的黑曜石的硬度使其和末地石一致。
+
+< 需要客户端支持 >
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
