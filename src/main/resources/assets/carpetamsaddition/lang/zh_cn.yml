@@ -491,9 +491,13 @@ carpetamsaddition:
       softDeepslate:
         name: 易碎深板岩
         desc: 改变深板岩的硬度使其和普通石头一致
+        extra:
+          '0': '需要客户端支持'
       softObsidian:
         name: 易碎黑曜石
         desc: 改变黑曜石与哭泣的黑曜石的硬度使其和末地石一致
+        extra:
+          '0': '需要客户端支持'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -396,8 +396,12 @@ carpetamsaddition:
           '0': 'The range of values: 0 - 1'
       softDeepslate:
         desc: Change the hardness of deepslate to stone
+        extra:
+          '0': 'Requires client support'
       softObsidian:
         desc: Change the hardness of obsidian and crying obsidian to end stone
+        extra:
+          '0': 'Requires client support'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
