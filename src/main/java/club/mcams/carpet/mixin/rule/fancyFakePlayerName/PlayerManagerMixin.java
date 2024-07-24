@@ -24,7 +24,7 @@ import carpet.patches.EntityPlayerMPFake;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.FakePlayerHelper;
-import club.mcams.carpet.helpers.rule.fancyFakePlayerName.fancyFakePlayerNameTeamController;
+import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyNameHelper;
 
 import net.minecraft.network.ClientConnection;
@@ -52,31 +52,23 @@ public abstract class PlayerManagerMixin {
         //#endif
         CallbackInfo ci
     ) {
-    if (
-        !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
-        FakePlayerHelper.isFakePlayer(player) &&
-        !((EntityPlayerMPFake) player).isAShadow
-    ) {
+        if (
+            !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
+            FakePlayerHelper.isFakePlayer(player) &&
+            !((EntityPlayerMPFake) player).isAShadow
+        ) {
             FancyNameHelper.addBotTeamNamePrefix(player);
         }
     }
 
     @Inject(method = "remove", at = @At("HEAD"))
-    private void remove(ServerPlayerEntity player, CallbackInfo info) {
+    private void kickFakePlayerFromBotTeam(ServerPlayerEntity player, CallbackInfo info) {
         if (
             !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
             FakePlayerHelper.isFakePlayer(player) &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {
-            fancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player);
-        }
-
-        if (
-            !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
-            FakePlayerHelper.isFakePlayer(player) &&
-            !((EntityPlayerMPFake) player).isAShadow
-        ) {
-            fancyFakePlayerNameTeamController.removeBotTeam(player);
+            FancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player);
         }
     }
 }

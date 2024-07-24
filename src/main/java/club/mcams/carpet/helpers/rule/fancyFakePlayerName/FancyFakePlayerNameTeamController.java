@@ -29,7 +29,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.Objects;
 
-public class fancyFakePlayerNameTeamController {
+public class FancyFakePlayerNameTeamController {
     public static void kickFakePlayerFromBotTeam(ServerPlayerEntity player) {
         MinecraftServer server = player.getServer();
         if (server != null) {
@@ -43,17 +43,6 @@ public class fancyFakePlayerNameTeamController {
 
     public static Team addBotTeam(MinecraftServer server) {
         return server.getScoreboard().addTeam(AmsServerSettings.fancyFakePlayerName);
-    }
-
-    public static void removeBotTeam(ServerPlayerEntity player) {
-        MinecraftServer server = player.getServer();
-        if (server != null) {
-            Scoreboard scoreboard = player.getServer().getScoreboard();
-            Team team = scoreboard.getTeam(AmsServerSettings.fancyFakePlayerName);
-            if (team != null) {
-                scoreboard.removeTeam(team);
-            }
-        }
     }
 
     public static void removeBotTeam(MinecraftServer server) {

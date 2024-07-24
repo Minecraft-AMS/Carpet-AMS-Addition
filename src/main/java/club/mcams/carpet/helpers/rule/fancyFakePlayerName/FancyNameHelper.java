@@ -41,7 +41,7 @@ public class FancyNameHelper {
             Scoreboard scoreboard = player.getServer().getScoreboard();
             Team team = scoreboard.getTeam(AmsServerSettings.fancyFakePlayerName);
             if (team == null) {
-                team = fancyFakePlayerNameTeamController.addBotTeam(player.getServer());
+                team = FancyFakePlayerNameTeamController.addBotTeam(player.getServer());
                 team.setPrefix(Messenger.s("[bot] ").formatted(Formatting.BOLD));
                 team.setColor(Formatting.DARK_GREEN);
             }
