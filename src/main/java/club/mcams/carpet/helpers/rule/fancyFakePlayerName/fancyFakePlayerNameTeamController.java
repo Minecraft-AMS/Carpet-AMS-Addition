@@ -20,31 +20,46 @@
 
 package club.mcams.carpet.helpers.rule.fancyFakePlayerName;
 
+import club.mcams.carpet.AmsServerSettings;
+
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-public class BotTeamController {
+import java.util.Objects;
+
+public class fancyFakePlayerNameTeamController {
     public static void kickFakePlayerFromBotTeam(ServerPlayerEntity player) {
         MinecraftServer server = player.getServer();
         if (server != null) {
             Scoreboard scoreboard = player.getServer().getScoreboard();
-            Team team = scoreboard.getTeam("bot");
+            Team team = scoreboard.getTeam(AmsServerSettings.fancyFakePlayerName);
             if (team != null) {
                 team.getPlayerList().remove(player.getGameProfile().getName());
             }
         }
     }
 
+    public static Team addBotTeam(MinecraftServer server) {
+        return server.getScoreboard().addTeam(AmsServerSettings.fancyFakePlayerName);
+    }
+
     public static void removeBotTeam(ServerPlayerEntity player) {
         MinecraftServer server = player.getServer();
         if (server != null) {
             Scoreboard scoreboard = player.getServer().getScoreboard();
-            Team team = scoreboard.getTeam("bot");
+            Team team = scoreboard.getTeam(AmsServerSettings.fancyFakePlayerName);
             if (team != null) {
                 scoreboard.removeTeam(team);
             }
+        }
+    }
+
+    public static void removeBotTeam(MinecraftServer server) {
+        Team fancyFakePlayerNameTeam = server.getScoreboard().getTeam(AmsServerSettings.fancyFakePlayerName);
+        if (!Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") && fancyFakePlayerNameTeam != null) {
+            server.getScoreboard().removeTeam(fancyFakePlayerNameTeam);
         }
     }
 }

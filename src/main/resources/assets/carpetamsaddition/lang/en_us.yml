@@ -271,7 +271,8 @@ carpetamsaddition:
       fancyFakePlayerName:
         desc: Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn't need to be input when using the command, but the suffix is indeed present
         extra:
-          '0': 'Example：1024_byteeeee -> [bot] 1024_byteeeee_bot'
+          "0": 'Note: This rule will create a team named with the value you input'
+          '1': 'Example：1024_byteeeee -> [bot] 1024_byteeeee_bot'
       fakePlayerNoScoreboardCounter:
         desc: The scoreboard will hide the fake player
       noFamilyPlanning:

@@ -256,8 +256,12 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean sneakToEditSign = false;
 
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean fancyFakePlayerName = false;
+    @Rule(
+        options = {"false", "bot", "fake_player"},
+        categories = {AMS, FEATURE},
+        strict = false
+    )
+    public static String fancyFakePlayerName = "false";
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean fakePlayerNoScoreboardCounter = false;

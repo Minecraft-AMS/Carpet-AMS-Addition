@@ -30,18 +30,19 @@ import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
+
+import java.util.Objects;
 
 public class FancyNameHelper {
     public static void addBotTeamNamePrefix(ServerPlayerEntity player) {
         MinecraftServer server = player.getServer();
         if (server != null) {
             Scoreboard scoreboard = player.getServer().getScoreboard();
-            Team team = scoreboard.getTeam("bot");
+            Team team = scoreboard.getTeam(AmsServerSettings.fancyFakePlayerName);
             if (team == null) {
-                team = scoreboard.addTeam("bot");
-                team.setPrefix(Messenger.s("[bot] ").setStyle(Style.EMPTY.withBold(true)));
+                team = fancyFakePlayerNameTeamController.addBotTeam(player.getServer());
+                team.setPrefix(Messenger.s("[bot] ").formatted(Formatting.BOLD));
                 team.setColor(Formatting.DARK_GREEN);
             }
             scoreboard.addPlayerToTeam(player.getGameProfile().getName(), team);
@@ -58,7 +59,7 @@ public class FancyNameHelper {
         //#else
         String playerName = StringArgumentType.getString(context, name);
         //#endif
-        if (AmsServerSettings.fancyFakePlayerName) {
+        if (!Objects.equals(AmsServerSettings.fancyFakePlayerName, "false")) {
             playerName = playerName + SUFFIX;
         }
         return playerName;
