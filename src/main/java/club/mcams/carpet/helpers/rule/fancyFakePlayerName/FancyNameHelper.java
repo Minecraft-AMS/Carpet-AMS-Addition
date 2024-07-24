@@ -20,7 +20,6 @@
 
 package club.mcams.carpet.helpers.rule.fancyFakePlayerName;
 
-import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -35,13 +34,13 @@ import net.minecraft.util.Formatting;
 import java.util.Objects;
 
 public class FancyNameHelper {
-    public static void addBotTeamNamePrefix(ServerPlayerEntity player) {
+    public static void addBotTeamNamePrefix(ServerPlayerEntity player, String teamName) {
         MinecraftServer server = player.getServer();
         if (server != null) {
             Scoreboard scoreboard = player.getServer().getScoreboard();
-            Team team = scoreboard.getTeam(AmsServerSettings.fancyFakePlayerName);
+            Team team = scoreboard.getTeam(teamName);
             if (team == null) {
-                team = FancyFakePlayerNameTeamController.addBotTeam(player.getServer());
+                team = FancyFakePlayerNameTeamController.addBotTeam(player.getServer(),teamName);
                 team.setPrefix(Messenger.s("[bot] ").formatted(Formatting.BOLD));
                 team.setColor(Formatting.DARK_GREEN);
             }
@@ -49,7 +48,7 @@ public class FancyNameHelper {
         }
     }
 
-    public static String addBotNameSuffix(final CommandContext<?> context, final String name) {
+    public static String addBotNameSuffix(final CommandContext<?> context, final String name, String teamName) {
         final String SUFFIX = "_bot";
         //#if MC>=11700
         //$$ String playerName = StringArgumentType.getString(context, name);
@@ -59,7 +58,7 @@ public class FancyNameHelper {
         //#else
         String playerName = StringArgumentType.getString(context, name);
         //#endif
-        if (!Objects.equals(AmsServerSettings.fancyFakePlayerName, "false")) {
+        if (!Objects.equals(teamName, "false")) {
             playerName = playerName + SUFFIX;
         }
         return playerName;

@@ -57,7 +57,7 @@ public abstract class PlayerManagerMixin {
             FakePlayerHelper.isFakePlayer(player) &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {
-            FancyNameHelper.addBotTeamNamePrefix(player);
+            FancyNameHelper.addBotTeamNamePrefix(player, AmsServerSettings.fancyFakePlayerName);
         }
     }
 
@@ -68,7 +68,7 @@ public abstract class PlayerManagerMixin {
             FakePlayerHelper.isFakePlayer(player) &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {
-            FancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player);
+            FancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player, AmsServerSettings.fancyFakePlayerName);
         }
     }
 }

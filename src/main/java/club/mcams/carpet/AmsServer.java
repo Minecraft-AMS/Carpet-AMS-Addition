@@ -140,13 +140,13 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onServerClosed(MinecraftServer server) {
-        FancyFakePlayerNameTeamController.removeBotTeam(server);
+        FancyFakePlayerNameTeamController.removeBotTeam(server, AmsServerSettings.fancyFakePlayerName);
         CraftingRuleUtil.clearAmsDatapacks(server);
     }
 
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
-        FancyFakePlayerNameTeamController.removeBotTeam(server);
+        FancyFakePlayerNameTeamController.removeBotTeam(server, AmsServerSettings.fancyFakePlayerName);
         CraftingRuleUtil.loadAmsDatapacks(server);
     }
 

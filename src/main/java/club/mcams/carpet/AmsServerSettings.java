@@ -20,6 +20,7 @@
 
 package club.mcams.carpet;
 
+import club.mcams.carpet.validators.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 //#if MC>=12002
@@ -259,6 +260,7 @@ public class AmsServerSettings {
     @Rule(
         options = {"false", "bot", "fake_player"},
         categories = {AMS, FEATURE},
+        validators = FancyFakePlayerNameRuleObserver.class,
         strict = false
     )
     public static String fancyFakePlayerName = "false";

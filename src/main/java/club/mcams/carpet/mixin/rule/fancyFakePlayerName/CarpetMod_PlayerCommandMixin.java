@@ -49,7 +49,7 @@ public abstract class CarpetMod_PlayerCommandMixin {
     private static String spawn(CommandContext<?> context, String name, Operation<String> original) {
        return
            !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") ?
-           FancyNameHelper.addBotNameSuffix(context, name) :
+           FancyNameHelper.addBotNameSuffix(context, name, AmsServerSettings.fancyFakePlayerName) :
            original.call(context, name);
     }
 
@@ -65,7 +65,7 @@ public abstract class CarpetMod_PlayerCommandMixin {
     private static String cantSpawn(CommandContext<?> context, String name, Operation<String> original) {
         return
             !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") ?
-            FancyNameHelper.addBotNameSuffix(context, name) :
+            FancyNameHelper.addBotNameSuffix(context, name, AmsServerSettings.fancyFakePlayerName) :
             original.call(context, name);
     }
 }
