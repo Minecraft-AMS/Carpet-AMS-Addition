@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerManager.class)
 public abstract class PlayerManagerMixin {
-    @Inject(method = "onPlayerConnect", at = @At("HEAD"))
+    @Inject(method = "onPlayerConnect", at = @At("TAIL"))
     //#if MC>=12002
     //$$ private void onPlayerConnects(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci) {
     //#else
