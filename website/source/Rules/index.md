@@ -1130,7 +1130,11 @@ global模式下修改值后需要玩家重新进入游戏。
 
 为carpet mod所召唤出来的假人加上绿色的前缀与后缀，输入命令时不用输入前缀，而后缀则是真实存在的。
 
-- 类型: `boolean`
+注意：该规则会创建一个名为你输入的值的team
+
+例：1024_byteeeee -> [bot] 1024_byteeeee_bot
+
+- 类型: `String`
 
 
 
@@ -1138,7 +1142,7 @@ global模式下修改值后需要玩家重新进入游戏。
 
 
 
-- 参考选项: `false`, `true`
+- 参考选项: `false`, `bot`, `fake_player`
 
 
 

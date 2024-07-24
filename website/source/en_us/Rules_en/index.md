@@ -1169,9 +1169,11 @@ When enabled，Players can sneak with empty hands to edit already placed signs b
 
 Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn't need to be input when using the command, but the suffix is indeed present.
 
+Note: This rule will create a team named with the value you input
+
 Example：1024_byteeeee -> [bot] 1024_byteeeee_bot
 
-- Type: `boolean`
+- Type: `String`
 
 
 
@@ -1179,7 +1181,7 @@ Example：1024_byteeeee -> [bot] 1024_byteeeee_bot
 
 
 
-- Suggested options: `false`, `true`
+- Suggested options: `false`, `bot`, `fake_player`
 
 
 
