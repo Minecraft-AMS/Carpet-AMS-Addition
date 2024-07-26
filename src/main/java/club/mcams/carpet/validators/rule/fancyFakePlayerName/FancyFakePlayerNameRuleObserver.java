@@ -16,7 +16,6 @@ public class FancyFakePlayerNameRuleObserver extends RuleObserver<String> {
         MinecraftServer server = AmsServer.minecraftServer;
         if (server != null) {
             FancyFakePlayerNameTeamController.removeBotTeam(server, oldValue);
-
             if (!Objects.equals(newValue, "false")) {
                 List<ServerPlayerEntity> playerEntities = server.getPlayerManager().getPlayerList();
                 for (ServerPlayerEntity player : playerEntities) {

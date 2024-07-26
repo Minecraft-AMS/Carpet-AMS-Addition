@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.commands.rule.commandPing;
+package club.mcams.carpet.commands.rule.commandPacketInternetGroper;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
