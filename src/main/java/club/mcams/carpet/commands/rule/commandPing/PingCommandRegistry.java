@@ -47,7 +47,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class PingCommandRegistry {
     private static final Translator translator = new Translator("command.ping");
     private static final String MSG_HEAD = "<commandPacketInternetGroper>";
-    private static final Map<PlayerEntity, Thread> PING_THREADS = new HashMap<>();
+    private static final Map<PlayerEntity, PingThread> PING_THREADS = new HashMap<>();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
@@ -66,11 +66,11 @@ public class PingCommandRegistry {
     }
 
     private static int executePing(PlayerEntity player, String targetIpOrDomainName, int pingQuantity) {
-        PingThread thread = (PingThread) PING_THREADS.get(player);
+        PingThread thread = PING_THREADS.get(player);
         if (thread != null) {
             thread.setInterrupted();
         }
-        Thread pingThread = new PingThread(pingQuantity, player, targetIpOrDomainName);
+        PingThread pingThread = new PingThread(pingQuantity, player, targetIpOrDomainName);
         pingThread.start();
         PING_THREADS.put(player, pingThread);
         return 1;
@@ -118,7 +118,7 @@ public class PingCommandRegistry {
     private static int stopPing(PlayerEntity player) {
         String stopPing = translator.tr("stop_ping").getString();
         String activePingIsNull = translator.tr("active_ping_is_null").getString();
-        PingThread pingThread = (PingThread)PING_THREADS.get(player);
+        PingThread pingThread = PING_THREADS.get(player);
         if (pingThread != null) {
             pingThread.setInterrupted();
             player.sendMessage(Messenger.s(String.format("§b%s §4%s", MSG_HEAD, stopPing)), false);
@@ -160,6 +160,7 @@ public class PingCommandRegistry {
             this.pingQuantity = pingQuantity;
             this.player = player;
             this.targetIpOrDomainName = targetIpOrDomainName;
+            this.setDaemon(true);
        }
 
        @Override
