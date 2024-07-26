@@ -1,10 +1,12 @@
 package club.mcams.carpet.validators.rule.fancyFakePlayerName;
 
 import carpet.patches.EntityPlayerMPFake;
+
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyNameHelper;
 import club.mcams.carpet.settings.RuleObserver;
+
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
