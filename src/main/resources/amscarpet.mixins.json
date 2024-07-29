@@ -25,7 +25,7 @@
     "rule.commandCustomBlockBlastResistance.BlockMixin",
     "rule.commandCustomBlockBlastResistance.FluidStateMixin",
     "rule.commandCustomCommandPermissionLevel.CommandDispatcherMixin",
-    "rule.commandPlayerChunkLoadController.ThreadedAnvilChunkStorageMixin",
+    "rule.commandPlayerChunkLoadController.ChunkTicketManagetMixin",
     "rule.creativeOneHitKill.EntityAccessorMixin",
     "rule.creativeOneHitKill.PlayerEntityMixin",
     "rule.creativeShulkerBoxDropsDisabled.ShulkerBoxBlockMixin",
