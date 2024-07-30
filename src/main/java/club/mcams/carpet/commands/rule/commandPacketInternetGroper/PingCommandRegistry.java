@@ -52,16 +52,15 @@ public class PingCommandRegistry {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
             CommandManager.literal("ping")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandPacketInternetGroper))
-            .then(argument("targetIpOrDomainName", StringArgumentType.string())
+            .then(literal("stop").requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandPacketInternetGroper)).executes(context -> stopPing(context.getSource().getPlayer())))
+            .then(literal("help").requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandPacketInternetGroper)).executes(context -> help(context.getSource().getPlayer())))
+            .then(argument("targetIpOrDomainName", StringArgumentType.string()).requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandPacketInternetGroper))
             .then(argument("pingQuantity", IntegerArgumentType.integer())
             .executes(context -> executePing(
                 context.getSource().getPlayer(),
                 StringArgumentType.getString(context, "targetIpOrDomainName"),
                 IntegerArgumentType.getInteger(context, "pingQuantity")
             ))))
-            .then(literal("stop").executes(context -> stopPing(context.getSource().getPlayer())))
-            .then(literal("help").executes(context -> help(context.getSource().getPlayer())))
         );
     }
 
