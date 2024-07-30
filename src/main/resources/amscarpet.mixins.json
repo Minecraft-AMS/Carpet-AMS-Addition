@@ -4,6 +4,7 @@
   "package": "club.mcams.carpet.mixin",
   "compatibilityLevel": "/*JAVA_VERSION*/",
   "mixins": [
+    "carpet.CarpetServerMixin",
     "carpet.HUDControllerMixin",
     "carpet.SettingsManagerMixin",
     "rule.amsUpdateSuppressionCrashFix.ChainRestrictedNeighborUpdater_SixWayEntryMixin",
