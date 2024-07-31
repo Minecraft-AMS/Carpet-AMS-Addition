@@ -20,12 +20,24 @@
 
 package club.mcams.carpet.mixin.carpet;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import carpet.CarpetServer;
+
+import net.minecraft.server.MinecraftServer;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.19.4", desc = "Just a fix for https://github.com/gnembon/fabric-carpet/issues/1908")
-@Mixin(DummyClass.class)
-public class CarpetServerMixin {}
+@Mixin(value = CarpetServer.class, remap = false)
+public abstract class CarpetServerMixin {
+    @Inject(method = "onServerClosed(Lnet/minecraft/server/MinecraftServer;)V", at = @At("HEAD"), cancellable = true)
+    private static void onlyCallIfServerNotnull(MinecraftServer server, CallbackInfo ci) {
+        if (server == null) {
+            ci.cancel();
+        }
+    }
+}
