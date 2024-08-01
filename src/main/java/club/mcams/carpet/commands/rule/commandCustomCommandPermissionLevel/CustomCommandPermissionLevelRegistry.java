@@ -39,6 +39,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 
 import java.util.HashMap;
@@ -77,7 +78,7 @@ public class CustomCommandPermissionLevelRegistry {
         .executes(context -> help(context.getSource().getPlayer()))));
     }
 
-    private static int set(MinecraftServer server, PlayerEntity player, String command, int permissionLevel) {
+    private static int set(MinecraftServer server, ServerPlayerEntity player, String command, int permissionLevel) {
         if (COMMAND_PERMISSION_MAP.containsKey(command)) {
             int oldPermissionLevel = COMMAND_PERMISSION_MAP.get(command);
             player.sendMessage(
@@ -98,17 +99,17 @@ public class CustomCommandPermissionLevelRegistry {
         return 1;
     }
 
-    private static void setPermission(MinecraftServer server, PlayerEntity player, String command, int permissionLevel) {
+    private static void setPermission(MinecraftServer server, ServerPlayerEntity player, String command, int permissionLevel) {
         CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
 
         CommandNode<ServerCommandSource> target = dispatcher.getRoot().getChild(command);
 
         ((CommandNodeInvoker<ServerCommandSource>)target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
 
-        refreshCommandNodeTree();
+        CommandHelper.notifyPlayersCommandsChanged(player);
     }
 
-    private static int remove(MinecraftServer server, PlayerEntity player, String command) {
+    private static int remove(MinecraftServer server, ServerPlayerEntity player, String command) {
         if (COMMAND_PERMISSION_MAP.containsKey(command)) {
             COMMAND_PERMISSION_MAP.remove(command);
             saveToJson(server);
@@ -117,7 +118,7 @@ public class CustomCommandPermissionLevelRegistry {
                     String.format("%s- %s", MSG_HEAD, command)
                 ).formatted(Formatting.RED, Formatting.ITALIC), false
             );
-            refreshCommandNodeTree();
+            CommandHelper.notifyPlayersCommandsChanged(player);
         } else {
             player.sendMessage(
                 Messenger.s(
@@ -128,11 +129,11 @@ public class CustomCommandPermissionLevelRegistry {
         return 1;
     }
 
-    private static int removeAll(MinecraftServer server, PlayerEntity player) {
+    private static int removeAll(MinecraftServer server, ServerPlayerEntity player) {
         if (!COMMAND_PERMISSION_MAP.isEmpty()) {
             COMMAND_PERMISSION_MAP.clear();
             saveToJson(server);
-            refreshCommandNodeTree();
+            CommandHelper.notifyPlayersCommandsChanged(player);
         }
         player.sendMessage(
                 Messenger.s(
@@ -176,9 +177,5 @@ public class CustomCommandPermissionLevelRegistry {
     private static void saveToJson(MinecraftServer server) {
         final String CONFIG_PATH = CustomCommandPermissionLevelConfig.getPath(server);
         CustomCommandPermissionLevelConfig.saveToJson(COMMAND_PERMISSION_MAP, CONFIG_PATH);
-    }
-
-    private static void refreshCommandNodeTree() {
-        CommandHelper.notifyPlayersCommandsChanged(AmsServer.minecraftServer);
     }
 }
