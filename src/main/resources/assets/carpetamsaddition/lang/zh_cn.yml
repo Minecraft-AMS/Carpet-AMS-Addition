@@ -318,7 +318,8 @@ carpetamsaddition:
         name: 花哨的假人名称
         desc: 为carpet mod所召唤出来的假人加上绿色的前缀与后缀，输入命令时不用输入前缀，而后缀则是真实存在的
         extra:
-          '0': '例：1024_byteeeee -> [bot] 1024_byteeeee_bot'
+          "0": '注意：该规则会创建一个名为你输入的值的team'
+          '1': '例：1024_byteeeee -> [bot] 1024_byteeeee_bot'
       fakePlayerNoScoreboardCounter:
         name: 假人不计入计分板
         desc: 计分板将会屏蔽假人
@@ -417,9 +418,13 @@ carpetamsaddition:
       fertilizableSmallFlower:
         name: 可施肥小花
         desc: 使诸如蒲公英的小花也可以被骨粉催熟
-      preventEndSpawnSpikeRespawn:
+      preventEndSpikeRespawn:
         name: 禁用末地黑曜石柱重新生成
         desc: 复活龙时末地的黑曜石柱子不会重新生成
+        extra:
+          '0': '[true] - 禁止生成'
+          '1': '[false] - 禁用规则'
+          '2': '[keepEndCrystal] - 保留水晶生成'
       safePointedDripstone:
         name: 安全的滴水石锥
         desc: 玩家落在滴水石锥上时，不会受到它的附加伤害
@@ -484,6 +489,16 @@ carpetamsaddition:
         desc: 自定义僵尸猪灵掉落下界合金碎片的概率
         extra:
           '0': '允许设定的范围：0 - 1'
+      softDeepslate:
+        name: 易碎深板岩
+        desc: 改变深板岩的硬度使其和普通石头一致
+        extra:
+          '0': '需要客户端支持'
+      softObsidian:
+        name: 易碎黑曜石
+        desc: 改变黑曜石与哭泣的黑曜石的硬度使其和末地石一致
+        extra:
+          '0': '需要客户端支持'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

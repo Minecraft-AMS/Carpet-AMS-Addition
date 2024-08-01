@@ -27,11 +27,11 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(VillageGossipType.class)
 public interface VillageGossipTypeAccessor{
-    @Accessor(value = "maxValue")
+    @Accessor("maxValue")
     @Mutable
     void setMaxValue(int maxValue);
 
-    @Accessor(value = "shareDecrement")
+    @Accessor("shareDecrement")
     @Mutable
     void setShareDecrement(int shareDecrement);
 }

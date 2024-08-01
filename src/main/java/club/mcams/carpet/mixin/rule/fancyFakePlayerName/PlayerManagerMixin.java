@@ -24,7 +24,7 @@ import carpet.patches.EntityPlayerMPFake;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.FakePlayerHelper;
-import club.mcams.carpet.helpers.rule.fancyFakePlayerName.BotTeamController;
+import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyNameHelper;
 
 import net.minecraft.network.ClientConnection;
@@ -39,26 +39,36 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Objects;
+
 @Mixin(PlayerManager.class)
 public abstract class PlayerManagerMixin {
-    @Inject(method = "onPlayerConnect", at = @At("HEAD"))
-    //#if MC>=12002
-    //$$ private void onPlayerConnects(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci) {
-    //#else
-    private void onPlayerConnects(ClientConnection connection, ServerPlayerEntity player, CallbackInfo ci) {
-    //#endif
-        if (AmsServerSettings.fancyFakePlayerName && FakePlayerHelper.isFakePlayer(player) && !((EntityPlayerMPFake) player).isAShadow) {
-            FancyNameHelper.addBotTeamNamePrefix(player);
+    @Inject(method = "onPlayerConnect", at = @At("TAIL"))
+    private void onPlayerConnects(
+        ClientConnection connection,
+        ServerPlayerEntity player,
+        //#if MC>=12002
+        //$$ ConnectedClientData clientData,
+        //#endif
+        CallbackInfo ci
+    ) {
+        if (
+            !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
+            FakePlayerHelper.isFakePlayer(player) &&
+            !((EntityPlayerMPFake) player).isAShadow
+        ) {
+            FancyNameHelper.addBotTeamNamePrefix(player, AmsServerSettings.fancyFakePlayerName);
         }
     }
 
     @Inject(method = "remove", at = @At("HEAD"))
-    private void remove(ServerPlayerEntity player, CallbackInfo info) {
-        if (AmsServerSettings.fancyFakePlayerName && FakePlayerHelper.isFakePlayer(player) && !((EntityPlayerMPFake) player).isAShadow) {
-            BotTeamController.kickFakePlayerFromBotTeam(player);
-        }
-        if (!AmsServerSettings.fancyFakePlayerName && FakePlayerHelper.isFakePlayer(player) && !((EntityPlayerMPFake) player).isAShadow) {
-            BotTeamController.removeBotTeam(player);
+    private void kickFakePlayerFromBotTeam(ServerPlayerEntity player, CallbackInfo info) {
+        if (
+            !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
+            FakePlayerHelper.isFakePlayer(player) &&
+            !((EntityPlayerMPFake) player).isAShadow
+        ) {
+            FancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player, AmsServerSettings.fancyFakePlayerName);
         }
     }
 }

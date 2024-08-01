@@ -20,12 +20,13 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.helpers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
-//#if MC>=12002
-//$$ import club.mcams.carpet.helpers.rule.stackableDiscount.StackableDiscountRuleObserver;
-//#endif
+import club.mcams.carpet.validators.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+//#if MC>=12002
+//$$ import club.mcams.carpet.validators.rule.stackableDiscount.StackableDiscountRuleObserver;
+//#endif
+import club.mcams.carpet.validators.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
 import club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.blockChunkLoaderTimeController.MaxTimeValidator;
@@ -178,7 +179,10 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
-    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL}, observer = LargeShulkerBoxRuleObserver.class)
+    @Rule(
+        categories = {AMS, FEATURE, EXPERIMENTAL},
+        validators = LargeShulkerBoxRuleObserver.class
+    )
     public static boolean largeShulkerBox = false;
 
     @Rule(
@@ -253,8 +257,13 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean sneakToEditSign = false;
 
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean fancyFakePlayerName = false;
+    @Rule(
+        options = {"false", "bot", "fake_player"},
+        categories = {AMS, FEATURE},
+        validators = FancyFakePlayerNameRuleObserver.class,
+        strict = false
+    )
+    public static String fancyFakePlayerName = "false";
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean fakePlayerNoScoreboardCounter = false;
@@ -354,8 +363,8 @@ public class AmsServerSettings {
     public static boolean infiniteDurability = false;
 
     @Rule(
-            options = {"true", "false", "keepEndCrystal"},
-            categories = {AMS, FEATURE, SURVIVAL}
+        options = {"true", "false", "keepEndCrystal"},
+        categories = {AMS, FEATURE, SURVIVAL}
     )
     public static String preventEndSpikeRespawn = "false";
 
@@ -443,7 +452,11 @@ public class AmsServerSettings {
     public static boolean headHunter = false;
 
     //#if MC>=12002
-    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL}, observer = StackableDiscountRuleObserver.class)
+    //$$ @GameVersion(version = "Minecraft >= 1.20.2")
+    //$$ @Rule(
+    //$$     categories = {AMS, FEATURE, SURVIVAL},
+    //$$     validators = StackableDiscountRuleObserver.class
+    //$$ )
     //$$ public static boolean stackableDiscounts = false;
     //#endif
 
@@ -463,6 +476,15 @@ public class AmsServerSettings {
         strict = false
     )
     public static double renewableNetheriteScrap = 0.0D;
+
+    //#if MC>=11700
+    @GameVersion(version = "Minecraft >= 1.17")
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean softDeepslate = false;
+    //#endif
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean softObsidian = false;
 
     /*
      * 区块加载规则

@@ -4,6 +4,7 @@
   "package": "club.mcams.carpet.mixin",
   "compatibilityLevel": "/*JAVA_VERSION*/",
   "mixins": [
+    "carpet.CarpetServerMixin",
     "carpet.HUDControllerMixin",
     "carpet.SettingsManagerMixin",
     "rule.amsUpdateSuppressionCrashFix.ChainRestrictedNeighborUpdater_SixWayEntryMixin",
@@ -130,6 +131,8 @@
     "rule.sneakToEatCake.sneakToEatCake",
     "rule.sneakToEditSign.AbstractSignBlockMixin",
     "rule.sneakToEditSign.SignBlockEntityMixin",
+    "rule.softBlock.AbstractBlockMixin",
+    "rule.softBlock.AbstractBlockStateInvoker",
     "rule.stackableDiscount.VillageGossipTypeAccessor",
     "rule.superBow.EnchantmentMixin",
     "rule.superBow.InfinityEnchantmentMixin",

@@ -18,18 +18,16 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.largeShulkerBox;
+package club.mcams.carpet.mixin.rule.softBlock;
 
-import net.minecraft.block.entity.ShulkerBoxBlockEntity;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(ShulkerBoxBlockEntity.class)
-public interface ShulkerBoxBlockEntityAccessor {
-    @Accessor("field_31356")
-    @Mutable
-    static void setInventorySize(int size) {
-        throw new AssertionError();
-    }
+@Mixin(AbstractBlock.AbstractBlockState.class)
+public interface AbstractBlockStateInvoker {
+    @Invoker("getBlock")
+    Block invokeGetBlock();
 }

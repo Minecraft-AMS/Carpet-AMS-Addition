@@ -18,21 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.largeShulkerBox;
+package club.mcams.carpet.mixin.carpet;
 
-import club.mcams.carpet.mixin.rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor;
-import club.mcams.carpet.settings.SimpleRuleObserver;
+import club.mcams.carpet.utils.compat.DummyClass;
 
-public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver {
-    static void onRuleActivate() {
-        //#if MC>=11700
-        ShulkerBoxBlockEntityAccessor.setInventorySize(54);
-        //#endif
-    }
+import org.spongepowered.asm.mixin.Mixin;
 
-    public static void onRuleDeactivate() {
-        //#if MC>=11700
-        ShulkerBoxBlockEntityAccessor.setInventorySize(27);
-        //#endif
-    }
-}
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.19.4", desc = "Just a fix for https://github.com/gnembon/fabric-carpet/issues/1908")
+@Mixin(DummyClass.class)
+public class CarpetServerMixin {}

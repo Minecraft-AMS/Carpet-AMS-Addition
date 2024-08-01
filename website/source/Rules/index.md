@@ -1130,7 +1130,11 @@ global模式下修改值后需要玩家重新进入游戏。
 
 为carpet mod所召唤出来的假人加上绿色的前缀与后缀，输入命令时不用输入前缀，而后缀则是真实存在的。
 
-- 类型: `boolean`
+注意：该规则会创建一个名为你输入的值的team
+
+例：1024_byteeeee -> [bot] 1024_byteeeee_bot
+
+- 类型: `String`
 
 
 
@@ -1138,7 +1142,7 @@ global模式下修改值后需要玩家重新进入游戏。
 
 
 
-- 参考选项: `false`, `true`
+- 参考选项: `false`, `bot`, `fake_player`
 
 
 
@@ -1955,6 +1959,88 @@ json位置：
 
 
 - 参考选项: `0.0`, `0.01`, `0.1`, `1.0`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 村民折扣叠加（stackableDiscounts）
+
+重新引入<23w31a的打骨折机制，让治疗村民的折扣可以叠加。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 禁用末地黑曜石柱重新生成（preventEndSpikeRespawn）
+
+复活龙时末地的黑曜石柱子不会重新生成。
+
+[true] - 禁止生成
+
+[false] - 禁用规则
+
+[keepEndCrystal] - 保留水晶生成
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`, `keepEndCrystal`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 易碎深板岩（softDeepslate）
+
+改变深板岩的硬度使其和普通石头一致。
+
+< 需要客户端支持 >
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 易碎黑曜石（softObsidian）
+
+改变黑曜石与哭泣的黑曜石的硬度使其和末地石一致。
+
+< 需要客户端支持 >
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
 
 
 

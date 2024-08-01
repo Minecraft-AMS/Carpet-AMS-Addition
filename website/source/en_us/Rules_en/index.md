@@ -1169,9 +1169,11 @@ When enabled，Players can sneak with empty hands to edit already placed signs b
 
 Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn't need to be input when using the command, but the suffix is indeed present.
 
+Note: This rule will create a team named with the value you input
+
 Example：1024_byteeeee -> [bot] 1024_byteeeee_bot
 
-- Type: `boolean`
+- Type: `String`
 
 
 
@@ -1179,7 +1181,7 @@ Example：1024_byteeeee -> [bot] 1024_byteeeee_bot
 
 
 
-- Suggested options: `false`, `true`
+- Suggested options: `false`, `bot`, `fake_player`
 
 
 
@@ -1994,6 +1996,88 @@ Customize the drop rate of netherite scrap from zombified piglin.
 
 
 - Suggested options: `0.0`, `0.01`, `0.1`, `1.0`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## stackableDiscounts
+
+Reintroduce the stackable discounts feature in <23w31a.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## preventEndSpikeRespawn
+
+Prevent end spikes (obsidian spikes in the_end) from spawning.
+
+[true] - Prohibited from generating
+
+[false] - Disable Rule
+
+[keepEndCrystal] - Preserve crystal generation
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`, `keepEndCrystal`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## softDeepslate
+
+Change the hardness of deepslate to stone.
+
+< Requires client support >
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## softObsidian
+
+Change the hardness of obsidian and crying obsidian to end stone.
+
+< Requires client support >
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
 
 
 

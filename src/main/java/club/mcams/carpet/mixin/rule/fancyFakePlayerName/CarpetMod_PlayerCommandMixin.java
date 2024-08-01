@@ -32,6 +32,8 @@ import com.mojang.brigadier.context.CommandContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import java.util.Objects;
+
 @Mixin(PlayerCommand.class)
 public abstract class CarpetMod_PlayerCommandMixin {
     @WrapOperation(method = "spawn",
@@ -45,7 +47,10 @@ public abstract class CarpetMod_PlayerCommandMixin {
         remap = false
     )
     private static String spawn(CommandContext<?> context, String name, Operation<String> original) {
-       return AmsServerSettings.fancyFakePlayerName ? FancyNameHelper.addBotNameSuffix(context, name) : original.call(context, name);
+       return
+           !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") ?
+           FancyNameHelper.addBotNameSuffix(context, name, AmsServerSettings.fancyFakePlayerName) :
+           original.call(context, name);
     }
 
     @WrapOperation(
@@ -58,6 +63,9 @@ public abstract class CarpetMod_PlayerCommandMixin {
         remap = false
     )
     private static String cantSpawn(CommandContext<?> context, String name, Operation<String> original) {
-        return AmsServerSettings.fancyFakePlayerName ? FancyNameHelper.addBotNameSuffix(context, name) : original.call(context, name);
+        return
+            !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") ?
+            FancyNameHelper.addBotNameSuffix(context, name, AmsServerSettings.fancyFakePlayerName) :
+            original.call(context, name);
     }
 }

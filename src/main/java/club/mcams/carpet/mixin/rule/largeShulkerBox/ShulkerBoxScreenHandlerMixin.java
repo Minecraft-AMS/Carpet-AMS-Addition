@@ -27,8 +27,8 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.ShulkerBoxScreenHandler;
-
 import net.minecraft.screen.slot.ShulkerBoxSlot;
+
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -57,56 +57,32 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         return ScreenHandlerType.GENERIC_9X6;
     }
 
-//    @Inject(
-//        method = ",
-//        at = @At(
-//            value = "JUMP",
-//            opcode = Opcodes.GOTO,
-//            ordinal = 1,
-//            shift = At.Shift.BY,
-//            by = 2
-//        )
-//    )
-//    private void init(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
-//        if (!AmsServerSettings.largeShulkerBox || this.slots.size() != 9 * 3) {
-//            return;
-//        }
-//        checkSize(inventory, 9 * 6);
-//        for (int row = 3; row < 6; ++row) {
-//            for (int column = 0; column < 9; ++column) {
-//                this.addSlot(new ShulkerBoxSlot(inventory, column + row * 9, 8 + column * 18, 18 + row * 18));
-//            }
-//        }
-//    }
-
     @ModifyArg(
-            method="<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/screen/ShulkerBoxScreenHandler;checkSize(Lnet/minecraft/inventory/Inventory;I)V"
-            ),
-            index = 1
+        method="<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/screen/ShulkerBoxScreenHandler;checkSize(Lnet/minecraft/inventory/Inventory;I)V"
+        ),
+        index = 1
     )
     private int checkLargerSize(int size) {
-        if (AmsServerSettings.largeShulkerBox){
+        if (AmsServerSettings.largeShulkerBox) {
             return 9 * 6;
-        }
-        else{
+        } else {
             return size;
         }
     }
 
     @Inject(
-            method="<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/inventory/Inventory;onOpen(Lnet/minecraft/entity/player/PlayerEntity;)V",
-                    shift=At.Shift.AFTER
-            )
+        method="<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/inventory/Inventory;onOpen(Lnet/minecraft/entity/player/PlayerEntity;)V",
+            shift=At.Shift.AFTER
+        )
     )
     protected void addingExtraSlots(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
         if (AmsServerSettings.largeShulkerBox && this.slots.isEmpty()) {
-            // 在原版槽位添加之前添加
             for (int row = 3; row < 6; ++row) {
                 for (int column = 0; column < 9; ++column) {
                     this.addSlot(new ShulkerBoxSlot(inventory, column + row * 9, 8 + column * 18, 18 + row * 18));

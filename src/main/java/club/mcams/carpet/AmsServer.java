@@ -30,6 +30,7 @@ import club.mcams.carpet.commands.RegisterCommands;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import club.mcams.carpet.config.LoadConfigFromJson;
 import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
+import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
@@ -139,11 +140,13 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onServerClosed(MinecraftServer server) {
+        FancyFakePlayerNameTeamController.removeBotTeam(server, AmsServerSettings.fancyFakePlayerName);
         CraftingRuleUtil.clearAmsDatapacks(server);
     }
 
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
+        FancyFakePlayerNameTeamController.removeBotTeam(server, AmsServerSettings.fancyFakePlayerName);
         CraftingRuleUtil.loadAmsDatapacks(server);
     }
 

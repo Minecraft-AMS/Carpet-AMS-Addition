@@ -271,7 +271,8 @@ carpetamsaddition:
       fancyFakePlayerName:
         desc: Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn't need to be input when using the command, but the suffix is indeed present
         extra:
-          '0': 'Example：1024_byteeeee -> [bot] 1024_byteeeee_bot'
+          "0": 'Note: This rule will create a team named with the value you input'
+          '1': 'Example：1024_byteeeee -> [bot] 1024_byteeeee_bot'
       fakePlayerNoScoreboardCounter:
         desc: The scoreboard will hide the fake player
       noFamilyPlanning:
@@ -349,6 +350,10 @@ carpetamsaddition:
         desc: Allow players to pass through pointed dripstone
       preventEndSpikeRespawn:
         desc: Prevent end spikes (obsidian spikes in the_end) from spawning
+        extra:
+          '0': '[true] - Prohibited from generating'
+          '1': '[false] - Disable Rule'
+          '2': '[keepEndCrystal] - Preserve crystal generation'
       foliageGenerateDisabled:
         desc: The foliage will not generate in any way
       commandGetSystemInfo:
@@ -390,6 +395,14 @@ carpetamsaddition:
         desc: Customize the drop rate of netherite scrap from zombified piglin
         extra:
           '0': 'The range of values: 0 - 1'
+      softDeepslate:
+        desc: Change the hardness of deepslate to stone
+        extra:
+          '0': 'Requires client support'
+      softObsidian:
+        desc: Change the hardness of obsidian and crying obsidian to end stone
+        extra:
+          '0': 'Requires client support'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

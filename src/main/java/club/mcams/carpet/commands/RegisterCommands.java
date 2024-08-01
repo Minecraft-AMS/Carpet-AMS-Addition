@@ -25,7 +25,7 @@ import club.mcams.carpet.commands.rule.commandGetPlayerSkull.GetPlayerSkullComma
 import club.mcams.carpet.commands.rule.commandGetSaveSize.GetSaveSizeCommandRegistry;
 import club.mcams.carpet.commands.rule.commandGetSystemInfo.GetSystemInfoCommandRegistry;
 import club.mcams.carpet.commands.rule.commandHere.HereCommandRegistry;
-import club.mcams.carpet.commands.rule.commandPing.PingCommandRegistry;
+import club.mcams.carpet.commands.rule.commandPacketInternetGroper.PingCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import club.mcams.carpet.commands.rule.commandWhere.WhereCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
