@@ -20,10 +20,10 @@
 
 package club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel;
 
-import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.suggestionProviders.ListSuggestionProvider;
 import club.mcams.carpet.commands.suggestionProviders.LiteralCommandSuggestionProvider;
+import club.mcams.carpet.commands.suggestionProviders.SetSuggestionProvider;
 import club.mcams.carpet.mixin.rule.commandCustomCommandPermissionLevel.CommandNodeInvoker;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
@@ -56,26 +56,28 @@ public class CustomCommandPermissionLevelRegistry {
         .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomCommandPermissionLevel))
         .then(CommandManager.literal("set")
         .then(CommandManager.argument("command", StringArgumentType.string()).suggests(new LiteralCommandSuggestionProvider())
-        .then(CommandManager.argument("permissionLevel", IntegerArgumentType.integer()).suggests(ListSuggestionProvider.of(CommandHelper.permissionLevels))
-        .executes(context -> set(
-            context.getSource().getServer(),
-            context.getSource().getPlayer(),
-            StringArgumentType.getString(context, "command"),
-            IntegerArgumentType.getInteger(context, "permissionLevel")
+        .then(CommandManager.argument("permissionLevel", IntegerArgumentType.integer())
+            .suggests(ListSuggestionProvider.of(CommandHelper.permissionLevels))
+            .executes(context -> set(
+                context.getSource().getServer(),
+                context.getSource().getPlayer(),
+                StringArgumentType.getString(context, "command"),
+                IntegerArgumentType.getInteger(context, "permissionLevel")
         )))))
         .then(CommandManager.literal("remove")
-        .then(CommandManager.argument("command", StringArgumentType.string()).suggests(ListSuggestionProvider.of(COMMAND_PERMISSION_MAP.keySet().stream().toList()))
-        .executes(context -> remove(
-            context.getSource().getServer(),
-            context.getSource().getPlayer(),
-            StringArgumentType.getString(context, "command")
+        .then(CommandManager.argument("command", StringArgumentType.string())
+            .suggests(SetSuggestionProvider.of(COMMAND_PERMISSION_MAP.keySet()))
+            .executes(context -> remove(
+                context.getSource().getServer(),
+                context.getSource().getPlayer(),
+                StringArgumentType.getString(context, "command")
         ))))
         .then(CommandManager.literal("removeAll")
-        .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
+            .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
         .then(CommandManager.literal("list")
-        .executes(context -> list(context.getSource().getPlayer())))
+            .executes(context -> list(context.getSource().getPlayer())))
         .then(CommandManager.literal("help")
-        .executes(context -> help(context.getSource().getPlayer()))));
+            .executes(context -> help(context.getSource().getPlayer()))));
     }
 
     private static int set(MinecraftServer server, ServerPlayerEntity player, String command, int permissionLevel) {
