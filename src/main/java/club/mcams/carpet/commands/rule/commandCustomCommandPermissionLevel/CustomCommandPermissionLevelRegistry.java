@@ -20,9 +20,10 @@
 
 package club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel;
 
-import carpet.patches.EntityPlayerMPFake;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.commands.suggestionProviders.ListSuggestionProvider;
+import club.mcams.carpet.commands.suggestionProviders.LiteralCommandSuggestionProvider;
 import club.mcams.carpet.mixin.rule.commandCustomCommandPermissionLevel.CommandNodeInvoker;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
@@ -30,7 +31,6 @@ import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.config.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelConfig;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.ParseResults;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
@@ -54,8 +54,8 @@ public class CustomCommandPermissionLevelRegistry {
         CommandManager.literal("customCommandPermissionLevel")
         .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomCommandPermissionLevel))
         .then(CommandManager.literal("set")
-        .then(CommandManager.argument("command", StringArgumentType.string())
-        .then(CommandManager.argument("permissionLevel", IntegerArgumentType.integer())
+        .then(CommandManager.argument("command", StringArgumentType.string()).suggests(new LiteralCommandSuggestionProvider())
+        .then(CommandManager.argument("permissionLevel", IntegerArgumentType.integer()).suggests(ListSuggestionProvider.of(CommandHelper.permissionLevels))
         .executes(context -> set(
             context.getSource().getServer(),
             context.getSource().getPlayer(),
@@ -63,7 +63,7 @@ public class CustomCommandPermissionLevelRegistry {
             IntegerArgumentType.getInteger(context, "permissionLevel")
         )))))
         .then(CommandManager.literal("remove")
-        .then(CommandManager.argument("command", StringArgumentType.string())
+        .then(CommandManager.argument("command", StringArgumentType.string()).suggests(ListSuggestionProvider.of(COMMAND_PERMISSION_MAP.keySet().stream().toList()))
         .executes(context -> remove(
             context.getSource().getServer(),
             context.getSource().getPlayer(),
