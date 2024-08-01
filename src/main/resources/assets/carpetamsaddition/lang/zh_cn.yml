@@ -20,6 +20,9 @@ carpetamsaddition:
       copy: '复制坐标到剪切板'
 
   command:
+    commandHelper:
+      refresh_cmd_tree: '您的命令已被刷新'
+
     amsUpdateSuppressionCrashFixForceMode:
       lazy_mod: '[ lazy 模式 ]'
       force_mod: '[ force 模式 ]'
@@ -73,7 +76,6 @@ carpetamsaddition:
       total_memory: '总内存：'
       free_memory: '可用内存：'
     customCommandPermissionLevel:
-      need_restart_server_msg: '重启服务器后生效'
       not_found: ' 不存在于配置文件中'
       removeAll: '已删除所有条目'
       list: '[ 自定义指令权限等级列表 ]'
