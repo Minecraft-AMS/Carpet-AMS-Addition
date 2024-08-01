@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 import java.util.function.Predicate;
 
-@Mixin(value = CommandNode.class,remap = false)
+@Mixin(value = CommandNode.class, remap = false)
 public interface CommandNodeInvoker<S> {
     @Mutable
     @Accessor("requirement")
