@@ -21,17 +21,22 @@
 package club.mcams.carpet.utils;
 
 import carpet.CarpetSettings;
+import carpet.patches.EntityPlayerMPFake;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerMod;
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.translations.Translator;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerTask;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Style;
+import net.minecraft.util.Formatting;
 
 @SuppressWarnings("EnhancedSwitchMigration")
 public final class CommandHelper {
+    private static final Translator translator = new Translator("command");
     private CommandHelper() {}
 
     public static void notifyPlayersCommandsChanged(MinecraftServer server)
@@ -44,7 +49,10 @@ public final class CommandHelper {
         {
             try {
                 for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-                    server.getCommandManager().sendCommandTree(player);
+                    if (!(player instanceof EntityPlayerMPFake)) {
+                        server.getCommandManager().sendCommandTree(player);
+                        player.sendMessage(Messenger.s(translator.tr("refresh_cmd_tree").getString()).setStyle(Style.EMPTY.withColor(Formatting.YELLOW)), false);
+                    }
                 }
             }
             catch (NullPointerException e)
@@ -52,10 +60,6 @@ public final class CommandHelper {
                 AmsServer.LOGGER.warn("Exception while refreshing commands, please report this to Carpet", e);
             }
         }));
-    }
-
-    public static void refreshCommandTree(ServerPlayerEntity player) {
-        AmsServer.minecraftServer.getCommandManager().sendCommandTree(player);
     }
 
     public static boolean canUseCommand(ServerCommandSource source, Object commandLevel) {

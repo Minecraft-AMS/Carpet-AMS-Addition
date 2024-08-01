@@ -85,14 +85,12 @@ public class CustomCommandPermissionLevelRegistry {
                     String.format("%s%s %d -> %d", MSG_HEAD, command, oldPermissionLevel, permissionLevel)
                 ).formatted(Formatting.GREEN), false
             );
-//            sendNeedRestartServerMessage(player);
         } else {
             player.sendMessage(
                 Messenger.s(
                     String.format("%s+ %s/%d", MSG_HEAD, command, permissionLevel)
                 ).formatted(Formatting.GREEN), false
             );
-//            sendNeedRestartServerMessage(player);
         }
         COMMAND_PERMISSION_MAP.put(command, permissionLevel);
         saveToJson(server);
@@ -102,12 +100,11 @@ public class CustomCommandPermissionLevelRegistry {
 
     private static void setPermission(MinecraftServer server, PlayerEntity player, String command, int permissionLevel) {
         CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
-        ParseResults<ServerCommandSource> result = dispatcher.parse(command, player.getCommandSource());
 
-        CommandNode<ServerCommandSource> target = result.getContext().findSuggestionContext(result.getReader().getCursor()).parent;
+        CommandNode<ServerCommandSource> target = dispatcher.getRoot().getChild(command);
+
         ((CommandNodeInvoker<ServerCommandSource>)target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
 
-        CommandHelper.notifyPlayersCommandsChanged(server);
         refreshCommandNodeTree();
     }
 
@@ -132,14 +129,16 @@ public class CustomCommandPermissionLevelRegistry {
     }
 
     private static int removeAll(MinecraftServer server, PlayerEntity player) {
-        COMMAND_PERMISSION_MAP.clear();
-        saveToJson(server);
+        if (!COMMAND_PERMISSION_MAP.isEmpty()) {
+            COMMAND_PERMISSION_MAP.clear();
+            saveToJson(server);
+            refreshCommandNodeTree();
+        }
         player.sendMessage(
-            Messenger.s(
-                MSG_HEAD + translator.tr("removeAll").getString()
-            ).formatted(Formatting.RED, Formatting.ITALIC), false
+                Messenger.s(
+                        MSG_HEAD + translator.tr("removeAll").getString()
+                ).formatted(Formatting.RED, Formatting.ITALIC), false
         );
-        refreshCommandNodeTree();
         return 1;
     }
 
@@ -180,8 +179,6 @@ public class CustomCommandPermissionLevelRegistry {
     }
 
     private static void refreshCommandNodeTree() {
-        AmsServer.minecraftServer.getPlayerManager().getPlayerList().stream()
-                .filter(player -> !(player instanceof EntityPlayerMPFake))
-                .forEach(CommandHelper::refreshCommandTree);
+        CommandHelper.notifyPlayersCommandsChanged(AmsServer.minecraftServer);
     }
 }
