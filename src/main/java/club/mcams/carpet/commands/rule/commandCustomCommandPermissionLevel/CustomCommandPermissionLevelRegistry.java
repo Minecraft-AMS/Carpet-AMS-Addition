@@ -57,27 +57,27 @@ public class CustomCommandPermissionLevelRegistry {
         .then(CommandManager.literal("set")
         .then(CommandManager.argument("command", StringArgumentType.string()).suggests(new LiteralCommandSuggestionProvider())
         .then(CommandManager.argument("permissionLevel", IntegerArgumentType.integer())
-            .suggests(ListSuggestionProvider.of(CommandHelper.permissionLevels))
-            .executes(context -> set(
-                context.getSource().getServer(),
-                context.getSource().getPlayer(),
-                StringArgumentType.getString(context, "command"),
-                IntegerArgumentType.getInteger(context, "permissionLevel")
+        .suggests(ListSuggestionProvider.of(CommandHelper.permissionLevels))
+        .executes(context -> set(
+            context.getSource().getServer(),
+            context.getSource().getPlayer(),
+            StringArgumentType.getString(context, "command"),
+            IntegerArgumentType.getInteger(context, "permissionLevel")
         )))))
         .then(CommandManager.literal("remove")
         .then(CommandManager.argument("command", StringArgumentType.string())
-            .suggests(SetSuggestionProvider.of(COMMAND_PERMISSION_MAP.keySet()))
-            .executes(context -> remove(
-                context.getSource().getServer(),
-                context.getSource().getPlayer(),
-                StringArgumentType.getString(context, "command")
+        .suggests(SetSuggestionProvider.of(COMMAND_PERMISSION_MAP.keySet()))
+        .executes(context -> remove(
+            context.getSource().getServer(),
+            context.getSource().getPlayer(),
+            StringArgumentType.getString(context, "command")
         ))))
         .then(CommandManager.literal("removeAll")
-            .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
+        .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
         .then(CommandManager.literal("list")
-            .executes(context -> list(context.getSource().getPlayer())))
+        .executes(context -> list(context.getSource().getPlayer())))
         .then(CommandManager.literal("help")
-            .executes(context -> help(context.getSource().getPlayer()))));
+        .executes(context -> help(context.getSource().getPlayer()))));
     }
 
     private static int set(MinecraftServer server, ServerPlayerEntity player, String command, int permissionLevel) {
@@ -101,13 +101,11 @@ public class CustomCommandPermissionLevelRegistry {
         return 1;
     }
 
+    @SuppressWarnings("unchecked")
     private static void setPermission(MinecraftServer server, ServerPlayerEntity player, String command, int permissionLevel) {
         CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
-
         CommandNode<ServerCommandSource> target = dispatcher.getRoot().getChild(command);
-
         ((CommandNodeInvoker<ServerCommandSource>)target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
-
         CommandHelper.notifyPlayersCommandsChanged(player);
     }
 
@@ -135,13 +133,13 @@ public class CustomCommandPermissionLevelRegistry {
         if (!COMMAND_PERMISSION_MAP.isEmpty()) {
             COMMAND_PERMISSION_MAP.clear();
             saveToJson(server);
-            CommandHelper.notifyPlayersCommandsChanged(player);
         }
         player.sendMessage(
-                Messenger.s(
-                        MSG_HEAD + translator.tr("removeAll").getString()
-                ).formatted(Formatting.RED, Formatting.ITALIC), false
+            Messenger.s(
+                MSG_HEAD + translator.tr("removeAll").getString()
+            ).formatted(Formatting.RED, Formatting.ITALIC), false
         );
+        CommandHelper.notifyPlayersCommandsChanged(player);
         return 1;
     }
 
