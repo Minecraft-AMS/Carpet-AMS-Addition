@@ -67,8 +67,6 @@ public class RegisterCommands {
 
         LeaderCommandRegistry.register(dispatcher);
 
-        PingCommandRegistry.register(dispatcher);
-
         GetSaveSizeCommandRegistry.register(dispatcher);
 
         GetSystemInfoCommandRegistry.register(dispatcher);
@@ -78,5 +76,14 @@ public class RegisterCommands {
         CustomCommandPermissionLevelRegistry.register(dispatcher);
 
         GetPlayerSkullCommandRegistry.register(dispatcher);
+    }
+
+    public static void registerPostCommands(
+        CommandDispatcher<ServerCommandSource> dispatcher
+        //#if MC>=11900
+        //$$ , final CommandRegistryAccess commandBuildContext
+        //#endif
+    ) {
+        PingCommandRegistry.register(dispatcher);
     }
 }

@@ -20,12 +20,58 @@
 
 package club.mcams.carpet.mixin.carpet;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import carpet.CarpetServer;
+
+import club.mcams.carpet.commands.RegisterCommands;
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
+//#if MC>=11900
+//$$ import net.minecraft.command.CommandRegistryAccess;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@GameVersion(version = "Minecraft >= 1.19.4", desc = "Just a fix for https://github.com/gnembon/fabric-carpet/issues/1908")
-@Mixin(DummyClass.class)
-public class CarpetServerMixin {}
+@Mixin(value = CarpetServer.class, remap = false)
+public abstract class CarpetServerMixin {
+    @Inject(
+            method =
+                    //#if MC<=11605
+                    //$$ "registerCarpetCommands",
+                    //#elseif MC<11904
+                    "registerCarpetCommands(Lcom/mojang/brigadier/CommandDispatcher;Lnet/minecraft/server/command/CommandManager$RegistrationEnvironment;)V",
+                    //#else
+                    //$$ "registerCarpetCommands(Lcom/mojang/brigadier/CommandDispatcher;Lnet/minecraft/server/command/CommandManager$RegistrationEnvironment;Lnet/minecraft/command/CommandRegistryAccess;)V",
+                    //#endif
+            at = @At("TAIL")
+    )
+    private static void registerCarpetCommands(CommandDispatcher<ServerCommandSource> dispatcher,
+                                               //#if MC>11605
+                                               CommandManager.RegistrationEnvironment environment,
+                                               //#endif
+                                               //#if MC>=11904
+                                               //$$ final CommandRegistryAccess commandBuildContext,
+                                               //#endif
+                                               CallbackInfo ci) {
+        RegisterCommands.registerPostCommands(dispatcher
+                //#if MC>=11904
+                //$$ , commandBuildContext
+                //#endif
+        );
+    }
+
+
+    //#if MC>=11904
+    //$$ @Inject(method = "onServerClosed(Lnet/minecraft/server/MinecraftServer;)V", at = @At("HEAD"), cancellable = true)
+    //$$ private static void onlyCallIfServerNotnull(MinecraftServer server, CallbackInfo ci) {
+    //$$     if (server == null) {
+    //$$         ci.cancel();
+    //$$     }
+    //$$ }
+    //#endif
+}
