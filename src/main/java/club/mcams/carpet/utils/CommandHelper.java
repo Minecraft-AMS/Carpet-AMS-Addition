@@ -24,6 +24,7 @@ import carpet.CarpetSettings;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerMod;
 import club.mcams.carpet.AmsServerSettings;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerTask;
 import net.minecraft.server.command.ServerCommandSource;
@@ -51,6 +52,10 @@ public final class CommandHelper {
                 AmsServer.LOGGER.warn("Exception while refreshing commands, please report this to Carpet", e);
             }
         }));
+    }
+
+    public static void refreshCommandTree(ServerPlayerEntity player) {
+        AmsServer.minecraftServer.getCommandManager().sendCommandTree(player);
     }
 
     public static boolean canUseCommand(ServerCommandSource source, Object commandLevel) {

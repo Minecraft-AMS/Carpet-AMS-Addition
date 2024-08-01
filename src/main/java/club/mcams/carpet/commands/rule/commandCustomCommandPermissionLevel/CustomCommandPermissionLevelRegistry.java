@@ -20,6 +20,8 @@
 
 package club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel;
 
+import carpet.patches.EntityPlayerMPFake;
+import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.mixin.rule.commandCustomCommandPermissionLevel.CommandNodeInvoker;
 import club.mcams.carpet.translations.Translator;
@@ -44,7 +46,6 @@ import java.util.Map;
 
 public class CustomCommandPermissionLevelRegistry {
     private static final Translator translator = new Translator("command.customCommandPermissionLevel");
-    private static final String needRestartServerMessage = translator.tr("need_restart_server_msg").getString();
     private static final String MSG_HEAD = "<customCommandPermissionLevel> ";
     public static final Map<String, Integer> COMMAND_PERMISSION_MAP = new HashMap<>();
 
@@ -107,6 +108,7 @@ public class CustomCommandPermissionLevelRegistry {
         ((CommandNodeInvoker<ServerCommandSource>)target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
 
         CommandHelper.notifyPlayersCommandsChanged(server);
+        refreshCommandNodeTree();
     }
 
     private static int remove(MinecraftServer server, PlayerEntity player, String command) {
@@ -118,7 +120,7 @@ public class CustomCommandPermissionLevelRegistry {
                     String.format("%s- %s", MSG_HEAD, command)
                 ).formatted(Formatting.RED, Formatting.ITALIC), false
             );
-            sendNeedRestartServerMessage(player);
+            refreshCommandNodeTree();
         } else {
             player.sendMessage(
                 Messenger.s(
@@ -137,7 +139,7 @@ public class CustomCommandPermissionLevelRegistry {
                 MSG_HEAD + translator.tr("removeAll").getString()
             ).formatted(Formatting.RED, Formatting.ITALIC), false
         );
-        sendNeedRestartServerMessage(player);
+        refreshCommandNodeTree();
         return 1;
     }
 
@@ -177,12 +179,9 @@ public class CustomCommandPermissionLevelRegistry {
         CustomCommandPermissionLevelConfig.saveToJson(COMMAND_PERMISSION_MAP, CONFIG_PATH);
     }
 
-    // TODO: 热重载咕咕咕
-    private static void sendNeedRestartServerMessage(PlayerEntity player) {
-        player.sendMessage(
-            Messenger.s(
-                MSG_HEAD + needRestartServerMessage
-            ).formatted(Formatting.YELLOW), false
-        );
+    private static void refreshCommandNodeTree() {
+        AmsServer.minecraftServer.getPlayerManager().getPlayerList().stream()
+                .filter(player -> !(player instanceof EntityPlayerMPFake))
+                .forEach(CommandHelper::refreshCommandTree);
     }
 }
