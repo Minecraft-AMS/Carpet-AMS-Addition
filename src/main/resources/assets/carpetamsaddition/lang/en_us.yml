@@ -20,6 +20,7 @@ carpetamsaddition:
       copy: 'copy coord to clipboard'
 
   command:
+    refresh_cmd_tree: 'Your commands has been refreshed'
     amsUpdateSuppressionCrashFixForceMode:
       lazy_mod: '[ lazy mode ]'
       force_mod: '[ force mode ]'
@@ -73,7 +74,6 @@ carpetamsaddition:
       total_memory: 'Total Memory:'
       free_memory: 'Free Memory:'
     customCommandPermissionLevel:
-      need_restart_server_msg: 'It will take effect after restarting the server'
       not_found: ' Does not exist in the configuration file'
       removeAll: 'All entries have been removed'
       list: '[ Custom command permission level list ]'
