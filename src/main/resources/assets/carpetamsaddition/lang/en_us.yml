@@ -20,7 +20,9 @@ carpetamsaddition:
       copy: 'copy coord to clipboard'
 
   command:
-    refresh_cmd_tree: 'Your commands has been refreshed'
+    commandHelper:
+      refresh_cmd_tree: 'Your commands has been refreshed'
+
     amsUpdateSuppressionCrashFixForceMode:
       lazy_mod: '[ lazy mode ]'
       force_mod: '[ force mode ]'

@@ -20,7 +20,9 @@ carpetamsaddition:
       copy: '复制坐标到剪切板'
 
   command:
-    refresh_cmd_tree: '您的命令已被刷新'
+    commandHelper:
+      refresh_cmd_tree: '您的命令已被刷新'
+
     amsUpdateSuppressionCrashFixForceMode:
       lazy_mod: '[ lazy 模式 ]'
       force_mod: '[ force 模式 ]'
