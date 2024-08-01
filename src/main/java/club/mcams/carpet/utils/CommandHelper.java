@@ -20,14 +20,11 @@
 
 package club.mcams.carpet.utils;
 
-import carpet.patches.EntityPlayerMPFake;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.translations.Translator;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.ServerTask;
+
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 
 import java.util.Arrays;
@@ -35,21 +32,21 @@ import java.util.List;
 
 @SuppressWarnings("EnhancedSwitchMigration")
 public final class CommandHelper {
-    public static final List<String> permissionLevels = Arrays.asList("true", "false", "ops", "0", "1", "2", "3", "4");
+    public static final List<String> permissionLevels = Arrays.asList("0", "1", "2", "3", "4");
+    private static final Translator translator = new Translator("command.commandHelper");
 
-    private static final Translator translator = new Translator("command");
     private CommandHelper() {}
 
-    public static void notifyPlayersCommandsChanged(ServerPlayerEntity player)
-    {
+    public static void notifyPlayersCommandsChanged(ServerPlayerEntity player) {
         try {
             if (player.getServer() != null) {
                 player.getServer().getCommandManager().sendCommandTree(player);
-                player.sendMessage(Messenger.s(translator.tr("refresh_cmd_tree").getString()).setStyle(Style.EMPTY.withColor(Formatting.YELLOW)), false);
+                player.sendMessage(
+                    Messenger.s(translator.tr("refresh_cmd_tree").getString()).formatted(Formatting.YELLOW), false
+                );
             }
         }
-        catch (NullPointerException e)
-        {
+        catch (NullPointerException e) {
             AmsServer.LOGGER.warn("Exception while refreshing commands, please report this to Carpet", e);
         }
     }
