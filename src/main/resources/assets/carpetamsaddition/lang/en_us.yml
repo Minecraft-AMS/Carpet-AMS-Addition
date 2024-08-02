@@ -63,8 +63,8 @@ carpetamsaddition:
       stop_ping: 'Ping operation stopped.'
       active_ping_is_null: 'No active ping operation to stop.'
       help:
-        ping: '/ping <targetIpOrDomainName> <pingQuantity>  ->  Ping a specific host'
-        stop: '/ping stop  ->  Interrupt the ping operation'
+        ping: '/pings <targetIpOrDomainName> <pingQuantity>  ->  Ping a specific host'
+        stop: '/pings stop  ->  Interrupt the ping operation'
     getSaveSize:
       size_msg: 'Current save size:'
       save_success_msg: '[ Save world success ]'
