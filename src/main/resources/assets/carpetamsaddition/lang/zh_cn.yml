@@ -20,6 +20,9 @@ carpetamsaddition:
       copy: '复制坐标到剪切板'
 
   command:
+    commandHelper:
+      refresh_cmd_tree: '您的命令已被刷新'
+
     amsUpdateSuppressionCrashFixForceMode:
       lazy_mod: '[ lazy 模式 ]'
       force_mod: '[ force 模式 ]'
@@ -60,8 +63,8 @@ carpetamsaddition:
       stop_ping: '已中断ping操作'
       active_ping_is_null: '没有正在活动的ping操作'
       help:
-        ping: '/ping <目标IP/域名> <ping的次数>  ->  ping某个主机'
-        stop: '/ping stop  ->  中断ping操作'
+        ping: '/pings <目标IP/域名> <ping的次数>  ->  ping某个主机'
+        stop: '/pings stop  ->  中断ping操作'
     getSaveSize:
       size_msg: '当前存档大小：'
       save_success_msg: '[ 保存世界成功 ]'
@@ -73,7 +76,6 @@ carpetamsaddition:
       total_memory: '总内存：'
       free_memory: '可用内存：'
     customCommandPermissionLevel:
-      need_restart_server_msg: '重启服务器后生效'
       not_found: ' 不存在于配置文件中'
       removeAll: '已删除所有条目'
       list: '[ 自定义指令权限等级列表 ]'

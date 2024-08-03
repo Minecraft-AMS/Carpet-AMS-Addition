@@ -4,6 +4,7 @@
   "package": "club.mcams.carpet.mixin",
   "compatibilityLevel": "/*JAVA_VERSION*/",
   "mixins": [
+    "carpet.CarpetServerMixin",
     "carpet.HUDControllerMixin",
     "carpet.SettingsManagerMixin",
     "rule.amsUpdateSuppressionCrashFix.ChainRestrictedNeighborUpdater_SixWayEntryMixin",
@@ -26,6 +27,8 @@
     "rule.commandCustomBlockBlastResistance.FluidStateMixin",
     "rule.commandCustomCommandPermissionLevel.CommandDispatcherMixin",
     "rule.commandPlayerChunkLoadController.ChunkTicketManagerMixin",
+    "rule.commandCustomCommandPermissionLevel.CommandNodeInvoker",
+    "rule.commandPlayerChunkLoadController.ThreadedAnvilChunkStorageMixin",
     "rule.creativeOneHitKill.EntityAccessorMixin",
     "rule.creativeOneHitKill.PlayerEntityMixin",
     "rule.creativeShulkerBoxDropsDisabled.ShulkerBoxBlockMixin",
