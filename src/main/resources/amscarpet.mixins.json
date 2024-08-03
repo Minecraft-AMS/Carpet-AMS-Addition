@@ -28,7 +28,6 @@
     "rule.commandCustomCommandPermissionLevel.CommandDispatcherMixin",
     "rule.commandPlayerChunkLoadController.ChunkTicketManagerMixin",
     "rule.commandCustomCommandPermissionLevel.CommandNodeInvoker",
-    "rule.commandPlayerChunkLoadController.ThreadedAnvilChunkStorageMixin",
     "rule.creativeOneHitKill.EntityAccessorMixin",
     "rule.creativeOneHitKill.PlayerEntityMixin",
     "rule.creativeShulkerBoxDropsDisabled.ShulkerBoxBlockMixin",
