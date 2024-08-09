@@ -28,6 +28,7 @@ import club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController.ChunkLoad
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 
@@ -50,8 +51,8 @@ public class PlayerChunkLoadControllerCommandRegistry {
     }
 
     private static int setPlayerInteraction(ServerCommandSource source, String playerName, boolean b) {
-        PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
-        ChunkLoading.setPlayerInteraction(playerName, b, true);
+        ServerPlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
+        ChunkLoading.setPlayerLoading(player, b);
         if (player == null) {
             Messenger.sendServerMessage(
                 AmsServer.minecraftServer, Messenger.s("No player specified").
@@ -69,8 +70,7 @@ public class PlayerChunkLoadControllerCommandRegistry {
     }
 
     private static int listPlayerInteractions(ServerCommandSource source, String playerName) {
-        boolean playerInteractions = ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true);
-        PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
+        ServerPlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
         if (player == null) {
             Messenger.sendServerMessage(
                 AmsServer.minecraftServer, Messenger.s("No player specified").
@@ -78,6 +78,7 @@ public class PlayerChunkLoadControllerCommandRegistry {
             );
             return 0;
         }
+        boolean playerInteractions = !ChunkLoading.isPlayerUnLoading(player);
         if (playerInteractions) {
             player.sendMessage(
                 Messenger.s((playerName + " chunk loading: true")).
