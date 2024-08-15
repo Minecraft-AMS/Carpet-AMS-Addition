@@ -14,6 +14,9 @@ repositories {
 		url = 'https://api.modrinth.com/maven'
 	}
 	maven {
+		url 'https://maven.fallenbreath.me/releases'
+	}
+	maven {
 		url = 'https://masa.dy.fi/maven'
 	}
 	maven {
@@ -40,6 +43,11 @@ dependencies {
 	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 
+	// Conditional Mixin, for conditional compatability with other mods
+	modImplementation 'com.github.Fallen-Breath.conditional-mixin:conditional-mixin-fabric:0.6.2'
+	// Mixin Auditor just for mixin audits
+	modRuntimeOnly 'me.fallenbreath:mixin-auditor:0.1.0'
+
 	// Dependencies
 	include(implementation("com.esotericsoftware.yamlbeans:yamlbeans:${project.yamlbeans_version}"))
 }
@@ -53,16 +61,17 @@ loom {
 	}
 
 	runs {
-        mixinAudit {
+        // run server, but with mixin auditor enabled
+        serverMixinAudit {
             server()
-            vmArgs '-Dcarpetamsaddition.mixin_audit=true'
-            ideConfigGenerated false
+            vmArgs '-DmixinAuditor.audit=true'
         }
-        mixinAuditClient {
+
+        // run client, but with mixin auditor enabled
+        clientMixinAudit {
             client()
-            vmArgs '-Dcarpetamsaddition.mixin_audit=true'
-            ideConfigGenerated false
-        }
+            vmArgs('-DmixinAuditor.audit=true', '-DmixinAuditor.when=game_init')
+    	}
     }
 
 	accessWidenerPath = file("carpetamsaddition.accesswidener")
@@ -101,6 +110,9 @@ if (mcVersion >= 12100) {
 String versionSuffix = ''
 // detect github action environment variables
 // https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+String buildType = System.getenv("BUILD_TYPE")
+versionSuffix += buildType != null ? '-' + buildType : '-TEST'
+
 if (System.getenv("BUILD_RELEASE") != "true") {
 	String buildNumber = System.getenv("BUILD_ID")
 	versionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SNAPSHOT'

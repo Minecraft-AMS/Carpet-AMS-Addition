@@ -1,21 +1,20 @@
-name: step.build
+name: _step.build
 
 on:
   workflow_call:
     inputs:
       release:
-        type: boolean
+        type: string
         required: false
-        default: false
+        default: 'false'
       target_subproject:
-        description: The subproject name of the specified Minecraft version to be built. Leave it empty to build all
+        description: see release.yml.disabled, leave it empty to build all
         type: string
         required: false
         default: ''
-      mixin_audit:
-        type: boolean
-        required: false
-        default: false
+      build_version_type:
+        type: string
+        required: true
 
 jobs:
   build:
@@ -30,43 +29,63 @@ jobs:
           java-version: 21
 
       - name: Cache gradle files
+        if: ${{ inputs.build_version_type != 'PULL_REQUEST' }}
         uses: actions/cache@v4
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
             ./.gradle/loom-cache
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/gradle.properties', '**/*.accesswidener') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/gradle.properties', '**/*.accesswidener', 'settings.json') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Get subproject name to build
-        id: subproject_info
-        run: |
-          if [ "${{ inputs.target_subproject }}" != "" ]
-          then
-              echo "prefix=${{ inputs.target_subproject }}:" >> $GITHUB_OUTPUT
-          else
-              echo "prefix=" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Build with Gradle
+      - name: Build with gradle
         run: |
           chmod +x gradlew
-          ./gradlew ${{ steps.subproject_info.outputs.prefix }}build --no-daemon
+          if [ -z "${{ inputs.target_subproject }}" ]; then
+              echo "Building all subprojects"
+              ./gradlew build
+          else
+              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:build/' | paste -sd ' ')
+              echo "Building with arguments=$args"
+              ./gradlew $args
+          fi
         env:
           BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
+          BUILD_TYPE: ${{ inputs.build_version_type }}
 
-      - name: Run Mixin Audit Check
-        if: ${{ inputs.mixin_audit }}
+      # [FEATURE] MIXIN_AUDITOR
+      - name: Run mixin audit check for Minecraft server
+        if: ${{ inputs.build_version_type != 'RELEASE' }}   # build if a dev build
         timeout-minutes: 10
         run: |
           mkdir -p ./run
           echo eula=true > ./run/eula.txt
-          ./gradlew runMixinAudit
+          ./gradlew runServerMixinAudit
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: versions/*/build/libs/
+
+  summary:
+    runs-on: ubuntu-22.04
+    needs:
+      - build
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: build-artifacts
+
+      - name: Make build summary
+        run: python3 .github/workflows/scripts/summary.py  # ubuntu-22.04 uses Python 3.10.6
+        env:
+          TARGET_SUBPROJECT: ${{ inputs.target_subproject }}
