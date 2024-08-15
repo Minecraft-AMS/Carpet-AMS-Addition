@@ -84,6 +84,9 @@ public class UpdateSuppressionContext {
         if (cause instanceof OutOfMemoryError) {
             return OutOfMemoryError.class.getSimpleName();
         }
+        if (cause instanceof IllegalArgumentException) {
+            return IllegalArgumentException.class.getSimpleName();
+        }
         return "? ? ?";
     }
 }
