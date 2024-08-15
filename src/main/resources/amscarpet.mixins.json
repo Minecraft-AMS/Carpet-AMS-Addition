@@ -3,6 +3,7 @@
   "minVersion": "0.8.5",
   "package": "club.mcams.carpet.mixin",
   "compatibilityLevel": "/*JAVA_VERSION*/",
+  "plugin": "club.mcams.carpet.utils.mixin.MixinConfigPlugin",
   "mixins": [
     "carpet.CarpetServerMixin",
     "carpet.HUDControllerMixin",

@@ -29,7 +29,7 @@ pluginManagement {
 	}
 }
 
-def versionsFilePath = 'minecraftVersions' + '.json'
+def versionsFilePath = 'settings' + '.json'
 def versions = new JsonSlurper().parseText(file(versionsFilePath).text)
 versions.versions.each {
 	version -> include(":$version")
