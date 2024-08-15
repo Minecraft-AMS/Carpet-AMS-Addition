@@ -10,7 +10,7 @@ on:
   push:
     branches:
       - "multi"   # 正式release，如加版本号
-      - "dev"     # 预构建branch，这里发测试版
+      - "preview"     # 预构建branch，这里发测试版
       - "exp/**"  # 新特性branch
       - "dev/**"  # 修bug的branch
     paths:
@@ -84,7 +84,7 @@ jobs:
         run: |
           if [ ${{ github.event_name }} == 'push' ]
           then
-              if [[ ${{ github.ref_name }} == 'dev' ]]; then
+              if [[ ${{ github.ref_name }} == 'preview' ]]; then
                   build_publish=true
               else
                   build_publish=false
