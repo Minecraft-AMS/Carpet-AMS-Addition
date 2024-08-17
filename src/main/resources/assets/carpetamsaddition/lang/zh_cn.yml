@@ -439,6 +439,9 @@ carpetamsaddition:
       stackableDiscounts:
         name: 村民折扣叠加
         desc: 重新引入<23w31a的打骨折机制，让治疗村民的折扣可以叠加
+      fakePlayerInteractLikeClient:
+        name: 假人交互同步客户端行为
+        desc: 修复几个假人和盔甲架、矿车、船在特定情况下与客户端相应行为结果不一样的问题
       commandGetSystemInfo:
         name: 获取系统信息
         desc: 使用“/getSystemInfo”命令获取服务器的系统信息

@@ -317,6 +317,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean mitePearl = false;
 
+    @Rule(categories = {AMS, FEATURE, BUGFIX})
+    public static boolean fakePlayerInteractLikeClient = false;
+
     //#if MC<12000
     @GameVersion(version = "Minecraft < 1.20")
     @Rule(categories = {AMS, FEATURE})

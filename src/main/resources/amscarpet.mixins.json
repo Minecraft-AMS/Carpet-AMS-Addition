@@ -47,6 +47,8 @@
     "rule.experimentalContentCheckDisabled.ToggleableFeatureMixin",
     "rule.extinguishedCampfire_campfireSmokeParticleDisabled.CampfireBlockMixin",
     "rule.fakePeace.AbstractBlockStateMixin",
+    "rule.fakePlayerInteractLikeClient.BoatEntityInvoker",
+    "rule.fakePlayerInteractLikeClient.EntityPlayerActionPackActionTypeMixin",
     "rule.fakePlayerNoScoreboardCounter.PlayerEntityMixin",
     "rule.fakePlayerPickUpController.ItemEntityMixin",
     "rule.fancyFakePlayerName.CarpetMod_PlayerCommandMixin",
