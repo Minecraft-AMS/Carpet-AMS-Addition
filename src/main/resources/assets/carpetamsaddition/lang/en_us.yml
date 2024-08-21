@@ -405,6 +405,8 @@ carpetamsaddition:
         desc: Change the hardness of obsidian and crying obsidian to end stone
         extra:
           '0': 'Requires client support'
+      fakePlayerInteractLikeClient:
+        desc: Fix some cases that fake player interact differently from the client
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -486,6 +486,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean softObsidian = false;
 
+    @Rule(categories = {AMS, FEATURE, BUGFIX})
+    public static boolean fakePlayerInteractLikeClient = false;
+
     /*
      * 区块加载规则
      */
