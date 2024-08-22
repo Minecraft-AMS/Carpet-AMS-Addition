@@ -136,6 +136,8 @@
     "rule.softBlock.AbstractBlockMixin",
     "rule.softBlock.AbstractBlockStateInvoker",
     "rule.stackableDiscount.VillageGossipTypeAccessor",
+    "rule.strongLeash.LeashableMixin",
+    "rule.strongLeash.PathAwareEntityMixin",
     "rule.superBow.EnchantmentMixin",
     "rule.superBow.InfinityEnchantmentMixin",
     "rule.undyingCoral.CoralBlockBlockMixin",

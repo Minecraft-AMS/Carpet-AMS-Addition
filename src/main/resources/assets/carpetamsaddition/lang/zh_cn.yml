@@ -504,6 +504,9 @@ carpetamsaddition:
       fakePlayerInteractLikeClient:
         name: 假人交互同步客户端行为
         desc: 修复几个假人和盔甲架、矿车、船在特定情况下与客户端相应行为结果不一样的问题
+      strongLeash:
+        name: 强力拴绳
+        desc: 使拴绳不会因为距离过远而断裂
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

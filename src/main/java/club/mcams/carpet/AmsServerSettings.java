@@ -489,6 +489,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, BUGFIX})
     public static boolean fakePlayerInteractLikeClient = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean strongLeash = false;
+
     /*
      * 区块加载规则
      */

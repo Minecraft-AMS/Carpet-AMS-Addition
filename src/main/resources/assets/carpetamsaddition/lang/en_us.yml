@@ -407,6 +407,8 @@ carpetamsaddition:
           '0': 'Requires client support'
       fakePlayerInteractLikeClient:
         desc: Fix some cases that fake player interact differently from the client
+      strongLeash:
+        desc: The leash will not break due to excessive distance
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
