@@ -39,6 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft <= 1.18")
+@SuppressWarnings("InjectLocalCaptureCanBeReplacedWithLocal")
 @Mixin(World.class)
 public abstract class WorldMixin {
     @Inject(
