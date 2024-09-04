@@ -56,7 +56,8 @@ public abstract class PistonBlockMixin {
             ChunkPos chunkPos = new ChunkPos(pos.offset(direction));
             if (optionIsBoneBlockOrAll()) {
                 loadChunkIfMatch(world, chunkPos, pistonBlockUp, Blocks.BONE_BLOCK);
-            } else if (optionIsBedRockOrAll()) {
+            }
+            if (optionIsBedRockOrAll()) {
                 loadChunkIfMatch(world, chunkPos, pistonBlockDown, Blocks.BEDROCK);
             }
         }
