@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix;
 
+import club.mcams.carpet.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
@@ -48,6 +49,7 @@ public class AmsUpdateSuppressionCrashFixCommandRegistry {
         .executes(context -> {
             boolean mode = BoolArgumentType.getBool(context, "mode");
             amsUpdateSuppressionCrashFixForceMode = mode;
+            ForceModeCommandConfig.saveConfigToJson(context.getSource().getServer());
             Text message =
                     mode ?
                     Messenger.s(translator.tr("force_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)) :
