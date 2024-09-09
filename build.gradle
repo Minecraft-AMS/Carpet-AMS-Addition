@@ -19,6 +19,7 @@ preprocess {
 	def mc1206 = createNode('1.20.6', 1_20_06, 'yarn')
 	def mc121 = createNode('1.21', 1_21_00, 'yarn')
 	def mc1211 = createNode('1.21.1', 1_21_01, 'yarn')
+	def mc1212 = createNode('1.21.2', 1_21_02, 'yarn')
 
 	mc116.link(mc117, file('versions/mapping-1.16-1.17.txt'))
 	mc117.link(mc118, file('versions/mapping-1.17-1.18.txt'))
@@ -32,6 +33,7 @@ preprocess {
 	mc1205.link(mc1206, file('versions/mapping-1.20.5-1.20.6.txt'))
 	mc1206.link(mc121, file('versions/mapping-1.20.6-1.21.txt'))
 	mc121.link(mc1211, file('versions/mapping-1.21-1.21.1.txt'))
+	mc1211.link(mc1212, file('versions/mapping-1.21.1-1.21.2.txt'))
 }
 
 tasks.register('buildAndGather') {

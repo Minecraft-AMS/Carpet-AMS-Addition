@@ -27,6 +27,9 @@ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppres
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+//#if MC>=12102
+//$$ import net.minecraft.world.block.WireOrientation;
+//#endif
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.block.NeighborUpdater;
@@ -50,7 +53,20 @@ public interface NeighborUpdaterMixin {
        ),
        locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private static void tryNeighborUpdate(World world, BlockState state, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, CallbackInfo ci, Throwable throwable) {
+    private static void tryNeighborUpdate(
+        World world,
+        BlockState state,
+        BlockPos pos,
+        Block sourceBlock,
+        //#if MC>=12102
+        //$$ WireOrientation orientation,
+        //#else
+        BlockPos sourcePos,
+        //#endif
+        boolean notify,
+        CallbackInfo ci,
+        Throwable throwable
+    ) {
         if (AmsServerSettings.amsUpdateSuppressionCrashFix && UpdateSuppressionException.isUpdateSuppression(throwable)) {
             UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
            throw new ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));

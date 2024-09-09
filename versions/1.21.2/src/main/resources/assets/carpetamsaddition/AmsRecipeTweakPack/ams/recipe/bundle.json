@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":[
+    "SRS",
+    "R R",
+    "RRR"
+  ],
+  "key":{
+    "S": "minecraft:string",
+    "R": "minecraft:rabbit_hide"
+  },
+  "result":{
+    "/*ams_recipes_item_id*/":"minecraft:bundle",
+    "count":1
+  }
+}

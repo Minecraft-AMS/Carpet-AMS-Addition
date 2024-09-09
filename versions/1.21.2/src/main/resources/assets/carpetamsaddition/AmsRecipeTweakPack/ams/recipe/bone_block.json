@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":[
+    "###",
+    "###",
+    "###"
+  ],
+  "key":{
+    "#": "minecraft:bone"
+  },
+  "result":{
+    "/*ams_recipes_item_id*/":"minecraft:bone_block",
+    "count":3
+  }
+}
