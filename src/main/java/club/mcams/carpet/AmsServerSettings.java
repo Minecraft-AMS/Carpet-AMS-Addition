@@ -20,13 +20,14 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.validators.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
+import club.mcams.carpet.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 //#if MC>=12002
-//$$ import club.mcams.carpet.validators.rule.stackableDiscount.StackableDiscountRuleObserver;
+//$$ import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 //#endif
-import club.mcams.carpet.validators.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
+import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
+
 import club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.blockChunkLoaderTimeController.MaxTimeValidator;
@@ -79,8 +80,12 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean sharedVillagerDiscounts = false;
 
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean fakePeace = false;
+    @Rule(
+        options = {"false", "true", "minecraft:overworld", "minecraft:the_end", "minecraft:the_nether", "minecraft:the_end,minecraft:the_nether"},
+        categories = {AMS, FEATURE},
+        strict = false
+    )
+    public static String fakePeace = "false";
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean extinguishedCampfire = false;
@@ -228,11 +233,10 @@ public class AmsServerSettings {
     public static double maxClientInteractionReachDistance = -1.0D;
 
     @Rule(
-        options = {"VANILLA", "minecraft:bedrock", "minecraft:bedrock,minecraft:obsidian"},
-        categories = {AMS, FEATURE},
-        strict = false
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, FEATURE, COMMAND}
     )
-    public static String customMovableBlock = "VANILLA";
+    public static String commandCustomMovableBlock = "false";
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean easyMaxLevelBeacon = false;

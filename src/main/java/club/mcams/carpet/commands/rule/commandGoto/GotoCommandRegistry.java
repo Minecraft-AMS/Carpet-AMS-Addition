@@ -24,6 +24,10 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 
+//#if MC>=12102
+//$$ import java.util.Set;
+//#endif
+
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.command.argument.BlockPosArgumentType;
@@ -57,7 +61,11 @@ public class GotoCommandRegistry {
         int x = destinationPos.getX();
         int y = destinationPos.getY();
         int z = destinationPos.getZ();
+        //#if MC>=12102
+        //$$ player.teleport(targetDimension, x, y, z, Set.of(), player.getPitch(1), 1, false);
+        //#else
         player.teleport(targetDimension, x, y, z, player.getYaw(1), player.getPitch(1));
+        //#endif
         return 1;
     }
 

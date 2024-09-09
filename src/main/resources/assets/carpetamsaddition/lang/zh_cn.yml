@@ -84,6 +84,16 @@ carpetamsaddition:
         remove: '/customCommandPermissionLevel remove <指令>  ->  删除某个被修改的指令'
         removeAll: '/customCommandPermissionLevel removeAll  ->  删除所有被修改的指令'
         list: '/customCommandPermissionLevel list  ->  查看被修改的指令列表'
+    customMovableBlock:
+      already_exists: " 已存在"
+      not_found: " 不存在"
+      removeAll: "已删除所有条目"
+      list: "[ 可移动方块列表 ]"
+      help:
+        set: '/customMovableBlock add <方块注册名>  ->  增加一个可移动方块'
+        remove: '/customMovableBlock remove <方块注册名>  ->  删除一个可移动方块'
+        removeAll: '/customMovableBlock removeAll  ->  删除所有添加的可移动方块'
+        list: '/customMovableBlock list  ->  查看可移动方块列表'
 
   logger:
     serverRuntime:
@@ -122,7 +132,7 @@ carpetamsaddition:
         desc: 玩家将僵尸村民治疗为村民后的获得的折扣将共享给所有玩家
       fakePeace:
         name: 伪和平
-        desc: 伪和平
+        desc: 伪和平，你可以自定义其生效的维度，也可以自定义生效的维度组合，使用“,”隔开即可
       extinguishedCampfire:
         name: 熄灭的篝火
         desc: 当玩家放置篝火时，篝火处于熄灭状态
@@ -284,14 +294,11 @@ carpetamsaddition:
         extra:
           '0': '允许设定的范围：0 - 512'
           '1': '需要关闭Tweakeroo的tweakBlockReachOverride功能'
-      customMovableBlock:
+      commandCustomMovableBlock:
         name: 自定义可移动方块
-        desc: 可自定义的让不能被推动的方块变得能被推动
+        desc: 可自定义的让不能被推动的方块变得能被推动（不支持容器方块，如果需要推动容器可以使用Carpet的movableBlockEntities规则）
         extra:
-          '0': '命令格式：'
-          '1': '/carpet customMovableBlock minecraft:BlockName'
-          '2': '你也可以同时设置多个方块，使用 "," 隔开即可：'
-          '3': '/carpet customMovableBlock minecraft:BlockName1,minecraft:BlockName2'
+          '0': '开启规则后使用/customMovableBlock help命令查看使用说明'
       easyMaxLevelBeacon:
         name: 简易满级信标
         desc: 只需一个底座方块就能激活满级信标

@@ -18,13 +18,16 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.customMovableBlock;
+package club.mcams.carpet.mixin.rule.commandCustomMovableBlock;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockRegistry;
 import club.mcams.carpet.utils.RegexTools;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PistonBlock;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -34,30 +37,25 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Mixin(PistonBlock.class)
 public abstract class PistonBlockMixin {
     @Inject(method = "isMovable", at = @At("HEAD"), cancellable = true)
     private static void MovableBlocks(BlockState state, World world, BlockPos blockPos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
-        if (!Objects.equals(AmsServerSettings.customMovableBlock, "VANILLA")) {
-            Set<String> moreCustomMovableBlock = new HashSet<>(Arrays.asList(AmsServerSettings.customMovableBlock.split(",")));
-            String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); //Block{minecraft:bedrock} -> minecraft:bedrock
-            if (moreCustomMovableBlock.contains(blockName)) {
-                //#if MC<11700
-                //$$ if (direction == Direction.DOWN && blockPos.getY() == 0) {
-                //#else
-                if (direction == Direction.DOWN && blockPos.getY() == world.getBottomY()) {
-                //#endif
+        if (!Objects.equals(AmsServerSettings.commandCustomMovableBlock, "false") && CustomMovableBlockRegistry.CUSTOM_MOVABLE_BLOCKS.contains(RegexTools.getBlockRegisterName(state.getBlock().toString()))) {
+            BlockEntity blockEntity = world.getBlockEntity(blockPos);
+            //#if MC>=11700
+            boolean isBottomY = blockPos.getY() == world.getBottomY();
+            boolean isTopY = blockPos.getY() == world.getTopY();
+            //#else
+            //$$ boolean isBottomY = blockPos.getY() == 0;
+            //$$ boolean isTopY = blockPos.getY() == world.getHeight() - 1;
+            //#endif
+            if (!(blockEntity instanceof LootableContainerBlockEntity)) {
+                if (direction == Direction.DOWN && isBottomY) {
                     cir.setReturnValue(false);
-                //#if MC<11700
-                //$$ } else if (direction == Direction.UP && blockPos.getY() == world.getHeight() - 1) {
-                //#else
-                } else if (direction == Direction.UP && blockPos.getY() == world.getTopY() - 1) {
-                //#endif
+                } else if (direction == Direction.UP && isTopY) {
                     cir.setReturnValue(false);
                 } else {
                     cir.setReturnValue(true);

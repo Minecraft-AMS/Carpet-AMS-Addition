@@ -18,10 +18,10 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.config.rule.commandLeader;
+package club.mcams.carpet.config.rule.commandCustomMovableBlock;
 
 import club.mcams.carpet.AmsServer;
-import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
+import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockRegistry;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,27 +30,26 @@ import com.google.gson.reflect.TypeToken;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.WorldSavePath;
 
-import java.io.*;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class LeaderConfig {
+public class CustomMovableBlockConfig {
     @SuppressWarnings("ReadWriteStringCanBeUsed")
     public static void loadFromJson(String configFilePath) {
         Gson gson = new Gson();
         Path path = Paths.get(configFilePath);
-        LeaderCommandRegistry.LEADER_LIST.clear();
+        CustomMovableBlockRegistry.CUSTOM_MOVABLE_BLOCKS.clear();
         if (Files.exists(path)) {
             try {
                 String json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
-                Type type = new TypeToken<Map<String, String>>() {}.getType();
-                Map<String, String> simplifiedMap = gson.fromJson(json, type);
-                LeaderCommandRegistry.LEADER_LIST.putAll(simplifiedMap);
+                Type type = new TypeToken<List<String>>() {}.getType();
+                List<String> simplifiedMap = gson.fromJson(json, type);
+                CustomMovableBlockRegistry.CUSTOM_MOVABLE_BLOCKS.addAll(simplifiedMap);
             } catch (IOException e) {
                 AmsServer.LOGGER.warn("Failed to load config", e);
             }
@@ -58,9 +57,9 @@ public class LeaderConfig {
     }
 
     @SuppressWarnings("ReadWriteStringCanBeUsed")
-    public static void saveToJson(Map<String, String> leaderMap, String configFilePath) {
+    public static void saveToJson(List<String> customBlockMap, String configFilePath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Map<String, String> simplifiedMap = new HashMap<>(leaderMap);
+        List<String> simplifiedMap = new ArrayList<>(customBlockMap);
         String json = gson.toJson(simplifiedMap);
         try {
             Path path = Paths.get(configFilePath);
@@ -72,6 +71,6 @@ public class LeaderConfig {
     }
 
     public static String getPath(MinecraftServer server) {
-        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/leader" + ".json").toString();
+        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_movable_block" + ".json").toString();
     }
 }

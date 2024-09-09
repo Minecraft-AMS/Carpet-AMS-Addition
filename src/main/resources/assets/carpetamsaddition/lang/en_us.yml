@@ -84,6 +84,16 @@ carpetamsaddition:
         remove: '/customCommandPermissionLevel remove <command>  ->  Remove a modified command'
         removeAll: '/customCommandPermissionLevel removeAll  ->  Remove all modified commands'
         list: '/customCommandPermissionLevel list  ->  View the list of modified commands'
+    customMovableBlock:
+      already_exists: " is already exists"
+      not_found: " not found"
+      removeAll: "All block have been removed from list"
+      list: "[ Moveable block list ]"
+      help:
+        set: '/customMovableBlock add <block>  ->  Added a movable block'
+        remove: '/customMovableBlock remove <block>  ->  Delete a movable block'
+        removeAll: '/customMovableBlock removeAll  ->  Removes all added movable blocks'
+        list: '/customMovableBlock list  ->  Check out the list of movable blocks'
 
   logger:
     serverRuntime:
@@ -119,7 +129,7 @@ carpetamsaddition:
       sharedVillagerDiscounts:
         desc: Share villagers discount to all players
       fakePeace:
-        desc: Simulation fake Peace
+        desc: Simulation fake Peace, You can customize the dimensions in which it works, or you can customize the combination and use "," to separate
       extinguishedCampfire:
         desc: The campfire is extinguished when the player places it
       netherWaterPlacement:
@@ -244,13 +254,10 @@ carpetamsaddition:
         extra:
           '0': 'The range of values: 0 - 512'
           '1': 'Need to disable the tweakBlockReachOverride feature in Tweakeroo'
-      customMovableBlock:
-        desc: Customize the non-pushable block to make it pushable
+      commandCustomMovableBlock:
+        desc: Customize the non-pushable block to make it pushable (Container blocks are not supported, and if you need to push containers, you can use Carpet's movableBlockEntities rule)
         extra:
-          '0': 'Command format:'
-          '1': '/carpet customMovableBlock minecraft:BlockName'
-          '2': 'You can also set multiple blocks simultaneously by separating them with commas:'
-          '3': '/carpet customMovableBlock minecraft:BlockName1,minecraft:BlockName2'
+          '0': 'After enabling the rules, use the /customMovableBlock help command to view the usage instructions'
       easyMaxLevelBeacon:
         desc: Activate full-level beacon with just one base block
       commandCustomBlockBlastResistance:
