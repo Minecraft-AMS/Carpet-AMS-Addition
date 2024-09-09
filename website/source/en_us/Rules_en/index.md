@@ -298,7 +298,7 @@ Player can place water source in the nether by using water bucket.
 
 ## fakePeace
 
-No mob will spawn without change difficulty.
+No mob will spawn without change difficulty, Simulation fake Peace, You can customize the dimensions in which it works, or you can customize the combination and use "," to separate.
 
 - Type: `boolean`
 
@@ -312,7 +312,7 @@ No mob will spawn without change difficulty.
 
 
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categroies: `AMS`, `FEATURE`
 
 ## blowUpEverything
 
@@ -1045,28 +1045,26 @@ Need to disable the tweakBlockReachOverride feature in Tweakeroo.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
-## customMovableBlock
+## commandCustomMovableBlock
 
-Customize the non-pushable block to make it pushable.
-Command format:
-/carpet customMovableBlock minecraft:BlockName
-You can also set multiple blocks simultaneously by separating them with commas:
-/carpet customMovableBlock minecraft:BlockName1,minecraft:BlockName2
+Customize the non-pushable block to make it pushable (Container blocks are not supported, and if you need to push containers, you can use Carpet's movableBlockEntities rule).
+
+After enabling the rules, use the `/customMovableBlock help` command to view the usage instructions
 
 
 - Type: `String`
 
 
 
-- Default: `VANILLA`
+- Default: `false`
 
 
 
-- Suggested options: `VANILLA`, `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
 
 
 
-- Categroies: `AMS`, `FEATURE`
+- Categroies: `AMS`, `FEATURE`, `COMMAND`
 
 ## eazyMaxLevelBeacon
 

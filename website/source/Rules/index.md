@@ -255,9 +255,9 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 ## 伪和平（fakePeace）
 
-开启后，所有生物不会生成，但不影响困难难度（类似伪和平）。
+开启后，所有生物不会生成，但不影响困难难度（类似伪和平），你可以自定义其生效的维度，也可以自定义生效的维度组合，使用“,”隔开即可。
 
-- 类型: `boolean`
+- 类型: `String`
 
 
 
@@ -265,11 +265,11 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 
 
-- 参考选项: `false`, `true`
+- 参考选项: `false`, `true`, `minecraft:overworld`, `minecraft:the_end`, `minecraft:the_nether`, `minecraft:the_end,minecraft:the_nether`
 
 
 
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+- 分类: `AMS`, `FEATURE`
 
 
 ## 炸毁所有方块（blowUpEverything）
@@ -1007,23 +1007,21 @@ global模式下修改值后需要玩家重新进入游戏。
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 自定义可移动方块（customMovableBlock）
+## 自定义可移动方块（commandCustomMovableBlock）
 
-可自定义的让不能被推动的方块变得能被推动。
-命令格式：
-/carpet customMovableBlock minecraft:BlockName
-你也可以同时设置多个方块使用 `,` 隔开即可：
-/carpet customMovableBlock inecraft:BlockName1,minecraft:BlockName2
+可自定义的让不能被推动的方块变得能被推动（不支持容器方块，如果需要推动容器可以使用Carpet的movableBlockEntities规则）。
+
+开启规则后使用`/customMovableBlock help`命令查看使用说明
 
 - 类型: `String`
 
 
 
-- 默认值: `VANILLA`
+- 默认值: `false`
 
 
 
-- 参考选项: `VANILLA`, `minecraft:bedrock`, `minecraft:bedrock,minecraft:obsidian`
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
 
 
 
@@ -2031,6 +2029,42 @@ json位置：
 改变黑曜石与哭泣的黑曜石的硬度使其和末地石一致。
 
 < 需要客户端支持 >
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 假人交互同步客户端行为（fakePlayerInteractLikeClient）
+
+修复几个假人和盔甲架、矿车、船在特定情况下与客户端相应行为结果不一样的问题。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `BUGFIX`
+
+## 强力拴绳（strongLeash）
+
+使拴绳不会因为距离过远而断裂。
 
 - 类型: `boolean`
 

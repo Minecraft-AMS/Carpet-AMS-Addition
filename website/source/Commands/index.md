@@ -99,13 +99,13 @@
 
 ### ping命令（commandPacketInternetGroper）
 
-- `/ping <目标IP/域名> <ping的次数>`
+- `/pings <目标IP/域名> <ping的次数>`
 
   ping某个主机。
 
 
 
-- `/ping stop`
+- `/pings stop`
 
   中断ping操作。
 
@@ -168,3 +168,33 @@
 - `/getPlayerSkull <玩家>`
 
   获取指定在线玩家的头颅。
+
+### 自定义可移动方块（commandCustomMovableBlock）
+
+- `/customMovableBlock add <方块注册名>`
+
+  增加一个可移动方块。
+
+
+
+- `/customMovableBlock remove <方块注册名>`
+
+  删除一个可移动方块。
+
+
+
+- `/customMovableBlock removeAll`
+
+  删除所有添加的可移动方块。
+
+
+
+- `/customMovableBlock list`
+
+  查看可移动方块列表。
+
+
+
+- `/customMovableBlock help`
+
+  查看使用说明。

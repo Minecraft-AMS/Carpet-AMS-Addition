@@ -99,13 +99,13 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 
 ### commandPacketInternetGroper
 
-- `/ping <targetIpOrDomainName> <pingQuantity>`
+- `/pings <targetIpOrDomainName> <pingQuantity>`
 
   Ping a specific host.
 
 
 
-- `/ping stop`
+- `/pings stop`
 
   Interrupt the ping operation.
 
@@ -168,3 +168,33 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 - `/getPlayerSkull <player>`
 
   Get the skull of a specified online player.
+
+### commandCustomMovableBlock
+
+- `/customMovableBlock add <block>`
+
+  Added a movable block.
+
+
+
+- `/customMovableBlock remove <block>`
+
+  Delete a movable block.
+
+
+
+- `/customMovableBlock removeAll`
+
+  Removes all added movable blocks.
+
+
+
+- `/customMovableBlock list`
+
+  Check out the list of movable blocks.
+
+
+
+- `/customMovableBlock help`
+
+  View the usage instructions.
