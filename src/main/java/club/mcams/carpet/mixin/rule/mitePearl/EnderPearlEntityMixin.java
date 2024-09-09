@@ -24,6 +24,9 @@ import club.mcams.carpet.AmsServerSettings;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+//#if MC>=12102
+//$$ import net.minecraft.entity.SpawnReason;
+//#endif
 import net.minecraft.entity.mob.EndermiteEntity;
 import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -55,7 +58,9 @@ public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
     private void onCollision(CallbackInfo ci) {
         if (AmsServerSettings.mitePearl) {
             Entity entity = this.getOwner();
-            //#if MC>=11900
+            //#if MC>=12102
+            //$$ EndermiteEntity endermiteEntity = EntityType.ENDERMITE.create(this.getWorld(), SpawnReason.EVENT);
+            //#elseif MC>=11900
             //$$ EndermiteEntity endermiteEntity = EntityType.ENDERMITE.create(this.getWorld());
             //#else
             EndermiteEntity endermiteEntity = EntityType.ENDERMITE.create(this.world);

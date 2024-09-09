@@ -38,7 +38,7 @@ public abstract class BambooBlockMixin {
     @Shadow
     public abstract Block getBlock();
 
-    @Inject(method = "getModelOffset(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/util/math/Vec3d;", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getModelOffset", at = @At("HEAD"), cancellable = true)
     public void getModelOffset(CallbackInfoReturnable<Vec3d> cir) {
         if (AmsServerSettings.bambooModelNoOffset && (this.getBlock() == Blocks.BAMBOO || this.getBlock() == Blocks.BAMBOO_SAPLING)) {
             cir.setReturnValue(Vec3d.ZERO);

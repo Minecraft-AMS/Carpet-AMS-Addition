@@ -25,6 +25,9 @@ import club.mcams.carpet.utils.RegexTools;
 import club.mcams.carpet.helpers.rule.customBlockUpdateSuppressor.BlockUpdateSuppressorExceptionHelper;
 
 import net.minecraft.block.AbstractBlock;
+//#if MC>=12102
+//$$ import net.minecraft.world.block.WireOrientation;
+//#endif
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -42,7 +45,19 @@ import static club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUp
 @Mixin(AbstractBlock.class)
 public abstract class AbstractBlockMixin {
     @Inject(method = "neighborUpdate", at = @At("HEAD"))
-    private void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify, CallbackInfo ci) {
+    private void neighborUpdate(
+        BlockState state,
+        World world,
+        BlockPos pos,
+        Block block,
+        //#if MC>=12102
+        //$$ WireOrientation wireOrientation,
+        //#else
+        BlockPos fromPos,
+        //#endif
+        boolean notify,
+        CallbackInfo ci
+    ) {
         if (!Objects.equals(AmsServerSettings.customBlockUpdateSuppressor, "none")) {
             if (amsUpdateSuppressionCrashFixForceMode) {
                 AmsServerSettings.amsUpdateSuppressionCrashFix = true;
