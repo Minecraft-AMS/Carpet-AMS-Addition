@@ -18,12 +18,13 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.validators.rule.largeShulkerBox;
+package club.mcams.carpet.observers.rule.largeShulkerBox;
 
 import club.mcams.carpet.mixin.rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor;
 import club.mcams.carpet.settings.SimpleRuleObserver;
 
 public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver<Boolean> {
+    @Override
     public void onValueChange(Boolean oldValue, Boolean newValue) {
         //#if MC>=11700
         if (newValue) {

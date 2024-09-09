@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.validators.rule.fancyFakePlayerName;
+package club.mcams.carpet.observers.rule.fancyFakePlayerName;
 
 import carpet.patches.EntityPlayerMPFake;
 
@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class FancyFakePlayerNameRuleObserver extends RuleObserver<String> {
+    @Override
     public void onValueChange(String oldValue, String newValue) {
         MinecraftServer server = AmsServer.minecraftServer;
         if (server != null) {

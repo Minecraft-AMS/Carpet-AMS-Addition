@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.validators.rule.stackableDiscount;
+package club.mcams.carpet.observers.rule.stackableDiscount;
 
 import club.mcams.carpet.mixin.rule.stackableDiscount.VillageGossipTypeAccessor;
 import club.mcams.carpet.settings.SimpleRuleObserver;
@@ -30,6 +30,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft >= 1.20.2")
 @SuppressWarnings({"unused", "DataFlowIssue"})
 public class StackableDiscountRuleObserver extends SimpleRuleObserver<Boolean> {
+    @Override
     public void onValueChange(Boolean oldValue, Boolean newValue) {
         if (newValue) {
             ((VillageGossipTypeAccessor) (Object) VillageGossipType.MINOR_POSITIVE).setMaxValue(200);
