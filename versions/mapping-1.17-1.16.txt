@@ -1,0 +1,2 @@
+com.google.gson.JsonParser parseReader() com.google.gson.JsonParser parse()
+net.minecraft.server.command.ReloadCommand tryReloadDataPacks() net.minecraft.server.command.ReloadCommand method_29480()
