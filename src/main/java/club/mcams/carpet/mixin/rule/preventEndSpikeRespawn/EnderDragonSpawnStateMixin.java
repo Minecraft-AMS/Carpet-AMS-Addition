@@ -38,8 +38,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(targets="net/minecraft/entity/boss/dragon/EnderDragonSpawnState$3")
-public class EnderDragonSpawnStateMixin {
+@Mixin(targets = "net/minecraft/entity/boss/dragon/EnderDragonSpawnState$3")
+public abstract class EnderDragonSpawnStateMixin {
     @WrapOperation(
         method = "run",
         at = @At(
@@ -51,13 +51,15 @@ public class EnderDragonSpawnStateMixin {
         return Objects.equals(AmsServerSettings.preventEndSpikeRespawn, "false") ? original.call(serverWorld, blockPos, b) : false;
     }
 
+    // TODO: 不知道为什么注入点认不到，先摆
+    //#if MC<12102
     @WrapOperation(
         method = "run",
         at = @At(
             value = "INVOKE",
             target =
             //#if MC>=12102
-            //$$ "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
+            //$$ "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/World$ExplosionSourceType;)V"
             //#elseif MC>11904
             //$$ "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/World$ExplosionSourceType;)Lnet/minecraft/world/explosion/Explosion;"
             //#else
@@ -69,9 +71,7 @@ public class EnderDragonSpawnStateMixin {
         ServerWorld serverWorld,
         Entity entity,
         double x, double y, double z, float power,
-        //#if MC>=12102
-        //$$ Explosion.DestructionType destructionType,
-        //#elseif MC>11904
+        //#if MC>=12000
         //$$ World.ExplosionSourceType destructionType,
         //#else
         Explosion.DestructionType destructionType,
@@ -80,4 +80,5 @@ public class EnderDragonSpawnStateMixin {
     ) {
         return Objects.equals(AmsServerSettings.preventEndSpikeRespawn, "false") ? original.call(serverWorld, entity, x, y, z, power, destructionType) : null;
     }
+    //#endif
 }
