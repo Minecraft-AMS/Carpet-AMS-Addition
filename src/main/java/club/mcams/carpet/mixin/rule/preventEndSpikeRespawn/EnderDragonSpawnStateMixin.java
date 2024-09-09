@@ -56,10 +56,12 @@ public class EnderDragonSpawnStateMixin {
         at = @At(
             value = "INVOKE",
             target =
-            //#if MC<11904
-            "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
-            //#else
+            //#if MC>=12102
+            //$$ "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
+            //#elseif MC>11904
             //$$ "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/World$ExplosionSourceType;)Lnet/minecraft/world/explosion/Explosion;"
+            //#else
+            "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
             //#endif
         )
     )
@@ -67,10 +69,12 @@ public class EnderDragonSpawnStateMixin {
         ServerWorld serverWorld,
         Entity entity,
         double x, double y, double z, float power,
-        //#if MC<11904
-        Explosion.DestructionType destructionType,
-        //#else
+        //#if MC>=12102
+        //$$ Explosion.DestructionType destructionType,
+        //#elseif MC>11904
         //$$ World.ExplosionSourceType destructionType,
+        //#else
+        Explosion.DestructionType destructionType,
         //#endif
         Operation<Explosion> original
     ) {
