@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import java.util.function.Predicate;
 
 @Mixin(targets = "net.minecraft.village.VillagerGossips$Reputation")
-public interface GetValueForInvoker {
+public interface VillagerGossips_ReputationInvoker {
     @Invoker("getValueFor")
     int invokeGetValueFor(Predicate<VillageGossipType> gossipTypeFilter);
 }
