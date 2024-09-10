@@ -23,30 +23,44 @@ package club.mcams.carpet.mixin.rule.fakePeace;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.mob.Monster;
-import net.minecraft.server.world.ServerWorld;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+import net.minecraft.entity.*;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.SpawnHelper;
+
+import net.minecraft.world.chunk.WorldChunk;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Mixin(ServerWorld.class)
-public abstract class ServerWorldMixin {
-    @Inject(method = "spawnEntity", at = @At("HEAD"), cancellable = true)
-    private void allowsSpawning(Entity entity, CallbackInfoReturnable<Boolean> cir) {
-        if (!"false".equals(AmsServerSettings.fakePeace) && entity instanceof Monster) {
-            DimensionWrapper worldDimension = DimensionWrapper.of((ServerWorld) (Object) this);
+import static net.minecraft.world.SpawnHelper.spawnEntitiesInChunk;
+
+@Mixin(SpawnHelper.class)
+public abstract class SpawnHelperMixin {
+    @WrapOperation(
+        method = "spawn",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/SpawnHelper;spawnEntitiesInChunk(Lnet/minecraft/entity/SpawnGroup;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/world/chunk/WorldChunk;Lnet/minecraft/world/SpawnHelper$Checker;Lnet/minecraft/world/SpawnHelper$Runner;)V"
+        )
+    )
+    private static void allowsSpawning(SpawnGroup group, ServerWorld serverWorld, WorldChunk chunk, SpawnHelper.Checker checker, SpawnHelper.Runner runner, Operation<Void> original) {
+        if (!"false".equals(AmsServerSettings.fakePeace) && group.equals(SpawnGroup.MONSTER)) {
+            DimensionWrapper worldDimension = DimensionWrapper.of(serverWorld);
             Set<String> dimensionCP = new HashSet<>(Arrays.asList(AmsServerSettings.fakePeace.split(",")));
             if (dimensionCP.contains(worldDimension.getIdentifierString()) || Objects.equals(AmsServerSettings.fakePeace, "true")) {
-                cir.setReturnValue(false);
+                spawnEntitiesInChunk(null, serverWorld, chunk, null, null);
+            } else {
+                original.call(group, serverWorld, chunk, checker, runner);
             }
+        } else {
+            original.call(group, serverWorld, chunk, checker, runner);
         }
     }
 }
