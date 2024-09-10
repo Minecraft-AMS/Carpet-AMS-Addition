@@ -2081,6 +2081,42 @@ Change the hardness of obsidian and crying obsidian to end stone.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## strongLeash
+
+The leash will not break due to excessive distance.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## superZombieDoctor
+
+Players can use a Weakness Potion + Golden Apple to instantly convert a Zombie Villager into a Villager.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

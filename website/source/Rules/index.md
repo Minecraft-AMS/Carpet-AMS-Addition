@@ -2080,6 +2080,24 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 超级僵尸医生（superZombieDoctor）
+
+玩家可以使用虚弱药水 + 金苹果瞬间将僵尸村民转化为村民。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
