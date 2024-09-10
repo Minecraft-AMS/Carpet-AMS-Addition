@@ -496,6 +496,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean strongLeash = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean superZombieDoctor = false;
+
     /*
      * 区块加载规则
      */

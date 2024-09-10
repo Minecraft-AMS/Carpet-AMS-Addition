@@ -514,6 +514,9 @@ carpetamsaddition:
       strongLeash:
         name: 强力拴绳
         desc: 使拴绳不会因为距离过远而断裂
+      superZombieDoctor:
+        name: 超级僵尸医生
+        desc: 玩家可以使用虚弱药水 + 金苹果瞬间将僵尸村民转化为村民
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -416,6 +416,8 @@ carpetamsaddition:
         desc: Fix some cases that fake player interact differently from the client
       strongLeash:
         desc: The leash will not break due to excessive distance
+      superZombieDoctor:
+        desc: Players can use a Weakness Potion + Golden Apple to instantly convert a Zombie Villager into a Villager
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
