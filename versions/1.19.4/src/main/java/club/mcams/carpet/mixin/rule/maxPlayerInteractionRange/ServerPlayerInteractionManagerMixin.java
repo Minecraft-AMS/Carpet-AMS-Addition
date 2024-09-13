@@ -20,42 +20,31 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
-
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
-
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.minecraft.server.network.ServerPlayerInteractionManager;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft < 1.20.5")
-@Mixin(value = ServerPlayNetworkHandler.class, priority = 168)
-public abstract class ServerPlayNetworkHandlerMixin {
-
-    @Shadow
-    public ServerPlayerEntity player;
-
-    @ModifyExpressionValue(method = "onPlayerInteractBlock", at = @At(value = "CONSTANT", args = "doubleValue=64.0D"))
-    private double onPlayerInteractBlock1(double constant) {
+@Mixin(value = ServerPlayerInteractionManager.class, priority = 168)
+public abstract class ServerPlayerInteractionManagerMixin {
+    @GameVersion(version = "Minecraft >= 1.19")
+    @WrapOperation(
+        method = "processBlockBreakingAction",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D"
+        )
+    )
+    private double getActualReachDistance(Operation<Double> original) {
         if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D) {
             return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerBlockInteractionRange);
         } else {
-            return constant;
-        }
-    }
-
-    @GameVersion(version = "Minecraft < 1.19")
-    @ModifyExpressionValue(method = "onPlayerInteractEntity", at = @At(value = "CONSTANT", args = "doubleValue=36.0D"))
-    private double onPlayerInteractEntity(double constant) {
-        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D) {
-            return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerEntityInteractionRange);
-        } else {
-            return constant;
+            return original.call();
         }
     }
 }

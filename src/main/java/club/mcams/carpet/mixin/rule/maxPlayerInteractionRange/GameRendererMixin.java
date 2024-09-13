@@ -20,20 +20,20 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.MinecraftClient;
 
-import org.spongepowered.asm.mixin.Final;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
-
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Shadow;
 
 @GameVersion(version = "Minecraft < 1.20.5")
 @Mixin(value = GameRenderer.class, priority = 168)
@@ -48,12 +48,7 @@ public abstract class GameRendererMixin {
     private MinecraftClient client;
     //#endif
 
-    @ModifyConstant(
-            method = "updateTargetedEntity",
-            require = 0,
-            allow = 1,
-            constant = @Constant(doubleValue = 6.0D)
-    )
+    @ModifyExpressionValue(method = "updateTargetedEntity", at = @At(value = "CONSTANT", args = "doubleValue=6.0D"))
     private double updateTargetedEntity1(final double constant) {
         if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && this.client.player != null) {
             return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerEntityInteractionRange);
@@ -62,11 +57,7 @@ public abstract class GameRendererMixin {
     }
 
     //#if MC<12003
-    @ModifyConstant(
-            method = "updateTargetedEntity",
-            require = 0,
-            constant = @Constant(doubleValue = 3.0D)
-    )
+    @ModifyExpressionValue(method = "updateTargetedEntity", at = @At(value = "CONSTANT", args = "doubleValue=3.0D"))
     private double updateTargetedEntity2(final double constant) {
         if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && this.client.player != null) {
             return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerEntityInteractionRange);
@@ -76,11 +67,7 @@ public abstract class GameRendererMixin {
     }
     //#endif
 
-    @ModifyConstant(
-            method = "updateTargetedEntity",
-            require = 0,
-            constant = @Constant(doubleValue = 9.0D)
-    )
+    @ModifyExpressionValue(method = "updateTargetedEntity", at = @At(value = "CONSTANT", args = "doubleValue=9.0D"))
     private double updateTargetedEntity3(final double constant) {
         if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && this.client.player != null) {
             return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerEntityInteractionRange);

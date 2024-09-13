@@ -20,34 +20,23 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.maxPlayerInteractionDistance_maxClientInteractionReachDistance.MaxInteractionDistanceMathHelper;
 
-//#if MC>11800
-//$$ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-//$$ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-//$$ import org.spongepowered.asm.mixin.injection.At;
-//#endif
-
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
-
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 @GameVersion(version = "Minecraft < 1.20.5")
 @Mixin(value = ServerPlayerInteractionManager.class, priority = 168)
 public abstract class ServerPlayerInteractionManagerMixin {
-    //#if MC<11900
-    @ModifyConstant(
-            method = "processBlockBreakingAction",
-            require = 0,
-            allow = 1,
-            constant = @Constant(doubleValue = 36.0)
-    )
+    @GameVersion(version = "Minecraft < 1.19")
+    @ModifyExpressionValue(method = "processBlockBreakingAction", at = @At(value = "CONSTANT", args = "doubleValue=36.0D"))
     private double processBlockBreakingAction(final double constant) {
         if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D) {
             return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerBlockInteractionRange);
@@ -55,20 +44,4 @@ public abstract class ServerPlayerInteractionManagerMixin {
             return constant;
         }
     }
-    //#else
-    //$$ @WrapOperation(
-    //$$         method = "processBlockBreakingAction",
-    //$$         at = @At(
-    //$$                 value = "FIELD",
-    //$$                 target = "Lnet/minecraft/server/network/ServerPlayNetworkHandler;MAX_BREAK_SQUARED_DISTANCE:D"
-    //$$         )
-    //$$ )
-    //$$ private double getActualReachDistance(Operation<Double> original) {
-    //$$     if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D) {
-    //$$         return MaxInteractionDistanceMathHelper.getMaxSquaredReachDistance(AmsServerSettings.maxPlayerBlockInteractionRange);
-    //$$     } else {
-    //$$         return original.call();
-    //$$     }
-    //$$ }
-    //#endif
 }
