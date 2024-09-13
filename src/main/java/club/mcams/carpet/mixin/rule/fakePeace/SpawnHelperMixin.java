@@ -29,8 +29,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.SpawnHelper;
-
 import net.minecraft.world.chunk.WorldChunk;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -38,8 +38,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import static net.minecraft.world.SpawnHelper.spawnEntitiesInChunk;
 
 @Mixin(SpawnHelper.class)
 public abstract class SpawnHelperMixin {
@@ -51,11 +49,11 @@ public abstract class SpawnHelperMixin {
         )
     )
     private static void allowsSpawning(SpawnGroup group, ServerWorld serverWorld, WorldChunk chunk, SpawnHelper.Checker checker, SpawnHelper.Runner runner, Operation<Void> original) {
-        if (!"false".equals(AmsServerSettings.fakePeace) && group.equals(SpawnGroup.MONSTER)) {
+        if (!Objects.equals(AmsServerSettings.fakePeace, "false") && group.equals(SpawnGroup.MONSTER)) {
             DimensionWrapper worldDimension = DimensionWrapper.of(serverWorld);
             Set<String> dimensionCP = new HashSet<>(Arrays.asList(AmsServerSettings.fakePeace.split(",")));
             if (dimensionCP.contains(worldDimension.getIdentifierString()) || Objects.equals(AmsServerSettings.fakePeace, "true")) {
-                spawnEntitiesInChunk(null, serverWorld, chunk, null, null);
+                SpawnHelper.spawnEntitiesInChunk(null, serverWorld, chunk, null, null);
             } else {
                 original.call(group, serverWorld, chunk, checker, runner);
             }
