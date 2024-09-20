@@ -18,29 +18,22 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.quickVillagerLevelUp;
+package club.mcams.carpet.mixin.rule.superleash;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.passive.VillagerEntity;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.entity.mob.MobEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(VillagerEntity.class)
-public abstract class VillagerEntityMixin implements VillagerEntityInvoker{
-    @Inject(
-        method = "interactMob",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/entity/passive/VillagerEntity;beginTradeWith(Lnet/minecraft/entity/player/PlayerEntity;)V"
-        )
-    )
-    private void quickLevelUp(CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.quickVillagerLevelUp && this.invokerGetVillagerData().getLevel() < 5) {
-            this.invokerLevelUp();
-        }
+@SuppressWarnings("SimplifiableConditionalExpression")
+@Mixin(MobEntity.class)
+public abstract class MobEntityMixin {
+    @ModifyReturnValue(method = "canBeLeashedBy", at = @At("RETURN"))
+    private boolean allowLeashed(boolean original) {
+        return AmsServerSettings.superLeash ? true : original;
     }
 }

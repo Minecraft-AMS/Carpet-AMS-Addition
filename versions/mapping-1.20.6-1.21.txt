@@ -1,0 +1,2 @@
+net.minecraft.entity.mob.MobEntity canBeLeashedBy() canBeLeashed()
+net.minecraft.entity.passive.MerchantEntity canBeLeashedBy() canBeLeashed()

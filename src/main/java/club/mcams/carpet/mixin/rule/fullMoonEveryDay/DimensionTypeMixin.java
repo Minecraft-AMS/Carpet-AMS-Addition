@@ -18,29 +18,21 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.quickVillagerLevelUp;
+package club.mcams.carpet.mixin.rule.fullMoonEveryDay;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.passive.VillagerEntity;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.world.dimension.DimensionType;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(VillagerEntity.class)
-public abstract class VillagerEntityMixin implements VillagerEntityInvoker{
-    @Inject(
-        method = "interactMob",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/entity/passive/VillagerEntity;beginTradeWith(Lnet/minecraft/entity/player/PlayerEntity;)V"
-        )
-    )
-    private void quickLevelUp(CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.quickVillagerLevelUp && this.invokerGetVillagerData().getLevel() < 5) {
-            this.invokerLevelUp();
-        }
+@Mixin(DimensionType.class)
+public abstract class DimensionTypeMixin {
+    @ModifyReturnValue(method = "getMoonPhase", at = @At("RETURN"))
+    private int alwaysFullMoon(int original) {
+        return AmsServerSettings.fullMoonEveryDay ? 0 : original;
     }
 }

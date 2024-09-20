@@ -418,6 +418,14 @@ carpetamsaddition:
         desc: The leash will not break due to excessive distance
       superZombieDoctor:
         desc: Players can use a Weakness Potion + Golden Apple to instantly convert a Zombie Villager into a Villager
+      fakePlayerUseOfflinePlayerUUID:
+        desc: Let fake players use offline UUIDs
+      superLeash:
+        desc: Villagers and monsters can be leashed as well
+      fullMoonEveryDay:
+        desc: Full moon every day
+      easyRefreshTrades:
+        desc: When a villager has not made a deal with the player before, each time the trade screen is opened, the content sold by the villager will be refreshed
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

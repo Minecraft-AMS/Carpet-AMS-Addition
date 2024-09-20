@@ -18,29 +18,35 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.quickVillagerLevelUp;
+package club.mcams.carpet.mixin.rule.fakePlayerUseOfflinePlayerUuid;
+
+import carpet.commands.PlayerCommand;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.passive.VillagerEntity;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.mojang.authlib.GameProfile;
+
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.UserCache;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(VillagerEntity.class)
-public abstract class VillagerEntityMixin implements VillagerEntityInvoker{
-    @Inject(
-        method = "interactMob",
+@Mixin(PlayerCommand.class)
+public abstract class Carpet_PlayerCommandMixin {
+    @WrapOperation(
+        method = "cantSpawn",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/passive/VillagerEntity;beginTradeWith(Lnet/minecraft/entity/player/PlayerEntity;)V"
+            target = "Lnet/minecraft/util/UserCache;findByName(Ljava/lang/String;)Lcom/mojang/authlib/GameProfile;"
         )
     )
-    private void quickLevelUp(CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.quickVillagerLevelUp && this.invokerGetVillagerData().getLevel() < 5) {
-            this.invokerLevelUp();
-        }
+    private static GameProfile useOfflinePlayerUuid(UserCache userCache, String playerName, Operation<GameProfile> original) {
+        return
+            AmsServerSettings.fakePlayerUseOfflinePlayerUUID ?
+            new GameProfile(PlayerEntity.getOfflinePlayerUuid(playerName), playerName) :
+            original.call(userCache, playerName);
     }
 }

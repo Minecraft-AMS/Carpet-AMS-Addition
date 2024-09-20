@@ -517,6 +517,18 @@ carpetamsaddition:
       superZombieDoctor:
         name: 超级僵尸医生
         desc: 玩家可以使用虚弱药水 + 金苹果瞬间将僵尸村民转化为村民
+      fakePlayerUseOfflinePlayerUUID:
+        name: 假玩家使用离线UUID
+        desc: 让假玩家使用离线UUID
+      superLeash:
+        name: 超级拴绳
+        desc: 让村民与怪物同样可以被拴绳栓住
+      fullMoonEveryDay:
+        name: 每天都是满月
+        desc: 每天都是满月
+      easyRefreshTrades:
+        name: 轻松刷新交易
+        desc: 当村民之前没有与玩家达成过交易时，每次打开交易界面都会刷新村民出售的内容
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

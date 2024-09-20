@@ -499,6 +499,18 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean superZombieDoctor = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean fakePlayerUseOfflinePlayerUUID = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean superLeash = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean fullMoonEveryDay = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean easyRefreshTrades = false;
+
     /*
      * 区块加载规则
      */

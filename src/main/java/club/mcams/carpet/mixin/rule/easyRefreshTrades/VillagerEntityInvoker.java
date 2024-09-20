@@ -18,29 +18,15 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.quickVillagerLevelUp;
-
-import club.mcams.carpet.AmsServerSettings;
+package club.mcams.carpet.mixin.rule.easyRefreshTrades;
 
 import net.minecraft.entity.passive.VillagerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(VillagerEntity.class)
-public abstract class VillagerEntityMixin implements VillagerEntityInvoker{
-    @Inject(
-        method = "interactMob",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/entity/passive/VillagerEntity;beginTradeWith(Lnet/minecraft/entity/player/PlayerEntity;)V"
-        )
-    )
-    private void quickLevelUp(CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.quickVillagerLevelUp && this.invokerGetVillagerData().getLevel() < 5) {
-            this.invokerLevelUp();
-        }
-    }
+public interface VillagerEntityInvoker {
+    @Invoker("fillRecipes")
+    void invokeFillRecipes();
 }
