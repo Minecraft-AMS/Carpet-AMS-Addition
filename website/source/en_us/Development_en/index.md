@@ -28,7 +28,7 @@
 
 |       Game Version        | Development Status |                    Last Supported Version                    |
 | :-----------------------: | :----------------: | :----------------------------------------------------------: |
-|          24w36a           |         ✔          |                             ---                              |
+|          24w38a           |         ✔          |                             ---                              |
 |          1.21.1           |         ✔          |                             ---                              |
 |           1.21            |         ✔          |                             ---                              |
 |          1.20.6           |         ✔          |                             ---                              |
@@ -44,7 +44,8 @@
 | **<u>1.18.2(master)</u>** |         ✔          |                             ---                              |
 |          1.17.1           |         ✔          |                             ---                              |
 |          1.16.5           |         ✔          |                             ---                              |
-|          1.15.2           |         ✖          | [ Carpet-AMS-Addition-mc1.15.2](https://github.com/1024-byteeeee/Carpet-AMS-Addition-1.15.2) |
+|          1.15.2           |         ❓          | [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy) |
+|          1.14.4           |         ❓          | [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy) |
 
 &emsp;
 

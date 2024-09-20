@@ -2117,6 +2117,78 @@ Players can use a Weakness Potion + Golden Apple to instantly convert a Zombie V
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## fakePlayerUseOfflinePlayerUUID
+
+Let fake players use offline UUIDs.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## superLeash
+
+Villagers and monsters can be leashed as well.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## fullMoonEveryDay
+
+Full moon every day.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## easyRefreshTrades
+
+When a villager has not made a deal with the player before, each time the trade screen is opened, the content sold by the villager will be refreshed.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
