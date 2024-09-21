@@ -49,7 +49,7 @@ public abstract class Carpet_PlayerCommandMixin {
             target = "Lnet/minecraft/util/UserCache;findByName(Ljava/lang/String;)Ljava/util/Optional;"
         )
     )
-    private static Optional<GameProfile> useOfflinePlayerUuid(UserCache userCache, String playerName, Operation<GameProfile> original) {
+    private static Optional<GameProfile> useOfflinePlayerUuid(UserCache userCache, String playerName, Operation<Optional<GameProfile>> original) {
         return
             AmsServerSettings.fakePlayerUseOfflinePlayerUUID ?
             //#if MC>=11900
