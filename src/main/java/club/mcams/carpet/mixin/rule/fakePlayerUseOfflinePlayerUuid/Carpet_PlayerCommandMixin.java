@@ -57,6 +57,6 @@ public abstract class Carpet_PlayerCommandMixin {
             //#else
             Optional.of(new GameProfile(PlayerEntity.getOfflinePlayerUuid(playerName), playerName)) :
             //#endif
-            Optional.of(original.call(userCache, playerName));
+            original.call(userCache, playerName);
     }
 }
