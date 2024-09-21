@@ -26,6 +26,7 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
 import com.mojang.authlib.GameProfile;
 
 //#if MC>=11900
@@ -49,7 +50,7 @@ public abstract class Carpet_PlayerCommandMixin {
             target = "Lnet/minecraft/util/UserCache;findByName(Ljava/lang/String;)Ljava/util/Optional;"
         )
     )
-    private static Optional<GameProfile> useOfflinePlayerUuid(UserCache userCache, String playerName, Operation<Optional<GameProfile>> original) {
+    private static Optional<GameProfile> useOfflinePlayerUUID(UserCache userCache, String playerName, Operation<Optional<GameProfile>> original) {
         return
             AmsServerSettings.fakePlayerUseOfflinePlayerUUID ?
             //#if MC>=11900
