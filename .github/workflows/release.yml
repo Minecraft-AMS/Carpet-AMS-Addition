@@ -182,7 +182,7 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_API_TOKEN }}
 
           curseforge-id: 1002635
-          curseforge-token: ${{ secrets.CF_API_TOKEN }}
+          curseforge-token: ${{ secrets.CURSEFORGE_API_TOKEN }}
 
           github-tag: ${{ steps.release_info.outputs.tag_name }}
           github-token: ${{ secrets.GITHUB_TOKEN }}

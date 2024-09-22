@@ -2,8 +2,15 @@ name: _step.build
 
 on:
   workflow_call:
+    secrets:
+      GITEE_API_TOKEN:
+        required: false
     inputs:
       release:
+        type: boolean
+        required: false
+        default: false
+      ci_release:
         type: boolean
         required: false
         default: false
@@ -28,6 +35,21 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 21
+
+      - name: Get git info
+        id: get_git_info
+        run: |
+          short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
+          commit_count=$(git log | grep -e '^commit [a-zA-Z0-9]*' | wc -l)
+          echo "short_sha=$short_sha" >> $GITHUB_OUTPUT
+          echo "commit_count=$commit_count" >> $GITHUB_OUTPUT
+
+      - name: Read common properties
+        id: properties_g
+        uses: christian-draeger/read-properties@1.1.1
+        with:
+          path: gradle.properties
+          properties: 'mod_name mod_version'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -60,6 +82,32 @@ jobs:
         with:
           name: build-artifacts
           path: versions/*/build/libs/
+
+      - name: Upload gitee CI artifacts
+        uses: nicennnnnnnlee/action-gitee-release@v1.0.5
+        if: ${{ inputs.ci_release }}
+        with:
+          gitee_owner: wendavid552
+          gitee_repo: Carpet-AMS-Addition
+          gitee_token: ${{ secrets.GITEE_API_TOKEN }}
+          gitee_tag_name: ${{ format('{0}.{1}', github.ref_name, steps.get_git_info.outputs.commit_count) }}
+          gitee_release_name: ${{ format('[CI#{0}]{1} {2}.{3}+{4}', github.run_number, steps.properties_g.outputs.mod_name, steps.properties_g.outputs.mod_version, steps.get_git_info.outputs.commit_count, steps.get_git_info.outputs.short_sha) }}
+          gitee_release_body:  |-
+            **This version is automatically released by CI Build**
+            
+            Latest commit log:
+            
+            ${{ github.event.head_commit.message }}
+            
+            -------
+            
+            Build Information
+            
+            - Built from: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          gitee_target_commitish: ${{ github.sha }}
+          gitee_upload_retry_times: 3
+          gitee_files: |
+            versions/*/build/libs/*.jar
 
   summary:
     runs-on: ubuntu-22.04
