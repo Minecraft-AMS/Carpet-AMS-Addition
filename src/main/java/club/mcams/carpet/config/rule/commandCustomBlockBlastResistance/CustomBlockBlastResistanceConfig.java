@@ -21,6 +21,7 @@
 package club.mcams.carpet.config.rule.commandCustomBlockBlastResistance;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.utils.IdentifierUtil;
 import club.mcams.carpet.utils.RegexTools;
 import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
 
@@ -30,7 +31,6 @@ import com.google.gson.reflect.TypeToken;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.WorldSavePath;
 import net.minecraft.util.registry.Registry;
 
@@ -55,11 +55,7 @@ public class CustomBlockBlastResistanceConfig {
                 Type type = new TypeToken<Map<String, Float>>() {}.getType();
                 Map<String, Float> simplifiedMap = gson.fromJson(json, type);
                 for (Map.Entry<String, Float> entry : simplifiedMap.entrySet()) {
-                    //#if MC>=12100
-                    //$$ BlockState state = Registries.BLOCK.get(Identifier.of(entry.getKey())).getDefaultState();
-                    //#else
-                    BlockState state = Registry.BLOCK.get(new Identifier(entry.getKey())).getDefaultState();
-                    //#endif
+                    BlockState state = Registry.BLOCK.get(IdentifierUtil.ofId(entry.getKey())).getDefaultState();
                     CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, entry.getValue());
                 }
             } catch (IOException e) {
