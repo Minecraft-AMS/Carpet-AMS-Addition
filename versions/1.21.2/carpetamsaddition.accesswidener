@@ -1,1 +1,2 @@
 accessWidener	v1	named
+accessible method net/minecraft/recipe/RecipeManager deserialize (Lnet/minecraft/util/Identifier;Lcom/google/gson/JsonObject;Lnet/minecraft/registry/RegistryWrapper$WrapperLookup;)Lnet/minecraft/recipe/RecipeEntry;

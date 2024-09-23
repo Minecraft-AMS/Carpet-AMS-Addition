@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2024 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -11,27 +11,32 @@
  *
  * Carpet AMS Addition is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
+ * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.settings;
+package club.mcams.carpet.api.recipe.template;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
-@Deprecated
-@Target(ElementType.FIELD)
-@Retention(RetentionPolicy.RUNTIME)
-public @interface CraftingRule {
-    String name() default "";
+import net.minecraft.util.Identifier;
 
-    String[] recipes();
+import java.util.Map;
 
-    String recipeNamespace() default "ams";
+public interface RecipeTemplateInterface {
+    JsonObject toJson();
+
+    void addToRecipeMap(Map<Identifier, JsonElement> recipeMap);
+
+    static String compatResultItemIdKey() {
+        //#if MC>=12005
+        //$$ return "id";
+        //#else
+        return "item";
+        //#endif
+    }
 }

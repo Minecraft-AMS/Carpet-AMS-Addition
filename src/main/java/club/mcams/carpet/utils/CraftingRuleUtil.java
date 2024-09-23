@@ -57,6 +57,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
+@SuppressWarnings("unused")
+@Deprecated
 public class CraftingRuleUtil {
     private static final String COMPAT_ADVANCEMENT_FOLDER_NAME;
     private static final String COMPAT_RECIPE_FOLDER_NAME;
