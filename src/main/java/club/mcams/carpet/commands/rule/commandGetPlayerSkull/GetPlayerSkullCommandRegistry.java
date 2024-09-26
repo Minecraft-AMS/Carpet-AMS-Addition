@@ -26,7 +26,8 @@ import club.mcams.carpet.helpers.rule.headHunter_commandGetPlayerSkull.SkullSkin
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.command.argument.EntityArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
+import net.minecraft.command.CommandSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -38,16 +39,17 @@ public class GetPlayerSkullCommandRegistry {
         dispatcher.register(
             CommandManager.literal("getPlayerSkull")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetPlayerSkull))
-            .then(CommandManager.argument("player", EntityArgumentType.players())
+            .then(CommandManager.argument("player", StringArgumentType.string())
+            .suggests((context, builder) -> CommandSource.suggestMatching(context.getSource().getServer().getPlayerNames(), builder))
             .executes(context -> execute(
-                context.getSource().getPlayer(), EntityArgumentType.getPlayer(context, "player"))
+                context.getSource().getPlayer(), StringArgumentType.getString(context, "player"))
             ))
         );
     }
 
-    private static int execute(PlayerEntity player, PlayerEntity targetPlayer) {
+    private static int execute(PlayerEntity player, String name) {
         ItemStack headStack = new ItemStack(Items.PLAYER_HEAD);
-        SkullSkinHelper.writeNbtToPlayerSkull(targetPlayer, headStack);
+        SkullSkinHelper.writeNbtToPlayerSkull(name, headStack);
         player.giveItemStack(headStack);
         return 1;
     }
