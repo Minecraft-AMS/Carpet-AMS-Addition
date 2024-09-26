@@ -84,20 +84,6 @@ if (mcVersion >= 12005) {
 }
 JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_VERSION
 
-def COMPAT_RECIPES_ITEM_ID
-if (mcVersion >= 12005) {
-	COMPAT_RECIPES_ITEM_ID = "id"
-} else {
-	COMPAT_RECIPES_ITEM_ID = "item"
-}
-
-def COMPAT_RECIPES_PATH
-if (mcVersion >= 12100) {
-	COMPAT_RECIPES_PATH = "assets/carpetamsaddition/AmsRecipeTweakPack/ams/recipe/*.json"
-} else {
-	COMPAT_RECIPES_PATH = "assets/carpetamsaddition/AmsRecipeTweakPack/ams/recipes/*.json"
-}
-
 String versionSuffix = ''
 // detect github action environment variables
 // https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
@@ -130,12 +116,6 @@ processResources {
 	filesMatching("amscarpet.mixins.json") {
 		filter {
 			text -> text.replace("/*JAVA_VERSION*/", "JAVA_${MIXIN_COMPATIBILITY_LEVEL.ordinal() + 1}")
-		}
-	}
-
-	filesMatching(COMPAT_RECIPES_PATH) {
-		filter {
-			text -> text.replace("/*ams_recipes_item_id*/", COMPAT_RECIPES_ITEM_ID)
 		}
 	}
 }
