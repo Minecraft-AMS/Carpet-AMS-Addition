@@ -74,7 +74,7 @@ public class ShapedRecipeTemplate implements RecipeTemplateInterface{
         recipeJson.add("key", keyJson);
 
         JsonObject resultJson = new JsonObject();
-        resultJson.addProperty(RecipeTemplateInterface.compatResultItemIdKey(), resultItem);
+        resultJson.addProperty(this.compatResultItemIdKey(), resultItem);
         resultJson.addProperty("count", resultCount);
         recipeJson.add("result", resultJson);
 

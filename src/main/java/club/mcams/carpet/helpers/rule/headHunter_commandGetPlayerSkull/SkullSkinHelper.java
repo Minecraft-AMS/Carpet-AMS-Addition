@@ -43,8 +43,7 @@ public class SkullSkinHelper {
 
     public static void writeNbtToPlayerSkull(String name, ItemStack headStack) {
         //#if MC>=12005
-        //$$ ProfileComponent profileComponent = DataComponentTypes.PROFILE.getCodecOrThrow()
-        //$$    .parse(NbtOps.INSTANCE, NbtString.of(name)).getOrThrow();
+        //$$ ProfileComponent profileComponent = DataComponentTypes.PROFILE.getCodecOrThrow().parse(NbtOps.INSTANCE, NbtString.of(name)).getOrThrow();
         //$$ headStack.set(DataComponentTypes.PROFILE, profileComponent);
         //#else
         headStack.getOrCreateNbt().putString("SkullOwner", name);

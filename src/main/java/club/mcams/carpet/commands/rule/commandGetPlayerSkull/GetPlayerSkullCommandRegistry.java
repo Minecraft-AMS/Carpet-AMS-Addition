@@ -25,8 +25,8 @@ import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.helpers.rule.headHunter_commandGetPlayerSkull.SkullSkinHelper;
 
 import com.mojang.brigadier.CommandDispatcher;
-
 import com.mojang.brigadier.arguments.StringArgumentType;
+
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

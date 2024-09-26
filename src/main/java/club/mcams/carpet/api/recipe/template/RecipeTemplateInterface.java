@@ -32,7 +32,7 @@ public interface RecipeTemplateInterface {
 
     void addToRecipeMap(Map<Identifier, JsonElement> recipeMap);
 
-    static String compatResultItemIdKey() {
+    default String compatResultItemIdKey() {
         //#if MC>=12005
         //$$ return "id";
         //#else

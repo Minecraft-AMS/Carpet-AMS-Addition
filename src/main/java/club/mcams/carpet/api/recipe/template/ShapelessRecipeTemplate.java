@@ -62,7 +62,7 @@ public class ShapelessRecipeTemplate implements RecipeTemplateInterface{
         recipeJson.add("ingredients", ingredientsJson);
 
         JsonObject resultJson = new JsonObject();
-        resultJson.addProperty(RecipeTemplateInterface.compatResultItemIdKey(), resultItem);
+        resultJson.addProperty(this.compatResultItemIdKey(), resultItem);
         resultJson.addProperty("count", resultCount);
         recipeJson.add("result", resultJson);
         return recipeJson;
