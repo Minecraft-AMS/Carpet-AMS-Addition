@@ -2189,6 +2189,60 @@ When a villager has not made a deal with the player before, each time the trade 
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## jebSheepDropRandomColorWool
+
+When a sheep is named `jeb_`, shearing its wool will drop wool of a random color.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## cryingObsidianNetherPortal
+
+Nether portals can be constructed using crying obsidian.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## furnaceSmeltingTimeController
+
+The time required to control the smelting of items in the furnace (unit: Tick).
+
+- Type: `int`
+
+
+
+- Default: `-1`
+
+
+
+- Suggested options: `-1`, `1 - ?`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
@@ -2302,6 +2356,24 @@ Dispenser can be crafted more flexible. It can be crafted using bow and dropper,
 ## betterCraftablePolishedBlackStoneButton
 
 Use deepslate to crafted polished_blackstone_button in minecraft.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## rottenFleshBurnedIntoLeather
+
+Rotten flesh can be burned into leather in a furnace.
 
 - Type: `boolean`
 
