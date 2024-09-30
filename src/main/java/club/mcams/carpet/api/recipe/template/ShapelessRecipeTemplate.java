@@ -29,7 +29,7 @@ import net.minecraft.util.Identifier;
 import java.util.List;
 import java.util.Map;
 
-public class ShapelessRecipeTemplate implements RecipeTemplateInterface{
+public class ShapelessRecipeTemplate implements RecipeTemplateInterface {
     private final Identifier recipeId;
     private final List<String> ingredients;
     private final String resultItem;

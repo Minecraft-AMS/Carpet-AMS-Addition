@@ -24,40 +24,40 @@ import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.api.recipe.template.ShapedRecipeTemplate;
 import club.mcams.carpet.api.recipe.template.ShapelessRecipeTemplate;
+import club.mcams.carpet.api.recipe.template.SmeltingRecipeTemplate;
+import club.mcams.carpet.utils.ChainableHashMap;
+import club.mcams.carpet.utils.ChainableList;
 import club.mcams.carpet.utils.IdentifierUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class AmsRecipeRegistry {
+public class AmsRecipeBuilder {
     private static final String MOD_ID = AmsServer.compactName;
-    private static final AmsRecipeRegistry instance = new AmsRecipeRegistry();
+    private static final AmsRecipeBuilder instance = new AmsRecipeBuilder();
     public List<ShapedRecipeTemplate> shapedRecipeList = new ArrayList<>();
     public List<ShapelessRecipeTemplate> shapelessRecipeList = new ArrayList<>();
+    public List<SmeltingRecipeTemplate> smeltingRecipeList = new ArrayList<>();
 
-    public static AmsRecipeRegistry getInstance() {
+    public static AmsRecipeBuilder getInstance() {
         return instance;
     }
 
-    public void register() {
-        // Shaped Recipe List
+    public void build() {
+        /*
+         * 有序合成配方
+         */
         if (AmsServerSettings.craftableEnchantedGoldenApples) {
-            String[][] enchantedGoldenApplePattern = {
+            String[][] notchApplePattern = {
                 {"#", "#", "#"},
                 {"#", "A", "#"},
                 {"#", "#", "#"}
             };
-            Map<Character, String> enchantedGoldenAppleIngredients = new HashMap<>();
-            enchantedGoldenAppleIngredients.put('#', "minecraft:gold_block");
-            enchantedGoldenAppleIngredients.put('A', "minecraft:apple");
+            ChainableHashMap<Character, String> notchAppleIngredients = new ChainableHashMap<>();
+            notchAppleIngredients.cPut('#', "minecraft:gold_block").cPut('A', "minecraft:apple");
             shapedRecipeList.add(new ShapedRecipeTemplate(
                 IdentifierUtil.of(MOD_ID, "enchanted_golden_apple"),
-                enchantedGoldenApplePattern,
-                enchantedGoldenAppleIngredients,
-                "minecraft:enchanted_golden_apple",
-                1
+                notchApplePattern, notchAppleIngredients, "minecraft:enchanted_golden_apple", 1
             ));
         }
 
@@ -67,14 +67,11 @@ public class AmsRecipeRegistry {
                 {"#", "#", "#"},
                 {"#", "#", "#"}
             };
-            Map<Character, String> boneBlockIngredients = new HashMap<>();
-            boneBlockIngredients.put('#', "minecraft:bone");
+            ChainableHashMap<Character, String> boneBlockIngredients = new ChainableHashMap<>();
+            boneBlockIngredients.cPut('#', "minecraft:bone");
             shapedRecipeList.add(new ShapedRecipeTemplate(
                 IdentifierUtil.of(MOD_ID, "bone_block"),
-                bonePattern,
-                boneBlockIngredients,
-                "minecraft:bone_block",
-                3
+                bonePattern, boneBlockIngredients, "minecraft:bone_block", 3
             ));
         }
 
@@ -84,16 +81,11 @@ public class AmsRecipeRegistry {
                 {"S", "D", "X"},
                 {" ", "S", "X"}
             };
-            Map<Character, String> dispenserIngredients = new HashMap<>();
-            dispenserIngredients.put('D', "minecraft:dropper");
-            dispenserIngredients.put('S', "minecraft:stick");
-            dispenserIngredients.put('X', "minecraft:string");
+            ChainableHashMap<Character, String> dispenserIngredients = new ChainableHashMap<>();
+            dispenserIngredients.cPut('D', "minecraft:dropper").cPut('S', "minecraft:stick").cPut('X', "minecraft:string");
             shapedRecipeList.add(new ShapedRecipeTemplate(
                 IdentifierUtil.of(MOD_ID, "dispenser1"),
-                dispenserPattern,
-                dispenserIngredients,
-                "minecraft:dispenser",
-                1
+                dispenserPattern, dispenserIngredients, "minecraft:dispenser", 1
             ));
         }
 
@@ -103,17 +95,11 @@ public class AmsRecipeRegistry {
                 {"P", "*", "P"},
                 {"P", "L", "P"}
             };
-            Map<Character, String> elytraIngredients = new HashMap<>();
-            elytraIngredients.put('P', "minecraft:phantom_membrane");
-            elytraIngredients.put('S', "minecraft:stick");
-            elytraIngredients.put('*', "minecraft:saddle");
-            elytraIngredients.put('L', "minecraft:string");
+            ChainableHashMap<Character, String> elytraIngredients = new ChainableHashMap<>();
+            elytraIngredients.cPut('P', "minecraft:phantom_membrane").cPut('S', "minecraft:stick").cPut('*', "minecraft:saddle").cPut('L', "minecraft:string");
             shapedRecipeList.add(new ShapedRecipeTemplate(
                 IdentifierUtil.of(MOD_ID, "elytra"),
-                elytraPattern,
-                elytraIngredients,
-                "minecraft:elytra",
-                1
+                elytraPattern, elytraIngredients, "minecraft:elytra", 1
             ));
         }
 
@@ -124,61 +110,60 @@ public class AmsRecipeRegistry {
                 {"R", "Q", "R"},
                 {"D", "D", "D"}
             };
-            Map<Character, String> sculkSensorIngredients = new HashMap<>();
-            sculkSensorIngredients.put('D', "minecraft:deepslate");
-            sculkSensorIngredients.put('R', "minecraft:redstone");
-            sculkSensorIngredients.put('Q', "minecraft:quartz");
+            ChainableHashMap<Character, String> sculkSensorIngredients = new ChainableHashMap<>();
+            sculkSensorIngredients.cPut('D', "minecraft:deepslate").cPut('R', "minecraft:redstone").cPut('Q', "minecraft:quartz");
             shapedRecipeList.add(new ShapedRecipeTemplate(
                 IdentifierUtil.of(MOD_ID, "sculk_sensor"),
-                sculkSensorPattern,
-                sculkSensorIngredients,
-                "minecraft:sculk_sensor",
-                1
+                sculkSensorPattern, sculkSensorIngredients, "minecraft:sculk_sensor", 1
             ));
         }
         //#endif
 
-        // Shapeless Recipe List
+        /*
+         * 无序合成配方
+         */
         if (AmsServerSettings.betterCraftableDispenser) {
-            List<String> dispenserIngredients = List.of(
-                "minecraft:bow",
-                "minecraft:dropper"
-            );
+            ChainableList<String> dispenserIngredients = new ChainableList<>();
+            dispenserIngredients.cAdd("minecraft:bow").cAdd("minecraft:dropper");
             shapelessRecipeList.add(new ShapelessRecipeTemplate(
                 IdentifierUtil.of(MOD_ID, "dispenser2"),
-                dispenserIngredients,
-                "minecraft:dispenser",
-                1
+                dispenserIngredients, "minecraft:dispenser", 1
             ));
         }
 
         //#if MC>=11700 && MC<12102
         if (AmsServerSettings.craftableBundle) {
-            List<String> bundleIngredients = List.of(
-                "minecraft:string",
-                "minecraft:leather"
-            );
+            ChainableList<String> bundleIngredients = new ChainableList<>();
+            bundleIngredients.cAdd("minecraft:string").cAdd("minecraft:leather");
             shapelessRecipeList.add(new ShapelessRecipeTemplate(
                 IdentifierUtil.of(MOD_ID, "bundle"),
-                bundleIngredients,
-                "minecraft:bundle",
-                1
+                bundleIngredients, "minecraft:bundle", 1
             ));
         }
         //#endif
 
         //#if MC>=11700
         if (AmsServerSettings.betterCraftablePolishedBlackStoneButton) {
-            List<String> polishedBlackstoneButtonIngredients = List.of(
-                "minecraft:deepslate"
-            );
+            ChainableList<String> polishedBlackstoneButtonIngredients = new ChainableList<>();
+            polishedBlackstoneButtonIngredients.cAdd("minecraft:deepslate");
             shapelessRecipeList.add(new ShapelessRecipeTemplate(
                 IdentifierUtil.of(MOD_ID, "polished_blackstone_button"),
-                polishedBlackstoneButtonIngredients,
-                "minecraft:polished_blackstone_button",
-                1
+                polishedBlackstoneButtonIngredients, "minecraft:polished_blackstone_button", 1
             ));
         }
         //#endif
+
+        /*
+         * 熔炉烧炼配方
+         */
+        if (AmsServerSettings.rottenFleshBurnedIntoLeather) {
+            smeltingRecipeList.add(
+                new SmeltingRecipeTemplate(
+                    IdentifierUtil.of(MOD_ID, "leather"),
+                    "minecraft:rotten_flesh", "minecraft:leather",
+                    0.1F, 50
+                )
+            );
+        }
     }
 }
