@@ -18,22 +18,13 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
+package club.mcams.carpet.utils;
 
-import java.util.HashSet;
-import java.util.function.Predicate;
+import java.util.HashMap;
 
-public class UpdateSuppressionException {
-    private static final HashSet<Predicate<Throwable>> exceptionPredicates = new HashSet<>();
-
-    public static boolean isUpdateSuppression(Throwable throwable) {
-        return exceptionPredicates.stream().anyMatch(predicate -> predicate.test(throwable));
-    }
-
-    static {
-        exceptionPredicates.add(throwable -> throwable instanceof ClassCastException);
-        exceptionPredicates.add(throwable -> throwable instanceof StackOverflowError);
-        exceptionPredicates.add(throwable -> throwable instanceof OutOfMemoryError);
-        exceptionPredicates.add(throwable -> throwable instanceof IllegalArgumentException);
+public class ChainableHashMap<K, V> extends HashMap<K, V> {
+    public ChainableHashMap<K, V> cPut(K key, V value) {
+        put(key, value);
+        return this;
     }
 }

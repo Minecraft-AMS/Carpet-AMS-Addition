@@ -529,6 +529,15 @@ carpetamsaddition:
       easyRefreshTrades:
         name: 轻松刷新交易
         desc: 当村民之前没有与玩家达成过交易时，每次打开交易界面都会刷新村民出售的内容
+      jebSheepDropRandomColorWool:
+        name: jeb羊掉落随机颜色羊毛
+        desc: 当羊被命名为jeb_后，修剪羊毛会掉落随机颜色的羊毛
+      cryingObsidianNetherPortal:
+        name: 哭泣的黑曜石下界传送门
+        desc: 可以使用哭泣的黑曜石构建下界传送门
+      furnaceSmeltingTimeController:
+        name: 炉膛冶炼时间控制器
+        desc: 控制熔炉冶炼物品所需要的时间（单位：Tick）
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -627,3 +636,6 @@ carpetamsaddition:
       betterCraftablePolishedBlackStoneButton:
         name: 更好的合成磨制黑石按钮
         desc: 使用深板岩来合成磨制黑石按钮
+      rottenFleshBurnedIntoLeather:
+        name: 腐肉烧皮革
+        desc: 腐肉可以在熔炉中烧成皮革

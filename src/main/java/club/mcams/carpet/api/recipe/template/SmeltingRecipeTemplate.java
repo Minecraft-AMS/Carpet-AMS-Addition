@@ -20,51 +20,52 @@
 
 package club.mcams.carpet.api.recipe.template;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import net.minecraft.util.Identifier;
 
-import java.util.List;
 import java.util.Map;
 
-public class ShapelessRecipeTemplate implements RecipeTemplateInterface {
+public class SmeltingRecipeTemplate implements RecipeTemplateInterface {
     private final Identifier recipeId;
-    private final List<String> ingredients;
+    private final String ingredient;
     private final String resultItem;
-    private final int resultCount;
+    private final float experience;
+    private final int cookingTime;
 
-    public ShapelessRecipeTemplate(Identifier recipeId, List<String> ingredients, String resultItem, int resultCount) {
+    public SmeltingRecipeTemplate(Identifier recipeId, String ingredient, String resultItem, float experience, int cookingTime) {
         this.recipeId = recipeId;
-        this.ingredients = ingredients;
+        this.ingredient = ingredient;
         this.resultItem = resultItem;
-        this.resultCount = resultCount;
+        this.experience = experience;
+        this.cookingTime = cookingTime;
     }
 
     @Override
     public JsonObject toJson() {
         JsonObject recipeJson = new JsonObject();
-        recipeJson.addProperty("type", "minecraft:crafting_shapeless");
+        recipeJson.addProperty("type", "minecraft:smelting");
 
-        JsonArray ingredientsJson = new JsonArray();
-        //#if MC>=12102
-        //$$ for (String ingredient : ingredients) {
-        //$$     ingredientsJson.add(ingredient);
-        //$$ }
+        //#if MC<12102
+        JsonObject ingredientJson = new JsonObject();
+        ingredientJson.addProperty("item", ingredient);
+        recipeJson.add("ingredient", ingredientJson);
         //#else
-        for (String ingredient : ingredients) {
-            JsonObject itemJson = new JsonObject();
-            itemJson.addProperty("item", ingredient);
-            ingredientsJson.add(itemJson);
-        }
+        //$$ recipeJson.addProperty("ingredient", ingredient);
         //#endif
-        recipeJson.add("ingredients", ingredientsJson);
 
-        JsonObject resultJson = new JsonObject();
-        resultJson.addProperty(this.compatResultItemIdKey(), resultItem);
-        resultJson.addProperty("count", resultCount);
-        recipeJson.add("result", resultJson);
+        //#if MC<12005
+        recipeJson.addProperty("result", resultItem);
+        //#else
+        //$$ JsonObject resultJson = new JsonObject();
+        //$$ resultJson.addProperty(this.compatResultItemIdKey(), resultItem);
+        //$$ recipeJson.add("result", resultJson);
+        //#endif
+
+        recipeJson.addProperty("experience", experience);
+        recipeJson.addProperty("cookingtime", cookingTime);
+
         return recipeJson;
     }
 

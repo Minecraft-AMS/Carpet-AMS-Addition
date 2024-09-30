@@ -27,8 +27,6 @@ import club.mcams.carpet.settings.SimpleRuleObserver;
 public class RecipeRuleObserver extends SimpleRuleObserver<Boolean> {
     @Override
     public void onValueChange(Boolean oldValue, Boolean newValue) {
-        if (newValue) {
-            RecipeRuleHelper.onValueChange(AmsServer.minecraftServer);
-        }
+        RecipeRuleHelper.onValueChange(AmsServer.minecraftServer);
     }
 }

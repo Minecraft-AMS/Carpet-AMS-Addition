@@ -2170,6 +2170,60 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## jeb羊掉落随机颜色羊毛（jebSheepDropRandomColorWool）
+
+当羊被命名为`jeb_`后，修剪羊毛会掉落随机颜色的羊毛。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 哭泣的黑曜石下界传送门（cryingObsidianNetherPortal）
+
+可以使用哭泣的黑曜石构建下界传送门。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 炉膛冶炼时间控制器（furnaceSmeltingTimeController）
+
+控制熔炉冶炼物品所需要的时间（单位：Tick）。
+
+- 类型: `int`
+
+
+
+- 默认值: `-1`
+
+
+
+- 参考选项: `-1`, `-1 - ?`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
@@ -2285,6 +2339,24 @@ json位置：
 ## 更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）
 
 使用深板岩来合成磨制黑石按钮。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## 腐肉烧皮革（rottenFleshBurnedIntoLeather）
+
+腐肉可以在熔炉中烧成皮革。
 
 - 类型: `boolean`
 

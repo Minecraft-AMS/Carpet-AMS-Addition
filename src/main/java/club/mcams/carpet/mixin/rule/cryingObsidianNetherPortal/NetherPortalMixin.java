@@ -18,22 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
+package club.mcams.carpet.mixin.rule.cryingObsidianNetherPortal;
 
-import java.util.HashSet;
-import java.util.function.Predicate;
+import club.mcams.carpet.utils.compat.DummyClass;
 
-public class UpdateSuppressionException {
-    private static final HashSet<Predicate<Throwable>> exceptionPredicates = new HashSet<>();
+import org.spongepowered.asm.mixin.Mixin;
 
-    public static boolean isUpdateSuppression(Throwable throwable) {
-        return exceptionPredicates.stream().anyMatch(predicate -> predicate.test(throwable));
-    }
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-    static {
-        exceptionPredicates.add(throwable -> throwable instanceof ClassCastException);
-        exceptionPredicates.add(throwable -> throwable instanceof StackOverflowError);
-        exceptionPredicates.add(throwable -> throwable instanceof OutOfMemoryError);
-        exceptionPredicates.add(throwable -> throwable instanceof IllegalArgumentException);
-    }
-}
+@GameVersion(version = "Minecraft >= 1.19")
+@Mixin(DummyClass.class)
+public abstract class NetherPortalMixin {}

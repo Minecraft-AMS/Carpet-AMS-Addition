@@ -18,22 +18,21 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
+package club.mcams.carpet.mixin.rule.furnaceSmeltingTimeController;
 
-import java.util.HashSet;
-import java.util.function.Predicate;
+import club.mcams.carpet.AmsServerSettings;
 
-public class UpdateSuppressionException {
-    private static final HashSet<Predicate<Throwable>> exceptionPredicates = new HashSet<>();
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-    public static boolean isUpdateSuppression(Throwable throwable) {
-        return exceptionPredicates.stream().anyMatch(predicate -> predicate.test(throwable));
-    }
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 
-    static {
-        exceptionPredicates.add(throwable -> throwable instanceof ClassCastException);
-        exceptionPredicates.add(throwable -> throwable instanceof StackOverflowError);
-        exceptionPredicates.add(throwable -> throwable instanceof OutOfMemoryError);
-        exceptionPredicates.add(throwable -> throwable instanceof IllegalArgumentException);
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+
+@Mixin(AbstractFurnaceBlockEntity.class)
+public abstract class AbstractFurnaceBlockEntityMixin {
+    @ModifyReturnValue(method = "getCookTime", at = @At("RETURN"))
+    private static int setCookTime(int original) {
+        return AmsServerSettings.furnaceSmeltingTimeController != -1 ? AmsServerSettings.furnaceSmeltingTimeController : original;
     }
 }

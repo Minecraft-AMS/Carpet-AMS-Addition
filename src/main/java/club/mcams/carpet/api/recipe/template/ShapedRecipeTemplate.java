@@ -28,7 +28,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.Map;
 
-public class ShapedRecipeTemplate implements RecipeTemplateInterface{
+public class ShapedRecipeTemplate implements RecipeTemplateInterface {
     private final Identifier recipeId;
     private final String[][] pattern;
     private final Map<Character, String> ingredients;
@@ -43,12 +43,12 @@ public class ShapedRecipeTemplate implements RecipeTemplateInterface{
         this.resultCount = resultCount;
     }
 
+    @SuppressWarnings("ExtractMethodRecommender")
     @Override
     public JsonObject toJson() {
         JsonObject recipeJson = new JsonObject();
         recipeJson.addProperty("type", "minecraft:crafting_shaped");
 
-        // 构建合成图案
         JsonArray patternJson = new JsonArray();
         for (String[] row : pattern) {
             StringBuilder rowString = new StringBuilder();
