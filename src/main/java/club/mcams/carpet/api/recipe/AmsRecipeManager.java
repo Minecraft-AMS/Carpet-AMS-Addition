@@ -22,6 +22,7 @@ package club.mcams.carpet.api.recipe;
 
 import club.mcams.carpet.api.recipe.template.ShapedRecipeTemplate;
 import club.mcams.carpet.api.recipe.template.ShapelessRecipeTemplate;
+import club.mcams.carpet.api.recipe.template.SmeltingRecipeTemplate;
 
 import com.google.gson.JsonElement;
 //#if MC>=12102
@@ -41,10 +42,12 @@ import java.util.Map;
 public class AmsRecipeManager {
     private final List<ShapelessRecipeTemplate> shapelessRecipes;
     private final List<ShapedRecipeTemplate> shapedRecipes;
+    private final List<SmeltingRecipeTemplate> smeltingRecipes;
 
-    public AmsRecipeManager(List<ShapelessRecipeTemplate> shapelessRecipes, List<ShapedRecipeTemplate> shapedRecipes) {
+    public AmsRecipeManager(List<ShapelessRecipeTemplate> shapelessRecipes, List<ShapedRecipeTemplate> shapedRecipes, List<SmeltingRecipeTemplate> smeltingRecipes) {
         this.shapelessRecipes = shapelessRecipes;
         this.shapedRecipes = shapedRecipes;
+        this.smeltingRecipes = smeltingRecipes;
     }
 
     public void registerRecipes(
@@ -57,28 +60,24 @@ public class AmsRecipeManager {
         //#if MC>=12102
         //$$ Map<Identifier, JsonElement> recipeMap = new HashMap<>();
         //#endif
-        for (ShapelessRecipeTemplate recipe : shapelessRecipes) {
-            recipe.addToRecipeMap(recipeMap);
-        }
-        for (ShapedRecipeTemplate recipe : shapedRecipes) {
-            recipe.addToRecipeMap(recipeMap);
-        }
+        shapelessRecipes.forEach(recipe -> recipe.addToRecipeMap(recipeMap));
+        shapedRecipes.forEach(recipe -> recipe.addToRecipeMap(recipeMap));
+        smeltingRecipes.forEach(recipe -> recipe.addToRecipeMap(recipeMap));
         //#if MC>=12102
-        //$$ for (Map.Entry<Identifier, JsonElement> entry : recipeMap.entrySet()) {
-        //$$     Identifier id = entry.getKey();
-        //$$     JsonElement json = entry.getValue();
+        //$$ recipeMap.forEach((id, json) -> {
         //$$     try {
         //$$         RecipeEntry<?> recipeEntry = RecipeManager.deserialize(id, json.getAsJsonObject(), wrapperLookup);
         //$$         map.put(id, recipeEntry.value());
         //$$     } catch (JsonParseException e) {
         //$$         AmsServer.LOGGER.warn("Failed to parse recipe: {}", id);
         //$$     }
-        //$$ }
+        //$$ });
         //#endif
     }
 
-    public static void clearRecipeListMemory(AmsRecipeRegistry amsRecipeRegistry) {
-        amsRecipeRegistry.shapedRecipeList.clear();
-        amsRecipeRegistry.shapelessRecipeList.clear();
+    public static void clearRecipeListMemory(AmsRecipeBuilder amsRecipeBuilder) {
+        amsRecipeBuilder.shapedRecipeList.clear();
+        amsRecipeBuilder.shapelessRecipeList.clear();
+        amsRecipeBuilder.smeltingRecipeList.clear();
     }
 }
