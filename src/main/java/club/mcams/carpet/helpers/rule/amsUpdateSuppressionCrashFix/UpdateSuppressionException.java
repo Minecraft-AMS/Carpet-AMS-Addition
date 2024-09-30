@@ -20,12 +20,11 @@
 
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.function.Predicate;
 
 public class UpdateSuppressionException {
-    private static final List<Predicate<Throwable>> exceptionPredicates = new ArrayList<>();
+    private static final HashSet<Predicate<Throwable>> exceptionPredicates = new HashSet<>();
 
     public static boolean isUpdateSuppression(Throwable throwable) {
         return exceptionPredicates.stream().anyMatch(predicate -> predicate.test(throwable));
