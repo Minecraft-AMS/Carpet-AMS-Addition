@@ -26,6 +26,8 @@ import carpet.CarpetServer;
 //$$ import carpet.network.ServerNetworkHandler;
 //#endif
 
+import club.mcams.carpet.api.recipe.AmsRecipeManager;
+import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 import club.mcams.carpet.commands.RegisterCommands;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import club.mcams.carpet.config.LoadConfigFromJson;
@@ -41,6 +43,7 @@ import club.mcams.carpet.utils.CountRulesUtil;
 
 import com.google.common.collect.Maps;
 
+import com.google.gson.JsonElement;
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.server.MinecraftServer;
@@ -49,6 +52,11 @@ import net.minecraft.server.command.ServerCommandSource;
 //$$ import net.minecraft.command.CommandRegistryAccess;
 //#endif
 import net.minecraft.server.network.ServerPlayerEntity;
+//#if MC>=12102
+//$$ import net.minecraft.recipe.Recipe;
+//$$ import net.minecraft.registry.RegistryWrapper;
+//#endif
+import net.minecraft.util.Identifier;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -64,6 +72,10 @@ public class AmsServer implements CarpetExtension {
     public static final String compactName = name.replace("-", "");  // carpetamsaddition
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
     private static final AmsServer INSTANCE = new AmsServer();
+
+    public static AmsServer getInstance() {
+        return INSTANCE;
+    }
 
     public static void init() {
         CarpetServer.manageExtension(INSTANCE);
@@ -89,7 +101,6 @@ public class AmsServer implements CarpetExtension {
         AmsCarpetLoggerRegistry.registerLoggers();
     }
 
-
     @Override
     public void registerCommands(
         CommandDispatcher<ServerCommandSource> dispatcher
@@ -103,6 +114,28 @@ public class AmsServer implements CarpetExtension {
             //$$ , commandBuildContext
             //#endif
         );
+    }
+
+    public void registerCustomRecipes(
+        //#if MC>=12102
+        //$$ Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup
+        //#else
+        Map<Identifier, JsonElement> map
+        //#endif
+    ) {
+        AmsRecipeBuilder amsRecipeBuilder = AmsRecipeBuilder.getInstance();
+        AmsRecipeManager amsRecipeManager = new AmsRecipeManager(
+            amsRecipeBuilder.shapelessRecipeList,
+            amsRecipeBuilder.shapedRecipeList,
+            amsRecipeBuilder.smeltingRecipeList
+        );
+        AmsRecipeManager.clearRecipeListMemory(amsRecipeBuilder);
+        amsRecipeBuilder.build();
+        //#if MC>=12102
+        //$$ amsRecipeManager.registerRecipes(map, wrapperLookup);
+        //#else
+        amsRecipeManager.registerRecipes(map);
+        //#endif
     }
 
     @Override

@@ -23,7 +23,7 @@ package club.mcams.carpet.helpers.rule.recipeRule;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.api.recipe.AmsRecipeManager;
-import club.mcams.carpet.api.recipe.AmsRecipeRegistry;
+import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 import club.mcams.carpet.settings.RecipeRule;
 
 import net.minecraft.recipe.Recipe;
@@ -40,6 +40,7 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 
 public class RecipeRuleHelper {
+    @SuppressWarnings("ExtractMethodRecommender")
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayerEntity player) {
         if (server != null && !server.isStopping() && !server.isStopped() && hasActiveRecipeRule()) {
             RecipeManager recipeManager = server.getRecipeManager();
@@ -68,10 +69,11 @@ public class RecipeRuleHelper {
         }
     }
 
+    @SuppressWarnings("ExtractMethodRecommender")
     public static void onValueChange(MinecraftServer server) {
         if (server != null && !server.isStopping() && !server.isStopped()) {
-            AmsRecipeManager.clearRecipeListMemory(AmsRecipeRegistry.getInstance());
-            AmsRecipeRegistry.getInstance().register();
+            AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
+            AmsRecipeBuilder.getInstance().build();
             server.execute(() -> {
                 server.getCommandManager().execute(server.getCommandSource().withSilent(), "/reload");
                 RecipeManager recipeManager = server.getRecipeManager();

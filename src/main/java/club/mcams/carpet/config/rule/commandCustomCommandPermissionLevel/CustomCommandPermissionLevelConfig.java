@@ -39,7 +39,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class CustomCommandPermissionLevelConfig {
     @SuppressWarnings("ReadWriteStringCanBeUsed")
     public static void loadFromJson(String configFilePath) {

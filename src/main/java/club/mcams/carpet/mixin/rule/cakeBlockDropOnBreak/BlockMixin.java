@@ -47,10 +47,7 @@ import static net.minecraft.block.Block.dropStack;
 public abstract class BlockMixin {
     @Inject(method = "onBreak", at = @At("HEAD"))
     private void onBreak(
-        World world,
-        BlockPos pos,
-        BlockState state,
-        PlayerEntity player,
+        World world, BlockPos pos, BlockState state, PlayerEntity player,
         //#if MC>12002
         //$$ CallbackInfoReturnable<BlockState> cir
         //#else

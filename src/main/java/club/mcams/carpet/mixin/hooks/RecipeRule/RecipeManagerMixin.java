@@ -18,10 +18,9 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.hook;
+package club.mcams.carpet.mixin.hooks.RecipeRule;
 
-import club.mcams.carpet.api.recipe.AmsRecipeManager;
-import club.mcams.carpet.api.recipe.AmsRecipeRegistry;
+import club.mcams.carpet.AmsServer;
 
 import com.google.gson.JsonElement;
 
@@ -50,7 +49,9 @@ public abstract class RecipeManagerMixin {
     //#if MC>=12102
     //$$ @Unique
     //$$ private RegistryWrapper.WrapperLookup wrapperLookup;
+    //#endif
 
+    //#if MC>=12102
     //$$ @Inject(method = "<init>", at = @At("TAIL"))
     //$$ private void init(RegistryWrapper.WrapperLookup registries, CallbackInfo ci) {
     //$$     this.wrapperLookup = registries;
@@ -58,7 +59,7 @@ public abstract class RecipeManagerMixin {
     //#endif
 
     @Inject(method = "apply(Ljava/util/Map;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/util/profiler/Profiler;)V", at = @At("HEAD"))
-    private void addCustomRecipe(
+    private void registerCustomRecipes(
         //#if MC>=12102
         //$$ Map<Identifier, Recipe<?>> map,
         //#else
@@ -66,17 +67,10 @@ public abstract class RecipeManagerMixin {
         //#endif
         ResourceManager resourceManager, Profiler profiler, CallbackInfo ci
     ) {
-        AmsRecipeRegistry amsRecipeRegistry = AmsRecipeRegistry.getInstance();
-        AmsRecipeManager amsRecipeManager = new AmsRecipeManager(
-            amsRecipeRegistry.shapelessRecipeList,
-            amsRecipeRegistry.shapedRecipeList
-        );
-        AmsRecipeManager.clearRecipeListMemory(amsRecipeRegistry);
-        amsRecipeRegistry.register();
         //#if MC>=12102
-        //$$ amsRecipeManager.registerRecipes(map, this.wrapperLookup);
+        //$$ AmsServer.getInstance().registerCustomRecipes(map, this.wrapperLookup);
         //#else
-        amsRecipeManager.registerRecipes(map);
+        AmsServer.getInstance().registerCustomRecipes(map);
         //#endif
     }
 }
