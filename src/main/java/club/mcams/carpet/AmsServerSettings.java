@@ -20,8 +20,6 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.settings.RecipeRule;
-
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 //#if MC>=12002
@@ -43,6 +41,7 @@ import club.mcams.carpet.validators.rule.maxClientInteractionReachDistance.MaxCl
 import club.mcams.carpet.validators.rule.renewableNetherScrap.DropRateValidator;
 
 import club.mcams.carpet.settings.Rule;
+import club.mcams.carpet.settings.RecipeRule;
 
 import static carpet.settings.RuleCategory.*;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
@@ -513,6 +512,15 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean easyRefreshTrades = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean jebSheepDropRandomColorWool = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean cryingObsidianNetherPortal = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL}, strict = false)
+    public static int furnaceSmeltingTimeController = -1;
+
     /*
      * 区块加载规则
      */
@@ -595,6 +603,10 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean betterCraftablePolishedBlackStoneButton = false;
     //#endif
+
+    @RecipeRule
+    @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    public static boolean rottenFleshBurnedIntoLeather = false;
 
     public enum blueSkullProbability {
         VANILLA,
