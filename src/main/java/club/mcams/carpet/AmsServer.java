@@ -123,14 +123,9 @@ public class AmsServer implements CarpetExtension {
         Map<Identifier, JsonElement> map
         //#endif
     ) {
-        AmsRecipeBuilder amsRecipeBuilder = AmsRecipeBuilder.getInstance();
-        AmsRecipeManager amsRecipeManager = new AmsRecipeManager(
-            amsRecipeBuilder.shapelessRecipeList,
-            amsRecipeBuilder.shapedRecipeList,
-            amsRecipeBuilder.smeltingRecipeList
-        );
-        AmsRecipeManager.clearRecipeListMemory(amsRecipeBuilder);
-        amsRecipeBuilder.build();
+        AmsRecipeManager amsRecipeManager = new AmsRecipeManager(AmsRecipeBuilder.getInstance());
+        AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
+        AmsServerCustomRecipes.getInstance().buildRecipes();
         //#if MC>=12102
         //$$ amsRecipeManager.registerRecipes(map, wrapperLookup);
         //#else

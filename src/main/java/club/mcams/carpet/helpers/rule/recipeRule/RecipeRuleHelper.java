@@ -21,6 +21,7 @@
 package club.mcams.carpet.helpers.rule.recipeRule;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.AmsServerCustomRecipes;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.api.recipe.AmsRecipeManager;
 import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
@@ -73,7 +74,7 @@ public class RecipeRuleHelper {
     public static void onValueChange(MinecraftServer server) {
         if (server != null && !server.isStopping() && !server.isStopped()) {
             AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
-            AmsRecipeBuilder.getInstance().build();
+            AmsServerCustomRecipes.getInstance().buildRecipes();
             server.execute(() -> {
                 server.getCommandManager().execute(server.getCommandSource().withSilent(), "/reload");
                 RecipeManager recipeManager = server.getRecipeManager();

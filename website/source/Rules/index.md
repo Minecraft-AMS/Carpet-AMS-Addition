@@ -2206,7 +2206,7 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 炉膛冶炼时间控制器（furnaceSmeltingTimeController）
+## 熔炉冶炼时间控制器（furnaceSmeltingTimeController）
 
 控制熔炉冶炼物品所需要的时间（单位：Tick）。
 

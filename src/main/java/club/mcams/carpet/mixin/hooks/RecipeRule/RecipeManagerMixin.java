@@ -67,10 +67,11 @@ public abstract class RecipeManagerMixin {
         //#endif
         ResourceManager resourceManager, Profiler profiler, CallbackInfo ci
     ) {
-        //#if MC>=12102
-        //$$ AmsServer.getInstance().registerCustomRecipes(map, this.wrapperLookup);
-        //#else
-        AmsServer.getInstance().registerCustomRecipes(map);
-        //#endif
+        AmsServer.getInstance().registerCustomRecipes(
+            map
+            //#if MC>=12102
+            //$$ , this.wrapperLookup
+            //#endif
+        );
     }
 }
