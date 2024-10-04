@@ -78,7 +78,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/inventory/Inventory;onOpen(Lnet/minecraft/entity/player/PlayerEntity;)V",
-            shift=At.Shift.AFTER
+            shift = At.Shift.AFTER
         )
     )
     protected void addingExtraSlots(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
