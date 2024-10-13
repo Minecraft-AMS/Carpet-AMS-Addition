@@ -33,8 +33,8 @@ import club.mcams.carpet.config.rule.commandCustomCommandPermissionLevel.CustomC
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
-
 import com.mojang.brigadier.tree.CommandNode;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
