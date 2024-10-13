@@ -42,6 +42,9 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+import java.util.Objects;
+
+@SuppressWarnings("InjectLocalCaptureCanBeReplacedWithLocal")
 @GameVersion(version = "Minecraft >= 1.19")
 @Mixin(NeighborUpdater.class)
 public interface NeighborUpdaterMixin {
@@ -54,20 +57,15 @@ public interface NeighborUpdaterMixin {
        locals = LocalCapture.CAPTURE_FAILHARD
     )
     private static void tryNeighborUpdate(
-        World world,
-        BlockState state,
-        BlockPos pos,
-        Block sourceBlock,
+        World world, BlockState state, BlockPos pos, Block sourceBlock,
         //#if MC>=12102
         //$$ WireOrientation orientation,
         //#else
         BlockPos sourcePos,
         //#endif
-        boolean notify,
-        CallbackInfo ci,
-        Throwable throwable
+        boolean notify, CallbackInfo ci, Throwable throwable
     ) {
-        if (AmsServerSettings.amsUpdateSuppressionCrashFix && UpdateSuppressionException.isUpdateSuppression(throwable)) {
+        if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
             UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
            throw new ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));
         }

@@ -236,8 +236,11 @@ carpetamsaddition:
         name: 更新抑制崩溃修复
         desc: 防止更新抑制导致服务器崩溃，同时提供发生更新抑制的坐标与维度
         extra:
-          '0': '使用如下指令来控制其是否在"customBlockUpdateSuppressor"开启时强制启动，权限等级为2:'
-          '1': '/amsUpdateSuppressionCrashFixForceMode true/false'
+          '0': '[false] - 禁用规则'
+          '1': '[true] - 启用规则'
+          "2": '[silence] - 启用但不发送服务器消息'
+          '3': '使用如下指令来控制其是否在"customBlockUpdateSuppressor"开启时强制启动，权限等级为2:'
+          '4': '/amsUpdateSuppressionCrashFixForceMode true/false'
       ghastFireballExplosionDamageSourceFix:
         name: 恶魂火球爆炸伤害源修复
         desc: 修复MC-193297中，恶魂火球爆炸时不会正确传递伤害源

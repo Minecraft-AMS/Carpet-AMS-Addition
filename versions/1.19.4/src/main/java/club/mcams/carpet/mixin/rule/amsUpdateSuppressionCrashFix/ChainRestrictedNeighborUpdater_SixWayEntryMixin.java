@@ -36,6 +36,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+import java.util.Objects;
+
 @GameVersion(version = "Minecraft 1.19 - 1.20.1")
 @Mixin(targets = "net.minecraft.world.block.ChainRestrictedNeighborUpdater$SixWayEntry")
 public abstract class ChainRestrictedNeighborUpdater_SixWayEntryMixin {
@@ -47,7 +49,7 @@ public abstract class ChainRestrictedNeighborUpdater_SixWayEntryMixin {
         )
     )
     private void update(BlockState state, World world, BlockPos pos, Block sourceBlock, BlockPos sourcePos, boolean notify, Operation<Void> original) {
-        if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
+        if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false")) {
             NeighborUpdater.tryNeighborUpdate(world, state, pos, sourceBlock, sourcePos, notify);
         } else {
             original.call(state, world, pos, sourceBlock, sourcePos, notify);

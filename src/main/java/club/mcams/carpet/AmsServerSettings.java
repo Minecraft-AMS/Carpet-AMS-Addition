@@ -167,8 +167,11 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL, COMMAND})
     public static boolean preventAdministratorCheat = false;
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL})
-    public static boolean amsUpdateSuppressionCrashFix = false;
+    @Rule(
+        options = {"false", "true", "silence"},
+        categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL}
+    )
+    public static String amsUpdateSuppressionCrashFix = "false";
 
     //#if MC<11900
     @GameVersion(version = "Minecraft < 1.19.3")

@@ -32,6 +32,7 @@ import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import java.util.Objects;
 import java.util.function.BooleanSupplier;
 
 @Mixin(MinecraftServer.class)
@@ -44,7 +45,7 @@ public abstract class MinecraftServerMixin {
         )
     )
     private void tickWorlds(ServerWorld serverWorld, BooleanSupplier shouldKeepTicking, Operation<Void> original) {
-        if (AmsServerSettings.amsUpdateSuppressionCrashFix) {
+        if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false")) {
             try {
                 original.call(serverWorld, shouldKeepTicking);
             } catch (Throwable throwable) {

@@ -206,8 +206,11 @@ carpetamsaddition:
       amsUpdateSuppressionCrashFix:
         desc: Prevent update suppression from causing server crashes, while providing the coordinates and dimensions where the update suppression occurred
         extra:
-          '0': 'Use the following command to control whether it is forcibly enabled when "customBlockUpdateSuppressor" is enabled, with a permission level of 2:'
-          '1': '/amsUpdateSuppressionCrashFixForceMode true/false'
+          '0': '[false] - Disable rule'
+          '1': '[true] - Enable rule'
+          "2": '[silence] - Enable but no send server messages'
+          '3': 'Use the following command to control whether it is forcibly enabled when "customBlockUpdateSuppressor" is enabled, with a permission level of 2:'
+          '4': '/amsUpdateSuppressionCrashFixForceMode true/false'
       ghastFireballExplosionDamageSourceFix:
         desc: Fix MC-193297 that the large fireball does not create explosion with correct damage source
       cakeBlockDropOnBreak:

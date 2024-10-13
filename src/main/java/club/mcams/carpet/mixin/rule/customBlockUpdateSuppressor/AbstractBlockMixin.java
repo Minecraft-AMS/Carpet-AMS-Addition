@@ -23,6 +23,7 @@ package club.mcams.carpet.mixin.rule.customBlockUpdateSuppressor;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.RegexTools;
 import club.mcams.carpet.helpers.rule.customBlockUpdateSuppressor.BlockUpdateSuppressorExceptionHelper;
+import club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry;
 
 import net.minecraft.block.AbstractBlock;
 //#if MC>=12102
@@ -40,27 +41,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
-import static club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode;
-
 @Mixin(AbstractBlock.class)
 public abstract class AbstractBlockMixin {
     @Inject(method = "neighborUpdate", at = @At("HEAD"))
     private void neighborUpdate(
-        BlockState state,
-        World world,
-        BlockPos pos,
-        Block block,
+        BlockState state, World world, BlockPos pos, Block block,
         //#if MC>=12102
         //$$ WireOrientation wireOrientation,
         //#else
         BlockPos fromPos,
         //#endif
-        boolean notify,
-        CallbackInfo ci
+        boolean notify, CallbackInfo ci
     ) {
         if (!Objects.equals(AmsServerSettings.customBlockUpdateSuppressor, "none")) {
-            if (amsUpdateSuppressionCrashFixForceMode) {
-                AmsServerSettings.amsUpdateSuppressionCrashFix = true;
+            if (AmsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode) {
+                AmsServerSettings.amsUpdateSuppressionCrashFix = "true";
             }
             String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); // Block{minecraft:bedrock} -> minecraft:bedrock
             if (Objects.equals(AmsServerSettings.customBlockUpdateSuppressor, blockName)) {

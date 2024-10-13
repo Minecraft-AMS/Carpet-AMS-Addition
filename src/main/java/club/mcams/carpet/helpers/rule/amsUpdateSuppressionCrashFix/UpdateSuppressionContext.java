@@ -21,6 +21,7 @@
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
@@ -34,17 +35,20 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Objects;
+
 public class UpdateSuppressionContext {
     private static final Translator translator = new Translator("rule.amsUpdateSuppressionCrashFix");
 
     public static void sendMessageToServer(BlockPos pos, World world, Throwable cause) {
-        String suppressionMessage = suppressionMessageText(pos, world, cause);
-        final Text copyButton = copyButton(pos);
-
-        Messenger.sendServerMessage(
-            AmsServer.minecraftServer,
-            Messenger.s(suppressionMessage).formatted(Formatting.RED, Formatting.ITALIC).append(copyButton)
-        );
+        if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "silence")) {
+            String suppressionMessage = suppressionMessageText(pos, world, cause);
+            final Text copyButton = copyButton(pos);
+            Messenger.sendServerMessage(
+                AmsServer.minecraftServer,
+                Messenger.s(suppressionMessage).formatted(Formatting.RED, Formatting.ITALIC).append(copyButton)
+            );
+        }
     }
 
     public static String suppressionMessageText(BlockPos pos, World world, Throwable cause) {
@@ -75,18 +79,6 @@ public class UpdateSuppressionContext {
     }
 
     private static String exceptionCauseText(Throwable cause) {
-        if (cause instanceof ClassCastException) {
-            return ClassCastException.class.getSimpleName();
-        }
-        if (cause instanceof StackOverflowError) {
-            return StackOverflowError.class.getSimpleName();
-        }
-        if (cause instanceof OutOfMemoryError) {
-            return OutOfMemoryError.class.getSimpleName();
-        }
-        if (cause instanceof IllegalArgumentException) {
-            return IllegalArgumentException.class.getSimpleName();
-        }
-        return "? ? ?";
+        return UpdateSuppressionException.isUpdateSuppression(cause) ? cause.getClass().getSimpleName() : "? ? ?";
     }
 }
