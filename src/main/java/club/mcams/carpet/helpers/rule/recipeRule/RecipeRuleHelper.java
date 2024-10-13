@@ -43,7 +43,7 @@ import java.util.Collection;
 public class RecipeRuleHelper {
     @SuppressWarnings("ExtractMethodRecommender")
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayerEntity player) {
-        if (server != null && hasActiveRecipeRule()) {
+        if (server != null && server.isRunning() && hasActiveRecipeRule()) {
             RecipeManager recipeManager = server.getRecipeManager();
             //#if MC>=12002
             //$$ Collection<RecipeEntry<?>> allRecipes = recipeManager.values();
@@ -72,7 +72,7 @@ public class RecipeRuleHelper {
 
     @SuppressWarnings("ExtractMethodRecommender")
     public static void onValueChange(MinecraftServer server) {
-        if (server != null) {
+        if (server != null && server.isRunning()) {
             AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
             AmsServerCustomRecipes.getInstance().buildRecipes();
             server.execute(() -> {
@@ -99,7 +99,7 @@ public class RecipeRuleHelper {
     }
 
     public static void onServerLoadedWorlds(MinecraftServer server) {
-        if (server != null && hasActiveRecipeRule()) {
+        if (server != null && server.isRunning() && hasActiveRecipeRule()) {
             server.execute(() -> {
                 CommandManager commandManager = server.getCommandManager();
                 commandManager.execute(server.getCommandSource(), "/reload");
