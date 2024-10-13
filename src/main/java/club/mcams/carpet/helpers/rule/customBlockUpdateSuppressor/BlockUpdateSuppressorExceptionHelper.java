@@ -22,10 +22,6 @@ package club.mcams.carpet.helpers.rule.customBlockUpdateSuppressor;
 
 public class BlockUpdateSuppressorExceptionHelper {
     public static void throwException() {
-        //#if MC<11900
         throw new StackOverflowError("[Carpet-AMS-Addition]: StackOverflowError");
-        //#else
-        //$$ throw new ClassCastException("[Carpet-AMS-Addition]: ClassCastException");
-        //#endif
     }
 }
