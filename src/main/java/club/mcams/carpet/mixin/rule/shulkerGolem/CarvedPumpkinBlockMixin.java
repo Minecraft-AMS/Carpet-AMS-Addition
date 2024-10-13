@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.shulkerGolem;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.ParticleHelper;
 
 import net.minecraft.block.CarvedPumpkinBlock;
 import net.minecraft.block.ShulkerBoxBlock;
@@ -29,6 +30,7 @@ import net.minecraft.entity.EntityType;
 //$$ import net.minecraft.entity.SpawnReason;
 //#endif
 import net.minecraft.entity.mob.ShulkerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -44,6 +46,7 @@ public abstract class CarvedPumpkinBlockMixin {
     @Inject(method = "trySpawnEntity", at = @At("TAIL"))
     private void trySpawnShulker(World world, BlockPos headPos, CallbackInfo ci) {
         if (AmsServerSettings.shulkerGolem) {
+            ServerWorld serverWorld = (ServerWorld) world;
             BlockPos bodyPos = headPos.down(1);
             boolean headIsCarvedPumpkin = world.getBlockState(headPos).getBlock() instanceof CarvedPumpkinBlock;
             boolean bodyIsShulkerBox = world.getBlockState(bodyPos).getBlock() instanceof ShulkerBoxBlock;
@@ -59,6 +62,7 @@ public abstract class CarvedPumpkinBlockMixin {
                 world.breakBlock(bodyPos, false);
                 world.breakBlock(headPos, false);
                 world.spawnEntity(shulkerGolem);
+                ParticleHelper.spawnShulkerGolemParticles(serverWorld, bodyPos);
             }
         }
     }
