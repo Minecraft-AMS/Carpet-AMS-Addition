@@ -31,6 +31,7 @@ public class UpdateSuppressionException {
     }
 
     static {
+        exceptionPredicates.add(throwable -> throwable instanceof ThrowableSuppression);
         exceptionPredicates.add(throwable -> throwable instanceof ClassCastException);
         exceptionPredicates.add(throwable -> throwable instanceof StackOverflowError);
         exceptionPredicates.add(throwable -> throwable instanceof OutOfMemoryError);
