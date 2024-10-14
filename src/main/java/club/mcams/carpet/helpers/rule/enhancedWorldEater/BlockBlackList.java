@@ -23,11 +23,10 @@ package club.mcams.carpet.helpers.rule.enhancedWorldEater;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 
 public class BlockBlackList {
-    private static final List<Block> blacklist = new ArrayList<>();
+    private static final HashSet<Block> blacklist = new HashSet<>();
 
     public static boolean isIn(Block block) {
         return blacklist.contains(block);

@@ -21,7 +21,16 @@
 package club.mcams.carpet.helpers.rule.customBlockUpdateSuppressor;
 
 public class BlockUpdateSuppressorExceptionHelper {
-    public static void throwException() {
-        throw new StackOverflowError("[Carpet-AMS-Addition]: StackOverflowError");
+    private static final IllegalArgumentException illegalArgumentException = new IllegalArgumentException();
+    private static final BlockUpdateSuppressorExceptionHelper INSTANCE = new BlockUpdateSuppressorExceptionHelper();
+
+    private BlockUpdateSuppressorExceptionHelper() {}
+
+    public static BlockUpdateSuppressorExceptionHelper getInstance() {
+        return INSTANCE;
+    }
+
+    public void throwIllegalArgumentException() {
+        throw illegalArgumentException;
     }
 }

@@ -59,7 +59,7 @@ public abstract class AbstractBlockMixin {
             }
             String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); // Block{minecraft:bedrock} -> minecraft:bedrock
             if (Objects.equals(AmsServerSettings.customBlockUpdateSuppressor, blockName)) {
-                BlockUpdateSuppressorExceptionHelper.throwException();
+                BlockUpdateSuppressorExceptionHelper.getInstance().throwIllegalArgumentException();
             }
         }
     }
