@@ -19,6 +19,9 @@ repositories {
 	maven {
 		url = 'https://jitpack.io'
 	}
+	maven {
+		url = 'https://maven.fallenbreath.me/releases'
+	}
 }
 
 // https://github.com/FabricMC/fabric-loader/issues/783
@@ -35,6 +38,11 @@ dependencies {
 	// mods
 	//modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") // modrinth
 	modImplementation "carpet:fabric-carpet:${project.carpet_core_version}" // masa
+	// runtime mods
+	if (mcVersion < 11904) {
+		modRuntimeOnly(mcVersion < 11900 ? "com.github.astei:lazydfu:0.1.2" : "com.github.Fallen-Breath:lazydfu:a7cfc44c0c")
+	}
+	modRuntimeOnly 'me.fallenbreath:mixin-auditor:0.1.0'
 
 	// library mods
 	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
@@ -45,25 +53,40 @@ dependencies {
 }
 
 loom {
-	runConfigs.all {
-		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
-		ideConfigGenerated = true
+	def commonVmArgs = ['-Dmixin.debug.export=true']
+	if (mcVersion < 11904) {
+		// carpet 1.4.100+v230314 for mc1.19.4 and above
+		// fail to pass the check on at MinecraftServer_pingPlayerSampleLimit#modifyPlayerSampleLimit
+		// see https://github.com/gnembon/fabric-carpet/pull/1938
+		commonVmArgs.add('-Dmixin.debug.countInjections=true')
+	}
+	runConfigs.configureEach {
 		runDir '../../run'
-		vmArgs '-Dmixin.debug.export=true'
+		vmArgs commonVmArgs
+		ideConfigGenerated true
+	}
+
+	runConfigs.named("client") {
+		runDir("run/client")
+	}
+
+	runConfigs.named("server") {
+		runDir("run/server")
 	}
 
 	runs {
-        mixinAudit {
-            server()
-            vmArgs '-Dcarpetamsaddition.mixin_audit=true'
-            ideConfigGenerated false
-        }
-        mixinAuditClient {
-            client()
-            vmArgs '-Dcarpetamsaddition.mixin_audit=true'
-            ideConfigGenerated false
-        }
-    }
+		// run server, but with mixin auditor enabled
+		serverMixinAudit {
+			server()
+			vmArgs '-DmixinAuditor.audit=true'
+		}
+
+		// run client, but with mixin auditor enabled
+		clientMixinAudit {
+			client()
+			vmArgs('-DmixinAuditor.audit=true', '-DmixinAuditor.when=game_init')
+		}
+	}
 
 	accessWidenerPath = file("carpetamsaddition.accesswidener")
 }

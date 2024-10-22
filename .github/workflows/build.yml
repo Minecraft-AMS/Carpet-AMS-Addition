@@ -1,14 +1,21 @@
-name: step.build
+name: _step.build
 
 on:
   workflow_call:
+    secrets:
+      GITEE_API_TOKEN:
+        required: false
     inputs:
       release:
         type: boolean
         required: false
         default: false
+      ci_release:
+        type: boolean
+        required: false
+        default: false
       target_subproject:
-        description: The subproject name of the specified Minecraft version to be built. Leave it empty to build all
+        description: see release.yml, leave it empty to build all
         type: string
         required: false
         default: ''
@@ -29,31 +36,35 @@ jobs:
           distribution: 'temurin'
           java-version: 21
 
-      - name: Cache gradle files
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-            ./.gradle/loom-cache
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle', '**/gradle.properties', '**/*.accesswidener') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Get subproject name to build
-        id: subproject_info
+      - name: Get git info
+        id: get_git_info
         run: |
-          if [ "${{ inputs.target_subproject }}" != "" ]
-          then
-              echo "prefix=${{ inputs.target_subproject }}:" >> $GITHUB_OUTPUT
-          else
-              echo "prefix=" >> $GITHUB_OUTPUT
-          fi
+          short_sha=$(echo ${GITHUB_SHA} | cut -c1-7)
+          commit_count=$(git log | grep -e '^commit [a-zA-Z0-9]*' | wc -l)
+          echo "short_sha=$short_sha" >> $GITHUB_OUTPUT
+          echo "commit_count=$commit_count" >> $GITHUB_OUTPUT
 
-      - name: Build with Gradle
+      - name: Read common properties
+        id: properties_g
+        uses: christian-draeger/read-properties@1.1.1
+        with:
+          path: gradle.properties
+          properties: 'mod_name mod_version'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build with gradle
         run: |
           chmod +x gradlew
-          ./gradlew ${{ steps.subproject_info.outputs.prefix }}build --no-daemon
+          if [ -z "${{ inputs.target_subproject }}" ]; then
+              echo "Building all subprojects"
+              ./gradlew build
+          else
+              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:build/' | paste -sd ' ')
+              echo "Building with arguments=$args"
+              ./gradlew $args
+          fi
         env:
           BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
@@ -64,9 +75,55 @@ jobs:
         run: |
           mkdir -p ./run
           echo eula=true > ./run/eula.txt
-          ./gradlew runMixinAudit
+          ./gradlew runServerMixinAudit
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: versions/*/build/libs/
+
+      - name: Upload gitee CI artifacts
+        uses: nicennnnnnnlee/action-gitee-release@v1.0.5
+        if: ${{ inputs.ci_release }}
+        with:
+          gitee_owner: wendavid552
+          gitee_repo: Carpet-AMS-Addition
+          gitee_token: ${{ secrets.GITEE_API_TOKEN }}
+          gitee_tag_name: ${{ format('{0}.{1}', github.ref_name, steps.get_git_info.outputs.commit_count) }}
+          gitee_release_name: ${{ format('[CI#{0}]{1} {2}.{3}+{4}', github.run_number, steps.properties_g.outputs.mod_name, steps.properties_g.outputs.mod_version, steps.get_git_info.outputs.commit_count, steps.get_git_info.outputs.short_sha) }}
+          gitee_release_body:  |-
+            **This version is automatically released by CI Build**
+            
+            Latest commit log:
+            
+            ${{ github.event.head_commit.message }}
+            
+            -------
+            
+            Build Information
+            
+            - Built from: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          gitee_target_commitish: ${{ github.sha }}
+          gitee_upload_retry_times: 3
+          gitee_files: |
+            versions/*/build/libs/*.jar
+
+  summary:
+    runs-on: ubuntu-22.04
+    needs:
+      - build
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: build-artifacts
+
+      - name: Make build summary
+        run: python3 .github/workflows/scripts/summary.py  # ubuntu-22.04 uses Python 3.10.6
+        env:
+          TARGET_SUBPROJECT: ${{ inputs.target_subproject }}
