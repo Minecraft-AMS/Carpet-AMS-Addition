@@ -429,12 +429,16 @@ carpetamsaddition:
         desc: Full moon every day
       easyRefreshTrades:
         desc: When a villager has not made a deal with the player before, each time the trade screen is opened, the content sold by the villager will be refreshed
+        extra:
+          '0': 'When the player is holding an emerald block in their main hand, the refresh will not be triggered'
       jebSheepDropRandomColorWool:
         desc: When a sheep is named jeb_, shearing its wool will drop wool of a random color
       cryingObsidianNetherPortal:
         desc: Nether portals can be constructed using crying obsidian
       furnaceSmeltingTimeController:
         desc: 'The time required to control the smelting of items in the furnace (unit: Tick)'
+      fakePlayerDefaultSurvivalMode:
+        desc: When summoning fake players, they are default to survival mode anyway
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

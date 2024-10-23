@@ -532,6 +532,8 @@ carpetamsaddition:
       easyRefreshTrades:
         name: 轻松刷新交易
         desc: 当村民之前没有与玩家达成过交易时，每次打开交易界面都会刷新村民出售的内容
+        extra:
+          '0': '当玩家主手拿着绿宝石块时将不会触发刷新'
       jebSheepDropRandomColorWool:
         name: jeb羊掉落随机颜色羊毛
         desc: 当羊被命名为jeb_后，修剪羊毛会掉落随机颜色的羊毛
@@ -541,6 +543,9 @@ carpetamsaddition:
       furnaceSmeltingTimeController:
         name: 熔炉冶炼时间控制器
         desc: 控制熔炉冶炼物品所需要的时间（单位：Tick）
+      fakePlayerDefaultSurvivalMode:
+        name: 假人默认生存模式
+        desc: 当召唤假人时，无论如何假人都默认为生存模式
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
