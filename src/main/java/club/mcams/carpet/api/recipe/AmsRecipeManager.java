@@ -28,9 +28,9 @@ import com.google.gson.JsonElement;
 //#if MC>=12102
 //$$ import club.mcams.carpet.AmsServer;
 //$$ import com.google.gson.JsonParseException;
-//$$ import net.minecraft.recipe.Recipe;
-//$$ import net.minecraft.recipe.RecipeEntry;
-//$$ import net.minecraft.recipe.RecipeManager;
+//$$ import net.minecraft.recipe.*;
+//$$ import net.minecraft.registry.RegistryKey;
+//$$ import net.minecraft.registry.RegistryKeys;
 //$$ import net.minecraft.registry.RegistryWrapper;
 //$$ import java.util.HashMap;
 //#endif
@@ -69,10 +69,16 @@ public class AmsRecipeManager {
     //#if MC>=12102
     //$$ private void deserializeRecipe(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup, Identifier id, JsonElement json) {
     //$$     try {
-    //$$         RecipeEntry<?> recipeEntry = RecipeManager.deserialize(id, json.getAsJsonObject(), wrapperLookup);
+    //$$         RecipeEntry<?> recipeEntry = ServerRecipeManager.deserialize(
+    //$$             RegistryKey.of(RegistryKeys.RECIPE, id),
+    //$$             json.getAsJsonObject(),
+    //$$             wrapperLookup
+    //$$         );
     //$$         map.put(id, recipeEntry.value());
     //$$     } catch (JsonParseException e) {
-    //$$         AmsServer.LOGGER.warn("Failed to parse recipe: {}", id);
+    //$$         AmsServer.LOGGER.warn("Failed to parse recipe: {}, error: {}", id, e.getMessage());
+    //$$     } catch (Exception e) {
+    //$$         AmsServer.LOGGER.error("Unexpected error during recipe deserialization: {}, error: {}", id, e);
     //$$     }
     //$$ }
     //#endif

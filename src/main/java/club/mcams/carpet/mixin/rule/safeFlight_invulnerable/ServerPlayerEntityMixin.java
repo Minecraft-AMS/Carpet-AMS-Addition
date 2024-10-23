@@ -28,6 +28,9 @@ import net.minecraft.entity.damage.DamageSource;
 //#endif
 import net.minecraft.server.network.ServerPlayerEntity;
 
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -36,7 +39,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ServerPlayerEntity.class)
 public abstract class ServerPlayerEntityMixin {
     @Inject(method = "isInvulnerableTo",at = @At("TAIL"), cancellable = true)
-    private void isInvulnerableTo(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+    private void isInvulnerableTo(
+        //#if MC>=12102
+        //$$ ServerWorld world,
+        //#endif
+        DamageSource damageSource, CallbackInfoReturnable<Boolean> cir
+    ) {
         //#if MC>11900
         //$$ if (AmsServerSettings.safeFlight && damageSource.isOf(DamageTypes.FLY_INTO_WALL)) {
         //#else
@@ -45,6 +53,7 @@ public abstract class ServerPlayerEntityMixin {
             cir.setReturnValue(true);
             cir.cancel();
         }
+
         //#if MC>11900
         //$$ if (AmsServerSettings.invulnerable && !damageSource.isOf(DamageTypes.OUT_OF_WORLD)) {
         //#else

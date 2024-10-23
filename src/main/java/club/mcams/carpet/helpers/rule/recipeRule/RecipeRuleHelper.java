@@ -31,7 +31,12 @@ import net.minecraft.recipe.Recipe;
 //#if MC>=12002
 //$$ import net.minecraft.recipe.RecipeEntry;
 //#endif
+
+//#if MC>=12102
+//$$ import net.minecraft.recipe.ServerRecipeManager;
+//#else
 import net.minecraft.recipe.RecipeManager;
+//#endif
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -41,22 +46,21 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 
 public class RecipeRuleHelper {
-    @SuppressWarnings("ExtractMethodRecommender")
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayerEntity player) {
         if (server != null && server.isRunning() && hasActiveRecipeRule()) {
-            RecipeManager recipeManager = server.getRecipeManager();
             //#if MC>=12002
-            //$$ Collection<RecipeEntry<?>> allRecipes = recipeManager.values();
+            //$$ Collection<RecipeEntry<?>> allRecipes = getServerRecipeManager(server).values();
             //$$ for (RecipeEntry<?> recipe : allRecipes) {
-            //$$     if (recipe.id().getNamespace().equals(AmsServer.compactName) && !player.getRecipeBook().contains(recipe)) {
+            //$$     Identifier recipeId = getRecipeId(recipe);
+            //$$     if (recipeId.getNamespace().startsWith(AmsServer.compactName)) {
             //$$         server.getCommandManager().executeWithPrefix(
             //$$             server.getCommandSource().withSilent(),
-            //$$             String.format("/recipe give %s %s", player.getName().getString(), recipe)
+            //$$             String.format("/recipe give %s %s", player.getName().getString(), recipeId)
             //$$         );
             //$$     }
             //$$ }
             //#else
-            Collection<Recipe<?>> allRecipes = recipeManager.values();
+            Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
             for (Recipe<?> recipe : allRecipes) {
                 Identifier recipeId = recipe.getId();
                 if (recipeId.getNamespace().equals(AmsServer.compactName) && !player.getRecipeBook().contains(recipeId)) {
@@ -70,23 +74,25 @@ public class RecipeRuleHelper {
         }
     }
 
-    @SuppressWarnings("ExtractMethodRecommender")
     public static void onValueChange(MinecraftServer server) {
         if (server != null && server.isRunning()) {
             AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
             AmsServerCustomRecipes.getInstance().buildRecipes();
             server.execute(() -> {
                 server.getCommandManager().execute(server.getCommandSource().withSilent(), "/reload");
-                RecipeManager recipeManager = server.getRecipeManager();
                 //#if MC>=12002
-                //$$ Collection<RecipeEntry<?>> allRecipes = recipeManager.values();
+                //$$ Collection<RecipeEntry<?>> allRecipes = getServerRecipeManager(server).values();
                 //$$ for (RecipeEntry<?> recipe : allRecipes) {
-                //$$     if (recipe.id().getNamespace().equals(AmsServer.compactName)) {
-                //$$         server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "/recipe give @a " + recipe);
+                //$$     Identifier recipeId = getRecipeId(recipe);
+                //$$     if (recipeId.getNamespace().startsWith(AmsServer.compactName)) {
+                //$$         server.getCommandManager().executeWithPrefix(
+                //$$             server.getCommandSource().withSilent(),
+                //$$             "/recipe give @a " + recipeId.toString()
+                //$$         );
                 //$$     }
                 //$$ }
                 //#else
-                Collection<Recipe<?>> allRecipes = recipeManager.values();
+                Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
                 for (Recipe<?> recipe : allRecipes) {
                     Identifier recipeId = recipe.getId();
                     if (recipeId.getNamespace().equals(AmsServer.compactName)) {
@@ -123,4 +129,22 @@ public class RecipeRuleHelper {
         }
         return false;
     }
+
+    //#if MC>=12102
+    //$$ private static ServerRecipeManager getServerRecipeManager(MinecraftServer server) {
+    //#else
+    private static RecipeManager getServerRecipeManager(MinecraftServer server) {
+    //#endif
+        return server.getRecipeManager();
+    }
+
+    //#if MC>=12102
+    //$$ private static Identifier getRecipeId(RecipeEntry<?> recipe) {
+    //$$     return recipe.id().getValue();
+    //$$ }
+    //#elseif MC>=12002
+    //$$ private static Identifier getRecipeId(RecipeEntry<?> recipe) {
+    //$$     return recipe.id();
+    //$$ }
+    //#endif
 }

@@ -24,54 +24,25 @@ import club.mcams.carpet.AmsServer;
 
 import com.google.gson.JsonElement;
 
-//#if MC>=12102
-//$$ import net.minecraft.recipe.Recipe;
-//$$ import net.minecraft.registry.RegistryWrapper;
-//#endif
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.profiler.Profiler;
 
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC>=12102
-//$$ import org.spongepowered.asm.mixin.Unique;
-//#endif
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Map;
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+import java.util.*;
+
+@GameVersion(version = "Minecraft < 1.21.2")
 @Mixin(RecipeManager.class)
 public abstract class RecipeManagerMixin {
-
-    //#if MC>=12102
-    //$$ @Unique
-    //$$ private RegistryWrapper.WrapperLookup wrapperLookup;
-    //#endif
-
-    //#if MC>=12102
-    //$$ @Inject(method = "<init>", at = @At("TAIL"))
-    //$$ private void init(RegistryWrapper.WrapperLookup registries, CallbackInfo ci) {
-    //$$     this.wrapperLookup = registries;
-    //$$ }
-    //#endif
-
     @Inject(method = "apply(Ljava/util/Map;Lnet/minecraft/resource/ResourceManager;Lnet/minecraft/util/profiler/Profiler;)V", at = @At("HEAD"))
-    private void registerCustomRecipes(
-        //#if MC>=12102
-        //$$ Map<Identifier, Recipe<?>> map,
-        //#else
-        Map<Identifier, JsonElement> map,
-        //#endif
-        ResourceManager resourceManager, Profiler profiler, CallbackInfo ci
-    ) {
-        AmsServer.getInstance().registerCustomRecipes(
-            map
-            //#if MC>=12102
-            //$$ , this.wrapperLookup
-            //#endif
-        );
+    private void registerCustomRecipes(Map<Identifier, JsonElement> map, ResourceManager resourceManager, Profiler profiler, CallbackInfo ci) {
+        AmsServer.getInstance().registerCustomRecipes(map);
     }
 }

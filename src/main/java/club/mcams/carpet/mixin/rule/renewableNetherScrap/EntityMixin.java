@@ -25,6 +25,9 @@ import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
 import net.minecraft.item.Items;
 import net.minecraft.entity.mob.ZombifiedPiglinEntity;
 
@@ -42,12 +45,24 @@ public abstract class EntityMixin {
 
     @Shadow
     @Nullable
+    //#if MC>=12102
+    //$$ public abstract ItemEntity dropStack(ServerWorld par1, ItemStack par2);
+    //#else
     public abstract ItemEntity dropStack(ItemStack stack, float yOffset);
+    //#endif
 
     @Unique
     private boolean isFirstDrop = true;
 
-    @Inject(method = "dropStack(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;", at = @At("TAIL"), cancellable = true)
+    @Inject(
+        //#if MC>=12102
+        //$$ method = "dropStack(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;",
+        //#else
+        method = "dropStack(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;",
+        //#endif
+        at = @At("TAIL"),
+        cancellable = true
+    )
     private void dropNetheriteScrap(CallbackInfoReturnable<ItemEntity> cir) {
         if (AmsServerSettings.renewableNetheriteScrap != 0.0D && isFirstDrop) {
             Entity entity = (Entity) (Object) this;
@@ -56,7 +71,11 @@ public abstract class EntityMixin {
                 double rate = AmsServerSettings.renewableNetheriteScrap;
                 if (random < rate) {
                     ItemStack netherScrapStack = new ItemStack(Items.NETHERITE_SCRAP);
+                    //#if MC>=12102
+                    //$$ ItemEntity netherScrapItemEntity = this.dropStack((ServerWorld) entity.getWorld(), netherScrapStack);
+                    //#else
                     ItemEntity netherScrapItemEntity = this.dropStack(netherScrapStack, 1.1F);
+                    //#endif
                     isFirstDrop = false;
                     cir.setReturnValue(netherScrapItemEntity);
                 }

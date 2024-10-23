@@ -53,6 +53,7 @@
     "rule.experimentalContentCheckDisabled.ToggleableFeatureMixin",
     "rule.extinguishedCampfire_campfireSmokeParticleDisabled.CampfireBlockMixin",
     "rule.fakePeace.SpawnHelperMixin",
+    "rule.fakePlayerDefaultSurvivalMode.Carpet_PlayerCommandMixin",
     "rule.fakePlayerInteractLikeClient.BoatEntityInvoker",
     "rule.fakePlayerInteractLikeClient.EntityPlayerActionPackActionTypeMixin",
     "rule.fakePlayerNoScoreboardCounter.PlayerEntityMixin",

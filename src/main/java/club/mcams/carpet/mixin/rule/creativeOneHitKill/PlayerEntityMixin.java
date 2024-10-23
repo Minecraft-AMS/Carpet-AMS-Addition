@@ -27,6 +27,9 @@ import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.player.PlayerAbilities;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 
@@ -70,10 +73,19 @@ public abstract class PlayerEntityMixin implements EntityAccessorMixin {
         ) {
             Consumer<Entity> instaKill = (target2) -> {
                 if (target2 instanceof EnderDragonPart) {
+                    //#if MC>=12102
+                    //$$ Arrays.stream(((EnderDragonPart) target2).owner.getBodyParts()).forEach(Entity -> target2.kill((ServerWorld) target2.getWorld()));
+                    //$$ ((EnderDragonPart) target2).owner.kill((ServerWorld) target2.getWorld());
+                    //#else
                     Arrays.stream(((EnderDragonPart) target2).owner.getBodyParts()).forEach(Entity::kill);
                     ((EnderDragonPart) target2).owner.kill();
+                    //#endif
                 } else {
+                    //#if MC>=12102
+                    //$$ target2.kill((ServerWorld) target2.getWorld());
+                    //#else
                     target2.kill();
+                    //#endif
                 }
             };
             instaKill.accept(target);

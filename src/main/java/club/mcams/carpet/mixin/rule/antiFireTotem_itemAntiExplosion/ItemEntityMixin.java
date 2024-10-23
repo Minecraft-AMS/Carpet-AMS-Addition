@@ -24,6 +24,9 @@ import club.mcams.carpet.AmsServerSettings;
 
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.damage.DamageSource;
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 //#if MC>=11900
@@ -51,7 +54,12 @@ public abstract class ItemEntityMixin {
     }
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-    private void damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    private void damage(
+        //#if MC>=12102
+        //$$ ServerWorld world,
+        //#endif
+        DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir
+    ) {
         //#if MC>=11900
         //$$ if(AmsServerSettings.itemAntiExplosion && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
         //#else

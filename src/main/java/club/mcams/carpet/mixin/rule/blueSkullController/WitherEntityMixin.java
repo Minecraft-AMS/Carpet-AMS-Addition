@@ -26,8 +26,12 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.world.Difficulty;
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//#else
 import net.minecraft.world.World;
+//#endif
+import net.minecraft.world.Difficulty;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -56,14 +60,25 @@ public abstract class WitherEntityMixin {
         method = "mobTick",
         at = @At(
             value = "INVOKE",
+            //#if MC>=12102
+            //$$ target = "Lnet/minecraft/server/world/ServerWorld;getDifficulty()Lnet/minecraft/world/Difficulty;"
+            //#else
             target = "Lnet/minecraft/world/World;getDifficulty()Lnet/minecraft/world/Difficulty;"
+            //#endif
         )
     )
-    private Difficulty modifyDifficulty(World instance, Operation<Difficulty> original) {
+    private Difficulty modifyDifficulty(
+        //#if MC>=12102
+        //$$ ServerWorld world,
+        //#else
+        World world,
+        //#endif
+        Operation<Difficulty> original
+    ) {
         if(AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.NEVER) {
             return Difficulty.EASY;
         } else {
-            return original.call(instance);
+            return original.call(world);
         }
     }
 }

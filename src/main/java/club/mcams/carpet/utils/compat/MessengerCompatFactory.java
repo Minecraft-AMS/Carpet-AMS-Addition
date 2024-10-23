@@ -67,7 +67,7 @@ public class MessengerCompatFactory {
         //#if MC<11900
         player.sendSystemMessage(text, Util.NIL_UUID);
         //#else
-        //$$ player.sendMessage(text);
+        //$$ player.sendMessage(text, false);
         //#endif
     }
 

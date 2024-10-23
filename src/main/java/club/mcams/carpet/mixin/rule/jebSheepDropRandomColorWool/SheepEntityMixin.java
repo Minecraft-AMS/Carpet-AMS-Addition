@@ -29,11 +29,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.passive.SheepEntity;
 //#if MC>=12102
-//$$ import net.minecraft.item.DyeItem;
 //$$ import net.minecraft.item.ItemStack;
 //$$ import net.minecraft.loot.LootTable;
 //$$ import net.minecraft.registry.RegistryKey;
-//$$ import java.util.function.Consumer;
+//$$ import java.util.function.BiConsumer;
+//$$ import net.minecraft.server.world.ServerWorld;
 //#endif
 import net.minecraft.util.DyeColor;
 
@@ -50,19 +50,19 @@ public abstract class SheepEntityMixin {
     //$$     method = "sheared",
     //$$     at = @At(
     //$$         value = "INVOKE",
-    //$$         target = "Lnet/minecraft/entity/passive/SheepEntity;forEachShearedItem(Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/item/ItemStack;Ljava/util/function/Consumer;)V"
+    //$$         target = "Lnet/minecraft/entity/passive/SheepEntity;forEachShearedItem(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/item/ItemStack;Ljava/util/function/BiConsumer;)V"
     //$$     )
     //$$ )
-    //$$ private void redirectDropStack(SheepEntity sheepEntity, RegistryKey<LootTable> registryKey, ItemStack itemStack, Consumer<ItemStack> consumer, Operation<Void> original) {
+    //$$ private void redirectDropStack(SheepEntity sheepEntity, ServerWorld world, RegistryKey<LootTable> registryKey, ItemStack shears, BiConsumer<ServerWorld, ItemStack> consumer, Operation<Void> original) {
     //$$     if (AmsServerSettings.jebSheepDropRandomColorWool && isJebSheep(sheepEntity)) {
     //$$         Random random = new Random();
     //$$         for (int i = 0; i < 1 + random.nextInt(3); ++i) {
     //$$             DyeColor randomColor = DyeColor.values()[random.nextInt(DyeColor.values().length)];
     //$$             Block coloredWoolBlock = getWoolBlockFromColor(randomColor);
-    //$$             consumer.accept(new ItemStack(coloredWoolBlock.asItem()));
+    //$$             consumer.accept(world, new ItemStack(coloredWoolBlock.asItem()));
     //$$         }
     //$$     } else {
-    //$$         original.call(sheepEntity, registryKey, itemStack, consumer);
+    //$$         original.call(sheepEntity, world, registryKey, shears, consumer);
     //$$     }
     //$$ }
     //#else
@@ -88,7 +88,7 @@ public abstract class SheepEntityMixin {
         return sheepEntity.hasCustomName() && sheepEntity.getCustomName() != null && sheepEntity.getCustomName().getString().equals("jeb_");
     }
 
-    @SuppressWarnings({"EnhancedSwitchMigration", "DuplicateBranchesInSwitch"})
+    @SuppressWarnings({"EnhancedSwitchMigration", "DuplicateBranchesInSwitch", "unused"})
     @Unique
     private static Block getWoolBlockFromColor(DyeColor color) {
         switch (color) {

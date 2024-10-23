@@ -222,8 +222,8 @@ public class AmsServerSettings {
     //#if MC>=12005
     //$$ @GameVersion(version = "Minecraft >= 1.20.5")
     //$$ @Rule(
-    //$$         options = {"server", "global"},
-    //$$         categories = {AMS, FEATURE, SURVIVAL}
+    //$$     options = {"server", "global"},
+    //$$     categories = {AMS, FEATURE, SURVIVAL}
     //$$ )
     //$$ public static String maxPlayerEntityInteractionRangeScope = "server";
     //#endif
@@ -524,6 +524,10 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL}, strict = false)
     public static int furnaceSmeltingTimeController = -1;
 
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean fakePlayerDefaultSurvivalMode = false;
+
+
     /*
      * 区块加载规则
      */
@@ -567,6 +571,7 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
     public static boolean commandPlayerChunkLoadController = false;
 
+
     /*
      * 合成表规则
      */
@@ -575,7 +580,7 @@ public class AmsServerSettings {
     public static boolean craftableEnchantedGoldenApples = false;
 
     //#if MC>=11700 && MC<12102
-    @GameVersion(version = "Minecraft >= 1.17")
+    @GameVersion(version = "Minecraft 1.17 - 1.21.1")
     @RecipeRule
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean craftableBundle = false;

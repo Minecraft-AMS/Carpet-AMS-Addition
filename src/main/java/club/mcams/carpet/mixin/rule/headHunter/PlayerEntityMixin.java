@@ -25,6 +25,9 @@ import club.mcams.carpet.helpers.rule.headHunter_commandGetPlayerSkull.SkullSkin
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
 import net.minecraft.item.Items;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -46,7 +49,11 @@ public abstract class PlayerEntityMixin {
             PlayerEntity player = (PlayerEntity) (Object) this;
             ItemStack headStack = new ItemStack(Items.PLAYER_HEAD);
             SkullSkinHelper.writeNbtToPlayerSkull(player, headStack);
+            //#if MC>=12102
+            //$$ player.dropStack((ServerWorld) player.getWorld(), headStack);
+            //#else
             player.dropStack(headStack);
+            //#endif
         }
     }
 }

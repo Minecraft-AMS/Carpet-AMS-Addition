@@ -55,7 +55,11 @@ public abstract class ShulkerBulletEntityMixin {
         method = "onEntityHit",
         at = @At(
             value = "INVOKE",
+            //#if MC>=12102
+            //$$ target = "Lnet/minecraft/entity/Entity;sidedDamage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
+            //#else
             target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
+            //#endif
         )
     )
     private float noDamage(float amount) {

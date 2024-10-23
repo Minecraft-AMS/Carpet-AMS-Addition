@@ -64,7 +64,7 @@ public abstract class AttributeCommandMixin {
                 player.sendMessage(
                     Messenger.s(
                         MSG_HEAD + translator.tr("maxPlayerBlockInteractionRange.disable_command").getString()
-                    ).formatted(Formatting.RED)
+                    ).formatted(Formatting.RED), false
                 );
             }
         } else {
@@ -86,7 +86,7 @@ public abstract class AttributeCommandMixin {
                 player.sendMessage(
                     Messenger.s(
                         MSG_HEAD + translator.tr("maxPlayerEntityInteractionRange.disable_command").getString()
-                    ).formatted(Formatting.RED)
+                    ).formatted(Formatting.RED), false
                 );
             }
         } else {

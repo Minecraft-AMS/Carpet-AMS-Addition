@@ -26,6 +26,9 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.mob.AbstractSkeletonEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.item.Items;
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
 import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,7 +45,12 @@ public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
     @Inject(method = "dropEquipment", at = @At("TAIL"))
     private void dropEquipment(CallbackInfo ci) {
         if (AmsServerSettings.easyWitherSkeletonSkullDrop) {
+            //#if MC>=12102
+            //$$ WitherSkeletonEntity wither = (WitherSkeletonEntity) (Object) this;
+            //$$ this.dropItem((ServerWorld) wither.getWorld(), Items.WITHER_SKELETON_SKULL);
+            //#else
             this.dropItem(Items.WITHER_SKELETON_SKULL);
+            //#endif
         }
     }
 }
