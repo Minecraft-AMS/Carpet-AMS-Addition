@@ -27,6 +27,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.village.TradeOfferList;
 import net.minecraft.village.TradeOffers;
@@ -66,7 +67,7 @@ public abstract class VillagerEntityMixin implements AbstractTraderEntityInvoker
     private void updateRecipes(PlayerEntity player, Hand hand, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.easyRefreshTrades) {
             VillagerEntity villagerEntity = (VillagerEntity) (Object) this;
-            if (isNewMerchant(villagerEntity)) {
+            if (isNewMerchant(villagerEntity) && !player.getMainHandStack().getItem().equals(Items.EMERALD_BLOCK)) {
                 this.invokeFillRecipes();
             }
         }
