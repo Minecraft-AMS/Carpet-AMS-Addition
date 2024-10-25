@@ -809,7 +809,19 @@ Use the following command to control whether it is forcibly enabled when `custom
 
 /amsUpdateSuppressionCrashFixForceMode true/false
 
-- Type: `boolean`
+- `false`: Disable rule
+
+
+
+- `true`: Enable rule
+
+
+
+- `silence`: Enable but no send server messages
+
+
+
+- Type: `String`
 
 
 
@@ -817,7 +829,7 @@ Use the following command to control whether it is forcibly enabled when `custom
 
 
 
-- Suggested options: `false` , `true`
+- Suggested options: `false` , `true`, `silence`
 
 
 
@@ -2175,6 +2187,8 @@ Full moon every day.
 
 When a villager has not made a deal with the player before, each time the trade screen is opened, the content sold by the villager will be refreshed.
 
+When the player is holding an emerald block in their main hand, the refresh will not be triggered.
+
 - Type: `boolean`
 
 
@@ -2242,6 +2256,24 @@ The time required to control the smelting of items in the furnace (unit: Tick).
 
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## fakePlayerDefaultSurvivalMode
+
+When summoning fake players, they are default to survival mode anyway.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
 
 ## craftableEnchantedGoldApple
 

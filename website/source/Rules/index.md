@@ -774,6 +774,18 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 /amsUpdateSuppressionCrashFixForceMode true/false
 
+- `false`: 禁用规则
+
+
+
+- `true`: 启用规则
+
+
+
+- `silence`: 启用但不发送服务器消息
+
+
+
 - 类型: `boolean`
 
 
@@ -2156,6 +2168,8 @@ json位置：
 
 当村民之前没有与玩家达成过交易时，每次打开交易界面都会刷新村民出售的内容。
 
+当玩家主手拿着绿宝石块时将不会触发刷新。
+
 - 类型: `boolean`
 
 
@@ -2223,6 +2237,24 @@ json位置：
 
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 假人默认生存模式（fakePlayerDefaultSurvivalMode）
+
+当召唤假人时，无论如何假人都默认为生存模式。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
