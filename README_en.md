@@ -15,6 +15,7 @@ https://minecraft-ams.github.io/carpetamsaddition/
 
 |       Game Version        | Development Status |                    Last Supported Version                    |
 |:-------------------------:| :----------------: | :----------------------------------------------------------: |
+|          1.21.4           |         ✔          |                             ---                              |
 |          1.21.3           |         ✔          |                             ---                              |
 |          1.21.2           |         ✔          |                             ---                              |
 |          1.21.1           |         ✔          |                             ---                              |
