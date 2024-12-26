@@ -22,6 +22,7 @@ package club.mcams.carpet.mixin.rule.breedableParrots;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import club.mcams.carpet.utils.RegexTools;
 import net.minecraft.entity.EntityType;
 //#if MC>=12102
 //$$ import net.minecraft.entity.SpawnReason;
@@ -59,7 +60,7 @@ public abstract class ParrotEntityMixin extends TameableShoulderEntity {
     @Inject(method = "isBreedingItem", at = @At("HEAD"), cancellable = true)
     private void isBreedingItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.breedableParrots, "none")) {
-            String item = stack.getItem().toString();
+            String item = RegexTools.getItemRegisterName(stack.getItem().toString());
             if (Objects.equals(AmsServerSettings.breedableParrots, item)) {
                 cir.setReturnValue(true);
             }
@@ -67,10 +68,10 @@ public abstract class ParrotEntityMixin extends TameableShoulderEntity {
     }
 
     @Inject(method = "canBreedWith", at = @At("HEAD"), cancellable = true)
-    private void canBreedWith(AnimalEntity other, CallbackInfoReturnable<Boolean> cir) {
+    private void canBreedWith(AnimalEntity animalEntity, CallbackInfoReturnable<Boolean> cir) {
         if (
             !Objects.equals(AmsServerSettings.breedableParrots, "none") &&
-            other instanceof ParrotEntity
+            animalEntity instanceof ParrotEntity
         ) {
             cir.setReturnValue(true);
         }

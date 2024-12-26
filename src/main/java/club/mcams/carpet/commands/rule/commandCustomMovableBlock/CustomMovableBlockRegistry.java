@@ -24,9 +24,9 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.config.rule.commandCustomMovableBlock.CustomMovableBlockConfig;
-
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.RegexTools;
+
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.block.BlockState;
@@ -137,6 +137,7 @@ public class CustomMovableBlockRegistry {
         return 1;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private static int help(ServerPlayerEntity player) {
         String setHelpText = translator.tr("help.set").getString();
         String removeHelpText = translator.tr("help.remove").getString();
