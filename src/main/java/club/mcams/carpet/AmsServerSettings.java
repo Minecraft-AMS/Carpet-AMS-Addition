@@ -527,6 +527,17 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean fakePlayerDefaultSurvivalMode = false;
 
+    @Rule(
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, SURVIVAL, COMMAND}
+    )
+    public static String commandGetHeldItemID = "false";
+
+    //#if MC>=12102
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    //$$ public static boolean tripwireHookDupeReintroduced = false;
+    //#endif
+
 
     /*
      * 区块加载规则

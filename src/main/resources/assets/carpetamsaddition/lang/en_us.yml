@@ -94,6 +94,9 @@ carpetamsaddition:
         remove: '/customMovableBlock remove <block>  ->  Delete a movable block'
         removeAll: '/customMovableBlock removeAll  ->  Removes all added movable blocks'
         list: '/customMovableBlock list  ->  Check out the list of movable blocks'
+    commandGetHeldItemID:
+      getHeldItemID:
+        copy: 'Copy to clipboard'
 
   logger:
     serverRuntime:
@@ -439,6 +442,10 @@ carpetamsaddition:
         desc: 'The time required to control the smelting of items in the furnace (unit: Tick)'
       fakePlayerDefaultSurvivalMode:
         desc: When summoning fake players, they are default to survival mode anyway
+      commandGetHeldItemID:
+        desc: Use "/getHeldItemID" command to get item ID of the player main hand item
+      tripwireHookDupeReintroduced:
+        desc: Reintroduced the tripwire hook dupe feature
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

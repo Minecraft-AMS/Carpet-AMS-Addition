@@ -160,6 +160,7 @@
     "rule.superleash.MobEntityMixin",
     "rule.superZombieDoctor.ZombieVillagerEntityAccessor",
     "rule.superZombieDoctor.ZombieVillagerEntityMixin",
+    "rule.tripwireHookDupeReintroduced.TripwireHookBlockMixin",
     "rule.undyingCoral.CoralBlockBlockMixin",
     "rule.undyingCoral.CoralParentBlockMixin",
     "rule.useItemCooldownDisabled.ItemCooldownManagerMixin",

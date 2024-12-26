@@ -94,6 +94,10 @@ carpetamsaddition:
         remove: '/customMovableBlock remove <方块注册名>  ->  删除一个可移动方块'
         removeAll: '/customMovableBlock removeAll  ->  删除所有添加的可移动方块'
         list: '/customMovableBlock list  ->  查看可移动方块列表'
+    commandGetHeldItemID:
+      getHeldItemID:
+        copy: '复制到剪切板'
+
 
   logger:
     serverRuntime:
@@ -546,6 +550,12 @@ carpetamsaddition:
       fakePlayerDefaultSurvivalMode:
         name: 假人默认生存模式
         desc: 当召唤假人时，无论如何假人都默认为生存模式
+      commandGetHeldItemID:
+        name: 获取主手物品ID
+        desc: 使用“/getHeldItemID”命令来获取玩家主手物品的物品ID
+      tripwireHookDupeReintroduced:
+        name: 重新引入拌线钩欺骗特性
+        desc: 重新引入拌线钩欺骗特性
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

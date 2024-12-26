@@ -22,6 +22,7 @@ package club.mcams.carpet.commands;
 
 import club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
 import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockRegistry;
+import club.mcams.carpet.commands.rule.commandGetHeldItemID.GetHeldItemIDCommandRegistry;
 import club.mcams.carpet.commands.rule.commandGetPlayerSkull.GetPlayerSkullCommandRegistry;
 import club.mcams.carpet.commands.rule.commandGetSaveSize.GetSaveSizeCommandRegistry;
 import club.mcams.carpet.commands.rule.commandGetSystemInfo.GetSystemInfoCommandRegistry;
@@ -86,5 +87,7 @@ public class RegisterCommands {
             //$$ , commandBuildContext
             //#endif
         );
+
+        GetHeldItemIDCommandRegistry.register(dispatcher);
     }
 }
