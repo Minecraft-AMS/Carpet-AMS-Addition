@@ -2275,6 +2275,44 @@ When summoning fake players, they are default to survival mode anyway.
 
 - Categroies: `AMS`, `FEATURE`
 
+## commandGetHeldItemID
+
+Use "/getHeldItemID" command to get item ID of the player main hand item.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `COMMAND`
+
+## tripwireHookDupeReintroduced
+
+Reintroduced the tripwire hook dupe feature.
+
+< Available for Minecraft >= 1.21.2 >
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.

@@ -2256,6 +2256,44 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`
 
+## 获取主手物品ID（commandGetHeldItemID）
+
+使用“/getHeldItemID”命令来获取玩家主手物品的物品ID。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `SURVIVAL`, `COMMAND`
+
+## 重新引入拌线钩欺骗特性（tripwireHookDupeReintroduced）
+
+重新引入拌线钩欺骗特性。
+
+<该规则 Minecraft >= 1.21.2 可用>
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

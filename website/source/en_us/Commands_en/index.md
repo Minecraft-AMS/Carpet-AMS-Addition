@@ -198,3 +198,9 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 - `/customMovableBlock help`
 
   View the usage instructions.
+
+### commandGetHeldItemID
+
+- `/getHeldItemID`
+
+  Get item ID of the player main hand item.

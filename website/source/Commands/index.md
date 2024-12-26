@@ -198,3 +198,9 @@
 - `/customMovableBlock help`
 
   查看使用说明。
+
+### 获取主手物品ID（commandGetHeldItemID）
+
+- `/getHeldItemID`
+
+  获取玩家主手物品的物品ID。
