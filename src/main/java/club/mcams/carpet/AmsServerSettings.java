@@ -535,7 +535,7 @@ public class AmsServerSettings {
 
     //#if MC>=12102
     //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    //$$ public static boolean tripwireHookDupeReintroduced = false;
+    //$$ public static boolean stringDupeReintroduced = false;
     //#endif
 
 
