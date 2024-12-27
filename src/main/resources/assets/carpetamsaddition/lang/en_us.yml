@@ -444,8 +444,8 @@ carpetamsaddition:
         desc: When summoning fake players, they are default to survival mode anyway
       commandGetHeldItemID:
         desc: Use "/getHeldItemID" command to get item ID of the player main hand item
-      tripwireHookDupeReintroduced:
-        desc: Reintroduced the tripwire hook dupe feature
+      stringDupeReintroduced:
+        desc: Reintroduced the string dupe feature, you can use this rule to continue using the string farm
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

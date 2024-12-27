@@ -18,31 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.tripwireHookDupeReintroduced;
+package club.mcams.carpet.mixin.rule.stringDupeReintroduced;
 
-import club.mcams.carpet.AmsServerSettings;
-
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-
-import net.minecraft.block.TripwireHookBlock;
+import club.mcams.carpet.utils.compat.DummyClass;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@SuppressWarnings("SimplifiableConditionalExpression")
 @GameVersion(version = "Minecraft >= 1.21.2", desc = "https://bugs.mojang.com/browse/MC-59471")
-@Mixin(TripwireHookBlock.class)
-public abstract class TripwireHookBlockMixin {
-    @ModifyExpressionValue(
-        method = "update",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", ordinal = 3
-        )
-    )
-    private static boolean tripwireHookDupeReintroduced(boolean original) {
-        return AmsServerSettings.tripwireHookDupeReintroduced ? true : original;
-    }
-}
+@Mixin(DummyClass.class)
+public abstract class TripwireHookBlockMixin {}

@@ -553,9 +553,9 @@ carpetamsaddition:
       commandGetHeldItemID:
         name: 获取主手物品ID
         desc: 使用“/getHeldItemID”命令来获取玩家主手物品的物品ID
-      tripwireHookDupeReintroduced:
-        name: 重新引入拌线钩欺骗特性
-        desc: 重新引入拌线钩欺骗特性
+      stringDupeReintroduced:
+        name: 重新引入拌线骗特性
+        desc: 重新引入拌线骗特性，可以通过此规则来继续使用刷线机
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
