@@ -2293,9 +2293,9 @@ Use "/getHeldItemID" command to get item ID of the player main hand item.
 
 - Categroies: `AMS`, `SURVIVAL`, `COMMAND`
 
-## tripwireHookDupeReintroduced
+## stringDupeReintroduced
 
-Reintroduced the tripwire hook dupe feature.
+Reintroduced the string dupe feature, you can use this rule to continue using the string farm.
 
 < Available for Minecraft >= 1.21.2 >
 

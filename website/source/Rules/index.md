@@ -2274,9 +2274,9 @@ json位置：
 
 - 分类: `AMS`, `SURVIVAL`, `COMMAND`
 
-## 重新引入拌线钩欺骗特性（tripwireHookDupeReintroduced）
+## 重新引入拌线欺骗特性（stringDupeReintroduced）
 
-重新引入拌线钩欺骗特性。
+重新引入拌线欺骗特性，可以通过此规则来继续使用刷线机。
 
 <该规则 Minecraft >= 1.21.2 可用>
 
