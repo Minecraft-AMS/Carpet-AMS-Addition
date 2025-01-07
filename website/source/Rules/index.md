@@ -2294,6 +2294,78 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 女巫红石粉掉落控制器（witchRedstoneDustDropController）
+
+设置女巫掉落红石粉的保底数量。
+
+- 类型: `int`
+
+
+
+- 默认值: `-1`
+
+
+
+- 参考选项: `-1 - 999999`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 女巫萤石粉掉落控制器（witchGlowstoneDustDropController）
+
+设置女巫掉落萤石粉的保底数量。
+
+- 类型: `int`
+
+
+
+- 默认值: `-1`
+
+
+
+- 参考选项: `-1 - 999999`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## TNT威力控制器（tntPowerController）
+
+控制TNT的爆炸威力，设置为"-1"禁用规则。
+
+- 类型: `double`
+
+
+
+- 默认值: `-1.0D`
+
+
+
+- 参考选项: `-1.0D - 999999D`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
+
+## 温顺的末影人（meekEnderman）
+
+重新引入拌线欺骗特性，可以通过此规则来继续使用刷线机。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

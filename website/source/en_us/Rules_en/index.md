@@ -2313,6 +2313,78 @@ Reintroduced the string dupe feature, you can use this rule to continue using th
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## witchRedstoneDustDropController
+
+Set the guaranteed minimum amount of Redstone Dust dropped by witches.
+
+- Type: `int`
+
+
+
+- Default: `-1`
+
+
+
+- Suggested options: `-1 - 999999`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## witchGlowstoneDustDropController
+
+Set the guaranteed minimum amount of Glowstone Dust dropped by witches.
+
+- Type: `int`
+
+
+
+- Default: `-1`
+
+
+
+- Suggested options: `-1 - 999999`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## tntPowerController
+
+Controls the explosive power of TNT, setting it to "-1" to disable the rule.
+
+- Type: `double`
+
+
+
+- Default: `-1.0D`
+
+
+
+- Suggested options: `-1.0D - 999999D`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
+
+## meekEnderman
+
+You can casually glance at endermen.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
