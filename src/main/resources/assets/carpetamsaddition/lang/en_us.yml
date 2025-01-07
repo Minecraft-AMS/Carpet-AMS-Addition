@@ -446,6 +446,14 @@ carpetamsaddition:
         desc: Use "/getHeldItemID" command to get item ID of the player main hand item
       stringDupeReintroduced:
         desc: Reintroduced the string dupe feature, you can use this rule to continue using the string farm
+      witchRedstoneDustDropController:
+        desc: Set the guaranteed minimum amount of Redstone Dust dropped by witches
+      witchGlowstoneDustDropController:
+        desc: Set the guaranteed minimum amount of Glowstone Dust dropped by witches
+      tntPowerController:
+        desc: Controls the explosive power of TNT, setting it to "-1" to disable the rule
+      meekEnderman:
+        desc: You can casually glance at endermen
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -525,3 +533,7 @@ carpetamsaddition:
         desc: Use deepslate to crafted polished_blackstone_button in minecraft
       rottenFleshBurnedIntoLeather:
         desc: Rotten flesh can be burned into leather in a furnace
+
+      # 测试用规则
+      testRule:
+        desc: Just for test

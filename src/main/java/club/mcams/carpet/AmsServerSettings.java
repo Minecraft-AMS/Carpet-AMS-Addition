@@ -538,6 +538,30 @@ public class AmsServerSettings {
     //$$ public static boolean stringDupeReintroduced = false;
     //#endif
 
+    @Rule(
+        options = "-1",
+        categories = {AMS, FEATURE, SURVIVAL},
+        strict = false
+    )
+    public static int witchRedstoneDustDropController = -1;
+
+    @Rule(
+        options = "-1",
+        categories = {AMS, FEATURE, SURVIVAL},
+        strict = false
+    )
+    public static int witchGlowstoneDustDropController = -1;
+
+    @Rule(
+        options = "-1.0",
+        categories = {AMS, FEATURE, SURVIVAL, TNT},
+        strict = false
+    )
+    public static double tntPowerController = -1.0D;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean meekEnderman = false;
+
 
     /*
      * 区块加载规则
@@ -639,4 +663,8 @@ public class AmsServerSettings {
         END,
         ALL
     }
+
+    @SuppressWarnings("unused")
+    @Rule(categories = AMS)
+    public static boolean testRule = false;
 }

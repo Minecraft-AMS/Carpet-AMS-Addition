@@ -556,6 +556,18 @@ carpetamsaddition:
       stringDupeReintroduced:
         name: 重新引入拌线骗特性
         desc: 重新引入拌线骗特性，可以通过此规则来继续使用刷线机
+      witchRedstoneDustDropController:
+        name: 女巫红石粉掉落控制器
+        desc: 设置女巫掉落红石粉的保底数量
+      witchGlowstoneDustDropController:
+        name: 女巫萤石粉掉落控制器
+        desc: 设置女巫掉落萤石粉的保底数量
+      tntPowerController:
+        name: TNT威力控制器
+        desc: 控制TNT的爆炸威力，设置为"-1"禁用规则
+      meekEnderman:
+        name: 温顺的末影人
+        desc: 你可以随便瞅末影人
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -657,3 +669,8 @@ carpetamsaddition:
       rottenFleshBurnedIntoLeather:
         name: 腐肉烧皮革
         desc: 腐肉可以在熔炉中烧成皮革
+
+      # 测试用规则
+      testRule:
+        name: 测试用规则
+        desc: 仅用于测试，没有什么作用
