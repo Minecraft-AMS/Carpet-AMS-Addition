@@ -18,20 +18,20 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.superleash;
+package club.mcams.carpet.mixin.rule.superLeash;
 
 import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.entity.passive.MerchantEntity;
+import net.minecraft.entity.mob.MobEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(MerchantEntity.class)
-public abstract class MerchantEntityMixin {
+@Mixin(MobEntity.class)
+public abstract class MobEntityMixin {
     @ModifyReturnValue(method = "canBeLeashedBy", at = @At("RETURN"))
     private boolean allowLeashed(boolean original) {
         return AmsServerSettings.superLeash ? true : original;

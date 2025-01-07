@@ -58,7 +58,7 @@ public class AMSTranslations {
                     translations.put(language, translation);
                     languages.add(language);
                 } catch (IOException e) {
-                    AmsServer.LOGGER.warn("Failed to load translation for language: " + language, e);
+                    AmsServer.LOGGER.warn("Failed to load translation for language: {}", language, e);
                 }
             });
         } catch (IOException e) {

@@ -20,17 +20,17 @@
 
 package club.mcams.carpet.api.recipe;
 
-import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.api.recipe.template.ShapedRecipeTemplate;
 import club.mcams.carpet.api.recipe.template.ShapelessRecipeTemplate;
 import club.mcams.carpet.api.recipe.template.SmeltingRecipeTemplate;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import com.mojang.serialization.JsonOps;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
@@ -57,19 +57,16 @@ public class AmsRecipeManager {
     public void registerRecipes(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup) {
         Map<Identifier, JsonElement> recipeMap = new HashMap<>();
         registerAllRecipes(recipeMap);
-        recipeMap.forEach((id, json) -> deserializeRecipe(map, wrapperLookup, id, json));
+        recipeMap.forEach((id, json) -> addRecipe(map, wrapperLookup, id, json));
     }
 
-    @SuppressWarnings("DuplicatedCode")
-    private void deserializeRecipe(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup, Identifier id, JsonElement json) {
-        try {
-            RecipeEntry<?> recipeEntry = ServerRecipeManager.deserialize(RegistryKey.of(RegistryKeys.RECIPE, id), json.getAsJsonObject(), wrapperLookup);
-            map.put(id, recipeEntry.value());
-        } catch (JsonParseException e) {
-            AmsServer.LOGGER.warn("Failed to parse recipe: {}, error: {}", id, e.getMessage());
-        } catch (Exception e) {
-            AmsServer.LOGGER.error("Unexpected error during recipe deserialization: {}, error: {}", id, e);
-        }
+    private void addRecipe(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup, Identifier id, JsonElement json) {
+        RecipeEntry<?> recipeEntry = this.deserializeRecipe(RegistryKey.of(RegistryKeys.RECIPE, id), json.getAsJsonObject(), wrapperLookup);
+        map.put(id, recipeEntry.value());
+    }
+
+    private RecipeEntry<?> deserializeRecipe(RegistryKey<Recipe<?>> key, JsonObject json, RegistryWrapper.WrapperLookup registries) {
+        return new RecipeEntry<>(key, Recipe.CODEC.parse(registries.getOps(JsonOps.INSTANCE), json).getOrThrow(JsonParseException::new));
     }
 
     private void registerAllRecipes(Map<Identifier, JsonElement> recipeMap) {

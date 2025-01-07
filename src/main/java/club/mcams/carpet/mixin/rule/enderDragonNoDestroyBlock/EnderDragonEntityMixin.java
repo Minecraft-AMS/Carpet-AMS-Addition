@@ -23,6 +23,7 @@ package club.mcams.carpet.mixin.rule.enderDragonNoDestroyBlock;
 import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 
 import org.spongepowered.asm.mixin.Mixin;

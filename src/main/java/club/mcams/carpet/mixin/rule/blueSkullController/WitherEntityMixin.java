@@ -44,11 +44,15 @@ public abstract class WitherEntityMixin {
     @Shadow
     protected abstract void shootSkullAt(int headIndex, double targetX, double targetY, double targetZ, boolean charged);
 
-    //#if MC>=11700
-    @Inject(method = "shootSkullAt(ILnet/minecraft/entity/LivingEntity;)V", at = @At("HEAD"), cancellable = true)
-    //#else
-    //$$ @Inject(method = "method_6878", at = @At("HEAD"), cancellable = true)
-    //#endif
+    @Inject(
+        //#if MC>=11700
+        method = "shootSkullAt(ILnet/minecraft/entity/LivingEntity;)V",
+        //#else
+        //$$ method = "method_6878",
+        //#endif
+        at = @At("HEAD"),
+        cancellable = true
+    )
     private void shootSkullAt(int headIndex, LivingEntity target, CallbackInfo ci) {
         if(AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.SURELY) {
             this.shootSkullAt(headIndex, target.getX(), target.getY() + (double)target.getStandingEyeHeight() * 0.5, target.getZ(), true);

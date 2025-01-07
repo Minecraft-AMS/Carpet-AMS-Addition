@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,22 +18,15 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.superleash;
+package club.mcams.carpet.mixin.rule.bambooModelNoOffset;
 
-import club.mcams.carpet.AmsServerSettings;
-
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.block.Block;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-@SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(MobEntity.class)
-public abstract class MobEntityMixin {
-    @ModifyReturnValue(method = "canBeLeashedBy", at = @At("RETURN"))
-    private boolean allowLeashed(boolean original) {
-        return AmsServerSettings.superLeash ? true : original;
-    }
+@Mixin(net.minecraft.block.AbstractBlock.AbstractBlockState.class)
+public interface AbstractBlockStateInvoker {
+    @Invoker("getBlock")
+    Block invokeGetBlock();
 }

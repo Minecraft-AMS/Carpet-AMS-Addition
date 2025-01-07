@@ -50,10 +50,7 @@ public abstract class BellBlockMixin {
         //#if MC>=11700
         Entity entity,
         //#endif
-        World world,
-        BlockPos pos,
-        Direction direction,
-        CallbackInfoReturnable<Boolean> cir
+        World world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir
     ) {
         if (AmsServerSettings.bellBlockChunkLoader && !world.isClient) {
             ChunkPos chunkPos = new ChunkPos(pos);

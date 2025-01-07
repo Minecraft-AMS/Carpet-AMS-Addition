@@ -23,12 +23,12 @@ package club.mcams.carpet.helpers.rule.recipeRule;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerCustomRecipes;
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.api.recipe.AmsRecipeManager;
 import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
+import club.mcams.carpet.api.recipe.AmsRecipeManager;
 import club.mcams.carpet.settings.RecipeRule;
 
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeManager;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -38,15 +38,16 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
-@GameVersion(version = "Minecraft < 1.20.2")
+@SuppressWarnings("DuplicatedCode")
+@GameVersion(version = "Minecraft >= 1.21.2")
 public class RecipeRuleHelper {
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayerEntity player) {
         if (server != null && server.isRunning() && hasActiveRecipeRule()) {
-            Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
-            for (Recipe<?> recipe : allRecipes) {
-                Identifier recipeId = recipe.getId();
-                if (recipeId.getNamespace().equals(AmsServer.compactName) && !player.getRecipeBook().contains(recipeId)) {
-                    server.getCommandManager().execute(
+            Collection<RecipeEntry<?>> allRecipes = getServerRecipeManager(server).values();
+            for (RecipeEntry<?> recipe : allRecipes) {
+                Identifier recipeId = getRecipeId(recipe);
+                if (recipeId.getNamespace().startsWith(AmsServer.compactName)) {
+                    server.getCommandManager().executeWithPrefix(
                         server.getCommandSource().withSilent(),
                         String.format("/recipe give %s %s", player.getName().getString(), recipeId)
                     );
@@ -61,11 +62,14 @@ public class RecipeRuleHelper {
             AmsServerCustomRecipes.getInstance().buildRecipes();
             server.execute(() -> {
                 serverExecuteReloadCommand(server);
-                Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
-                for (Recipe<?> recipe : allRecipes) {
-                    Identifier recipeId = recipe.getId();
-                    if (recipeId.getNamespace().equals(AmsServer.compactName)) {
-                        server.getCommandManager().execute(server.getCommandSource().withSilent(), "/recipe give @a " + recipeId);
+                Collection<RecipeEntry<?>> allRecipes = getServerRecipeManager(server).values();
+                for (RecipeEntry<?> recipe : allRecipes) {
+                    Identifier recipeId = getRecipeId(recipe);
+                    if (recipeId.getNamespace().startsWith(AmsServer.compactName)) {
+                        server.getCommandManager().executeWithPrefix(
+                            server.getCommandSource().withSilent(),
+                            "/recipe give @a " + recipeId
+                        );
                     }
                 }
             });
@@ -95,11 +99,15 @@ public class RecipeRuleHelper {
         return false;
     }
 
-    private static RecipeManager getServerRecipeManager(MinecraftServer server) {
+    private static ServerRecipeManager getServerRecipeManager(MinecraftServer server) {
         return server.getRecipeManager();
     }
 
+    private static Identifier getRecipeId(RecipeEntry<?> recipe) {
+        return recipe.id().getValue();
+    }
+
     private static void serverExecuteReloadCommand(MinecraftServer server) {
-        server.getCommandManager().execute(server.getCommandSource().withSilent(), "/reload");
+        server.getCommandManager().executeWithPrefix(server.getCommandSource().withSilent(), "/reload");
     }
 }

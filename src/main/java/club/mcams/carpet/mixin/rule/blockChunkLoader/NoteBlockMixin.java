@@ -52,9 +52,7 @@ public abstract class NoteBlockMixin {
         //$$ Entity entity,
         //$$ BlockState blockState,
         //#endif
-        World world,
-        BlockPos pos,
-        CallbackInfo info
+        World world, BlockPos pos, CallbackInfo info
     ) {
         if (!Objects.equals(AmsServerSettings.noteBlockChunkLoader, "false")) {
             handleChunkLoading(world, pos);
