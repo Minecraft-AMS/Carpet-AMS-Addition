@@ -23,6 +23,9 @@ package club.mcams.carpet.mixin.rule.optimizedDragonRespawn;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.optimizedDragonRespawn.BlockPatternHelper;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.EndGatewayBlockEntity;
 import net.minecraft.block.entity.EndPortalBlockEntity;
@@ -75,87 +78,88 @@ public abstract class EnderDragonFightMixin {
      * @reason Optimize the search of end portal
      */
 
-    @Overwrite
-    private @Nullable BlockPattern.Result findEndPortal() {
-        int i,j;
+    @WrapMethod(method = "findEndPortal")
+    private @Nullable BlockPattern.Result findEndPortal(Operation<BlockPattern.Result> original) {
+        int i, j;
         if(!AmsServerSettings.optimizedDragonRespawn) {
-            cacheChunkIteratorX = -8;
-            cacheChunkIteratorZ = -8;
-        }
-        for(i = cacheChunkIteratorX; i <= 8; ++i) {
-            for(j = cacheChunkIteratorZ; j <= 8; ++j) {
-                WorldChunk worldChunk = this.world.getChunk(i, j);
-                for(BlockEntity blockEntity : worldChunk.getBlockEntities().values()) {
-                    if(AmsServerSettings.optimizedDragonRespawn && blockEntity instanceof EndGatewayBlockEntity) continue;
-                    if (blockEntity instanceof EndPortalBlockEntity) {
-                        BlockPattern.Result result = this.endPortalPattern.searchAround(this.world, blockEntity.getPos());
-                        if (result != null) {
-                            BlockPos blockPos = result.translate(3, 3, 3).getBlockPos();
-                            if (this.exitPortalLocation == null) {
-                                this.exitPortalLocation = blockPos;
+            original.call();
+        } else {
+            for (i = cacheChunkIteratorX; i <= 8; ++i) {
+                for (j = cacheChunkIteratorZ; j <= 8; ++j) {
+                    WorldChunk worldChunk = this.world.getChunk(i, j);
+                    for (BlockEntity blockEntity : worldChunk.getBlockEntities().values()) {
+                        if (AmsServerSettings.optimizedDragonRespawn && blockEntity instanceof EndGatewayBlockEntity) continue;
+                        if (blockEntity instanceof EndPortalBlockEntity) {
+                            BlockPattern.Result result = this.endPortalPattern.searchAround(this.world, blockEntity.getPos());
+                            if (result != null) {
+                                BlockPos blockPos = result.translate(3, 3, 3).getBlockPos();
+                                if (this.exitPortalLocation == null) {
+                                    this.exitPortalLocation = blockPos;
+                                }
+                                //No need to judge whether optimizing option is open
+                                cacheChunkIteratorX = i;
+                                cacheChunkIteratorZ = j;
+                                return result;
                             }
-                            //No need to judge whether optimizing option is open
-                            cacheChunkIteratorX = i;
-                            cacheChunkIteratorZ = j;
-                            return result;
                         }
                     }
                 }
             }
-        }
-        if(this.doLegacyCheck || this.exitPortalLocation == null){
-            if(AmsServerSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
-                i = cacheOriginIteratorY;
-            }
-            else {
-                //#if MC>=12000
-                //$$ i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN)).getY();
-                //#else
-                i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.ORIGIN).getY();
-                //#endif
-            }
-            boolean notFirstSearch = false;
-            for(j = i; j >= 0; --j) {
-                //#if MC>=12000
-                //$$ BlockPattern.Result result2 = null;
-                //#else
-                BlockPattern.Result result2;
-                //#endif
-                if(AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
-                    //#if MC>=12000
-                    //$$ result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getX(), j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
-                    //#else
-                    result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
-                    //#endif
+            if (this.doLegacyCheck || this.exitPortalLocation == null){
+                if(AmsServerSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
+                    i = cacheOriginIteratorY;
                 }
                 else {
                     //#if MC>=12000
-                    //$$ result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getX(), j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
+                    //$$ i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN)).getY();
                     //#else
-                    result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
+                    i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.ORIGIN).getY();
                     //#endif
                 }
-                if (result2 != null) {
-                    if (this.exitPortalLocation == null) {
-                        this.exitPortalLocation = result2.translate(3, 3, 3).getBlockPos();
+                boolean notFirstSearch = false;
+                for (j = i; j >= 0; --j) {
+                    //#if MC>=12000
+                    //$$ BlockPattern.Result result2 = null;
+                    //#else
+                    BlockPattern.Result result2;
+                    //#endif
+                    if (AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
+                        //#if MC>=12000
+                        //$$ result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getX(), j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
+                        //#else
+                        result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
+                        //#endif
                     }
-                    cacheOriginIteratorY = j;
-                    return result2;
+                    else {
+                        //#if MC>=12000
+                        //$$ result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getX(), j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
+                        //#else
+                        result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.ORIGIN.getX(), j, EndPortalFeature.ORIGIN.getZ()));
+                        //#endif
+                    }
+                    if (result2 != null) {
+                        if (this.exitPortalLocation == null) {
+                            this.exitPortalLocation = result2.translate(3, 3, 3).getBlockPos();
+                        }
+                        cacheOriginIteratorY = j;
+                        return result2;
+                    }
+                    notFirstSearch = true;
                 }
-                notFirstSearch = true;
             }
         }
-
         return null;
     }
 
     @Inject(
-            method = "respawnDragon(Ljava/util/List;)V",
-            at = @At("HEAD")
+        method = "respawnDragon(Ljava/util/List;)V",
+        at = @At("HEAD")
     )
     private void resetCache(List<EndCrystalEntity> crystals, CallbackInfo ci) {
-        cacheChunkIteratorX = -8;
-        cacheChunkIteratorZ = -8;
-        cacheOriginIteratorY = -1;
+        if (AmsServerSettings.optimizedDragonRespawn) {
+            cacheChunkIteratorX = -8;
+            cacheChunkIteratorZ = -8;
+            cacheOriginIteratorY = -1;
+        }
     }
 }
