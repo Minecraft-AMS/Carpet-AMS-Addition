@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -28,19 +28,20 @@ import net.minecraft.util.math.ChunkPos;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-import java.util.Comparator;
-
-@GameVersion(version = "Minecraft < 1.21.5")
+@GameVersion(version = "Minecraft >= 1.21.5")
 public class BlockChunkLoaderHelper {
     public static String TICKET_NAMESPACE = "carpetamsaddition";
-    public static final ChunkTicketType<ChunkPos> NOTE_BLOCK_TICKET_TYPE = createChunkTicketType(
-        String.format("%s:note_block_loader", TICKET_NAMESPACE)
+    public static ChunkTicketType NOTE_BLOCK_TICKET_TYPE = ChunkTicketType.register(
+        String.format("%s:note_block_loader", TICKET_NAMESPACE),
+        BlockChunkLoaderHelper.getLoadTime(), true, ChunkTicketType.Use.LOADING_AND_SIMULATION
     );
-    private static final ChunkTicketType<ChunkPos> PISTON_BLOCK_TICKET_TYPE = createChunkTicketType(
-        String.format("%s:piston_block_loader", TICKET_NAMESPACE)
+    public static ChunkTicketType PISTON_BLOCK_TICKET_TYPE = ChunkTicketType.register(
+        String.format("%s:piston_block_loader", TICKET_NAMESPACE),
+        BlockChunkLoaderHelper.getLoadTime(), true, ChunkTicketType.Use.LOADING_AND_SIMULATION
     );
-    private static final ChunkTicketType<ChunkPos> BELL_BLOCK_TICKET_TYPE = createChunkTicketType(
-        String.format("%s:bell_block_loader", TICKET_NAMESPACE)
+    public static ChunkTicketType BELL_BLOCK_TICKET_TYPE = ChunkTicketType.register(
+        String.format("%s:bell_block_loader", TICKET_NAMESPACE),
+        BlockChunkLoaderHelper.getLoadTime(), true, ChunkTicketType.Use.LOADING_AND_SIMULATION
     );
 
     public static void addNoteBlockTicket(ServerWorld world, ChunkPos chunkPos) {
@@ -55,8 +56,8 @@ public class BlockChunkLoaderHelper {
         addTicket(world, chunkPos, BELL_BLOCK_TICKET_TYPE);
     }
 
-    private static void addTicket(ServerWorld world, ChunkPos chunkPos, ChunkTicketType<ChunkPos> ticketType) {
-        world.getChunkManager().addTicket(ticketType, chunkPos, getLoadRange(), chunkPos);
+    private static void addTicket(ServerWorld world, ChunkPos chunkPos, ChunkTicketType ticketType) {
+        world.getChunkManager().addTicket(ticketType, chunkPos, getLoadRange());
         blockChunkLoaderKeepWorldTickUpdate(world);
     }
 
@@ -66,15 +67,11 @@ public class BlockChunkLoaderHelper {
         }
     }
 
-    private static int getLoadTime() {
+    public static int getLoadTime() {
         return AmsServerSettings.blockChunkLoaderTimeController;
     }
 
     private static int getLoadRange() {
         return AmsServerSettings.blockChunkLoaderRangeController;
-    }
-
-    private static ChunkTicketType<ChunkPos> createChunkTicketType(String type) {
-        return ChunkTicketType.create(type, Comparator.comparingLong(ChunkPos::toLong), getLoadTime());
     }
 }
