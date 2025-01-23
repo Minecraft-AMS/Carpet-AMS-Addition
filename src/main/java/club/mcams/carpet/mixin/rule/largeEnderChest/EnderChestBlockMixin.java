@@ -51,16 +51,19 @@ public abstract class EnderChestBlockMixin {
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/entity/player/PlayerEntity;openHandledScreen(Lnet/minecraft/screen/NamedScreenHandlerFactory;)Ljava/util/OptionalInt;"
-        )
+        ),
+        require = 0
     )
-	private OptionalInt onUse(PlayerEntity playerEntity, NamedScreenHandlerFactory factory, Operation<OptionalInt> original) {
+	private OptionalInt onUse(PlayerEntity playerEntity, NamedScreenHandlerFactory namedScreenHandlerFactory, Operation<OptionalInt> original) {
         if (AmsServerSettings.largeEnderChest) {
-            return playerEntity.openHandledScreen(
-                new SimpleNamedScreenHandlerFactory((syncId, playerInventory, playerEntityInner)
-                    -> GenericContainerScreenHandler.createGeneric9x6(syncId, playerInventory, playerEntityInner.getEnderChestInventory()), CONTAINER_NAME)
+            SimpleNamedScreenHandlerFactory factory = new SimpleNamedScreenHandlerFactory((syncId, playerInventory, playerEntityInner) ->
+                GenericContainerScreenHandler.createGeneric9x6(
+                    syncId, playerInventory, playerEntityInner.getEnderChestInventory()
+                ), CONTAINER_NAME
             );
+            return playerEntity.openHandledScreen(factory);
         } else {
-            return original.call(playerEntity, factory);
+            return original.call(playerEntity, namedScreenHandlerFactory);
         }
     }
 }

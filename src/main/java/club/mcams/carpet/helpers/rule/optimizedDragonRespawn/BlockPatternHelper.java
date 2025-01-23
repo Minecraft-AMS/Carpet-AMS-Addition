@@ -38,7 +38,7 @@ public class BlockPatternHelper {
             for (Direction direction : Direction.values()) {
                 for (Direction direction2 : Direction.values()) {
                     BlockPattern.Result result;
-                    if (direction2 == direction || direction2 == direction.getOpposite() || (result = ((BlockPatternTestTransformInvoker)pattern).invokeTestTransform(blockPos, direction, direction2, loadingCache)) == null) continue;
+                    if (direction2 == direction || direction2 == direction.getOpposite() || (result = ((BlockPatternTestTransformInvoker) pattern).invokeTestTransform(blockPos, direction, direction2, loadingCache)) == null) continue;
                     return result;
                 }
             }

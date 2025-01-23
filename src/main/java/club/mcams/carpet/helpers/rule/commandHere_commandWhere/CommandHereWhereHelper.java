@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2024  A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,23 +18,23 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.largeEnderChest;
+package club.mcams.carpet.helpers.rule.commandHere_commandWhere;
 
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.command.ServerCommandSource;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
-import org.spongepowered.asm.mixin.gen.Accessor;
+public class CommandHereWhereHelper {
+    public static int[] getPos(ServerCommandSource source) {
+        int x = (int) source.getPosition().getX();
+        int y = (int) source.getPosition().getY();
+        int z = (int) source.getPosition().getZ();
+        return new int[]{x, y, z};
+    }
 
-@Mixin(SimpleInventory.class)
-public interface SimpleInventoryAccessor {
-	@Accessor("size")
-	@Mutable
-	void setSize(int size);
-
-	@Accessor("stacks")
-	@Mutable
-	void setStacks(DefaultedList<ItemStack> stacks);
+    public static int[] getPos(PlayerEntity player) {
+        int x = (int) player.getX();
+        int y = (int) player.getY();
+        int z = (int) player.getZ();
+        return new int[]{x, y, z};
+    }
 }

@@ -42,11 +42,17 @@ carpetamsaddition:
       overworld: '主世界'
       nether: '下界'
       the_end: '末地'
+      the_end_button_hover: '复制末地坐标'
+      overworld_button_hover: '复制主世界坐标'
+      nether_button_hover: '复制下界坐标'
     where:
       overworld: '主世界'
       nether: '下界'
       the_end: '末地'
       who_get_who: '%s 获取了 %s 的位置'
+      the_end_button_hover: '复制末地坐标'
+      overworld_button_hover: '复制主世界坐标'
+      nether_button_hover: '复制下界坐标'
     leader:
       add: '成为了导游'
       is_already_leader: '已经是一名导游'
@@ -120,6 +126,8 @@ carpetamsaddition:
       value_range: '设定的值必须为 1 - 100 或 0'
     renewableNetherScrap:
       value_range: '设定的值必须为 0 - 1'
+    largeEnderChest:
+      switch_tip: '侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
 
   carpet_translations:
     category:

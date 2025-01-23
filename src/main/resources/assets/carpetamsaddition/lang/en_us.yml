@@ -42,11 +42,17 @@ carpetamsaddition:
       overworld: 'overworld'
       nether: 'nether'
       the_end: 'the_end'
+      the_end_button_hover: 'copy end coord'
+      overworld_button_hover: 'copy overworld coord'
+      nether_button_hover: 'copy nether coord'
     where:
       overworld: 'overworld'
       nether: 'nether'
       the_end: 'the_end'
       who_get_who: '%s got %s location'
+      the_end_button_hover: 'copy end coord'
+      overworld_button_hover: 'copy overworld coord'
+      nether_button_hover: 'copy nether coord'
     leader:
       add: 'became a tour guide'
       is_already_leader: 'is already leader'
@@ -119,6 +125,8 @@ carpetamsaddition:
       value_range: 'The value must be 2 - 100 or 0'
     renewableNetherScrap:
       value_range: 'The value must be 0 - 1'
+    largeEnderChest:
+      switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
 
   carpet_translations:
     category:

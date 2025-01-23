@@ -18,23 +18,28 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.largeEnderChest;
+package club.mcams.carpet.mixin.rule.creativeOneHitKill;
 
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
-
+import net.minecraft.entity.Entity;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(SimpleInventory.class)
-public interface SimpleInventoryAccessor {
-	@Accessor("size")
-	@Mutable
-	void setSize(int size);
+@Mixin(Entity.class)
+public interface EntityAccessorAndInvoker {
+    @Accessor("world")
+    World getWorld();
 
-	@Accessor("stacks")
-	@Mutable
-	void setStacks(DefaultedList<ItemStack> stacks);
+    @Invoker("getX")
+    double invokerGetX();
+
+    @Invoker("getY")
+    double invokerGetY();
+
+    @Invoker("getZ")
+    double invokerGetZ();
+
+    @Invoker("isSneaking")
+    boolean invokerIsSneaking();
 }

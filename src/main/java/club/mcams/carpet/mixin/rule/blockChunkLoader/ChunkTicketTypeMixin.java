@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024  A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -11,22 +11,21 @@
  *
  * Carpet AMS Addition is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
+ * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.commandWhere;
+package club.mcams.carpet.mixin.rule.blockChunkLoader;
 
-import net.minecraft.entity.player.PlayerEntity;
+import club.mcams.carpet.utils.compat.DummyClass;
 
-public class GetPlayerPos {
-    public static int[] getPos(PlayerEntity player) {
-        int x = (int) player.getX();
-        int y = (int) player.getY();
-        int z = (int) player.getZ();
-        return new int[]{x, y, z};
-    }
-}
+import org.spongepowered.asm.mixin.Mixin;
+
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21.5")
+@Mixin(DummyClass.class)
+public class ChunkTicketTypeMixin {}

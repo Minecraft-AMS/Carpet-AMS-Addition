@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024  A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -11,22 +11,23 @@
  *
  * Carpet AMS Addition is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
+ * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.commandHere;
+package club.mcams.carpet.mixin.rule.largeEnderChest;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EnderChestInventory;
 
-public class GetCommandSourcePos {
-    public static int[] getPos(ServerCommandSource source) {
-        int x = (int) source.getPosition().getX();
-        int y = (int) source.getPosition().getY();
-        int z = (int) source.getPosition().getZ();
-        return new int[]{x, y, z};
-    }
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
+
+@Mixin(PlayerEntity.class)
+public interface PlayerEntityInvoker {
+    @Invoker("getEnderChestInventory")
+    EnderChestInventory invokeGetEnderChestInventory();
 }

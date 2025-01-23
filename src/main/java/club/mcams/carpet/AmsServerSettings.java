@@ -20,6 +20,7 @@
 
 package club.mcams.carpet;
 
+import club.mcams.carpet.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 //#if MC>=12002
@@ -110,7 +111,7 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, CREATIVE})
     public static boolean creativeOneHitKill = false;
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    @Rule(categories = {AMS, FEATURE, SURVIVAL}, validators = LargeEnderChestRuleObserver.class)
     public static boolean largeEnderChest = false;
 
     @Rule(categories = {AMS, FEATURE, OPTIMIZATION})

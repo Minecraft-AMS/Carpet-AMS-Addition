@@ -21,11 +21,13 @@
 package club.mcams.carpet.commands.rule.commandHere;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.rule.commandHere_commandWhere.CommandHereWhereHelper;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
+import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
-import club.mcams.carpet.helpers.rule.commandHere.GetCommandSourcePos;
 
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -33,6 +35,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -53,7 +58,7 @@ public class HereCommandRegistry {
     }
 
     private static int sendMessage(ServerCommandSource source, MinecraftServer minecraftServer, PlayerEntity player) {
-        Messenger.sendServerMessage(minecraftServer, Messenger.s(message(source)));
+        Messenger.sendServerMessage(minecraftServer, message(source));
         highlightPlayer(player);
         return 1;
     }
@@ -67,13 +72,13 @@ public class HereCommandRegistry {
     }
 
     private static String getCurrentPos(ServerCommandSource source) {
-        int[] pos = GetCommandSourcePos.getPos(source);
+        int[] pos = CommandHereWhereHelper.getPos(source);
         return String.format("%d, %d, %d", pos[0], pos[1], pos[2]);
     }
 
     private static String getOtherPos(ServerCommandSource source) {
         DimensionWrapper dimension = DimensionWrapper.of(source.getWorld());
-        int[] pos = GetCommandSourcePos.getPos(source);
+        int[] pos = CommandHereWhereHelper.getPos(source);
         String otherPos = null;
         if (dimension.getValue() == World.NETHER) {
             otherPos = String.format("%d, %d, %d", pos[0] * 8, pos[1], pos[2] * 8);
@@ -83,19 +88,46 @@ public class HereCommandRegistry {
         return otherPos;
     }
 
-    private static String message(ServerCommandSource source) {
+    private static Text message(ServerCommandSource source) {
         DimensionWrapper dimension = DimensionWrapper.of(source.getWorld());
         String playerName = getPlayerName(source);
         String currentPos = getCurrentPos(source);
         String otherPos = getOtherPos(source);
-        String message = null;
+        Text message = Messenger.s("Unknown dimension").formatted(Formatting.RED);
         if (dimension.getValue() == World.END) {
-            message = String.format("§d[%s] §e%s §b@ §d[ %s ]", translator.tr("the_end").getString(), playerName, currentPos);
+            message = Messenger.s(
+                String.format("§d[%s] §e%s §b@ §d[ %s ]", translator.tr("the_end").getString(), playerName, currentPos))
+                .append(copyButton(currentPos, Formatting.LIGHT_PURPLE)
+            );
         } else if (dimension.getValue() == World.OVERWORLD) {
-            message = String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", translator.tr("overworld").getString(), playerName, currentPos, otherPos);
+            message = Messenger.s(
+                String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", translator.tr("overworld").getString(), playerName, currentPos, otherPos))
+                .append(copyButton(currentPos, Formatting.GREEN)).append(copyButton(otherPos, Formatting.DARK_RED)
+            );
         } else if (dimension.getValue() == World.NETHER) {
-            message = String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", translator.tr("nether").getString(), playerName, currentPos, otherPos);
+            message = Messenger.s(
+                String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", translator.tr("nether").getString(), playerName, currentPos, otherPos))
+                .append(copyButton(currentPos, Formatting.DARK_RED)).append(copyButton(otherPos, Formatting.GREEN)
+            );
         }
         return message;
+    }
+
+    private static Text copyButton(String copyText, Formatting buttonColor) {
+        String copyCoordText = copyText.replace(",", ""); // 1, 0, -24 -> 1 0 -24
+        Text hoverText = null;
+        if (buttonColor == Formatting.LIGHT_PURPLE) {
+            hoverText = Messenger.s(translator.tr("the_end_button_hover").getString()).formatted(Formatting.YELLOW);
+        } else if (buttonColor == Formatting.GREEN) {
+            hoverText = Messenger.s(translator.tr("overworld_button_hover").getString()).formatted(Formatting.YELLOW);
+        } else if (buttonColor == Formatting.DARK_RED) {
+            hoverText = Messenger.s(translator.tr("nether_button_hover").getString()).formatted(Formatting.YELLOW);
+        }
+        return
+            Messenger.s(" [C]").setStyle(
+                Style.EMPTY.withColor(buttonColor).withBold(true).
+                withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
+                withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
+            );
     }
 }

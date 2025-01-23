@@ -41,7 +41,15 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @Mixin(PointedDripstoneBlock.class)
 public abstract class PointedDripstoneBlockMixin {
     @Inject(method = "onLandedUpon", at = @At("HEAD"), cancellable = true)
-    private void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance, CallbackInfo ci) {
+    private void onLandedUpon(
+        World world, BlockState state, BlockPos pos, Entity entity,
+        //#if MC<12105
+        float fallDistance,
+        //#else
+        //$$ double fallDistance,
+        //#endif
+        CallbackInfo ci
+    ) {
         if (AmsServerSettings.safePointedDripstone && entity instanceof PlayerEntity) {
             entity.handleFallDamage(
                 fallDistance,
