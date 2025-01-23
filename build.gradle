@@ -2,12 +2,10 @@ plugins {
 	id 'maven-publish'
 	id 'com.github.hierynomus.license' version '0.16.1' apply false
 	id 'fabric-loom' version '1.9-SNAPSHOT' apply false
-	id 'com.replaymod.preprocess' version '7c980d9'
+	id 'com.replaymod.preprocess' version 'SNAPSHOT'
 }
 
 preprocess {
-	strictExtraMappings = false
-
 	def mc116 = createNode('1.16.5', 1_16_05, 'yarn')
 	def mc117 = createNode('1.17.1', 1_17_01, 'yarn')
 	def mc118 = createNode('1.18.2', 1_18_02, 'yarn')
@@ -46,21 +44,23 @@ preprocess {
 
 tasks.register('buildAndGather') {
 	subprojects {
-		dependsOn project.name + ':build'
+		dependsOn project.tasks.named('build').get()
 	}
 	doFirst {
 		println 'Gathering builds'
-		delete fileTree(project.projectDir.toPath().resolve('build/libs')) {
+		def buildLibs = {
+			p -> p.buildDir.toPath().resolve('libs')
+		}
+		delete fileTree(buildLibs(rootProject)) {
 			include '*'
 		}
-		copy {
-			subprojects {
-				def libDir = project.projectDir.toPath().resolve('build/libs')
-				from(libDir) {
+		subprojects {
+			copy {
+				from(buildLibs(project)) {
 					include '*.jar'
 					exclude '*-dev.jar', '*-sources.jar'
 				}
-				into 'build/libs/'
+				into buildLibs(rootProject)
 				duplicatesStrategy DuplicatesStrategy.INCLUDE
 			}
 		}
