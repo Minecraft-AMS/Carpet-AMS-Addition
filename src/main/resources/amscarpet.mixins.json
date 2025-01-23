@@ -105,7 +105,7 @@
     "rule.noCakeEating.CakeBlockMixin",
     "rule.noEnchantedGoldenAppleEating.ItemStackMixin",
     "rule.noFamilyPlanning.PassiveEntityMixin",
-    "rule.optimizedDragonRespawn.BlockPatternTestTransformInvoker",
+    "rule.optimizedDragonRespawn.BlockPatternMixin",
     "rule.optimizedDragonRespawn.EnderDragonFightMixin",
     "rule.perfectInvisibility_sneakInvisibility.EntityInvoker",
     "rule.perfectInvisibility_sneakInvisibility.LivingEntityMixin",

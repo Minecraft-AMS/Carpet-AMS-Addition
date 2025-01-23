@@ -18,9 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.helpers.rule.optimizedDragonRespawn;
-
-import club.mcams.carpet.mixin.rule.optimizedDragonRespawn.BlockPatternMixin;
+package club.mcams.carpet.mixin.rule.optimizedDragonRespawn;
 
 import com.google.common.cache.LoadingCache;
 
@@ -28,21 +26,12 @@ import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldView;
 
-public class BlockPatternHelper {
-    public static BlockPattern.Result partialSearchAround(BlockPattern pattern, WorldView world, BlockPos pos) {
-        LoadingCache<BlockPos, CachedBlockPosition> loadingCache = BlockPattern.makeCache(world, false);
-        int i = Math.max(Math.max(pattern.getWidth(), pattern.getHeight()), pattern.getDepth());
-        for (BlockPos blockPos : BlockPos.iterate(pos, pos.add(i - 1, 0, i - 1))) {
-            for (Direction direction : Direction.values()) {
-                for (Direction direction2 : Direction.values()) {
-                    BlockPattern.Result result;
-                    if (direction2 == direction || direction2 == direction.getOpposite() || (result = ((BlockPatternMixin) pattern).invokeTestTransform(blockPos, direction, direction2, loadingCache)) == null) continue;
-                    return result;
-                }
-            }
-        }
-        return null;
-    }
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
+
+@Mixin(BlockPattern.class)
+public interface BlockPatternMixin {
+    @Invoker("testTransform")
+    BlockPattern.Result invokeTestTransform(BlockPos frontTopLeft, Direction forwards, Direction up, LoadingCache<BlockPos, CachedBlockPosition> cache);
 }
