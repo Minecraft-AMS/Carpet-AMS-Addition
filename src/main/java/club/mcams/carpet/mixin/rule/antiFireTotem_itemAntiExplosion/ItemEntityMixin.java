@@ -49,13 +49,7 @@ public abstract class ItemEntityMixin implements ItemEntityInvoker {
     }
 
     @ModifyReturnValue(method = "damage", at = @At("RETURN"))
-    private boolean damage(
-       boolean original,
-       //#if MC>=12102
-       //$$ ServerWorld world,
-       //#endif
-       DamageSource source
-    ) {
+    private boolean damage(boolean original, DamageSource source) {
         //#if MC>=11900
         //$$ if(AmsServerSettings.itemAntiExplosion && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
         //#else

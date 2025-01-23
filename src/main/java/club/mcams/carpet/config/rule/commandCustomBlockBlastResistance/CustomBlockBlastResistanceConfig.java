@@ -55,7 +55,11 @@ public class CustomBlockBlastResistanceConfig {
                 Type type = new TypeToken<Map<String, Float>>() {}.getType();
                 Map<String, Float> simplifiedMap = gson.fromJson(json, type);
                 for (Map.Entry<String, Float> entry : simplifiedMap.entrySet()) {
+                    //#if MC>=12102
+                    //$$ BlockState state = Registries.BLOCK.getEntry(IdentifierUtil.ofId(entry.getKey())).map(stateEntry -> stateEntry.value().getDefaultState()).orElse(null);
+                    //#else
                     BlockState state = Registry.BLOCK.get(IdentifierUtil.ofId(entry.getKey())).getDefaultState();
+                    //#endif
                     CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, entry.getValue());
                 }
             } catch (IOException e) {

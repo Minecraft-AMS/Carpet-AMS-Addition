@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(BlockPattern.class)
-public interface BlockPatternTestTransformInvoker {
+public interface BlockPatternMixin {
     @Invoker("testTransform")
     BlockPattern.Result invokeTestTransform(BlockPos frontTopLeft, Direction forwards, Direction up, LoadingCache<BlockPos, CachedBlockPosition> cache);
 }
