@@ -36,7 +36,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @Mixin(ToggleableFeature.class)
 public interface ToggleableFeatureMixin {
     @ModifyReturnValue(method = "isEnabled", at = @At("RETURN"))
-    private boolean getRequiredFeatures(boolean original) {
+    private boolean isEnabled(boolean original) {
         return AmsServerSettings.experimentalContentCheckDisabled ? true : original;
     }
 }
