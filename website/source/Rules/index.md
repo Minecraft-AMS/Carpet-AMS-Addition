@@ -511,11 +511,13 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 - 分类: `AMS`, `FEATURE`
 
 
-## 防火图腾（antiFireTotem）
+## 自定义防火物品（commandCustomAntiFireItems）
 
-开启后，图腾将不会被火焰或者岩浆烧毁。
+用命令控制任何物品是否防火。
 
-- 类型: `boolean`
+开启规则后使用`/customAntiFireItems help`命令查看使用说明
+
+- 类型: `String`
 
 
 
@@ -523,11 +525,11 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 
 
-- 参考选项: `false`, `true`
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
 
 
 
-- 分类: `AMS`, `FEATURE`
+- 分类: `AMS`, `FEATURE`, `COMMAND`
 
 
 ## 掉落物防爆（itemAntiExplosion）
@@ -1037,7 +1039,7 @@ global模式下修改值后需要玩家重新进入游戏。
 
 
 
-- 分类: `AMS`, `FEATURE`
+- 分类: `AMS`, `FEATURE`, `COMMAND`
 
 ## 简易满级信标（eazyMaxLevelBeacon）
 

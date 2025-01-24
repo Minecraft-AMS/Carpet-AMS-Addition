@@ -549,11 +549,14 @@ When enabled, Campfire will not produce smoke particles.
 
 - Categroies: `AMS` , `FEATURE`
 
-## *antiFireTotem*
+## commandCustomAntiFireItems
 
-When enabled, Totem will not be destroyed by flames and magma.
+Use command to control whether any item is fireproof or not.
 
-- Type: `boolean`
+After enabling the rules, use the `/customAntiFireItems help` command to view the usage instructions
+
+
+- Type: `String`
 
 
 
@@ -561,11 +564,11 @@ When enabled, Totem will not be destroyed by flames and magma.
 
 
 
-- Suggested options: `false`, `true`
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
 
 
 
-- Categroies: `AMS`, `FEATURE`
+- Categroies: `AMS`, `FEATURE`, `COMMAND`
 
 ## **itemAntiExplosion**
 

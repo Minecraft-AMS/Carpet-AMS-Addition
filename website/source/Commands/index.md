@@ -204,3 +204,33 @@
 - `/getHeldItemID`
 
   获取玩家主手物品的物品ID。
+
+### 自定义防火物品（commandCustomAntiFireItems）
+
+- `/customAntiFireItems add <物品注册名>`
+
+  增加一个防火物品。
+
+
+
+- `/customAntiFireItems remove <物品注册名>`
+
+  删除一个可防火物品。
+
+
+
+- `/customAntiFireItems removeAll`
+
+  删除所有添加的防火物品。
+
+
+
+- `/customAntiFireItems list`
+
+  查看防火物品列表。
+
+
+
+- `/customAntiFireItems help`
+
+  查看使用说明。

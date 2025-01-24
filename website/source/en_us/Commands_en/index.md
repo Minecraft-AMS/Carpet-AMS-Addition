@@ -204,3 +204,33 @@ get the specified player's dimension, coordinates, and corresponding Overworld/N
 - `/getHeldItemID`
 
   Get item ID of the player main hand item.
+
+### commandCustomAntiFireItems
+
+- `/customAntiFireItems add <item>`
+
+  Added a anti fire item.
+
+
+
+- `/customAntiFireItems  remove <block>`
+
+  Delete a anti fire item.
+
+
+
+- `/customAntiFireItems removeAll`
+
+  Removes all added anti fire items.
+
+
+
+- `/customAntiFireItems  list`
+
+  Check out the list of anti fire item.
+
+
+
+- `/customAntiFireItems help`
+
+  View the usage instructions.
