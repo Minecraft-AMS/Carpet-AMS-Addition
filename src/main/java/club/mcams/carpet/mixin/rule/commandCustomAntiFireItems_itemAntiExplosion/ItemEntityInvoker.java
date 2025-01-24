@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.antiFireTotem_itemAntiExplosion;
+package club.mcams.carpet.mixin.rule.commandCustomAntiFireItems_itemAntiExplosion;
 
 import net.minecraft.entity.ItemEntity;
 

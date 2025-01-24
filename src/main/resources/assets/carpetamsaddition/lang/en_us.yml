@@ -103,6 +103,16 @@ carpetamsaddition:
     commandGetHeldItemID:
       getHeldItemID:
         copy: 'Copy to clipboard'
+    customAntiFireItems:
+      already_exists: " is already exists"
+      not_found: " not found"
+      removeAll: "All item have been removed from list"
+      list: "[ Anti Fire item list ]"
+      help:
+        set: '/customAntiFireItems add <item>  ->  Added a anti fire item'
+        remove: '/customAntiFireItems remove <item>  ->  Delete a anti fire item'
+        removeAll: '/customAntiFireItems removeAll  ->  Removes all added anti fire item'
+        list: '/customAntiFireItems list  ->  Check out the list of anti fire item'
 
   logger:
     serverRuntime:
@@ -172,8 +182,10 @@ carpetamsaddition:
         desc: Allow players to pass through bamboo
       campfireSmokeParticleDisabled:
         desc: Disable campfire smoke particles
-      antiFireTotem:
-        desc: Totem will not be destroyed by flames and magma
+      commandCustomAntiFireItems:
+        desc: Use command to control whether any item is fireproof or not
+        extra:
+          '0': 'After enabling the rules, use the /customAntiFireItems help command to view the usage instructions'
       itemAntiExplosion:
         desc: Dropped items will not be destroyed by explosions
       creativeShulkerBoxDropsDisabled:

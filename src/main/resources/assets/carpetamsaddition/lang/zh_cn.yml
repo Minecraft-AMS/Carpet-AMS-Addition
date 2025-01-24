@@ -103,6 +103,16 @@ carpetamsaddition:
     commandGetHeldItemID:
       getHeldItemID:
         copy: '复制到剪切板'
+    customAntiFireItems:
+      already_exists: " 已存在"
+      not_found: " 不存在"
+      removeAll: "已删除所有条目"
+      list: "[ 防火物品列表 ]"
+      help:
+        set: '/customAntiFireItems add <物品注册名>  ->  增加一个防火物品'
+        remove: '/customAntiFireItems remove <物品注册名>  ->  删除一个防火物品'
+        removeAll: '/customAntiFireItems removeAll  ->  删除所有添加的防火物品'
+        list: '/customAntiFireItems list  ->  查看防火物品列表'
 
 
   logger:
@@ -189,9 +199,11 @@ carpetamsaddition:
       campfireSmokeParticleDisabled:
         name: 禁用篝火烟雾粒子
         desc: 篝火将不会产生烟雾粒子
-      antiFireTotem:
-        name: 防火图腾
-        desc: 图腾将不会被火焰或者岩浆烧毁
+      commandCustomAntiFireItems:
+        name: 自定义防火物品
+        desc: 用命令控制任何物品是否防火
+        extra:
+          '0': '开启规则后使用/customAntiFireItems help命令查看使用说明'
       itemAntiExplosion:
         name: 掉落物防爆
         desc: 掉落物将不会被爆炸摧毁

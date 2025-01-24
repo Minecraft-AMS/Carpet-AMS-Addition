@@ -20,12 +20,14 @@
 
 package club.mcams.carpet.config;
 
+import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
-import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockRegistry;
+import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 
 import club.mcams.carpet.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
+import club.mcams.carpet.config.rule.commandAntiFireItems.CustomAntiFireItemsConfig;
 import club.mcams.carpet.config.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceConfig;
 import club.mcams.carpet.config.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelConfig;
 import club.mcams.carpet.config.rule.commandCustomMovableBlock.CustomMovableBlockConfig;
@@ -41,12 +43,14 @@ public class LoadConfigFromJson {
         LeaderConfig.loadFromJson(LeaderConfig.getPath(server));
         CustomCommandPermissionLevelConfig.loadFromJson(CustomCommandPermissionLevelConfig.getPath(server));
         CustomMovableBlockConfig.loadFromJson(CustomMovableBlockConfig.getPath(server));
+        CustomAntiFireItemsConfig.loadFromJson(CustomAntiFireItemsConfig.getPath(server));
     }
 
     private static void clearMemory() {
         CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
         LeaderCommandRegistry.LEADER_LIST.clear();
         CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.clear();
-        CustomMovableBlockRegistry.CUSTOM_MOVABLE_BLOCKS.clear();
+        CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS.clear();
+        CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.clear();
     }
 }

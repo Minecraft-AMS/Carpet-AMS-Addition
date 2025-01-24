@@ -20,7 +20,6 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 //#if MC>=12002
@@ -29,6 +28,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
 import club.mcams.carpet.observers.rule.recipeRule.RecipeRuleObserver;
 import club.mcams.carpet.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
+import club.mcams.carpet.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
 
 import club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
@@ -123,8 +123,11 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean campfireSmokeParticleDisabled = false;
 
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean antiFireTotem = false;
+    @Rule(
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, FEATURE, COMMAND}
+    )
+    public static String commandCustomAntiFireItems = "false";
 
     @Rule(categories = {AMS, FEATURE, TNT})
     public static boolean itemAntiExplosion = false;
