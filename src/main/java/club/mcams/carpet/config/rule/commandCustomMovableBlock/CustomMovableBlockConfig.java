@@ -21,7 +21,7 @@
 package club.mcams.carpet.config.rule.commandCustomMovableBlock;
 
 import club.mcams.carpet.AmsServer;
-import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockRegistry;
+import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommandRegistry;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,20 +43,20 @@ public class CustomMovableBlockConfig {
     public static void loadFromJson(String configFilePath) {
         Gson gson = new Gson();
         Path path = Paths.get(configFilePath);
-        CustomMovableBlockRegistry.CUSTOM_MOVABLE_BLOCKS.clear();
+        CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS.clear();
         if (Files.exists(path)) {
             try {
                 String json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
                 Type type = new TypeToken<List<String>>() {}.getType();
                 List<String> simplifiedMap = gson.fromJson(json, type);
-                CustomMovableBlockRegistry.CUSTOM_MOVABLE_BLOCKS.addAll(simplifiedMap);
+                CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS.addAll(simplifiedMap);
             } catch (IOException e) {
                 AmsServer.LOGGER.warn("Failed to load config", e);
             }
         }
     }
 
-    @SuppressWarnings("ReadWriteStringCanBeUsed")
+    @SuppressWarnings({"ReadWriteStringCanBeUsed", "DuplicatedCode"})
     public static void saveToJson(List<String> customBlockMap, String configFilePath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         List<String> simplifiedMap = new ArrayList<>(customBlockMap);

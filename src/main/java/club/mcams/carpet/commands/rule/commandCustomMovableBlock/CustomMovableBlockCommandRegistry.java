@@ -48,7 +48,7 @@ import java.util.List;
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
-public class CustomMovableBlockRegistry {
+public class CustomMovableBlockCommandRegistry {
     private static final Translator translator = new Translator("command.customMovableBlock");
     private static final String MSG_HEAD = "<customMovableBlock> ";
     public static final List<String> CUSTOM_MOVABLE_BLOCKS = new ArrayList<>();

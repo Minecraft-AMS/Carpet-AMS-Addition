@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.commandCustomMovableBlock;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockRegistry;
+import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommandRegistry;
 import club.mcams.carpet.utils.RegexTools;
 
 import net.minecraft.block.BlockState;
@@ -43,7 +43,7 @@ import java.util.Objects;
 public abstract class PistonBlockMixin {
     @Inject(method = "isMovable", at = @At("HEAD"), cancellable = true)
     private static void MovableBlocks(BlockState state, World world, BlockPos blockPos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
-        if (!Objects.equals(AmsServerSettings.commandCustomMovableBlock, "false") && CustomMovableBlockRegistry.CUSTOM_MOVABLE_BLOCKS.contains(RegexTools.getBlockRegisterName(state.getBlock().toString()))) {
+        if (!Objects.equals(AmsServerSettings.commandCustomMovableBlock, "false") && CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS.contains(RegexTools.getBlockRegisterName(state))) {
             BlockEntity blockEntity = world.getBlockEntity(blockPos);
             //#if MC>=11700
             boolean isBottomY = blockPos.getY() == world.getBottomY();

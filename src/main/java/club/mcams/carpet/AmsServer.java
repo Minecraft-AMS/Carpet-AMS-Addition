@@ -143,7 +143,7 @@ public class AmsServer implements CarpetExtension {
         }
 
         if (
-            player.getActiveStatusEffects().equals(LeaderCommandRegistry.HIGH_LIGHT) &&
+            player.getActiveStatusEffects().equals(LeaderCommandRegistry.HIGH_LIGHT.getEffectType()) &&
             !LeaderCommandRegistry.LEADER_LIST.containsValue(player.getUuidAsString())
         ) {
             player.removeStatusEffect(LeaderCommandRegistry.HIGH_LIGHT.getEffectType());
