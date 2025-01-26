@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.commands;
 
+import club.mcams.carpet.commands.rule.commandCarpetExtensionModWikiHyperlink.CarpetExtensionModWikiHyperlinkCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
 import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommandRegistry;
@@ -52,50 +53,36 @@ public class RegisterCommands {
         //#endif
     ) {
         AmsUpdateSuppressionCrashFixCommandRegistry.register(dispatcher);
-
         PlayerChunkLoadControllerCommandRegistry.register(dispatcher);
-
         AnvilInteractionDisabledCommandRegistry.register(dispatcher);
-
         CustomBlockBlastResistanceCommandRegistry.register(
             dispatcher
             //#if MC>=11900
             //$$ , commandBuildContext
             //#endif
         );
-
         HereCommandRegistry.register(dispatcher);
-
         WhereCommandRegistry.register(dispatcher);
-
         LeaderCommandRegistry.register(dispatcher);
-
         PingCommandRegistry.register(dispatcher);
-
         GetSaveSizeCommandRegistry.register(dispatcher);
-
         GetSystemInfoCommandRegistry.register(dispatcher);
-
         GotoCommandRegistry.register(dispatcher);
-
         CustomCommandPermissionLevelRegistry.register(dispatcher);
-
         GetPlayerSkullCommandRegistry.register(dispatcher);
-
         CustomMovableBlockCommandRegistry.register(
             dispatcher
             //#if MC>=11900
             //$$ , commandBuildContext
             //#endif
         );
-
         GetHeldItemIDCommandRegistry.register(dispatcher);
-
         CustomAntiFireItemsCommandRegistry.register(
             dispatcher
             //#if MC>=11900
             //$$ , commandBuildContext
             //#endif
         );
+        CarpetExtensionModWikiHyperlinkCommandRegistry.register(dispatcher);
     }
 }

@@ -113,6 +113,8 @@ carpetamsaddition:
         remove: '/customAntiFireItems remove <item>  ->  Delete a anti fire item'
         removeAll: '/customAntiFireItems removeAll  ->  Removes all added anti fire item'
         list: '/customAntiFireItems list  ->  Check out the list of anti fire item'
+    carpetExtensionModWikiHyperlink:
+      click_to_jump: 'Click link to jump: '
 
   logger:
     serverRuntime:
@@ -474,6 +476,12 @@ carpetamsaddition:
         desc: Controls the explosive power of TNT, setting it to "-1" to disable the rule
       meekEnderman:
         desc: You can casually glance at endermen
+      customizedNetherPortal:
+        desc: Fully customizable Nether portal. after enabled, the Nether portal blocks can be mined, and mining the Nether portal frame or the portal itself will not cause the nether portal to broken
+      commandCarpetExtensionModWikiHyperlink:
+        desc: Some commonly used Carpet extension wiki links are listed. You only need to use the "/carpetExtensionModWikiHyperlink <ExtensionName>" command to get the hyperlink in the chat box, and you can click the link to jump to it
+        extra:
+          '0': As the version is updated, the list of mods will be constantly adjusted
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

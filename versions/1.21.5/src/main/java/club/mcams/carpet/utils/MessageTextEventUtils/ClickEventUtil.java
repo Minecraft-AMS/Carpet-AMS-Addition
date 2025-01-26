@@ -43,7 +43,18 @@ public class ClickEventUtil {
     }
 
     static {
-        CLICK_EVENT_ACTION_MAP.put(ClickEvent.Action.OPEN_URL, value -> new ClickEvent.OpenUrl((URI) value));
+        CLICK_EVENT_ACTION_MAP.put(ClickEvent.Action.OPEN_URL, value -> {
+            if (value instanceof URI) {
+                return new ClickEvent.OpenUrl((URI) value);
+            } else if (value instanceof String) {
+                try {
+                    return new ClickEvent.OpenUrl(new URI((String) value));
+                } catch (Exception e) {
+                    throw new IllegalArgumentException("Invalid URL format", e);
+                }
+            }
+            throw new IllegalArgumentException("Expected a URI or String for OPEN_URL action");
+        });
         CLICK_EVENT_ACTION_MAP.put(ClickEvent.Action.OPEN_FILE, value -> new ClickEvent.OpenFile((String) value));
         CLICK_EVENT_ACTION_MAP.put(ClickEvent.Action.RUN_COMMAND, value -> new ClickEvent.RunCommand((String) value));
         CLICK_EVENT_ACTION_MAP.put(ClickEvent.Action.SUGGEST_COMMAND, value -> new ClickEvent.SuggestCommand((String) value));

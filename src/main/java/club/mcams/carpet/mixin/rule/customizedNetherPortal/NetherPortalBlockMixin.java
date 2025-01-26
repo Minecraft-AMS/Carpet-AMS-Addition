@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,14 +18,22 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.experimentalContentCheckDisabled;
+package club.mcams.carpet.mixin.rule.customizedNetherPortal;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.NetherPortalBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft 1.19 - 1.21.1")
-@Mixin(DummyClass.class)
-public abstract class FeatureSetMixin {}
+@Mixin(NetherPortalBlock.class)
+public abstract class NetherPortalBlockMixin {
+    @ModifyReturnValue(method = "getStateForNeighborUpdate", at = @At("RETURN"))
+    private BlockState noBreak(BlockState original) {
+        return AmsServerSettings.customizedNetherPortal ? ((NetherPortalBlock) (Object) this).getDefaultState() : original;
+    }
+}

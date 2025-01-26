@@ -113,6 +113,8 @@ carpetamsaddition:
         remove: '/customAntiFireItems remove <物品注册名>  ->  删除一个防火物品'
         removeAll: '/customAntiFireItems removeAll  ->  删除所有添加的防火物品'
         list: '/customAntiFireItems list  ->  查看防火物品列表'
+    carpetExtensionModWikiHyperlink:
+      click_to_jump: '点击此链接访问页面: '
 
 
   logger:
@@ -588,6 +590,14 @@ carpetamsaddition:
       meekEnderman:
         name: 温顺的末影人
         desc: 你可以随便瞅末影人
+      customizedNetherPortal:
+        name: 客制化地狱门
+        desc: 完全自定义地狱门，开启后，地狱门方块将可以被挖掘且挖掘地狱门框架和地狱门都不会让整个地狱门破碎
+      commandCarpetExtensionModWikiHyperlink:
+        name: 地毯拓展模组Wiki超链接
+        desc: 列举了一些常用Carpet拓展的Wiki链接，你只需要使用"/carpetExtensionModWikiHyperlink <ExtensionName>"指令即可在聊天框中获取到跳转链接，点击链接即可跳转
+        extra:
+          '0': 随着版本更新该规则的拓展模组列表会不断调整
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

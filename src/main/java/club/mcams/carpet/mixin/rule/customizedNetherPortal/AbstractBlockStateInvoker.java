@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,14 +18,16 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.experimentalContentCheckDisabled;
+package club.mcams.carpet.mixin.rule.customizedNetherPortal;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft 1.19 - 1.21.1")
-@Mixin(DummyClass.class)
-public abstract class FeatureSetMixin {}
+@Mixin(AbstractBlock.AbstractBlockState.class)
+public interface AbstractBlockStateInvoker {
+    @Invoker("getBlock")
+    Block invokeGetBlock();
+}

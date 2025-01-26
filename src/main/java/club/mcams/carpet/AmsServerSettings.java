@@ -392,8 +392,8 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean carpetAlwaysSetDefault = false;
 
-    //#if MC>=11900
-    //$$ @GameVersion(version = "Minecraft >= 1.19")
+    //#if MC>=11900 && MC<=12101
+    //$$ @GameVersion(version = "Minecraft 1.19 - 1.21.1")
     //$$ @Rule(categories = {AMS, EXPERIMENTAL})
     //$$ public static boolean experimentalContentCheckDisabled = false;
     //#endif
@@ -565,6 +565,15 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean meekEnderman = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean customizedNetherPortal = false;
+
+    @Rule(
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, COMMAND}
+    )
+    public static String commandCarpetExtensionModWikiHyperlink = "false";
 
 
     /*
