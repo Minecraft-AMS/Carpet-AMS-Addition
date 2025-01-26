@@ -8,229 +8,235 @@
 
 ### commandPlayerChunkLoadController
 
-`/playerChunkLoading [true/false]`
+- **/playerChunkLoading [true/false]**
 
-Control chunk loading of player. Can only manipulate yourself.
+  Control chunk loading of player. Can only manipulate yourself.
 
 
 ### commandAnvilInteractionDisabled
 
-`/anvilInteractionDisabled [true/false]`
+- **/anvilInteractionDisabled [true/false]**
 
-Controls whether the player can interact with the anvil.
+  Controls whether the player can interact with the anvil.
 
 ### amsUpdateSuppressionCrashFix
 
-`/amsUpdateSuppressionCrashFixForceMode [true/false]`
+- **/amsUpdateSuppressionCrashFixForceMode [true/false]**
 
-Control whether forced startup is enabled when the `customBlockUpdateSuppressor ` rule is enabled.
+  Control whether forced startup is enabled when the `customBlockUpdateSuppressor`  rule is enabled.
 
 ### commandCustomBlockBlastResistance
 
-- `/customBlockBlastResistance set <block> <hardness>`
+- **/customBlockBlastResistance set <block> <hardness>**
 
   Add or modify blocks and their blast resistance.
 
   
 
-- `/customBlockBlastResistance remove <block>`
+- **/customBlockBlastResistance remove <block>**
 
   Remove a block from the list.
 
   
 
-- `/customBlockBlastResistance removeAll`
+- **/customBlockBlastResistance removeAll**
 
   Remove all blocks from the list.
 
   
 
-- `/customBlockBlastResistance list`
+- **/customBlockBlastResistance list**
 
   Display all added blocks.
 
 
 
-- `/customBlockBlastResistance help`
+- **/customBlockBlastResistance help**
 
   View the usage instructions.
 
 ### commandHere
 
-- `/here`
+- **/here**
 
-send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect.
+  send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect.
 
 ### commandWhere
 
-- `/where`
+- **/where**
 
-get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect.
+  get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect.
 
 ### commandPlayerLeader
 
-- `/leader add <PlayerName>`
+- **/leader add <PlayerName>**
 
   Add a tour guide.
 
 
 
-- `/leader remove <PlayerName>`
+- **/leader remove <PlayerName>**
 
   remove a tour guide.
 
 
 
-- `/leader removeAll`
+- **/leader removeAll**
 
   Remove all tour guide.
 
 
 
-- `/leader list`
+- **/leader list**
 
   View tour guide list.
 
 
 
-- `/leader help`
+- **/leader help**
 
   View the usage instructions.
 
 ### commandPacketInternetGroper
 
-- `/pings <targetIpOrDomainName> <pingQuantity>`
+- **/pings <targetIpOrDomainName> <pingQuantity>**
 
   Ping a specific host.
 
 
 
-- `/pings stop`
+- **/pings stop**
 
   Interrupt the ping operation.
 
 ### commandGetSaveSize
 
-- `/getSaveSize`
+- **/getSaveSize**
 
   Get save size.
 
 ### commandGetSystemInfo
 
-- `/getSystemInfo`
+- **/getSystemInfo**
 
   Get the system information of the server.
 
 ### commandGoto
 
-- `/goto <dimension> <x> <y> <z>`
+- **/goto <dimension> <x> <y> <z>**
 
   teleport to the specified dimension and coordinates.
 
 
 
-- `/goto <dimension>`
+- **/goto <dimension>**
 
   Teleport to the corresponding coordinates of the current player location.
 
 ### commandCustomCommandPermissionLevel
 
-- `/customCommandPermissionLevel set <command> <permissionLevel>`
+- **/customCommandPermissionLevel set <command> <permissionLevel>**
 
   Set the permission level of a command.
 
 
 
-- `/customCommandPermissionLevel remove <command>`
+- **/customCommandPermissionLevel remove <command>**
 
   Remove a modified command.
 
 
 
-- `/customCommandPermissionLevel removeAll`
+- **/customCommandPermissionLevel removeAll**
 
   Remove all modified commands.
 
 
 
-- `/customCommandPermissionLevel list`
+- **/customCommandPermissionLevel list**
 
   View the list of modified commands.
 
 
 
-- `/customCommandPermissionLevel help`
+- **/customCommandPermissionLevel help**
 
   View the usage instructions.
 
 ### commandGetPlayerSkull
 
-- `/getPlayerSkull <player>`
+- **/getPlayerSkull <player>**
 
   Get the skull of a specified online player.
 
 ### commandCustomMovableBlock
 
-- `/customMovableBlock add <block>`
+- **/customMovableBlock add <block>**
 
   Added a movable block.
 
 
 
-- `/customMovableBlock remove <block>`
+- **/customMovableBlock remove <block>**
 
   Delete a movable block.
 
 
 
-- `/customMovableBlock removeAll`
+- **/customMovableBlock removeAll**
 
   Removes all added movable blocks.
 
 
 
-- `/customMovableBlock list`
+- **/customMovableBlock list**
 
   Check out the list of movable blocks.
 
 
 
-- `/customMovableBlock help`
+- **/customMovableBlock help**
 
   View the usage instructions.
 
 ### commandGetHeldItemID
 
-- `/getHeldItemID`
+- **/getHeldItemID**
 
   Get item ID of the player main hand item.
 
 ### commandCustomAntiFireItems
 
-- `/customAntiFireItems add <item>`
+- **/customAntiFireItems add <item>**
 
   Added a anti fire item.
 
 
 
-- `/customAntiFireItems  remove <block>`
+- **/customAntiFireItems  remove <block>**
 
   Delete a anti fire item.
 
 
 
-- `/customAntiFireItems removeAll`
+- **/customAntiFireItems removeAll**
 
   Removes all added anti fire items.
 
 
 
-- `/customAntiFireItems  list`
+- **/customAntiFireItems  list**
 
   Check out the list of anti fire item.
 
 
 
-- `/customAntiFireItems help`
+- **/customAntiFireItems help**
 
   View the usage instructions.
+
+### commandCarpetExtensionModWikiHyperlink
+
+- **/carpetExtensionModWikiHyperlink <ExtensionName>**
+
+  Get the Wiki link for a carpet extension mod.

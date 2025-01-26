@@ -1636,7 +1636,7 @@ json位置：
 
 允许在游戏中通过添加数据包来游玩Minecraft的实验性内容（需要重启服务器）。
 
-<该规则 Minecraft >= 1.19 可用>
+<该规则 Minecraft 1.19 - 1.21.1 可用>
 
 - 类型: `boolean`
 
@@ -2352,7 +2352,7 @@ json位置：
 
 ## 温顺的末影人（meekEnderman）
 
-重新引入拌线欺骗特性，可以通过此规则来继续使用刷线机。
+你可以随便瞅末影人。
 
 - 类型: `boolean`
 
@@ -2367,6 +2367,44 @@ json位置：
 
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 客制化地狱门（customizedNetherPortal）
+
+完全自定义地狱门，开启后，地狱门方块将可以被挖掘且挖掘地狱门框架和地狱门都不会让整个地狱门破碎。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）
+
+列举了一些常用Carpet拓展的Wiki链接，你只需要使用 `/carpetExtensionModWikiHyperlink <ExtensionName>` 指令即可在聊天框中获取到跳转链接，点击链接即可跳转。
+
+随着版本更新该规则的拓展模组列表会不断调整。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `COMMAND`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 

@@ -1,7 +1,7 @@
 favicon: images/icon.png
 
 menu:
-  发布[Release]: /
+  日志[logs]: /
   规则[Rules]: /Rules
   记录器[Loggers]: /Loggers
   指令[Commands]: /Commands
@@ -42,4 +42,3 @@ canvas_nest:
   opacity: '0.8'
   count: '99'
   zIndex: '-1'
-

@@ -1676,7 +1676,7 @@ Whenever you set the carpet rule, it will be automatically set to the default va
 
 Allow playing Minecraft experimental content in the game by adding data packs  (need restart server). 
 
-< Available for Minecraft >= 1.19 >
+< Available for Minecraft 1.19 - 1.21.1 >
 
 - Type: `boolean`
 
@@ -2387,6 +2387,44 @@ You can casually glance at endermen.
 
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## customizedNetherPortal
+
+Fully customizable Nether portal. after enabled, the Nether portal blocks can be mined, and mining the Nether portal frame or the portal itself will not cause the nether portal to broken.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## commandCarpetExtensionModWikiHyperlink
+
+Some commonly used Carpet extension wiki links are listed. You only need to use the `/carpetExtensionModWikiHyperlink <ExtensionName>` command to get the hyperlink in the chat box, and you can click the link to jump to it.
+
+As the version is updated, the list of mods will be constantly adjusted.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `COMMAND`
 
 ## craftableEnchantedGoldApple
 

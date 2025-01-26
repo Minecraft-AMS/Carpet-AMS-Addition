@@ -3,19 +3,24 @@
     display: flex
     justify-content: center
 
-.header-menu-list
-    width: 100%
-    margin: 0 10px
-    ul
-        text-align: left
-        list-style-type: none
-        margin: 0
-        display: inline-flex
-        font-weight: bold;
-        border: 5px solid black;
-        padding: 10px;
-    li:not(:last-child)
-        margin-right: 50px
+.header-menu-list {
+    width: 100%;
+    margin: 0 10px;
+}
+
+.header-menu-list ul {
+    text-align: left;
+    list-style-type: none;
+    margin: 0;
+    display: inline-flex;
+    font-weight: bold;
+    border: 10px double #00CED1;
+    padding: 20px;
+}
+
+.header-menu-list li:not(:last-child) {
+    margin-right: 50px;
+}
 
 @media screen and (max-width: 1500px)
     .header-menu-list

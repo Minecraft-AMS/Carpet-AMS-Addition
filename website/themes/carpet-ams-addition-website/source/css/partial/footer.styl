@@ -5,15 +5,15 @@
 
 .footer-meta
     font-size: 15px
-    color: #999
+    color: #00FFFF
     width: 100%
     margin: 0 0
     display: inline-flex
 
     a
-        color: #777
+        color: #00FFFF
         &:hover
-            color: #555
+            color: #00FFFF
 
 .footer-meta > div:not(:last-child)
     margin-right: 20px
@@ -27,9 +27,12 @@
   right 3%
   text-align center
   cursor pointer
-  a
-    display block
-    font-size 25px
-    line-height 25px
-    color #7c2609
-    text-decoration none
+  filter: invert(0%) !important; /* 使#top元素不受反转影响 */
+
+#top a {
+  display: block;
+  font-size: 25px;
+  line-height: 25px;
+  color: #00FFFF;  /* 设置链接颜色 */
+  text-decoration: none;
+}

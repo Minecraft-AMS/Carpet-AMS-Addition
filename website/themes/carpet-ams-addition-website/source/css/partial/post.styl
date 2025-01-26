@@ -1,5 +1,5 @@
 .post-details {
-    color: #555;
+    color: #008B8B;
     font-size: 0.9em;
     width: 100%;
     margin: 0 10px;
@@ -7,11 +7,11 @@
 
     a:not(.nonstyle) {
         text-decoration: none;
-        color: #3A97FF;
+        color: #A3D2E2;
         box-shadow: 0 1px 0 #555;
 
         &:hover {
-            box-shadow: 0 1px 0 #3A97FF;
+            box-shadow: 0 1px 0 #A3D2E2;
         }
     }
 
@@ -19,7 +19,7 @@
         margin-bottom: 10px;
 
         h1 {
-            color: #222;
+            color: #00CED1;
             font-size: 2em;
             font-weight: normal;
             margin-block: 0;
@@ -29,12 +29,12 @@
     .post-meta {
         margin-bottom: 20px;
         font-size: 14px;
-        color: #999;
+        color: #00CED1;
     }
 
     .post-content {
         h1, h2, h3, h4, h5, h6 {
-            color: #222;
+            color: #00CED1;
             margin-block: 0;
             margin-inline: 0;
             margin-top: 20px;
@@ -69,6 +69,7 @@
         p {
             margin-block: 0;
             line-height: 1.8em;
+            text-align: left
 
             &:not(:last-child) {
                 margin: 0 0 10px;
@@ -102,11 +103,13 @@
             border-radius: 3px;
         }
 
+        // `content color`
         mark,
         code:not(.hljs) {
-            padding: 1px 3px;
-            background-color: #eee;
-            border-radius: 3px;
+            padding: 2px 3px;
+            background-color: #41e199;
+            border-radius: 10px;
+            font-family: "Consolas", sans-serif;  /* 设置字体 */
         }
 
         table {
@@ -119,16 +122,16 @@
         th,
         td {
             padding: 5px;
-            border: 1px solid #eee;
+            border: 1px solid #00CED1;
         }
 
         tr:nth-child(even) {
-            background-color: #eee;
+            background-color: #000000;
         }
 
         th {
             font-weight: 400;
-            background-color: #ddd;
+            background-color: #00CED1v;
         }
     }
 
