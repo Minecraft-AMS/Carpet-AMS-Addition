@@ -24,6 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
+//import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
-@GameVersion(version = "Minecraft >= 1.19")
+@GameVersion(version = "Minecraft 1.19 - 1.21.1")
 @Mixin(FeatureSet.class)
 public abstract class FeatureSetMixin {
     @ModifyReturnValue(method = "contains", at = @At("RETURN"))
@@ -40,15 +41,15 @@ public abstract class FeatureSetMixin {
         return AmsServerSettings.experimentalContentCheckDisabled ? true : original;
     }
 
-    @ModifyReturnValue(
-        method = {
-            "of(Lnet/minecraft/resource/featuretoggle/FeatureUniverse;Ljava/util/Collection;)Lnet/minecraft/resource/featuretoggle/FeatureSet;",
-            "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;",
-            "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;[Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;"
-        },
-        at = @At("RETURN")
-    )
-    private static FeatureSet of(FeatureSet original) {
-        return FeatureSet.empty();
-    }
+//    @ModifyReturnValue(
+//        method = {
+//            "of(Lnet/minecraft/resource/featuretoggle/FeatureUniverse;Ljava/util/Collection;)Lnet/minecraft/resource/featuretoggle/FeatureSet;",
+//            "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;",
+//            "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;[Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;"
+//        },
+//        at = @At("RETURN")
+//    )
+//    private static FeatureSet of(FeatureSet original) {
+//        return FeatureSet.empty();
+//    }
 }
