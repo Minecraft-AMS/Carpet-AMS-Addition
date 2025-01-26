@@ -86,8 +86,9 @@ public class AmsServer implements CarpetExtension {
     public void onGameStarted() {
         // let's /carpet handle our few simple settings
         LOGGER.info(String.format("%s v%s loaded! (Total rules: %d)", fancyName, AmsServerMod.getVersion(), ruleCount));
-        LOGGER.info("open source: https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
-        LOGGER.info("issues: https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
+        LOGGER.info("Open Source: https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
+        LOGGER.info("Issues: https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
+        LOGGER.info("Wiki: https://minecraft-ams.github.io/carpetamsaddition/");
         CarpetRuleRegistrar.register(CarpetServer.settingsManager, AmsServerSettings.class);
     }
 
