@@ -93,7 +93,7 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
 
     private static Text createOpenUrlButton(String url) {
         return Messenger.s(getUrl(url)).setStyle(
-            Style.EMPTY.withColor(Formatting.GREEN).withUnderline(true)
+            Style.EMPTY.withColor(Formatting.GREEN)
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.OPEN_URL, url))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, getCopyHoverText(url)))
         );
