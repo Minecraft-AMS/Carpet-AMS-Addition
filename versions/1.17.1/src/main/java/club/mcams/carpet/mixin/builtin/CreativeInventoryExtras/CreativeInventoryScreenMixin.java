@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.builtin.showHoneyBlockAndSlimeBlockInCreativeInvScreen;
+package club.mcams.carpet.mixin.builtin.CreativeInventoryExtras;
 
 import club.mcams.carpet.utils.compat.DummyClass;
 

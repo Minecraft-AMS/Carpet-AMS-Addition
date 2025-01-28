@@ -185,7 +185,7 @@
     "translations.TranslatableTextMixin"
   ],
   "client": [
-    "builtin.showHoneyBlockAndSlimeBlockInCreativeInvScreen.CreativeInventoryScreenMixin",
+    "builtin.CreativeInventoryExtras.CreativeInventoryScreenMixin",
     "rule.bedRockFlying.ClientPlayerEntityInvoker",
     "rule.bedRockFlying.ClientPlayerEntityMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",

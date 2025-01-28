@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.builtin.showHoneyBlockAndSlimeBlockInCreativeInvScreen;
+package club.mcams.carpet.mixin.builtin.CreativeInventoryExtras;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -39,27 +39,35 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import java.util.ArrayList;
 import java.util.List;
 
-// 这是一个在Minecraft 1.16.5的创造物品栏的红石选项卡下添加蜜块和黏液块的客户端功能
+// 这是一个在Minecraft 1.16.5的创造物品栏的红石选项卡下添加蜜块、黏液块、各种命令方块的客户端功能
 // TODO: 在我决定制作新的客户端模组之前，暂时（也有可能长期）内置这个功能，毕竟也只有1.16.5中存在，且代码很绿色健康
 @Environment(value = EnvType.CLIENT)
 @GameVersion(version = "Minecraft < 1.17")
 @Mixin(CreativeInventoryScreen.class)
 public abstract class CreativeInventoryScreenMixin {
     @Inject(method = "setSelectedTab", at = @At("TAIL"))
-    private void onSetSelectedTab(ItemGroup group, CallbackInfo ci) {
+    private void onSetRedstoneSelectedTab(ItemGroup group, CallbackInfo ci) {
         if (group.equals(ItemGroup.REDSTONE)) {
-            final ItemStack slimeBlock = new ItemStack(Items.SLIME_BLOCK);
-            final ItemStack honeyBlock = new ItemStack(Items.HONEY_BLOCK);
-            CreativeInventoryScreen creativeInventoryScreen = (CreativeInventoryScreen) (Object) this;
-            CreativeInventoryScreen.CreativeScreenHandler creativeScreenHandler = creativeInventoryScreen.getScreenHandler();
+            final CreativeInventoryScreen creativeInventoryScreen = (CreativeInventoryScreen) (Object) this;
+            final CreativeInventoryScreen.CreativeScreenHandler creativeScreenHandler = creativeInventoryScreen.getScreenHandler();
+            final ItemStack SLIME_BLOCK = new ItemStack(Items.SLIME_BLOCK);
+            final ItemStack HONEY_BLOCK = new ItemStack(Items.HONEY_BLOCK);
+            final ItemStack COMMAND_BLOCK = new ItemStack(Items.COMMAND_BLOCK);
+            final ItemStack COMMAND_BLOCK_MINECART = new ItemStack(Items.COMMAND_BLOCK_MINECART);
+            final ItemStack CHAIN_COMMAND_BLOCK = new ItemStack(Items.CHAIN_COMMAND_BLOCK);
+            final ItemStack REPEATING_COMMAND_BLOCK = new ItemStack(Items.REPEATING_COMMAND_BLOCK);
             List<Item> list = new ArrayList<>();
             for (ItemStack itemStack : creativeScreenHandler.itemList) {
                 Item item = itemStack.getItem();
                 list.add(item);
             }
             int pistonIndex = list.indexOf(Items.PISTON);
-            creativeScreenHandler.itemList.add(pistonIndex + 1, slimeBlock);
-            creativeScreenHandler.itemList.add(pistonIndex + 2, honeyBlock);
+            creativeScreenHandler.itemList.add(pistonIndex + 1, SLIME_BLOCK);
+            creativeScreenHandler.itemList.add(pistonIndex + 2, HONEY_BLOCK);
+            creativeScreenHandler.itemList.add(COMMAND_BLOCK);
+            creativeScreenHandler.itemList.add(CHAIN_COMMAND_BLOCK);
+            creativeScreenHandler.itemList.add(REPEATING_COMMAND_BLOCK);
+            creativeScreenHandler.itemList.add(COMMAND_BLOCK_MINECART);
             creativeInventoryScreen.mouseScrolled(0.01F, 0.01F, 0.01F);
         }
     }
