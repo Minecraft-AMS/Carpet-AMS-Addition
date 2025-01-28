@@ -32,8 +32,8 @@ import java.util.Comparator;
 
 @GameVersion(version = "Minecraft < 1.21.5")
 public class BlockChunkLoaderHelper {
-    public static String TICKET_NAMESPACE = "carpetamsaddition";
-    public static final ChunkTicketType<ChunkPos> NOTE_BLOCK_TICKET_TYPE = createChunkTicketType(
+    private static final String TICKET_NAMESPACE = "carpetamsaddition";
+    private static final ChunkTicketType<ChunkPos> NOTE_BLOCK_TICKET_TYPE = createChunkTicketType(
         String.format("%s:note_block_loader", TICKET_NAMESPACE)
     );
     private static final ChunkTicketType<ChunkPos> PISTON_BLOCK_TICKET_TYPE = createChunkTicketType(

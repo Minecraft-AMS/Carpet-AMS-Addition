@@ -57,7 +57,7 @@ public class CarpetRuleRegistrar {
         this.settingsManager = settingsManager;
     }
 
-    public static void register(SettingsManager settingsManager, Class<?> settingsClass){
+    public static void register(SettingsManager settingsManager, Class<?> settingsClass) {
         CarpetRuleRegistrar registrar = new CarpetRuleRegistrar(settingsManager);
         registrar.parseSettingsClass(settingsClass);
         registrar.registerToCarpet();

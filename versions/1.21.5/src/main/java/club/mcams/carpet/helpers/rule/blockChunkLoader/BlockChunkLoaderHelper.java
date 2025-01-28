@@ -30,16 +30,16 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21.5")
 public class BlockChunkLoaderHelper {
-    public static String TICKET_NAMESPACE = "carpetamsaddition";
-    public static ChunkTicketType NOTE_BLOCK_TICKET_TYPE = ChunkTicketType.register(
+    private static final String TICKET_NAMESPACE = "carpetamsaddition";
+    private static final ChunkTicketType NOTE_BLOCK_TICKET_TYPE = ChunkTicketType.register(
         String.format("%s:note_block_loader", TICKET_NAMESPACE),
         BlockChunkLoaderHelper.getLoadTime(), true, ChunkTicketType.Use.LOADING_AND_SIMULATION
     );
-    public static ChunkTicketType PISTON_BLOCK_TICKET_TYPE = ChunkTicketType.register(
+    private static final ChunkTicketType PISTON_BLOCK_TICKET_TYPE = ChunkTicketType.register(
         String.format("%s:piston_block_loader", TICKET_NAMESPACE),
         BlockChunkLoaderHelper.getLoadTime(), true, ChunkTicketType.Use.LOADING_AND_SIMULATION
     );
-    public static ChunkTicketType BELL_BLOCK_TICKET_TYPE = ChunkTicketType.register(
+    private static final ChunkTicketType BELL_BLOCK_TICKET_TYPE = ChunkTicketType.register(
         String.format("%s:bell_block_loader", TICKET_NAMESPACE),
         BlockChunkLoaderHelper.getLoadTime(), true, ChunkTicketType.Use.LOADING_AND_SIMULATION
     );
@@ -67,7 +67,7 @@ public class BlockChunkLoaderHelper {
         }
     }
 
-    public static int getLoadTime() {
+    private static int getLoadTime() {
         return AmsServerSettings.blockChunkLoaderTimeController;
     }
 
