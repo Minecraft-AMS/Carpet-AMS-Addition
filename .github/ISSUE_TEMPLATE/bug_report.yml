@@ -57,8 +57,8 @@ body:
   - type: input
     id: mod-version
     attributes:
-      label: TemplateMod version
-      description: The TemplateMod version(s) where this bug occurs in.
+      label: Carpet AMS Addition version
+      description: The Carpet AMS Addition version(s) where this bug occurs in.
       placeholder: 1.2.3
     validations:
       required: true
