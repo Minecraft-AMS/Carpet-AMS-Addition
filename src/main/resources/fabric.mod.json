@@ -25,6 +25,9 @@
     ],
     "main": [
       "club.mcams.carpet.AmsServerMod"
+    ],
+    "client": [
+      "club.mcams.carpet.AmsClient"
     ]
   },
   "mixins": [
