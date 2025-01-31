@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.commands.rule.commandCustomBlockHardness;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.config.rule.commandCustomBlockHardness.CustomBlockHardnessConfig;
 import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessS2CPacket;
 import club.mcams.carpet.translations.Translator;
@@ -62,7 +63,7 @@ public class CustomBlockHardnessCommandRegistry {
     //#endif
         dispatcher.register(
             CommandManager.literal("customBlockHardness")
-            .requires(source -> CommandHelper.canUseCommand(source, 0))
+            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomBlockHardness))
             .then(literal("set")
             //#if MC<11900
             .then(argument("block", BlockStateArgumentType.blockState())
