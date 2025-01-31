@@ -20,13 +20,13 @@
 
 package club.mcams.carpet;
 
+import club.mcams.carpet.network.S2CNetworkPacket;
 import club.mcams.carpet.utils.AutoMixinAuditExecutor;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 
 public class AmsServerMod implements ModInitializer {
-
     private static final String MOD_ID = "carpet-ams-addition";
     private static String version;
 
@@ -35,6 +35,7 @@ public class AmsServerMod implements ModInitializer {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
         AutoMixinAuditExecutor.run();
         AmsServer.init();
+        S2CNetworkPacket.register();
     }
 
     public static String getModId() {
