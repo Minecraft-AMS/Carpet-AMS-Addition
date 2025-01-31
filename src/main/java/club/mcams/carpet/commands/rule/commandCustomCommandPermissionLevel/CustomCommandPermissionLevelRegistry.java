@@ -24,7 +24,6 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.suggestionProviders.ListSuggestionProvider;
 import club.mcams.carpet.commands.suggestionProviders.LiteralCommandSuggestionProvider;
 import club.mcams.carpet.commands.suggestionProviders.SetSuggestionProvider;
-import club.mcams.carpet.mixin.rule.commandCustomCommandPermissionLevel.CommandNodeInvoker;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
@@ -33,7 +32,6 @@ import club.mcams.carpet.config.rule.commandCustomCommandPermissionLevel.CustomC
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.tree.CommandNode;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
@@ -44,11 +42,13 @@ import net.minecraft.util.Formatting;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public class CustomCommandPermissionLevelRegistry {
     private static final Translator translator = new Translator("command.customCommandPermissionLevel");
     private static final String MSG_HEAD = "<customCommandPermissionLevel> ";
     public static final Map<String, Integer> COMMAND_PERMISSION_MAP = new HashMap<>();
+    public static final Map<String, Predicate<ServerCommandSource>> DEFAULT_PERMISSION_MAP = new HashMap<>();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
@@ -97,19 +97,12 @@ public class CustomCommandPermissionLevelRegistry {
         }
         COMMAND_PERMISSION_MAP.put(command, permissionLevel);
         saveToJson(server);
-        setPermission(server,player, command, permissionLevel);
+        CommandHelper.setPermission(server, command, permissionLevel);
+        CommandHelper.updateAllCommandPermissions(server);
         return 1;
     }
 
-    @SuppressWarnings("unchecked")
-    private static void setPermission(MinecraftServer server, ServerPlayerEntity player, String command, int permissionLevel) {
-        CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
-        CommandNode<ServerCommandSource> target = dispatcher.getRoot().getChild(command);
-        ((CommandNodeInvoker<ServerCommandSource>)target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
-        CommandHelper.notifyPlayersCommandsChanged(player);
-    }
-
-    private static int remove(MinecraftServer server, ServerPlayerEntity player, String command) {
+    private static int remove(MinecraftServer server, PlayerEntity player, String command) {
         if (COMMAND_PERMISSION_MAP.containsKey(command)) {
             COMMAND_PERMISSION_MAP.remove(command);
             saveToJson(server);
@@ -118,7 +111,7 @@ public class CustomCommandPermissionLevelRegistry {
                     String.format("%s- %s", MSG_HEAD, command)
                 ).formatted(Formatting.RED, Formatting.ITALIC), false
             );
-            CommandHelper.notifyPlayersCommandsChanged(player);
+            CommandHelper.updateAllCommandPermissions(server);
         } else {
             player.sendMessage(
                 Messenger.s(
@@ -139,7 +132,7 @@ public class CustomCommandPermissionLevelRegistry {
                 MSG_HEAD + translator.tr("removeAll").getString()
             ).formatted(Formatting.RED, Formatting.ITALIC), false
         );
-        CommandHelper.notifyPlayersCommandsChanged(player);
+        CommandHelper.updateAllCommandPermissions(server);
         return 1;
     }
 
@@ -152,7 +145,7 @@ public class CustomCommandPermissionLevelRegistry {
         );
         for (Map.Entry<String, Integer> entry : COMMAND_PERMISSION_MAP.entrySet()) {
             String command = entry.getKey();
-            float permissionLevel = entry.getValue();
+            int permissionLevel = entry.getValue();
             player.sendMessage(
                 Messenger.s(command + " -> " + permissionLevel).formatted(Formatting.DARK_AQUA),
                 false

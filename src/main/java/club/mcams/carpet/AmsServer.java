@@ -35,10 +35,12 @@ import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
+import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessS2CPacket;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
 import club.mcams.carpet.utils.AutoCleaner;
+import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.CountRulesUtil;
 
 import com.google.common.collect.Maps;
@@ -62,6 +64,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class AmsServer implements CarpetExtension {
     public static MinecraftServer minecraftServer;
@@ -158,8 +161,8 @@ public class AmsServer implements CarpetExtension {
                 //#endif
             );
         }
-
         RecipeRuleHelper.onPlayerLoggedIn(AmsServer.minecraftServer, player);
+        CustomBlockHardnessS2CPacket.sendToPlayer(player);
     }
 
     @Override
@@ -167,6 +170,9 @@ public class AmsServer implements CarpetExtension {
         serverStartTimeMillis = System.currentTimeMillis();
         minecraftServer = server;
         LoadConfigFromJson.load(server);
+        if (!Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false")) {
+            CommandHelper.updateAllCommandPermissions(server);
+        }
     }
 
     @Override

@@ -20,15 +20,23 @@
 
 package club.mcams.carpet.utils;
 
-import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
+import club.mcams.carpet.mixin.rule.commandCustomCommandPermissionLevel.CommandNodeInvoker;
 import club.mcams.carpet.translations.Translator;
 
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.tree.CommandNode;
+import com.mojang.brigadier.tree.LiteralCommandNode;
+
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.function.Predicate;
 
 @SuppressWarnings("EnhancedSwitchMigration")
 public final class CommandHelper {
@@ -37,33 +45,50 @@ public final class CommandHelper {
 
     private CommandHelper() {}
 
-    public static void notifyPlayersCommandsChanged(ServerPlayerEntity player) {
-        try {
-            if (player.getServer() != null) {
-                player.getServer().getCommandManager().sendCommandTree(player);
-                player.sendMessage(
-                    Messenger.s(translator.tr("refresh_cmd_tree").getString()).formatted(Formatting.YELLOW), false
-                );
+    @SuppressWarnings("unchecked")
+    public static void updateAllCommandPermissions(MinecraftServer server) {
+        CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
+        CommandManager serverCommandManager = server.getCommandManager();
+        for (CommandNode<ServerCommandSource> node : dispatcher.getRoot().getChildren()) {
+            if (node instanceof LiteralCommandNode) {
+                String commandName = ((LiteralCommandNode<?>) node).getLiteral();
+                Predicate<ServerCommandSource> defaultRequirement = CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.get(commandName);
+                if (CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(commandName)) {
+                    int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(commandName);
+                    ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(source -> source.hasPermissionLevel(level));
+                } else if (defaultRequirement != null) {
+                    ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(defaultRequirement);
+                }
             }
         }
-        catch (NullPointerException e) {
-            AmsServer.LOGGER.warn("Exception while refreshing commands, please report this to Carpet", e);
-        }
+        server.getPlayerManager().getPlayerList().forEach(serverCommandManager::sendCommandTree);
+        Messenger.sendServerMessage(server, Messenger.s(translator.tr("refresh_cmd_tree").getString()).formatted(Formatting.GRAY));
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void setPermission(MinecraftServer server, String command, int permissionLevel) {
+        CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
+        CommandNode<ServerCommandSource> target = dispatcher.getRoot().getChild(command);
+        ((CommandNodeInvoker<ServerCommandSource>)target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
     }
 
     public static boolean canUseCommand(ServerCommandSource source, Object commandLevel) {
-        if (commandLevel instanceof Boolean) return (Boolean) commandLevel;
-        String commandLevelString = commandLevel.toString();
-        switch (commandLevelString) {
-            case "true": return true;
-            case "false": return false;
-            case "ops": return source.hasPermissionLevel(2);
-            case "0":
-            case "1":
-            case "2":
-            case "3":
-            case "4":
-                return source.hasPermissionLevel(Integer.parseInt(commandLevelString));
+        if (commandLevel instanceof Boolean) {
+            return (Boolean) commandLevel;
+        }
+        if (commandLevel instanceof String) {
+            final String levelStr = ((String) commandLevel).toLowerCase(Locale.ENGLISH);
+            switch (levelStr) {
+                case "true":  return true;
+                case "false": return false;
+                case "ops": return source.hasPermissionLevel(2);
+            }
+            if (levelStr.length() == 1) {
+                char c = levelStr.charAt(0);
+                if (c >= '0' && c <= '4') {
+                    return source.hasPermissionLevel(c - '0');
+                }
+            }
         }
         return false;
     }
