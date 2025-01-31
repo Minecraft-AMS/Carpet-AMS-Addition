@@ -575,6 +575,15 @@ public class AmsServerSettings {
     )
     public static String commandCarpetExtensionModWikiHyperlink = "false";
 
+    @Rule(
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, FEATURE, SURVIVAL, COMMAND}
+    )
+    public static String commandCustomBlockHardness = "false";
+
+    @Rule(categories = {AMS, COMMAND})
+    public static boolean onlyOpCanSpawnRealPlayerInWhitelist = false;
+
 
     /*
      * 区块加载规则

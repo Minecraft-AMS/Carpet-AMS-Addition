@@ -21,7 +21,7 @@ carpetamsaddition:
 
   command:
     commandHelper:
-      refresh_cmd_tree: 'Your commands has been refreshed'
+      refresh_cmd_tree: 'Commands has been refreshed'
 
     amsUpdateSuppressionCrashFixForceMode:
       lazy_mod: '[ lazy mode ]'
@@ -115,6 +115,15 @@ carpetamsaddition:
         list: '/customAntiFireItems list  ->  Check out the list of anti fire item'
     carpetExtensionModWikiHyperlink:
       click_to_jump: 'Click link to jump: '
+    customBlockHardness:
+      not_found: ' not found !'
+      removeAll: 'All custom block hardness values have been removed.'
+      list: '[ Block / Hardness ]'
+      help:
+        set: '/customBlockHardness set <block> <hardness>  ->  Add or modify blocks and their hardness'
+        remove: '/customBlockHardness remove <block>  ->  Remove a block from the list'
+        removeAll: '/customBlockHardness removeAll  ->  Remove all blocks from the list'
+        list: '/customBlockHardness list  ->  Display all added blocks'
 
   logger:
     serverRuntime:
@@ -482,6 +491,12 @@ carpetamsaddition:
         desc: Some commonly used Carpet extension wiki links are listed. You only need to use the "/carpetExtensionModWikiHyperlink <ExtensionName>" command to get the hyperlink in the chat box, and you can click the link to jump to it
         extra:
           '0': As the version is updated, the list of mods will be constantly adjusted
+      commandCustomBlockHardness:
+        desc: Use command to customizing mining hardness for any block
+        extra:
+          '0': 'After enabling the rules, use the /customBlockBlastResistance helper command to view the usage instructions'
+      onlyOpCanSpawnRealPlayerInWhitelist:
+        desc: Only OP players can spawn players on the whitelist, regardless of whether the whitelist is enabled
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
