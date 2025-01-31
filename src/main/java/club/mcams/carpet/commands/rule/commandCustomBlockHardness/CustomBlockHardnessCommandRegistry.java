@@ -41,7 +41,6 @@ import net.minecraft.server.MinecraftServer;
 //#endif
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.WorldSavePath;
 
@@ -116,7 +115,7 @@ public class CustomBlockHardnessCommandRegistry {
         }
         CUSTOM_BLOCK_HARDNESS_MAP.put(state, hardness);
         CustomBlockHardnessConfig.saveToJson(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
-        CustomBlockHardnessS2CPacket.sendToPlayer((ServerPlayerEntity) player);
+        sendSyncPacketToAllOnlinePlayer(server);
         return 1;
     }
 
@@ -126,7 +125,7 @@ public class CustomBlockHardnessCommandRegistry {
             float hardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
             CUSTOM_BLOCK_HARDNESS_MAP.remove(state);
             CustomBlockHardnessConfig.saveToJson(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
-            CustomBlockHardnessS2CPacket.sendToPlayer((ServerPlayerEntity) player);
+            sendSyncPacketToAllOnlinePlayer(server);
             player.sendMessage(
                 Messenger.s(
                     MESSAGE_HEAD + "- " + RegexTools.getBlockRegisterName(state) + "/" + hardness
@@ -147,7 +146,7 @@ public class CustomBlockHardnessCommandRegistry {
         String CONFIG_FILE_PATH = getPath(server);
         CUSTOM_BLOCK_HARDNESS_MAP.clear();
         CustomBlockHardnessConfig.saveToJson(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
-        CustomBlockHardnessS2CPacket.sendToPlayer((ServerPlayerEntity) player);
+        sendSyncPacketToAllOnlinePlayer(server);
         player.sendMessage(
             Messenger.s(
                 MESSAGE_HEAD + translator.tr("removeAll").getString()
@@ -188,7 +187,11 @@ public class CustomBlockHardnessCommandRegistry {
         return 1;
     }
 
-    public static String getPath(MinecraftServer server) {
+    private static void sendSyncPacketToAllOnlinePlayer(MinecraftServer server) {
+        server.getPlayerManager().getPlayerList().forEach(CustomBlockHardnessS2CPacket::sendToPlayer);
+    }
+
+    private static String getPath(MinecraftServer server) {
         return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_block_hardness" + ".json").toString();
     }
 }
