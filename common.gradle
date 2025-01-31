@@ -26,6 +26,8 @@ configurations {
 	modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
 }
 
+
+
 dependencies {
 	// loom
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -39,6 +41,8 @@ dependencies {
 	// library mods
 	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
+	include(modImplementation(fabricApi.module("fabric-api-base", project.fabric_api_version)))
+	include(modImplementation(fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)))
 
 	// Dependencies
 	include(implementation("com.esotericsoftware.yamlbeans:yamlbeans:${project.yamlbeans_version}"))

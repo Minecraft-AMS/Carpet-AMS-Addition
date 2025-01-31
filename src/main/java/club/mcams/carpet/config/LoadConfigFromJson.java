@@ -22,6 +22,7 @@ package club.mcams.carpet.config;
 
 import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
+import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
 import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
@@ -29,6 +30,7 @@ import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry
 import club.mcams.carpet.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
 import club.mcams.carpet.config.rule.commandAntiFireItems.CustomAntiFireItemsConfig;
 import club.mcams.carpet.config.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceConfig;
+import club.mcams.carpet.config.rule.commandCustomBlockHardness.CustomBlockHardnessConfig;
 import club.mcams.carpet.config.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelConfig;
 import club.mcams.carpet.config.rule.commandCustomMovableBlock.CustomMovableBlockConfig;
 import club.mcams.carpet.config.rule.commandLeader.LeaderConfig;
@@ -44,6 +46,7 @@ public class LoadConfigFromJson {
         CustomCommandPermissionLevelConfig.loadFromJson(CustomCommandPermissionLevelConfig.getPath(server));
         CustomMovableBlockConfig.loadFromJson(CustomMovableBlockConfig.getPath(server));
         CustomAntiFireItemsConfig.loadFromJson(CustomAntiFireItemsConfig.getPath(server));
+        CustomBlockHardnessConfig.loadFromJson(CustomBlockHardnessConfig.getPath(server));
     }
 
     private static void clearMemory() {
@@ -52,5 +55,6 @@ public class LoadConfigFromJson {
         CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.clear();
         CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS.clear();
         CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.clear();
+        CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
     }
 }

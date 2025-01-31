@@ -22,6 +22,7 @@ package club.mcams.carpet.commands;
 
 import club.mcams.carpet.commands.rule.commandCarpetExtensionModWikiHyperlink.CarpetExtensionModWikiHyperlinkCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
+import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
 import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommandRegistry;
 import club.mcams.carpet.commands.rule.commandGetHeldItemID.GetHeldItemIDCommandRegistry;
@@ -84,5 +85,11 @@ public class RegisterCommands {
             //#endif
         );
         CarpetExtensionModWikiHyperlinkCommandRegistry.register(dispatcher);
+        CustomBlockHardnessCommandRegistry.register(
+            dispatcher
+            //#if MC>=11900
+            //$$ , commandBuildContext
+            //#endif
+        );
     }
 }
