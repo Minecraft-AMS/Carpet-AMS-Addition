@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.mixin.carpet;
 
+import carpet.CarpetServer;
 import carpet.settings.SettingsManager;
 
 import club.mcams.carpet.AmsServer;
@@ -59,14 +60,16 @@ public abstract class SettingsManagerMixin {
         remap = false
     )
     private void printVersion(ServerCommandSource source, CallbackInfoReturnable<Integer> cir) {
-        Messenger.tell(
-            source,
-            Messenger.c(
-                String.format("g %s ", AmsServer.fancyName),
-                String.format("g %s: ", translator.tr("version").getString()),
-                String.format("g %s ", AmsServerMod.getVersion()),
-                String.format("g (%s: %d)", translator.tr("total_rules").getString(), AmsServer.ruleCount)
-            )
-        );
+        if ((Object)this == CarpetServer.settingsManager) {
+            Messenger.tell(
+                    source,
+                    Messenger.c(
+                            String.format("g %s ", AmsServer.fancyName),
+                            String.format("g %s: ", translator.tr("version").getString()),
+                            String.format("g %s ", AmsServerMod.getVersion()),
+                            String.format("g (%s: %d)", translator.tr("total_rules").getString(), AmsServer.ruleCount)
+                    )
+            );
+        }
     }
 }
