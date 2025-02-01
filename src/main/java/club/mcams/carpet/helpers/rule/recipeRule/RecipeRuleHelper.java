@@ -31,12 +31,12 @@ import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
+import java.util.List;
 
 @GameVersion(version = "Minecraft < 1.20.2")
 public class RecipeRuleHelper {
@@ -44,12 +44,8 @@ public class RecipeRuleHelper {
         if (server != null && server.isRunning() && hasActiveRecipeRule()) {
             Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
             for (Recipe<?> recipe : allRecipes) {
-                Identifier recipeId = recipe.getId();
-                if (recipeId.getNamespace().equals(AmsServer.compactName) && !player.getRecipeBook().contains(recipeId)) {
-                    server.getCommandManager().execute(
-                        server.getCommandSource().withSilent(),
-                        String.format("/recipe give %s %s", player.getName().getString(), recipeId)
-                    );
+                if (recipe.getId().getNamespace().equals(AmsServer.compactName) && !player.getRecipeBook().contains(recipe.getId())) {
+                    player.unlockRecipes(List.of(recipe));
                 }
             }
         }
@@ -60,21 +56,18 @@ public class RecipeRuleHelper {
             AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
             AmsServerCustomRecipes.getInstance().buildRecipes();
             server.execute(() -> {
-                serverExecuteReloadCommand(server);
+                needReloadServerResources(server);
                 Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
                 for (Recipe<?> recipe : allRecipes) {
-                    Identifier recipeId = recipe.getId();
-                    if (recipeId.getNamespace().equals(AmsServer.compactName)) {
-                        server.getCommandManager().execute(server.getCommandSource().withSilent(), "/recipe give @a " + recipeId);
+                    if (recipe.getId().getNamespace().equals(AmsServer.compactName)) {
+                        for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
+                            if (!player.getRecipeBook().contains(recipe.getId())) {
+                                player.unlockRecipes(List.of(recipe));
+                            }
+                        }
                     }
                 }
             });
-        }
-    }
-
-    public static void onServerLoadedWorlds(MinecraftServer server) {
-        if (server != null && server.isRunning() && hasActiveRecipeRule()) {
-            server.execute(() -> serverExecuteReloadCommand(server));
         }
     }
 
@@ -99,7 +92,9 @@ public class RecipeRuleHelper {
         return server.getRecipeManager();
     }
 
-    private static void serverExecuteReloadCommand(MinecraftServer server) {
-        server.getCommandManager().execute(server.getCommandSource().withSilent(), "/reload");
+    public static void needReloadServerResources(MinecraftServer server) {
+        if (server != null && server.isRunning() && hasActiveRecipeRule()) {
+            server.reloadResources(server.getDataPackManager().getEnabledNames());
+        }
     }
 }

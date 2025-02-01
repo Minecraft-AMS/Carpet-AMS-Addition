@@ -182,9 +182,12 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
-        RecipeRuleHelper.onServerLoadedWorlds(server);
         FancyFakePlayerNameTeamController.removeBotTeam(server, AmsServerSettings.fancyFakePlayerName);
         AutoCleaner.removeAmsDataFolder(server);
+    }
+
+    public void afterServerLoadWorld(MinecraftServer server) {
+        RecipeRuleHelper.needReloadServerResources(server);
     }
 
     @Override
