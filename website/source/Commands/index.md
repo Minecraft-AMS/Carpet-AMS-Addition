@@ -27,7 +27,7 @@
 
 ### 自定义方块爆炸抗性（commandCustomBlockBlastResistance）
 
-- **/customBlockBlastResistance set <block> <hardness>**
+- **/customBlockBlastResistance set <block> <resistance>**
 
   添加或修改方块及其爆炸抗性。
 
@@ -240,3 +240,33 @@
 - **/carpetExtensionModWikiHyperlink <拓展模组名>**
 
   获取某个Carpet拓展模组的Wiki链接。
+
+### 自定义方块硬度（commandCustomBlockHardness）
+
+- **/customBlockHardness set <block> <hardness>**
+
+  添加或修改方块及其硬度。
+
+  
+
+- **/customBlockHardness remove <block>**
+
+  从列表中移除方块。
+
+  
+
+- **/customBlockHardness removeAll**
+
+  移除列表中的所有方块。
+
+  
+
+- **/customBlockHardness list**
+
+  显示所有添加的方块。
+
+
+
+- **/customBlockHardness help**
+
+  查看使用说明。

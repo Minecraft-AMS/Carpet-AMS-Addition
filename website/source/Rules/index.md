@@ -691,7 +691,7 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 ## 更快移动规则控制器（fasterMovementController）
 
-用于控制更快移动规则在那个维度生效。
+用于控制更快移动规则在哪个维度生效。
 
 - 类型: `String`
 
@@ -1868,7 +1868,7 @@ json位置：
 
 自定义任何命令的权限等级。
 
-开启规则后使用 /customCommandPermissionLevel help 命令查看使用说明。
+开启规则后使用 `/customCommandPermissionLevel help` 命令查看使用说明。
 
 - 类型: `String`
 
@@ -2401,6 +2401,46 @@ json位置：
 
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `COMMAND`
+
+## 自定义方块硬度（commandCustomBlockHardness）
+
+使用指令来自定义任何方块的挖掘硬度。
+
+开启规则后使用 `/customBlockHardness help` 命令来查看使用说明。
+
+客户端没有安装 `Carpet AMS Addition` 时，该规则完全不可用。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`,`COMMAND`
+
+## 仅OP可召唤白名单中的玩家（onlyOpCanSpawnRealPlayerInWhitelist）
+
+只有OP玩家可以召唤在白名单中的玩家，无论白名单是否开启。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
 
 
 

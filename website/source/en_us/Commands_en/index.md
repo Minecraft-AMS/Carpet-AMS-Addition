@@ -27,7 +27,7 @@
 
 ### commandCustomBlockBlastResistance
 
-- **/customBlockBlastResistance set <block> <hardness>**
+- **/customBlockBlastResistance set <block> <resistance>**
 
   Add or modify blocks and their blast resistance.
 
@@ -240,3 +240,33 @@
 - **/carpetExtensionModWikiHyperlink <ExtensionName>**
 
   Get the Wiki link for a carpet extension mod.
+
+### commandCustomBlockHardness
+
+- **/customBlockHardness set <block> <hardness>**
+
+  Add or modify blocks and their hardness.
+
+  
+
+- **/customBlockHardness remove <block>**
+
+  Remove a block from the list.
+
+  
+
+- **/customBlockHardness removeAll**
+
+  Remove all blocks from the list.
+
+  
+
+- **/customBlockHardness list**
+
+  Display all added blocks.
+
+
+
+- **/customBlockHardness help**
+
+  View the usage instructions.

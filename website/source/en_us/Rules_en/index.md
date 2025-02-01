@@ -1908,7 +1908,7 @@ When the player is sneak, they will be completely hidden from mobs, even when we
 
 Customize the permission level of any commands.
 
-After enabling the rules, use the /customCommandPermissionLevel command to view the usage instructions.
+After enabling the rules, use the `/customCommandPermissionLevel help` command to view the usage instructions.
 
 - Type: `String`
 
@@ -2425,6 +2425,46 @@ As the version is updated, the list of mods will be constantly adjusted.
 
 
 - Categroies: `AMS`, `SURVIVAL`, `COMMAND`
+
+## commandCustomBlockHardness
+
+Use command to customizing mining hardness for any block.
+
+After enabling the rules, use the `/customBlockHardness help` command to view the usage instructions.
+
+When the `Carpet AMS Addition` is not installed on the client, this rule is completely unavailable.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
+
+## onlyOpCanSpawnRealPlayerInWhitelist
+
+Only OP players can spawn players on the whitelist, regardless of whether the whitelist is enabled.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `COMMAND`
 
 ## craftableEnchantedGoldApple
 
