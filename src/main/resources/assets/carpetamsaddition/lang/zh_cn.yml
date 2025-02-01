@@ -607,12 +607,14 @@ carpetamsaddition:
         desc: 列举了一些常用Carpet拓展的Wiki链接，你只需要使用"/carpetExtensionModWikiHyperlink <ExtensionName>"指令即可在聊天框中获取到跳转链接，点击链接即可跳转
         extra:
           '0': 随着版本更新该规则的拓展模组列表会不断调整
-      customBlockHardness:
+      commandCustomBlockHardness:
         name: 自定义方块硬度
         desc: 使用指令来自定义任何方块的挖掘硬度
         extra:
           '0': '开启规则后使用/customBlockHardness help命令来查看使用说明'
+          '1': '客户端没有安装Carpet AMS Addition时，该规则完全不可用'
       onlyOpCanSpawnRealPlayerInWhitelist:
+        name: 仅OP可召唤白名单中的玩家
         desc: 只有OP玩家可以召唤在白名单中的玩家，无论白名单是否开启
 
 
