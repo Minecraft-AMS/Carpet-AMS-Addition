@@ -27,13 +27,13 @@
 
 ### commandCustomBlockBlastResistance
 
-- **/customBlockBlastResistance set <block> <resistance>**
+- **/customBlockBlastResistance set &lt;block&gt; &lt;resistance&gt;**
 
   Add or modify blocks and their blast resistance.
 
   
 
-- **/customBlockBlastResistance remove <block>**
+- **/customBlockBlastResistance remove  &lt;block&gt; **
 
   Remove a block from the list.
 
@@ -69,13 +69,13 @@
 
 ### commandPlayerLeader
 
-- **/leader add <PlayerName>**
+- **/leader add &lt;PlayerName&gt;**
 
   Add a tour guide.
 
 
 
-- **/leader remove <PlayerName>**
+- **/leader remove &lt;PlayerName&gt;**
 
   remove a tour guide.
 
@@ -99,7 +99,7 @@
 
 ### commandPacketInternetGroper
 
-- **/pings <targetIpOrDomainName> <pingQuantity>**
+- **/pings &lt;targetIpOrDomainName&gt; &lt;pingQuantity&gt;**
 
   Ping a specific host.
 
@@ -123,25 +123,25 @@
 
 ### commandGoto
 
-- **/goto <dimension> <x> <y> <z>**
+- **/goto &lt;dimension&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt;**
 
   teleport to the specified dimension and coordinates.
 
 
 
-- **/goto <dimension>**
+- **/goto &lt;dimension&gt;**
 
   Teleport to the corresponding coordinates of the current player location.
 
 ### commandCustomCommandPermissionLevel
 
-- **/customCommandPermissionLevel set <command> <permissionLevel>**
+- **/customCommandPermissionLevel set &lt;command&gt; &lt;permissionLevel&gt;**
 
   Set the permission level of a command.
 
 
 
-- **/customCommandPermissionLevel remove <command>**
+- **/customCommandPermissionLevel remove &lt;command&gt;**
 
   Remove a modified command.
 
@@ -165,19 +165,19 @@
 
 ### commandGetPlayerSkull
 
-- **/getPlayerSkull <player>**
+- **/getPlayerSkull &lt;player&gt;**
 
   Get the skull of a specified online player.
 
 ### commandCustomMovableBlock
 
-- **/customMovableBlock add <block>**
+- **/customMovableBlock add &lt;block&gt;**
 
   Added a movable block.
 
 
 
-- **/customMovableBlock remove <block>**
+- **/customMovableBlock remove &lt;block&gt;**
 
   Delete a movable block.
 
@@ -207,13 +207,13 @@
 
 ### commandCustomAntiFireItems
 
-- **/customAntiFireItems add <item>**
+- **/customAntiFireItems add &lt;item&gt;**
 
   Added a anti fire item.
 
 
 
-- **/customAntiFireItems  remove <block>**
+- **/customAntiFireItems  remove &lt;block&gt;**
 
   Delete a anti fire item.
 
@@ -237,19 +237,19 @@
 
 ### commandCarpetExtensionModWikiHyperlink
 
-- **/carpetExtensionModWikiHyperlink <ExtensionName>**
+- **/carpetExtensionModWikiHyperlink &lt;ExtensionName&gt;**
 
   Get the Wiki link for a carpet extension mod.
 
 ### commandCustomBlockHardness
 
-- **/customBlockHardness set <block> <hardness>**
+- **/customBlockHardness set &lt;block&gt; &lt;hardness&gt;** 
 
   Add or modify blocks and their hardness.
 
   
 
-- **/customBlockHardness remove <block>**
+- **/customBlockHardness remove &lt;block&gt;**
 
   Remove a block from the list.
 

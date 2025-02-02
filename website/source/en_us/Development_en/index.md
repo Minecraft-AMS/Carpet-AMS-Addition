@@ -27,19 +27,14 @@
 ## Support Version
 
 |       Game Version        | Development Status |                    Last Supported Version                    |
-|:-------------------------:| :----------------: | :----------------------------------------------------------: |
+| :-----------------------: | :----------------: | :----------------------------------------------------------: |
 |          1.21.4           |         ✔          |                             ---                              |
 |          1.21.3           |         ✔          |                             ---                              |
 |          1.21.2           |         ✔          |                             ---                              |
 |          1.21.1           |         ✔          |                             ---                              |
 |           1.21            |         ✔          |                             ---                              |
 |          1.20.6           |         ✔          |                             ---                              |
-|          1.20.5           |         ✔          |                             ---                              |
-|          1.20.4           |         ✔          |                             ---                              |
-|          1.20.3           |         ✔          |                             ---                              |
-|          1.20.2           |         ✔          |                             ---                              |
-|          1.20.1           |         ✔          |                             ---                              |
-|           1.20            |         ✔          |                             ---                              |
+|       1.20 - 1.20.5       |         ✖          | [Carpet-AMS-Addition-mc1.20-1.20.5-v2.54.0](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v2.54.0) |
 |          1.19.4           |         ✔          |                             ---                              |
 |          1.19.3           |         ✖          | [Carpet-AMS-Addition-mc1.19.3-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
 |          1.19.2           |         ✖          | [Carpet-AMS-Addition-mc1.19.2-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |

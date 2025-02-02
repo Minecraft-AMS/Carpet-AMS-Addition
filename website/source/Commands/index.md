@@ -27,13 +27,13 @@
 
 ### 自定义方块爆炸抗性（commandCustomBlockBlastResistance）
 
-- **/customBlockBlastResistance set <block> <resistance>**
+- **/customBlockBlastResistance set <方块> <抗性>**
 
   添加或修改方块及其爆炸抗性。
 
   
 
-- **/customBlockBlastResistance remove <block>**
+- **/customBlockBlastResistance remove <方块>**
 
   从列表中移除方块。
 
@@ -243,13 +243,13 @@
 
 ### 自定义方块硬度（commandCustomBlockHardness）
 
-- **/customBlockHardness set <block> <hardness>**
+- **/customBlockHardness set <方块> <硬度>**
 
   添加或修改方块及其硬度。
 
   
 
-- **/customBlockHardness remove <block>**
+- **/customBlockHardness remove <方块>**
 
   从列表中移除方块。
 
