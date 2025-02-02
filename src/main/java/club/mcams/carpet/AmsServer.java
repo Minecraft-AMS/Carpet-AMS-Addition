@@ -139,20 +139,15 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onPlayerLoggedIn(ServerPlayerEntity player) {
-        //#if MC==12005
-        //$$ ServerNetworkHandler.onHello(player, "carpet ams addition");
-        //#endif
         if (AmsServerSettings.welcomeMessage) {
             CustomWelcomeMessageConfig.handleMessage(player, AmsServer.minecraftServer);
         }
-
         if (
-            player.getActiveStatusEffects().equals(LeaderCommandRegistry.HIGH_LIGHT.getEffectType()) &&
+            player.getActiveStatusEffects().containsValue(LeaderCommandRegistry.HIGH_LIGHT) &&
             !LeaderCommandRegistry.LEADER_LIST.containsValue(player.getUuidAsString())
         ) {
             player.removeStatusEffect(LeaderCommandRegistry.HIGH_LIGHT.getEffectType());
         }
-
         if (LeaderCommandRegistry.LEADER_LIST.containsValue(player.getUuidAsString())) {
             player.addStatusEffect(
                 LeaderCommandRegistry.HIGH_LIGHT
@@ -162,7 +157,9 @@ public class AmsServer implements CarpetExtension {
             );
         }
         RecipeRuleHelper.onPlayerLoggedIn(AmsServer.minecraftServer, player);
-        CustomBlockHardnessS2CPacket.sendToPlayer(player);
+        if (!Objects.equals(AmsServerSettings.commandCustomBlockHardness, "false")) {
+            CustomBlockHardnessS2CPacket.sendToPlayer(player);
+        }
     }
 
     @Override
@@ -186,7 +183,7 @@ public class AmsServer implements CarpetExtension {
         AutoCleaner.removeAmsDataFolder(server);
     }
 
-    public void afterServerLoadWorld(MinecraftServer server) {
+    public void afterServerLoadWorlds(MinecraftServer server) {
         RecipeRuleHelper.needReloadServerResources(server);
     }
 
