@@ -22,9 +22,6 @@ package club.mcams.carpet;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
-//#if MC>=12005
-//$$ import carpet.network.ServerNetworkHandler;
-//#endif
 
 import club.mcams.carpet.api.recipe.AmsRecipeManager;
 import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
