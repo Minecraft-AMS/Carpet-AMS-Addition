@@ -69,7 +69,7 @@ public final class CommandHelper {
     public static void setPermission(MinecraftServer server, String command, int permissionLevel) {
         CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
         CommandNode<ServerCommandSource> target = dispatcher.getRoot().getChild(command);
-        ((CommandNodeInvoker<ServerCommandSource>)target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
+        ((CommandNodeInvoker<ServerCommandSource>) target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
     }
 
     public static boolean canUseCommand(ServerCommandSource source, Object commandLevel) {
