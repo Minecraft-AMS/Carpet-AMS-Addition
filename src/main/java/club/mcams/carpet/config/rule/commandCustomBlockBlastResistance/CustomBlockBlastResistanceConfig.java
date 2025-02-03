@@ -68,7 +68,7 @@ public class CustomBlockBlastResistanceConfig {
         }
     }
 
-    @SuppressWarnings("ReadWriteStringCanBeUsed")
+    @SuppressWarnings({"ReadWriteStringCanBeUsed", "DuplicatedCode"})
     public static void saveToJson(Map<BlockState, Float> customBlockMap, String configFilePath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Map<String, Float> simplifiedMap = new HashMap<>();
