@@ -20,17 +20,14 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
-import club.mcams.carpet.utils.ChainableHashMap;
-import club.mcams.carpet.utils.ChainableList;
-
-import net.minecraft.item.Item;
+import club.mcams.carpet.api.recipe.builder.ShapedRecipeBuilder;
+import club.mcams.carpet.api.recipe.builder.ShapelessRecipeBuilder;
+import club.mcams.carpet.api.recipe.builder.SmeltingRecipeBuilder;
 
 import static net.minecraft.item.Items.*;
 
 public class AmsServerCustomRecipes {
     private static final AmsServerCustomRecipes INSTANCE = new AmsServerCustomRecipes();
-    private static final AmsRecipeBuilder builder = AmsRecipeBuilder.getInstance();
 
     private AmsServerCustomRecipes() {}
 
@@ -39,100 +36,63 @@ public class AmsServerCustomRecipes {
     }
 
     public void buildRecipes() {
-        /*
-         * 有序合成配方
-         */
-        if (AmsServerSettings.craftableEnchantedGoldenApples) {
-            String[][] notchApplePattern = {
-                {"#", "#", "#"},
-                {"#", "A", "#"},
-                {"#", "#", "#"}
-            };
-            ChainableHashMap<Character, String> notchAppleIngredients = new ChainableHashMap<>();
-            notchAppleIngredients.cPut('#', item(GOLD_BLOCK)).cPut('A', item(APPLE));
-            builder.addShapedRecipe("enchanted_golden_apple", notchApplePattern, notchAppleIngredients, item(ENCHANTED_GOLDEN_APPLE), 1);
-        }
+        ShapedRecipeBuilder.create(AmsServerSettings.craftableEnchantedGoldenApples, "enchanted_golden_apple")
+        .pattern("###")
+        .pattern("#A#")
+        .pattern("###")
+        .define('#', GOLD_BLOCK).define('A', APPLE)
+        .output(ENCHANTED_GOLDEN_APPLE).build();
 
-        if (AmsServerSettings.betterCraftableBoneBlock) {
-            String[][] boneBlockPattern = {
-                {"#", "#", "#"},
-                {"#", "#", "#"},
-                {"#", "#", "#"}
-            };
-            ChainableHashMap<Character, String> boneBlockIngredients = new ChainableHashMap<>();
-            boneBlockIngredients.cPut('#', item(BONE));
-            builder.addShapedRecipe("bone_block", boneBlockPattern, boneBlockIngredients, item(BONE_BLOCK), 3);
-        }
+        ShapedRecipeBuilder.create(AmsServerSettings.betterCraftableBoneBlock, "bone_block")
+        .pattern("###")
+        .pattern("###")
+        .pattern("###")
+        .define('#', BONE)
+        .output(BONE_BLOCK, 3).build();
 
-        if (AmsServerSettings.betterCraftableDispenser) {
-            String[][] dispenserPattern = {
-                {" ", "S", "X"},
-                {"S", "D", "X"},
-                {" ", "S", "X"}
-            };
-            ChainableHashMap<Character, String> dispenserIngredients = new ChainableHashMap<>();
-            dispenserIngredients.cPut('D', item(DROPPER)).cPut('S', item(STICK)).cPut('X', item(STRING));
-            builder.addShapedRecipe("dispenser1", dispenserPattern, dispenserIngredients, item(DISPENSER), 1);
-        }
+        ShapedRecipeBuilder.create(AmsServerSettings.betterCraftableDispenser, "dispenser1")
+        .pattern(" SX")
+        .pattern("SDX")
+        .pattern(" SX")
+        .define('D', DROPPER).define('S', STICK).define('X', STRING)
+        .output(DISPENSER, 1).build();
 
-        if (AmsServerSettings.craftableElytra) {
-            String[][] elytraPattern = {
-                {"P", "S", "P"},
-                {"P", "*", "P"},
-                {"P", "L", "P"}
-            };
-            ChainableHashMap<Character, String> elytraIngredients = new ChainableHashMap<>();
-            elytraIngredients.cPut('P', item(PHANTOM_MEMBRANE)).cPut('S', item(STICK)).cPut('*', item(SADDLE)).cPut('L', item(STRING));
-            builder.addShapedRecipe("elytra", elytraPattern, elytraIngredients, item(ELYTRA), 1);
-        }
+        ShapedRecipeBuilder.create(AmsServerSettings.craftableElytra, "elytra")
+        .pattern("PSP")
+        .pattern("P*P")
+        .pattern("PLP")
+        .define('P', PHANTOM_MEMBRANE).define('S', STICK).define('*', SADDLE).define('L', STRING)
+        .output(ELYTRA, 1).build();
 
         //#if MC<11900 && MC>=11700
-        if (AmsServerSettings.craftableSculkSensor) {
-            String[][] sculkSensorPattern = {
-                {" ", " ", " "},
-                {"R", "Q", "R"},
-                {"D", "D", "D"}
-            };
-            ChainableHashMap<Character, String> sculkSensorIngredients = new ChainableHashMap<>();
-            sculkSensorIngredients.cPut('D', item(DEEPSLATE)).cPut('R', item(REDSTONE)).cPut('Q', item(QUARTZ));
-            builder.addShapedRecipe("sculk_sensor", sculkSensorPattern, sculkSensorIngredients, item(SCULK_SENSOR), 1);
-        }
+        ShapedRecipeBuilder.create(AmsServerSettings.craftableSculkSensor, "sculk_sensor")
+        .pattern("   ")
+        .pattern("RQR")
+        .pattern("DDD")
+        .define('D', DEEPSLATE).define('R', REDSTONE).define('Q', QUARTZ)
+        .output(SCULK_SENSOR, 1).build();
         //#endif
 
         /*
          * 无序合成配方
          */
-        if (AmsServerSettings.betterCraftableDispenser) {
-            ChainableList<String> dispenserIngredients = new ChainableList<>();
-            dispenserIngredients.cAdd(item(BOW)).cAdd(item(DROPPER));
-            builder.addShapelessRecipe("dispenser2", dispenserIngredients, item(DISPENSER), 1);
-        }
+        ShapelessRecipeBuilder.create(AmsServerSettings.betterCraftableDispenser, "dispenser2")
+        .addIngredient(BOW).addIngredient(DROPPER).output(DISPENSER, 1).build();
 
         //#if MC>=11700 && MC<12102
-        if (AmsServerSettings.craftableBundle) {
-            ChainableList<String> bundleIngredients = new ChainableList<>();
-            bundleIngredients.cAdd(item(STRING)).cAdd(item(LEATHER));
-            builder.addShapelessRecipe("bundle", bundleIngredients, item(BUNDLE), 1);
-        }
+        ShapelessRecipeBuilder.create(AmsServerSettings.craftableBundle, "bundle")
+        .addIngredient(STRING).addIngredient(LEATHER).output(BUNDLE, 1).build();
         //#endif
 
         //#if MC>=11700
-        if (AmsServerSettings.betterCraftablePolishedBlackStoneButton) {
-            ChainableList<String> polishedBlackstoneButtonIngredients = new ChainableList<>();
-            polishedBlackstoneButtonIngredients.cAdd(item(DEEPSLATE));
-            builder.addShapelessRecipe("polished_blackstone_button", polishedBlackstoneButtonIngredients, item(POLISHED_BLACKSTONE_BUTTON), 1);
-        }
+        ShapelessRecipeBuilder.create(AmsServerSettings.betterCraftablePolishedBlackStoneButton, "polished_blackstone_button")
+        .addIngredient(DEEPSLATE).output(POLISHED_BLACKSTONE_BUTTON, 1).build();
         //#endif
 
         /*
          * 熔炉烧炼配方
          */
-        if (AmsServerSettings.rottenFleshBurnedIntoLeather) {
-            builder.addSmeltingRecipe("leather", item(ROTTEN_FLESH), item(LEATHER), 0.1F, 50);
-        }
-    }
-
-    private static String item(Item item) {
-        return item.toString();
+        SmeltingRecipeBuilder.create(AmsServerSettings.rottenFleshBurnedIntoLeather, "leather")
+        .material(ROTTEN_FLESH).experience(0.1F).cookTime(50).output(LEATHER, 1).build();
     }
 }
