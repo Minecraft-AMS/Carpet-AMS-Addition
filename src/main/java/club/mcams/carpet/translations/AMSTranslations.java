@@ -145,14 +145,14 @@ public class AMSTranslations {
         if (!translationKey.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
             return text;
         }
-        String formattedString = translateKeyToFormattedString(lang, translationKey);
-        if (formattedString == null) {
-            translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, translationKey);
-        }
-        if (formattedString != null) {
-            text = updateTextWithTranslation(text, formattedString, translatableText);
-        } else if (!suppressWarnings) {
-            AmsServer.LOGGER.warn("Unknown translation key {}", translationKey);
+        String formattedString = Optional.ofNullable(translateKeyToFormattedString(lang, translationKey))
+            .orElseGet(() -> translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, translationKey));
+        return formattedString != null ? updateTextWithTranslation(text, formattedString, translatableText) : translationLog(translationKey, suppressWarnings, text);
+    }
+
+    private static BaseText translationLog(String translationKey, boolean suppressWarnings, BaseText text) {
+        if (!suppressWarnings) {
+            AmsServer.LOGGER.warn("Unknown translation key: {}. Check if the translation exists or the key is correct.", translationKey);
         }
         return text;
     }

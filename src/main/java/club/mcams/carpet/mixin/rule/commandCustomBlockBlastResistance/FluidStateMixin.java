@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.Objects;
 
 @Mixin(FluidState.class)
-public abstract class FluidStateMixin implements FluidStateInvoker{
+public abstract class FluidStateMixin implements FluidStateInvoker {
     @ModifyReturnValue(method = "getBlastResistance", at = @At("RETURN"))
     private float getBlastResistance(float original) {
         if (!Objects.equals(AmsServerSettings.commandCustomBlockBlastResistance, "false") && AmsServerSettings.enhancedWorldEater == -1.0F) {

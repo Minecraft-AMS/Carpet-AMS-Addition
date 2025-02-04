@@ -13,5 +13,6 @@ net.minecraft.text.BaseText net.minecraft.text.MutableText
 net.minecraft.world.dimension.DimensionType isUltrawarm() ultrawarm()
 net.minecraft.server.command.CommandManager execute() executeWithPrefix()
 net.minecraft.registry.Registry net.minecraft.registry.Registries
+net.minecraft.text.TranslatableText net.minecraft.text.TranslatableTextContent
 
 net.minecraft.block.entity.ShulkerBoxBlockEntity field_31356 INVENTORY_SIZE

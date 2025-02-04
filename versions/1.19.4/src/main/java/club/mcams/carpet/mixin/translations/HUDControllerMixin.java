@@ -20,12 +20,13 @@
 
 package club.mcams.carpet.mixin.translations;
 
-import carpet.logging.Logger;
+import carpet.logging.HUDController;
 
 import club.mcams.carpet.translations.AMSTranslations;
 
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.BaseText;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,14 +34,14 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft < 1.19")
-@Mixin(Logger.class)
-public abstract class LoggerMixin {
-    @ModifyVariable(method = "sendPlayerMessage", at = @At("HEAD"), argsOnly = true, remap = false)
-    private BaseText[] applyAMSTranslationToLoggerMessage(BaseText[] messages, /* parent method parameters -> */ ServerPlayerEntity player, BaseText... messages_) {
-        for (int i = 0; i < messages.length; i++) {
-            messages[i] = AMSTranslations.translate(messages[i], player);
+@GameVersion(version = "Minecraft >= 1.19")
+@Mixin(HUDController.class)
+public abstract class HUDControllerMixin {
+    @ModifyVariable(method = "addMessage", at = @At("HEAD"), argsOnly = true, remap = false)
+    private static Text applyAMSTranslationToHudLoggerMessage(Text hudMessage, ServerPlayerEntity player, Text hudMessage_) {
+        if (player != null) {
+            hudMessage = AMSTranslations.translate((MutableText) hudMessage, player);
         }
-        return messages;
+        return hudMessage;
     }
 }

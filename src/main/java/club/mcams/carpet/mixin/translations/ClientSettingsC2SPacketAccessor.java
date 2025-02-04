@@ -20,21 +20,12 @@
 
 package club.mcams.carpet.mixin.translations;
 
-import net.minecraft.network.packet.c2s.play.ClientSettingsC2SPacket;
+import club.mcams.carpet.utils.compat.DummyInterface;
 
-//#if MC<11800
-import org.spongepowered.asm.mixin.gen.Accessor;
-//#endif
 import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft < 1.18")
-@SuppressWarnings("unused")
-@Mixin(ClientSettingsC2SPacket.class)
-public interface ClientSettingsC2SPacketAccessor {
-    //#if MC<11800
-    @Accessor(value = "language")
-    String getLanguage$AMS();
-    //#endif
-}
+@Mixin(DummyInterface.class)
+public interface ClientSettingsC2SPacketAccessor {}
