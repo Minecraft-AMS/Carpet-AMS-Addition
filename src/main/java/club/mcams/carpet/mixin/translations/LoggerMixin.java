@@ -37,7 +37,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @Mixin(Logger.class)
 public abstract class LoggerMixin {
     @ModifyVariable(method = "sendPlayerMessage", at = @At("HEAD"), argsOnly = true, remap = false)
-    private BaseText[] applyAMSTranslationToLoggerMessage(BaseText[] messages, /* parent method parameters -> */ ServerPlayerEntity player, BaseText... messages_) {
+    private BaseText[] applyAMSTranslationToLoggerMessage(BaseText[] messages, ServerPlayerEntity player, BaseText... messages_) {
         for (int i = 0; i < messages.length; i++) {
             messages[i] = AMSTranslations.translate(messages[i], player);
         }

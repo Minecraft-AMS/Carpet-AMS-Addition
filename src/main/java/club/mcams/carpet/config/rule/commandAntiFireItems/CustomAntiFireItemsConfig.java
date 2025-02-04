@@ -57,7 +57,7 @@ public class CustomAntiFireItemsConfig {
         }
     }
 
-    @SuppressWarnings({"ReadWriteStringCanBeUsed", "DuplicatedCode"})
+    @SuppressWarnings({"ReadWriteStringCanBeUsed", "DuplicatedCode", "JavaExistingMethodCanBeUsed"})
     public static void saveToJson(List<String> customBlockMap, String configFilePath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         List<String> simplifiedMap = new ArrayList<>(customBlockMap);
