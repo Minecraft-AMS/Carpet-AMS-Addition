@@ -20,12 +20,11 @@
 
 package club.mcams.carpet.observers.rule.largeEnderChest;
 
-import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.settings.SimpleRuleObserver;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Formatting;
 
@@ -35,9 +34,8 @@ public class LargeEnderChestRuleObserver extends SimpleRuleObserver<Boolean> {
 
     @Override
     public void onValueChange(Boolean oldValue, Boolean newValue) {
-        MinecraftServer minecraftServer = AmsServer.minecraftServer;
-        if (newValue && minecraftServer != null && minecraftServer.isRunning()) {
-            Messenger.sendServerMessage(minecraftServer, message());
+        if (newValue && MinecraftServerUtil.serverIsRunning()) {
+            Messenger.sendServerMessage(MinecraftServerUtil.getServer(), message());
         }
     }
 

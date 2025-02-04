@@ -18,28 +18,22 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.tntPowerController;
+package club.mcams.carpet.utils;
 
-import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.AmsServer;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import net.minecraft.server.MinecraftServer;
 
-import net.minecraft.entity.TntEntity;
+public class MinecraftServerUtil {
+    public static MinecraftServer getServer() {
+        return AmsServer.getInstance().getMinecraftServer();
+    }
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
+    public static boolean serverIsRunning() {
+        return getServer() != null && getServer().isRunning();
+    }
 
-@Mixin(TntEntity.class)
-public abstract class TntEntityMixin {
-    @ModifyExpressionValue(
-        //#if MC>=12102
-        //$$ method = "<init>(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V",
-        //#else
-        method = "explode",
-        //#endif
-        at = @At(value = "CONSTANT", args = "floatValue=4.0F")
-    )
-    private float modifyTntPower(float original) {
-        return AmsServerSettings.tntPowerController != -1.0D ? (float) AmsServerSettings.tntPowerController : original;
+    public static boolean serverIsRunning(MinecraftServer server) {
+        return server != null && server.isRunning();
     }
 }

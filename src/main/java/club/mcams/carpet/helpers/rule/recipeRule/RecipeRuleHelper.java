@@ -27,6 +27,7 @@ import club.mcams.carpet.api.recipe.AmsRecipeManager;
 import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 import club.mcams.carpet.settings.RecipeRule;
 
+import club.mcams.carpet.utils.MinecraftServerUtil;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.server.MinecraftServer;
@@ -41,7 +42,7 @@ import java.util.List;
 @GameVersion(version = "Minecraft < 1.20.2")
 public class RecipeRuleHelper {
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayerEntity player) {
-        if (server != null && server.isRunning() && hasActiveRecipeRule()) {
+        if (MinecraftServerUtil.serverIsRunning(server) && hasActiveRecipeRule()) {
             Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
             for (Recipe<?> recipe : allRecipes) {
                 if (recipe.getId().getNamespace().equals(AmsServer.compactName) && !player.getRecipeBook().contains(recipe.getId())) {
@@ -52,7 +53,7 @@ public class RecipeRuleHelper {
     }
 
     public static void onValueChange(MinecraftServer server) {
-        if (server != null && server.isRunning()) {
+        if (MinecraftServerUtil.serverIsRunning(server)) {
             AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
             AmsServerCustomRecipes.getInstance().buildRecipes();
             server.execute(() -> {
@@ -93,7 +94,7 @@ public class RecipeRuleHelper {
     }
 
     public static void needReloadServerResources(MinecraftServer server) {
-        if (server != null && server.isRunning() && hasActiveRecipeRule()) {
+        if (MinecraftServerUtil.serverIsRunning(server) && hasActiveRecipeRule()) {
             server.reloadResources(server.getDataPackManager().getEnabledNames());
         }
     }

@@ -20,8 +20,8 @@
 
 package club.mcams.carpet.mixin.rule.sendPlayerDeathLocation;
 
-import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 import club.mcams.carpet.helpers.rule.sendPlayerDeathLocation.PlayerDeathLocationContext;
 
 import net.minecraft.server.MinecraftServer;
@@ -40,7 +40,7 @@ public abstract class ServerPlayerEntityMixin implements ServerPlayerEntityInvok
     @Inject(method = "onDeath", at = @At("TAIL"))
     private void sendDeathLocation(CallbackInfo ci) {
         if (!Objects.equals(AmsServerSettings.sendPlayerDeathLocation, "false")) {
-            MinecraftServer server = AmsServer.minecraftServer;
+            MinecraftServer server = MinecraftServerUtil.getServer();
             ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
             World world = this.invokeGetWorld();
             switch (AmsServerSettings.sendPlayerDeathLocation) {

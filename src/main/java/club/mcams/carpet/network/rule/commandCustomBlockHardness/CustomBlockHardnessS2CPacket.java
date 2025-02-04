@@ -21,6 +21,7 @@
 package club.mcams.carpet.network.rule.commandCustomBlockHardness;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.utils.IdentifierUtil;
 
@@ -33,6 +34,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.block.Block;
 
 import java.util.Map;
+import java.util.Objects;
 
 import io.netty.buffer.Unpooled;
 
@@ -59,8 +61,10 @@ public class CustomBlockHardnessS2CPacket {
     }
 
     public static void sendToPlayer(ServerPlayerEntity player) {
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        encode(buf);
-        ServerPlayNetworking.send(player, ID, buf);
+        if (!Objects.equals(AmsServerSettings.commandCustomBlockHardness, "false")) {
+            PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+            encode(buf);
+            ServerPlayNetworking.send(player, ID, buf);
+        }
     }
 }

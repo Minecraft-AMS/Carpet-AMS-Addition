@@ -20,10 +20,10 @@
 
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
-import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.translations.Translator;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
@@ -45,7 +45,7 @@ public class UpdateSuppressionContext {
             String suppressionMessage = suppressionMessageText(pos, world, cause);
             final Text copyButton = copyButton(pos);
             Messenger.sendServerMessage(
-                AmsServer.minecraftServer,
+                MinecraftServerUtil.getServer(),
                 Messenger.s(suppressionMessage).formatted(Formatting.RED, Formatting.ITALIC).append(copyButton)
             );
         }

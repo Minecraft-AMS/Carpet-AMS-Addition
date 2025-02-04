@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController;
 
-import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -40,6 +40,6 @@ public class ChunkLoading {
     }
 
     protected static ServerPlayerEntity playerFromName(String name) {
-        return AmsServer.minecraftServer.getPlayerManager().getPlayer(name);
+        return MinecraftServerUtil.getServer().getPlayerManager().getPlayer(name);
     }
 }

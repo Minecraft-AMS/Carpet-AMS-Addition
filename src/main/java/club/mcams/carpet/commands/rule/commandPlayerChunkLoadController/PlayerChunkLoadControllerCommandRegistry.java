@@ -20,11 +20,11 @@
 
 package club.mcams.carpet.commands.rule.commandPlayerChunkLoadController;
 
-import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
@@ -54,7 +54,7 @@ public class PlayerChunkLoadControllerCommandRegistry {
         ChunkLoading.setPlayerInteraction(playerName, b, true);
         if (player == null) {
             Messenger.sendServerMessage(
-                AmsServer.minecraftServer, Messenger.s("No player specified").
+                MinecraftServerUtil.getServer(), Messenger.s("No player specified").
                 setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true))
             );
             return 0;
@@ -73,7 +73,7 @@ public class PlayerChunkLoadControllerCommandRegistry {
         PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
         if (player == null) {
             Messenger.sendServerMessage(
-                AmsServer.minecraftServer, Messenger.s("No player specified").
+                MinecraftServerUtil.getServer(), Messenger.s("No player specified").
                 setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true))
             );
             return 0;
