@@ -21,6 +21,7 @@
 package club.mcams.carpet.api.recipe.builder;
 
 import club.mcams.carpet.utils.RegexTools;
+
 import net.minecraft.item.Item;
 
 public abstract class AbstractRecipeBuilder {
@@ -32,10 +33,6 @@ public abstract class AbstractRecipeBuilder {
     protected AbstractRecipeBuilder(boolean enabled, String recipeName) {
         this.enabled = enabled;
         this.recipeName = recipeName;
-    }
-
-    public AbstractRecipeBuilder output(Item item) {
-        return output(item, resultCount);
     }
 
     public AbstractRecipeBuilder output(Item item, int count) {

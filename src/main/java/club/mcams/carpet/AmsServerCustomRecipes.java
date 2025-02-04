@@ -41,7 +41,7 @@ public class AmsServerCustomRecipes {
         .pattern("#A#")
         .pattern("###")
         .define('#', GOLD_BLOCK).define('A', APPLE)
-        .output(ENCHANTED_GOLDEN_APPLE).build();
+        .output(ENCHANTED_GOLDEN_APPLE, 1).build();
 
         ShapedRecipeBuilder.create(AmsServerSettings.betterCraftableBoneBlock, "bone_block")
         .pattern("###")
