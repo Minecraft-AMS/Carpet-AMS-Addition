@@ -37,6 +37,7 @@
     "rule.commandCustomCommandPermissionLevel.CommandNodeInvoker",
     "rule.commandCustomMovableBlock.PistonBlockMixin",
     "rule.commandPlayerChunkLoadController.ThreadedAnvilChunkStorageMixin",
+    "rule.commandPlayerLeader.ServerPlayerEntityMixin",
     "rule.creativeOneHitKill.EntityAccessorAndInvoker",
     "rule.creativeOneHitKill.PlayerEntityAccessorAndInvoker",
     "rule.creativeOneHitKill.PlayerEntityMixin",
