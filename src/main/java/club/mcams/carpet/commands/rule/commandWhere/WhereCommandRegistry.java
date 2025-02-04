@@ -27,6 +27,7 @@ import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 import club.mcams.carpet.utils.Messenger;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 
 import net.minecraft.command.argument.EntityArgumentType;
@@ -66,6 +67,13 @@ public class WhereCommandRegistry {
         sendWhoGetWhoMessage(minecraftServer, senderPlayer, targetPlayer);
         highlightPlayer(targetPlayer);
         return 1;
+    }
+
+    // 用于与Leader命令联动
+    public static void sendMessage(PlayerEntity targetPlayer) {
+        if (MinecraftServerUtil.serverIsRunning() && targetPlayer != null) {
+            Messenger.sendServerMessage(MinecraftServerUtil.getServer(), message(targetPlayer));
+        }
     }
 
     private static void sendWhoGetWhoMessage(MinecraftServer minecraftServer, PlayerEntity senderPlayer, PlayerEntity targetPlayer) {

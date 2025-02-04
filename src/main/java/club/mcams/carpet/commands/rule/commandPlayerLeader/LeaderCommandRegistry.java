@@ -21,12 +21,18 @@
 package club.mcams.carpet.commands.rule.commandPlayerLeader;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.commands.suggestionProviders.SetSuggestionProvider;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.config.rule.commandLeader.LeaderConfig;
+import club.mcams.carpet.commands.rule.commandWhere.WhereCommandRegistry;
+import club.mcams.carpet.utils.MinecraftServerUtil;
+
+import com.google.common.collect.ImmutableSet;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -38,10 +44,8 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -50,6 +54,9 @@ public class LeaderCommandRegistry {
     private static final Translator translator = new Translator("command.leader");
     private static final String MSG_HEAD = "<commandPlayerLeader> ";
     private static final int GLOWING_TIME = Integer.MAX_VALUE;
+    private static final Set<Integer> suggestionIntervalOptions = ImmutableSet.of(20, 40, 60, 80, 100, -1024);
+    private static final Map<String, Integer> PLAYER_TICK_INTERVAL = new ConcurrentHashMap<>();
+    private static final Map<String, Integer> PLAYER_TICK_COUNTER = new ConcurrentHashMap<>();
     public static final StatusEffectInstance HIGH_LIGHT = new StatusEffectInstance(StatusEffects.GLOWING, GLOWING_TIME);
     public static final Map<String, String> LEADER_LIST = new HashMap<>();
 
@@ -69,7 +76,66 @@ public class LeaderCommandRegistry {
             .executes(context -> list(context.getSource().getPlayer())))
             .then(literal("help")
             .executes(context -> help(context.getSource().getPlayer())))
+            .then(literal("broadcastLeaderPos")
+            .then(argument("player", EntityArgumentType.player())
+            .then(literal("interval")
+            .then(argument("interval", IntegerArgumentType.integer()).suggests(new SetSuggestionProvider<>(suggestionIntervalOptions))
+            .executes(context -> broadcastPosTickInterval(
+                EntityArgumentType.getPlayer(context, "player"), IntegerArgumentType.getInteger(context, "interval")
+            ))))))
         );
+    }
+
+    public static int broadcastPosTickInterval(PlayerEntity targetPlayer, int interval) {
+        String playerUUID = getPlayerUUID(targetPlayer);
+        PLAYER_TICK_INTERVAL.put(playerUUID, interval);
+        PLAYER_TICK_COUNTER.put(playerUUID, 0);
+        return 1;
+    }
+
+    public static void Tick() {
+        if (!Objects.equals(AmsServerSettings.commandPlayerLeader, "false") && !PLAYER_TICK_INTERVAL.isEmpty() && !PLAYER_TICK_COUNTER.isEmpty()) {
+            // 存储需要移除的玩家UUID
+            List<String> needRemovePlayer = new ArrayList<>();
+            for (Map.Entry<String, Integer> entry : PLAYER_TICK_INTERVAL.entrySet()) {
+                String playerUUID = entry.getKey();
+                int interval = entry.getValue();
+                if (interval <= -1 || !LEADER_LIST.containsValue(playerUUID)) {
+                    needRemovePlayer.add(playerUUID);
+                }
+            }
+
+            // 统一删除
+            needRemovePlayer.forEach(uuid -> {
+                PLAYER_TICK_INTERVAL.remove(uuid);
+                PLAYER_TICK_COUNTER.remove(uuid);
+            });
+
+            // 继续处理广播
+            for (Map.Entry<String, Integer> entry : PLAYER_TICK_INTERVAL.entrySet()) {
+                String playerUUID = entry.getKey();
+                int interval = entry.getValue();
+                int tickCounter = PLAYER_TICK_COUNTER.getOrDefault(playerUUID, 0);
+                tickCounter++;
+                if (tickCounter >= interval && MinecraftServerUtil.serverIsRunning()) {
+                    PlayerEntity player = MinecraftServerUtil.getServer().getPlayerManager().getPlayer(UUID.fromString(playerUUID));
+                    if (canBroadcastPos(player)) {
+                        WhereCommandRegistry.sendMessage(player);
+                    }
+                    PLAYER_TICK_COUNTER.put(playerUUID, 0);
+                } else {
+                    PLAYER_TICK_COUNTER.put(playerUUID, tickCounter);
+                }
+            }
+        }
+    }
+
+    private static boolean canBroadcastPos(PlayerEntity player) {
+        return
+            player != null &&
+            player.isAlive() &&
+            LEADER_LIST.containsValue(getPlayerUUID(player)) &&
+            LEADER_LIST.containsKey(getPlayerName(player));
     }
 
     private static int add(MinecraftServer server, PlayerEntity targetPlayer) {

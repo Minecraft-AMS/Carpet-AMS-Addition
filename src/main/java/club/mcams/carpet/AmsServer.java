@@ -64,17 +64,21 @@ import java.util.Map;
 import java.util.Objects;
 
 public class AmsServer implements CarpetExtension {
-    public static MinecraftServer minecraftServer;
     public static long serverStartTimeMillis;
     public static final int ruleCount = CountRulesUtil.countRules();
     public static final String fancyName = "Carpet AMS Addition";
     public static final String name = AmsServerMod.getModId();
     public static final String compactName = name.replace("-", "");  // carpetamsaddition
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
+    private static MinecraftServer minecraftServer;
     private static final AmsServer INSTANCE = new AmsServer();
 
     public static AmsServer getInstance() {
         return INSTANCE;
+    }
+
+    public MinecraftServer getMinecraftServer() {
+        return minecraftServer;
     }
 
     public static void init() {
@@ -85,7 +89,7 @@ public class AmsServer implements CarpetExtension {
     @Override
     public void onGameStarted() {
         // let's /carpet handle our few simple settings
-        LOGGER.info(String.format("%s v%s loaded! (Total rules: %d)", fancyName, AmsServerMod.getVersion(), ruleCount));
+        LOGGER.info("{} v{} loaded! (Total rules: {})", fancyName, AmsServerMod.getVersion(), ruleCount);
         LOGGER.info("Open Source: https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
         LOGGER.info("Issues: https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
         LOGGER.info("Wiki: https://minecraft-ams.github.io/carpetamsaddition/");
@@ -95,6 +99,11 @@ public class AmsServer implements CarpetExtension {
     @Override
     public String version() {
         return AmsServerMod.getModId();
+    }
+
+    @Override
+    public void onTick(MinecraftServer server) {
+        LeaderCommandRegistry.Tick();
     }
 
     @Override
@@ -154,9 +163,7 @@ public class AmsServer implements CarpetExtension {
             );
         }
         RecipeRuleHelper.onPlayerLoggedIn(AmsServer.minecraftServer, player);
-        if (!Objects.equals(AmsServerSettings.commandCustomBlockHardness, "false")) {
-            CustomBlockHardnessS2CPacket.sendToPlayer(player);
-        }
+        CustomBlockHardnessS2CPacket.sendToPlayer(player);
     }
 
     @Override
