@@ -41,11 +41,13 @@ import java.util.List;
 @SuppressWarnings("DuplicatedCode")
 @GameVersion(version = "Minecraft >= 1.20.2")
 public class RecipeRuleHelper {
+    private static final String MOD_ID = AmsServer.compactName;
+
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayerEntity player) {
         if (server != null && server.isRunning() && hasActiveRecipeRule()) {
             Collection<RecipeEntry<?>> allRecipes = getServerRecipeManager(server).values();
             for (RecipeEntry<?> recipe : allRecipes) {
-                if (recipe.id().getNamespace().equals(AmsServer.compactName) && !player.getRecipeBook().contains(recipe.id())) {
+                if (recipe.id().getNamespace().equals(MOD_ID) && !player.getRecipeBook().contains(recipe.id())) {
                     player.unlockRecipes(List.of(recipe));
                 }
             }
@@ -60,7 +62,7 @@ public class RecipeRuleHelper {
                 needReloadServerResources(server);
                 Collection<RecipeEntry<?>> allRecipes = getServerRecipeManager(server).values();
                 for (RecipeEntry<?> recipe : allRecipes) {
-                    if (recipe.id().getNamespace().equals(AmsServer.compactName)) {
+                    if (recipe.id().getNamespace().equals(MOD_ID)) {
                         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                             if (!player.getRecipeBook().contains(recipe.id())) {
                                 player.unlockRecipes(List.of(recipe));

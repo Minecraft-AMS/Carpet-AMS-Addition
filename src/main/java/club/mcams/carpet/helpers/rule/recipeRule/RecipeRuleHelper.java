@@ -26,8 +26,8 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.api.recipe.AmsRecipeManager;
 import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 import club.mcams.carpet.settings.RecipeRule;
-
 import club.mcams.carpet.utils.MinecraftServerUtil;
+
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.server.MinecraftServer;
@@ -41,11 +41,13 @@ import java.util.List;
 
 @GameVersion(version = "Minecraft < 1.20.2")
 public class RecipeRuleHelper {
+    private static final String MOD_ID = AmsServer.compactName;
+
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayerEntity player) {
         if (MinecraftServerUtil.serverIsRunning(server) && hasActiveRecipeRule()) {
             Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
             for (Recipe<?> recipe : allRecipes) {
-                if (recipe.getId().getNamespace().equals(AmsServer.compactName) && !player.getRecipeBook().contains(recipe.getId())) {
+                if (recipe.getId().getNamespace().equals(MOD_ID) && !player.getRecipeBook().contains(recipe.getId())) {
                     player.unlockRecipes(List.of(recipe));
                 }
             }
@@ -60,7 +62,7 @@ public class RecipeRuleHelper {
                 needReloadServerResources(server);
                 Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
                 for (Recipe<?> recipe : allRecipes) {
-                    if (recipe.getId().getNamespace().equals(AmsServer.compactName)) {
+                    if (recipe.getId().getNamespace().equals(MOD_ID)) {
                         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                             if (!player.getRecipeBook().contains(recipe.getId())) {
                                 player.unlockRecipes(List.of(recipe));

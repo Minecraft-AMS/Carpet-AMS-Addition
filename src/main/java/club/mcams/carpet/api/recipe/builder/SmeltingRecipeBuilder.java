@@ -25,7 +25,7 @@ import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 import net.minecraft.item.Item;
 
 public class SmeltingRecipeBuilder extends AbstractRecipeBuilder {
-    private Item sourceItem;
+    private Item material;
     private float experience;
     private int cookingTime;
 
@@ -38,7 +38,7 @@ public class SmeltingRecipeBuilder extends AbstractRecipeBuilder {
     }
 
     public SmeltingRecipeBuilder material(Item item) {
-        this.sourceItem = item;
+        this.material = item;
         return this;
     }
 
@@ -54,9 +54,9 @@ public class SmeltingRecipeBuilder extends AbstractRecipeBuilder {
 
     @Override
     public void build() {
-        if (!enabled || resultItem == null || sourceItem == null) {
+        if (!enabled || resultItem == null || material == null) {
             return;
         }
-        AmsRecipeBuilder.getInstance().addSmeltingRecipe(recipeName, item(sourceItem), item(resultItem), experience, cookingTime);
+        AmsRecipeBuilder.getInstance().addSmeltingRecipe(recipeName, item(material), item(resultItem), experience, cookingTime);
     }
 }

@@ -40,6 +40,7 @@ import club.mcams.carpet.utils.AutoCleaner;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.CountRulesUtil;
 
+import club.mcams.carpet.utils.MinecraftServerUtil;
 import com.google.common.collect.Maps;
 
 import com.google.gson.JsonElement;
@@ -61,7 +62,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
-import java.util.Objects;
 
 public class AmsServer implements CarpetExtension {
     public static long serverStartTimeMillis;
@@ -103,7 +103,7 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onTick(MinecraftServer server) {
-        LeaderCommandRegistry.Tick();
+        LeaderCommandRegistry.tick();
     }
 
     @Override
@@ -145,24 +145,9 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onPlayerLoggedIn(ServerPlayerEntity player) {
-        if (AmsServerSettings.welcomeMessage) {
-            CustomWelcomeMessageConfig.handleMessage(player, AmsServer.minecraftServer);
-        }
-        if (
-            player.getActiveStatusEffects().containsValue(LeaderCommandRegistry.HIGH_LIGHT) &&
-            !LeaderCommandRegistry.LEADER_LIST.containsValue(player.getUuidAsString())
-        ) {
-            player.removeStatusEffect(LeaderCommandRegistry.HIGH_LIGHT.getEffectType());
-        }
-        if (LeaderCommandRegistry.LEADER_LIST.containsValue(player.getUuidAsString())) {
-            player.addStatusEffect(
-                LeaderCommandRegistry.HIGH_LIGHT
-                //#if MC>=11700
-                , player
-                //#endif
-            );
-        }
-        RecipeRuleHelper.onPlayerLoggedIn(AmsServer.minecraftServer, player);
+        CustomWelcomeMessageConfig.getConfig().sendWelcomeMessage(player, MinecraftServerUtil.getServer());
+        LeaderCommandRegistry.onPlayerLoggedIn(player);
+        RecipeRuleHelper.onPlayerLoggedIn(MinecraftServerUtil.getServer(), player);
         CustomBlockHardnessS2CPacket.sendToPlayer(player);
     }
 
@@ -171,9 +156,7 @@ public class AmsServer implements CarpetExtension {
         serverStartTimeMillis = System.currentTimeMillis();
         minecraftServer = server;
         LoadConfigFromJson.load(server);
-        if (!Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false")) {
-            CommandHelper.updateAllCommandPermissions(server);
-        }
+        CommandHelper.updateAllCommandPermissions(server);
     }
 
     @Override

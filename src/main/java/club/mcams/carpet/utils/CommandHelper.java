@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.utils;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
 import club.mcams.carpet.mixin.rule.commandCustomCommandPermissionLevel.CommandNodeInvoker;
 import club.mcams.carpet.translations.Translator;
@@ -36,6 +37,7 @@ import net.minecraft.util.Formatting;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 @SuppressWarnings("EnhancedSwitchMigration")
@@ -47,22 +49,24 @@ public final class CommandHelper {
 
     @SuppressWarnings("unchecked")
     public static void updateAllCommandPermissions(MinecraftServer server) {
-        CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
-        CommandManager serverCommandManager = server.getCommandManager();
-        for (CommandNode<ServerCommandSource> node : dispatcher.getRoot().getChildren()) {
-            if (node instanceof LiteralCommandNode) {
-                String commandName = ((LiteralCommandNode<?>) node).getLiteral();
-                Predicate<ServerCommandSource> defaultRequirement = CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.get(commandName);
-                if (CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(commandName)) {
-                    int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(commandName);
-                    ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(source -> source.hasPermissionLevel(level));
-                } else if (defaultRequirement != null) {
-                    ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(defaultRequirement);
+        if (!Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false")) {
+            CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
+            CommandManager serverCommandManager = server.getCommandManager();
+            for (CommandNode<ServerCommandSource> node : dispatcher.getRoot().getChildren()) {
+                if (node instanceof LiteralCommandNode) {
+                    String commandName = ((LiteralCommandNode<?>) node).getLiteral();
+                    Predicate<ServerCommandSource> defaultRequirement = CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.get(commandName);
+                    if (CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(commandName)) {
+                        int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(commandName);
+                        ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(source -> source.hasPermissionLevel(level));
+                    } else if (defaultRequirement != null) {
+                        ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(defaultRequirement);
+                    }
                 }
             }
+            server.getPlayerManager().getPlayerList().forEach(serverCommandManager::sendCommandTree);
+            Messenger.sendServerMessage(server, Messenger.s(translator.tr("refresh_cmd_tree").getString()).formatted(Formatting.GRAY));
         }
-        server.getPlayerManager().getPlayerList().forEach(serverCommandManager::sendCommandTree);
-        Messenger.sendServerMessage(server, Messenger.s(translator.tr("refresh_cmd_tree").getString()).formatted(Formatting.GRAY));
     }
 
     @SuppressWarnings("unchecked")

@@ -21,6 +21,7 @@
 package club.mcams.carpet.config.rule.welcomeMessage;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
 
@@ -39,8 +40,15 @@ import java.nio.file.Path;
 
 public class CustomWelcomeMessageConfig {
     private static final Translator translator = new Translator("rule.welcomeMessage");
+    private static final CustomWelcomeMessageConfig CONFIG = new CustomWelcomeMessageConfig();
 
-    public static void handleMessage(PlayerEntity player, MinecraftServer server) {
+    private CustomWelcomeMessageConfig() {}
+
+    public static CustomWelcomeMessageConfig getConfig() {
+        return CONFIG;
+    }
+
+    private static void handleMessage(PlayerEntity player, MinecraftServer server) {
         try {
             Path path = server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/welcomeMessage" + ".json");
             if (!Files.exists(path)) {
@@ -69,6 +77,12 @@ public class CustomWelcomeMessageConfig {
             player.sendMessage(Messenger.s(welcomeMessage), false);
         } catch (Exception e) {
             AmsServer.LOGGER.error("An error occurred while processing the welcome message configuration", e);
+        }
+    }
+
+    public void sendWelcomeMessage(PlayerEntity player, MinecraftServer server) {
+        if (AmsServerSettings.welcomeMessage) {
+            handleMessage(player, server);
         }
     }
 }

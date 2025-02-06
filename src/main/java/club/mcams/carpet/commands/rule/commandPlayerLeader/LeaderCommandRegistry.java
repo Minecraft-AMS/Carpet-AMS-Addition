@@ -54,7 +54,7 @@ public class LeaderCommandRegistry {
     private static final Translator translator = new Translator("command.leader");
     private static final String MSG_HEAD = "<commandPlayerLeader> ";
     private static final int GLOWING_TIME = Integer.MAX_VALUE;
-    private static final Set<Integer> suggestionIntervalOptions = ImmutableSet.of(20, 40, 60, 80, 100, -1024);
+    private static final Set<Integer> suggestionIntervalOptions = ImmutableSet.of(20, 40, 80, 160, 320, 640, -1024);
     private static final Map<String, Integer> PLAYER_TICK_INTERVAL = new ConcurrentHashMap<>();
     private static final Map<String, Integer> PLAYER_TICK_COUNTER = new ConcurrentHashMap<>();
     public static final StatusEffectInstance HIGH_LIGHT = new StatusEffectInstance(StatusEffects.GLOWING, GLOWING_TIME);
@@ -90,10 +90,14 @@ public class LeaderCommandRegistry {
         String playerUUID = getPlayerUUID(targetPlayer);
         PLAYER_TICK_INTERVAL.put(playerUUID, interval);
         PLAYER_TICK_COUNTER.put(playerUUID, 0);
+        // 立马先发一遍
+        if (canBroadcastPos(targetPlayer)) {
+            WhereCommandRegistry.sendMessage(targetPlayer);
+        }
         return 1;
     }
 
-    public static void Tick() {
+    public static void tick() {
         if (!Objects.equals(AmsServerSettings.commandPlayerLeader, "false") && !PLAYER_TICK_INTERVAL.isEmpty() && !PLAYER_TICK_COUNTER.isEmpty()) {
             // 存储需要移除的玩家UUID
             List<String> needRemovePlayer = new ArrayList<>();
@@ -223,10 +227,27 @@ public class LeaderCommandRegistry {
         String listHelp = translator.tr("help.list").getString();
         player.sendMessage(
             Messenger.s(addHelp + "\n" + removeHelp + "\n" + removeAllHelp + "\n" + listHelp).
-            setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
-            false
+            setStyle(Style.EMPTY.withColor(Formatting.GRAY)), false
         );
         return 1;
+    }
+
+    public static void onPlayerLoggedIn(PlayerEntity player) {
+        if (
+            player.getActiveStatusEffects().containsValue(LeaderCommandRegistry.HIGH_LIGHT) &&
+            !LEADER_LIST.containsValue(getPlayerUUID(player)) &&
+            !LEADER_LIST.containsKey(getPlayerName(player))
+        ) {
+            player.removeStatusEffect(LeaderCommandRegistry.HIGH_LIGHT.getEffectType());
+        }
+        if (LeaderCommandRegistry.LEADER_LIST.containsValue(player.getUuidAsString())) {
+            player.addStatusEffect(
+                LeaderCommandRegistry.HIGH_LIGHT
+                //#if MC>=11700
+                , player
+                //#endif
+            );
+        }
     }
 
     private static String getPlayerName(PlayerEntity player) {
