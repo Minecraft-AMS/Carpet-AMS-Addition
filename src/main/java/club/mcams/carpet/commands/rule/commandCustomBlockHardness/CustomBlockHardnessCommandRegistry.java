@@ -45,6 +45,9 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.WorldSavePath;
 
 import java.util.HashMap;
+//#if MC<11700
+//$$ import java.util.concurrent.ConcurrentHashMap;
+//#endif
 import java.util.Map;
 
 import static net.minecraft.server.command.CommandManager.argument;
@@ -53,6 +56,9 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class CustomBlockHardnessCommandRegistry {
     private final static Translator translator = new Translator("command.customBlockHardness");
     public static final Map<BlockState, Float> CUSTOM_BLOCK_HARDNESS_MAP = new HashMap<>();
+    //#if MC<11700
+    //$$ public static final Map<BlockState, Float> DEFAULT_HARDNESS_MAP = new ConcurrentHashMap<>();
+    //#endif
     private static final String MESSAGE_HEAD = "<customBlockHardness> ";
 
     //#if MC<11900
@@ -93,6 +99,16 @@ public class CustomBlockHardnessCommandRegistry {
             ))
             .then(literal("list").executes(context -> list(context.getSource().getPlayer())))
             .then(literal("help").executes(context -> help(context.getSource().getPlayer())))
+            .then(literal("getDefaultHardness")
+            //#if MC<11900
+            .then(argument("block", BlockStateArgumentType.blockState())
+            //#else
+            //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
+            //#endif
+            .executes(context -> getDefaultHardness(
+                context.getSource().getPlayer(),
+                BlockStateArgumentType.getBlockState(context, "block").getBlockState()
+            ))))
         );
     }
 
@@ -155,6 +171,21 @@ public class CustomBlockHardnessCommandRegistry {
         return 1;
     }
 
+    private static int getDefaultHardness(PlayerEntity player, BlockState state) {
+        //#if MC>=11700
+        float hardness = state.getBlock().getHardness();
+        //#else
+        //$$ float hardness = CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.get(state);
+        //#endif
+        String blockName = RegexTools.getBlockRegisterName(state);
+        player.sendMessage(
+            Messenger.s(
+                String.format("%s%s %s %s", MESSAGE_HEAD, blockName, translator.tr("default_hardness").getString(), hardness)
+            ).formatted(Formatting.GREEN), false
+        );
+        return 1;
+    }
+
     private static int list(PlayerEntity player) {
         player.sendMessage(
             Messenger.s(
@@ -172,15 +203,17 @@ public class CustomBlockHardnessCommandRegistry {
     }
 
     private static int help(PlayerEntity player) {
-        String setHelpText = translator.tr("help.set").getString();
-        String removeHelpText = translator.tr("help.remove").getString();
-        String removeAllHelpText = translator.tr("help.removeAll").getString();
-        String listHelpText = translator.tr("help.list").getString();
+        final String setHelpText = translator.tr("help.set").getString();
+        final String removeHelpText = translator.tr("help.remove").getString();
+        final String removeAllHelpText = translator.tr("help.removeAll").getString();
+        final String listHelpText = translator.tr("help.list").getString();
+        final String getDefaultHardnessHelpText = translator.tr("help.get_default_hardness").getString();
         player.sendMessage(
             Messenger.s(
                 setHelpText + "\n" +
                 removeHelpText + "\n" +
                 removeAllHelpText + "\n" +
+                getDefaultHardnessHelpText + "\n" +
                 listHelpText
             ).formatted(Formatting.GRAY), false
         );
