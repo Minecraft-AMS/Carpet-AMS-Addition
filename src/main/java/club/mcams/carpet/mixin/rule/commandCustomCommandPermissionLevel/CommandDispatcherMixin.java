@@ -35,22 +35,26 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
-import java.util.function.Predicate;
 
 @Mixin(CommandDispatcher.class)
 public abstract class CommandDispatcherMixin {
     @Inject(method = "register", at = @At("HEAD"), remap = false)
-    private void register(LiteralArgumentBuilder<ServerCommandSource> command, CallbackInfoReturnable<LiteralCommandNode<ServerCommandSource>> cir) {
+    private void saveDefaultRequirement(LiteralArgumentBuilder<ServerCommandSource> command, CallbackInfoReturnable<LiteralCommandNode<ServerCommandSource>> cir) {
         CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.putIfAbsent(command.getLiteral(), command.getRequirement());
+    }
 
+    @Inject(
+        method = "register",
+        at = @At(
+            value = "INVOKE",
+            target = "Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;build()Lcom/mojang/brigadier/tree/LiteralCommandNode;"
+        ),
+        remap = false
+    )
+    private void modifyPermissionLevel(LiteralArgumentBuilder<ServerCommandSource> command, CallbackInfoReturnable<LiteralCommandNode<ServerCommandSource>> cir) {
         if (!Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false") && CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(command.getLiteral())) {
             int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(command.getLiteral());
             command.requires(source -> source.hasPermissionLevel(level));
-        }
-
-        if (!CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(command.getLiteral())) {
-            Predicate<ServerCommandSource> defaultRequires = CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.get(command.getLiteral());
-            command.requires(defaultRequires);
         }
     }
 }
