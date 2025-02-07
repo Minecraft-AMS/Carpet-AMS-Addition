@@ -42,6 +42,7 @@ import net.minecraft.util.Formatting;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class CustomCommandPermissionLevelRegistry {
@@ -55,7 +56,8 @@ public class CustomCommandPermissionLevelRegistry {
         CommandManager.literal("customCommandPermissionLevel")
         .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomCommandPermissionLevel))
         .then(CommandManager.literal("set")
-        .then(CommandManager.argument("command", StringArgumentType.string()).suggests(new LiteralCommandSuggestionProvider())
+        .then(CommandManager.argument("command", StringArgumentType.string())
+        .suggests(new LiteralCommandSuggestionProvider())
         .then(CommandManager.argument("permissionLevel", IntegerArgumentType.integer())
         .suggests(ListSuggestionProvider.of(CommandHelper.permissionLevels))
         .executes(context -> set(
@@ -74,6 +76,8 @@ public class CustomCommandPermissionLevelRegistry {
         ))))
         .then(CommandManager.literal("removeAll")
         .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
+        .then(CommandManager.literal("refresh")
+        .executes(context -> refreshCommandTree(context.getSource().getServer())))
         .then(CommandManager.literal("list")
         .executes(context -> list(context.getSource().getPlayer())))
         .then(CommandManager.literal("help")
@@ -81,6 +85,13 @@ public class CustomCommandPermissionLevelRegistry {
     }
 
     private static int set(MinecraftServer server, ServerPlayerEntity player, String command, int permissionLevel) {
+        if (Objects.equals(command, "customCommandPermissionLevel")) {
+            player.sendMessage(
+                Messenger.s(MSG_HEAD + translator.tr("cant_modify_self").getString())
+                .formatted(Formatting.ITALIC, Formatting.RED), false
+            );
+            return 0;
+        }
         if (COMMAND_PERMISSION_MAP.containsKey(command)) {
             int oldPermissionLevel = COMMAND_PERMISSION_MAP.get(command);
             player.sendMessage(
@@ -132,6 +143,11 @@ public class CustomCommandPermissionLevelRegistry {
                 MSG_HEAD + translator.tr("removeAll").getString()
             ).formatted(Formatting.RED, Formatting.ITALIC), false
         );
+        CommandHelper.updateAllCommandPermissions(server);
+        return 1;
+    }
+
+    private static int refreshCommandTree(MinecraftServer server) {
         CommandHelper.updateAllCommandPermissions(server);
         return 1;
     }

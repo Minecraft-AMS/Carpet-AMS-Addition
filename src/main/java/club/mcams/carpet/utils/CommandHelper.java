@@ -32,7 +32,6 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.util.Formatting;
 
 import java.util.Arrays;
 import java.util.List;
@@ -65,7 +64,7 @@ public final class CommandHelper {
                 }
             }
             server.getPlayerManager().getPlayerList().forEach(serverCommandManager::sendCommandTree);
-            Messenger.sendServerMessage(server, Messenger.s(translator.tr("refresh_cmd_tree").getString()).formatted(Formatting.GRAY));
+            Messenger.sendServerMessage(server, Messenger.s("§o§7Server: " + translator.tr("refresh_cmd_tree").getString()));
         }
     }
 
@@ -83,7 +82,7 @@ public final class CommandHelper {
         if (commandLevel instanceof String) {
             final String levelStr = ((String) commandLevel).toLowerCase(Locale.ENGLISH);
             switch (levelStr) {
-                case "true":  return true;
+                case "true": return true;
                 case "false": return false;
                 case "ops": return source.hasPermissionLevel(2);
             }
