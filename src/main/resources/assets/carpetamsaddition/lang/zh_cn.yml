@@ -90,6 +90,7 @@ carpetamsaddition:
       help:
         set: '/customCommandPermissionLevel set <指令> <权限等级>  ->  设置某个指令的权限等级'
         remove: '/customCommandPermissionLevel remove <指令>  ->  删除某个被修改的指令'
+        refresh: '/customCommandPermissionLevel refresh  ->  刷新指令树'
         removeAll: '/customCommandPermissionLevel removeAll  ->  删除所有被修改的指令'
         list: '/customCommandPermissionLevel list  ->  查看被修改的指令列表'
     customMovableBlock:

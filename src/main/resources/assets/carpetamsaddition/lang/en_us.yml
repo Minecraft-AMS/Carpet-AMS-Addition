@@ -90,6 +90,7 @@ carpetamsaddition:
       help:
         set: '/customCommandPermissionLevel set <command> <permissionLevel>  ->  Set the permission level of a command'
         remove: '/customCommandPermissionLevel remove <command>  ->  Remove a modified command'
+        refresh: '/customCommandPermissionLevel refresh  ->  Refresh command tree'
         removeAll: '/customCommandPermissionLevel removeAll  ->  Remove all modified commands'
         list: '/customCommandPermissionLevel list  ->  View the list of modified commands'
     customMovableBlock:

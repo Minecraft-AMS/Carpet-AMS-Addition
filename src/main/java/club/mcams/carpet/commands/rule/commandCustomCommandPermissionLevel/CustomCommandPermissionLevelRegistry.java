@@ -174,10 +174,11 @@ public class CustomCommandPermissionLevelRegistry {
         final String setHelp = translator.tr("help.set").getString();
         final String removeHelp = translator.tr("help.remove").getString();
         final String removeAllHelp = translator.tr("help.removeAll").getString();
+        final String refreshHelp = translator.tr("help.refresh").getString();
         final String listHelp = translator.tr("help.list").getString();
         player.sendMessage(
             Messenger.s(
-                setHelp + "\n" + removeHelp + "\n" + removeAllHelp + "\n" + listHelp
+                setHelp + "\n" + removeHelp + "\n" + removeAllHelp + "\n" + listHelp + "\n" + refreshHelp
             ).formatted(Formatting.GRAY), false
         );
         return 1;
