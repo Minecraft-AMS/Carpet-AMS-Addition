@@ -69,13 +69,13 @@
 
 ### commandPlayerLeader
 
-- **/leader add &lt;PlayerName&gt;**
+- **/leader add &lt;player&gt;**
 
   Add a tour guide.
 
 
 
-- **/leader remove &lt;PlayerName&gt;**
+- **/leader remove &lt;player&gt;**
 
   remove a tour guide.
 
@@ -84,6 +84,12 @@
 - **/leader removeAll**
 
   Remove all tour guide.
+
+
+
+- **/leader broadcastLeaderPos &lt;player&gt; interval &lt;tick&gt;**
+
+  Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting.
 
 
 
@@ -150,6 +156,12 @@
 - **/customCommandPermissionLevel removeAll**
 
   Remove all modified commands.
+
+
+
+- **/customCommandPermissionLevel refresh**
+
+  Refresh command tree.
 
 
 
@@ -260,6 +272,13 @@
   Remove all blocks from the list.
 
   
+
+
+- **/customBlockHardness getDefaultHardness**
+
+  Query the default hardness of blocks.
+
+​	
 
 - **/customBlockHardness list**
 

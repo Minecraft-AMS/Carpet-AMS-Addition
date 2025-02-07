@@ -2018,46 +2018,6 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 易碎深板岩（softDeepslate）
-
-改变深板岩的硬度使其和普通石头一致。
-
-< 需要客户端支持 >
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`
-
-## 易碎黑曜石（softObsidian）
-
-改变黑曜石与哭泣的黑曜石的硬度使其和末地石一致。
-
-< 需要客户端支持 >
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`
-
 ## 假人交互同步客户端行为（fakePlayerInteractLikeClient）
 
 修复几个假人和盔甲架、矿车、船在特定情况下与客户端相应行为结果不一样的问题。

@@ -2056,46 +2056,6 @@ Prevent end spikes (obsidian spikes in the_end) from spawning.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
-## softDeepslate
-
-Change the hardness of deepslate to stone.
-
-< Requires client support >
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
-
-## softObsidian
-
-Change the hardness of obsidian and crying obsidian to end stone.
-
-< Requires client support >
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
-
 ## strongLeash
 
 The leash will not break due to excessive distance.

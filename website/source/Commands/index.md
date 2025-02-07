@@ -43,7 +43,8 @@
 
   移除列表中的所有方块。
 
-  
+
+
 
 - **/customBlockBlastResistance list**
 
@@ -69,13 +70,13 @@
 
 ### 玩家导游（commandPlayerLeader）
 
-- **/leader add <玩家名>**
+- **/leader add <玩家>**
 
   添加一名导游。
 
 
 
-- **/leader remove <玩家名>**
+- **/leader remove <玩家>**
 
   移除一名导游。
 
@@ -86,6 +87,12 @@
   解雇所有导游。
 
 
+
+- **/leader broadcastLeaderPos <玩家> interval &lt;tick&gt;**
+
+  定时广播一名导游的坐标，时间设置为负数停止广播。
+
+​	
 
 - **/leader list**
 
@@ -150,6 +157,12 @@
 - **/customCommandPermissionLevel removeAll**
 
   删除所有被修改的指令。
+
+
+
+- **/customCommandPermissionLevel refresh**
+
+  刷新指令树。
 
 
 
@@ -260,6 +273,13 @@
   移除列表中的所有方块。
 
   
+
+
+- **/customBlockBlastResistance getDefaultHardness <方块>**
+
+  查询方块的默认硬度。
+
+
 
 - **/customBlockHardness list**
 
