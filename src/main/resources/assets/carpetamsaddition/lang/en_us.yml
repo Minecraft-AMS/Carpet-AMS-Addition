@@ -64,6 +64,7 @@ carpetamsaddition:
         add: '/leader add <PlayerName>  ->  Add a tour guide'
         remove: '/leader remove <PlayerName>  ->  Remove a tour guide'
         removeAll: '/leader removeAll  ->  Remove all tour guide'
+        broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick>  ->  Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting'
         list: '/leader list  ->  View tour guide list'
     ping:
       stop_ping: 'Ping operation stopped.'
@@ -83,6 +84,7 @@ carpetamsaddition:
       free_memory: 'Free Memory:'
     customCommandPermissionLevel:
       not_found: ' Does not exist in the configuration file'
+      cant_modify_self: 'You cannot modify the permissions of the command'
       removeAll: 'All entries have been removed'
       list: '[ Custom command permission level list ]'
       help:
@@ -119,10 +121,12 @@ carpetamsaddition:
       not_found: ' not found !'
       removeAll: 'All custom block hardness values have been removed.'
       list: '[ Block / Hardness ]'
+      default_hardness: 'default hardness:'
       help:
         set: '/customBlockHardness set <block> <hardness>  ->  Add or modify blocks and their hardness'
         remove: '/customBlockHardness remove <block>  ->  Remove a block from the list'
         removeAll: '/customBlockHardness removeAll  ->  Remove all blocks from the list'
+        get_default_hardness: '/customBlockHardness getDefaultHardness <block>  ->  Query the default hardness of blocks'
         list: '/customBlockHardness list  ->  Display all added blocks'
 
   logger:
@@ -441,14 +445,6 @@ carpetamsaddition:
         desc: Customize the drop rate of netherite scrap from zombified piglin
         extra:
           '0': 'The range of values: 0 - 1'
-      softDeepslate:
-        desc: Change the hardness of deepslate to stone
-        extra:
-          '0': 'Requires client support'
-      softObsidian:
-        desc: Change the hardness of obsidian and crying obsidian to end stone
-        extra:
-          '0': 'Requires client support'
       fakePlayerInteractLikeClient:
         desc: Fix some cases that fake player interact differently from the client
       strongLeash:

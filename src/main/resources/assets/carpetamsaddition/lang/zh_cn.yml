@@ -64,6 +64,7 @@ carpetamsaddition:
         add: '/leader add <PlayerName>  ->  添加一名导游'
         remove: '/leader remove <PlayerName>  ->  移除一名导游'
         removeAll: '/leader removeAll  ->  解雇所有导游'
+        broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick>  ->  定时广播一名导游的坐标，时间设置为负数停止广播'
         list: '/leader list  ->  查看导游列表'
     ping:
       stop_ping: '已中断ping操作'
@@ -83,6 +84,7 @@ carpetamsaddition:
       free_memory: '可用内存：'
     customCommandPermissionLevel:
       not_found: ' 不存在于配置文件中'
+      cant_modify_self: '您不能修改该命令的权限'
       removeAll: '已删除所有条目'
       list: '[ 自定义指令权限等级列表 ]'
       help:
@@ -119,12 +121,13 @@ carpetamsaddition:
       not_found: ' 不存在 !'
       removeAll: '所有自定义方块及其硬度已从列表删除'
       list: '[ 方块 / 硬度 ]'
+      default_hardness: '的默认硬度为:'
       help:
         set: '/customBlockHardness set <block> <hardness>  ->  添加或修改方块及其硬度'
         remove: '/customBlockHardness remove <block>  ->  从列表中移除方块'
         removeAll: '/customBlockHardness removeAll  ->  移除列表中的所有方块'
+        get_default_hardness: '/customBlockHardness getDefaultHardness <block>  ->  查询方块的默认硬度'
         list: '/customBlockHardness list  ->  显示所有添加的方块'
-
 
   logger:
     serverRuntime:
@@ -536,16 +539,6 @@ carpetamsaddition:
         desc: 自定义僵尸猪灵掉落下界合金碎片的概率
         extra:
           '0': '允许设定的范围：0 - 1'
-      softDeepslate:
-        name: 易碎深板岩
-        desc: 改变深板岩的硬度使其和普通石头一致
-        extra:
-          '0': '需要客户端支持'
-      softObsidian:
-        name: 易碎黑曜石
-        desc: 改变黑曜石与哭泣的黑曜石的硬度使其和末地石一致
-        extra:
-          '0': '需要客户端支持'
       fakePlayerInteractLikeClient:
         name: 假人交互同步客户端行为
         desc: 修复几个假人和盔甲架、矿车、船在特定情况下与客户端相应行为结果不一样的问题
