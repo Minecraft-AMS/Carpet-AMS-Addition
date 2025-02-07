@@ -60,6 +60,7 @@ public class LeaderCommandRegistry {
     public static final StatusEffectInstance HIGH_LIGHT = new StatusEffectInstance(StatusEffects.GLOWING, GLOWING_TIME);
     public static final Map<String, String> LEADER_LIST = new HashMap<>();
 
+    // TODO: 实际上有很多消息不应该是服务器消息，但是懒得改了 :)
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
             CommandManager.literal("leader")
@@ -81,12 +82,22 @@ public class LeaderCommandRegistry {
             .then(literal("interval")
             .then(argument("interval", IntegerArgumentType.integer()).suggests(new SetSuggestionProvider<>(suggestionIntervalOptions))
             .executes(context -> broadcastPosTickInterval(
-                EntityArgumentType.getPlayer(context, "player"), IntegerArgumentType.getInteger(context, "interval")
+                EntityArgumentType.getPlayer(context, "player"),
+                context.getSource().getServer(),
+                IntegerArgumentType.getInteger(context, "interval")
             ))))))
         );
     }
 
-    public static int broadcastPosTickInterval(PlayerEntity targetPlayer, int interval) {
+    public static int broadcastPosTickInterval(PlayerEntity targetPlayer, MinecraftServer server, int interval) {
+        if (!LEADER_LIST.containsKey(getPlayerName(targetPlayer))) {
+            Messenger.sendServerMessage(server,
+                Messenger.s(
+                    String.format(MSG_HEAD + getPlayerName(targetPlayer) + " " + translator.tr("is_not_leader").getString())
+                ).formatted(Formatting.RED, Formatting.ITALIC)
+            );
+            return 0;
+        }
         String playerUUID = getPlayerUUID(targetPlayer);
         PLAYER_TICK_INTERVAL.put(playerUUID, interval);
         PLAYER_TICK_COUNTER.put(playerUUID, 0);
@@ -224,9 +235,10 @@ public class LeaderCommandRegistry {
         String addHelp = translator.tr("help.add").getString();
         String removeHelp = translator.tr("help.remove").getString();
         String removeAllHelp = translator.tr("help.removeAll").getString();
+        String broadcastLeaderPos = translator.tr("help.broadcast_leader_pos").getString();
         String listHelp = translator.tr("help.list").getString();
         player.sendMessage(
-            Messenger.s(addHelp + "\n" + removeHelp + "\n" + removeAllHelp + "\n" + listHelp).
+            Messenger.s(addHelp + "\n" + removeHelp + "\n" + removeAllHelp + "\n" + broadcastLeaderPos +  "\n" + listHelp).
             setStyle(Style.EMPTY.withColor(Formatting.GRAY)), false
         );
         return 1;
