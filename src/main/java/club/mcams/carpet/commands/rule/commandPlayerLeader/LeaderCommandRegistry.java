@@ -246,7 +246,7 @@ public class LeaderCommandRegistry {
 
     public static void onPlayerLoggedIn(PlayerEntity player) {
         if (
-            player.getActiveStatusEffects().containsValue(LeaderCommandRegistry.HIGH_LIGHT) &&
+            player.getActiveStatusEffects().containsKey(LeaderCommandRegistry.HIGH_LIGHT.getEffectType()) &&
             !LEADER_LIST.containsValue(getPlayerUUID(player)) &&
             !LEADER_LIST.containsKey(getPlayerName(player))
         ) {
