@@ -489,15 +489,6 @@ public class AmsServerSettings {
     )
     public static double renewableNetheriteScrap = 0.0D;
 
-    //#if MC>=11700
-    @GameVersion(version = "Minecraft >= 1.17")
-    @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean softDeepslate = false;
-    //#endif
-
-    @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean softObsidian = false;
-
     @Rule(categories = {AMS, FEATURE, BUGFIX})
     public static boolean fakePlayerInteractLikeClient = false;
 
