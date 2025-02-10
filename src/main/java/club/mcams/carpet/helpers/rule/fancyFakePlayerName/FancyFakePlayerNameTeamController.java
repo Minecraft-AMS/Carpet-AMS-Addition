@@ -20,7 +20,8 @@
 
 package club.mcams.carpet.helpers.rule.fancyFakePlayerName;
 
-import net.minecraft.scoreboard.Scoreboard;
+import club.mcams.carpet.utils.MinecraftServerUtil;
+
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -29,10 +30,8 @@ import java.util.Objects;
 
 public class FancyFakePlayerNameTeamController {
     public static void kickFakePlayerFromBotTeam(ServerPlayerEntity player, String teamName) {
-        MinecraftServer server = player.getServer();
-        if (server != null) {
-            Scoreboard scoreboard = player.getServer().getScoreboard();
-            Team team = scoreboard.getTeam(teamName);
+        if (MinecraftServerUtil.serverIsRunning() && player.getScoreboard().getTeam(teamName) != null) {
+            Team team = MinecraftServerUtil.getServer().getScoreboard().getTeam(teamName);
             if (team != null) {
                 team.getPlayerList().remove(player.getGameProfile().getName());
             }
