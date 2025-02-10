@@ -610,7 +610,12 @@ carpetamsaddition:
       onlyOpCanSpawnRealPlayerInWhitelist:
         name: 仅OP可召唤白名单中的玩家
         desc: 只有OP玩家可以召唤在白名单中的玩家，无论白名单是否开启
-
+      highLightWitherSkeletonEntity:
+        name: 高亮凋零骷髅
+        desc: 给予凋零骷髅高亮效果（开启时可能会有一定的性能影响）
+      itemEntityCreateNetherPortalDisabled:
+        name: 禁止物品实体创建下界传送门
+        desc: 让物品实体穿过下界传送门时不会创建传送门
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

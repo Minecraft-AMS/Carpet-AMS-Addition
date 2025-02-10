@@ -575,6 +575,15 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, COMMAND})
     public static boolean onlyOpCanSpawnRealPlayerInWhitelist = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean highLightWitherSkeletonEntity = false;
+
+    //#if MC>=12100
+    //$$ @GameVersion(version = "Minecraft >= 1.21")
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    //$$ public static boolean itemEntityCreateNetherPortalDisabled = false;
+    //#endif
+
 
     /*
      * 区块加载规则
