@@ -25,16 +25,14 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.WorldSavePath;
 
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -50,31 +48,41 @@ public class CustomWelcomeMessageConfig {
 
     private static void handleMessage(PlayerEntity player, MinecraftServer server) {
         try {
-            Path path = server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/welcomeMessage" + ".json");
+            Path path = server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/welcomeMessage.json");
             if (!Files.exists(path)) {
                 Files.createDirectories(path.getParent());
                 JsonObject defaultConfig = new JsonObject();
-                defaultConfig.addProperty(
-                    "welcomeMessage",
-                    String.format(
-                        "§3§o %s \n §a%s/carpetamsaddition/welcomeMessage.json",
-                        translator.tr("modify_content_in").getString(),
-                        translator.tr("save_path").getString()
-                    )
-                );
-                FileWriter writer = new FileWriter(path.toFile());
-                Gson gson = new Gson();
-                gson.toJson(defaultConfig, writer);
-                writer.close();
+                JsonArray defaultMsg = new JsonArray();
+                defaultMsg.add("§3§o " + translator.tr("modify_content_in").getString());
+                defaultMsg.add("§a" + translator.tr("save_path").getString() + "/carpetamsaddition/welcomeMessage.json");
+                defaultConfig.add("welcomeMessage", defaultMsg);
+                try (OutputStreamWriter writer = new OutputStreamWriter(
+                        new FileOutputStream(path.toFile()), StandardCharsets.UTF_8)) {
+                    new Gson().toJson(defaultConfig, writer);
+                }
             }
-            //#if MC<11800
-            //$$ JsonParser jsonParser = new JsonParser();
-            //$$ JsonObject config = jsonParser.parse(new FileReader(path.toString())).getAsJsonObject();
-            //#else
-            JsonObject config = JsonParser.parseReader(new FileReader(path.toString())).getAsJsonObject();
-            //#endif
-            String welcomeMessage = config.get("welcomeMessage").getAsString();
-            player.sendMessage(Messenger.s(welcomeMessage), false);
+            JsonObject config;
+            try (InputStreamReader reader = new InputStreamReader(new FileInputStream(path.toFile()), StandardCharsets.UTF_8)) {
+                //#if MC<11800
+                //$$ config = new JsonParser().parse(reader).getAsJsonObject();
+                //#else
+                config = JsonParser.parseReader(reader).getAsJsonObject();
+                //#endif
+            }
+
+            JsonElement msgElement = config.get("welcomeMessage");
+            if (msgElement.isJsonArray()) {
+                JsonArray messages = msgElement.getAsJsonArray();
+                for (JsonElement element : messages) {
+                    String line = element.getAsString();
+                    player.sendMessage(Messenger.s(line), false);
+                }
+            } else {
+                String legacyMsg = msgElement.getAsString();
+                for (String line : legacyMsg.split("\n")) {
+                    player.sendMessage(Messenger.s(line.trim()), false);
+                }
+            }
         } catch (Exception e) {
             AmsServer.LOGGER.error("An error occurred while processing the welcome message configuration", e);
         }
