@@ -56,8 +56,7 @@ public class CustomWelcomeMessageConfig {
                 defaultMsg.add("§3§o " + translator.tr("modify_content_in").getString());
                 defaultMsg.add("§a" + translator.tr("save_path").getString() + "/carpetamsaddition/welcomeMessage.json");
                 defaultConfig.add("welcomeMessage", defaultMsg);
-                try (OutputStreamWriter writer = new OutputStreamWriter(
-                        new FileOutputStream(path.toFile()), StandardCharsets.UTF_8)) {
+                try (OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(path.toFile()), StandardCharsets.UTF_8)) {
                     new Gson().toJson(defaultConfig, writer);
                 }
             }
