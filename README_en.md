@@ -1,4 +1,4 @@
-# Carpet-AMS-addition
+# Carpet-AMS-Addition
 
 [![License](https://img.shields.io/github/license/Minecraft-AMS/Carpet-AMS-Addition.svg?label=License&color=blue)](https://choosealicense.com/licenses/lgpl-3.0/)
 [![Modrinth](https://img.shields.io/modrinth/dt/q4fx1eTg?label=Modrinth%20Downloads)](https://modrinth.com/mod/carpet-ams-addition)
@@ -9,8 +9,8 @@
 
 ## Documents
 
-Access the website to view all the relevant information about carpet-ams-addition:<br>
-https://minecraft-ams.github.io/carpetamsaddition/
+Access the website to view all the relevant information about carpet-ams-addition: https://carpet.mcams.club/
+
 
 ## Support Version
 

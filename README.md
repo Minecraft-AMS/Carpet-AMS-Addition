@@ -9,8 +9,7 @@
 
 ## 文档
 
-访问网页查看所有关于Carpet-AMS-Addition的相关信息：<br>
-https://minecraft-ams.github.io/carpetamsaddition/
+访问网页查看所有关于Carpet-AMS-Addition的相关信息：https://carpet.mcams.club/
 
 ## 版本支持
 
