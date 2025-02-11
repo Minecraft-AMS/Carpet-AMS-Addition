@@ -29,9 +29,12 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
 import net.minecraft.block.BlockState;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@GameVersion(version = "Minecraft < 1.20.5")
 @Environment(EnvType.CLIENT)
 public class ClientReceiver {
     public static void register() {

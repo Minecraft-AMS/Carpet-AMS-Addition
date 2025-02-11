@@ -28,6 +28,9 @@ import net.fabricmc.api.Environment;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.20.5")
 @Environment(EnvType.CLIENT)
 public class ClientReceiver {
     public static void register() {

@@ -36,8 +36,8 @@ import java.util.Objects;
 public class FancyFakePlayerNameRuleObserver extends RuleObserver<String> {
     @Override
     public void onValueChange(String oldValue, String newValue) {
-        MinecraftServer server = MinecraftServerUtil.getServer();
-        if (server != null) {
+        if (MinecraftServerUtil.serverIsRunning()) {
+            MinecraftServer server = MinecraftServerUtil.getServer();
             FancyFakePlayerNameTeamController.removeBotTeam(server, oldValue);
             if (!Objects.equals(newValue, "false")) {
                 List<ServerPlayerEntity> playerEntities = server.getPlayerManager().getPlayerList();

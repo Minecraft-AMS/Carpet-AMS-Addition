@@ -98,15 +98,13 @@ public class CustomBlockBlastResistanceCommandRegistry {
                 Messenger.s(
                     MSG_HEAD + getBlockRegisterName(state) + "/" + oldBlastResistance +
                     " -> " + getBlockRegisterName(state) + "/" + blastResistance
-                ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
-                false
+                ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)), false
             );
         } else {
             player.sendMessage(
                 Messenger.s(
                     MSG_HEAD + "+ " + getBlockRegisterName(state) + "/" + blastResistance
-                ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)),
-                false
+                ).setStyle(Style.EMPTY.withColor(Formatting.GREEN).withBold(true)), false
             );
         }
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, blastResistance);
@@ -122,16 +120,14 @@ public class CustomBlockBlastResistanceCommandRegistry {
             player.sendMessage(
                 Messenger.s(
                     MSG_HEAD + "- " + getBlockRegisterName(state) + "/" + blastResistance
-                ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
-                false
+                ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)), false
             );
             return 1;
         } else {
             player.sendMessage(
                 Messenger.s(
                     MSG_HEAD + getBlockRegisterName(state) + translator.tr("not_found").getString()
-                ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
-                false
+                ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)), false
             );
             return 0;
         }
@@ -143,8 +139,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         player.sendMessage(
             Messenger.s(
                 MSG_HEAD + translator.tr("removeAll").getString()
-            ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)),
-            false
+            ).setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true)), false
         );
         return 1;
     }
@@ -162,13 +157,13 @@ public class CustomBlockBlastResistanceCommandRegistry {
             String blockName = getBlockRegisterName(state);
             player.sendMessage(
                 Messenger.s(blockName + " / " + blastResistance).
-                setStyle(Style.EMPTY.withColor(Formatting.GREEN)),
-                false
+                setStyle(Style.EMPTY.withColor(Formatting.GREEN)), false
             );
         }
         return 1;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private static int help(PlayerEntity player) {
         String setHelpText = translator.tr("help.set").getString();
         String removeHelpText = translator.tr("help.remove").getString();
@@ -181,8 +176,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
                 removeHelpText + "\n" +
                 removeAllHelpText + "\n" +
                 listHelpText
-            ).setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
-            false
+            ).setStyle(Style.EMPTY.withColor(Formatting.GRAY)), false
         );
         return 1;
     }

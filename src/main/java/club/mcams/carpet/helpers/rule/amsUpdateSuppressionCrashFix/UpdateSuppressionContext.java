@@ -79,6 +79,6 @@ public class UpdateSuppressionContext {
     }
 
     private static String exceptionCauseText(Throwable cause) {
-        return UpdateSuppressionException.isUpdateSuppression(cause) ? cause.getClass().getSimpleName() : "? ? ?";
+        return cause.getClass().getSimpleName();
     }
 }
