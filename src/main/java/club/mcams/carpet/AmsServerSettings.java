@@ -580,7 +580,7 @@ public class AmsServerSettings {
 
     //#if MC>=12100
     //$$ @GameVersion(version = "Minecraft >= 1.21")
-    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    //$$ @Rule(categories = {AMS, FEATURE})
     //$$ public static boolean itemEntityCreateNetherPortalDisabled = false;
     //#endif
 
