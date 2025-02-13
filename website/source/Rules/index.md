@@ -2406,6 +2406,44 @@ json位置：
 
 - 分类: `AMS`, `COMMAND`
 
+## 高亮凋零骷髅（highLightWitherSkeletonEntity）
+
+给予凋零骷髅高亮效果（开启时可能会有一定的性能影响）。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 禁止物品实体创建下界传送门（itemEntityCreateNetherPortalDisabled）
+
+让物品实体穿过下界传送门时不会创建传送门。
+
+<该规则 Minecraft >= 1.21 可用>
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

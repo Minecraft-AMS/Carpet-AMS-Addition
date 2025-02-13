@@ -2426,6 +2426,44 @@ Only OP players can spawn players on the whitelist, regardless of whether the wh
 
 - Categroies: `AMS`, `COMMAND`
 
+## highLightWitherSkeletonEntity
+
+Gives the wither skeleton a highlight effect (may have some performance effect when enabled).
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## itemEntityCreateNetherPortalDisabled
+
+Prevent item entities from creating portals when passing through Nether portals.
+
+<Available for Minecraft \>= 1.21>
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
