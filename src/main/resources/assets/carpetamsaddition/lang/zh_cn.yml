@@ -616,6 +616,9 @@ carpetamsaddition:
       itemEntityCreateNetherPortalDisabled:
         name: 禁止物品实体创建下界传送门
         desc: 让物品实体穿过下界传送门时不会创建传送门
+      pleasantAnvil:
+        name: 悦耳的铁砧
+        desc: 让放置铁砧的声音不那么吵
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

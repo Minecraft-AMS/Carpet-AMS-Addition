@@ -499,6 +499,8 @@ carpetamsaddition:
         desc: Gives the wither skeleton a highlight effect (may have some performance effect when enabled)
       itemEntityCreateNetherPortalDisabled:
         desc: Prevent item entities from creating portals when passing through Nether portals
+      pleasantAnvil:
+        desc: Make the sound of placing the anvil less noisy
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

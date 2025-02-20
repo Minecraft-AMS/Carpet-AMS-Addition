@@ -584,6 +584,9 @@ public class AmsServerSettings {
     //$$ public static boolean itemEntityCreateNetherPortalDisabled = false;
     //#endif
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean pleasantAnvil = false;
+
 
     /*
      * 区块加载规则
