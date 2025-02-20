@@ -22,6 +22,7 @@ package club.mcams.carpet.helpers.rule.fancyFakePlayerName;
 
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
+import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -30,11 +31,12 @@ import java.util.Objects;
 
 public class FancyFakePlayerNameTeamController {
     public static void kickFakePlayerFromBotTeam(ServerPlayerEntity player, String teamName) {
-        if (MinecraftServerUtil.serverIsRunning() && player.getScoreboard().getTeam(teamName) != null) {
-            Team team = MinecraftServerUtil.getServer().getScoreboard().getTeam(teamName);
-            if (team != null) {
-                team.getPlayerList().remove(player.getGameProfile().getName());
-            }
+        Scoreboard scoreboard = player.getScoreboard();
+        String playerName = player.getGameProfile().getName();
+        Team currentTeam = scoreboard.getPlayerTeam(playerName);
+        Team targetTeam = scoreboard.getTeam(teamName);
+        if (currentTeam != null && currentTeam.equals(targetTeam)) {
+            scoreboard.removePlayerFromTeam(playerName, currentTeam);
         }
     }
 
@@ -43,9 +45,11 @@ public class FancyFakePlayerNameTeamController {
     }
 
     public static void removeBotTeam(MinecraftServer server, String teamName) {
-        Team fancyFakePlayerNameTeam = server.getScoreboard().getTeam(teamName);
-        if (!Objects.equals(teamName, "false") && fancyFakePlayerNameTeam != null) {
-            server.getScoreboard().removeTeam(fancyFakePlayerNameTeam);
+        if (MinecraftServerUtil.serverIsRunning()) {
+            Team fancyFakePlayerNameTeam = server.getScoreboard().getTeam(teamName);
+            if (!Objects.equals(teamName, "false") && fancyFakePlayerNameTeam != null) {
+                server.getScoreboard().removeTeam(fancyFakePlayerNameTeam);
+            }
         }
     }
 }

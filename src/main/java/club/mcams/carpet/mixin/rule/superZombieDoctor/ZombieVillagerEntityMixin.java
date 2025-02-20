@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ZombieVillagerEntity.class)
-public abstract class ZombieVillagerEntityMixin implements ZombieVillagerEntityAccessor{
+public abstract class ZombieVillagerEntityMixin implements ZombieVillagerEntityAccessor {
     @Inject(method = "tick", at = @At("HEAD"))
     private void modifyConversionTime(CallbackInfo ci) {
         if (AmsServerSettings.superZombieDoctor) {

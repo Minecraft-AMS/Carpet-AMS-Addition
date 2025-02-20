@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.helpers.rule.fancyFakePlayerName;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -37,19 +38,26 @@ public class FancyNameHelper {
     public static void addBotTeamNamePrefix(ServerPlayerEntity player, String teamName) {
         MinecraftServer server = player.getServer();
         if (server != null) {
-            Scoreboard scoreboard = player.getServer().getScoreboard();
+            Scoreboard scoreboard = server.getScoreboard();
             Team team = scoreboard.getTeam(teamName);
             if (team == null) {
-                team = FancyFakePlayerNameTeamController.addBotTeam(player.getServer(),teamName);
-                team.setPrefix(Messenger.s("[bot] ").formatted(Formatting.BOLD));
+                team = FancyFakePlayerNameTeamController.addBotTeam(server, teamName);
+                team.setPrefix(Messenger.s(String.format("[%s] ", teamName)).formatted(Formatting.BOLD));
                 team.setColor(Formatting.DARK_GREEN);
             }
-            scoreboard.addPlayerToTeam(player.getGameProfile().getName(), team);
+            String playerName = player.getGameProfile().getName();
+            Team currentTeam = scoreboard.getPlayerTeam(playerName);
+            if (currentTeam != null && currentTeam != team) {
+                scoreboard.removePlayerFromTeam(playerName, currentTeam);
+            }
+            if (currentTeam != team) {
+                scoreboard.addPlayerToTeam(playerName, team);
+            }
         }
     }
 
     public static String addBotNameSuffix(final CommandContext<?> context, final String name, String teamName) {
-        final String SUFFIX = "_bot";
+        final String SUFFIX = "_" + AmsServerSettings.fancyFakePlayerName;
         //#if MC>=11700
         //$$ String playerName = StringArgumentType.getString(context, name);
         //$$ if (!name.equals("player")) {

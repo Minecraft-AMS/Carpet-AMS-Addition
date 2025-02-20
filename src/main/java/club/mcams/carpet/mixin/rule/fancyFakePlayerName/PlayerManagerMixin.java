@@ -61,11 +61,18 @@ public abstract class PlayerManagerMixin {
         }
     }
 
-    @Inject(method = "remove", at = @At("HEAD"))
+    @Inject(
+        method = "remove",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/PlayerManager;sendToAll(Lnet/minecraft/network/Packet;)V"
+        )
+    )
     private void kickFakePlayerFromBotTeam(ServerPlayerEntity player, CallbackInfo info) {
         if (
             !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
             FakePlayerHelper.isFakePlayer(player) &&
+            player.getScoreboard().getTeam(AmsServerSettings.fancyFakePlayerName) != null &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {
             FancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player, AmsServerSettings.fancyFakePlayerName);

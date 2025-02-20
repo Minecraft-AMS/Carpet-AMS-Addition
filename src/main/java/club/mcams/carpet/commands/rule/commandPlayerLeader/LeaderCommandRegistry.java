@@ -263,7 +263,7 @@ public class LeaderCommandRegistry {
     }
 
     private static String getPlayerName(PlayerEntity player) {
-        return player.getName().getString();
+        return player.getGameProfile().getName();
     }
 
     private static String getPlayerUUID(PlayerEntity player) {
