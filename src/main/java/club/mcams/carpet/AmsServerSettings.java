@@ -677,14 +677,14 @@ public class AmsServerSettings {
     public static boolean betterCraftablePolishedBlackStoneButton = false;
     //#endif
 
-    //#if MC<12105
     @RecipeRule
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean rottenFleshBurnedIntoLeather = false;
-    //#endif
 
+    //#if MC<12105
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean useNewLodestoneRecipe = false;
+    //#endif
 
     public enum blueSkullProbability {
         VANILLA,
