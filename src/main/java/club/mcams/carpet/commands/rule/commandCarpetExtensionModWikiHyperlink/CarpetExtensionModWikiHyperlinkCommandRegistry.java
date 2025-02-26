@@ -54,10 +54,10 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
         dispatcher.register(
             CommandManager.literal("carpetExtensionModWikiHyperlink")
                 .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCarpetExtensionModWikiHyperlink))
-                .then(CommandManager.argument("ExtensionName", StringArgumentType.string())
+                .then(CommandManager.argument("extensionName", StringArgumentType.string())
                 .suggests(getSuggestions)
                 .executes(context -> execute(
-                    context.getSource().getPlayer(), StringArgumentType.getString(context, "ExtensionName")
+                    context.getSource().getPlayer(), StringArgumentType.getString(context, "extensionName")
                 ))
             )
         );
@@ -65,9 +65,8 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
 
     private static int execute(PlayerEntity player, String extensionName) {
         player.sendMessage(
-            Messenger.s(
-                translator.tr("click_to_jump").getString()).formatted(Formatting.AQUA).append(createOpenUrlButton(getUrl(extensionName))
-            ), false
+            translator.tr("click_to_jump").formatted(Formatting.AQUA)
+            .append(createOpenUrlButton(getUrl(extensionName))), false
         );
         return 1;
     }
@@ -75,7 +74,7 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
     @SuppressWarnings("EnhancedSwitchMigration")
     private static String getUrl(String extensionName) {
         switch (extensionName) {
-            case "Carpet-AMS-Addition": return "https://minecraft-ams.github.io/carpetamsaddition/";
+            case "Carpet-AMS-Addition": return "https://carpet.mcams.club/";
             case "Carpet-ORG-Addition": return "https://github.com/fcsailboat/Carpet-Org-Addition/";
             case "Carpet-TIS-Addition": return "https://carpet.tis.world/";
             case "Carpet-Extra": return "https://github.com/gnembon/carpet-extra/";

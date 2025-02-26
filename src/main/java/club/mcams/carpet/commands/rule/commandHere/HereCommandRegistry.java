@@ -21,6 +21,7 @@
 package club.mcams.carpet.commands.rule.commandHere;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.carpetorgaddition.InvokeOrgCommand;
 import club.mcams.carpet.helpers.rule.commandHere_commandWhere.CommandHereWhereHelper;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
@@ -88,6 +89,7 @@ public class HereCommandRegistry {
         return otherPos;
     }
 
+    @SuppressWarnings("DuplicatedCode")
     private static Text message(ServerCommandSource source) {
         DimensionWrapper dimension = DimensionWrapper.of(source.getWorld());
         String playerName = getPlayerName(source);
@@ -97,18 +99,15 @@ public class HereCommandRegistry {
         if (dimension.getValue() == World.END) {
             message = Messenger.s(
                 String.format("§d[%s] §e%s §b@ §d[ %s ]", translator.tr("the_end").getString(), playerName, currentPos))
-                .append(copyButton(currentPos, Formatting.LIGHT_PURPLE)
-            );
+                .append(copyButton(currentPos, Formatting.LIGHT_PURPLE)).append(InvokeOrgCommand.highlightPosButton(currentPos));
         } else if (dimension.getValue() == World.OVERWORLD) {
             message = Messenger.s(
                 String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", translator.tr("overworld").getString(), playerName, currentPos, otherPos))
-                .append(copyButton(currentPos, Formatting.GREEN)).append(copyButton(otherPos, Formatting.DARK_RED)
-            );
+                .append(copyButton(currentPos, Formatting.GREEN)).append(copyButton(otherPos, Formatting.DARK_RED)).append(InvokeOrgCommand.highlightPosButton(currentPos));
         } else if (dimension.getValue() == World.NETHER) {
             message = Messenger.s(
                 String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", translator.tr("nether").getString(), playerName, currentPos, otherPos))
-                .append(copyButton(currentPos, Formatting.DARK_RED)).append(copyButton(otherPos, Formatting.GREEN)
-            );
+                .append(copyButton(currentPos, Formatting.DARK_RED)).append(copyButton(otherPos, Formatting.GREEN)).append(InvokeOrgCommand.highlightPosButton(currentPos));
         }
         return message;
     }

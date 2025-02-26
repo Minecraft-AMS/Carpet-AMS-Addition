@@ -21,6 +21,7 @@
 package club.mcams.carpet.commands.rule.commandWhere;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.carpetorgaddition.InvokeOrgCommand;
 import club.mcams.carpet.helpers.rule.commandHere_commandWhere.CommandHereWhereHelper;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
@@ -92,7 +93,7 @@ public class WhereCommandRegistry {
     }
 
     private static String getPlayerName(PlayerEntity player) {
-        return player.getName().getString();
+        return player.getGameProfile().getName();
     }
 
     private static String getCurrentPos(PlayerEntity player) {
@@ -121,18 +122,15 @@ public class WhereCommandRegistry {
         if (dimension.getValue() == World.END) {
             message = Messenger.s(
                 String.format("§d[%s] §e%s §b@ §d[ %s ]", translator.tr("the_end").getString(), playerName, currentPos))
-                .append(copyButton(currentPos, Formatting.LIGHT_PURPLE)
-            );
+                .append(copyButton(currentPos, Formatting.LIGHT_PURPLE)).append(InvokeOrgCommand.highlightPosButton(currentPos));
         } else if (dimension.getValue() == World.OVERWORLD) {
             message = Messenger.s(
                 String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", translator.tr("overworld").getString(), playerName, currentPos, otherPos))
-                .append(copyButton(currentPos, Formatting.GREEN)).append(copyButton(otherPos, Formatting.DARK_RED)
-            );
+                .append(copyButton(currentPos, Formatting.GREEN)).append(copyButton(otherPos, Formatting.DARK_RED)).append(InvokeOrgCommand.highlightPosButton(currentPos));
         } else if (dimension.getValue() == World.NETHER) {
             message = Messenger.s(
                 String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", translator.tr("nether").getString(), playerName, currentPos, otherPos))
-                .append(copyButton(currentPos, Formatting.DARK_RED)).append(copyButton(otherPos, Formatting.GREEN)
-            );
+                .append(copyButton(currentPos, Formatting.DARK_RED)).append(copyButton(otherPos, Formatting.GREEN)).append(InvokeOrgCommand.highlightPosButton(currentPos));
         }
         return message;
     }
@@ -141,11 +139,11 @@ public class WhereCommandRegistry {
         Text hoverText = Messenger.s(translator.tr("copy").getString()).formatted(Formatting.YELLOW);
         String copyCoordText = copyText.replace(",", ""); // 1, 0, -24 -> 1 0 -24
         if (buttonColor == Formatting.LIGHT_PURPLE) {
-            hoverText = Messenger.s(translator.tr("the_end_button_hover").getString()).formatted(Formatting.YELLOW);
+            hoverText = translator.tr("the_end_button_hover").formatted(Formatting.YELLOW);
         } else if (buttonColor == Formatting.GREEN) {
-            hoverText = Messenger.s(translator.tr("overworld_button_hover").getString()).formatted(Formatting.YELLOW);
+            hoverText = translator.tr("overworld_button_hover").formatted(Formatting.YELLOW);
         } else if (buttonColor == Formatting.DARK_RED) {
-            hoverText = Messenger.s(translator.tr("nether_button_hover").getString()).formatted(Formatting.YELLOW);
+            hoverText = translator.tr("nether_button_hover").formatted(Formatting.YELLOW);
         }
         return
             Messenger.s(" [C]").setStyle(

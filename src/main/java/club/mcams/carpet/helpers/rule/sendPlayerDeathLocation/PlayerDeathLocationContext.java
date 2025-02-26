@@ -21,6 +21,7 @@
 package club.mcams.carpet.helpers.rule.sendPlayerDeathLocation;
 
 import club.mcams.carpet.helpers.FakePlayerHelper;
+import club.mcams.carpet.carpetorgaddition.InvokeOrgCommand;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
@@ -41,7 +42,11 @@ public class PlayerDeathLocationContext {
     public static void sendMessage(MinecraftServer server, ServerPlayerEntity player, World world) {
         final Text copyButton = copyButton(player);
         String message = formatMessage(player, world);
-        Messenger.sendServerMessage(server, Messenger.s(message).formatted(Formatting.RED).append(copyButton));
+        Messenger.sendServerMessage(
+            server, Messenger.s(message).formatted(Formatting.RED)
+            .append(copyButton)
+            .append(InvokeOrgCommand.highlightPosButton(getPlayerPos(player).replace(",", "")))
+        );
     }
 
     public static void realPlayerSendMessage(MinecraftServer server, ServerPlayerEntity player, World world) {
@@ -73,7 +78,7 @@ public class PlayerDeathLocationContext {
         String copyCoordText = getPlayerPos(player).replace(",", ""); // 1, 0, -24 -> 1 0 -24
 
         return
-            Messenger.s(" [C] ").setStyle(
+            Messenger.s(" [C]").setStyle(
             Style.EMPTY.withColor(Formatting.GREEN).withBold(true).
             withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
             withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
