@@ -154,6 +154,10 @@ carpetamsaddition:
     largeEnderChest:
       switch_tip: '侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
 
+  org:
+    command:
+      highlightPosButtonHoverText: 使用Carpet Org Addition高亮路径点，使用/highlight clear取消高亮
+
   carpet_translations:
     category:
       AMS: AMS
@@ -422,9 +426,13 @@ carpetamsaddition:
       commandHere:
         name: 我在哪
         desc: 使用/here命令发送当前自身所在维度、坐标、对应的主世界/下界坐标，同时给予自身30s的发光效果。
+        extra:
+          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的H按钮高亮路径点，使用/highlight clear命令来取消高亮'
       commandWhere:
         name: 你在哪
         desc: 使用/where命令获取指定玩家所在维度、坐标、对应的主世界/下界坐标，同时给予目标玩家30s的发光效果。
+        extra:
+          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的H按钮高亮路径点，使用/highlight clear命令来取消高亮'
       fakePlayerPickUpController:
         name: 假人拾取控制器
         desc: 提供了两种模式来控制假人是否可以拾取物品
@@ -512,6 +520,7 @@ carpetamsaddition:
           '1': '[all] - 总是发送消息'
           '2': '[realPlayerOnly] - 只有真实玩家死亡时发送消息'
           '3': '[fakePlayerOnly] - 只有假人死亡时发送消息'
+          '4': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的H按钮高亮路径点，使用/highlight clear命令来取消高亮'
       perfectInvisibility:
         name: 完美隐身
         desc: 当玩家拥有隐身效果时将对生物完全隐身，即使穿着全套盔甲
@@ -616,9 +625,13 @@ carpetamsaddition:
       itemEntityCreateNetherPortalDisabled:
         name: 禁止物品实体创建下界传送门
         desc: 让物品实体穿过下界传送门时不会创建传送门
-      pleasantAnvil:
-        name: 悦耳的铁砧
-        desc: 让放置铁砧的声音不那么吵
+      powerfulExpMending:
+        name: 强效经验修补
+        desc: 让物品只需要在背包内即可受到经验修补的效果，无需拿在手上
+      commandAtSomeOnePlayer:
+        name: '@玩家'
+        desc: '使用/@指令去@某位玩家'
+
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -720,6 +733,9 @@ carpetamsaddition:
       rottenFleshBurnedIntoLeather:
         name: 腐肉烧皮革
         desc: 腐肉可以在熔炉中烧成皮革
+      useNewLodestoneRecipe:
+        name: 使用新的磁石配方
+        desc: 使用铁锭来合成磁石
 
       # 测试用规则
       testRule:

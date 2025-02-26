@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.commands;
 
+import club.mcams.carpet.commands.rule.commandAtSomeOnePlayer.AtCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCarpetExtensionModWikiHyperlink.CarpetExtensionModWikiHyperlinkCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
@@ -120,5 +121,6 @@ public class RegisterCommands {
                 //#endif
             );
         });
+        AMS_CMD_QUEUE.add(() -> AtCommandRegistry.register(dispatcher));
     }
 }

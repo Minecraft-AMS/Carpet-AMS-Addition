@@ -154,6 +154,10 @@ carpetamsaddition:
     largeEnderChest:
       switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
 
+  org:
+    command:
+      highlightPosButtonHoverText: Use Carpet Org Addition to highlight waypoints, use /highlight clear to remove the highlight
+
   carpet_translations:
     category:
       AMS: AMS
@@ -360,6 +364,8 @@ carpetamsaddition:
         desc: A sound effect will be played when the player uses an ender pearl for teleportation
       commandHere:
         desc: Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect
+        extra:
+          '0': 'When the client has installed Carpet Org Addition, they can click the H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
       commandWhere:
         desc: Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect
       fakePlayerPickUpController:
@@ -426,6 +432,7 @@ carpetamsaddition:
           '1': '[all] - Always send messages'
           '2': '[realPlayerOnly] - Messages will only be sent when real players die'
           '3': '[fakePlayerOnly] - Messages will only be sent when fake players die'
+          '4': 'When the client has installed Carpet Org Addition, they can click the H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
       perfectInvisibility:
         desc: When the player is invisible, they will be completely hidden from mobs, even when wearing a full set of armor
       sneakInvisibility:
@@ -499,8 +506,10 @@ carpetamsaddition:
         desc: Gives the wither skeleton a highlight effect (may have some performance effect when enabled)
       itemEntityCreateNetherPortalDisabled:
         desc: Prevent item entities from creating portals when passing through Nether portals
-      pleasantAnvil:
-        desc: Make the sound of placing the anvil less noisy
+      powerfulExpMending:
+        desc: Allow items to receive the Mending effect simply by being in the backpack, without needing to be held in hand
+      commandAtSomeOnePlayer:
+        desc: 'Use /@ command to @ some one player'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -580,6 +589,8 @@ carpetamsaddition:
         desc: Use deepslate to crafted polished_blackstone_button in minecraft
       rottenFleshBurnedIntoLeather:
         desc: Rotten flesh can be burned into leather in a furnace
+      useNewLodestoneRecipe:
+        desc: Use iron ingots to craft Lodestone
 
       # 测试用规则
       testRule:

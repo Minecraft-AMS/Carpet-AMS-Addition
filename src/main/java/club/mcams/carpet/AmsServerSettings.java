@@ -585,8 +585,13 @@ public class AmsServerSettings {
     //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean pleasantAnvil = false;
+    public static boolean powerfulExpMending = false;
 
+    @Rule(
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, COMMAND}
+    )
+    public static String commandAtSomeOnePlayer = "false";
 
     /*
      * 区块加载规则
@@ -672,9 +677,14 @@ public class AmsServerSettings {
     public static boolean betterCraftablePolishedBlackStoneButton = false;
     //#endif
 
+    //#if MC<12105
     @RecipeRule
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean rottenFleshBurnedIntoLeather = false;
+    //#endif
+
+    @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    public static boolean useNewLodestoneRecipe = false;
 
     public enum blueSkullProbability {
         VANILLA,

@@ -73,6 +73,15 @@ public class AmsServerCustomRecipes {
         .output(SCULK_SENSOR, 1).build();
         //#endif
 
+        //#if MC<12105
+        ShapedRecipeBuilder.create(AmsServerSettings.useNewLodestoneRecipe, "lodestone")
+        .pattern("CCC")
+        .pattern("CIC")
+        .pattern("CCC")
+        .define('C', CHISELED_STONE_BRICKS).define('I', IRON_INGOT)
+        .output(LODESTONE, 1).build();
+        //#endif
+
         /*
          * 无序合成配方
          */
