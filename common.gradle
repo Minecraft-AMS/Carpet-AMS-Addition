@@ -26,8 +26,6 @@ configurations {
 	modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
 }
 
-
-
 dependencies {
 	// loom
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
