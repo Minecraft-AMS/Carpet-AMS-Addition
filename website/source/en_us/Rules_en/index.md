@@ -2551,7 +2551,7 @@ Enchanted gold apple can be crafted using gold block and apple, which is the ori
 Bundle can be crafted using string and rabbit hide.
 <Available for Minecraft \>= 1.17>
 
-- Type: `boolean`
+- Type: `String`
 
 
 
@@ -2559,7 +2559,7 @@ Bundle can be crafted using string and rabbit hide.
 
 
 
-- Suggested options: `false`, `true`
+- Suggested options: `false`, `9x3`, `9x6`
 
 
 
@@ -2659,6 +2659,26 @@ Use deepslate to crafted polished_blackstone_button in minecraft.
 ## rottenFleshBurnedIntoLeather
 
 Rotten flesh can be burned into leather in a furnace.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## useNewLodestoneRecipe
+
+Use iron ingots to craft Lodestone.
+
+<Available for Minecraft \< 1.21.5>
 
 - Type: `boolean`
 

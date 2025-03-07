@@ -2655,3 +2655,23 @@ json位置：
 
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## 使用新的磁石配方（useNewLodestoneRecipe）
+
+使用铁锭来合成磁石。
+
+<该规则 Minecraft < 1.21.5 可用>
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
