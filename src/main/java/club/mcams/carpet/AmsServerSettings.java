@@ -593,6 +593,14 @@ public class AmsServerSettings {
     )
     public static String commandAtSomeOnePlayer = "false";
 
+    //#if MC>=11700
+    @Rule(
+        options = {"false", "9x3", "9x6"},
+        categories = {AMS, FEATURE, SURVIVAL}
+    )
+    public static String largeBundle = "false";
+    //#endif
+
     /*
      * 区块加载规则
      */

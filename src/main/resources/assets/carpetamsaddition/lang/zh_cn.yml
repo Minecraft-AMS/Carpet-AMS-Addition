@@ -427,12 +427,12 @@ carpetamsaddition:
         name: 我在哪
         desc: 使用/here命令发送当前自身所在维度、坐标、对应的主世界/下界坐标，同时给予自身30s的发光效果。
         extra:
-          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的H按钮高亮路径点，使用/highlight clear命令来取消高亮'
+          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的+H按钮高亮路径点，使用/highlight clear命令来取消高亮'
       commandWhere:
         name: 你在哪
         desc: 使用/where命令获取指定玩家所在维度、坐标、对应的主世界/下界坐标，同时给予目标玩家30s的发光效果。
         extra:
-          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的H按钮高亮路径点，使用/highlight clear命令来取消高亮'
+          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的+H按钮高亮路径点，使用/highlight clear命令来取消高亮'
       fakePlayerPickUpController:
         name: 假人拾取控制器
         desc: 提供了两种模式来控制假人是否可以拾取物品
@@ -631,7 +631,11 @@ carpetamsaddition:
       commandAtSomeOnePlayer:
         name: '@玩家'
         desc: '使用/@指令去@某位玩家'
-
+      largeBundle:
+        name: 大收纳袋
+        desc: 让收纳袋拥有一个9x3或9x6的UI，手持收纳袋右键即可打开UI
+        extra:
+          '0': '该规则不允许在收纳袋中放入收纳袋和潜影盒'
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

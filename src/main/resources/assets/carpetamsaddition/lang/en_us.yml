@@ -365,9 +365,11 @@ carpetamsaddition:
       commandHere:
         desc: Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect
         extra:
-          '0': 'When the client has installed Carpet Org Addition, they can click the H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
+          '0': 'When the client has installed Carpet Org Addition, they can click the +H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
       commandWhere:
         desc: Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect
+        extra:
+          '0': 'When the client has installed Carpet Org Addition, they can click the +H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
       fakePlayerPickUpController:
         desc: Two modes are provided to control whether fake player can pick up items
         extra:
@@ -432,7 +434,7 @@ carpetamsaddition:
           '1': '[all] - Always send messages'
           '2': '[realPlayerOnly] - Messages will only be sent when real players die'
           '3': '[fakePlayerOnly] - Messages will only be sent when fake players die'
-          '4': 'When the client has installed Carpet Org Addition, they can click the H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
+          '4': 'When the client has installed Carpet Org Addition, they can click the +H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
       perfectInvisibility:
         desc: When the player is invisible, they will be completely hidden from mobs, even when wearing a full set of armor
       sneakInvisibility:
@@ -510,6 +512,10 @@ carpetamsaddition:
         desc: Allow items to receive the Mending effect simply by being in the backpack, without needing to be held in hand
       commandAtSomeOnePlayer:
         desc: 'Use /@ command to @ some one player'
+      largeBundle:
+        desc: Let the bundle have a 9x3 or 9x6 UI, and right-click in the hand to open the UI
+        extra:
+          '0': 'This rule does not allow bundle and shulker boxes to be placed in bundle'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
