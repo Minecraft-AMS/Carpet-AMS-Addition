@@ -1,6 +1,6 @@
 
 
-### [ 中文 | [English](/carpetamsaddition/en_us/Commands_en) ]
+### [ 中文 | [English](/en_us/Commands_en) ]
 
 # <center>------ 指 令 ------</center>
 
@@ -290,3 +290,9 @@
 - **/customBlockHardness help**
 
   查看使用说明。
+
+### @玩家（commandAtSomeOnePlayer）
+
+- /@ &lt;player&gt;
+
+  @某位玩家。

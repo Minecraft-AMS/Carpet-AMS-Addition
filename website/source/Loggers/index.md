@@ -1,6 +1,6 @@
 
 
-### [ 中文 | [English](/carpetamsaddition/en_us/Loggers_en) ]
+### [ 中文 | [English](/en_us/Loggers_en) ]
 
 # <center>------ 记 录 器 ------</center>
 

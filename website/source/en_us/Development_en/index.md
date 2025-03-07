@@ -1,4 +1,4 @@
-### [ [中文](/carpetamsaddition/Development) | English ]
+### [ [中文](/Development) | English ]
 
 # <center>------ Development ------</center>
 

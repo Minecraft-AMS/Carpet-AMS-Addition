@@ -1,6 +1,6 @@
 
 
-### [ 中文 | [English](/carpetamsaddition/en_us/OpenSource_en) ]
+### [ 中文 | [English](/en_us/OpenSource_en) ]
 
 # <center>------ 开 源 ------</center>
 

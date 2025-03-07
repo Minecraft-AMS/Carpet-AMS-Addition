@@ -1,6 +1,6 @@
 
 
-### [ 中文 | [English](/carpetamsaddition/en_us/Download_en) ]
+### [ 中文 | [English](/en_us/Download_en) ]
 
 # <center>------ 下 载 ------</center>
 

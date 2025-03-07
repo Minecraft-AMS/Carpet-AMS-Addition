@@ -1,6 +1,6 @@
 
 
-### [ [中文](/carpetamsaddition/Download) | English ]
+### [ [中文](/Download) | English ]
 
 # <center>------ Download ------</center>
 

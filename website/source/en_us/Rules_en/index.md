@@ -1,4 +1,4 @@
-### [ [中文](/carpetamsaddition/Rules) | English ]
+### [ [中文](/Rules) | English ]
 
 # <center>------ Rules ------</center>
 
@@ -1476,6 +1476,8 @@ A sound effect will be played when the player uses an ender pearl for teleportat
 
 Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect.
 
+When the client has installed `Carpet Org Addition`, they can click the `+H` button at the end of the message to highlight the waypoint, and use the `/highlight clear` command to remove the highlight.
+
 - Type: `String`
 
 
@@ -1493,6 +1495,8 @@ Use the "/here" command to send the current dimension, coordinates, and correspo
 ## commandWhere
 
 Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect.
+
+When the client has installed `Carpet Org Addition`, they can click the `+H` button at the end of the message to highlight the waypoint, and use the `/highlight clear` command to remove the highlight.
 
 - Type: `String`
 
@@ -1845,6 +1849,8 @@ Use the "/goto" command to teleport to the specified dimension and coordinates, 
 ## sendPlayerDeathLocation
 
 When a player dies, a message with their death coordinates and dimension will be broadcasted.
+
+When the client has installed `Carpet Org Addition`, they can click the `+H` button at the end of the message to highlight the waypoint, and use the `/highlight clear` command to remove the highlight.
 
 `false`: Disable rule.
 
@@ -2463,6 +2469,64 @@ Prevent item entities from creating portals when passing through Nether portals.
 
 
 - Categroies: `AMS`, `FEATURE`
+
+## powerfulExpMending
+
+Allow items to receive the Mending effect simply by being in the backpack, without needing to be held in hand.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## commandAtSomeOnePlayer
+
+Use `/@` command to @ some one player.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `COMMAND`
+
+## largeBundle
+
+Let the bundle have a 9x3 or 9x6 UI, and right-click in the hand to open the UI.
+
+This rule does not allow bundle and shulker boxes to be placed in bundle.
+
+&lt;Available for Minecraft >= 1.17.1&gt;
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## craftableEnchantedGoldApple
 

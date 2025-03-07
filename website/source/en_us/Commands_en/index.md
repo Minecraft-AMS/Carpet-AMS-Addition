@@ -1,6 +1,6 @@
 
 
-### [ [中文](/carpetamsaddition/Commands) | English ]
+### [ [中文](/Commands) | English ]
 
 # <center>------ Commands ------</center>
 
@@ -273,19 +273,25 @@
 
   
 
-
 - **/customBlockHardness getDefaultHardness**
 
   Query the default hardness of blocks.
 
-​	
+
 
 - **/customBlockHardness list**
 
   Display all added blocks.
-
-
+  
+  
 
 - **/customBlockHardness help**
 
   View the usage instructions.
+
+### commandAtSomeOnePlayer
+
+- /@ &lt;player&gt;
+
+  @ some one player.
+

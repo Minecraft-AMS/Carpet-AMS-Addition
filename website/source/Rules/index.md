@@ -1,4 +1,4 @@
-### [ 中文 | [English](/carpetamsaddition/en_us/Rules_en) ]
+### [ 中文 | [English](/en_us/Rules_en) ]
 
 # <center>------ 规 则 ------</center>
 
@@ -1436,6 +1436,8 @@ global模式下修改值后需要玩家重新进入游戏。
 
 使用 "/here" 命令发送当前自身所在维度、坐标、对应的主世界/下界坐标，同时给予自身30s的发光效果。
 
+当客户端安装了`Carpet Org Addition`时，可以单击消息末尾的`+H`按钮高亮路径点，使用`/highlight clear`命令来取消高亮。
+
 - 类型: `String`
 
 
@@ -1453,6 +1455,8 @@ global模式下修改值后需要玩家重新进入游戏。
 ## 你在哪（commandWhere）
 
 使用 "/where" 命令获取指定玩家所在维度、坐标、对应的主世界/下界坐标，同时给予目标玩家30s的发光效果。
+
+当客户端安装了`Carpet Org Addition`时，可以单击消息末尾的`+H`按钮高亮路径点，使用`/highlight clear`命令来取消高亮。
 
 - 类型: `String`
 
@@ -1805,6 +1809,8 @@ json位置：
 ## 发送玩家死亡位置（sendPlayerDeathLocation）
 
 当玩家死亡时，会广播一条包含该玩家死亡坐标以及维度的消息。
+
+当客户端安装了`Carpet Org Addition`时，可以单击消息末尾的`+H`按钮高亮路径点，使用`/highlight clear`命令来取消高亮。
 
 `false`: 禁用规则。
 
@@ -2443,6 +2449,64 @@ json位置：
 
 
 - 分类: `AMS`, `FEATURE`
+
+## 强效经验修补（powerfulExpMending）
+
+让物品只需要在背包内即可受到经验修补的效果，无需拿在手上。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## @玩家（commandAtSomeOnePlayer）
+
+使用`/@`指令去@某位玩家。
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `COMMAND`, `SURVIVAL`
+
+## 大收纳袋（largeBundle）
+
+让收纳袋拥有一个`9x3`或`9x6`的UI，手持收纳袋右键即可打开UI。
+
+该规则不允许在收纳袋中放入收纳袋和潜影盒。
+
+<该规则 Minecraft >= 1.17.1 可用>
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `9x3`, `9x6`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
