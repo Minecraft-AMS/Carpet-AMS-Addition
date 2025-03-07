@@ -39,11 +39,11 @@ import club.mcams.carpet.translations.TranslationConstants;
 import club.mcams.carpet.utils.AutoCleaner;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.CountRulesUtil;
-
 import club.mcams.carpet.utils.MinecraftServerUtil;
-import com.google.common.collect.Maps;
 
+import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
+
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.server.MinecraftServer;
