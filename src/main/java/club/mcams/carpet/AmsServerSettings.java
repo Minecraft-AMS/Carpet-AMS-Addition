@@ -594,11 +594,22 @@ public class AmsServerSettings {
     public static String commandAtSomeOnePlayer = "false";
 
     //#if MC>=11700
+    @GameVersion(version = "Minecraft >= 1.17")
     @Rule(
         options = {"false", "9x3", "9x6"},
         categories = {AMS, FEATURE, SURVIVAL}
     )
     public static String largeBundle = "false";
+    //#endif
+
+    //#if MC>=11900
+    //$$ @GameVersion(version = "Minecraft >= 1.19")
+    //$$ @Rule(
+    //$$     options = {"-1", "100000", "200000", "300000"},
+    //$$     categories = {AMS, FEATURE, SURVIVAL},
+    //$$     strict = false
+    //$$ )
+    //$$ public static int maxChainUpdateThreshold = -1;
     //#endif
 
     /*
@@ -709,5 +720,5 @@ public class AmsServerSettings {
 
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
-    public static boolean testRule = false;
+    public static int testRule = -1;
 }

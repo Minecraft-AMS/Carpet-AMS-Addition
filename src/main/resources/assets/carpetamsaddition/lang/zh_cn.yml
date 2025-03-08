@@ -636,6 +636,9 @@ carpetamsaddition:
         desc: 让收纳袋拥有一个9x3或9x6的UI，手持收纳袋右键即可打开UI
         extra:
           '0': '该规则不允许在收纳袋中放入收纳袋和潜影盒'
+      maxChainUpdateThreshold:
+        name: 最大链式更新阈值
+        desc: 修改链式更新，设置为“-1”禁用规则
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -105,6 +105,8 @@
     "rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor",
     "rule.largeShulkerBox.ShulkerBoxBlockEntityMixin",
     "rule.largeShulkerBox.ShulkerBoxScreenHandlerMixin",
+    "rule.maxChainUpdateThreshold.ChainRestrictedNeighborUpdaterAccessor",
+    "rule.maxChainUpdateThreshold.ChainRestrictedNeighborUpdaterMixin",
     "rule.maxPlayerInteractionRange.AttributeCommandMixin",
     "rule.maxPlayerInteractionRange.ClampedEntityAttributeMixin",
     "rule.maxPlayerInteractionRange.EntityAttributeInstanceInvoker",

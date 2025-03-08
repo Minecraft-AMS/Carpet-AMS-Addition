@@ -530,6 +530,8 @@ carpetamsaddition:
         desc: Make stems accepts scheduled tick as random tick
       scheduledRandomTickAllPlants:
         desc: Make all plants accepts scheduled tick as random tick
+      maxChainUpdateThreshold:
+        desc: Modify max chain update threshold, Set to "-1" to disable the rule
 
       #区块加载规则
       commandPlayerChunkLoadController:
