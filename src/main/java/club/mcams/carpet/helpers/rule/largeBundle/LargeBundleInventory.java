@@ -124,6 +124,7 @@ public class LargeBundleInventory implements Inventory {
     /**
      * 在Mixin中调用
      * @see net.minecraft.item.BundleItem
+     * @see club.mcams.carpet.mixin.rule.largeBundle.BundleItemMixin
      */
     public static boolean canInsert(ItemStack stack) {
         if (stack.getItem() instanceof BundleItem) {
