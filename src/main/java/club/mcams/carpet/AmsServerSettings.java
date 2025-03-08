@@ -606,7 +606,7 @@ public class AmsServerSettings {
     //$$ @GameVersion(version = "Minecraft >= 1.19")
     //$$ @Rule(
     //$$     options = {"-1", "100000", "200000", "300000"},
-    //$$     categories = {AMS, FEATURE, SURVIVAL},
+    //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
     //$$     strict = false
     //$$ )
     //$$ public static int maxChainUpdateThreshold = -1;
