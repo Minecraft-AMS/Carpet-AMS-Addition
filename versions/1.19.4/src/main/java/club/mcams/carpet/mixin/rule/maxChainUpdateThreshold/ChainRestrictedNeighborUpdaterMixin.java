@@ -39,6 +39,6 @@ public abstract class ChainRestrictedNeighborUpdaterMixin {
         )
     )
     private int modifyMaxChainDepth(int original) {
-        return AmsServerSettings.maxChainUpdateThreshold == -1 ? original : AmsServerSettings.maxChainUpdateThreshold;
+        return AmsServerSettings.maxChainUpdateDepth == -1 ? original : AmsServerSettings.maxChainUpdateDepth;
     }
 }

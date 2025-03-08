@@ -609,7 +609,7 @@ public class AmsServerSettings {
     //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
     //$$     strict = false
     //$$ )
-    //$$ public static int maxChainUpdateThreshold = -1;
+    //$$ public static int maxChainUpdateDepth = -1;
     //#endif
 
     /*

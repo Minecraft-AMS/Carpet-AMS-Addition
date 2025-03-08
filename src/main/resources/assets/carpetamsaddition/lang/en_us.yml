@@ -516,6 +516,8 @@ carpetamsaddition:
         desc: Let the bundle have a 9x3 or 9x6 UI, and right-click in the hand to open the UI
         extra:
           '0': 'This rule does not allow bundle and shulker boxes to be placed in bundle'
+      maxChainUpdateDepth:
+        desc: Modify max chain update depth, Set to "-1" to disable the rule
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -530,8 +532,6 @@ carpetamsaddition:
         desc: Make stems accepts scheduled tick as random tick
       scheduledRandomTickAllPlants:
         desc: Make all plants accepts scheduled tick as random tick
-      maxChainUpdateThreshold:
-        desc: Modify max chain update threshold, Set to "-1" to disable the rule
 
       #区块加载规则
       commandPlayerChunkLoadController:
