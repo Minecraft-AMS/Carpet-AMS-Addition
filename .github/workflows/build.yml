@@ -70,3 +70,4 @@ jobs:
         with:
           name: build-artifacts
           path: versions/*/build/libs/
+          retention-days: 7
