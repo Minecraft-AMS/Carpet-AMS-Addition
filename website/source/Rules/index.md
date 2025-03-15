@@ -2508,6 +2508,44 @@ json位置：
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
+## 最大链式更新深度（maxChainUpdateDepth）
+
+修改最大链式更新深度，设置为“-1”禁用规则。
+
+<该规则 Minecraft >= 1.19 可用>
+
+- 类型: `int`
+
+
+
+- 默认值: `-1`
+
+
+
+- 参考选项: `-1`, `100000`, `200000`, `300000`
+
+
+
+- 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
+
+## 幻翼生成警告（phantomSpawnAlert）
+
+广播谁召唤了幻翼的消息。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `SURVIVAL`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

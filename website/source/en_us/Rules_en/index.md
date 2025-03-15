@@ -2528,6 +2528,44 @@ This rule does not allow bundle and shulker boxes to be placed in bundle.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## maxChainUpdateDepth
+
+Modify max chain update depth, Set to "-1" to disable the rule.
+
+&lt;Available for Minecraft >= 1.19&gt;
+
+- Type: `int`
+
+
+
+- Default: `-1`
+
+
+
+- Suggested options: `-1`, `100000`, `200000`, `300000`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `EXPERIMENTAL`
+
+## phantomSpawnAlert
+
+Broadcast the news of who summoned the phantoms.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
