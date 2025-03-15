@@ -130,7 +130,7 @@ public class WhereCommandRegistry {
         } else if (dimension.getValue() == World.NETHER) {
             message = Messenger.s(
                 String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", translator.tr("nether").getString(), playerName, currentPos, otherPos))
-                .append(copyButton(currentPos, Formatting.DARK_RED)).append(copyButton(otherPos, Formatting.GREEN)).append(InvokeOrgCommand.highlightPosButton(currentPos));
+                .append(copyButton(currentPos, Formatting.DARK_RED)).append(copyButton(otherPos, Formatting.GREEN)).append(InvokeOrgCommand.highlightPosButton(otherPos));
         }
         return message;
     }

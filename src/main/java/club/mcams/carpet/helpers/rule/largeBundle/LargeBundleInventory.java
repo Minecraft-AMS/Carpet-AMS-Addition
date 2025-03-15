@@ -118,7 +118,7 @@ public class LargeBundleInventory implements Inventory {
 
     @Override
     public boolean canPlayerUse(PlayerEntity player) {
-        return true;
+        return !this.stack.isEmpty();
     }
 
     /**
