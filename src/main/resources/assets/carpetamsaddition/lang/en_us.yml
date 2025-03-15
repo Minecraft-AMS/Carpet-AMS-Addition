@@ -18,6 +18,8 @@ carpetamsaddition:
     sendPlayerDeathLocation:
       location: 'death location'
       copy: 'copy coord to clipboard'
+    phantomSpawnAlert:
+      msg: '§b<phantomSpawnAlert> §r§e%s §r§dsummoned phantoms §r§e@ §r§a[ %s ]'
 
   command:
     commandHelper:
@@ -518,6 +520,8 @@ carpetamsaddition:
           '0': 'This rule does not allow bundle and shulker boxes to be placed in bundle'
       maxChainUpdateDepth:
         desc: Modify max chain update depth, Set to "-1" to disable the rule
+      phantomSpawnAlert:
+        desc: Broadcast the news of who summoned the phantoms
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

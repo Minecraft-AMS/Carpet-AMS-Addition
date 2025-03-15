@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.maxChainUpdateThreshold;
+package club.mcams.carpet.mixin.rule.maxChainUpdateDepth;
 
 import club.mcams.carpet.utils.compat.DummyInterface;
 

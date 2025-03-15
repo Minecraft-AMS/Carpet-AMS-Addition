@@ -612,6 +612,9 @@ public class AmsServerSettings {
     //$$ public static int maxChainUpdateDepth = -1;
     //#endif
 
+    @Rule(categories = {AMS, SURVIVAL})
+    public static boolean phantomSpawnAlert = false;
+
     /*
      * 区块加载规则
      */

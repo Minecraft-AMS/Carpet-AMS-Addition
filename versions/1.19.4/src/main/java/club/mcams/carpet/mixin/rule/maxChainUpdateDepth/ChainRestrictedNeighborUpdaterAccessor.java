@@ -18,27 +18,18 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.maxChainUpdateThreshold;
-
-import club.mcams.carpet.AmsServerSettings;
-
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+package club.mcams.carpet.mixin.rule.maxChainUpdateDepth;
 
 import net.minecraft.world.block.ChainRestrictedNeighborUpdater;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.gen.Accessor;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.19")
 @Mixin(ChainRestrictedNeighborUpdater.class)
-public abstract class ChainRestrictedNeighborUpdaterMixin {
-    @ModifyExpressionValue(
-        method = "enqueue",
-        at = @At(
-            value = "FIELD",
-            target = "Lnet/minecraft/world/block/ChainRestrictedNeighborUpdater;maxChainDepth:I"
-        )
-    )
-    private int modifyMaxChainDepth(int original) {
-        return AmsServerSettings.maxChainUpdateDepth == -1 ? original : AmsServerSettings.maxChainUpdateDepth;
-    }
+public interface ChainRestrictedNeighborUpdaterAccessor {
+    @Accessor("maxChainDepth")
+    int getMaxChainDepth();
 }

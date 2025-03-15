@@ -18,6 +18,9 @@ carpetamsaddition:
     sendPlayerDeathLocation:
       location: '死亡位置'
       copy: '复制坐标到剪切板'
+    phantomSpawnAlert:
+      msg: '§b<phantomSpawnAlert> §r§e%s §r§d召唤了幻翼 §r§e@ §r§a[ %s ]'
+
 
   command:
     commandHelper:
@@ -639,6 +642,9 @@ carpetamsaddition:
       maxChainUpdateDepth:
         name: 最大链式更新深度
         desc: 修改最大链式更新深度，设置为“-1”禁用规则
+      phantomSpawnAlert:
+        name: 幻翼生成警告
+        desc: 广播谁召唤了幻翼的消息
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:
