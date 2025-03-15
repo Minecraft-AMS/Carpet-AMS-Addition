@@ -26,6 +26,7 @@ import net.minecraft.block.Block;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 @Mixin(Block.class)

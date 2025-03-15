@@ -5,11 +5,15 @@
   "name": "${name}",
   "description": "A fabric-carpet extension mod. It offers some interesting and useful features.",
   "authors": [
-    "Author: 1024_byteeeee",
-    "Collaborator: WenDavid",
-    " ",
-    "Contributors:",
-    "Rokuuuchan, SunnySlopes, Kir_Antipov, cdqtzrc, Crystal0404"
+    "1024_byteeeee",
+    "WenDavid"
+  ],
+  "contributors": [
+    "Rokuuuchan",
+    "SunnySlopes",
+    "Kir_Antipov" ,
+    "cdqtzrc",
+    "Crystal0404"
   ],
   "contact": {
     "homepage": "https://minecraft-ams.github.io/carpetamsaddition/",

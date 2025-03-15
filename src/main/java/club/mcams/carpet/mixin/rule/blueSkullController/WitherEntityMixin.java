@@ -54,7 +54,7 @@ public abstract class WitherEntityMixin {
         cancellable = true
     )
     private void shootSkullAt(int headIndex, LivingEntity target, CallbackInfo ci) {
-        if(AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.SURELY) {
+        if (AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.SURELY) {
             this.shootSkullAt(headIndex, target.getX(), target.getY() + (double)target.getStandingEyeHeight() * 0.5, target.getZ(), true);
             ci.cancel();
         }
@@ -79,7 +79,7 @@ public abstract class WitherEntityMixin {
         //#endif
         Operation<Difficulty> original
     ) {
-        if(AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.NEVER) {
+        if (AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.NEVER) {
             return Difficulty.EASY;
         } else {
             return original.call(world);
