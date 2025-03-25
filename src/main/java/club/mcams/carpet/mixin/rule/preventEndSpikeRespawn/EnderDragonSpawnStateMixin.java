@@ -43,8 +43,8 @@ public abstract class EnderDragonSpawnStateMixin {
     @WrapOperation(
         method = "run",
         at = @At(
-            value="INVOKE",
-            target="Lnet/minecraft/server/world/ServerWorld;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/world/ServerWorld;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
         )
     )
     private boolean onRemoveBlock(ServerWorld serverWorld, BlockPos blockPos, boolean b, Operation<Boolean> original) {

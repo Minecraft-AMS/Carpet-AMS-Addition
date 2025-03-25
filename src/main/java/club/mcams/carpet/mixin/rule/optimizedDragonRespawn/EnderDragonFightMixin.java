@@ -151,10 +151,7 @@ public abstract class EnderDragonFightMixin {
         return null;
     }
 
-    @Inject(
-        method = "respawnDragon(Ljava/util/List;)V",
-        at = @At("HEAD")
-    )
+    @Inject(method = "respawnDragon(Ljava/util/List;)V", at = @At("HEAD"))
     private void resetCache(List<EndCrystalEntity> crystals, CallbackInfo ci) {
         if (AmsServerSettings.optimizedDragonRespawn) {
             cacheChunkIteratorX = -8;

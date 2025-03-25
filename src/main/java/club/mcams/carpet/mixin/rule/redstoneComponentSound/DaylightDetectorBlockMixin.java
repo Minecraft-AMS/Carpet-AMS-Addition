@@ -42,15 +42,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class DaylightDetectorBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"))
     private void playSound(
-        BlockState state,
-        World world,
-        BlockPos pos,
-        PlayerEntity player,
+        BlockState state, World world, BlockPos pos, PlayerEntity player,
         //#if MC<12005
         Hand hand,
         //#endif
-        BlockHitResult hit,
-        CallbackInfoReturnable<ActionResult> cir
+        BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir
     ) {
         if (AmsServerSettings.redstoneComponentSound) {
             world.playSound(player, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 1.0f, 0.95f);
