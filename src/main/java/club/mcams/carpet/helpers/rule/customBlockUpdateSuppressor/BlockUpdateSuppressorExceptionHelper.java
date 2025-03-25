@@ -20,8 +20,10 @@
 
 package club.mcams.carpet.helpers.rule.customBlockUpdateSuppressor;
 
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.AMS_ThrowableSuppression;
+
 public class BlockUpdateSuppressorExceptionHelper {
-    private static final IllegalArgumentException illegalArgumentException = new IllegalArgumentException();
+    private static final AMS_ThrowableSuppression amsThrowableSuppression = new AMS_ThrowableSuppression("AMS Throwable Suppression");
     private static final BlockUpdateSuppressorExceptionHelper INSTANCE = new BlockUpdateSuppressorExceptionHelper();
 
     private BlockUpdateSuppressorExceptionHelper() {}
@@ -30,7 +32,7 @@ public class BlockUpdateSuppressorExceptionHelper {
         return INSTANCE;
     }
 
-    public void throwIllegalArgumentException() {
-        throw illegalArgumentException;
+    public void throwThrowableSuppression() {
+        throw amsThrowableSuppression;
     }
 }

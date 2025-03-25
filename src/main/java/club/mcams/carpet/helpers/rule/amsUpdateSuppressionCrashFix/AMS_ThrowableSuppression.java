@@ -20,8 +20,8 @@
 
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
-public class ThrowableSuppression extends RuntimeException{
-    public ThrowableSuppression(String message) {
+public class AMS_ThrowableSuppression extends RuntimeException{
+    public AMS_ThrowableSuppression(String message) {
         super(message);
     }
 }

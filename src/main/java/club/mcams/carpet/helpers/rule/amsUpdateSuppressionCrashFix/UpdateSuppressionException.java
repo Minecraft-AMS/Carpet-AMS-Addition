@@ -21,17 +21,18 @@
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class UpdateSuppressionException {
     private static final HashSet<Predicate<Throwable>> exceptionPredicates = new HashSet<>();
 
     public static boolean isUpdateSuppression(Throwable throwable) {
-        return exceptionPredicates.stream().anyMatch(predicate -> predicate.test(throwable));
+        return Optional.ofNullable(throwable).map(t -> exceptionPredicates.stream().anyMatch(predicate -> predicate.test(t))).orElse(false);
     }
 
     static {
-        exceptionPredicates.add(throwable -> throwable instanceof ThrowableSuppression);
+        exceptionPredicates.add(throwable -> throwable instanceof AMS_ThrowableSuppression);
         exceptionPredicates.add(throwable -> throwable instanceof ClassCastException);
         exceptionPredicates.add(throwable -> throwable instanceof StackOverflowError);
         exceptionPredicates.add(throwable -> throwable instanceof OutOfMemoryError);

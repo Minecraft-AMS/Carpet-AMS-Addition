@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.AMS_ThrowableSuppression;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionContext;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionException;
 
@@ -67,7 +67,7 @@ public interface NeighborUpdaterMixin {
     ) {
         if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
             UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
-           throw new ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));
+            throw new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));
         }
     }
 }

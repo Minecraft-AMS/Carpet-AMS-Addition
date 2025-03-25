@@ -49,7 +49,9 @@ public abstract class MinecraftServerMixin {
             try {
                 original.call(serverWorld, shouldKeepTicking);
             } catch (Throwable throwable) {
-                if (!UpdateSuppressionException.isUpdateSuppression(throwable)) {
+                boolean isSuppression = UpdateSuppressionException.isUpdateSuppression(throwable);
+                boolean isSuppressionCause = throwable.getCause() != null && UpdateSuppressionException.isUpdateSuppression(throwable.getCause());
+                if (!isSuppression && !isSuppressionCause) {
                     throw throwable;
                 }
             }

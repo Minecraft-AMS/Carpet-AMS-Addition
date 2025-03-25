@@ -21,42 +21,39 @@
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.ThrowableSuppression;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.AMS_ThrowableSuppression;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionException;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionContext;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import com.llamalad7.mixinextras.sugar.Local;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-import java.util.Objects;
-
 @GameVersion(version = "Minecraft <= 1.18")
-@SuppressWarnings("InjectLocalCaptureCanBeReplacedWithLocal")
 @Mixin(World.class)
 public abstract class WorldMixin {
-    @Inject(
+    @ModifyArg(
         method = "updateNeighbor",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
         ),
-        locals = LocalCapture.CAPTURE_FAILHARD
+        index = 0
     )
-    private void updateNeighbor(BlockPos sourcePos, Block sourceBlock, BlockPos neighborPos, CallbackInfo ci, BlockState state, Throwable throwable) {
-        if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
+    private Throwable modifyCrashReportThrowable(Throwable original, @Local(ordinal = 1, argsOnly = true) BlockPos sourcePos) {
+        if (!AmsServerSettings.amsUpdateSuppressionCrashFix.equals("false") && UpdateSuppressionException.isUpdateSuppression(original)) {
             World world = (World) (Object) this;
-            UpdateSuppressionContext.sendMessageToServer(sourcePos, world, throwable);
-            throw new ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(sourcePos, world, throwable));
+            UpdateSuppressionContext.sendMessageToServer(sourcePos, world, original);
+            return new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(sourcePos, world, original));
+        } else {
+            return original;
         }
     }
 }
