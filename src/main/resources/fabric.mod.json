@@ -37,7 +37,6 @@
   "mixins": [
     "amscarpet.mixins.json"
   ],
-  "accessWidener": "carpetamsaddition.accesswidener",
   "depends": {
     "fabricloader": ">=0.15.11",
     "minecraft": "${minecraft_dependency}",
