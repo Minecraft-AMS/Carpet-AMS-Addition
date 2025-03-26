@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.hooks.afterServerLoadWorld;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
 
@@ -33,6 +34,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MinecraftServerMixin {
     @Inject(method = "loadWorld", at = @At("TAIL"))
     private void afterServerLoadWorld(CallbackInfo ci) {
-        AmsServer.getInstance().afterServerLoadWorlds((MinecraftServer) (Object) this);
+        if (MinecraftServerUtil.serverIsRunning()) {
+            AmsServer.getInstance().afterServerLoadWorlds(MinecraftServerUtil.getServer());
+        }
     }
 }
