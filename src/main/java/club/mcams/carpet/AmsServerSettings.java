@@ -723,5 +723,5 @@ public class AmsServerSettings {
 
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
-    public static int testRule = -1;
+    public static Boolean testRule = false;
 }
