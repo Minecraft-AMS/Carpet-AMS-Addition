@@ -132,6 +132,8 @@ carpetamsaddition:
         removeAll: '/customBlockHardness removeAll  ->  移除列表中的所有方块'
         get_default_hardness: '/customBlockHardness getDefaultHardness <block>  ->  查询方块的默认硬度'
         list: '/customBlockHardness list  ->  显示所有添加的方块'
+    at:
+      title: '%s @ 了你'
 
   logger:
     serverRuntime:

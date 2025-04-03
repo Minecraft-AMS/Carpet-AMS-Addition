@@ -131,6 +131,8 @@ carpetamsaddition:
         removeAll: '/customBlockHardness removeAll  ->  Remove all blocks from the list'
         get_default_hardness: '/customBlockHardness getDefaultHardness <block>  ->  Query the default hardness of blocks'
         list: '/customBlockHardness list  ->  Display all added blocks'
+    at:
+      title: '%s @ You'
 
   logger:
     serverRuntime:

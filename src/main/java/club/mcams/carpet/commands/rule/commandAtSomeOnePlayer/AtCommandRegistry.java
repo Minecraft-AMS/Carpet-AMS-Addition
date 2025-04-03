@@ -21,9 +21,11 @@
 package club.mcams.carpet.commands.rule.commandAtSomeOnePlayer;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.MinecraftServerUtil;
+import club.mcams.carpet.utils.PlayerUtil;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -40,6 +42,7 @@ import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
 
 public class AtCommandRegistry {
+    private static final Translator tr = new Translator("command.at");
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("@")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandAtSomeOnePlayer))
@@ -53,19 +56,28 @@ public class AtCommandRegistry {
     }
 
     private static int execute(ServerPlayerEntity sourcePlayer, ServerPlayerEntity targetPlayer, String text) {
-        final BaseText titleText = Messenger.s(sourcePlayer.getGameProfile().getName() + " @ 了你");
-        BaseText messageText = Messenger.s(String.format("<%s> %s", sourcePlayer.getGameProfile().getName(), text));
+        BaseText titleText = tr.tr("title", PlayerUtil.getName(sourcePlayer));
+        BaseText messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
+
         //#if MC<11700
         //$$ targetPlayer.networkHandler.sendPacket(new TitleS2CPacket(TitleS2CPacket.Action.TITLE, titleText.formatted(Formatting.AQUA)));
         //#else
         targetPlayer.networkHandler.sendPacket(new TitleS2CPacket(titleText.formatted(Formatting.AQUA)));
         //#endif
-        targetPlayer.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
         //#if MC>=11900
         //$$ MinecraftServerUtil.getServer().getPlayerManager().broadcast(messageText, false);
         //#else
         MinecraftServerUtil.getServer().getPlayerManager().broadcast(messageText, MessageType.CHAT, sourcePlayer.getUuid());
         //#endif
+
+        targetPlayer.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+        Messenger.sendServerMessage(
+            MinecraftServerUtil.getServer(),
+            Messenger.s(String.format("%s @ %s", PlayerUtil.getName(sourcePlayer), PlayerUtil.getName(targetPlayer))).formatted(Formatting.GRAY)
+        );
+
         return 1;
     }
 }
