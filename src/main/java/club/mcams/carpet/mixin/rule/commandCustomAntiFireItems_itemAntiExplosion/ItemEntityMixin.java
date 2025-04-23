@@ -24,6 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 
 import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
 import club.mcams.carpet.utils.RegexTools;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import net.minecraft.entity.ItemEntity;
@@ -51,14 +52,20 @@ public abstract class ItemEntityMixin implements ItemEntityInvoker {
         }
     }
 
-    @ModifyReturnValue(method = "damage", at = @At("RETURN"))
+    @ModifyExpressionValue(
+        method = "damage",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/ItemEntity;isInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
+        )
+    )
     private boolean damage(boolean original, DamageSource source) {
         //#if MC>=11900
         //$$ if(AmsServerSettings.itemAntiExplosion && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
         //#else
         if (AmsServerSettings.itemAntiExplosion && source.isExplosive()) {
-        //#endif
-            return false;
+            //#endif
+            return original || AmsServerSettings.itemAntiExplosion;
         } else {
             return original;
         }
