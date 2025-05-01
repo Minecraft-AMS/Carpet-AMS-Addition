@@ -32,6 +32,9 @@ import net.minecraft.entity.ItemEntity;
 //$$ import net.minecraft.registry.tag.DamageTypeTags;
 //#endif
 import net.minecraft.entity.damage.DamageSource;
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -52,6 +55,15 @@ public abstract class ItemEntityMixin implements ItemEntityInvoker {
         }
     }
 
+    //#if MC>=12102
+    //$$ @ModifyExpressionValue(
+    //$$     method = "damage",
+    //$$     at = @At(
+    //$$         value = "INVOKE",
+    //$$         target = "Lnet/minecraft/entity/ItemEntity;isAlwaysInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
+    //$$     )
+    //$$ )
+    //#else
     @ModifyExpressionValue(
         method = "damage",
         at = @At(
@@ -59,7 +71,14 @@ public abstract class ItemEntityMixin implements ItemEntityInvoker {
             target = "Lnet/minecraft/entity/ItemEntity;isInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
         )
     )
-    private boolean damage(boolean original, DamageSource source) {
+    //#endif
+    private boolean damage(
+        boolean original,
+        //#if MC>=12102
+        //$$ ServerWorld world,
+        //#endif
+        DamageSource source
+    ) {
         //#if MC>=11900
         //$$ if(AmsServerSettings.itemAntiExplosion && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
         //#else
