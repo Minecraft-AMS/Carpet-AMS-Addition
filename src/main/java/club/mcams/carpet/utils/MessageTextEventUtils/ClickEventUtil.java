@@ -22,6 +22,9 @@ package club.mcams.carpet.utils.MessageTextEventUtils;
 
 import net.minecraft.text.ClickEvent;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft < 1.21.5")
 @SuppressWarnings("unused")
 public class ClickEventUtil {
     public static ClickEvent.Action OPEN_URL = ClickEvent.Action.OPEN_URL;

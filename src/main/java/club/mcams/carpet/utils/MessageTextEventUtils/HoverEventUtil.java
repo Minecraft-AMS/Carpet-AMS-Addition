@@ -23,6 +23,9 @@ package club.mcams.carpet.utils.MessageTextEventUtils;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft < 1.21.5")
 @SuppressWarnings("unused")
 public class HoverEventUtil {
     public static HoverEvent.Action<Text> SHOW_TEXT = HoverEvent.Action.SHOW_TEXT;
