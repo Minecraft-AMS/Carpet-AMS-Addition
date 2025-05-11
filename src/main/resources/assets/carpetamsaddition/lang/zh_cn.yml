@@ -83,7 +83,8 @@ carpetamsaddition:
       os: '操作系统：'
       os_arch: '架构：'
       available_processors: '可用处理器：'
-      total_memory: '总内存：'
+      max_memory: '总内存：'
+      total_memory: '已分配内存：'
       free_memory: '可用内存：'
     customCommandPermissionLevel:
       not_found: ' 不存在于配置文件中'

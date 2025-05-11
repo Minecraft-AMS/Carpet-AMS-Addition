@@ -59,14 +59,16 @@ public class GetSystemInfoCommandRegistry {
         String os = osBean.getName() + " - " + osBean.getVersion();
         String osArch = osBean.getArch();
         String availableProcessors = String.valueOf(runtime.availableProcessors());
+        String maxMemory = runtime.maxMemory() / 1024 / 1024 + "MB";
         String totalMemory = runtime.totalMemory() / 1024 / 1024 + "MB";
         String freeMemory = runtime.freeMemory() / 1024 / 1024 + "MB";
         return String.format(
-            "%s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s",
+            "%s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s %s\n%s",
             line,
             translator.tr("os").getString(), os,
             translator.tr("os_arch").getString(), osArch,
             translator.tr("available_processors").getString(), availableProcessors,
+            translator.tr("max_memory").getString(), maxMemory,
             translator.tr("total_memory").getString(), totalMemory,
             translator.tr("free_memory").getString(), freeMemory,
             line

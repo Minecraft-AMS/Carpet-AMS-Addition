@@ -82,6 +82,7 @@ carpetamsaddition:
       os: 'OS:'
       os_arch: 'Arch:'
       available_processors: 'Available Processors:'
+      max_memory: 'Max Memory:'
       total_memory: 'Total Memory:'
       free_memory: 'Free Memory:'
     customCommandPermissionLevel:
