@@ -129,8 +129,11 @@ public class AmsServerSettings {
     )
     public static String commandCustomAntiFireItems = "false";
 
-    @Rule(categories = {AMS, FEATURE, TNT})
-    public static boolean itemAntiExplosion = false;
+    @Rule(
+        options = {"true", "false", "no_blast_wave"},
+        categories = {AMS, FEATURE, TNT}
+    )
+    public static String itemAntiExplosion = "false";
 
     @Rule(categories = {AMS, FEATURE, CREATIVE})
     public static boolean creativeShulkerBoxDropsDisabled = false;

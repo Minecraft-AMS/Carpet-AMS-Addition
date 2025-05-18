@@ -18,14 +18,11 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.commandCustomAntiFireItems_itemAntiExplosion;
+package club.mcams.carpet.mixin.rule.itemAntiExplosion;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
-import club.mcams.carpet.utils.RegexTools;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import net.minecraft.entity.ItemEntity;
 //#if MC>=11900
@@ -42,37 +39,23 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.Objects;
 
 @Mixin(ItemEntity.class)
-public abstract class ItemEntityMixin implements ItemEntityInvoker {
-    @ModifyReturnValue(method = "isFireImmune", at = @At("RETURN"))
-    private boolean isFireImmune(boolean original) {
-        if (
-            !Objects.equals(AmsServerSettings.commandCustomAntiFireItems, "false") &&
-            CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.contains(RegexTools.getItemRegisterName(this.invokeGetStack()))
-        ) {
-            return true;
-        } else {
-            return original;
-        }
-    }
-
-    //#if MC>=12102
-    //$$ @ModifyExpressionValue(
-    //$$     method = "damage",
-    //$$     at = @At(
-    //$$         value = "INVOKE",
-    //$$         target = "Lnet/minecraft/entity/ItemEntity;isAlwaysInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
-    //$$     )
-    //$$ )
-    //#else
+public abstract class ItemEntityMixin {
     @ModifyExpressionValue(
+        //#if MC>=12102
+        //$$ method = "damage",
+        //#else
         method = "damage",
+        //#endif
         at = @At(
             value = "INVOKE",
+            //#if MC>=12102
+            //$$ target = "Lnet/minecraft/entity/ItemEntity;isAlwaysInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
+            //#else
             target = "Lnet/minecraft/entity/ItemEntity;isInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
+            //#endif
         )
     )
-    //#endif
-    private boolean damage(
+    private boolean isInvulnerableTo(
         boolean original,
         //#if MC>=12102
         //$$ ServerWorld world,
@@ -80,11 +63,11 @@ public abstract class ItemEntityMixin implements ItemEntityInvoker {
         DamageSource source
     ) {
         //#if MC>=11900
-        //$$ if(AmsServerSettings.itemAntiExplosion && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
+        //$$ if(!Objects.equals(AmsServerSettings.itemAntiExplosion, "false") && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
         //#else
-        if (AmsServerSettings.itemAntiExplosion && source.isExplosive()) {
-            //#endif
-            return original || AmsServerSettings.itemAntiExplosion;
+        if (!Objects.equals(AmsServerSettings.itemAntiExplosion, "false") && source.isExplosive()) {
+        //#endif
+            return original || !Objects.equals(AmsServerSettings.itemAntiExplosion, "false");
         } else {
             return original;
         }
