@@ -46,7 +46,8 @@ public class AtCommandRegistry {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(CommandManager.literal("@")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandAtSomeOnePlayer))
-            .then(CommandManager.argument("targetPlayer", EntityArgumentType.player()).then(CommandManager.argument("text", StringArgumentType.greedyString())
+            .then(CommandManager.argument("targetPlayer", EntityArgumentType.player())
+            .then(CommandManager.argument("text", StringArgumentType.greedyString())
             .executes(context -> execute(
                 context.getSource().getPlayer(),
                 EntityArgumentType.getPlayer(context, "targetPlayer"),
