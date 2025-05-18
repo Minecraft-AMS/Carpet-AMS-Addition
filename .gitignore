@@ -32,3 +32,4 @@ bin/
 
 run/*
 !run/options.txt
+!run/eula.txt
