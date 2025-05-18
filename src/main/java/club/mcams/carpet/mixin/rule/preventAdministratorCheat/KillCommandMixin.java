@@ -30,6 +30,9 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft < 1.21.6")
 @Mixin(KillCommand.class)
 public abstract class KillCommandMixin {
     @ModifyExpressionValue(

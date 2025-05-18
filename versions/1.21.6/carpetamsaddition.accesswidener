@@ -1,2 +1,3 @@
 accessWidener	v1	named
 accessible method net/minecraft/server/world/ChunkTicketType register (Ljava/lang/String;JZLnet/minecraft/server/world/ChunkTicketType$Use;)Lnet/minecraft/server/world/ChunkTicketType;
+accessible field net/minecraft/server/network/ServerPlayerEntity server Lnet/minecraft/server/MinecraftServer;

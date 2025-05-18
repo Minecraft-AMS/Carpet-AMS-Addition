@@ -22,27 +22,28 @@ package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
 
 import club.mcams.carpet.helpers.rule.preventAdministratorCheat.PermissionHelper;
 
-import net.minecraft.server.command.EffectCommand;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
+import net.minecraft.command.PermissionLevelPredicate;
+import net.minecraft.server.command.AdvancementCommand;
 import net.minecraft.server.command.ServerCommandSource;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft < 1.21.6")
-@Mixin(EffectCommand.class)
-public abstract class EffectCommandMixin {
+@GameVersion(version = "Minecraft >= 1.21.6")
+@Mixin(AdvancementCommand.class)
+public abstract class AdvancementCommandMixin {
     @ModifyExpressionValue(
-        method = "method_13235",
+        method = "register",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
+            target = "Lnet/minecraft/server/command/CommandManager;requirePermissionLevel(I)Lnet/minecraft/command/PermissionLevelPredicate;"
         )
     )
-    private static boolean EffectCommand(boolean original, ServerCommandSource source) {
-        return original && PermissionHelper.canCheat(source);
+    private static PermissionLevelPredicate<ServerCommandSource> preventCheat(PermissionLevelPredicate<ServerCommandSource> original) {
+        return PermissionHelper.createPermissionPredicate(original);
     }
 }

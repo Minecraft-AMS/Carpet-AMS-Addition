@@ -26,6 +26,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.21.1")
+@GameVersion(version = "Minecraft >= 1.21")
 @Mixin(DummyInterface.class)
 public interface LeashableMixin {}

@@ -22,6 +22,9 @@ package club.mcams.carpet.helpers.rule.preventAdministratorCheat;
 
 import club.mcams.carpet.AmsServerSettings;
 
+//#if MC>=12106
+//$$ import net.minecraft.command.PermissionLevelPredicate;
+//#endif
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -29,4 +32,20 @@ public class PermissionHelper {
     public static boolean canCheat(ServerCommandSource source) {
         return !(source.getEntity() instanceof ServerPlayerEntity) || !AmsServerSettings.preventAdministratorCheat;
     }
+
+    //#if MC>=12106
+    //$$ public static PermissionLevelPredicate<ServerCommandSource> createPermissionPredicate(PermissionLevelPredicate<ServerCommandSource> original) {
+    //$$     return new PermissionLevelPredicate<>() {
+    //$$         @Override
+    //$$         public int requiredLevel() {
+    //$$             return original.requiredLevel();
+    //$$         }
+    //$$
+    //$$         @Override
+    //$$         public boolean test(ServerCommandSource source) {
+    //$$             return original.test(source) && PermissionHelper.canCheat(source);
+    //$$         }
+    //$$     };
+    //$$ }
+    //#endif
 }

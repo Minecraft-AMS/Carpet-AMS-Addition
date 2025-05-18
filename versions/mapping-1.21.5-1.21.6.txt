@@ -1,0 +1,2 @@
+net.minecraft.entity.Entity getEntityWorld() getWorld()
+net.minecraft.entity.LivingEntity getEntityWorld() getWorld()

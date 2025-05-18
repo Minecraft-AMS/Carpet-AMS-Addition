@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft < 1.21.1")
+@GameVersion(version = "Minecraft < 1.21")
 @Mixin(PathAwareEntity.class)
 public abstract class PathAwareEntityMixin {
     @ModifyExpressionValue(

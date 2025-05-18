@@ -22,7 +22,7 @@ package club.mcams.carpet.mixin.rule.strongLeash;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import net.minecraft.entity.Leashable;
 
@@ -31,18 +31,11 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.21 && Minecraft < 1.21.6")
+@GameVersion(version = "Minecraft >= 1.21.6")
 @Mixin(Leashable.class)
 public interface LeashableMixin {
-    @ModifyExpressionValue(
-        method = "tickLeash",
-        at = @At(
-            value = "CONSTANT",
-            args = "doubleValue=10.0F"
-        ),
-        require = 1
-    )
-    private static double modifyMaxLeashDetachDistance(double original) {
+    @ModifyReturnValue(method = "getLeashSnappingDistance", at = @At("RETURN"))
+    private double modifyMaxLeashDetachDistance(double original) {
         return AmsServerSettings.strongLeash ? Math.max(original, Double.MAX_VALUE) : original;
     }
 }

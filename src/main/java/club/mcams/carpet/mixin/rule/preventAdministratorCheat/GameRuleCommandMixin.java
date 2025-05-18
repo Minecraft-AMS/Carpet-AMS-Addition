@@ -30,6 +30,9 @@ import net.minecraft.server.command.ServerCommandSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft < 1.21.6")
 @Mixin(GameRuleCommand.class)
 public abstract class GameRuleCommandMixin {
     @ModifyExpressionValue(
