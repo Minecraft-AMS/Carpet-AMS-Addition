@@ -213,6 +213,10 @@ carpetamsaddition:
           '0': 'After enabling the rules, use the /customAntiFireItems help command to view the usage instructions'
       itemAntiExplosion:
         desc: Dropped items will not be destroyed by explosions
+        extra:
+          '0': '[false] - Disable rule'
+          '1': '[true] - Enable rule'
+          '3': '[no_blast_wave] - Explosion-proof and non-shockwave, the explosion will not push the item'
       creativeShulkerBoxDropsDisabled:
         desc: Breaking a shulker box with items in creative mode will not cause drops
       bedRockFlying:
