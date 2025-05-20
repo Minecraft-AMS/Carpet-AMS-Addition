@@ -574,7 +574,13 @@ After enabling the rules, use the `/customAntiFireItems help` command to view th
 
 When enabled, Dropped items will not be destroyed by explosions.
 
-- Type: `boolean`
+false: Disable rule
+
+true: enable rule
+
+no_blast_wave: Explosion-proof and non-shockwave, the explosion will not push the item
+
+- Type: `String`
 
 
 
@@ -582,7 +588,7 @@ When enabled, Dropped items will not be destroyed by explosions.
 
 
 
-- Suggested options: `false`, `true`
+- Suggested options: `false`, `true`, `no_blast_wave`
 
 
 
@@ -1968,7 +1974,7 @@ When a player dies, they will drop their own skull.
 
 ## commandGetPlayerSkull
 
-Use the "/getPlayerSkull" command to get a online player skull.
+Use the "/getPlayerSkull &lt;player&gt; &lt;count&gt;" command to get a player skull.
 
 - Type: `String`
 

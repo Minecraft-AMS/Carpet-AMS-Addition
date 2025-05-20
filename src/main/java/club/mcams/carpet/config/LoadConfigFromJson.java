@@ -39,22 +39,12 @@ import net.minecraft.server.MinecraftServer;
 
 public class LoadConfigFromJson {
     public static void load(MinecraftServer server) {
-        clearMemory();
         ForceModeCommandConfig.loadConfigFromJson(server);
-        CustomBlockBlastResistanceConfig.loadFromJson(CustomBlockBlastResistanceConfig.getPath(server));
-        LeaderConfig.loadFromJson(LeaderConfig.getPath(server));
-        CustomCommandPermissionLevelConfig.loadFromJson(CustomCommandPermissionLevelConfig.getPath(server));
-        CustomMovableBlockConfig.loadFromJson(CustomMovableBlockConfig.getPath(server));
-        CustomAntiFireItemsConfig.loadFromJson(CustomAntiFireItemsConfig.getPath(server));
-        CustomBlockHardnessConfig.loadFromJson(CustomBlockHardnessConfig.getPath(server));
-    }
-
-    private static void clearMemory() {
-        CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
-        LeaderCommandRegistry.LEADER_LIST.clear();
-        CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.clear();
-        CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS.clear();
-        CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.clear();
-        CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
+        CustomBlockBlastResistanceConfig.getInstance().loadBlockStates(CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP);
+        LeaderConfig.getInstance().loadFromJson(LeaderCommandRegistry.LEADER_MAP);
+        CustomCommandPermissionLevelConfig.getInstance().loadFromJson(CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP);
+        CustomMovableBlockConfig.getInstance().loadFromJson(CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS);
+        CustomAntiFireItemsConfig.getInstance().loadFromJson(CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS);
+        CustomBlockHardnessConfig.getInstance().loadBlockStates(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP);
     }
 }

@@ -35,7 +35,6 @@ import net.minecraft.entity.player.PlayerEntity;
 //$$ import net.minecraft.command.CommandRegistryAccess;
 //#endif
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -68,7 +67,6 @@ public class CustomAntiFireItemsCommandRegistry {
             //$$ .then(argument("item", ItemStackArgumentType.itemStack(commandRegistryAccess))
             //#endif
             .executes(context -> add(
-                context.getSource().getServer(),
                 context.getSource().getPlayer(),
                 ItemStackArgumentType.getItemStackArgument(context, "item").createStack(1, false)
             ))))
@@ -79,12 +77,11 @@ public class CustomAntiFireItemsCommandRegistry {
             //$$ .then(argument("item", ItemStackArgumentType.itemStack(commandRegistryAccess))
             //#endif
             .executes(context -> remove(
-                context.getSource().getServer(),
                 context.getSource().getPlayer(),
                 ItemStackArgumentType.getItemStackArgument(context, "item").createStack(1, false)
             ))))
             .then(literal("removeAll")
-            .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
+            .executes(context -> removeAll(context.getSource().getPlayer())))
             .then(literal("list")
             .executes(context -> list(context.getSource().getPlayer())))
             .then(literal("help")
@@ -92,10 +89,10 @@ public class CustomAntiFireItemsCommandRegistry {
         );
     }
 
-    private static int add(MinecraftServer server, PlayerEntity player, ItemStack itemStack) {
+    private static int add(PlayerEntity player, ItemStack itemStack) {
         if (!CUSTOM_ANTI_FIRE_ITEMS.contains(getItemName(itemStack))) {
             CUSTOM_ANTI_FIRE_ITEMS.add(getItemName(itemStack));
-            saveToJson(server);
+            saveToJson();
             player.sendMessage(Messenger.s(MSG_HEAD + "+ " + getItemName(itemStack)).formatted(Formatting.GREEN), false);
         } else {
             player.sendMessage(
@@ -107,10 +104,10 @@ public class CustomAntiFireItemsCommandRegistry {
         return 1;
     }
 
-    private static int remove(MinecraftServer server, PlayerEntity player, ItemStack itemStack) {
+    private static int remove(PlayerEntity player, ItemStack itemStack) {
         if (CUSTOM_ANTI_FIRE_ITEMS.contains(getItemName(itemStack))) {
             CUSTOM_ANTI_FIRE_ITEMS.remove(getItemName(itemStack));
-            saveToJson(server);
+            saveToJson();
             player.sendMessage(Messenger.s(MSG_HEAD + "- " + getItemName(itemStack)).formatted(Formatting.RED), false);
         } else {
             player.sendMessage(Messenger.s(MSG_HEAD + getItemName(itemStack) + translator.tr("not_found").getString()).formatted(Formatting.RED), false);
@@ -118,9 +115,9 @@ public class CustomAntiFireItemsCommandRegistry {
         return 1;
     }
 
-    private static int removeAll(MinecraftServer server, PlayerEntity player) {
+    private static int removeAll(PlayerEntity player) {
         CUSTOM_ANTI_FIRE_ITEMS.clear();
-        saveToJson(server);
+        saveToJson();
         player.sendMessage(Messenger.s(MSG_HEAD + translator.tr("removeAll").getString()).formatted(Formatting.RED), false);
         return 1;
     }
@@ -156,9 +153,8 @@ public class CustomAntiFireItemsCommandRegistry {
         return 1;
     }
 
-    private static void saveToJson(MinecraftServer server) {
-        String CONFIG_FILE_PATH = CustomAntiFireItemsConfig.getPath(server);
-        CustomAntiFireItemsConfig.saveToJson(CUSTOM_ANTI_FIRE_ITEMS, CONFIG_FILE_PATH);
+    private static void saveToJson() {
+        CustomAntiFireItemsConfig.getInstance().saveToJson(CUSTOM_ANTI_FIRE_ITEMS);
     }
 
     private static String getItemName(ItemStack stack) {

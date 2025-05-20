@@ -40,16 +40,16 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 
 public class CustomCommandPermissionLevelRegistry {
     private static final Translator translator = new Translator("command.customCommandPermissionLevel");
     private static final String MSG_HEAD = "<customCommandPermissionLevel> ";
-    public static final Map<String, Integer> COMMAND_PERMISSION_MAP = new HashMap<>();
-    public static final Map<String, Predicate<ServerCommandSource>> DEFAULT_PERMISSION_MAP = new HashMap<>();
+    public static final Map<String, Integer> COMMAND_PERMISSION_MAP = new ConcurrentHashMap<>();
+    public static final Map<String, Predicate<ServerCommandSource>> DEFAULT_PERMISSION_MAP = new ConcurrentHashMap<>();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
@@ -107,7 +107,7 @@ public class CustomCommandPermissionLevelRegistry {
             );
         }
         COMMAND_PERMISSION_MAP.put(command, permissionLevel);
-        saveToJson(server);
+        saveToJson();
         CommandHelper.setPermission(server, command, permissionLevel);
         CommandHelper.updateAllCommandPermissions(server);
         return 1;
@@ -116,7 +116,7 @@ public class CustomCommandPermissionLevelRegistry {
     private static int remove(MinecraftServer server, PlayerEntity player, String command) {
         if (COMMAND_PERMISSION_MAP.containsKey(command)) {
             COMMAND_PERMISSION_MAP.remove(command);
-            saveToJson(server);
+            saveToJson();
             player.sendMessage(
                 Messenger.s(
                     String.format("%s- %s", MSG_HEAD, command)
@@ -136,7 +136,7 @@ public class CustomCommandPermissionLevelRegistry {
     private static int removeAll(MinecraftServer server, ServerPlayerEntity player) {
         if (!COMMAND_PERMISSION_MAP.isEmpty()) {
             COMMAND_PERMISSION_MAP.clear();
-            saveToJson(server);
+            saveToJson();
         }
         player.sendMessage(
             Messenger.s(
@@ -184,8 +184,7 @@ public class CustomCommandPermissionLevelRegistry {
         return 1;
     }
 
-    private static void saveToJson(MinecraftServer server) {
-        final String CONFIG_PATH = CustomCommandPermissionLevelConfig.getPath(server);
-        CustomCommandPermissionLevelConfig.saveToJson(COMMAND_PERMISSION_MAP, CONFIG_PATH);
+    private static void saveToJson() {
+        CustomCommandPermissionLevelConfig.getInstance().saveToJson(COMMAND_PERMISSION_MAP);
     }
 }

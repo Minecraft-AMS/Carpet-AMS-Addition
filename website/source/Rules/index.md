@@ -536,7 +536,13 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 开启后，掉落物将不会被爆炸摧毁。
 
-- 类型: `boolean`
+false: 禁用规则
+
+true: 启用规则
+
+no_blast_wave: 防爆且无冲击波，爆炸将不会推动掉落物
+
+- 类型: `String`
 
 
 
@@ -544,7 +550,7 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 
 
-- 参考选项: `false`, `true`
+- 参考选项: `false`, `true`, `no_blast_wave`
 
 
 
@@ -1930,7 +1936,7 @@ json位置：
 
 自定义任何命令的权限等级。
 
-使用 “/getPlayerSkull” 命令来获取一名在线玩家的头颅。
+使用 “/getPlayerSkull <玩家> <数量>” 命令来获取一名在线玩家的头颅。
 
 - 类型: `String`
 

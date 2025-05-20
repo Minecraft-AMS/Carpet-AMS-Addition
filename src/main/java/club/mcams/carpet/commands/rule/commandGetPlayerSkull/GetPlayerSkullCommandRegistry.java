@@ -25,6 +25,7 @@ import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.helpers.rule.headHunter_commandGetPlayerSkull.SkullSkinHelper;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
 import net.minecraft.command.CommandSource;
@@ -40,15 +41,21 @@ public class GetPlayerSkullCommandRegistry {
             CommandManager.literal("getPlayerSkull")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetPlayerSkull))
             .then(CommandManager.argument("player", StringArgumentType.string())
-            .suggests((context, builder) -> CommandSource.suggestMatching(context.getSource().getServer().getPlayerNames(), builder))
+            .suggests(
+                (context, builder) ->
+                CommandSource.suggestMatching(context.getSource().getServer().getPlayerNames(), builder)
+            )
+            .then(CommandManager.argument("count", IntegerArgumentType.integer(1, 64))
             .executes(context -> execute(
-                context.getSource().getPlayer(), StringArgumentType.getString(context, "player"))
-            ))
+                context.getSource().getPlayer(),
+                StringArgumentType.getString(context, "player"),
+                IntegerArgumentType.getInteger(context, "count")
+            ))))
         );
     }
 
-    private static int execute(PlayerEntity player, String name) {
-        ItemStack headStack = new ItemStack(Items.PLAYER_HEAD);
+    private static int execute(PlayerEntity player, String name, int count) {
+        ItemStack headStack = new ItemStack(Items.PLAYER_HEAD, count);
         SkullSkinHelper.writeNbtToPlayerSkull(name, headStack);
         player.giveItemStack(headStack);
         return 1;

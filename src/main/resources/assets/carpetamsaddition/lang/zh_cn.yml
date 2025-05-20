@@ -232,6 +232,10 @@ carpetamsaddition:
       itemAntiExplosion:
         name: 掉落物防爆
         desc: 掉落物将不会被爆炸摧毁
+        extra:
+          '0': '[false] - 禁用规则'
+          '1': '[true] - 启用规则'
+          '2': '[no_blast_wave] - 防爆且无冲击波，爆炸将不会推动掉落物'
       creativeShulkerBoxDropsDisabled:
         name: 创造模式潜影盒无掉落
         desc: 当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落
@@ -546,7 +550,7 @@ carpetamsaddition:
         desc: 当玩家死亡时他们会掉落一个自己的头颅
       commandGetPlayerSkull:
         name: 获取玩家头颅
-        desc: 使用 “/getPlayerSkull” 命令来获取一名在线玩家的头颅
+        desc: 使用 “/getPlayerSkull <玩家名> <数量>” 命令来获取一名玩家的头颅
       quickVillagerLevelUp:
         name: 快速升级村民
         desc: 每次打开交易屏幕时村民都会升级

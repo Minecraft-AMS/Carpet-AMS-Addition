@@ -20,58 +20,36 @@
 
 package club.mcams.carpet.config.rule.commandLeader;
 
-import club.mcams.carpet.AmsServer;
-import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import club.mcams.carpet.config.template.AbstractMapJsonConfig;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.WorldSavePath;
 
-import java.io.*;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
-public class LeaderConfig {
-    @SuppressWarnings("ReadWriteStringCanBeUsed")
-    public static void loadFromJson(String configFilePath) {
-        Gson gson = new Gson();
-        Path path = Paths.get(configFilePath);
-        LeaderCommandRegistry.LEADER_LIST.clear();
-        if (Files.exists(path)) {
-            try {
-                String json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
-                Type type = new TypeToken<Map<String, String>>() {}.getType();
-                Map<String, String> simplifiedMap = gson.fromJson(json, type);
-                LeaderCommandRegistry.LEADER_LIST.putAll(simplifiedMap);
-            } catch (IOException e) {
-                AmsServer.LOGGER.warn("Failed to load config", e);
-            }
-        }
+public class LeaderConfig extends AbstractMapJsonConfig<String, String> {
+    private static final LeaderConfig INSTANCE = new LeaderConfig();
+
+    public LeaderConfig() {
+        super(getConfigPath(MinecraftServerUtil.getServer()));
     }
 
-    @SuppressWarnings("ReadWriteStringCanBeUsed")
-    public static void saveToJson(Map<String, String> leaderMap, String configFilePath) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Map<String, String> simplifiedMap = new HashMap<>(leaderMap);
-        String json = gson.toJson(simplifiedMap);
-        try {
-            Path path = Paths.get(configFilePath);
-            Files.createDirectories(path.getParent());
-            Files.write(path, json.getBytes(StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            AmsServer.LOGGER.warn("Failed to save config", e);
-        }
+    public static LeaderConfig getInstance() {
+        return INSTANCE;
     }
 
-    public static String getPath(MinecraftServer server) {
-        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/leader" + ".json").toString();
+    @Override
+    protected Class<String> getKeyType() {
+        return String.class;
+    }
+
+    @Override
+    protected Class<String> getValueType() {
+        return String.class;
+    }
+
+    private static Path getConfigPath(MinecraftServer server) {
+        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/leader.json");
     }
 }

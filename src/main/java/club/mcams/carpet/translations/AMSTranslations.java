@@ -24,10 +24,11 @@ import carpet.CarpetSettings;
 
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServer;
-import club.mcams.carpet.mixin.translations.TranslatableTextAccessor;
 import club.mcams.carpet.utils.FileUtil;
+import club.mcams.carpet.mixin.translations.TranslatableTextAccessor;
 
-import com.esotericsoftware.yamlbeans.YamlReader;
+import club.mcams.carpet.yaml.YamlParseException;
+import club.mcams.carpet.yaml.YamlParser;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -40,8 +41,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.util.*;
 
 public class AMSTranslations {
@@ -57,34 +56,34 @@ public class AMSTranslations {
                     Map<String, String> translation = loadTranslationForLanguage(language);
                     translations.put(language, translation);
                     languages.add(language);
-                } catch (IOException e) {
+                } catch (IOException | YamlParseException e) {
                     AmsServer.LOGGER.warn("Failed to load translation for language: {}", language, e);
                 }
             });
-        } catch (IOException e) {
+        } catch (IOException | YamlParseException e) {
             AmsServer.LOGGER.warn("Failed to get available languages", e);
         }
     }
 
-    @SuppressWarnings("unchecked")
-    private static List<String> getAvailableLanguages() throws IOException {
+    private static List<String> getAvailableLanguages() throws IOException, YamlParseException {
         String yamlData = FileUtil.readFile(LANG_DIR + "/meta/languages.yml");
-        try (Reader reader = new StringReader(yamlData)) {
-            Map<String, Object> yamlMap = (Map<String, Object>) new YamlReader(reader).read();
-            return (List<String>) yamlMap.getOrDefault("languages", new ArrayList<>());
+        Map<String, Object> yamlMap = YamlParser.parse(yamlData);
+        Object languagesObj = yamlMap.getOrDefault("languages", new ArrayList<>());
+
+        if (languagesObj instanceof List) {
+            return YamlParser.getNestedStringList(yamlMap, "languages");
         }
+
+        return new ArrayList<>();
     }
 
-    @SuppressWarnings("unchecked")
-    private static Map<String, String> loadTranslationForLanguage(String language) throws IOException {
+    private static Map<String, String> loadTranslationForLanguage(String language) throws IOException, YamlParseException {
         String path = LANG_DIR + "/" + language + ".yml";
         String data = FileUtil.readFile(path);
-        try (Reader reader = new StringReader(data)) {
-            Map<String, Object> yaml = (Map<String, Object>) new YamlReader(reader).read();
-            Map<String, String> translation = new LinkedHashMap<>();
-            buildTranslationMap(translation, yaml, "");
-            return translation;
-        }
+        Map<String, Object> yaml = YamlParser.parse(data);
+        Map<String, String> translation = new LinkedHashMap<>();
+        buildTranslationMap(translation, yaml, "");
+        return translation;
     }
 
     @SuppressWarnings("unchecked")
@@ -95,8 +94,10 @@ public class AMSTranslations {
                 translation.put(fullKey, (String) value);
             } else if (value instanceof Map) {
                 buildTranslationMap(translation, (Map<String, Object>) value, fullKey);
+            } else if (value == null) {
+                translation.put(fullKey, "");
             } else {
-                throw new IllegalArgumentException("Unknown type " + value.getClass() + " for key " + fullKey);
+                translation.put(fullKey, String.valueOf(value));
             }
         });
     }
@@ -145,8 +146,7 @@ public class AMSTranslations {
         if (!translationKey.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
             return text;
         }
-        String formattedString = Optional.ofNullable(translateKeyToFormattedString(lang, translationKey))
-            .orElseGet(() -> translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, translationKey));
+        String formattedString = Optional.ofNullable(translateKeyToFormattedString(lang, translationKey)).orElseGet(() -> translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, translationKey));
         return formattedString != null ? updateTextWithTranslation(text, formattedString, translatableText) : translationLog(translationKey, suppressWarnings, text);
     }
 
