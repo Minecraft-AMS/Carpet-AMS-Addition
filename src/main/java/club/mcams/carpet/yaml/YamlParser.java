@@ -110,8 +110,7 @@ public class YamlParser {
      * @return 下一个要解析的行索引
      * @throws YamlParseException 解析YAML时发生错误
      */
-    private static int parseNode(List<String> lines, int startIndex, int baseIndentation,
-                                 Map<String, Object> container) throws YamlParseException {
+    private static int parseNode(List<String> lines, int startIndex, int baseIndentation, Map<String, Object> container) throws YamlParseException {
         int i = startIndex;
 
         while (i < lines.size()) {
@@ -323,11 +322,11 @@ public class YamlParser {
      * @param indent 当前缩进
      * @param builder 目标StringBuilder
      */
+    @SuppressWarnings("unchecked")
     private static void writeList(List<?> list, String indent, StringBuilder builder) {
         for (Object item : list) {
             builder.append(indent).append("- ");
             if (item instanceof Map) {
-                @SuppressWarnings("unchecked")
                 Map<String, Object> map = (Map<String, Object>) item;
                 if (map.isEmpty()) {
                     builder.append("{}\n");
@@ -336,7 +335,6 @@ public class YamlParser {
                     writeMap(map, indent + "  ", builder);
                 }
             } else if (item instanceof List) {
-                @SuppressWarnings("unchecked")
                 List<Object> nestedList = (List<Object>) item;
                 if (nestedList.isEmpty()) {
                     builder.append("[]\n");
