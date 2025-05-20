@@ -178,9 +178,9 @@
 
 ### 获取玩家头颅（commandGetPlayerSkull）
 
-- **/getPlayerSkull <玩家>**
+- **/getPlayerSkull <玩家> <数量>** 
 
-  获取指定在线玩家的头颅。
+  获取指定玩家的头颅。
 
 ### 自定义可移动方块（commandCustomMovableBlock）
 

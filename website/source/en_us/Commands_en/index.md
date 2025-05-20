@@ -177,9 +177,9 @@
 
 ### commandGetPlayerSkull
 
-- **/getPlayerSkull &lt;player&gt;**
+- **/getPlayerSkull &lt;player&gt; &lt;count&gt;**
 
-  Get the skull of a specified online player.
+  Get the skull of a specified player.
 
 ### commandCustomMovableBlock
 
