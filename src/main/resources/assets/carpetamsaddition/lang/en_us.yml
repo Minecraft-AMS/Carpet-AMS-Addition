@@ -216,7 +216,7 @@ carpetamsaddition:
         extra:
           '0': '[false] - Disable rule'
           '1': '[true] - Enable rule'
-          '3': '[no_blast_wave] - Explosion-proof and non-shockwave, the explosion will not push the item'
+          '2': '[no_blast_wave] - Explosion-proof and non-shockwave, the explosion will not push the item'
       creativeShulkerBoxDropsDisabled:
         desc: Breaking a shulker box with items in creative mode will not cause drops
       bedRockFlying:
@@ -457,7 +457,7 @@ carpetamsaddition:
       headHunter:
         desc: When a player dies, they will drop their own skull
       commandGetPlayerSkull:
-        desc: Use the "/getPlayerSkull" command to get a online player skull
+        desc: Use the "/getPlayerSkull <player> <count>" command to get a player skull
       quickVillagerLevelUp:
         desc: Each time the trading screen is opened, the villager will level up
       renewableNetheriteScrap:
