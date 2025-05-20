@@ -153,10 +153,8 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onServerLoaded(MinecraftServer server) {
-        serverStartTimeMillis = System.currentTimeMillis();
         minecraftServer = server;
-        LoadConfigFromJson.load(server);
-        CommandHelper.updateAllCommandPermissions(server);
+        serverStartTimeMillis = System.currentTimeMillis();
     }
 
     @Override
@@ -171,6 +169,8 @@ public class AmsServer implements CarpetExtension {
     }
 
     public void afterServerLoadWorlds(MinecraftServer server) {
+        LoadConfigFromJson.load(server);
+        CommandHelper.updateAllCommandPermissions(server);
         RecipeRuleHelper.needReloadServerResources(server);
     }
 
