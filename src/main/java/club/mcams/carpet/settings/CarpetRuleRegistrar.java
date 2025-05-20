@@ -179,9 +179,7 @@ public class CarpetRuleRegistrar {
             }
         };
 
-        ParsedRule<?> parsedRule = ParsedRuleAccessor.invokeConstructor(
-                field, cmRule, this.settingsManager
-        );
+        ParsedRule<?> parsedRule = ParsedRuleAccessor.invokeConstructor(field, cmRule, this.settingsManager);
         this.rules.add(parsedRule);
     }
     //#endif
