@@ -43,7 +43,7 @@ dependencies {
 	include(modImplementation(fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)))
 
 	// Dependencies
-	include(implementation("com.esotericsoftware.yamlbeans:yamlbeans:${project.yamlbeans_version}"))
+	// include(implementation("com.esotericsoftware.yamlbeans:yamlbeans:${project.yamlbeans_version}"))
 }
 
 loom {
