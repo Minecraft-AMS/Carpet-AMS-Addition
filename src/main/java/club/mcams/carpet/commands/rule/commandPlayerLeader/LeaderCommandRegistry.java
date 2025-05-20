@@ -58,9 +58,8 @@ public class LeaderCommandRegistry {
     private static final Map<String, Integer> PLAYER_TICK_INTERVAL = new ConcurrentHashMap<>();
     private static final Map<String, Integer> PLAYER_TICK_COUNTER = new ConcurrentHashMap<>();
     public static final StatusEffectInstance HIGH_LIGHT = new StatusEffectInstance(StatusEffects.GLOWING, GLOWING_TIME);
-    public static final Map<String, String> LEADER_LIST = new HashMap<>();
+    public static final Map<String, String> LEADER_MAP = new HashMap<>();
 
-    // TODO: 实际上有很多消息不应该是服务器消息，但是懒得改了 :)
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
             CommandManager.literal("leader")
@@ -90,7 +89,7 @@ public class LeaderCommandRegistry {
     }
 
     public static int broadcastPosTickInterval(PlayerEntity targetPlayer, MinecraftServer server, int interval) {
-        if (!LEADER_LIST.containsKey(getPlayerName(targetPlayer))) {
+        if (!LEADER_MAP.containsKey(getPlayerName(targetPlayer))) {
             Messenger.sendServerMessage(server,
                 Messenger.s(
                     String.format(MSG_HEAD + getPlayerName(targetPlayer) + " " + translator.tr("is_not_leader").getString())
@@ -115,7 +114,7 @@ public class LeaderCommandRegistry {
             for (Map.Entry<String, Integer> entry : PLAYER_TICK_INTERVAL.entrySet()) {
                 String playerUUID = entry.getKey();
                 int interval = entry.getValue();
-                if (interval <= -1 || !LEADER_LIST.containsValue(playerUUID)) {
+                if (interval <= -1 || !LEADER_MAP.containsValue(playerUUID)) {
                     needRemovePlayer.add(playerUUID);
                 }
             }
@@ -149,12 +148,12 @@ public class LeaderCommandRegistry {
         return
             player != null &&
             player.isAlive() &&
-            LEADER_LIST.containsValue(getPlayerUUID(player)) &&
-            LEADER_LIST.containsKey(getPlayerName(player));
+            LEADER_MAP.containsValue(getPlayerUUID(player)) &&
+            LEADER_MAP.containsKey(getPlayerName(player));
     }
 
     private static int add(MinecraftServer server, PlayerEntity targetPlayer) {
-        if (!LEADER_LIST.containsValue(getPlayerUUID(targetPlayer))) {
+        if (!LEADER_MAP.containsValue(getPlayerUUID(targetPlayer))) {
             targetPlayer.addStatusEffect(HIGH_LIGHT);
             Messenger.sendServerMessage(
                 server,
@@ -162,8 +161,8 @@ public class LeaderCommandRegistry {
                     String.format("%s %s %s", MSG_HEAD, getPlayerName(targetPlayer), translator.tr("add").getString())
                 ).formatted(Formatting.GRAY)
             );
-            LEADER_LIST.put(getPlayerName(targetPlayer), getPlayerUUID(targetPlayer));
-            saveToJson(server);
+            LEADER_MAP.put(getPlayerName(targetPlayer), getPlayerUUID(targetPlayer));
+            saveToJson();
         } else {
             Messenger.sendServerMessage(
                 server,
@@ -176,7 +175,7 @@ public class LeaderCommandRegistry {
     }
 
     private static int remove(MinecraftServer server, PlayerEntity targetPlayer) {
-        if (LEADER_LIST.containsValue(getPlayerUUID(targetPlayer))) {
+        if (LEADER_MAP.containsValue(getPlayerUUID(targetPlayer))) {
             targetPlayer.removeStatusEffect(HIGH_LIGHT.getEffectType());
             Messenger.sendServerMessage(
                 server,
@@ -184,8 +183,8 @@ public class LeaderCommandRegistry {
                     String.format("%s %s %s", MSG_HEAD, getPlayerName(targetPlayer), translator.tr("remove").getString())
                 ).formatted(Formatting.GRAY)
             );
-            LEADER_LIST.remove(getPlayerName(targetPlayer), getPlayerUUID(targetPlayer));
-            saveToJson(server);
+            LEADER_MAP.remove(getPlayerName(targetPlayer), getPlayerUUID(targetPlayer));
+            saveToJson();
         } else {
             Messenger.sendServerMessage(
                 server,
@@ -198,7 +197,7 @@ public class LeaderCommandRegistry {
     }
 
     private static int removeAll(MinecraftServer server, PlayerEntity player) {
-        Iterator<Map.Entry<String, String>> iterator = LEADER_LIST.entrySet().iterator();
+        Iterator<Map.Entry<String, String>> iterator = LEADER_MAP.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, String> entry = iterator.next();
             String playerUUID = entry.getValue();
@@ -208,8 +207,8 @@ public class LeaderCommandRegistry {
             }
             iterator.remove();
         }
-        LEADER_LIST.clear();
-        saveToJson(server);
+        LEADER_MAP.clear();
+        saveToJson();
         player.sendMessage(
             Messenger.s(MSG_HEAD + translator.tr("removeAll").getString()).formatted(Formatting.YELLOW), false
         );
@@ -223,7 +222,7 @@ public class LeaderCommandRegistry {
                 translator.tr("list").getString() + "\n" + LINE
             ).formatted(Formatting.AQUA, Formatting.BOLD), false
         );
-        for (Map.Entry<String, String> entry : LEADER_LIST.entrySet()) {
+        for (Map.Entry<String, String> entry : LEADER_MAP.entrySet()) {
             String playerName = entry.getKey();
             String playerUUID = getPlayerUUID(player);
             player.sendMessage(Messenger.s(playerName + " - " + playerUUID).formatted(Formatting.DARK_AQUA), false);
@@ -247,12 +246,12 @@ public class LeaderCommandRegistry {
     public static void onPlayerLoggedIn(PlayerEntity player) {
         if (
             player.getActiveStatusEffects().containsKey(LeaderCommandRegistry.HIGH_LIGHT.getEffectType()) &&
-            !LEADER_LIST.containsValue(getPlayerUUID(player)) &&
-            !LEADER_LIST.containsKey(getPlayerName(player))
+            !LEADER_MAP.containsValue(getPlayerUUID(player)) &&
+            !LEADER_MAP.containsKey(getPlayerName(player))
         ) {
             player.removeStatusEffect(LeaderCommandRegistry.HIGH_LIGHT.getEffectType());
         }
-        if (LeaderCommandRegistry.LEADER_LIST.containsValue(player.getUuidAsString())) {
+        if (LeaderCommandRegistry.LEADER_MAP.containsValue(player.getUuidAsString())) {
             player.addStatusEffect(
                 LeaderCommandRegistry.HIGH_LIGHT
                 //#if MC>=11700
@@ -270,8 +269,7 @@ public class LeaderCommandRegistry {
         return player.getUuidAsString();
     }
 
-    private static void saveToJson(MinecraftServer server) {
-        String CONFIG_FILE_PATH = LeaderConfig.getPath(server);
-        LeaderConfig.saveToJson(LEADER_LIST, CONFIG_FILE_PATH);
+    private static void saveToJson() {
+        LeaderConfig.getInstance().saveToJson(LEADER_MAP);
     }
 }

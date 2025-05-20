@@ -32,7 +32,6 @@ import com.mojang.brigadier.arguments.FloatArgumentType;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 //#if MC>=11900
@@ -42,8 +41,8 @@ import net.minecraft.command.argument.BlockStateArgumentType;
 import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -51,7 +50,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class CustomBlockBlastResistanceCommandRegistry {
     private static final Translator translator = new Translator("command.customBlockBlastResistance");
     private static final String MSG_HEAD = "<customBlockBlastResistance> ";
-    public static final Map<BlockState, Float> CUSTOM_BLOCK_BLAST_RESISTANCE_MAP = new HashMap<>();
+    public static final Map<BlockState, Float> CUSTOM_BLOCK_BLAST_RESISTANCE_MAP = new ConcurrentHashMap<>();
 
     //#if MC<11900
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
@@ -71,7 +70,6 @@ public class CustomBlockBlastResistanceCommandRegistry {
             .executes(context -> set(
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState(),
                 FloatArgumentType.getFloat(context, "resistance"),
-                context.getSource().getServer(),
                 context.getSource().getPlayer()
             )))))
             .then(literal("remove")
@@ -82,16 +80,15 @@ public class CustomBlockBlastResistanceCommandRegistry {
             //#endif
             .executes(context -> remove(
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState(),
-                context.getSource().getServer(),
                 context.getSource().getPlayer()
             ))))
-            .then(literal("removeAll").executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
+            .then(literal("removeAll").executes(context -> removeAll(context.getSource().getPlayer())))
             .then(literal("list").executes(context -> list(context.getSource().getPlayer())))
             .then(literal("help").executes(context -> help(context.getSource().getPlayer())))
         );
     }
 
-    private static int set(BlockState state, float blastResistance, MinecraftServer server, PlayerEntity player) {
+    private static int set(BlockState state, float blastResistance, PlayerEntity player) {
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float oldBlastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             player.sendMessage(
@@ -108,15 +105,15 @@ public class CustomBlockBlastResistanceCommandRegistry {
             );
         }
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, blastResistance);
-        saveToJson(server);
+        saveToJson();
         return 1;
     }
 
-    private static int remove(BlockState state, MinecraftServer server, PlayerEntity player) {
+    private static int remove(BlockState state, PlayerEntity player) {
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float blastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.remove(state);
-            saveToJson(server);
+            saveToJson();
             player.sendMessage(
                 Messenger.s(
                     MSG_HEAD + "- " + getBlockRegisterName(state) + "/" + blastResistance
@@ -133,9 +130,9 @@ public class CustomBlockBlastResistanceCommandRegistry {
         }
     }
 
-    private static int removeAll(MinecraftServer server, PlayerEntity player) {
+    private static int removeAll(PlayerEntity player) {
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
-        saveToJson(server);
+        saveToJson();
         player.sendMessage(
             Messenger.s(
                 MSG_HEAD + translator.tr("removeAll").getString()
@@ -185,8 +182,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
         return RegexTools.getBlockRegisterName(state.getBlock().toString());
     }
 
-    private static void saveToJson(MinecraftServer server) {
-        String CONFIG_FILE_PATH = CustomBlockBlastResistanceConfig.getPath(server);
-        CustomBlockBlastResistanceConfig.saveToJson(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP, CONFIG_FILE_PATH);
+    private static void saveToJson() {
+        CustomBlockBlastResistanceConfig.getInstance().saveBlockStates(CUSTOM_BLOCK_BLAST_RESISTANCE_MAP);
     }
 }

@@ -42,12 +42,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.WorldSavePath;
 
-import java.util.HashMap;
-//#if MC<11700
-//$$ import java.util.concurrent.ConcurrentHashMap;
-//#endif
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
 import static net.minecraft.server.command.CommandManager.argument;
@@ -55,10 +51,9 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class CustomBlockHardnessCommandRegistry {
     private final static Translator translator = new Translator("command.customBlockHardness");
-    public static final Map<BlockState, Float> CUSTOM_BLOCK_HARDNESS_MAP = new HashMap<>();
-    //#if MC<11700
-    //$$ public static final Map<BlockState, Float> DEFAULT_HARDNESS_MAP = new ConcurrentHashMap<>();
-    //#endif
+    public static final Map<BlockState, Float> CUSTOM_BLOCK_HARDNESS_MAP = new ConcurrentHashMap<>();
+    @SuppressWarnings("unused") // Minecraft < 1.17
+    public static final Map<BlockState, Float> DEFAULT_HARDNESS_MAP = new ConcurrentHashMap<>();
     private static final String MESSAGE_HEAD = "<customBlockHardness> ";
 
     //#if MC<11900
@@ -113,7 +108,6 @@ public class CustomBlockHardnessCommandRegistry {
     }
 
     private static int set(BlockState state, float hardness, MinecraftServer server, PlayerEntity player) {
-        String CONFIG_FILE_PATH = getPath(server);
         if (CUSTOM_BLOCK_HARDNESS_MAP.containsKey(state)) {
             float oldHardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
             player.sendMessage(
@@ -130,17 +124,16 @@ public class CustomBlockHardnessCommandRegistry {
             );
         }
         CUSTOM_BLOCK_HARDNESS_MAP.put(state, hardness);
-        CustomBlockHardnessConfig.saveToJson(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
+        saveToJson();
         sendSyncPacketToAllOnlinePlayer(server);
         return 1;
     }
 
     private static int remove(BlockState state, MinecraftServer server, PlayerEntity player) {
-        String CONFIG_FILE_PATH = getPath(server);
         if (CUSTOM_BLOCK_HARDNESS_MAP.containsKey(state)) {
             float hardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
             CUSTOM_BLOCK_HARDNESS_MAP.remove(state);
-            CustomBlockHardnessConfig.saveToJson(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
+            saveToJson();
             sendSyncPacketToAllOnlinePlayer(server);
             player.sendMessage(
                 Messenger.s(
@@ -159,9 +152,8 @@ public class CustomBlockHardnessCommandRegistry {
     }
 
     private static int removeAll(MinecraftServer server, PlayerEntity player) {
-        String CONFIG_FILE_PATH = getPath(server);
         CUSTOM_BLOCK_HARDNESS_MAP.clear();
-        CustomBlockHardnessConfig.saveToJson(CUSTOM_BLOCK_HARDNESS_MAP, CONFIG_FILE_PATH);
+        saveToJson();
         sendSyncPacketToAllOnlinePlayer(server);
         player.sendMessage(
             Messenger.s(
@@ -224,7 +216,7 @@ public class CustomBlockHardnessCommandRegistry {
         server.getPlayerManager().getPlayerList().forEach(CustomBlockHardnessS2CPacket::sendToPlayer);
     }
 
-    private static String getPath(MinecraftServer server) {
-        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_block_hardness" + ".json").toString();
+    private static void saveToJson() {
+        CustomBlockHardnessConfig.getInstance().saveBlockStates(CUSTOM_BLOCK_HARDNESS_MAP);
     }
 }

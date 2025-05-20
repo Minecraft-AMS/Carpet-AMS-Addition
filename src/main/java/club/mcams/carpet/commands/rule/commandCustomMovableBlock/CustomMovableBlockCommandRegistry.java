@@ -35,7 +35,6 @@ import net.minecraft.entity.player.PlayerEntity;
 //#if MC>=11900
 //$$ import net.minecraft.command.CommandRegistryAccess;
 //#endif
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -68,7 +67,6 @@ public class CustomMovableBlockCommandRegistry {
             //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
             //#endif
             .executes(context -> add(
-                context.getSource().getServer(),
                 context.getSource().getPlayer(),
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState()
             ))))
@@ -79,12 +77,11 @@ public class CustomMovableBlockCommandRegistry {
             //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
             //#endif
             .executes(context -> remove(
-                context.getSource().getServer(),
                 context.getSource().getPlayer(),
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState())
             )))
             .then(literal("removeAll")
-            .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
+            .executes(context -> removeAll(context.getSource().getPlayer())))
             .then(literal("list")
             .executes(context -> list(context.getSource().getPlayer())))
             .then(literal("help")
@@ -92,10 +89,10 @@ public class CustomMovableBlockCommandRegistry {
         );
     }
 
-    private static int add(MinecraftServer server, PlayerEntity player, BlockState blockState) {
+    private static int add(PlayerEntity player, BlockState blockState) {
         if (!CUSTOM_MOVABLE_BLOCKS.contains(getBlockName(blockState))) {
             CUSTOM_MOVABLE_BLOCKS.add(getBlockName(blockState));
-            saveToJson(server);
+            saveToJson();
             player.sendMessage(Messenger.s(MSG_HEAD + "+ " + getBlockName(blockState)).formatted(Formatting.GREEN), false);
         } else {
             player.sendMessage(
@@ -107,10 +104,10 @@ public class CustomMovableBlockCommandRegistry {
         return 1;
     }
 
-    private static int remove(MinecraftServer server, PlayerEntity player, BlockState blockState) {
+    private static int remove(PlayerEntity player, BlockState blockState) {
         if (CUSTOM_MOVABLE_BLOCKS.contains(getBlockName(blockState))) {
             CUSTOM_MOVABLE_BLOCKS.remove(getBlockName(blockState));
-            saveToJson(server);
+            saveToJson();
             player.sendMessage(Messenger.s(MSG_HEAD + "- " + getBlockName(blockState)).formatted(Formatting.RED), false);
         } else {
             player.sendMessage(Messenger.s(MSG_HEAD + getBlockName(blockState) + translator.tr("not_found").getString()).formatted(Formatting.RED), false);
@@ -118,9 +115,9 @@ public class CustomMovableBlockCommandRegistry {
         return 1;
     }
 
-    private static int removeAll(MinecraftServer server, PlayerEntity player) {
+    private static int removeAll(PlayerEntity player) {
         CUSTOM_MOVABLE_BLOCKS.clear();
-        saveToJson(server);
+        saveToJson();
         player.sendMessage(Messenger.s(MSG_HEAD + translator.tr("removeAll").getString()).formatted(Formatting.RED), false);
         return 1;
     }
@@ -156,12 +153,11 @@ public class CustomMovableBlockCommandRegistry {
         return 1;
     }
 
-    private static void saveToJson(MinecraftServer server) {
-        String CONFIG_FILE_PATH = CustomMovableBlockConfig.getPath(server);
-        CustomMovableBlockConfig.saveToJson(CUSTOM_MOVABLE_BLOCKS, CONFIG_FILE_PATH);
+    private static void saveToJson() {
+        CustomMovableBlockConfig.getInstance().saveToJson(CUSTOM_MOVABLE_BLOCKS);
     }
 
     private static String getBlockName(BlockState blockState) {
-        return RegexTools.getBlockRegisterName(blockState.getBlock().toString());
+        return RegexTools.getBlockRegisterName(blockState);
     }
 }

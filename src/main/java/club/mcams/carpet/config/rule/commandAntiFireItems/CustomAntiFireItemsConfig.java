@@ -20,58 +20,31 @@
 
 package club.mcams.carpet.config.rule.commandAntiFireItems;
 
-import club.mcams.carpet.AmsServer;
-import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import club.mcams.carpet.config.template.AbstractListJsonConfig;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.WorldSavePath;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
-public class CustomAntiFireItemsConfig {
-    @SuppressWarnings("ReadWriteStringCanBeUsed")
-    public static void loadFromJson(String configFilePath) {
-        Gson gson = new Gson();
-        Path path = Paths.get(configFilePath);
-        CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.clear();
-        if (Files.exists(path)) {
-            try {
-                String json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
-                Type type = new TypeToken<List<String>>() {}.getType();
-                List<String> simplifiedMap = gson.fromJson(json, type);
-                CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.addAll(simplifiedMap);
-            } catch (IOException e) {
-                AmsServer.LOGGER.warn("Failed to load config", e);
-            }
-        }
+public class CustomAntiFireItemsConfig extends AbstractListJsonConfig<String> {
+    private static final CustomAntiFireItemsConfig INSTANCE = new CustomAntiFireItemsConfig();
+
+    protected CustomAntiFireItemsConfig() {
+        super(getPath(MinecraftServerUtil.getServer()));
     }
 
-    @SuppressWarnings({"ReadWriteStringCanBeUsed", "DuplicatedCode", "JavaExistingMethodCanBeUsed"})
-    public static void saveToJson(List<String> customBlockMap, String configFilePath) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        List<String> simplifiedMap = new ArrayList<>(customBlockMap);
-        String json = gson.toJson(simplifiedMap);
-        try {
-            Path path = Paths.get(configFilePath);
-            Files.createDirectories(path.getParent());
-            Files.write(path, json.getBytes(StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            AmsServer.LOGGER.warn("Failed to save config", e);
-        }
+    public static CustomAntiFireItemsConfig getInstance() {
+        return INSTANCE;
     }
 
-    public static String getPath(MinecraftServer server) {
-        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_anti_fire_items" + ".json").toString();
+    @Override
+    protected Class<String> getElementType() {
+        return String.class;
+    }
+
+    private static Path getPath(MinecraftServer server) {
+        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_anti_fire_items" + ".json");
     }
 }

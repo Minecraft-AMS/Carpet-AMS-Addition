@@ -21,73 +21,71 @@
 package club.mcams.carpet.config.rule.commandCustomBlockBlastResistance;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.config.template.AbstractMapJsonConfig;
 import club.mcams.carpet.utils.IdentifierUtil;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 import club.mcams.carpet.utils.RegexTools;
-import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.WorldSavePath;
 import net.minecraft.util.registry.Registry;
 
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomBlockBlastResistanceConfig {
-    @SuppressWarnings("ReadWriteStringCanBeUsed")
-    public static void loadFromJson(String configFilePath) {
-        Gson gson = new Gson();
-        Path path = Paths.get(configFilePath);
-        CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
-        if (Files.exists(path)) {
+public class CustomBlockBlastResistanceConfig extends AbstractMapJsonConfig<String, Float> {
+    private static final CustomBlockBlastResistanceConfig INSTANCE = new CustomBlockBlastResistanceConfig();
+
+    public CustomBlockBlastResistanceConfig() {
+        super(getConfigPath(MinecraftServerUtil.getServer()));
+    }
+
+    public static CustomBlockBlastResistanceConfig getInstance() {
+        return INSTANCE;
+    }
+
+    @Override
+    protected Class<String> getKeyType() {
+        return String.class;
+    }
+
+    @Override
+    protected Class<Float> getValueType() {
+        return Float.class;
+    }
+
+    public void loadBlockStates(Map<BlockState, Float> targetMap) {
+        Map<String, Float> storageMap = new HashMap<>();
+        super.loadFromJson(storageMap);
+        targetMap.clear();
+        storageMap.forEach((blockId, resistance) -> {
             try {
-                String json = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
-                Type type = new TypeToken<Map<String, Float>>() {}.getType();
-                Map<String, Float> simplifiedMap = gson.fromJson(json, type);
-                for (Map.Entry<String, Float> entry : simplifiedMap.entrySet()) {
-                    //#if MC>=12102
-                    //$$ BlockState state = Registries.BLOCK.getEntry(IdentifierUtil.ofId(entry.getKey())).map(stateEntry -> stateEntry.value().getDefaultState()).orElse(null);
-                    //#else
-                    BlockState state = Registry.BLOCK.get(IdentifierUtil.ofId(entry.getKey())).getDefaultState();
-                    //#endif
-                    CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, entry.getValue());
+                //#if MC>=12102
+                //$$ BlockState state = Registries.BLOCK.getEntry(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().getDefaultState()).orElse(null);
+                //#else
+                BlockState state = Registry.BLOCK.get(IdentifierUtil.ofId(blockId)).getDefaultState();
+                //#endif
+                if (state != null) {
+                    targetMap.put(state, resistance);
                 }
-            } catch (IOException e) {
-                AmsServer.LOGGER.warn("Failed to load config", e);
+            } catch (Exception e) {
+                AmsServer.LOGGER.error("Invalid block ID: {}", blockId, e);
             }
-        }
+        });
     }
 
-    @SuppressWarnings({"ReadWriteStringCanBeUsed", "DuplicatedCode"})
-    public static void saveToJson(Map<BlockState, Float> customBlockMap, String configFilePath) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Map<String, Float> simplifiedMap = new HashMap<>();
-        for (Map.Entry<BlockState, Float> entry : customBlockMap.entrySet()) {
-            BlockState state = entry.getKey().getBlock().getDefaultState();
-            String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString());
-            simplifiedMap.put(blockName, entry.getValue());
-        }
-        String json = gson.toJson(simplifiedMap);
-        try {
-            Path path = Paths.get(configFilePath);
-            Files.createDirectories(path.getParent());
-            Files.write(path, json.getBytes(StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            AmsServer.LOGGER.warn("Failed to save config", e);
-        }
+    public void saveBlockStates(Map<BlockState, Float> sourceMap) {
+        Map<String, Float> storageMap = new HashMap<>();
+        sourceMap.forEach((state, resistance) -> {
+            String blockId = RegexTools.getBlockRegisterName(state.getBlock().toString());
+            storageMap.put(blockId, resistance);
+        });
+        saveToJson(storageMap);
     }
 
-    public static String getPath(MinecraftServer server) {
-        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_block_Blast_Resistance" + ".json").toString();
+    private static Path getConfigPath(MinecraftServer server) {
+        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_block_blast_resistance.json");
     }
 }
