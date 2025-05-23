@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(AbstractBlockState.class)
+@Mixin(value = AbstractBlockState.class, priority = 16888)
 public abstract class AbstractBlockStateMixin implements AbstractBlockStateInvoker{
     @ModifyReturnValue(method = "getHardness", at = @At("RETURN"))
     private float modifyHardness(float original) {

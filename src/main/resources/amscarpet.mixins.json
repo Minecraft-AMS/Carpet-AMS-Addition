@@ -34,6 +34,7 @@
     "rule.commandCustomBlockHardness.AbstractBlockStateInvoker",
     "rule.commandCustomBlockHardness.AbstractBlockStateMixin",
     "rule.commandCustomBlockHardness.BlocksMixin",
+    "rule.commandCustomBlockHardness.PistonBlockMixin",
     "rule.commandCustomCommandPermissionLevel.CommandDispatcherMixin",
     "rule.commandCustomCommandPermissionLevel.CommandNodeInvoker",
     "rule.commandCustomMovableBlock.PistonBlockMixin",

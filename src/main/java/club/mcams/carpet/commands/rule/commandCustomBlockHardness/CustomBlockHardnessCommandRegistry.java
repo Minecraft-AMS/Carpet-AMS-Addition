@@ -52,8 +52,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class CustomBlockHardnessCommandRegistry {
     private final static Translator translator = new Translator("command.customBlockHardness");
     public static final Map<BlockState, Float> CUSTOM_BLOCK_HARDNESS_MAP = new ConcurrentHashMap<>();
-    @SuppressWarnings("unused") // Minecraft < 1.17
-    public static final Map<BlockState, Float> DEFAULT_HARDNESS_MAP = new ConcurrentHashMap<>();
+    public static final Map<Block, Float> DEFAULT_HARDNESS_MAP = new ConcurrentHashMap<>();
     private static final String MESSAGE_HEAD = "<customBlockHardness> ";
 
     //#if MC<11900
@@ -102,7 +101,7 @@ public class CustomBlockHardnessCommandRegistry {
             //#endif
             .executes(context -> getDefaultHardness(
                 context.getSource().getPlayer(),
-                BlockStateArgumentType.getBlockState(context, "block").getBlockState()
+                BlockStateArgumentType.getBlockState(context, "block").getBlockState().getBlock()
             ))))
         );
     }
@@ -163,13 +162,9 @@ public class CustomBlockHardnessCommandRegistry {
         return 1;
     }
 
-    private static int getDefaultHardness(PlayerEntity player, BlockState state) {
-        //#if MC>=11700
-        float hardness = state.getBlock().getHardness();
-        //#else
-        //$$ float hardness = CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.get(state);
-        //#endif
-        String blockName = RegexTools.getBlockRegisterName(state);
+    private static int getDefaultHardness(PlayerEntity player, Block block) {
+        float hardness = CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.get(block);
+        String blockName = RegexTools.getBlockRegisterName(block.getDefaultState());
         player.sendMessage(
             Messenger.s(
                 String.format("%s%s %s %s", MESSAGE_HEAD, blockName, translator.tr("default_hardness").getString(), hardness)

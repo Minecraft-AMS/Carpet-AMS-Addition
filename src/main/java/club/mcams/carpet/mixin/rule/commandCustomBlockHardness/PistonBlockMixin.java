@@ -20,29 +20,38 @@
 
 package club.mcams.carpet.mixin.rule.commandCustomBlockHardness;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.block.PistonBlock;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft < 1.17", desc = "在静态代码块中提前存好默认的硬度值以供查询")
-@Mixin(Blocks.class)
-public abstract class BlocksMixin {
-    @Inject(method = "<clinit>", at = @At("RETURN"))
-    private static void registerCustomBlockHardness(CallbackInfo ci) {
-        for (Block block : Registry.BLOCK) {
-            BlockState state = block.getDefaultState();
-            float hardness = state.getHardness(null, null);
-            CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.put(state, hardness);
+@Mixin(value = PistonBlock.class, priority = 16888)
+public abstract class PistonBlockMixin {
+    @WrapOperation(
+        method = "isMovable",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/block/BlockState;getHardness(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)F"
+        )
+    )
+    private static float noPush(BlockState blockState, BlockView blockView, BlockPos blockPos, Operation<Float> original) {
+        if (!AmsServerSettings.commandCustomBlockHardness.equals("false") ) {
+            Block block = blockView.getBlockState(blockPos).getBlock();
+            Float defaultHardness = CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.get(block);
+            if (defaultHardness != null && defaultHardness == -1.0F) {
+                return -1.0F;
+            }
         }
+        return original.call(blockState, blockView, blockPos);
     }
 }
