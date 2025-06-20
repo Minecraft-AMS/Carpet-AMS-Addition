@@ -1,4 +1,4 @@
-version:4428
+version:4435
 ao:true
 biomeBlendRadius:4
 enableVsync:false
@@ -118,6 +118,7 @@ key_key.swapOffhand:key.keyboard.f
 key_key.saveToolbarActivator:key.keyboard.unknown
 key_key.loadToolbarActivator:key.keyboard.unknown
 key_key.advancements:key.keyboard.unknown
+key_key.quickActions:key.keyboard.g
 key_key.hotbar.1:key.keyboard.1
 key_key.hotbar.2:key.keyboard.2
 key_key.hotbar.3:key.keyboard.3
@@ -137,6 +138,7 @@ soundCategory_neutral:0.1056338
 soundCategory_player:0.7007042
 soundCategory_ambient:0.2535211
 soundCategory_voice:1.0
+soundCategory_ui:1.0
 modelPart_cape:true
 modelPart_jacket:true
 modelPart_left_sleeve:true
