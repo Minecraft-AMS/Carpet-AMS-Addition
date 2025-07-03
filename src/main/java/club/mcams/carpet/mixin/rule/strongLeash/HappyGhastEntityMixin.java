@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,12 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.strongLeash;
 
-import club.mcams.carpet.utils.compat.DummyInterface;
+import club.mcams.carpet.utils.compat.DummyClass;
 
 import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.21")
-@Mixin(DummyInterface.class)
-public interface LeashableMixin {}
+@GameVersion(version = "Minecraft >= 1.21.6")
+@Mixin(DummyClass.class)
+public abstract class HappyGhastEntityMixin {}
