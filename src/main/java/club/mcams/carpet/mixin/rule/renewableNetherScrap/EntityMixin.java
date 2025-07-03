@@ -52,7 +52,11 @@ public abstract class EntityMixin {
     //#endif
 
     @Unique
-    private boolean isFirstDrop = true;
+    private boolean hasDroppedNetherScrap = false;
+
+
+    @Unique
+    private boolean isDroppingNetherScrap = false;
 
     @Inject(
         //#if MC>=12102
@@ -60,24 +64,24 @@ public abstract class EntityMixin {
         //#else
         method = "dropStack(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;",
         //#endif
-        at = @At("TAIL"),
-        cancellable = true
+        at = @At("TAIL")
     )
     private void dropNetheriteScrap(CallbackInfoReturnable<ItemEntity> cir) {
-        if (AmsServerSettings.renewableNetheriteScrap != 0.0D && isFirstDrop) {
+        if (AmsServerSettings.renewableNetheriteScrap != 0.0D && !this.isDroppingNetherScrap) {
             Entity entity = (Entity) (Object) this;
-            if (entity instanceof ZombifiedPiglinEntity && !((ZombifiedPiglinEntity) entity).isBaby()) {
+            if (entity instanceof ZombifiedPiglinEntity && !((ZombifiedPiglinEntity) entity).isBaby() && !this.hasDroppedNetherScrap) {
+                this.hasDroppedNetherScrap = true;
                 double random = Math.random();
                 double rate = AmsServerSettings.renewableNetheriteScrap;
                 if (random < rate) {
+                    this.isDroppingNetherScrap = true;
                     ItemStack netherScrapStack = new ItemStack(Items.NETHERITE_SCRAP);
                     //#if MC>=12102
-                    //$$ ItemEntity netherScrapItemEntity = this.dropStack((ServerWorld) entity.getWorld(), netherScrapStack);
+                    //$$ this.dropStack((ServerWorld) entity.getWorld(), netherScrapStack);
                     //#else
-                    ItemEntity netherScrapItemEntity = this.dropStack(netherScrapStack, 1.1F);
+                    this.dropStack(netherScrapStack, 1.1F);
                     //#endif
-                    isFirstDrop = false;
-                    cir.setReturnValue(netherScrapItemEntity);
+                    this.isDroppingNetherScrap = false;
                 }
             }
         }
