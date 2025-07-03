@@ -183,6 +183,7 @@
     "rule.strongLeash.PathAwareEntityMixin",
     "rule.superBow.EnchantmentMixin",
     "rule.superBow.InfinityEnchantmentMixin",
+    "rule.strongLeash.HappyGhastEntityMixin",
     "rule.superLeash.MerchantEntityMixin",
     "rule.superLeash.MobEntityMixin",
     "rule.superZombieDoctor.ZombieVillagerEntityAccessor",

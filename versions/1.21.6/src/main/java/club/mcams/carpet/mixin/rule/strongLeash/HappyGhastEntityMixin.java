@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,12 +20,22 @@
 
 package club.mcams.carpet.mixin.rule.strongLeash;
 
-import club.mcams.carpet.utils.compat.DummyInterface;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.entity.passive.HappyGhastEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.21")
-@Mixin(DummyInterface.class)
-public interface LeashableMixin {}
+@GameVersion(version = "Minecraft >= 1.21.6")
+@Mixin(HappyGhastEntity.class)
+public abstract class HappyGhastEntityMixin {
+    @ModifyReturnValue(method = "getLeashSnappingDistance", at = @At("RETURN"))
+    private double modifyLeashSnappingDistance(double original) {
+        return AmsServerSettings.strongLeash ? Math.max(original, Double.MAX_VALUE) : original;
+    }
+}
