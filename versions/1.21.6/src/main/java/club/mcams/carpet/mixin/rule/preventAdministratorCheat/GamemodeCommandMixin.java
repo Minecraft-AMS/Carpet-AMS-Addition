@@ -47,6 +47,6 @@ public abstract class GamemodeCommandMixin {
         allow = 1
     )
     private static Predicate<ServerCommandSource> preventCheat(Predicate<ServerCommandSource> predicate) {
-        return  source -> predicate.test(source) && PermissionHelper.canCheat(source);
+        return source -> predicate.test(source) && PermissionHelper.canCheat(source);
     }
 }
