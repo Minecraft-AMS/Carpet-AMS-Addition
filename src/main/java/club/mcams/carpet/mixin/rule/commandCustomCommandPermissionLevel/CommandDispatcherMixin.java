@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
-@Mixin(CommandDispatcher.class)
+@Mixin(value = CommandDispatcher.class, priority = 1688)
 public abstract class CommandDispatcherMixin {
     @Inject(method = "register", at = @At("HEAD"), remap = false)
     private void saveDefaultRequirement(LiteralArgumentBuilder<ServerCommandSource> command, CallbackInfoReturnable<LiteralCommandNode<ServerCommandSource>> cir) {
