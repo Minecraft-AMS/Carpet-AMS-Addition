@@ -19,6 +19,9 @@ repositories {
 	maven {
 		url = 'https://jitpack.io'
 	}
+    maven {
+        url = 'https://nas.1024byteeeee.top:16999/releases'
+    }
 }
 
 // https://github.com/FabricMC/fabric-loader/issues/783
@@ -43,6 +46,7 @@ dependencies {
 	include(modImplementation(fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)))
 
 	// Dependencies
+    include(implementation("top.byteeeee:TinyYaml:${project.tiny_yaml_version}"))
 	// include(implementation("com.esotericsoftware.yamlbeans:yamlbeans:${project.yamlbeans_version}"))
 }
 
