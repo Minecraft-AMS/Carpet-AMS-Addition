@@ -205,8 +205,6 @@ carpetamsaddition:
         desc: The block model of bamboo will not generate offset
       bambooCollisionBoxDisabled:
         desc: Allow players to pass through bamboo
-      campfireSmokeParticleDisabled:
-        desc: Disable campfire smoke particles
       commandCustomAntiFireItems:
         desc: Use command to control whether any item is fireproof or not
         extra:
@@ -219,8 +217,6 @@ carpetamsaddition:
           '2': '[no_blast_wave] - Explosion-proof and non-shockwave, the explosion will not push the item'
       creativeShulkerBoxDropsDisabled:
         desc: Breaking a shulker box with items in creative mode will not cause drops
-      bedRockFlying:
-        desc: Flight in creative mode is consistent with the bedrock version
       shulkerHitLevitationDisabled:
         desc: When hit by a shulker, the player only takes damage and does not gain the levitation effect
       immuneShulkerBullet:
@@ -513,8 +509,6 @@ carpetamsaddition:
           '1': 'When the Carpet AMS Addition is not installed on the client, this rule is completely unavailable'
       onlyOpCanSpawnRealPlayerInWhitelist:
         desc: Only OP players can spawn players on the whitelist, regardless of whether the whitelist is enabled
-      highLightWitherSkeletonEntity:
-        desc: Gives the wither skeleton a highlight effect (may have some performance effect when enabled)
       itemEntityCreateNetherPortalDisabled:
         desc: Prevent item entities from creating portals when passing through Nether portals
       powerfulExpMending:

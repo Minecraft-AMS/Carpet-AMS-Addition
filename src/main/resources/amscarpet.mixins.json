@@ -65,7 +65,7 @@
     "rule.enhancedWorldEater.BlockMixin",
     "rule.experimentalContentCheckDisabled.FeatureSetMixin",
     "rule.experimentalContentCheckDisabled.ToggleableFeatureMixin",
-    "rule.extinguishedCampfire_campfireSmokeParticleDisabled.CampfireBlockMixin",
+    "rule.extinguishedCampfire.CampfireBlockMixin",
     "rule.fakePeace.SpawnHelperMixin",
     "rule.fakePlayerDefaultSurvivalMode.Carpet_PlayerCommandMixin",
     "rule.fakePlayerInteractLikeClient.BoatEntityInvoker",
@@ -86,7 +86,6 @@
     "rule.furnaceSmeltingTimeController.AbstractFurnaceBlockEntityMixin",
     "rule.ghastFireballExplosionDamageSourceFix.FireballEntityMixin",
     "rule.headHunter.PlayerEntityMixin",
-    "rule.highLightWitherSkeletonEntity.EntityMixin",
     "rule.hopperSuctionDisabled.HopperBlockEntityMixin",
     "rule.infiniteDurability.ItemStackMixin",
     "rule.infiniteTrades.TradeOfferAccessor",
@@ -204,8 +203,6 @@
   ],
   "client": [
     "builtin.CreativeInventoryExtras.CreativeInventoryScreenMixin",
-    "rule.bedRockFlying.ClientPlayerEntityInvoker",
-    "rule.bedRockFlying.ClientPlayerEntityMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
     "rule.maxClientInteractionReachDistance.GameRendererMixin",
     "rule.maxPlayerInteractionRange.GameRendererMixin"
