@@ -24,8 +24,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
+import org.jetbrains.annotations.NotNull;
+
 public class EntityUtil {
-    public static World getEntityWorld(Entity entity) {
+    public static World getEntityWorld(@NotNull Entity entity) {
         //#if MC>=12106 && MC<12109
         //$$ return entity.getWorld();
         //#else
@@ -33,7 +35,7 @@ public class EntityUtil {
         //#endif
     }
 
-    public static MinecraftServer getEntityServer(Entity entity) {
+    public static MinecraftServer getEntityServer(@NotNull Entity entity) {
         return getEntityWorld(entity).getServer();
     }
 }

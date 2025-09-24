@@ -22,8 +22,11 @@ package club.mcams.carpet.utils;
 
 import net.minecraft.world.World;
 
+import org.jetbrains.annotations.NotNull;
+
 public class WorldUtil {
-    public static boolean isClient(World world) {
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public static boolean isClient(@NotNull World world) {
         return world.isClient();
     }
 }
