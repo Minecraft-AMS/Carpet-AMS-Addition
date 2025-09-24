@@ -27,6 +27,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 //#if MC>=12102
 //$$ import net.minecraft.server.world.ServerWorld;
+//$$ import club.mcams.carpet.utils.EntityUtil;
 //#endif
 import net.minecraft.item.Items;
 import net.minecraft.entity.mob.ZombifiedPiglinEntity;
@@ -77,7 +78,7 @@ public abstract class EntityMixin {
                     this.isDroppingNetherScrap = true;
                     ItemStack netherScrapStack = new ItemStack(Items.NETHERITE_SCRAP);
                     //#if MC>=12102
-                    //$$ this.dropStack((ServerWorld) entity.getWorld(), netherScrapStack);
+                    //$$ this.dropStack((ServerWorld) EntityUtil.getEntityWorld(entity), netherScrapStack);
                     //#else
                     this.dropStack(netherScrapStack, 1.1F);
                     //#endif

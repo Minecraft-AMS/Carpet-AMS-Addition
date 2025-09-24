@@ -36,8 +36,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.spawner.PhantomSpawner;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 //#if MC>=12105
@@ -45,6 +43,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 //#else
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //#endif
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(PhantomSpawner.class)
 public abstract class PhantomSpawnerMixin {
@@ -59,6 +59,7 @@ public abstract class PhantomSpawnerMixin {
             shift = At.Shift.AFTER
         )
     )
+    //#if MC<12109
     private void broadcastMessage(
         ServerWorld world, boolean spawnMonsters, boolean spawnAnimals,
         //#if MC>=12105
@@ -72,7 +73,11 @@ public abstract class PhantomSpawnerMixin {
         @Local PlayerEntity playerEntity,
         //#endif
         @Local PhantomEntity phantom
-    ) {
+    )
+    //#else
+    //$$ private void broadcastMessage(ServerWorld world, boolean spawnMonsters, CallbackInfo ci, @Local ServerPlayerEntity playerEntity, @Local PhantomEntity phantom)
+    //#endif
+    {
         if (AmsServerSettings.phantomSpawnAlert && phantom != null) {
             MinecraftServer server = world.getServer();
             String playerName = playerEntity.getGameProfile().getName();

@@ -23,6 +23,7 @@ package club.mcams.carpet.commands.rule.commandGetSaveSize;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.utils.EntityUtil;
 import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -50,7 +51,7 @@ public class GetSaveSizeCommandRegistry {
     }
 
     private static int executeGetSaveSize(PlayerEntity player) {
-        MinecraftServer server = player.getServer();
+        MinecraftServer server = EntityUtil.getEntityServer(player);
         saveWorld(server, player);
         long size = getFolderSize(getSaveFolder(server));
         String sizeString = formatSize(size);

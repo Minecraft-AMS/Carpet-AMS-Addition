@@ -22,6 +22,8 @@ package club.mcams.carpet.helpers.rule.blockChunkLoader;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ChunkTicketType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.ChunkPos;
@@ -31,17 +33,35 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft >= 1.21.5")
 public class BlockChunkLoaderHelper {
     private static final String TICKET_NAMESPACE = "carpetamsaddition";
-    private static final ChunkTicketType NOTE_BLOCK_TICKET_TYPE = ChunkTicketType.register(
+
+    private static final ChunkTicketType NOTE_BLOCK_TICKET_TYPE = registerTicketType(
         String.format("%s:note_block_loader", TICKET_NAMESPACE),
-        BlockChunkLoaderHelper.getLoadTime(), true, ChunkTicketType.Use.LOADING_AND_SIMULATION
+        BlockChunkLoaderHelper.getLoadTime(),
+        //#if MC>=12109
+        //$$ 15
+        //#else
+        true, ChunkTicketType.Use.LOADING_AND_SIMULATION
+        //#endif
     );
-    private static final ChunkTicketType PISTON_BLOCK_TICKET_TYPE = ChunkTicketType.register(
+
+    private static final ChunkTicketType PISTON_BLOCK_TICKET_TYPE = registerTicketType(
         String.format("%s:piston_block_loader", TICKET_NAMESPACE),
-        BlockChunkLoaderHelper.getLoadTime(), true, ChunkTicketType.Use.LOADING_AND_SIMULATION
+        BlockChunkLoaderHelper.getLoadTime(),
+        //#if MC>=12109
+        //$$ 15
+        //#else
+        true, ChunkTicketType.Use.LOADING_AND_SIMULATION
+        //#endif
     );
-    private static final ChunkTicketType BELL_BLOCK_TICKET_TYPE = ChunkTicketType.register(
+
+    private static final ChunkTicketType BELL_BLOCK_TICKET_TYPE = registerTicketType(
         String.format("%s:bell_block_loader", TICKET_NAMESPACE),
-        BlockChunkLoaderHelper.getLoadTime(), true, ChunkTicketType.Use.LOADING_AND_SIMULATION
+        BlockChunkLoaderHelper.getLoadTime(),
+        //#if MC>=12109
+        //$$ 15
+        //#else
+        true, ChunkTicketType.Use.LOADING_AND_SIMULATION
+        //#endif
     );
 
     public static void addNoteBlockTicket(ServerWorld world, ChunkPos chunkPos) {
@@ -74,4 +94,14 @@ public class BlockChunkLoaderHelper {
     private static int getLoadRange() {
         return AmsServerSettings.blockChunkLoaderRangeController;
     }
+
+    //#if MC>=12109
+    //$$ private static ChunkTicketType registerTicketType(String id, long expiryTicks, int flags) {
+    //$$     return (ChunkTicketType)Registry.register(Registries.TICKET_TYPE, id, new ChunkTicketType(expiryTicks, flags));
+    //$$ }
+    //#else
+    public static ChunkTicketType registerTicketType(String id, long expiryTicks, boolean persist, ChunkTicketType.Use use) {
+        return Registry.register(Registries.TICKET_TYPE, id, new ChunkTicketType(expiryTicks, persist, use));
+    }
+    //#endif
 }

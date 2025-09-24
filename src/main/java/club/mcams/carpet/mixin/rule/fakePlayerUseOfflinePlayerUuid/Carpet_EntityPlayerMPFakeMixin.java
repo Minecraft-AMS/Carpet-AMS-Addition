@@ -39,8 +39,11 @@ import net.minecraft.util.UserCache;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.util.Optional;
 
+@GameVersion(version = "Minecraft < 1.21.9")
 @Mixin(EntityPlayerMPFake.class)
 public abstract class Carpet_EntityPlayerMPFakeMixin {
     @WrapOperation(

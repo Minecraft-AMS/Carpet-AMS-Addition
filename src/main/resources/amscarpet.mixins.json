@@ -57,7 +57,7 @@
     "rule.easyRefreshTrades.AbstractTraderEntityInvoker",
     "rule.easyRefreshTrades.VillagerEntityInvoker",
     "rule.easyRefreshTrades.VillagerEntityMixin",
-    "rule.easyWitherSkeletonSkullDrop.WitherSkeletonEntityMixin",
+    "rule.easyWitherSkeletonSkullDrop.LivingEntityMixin",
     "rule.enderDragonNoDestroyBlock.EnderDragonEntityMixin",
     "rule.endermanPickUpDisabled.PickUpBlockGoalMixin",
     "rule.endermanTeleportRandomlyDisabled.EndermanEntityMixin",
@@ -197,7 +197,6 @@
     "translations.ClientSettingsC2SPacketAccessor",
     "translations.HUDControllerMixin",
     "translations.LoggerMixin",
-    "translations.StyleAccessor",
     "translations.TranslatableTextAccessor",
     "translations.TranslatableTextMixin"
   ],

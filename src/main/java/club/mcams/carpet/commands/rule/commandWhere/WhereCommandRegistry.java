@@ -25,6 +25,7 @@ import club.mcams.carpet.carpetorgaddition.InvokeOrgCommand;
 import club.mcams.carpet.helpers.rule.commandHere_commandWhere.CommandHereWhereHelper;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.utils.EntityUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 import club.mcams.carpet.utils.Messenger;
@@ -102,7 +103,7 @@ public class WhereCommandRegistry {
     }
 
     private static String getOtherPos(PlayerEntity player) {
-        DimensionWrapper dimension = DimensionWrapper.of(player.getEntityWorld());
+        DimensionWrapper dimension = DimensionWrapper.of(EntityUtil.getEntityWorld(player));
         int[] pos = CommandHereWhereHelper.getPos(player);
         String otherPos = null;
         if (dimension.getValue() == World.NETHER) {
@@ -114,7 +115,7 @@ public class WhereCommandRegistry {
     }
 
     private static Text message(PlayerEntity player) {
-        DimensionWrapper dimension = DimensionWrapper.of(player.getEntityWorld());
+        DimensionWrapper dimension = DimensionWrapper.of(EntityUtil.getEntityWorld(player));
         String playerName = getPlayerName(player);
         String currentPos = getCurrentPos(player);
         String otherPos = getOtherPos(player);

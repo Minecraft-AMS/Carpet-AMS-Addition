@@ -20,18 +20,27 @@
 
 package club.mcams.carpet.helpers.rule.headHunter_commandGetPlayerSkull;
 
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ProfileComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtOps;
 
+import net.minecraft.nbt.NbtString;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft < 1.20.5")
+@GameVersion(version = "Minecraft >= 1.20.5")
 public class SkullSkinHelper {
     public static void writeNbtToPlayerSkull(PlayerEntity player, ItemStack headStack) {
-        headStack.getOrCreateNbt().putString("SkullOwner", player.getGameProfile().getName());
+        //#if MC>=12109
+        //$$ headStack.set(DataComponentTypes.PROFILE, ProfileComponent.ofStatic(player.getGameProfile()));
+        //#else
+        headStack.set(DataComponentTypes.PROFILE, new ProfileComponent(player.getGameProfile()));
+        //#endif
     }
 
     public static void writeNbtToPlayerSkull(String name, ItemStack headStack) {
-        headStack.getOrCreateNbt().putString("SkullOwner", name);
+        ProfileComponent profileComponent = DataComponentTypes.PROFILE.getCodecOrThrow().parse(NbtOps.INSTANCE, NbtString.of(name)).getOrThrow();
+        headStack.set(DataComponentTypes.PROFILE, profileComponent);
     }
 }

@@ -72,7 +72,7 @@ public abstract class PlayerManagerMixin {
         if (
             !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
             FakePlayerHelper.isFakePlayer(player) &&
-            player.getScoreboard().getTeam(AmsServerSettings.fancyFakePlayerName) != null &&
+            player.server.getScoreboard().getTeam(AmsServerSettings.fancyFakePlayerName) != null &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {
             FancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player, AmsServerSettings.fancyFakePlayerName);

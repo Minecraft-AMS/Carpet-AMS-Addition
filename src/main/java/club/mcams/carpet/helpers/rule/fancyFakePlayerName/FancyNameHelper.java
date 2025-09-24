@@ -21,6 +21,7 @@
 package club.mcams.carpet.helpers.rule.fancyFakePlayerName;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.EntityUtil;
 import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -36,20 +37,24 @@ import java.util.Objects;
 
 public class FancyNameHelper {
     public static void addBotTeamNamePrefix(ServerPlayerEntity player, String teamName) {
-        MinecraftServer server = player.getServer();
+        MinecraftServer server = EntityUtil.getEntityServer(player);
         if (server != null) {
             Scoreboard scoreboard = server.getScoreboard();
             Team team = scoreboard.getTeam(teamName);
+
             if (team == null) {
                 team = FancyFakePlayerNameTeamController.addBotTeam(server, teamName);
                 team.setPrefix(Messenger.s(String.format("[%s] ", teamName)).formatted(Formatting.BOLD));
                 team.setColor(Formatting.DARK_GREEN);
             }
+
             String playerName = player.getGameProfile().getName();
             Team currentTeam = scoreboard.getPlayerTeam(playerName);
+
             if (currentTeam != null && currentTeam != team) {
                 scoreboard.removePlayerFromTeam(playerName, currentTeam);
             }
+
             if (currentTeam != team) {
                 scoreboard.addPlayerToTeam(playerName, team);
             }
@@ -66,9 +71,11 @@ public class FancyNameHelper {
         //#else
         String playerName = StringArgumentType.getString(context, name);
         //#endif
+
         if (!Objects.equals(teamName, "false")) {
             playerName = playerName + SUFFIX;
         }
+
         return playerName;
     }
 }

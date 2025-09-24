@@ -30,7 +30,8 @@ public class ParticleHelper {
         world.spawnParticles(particle, x, y, z, count, deltaX, deltaY, deltaZ, speed);
     }
 
+    @SuppressWarnings("RedundantCast")
     public static void spawnShulkerGolemParticles(ServerWorld serverWorld, BlockPos pos) {
-        spawnParticles(serverWorld, ParticleTypes.DRAGON_BREATH, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 1688, 0.8, 0.8, 0.8, 0.0168);
+        spawnParticles(serverWorld, (ParticleEffect) ParticleTypes.DRAGON_BREATH, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 1688, 0.8, 0.8, 0.8, 0.0168);
     }
 }

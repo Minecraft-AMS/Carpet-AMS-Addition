@@ -22,35 +22,32 @@ package club.mcams.carpet.mixin.rule.easyWitherSkeletonSkullDrop;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.mob.AbstractSkeletonEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.item.Items;
 //#if MC>=12102
 //$$ import net.minecraft.server.world.ServerWorld;
+//$$ import club.mcams.carpet.utils.EntityUtil;
 //#endif
-import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(WitherSkeletonEntity.class)
-public abstract class WitherSkeletonEntityMixin extends AbstractSkeletonEntity {
-    protected WitherSkeletonEntityMixin(EntityType<? extends AbstractSkeletonEntity> entityType, World world) {
-        super(entityType, world);
-    }
-
-    @Inject(method = "dropEquipment", at = @At("TAIL"))
-    private void dropEquipment(CallbackInfo ci) {
+@Mixin(LivingEntity.class)
+public abstract class LivingEntityMixin {
+    @Inject(method = "onDeath", at = @At("TAIL"))
+    private void dropSkull(CallbackInfo ci) {
         if (AmsServerSettings.easyWitherSkeletonSkullDrop) {
-            //#if MC>=12102
-            //$$ WitherSkeletonEntity wither = (WitherSkeletonEntity) (Object) this;
-            //$$ this.dropItem((ServerWorld) wither.getWorld(), Items.WITHER_SKELETON_SKULL);
-            //#else
-            this.dropItem(Items.WITHER_SKELETON_SKULL);
-            //#endif
+            LivingEntity entity = (LivingEntity) (Object) this;
+            if (entity instanceof WitherSkeletonEntity) {
+                //#if MC>=12102
+                //$$ entity.dropItem((ServerWorld) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);
+                //#else
+                entity.dropItem(Items.WITHER_SKELETON_SKULL, 1);
+                //#endif
+            }
         }
     }
 }

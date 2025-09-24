@@ -22,6 +22,7 @@ package club.mcams.carpet.mixin.rule.blockChunkLoader;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
+import club.mcams.carpet.utils.WorldUtil;
 
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
@@ -49,7 +50,7 @@ public abstract class PistonBlockMixin {
 
     @Unique
     private void handleChunkLoading(BlockState state, World world, BlockPos pos) {
-        if (!world.isClient) {
+        if (!WorldUtil.isClient(world)) {
             Direction direction = state.get(FacingBlock.FACING);
             BlockState pistonBlockUp = world.getBlockState(pos.up(1));
             BlockState pistonBlockDown = world.getBlockState(pos.down(1));

@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.utils.compat;
 
+import club.mcams.carpet.utils.EntityUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.RegistryKey;
@@ -44,7 +45,7 @@ public class DimensionWrapper {
     }
 
     public static DimensionWrapper of(Entity entity) {
-        return of(entity.getEntityWorld());
+        return of(EntityUtil.getEntityWorld(entity));
     }
 
     public RegistryKey<World> getValue() {

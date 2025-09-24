@@ -22,6 +22,7 @@ package club.mcams.carpet.mixin.rule.blockChunkLoader;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
+import club.mcams.carpet.utils.WorldUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -61,7 +62,7 @@ public abstract class NoteBlockMixin {
 
     @Unique
     private void handleChunkLoading(World world, BlockPos pos) {
-        if (!world.isClient) {
+        if (!WorldUtil.isClient(world)) {
             ChunkPos chunkPos = new ChunkPos(pos);
             BlockState noteBlockUp = world.getBlockState(pos.up(1));
             if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "note_block")) {

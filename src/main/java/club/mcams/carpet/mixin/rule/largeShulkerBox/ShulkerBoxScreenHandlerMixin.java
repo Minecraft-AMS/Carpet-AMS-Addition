@@ -30,6 +30,7 @@ import net.minecraft.screen.ShulkerBoxScreenHandler;
 import net.minecraft.screen.slot.ShulkerBoxSlot;
 
 import org.jetbrains.annotations.Nullable;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -58,7 +59,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
     }
 
     @ModifyArg(
-        method="<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/screen/ShulkerBoxScreenHandler;checkSize(Lnet/minecraft/inventory/Inventory;I)V"
@@ -74,10 +75,14 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
     }
 
     @Inject(
-        method="<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
         at = @At(
             value = "INVOKE",
+            //#if MC>=12109
+            //$$ target = "Lnet/minecraft/inventory/Inventory;onOpen(Lnet/minecraft/entity/ContainerUser;)V",
+            //#else
             target = "Lnet/minecraft/inventory/Inventory;onOpen(Lnet/minecraft/entity/player/PlayerEntity;)V",
+            //#endif
             shift = At.Shift.AFTER
         )
     )
