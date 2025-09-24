@@ -51,15 +51,13 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
         )
     )
     private ActionResult onInteractAt(Entity instance, PlayerEntity player, Vec3d hitPos, Hand hand, Operation<ActionResult> original) {
-        //有一部分是直接在interact里面进行一些操作，所以先call一遍
         ActionResult originalResult = original.call(instance, player, hitPos, hand);
         if (AmsServerSettings.fakePlayerInteractLikeClient) {
             if (instance instanceof ArmorStandEntity) {
                 ArmorStandEntity stand = (ArmorStandEntity) instance;
                 ItemStack handItem = player.getStackInHand(hand);
                 if (!stand.isMarker() && handItem.getItem() != Items.NAME_TAG && !player.isSpectator()) {
-                    //1.21之类的版本应改为SUCCESS_SERVER，但是就这里而言应该效果一致
-                    return ActionResult.CONSUME;
+                    return ActionResult.PASS;
                 }
             }
         }
@@ -74,7 +72,6 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
         )
     )
     private ActionResult onInteract(ServerPlayerEntity player, Entity entity, Hand hand, Operation<ActionResult> original) {
-        //有一部分是直接在interact里面进行一些操作，所以先call一遍
         ActionResult originalResult = original.call(player, entity, hand);
         if (AmsServerSettings.fakePlayerInteractLikeClient) {
             if (entity instanceof BoatEntity) {
