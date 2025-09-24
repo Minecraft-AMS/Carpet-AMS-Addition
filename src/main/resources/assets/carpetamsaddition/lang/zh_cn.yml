@@ -160,9 +160,9 @@ carpetamsaddition:
     largeEnderChest:
       switch_tip: '侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
 
-  org:
+  fuzz:
     command:
-      highlightPosButtonHoverText: 使用Carpet Org Addition高亮路径点，使用/highlight clear取消高亮
+      highlightCoordButtonHoverText: 使用Fuzz模组高亮路径点，使用/coordCompass clear取消高亮
 
   carpet_translations:
     category:
@@ -431,12 +431,12 @@ carpetamsaddition:
         name: 我在哪
         desc: 使用/here命令发送当前自身所在维度、坐标、对应的主世界/下界坐标，同时给予自身30s的发光效果。
         extra:
-          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的+H按钮高亮路径点，使用/highlight clear命令来取消高亮'
+          '0': '当客户端安装了Fuzz模组时，可以单击消息末尾的+H按钮高亮路径点，使用\"/coordCompass clear\"命令来取消高亮'
       commandWhere:
         name: 你在哪
         desc: 使用/where命令获取指定玩家所在维度、坐标、对应的主世界/下界坐标，同时给予目标玩家30s的发光效果。
         extra:
-          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的+H按钮高亮路径点，使用/highlight clear命令来取消高亮'
+          '0': '当客户端安装了Fuzz模组时，可以单击消息末尾的+H按钮高亮路径点，使用\"/coordCompass clear\"命令来取消高亮'
       fakePlayerPickUpController:
         name: 假人拾取控制器
         desc: 提供了两种模式来控制假人是否可以拾取物品

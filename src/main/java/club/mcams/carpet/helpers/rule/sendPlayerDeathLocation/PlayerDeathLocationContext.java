@@ -21,7 +21,7 @@
 package club.mcams.carpet.helpers.rule.sendPlayerDeathLocation;
 
 import club.mcams.carpet.helpers.FakePlayerHelper;
-import club.mcams.carpet.carpetorgaddition.InvokeOrgCommand;
+import club.mcams.carpet.fuzz.InvokeFuzzModCommand;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
@@ -44,7 +44,7 @@ public class PlayerDeathLocationContext {
         Messenger.sendServerMessage(
             server, Messenger.s(message).formatted(Formatting.RED)
             .append(copyButton)
-            .append(InvokeOrgCommand.highlightPosButton(getPlayerPos(player).replace(",", "")))
+            .append(InvokeFuzzModCommand.highlightCoordButton(getPlayerPos(player).replace(",", "")))
         );
     }
 

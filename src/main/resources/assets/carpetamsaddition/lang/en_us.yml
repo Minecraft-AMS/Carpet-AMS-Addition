@@ -159,9 +159,9 @@ carpetamsaddition:
     largeEnderChest:
       switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
 
-  org:
+  fuzz:
     command:
-      highlightPosButtonHoverText: Use Carpet Org Addition to highlight waypoints, use /highlight clear to remove the highlight
+      highlightCoordButtonHoverText: Use fuzz mod to highlight waypoints, use /coordCompass clear to remove the highlight
 
   carpet_translations:
     category:
@@ -370,11 +370,11 @@ carpetamsaddition:
       commandHere:
         desc: Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect
         extra:
-          '0': 'When the client has installed Carpet Org Addition, they can click the +H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
+          '0': 'When the client has installed Fuzz Mod, they can click the +H button at the end of the message to highlight the waypoint, and use the \"/coordCompass clear\" command to remove the highlight'
       commandWhere:
         desc: Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect
         extra:
-          '0': 'When the client has installed Carpet Org Addition, they can click the +H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
+          '0': 'When the client has installed Fuzz Mod, they can click the +H button at the end of the message to highlight the waypoint, and use the \"/coordCompass clear\" command to remove the highlight'
       fakePlayerPickUpController:
         desc: Two modes are provided to control whether fake player can pick up items
         extra:
