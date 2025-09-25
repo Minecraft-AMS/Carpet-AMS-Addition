@@ -58,23 +58,6 @@ jobs:
           BUILD_ID: ${{ github.run_number }}
           BUILD_RELEASE: ${{ inputs.release }}
 
-      - name: Publish with gradle
-        if: inputs.release || github.ref == 'refs/heads/dev'
-        run: |
-          if [ -z "${{ inputs.target_subproject }}" ]; then
-              echo "Publishing all subprojects"
-              ./gradlew publish
-          else
-              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:publish/' | paste -sd ' ')
-              echo "Publishing with arguments=$args"
-              ./gradlew $args
-          fi
-        env:
-          BUILD_ID: ${{ github.run_number }}
-          BUILD_RELEASE: ${{ inputs.release }}
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
-
       - name: Run Mixin Audit Check
         if: ${{ inputs.mixin_audit }}
         timeout-minutes: 10
