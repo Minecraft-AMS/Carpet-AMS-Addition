@@ -7,7 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       target_subproject:
-        description: The subproject name of the specified Minecraft version to be released.
+        description: |-
+          The subproject name(s) of the specified Minecraft version to be released, separated with ",".
+          By default all subprojects will be released
         type: string
         required: false
         default: ''
@@ -24,8 +26,8 @@ jobs:
         run: |
           cat <<EOF > $GITHUB_STEP_SUMMARY
           ## Action Parameters
-          - target_subproject: `${{ github.event.inputs.target_subproject }}`
-          - target_release_tag: `${{ github.event.inputs.target_release_tag }}`
+          - target_subproject: \`${{ github.event.inputs.target_subproject }}\`
+          - target_release_tag: \`${{ github.event.inputs.target_release_tag }}\`
           EOF
 
   matrix_prep:
@@ -38,6 +40,7 @@ jobs:
     with:
       target_subproject: ${{ github.event.inputs.target_subproject }}
       release: true
+    secrets: inherit
 
   release:
     needs:
@@ -45,11 +48,17 @@ jobs:
       - build
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix: ${{ fromJson(needs.matrix_prep.outputs.matrix) }}
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Display context
+        run: |
+          echo ref_name = ${{ github.ref_name }}
+          echo target_subproject = ${{ github.event.inputs.target_subproject }}
+          echo target_release_tag = ${{ github.event.inputs.target_release_tag }}
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -57,21 +66,12 @@ jobs:
           name: build-artifacts
           path: build-artifacts
 
-      - name: Get github release information
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        id: get_release
-        uses: cardinalby/git-get-release-action@1.2.4
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        with:
-          tag: ${{ github.event.inputs.target_release_tag }}
-
       - name: Generate publish related information
         id: release_info
         run: |
           if [ $GITHUB_EVENT_NAME == 'release' ]
           then
-              echo "tag_name=" >> $GITHUB_OUTPUT  # leave an empty value here so softprops/action-gh-release will use the default value
+              echo "tag_name=" >> $GITHUB_OUTPUT
           elif [ $GITHUB_EVENT_NAME == 'workflow_dispatch' ]
           then
               echo "tag_name=${{ github.event.inputs.target_release_tag }}" >> $GITHUB_OUTPUT
@@ -79,45 +79,6 @@ jobs:
               echo Unknown github event name $GITHUB_EVENT_NAME
               exit 1
           fi
-
-      - name: Read common properties
-        id: properties_g
-        uses: christian-draeger/read-properties@1.1.1
-        with:
-          path: gradle.properties
-          properties: 'mod_name mod_version'
-
-      - name: Read version-specific properties
-        id: properties_v
-        uses: christian-draeger/read-properties@1.1.1
-        with:
-          path: ${{ format('versions/{0}/gradle.properties', matrix.subproject_dir) }}
-          properties: 'minecraft_version game_versions'
-
-      - name: Fix game version
-        id: game_versions
-        run: |
-          # Fixed \n in game_versions isn't parsed by christian-draeger/read-properties as a line separator
-          echo 'value<<EOF' >> $GITHUB_OUTPUT
-          echo -e "${{ steps.properties_v.outputs.game_versions }}" >> $GITHUB_OUTPUT
-          echo 'EOF' >> $GITHUB_OUTPUT
-
-      - name: Publish with gradle
-        if: inputs.release || github.ref == 'refs/heads/dev'
-        run: |
-          if [ -z "${{ inputs.target_subproject }}" ]; then
-              echo "Publishing all subprojects"
-              ./gradlew publish
-          else
-              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:publish/' | paste -sd ' ')
-              echo "Publishing with arguments=$args"
-              ./gradlew $args
-          fi
-        env:
-          BUILD_ID: ${{ github.run_number }}
-          BUILD_RELEASE: ${{ inputs.release }}
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: Publish Minecraft Mods
         uses: Kir-Antipov/mc-publish@v3.3.0
