@@ -18,10 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.yaml;
+package club.mcams.carpet.mixin.rule.endPortalChunkLoadDisabled;
 
-public class YamlParseException extends Exception {
-    public YamlParseException(String message) {
-        super(message);
-    }
-}
+import club.mcams.carpet.utils.compat.DummyClass;
+
+import org.spongepowered.asm.mixin.Mixin;
+
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.20.5 && Minecraft < 1.21")
+@Mixin(DummyClass.class)
+public abstract class EntityMixin {}

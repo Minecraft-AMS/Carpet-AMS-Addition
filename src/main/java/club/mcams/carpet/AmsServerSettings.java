@@ -120,9 +120,6 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean bambooCollisionBoxDisabled = false;
 
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean campfireSmokeParticleDisabled = false;
-
     @Rule(
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, FEATURE, COMMAND}
@@ -137,9 +134,6 @@ public class AmsServerSettings {
 
     @Rule(categories = {AMS, FEATURE, CREATIVE})
     public static boolean creativeShulkerBoxDropsDisabled = false;
-
-    @Rule(categories = {AMS, FEATURE, CREATIVE})
-    public static boolean bedRockFlying = false;
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean shulkerHitLevitationDisabled = false;
@@ -578,9 +572,6 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, COMMAND})
     public static boolean onlyOpCanSpawnRealPlayerInWhitelist = false;
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean highLightWitherSkeletonEntity = false;
-
     //#if MC>=12100
     //$$ @GameVersion(version = "Minecraft >= 1.21")
     //$$ @Rule(categories = {AMS, FEATURE})
@@ -658,9 +649,13 @@ public class AmsServerSettings {
     )
     public static int blockChunkLoaderRangeController = 3;
 
+    //#if MC>=12005
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    //$$ public static boolean endPortalChunkLoadDisabled = false;
+    //#endif
+
     @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
     public static boolean commandPlayerChunkLoadController = false;
-
 
     /*
      * 合成表规则

@@ -160,9 +160,9 @@ carpetamsaddition:
     largeEnderChest:
       switch_tip: '侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
 
-  org:
+  fuzz:
     command:
-      highlightPosButtonHoverText: 使用Carpet Org Addition高亮路径点，使用/highlight clear取消高亮
+      highlightCoordButtonHoverText: 使用Fuzz模组高亮路径点，使用/coordCompass clear取消高亮
 
   carpet_translations:
     category:
@@ -221,9 +221,6 @@ carpetamsaddition:
       bambooCollisionBoxDisabled:
         name: 禁用竹子碰撞箱
         desc: 允许玩家穿过竹子
-      campfireSmokeParticleDisabled:
-        name: 禁用篝火烟雾粒子
-        desc: 篝火将不会产生烟雾粒子
       commandCustomAntiFireItems:
         name: 自定义防火物品
         desc: 用命令控制任何物品是否防火
@@ -239,9 +236,6 @@ carpetamsaddition:
       creativeShulkerBoxDropsDisabled:
         name: 创造模式潜影盒无掉落
         desc: 当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落
-      bedRockFlying:
-        name: 基岩版飞行
-        desc: 创造模式下飞行与基岩版一致
       shulkerHitLevitationDisabled:
         name: 禁止潜影贝给予漂浮效果
         desc: 玩家被潜影贝击中时只会受到伤害而不会获得漂浮BUFF
@@ -437,12 +431,12 @@ carpetamsaddition:
         name: 我在哪
         desc: 使用/here命令发送当前自身所在维度、坐标、对应的主世界/下界坐标，同时给予自身30s的发光效果。
         extra:
-          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的+H按钮高亮路径点，使用/highlight clear命令来取消高亮'
+          '0': '当客户端安装了Fuzz模组时，可以单击消息末尾的+H按钮高亮路径点，使用\"/coordCompass clear\"命令来取消高亮'
       commandWhere:
         name: 你在哪
         desc: 使用/where命令获取指定玩家所在维度、坐标、对应的主世界/下界坐标，同时给予目标玩家30s的发光效果。
         extra:
-          '0': '当客户端安装了Carpet Org Addition时，可以单击消息末尾的+H按钮高亮路径点，使用/highlight clear命令来取消高亮'
+          '0': '当客户端安装了Fuzz模组时，可以单击消息末尾的+H按钮高亮路径点，使用\"/coordCompass clear\"命令来取消高亮'
       fakePlayerPickUpController:
         name: 假人拾取控制器
         desc: 提供了两种模式来控制假人是否可以拾取物品
@@ -629,9 +623,6 @@ carpetamsaddition:
       onlyOpCanSpawnRealPlayerInWhitelist:
         name: 仅OP可召唤白名单中的玩家
         desc: 只有OP玩家可以召唤在白名单中的玩家，无论白名单是否开启
-      highLightWitherSkeletonEntity:
-        name: 高亮凋零骷髅
-        desc: 给予凋零骷髅高亮效果（开启时可能会有一定的性能影响）
       itemEntityCreateNetherPortalDisabled:
         name: 禁止物品实体创建下界传送门
         desc: 让物品实体穿过下界传送门时不会创建传送门
@@ -652,6 +643,9 @@ carpetamsaddition:
       phantomSpawnAlert:
         name: 幻翼生成警告
         desc: 广播谁召唤了幻翼的消息
+      endPortalChunkLoadDisabled:
+        name: 禁用末地门加载
+        desc: 让实体穿过末地门不会发生区块加载（Minecraft >= 1.20.6可用）
 
 # 计划刻催熟规则：
       scheduledRandomTickCactus:

@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.fasterMovement;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.EntityUtil;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -46,7 +47,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void getMovementSpeed(CallbackInfoReturnable<Float> cir) {
         if (!Objects.equals(AmsServerSettings.fasterMovement, "VANILLA")) {
             PlayerEntity player = (PlayerEntity)(Object)this;
-            World world = player.getEntityWorld();
+            World world = EntityUtil.getEntityWorld(player);
             if (
                 (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.END && world.getRegistryKey() == World.END) ||
                 (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.NETHER && world.getRegistryKey() == World.NETHER) ||

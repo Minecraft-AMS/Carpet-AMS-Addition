@@ -102,6 +102,23 @@ jobs:
           echo -e "${{ steps.properties_v.outputs.game_versions }}" >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
 
+      - name: Publish with gradle
+        if: inputs.release || github.ref == 'refs/heads/dev'
+        run: |
+          if [ -z "${{ inputs.target_subproject }}" ]; then
+              echo "Publishing all subprojects"
+              ./gradlew publish
+          else
+              args=$(echo "${{ inputs.target_subproject }}" | tr ',' '\n' | sed 's/$/:publish/' | paste -sd ' ')
+              echo "Publishing with arguments=$args"
+              ./gradlew $args
+          fi
+        env:
+          BUILD_ID: ${{ github.run_number }}
+          BUILD_RELEASE: ${{ inputs.release }}
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+
       - name: Publish Minecraft Mods
         uses: Kir-Antipov/mc-publish@v3.3.0
         with:

@@ -26,6 +26,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.WitchEntity;
 //#if MC>=12102
 //$$ import net.minecraft.server.world.ServerWorld;
+//$$ import club.mcams.carpet.utils.EntityUtil;
 //#endif
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -44,7 +45,7 @@ public abstract class LivingEntityMixin {
         if (AmsServerSettings.witchRedstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
             //#if MC>=12102
-            //$$ ServerWorld world = (ServerWorld) livingEntity.getEntityWorld();
+            //$$ ServerWorld world = (ServerWorld) EntityUtil.getEntityWorld(livingEntity);
             //#endif
             int redstoneCount = AmsServerSettings.witchRedstoneDustDropController;
             compatWitchDropStack(
@@ -62,7 +63,7 @@ public abstract class LivingEntityMixin {
         if (AmsServerSettings.witchGlowstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
             //#if MC>=12102
-            //$$ ServerWorld world = (ServerWorld) livingEntity.getEntityWorld();
+            //$$ ServerWorld world = (ServerWorld) EntityUtil.getEntityWorld(livingEntity);
             //#endif
             int glowstoneCount = AmsServerSettings.witchGlowstoneDustDropController;
             compatWitchDropStack(

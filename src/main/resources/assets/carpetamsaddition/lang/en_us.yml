@@ -159,9 +159,9 @@ carpetamsaddition:
     largeEnderChest:
       switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
 
-  org:
+  fuzz:
     command:
-      highlightPosButtonHoverText: Use Carpet Org Addition to highlight waypoints, use /highlight clear to remove the highlight
+      highlightCoordButtonHoverText: Use fuzz mod to highlight waypoints, use /coordCompass clear to remove the highlight
 
   carpet_translations:
     category:
@@ -205,8 +205,6 @@ carpetamsaddition:
         desc: The block model of bamboo will not generate offset
       bambooCollisionBoxDisabled:
         desc: Allow players to pass through bamboo
-      campfireSmokeParticleDisabled:
-        desc: Disable campfire smoke particles
       commandCustomAntiFireItems:
         desc: Use command to control whether any item is fireproof or not
         extra:
@@ -219,8 +217,6 @@ carpetamsaddition:
           '2': '[no_blast_wave] - Explosion-proof and non-shockwave, the explosion will not push the item'
       creativeShulkerBoxDropsDisabled:
         desc: Breaking a shulker box with items in creative mode will not cause drops
-      bedRockFlying:
-        desc: Flight in creative mode is consistent with the bedrock version
       shulkerHitLevitationDisabled:
         desc: When hit by a shulker, the player only takes damage and does not gain the levitation effect
       immuneShulkerBullet:
@@ -374,11 +370,11 @@ carpetamsaddition:
       commandHere:
         desc: Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect
         extra:
-          '0': 'When the client has installed Carpet Org Addition, they can click the +H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
+          '0': 'When the client has installed Fuzz Mod, they can click the +H button at the end of the message to highlight the waypoint, and use the \"/coordCompass clear\" command to remove the highlight'
       commandWhere:
         desc: Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect
         extra:
-          '0': 'When the client has installed Carpet Org Addition, they can click the +H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight'
+          '0': 'When the client has installed Fuzz Mod, they can click the +H button at the end of the message to highlight the waypoint, and use the \"/coordCompass clear\" command to remove the highlight'
       fakePlayerPickUpController:
         desc: Two modes are provided to control whether fake player can pick up items
         extra:
@@ -513,8 +509,6 @@ carpetamsaddition:
           '1': 'When the Carpet AMS Addition is not installed on the client, this rule is completely unavailable'
       onlyOpCanSpawnRealPlayerInWhitelist:
         desc: Only OP players can spawn players on the whitelist, regardless of whether the whitelist is enabled
-      highLightWitherSkeletonEntity:
-        desc: Gives the wither skeleton a highlight effect (may have some performance effect when enabled)
       itemEntityCreateNetherPortalDisabled:
         desc: Prevent item entities from creating portals when passing through Nether portals
       powerfulExpMending:
@@ -529,6 +523,8 @@ carpetamsaddition:
         desc: Modify max chain update depth, Set to "-1" to disable the rule
       phantomSpawnAlert:
         desc: Broadcast the news of who summoned the phantoms
+      endPortalChunkLoadDisabled:
+        desc: Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

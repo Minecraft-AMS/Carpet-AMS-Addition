@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.carpetorgaddition;
+package club.mcams.carpet.fuzz;
 
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
@@ -29,18 +29,15 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-public class InvokeOrgCommand {
-    public static Text highlightPosButton(String posText) {
-        final Text hoverText = new Translator("org").tr("command.highlightPosButtonHoverText").formatted(Formatting.YELLOW);
-        //#if MC>=12103
+public class InvokeFuzzModCommand {
+    public static Text highlightCoordButton(String posText) {
+        final Text hoverText = new Translator("fuzz").tr("command.highlightCoordButtonHoverText").formatted(Formatting.YELLOW);
+
         return
             Messenger.s(" [+H]").setStyle(
                 Style.EMPTY.withColor(Formatting.YELLOW).withBold(true).
-                withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, "/highlight " + posText.replace(",", "") + " continue")).
+                withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, "/coordCompass set " + posText.replace(",", ""))).
                 withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
             );
-        //#else
-        //$$ return Messenger.s("");
-        //#endif
     }
 }

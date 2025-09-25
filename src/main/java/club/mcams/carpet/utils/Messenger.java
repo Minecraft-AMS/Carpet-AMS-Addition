@@ -20,7 +20,6 @@
 
 package club.mcams.carpet.utils;
 
-import club.mcams.carpet.mixin.translations.StyleAccessor;
 import club.mcams.carpet.utils.compat.MessengerCompatFactory;
 
 import net.minecraft.server.MinecraftServer;
@@ -39,11 +38,6 @@ public class Messenger {
     // Simple Text
     public static BaseText s(Object text) {
         return MessengerCompatFactory.LiteralText(text.toString());
-    }
-
-    // Simple Text with carpet style
-    public static BaseText s(Object text, String carpetStyle) {
-        return formatting(s(text), carpetStyle);
     }
 
     // Simple Text with formatting
@@ -75,27 +69,6 @@ public class Messenger {
     public static BaseText formatting(BaseText text, Formatting... formattings) {
         text.formatted(formattings);
         return text;
-    }
-
-    public static BaseText formatting(BaseText text, String carpetStyle) {
-        Style textStyle = text.getStyle();
-        StyleAccessor parsedStyle = (StyleAccessor) parseCarpetStyle(carpetStyle);
-        textStyle =  textStyle.withColor(parsedStyle.getColorField());
-        textStyle = textStyle.withBold(parsedStyle.getBoldField());
-        textStyle = textStyle.withItalic(parsedStyle.getItalicField());
-        ((StyleAccessor) textStyle).setUnderlinedField(parsedStyle.getUnderlineField());
-        ((StyleAccessor) textStyle).setStrikethroughField(parsedStyle.getStrikethroughField());
-        ((StyleAccessor) textStyle).setObfuscatedField(parsedStyle.getObfuscatedField());
-        return style(text, textStyle);
-    }
-
-    public static BaseText style(BaseText text, Style style) {
-        text.setStyle(style);
-        return text;
-    }
-
-    public static Style parseCarpetStyle(String style) {
-        return carpet.utils.Messenger.parseStyle(style);
     }
 
     public static void sendServerMessage(MinecraftServer server, Text text) {

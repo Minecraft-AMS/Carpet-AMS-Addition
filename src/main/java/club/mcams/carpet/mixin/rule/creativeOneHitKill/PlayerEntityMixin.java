@@ -22,12 +22,14 @@ package club.mcams.carpet.mixin.rule.creativeOneHitKill;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import club.mcams.carpet.utils.WorldUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
 //#if MC>=12102
 //$$ import net.minecraft.server.world.ServerWorld;
+//$$ import club.mcams.carpet.utils.EntityUtil;
 //#endif
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -46,7 +48,7 @@ import java.util.function.Function;
 public abstract class PlayerEntityMixin implements EntityAccessorAndInvoker, PlayerEntityAccessorAndInvoker {
     @Inject(method = "attack", at = @At("HEAD"))
     private void attack(Entity target, CallbackInfo ci) {
-        if (AmsServerSettings.creativeOneHitKill && !this.getWorld().isClient && this.getPlayerAbilities().creativeMode && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(target)) {
+        if (AmsServerSettings.creativeOneHitKill && !WorldUtil.isClient(this.getWorld()) && this.getPlayerAbilities().creativeMode && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(target)) {
             Function<Boolean, Runnable> actionInstaKill = isSneaking -> isSneaking ? () -> aoeAttack(target) : () -> instaKill(target);
             actionInstaKill.apply(invokerIsSneaking()).run();
         }
@@ -56,15 +58,15 @@ public abstract class PlayerEntityMixin implements EntityAccessorAndInvoker, Pla
     private void instaKill(Entity target) {
         if (target instanceof EnderDragonPart) {
             //#if MC>=12102
-            //$$ Arrays.stream(((EnderDragonPart) target).owner.getBodyParts()).forEach(Entity -> target.kill((ServerWorld) target.getWorld()));
-            //$$ ((EnderDragonPart) target).owner.kill((ServerWorld) target.getWorld());
+            //$$ Arrays.stream(((EnderDragonPart) target).owner.getBodyParts()).forEach(Entity -> target.kill((ServerWorld) EntityUtil.getEntityWorld(target)));
+            //$$ ((EnderDragonPart) target).owner.kill((ServerWorld) EntityUtil.getEntityWorld(target));
             //#else
             Arrays.stream(((EnderDragonPart) target).owner.getBodyParts()).forEach(Entity::kill);
             ((EnderDragonPart) target).owner.kill();
             //#endif
         } else {
             //#if MC>=12102
-            //$$ target.kill((ServerWorld) target.getWorld());
+            //$$ target.kill((ServerWorld) EntityUtil.getEntityWorld(target));
             //#else
             target.kill();
             //#endif

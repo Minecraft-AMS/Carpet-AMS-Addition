@@ -19,6 +19,9 @@ repositories {
 	maven {
 		url = 'https://jitpack.io'
 	}
+    maven {
+        url = 'https://nas.1024byteeeee.top:16999/releases'
+    }
 }
 
 // https://github.com/FabricMC/fabric-loader/issues/783
@@ -43,7 +46,7 @@ dependencies {
 	include(modImplementation(fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)))
 
 	// Dependencies
-	// include(implementation("com.esotericsoftware.yamlbeans:yamlbeans:${project.yamlbeans_version}"))
+    include(implementation("top.1024byteeeee:tiny_yaml:${project.tiny_yaml_version}"))
 }
 
 loom {
@@ -82,18 +85,36 @@ if (mcVersion >= 12005) {
 }
 JavaVersion MIXIN_COMPATIBILITY_LEVEL = JAVA_VERSION
 
-String versionSuffix = ''
-// detect github action environment variables
-// https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
-if (System.getenv("BUILD_RELEASE") != "true") {
-	String buildNumber = System.getenv("BUILD_ID")
-	versionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SNAPSHOT'
-}
-String fullModVersion = project.mod_version + versionSuffix
-
-version = 'v' + fullModVersion
 group = project.maven_group
-archivesBaseName = project.archives_base_name + '-mc' + project.minecraft_version + '-fabric'
+String modVersionSuffix = ''
+if (System.getenv("BUILD_ RELEASE") != "true") {
+	String buildNumber = System.getenv("BUILD_ID")
+    modVersionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SNAPSHOT'
+}
+
+String artifactVersion = project.mod_version
+String artifactVersionSuffix = ''
+
+if (System.getenv("BUILD_RELEASE") != "true") {
+    String buildNumber = System.getenv("BUILD_ID")
+    modVersionSuffix += buildNumber != null ? ('+build.' + buildNumber) : '-SNAPSHOT'
+    artifactVersionSuffix = '-SNAPSHOT'
+}
+
+String fullModVersion = project.mod_version + modVersionSuffix
+String fullProjectVersion, fullArtifactVersion
+
+if (System.getenv("JITPACK") == "true") {
+    base.archivesName = project.archives_base_name + '-mc' + project.minecraft_version
+    fullProjectVersion = 'v' + project.mod_version + modVersionSuffix
+    fullArtifactVersion = artifactVersion + artifactVersionSuffix
+} else {
+    base.archivesName = project.archives_base_name
+    fullProjectVersion = 'v' + project.mod_version + '-mc' + project.minecraft_version + modVersionSuffix
+    fullArtifactVersion = artifactVersion + '-mc' + project.minecraft_version + artifactVersionSuffix
+}
+
+version = fullProjectVersion
 
 processResources {
 	from "carpetamsaddition.accesswidener"
@@ -168,18 +189,25 @@ license {
 classes.dependsOn licenseFormatMain
 testClasses.dependsOn licenseFormatTest
 
-// configure the maven publication
 publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			artifactId archivesBaseName
-			from components.java
-		}
-	}
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId = base.archivesName.get()
+            version = fullArtifactVersion
+        }
+    }
 
-	// select the repositories you want to publish to
-	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
-	}
+    repositories {
+        maven {
+            url = fullArtifactVersion.endsWith("SNAPSHOT") ? "https://nas.1024byteeeee.top:16999/snapshots" : "https://nas.1024byteeeee.top:16999/releases"
+            credentials(PasswordCredentials) {
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
+            }
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
 }

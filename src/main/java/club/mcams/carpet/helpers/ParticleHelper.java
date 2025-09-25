@@ -21,6 +21,9 @@
 package club.mcams.carpet.helpers;
 
 import net.minecraft.particle.ParticleEffect;
+//#if MC>=12109
+//$$ import net.minecraft.particle.DragonBreathParticleEffect;
+//#endif
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -31,6 +34,15 @@ public class ParticleHelper {
     }
 
     public static void spawnShulkerGolemParticles(ServerWorld serverWorld, BlockPos pos) {
-        spawnParticles(serverWorld, ParticleTypes.DRAGON_BREATH, pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 1688, 0.8, 0.8, 0.8, 0.0168);
+        spawnParticles(
+            serverWorld,
+            //#if MC>=12109
+            //$$ DragonBreathParticleEffect.of(ParticleTypes.DRAGON_BREATH, 0),
+            //#else
+            ParticleTypes.DRAGON_BREATH,
+            //#endif
+            pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
+            1688, 0.8, 0.8, 0.8, 0.0168
+        );
     }
 }

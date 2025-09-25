@@ -27,6 +27,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 //#if MC>=12102
 //$$ import net.minecraft.server.world.ServerWorld;
+//$$ import club.mcams.carpet.utils.EntityUtil;
 //#endif
 import net.minecraft.item.Items;
 
@@ -50,7 +51,7 @@ public abstract class PlayerEntityMixin {
             ItemStack headStack = new ItemStack(Items.PLAYER_HEAD);
             SkullSkinHelper.writeNbtToPlayerSkull(player, headStack);
             //#if MC>=12102
-            //$$ player.dropStack((ServerWorld) player.getWorld(), headStack);
+            //$$ player.dropStack((ServerWorld) EntityUtil.getEntityWorld(player), headStack);
             //#else
             player.dropStack(headStack);
             //#endif

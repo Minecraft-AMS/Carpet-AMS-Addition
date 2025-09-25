@@ -73,7 +73,7 @@ public class GetHeldItemIDCommandRegistry {
     }
 
     private static Text getCopyHoverText() {
-        return Messenger.s(translator.tr("getHeldItemID.copy").getString(), "y");
+        return Messenger.s(translator.tr("getHeldItemID.copy")).formatted(Formatting.YELLOW);
     }
 
     private static String getHeldItemRegisterName(PlayerEntity player) {

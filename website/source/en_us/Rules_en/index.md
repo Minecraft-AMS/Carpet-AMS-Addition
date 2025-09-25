@@ -530,25 +530,6 @@ When enabled, players can pass through bamboo.
 
 - Categroies: `AMS` , `FEATURE`
 
-
-## campfireSmokeParticleDisabled
-
-When enabled, Campfire will not produce smoke particles.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false` , `true`
-
-
-
-- Categroies: `AMS` , `FEATURE`
-
 ## commandCustomAntiFireItems
 
 Use command to control whether any item is fireproof or not.
@@ -597,25 +578,6 @@ no_blast_wave: Explosion-proof and non-shockwave, the explosion will not push th
 ## **creativeShulkerBoxDropsDisabled**
 
 When enabled, Breaking a shulker box with items in creative mode will not cause drops.
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `CREATIVE`
-
-
-## **bedRockFlying**
-
-Flight in creative mode is consistent with the bedrock version.
 
 - Type: `boolean`
 
@@ -1087,7 +1049,7 @@ After enabling the rules, use the `/customMovableBlock help` command to view the
 
 - Categroies: `AMS`, `FEATURE`, `COMMAND`
 
-## eazyMaxLevelBeacon
+## easyMaxLevelBeacon
 
 When enabled, Activate full-level beacon with just one base block.
 
@@ -2438,24 +2400,6 @@ Only OP players can spawn players on the whitelist, regardless of whether the wh
 
 - Categroies: `AMS`, `COMMAND`
 
-## highLightWitherSkeletonEntity
-
-Gives the wither skeleton a highlight effect (may have some performance effect when enabled).
-
-- Type: `boolean`
-
-
-
-- Default: `false`
-
-
-
-- Suggested options: `false`, `true`
-
-
-
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
-
 ## itemEntityCreateNetherPortalDisabled
 
 Prevent item entities from creating portals when passing through Nether portals.
@@ -2571,6 +2515,26 @@ Broadcast the news of who summoned the phantoms.
 
 
 - Categroies: `AMS`, `SURVIVAL`
+
+## endPortalChunkLoadDisabled
+
+Entities passing through the End Portal will not cause chunk loading.
+
+&lt;Available for Minecraft >= 1.20.6&gt;
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## craftableEnchantedGoldApple
 

@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,15 +18,15 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.bedRockFlying;
+package club.mcams.carpet.utils;
 
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.world.World;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Invoker;
+import org.jetbrains.annotations.NotNull;
 
-@Mixin(ClientPlayerEntity.class)
-public interface ClientPlayerEntityInvoker {
-    @Invoker("hasMovementInput")
-    boolean invokerHasMovementInput();
+public class WorldUtil {
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public static boolean isClient(@NotNull World world) {
+        return world.isClient();
+    }
 }

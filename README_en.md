@@ -16,6 +16,7 @@ Access the website to view all the relevant information about carpet-ams-additio
 
 |       Game Version        | Development Status |                    Last Supported Version                    |
 |:-------------------------:| :----------------: | :----------------------------------------------------------: |
+|        1.21.9-pre1        |         ✔          |                             ---                              |
 |          1.21.8           |         ✔          |                             ---                              |
 |          1.21.7           |         ✔          |                             ---                              |
 |          1.21.6           |         ✔          |                             ---                              |

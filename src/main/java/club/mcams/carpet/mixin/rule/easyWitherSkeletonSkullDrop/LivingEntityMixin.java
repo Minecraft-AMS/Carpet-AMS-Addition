@@ -18,35 +18,36 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.extinguishedCampfire_campfireSmokeParticleDisabled;
+package club.mcams.carpet.mixin.rule.easyWitherSkeletonSkullDrop;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CampfireBlock;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.WitherSkeletonEntity;
+import net.minecraft.item.Items;
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//$$ import club.mcams.carpet.utils.EntityUtil;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(CampfireBlock.class)
-public abstract class CampfireBlockMixin {
-    @ModifyReturnValue(method = "getPlacementState", at = @At("RETURN"))
-    private BlockState setPlacementState(BlockState original) {
-        if (AmsServerSettings.extinguishedCampfire && original != null) {
-            return original.with(CampfireBlock.LIT, false);
-        } else {
-            return original;
-        }
-    }
-
-    @Inject(method = "spawnSmokeParticle", at = @At("HEAD"), cancellable = true)
-    private static void noSpawnSmokeParticle(CallbackInfo ci) {
-        if (AmsServerSettings.campfireSmokeParticleDisabled) {
-           ci.cancel();
+@Mixin(LivingEntity.class)
+public abstract class LivingEntityMixin {
+    @Inject(method = "onDeath", at = @At("TAIL"))
+    private void dropSkull(CallbackInfo ci) {
+        if (AmsServerSettings.easyWitherSkeletonSkullDrop) {
+            LivingEntity entity = (LivingEntity) (Object) this;
+            if (entity instanceof WitherSkeletonEntity) {
+                //#if MC>=12102
+                //$$ entity.dropItem((ServerWorld) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);
+                //#else
+                entity.dropItem(Items.WITHER_SKELETON_SKULL, 1);
+                //#endif
+            }
         }
     }
 }
