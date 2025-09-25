@@ -21,7 +21,6 @@
 package club.mcams.carpet.mixin.rule.endPortalChunkLoadDisabled;
 
 import club.mcams.carpet.utils.compat.DummyClass;
-import net.minecraft.block.EndPortalBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 
