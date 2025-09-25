@@ -492,25 +492,6 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 - 分类: `AMS`, `FEATURE`
 
 
-## 禁用篝火烟雾粒子（campfireSmokeParticleDisabled）
-
-开启后，篝火将不会产生烟雾粒子。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`
-
-
 ## 自定义防火物品（commandCustomAntiFireItems）
 
 用命令控制任何物品是否防火。
@@ -560,25 +541,6 @@ no_blast_wave: 防爆且无冲击波，爆炸将不会推动掉落物
 ## 创造模式潜影盒无掉落（creativeShulkerBoxDropsDisabled）
 
 开启后，当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `CREATIVE`
-
-
-## 基岩版飞行（bedRockFlying）
-
-开启后，玩家飞行时的表现与基岩版一致。
 
 - 类型: `boolean`
 
@@ -1047,7 +1009,7 @@ global模式下修改值后需要玩家重新进入游戏。
 
 - 分类: `AMS`, `FEATURE`, `COMMAND`
 
-## 简易满级信标（eazyMaxLevelBeacon）
+## 简易满级信标（easyMaxLevelBeacon）
 
 开启后，只需一个底座方块就能激活满级信标。
 
@@ -2418,24 +2380,6 @@ json位置：
 
 - 分类: `AMS`, `COMMAND`
 
-## 高亮凋零骷髅（highLightWitherSkeletonEntity）
-
-给予凋零骷髅高亮效果（开启时可能会有一定的性能影响）。
-
-- 类型: `boolean`
-
-
-
-- 默认值: `false`
-
-
-
-- 参考选项: `false`, `true`
-
-
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`
-
 ## 禁止物品实体创建下界传送门（itemEntityCreateNetherPortalDisabled）
 
 让物品实体穿过下界传送门时不会创建传送门。
@@ -2551,6 +2495,26 @@ json位置：
 
 
 - 分类: `AMS`, `SURVIVAL`
+
+## 禁用末地门加载（endPortalChunkLoadDisabled）
+
+让实体穿过末地门不会发生区块加载。
+
+<该规则 Minecraft >= 1.20.6 可用>
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `9x3`, `9x6`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
