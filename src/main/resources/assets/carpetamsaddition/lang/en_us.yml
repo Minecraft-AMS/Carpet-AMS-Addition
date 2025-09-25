@@ -523,6 +523,8 @@ carpetamsaddition:
         desc: Modify max chain update depth, Set to "-1" to disable the rule
       phantomSpawnAlert:
         desc: Broadcast the news of who summoned the phantoms
+      endPortalChunkLoadDisabled:
+        desc: Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -584,8 +586,6 @@ carpetamsaddition:
         extra:
           '0': 'Affected rules: '
           '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
-      endPortalChunkLoadDisabled:
-        desc: Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
 
       #合成配方规则
       craftableEnchantedGoldenApples:
