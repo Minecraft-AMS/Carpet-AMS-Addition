@@ -651,7 +651,7 @@ public class AmsServerSettings {
 
     //#if MC>=12005
     //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL, AMS_CHUNKLOADER})
-    //$$ public static boolean enderPortalChunkLoadDisabled = false;
+    //$$ public static boolean endPortalChunkLoadDisabled = false;
     //#endif
 
     @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})

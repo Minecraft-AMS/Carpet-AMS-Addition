@@ -44,7 +44,7 @@ public abstract class EndPortalBlockMixin {
         )
     )
     private TeleportTarget.PostDimensionTransition endPortalChunkLoadDisabled(TeleportTarget.PostDimensionTransition instance, TeleportTarget.PostDimensionTransition next, Operation<TeleportTarget.PostDimensionTransition> original) {
-        if (AmsServerSettings.enderPortalChunkLoadDisabled && next.equals(TeleportTarget.ADD_PORTAL_CHUNK_TICKET)) {
+        if (AmsServerSettings.endPortalChunkLoadDisabled && next.equals(TeleportTarget.ADD_PORTAL_CHUNK_TICKET)) {
             return entity -> {};
         } else {
             return original.call(instance, next);

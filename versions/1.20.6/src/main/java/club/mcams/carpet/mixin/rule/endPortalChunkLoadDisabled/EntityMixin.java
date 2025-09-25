@@ -49,12 +49,12 @@ public abstract class EntityMixin {
             target = "Lnet/minecraft/server/world/ServerChunkManager;addTicket(Lnet/minecraft/server/world/ChunkTicketType;Lnet/minecraft/util/math/ChunkPos;ILjava/lang/Object;)V"
         )
     )
-    private static void endPortalChunkLoadDisabled(
+    private void endPortalChunkLoadDisabled(
         ServerChunkManager chunkManager, ChunkTicketType<ServerWorld> chunkTicketType,
         ChunkPos chunkPos, int radius, Object obj, Operation<Void> original,
         @Local BlockPos blockPos
     ) {
-        if (AmsServerSettings.enderPortalChunkLoadDisabled && blockPos.equals(ServerWorld.END_SPAWN_POS)) {
+        if (AmsServerSettings.endPortalChunkLoadDisabled && blockPos.equals(ServerWorld.END_SPAWN_POS)) {
             Noop.noop();
         } else {
             original.call(chunkManager, chunkTicketType, chunkPos, radius, obj);
