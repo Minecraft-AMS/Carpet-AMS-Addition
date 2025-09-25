@@ -650,7 +650,7 @@ public class AmsServerSettings {
     public static int blockChunkLoaderRangeController = 3;
 
     //#if MC>=12005
-    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL, AMS_CHUNKLOADER})
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
     //$$ public static boolean endPortalChunkLoadDisabled = false;
     //#endif
 
