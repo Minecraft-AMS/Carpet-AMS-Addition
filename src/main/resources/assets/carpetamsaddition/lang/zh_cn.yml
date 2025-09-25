@@ -718,6 +718,9 @@ carpetamsaddition:
         extra:
           '0': '受影响的规则：'
           '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
+      enderPortalChunkLoadDisabled:
+        name: 禁用末地门加载
+        desc: 让实体穿过末地门不会发生区块加载（Minecraft >= 1.20.6可用）
 
 #合成配方规则
       craftableEnchantedGoldenApples:

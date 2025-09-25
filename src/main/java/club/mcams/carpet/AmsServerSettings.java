@@ -649,9 +649,13 @@ public class AmsServerSettings {
     )
     public static int blockChunkLoaderRangeController = 3;
 
+    //#if MC>=12005
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL, AMS_CHUNKLOADER})
+    //$$ public static boolean enderPortalChunkLoadDisabled = false;
+    //#endif
+
     @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
     public static boolean commandPlayerChunkLoadController = false;
-
 
     /*
      * 合成表规则

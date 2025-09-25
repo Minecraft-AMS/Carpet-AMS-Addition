@@ -63,6 +63,7 @@
     "rule.endermanTeleportRandomlyDisabled.EndermanEntityMixin",
     "rule.enderPearlSoundEffect.EnderPearlEntityMixin",
     "rule.endPortalChunkLoadDisabled.EndPortalBlockMixin",
+    "rule.endPortalChunkLoadDisabled.EntityMixin",
     "rule.enhancedWorldEater.BlockMixin",
     "rule.experimentalContentCheckDisabled.FeatureSetMixin",
     "rule.experimentalContentCheckDisabled.ToggleableFeatureMixin",

@@ -26,6 +26,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.21")
+@GameVersion(version = "Minecraft >= 1.20.5 && Minecraft < 1.21")
 @Mixin(DummyClass.class)
-public abstract class EndPortalBlockMixin {}
+public abstract class EntityMixin {}
