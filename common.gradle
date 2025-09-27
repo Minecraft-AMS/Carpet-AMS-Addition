@@ -20,7 +20,7 @@ repositories {
 		url = 'https://jitpack.io'
 	}
     maven {
-        url = 'https://nas.1024byteeeee.top:16999/releases'
+        url = 'https://maven.1024byteeeee.top:1024/releases'
     }
 }
 
@@ -199,7 +199,7 @@ publishing {
 
     repositories {
         maven {
-            url = fullArtifactVersion.endsWith("dev") ? "https://nas.1024byteeeee.top:16999/snapshots" : "https://nas.1024byteeeee.top:16999/releases"
+            url = fullArtifactVersion.endsWith("dev") ? "https://maven.1024byteeeee.top:1024/snapshots" : "https://maven.1024byteeeee.top:1024/releases"
             credentials(PasswordCredentials) {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")
