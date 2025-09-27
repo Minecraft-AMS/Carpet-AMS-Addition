@@ -609,6 +609,11 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, SURVIVAL})
     public static boolean phantomSpawnAlert = false;
 
+    //#if MC>=12005
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    //$$ public static boolean endPortalChunkLoadDisabled = false;
+    //#endif
+
     /*
      * 区块加载规则
      */
@@ -649,13 +654,14 @@ public class AmsServerSettings {
     )
     public static int blockChunkLoaderRangeController = 3;
 
-    //#if MC>=12005
-    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    //$$ public static boolean endPortalChunkLoadDisabled = false;
-    //#endif
-
     @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
     public static boolean commandPlayerChunkLoadController = false;
+
+    //#if MC<12005
+    @GameVersion(version = "Minecraft < 1.20.5")
+    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    public static boolean endPortalChunkLoader = false;
+    //#endif
 
     /*
      * 合成表规则
@@ -721,5 +727,5 @@ public class AmsServerSettings {
 
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
-    public static Boolean testRule = false;
+    public static boolean testRule = false;
 }

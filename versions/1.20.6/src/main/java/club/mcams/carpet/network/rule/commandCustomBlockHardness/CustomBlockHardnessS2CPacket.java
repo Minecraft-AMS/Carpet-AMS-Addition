@@ -39,6 +39,7 @@ public record CustomBlockHardnessS2CPacket(Map<BlockState, Float> hardnessMap) i
     public static final Id<CustomBlockHardnessS2CPacket> ID = new Id<>(
         IdentifierUtil.of(AmsServer.compactName, "sync_custom_block_hardness")
     );
+
     public static final PacketCodec<RegistryByteBuf, CustomBlockHardnessS2CPacket> CODEC = new PacketCodec<>() {
         @Override
         public CustomBlockHardnessS2CPacket decode(RegistryByteBuf buf) {
