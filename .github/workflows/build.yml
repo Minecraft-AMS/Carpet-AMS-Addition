@@ -66,6 +66,16 @@ jobs:
           echo eula=true > ./run/eula.txt
           ./gradlew runMixinAudit
 
+      - name: Publish with gradle
+        if: inputs.release || github.ref == 'refs/heads/dev'
+        run: |
+          ./gradlew ${{ steps.subproject_info.outputs.prefix }}publish --no-daemon
+        env:
+          BUILD_ID: ${{ github.run_number }}
+          BUILD_RELEASE: ${{ inputs.release }}
+          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+
       - uses: actions/upload-artifact@v4
         with:
           name: build-artifacts

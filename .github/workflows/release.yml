@@ -17,17 +17,6 @@ on:
         required: true
 
 jobs:
-  show_action_parameters:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Show action parameters
-        run: |
-          cat <<EOF > $GITHUB_STEP_SUMMARY
-          ## Action Parameters
-          - target_subproject: `${{ github.event.inputs.target_subproject }}`
-          - target_release_tag: `${{ github.event.inputs.target_release_tag }}`
-          EOF
-
   matrix_prep:
     uses: ./.github/workflows/matrix_prep.yml
     with:
@@ -35,6 +24,7 @@ jobs:
 
   build:
     uses: ./.github/workflows/build.yml
+    secrets: inherit
     with:
       target_subproject: ${{ github.event.inputs.target_subproject }}
       release: true
@@ -65,20 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           tag: ${{ github.event.inputs.target_release_tag }}
-
-      - name: Generate publish related information
-        id: release_info
-        run: |
-          if [ $GITHUB_EVENT_NAME == 'release' ]
-          then
-              echo "tag_name=" >> $GITHUB_OUTPUT  # leave an empty value here so softprops/action-gh-release will use the default value
-          elif [ $GITHUB_EVENT_NAME == 'workflow_dispatch' ]
-          then
-              echo "tag_name=${{ github.event.inputs.target_release_tag }}" >> $GITHUB_OUTPUT
-          else
-              echo Unknown github event name $GITHUB_EVENT_NAME
-              exit 1
-          fi
 
       - name: Read common properties
         id: properties_g
