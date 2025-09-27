@@ -586,6 +586,8 @@ carpetamsaddition:
         extra:
           '0': 'Affected rules: '
           '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
+      endPortalChunkLoader:
+        desc: Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5 (Available for Minecraft >= 1.20.6)
 
       #合成配方规则
       craftableEnchantedGoldenApples:

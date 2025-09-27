@@ -647,7 +647,7 @@ carpetamsaddition:
         name: 禁用末地门加载
         desc: 让实体穿过末地门不会发生区块加载（Minecraft >= 1.20.6可用）
 
-# 计划刻催熟规则：
+      # 计划刻催熟规则：
       scheduledRandomTickCactus:
         name: 计划刻催熟仙人掌
         desc: 当仙人掌方块收到计划刻时仍会给予生长随机刻
@@ -667,7 +667,7 @@ carpetamsaddition:
         name: 计划刻催熟所有作物
         desc: 当所有作物方块收到计划刻时仍会给予生长随机刻
 
-#区块加载规则
+      #区块加载规则
       commandPlayerChunkLoadController:
         name: 区块加载控制
         desc: 控制任意游戏模式下玩家对周围区块的加载
@@ -721,8 +721,11 @@ carpetamsaddition:
         extra:
           '0': '受影响的规则：'
           '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
+      endPortalChunkLoader:
+        name: 末地门加载器
+        desc: 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致 (Minecraft >= 1.20.6可用)
 
-#合成配方规则
+      #合成配方规则
       craftableEnchantedGoldenApples:
         name: 可合成附魔金苹果
         desc: 使用老版本的方式来合成附魔金苹果（8金块+1苹果）

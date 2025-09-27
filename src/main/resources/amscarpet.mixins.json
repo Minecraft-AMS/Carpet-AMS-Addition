@@ -64,6 +64,7 @@
     "rule.enderPearlSoundEffect.EnderPearlEntityMixin",
     "rule.endPortalChunkLoadDisabled.EndPortalBlockMixin",
     "rule.endPortalChunkLoadDisabled.EntityMixin",
+    "rule.endPortalChunkLoader.EntityMixin",
     "rule.enhancedWorldEater.BlockMixin",
     "rule.experimentalContentCheckDisabled.FeatureSetMixin",
     "rule.experimentalContentCheckDisabled.ToggleableFeatureMixin",
