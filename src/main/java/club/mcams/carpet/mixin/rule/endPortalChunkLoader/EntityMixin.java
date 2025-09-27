@@ -48,7 +48,7 @@ public abstract class EntityMixin {
             shift = At.Shift.AFTER
         )
     )
-    private void endPortalChunkLoadDisabled(ServerWorld destination, CallbackInfoReturnable<TeleportTarget> cir) {
+    private void endPortalChunkLoader(ServerWorld destination, CallbackInfoReturnable<TeleportTarget> cir) {
         if (AmsServerSettings.endPortalChunkLoader) {
             final boolean destinationIsEnd = destination.getRegistryKey().equals(World.END);
             BlockPos blockPos = destinationIsEnd ? ServerWorld.END_SPAWN_POS : destination.getSpawnPos();
