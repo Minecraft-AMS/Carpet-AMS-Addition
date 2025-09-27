@@ -2502,7 +2502,7 @@ json位置：
 
 <该规则 Minecraft >= 1.20.6 可用>
 
-- 类型: `String`
+- 类型: `boolean`
 
 
 
@@ -2510,11 +2510,31 @@ json位置：
 
 
 
-- 参考选项: `false`, `9x3`, `9x6`
+- 参考选项: `false`, `true`
 
 
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 末地门加载器（endPortalChunkLoader）
+
+让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致。
+
+<该规则 Minecraft < 1.20.6 可用>
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `AMS_CHUNKLOADER`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 

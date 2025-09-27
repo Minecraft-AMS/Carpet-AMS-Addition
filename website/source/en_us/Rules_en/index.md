@@ -2536,6 +2536,26 @@ Entities passing through the End Portal will not cause chunk loading.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
 
+## endPortalChunkLoader
+
+Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5.
+
+&lt;Available for Minecraft < 1.20.6&gt;
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
