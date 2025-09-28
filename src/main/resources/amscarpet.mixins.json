@@ -9,6 +9,8 @@
     "carpet.SettingsManagerMixin",
     "hooks.afterServerLoadWorld.MinecraftServerMixin",
     "hooks.RecipeRule.RecipeManagerMixin",
+    "network.CustomPayloadC2SPacketMixin",
+    "network.CustomPayloadS2CPacketMixin",
     "rule.amsUpdateSuppressionCrashFix.ChainRestrictedNeighborUpdater_SixWayEntryMixin",
     "rule.amsUpdateSuppressionCrashFix.MinecraftServerMixin",
     "rule.amsUpdateSuppressionCrashFix.NeighborUpdaterMixin",
@@ -205,6 +207,7 @@
   ],
   "client": [
     "builtin.CreativeInventoryExtras.CreativeInventoryScreenMixin",
+    "network.ClientPlayNetworkHandlerMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
     "rule.maxClientInteractionReachDistance.GameRendererMixin",
     "rule.maxPlayerInteractionRange.GameRendererMixin"

@@ -42,8 +42,6 @@ dependencies {
 	// library mods
 	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
-	include(modImplementation(fabricApi.module("fabric-api-base", project.fabric_api_version)))
-	include(modImplementation(fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)))
 
 	// Dependencies
     include(implementation("top.1024byteeeee:tiny_yaml:${project.tiny_yaml_version}"))

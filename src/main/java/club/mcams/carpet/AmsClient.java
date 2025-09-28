@@ -20,8 +20,6 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.network.ClientReceiver;
-
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -32,7 +30,10 @@ public class AmsClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ClientReceiver.register();
+        AmsServer.LOGGER.info("{} v{} loaded! (Total rules: {})", AmsServer.fancyName, AmsServerMod.getVersion(), AmsServer.ruleCount);
+        AmsServer.LOGGER.info("Open Source: https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
+        AmsServer.LOGGER.info("Issues: https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
+        AmsServer.LOGGER.info("Wiki: https://minecraft-ams.github.io/carpetamsaddition/");
     }
 
     public static AmsClient getInstance() {

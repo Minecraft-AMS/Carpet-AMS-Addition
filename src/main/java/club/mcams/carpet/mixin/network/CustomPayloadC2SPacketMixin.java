@@ -18,17 +18,10 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network;
+package club.mcams.carpet.mixin.network;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import club.mcams.carpet.utils.compat.DummyClass;
+import org.spongepowered.asm.mixin.Mixin;
 
-@SuppressWarnings("unused")
-@GameVersion(version = "Only Minecraft >= 1.20.5")
-public class S2CNetworkPacket {
-    public static void register() {
-        /*
-            只有 Minecraft >= 1.20.5 需要这个
-            例：PayloadTypeRegistry.playS2C().register(CustomBlockHardnessS2CPacket.ID, CustomBlockHardnessS2CPacket.CODEC);
-         */
-    }
-}
+@Mixin(DummyClass.class)
+public abstract class CustomPayloadC2SPacketMixin {}

@@ -20,27 +20,24 @@
 
 package club.mcams.carpet.network.rule.commandCustomBlockHardness;
 
-import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.utils.IdentifierUtil;
 
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.network.packet.s2c.common.CustomPayloadS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public record CustomBlockHardnessS2CPacket(Map<BlockState, Float> hardnessMap) implements CustomPayload {
-    public static final Id<CustomBlockHardnessS2CPacket> ID = new Id<>(
-        IdentifierUtil.of(AmsServer.compactName, "sync_custom_block_hardness")
-    );
-
+    public static final CustomPayload.Id<CustomBlockHardnessS2CPacket> ID = new CustomPayload.Id<>(IdentifierUtil.of("carpetamsaddition", "sync_custom_block_hardness"));
     public static final PacketCodec<RegistryByteBuf, CustomBlockHardnessS2CPacket> CODEC = new PacketCodec<>() {
+
         @Override
         public CustomBlockHardnessS2CPacket decode(RegistryByteBuf buf) {
             int size = buf.readVarInt();
@@ -65,12 +62,12 @@ public record CustomBlockHardnessS2CPacket(Map<BlockState, Float> hardnessMap) i
     };
 
     @Override
-    public Id<? extends CustomPayload> getId() {
+    public CustomPayload.Id<? extends CustomPayload> getId() {
         return ID;
     }
 
     public static void sendToPlayer(ServerPlayerEntity player) {
         CustomBlockHardnessS2CPacket packet = new CustomBlockHardnessS2CPacket(new HashMap<>(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP));
-        ServerPlayNetworking.send(player, packet);
+        player.networkHandler.sendPacket(new CustomPayloadS2CPacket(packet));
     }
 }

@@ -18,17 +18,10 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network;
+package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessS2CPacket;
+import club.mcams.carpet.utils.compat.DummyClass;
+import org.spongepowered.asm.mixin.Mixin;
 
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
-
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.20.5")
-public class S2CNetworkPacket {
-    public static void register() {
-        PayloadTypeRegistry.playS2C().register(CustomBlockHardnessS2CPacket.ID, CustomBlockHardnessS2CPacket.CODEC);
-    }
-}
+@Mixin(DummyClass.class)
+public abstract class CustomPayloadS2CPacketMixin {}

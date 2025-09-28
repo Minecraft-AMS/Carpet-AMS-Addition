@@ -18,31 +18,29 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network;
+package club.mcams.carpet.mixin.network;
 
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessS2CPacket;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.network.packet.CustomPayload;
 
-import net.minecraft.block.BlockState;
+import org.spongepowered.asm.mixin.Mixin;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.HashMap;
-import java.util.Map;
-
-@GameVersion(version = "Minecraft < 1.20.5")
-@Environment(EnvType.CLIENT)
-public class ClientReceiver {
-    public static void register() {
-        ClientPlayNetworking.registerGlobalReceiver(CustomBlockHardnessS2CPacket.ID, (client, handler, buf, responseSender) -> {
-            Map<BlockState, Float> map = new HashMap<>();
-            CustomBlockHardnessS2CPacket.decode(buf, map);
+@SuppressWarnings("DeconstructionCanBeUsed")
+@Mixin(ClientPlayNetworkHandler.class)
+public abstract class ClientPlayNetworkHandlerMixin {
+    @Inject(method = "onCustomPayload", at = @At("HEAD"), cancellable = true)
+    private void onCustomPayload(CustomPayload packet, CallbackInfo ci) {
+        if (packet instanceof CustomBlockHardnessS2CPacket customPacket) {
             CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
-            CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(map);
-        });
+            CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(customPacket.hardnessMap());
+            ci.cancel();
+        }
     }
 }

@@ -20,13 +20,11 @@
 
 package club.mcams.carpet.network.rule.commandCustomBlockHardness;
 
-import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.utils.IdentifierUtil;
 
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-
+import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.block.BlockState;
@@ -39,9 +37,7 @@ import java.util.Objects;
 import io.netty.buffer.Unpooled;
 
 public class CustomBlockHardnessS2CPacket {
-    public static final Identifier ID = IdentifierUtil.of(
-        AmsServer.compactName, "sync_custom_block_hardness"
-    );
+    public static final Identifier ID = IdentifierUtil.of("ams_server", "sync_custom_block_hardness");
 
     public static void decode(PacketByteBuf buf, Map<BlockState, Float> map) {
         int size = buf.readVarInt();
@@ -64,7 +60,8 @@ public class CustomBlockHardnessS2CPacket {
         if (!Objects.equals(AmsServerSettings.commandCustomBlockHardness, "false")) {
             PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
             encode(buf);
-            ServerPlayNetworking.send(player, ID, buf);
+            CustomPayloadS2CPacket packet = new CustomPayloadS2CPacket(ID, buf);
+            player.networkHandler.sendPacket(packet);
         }
     }
 }
