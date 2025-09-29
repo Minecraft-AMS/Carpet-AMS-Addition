@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
+import club.mcams.carpet.network.AMS_CustomPayload;
 
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
@@ -29,10 +29,13 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@GameVersion(version = "Minecraft >= 1.20.5")
 @Mixin(CustomPayloadC2SPacket.class)
 public abstract class CustomPayloadC2SPacketMixin {
     @ModifyArg(
@@ -44,7 +47,7 @@ public abstract class CustomPayloadC2SPacketMixin {
     )
     private static List<?> registerAMSPayloadC2S(List<CustomPayload.Type<?, ?>> types) {
         types = new ArrayList<>(types);
-        types.add(new CustomPayload.Type<>(CustomBlockHardnessPayload.ID_, CustomBlockHardnessPayload.CODEC));
+        types.add(new CustomPayload.Type<>(AMS_CustomPayload.KEY, AMS_CustomPayload.CODEC));
         return Collections.unmodifiableList(types);
     }
 }

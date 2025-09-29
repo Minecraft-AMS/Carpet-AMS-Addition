@@ -21,68 +21,36 @@
 package club.mcams.carpet.network.rule.commandCustomBlockHardness;
 
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
-import club.mcams.carpet.network.BaseCustomPayload;
-import club.mcams.carpet.utils.IdentifierUtil;
+import club.mcams.carpet.network.AMS_CustomPayload;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-//#if MC>=12005
-//$$ import net.minecraft.network.packet.CustomPayload;
-//#else
-import club.mcams.carpet.network.CustomPayload;
-//#endif
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
-import net.minecraft.util.Identifier;
 
 import java.util.HashMap;
 import java.util.Map;
 
-//#if MC>=12005
-//$$ import net.minecraft.network.codec.PacketCodec;
-//$$ import net.minecraft.network.packet.CustomPayload;
-//$$ import io.netty.buffer.Unpooled;
-//#endif
-
-public class CustomBlockHardnessPayload extends BaseCustomPayload implements CustomPayload {
-    public static final Identifier ID = IdentifierUtil.of("carpetamsaddition", "sync_custom_block_hardness");
-
-    //#if MC>=12005
-    //$$ public static final CustomPayload.Id<CustomBlockHardnessPayload> ID_ = new CustomPayload.Id<>(ID);
-    //$$ public static final PacketCodec<PacketByteBuf, CustomBlockHardnessPayload> CODEC = PacketCodec.of(CustomBlockHardnessPayload::write, CustomBlockHardnessPayload::new);
-    //#endif
+public class CustomBlockHardnessPayload extends AMS_CustomPayload {
+    public static final String PACKET_ID = "sync_custom_block_hardness";
 
     private final Map<BlockState, Float> hardnessMap;
 
+    private CustomBlockHardnessPayload(PacketByteBuf buf) {
+        super(PACKET_ID);
+        this.hardnessMap = decode(buf);
+    }
+
     public CustomBlockHardnessPayload(Map<BlockState, Float> hardnessMap) {
-        super(ID);
+        super(PACKET_ID);
         this.hardnessMap = new HashMap<>(hardnessMap);
     }
 
-    //#if MC>=12005
-    //$$ public CustomBlockHardnessPayload(PacketByteBuf buf) {
-    //$$     super(ID);
-    //$$     this.hardnessMap = decode(buf);
-    //$$ }
-    //#endif
-
-    public void write(PacketByteBuf buf) {
+    @Override
+    protected void writeData(PacketByteBuf buf) {
         encode(buf, this.hardnessMap);
     }
 
-    //#if MC>=12005
-    //$$ public Id<? extends CustomPayload> getId() {
-    //$$     return ID_;
-    //$$ }
-    //#endif
-
-    //#if MC>=12005
-    //$$ public Map<BlockState, Float> getHardnessMap() {
-    //$$     return hardnessMap;
-    //$$ }
-    //#endif
-
-    public static void encode(PacketByteBuf buf, Map<BlockState, Float> map) {
+    private static void encode(PacketByteBuf buf, Map<BlockState, Float> map) {
         buf.writeVarInt(map.size());
         for (Map.Entry<BlockState, Float> entry : map.entrySet()) {
             buf.writeVarInt(Block.getRawIdFromState(entry.getKey()));
@@ -90,7 +58,7 @@ public class CustomBlockHardnessPayload extends BaseCustomPayload implements Cus
         }
     }
 
-    public static Map<BlockState, Float> decode(PacketByteBuf buf) {
+    private static Map<BlockState, Float> decode(PacketByteBuf buf) {
         int size = buf.readVarInt();
         Map<BlockState, Float> map = new HashMap<>();
         for (int i = 0; i < size; i++) {
@@ -102,15 +70,12 @@ public class CustomBlockHardnessPayload extends BaseCustomPayload implements Cus
         return map;
     }
 
-    public static void handleCustomBlockHardnessPacket(Object packet) {
-        Map<BlockState, Float> hardnessMap;
-        //#if MC>=12005
-        //$$ hardnessMap = ((CustomBlockHardnessPayload) packet).getHardnessMap();
-        //#else
-        PacketByteBuf buf = ((CustomPayloadS2CPacket) packet).getData();
-        hardnessMap = CustomBlockHardnessPayload.decode(buf);
-        //#endif
+    public static void register() {
+        AMS_CustomPayload.register(PACKET_ID, CustomBlockHardnessPayload::new);
+    }
+
+    public void handle() {
         CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
-        CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(hardnessMap);
+        CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(this.hardnessMap);
     }
 }

@@ -18,17 +18,10 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network;
+package club.mcams.carpet.utils.compat;
 
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.util.Identifier;
 
 public interface CustomPayload {
     void write(PacketByteBuf buf);
-
-    Identifier getId();
-
-    //#if MC >= 12005
-    //$$ Object getRawPacket();
-    //#endif
 }
