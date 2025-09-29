@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessS2CPacket;
+import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
@@ -44,7 +44,7 @@ public abstract class CustomPayloadC2SPacketMixin {
     )
     private static List<?> registerAMSPayloadC2S(List<CustomPayload.Type<?, ?>> types) {
         types = new ArrayList<>(types);
-        types.add(new CustomPayload.Type<>(CustomBlockHardnessS2CPacket.ID, CustomBlockHardnessS2CPacket.CODEC));
+        types.add(new CustomPayload.Type<>(CustomBlockHardnessPayload.ID_, CustomBlockHardnessPayload.CODEC));
         return Collections.unmodifiableList(types);
     }
 }
