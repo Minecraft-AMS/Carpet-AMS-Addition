@@ -18,23 +18,10 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet;
+package club.mcams.carpet.utils.compat;
 
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import net.minecraft.network.PacketByteBuf;
 
-@Environment(EnvType.CLIENT)
-public class AmsClient implements ClientModInitializer {
-    private static final AmsClient AMS_CLIENT_INSTANCE = new AmsClient();
-
-    @Override
-    public void onInitializeClient() {
-        CustomBlockHardnessPayload.register();
-    }
-
-    public static AmsClient getInstance() {
-        return AMS_CLIENT_INSTANCE;
-    }
+public interface CustomPayload {
+    void write(PacketByteBuf buf);
 }

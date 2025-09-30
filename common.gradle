@@ -20,7 +20,7 @@ repositories {
 		url = 'https://jitpack.io'
 	}
     maven {
-        url = 'https://nas.1024byteeeee.top:16999/releases'
+        url = 'https://maven.1024byteeeee.top:1024/releases'
     }
 }
 
@@ -42,8 +42,6 @@ dependencies {
 	// library mods
 	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
-	include(modImplementation(fabricApi.module("fabric-api-base", project.fabric_api_version)))
-	include(modImplementation(fabricApi.module("fabric-networking-api-v1", project.fabric_api_version)))
 
 	// Dependencies
     include(implementation("top.1024byteeeee:tiny_yaml:${project.tiny_yaml_version}"))
@@ -199,7 +197,7 @@ publishing {
 
     repositories {
         maven {
-            url = fullArtifactVersion.endsWith("dev") ? "https://nas.1024byteeeee.top:16999/snapshots" : "https://nas.1024byteeeee.top:16999/releases"
+            url = fullArtifactVersion.endsWith("dev") ? "https://maven.1024byteeeee.top:1024/snapshots" : "https://maven.1024byteeeee.top:1024/releases"
             credentials(PasswordCredentials) {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")

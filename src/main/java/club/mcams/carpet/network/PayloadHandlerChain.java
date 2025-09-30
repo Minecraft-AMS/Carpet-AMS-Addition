@@ -20,15 +20,33 @@
 
 package club.mcams.carpet.network;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
-@SuppressWarnings("unused")
-@GameVersion(version = "Only Minecraft >= 1.20.5")
-public class S2CNetworkPacket {
-    public static void register() {
-        /*
-            只有 Minecraft >= 1.20.5 需要这个
-            例：PayloadTypeRegistry.playS2C().register(CustomBlockHardnessS2CPacket.ID, CustomBlockHardnessS2CPacket.CODEC);
-         */
+public class PayloadHandlerChain {
+    private final List<PayloadHandler> handlers = new ArrayList<>();
+
+    public void addHandler(PayloadHandler handler) {
+        handlers.add(handler);
+    }
+
+    public boolean handle(AMS_CustomPayload payload) {
+        for (PayloadHandler handler : handlers) {
+            if (handler.handle(payload)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public <T extends AMS_CustomPayload> void addHandlerFor(Class<T> payloadClass, Consumer<T> handler) {
+        addHandler(payload -> {
+            if (payloadClass.isInstance(payload)) {
+                handler.accept(payloadClass.cast(payload));
+                return true;
+            }
+            return false;
+        });
     }
 }

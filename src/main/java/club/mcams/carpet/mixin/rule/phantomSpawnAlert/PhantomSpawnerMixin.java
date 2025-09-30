@@ -24,6 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
 
+import club.mcams.carpet.utils.PlayerUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 
 import net.minecraft.entity.mob.PhantomEntity;
@@ -80,10 +81,10 @@ public abstract class PhantomSpawnerMixin {
     {
         if (AmsServerSettings.phantomSpawnAlert && phantom != null) {
             MinecraftServer server = world.getServer();
-            String playerName = playerEntity.getGameProfile().getName();
-            double x = phantom.getPos().getX();
-            double y = phantom.getPos().getY();
-            double z = phantom.getPos().getZ();
+            String playerName = PlayerUtil.getName(playerEntity);
+            double x = phantom.getX();
+            double y = phantom.getY();
+            double z = phantom.getZ();
             String coord = x + ", " + y + ", " + z;
             Messenger.sendServerMessage(server, Messenger.s(translator.tr("msg", playerName, coord).getString()));
         }

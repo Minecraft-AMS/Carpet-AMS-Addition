@@ -1,4 +1,4 @@
-version:4440
+version:4554
 ao:true
 biomeBlendRadius:4
 enableVsync:false
@@ -36,6 +36,7 @@ chatColors:true
 chatLinks:true
 chatLinksPrompt:true
 discrete_mouse_scroll:false
+invertXMouse:false
 invertYMouse:false
 realmsNotifications:false
 showSubtitles:false
@@ -44,6 +45,9 @@ touchscreen:false
 bobView:false
 toggleCrouch:false
 toggleSprint:false
+toggleAttack:false
+toggleUse:false
+sprintWindow:7
 darkMojangStudiosBackground:true
 hideLightningFlashes:false
 hideSplashTexts:false
@@ -78,6 +82,7 @@ attackIndicator:1
 tutorialStep:none
 mouseWheelSensitivity:1.0
 rawMouseInput:true
+allowCursorChanges:true
 glDebugVerbosity:1
 skipMultiplayerWarning:true
 hideMatchedNames:true
@@ -86,6 +91,7 @@ syncChunkWrites:true
 showAutosaveIndicator:true
 allowServerListing:true
 onlyShowSecureChat:false
+saveChatDrafts:false
 panoramaScrollSpeed:1.0
 telemetryOptInExtra:false
 onboardAccessibility:false
@@ -114,6 +120,7 @@ key_key.togglePerspective:key.keyboard.f5
 key_key.smoothCamera:key.keyboard.unknown
 key_key.fullscreen:key.keyboard.f11
 key_key.spectatorOutlines:key.keyboard.unknown
+key_key.spectatorHotbar:key.mouse.middle
 key_key.swapOffhand:key.keyboard.f
 key_key.saveToolbarActivator:key.keyboard.unknown
 key_key.loadToolbarActivator:key.keyboard.unknown

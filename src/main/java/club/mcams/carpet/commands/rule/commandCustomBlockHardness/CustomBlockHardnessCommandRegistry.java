@@ -22,7 +22,7 @@ package club.mcams.carpet.commands.rule.commandCustomBlockHardness;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.config.rule.commandCustomBlockHardness.CustomBlockHardnessConfig;
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessS2CPacket;
+import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
@@ -208,7 +208,8 @@ public class CustomBlockHardnessCommandRegistry {
     }
 
     private static void sendSyncPacketToAllOnlinePlayer(MinecraftServer server) {
-        server.getPlayerManager().getPlayerList().forEach(CustomBlockHardnessS2CPacket::sendToPlayer);
+        CustomBlockHardnessPayload payload = new CustomBlockHardnessPayload(CUSTOM_BLOCK_HARDNESS_MAP);
+        server.getPlayerManager().getPlayerList().forEach(payload::sendToPlayer);
     }
 
     private static void saveToJson() {

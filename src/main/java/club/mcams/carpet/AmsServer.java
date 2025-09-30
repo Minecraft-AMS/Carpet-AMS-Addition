@@ -26,13 +26,14 @@ import carpet.CarpetServer;
 import club.mcams.carpet.api.recipe.AmsRecipeManager;
 import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 import club.mcams.carpet.commands.RegisterCommands;
+import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import club.mcams.carpet.config.LoadConfigFromJson;
 import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessS2CPacket;
+import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
@@ -148,7 +149,8 @@ public class AmsServer implements CarpetExtension {
         CustomWelcomeMessageConfig.getConfig().sendWelcomeMessage(player, MinecraftServerUtil.getServer());
         LeaderCommandRegistry.onPlayerLoggedIn(player);
         RecipeRuleHelper.onPlayerLoggedIn(MinecraftServerUtil.getServer(), player);
-        CustomBlockHardnessS2CPacket.sendToPlayer(player);
+        CustomBlockHardnessPayload customBlockHardnessPayload = new CustomBlockHardnessPayload(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP);
+        customBlockHardnessPayload.sendToPlayer(player);
     }
 
     @Override

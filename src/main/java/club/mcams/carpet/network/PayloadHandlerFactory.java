@@ -20,23 +20,12 @@
 
 package club.mcams.carpet.network;
 
-import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessS2CPacket;
+import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.20.5")
-@Environment(EnvType.CLIENT)
-public class ClientReceiver {
-    public static void register() {
-        ClientPlayNetworking.registerGlobalReceiver(CustomBlockHardnessS2CPacket.ID, (payload, context) -> {
-            CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
-            CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(payload.hardnessMap());
-        });
+public class PayloadHandlerFactory {
+    public static PayloadHandlerChain createHandlerChain() {
+        PayloadHandlerChain chain = new PayloadHandlerChain();
+        chain.addHandlerFor(CustomBlockHardnessPayload.class, CustomBlockHardnessPayload::handle);
+        return chain;
     }
 }
