@@ -23,9 +23,9 @@ import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 
 import io.netty.buffer.Unpooled;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class AMS_CustomPayload implements CustomPayload {
     public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network");
@@ -33,7 +33,7 @@ public abstract class AMS_CustomPayload implements CustomPayload {
     //$$ public static final CustomPayload.Id<AMS_CustomPayload> KEY = new CustomPayload.Id<>(CHANNEL_ID);
     //$$ public static final PacketCodec<PacketByteBuf, AMS_CustomPayload> CODEC = CustomPayload.codecOf(AMS_CustomPayload::write, AMS_CustomPayload::read);
     //#endif
-    private static final Map<String, Function<PacketByteBuf, AMS_CustomPayload>> REGISTRY = new HashMap<>();
+    private static final Map<String, Function<PacketByteBuf, AMS_CustomPayload>> REGISTRY = new ConcurrentHashMap<>();
     private final String packetId;
 
     protected AMS_CustomPayload(String packetId) {
@@ -94,4 +94,6 @@ public abstract class AMS_CustomPayload implements CustomPayload {
         player.networkHandler.sendPacket(packet);
         //#endif
     }
+
+    public abstract void handle();
 }

@@ -22,7 +22,8 @@ package club.mcams.carpet.mixin.network;
 
 import club.mcams.carpet.network.AMS_CustomPayload;
 
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
+import club.mcams.carpet.network.PayloadHandlerChain;
+import club.mcams.carpet.network.PayloadHandlerFactory;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 //#if MC>=12005
 //$$ import net.minecraft.network.packet.CustomPayload;
@@ -31,12 +32,16 @@ import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 //#endif
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin {
+    @Unique
+    private final PayloadHandlerChain payloadHandlerChain = PayloadHandlerFactory.createHandlerChain();
+
     @Inject(method = "onCustomPayload", at = @At("HEAD"), cancellable = true)
     private void onCustomPayload(
         //#if MC>=12005
@@ -49,16 +54,14 @@ public abstract class ClientPlayNetworkHandlerMixin {
         //#if MC>=12005
         //$$ if (payload.getId().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
         //$$     AMS_CustomPayload amsPayload = (AMS_CustomPayload) payload;
-        //$$     if (amsPayload instanceof CustomBlockHardnessPayload) {
-        //$$         ((CustomBlockHardnessPayload) amsPayload).handle();
+        //$$     if (payloadHandlerChain.handle(amsPayload)) {
         //$$         ci.cancel();
         //$$     }
         //$$ }
         //#else
         if (packet.getChannel().equals(AMS_CustomPayload.CHANNEL_ID)) {
             AMS_CustomPayload payload = AMS_CustomPayload.decode(packet);
-            if (payload instanceof CustomBlockHardnessPayload) {
-                ((CustomBlockHardnessPayload) payload).handle();
+            if (payloadHandlerChain.handle(payload)) {
                 ci.cancel();
             }
         }

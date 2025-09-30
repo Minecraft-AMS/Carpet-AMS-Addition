@@ -74,6 +74,7 @@ public class CustomBlockHardnessPayload extends AMS_CustomPayload {
         AMS_CustomPayload.register(PACKET_ID, CustomBlockHardnessPayload::new);
     }
 
+    @Override
     public void handle() {
         CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
         CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(this.hardnessMap);
