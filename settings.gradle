@@ -2,7 +2,7 @@ import groovy.json.JsonSlurper
 
 pluginManagement {
 	def pluginMappings = [
-		"com.replaymod.preprocess" : "com.github.1024-byteeeee:preprocessor"
+		"com.replaymod.preprocess" : "com.github.Fallen-Breath:preprocessor"
 	]
 
 	repositories {
