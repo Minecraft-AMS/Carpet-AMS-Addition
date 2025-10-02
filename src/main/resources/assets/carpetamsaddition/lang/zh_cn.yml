@@ -753,6 +753,9 @@ carpetamsaddition:
       useNewLodestoneRecipe:
         name: 使用新的磁石配方
         desc: 使用铁锭来合成磁石
+      craftableCarvedPumpkin:
+        name: 可合成南瓜头
+        desc: 使用剪刀和南瓜合成南瓜头，每合成一个南瓜头剪刀-1耐久（受耐久附魔影响）
 
       # 测试用规则
       testRule:

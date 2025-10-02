@@ -98,6 +98,10 @@ public class AmsServerCustomRecipes {
         .addIngredient(DEEPSLATE).output(POLISHED_BLACKSTONE_BUTTON, 1).build();
         //#endif
 
+        // Mixin实现
+        ShapelessRecipeBuilder.create(AmsServerSettings.craftableCarvedPumpkin, "carved_pumpkin")
+        .addIngredient(SHEARS).addIngredient(PUMPKIN).output(CARVED_PUMPKIN, 1).build();
+
         /*
          * 熔炉烧炼配方
          */

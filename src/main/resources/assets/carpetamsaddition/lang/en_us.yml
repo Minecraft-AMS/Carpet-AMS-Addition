@@ -608,6 +608,8 @@ carpetamsaddition:
         desc: Rotten flesh can be burned into leather in a furnace
       useNewLodestoneRecipe:
         desc: Use iron ingots to craft Lodestone
+      craftableCarvedPumpkin:
+        desc: Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpkin reduces the shears durability by 1 (affected by unbreaking enchantments)
 
       # 测试用规则
       testRule:

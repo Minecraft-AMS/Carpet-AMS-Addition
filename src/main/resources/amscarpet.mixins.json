@@ -42,6 +42,8 @@
     "rule.commandCustomMovableBlock.PistonBlockMixin",
     "rule.commandPlayerChunkLoadController.ThreadedAnvilChunkStorageMixin",
     "rule.commandPlayerLeader.ServerPlayerEntityMixin",
+    "rule.craftableCarvedPumpkin.ShapelessRecipeMixin",
+    "rule.craftableCarvedPumpkin.RecipeMixin",
     "rule.creativeOneHitKill.EntityAccessorAndInvoker",
     "rule.creativeOneHitKill.PlayerEntityAccessorAndInvoker",
     "rule.creativeOneHitKill.PlayerEntityMixin",
