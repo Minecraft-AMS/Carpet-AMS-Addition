@@ -18,12 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network;
+package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
+import club.mcams.carpet.utils.compat.DummyInterface;
 
-public class RegPayloadToClient {
-    public static void register() {
-        CustomBlockHardnessPayload.register();
-    }
-}
+import org.spongepowered.asm.mixin.Mixin;
+
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft < 1.20.6")
+@Mixin(DummyInterface.class)
+public interface CustomPayloadC2SPacketAccessor {}
