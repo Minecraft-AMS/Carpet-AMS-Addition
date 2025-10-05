@@ -20,7 +20,9 @@
 
 package club.mcams.carpet.network.payload;
 
-public class RegC2SPayload {
+public final class RegC2SPayload {
+    private RegC2SPayload() {}
+
     public static void register() {
         ClientModVersionPayload.register();
     }

@@ -20,7 +20,6 @@
 
 package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.handler.PayloadHandlerChain;
 import club.mcams.carpet.network.handler.S2CPayloadHandlerFactory;
 import club.mcams.carpet.network.payload.AMS_CustomPayload;
 
@@ -36,10 +35,9 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 //#endif
-
 import net.minecraft.util.Identifier;
+
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -53,9 +51,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
     //#endif
 )
 public abstract class ClientPlayNetworkHandlerMixin {
-    @Unique
-    private final PayloadHandlerChain payloadHandlerChain = S2CPayloadHandlerFactory.createChain();
-
     @Inject(
         //#if MC>=12005
         //$$ method = "onCustomPayload(Lnet/minecraft/network/packet/s2c/common/CustomPayloadS2CPacket;)V",
@@ -69,7 +64,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
         //#if MC>=12005
         //$$ if (packet.payload() instanceof AMS_CustomPayload && packet.payload().getId().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
         //$$     AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
-        //$$     if (payloadHandlerChain.handle(payload)) {
+        //$$     if (S2CPayloadHandlerFactory.HANDLER_CHAIN.handle(payload)) {
         //$$         ci.cancel();
         //$$     }
         //$$ }
@@ -79,7 +74,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
             PacketByteBuf packetByteBuf = ((CustomPayloadS2CPacketAccessor) packet).getData();
             try {
                 AMS_CustomPayload payload = AMS_CustomPayload.decode(packet);
-                if (payload != null && payloadHandlerChain.handle(payload)) {
+                if (payload != null && S2CPayloadHandlerFactory.HANDLER_CHAIN.handle(payload)) {
                     ci.cancel();
                 }
             } finally {

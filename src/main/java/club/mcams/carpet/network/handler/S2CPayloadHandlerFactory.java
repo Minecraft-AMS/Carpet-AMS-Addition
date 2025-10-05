@@ -22,12 +22,18 @@ package club.mcams.carpet.network.handler;
 
 import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 
-public class S2CPayloadHandlerFactory {
-    public static PayloadHandlerChain createChain() {
+public final class S2CPayloadHandlerFactory {
+    private S2CPayloadHandlerFactory() {}
+
+    public static final PayloadHandlerChain HANDLER_CHAIN  = createChain();
+
+    private static PayloadHandlerChain createChain() {
         PayloadHandlerChain chain = new PayloadHandlerChain();
-
-        chain.addHandlerFor(CustomBlockHardnessPayload.class, CustomBlockHardnessPayload::handle);
-
+        registerHandlers(chain);
         return chain;
+    }
+
+    private static void registerHandlers(PayloadHandlerChain chain) {
+        chain.addHandlerFor(CustomBlockHardnessPayload.class, CustomBlockHardnessPayload::handle);
     }
 }

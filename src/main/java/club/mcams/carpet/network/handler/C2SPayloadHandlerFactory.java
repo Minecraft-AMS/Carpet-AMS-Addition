@@ -22,12 +22,18 @@ package club.mcams.carpet.network.handler;
 
 import club.mcams.carpet.network.payload.ClientModVersionPayload;
 
-public class C2SPayloadHandlerFactory {
-    public static PayloadHandlerChain createChain() {
-        PayloadHandlerChain chain = new PayloadHandlerChain();
-        
-        chain.addHandlerFor(ClientModVersionPayload.class, ClientModVersionPayload::handle);
+public final class C2SPayloadHandlerFactory {
+    private C2SPayloadHandlerFactory() {}
 
+    public static final PayloadHandlerChain HANDLER_CHAIN = createChain();
+
+    private static PayloadHandlerChain createChain() {
+        PayloadHandlerChain chain = new PayloadHandlerChain();
+        registerHandlers(chain);
         return chain;
+    }
+
+    private static void registerHandlers(PayloadHandlerChain chain) {
+        chain.addHandlerFor(ClientModVersionPayload.class, ClientModVersionPayload::handle);
     }
 }

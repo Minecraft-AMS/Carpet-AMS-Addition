@@ -22,7 +22,9 @@ package club.mcams.carpet.network.payload;
 
 import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 
-public class RegS2CPayload {
+public final class RegS2CPayload {
+    private RegS2CPayload() {}
+
     public static void register() {
         CustomBlockHardnessPayload.register();
     }

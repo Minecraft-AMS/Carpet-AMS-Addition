@@ -21,36 +21,31 @@
 package club.mcams.carpet.mixin.network;
 
 import club.mcams.carpet.network.handler.C2SPayloadHandlerFactory;
-import club.mcams.carpet.network.handler.PayloadHandlerChain;
 import club.mcams.carpet.network.payload.AMS_CustomPayload;
 
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ServerPlayNetworkHandler.class)
 public abstract class ServerPlayNetworkHandlerMixin {
-    @Unique
-    private final PayloadHandlerChain payloadHandlerChain = C2SPayloadHandlerFactory.createChain();
-
     @Inject(method = "onCustomPayload", at = @At("HEAD"), cancellable = true)
     private void onCustomPayload(CustomPayloadC2SPacket packet, CallbackInfo ci) {
         //#if MC>=12005
         //$$ if (packet.payload() instanceof AMS_CustomPayload && packet.payload().getId().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
         //$$     AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
-        //$$     if (payloadHandlerChain.handle(payload)) {
+        //$$     if (C2SPayloadHandlerFactory.HANDLER_CHAIN.handle(payload)) {
         //$$         ci.cancel();
         //$$     }
         //$$ }
         //#else
         if (((CustomPayloadC2SPacketAccessor) packet).getChannel().equals(AMS_CustomPayload.CHANNEL_ID)) {
             AMS_CustomPayload payload = AMS_CustomPayload.decode(packet);
-            if (payloadHandlerChain.handle(payload)) {
+            if (C2SPayloadHandlerFactory.HANDLER_CHAIN.handle(payload)) {
                 ci.cancel();
             }
         }
