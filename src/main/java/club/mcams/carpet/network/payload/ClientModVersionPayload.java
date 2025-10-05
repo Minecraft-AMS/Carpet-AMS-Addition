@@ -38,8 +38,8 @@ public class ClientModVersionPayload extends AMS_CustomPayload {
 
     public ClientModVersionPayload(PacketByteBuf buf) {
         super(PACKET_ID);
-        this.modVersion = buf.readString();
-        this.playerName = buf.readString();
+        this.modVersion = readString(buf);
+        this.playerName = readString(buf);
     }
 
     @Override
