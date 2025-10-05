@@ -39,10 +39,11 @@ public abstract class TripwireHookBlockMixin {
         method = "update",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z", ordinal = 3
+            target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z",
+            ordinal = 3
         )
     )
-    private static boolean tripwireHookDupeReintroduced(boolean original) {
+    private static boolean stringDupeReintroduced(boolean original) {
         return AmsServerSettings.stringDupeReintroduced ? true : original;
     }
 }
