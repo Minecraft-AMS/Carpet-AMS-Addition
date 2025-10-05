@@ -21,11 +21,8 @@
 package club.mcams.carpet.mixin.rule.strongLeash;
 
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.utils.Noop;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 import net.minecraft.entity.Leashable;
 
@@ -40,14 +37,5 @@ public interface LeashableMixin {
     @ModifyReturnValue(method = "getLeashSnappingDistance", at = @At("RETURN"))
     private double modifyLeashSnappingDistance(double original) {
         return AmsServerSettings.strongLeash ? Math.max(original, Double.MAX_VALUE) : original;
-    }
-
-    @WrapMethod(method = "detachLeash()V")
-    private void prentDetachLeash(Operation<Void> original) {
-        if (AmsServerSettings.strongLeash) {
-            Noop.noop();
-        } else {
-            original.call();
-        }
     }
 }
