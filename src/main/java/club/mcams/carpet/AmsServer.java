@@ -37,7 +37,6 @@ import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomB
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
-import club.mcams.carpet.utils.AutoCleaner;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.CountRulesUtil;
 import club.mcams.carpet.utils.MinecraftServerUtil;
@@ -166,7 +165,6 @@ public class AmsServer implements CarpetExtension {
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
         FancyFakePlayerNameTeamController.removeBotTeam(server, AmsServerSettings.fancyFakePlayerName);
-        AutoCleaner.removeAmsDataFolder(server);
     }
 
     public void afterServerLoadWorlds(MinecraftServer server) {
