@@ -95,6 +95,9 @@ public abstract class AMS_CustomPayload implements CustomPayload {
     private static AMS_CustomPayload getAmsCustomPayload(PacketByteBuf buf) {
         String packetId = readString(buf);
         Function<PacketByteBuf, AMS_CustomPayload> constructor = REGISTRY.get(packetId);
+        if (constructor == null) {
+            throw new IllegalArgumentException("Unknown packet id: " + packetId);
+        }
         return constructor.apply(buf);
     }
     //#endif

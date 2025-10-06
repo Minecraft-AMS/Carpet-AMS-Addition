@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.handler.S2CPayloadHandlerFactory;
+import club.mcams.carpet.network.handler.factory.S2CPayloadHandlerFactory;
 import club.mcams.carpet.network.payload.AMS_CustomPayload;
 
 import net.fabricmc.api.EnvType;

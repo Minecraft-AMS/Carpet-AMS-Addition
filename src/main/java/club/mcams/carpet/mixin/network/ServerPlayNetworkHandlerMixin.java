@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.handler.C2SPayloadHandlerFactory;
+import club.mcams.carpet.network.handler.factory.C2SPayloadHandlerFactory;
 import club.mcams.carpet.network.payload.AMS_CustomPayload;
 
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;

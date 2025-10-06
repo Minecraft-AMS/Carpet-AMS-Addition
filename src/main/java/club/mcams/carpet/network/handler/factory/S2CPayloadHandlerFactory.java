@@ -18,8 +18,9 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network.handler;
+package club.mcams.carpet.network.handler.factory;
 
+import club.mcams.carpet.network.handler.PayloadHandlerChain;
 import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 
 public final class S2CPayloadHandlerFactory {
