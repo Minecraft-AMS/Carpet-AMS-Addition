@@ -723,7 +723,7 @@ carpetamsaddition:
           '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
       endPortalChunkLoader:
         name: 末地门加载器
-        desc: 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致 (Minecraft >= 1.20.6可用)
+        desc: 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致 (Minecraft < 1.20.6可用)
 
       #合成配方规则
       craftableEnchantedGoldenApples:
