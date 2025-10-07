@@ -18,14 +18,23 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.network;
+package club.mcams.carpet.network.handler.factory;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.network.handler.PayloadHandlerChain;
+import club.mcams.carpet.network.payload.ClientModVersionPayload;
 
-import org.spongepowered.asm.mixin.Mixin;
+public final class C2SPayloadHandlerFactory {
+    private C2SPayloadHandlerFactory() {}
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+    public static final PayloadHandlerChain HANDLER_CHAIN = createChain();
 
-@GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(DummyClass.class)
-public abstract class CustomPayloadS2CPacketMixin {}
+    private static PayloadHandlerChain createChain() {
+        PayloadHandlerChain chain = new PayloadHandlerChain();
+        registerHandlers(chain);
+        return chain;
+    }
+
+    private static void registerHandlers(PayloadHandlerChain chain) {
+        chain.addHandlerFor(ClientModVersionPayload.class, ClientModVersionPayload::handle);
+    }
+}

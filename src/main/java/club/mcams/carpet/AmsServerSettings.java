@@ -708,9 +708,15 @@ public class AmsServerSettings {
     public static boolean rottenFleshBurnedIntoLeather = false;
 
     //#if MC<12105
+    @GameVersion(version = "Minecraft < 1.21.5")
+    @RecipeRule
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean useNewLodestoneRecipe = false;
     //#endif
+
+    @RecipeRule
+    @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    public static boolean craftableCarvedPumpkin = false;
 
     public enum blueSkullProbability {
         VANILLA,

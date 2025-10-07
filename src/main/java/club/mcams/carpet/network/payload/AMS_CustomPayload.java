@@ -5,10 +5,11 @@
  * Copyright (C) 2025 A Minecraft Server and contributors
  */
 
-package club.mcams.carpet.network;
+package club.mcams.carpet.network.payload;
 
 import club.mcams.carpet.utils.IdentifierUtil;
 
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
@@ -16,9 +17,13 @@ import net.minecraft.util.Identifier;
 //$$ import net.minecraft.network.codec.PacketCodec;
 //$$ import net.minecraft.network.packet.CustomPayload;
 //$$ import net.minecraft.network.packet.s2c.common.CustomPayloadS2CPacket;
+//$$ import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 //#else
-import club.mcams.carpet.utils.compat.CustomPayload;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
+import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
+import club.mcams.carpet.mixin.network.CustomPayloadC2SPacketAccessor;
+import club.mcams.carpet.mixin.network.CustomPayloadS2CPacketAccessor;
+import club.mcams.carpet.utils.compat.CustomPayload;
 //#endif
 
 import io.netty.buffer.Unpooled;
@@ -31,7 +36,7 @@ public abstract class AMS_CustomPayload implements CustomPayload {
     public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network");
     //#if MC>=12005
     //$$ public static final CustomPayload.Id<AMS_CustomPayload> KEY = new CustomPayload.Id<>(CHANNEL_ID);
-    //$$ public static final PacketCodec<PacketByteBuf, AMS_CustomPayload> CODEC = CustomPayload.codecOf(AMS_CustomPayload::write, AMS_CustomPayload::read);
+    //$$ public static final PacketCodec<PacketByteBuf, AMS_CustomPayload> CODEC = CustomPayload.codecOf(AMS_CustomPayload::write, AMS_CustomPayload::decode);
     //#endif
     private static final Map<String, Function<PacketByteBuf, AMS_CustomPayload>> REGISTRY = new ConcurrentHashMap<>();
     private final String packetId;
@@ -57,34 +62,41 @@ public abstract class AMS_CustomPayload implements CustomPayload {
 
     protected abstract void writeData(PacketByteBuf buf);
 
+    protected static String readString(PacketByteBuf buf) {
+        //#if MC<11700
+        return buf.readString(Short.MAX_VALUE);
+        //#else
+        //$$ return buf.readString();
+        //#endif
+    }
+
     //#if MC>=12005
-    //$$ public static AMS_CustomPayload read(PacketByteBuf buf) {
+    //$$ private  static AMS_CustomPayload decode(PacketByteBuf buf) {
     //$$     String packetId = buf.readString();
     //$$     Function<PacketByteBuf, AMS_CustomPayload> constructor = REGISTRY.get(packetId);
-    //$$     if (constructor == null) {
-    //$$         throw new IllegalArgumentException("Unknown packet id: " + packetId);
-    //$$     }
     //$$     return constructor.apply(buf);
     //$$ }
     //#endif
 
-    public static void register(String packetId, Function<PacketByteBuf, AMS_CustomPayload> constructor) {
-        REGISTRY.put(packetId, constructor);
+    //#if MC<12005
+    // S2C
+    public static AMS_CustomPayload decode(CustomPayloadS2CPacket packet) {
+        return getAmsCustomPayload(((CustomPayloadS2CPacketAccessor) packet).getData());
     }
 
-    //#if MC<12005
-    public static AMS_CustomPayload decode(CustomPayloadS2CPacket packet) {
-        PacketByteBuf buf = packet.getData();
-        String packetId = buf.readString();
+    // C2S
+    public static AMS_CustomPayload decode(CustomPayloadC2SPacket packet) {
+        return getAmsCustomPayload(((CustomPayloadC2SPacketAccessor) packet).getData());
+    }
+
+    private static AMS_CustomPayload getAmsCustomPayload(PacketByteBuf buf) {
+        String packetId = readString(buf);
         Function<PacketByteBuf, AMS_CustomPayload> constructor = REGISTRY.get(packetId);
-        if (constructor == null) {
-            throw new IllegalArgumentException("Unknown packet id: " + packetId);
-        }
         return constructor.apply(buf);
     }
     //#endif
 
-    public void sendToPlayer(ServerPlayerEntity player) {
+    public void sendS2CPacket(ServerPlayerEntity player) {
         //#if MC>=12005
         //$$ player.networkHandler.sendPacket(new CustomPayloadS2CPacket(this));
         //#else
@@ -93,6 +105,21 @@ public abstract class AMS_CustomPayload implements CustomPayload {
         CustomPayloadS2CPacket packet = new CustomPayloadS2CPacket(CHANNEL_ID, buf);
         player.networkHandler.sendPacket(packet);
         //#endif
+    }
+
+    public void sendC2SPacket(ClientPlayerEntity player) {
+        //#if MC>=12005
+        //$$ player.networkHandler.sendPacket(new CustomPayloadC2SPacket(this));
+        //#else
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        this.write(buf);
+        CustomPayloadC2SPacket packet = new CustomPayloadC2SPacket(CHANNEL_ID, buf);
+        player.networkHandler.sendPacket(packet);
+        //#endif
+    }
+
+    public static void register(String packetId, Function<PacketByteBuf, AMS_CustomPayload> constructor) {
+        REGISTRY.put(packetId, constructor);
     }
 
     public abstract void handle();

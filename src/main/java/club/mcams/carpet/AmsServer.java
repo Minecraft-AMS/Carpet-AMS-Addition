@@ -33,11 +33,10 @@ import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
-import club.mcams.carpet.network.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
+import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
-import club.mcams.carpet.utils.AutoCleaner;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.CountRulesUtil;
 import club.mcams.carpet.utils.MinecraftServerUtil;
@@ -149,8 +148,7 @@ public class AmsServer implements CarpetExtension {
         CustomWelcomeMessageConfig.getConfig().sendWelcomeMessage(player, MinecraftServerUtil.getServer());
         LeaderCommandRegistry.onPlayerLoggedIn(player);
         RecipeRuleHelper.onPlayerLoggedIn(MinecraftServerUtil.getServer(), player);
-        CustomBlockHardnessPayload customBlockHardnessPayload = new CustomBlockHardnessPayload(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP);
-        customBlockHardnessPayload.sendToPlayer(player);
+        CustomBlockHardnessPayload.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP).sendS2CPacket(player);
     }
 
     @Override
@@ -167,7 +165,6 @@ public class AmsServer implements CarpetExtension {
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
         FancyFakePlayerNameTeamController.removeBotTeam(server, AmsServerSettings.fancyFakePlayerName);
-        AutoCleaner.removeAmsDataFolder(server);
     }
 
     public void afterServerLoadWorlds(MinecraftServer server) {

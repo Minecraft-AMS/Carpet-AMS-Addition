@@ -40,7 +40,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import java.util.Collections;
 import java.util.List;
 
-@GameVersion(version = "Minecraft > 1.17")
+@GameVersion(version = "Minecraft >= 1.17")
 @Mixin(ExperienceOrbEntity.class)
 public abstract class ExperienceOrbEntityMixin {
     @Inject(method = "repairPlayerGears", at = @At("HEAD"), cancellable = true)

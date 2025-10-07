@@ -18,8 +18,20 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network;
+package club.mcams.carpet.mixin.network;
 
-public interface PayloadHandler {
-    boolean handle(AMS_CustomPayload payload);
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
+import net.minecraft.util.Identifier;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
+
+@Mixin(CustomPayloadS2CPacket.class)
+public interface CustomPayloadS2CPacketAccessor {
+    @Accessor("data")
+    PacketByteBuf getData();
+
+    @Accessor("channel")
+    Identifier getChannel();
 }

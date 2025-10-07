@@ -18,35 +18,24 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network;
+package club.mcams.carpet.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
+import club.mcams.carpet.AmsClient;
 
-public class PayloadHandlerChain {
-    private final List<PayloadHandler> handlers = new ArrayList<>();
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 
-    public void addHandler(PayloadHandler handler) {
-        handlers.add(handler);
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
+
+@Environment(EnvType.CLIENT)
+public class MinecraftClientUtil {
+    public static ClientPlayerEntity getCurrentPlayer() {
+        return AmsClient.minecraftClient.player;
     }
 
-    public boolean handle(AMS_CustomPayload payload) {
-        for (PayloadHandler handler : handlers) {
-            if (handler.handle(payload)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public <T extends AMS_CustomPayload> void addHandlerFor(Class<T> payloadClass, Consumer<T> handler) {
-        addHandler(payload -> {
-            if (payloadClass.isInstance(payload)) {
-                handler.accept(payloadClass.cast(payload));
-                return true;
-            }
-            return false;
-        });
+    @SuppressWarnings("unused")
+    public static MinecraftClient getCurrentClient() {
+        return AmsClient.minecraftClient;
     }
 }

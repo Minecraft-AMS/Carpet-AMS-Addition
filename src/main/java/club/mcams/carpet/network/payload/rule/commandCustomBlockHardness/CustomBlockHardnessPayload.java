@@ -18,10 +18,10 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network.rule.commandCustomBlockHardness;
+package club.mcams.carpet.network.payload.rule.commandCustomBlockHardness;
 
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
-import club.mcams.carpet.network.AMS_CustomPayload;
+import club.mcams.carpet.network.payload.AMS_CustomPayload;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -72,6 +72,10 @@ public class CustomBlockHardnessPayload extends AMS_CustomPayload {
 
     public static void register() {
         AMS_CustomPayload.register(PACKET_ID, CustomBlockHardnessPayload::new);
+    }
+
+    public static CustomBlockHardnessPayload create(Map<BlockState, Float> hardnessMap) {
+        return new CustomBlockHardnessPayload(hardnessMap);
     }
 
     @Override

@@ -587,7 +587,7 @@ carpetamsaddition:
           '0': 'Affected rules: '
           '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
       endPortalChunkLoader:
-        desc: Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5 (Available for Minecraft >= 1.20.6)
+        desc: Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5 (Available for Minecraft < 1.20.6)
 
       #合成配方规则
       craftableEnchantedGoldenApples:
@@ -608,6 +608,8 @@ carpetamsaddition:
         desc: Rotten flesh can be burned into leather in a furnace
       useNewLodestoneRecipe:
         desc: Use iron ingots to craft Lodestone
+      craftableCarvedPumpkin:
+        desc: Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpkin reduces the shears durability by 1 (affected by unbreaking enchantments)
 
       # 测试用规则
       testRule:

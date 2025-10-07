@@ -723,7 +723,7 @@ carpetamsaddition:
           '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
       endPortalChunkLoader:
         name: 末地门加载器
-        desc: 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致 (Minecraft >= 1.20.6可用)
+        desc: 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致 (Minecraft < 1.20.6可用)
 
       #合成配方规则
       craftableEnchantedGoldenApples:
@@ -753,6 +753,9 @@ carpetamsaddition:
       useNewLodestoneRecipe:
         name: 使用新的磁石配方
         desc: 使用铁锭来合成磁石
+      craftableCarvedPumpkin:
+        name: 可合成南瓜头
+        desc: 使用剪刀和南瓜合成南瓜头，每合成一个南瓜头剪刀-1耐久（受耐久附魔影响）
 
       # 测试用规则
       testRule:

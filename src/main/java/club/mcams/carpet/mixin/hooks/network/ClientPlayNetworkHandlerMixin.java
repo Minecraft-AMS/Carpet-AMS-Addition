@@ -18,14 +18,25 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.network;
+package club.mcams.carpet.mixin.hooks.network;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsClient;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+
+import net.minecraft.client.network.ClientPlayNetworkHandler;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(DummyClass.class)
-public abstract class CustomPayloadS2CPacketMixin {}
+@Environment(EnvType.CLIENT)
+@Mixin(ClientPlayNetworkHandler.class)
+public abstract class ClientPlayNetworkHandlerMixin {
+    @Inject(method = "onGameJoin", at = @At("RETURN"))
+    private void onGameJoin(CallbackInfo ci) {
+        AmsClient.getInstance().onGameJoin();
+    }
+}
