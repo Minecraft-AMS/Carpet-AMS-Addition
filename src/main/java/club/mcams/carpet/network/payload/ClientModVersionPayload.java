@@ -21,6 +21,7 @@
 package club.mcams.carpet.network.payload;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.AmsServerMod;
 
 import net.minecraft.network.PacketByteBuf;
 
@@ -50,7 +51,11 @@ public class ClientModVersionPayload extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        AmsServer.LOGGER.info("{} joined with carpet-ams-addition v{}", this.playerName, this.modVersion);
+        if (this.modVersion.equals(AmsServerMod.getVersion())) {
+            AmsServer.LOGGER.info("{} joined with matched carpet-ams-addition v{}", this.playerName, this.modVersion);
+        } else {
+            AmsServer.LOGGER.info("{} joined with mismatched carpet-ams-addition version (client: v{}, server: v{})", this.playerName, this.modVersion, AmsServerMod.getVersion());
+        }
     }
 
     public static ClientModVersionPayload create(String modVersion, String playerName) {
