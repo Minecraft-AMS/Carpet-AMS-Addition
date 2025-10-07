@@ -40,7 +40,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-    @Inject(method = "dropLoot", at = @At("TAIL"))
+    @Inject(
+        //#if MC>=12110
+        //$$ method = "dropLoot(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;Z)V",
+        //#else
+        method = "dropLoot",
+        //#endif
+        at = @At("TAIL")
+    )
     private void customRedstoneDustDrop(CallbackInfo ci) {
         if (AmsServerSettings.witchRedstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
@@ -58,7 +65,14 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @Inject(method = "dropLoot", at = @At("TAIL"))
+    @Inject(
+        //#if MC>=12110
+        //$$ method = "dropLoot(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;Z)V",
+        //#else
+        method = "dropLoot",
+        //#endif
+        at = @At("TAIL")
+    )
     private void customGlowstoneDustDrop(CallbackInfo ci) {
         if (AmsServerSettings.witchGlowstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
