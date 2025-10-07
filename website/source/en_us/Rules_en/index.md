@@ -2721,3 +2721,21 @@ Use iron ingots to craft Lodestone.
 
 
 - Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## craftableCarvedPumpkin
+
+Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpkin reduces the shears durability by 1 (affected by unbreaking enchantments).
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`

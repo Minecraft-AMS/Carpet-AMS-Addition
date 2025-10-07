@@ -2703,3 +2703,21 @@ json位置：
 
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## 可合成南瓜头（craftableCarvedPumpkin）
+
+使用剪刀和南瓜合成南瓜头，每合成一个南瓜头剪刀-1耐久（受耐久附魔影响）。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `SURVIVAL`, `CRAFTING`
