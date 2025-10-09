@@ -208,8 +208,7 @@ public class CustomBlockHardnessCommandRegistry {
     }
 
     private static void sendSyncPacketToAllOnlinePlayer(MinecraftServer server) {
-        CustomBlockHardnessPayload payload = new CustomBlockHardnessPayload(CUSTOM_BLOCK_HARDNESS_MAP);
-        server.getPlayerManager().getPlayerList().forEach(payload::sendS2CPacket);
+        server.getPlayerManager().getPlayerList().forEach(player -> CustomBlockHardnessPayload.create(CUSTOM_BLOCK_HARDNESS_MAP).sendS2CPacket(player));
     }
 
     private static void saveToJson() {
