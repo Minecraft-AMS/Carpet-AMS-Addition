@@ -31,13 +31,13 @@ public class ClientModVersionPayload extends AMS_CustomPayload {
     private final String modVersion;
     private final String playerName;
 
-    public ClientModVersionPayload(String modVersion, String playerName) {
+    private ClientModVersionPayload(String modVersion, String playerName) {
         super(PACKET_ID);
         this.modVersion = modVersion;
         this.playerName = playerName;
     }
 
-    public ClientModVersionPayload(PacketByteBuf buf) {
+    private ClientModVersionPayload(PacketByteBuf buf) {
         super(PACKET_ID);
         this.modVersion = readString(buf);
         this.playerName = readString(buf);

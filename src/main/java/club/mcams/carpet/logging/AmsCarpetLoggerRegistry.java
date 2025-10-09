@@ -45,8 +45,7 @@ public class AmsCarpetLoggerRegistry {
     public static Field getLoggerField(String logName) {
         try {
             return AmsCarpetLoggerRegistry.class.getField("__" + logName);
-        }
-        catch (NoSuchFieldException e) {
+        } catch (NoSuchFieldException e) {
             throw new RuntimeException();
         }
     }

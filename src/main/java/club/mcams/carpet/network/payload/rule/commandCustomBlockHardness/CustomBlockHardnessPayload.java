@@ -40,7 +40,7 @@ public class CustomBlockHardnessPayload extends AMS_CustomPayload {
         this.hardnessMap = decode(buf);
     }
 
-    public CustomBlockHardnessPayload(Map<BlockState, Float> hardnessMap) {
+    private CustomBlockHardnessPayload(Map<BlockState, Float> hardnessMap) {
         super(PACKET_ID);
         this.hardnessMap = new HashMap<>(hardnessMap);
     }
