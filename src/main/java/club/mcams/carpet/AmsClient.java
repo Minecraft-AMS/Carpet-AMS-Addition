@@ -23,16 +23,19 @@ package club.mcams.carpet;
 import club.mcams.carpet.network.payload.ClientModVersionPayload;
 import club.mcams.carpet.network.payload.RegS2CPayload;
 import club.mcams.carpet.utils.MinecraftClientUtil;
+import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.utils.PlayerUtil;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 
 public class AmsClient implements ClientModInitializer {
     private static final String MOD_ID = "carpet-ams-addition";
     public static final String name = getModId();
     public static MinecraftClient minecraftClient;
+    public ClientPlayerEntity player;
     private static String version;
     private static final AmsClient AMS_CLIENT_INSTANCE = new AmsClient();
 
@@ -56,6 +59,7 @@ public class AmsClient implements ClientModInitializer {
     }
 
     public void onGameJoin() {
-        ClientModVersionPayload.create(version, PlayerUtil.getName(MinecraftClientUtil.getCurrentPlayer())).sendC2SPacket(MinecraftClientUtil.getCurrentPlayer());
+        player = MinecraftClientUtil.getCurrentPlayer();
+        NetworkUtil.sendC2SPacket(player, ClientModVersionPayload.create(version, PlayerUtil.getName(player)));
     }
 }
