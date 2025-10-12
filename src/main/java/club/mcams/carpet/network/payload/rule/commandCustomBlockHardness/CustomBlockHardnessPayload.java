@@ -21,6 +21,7 @@
 package club.mcams.carpet.network.payload.rule.commandCustomBlockHardness;
 
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
+import club.mcams.carpet.network.PacketId;
 import club.mcams.carpet.network.payload.AMS_CustomPayload;
 
 import net.minecraft.block.Block;
@@ -31,17 +32,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CustomBlockHardnessPayload extends AMS_CustomPayload {
-    public static final String PACKET_ID = "sync_custom_block_hardness";
-
     private final Map<BlockState, Float> hardnessMap;
 
     private CustomBlockHardnessPayload(PacketByteBuf buf) {
-        super(PACKET_ID);
+        super(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId());
         this.hardnessMap = decode(buf);
     }
 
     private CustomBlockHardnessPayload(Map<BlockState, Float> hardnessMap) {
-        super(PACKET_ID);
+        super(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId());
         this.hardnessMap = new HashMap<>(hardnessMap);
     }
 
@@ -61,17 +60,19 @@ public class CustomBlockHardnessPayload extends AMS_CustomPayload {
     private static Map<BlockState, Float> decode(PacketByteBuf buf) {
         int size = buf.readVarInt();
         Map<BlockState, Float> map = new HashMap<>();
+
         for (int i = 0; i < size; i++) {
             int stateId = buf.readVarInt();
             float hardness = buf.readFloat();
             BlockState state = Block.STATE_IDS.get(stateId);
             map.put(state, hardness);
         }
+
         return map;
     }
 
     public static void register() {
-        AMS_CustomPayload.register(PACKET_ID, CustomBlockHardnessPayload::new);
+        AMS_CustomPayload.register(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId(), CustomBlockHardnessPayload::new);
     }
 
     public static CustomBlockHardnessPayload create(Map<BlockState, Float> hardnessMap) {

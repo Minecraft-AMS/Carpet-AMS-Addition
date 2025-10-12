@@ -26,16 +26,68 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class NetworkUtil {
+    private static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
+    private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
+
     public static void broadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
         server.getPlayerManager().getPlayerList().forEach(player -> sendS2CPacket(player, payload));
     }
 
     public static void sendS2CPacket(ServerPlayerEntity player, AMS_CustomPayload payload) {
-        payload.sendS2CPacket(player);
+        if (isSupportClient(player.getUuid())) {
+            payload.sendS2CPacket(player);
+        }
+    }
+
+    public static void sendC2SPacketIfSupport(ClientPlayerEntity player, AMS_CustomPayload payload) {
+        if (isSupportServer()) {
+            payload.sendC2SPacket(player);
+        }
     }
 
     public static void sendC2SPacket(ClientPlayerEntity player, AMS_CustomPayload payload) {
         payload.sendC2SPacket(player);
+    }
+
+    public static boolean isSupportClient(UUID uuid) {
+        return SUPPORT_CLIENT.contains(uuid);
+    }
+
+    public static boolean isSupportServer() {
+        return SUPPORT_SERVER.get();
+    }
+
+    public static void setServerSupport(boolean support) {
+        SUPPORT_SERVER.set(support);
+    }
+
+    public static void addSupportClient(UUID uuid) {
+        SUPPORT_CLIENT.add(uuid);
+    }
+
+    public static void removeSupportClient(UUID uuid) {
+        SUPPORT_CLIENT.remove(uuid);
+    }
+
+    public static void clearClientSupport() {
+        SUPPORT_CLIENT.clear();
+    }
+
+    public static void executeOnClientThread(Runnable runnable) {
+        if (MinecraftClientUtil.clientIsRunning()) {
+            MinecraftClientUtil.getCurrentClient().execute(runnable);
+        }
+    }
+
+    public static void executeOnServerThread(Runnable runnable) {
+        if (MinecraftServerUtil.serverIsRunning()) {
+            MinecraftServerUtil.getServer().execute(runnable);
+        }
     }
 }

@@ -64,7 +64,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
         //#if MC>=12005
         //$$ if (packet.payload() instanceof AMS_CustomPayload && packet.payload().getId().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
         //$$     AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
-        //$$     if (S2CPayloadHandlerFactory.HANDLER_CHAIN.handle(payload)) {
+        //$$     if (S2CPayloadHandlerFactory.getHandlerChain().handle(payload)) {
         //$$         ci.cancel();
         //$$     }
         //$$ }
@@ -74,7 +74,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
             PacketByteBuf packetByteBuf = ((CustomPayloadS2CPacketAccessor) packet).getData();
             try {
                 AMS_CustomPayload payload = AMS_CustomPayload.decode(packet);
-                if (payload != null && S2CPayloadHandlerFactory.HANDLER_CHAIN.handle(payload)) {
+                if (payload != null && S2CPayloadHandlerFactory.getHandlerChain().handle(payload)) {
                     ci.cancel();
                 }
             } finally {

@@ -21,12 +21,13 @@
 package club.mcams.carpet.network.handler.factory;
 
 import club.mcams.carpet.network.handler.PayloadHandlerChain;
+import club.mcams.carpet.network.payload.handshake.HandShakeS2CPayload;
 import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 
 public final class S2CPayloadHandlerFactory {
     private S2CPayloadHandlerFactory() {}
 
-    public static final PayloadHandlerChain HANDLER_CHAIN  = createChain();
+    private static final PayloadHandlerChain HANDLER_CHAIN  = createChain();
 
     private static PayloadHandlerChain createChain() {
         PayloadHandlerChain chain = new PayloadHandlerChain();
@@ -34,7 +35,12 @@ public final class S2CPayloadHandlerFactory {
         return chain;
     }
 
+    public static PayloadHandlerChain getHandlerChain() {
+        return HANDLER_CHAIN;
+    }
+
     private static void registerHandlers(PayloadHandlerChain chain) {
+        chain.addHandlerFor(HandShakeS2CPayload.class, HandShakeS2CPayload::handle);
         chain.addHandlerFor(CustomBlockHardnessPayload.class, CustomBlockHardnessPayload::handle);
     }
 }

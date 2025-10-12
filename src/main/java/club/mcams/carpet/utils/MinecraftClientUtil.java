@@ -34,8 +34,11 @@ public class MinecraftClientUtil {
         return AmsClient.minecraftClient.player;
     }
 
-    @SuppressWarnings("unused")
     public static MinecraftClient getCurrentClient() {
         return AmsClient.minecraftClient;
+    }
+
+    public static boolean clientIsRunning() {
+        return getCurrentClient() != null && getCurrentClient().isRunning();
     }
 }

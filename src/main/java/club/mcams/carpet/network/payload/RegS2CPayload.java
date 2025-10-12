@@ -20,12 +20,14 @@
 
 package club.mcams.carpet.network.payload;
 
+import club.mcams.carpet.network.payload.handshake.HandShakeS2CPayload;
 import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 
 public final class RegS2CPayload {
     private RegS2CPayload() {}
 
     public static void register() {
+        HandShakeS2CPayload.register();
         CustomBlockHardnessPayload.register();
     }
 }

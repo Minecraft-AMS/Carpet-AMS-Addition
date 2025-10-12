@@ -20,10 +20,12 @@
 
 package club.mcams.carpet.network.payload;
 
+import club.mcams.carpet.network.payload.handshake.HandShakeC2SPayload;
+
 public final class RegC2SPayload {
     private RegC2SPayload() {}
 
     public static void register() {
-        ClientModVersionPayload.register();
+        HandShakeC2SPayload.register();
     }
 }

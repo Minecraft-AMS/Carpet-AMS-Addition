@@ -21,9 +21,16 @@
 package club.mcams.carpet.utils;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
+
+import java.util.UUID;
 
 public class PlayerUtil {
     public static String getName(PlayerEntity player) {
         return player.getGameProfile().getName();
+    }
+
+    public static ServerPlayerEntity getServerPlayerEntityFromUuid(UUID uuid) {
+        return MinecraftServerUtil.getServer().getPlayerManager().getPlayer(uuid);
     }
 }

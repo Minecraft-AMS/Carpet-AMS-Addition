@@ -18,10 +18,20 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network.handler;
+package club.mcams.carpet.network;
 
-import club.mcams.carpet.network.payload.AMS_CustomPayload;
+public enum PacketId {
+    HANDSHAKE_C2S("handshake_c2s"),
+    HANDSHAKE_S2C("handshake_s2c"),
+    SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness");
 
-public interface PayloadHandler {
-    boolean handle(AMS_CustomPayload payload);
+    private final String id;
+
+    PacketId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

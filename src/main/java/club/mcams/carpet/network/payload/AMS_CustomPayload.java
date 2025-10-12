@@ -71,7 +71,7 @@ public abstract class AMS_CustomPayload implements CustomPayload {
     }
 
     //#if MC>=12005
-    //$$ private  static AMS_CustomPayload decode(PacketByteBuf buf) {
+    //$$ private static AMS_CustomPayload decode(PacketByteBuf buf) {
     //$$     String packetId = buf.readString();
     //$$     Function<PacketByteBuf, AMS_CustomPayload> constructor = REGISTRY.get(packetId);
     //$$     return constructor.apply(buf);
@@ -118,7 +118,7 @@ public abstract class AMS_CustomPayload implements CustomPayload {
         //#endif
     }
 
-    public static void register(String packetId, Function<PacketByteBuf, AMS_CustomPayload> constructor) {
+    protected static void register(String packetId, Function<PacketByteBuf, AMS_CustomPayload> constructor) {
         REGISTRY.put(packetId, constructor);
     }
 

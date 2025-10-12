@@ -22,33 +22,38 @@ package club.mcams.carpet.network.handler;
 
 import club.mcams.carpet.network.payload.AMS_CustomPayload;
 
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.function.Consumer;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PayloadHandlerChain {
-    private final List<PayloadHandler> handlers = new ArrayList<>();
+    private final Map<Class<? extends AMS_CustomPayload>, List<Consumer<? extends AMS_CustomPayload>>> HANDLERS = new ConcurrentHashMap<>();
 
-    public void addHandler(PayloadHandler handler) {
-        handlers.add(handler);
+    public <T extends AMS_CustomPayload> void addHandlerFor(Class<T> payloadClass, Consumer<T> handler) {
+        HANDLERS.computeIfAbsent(payloadClass, k -> new ArrayList<>()).add(handler);
     }
 
     public boolean handle(AMS_CustomPayload payload) {
-        for (PayloadHandler handler : handlers) {
-            if (handler.handle(payload)) {
-                return true;
-            }
+        if (payload == null) {
+            return false;
         }
-        return false;
+
+        return handleHandlers(payload);
     }
 
-    public <T extends AMS_CustomPayload> void addHandlerFor(Class<T> payloadClass, Consumer<T> handler) {
-        addHandler(payload -> {
-            if (payloadClass.isInstance(payload)) {
-                handler.accept(payloadClass.cast(payload));
-                return true;
+    @SuppressWarnings("unchecked")
+    private boolean handleHandlers(AMS_CustomPayload payload) {
+        List<Consumer<? extends AMS_CustomPayload>> consumers = HANDLERS.get(payload.getClass());
+
+        if (consumers != null && !consumers.isEmpty()) {
+            for (Consumer<? extends AMS_CustomPayload> consumer : consumers) {
+                ((Consumer<AMS_CustomPayload>) consumer).accept(payload);
             }
-            return false;
-        });
+            return true;
+        }
+
+        return false;
     }
 }
