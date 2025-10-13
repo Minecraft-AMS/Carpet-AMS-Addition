@@ -213,6 +213,7 @@
   "client": [
     "builtin.CreativeInventoryExtras.CreativeInventoryScreenMixin",
     "hooks.network.ClientPlayNetworkHandlerMixin",
+    "hooks.network.MinecraftClientMixin",
     "network.ClientPlayNetworkHandlerMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
     "rule.maxClientInteractionReachDistance.GameRendererMixin",

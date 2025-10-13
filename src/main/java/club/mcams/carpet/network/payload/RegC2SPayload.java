@@ -21,11 +21,13 @@
 package club.mcams.carpet.network.payload;
 
 import club.mcams.carpet.network.payload.handshake.HandShakeC2SPayload;
+import club.mcams.carpet.network.payload.wavehand.WaveHandC2SPayload;
 
 public final class RegC2SPayload {
     private RegC2SPayload() {}
 
     public static void register() {
         HandShakeC2SPayload.register();
+        WaveHandC2SPayload.register();
     }
 }

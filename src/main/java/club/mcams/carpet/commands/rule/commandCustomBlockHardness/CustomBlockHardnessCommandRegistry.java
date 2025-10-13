@@ -205,6 +205,7 @@ public class CustomBlockHardnessCommandRegistry {
                 listHelpText
             ).formatted(Formatting.GRAY), false
         );
+        System.out.println(NetworkUtil.SUPPORT_CLIENT);
         return 1;
     }
 

@@ -22,17 +22,28 @@ package club.mcams.carpet.mixin.hooks.network;
 
 import club.mcams.carpet.AmsClient;
 
-import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.MinecraftClient;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientPlayNetworkHandler.class)
-public abstract class ClientPlayNetworkHandlerMixin {
-    @Inject(method = "onGameJoin", at = @At("RETURN"))
-    private void onGameJoin(CallbackInfo ci) {
-        AmsClient.getInstance().onGameJoin();
+@Mixin(MinecraftClient.class)
+public abstract class MinecraftClientMixin {
+    @Inject(
+        //#if MC>=12110
+        //$$ method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;Z)V",
+        //#elseif MC>=12106
+        //$$ method = "disconnect",
+        //#elseif MC>=12006
+        //$$ method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;Z)V",
+        //#else
+        method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;)V",
+        //#endif
+        at = @At("HEAD")
+    )
+    private void onDisconnect(CallbackInfo ci) {
+        AmsClient.getInstance().onDisconnect();
     }
 }

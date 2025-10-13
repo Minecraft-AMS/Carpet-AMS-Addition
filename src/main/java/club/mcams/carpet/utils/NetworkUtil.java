@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NetworkUtil {
-    private static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
+    public static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
 
     public static void broadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {

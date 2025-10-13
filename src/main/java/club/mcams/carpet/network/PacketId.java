@@ -23,6 +23,7 @@ package club.mcams.carpet.network;
 public enum PacketId {
     HANDSHAKE_C2S("handshake_c2s"),
     HANDSHAKE_S2C("handshake_s2c"),
+    WAVEHAND_C2S("wavehand_c2s"),
     SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness");
 
     private final String id;
