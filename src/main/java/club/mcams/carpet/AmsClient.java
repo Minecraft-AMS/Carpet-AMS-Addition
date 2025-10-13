@@ -22,7 +22,6 @@ package club.mcams.carpet;
 
 import club.mcams.carpet.network.payload.handshake.HandShakeC2SPayload;
 import club.mcams.carpet.network.payload.RegS2CPayload;
-import club.mcams.carpet.network.payload.wavehand.WaveHandC2SPayload;
 import club.mcams.carpet.utils.MinecraftClientUtil;
 import club.mcams.carpet.utils.NetworkUtil;
 
@@ -71,52 +70,5 @@ public class AmsClient implements ClientModInitializer {
 
     public void onDisconnect() {
         NetworkUtil.setServerSupport(false);
-        NetworkUtil.sendC2SPacket(player, WaveHandC2SPayload.create(player.getUuid()));
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
-        System.out.println(NetworkUtil.isSupportServer());
     }
 }

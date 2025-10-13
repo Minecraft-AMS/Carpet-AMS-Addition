@@ -158,6 +158,11 @@ public class AmsServer implements CarpetExtension {
     }
 
     @Override
+    public void onPlayerLoggedOut(ServerPlayerEntity player) {
+        NetworkUtil.removeSupportClient(player.getUuid());
+    }
+
+    @Override
     public void onServerLoaded(MinecraftServer server) {
         minecraftServer = server;
         serverStartTimeMillis = System.currentTimeMillis();

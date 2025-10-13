@@ -22,7 +22,6 @@ package club.mcams.carpet.network.handler.factory;
 
 import club.mcams.carpet.network.handler.PayloadHandlerChain;
 import club.mcams.carpet.network.payload.handshake.HandShakeC2SPayload;
-import club.mcams.carpet.network.payload.wavehand.WaveHandC2SPayload;
 
 public final class C2SPayloadHandlerFactory {
     private C2SPayloadHandlerFactory() {}
@@ -41,6 +40,5 @@ public final class C2SPayloadHandlerFactory {
 
     private static void registerHandlers(PayloadHandlerChain chain) {
         chain.addHandlerFor(HandShakeC2SPayload.class, HandShakeC2SPayload::handle);
-        chain.addHandlerFor(WaveHandC2SPayload.class, WaveHandC2SPayload::handle);
     }
 }

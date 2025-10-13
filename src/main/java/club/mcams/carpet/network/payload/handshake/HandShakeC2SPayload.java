@@ -32,7 +32,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.UUID;
 
-@SuppressWarnings("DuplicatedCode")
 public class HandShakeC2SPayload extends AMS_CustomPayload {
     private final String modVersion;
     private final UUID playerUuid;
