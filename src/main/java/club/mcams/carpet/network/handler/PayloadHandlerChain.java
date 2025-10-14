@@ -29,10 +29,32 @@ import java.util.function.Consumer;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PayloadHandlerChain {
-    private final Map<Class<? extends AMS_CustomPayload>, List<Consumer<? extends AMS_CustomPayload>>> HANDLERS = new ConcurrentHashMap<>();
+    private final Map<Class<? extends AMS_CustomPayload>, CovariantHandlerList<?>> handlers = new ConcurrentHashMap<>();
 
     public <T extends AMS_CustomPayload> void addHandlerFor(Class<T> payloadClass, Consumer<T> handler) {
-        HANDLERS.computeIfAbsent(payloadClass, k -> new ArrayList<>()).add(handler);
+        CovariantHandlerList<T> list = getOrCreate(payloadClass);
+        list.addHandler(handler);
+    }
+
+    private <T extends AMS_CustomPayload> CovariantHandlerList<T> getOrCreate(Class<T> type) {
+        CovariantHandlerList<?> existing = handlers.get(type);
+
+        if (existing != null) {
+            return castList(existing, type);
+        }
+
+        CovariantHandlerList<T> newList = new CovariantHandlerList<>(type);
+        handlers.put(type, newList);
+
+        return newList;
+    }
+
+    private <T extends AMS_CustomPayload> CovariantHandlerList<T> castList(CovariantHandlerList<?> list, Class<T> type) {
+        if (list.matchesType(type)) {
+            return list.asType(type);
+        }
+
+        throw new IllegalStateException("Type mismatch");
     }
 
     public boolean handle(AMS_CustomPayload payload) {
@@ -40,20 +62,62 @@ public class PayloadHandlerChain {
             return false;
         }
 
-        return handleHandlers(payload);
+        CovariantHandlerList<?> list = handlers.get(payload.getClass());
+
+        return list != null && list.handle(payload);
     }
 
-    @SuppressWarnings("unchecked")
-    private boolean handleHandlers(AMS_CustomPayload payload) {
-        List<Consumer<? extends AMS_CustomPayload>> consumers = HANDLERS.get(payload.getClass());
+    private static class CovariantHandlerList<T extends AMS_CustomPayload> {
+        private final Class<T> type;
+        private final List<Consumer<T>> handlers = new ArrayList<>();
 
-        if (consumers != null && !consumers.isEmpty()) {
-            for (Consumer<? extends AMS_CustomPayload> consumer : consumers) {
-                ((Consumer<AMS_CustomPayload>) consumer).accept(payload);
-            }
-            return true;
+        CovariantHandlerList(Class<T> type) {
+            this.type = type;
         }
 
-        return false;
+        void addHandler(Consumer<T> handler) {
+            handlers.add(handler);
+        }
+
+        boolean handle(AMS_CustomPayload payload) {
+            if (!type.isInstance(payload)) {
+                return false;
+            }
+
+            T typed = type.cast(payload);
+
+            for (Consumer<T> handler : handlers) {
+                handler.accept(typed);
+            }
+
+            return !handlers.isEmpty();
+        }
+
+        boolean matchesType(Class<? extends AMS_CustomPayload> otherType) {
+            return type.equals(otherType);
+        }
+
+        <U extends AMS_CustomPayload> CovariantHandlerList<U> asType(Class<U> targetType) {
+            if (!type.equals(targetType)) {
+                throw new ClassCastException("Cannot cast " + type + " to " + targetType);
+            }
+
+            CovariantHandlerList<U> result = new CovariantHandlerList<>(targetType);
+
+            for (Consumer<T> handler : handlers) {
+                result.addHandler(createBridgeConsumer(handler));
+            }
+
+            return result;
+        }
+
+        private <U extends AMS_CustomPayload> Consumer<U> createBridgeConsumer(Consumer<T> originalHandler) {
+            return u -> {
+                if (type.isInstance(u)) {
+                    T t = type.cast(u);
+                    originalHandler.accept(t);
+                }
+            };
+        }
     }
 }
