@@ -29,5 +29,6 @@ public final class RegS2CPayload {
     public static void register() {
         HandShakeS2CPayload.register();
         CustomBlockHardnessPayload.register();
+        AMS_UnknownPayload.register();
     }
 }

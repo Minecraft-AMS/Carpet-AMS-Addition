@@ -21,6 +21,7 @@
 package club.mcams.carpet.network.handler.factory;
 
 import club.mcams.carpet.network.handler.PayloadHandlerChain;
+import club.mcams.carpet.network.payload.AMS_UnknownPayload;
 import club.mcams.carpet.network.payload.handshake.HandShakeC2SPayload;
 
 public final class C2SPayloadHandlerFactory {
@@ -40,5 +41,6 @@ public final class C2SPayloadHandlerFactory {
 
     private static void registerHandlers(PayloadHandlerChain chain) {
         chain.addHandlerFor(HandShakeC2SPayload.class, HandShakeC2SPayload::handle);
+        chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
     }
 }

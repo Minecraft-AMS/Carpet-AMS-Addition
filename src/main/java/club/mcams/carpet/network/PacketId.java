@@ -21,6 +21,7 @@
 package club.mcams.carpet.network;
 
 public enum PacketId {
+    UNKNOWN("unknown"),
     HANDSHAKE_C2S("handshake_c2s"),
     HANDSHAKE_S2C("handshake_s2c"),
     SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness");

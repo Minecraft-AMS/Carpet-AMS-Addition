@@ -21,6 +21,7 @@
 package club.mcams.carpet.network.handler.factory;
 
 import club.mcams.carpet.network.handler.PayloadHandlerChain;
+import club.mcams.carpet.network.payload.AMS_UnknownPayload;
 import club.mcams.carpet.network.payload.handshake.HandShakeS2CPayload;
 import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 
@@ -42,5 +43,6 @@ public final class S2CPayloadHandlerFactory {
     private static void registerHandlers(PayloadHandlerChain chain) {
         chain.addHandlerFor(HandShakeS2CPayload.class, HandShakeS2CPayload::handle);
         chain.addHandlerFor(CustomBlockHardnessPayload.class, CustomBlockHardnessPayload::handle);
+        chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
     }
 }

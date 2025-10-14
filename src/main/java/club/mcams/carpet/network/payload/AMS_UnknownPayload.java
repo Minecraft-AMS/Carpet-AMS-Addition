@@ -20,13 +20,37 @@
 
 package club.mcams.carpet.network.payload;
 
-import club.mcams.carpet.network.payload.handshake.HandShakeC2SPayload;
+import club.mcams.carpet.network.PacketId;
+import club.mcams.carpet.utils.Noop;
 
-public final class RegC2SPayload {
-    private RegC2SPayload() {}
+import net.minecraft.network.PacketByteBuf;
+
+import org.apache.logging.log4j.LogManager;
+
+public class AMS_UnknownPayload extends AMS_CustomPayload {
+    public AMS_UnknownPayload() {
+        super(PacketId.UNKNOWN.getId());
+    }
+
+    public AMS_UnknownPayload(PacketByteBuf buf) {
+        super(PacketId.UNKNOWN.getId());
+    }
+
+    @Override
+    protected void writeData(PacketByteBuf buf) {
+        Noop.noop();
+    }
+
+    @Override
+    public void handle() {
+        LogManager.getLogger().warn("Received unknown custom payload from carpet ams addition.");
+    }
+
+    public static AMS_UnknownPayload create() {
+        return new AMS_UnknownPayload();
+    }
 
     public static void register() {
-        HandShakeC2SPayload.register();
-        AMS_UnknownPayload.register();
+        AMS_CustomPayload.register(PacketId.UNKNOWN.getId(), AMS_UnknownPayload::new);
     }
 }

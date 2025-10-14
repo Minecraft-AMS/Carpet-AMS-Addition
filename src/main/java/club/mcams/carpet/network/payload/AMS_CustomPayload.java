@@ -33,7 +33,7 @@ import java.util.function.Function;
 import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class AMS_CustomPayload implements CustomPayload {
-    public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network");
+    public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network/v1");
     //#if MC>=12005
     //$$ public static final CustomPayload.Id<AMS_CustomPayload> KEY = new CustomPayload.Id<>(CHANNEL_ID);
     //$$ public static final PacketCodec<PacketByteBuf, AMS_CustomPayload> CODEC = CustomPayload.codecOf(AMS_CustomPayload::write, AMS_CustomPayload::decode);
@@ -70,10 +70,17 @@ public abstract class AMS_CustomPayload implements CustomPayload {
         //#endif
     }
 
+    public String getPacketId() {
+        return packetId;
+    }
+
     //#if MC>=12005
     //$$ private static AMS_CustomPayload decode(PacketByteBuf buf) {
     //$$     String packetId = buf.readString();
     //$$     Function<PacketByteBuf, AMS_CustomPayload> constructor = REGISTRY.get(packetId);
+    //$$     if (constructor == null) {
+    //$$         return AMS_UnknownPayload.create();
+    //$$     }
     //$$     return constructor.apply(buf);
     //$$ }
     //#endif
@@ -92,6 +99,11 @@ public abstract class AMS_CustomPayload implements CustomPayload {
     private static AMS_CustomPayload getAmsCustomPayload(PacketByteBuf buf) {
         String packetId = readString(buf);
         Function<PacketByteBuf, AMS_CustomPayload> constructor = REGISTRY.get(packetId);
+
+        if (constructor == null) {
+            return AMS_UnknownPayload.create();
+        }
+
         return constructor.apply(buf);
     }
     //#endif
