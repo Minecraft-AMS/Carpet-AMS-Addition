@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.hooks.afterServerLoadWorld;
+package club.mcams.carpet.mixin.hooks.server;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.utils.MinecraftServerUtil;

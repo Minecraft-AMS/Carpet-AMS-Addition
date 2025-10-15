@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.hooks.RecipeRule;
+package club.mcams.carpet.mixin.hooks.recipe;
 
 import club.mcams.carpet.AmsServer;
 
