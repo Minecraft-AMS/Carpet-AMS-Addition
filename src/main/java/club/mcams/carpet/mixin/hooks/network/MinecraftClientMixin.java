@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
     @Inject(
-        //#if MC>=12110
+        //#if MC>=12109
         //$$ method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;Z)V",
         //#elseif MC>=12106
         //$$ method = "disconnect",
