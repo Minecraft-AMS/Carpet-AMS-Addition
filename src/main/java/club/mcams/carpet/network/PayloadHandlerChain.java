@@ -18,9 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network.handler;
-
-import club.mcams.carpet.network.payload.AMS_CustomPayload;
+package club.mcams.carpet.network;
 
 import java.util.Map;
 import java.util.List;
@@ -29,7 +27,7 @@ import java.util.function.Consumer;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PayloadHandlerChain {
-    private final Map<Class<? extends AMS_CustomPayload>, CovariantHandlerList<?>> handlers = new ConcurrentHashMap<>();
+    private final Map<Class<? extends AMS_CustomPayload>, CovariantHandlerList<?>> PAYLOAD_HANDLERS = new ConcurrentHashMap<>();
 
     public <T extends AMS_CustomPayload> void addHandlerFor(Class<T> payloadClass, Consumer<T> handler) {
         CovariantHandlerList<T> list = getOrCreate(payloadClass);
@@ -37,14 +35,14 @@ public class PayloadHandlerChain {
     }
 
     private <T extends AMS_CustomPayload> CovariantHandlerList<T> getOrCreate(Class<T> type) {
-        CovariantHandlerList<?> existing = handlers.get(type);
+        CovariantHandlerList<?> existing = PAYLOAD_HANDLERS.get(type);
 
         if (existing != null) {
             return castList(existing, type);
         }
 
         CovariantHandlerList<T> newList = new CovariantHandlerList<>(type);
-        handlers.put(type, newList);
+        PAYLOAD_HANDLERS.put(type, newList);
 
         return newList;
     }
@@ -62,7 +60,7 @@ public class PayloadHandlerChain {
             return false;
         }
 
-        CovariantHandlerList<?> list = handlers.get(payload.getClass());
+        CovariantHandlerList<?> list = PAYLOAD_HANDLERS.get(payload.getClass());
 
         return list != null && list.handle(payload);
     }

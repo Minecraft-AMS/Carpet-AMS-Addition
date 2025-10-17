@@ -20,8 +20,8 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.network.payload.handshake.HandShakeC2SPayload;
-import club.mcams.carpet.network.payload.RegS2CPayload;
+import club.mcams.carpet.network.AMS_PayloadManager;
+import club.mcams.carpet.network.payloads.handshake.HandShakeC2SPayload;
 import club.mcams.carpet.utils.MinecraftClientUtil;
 import club.mcams.carpet.utils.NetworkUtil;
 
@@ -48,7 +48,7 @@ public class AmsClient implements ClientModInitializer {
     public void onInitializeClient() {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
         minecraftClient = MinecraftClient.getInstance();
-        RegS2CPayload.register();
+        AMS_PayloadManager.registerS2CPayloads();
     }
 
     public static AmsClient getInstance() {

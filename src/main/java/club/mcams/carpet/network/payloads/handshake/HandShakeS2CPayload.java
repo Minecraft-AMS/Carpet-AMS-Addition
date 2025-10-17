@@ -18,17 +18,17 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network.payload.handshake;
+package club.mcams.carpet.network.payloads.handshake;
 
 import club.mcams.carpet.AmsClient;
-import club.mcams.carpet.network.PacketId;
 import club.mcams.carpet.utils.NetworkUtil;
-import club.mcams.carpet.network.payload.AMS_CustomPayload;
+import club.mcams.carpet.network.AMS_CustomPayload;
+import club.mcams.carpet.network.AMS_PayloadManager;
 
 import net.minecraft.network.PacketByteBuf;
 
 public class HandShakeS2CPayload extends AMS_CustomPayload {
-    private static final String ID = PacketId.HANDSHAKE_S2C.getId();
+    private static final String ID = AMS_PayloadManager.PacketId.HANDSHAKE_S2C.getId();
     private final String modVersion;
     private final boolean isSupportServer;
 
@@ -40,7 +40,7 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
 
     private HandShakeS2CPayload(PacketByteBuf buf) {
         super(ID);
-        this.modVersion = readString(buf);
+        this.modVersion = NetworkUtil.readBufString(buf);
         this.isSupportServer = buf.readBoolean();
     }
 
@@ -67,6 +67,6 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
     }
 
     public static void register() {
-        AMS_CustomPayload.register(ID, HandShakeS2CPayload::new);
+        AMS_PayloadManager.register(ID, HandShakeS2CPayload::new);
     }
 }

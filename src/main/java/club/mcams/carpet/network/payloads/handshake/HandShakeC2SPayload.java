@@ -18,14 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network.payload.handshake;
+package club.mcams.carpet.network.payloads.handshake;
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerMod;
-import club.mcams.carpet.network.PacketId;
-import club.mcams.carpet.network.payload.AMS_CustomPayload;
-import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.utils.PlayerUtil;
+import club.mcams.carpet.utils.NetworkUtil;
+import club.mcams.carpet.network.AMS_CustomPayload;
+import club.mcams.carpet.network.AMS_PayloadManager;
 
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -33,7 +33,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import java.util.UUID;
 
 public class HandShakeC2SPayload extends AMS_CustomPayload {
-    private static final String ID = PacketId.HANDSHAKE_C2S.getId();
+    private static final String ID = AMS_PayloadManager.PacketId.HANDSHAKE_C2S.getId();
     private final String modVersion;
     private final UUID playerUuid;
 
@@ -45,7 +45,7 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
 
     private HandShakeC2SPayload(PacketByteBuf buf) {
         super(ID);
-        this.modVersion = readString(buf);
+        this.modVersion = NetworkUtil.readBufString(buf);
         this.playerUuid = buf.readUuid();
     }
 
@@ -82,6 +82,6 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
     }
 
     public static void register() {
-        AMS_CustomPayload.register(ID, HandShakeC2SPayload::new);
+        AMS_PayloadManager.register(ID, HandShakeC2SPayload::new);
     }
 }

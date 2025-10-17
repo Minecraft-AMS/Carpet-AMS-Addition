@@ -18,9 +18,10 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network.payload;
+package club.mcams.carpet.network.payloads;
 
-import club.mcams.carpet.network.PacketId;
+import club.mcams.carpet.network.AMS_CustomPayload;
+import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.utils.Noop;
 
 import net.minecraft.network.PacketByteBuf;
@@ -28,13 +29,13 @@ import net.minecraft.network.PacketByteBuf;
 import org.apache.logging.log4j.LogManager;
 
 public class AMS_UnknownPayload extends AMS_CustomPayload {
-    private static final String ID = PacketId.UNKNOWN.getId();
+    private static final String ID = AMS_PayloadManager.PacketId.UNKNOWN.getId();
 
-    public AMS_UnknownPayload() {
+    private AMS_UnknownPayload() {
         super(ID);
     }
 
-    public AMS_UnknownPayload(PacketByteBuf buf) {
+    private AMS_UnknownPayload(PacketByteBuf buf) {
         super(ID);
     }
 
@@ -53,6 +54,6 @@ public class AMS_UnknownPayload extends AMS_CustomPayload {
     }
 
     public static void register() {
-        AMS_CustomPayload.register(ID, AMS_UnknownPayload::new);
+        AMS_PayloadManager.register(ID, AMS_UnknownPayload::new);
     }
 }

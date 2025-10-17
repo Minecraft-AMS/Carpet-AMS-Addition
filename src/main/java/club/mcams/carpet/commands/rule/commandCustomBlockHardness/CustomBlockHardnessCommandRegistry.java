@@ -22,7 +22,7 @@ package club.mcams.carpet.commands.rule.commandCustomBlockHardness;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.config.rule.commandCustomBlockHardness.CustomBlockHardnessConfig;
-import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
+import club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;

@@ -18,11 +18,11 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network.payload.rule.commandCustomBlockHardness;
+package club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness;
 
+import club.mcams.carpet.network.AMS_PayloadManager;
+import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
-import club.mcams.carpet.network.PacketId;
-import club.mcams.carpet.network.payload.AMS_CustomPayload;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CustomBlockHardnessPayload extends AMS_CustomPayload {
-    private static final String ID = PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId();
+    private static final String ID = AMS_PayloadManager.PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId();
     private final Map<BlockState, Float> hardnessMap;
 
     private CustomBlockHardnessPayload(PacketByteBuf buf) {
@@ -72,17 +72,17 @@ public class CustomBlockHardnessPayload extends AMS_CustomPayload {
         return map;
     }
 
-    public static void register() {
-        AMS_CustomPayload.register(ID, CustomBlockHardnessPayload::new);
-    }
-
-    public static CustomBlockHardnessPayload create(Map<BlockState, Float> hardnessMap) {
-        return new CustomBlockHardnessPayload(hardnessMap);
-    }
-
     @Override
     public void handle() {
         CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
         CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(this.hardnessMap);
+    }
+
+    public static void register() {
+        AMS_PayloadManager.register(ID, CustomBlockHardnessPayload::new);
+    }
+
+    public static CustomBlockHardnessPayload create(Map<BlockState, Float> hardnessMap) {
+        return new CustomBlockHardnessPayload(hardnessMap);
     }
 }

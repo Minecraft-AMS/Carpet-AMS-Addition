@@ -20,8 +20,8 @@
 
 package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.handler.factory.C2SPayloadHandlerFactory;
-import club.mcams.carpet.network.payload.AMS_CustomPayload;
+import club.mcams.carpet.network.AMS_PayloadManager;
+import club.mcams.carpet.network.AMS_CustomPayload;
 
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -38,14 +38,14 @@ public abstract class ServerPlayNetworkHandlerMixin {
         //#if MC>=12005
         //$$ if (packet.payload() instanceof AMS_CustomPayload && packet.payload().getId().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
         //$$     AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
-        //$$     if (C2SPayloadHandlerFactory.getHandlerChain().handle(payload)) {
+        //$$     if (AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload)) {
         //$$         ci.cancel();
         //$$     }
         //$$ }
         //#else
         if (((CustomPayloadC2SPacketAccessor) packet).getChannel().equals(AMS_CustomPayload.CHANNEL_ID)) {
-            AMS_CustomPayload payload = AMS_CustomPayload.decode(packet);
-            if (C2SPayloadHandlerFactory.getHandlerChain().handle(payload)) {
+            AMS_CustomPayload payload = AMS_PayloadManager.C2S_decodePacket(packet);
+            if (AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload)) {
                 ci.cancel();
             }
         }
