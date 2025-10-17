@@ -28,17 +28,18 @@ import club.mcams.carpet.network.payload.AMS_CustomPayload;
 import net.minecraft.network.PacketByteBuf;
 
 public class HandShakeS2CPayload extends AMS_CustomPayload {
+    private static final String ID = PacketId.HANDSHAKE_S2C.getId();
     private final String modVersion;
     private final boolean isSupportServer;
 
     private HandShakeS2CPayload(String modVersion, boolean isSupportServer) {
-        super(PacketId.HANDSHAKE_S2C.getId());
+        super(ID);
         this.modVersion = modVersion;
         this.isSupportServer = isSupportServer;
     }
 
     private HandShakeS2CPayload(PacketByteBuf buf) {
-        super(PacketId.HANDSHAKE_S2C.getId());
+        super(ID);
         this.modVersion = readString(buf);
         this.isSupportServer = buf.readBoolean();
     }
@@ -66,6 +67,6 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
     }
 
     public static void register() {
-        AMS_CustomPayload.register(PacketId.HANDSHAKE_S2C.getId(), HandShakeS2CPayload::new);
+        AMS_CustomPayload.register(ID, HandShakeS2CPayload::new);
     }
 }

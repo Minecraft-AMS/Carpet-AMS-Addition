@@ -32,15 +32,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CustomBlockHardnessPayload extends AMS_CustomPayload {
+    private static final String ID = PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId();
     private final Map<BlockState, Float> hardnessMap;
 
     private CustomBlockHardnessPayload(PacketByteBuf buf) {
-        super(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId());
+        super(ID);
         this.hardnessMap = decode(buf);
     }
 
     private CustomBlockHardnessPayload(Map<BlockState, Float> hardnessMap) {
-        super(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId());
+        super(ID);
         this.hardnessMap = new HashMap<>(hardnessMap);
     }
 
@@ -72,7 +73,7 @@ public class CustomBlockHardnessPayload extends AMS_CustomPayload {
     }
 
     public static void register() {
-        AMS_CustomPayload.register(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId(), CustomBlockHardnessPayload::new);
+        AMS_CustomPayload.register(ID, CustomBlockHardnessPayload::new);
     }
 
     public static CustomBlockHardnessPayload create(Map<BlockState, Float> hardnessMap) {

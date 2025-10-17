@@ -33,17 +33,18 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import java.util.UUID;
 
 public class HandShakeC2SPayload extends AMS_CustomPayload {
+    private static final String ID = PacketId.HANDSHAKE_C2S.getId();
     private final String modVersion;
     private final UUID playerUuid;
 
     private HandShakeC2SPayload(String modVersion, UUID playerUuid) {
-        super(PacketId.HANDSHAKE_C2S.getId());
+        super(ID);
         this.modVersion = modVersion;
         this.playerUuid = playerUuid;
     }
 
     private HandShakeC2SPayload(PacketByteBuf buf) {
-        super(PacketId.HANDSHAKE_C2S.getId());
+        super(ID);
         this.modVersion = readString(buf);
         this.playerUuid = buf.readUuid();
     }
@@ -81,6 +82,6 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
     }
 
     public static void register() {
-        AMS_CustomPayload.register(PacketId.HANDSHAKE_C2S.getId(), HandShakeC2SPayload::new);
+        AMS_CustomPayload.register(ID, HandShakeC2SPayload::new);
     }
 }

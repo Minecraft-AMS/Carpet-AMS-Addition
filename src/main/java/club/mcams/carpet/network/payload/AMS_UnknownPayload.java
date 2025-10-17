@@ -28,12 +28,14 @@ import net.minecraft.network.PacketByteBuf;
 import org.apache.logging.log4j.LogManager;
 
 public class AMS_UnknownPayload extends AMS_CustomPayload {
+    private static final String ID = PacketId.UNKNOWN.getId();
+
     public AMS_UnknownPayload() {
-        super(PacketId.UNKNOWN.getId());
+        super(ID);
     }
 
     public AMS_UnknownPayload(PacketByteBuf buf) {
-        super(PacketId.UNKNOWN.getId());
+        super(ID);
     }
 
     @Override
@@ -51,6 +53,6 @@ public class AMS_UnknownPayload extends AMS_CustomPayload {
     }
 
     public static void register() {
-        AMS_CustomPayload.register(PacketId.UNKNOWN.getId(), AMS_UnknownPayload::new);
+        AMS_CustomPayload.register(ID, AMS_UnknownPayload::new);
     }
 }
