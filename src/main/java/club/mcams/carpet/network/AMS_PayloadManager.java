@@ -40,6 +40,9 @@ public class AMS_PayloadManager {
     private static final PayloadHandlerChain C2S_HANDLER_CHAIN = PayloadHandlerChainCreator.createC2SHandlerChain();
     private static final PayloadHandlerChain S2C_HANDLER_CHAIN = PayloadHandlerChainCreator.createS2CHandlerChain();
 
+    /*
+     * Register Payload Handlers
+     */
     // C2S
     private static void registerC2SHandlers(PayloadHandlerChain chain) {
         chain.addHandlerFor(HandShakeC2SPayload.class, HandShakeC2SPayload::handle);
@@ -53,6 +56,9 @@ public class AMS_PayloadManager {
         chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
     }
 
+    /*
+     * Register Payloads
+     */
     // C2S
     public static void registerC2SPayloads() {
         HandShakeC2SPayload.register();
