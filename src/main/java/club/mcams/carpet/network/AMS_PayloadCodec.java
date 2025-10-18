@@ -48,6 +48,12 @@ public class AMS_PayloadCodec {
     protected static AMS_CustomPayload decodePayload(PacketByteBuf buf) {
         String packetId = NetworkUtil.readBufString(buf);
         Function<PacketByteBuf, AMS_CustomPayload> constructor = AMS_PayloadManager.PAYLOAD_REGISTRY.get(packetId);
-        return constructor != null ? constructor.apply(buf) : AMS_UnknownPayload.create();
+
+        if (constructor != null) {
+            return constructor.apply(buf);
+        }
+
+        buf.skipBytes(buf.readableBytes());
+        return AMS_UnknownPayload.create();
     }
 }
