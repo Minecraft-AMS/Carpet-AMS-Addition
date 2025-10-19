@@ -159,6 +159,8 @@ carpetamsaddition:
       value_range: '设定的值必须为 0 - 1'
     largeEnderChest:
       switch_tip: '侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
+    amsNetworkProtocol:
+      need_enable_protocol: '[Carpet AMS Addition] 使用%s规则需要启用amsNetworkProtocol规则才能生效'
 
   fuzz:
     command:
@@ -168,7 +170,8 @@ carpetamsaddition:
     category:
       AMS: AMS
       crafting: 制造
-      AMS_chunkLoader: AMS_区块加载
+      AMS_chunkload: AMS_区块加载
+      AMS_network: AMS_网络
 
     rule:
       superBow:
@@ -646,6 +649,9 @@ carpetamsaddition:
       endPortalChunkLoadDisabled:
         name: 禁用末地门加载
         desc: 让实体穿过末地门不会发生区块加载（Minecraft >= 1.20.6可用）
+      amsNetworkProtocol:
+        name: AMS网络协议
+        desc: AMS网络协议的开关
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

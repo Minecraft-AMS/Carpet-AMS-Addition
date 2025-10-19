@@ -20,12 +20,16 @@
 
 package club.mcams.carpet.observers.rule.largeShulkerBox;
 
+import carpet.settings.ParsedRule;
+
 import club.mcams.carpet.mixin.rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor;
 import club.mcams.carpet.settings.SimpleRuleObserver;
 
+import net.minecraft.server.command.ServerCommandSource;
+
 public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver<Boolean> {
     @Override
-    public void onValueChange(Boolean oldValue, Boolean newValue) {
+    public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         //#if MC>=11700
         if (newValue) {
             ShulkerBoxBlockEntityAccessor.setInventorySize(54);

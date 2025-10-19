@@ -22,12 +22,15 @@ package club.mcams.carpet.observers.rule.fancyFakePlayerName;
 
 import carpet.patches.EntityPlayerMPFake;
 
+import carpet.settings.ParsedRule;
+
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyNameHelper;
 import club.mcams.carpet.settings.RuleObserver;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.List;
@@ -35,7 +38,7 @@ import java.util.Objects;
 
 public class FancyFakePlayerNameRuleObserver extends RuleObserver<String> {
     @Override
-    public void onValueChange(String oldValue, String newValue) {
+    public void onValueChange(ServerCommandSource source, ParsedRule<String> rule, String oldValue, String newValue) {
         if (MinecraftServerUtil.serverIsRunning()) {
             MinecraftServer server = MinecraftServerUtil.getServer();
             FancyFakePlayerNameTeamController.removeBotTeam(server, oldValue);

@@ -20,11 +20,14 @@
 
 package club.mcams.carpet.observers.rule.largeEnderChest;
 
+import carpet.settings.ParsedRule;
+
 import club.mcams.carpet.settings.SimpleRuleObserver;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.MutableText;
 import net.minecraft.util.Formatting;
 
@@ -33,7 +36,7 @@ public class LargeEnderChestRuleObserver extends SimpleRuleObserver<Boolean> {
     private static final String MSG_HEAD = "<Carpet AMS Addition> ";
 
     @Override
-    public void onValueChange(Boolean oldValue, Boolean newValue) {
+    public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue && MinecraftServerUtil.serverIsRunning()) {
             Messenger.sendServerMessage(MinecraftServerUtil.getServer(), message());
         }

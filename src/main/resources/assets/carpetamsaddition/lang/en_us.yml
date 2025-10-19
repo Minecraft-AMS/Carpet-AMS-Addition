@@ -158,6 +158,8 @@ carpetamsaddition:
       value_range: 'The value must be 0 - 1'
     largeEnderChest:
       switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
+    amsNetworkProtocol:
+      need_enable_protocol: '[Carpet AMS Addition] Using the %s rule requires enabling the amsNetworkProtocol rule to take effect'
 
   fuzz:
     command:
@@ -167,7 +169,8 @@ carpetamsaddition:
     category:
       AMS: AMS
       crafting: crafting
-      AMS_chunkLoader: AMS_chunkLoader
+      AMS_chunkload: AMS_chunkload
+      AMS_network: AMS_network
 
     rule:
       superBow:
@@ -525,6 +528,8 @@ carpetamsaddition:
         desc: Broadcast the news of who summoned the phantoms
       endPortalChunkLoadDisabled:
         desc: Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
+      amsNetworkProtocol:
+        desc: The switch of the AMS network protocol
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
