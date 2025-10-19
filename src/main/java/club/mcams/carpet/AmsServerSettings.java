@@ -25,6 +25,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 //#if MC>=12002
 //$$ import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 //#endif
+import club.mcams.carpet.observers.rule.network.NetworkProtocolObserver;
 import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
 import club.mcams.carpet.observers.rule.recipeRule.RecipeRuleObserver;
 import club.mcams.carpet.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
@@ -563,12 +564,6 @@ public class AmsServerSettings {
     )
     public static String commandCarpetExtensionModWikiHyperlink = "false";
 
-    @Rule(
-        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
-        categories = {AMS, FEATURE, SURVIVAL, COMMAND}
-    )
-    public static String commandCustomBlockHardness = "false";
-
     @Rule(categories = {AMS, COMMAND})
     public static boolean onlyOpCanSpawnRealPlayerInWhitelist = false;
 
@@ -613,6 +608,19 @@ public class AmsServerSettings {
     //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
     //$$ public static boolean endPortalChunkLoadDisabled = false;
     //#endif
+
+    /*
+     * AMS网络协议规则
+     */
+    @Rule(categories = {AMS, AMS_NETWORK})
+    public static boolean amsNetworkProtocol = false;
+
+    @Rule(
+        validators = NetworkProtocolObserver.class,
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, FEATURE, SURVIVAL, COMMAND}
+    )
+    public static String commandCustomBlockHardness = "false";
 
     /*
      * 区块加载规则

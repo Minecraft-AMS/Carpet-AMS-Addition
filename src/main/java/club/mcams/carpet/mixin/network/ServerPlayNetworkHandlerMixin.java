@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.mixin.network;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.network.AMS_CustomPayload;
 
@@ -35,6 +36,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerPlayNetworkHandlerMixin {
     @Inject(method = "onCustomPayload", at = @At("HEAD"), cancellable = true)
     private void onCustomPayload(CustomPayloadC2SPacket packet, CallbackInfo ci) {
+        if (!AmsServerSettings.amsNetworkProtocol) {
+            return;
+        }
+
         //#if MC>=12005
         //$$ if (packet.payload() instanceof AMS_CustomPayload && packet.payload().getId().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
         //$$     AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
