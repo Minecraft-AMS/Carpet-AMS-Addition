@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness;
 
+import club.mcams.carpet.utils.PacketByteBufExtras;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
@@ -37,7 +38,8 @@ public class CustomBlockHardnessPayload extends AMS_CustomPayload {
 
     private CustomBlockHardnessPayload(PacketByteBuf buf) {
         super(ID);
-        this.hardnessMap = decode(buf);
+        this.hardnessMap = PacketByteBufExtras.readMap(buf, b -> Block.STATE_IDS.get(b.readVarInt()), PacketByteBuf::readFloat);
+
     }
 
     private CustomBlockHardnessPayload(Map<BlockState, Float> hardnessMap) {
@@ -47,29 +49,7 @@ public class CustomBlockHardnessPayload extends AMS_CustomPayload {
 
     @Override
     protected void writeData(PacketByteBuf buf) {
-        encode(buf, this.hardnessMap);
-    }
-
-    private static void encode(PacketByteBuf buf, Map<BlockState, Float> map) {
-        buf.writeVarInt(map.size());
-        for (Map.Entry<BlockState, Float> entry : map.entrySet()) {
-            buf.writeVarInt(Block.getRawIdFromState(entry.getKey()));
-            buf.writeFloat(entry.getValue());
-        }
-    }
-
-    private static Map<BlockState, Float> decode(PacketByteBuf buf) {
-        int size = buf.readVarInt();
-        Map<BlockState, Float> map = new HashMap<>();
-
-        for (int i = 0; i < size; i++) {
-            int stateId = buf.readVarInt();
-            float hardness = buf.readFloat();
-            BlockState state = Block.STATE_IDS.get(stateId);
-            map.put(state, hardness);
-        }
-
-        return map;
+        PacketByteBufExtras.writeMap(buf, this.hardnessMap, (b, state) -> b.writeVarInt(Block.getRawIdFromState(state)), PacketByteBuf::writeFloat);
     }
 
     @Override
