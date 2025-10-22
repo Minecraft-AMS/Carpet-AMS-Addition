@@ -134,6 +134,8 @@ carpetamsaddition:
         list: '/customBlockHardness list  ->  Display all added blocks'
     at:
       title: '%s @ You'
+    getClientPlayerFps:
+      feedback: 'The FPS of %s is %d'
 
   logger:
     serverRuntime:
@@ -530,6 +532,8 @@ carpetamsaddition:
         desc: Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
       amsNetworkProtocol:
         desc: The switch of the AMS network protocol
+      commandGetClientPlayerFps:
+        desc: Use the "/getClientPlayerFps <player>" command to get the FPS of the specified player
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

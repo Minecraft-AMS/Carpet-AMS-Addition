@@ -618,9 +618,16 @@ public class AmsServerSettings {
     @Rule(
         validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
-        categories = {AMS, FEATURE, SURVIVAL, COMMAND}
+        categories = {AMS, FEATURE, SURVIVAL, AMS_NETWORK, COMMAND}
     )
     public static String commandCustomBlockHardness = "false";
+
+    @Rule(
+        validators = NetworkProtocolObserver.class,
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, AMS_NETWORK, COMMAND}
+    )
+    public static String commandGetClientPlayerFps = "false";
 
     /*
      * 区块加载规则

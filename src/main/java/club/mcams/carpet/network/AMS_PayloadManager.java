@@ -25,6 +25,8 @@ import club.mcams.carpet.network.payloads.handshake.HandShakeC2SPayload;
 import club.mcams.carpet.network.payloads.handshake.HandShakeS2CPayload;
 import club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
 
+import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_C2S;
+import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
 import net.minecraft.network.PacketByteBuf;
 //#if MC<12005
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
@@ -47,6 +49,7 @@ public class AMS_PayloadManager {
     private static void registerC2SHandlers(PayloadHandlerChain chain) {
         chain.addHandlerFor(HandShakeC2SPayload.class, HandShakeC2SPayload::handle);
         chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
+        chain.addHandlerFor(ClientPlayerFpsPayload_C2S.class, ClientPlayerFpsPayload_C2S::handle);
     }
 
     // S2C
@@ -54,6 +57,7 @@ public class AMS_PayloadManager {
         chain.addHandlerFor(HandShakeS2CPayload.class, HandShakeS2CPayload::handle);
         chain.addHandlerFor(CustomBlockHardnessPayload.class, CustomBlockHardnessPayload::handle);
         chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
+        chain.addHandlerFor(ClientPlayerFpsPayload_S2C.class, ClientPlayerFpsPayload_S2C::handle);
     }
 
     /*
@@ -63,6 +67,7 @@ public class AMS_PayloadManager {
     public static void registerC2SPayloads() {
         HandShakeC2SPayload.register();
         AMS_UnknownPayload.register();
+        ClientPlayerFpsPayload_C2S.register();
     }
 
     // S2C
@@ -70,6 +75,7 @@ public class AMS_PayloadManager {
         HandShakeS2CPayload.register();
         CustomBlockHardnessPayload.register();
         AMS_UnknownPayload.register();
+        ClientPlayerFpsPayload_S2C.register();
     }
 
     //#if MC<12005
@@ -114,7 +120,9 @@ public class AMS_PayloadManager {
         UNKNOWN("unknown"),
         HANDSHAKE_C2S("handshake_c2s"),
         HANDSHAKE_S2C("handshake_s2c"),
-        SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness");
+        SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness"),
+        CLIENT_PLAYER_FPS_C2S("client_player_fps_c2s"),
+        CLIENT_PLAYER_FPS_S2C("client_player_fps_s2c");
 
         private final String id;
 

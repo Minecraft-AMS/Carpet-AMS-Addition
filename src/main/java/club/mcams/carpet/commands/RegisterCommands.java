@@ -26,6 +26,7 @@ import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFire
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
 import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommandRegistry;
+import club.mcams.carpet.commands.rule.commandGetClientPlayerFPS.GetClientPlayerFpsRegistry;
 import club.mcams.carpet.commands.rule.commandGetHeldItemID.GetHeldItemIDCommandRegistry;
 import club.mcams.carpet.commands.rule.commandGetPlayerSkull.GetPlayerSkullCommandRegistry;
 import club.mcams.carpet.commands.rule.commandGetSaveSize.GetSaveSizeCommandRegistry;
@@ -122,5 +123,6 @@ public class RegisterCommands {
             );
         });
         AMS_CMD_QUEUE.add(() -> AtCommandRegistry.register(dispatcher));
+        AMS_CMD_QUEUE.add(() -> GetClientPlayerFpsRegistry.register(dispatcher));
     }
 }

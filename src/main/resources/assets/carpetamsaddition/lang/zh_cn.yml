@@ -135,6 +135,8 @@ carpetamsaddition:
         list: '/customBlockHardness list  ->  显示所有添加的方块'
     at:
       title: '%s @ 了你'
+    getClientPlayerFps:
+      feedback: 'The FPS of %s is %d'
 
   logger:
     serverRuntime:
@@ -652,6 +654,8 @@ carpetamsaddition:
       amsNetworkProtocol:
         name: AMS网络协议
         desc: AMS网络协议的开关
+      commandGetClientPlayerFps:
+        desc: Use the "/getClientPlayerFps <player>" command to get the FPS of the specified player
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
