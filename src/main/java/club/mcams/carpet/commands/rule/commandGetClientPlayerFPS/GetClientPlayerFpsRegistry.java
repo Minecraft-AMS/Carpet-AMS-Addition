@@ -3,8 +3,10 @@ package club.mcams.carpet.commands.rule.commandGetClientPlayerFPS;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
+import club.mcams.carpet.utils.PlayerUtil;
 
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -19,31 +21,31 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class GetClientPlayerFpsRegistry {
     private static final Translator tr = new Translator("command.getClientPlayerFps");
-    private static final Map<UUID, FpsQueryContext> fpsQueryMap = new ConcurrentHashMap<>();
+    private static final Map<UUID, ServerCommandSource> pendingQueries = new ConcurrentHashMap<>();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
             CommandManager.literal("getClientPlayerFps")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetClientPlayerFps))
             .then(CommandManager.argument("player", EntityArgumentType.player())
-            .executes(ctx -> {
-                ServerPlayerEntity targetPlayer = EntityArgumentType.getPlayer(ctx, "player");
-                return getFps(targetPlayer, ctx.getSource());
-            }))
+            .executes(ctx -> requestFps(EntityArgumentType.getPlayer(ctx, "player"), ctx.getSource())))
         );
     }
 
-    private static int getFps(ServerPlayerEntity targetPlayer, ServerCommandSource source) {
+    private static int requestFps(ServerPlayerEntity targetPlayer, ServerCommandSource source) {
+        pendingQueries.put(targetPlayer.getUuid(), source);
         NetworkUtil.sendS2CPacket(targetPlayer, ClientPlayerFpsPayload_S2C.create(targetPlayer.getUuid()));
-        fpsQueryMap.put(targetPlayer.getUuid(), new FpsQueryContext(source, targetPlayer.getName().getString()));
+        Messenger.tell(source, tr.tr("querying", PlayerUtil.getName(targetPlayer)));
         return 1;
     }
 
-    public static void onFpsReceived(UUID playerUuid, int fps) {
-        FpsQueryContext context = fpsQueryMap.remove(playerUuid);
-        if (context != null) {
-            System.out.println(context.getPlayerName());
-            System.out.println(fps);
+    public static void sendFpsResult(UUID playerUuid, int fps) {
+        ServerCommandSource source = pendingQueries.remove(playerUuid);
+        if (source != null) {
+            ServerPlayerEntity player = PlayerUtil.getServerPlayerEntityFromUuid(playerUuid);
+            if (player != null) {
+                Messenger.tell(source, tr.tr("feedback", PlayerUtil.getName(player), fps));
+            }
         }
     }
 }

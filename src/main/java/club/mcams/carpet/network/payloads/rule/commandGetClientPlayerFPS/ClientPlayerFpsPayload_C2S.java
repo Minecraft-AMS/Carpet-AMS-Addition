@@ -34,9 +34,7 @@ public class ClientPlayerFpsPayload_C2S extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnServerThread(() ->
-                GetClientPlayerFpsRegistry.onFpsReceived(this.playerUuid, this.fps)
-        );
+        NetworkUtil.executeOnServerThread(() -> GetClientPlayerFpsRegistry.sendFpsResult(this.playerUuid, this.fps));
     }
 
     public static ClientPlayerFpsPayload_C2S create(UUID playerUuid, int fps) {

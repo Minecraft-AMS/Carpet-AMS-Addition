@@ -11,30 +11,27 @@ import java.util.UUID;
 
 public class ClientPlayerFpsPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.CLIENT_PLAYER_FPS_S2C.getId();
-    private final UUID targetPlayerUuid;
+    private final UUID uuid;
 
-    private ClientPlayerFpsPayload_S2C(UUID targetPlayerUuid) {
+    private ClientPlayerFpsPayload_S2C(UUID uuid) {
         super(ID);
-        this.targetPlayerUuid = targetPlayerUuid;
+        this.uuid = uuid;
     }
 
     private ClientPlayerFpsPayload_S2C(PacketByteBuf buf) {
         super(ID);
-        this.targetPlayerUuid = buf.readUuid();
+        this.uuid = buf.readUuid();
     }
 
     @Override
     protected void writeData(PacketByteBuf buf) {
-        buf.writeUuid(targetPlayerUuid);
+        buf.writeUuid(uuid);
     }
 
     @Override
     public void handle() {
         NetworkUtil.executeOnClientThread(() ->
-            NetworkUtil.sendC2SPacketIfSupport(
-                MinecraftClientUtil.getCurrentPlayer(),
-                ClientPlayerFpsPayload_C2S.create(targetPlayerUuid, MinecraftClientUtil.getClientFps())
-            )
+            NetworkUtil.sendC2SPacketIfSupport(MinecraftClientUtil.getCurrentPlayer(), ClientPlayerFpsPayload_C2S.create(uuid, MinecraftClientUtil.getClientFps()))
         );
     }
 
