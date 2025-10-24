@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2025 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,19 +18,26 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.observers.rule.recipeRule;
+package club.mcams.carpet.observers.network;
 
 import carpet.settings.ParsedRule;
 
-import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
+import club.mcams.carpet.utils.Messenger;
+import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.settings.SimpleRuleObserver;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.util.Formatting;
 
-public class RecipeRuleObserver extends SimpleRuleObserver<Boolean> {
+public class NetworkProtocolObserver extends SimpleRuleObserver<Object> {
+    private final Translator tr = new Translator("validator.amsNetworkProtocol");
+
     @Override
-    public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
-        RecipeRuleHelper.onValueChange(MinecraftServerUtil.getServer());
+    public void onValueChange(ServerCommandSource source, ParsedRule<Object> rule, Object oldValue, Object newValue) {
+        if (!AmsServerSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning()) {
+            Messenger.tell(source, Messenger.formatting(tr.tr("need_enable_protocol", getRuleName(rule)), Formatting.YELLOW));
+        }
     }
 }

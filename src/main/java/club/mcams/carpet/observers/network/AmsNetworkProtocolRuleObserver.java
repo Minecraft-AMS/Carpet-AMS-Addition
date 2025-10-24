@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.observers.rule.amsNetworkProtocol;
+package club.mcams.carpet.observers.network;
 
 import carpet.settings.ParsedRule;
 

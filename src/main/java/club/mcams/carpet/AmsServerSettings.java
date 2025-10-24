@@ -25,12 +25,12 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 //#if MC>=12002
 //$$ import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 //#endif
-import club.mcams.carpet.observers.rule.network.NetworkProtocolObserver;
+import club.mcams.carpet.observers.network.NetworkProtocolObserver;
 import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
-import club.mcams.carpet.observers.rule.recipeRule.RecipeRuleObserver;
+import club.mcams.carpet.observers.recipe.RecipeRuleObserver;
 import club.mcams.carpet.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import club.mcams.carpet.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
-import club.mcams.carpet.observers.rule.amsNetworkProtocol.AmsNetworkProtocolRuleObserver;
+import club.mcams.carpet.observers.network.AmsNetworkProtocolRuleObserver;
 
 import club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
