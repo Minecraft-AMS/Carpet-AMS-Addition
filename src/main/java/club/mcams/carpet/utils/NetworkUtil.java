@@ -40,6 +40,10 @@ public class NetworkUtil {
         server.getPlayerManager().getPlayerList().forEach(player -> sendS2CPacket(player, payload));
     }
 
+    public static void forcedBroadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
+        server.getPlayerManager().getPlayerList().forEach(payload::sendS2CPacket);
+    }
+
     public static void sendS2CPacket(ServerPlayerEntity player, AMS_CustomPayload payload) {
         if (isSupportClient(player.getUuid())) {
             payload.sendS2CPacket(player);

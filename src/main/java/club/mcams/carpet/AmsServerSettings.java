@@ -30,6 +30,7 @@ import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObser
 import club.mcams.carpet.observers.rule.recipeRule.RecipeRuleObserver;
 import club.mcams.carpet.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import club.mcams.carpet.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
+import club.mcams.carpet.observers.rule.amsNetworkProtocol.AmsNetworkProtocolRuleObserver;
 
 import club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
@@ -612,7 +613,10 @@ public class AmsServerSettings {
     /*
      * AMS网络协议规则
      */
-    @Rule(categories = {AMS, AMS_NETWORK})
+    @Rule(
+        validators = AmsNetworkProtocolRuleObserver.class,
+        categories = {AMS, AMS_NETWORK}
+    )
     public static boolean amsNetworkProtocol = false;
 
     @Rule(
