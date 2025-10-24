@@ -23,10 +23,11 @@ package club.mcams.carpet.network;
 import club.mcams.carpet.network.payloads.AMS_UnknownPayload;
 import club.mcams.carpet.network.payloads.handshake.HandShakeC2SPayload;
 import club.mcams.carpet.network.payloads.handshake.HandShakeS2CPayload;
+import club.mcams.carpet.network.payloads.handshake.RequestHandShakeS2CPayload;
 import club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
-
 import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_C2S;
 import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
+
 import net.minecraft.network.PacketByteBuf;
 //#if MC<12005
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
@@ -42,6 +43,26 @@ public class AMS_PayloadManager {
     private static final PayloadHandlerChain C2S_HANDLER_CHAIN = PayloadHandlerChainCreator.createC2SHandlerChain();
     private static final PayloadHandlerChain S2C_HANDLER_CHAIN = PayloadHandlerChainCreator.createS2CHandlerChain();
 
+    public enum PacketId {
+        UNKNOWN("unknown"),
+        HANDSHAKE_C2S("handshake_c2s"),
+        HANDSHAKE_S2C("handshake_s2c"),
+        REQUEST_HANDSHAKE_S2C("request_handshake_s2c"),
+        SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness"),
+        CLIENT_PLAYER_FPS_C2S("client_player_fps_c2s"),
+        CLIENT_PLAYER_FPS_S2C("client_player_fps_s2c");
+
+        private final String id;
+
+        PacketId(String id) {
+            this.id = id;
+        }
+
+        public String getId() {
+            return id;
+        }
+    }
+
     /*
      * Register Payload Handlers
      */
@@ -55,6 +76,7 @@ public class AMS_PayloadManager {
     // S2C
     private static void registerS2CHandlers(PayloadHandlerChain chain) {
         chain.addHandlerFor(HandShakeS2CPayload.class, HandShakeS2CPayload::handle);
+        chain.addHandlerFor(RequestHandShakeS2CPayload.class, RequestHandShakeS2CPayload::handle);
         chain.addHandlerFor(CustomBlockHardnessPayload.class, CustomBlockHardnessPayload::handle);
         chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
         chain.addHandlerFor(ClientPlayerFpsPayload_S2C.class, ClientPlayerFpsPayload_S2C::handle);
@@ -73,6 +95,7 @@ public class AMS_PayloadManager {
     // S2C
     public static void registerS2CPayloads() {
         HandShakeS2CPayload.register();
+        RequestHandShakeS2CPayload.register();
         CustomBlockHardnessPayload.register();
         AMS_UnknownPayload.register();
         ClientPlayerFpsPayload_S2C.register();
@@ -113,25 +136,6 @@ public class AMS_PayloadManager {
             PayloadHandlerChain chain = new PayloadHandlerChain();
             registerS2CHandlers(chain);
             return chain;
-        }
-    }
-
-    public enum PacketId {
-        UNKNOWN("unknown"),
-        HANDSHAKE_C2S("handshake_c2s"),
-        HANDSHAKE_S2C("handshake_s2c"),
-        SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness"),
-        CLIENT_PLAYER_FPS_C2S("client_player_fps_c2s"),
-        CLIENT_PLAYER_FPS_S2C("client_player_fps_s2c");
-
-        private final String id;
-
-        PacketId(String id) {
-            this.id = id;
-        }
-
-        public String getId() {
-            return id;
         }
     }
 }

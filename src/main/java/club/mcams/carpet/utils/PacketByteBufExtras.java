@@ -24,11 +24,11 @@ import net.minecraft.network.PacketByteBuf;
 
 import java.util.Map;
 import java.util.HashMap;
-import java.util.function.BiConsumer;
 import java.util.function.Function;
+import java.util.function.BiConsumer;
 
 public class PacketByteBufExtras {
-    public static  <K, V> void writeMap(PacketByteBuf buf, Map<K, V> map, BiConsumer<PacketByteBuf, K> keyWriter, BiConsumer<PacketByteBuf, V> valueWriter) {
+    public static <K, V> void writeMap(PacketByteBuf buf, Map<K, V> map, BiConsumer<PacketByteBuf, K> keyWriter, BiConsumer<PacketByteBuf, V> valueWriter) {
         buf.writeVarInt(map.size());
         for (Map.Entry<K, V> entry : map.entrySet()) {
             keyWriter.accept(buf, entry.getKey());

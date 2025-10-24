@@ -25,7 +25,7 @@ public abstract class AMS_CustomPayload implements CustomPayload {
     public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network/v1");
     //#if MC>=12005
     //$$ public static final CustomPayload.Id<AMS_CustomPayload> KEY = new CustomPayload.Id<>(CHANNEL_ID);
-    //$$     public static final PacketCodec<PacketByteBuf, AMS_CustomPayload> CODEC = CustomPayload.codecOf(AMS_CustomPayload::write, AMS_PayloadCodec::decodePayload);
+    //$$ public static final PacketCodec<PacketByteBuf, AMS_CustomPayload> CODEC = CustomPayload.codecOf(AMS_CustomPayload::write, AMS_PayloadCodec::decodePayload);
     //#endif
     private final String packetId;
 

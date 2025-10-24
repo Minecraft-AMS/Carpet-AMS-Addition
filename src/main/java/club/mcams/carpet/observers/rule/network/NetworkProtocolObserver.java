@@ -21,10 +21,12 @@
 package club.mcams.carpet.observers.rule.network;
 
 import carpet.settings.ParsedRule;
+
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.settings.SimpleRuleObserver;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.Formatting;
@@ -34,7 +36,7 @@ public class NetworkProtocolObserver extends SimpleRuleObserver<Object> {
 
     @Override
     public void onValueChange(ServerCommandSource source, ParsedRule<Object> rule, Object oldValue, Object newValue) {
-        if (!AmsServerSettings.amsNetworkProtocol) {
+        if (!AmsServerSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning()) {
             Messenger.tell(source, Messenger.formatting(tr.tr("need_enable_protocol", getRuleName(rule)), Formatting.YELLOW));
         }
     }
