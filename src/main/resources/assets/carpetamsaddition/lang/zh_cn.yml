@@ -136,8 +136,7 @@ carpetamsaddition:
     at:
       title: '%s @ 了你'
     getClientPlayerFps:
-      feedback: '%s%d'
-      querying: '正在获取%s的FPS...'
+      feedback: '%s - FPS: %s'
 
   logger:
     serverRuntime:
@@ -656,7 +655,8 @@ carpetamsaddition:
         name: AMS网络协议
         desc: AMS网络协议的开关
       commandGetClientPlayerFps:
-        desc: Use the "/getClientPlayerFps <player>" command to get the FPS of the specified player
+        name: 获取客户端玩家FPS
+        desc: 使用"/getClientPlayerFps <player>"指令获取指定客户端玩家的FPS
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

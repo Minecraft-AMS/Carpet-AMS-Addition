@@ -135,8 +135,7 @@ carpetamsaddition:
     at:
       title: '%s @ You'
     getClientPlayerFps:
-      feedback: '%s %d'
-      querying: '正在获取%s的FPS...'
+      feedback: '%s - FPS: %s'
 
   logger:
     serverRuntime:
