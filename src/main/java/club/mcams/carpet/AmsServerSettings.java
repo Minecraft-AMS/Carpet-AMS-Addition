@@ -633,6 +633,13 @@ public class AmsServerSettings {
     )
     public static String commandGetClientPlayerFps = "false";
 
+    @Rule(
+        validators = NetworkProtocolObserver.class,
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, AMS_NETWORK, COMMAND}
+    )
+    public static String commandSetPlayerPose = "false";
+
     /*
      * 区块加载规则
      */

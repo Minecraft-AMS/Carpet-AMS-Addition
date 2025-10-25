@@ -137,6 +137,9 @@ carpetamsaddition:
       title: '%s @ 了你'
     getClientPlayerFps:
       feedback: '%s - FPS: %s'
+    setPlayerPose:
+      set_help: '/playerPose <player> set <pose>  ->  设置玩家姿势'
+      stop_help: '/playerPose <player> stop  ->  停止做姿势'
 
   logger:
     serverRuntime:
@@ -230,7 +233,7 @@ carpetamsaddition:
         name: 自定义防火物品
         desc: 用命令控制任何物品是否防火
         extra:
-          '0': '开启规则后使用/customAntiFireItems help命令查看使用说明'
+          '0': '开启规则后，使用"/customAntiFireItems help"命令查看使用说明'
       itemAntiExplosion:
         name: 掉落物防爆
         desc: 掉落物将不会被爆炸摧毁
@@ -353,7 +356,7 @@ carpetamsaddition:
         name: 自定义可移动方块
         desc: 可自定义的让不能被推动的方块变得能被推动（不支持容器方块，如果需要推动容器可以使用Carpet的movableBlockEntities规则）
         extra:
-          '0': '开启规则后使用/customMovableBlock help命令查看使用说明'
+          '0': '开启规则后，使用"/customMovableBlock help"命令查看使用说明'
       easyMaxLevelBeacon:
         name: 简易满级信标
         desc: 只需一个底座方块就能激活满级信标
@@ -361,7 +364,7 @@ carpetamsaddition:
         name: 自定义方块爆炸抗性
         desc: 使用指令自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）
         extra:
-          '0': '开启规则后使用/customBlockBlastResistance help命令查看使用说明'
+          '0': '开启规则后，使用"/customBlockBlastResistance help"命令查看使用说明'
       regeneratingDragonEgg:
         name: 再生成龙蛋
         desc: 玩家每次击败末影龙都会生成一个龙蛋
@@ -456,12 +459,12 @@ carpetamsaddition:
         name: 玩家导游
         desc: 指定一名或多名玩家成为导游，使他们拥有发光效果
         extra:
-          '0': '开启规则后使用 /leader help 命令查看使用说明'
+          '0': '开启规则后，使用"/leader help"命令查看使用说明'
       commandPacketInternetGroper:
         name: ping命令
         desc: 玩家可以在游戏中使用ping命令
         extra:
-          '0': '开启规则后使用 /ping help 命令查看使用说明'
+          '0': '开启规则后，使用"/ping help"命令查看使用说明'
       playerNoNetherPortalTeleport:
         name: 下界传送门不传送玩家
         desc: 玩家无法通过下界传送门进行传送
@@ -540,7 +543,7 @@ carpetamsaddition:
         name: 自定义命令权限等级
         desc: 自定义任何命令的权限等级
         extra:
-          '0': '开启规则后使用 /customCommandPermissionLevel help 命令查看使用说明'
+          '0': '开启规则后，使用"/customCommandPermissionLevel help"命令查看使用说明'
       shulkerGolem:
         name: 潜影贝傀儡
         desc: 可以通过在潜影盒上放置一个雕刻南瓜来召唤一只潜影贝
@@ -623,7 +626,7 @@ carpetamsaddition:
         name: 自定义方块硬度
         desc: 使用指令来自定义任何方块的挖掘硬度
         extra:
-          '0': '开启规则后使用/customBlockHardness help命令来查看使用说明'
+          '0': '开启规则后，使用"/customBlockHardness help"命令来查看使用说明'
           '1': '客户端没有安装Carpet AMS Addition时，该规则完全不可用'
       onlyOpCanSpawnRealPlayerInWhitelist:
         name: 仅OP可召唤白名单中的玩家
@@ -657,6 +660,11 @@ carpetamsaddition:
       commandGetClientPlayerFps:
         name: 获取客户端玩家FPS
         desc: 使用"/getClientPlayerFps <player>"指令获取指定客户端玩家的FPS
+      commandSetPlayerPose:
+        name: 设置玩家姿势
+        desc: 使用命令设置玩家姿势
+        extra:
+          '0': '开启规则后，使用"/playerPose help"命令查看使用说明'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -678,7 +686,7 @@ carpetamsaddition:
         name: 计划刻催熟所有作物
         desc: 当所有作物方块收到计划刻时仍会给予生长随机刻
 
-      #区块加载规则
+      # 区块加载规则
       commandPlayerChunkLoadController:
         name: 区块加载控制
         desc: 控制任意游戏模式下玩家对周围区块的加载
@@ -736,7 +744,7 @@ carpetamsaddition:
         name: 末地门加载器
         desc: 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致 (Minecraft < 1.20.6可用)
 
-      #合成配方规则
+      # 合成配方规则
       craftableEnchantedGoldenApples:
         name: 可合成附魔金苹果
         desc: 使用老版本的方式来合成附魔金苹果（8金块+1苹果）

@@ -43,6 +43,7 @@
     "rule.commandCustomCommandPermissionLevel.CommandDispatcherMixin",
     "rule.commandCustomCommandPermissionLevel.CommandNodeInvoker",
     "rule.commandCustomMovableBlock.PistonBlockMixin",
+    "rule.commandSetPlayerPose.EntityMixin",
     "rule.commandPlayerChunkLoadController.ThreadedAnvilChunkStorageMixin",
     "rule.commandPlayerLeader.ServerPlayerEntityMixin",
     "rule.craftableCarvedPumpkin.RecipeMixin",

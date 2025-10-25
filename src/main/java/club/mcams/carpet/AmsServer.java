@@ -28,13 +28,15 @@ import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 import club.mcams.carpet.commands.RegisterCommands;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
+import club.mcams.carpet.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
 import club.mcams.carpet.config.LoadConfigFromJson;
 import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
 import club.mcams.carpet.network.payloads.handshake.HandShakeS2CPayload;
-import club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
+import club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
+import club.mcams.carpet.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
@@ -147,7 +149,8 @@ public class AmsServer implements CarpetExtension {
 
     public void sendS2CPacketOnHandShake(ServerPlayerEntity player) {
         NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(AmsServerMod.getVersion(), NetworkUtil.isSupportServer()));
-        NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP));
+        NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP));
+        NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUuid()));
     }
 
     @Override
