@@ -32,17 +32,16 @@ import net.minecraft.network.PacketByteBuf;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomBlockHardnessPayload extends AMS_CustomPayload {
+public class CustomBlockHardnessPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId();
     private final Map<BlockState, Float> hardnessMap;
 
-    private CustomBlockHardnessPayload(PacketByteBuf buf) {
+    private CustomBlockHardnessPayload_S2C(PacketByteBuf buf) {
         super(ID);
         this.hardnessMap = PacketByteBufExtras.readMap(buf, b -> Block.STATE_IDS.get(b.readVarInt()), PacketByteBuf::readFloat);
-
     }
 
-    private CustomBlockHardnessPayload(Map<BlockState, Float> hardnessMap) {
+    private CustomBlockHardnessPayload_S2C(Map<BlockState, Float> hardnessMap) {
         super(ID);
         this.hardnessMap = new HashMap<>(hardnessMap);
     }
@@ -59,10 +58,10 @@ public class CustomBlockHardnessPayload extends AMS_CustomPayload {
     }
 
     public static void register() {
-        AMS_PayloadManager.register(ID, CustomBlockHardnessPayload::new);
+        AMS_PayloadManager.register(ID, CustomBlockHardnessPayload_S2C::new);
     }
 
-    public static CustomBlockHardnessPayload create(Map<BlockState, Float> hardnessMap) {
-        return new CustomBlockHardnessPayload(hardnessMap);
+    public static CustomBlockHardnessPayload_S2C create(Map<BlockState, Float> hardnessMap) {
+        return new CustomBlockHardnessPayload_S2C(hardnessMap);
     }
 }
