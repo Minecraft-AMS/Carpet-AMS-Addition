@@ -137,6 +137,7 @@ carpetamsaddition:
       title: '%s @ 了你'
     getClientPlayerFps:
       feedback: '%s - FPS: %s'
+      help: '/getClientPlayerFps <player>  ->  获取指定玩家的FPS'
     setPlayerPose:
       set_help: '/playerPose <player> set <pose>  ->  设置玩家姿势'
       stop_help: '/playerPose <player> stop  ->  停止做姿势'

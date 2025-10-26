@@ -51,6 +51,8 @@ public class GetClientPlayerFpsRegistry {
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetClientPlayerFps))
             .then(CommandManager.argument("player", EntityArgumentType.player())
             .executes(ctx -> requestFps(EntityArgumentType.getPlayer(ctx, "player"), ctx.getSource())))
+            .then(CommandManager.literal("help")
+            .executes(ctx -> help(ctx.getSource())))
         );
     }
 
@@ -68,5 +70,10 @@ public class GetClientPlayerFpsRegistry {
                 Messenger.tell(source, Messenger.formatting(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), Formatting.GREEN));
             }
         }
+    }
+
+    private static int help(ServerCommandSource source) {
+        Messenger.tell(source, Messenger.formatting(tr.tr("help"), Formatting.GRAY));
+        return 1;
     }
 }

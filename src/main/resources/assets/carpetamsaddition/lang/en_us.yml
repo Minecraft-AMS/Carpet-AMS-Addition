@@ -136,6 +136,7 @@ carpetamsaddition:
       title: '%s @ You'
     getClientPlayerFps:
       feedback: '%s - FPS: %s'
+      help: '/getClientPlayerFps <player>  ->  Get the FPS of the specified player'
     setPlayerPose:
       set_help: '/playerPose <player> set <pose>  ->  Set player pose'
       stop_help: '/playerPose <player> stop  ->  Stop posing'
