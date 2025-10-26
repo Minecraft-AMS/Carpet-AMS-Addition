@@ -40,6 +40,8 @@ import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SetPlayerPoseCommandRegistry {
@@ -70,12 +72,15 @@ public class SetPlayerPoseCommandRegistry {
 
     private static int set(ServerPlayerEntity targetPlayer, MinecraftServer server, String pose) {
         DO_POSE_MAP.put(targetPlayer.getUuid(), pose);
+        targetPlayer.setSneaking(true);
+        triggerPoseUpdate(targetPlayer);
         broadcastSyncDatapack(targetPlayer, server);
         return 1;
     }
 
     private static int stop(ServerPlayerEntity targetPlayer, MinecraftServer server) {
         DO_POSE_MAP.remove(targetPlayer.getUuid());
+        triggerPoseUpdate(targetPlayer);
         broadcastSyncDatapack(targetPlayer, server);
         return 1;
     }
@@ -87,5 +92,12 @@ public class SetPlayerPoseCommandRegistry {
 
     private static void broadcastSyncDatapack(ServerPlayerEntity targetPlayer, MinecraftServer server) {
         NetworkUtil.broadcastDataPack(server, UpdatePlayerPosePayload_S2C.create(DO_POSE_MAP, targetPlayer.getUuid()));
+    }
+
+    private static void triggerPoseUpdate(ServerPlayerEntity targetPlayer) {
+        targetPlayer.setSneaking(true);
+        Runnable stopSneaking = () -> targetPlayer.setSneaking(false);
+        Runnable stopSneakingOnServerThread = () -> NetworkUtil.executeOnServerThread(stopSneaking);
+        CompletableFuture.delayedExecutor(100, TimeUnit.MILLISECONDS).execute(stopSneakingOnServerThread);
     }
 }

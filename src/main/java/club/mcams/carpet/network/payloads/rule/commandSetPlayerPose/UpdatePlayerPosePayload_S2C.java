@@ -27,19 +27,14 @@ import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
 
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.UPDATE_PLAYER_POSE_S2C.getId();
-    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private final Map<UUID, String> poseMap;
     private final UUID targetPlayerUuid;
 
@@ -71,10 +66,7 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
         ClientPlayerEntity player = MinecraftClientUtil.getCurrentPlayer();
 
         if (player.getUuid().equals(this.targetPlayerUuid)) {
-            MinecraftClient client = MinecraftClientUtil.getCurrentClient();
             player.setPose(player.getPose());
-            client.options.sneakKey.setPressed(true);
-            scheduler.schedule(() -> client.execute(() -> client.options.sneakKey.setPressed(false)), 218, TimeUnit.MILLISECONDS);
         }
     }
 
