@@ -293,6 +293,40 @@
 
 ### @玩家（commandAtSomeOnePlayer）
 
-- /@ &lt;player&gt;
+- **/@ &lt;玩家**&gt;
 
   @某位玩家。
+
+
+
+### 获取客户端玩家FPS（commandGetClientPlayerFps）
+
+- **/getClientPlayerFps <玩家>**
+
+  获取指定玩家的FPS。
+
+
+
+- **/getClientPlayerFps help**
+
+  查看使用说明。
+
+
+
+### 设置玩家姿势（commandSetPlayerPose）
+
+- **/playerPose <玩家> set <姿势>**
+
+  设置玩家姿势。
+
+
+
+- **/playerPose <玩家> stop**
+
+  停止做姿势。
+
+
+
+- **/playerPose help**
+
+  查看使用说明。

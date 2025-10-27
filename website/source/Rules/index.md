@@ -2360,7 +2360,7 @@ json位置：
 
 
 
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`,`COMMAND`
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`, `COMMAND`
 
 ## 仅OP可召唤白名单中的玩家（onlyOpCanSpawnRealPlayerInWhitelist）
 
@@ -2535,6 +2535,66 @@ json位置：
 
 
 - 分类: `AMS`, `FEATURE`, `AMS_CHUNKLOADER`
+
+## AMS网络协议（amsNetworkProtocol）
+
+AMS网络协议的开关。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `AMS_NETWORK`
+
+## 获取客户端玩家FPS（commandGetClientPlayerFps）
+
+使用指令获取指定客户端玩家的FPS。
+
+开启规则后，使用“/getClientPlayerFps help”命令查看使用说明
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `AMS_NETWORK`, `COMMAND`
+
+
+
+## 设置玩家姿势（commandSetPlayerPose）
+
+使用指令设置玩家姿势。
+
+开启规则后，使用“/playerPose help”命令查看使用说明
+
+- 类型: `String`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- 分类: `AMS`, `AMS_NETWORK`, `COMMAND`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 

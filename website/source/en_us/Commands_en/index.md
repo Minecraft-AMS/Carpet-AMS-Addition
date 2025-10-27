@@ -291,7 +291,37 @@
 
 ### commandAtSomeOnePlayer
 
-- /@ &lt;player&gt;
+- **/@ &lt;player&gt;**
 
   @ some one player.
+
+### commandGetClientPlayerFps
+
+- **/getClientPlayerFps &lt;player**&gt;
+
+  Get the FPS of the specified player.
+
+
+
+- **/getClientPlayerFps help**
+
+  View the usage instructions.
+
+### commandSetPlayerPose
+
+- **/playerPose &lt;player&gt; set &lt;pose&gt;**
+
+  Set player pose.
+
+
+
+- **/playerPose &lt;player&gt; stop**
+
+  Stop posing.
+
+
+
+- **/playerPose help**
+
+  View the usage instructions.
 

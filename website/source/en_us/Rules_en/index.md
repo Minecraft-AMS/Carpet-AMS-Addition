@@ -2380,7 +2380,7 @@ When the `Carpet AMS Addition` is not installed on the client, this rule is comp
 
 
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`, `COMMAND`
 
 ## onlyOpCanSpawnRealPlayerInWhitelist
 
@@ -2555,6 +2555,64 @@ Passing entities through the End Portal causes chunk loading, consistent with Mi
 
 
 - Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
+## amsNetworkProtocol
+
+The switch of the AMS network protocol.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `AMS_NETWORK`
+
+## commandGetClientPlayerFps
+
+Use command to get the FPS of the specified player.
+
+After enabling the rule, use the "/getClientPlayerFps help" command to view the usage instructions
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `AMS_NETWORK`, `COMMAND`
+
+## commandSetPlayerPose
+
+Use command to set player pose.
+
+After enabling the rule, use the "/playerPose help" command to view the usage instructions
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `AMS_NETWORK`, `COMMAND`
 
 ## craftableEnchantedGoldApple
 
