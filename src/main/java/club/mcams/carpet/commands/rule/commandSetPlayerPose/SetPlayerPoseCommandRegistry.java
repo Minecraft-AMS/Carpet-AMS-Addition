@@ -45,7 +45,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SetPlayerPoseCommandRegistry {
-    private static final Translator tr = new Translator("command.setPlayerPose");
+    private static final Translator tr = new Translator("command.playerPose");
     private static final List<String> POSE = Arrays.asList("spin_attack", "swimming", "sleeping", "fall_flying", "standing", "crouching", "dying");
     public static final Map<UUID, String> DO_POSE_MAP = new ConcurrentHashMap<>();
 

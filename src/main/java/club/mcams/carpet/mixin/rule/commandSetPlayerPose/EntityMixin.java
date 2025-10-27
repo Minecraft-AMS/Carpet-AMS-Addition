@@ -66,8 +66,5 @@ public abstract class EntityMixin {
         POSE_MAPPING.put("standing", EntityPose.STANDING);
         POSE_MAPPING.put("crouching", EntityPose.CROUCHING);
         POSE_MAPPING.put("dying", EntityPose.DYING);
-        //#if MC>=11700
-        POSE_MAPPING.put("long_jumping", EntityPose.LONG_JUMPING);
-        //#endif
     }
 }

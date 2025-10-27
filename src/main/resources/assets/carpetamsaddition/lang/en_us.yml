@@ -137,7 +137,7 @@ carpetamsaddition:
     getClientPlayerFps:
       feedback: '%s - FPS: %s'
       help: '/getClientPlayerFps <player>  ->  Get the FPS of the specified player'
-    setPlayerPose:
+    playerPose:
       set_help: '/playerPose <player> set <pose>  ->  Set player pose'
       stop_help: '/playerPose <player> stop  ->  Stop posing'
 
@@ -537,7 +537,9 @@ carpetamsaddition:
       amsNetworkProtocol:
         desc: The switch of the AMS network protocol
       commandGetClientPlayerFps:
-        desc: Use the "/getClientPlayerFps <player>" command to get the FPS of the specified player
+        desc: Use command to get the FPS of the specified player
+        extra:
+          '0': 'After enabling the rule, use the "/getClientPlayerFps help" command to view the usage instructions'
       commandSetPlayerPose:
         desc: Use command to set player pose
         extra:

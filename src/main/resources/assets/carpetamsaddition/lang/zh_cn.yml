@@ -138,7 +138,7 @@ carpetamsaddition:
     getClientPlayerFps:
       feedback: '%s - FPS: %s'
       help: '/getClientPlayerFps <player>  ->  获取指定玩家的FPS'
-    setPlayerPose:
+    playerPose:
       set_help: '/playerPose <player> set <pose>  ->  设置玩家姿势'
       stop_help: '/playerPose <player> stop  ->  停止做姿势'
 
@@ -660,10 +660,12 @@ carpetamsaddition:
         desc: AMS网络协议的开关
       commandGetClientPlayerFps:
         name: 获取客户端玩家FPS
-        desc: 使用"/getClientPlayerFps <player>"指令获取指定客户端玩家的FPS
+        desc: 使用指令获取指定客户端玩家的FPS
+        extra:
+          '0': '开启规则后，使用"/getClientPlayerFps <player>"命令查看使用说明'
       commandSetPlayerPose:
         name: 设置玩家姿势
-        desc: 使用命令设置玩家姿势
+        desc: 使用指令设置玩家姿势
         extra:
           '0': '开启规则后，使用"/playerPose help"命令查看使用说明'
 
