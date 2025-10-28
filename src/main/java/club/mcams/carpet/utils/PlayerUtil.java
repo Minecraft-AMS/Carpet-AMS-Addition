@@ -30,6 +30,11 @@ public class PlayerUtil {
         return player.getGameProfile().getName();
     }
 
+    public static String getName(UUID uuid) {
+        ServerPlayerEntity player = getServerPlayerEntityFromUuid(uuid);
+        return getName(player);
+    }
+
     public static ServerPlayerEntity getServerPlayerEntityFromUuid(UUID uuid) {
         return MinecraftServerUtil.getServer().getPlayerManager().getPlayer(uuid);
     }

@@ -18,8 +18,9 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS;
+package club.mcams.carpet.network.payloads.debug;
 
+import club.mcams.carpet.AmsClient;
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.utils.MinecraftClientUtil;
@@ -29,16 +30,17 @@ import net.minecraft.network.PacketByteBuf;
 
 import java.util.UUID;
 
-public class ClientPlayerFpsPayload_S2C extends AMS_CustomPayload {
-    private static final String ID = AMS_PayloadManager.PacketId.CLIENT_PLAYER_FPS_S2C.getId();
+public class RequestClientModVersionPayload_S2C extends AMS_CustomPayload {
+    private static final String ID = AMS_PayloadManager.PacketId.REQUEST_CLIENT_MOD_VERSION_S2C.getId();
+
     private final UUID uuid;
 
-    private ClientPlayerFpsPayload_S2C(UUID uuid) {
+    protected RequestClientModVersionPayload_S2C(UUID uuid) {
         super(ID);
         this.uuid = uuid;
     }
 
-    private ClientPlayerFpsPayload_S2C(PacketByteBuf buf) {
+    public RequestClientModVersionPayload_S2C(PacketByteBuf buf) {
         super(ID);
         this.uuid = buf.readUuid();
     }
@@ -50,16 +52,14 @@ public class ClientPlayerFpsPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() ->
-            NetworkUtil.sendC2SPacketIfSupport(MinecraftClientUtil.getCurrentPlayer(), ClientPlayerFpsPayload_C2S.create(this.uuid, MinecraftClientUtil.getClientFps()))
-        );
+        NetworkUtil.executeOnClientThread(() -> NetworkUtil.sendC2SPacketIfSupport(MinecraftClientUtil.getCurrentPlayer(), RequestClientModVersionPayload_C2S.create("Carpet AMS Addition v" + AmsClient.getVersion(), this.uuid)));
     }
 
-    public static ClientPlayerFpsPayload_S2C create(UUID targetPlayerUuid) {
-        return new ClientPlayerFpsPayload_S2C(targetPlayerUuid);
+    public static RequestClientModVersionPayload_S2C create(UUID uuid) {
+        return new RequestClientModVersionPayload_S2C(uuid);
     }
 
     public static void register() {
-        AMS_PayloadManager.register(ID, ClientPlayerFpsPayload_S2C::new);
+        AMS_PayloadManager.register(ID, RequestClientModVersionPayload_S2C::new);
     }
 }

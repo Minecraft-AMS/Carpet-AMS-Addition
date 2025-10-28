@@ -21,6 +21,8 @@
 package club.mcams.carpet.network;
 
 import club.mcams.carpet.network.payloads.AMS_UnknownPayload;
+import club.mcams.carpet.network.payloads.debug.RequestClientModVersionPayload_C2S;
+import club.mcams.carpet.network.payloads.debug.RequestClientModVersionPayload_S2C;
 import club.mcams.carpet.network.payloads.handshake.HandShakeC2SPayload;
 import club.mcams.carpet.network.payloads.handshake.HandShakeS2CPayload;
 import club.mcams.carpet.network.payloads.handshake.RequestHandShakeS2CPayload;
@@ -48,6 +50,8 @@ public class AMS_PayloadManager {
         UNKNOWN("unknown"),
         HANDSHAKE_C2S("handshake_c2s"),
         HANDSHAKE_S2C("handshake_s2c"),
+        REQUEST_CLIENT_MOD_VERSION_S2C("request_client_mod_version_s2c"),
+        REQUEST_CLIENT_MOD_VERSION_C2S("request_client_mod_version_c2s"),
         REQUEST_HANDSHAKE_S2C("request_handshake_s2c"),
         SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness"),
         CLIENT_PLAYER_FPS_C2S("client_player_fps_c2s"),
@@ -73,6 +77,7 @@ public class AMS_PayloadManager {
         chain.addHandlerFor(HandShakeC2SPayload.class, HandShakeC2SPayload::handle);
         chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
         chain.addHandlerFor(ClientPlayerFpsPayload_C2S.class, ClientPlayerFpsPayload_C2S::handle);
+        chain.addHandlerFor(RequestClientModVersionPayload_C2S.class, RequestClientModVersionPayload_C2S::handle);
     }
 
     // S2C
@@ -83,6 +88,7 @@ public class AMS_PayloadManager {
         chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
         chain.addHandlerFor(ClientPlayerFpsPayload_S2C.class, ClientPlayerFpsPayload_S2C::handle);
         chain.addHandlerFor(UpdatePlayerPosePayload_S2C.class,  UpdatePlayerPosePayload_S2C::handle);
+        chain.addHandlerFor(RequestClientModVersionPayload_S2C.class, RequestClientModVersionPayload_S2C::handle);
     }
 
     /*
@@ -93,6 +99,7 @@ public class AMS_PayloadManager {
         HandShakeC2SPayload.register();
         AMS_UnknownPayload.register();
         ClientPlayerFpsPayload_C2S.register();
+        RequestClientModVersionPayload_C2S.register();
     }
 
     // S2C
@@ -103,6 +110,7 @@ public class AMS_PayloadManager {
         AMS_UnknownPayload.register();
         ClientPlayerFpsPayload_S2C.register();
         UpdatePlayerPosePayload_S2C.register();
+        RequestClientModVersionPayload_S2C.register();
     }
 
     //#if MC<12005

@@ -37,14 +37,14 @@ public class NetworkUtil {
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
 
     public static void broadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
-        server.getPlayerManager().getPlayerList().forEach(player -> sendS2CPacket(player, payload));
+        server.getPlayerManager().getPlayerList().forEach(player -> sendS2CPacketIfSupport(player, payload));
     }
 
     public static void forcedBroadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
         server.getPlayerManager().getPlayerList().forEach(payload::sendS2CPacket);
     }
 
-    public static void sendS2CPacket(ServerPlayerEntity player, AMS_CustomPayload payload) {
+    public static void sendS2CPacketIfSupport(ServerPlayerEntity player, AMS_CustomPayload payload) {
         if (isSupportClient(player.getUuid())) {
             payload.sendS2CPacket(player);
         }
@@ -54,6 +54,10 @@ public class NetworkUtil {
         if (isSupportServer()) {
             payload.sendC2SPacket(player);
         }
+    }
+
+    public static void sendS2CPacket(ServerPlayerEntity player, AMS_CustomPayload payload) {
+        payload.sendS2CPacket(player);
     }
 
     public static void sendC2SPacket(ClientPlayerEntity player, AMS_CustomPayload payload) {
@@ -70,6 +74,14 @@ public class NetworkUtil {
 
     public static void setServerSupport(boolean support) {
         SUPPORT_SERVER.set(support);
+    }
+
+    public static Boolean getServerSupport() {
+        return SUPPORT_SERVER.get();
+    }
+
+    public static Set<UUID> getSupportClientSet() {
+        return SUPPORT_CLIENT;
     }
 
     public static void addSupportClient(UUID uuid) {

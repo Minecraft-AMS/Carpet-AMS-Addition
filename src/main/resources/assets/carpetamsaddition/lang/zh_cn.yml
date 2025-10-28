@@ -658,6 +658,9 @@ carpetamsaddition:
       amsNetworkProtocol:
         name: AMS网络协议
         desc: AMS网络协议的开关
+      commandAmspDebug:
+        name: AMSP
+        desc: AMSP
       commandGetClientPlayerFps:
         name: 获取客户端玩家FPS
         desc: 使用指令获取指定客户端玩家的FPS

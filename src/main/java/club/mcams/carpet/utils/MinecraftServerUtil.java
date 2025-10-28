@@ -23,6 +23,10 @@ package club.mcams.carpet.utils;
 import club.mcams.carpet.AmsServer;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerPlayerEntity;
+
+import java.util.Collection;
+import java.util.Collections;
 
 public class MinecraftServerUtil {
     public static MinecraftServer getServer() {
@@ -35,5 +39,15 @@ public class MinecraftServerUtil {
 
     public static boolean serverIsRunning(MinecraftServer server) {
         return server != null && server.isRunning();
+    }
+
+    public static Collection<ServerPlayerEntity> getOnlinePlayers() {
+        MinecraftServer server = getServer();
+
+        if (serverIsRunning(server)) {
+            return server.getPlayerManager().getPlayerList();
+        }
+
+        return Collections.emptyList();
     }
 }

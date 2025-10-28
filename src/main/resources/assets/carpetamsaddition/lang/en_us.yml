@@ -536,6 +536,8 @@ carpetamsaddition:
         desc: Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
       amsNetworkProtocol:
         desc: The switch of the AMS network protocol
+      commandAmspDebug:
+        desc: AMSP
       commandGetClientPlayerFps:
         desc: Use command to get the FPS of the specified player
         extra:

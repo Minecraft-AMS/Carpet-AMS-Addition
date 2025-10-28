@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.commands;
 
+import club.mcams.carpet.commands.debug.network.AmspCommandRegistry;
 import club.mcams.carpet.commands.rule.commandAtSomeOnePlayer.AtCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCarpetExtensionModWikiHyperlink.CarpetExtensionModWikiHyperlinkCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
@@ -126,5 +127,6 @@ public class RegisterCommands {
         AMS_CMD_QUEUE.add(() -> AtCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> GetClientPlayerFpsRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> SetPlayerPoseCommandRegistry.register(dispatcher));
+        AMS_CMD_QUEUE.add(() -> AmspCommandRegistry.register(dispatcher));
     }
 }

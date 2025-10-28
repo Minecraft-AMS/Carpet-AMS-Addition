@@ -148,9 +148,9 @@ public class AmsServer implements CarpetExtension {
     }
 
     public void sendS2CPacketOnHandShake(ServerPlayerEntity player) {
-        NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(AmsServerMod.getVersion(), NetworkUtil.isSupportServer()));
-        NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP));
-        NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUuid()));
+        NetworkUtil.sendS2CPacketIfSupport(player, HandShakeS2CPayload.create(AmsServerMod.getVersion(), NetworkUtil.isSupportServer()));
+        NetworkUtil.sendS2CPacketIfSupport(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP));
+        NetworkUtil.sendS2CPacketIfSupport(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUuid()));
     }
 
     @Override
