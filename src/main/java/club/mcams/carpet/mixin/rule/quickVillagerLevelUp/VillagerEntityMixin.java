@@ -23,6 +23,9 @@ package club.mcams.carpet.mixin.rule.quickVillagerLevelUp;
 import club.mcams.carpet.AmsServerSettings;
 
 import net.minecraft.entity.passive.VillagerEntity;
+//#if MC>=12111
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,7 +43,14 @@ public abstract class VillagerEntityMixin implements VillagerEntityInvoker{
     )
     private void quickLevelUp(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.quickVillagerLevelUp && this.invokerGetVillagerData().getLevel() < 5) {
-            this.invokerLevelUp();
+            //#if MC>=12111
+            //$$ VillagerEntity villagerEntity = (VillagerEntity) (Object) this;
+            //#endif
+            this.invokerLevelUp(
+                //#if MC>=12111
+                //$$ (ServerWorld) villagerEntity.getEntityWorld()
+                //#endif
+            );
         }
     }
 }

@@ -28,6 +28,9 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
+//#if MC>=12111
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
 import net.minecraft.util.Hand;
 import net.minecraft.village.TradeOfferList;
 import net.minecraft.village.TradeOffers;
@@ -44,16 +47,38 @@ public abstract class VillagerEntityMixin implements AbstractTraderEntityInvoker
         method = "fillRecipes",
         at = @At(
             value = "INVOKE",
+            //#if MC>=12111
+            //$$ target = "Lnet/minecraft/entity/passive/VillagerEntity;fillRecipesFromPool(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/village/TradeOfferList;[Lnet/minecraft/village/TradeOffers$Factory;I)V"
+            //#else
             target = "Lnet/minecraft/entity/passive/VillagerEntity;fillRecipesFromPool(Lnet/minecraft/village/TradeOfferList;[Lnet/minecraft/village/TradeOffers$Factory;I)V"
+            //#endif
         )
     )
-    private void refreshRecipes(VillagerEntity villagerEntity, TradeOfferList tradeOffers, TradeOffers.Factory[] factories, int count, Operation<Void> original) {
+    private void refreshRecipes(
+        VillagerEntity villagerEntity,
+        //#if MC>=12111
+        //$$ ServerWorld world,
+        //#endif
+        TradeOfferList tradeOffers,
+        TradeOffers.Factory[] factories, int count, Operation<Void> original
+    ) {
         if (AmsServerSettings.easyRefreshTrades && isNewMerchant(villagerEntity)) {
             TradeOfferList traderOfferList = villagerEntity.getOffers();
             traderOfferList.clear();
-            this.invokeFillRecipesFromPool(traderOfferList, factories, count);
+            this.invokeFillRecipesFromPool(
+                //#if MC>=12111
+                //$$ world,
+                //#endif
+                traderOfferList, factories, count
+            );
         } else {
-            original.call(villagerEntity, tradeOffers, factories, count);
+            original.call(
+                villagerEntity,
+                //#if MC>=12111
+                //$$ world,
+                //#endif
+                tradeOffers, factories, count
+            );
         }
     }
 
@@ -68,7 +93,11 @@ public abstract class VillagerEntityMixin implements AbstractTraderEntityInvoker
         if (AmsServerSettings.easyRefreshTrades) {
             VillagerEntity villagerEntity = (VillagerEntity) (Object) this;
             if (isNewMerchant(villagerEntity) && !player.getMainHandStack().getItem().equals(Items.EMERALD_BLOCK)) {
-                this.invokeFillRecipes();
+                this.invokeFillRecipes(
+                    //#if MC>=12111
+                    //$$ (ServerWorld) villagerEntity.getEntityWorld()
+                    //#endif
+                );
             }
         }
     }

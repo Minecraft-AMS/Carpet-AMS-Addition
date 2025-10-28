@@ -25,14 +25,24 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import net.minecraft.world.dimension.DimensionType;
+//#if MC>=12111
+//$$ import net.minecraft.world.MoonPhase;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(DimensionType.class)
 public abstract class DimensionTypeMixin {
+    //#if MC>=12111
+    //$$ @ModifyReturnValue(method = "getMoonPhase", at = @At("RETURN"))
+    //$$ private MoonPhase alwaysFullMoon(MoonPhase original) {
+    //$$     return AmsServerSettings.fullMoonEveryDay ? MoonPhase.FULL_MOON : original;
+    //$$ }
+    //#else
     @ModifyReturnValue(method = "getMoonPhase", at = @At("RETURN"))
     private int alwaysFullMoon(int original) {
         return AmsServerSettings.fullMoonEveryDay ? 0 : original;
     }
+    //#endif
 }

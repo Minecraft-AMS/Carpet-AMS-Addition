@@ -20,7 +20,6 @@
 
 package club.mcams.carpet.utils;
 
-@SuppressWarnings("unused")
 public class Noop {
     public static void noop() {}
 }
