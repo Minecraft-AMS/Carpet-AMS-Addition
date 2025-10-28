@@ -20,12 +20,13 @@
 
 package club.mcams.carpet.commands.debug.network;
 
+import club.mcams.carpet.utils.*;
+import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerMod;
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.network.payloads.debug.RequestClientModVersionPayload_S2C;
-import club.mcams.carpet.network.payloads.handshake.RequestHandShakeS2CPayload;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.*;
+import club.mcams.carpet.network.payloads.handshake.RequestHandShakeS2CPayload;
+import club.mcams.carpet.network.payloads.debug.RequestClientModVersionPayload_S2C;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
@@ -75,8 +76,8 @@ public class AmspCommandRegistry {
             // set
             .then(CommandManager.literal("set")
             .then(CommandManager.literal("serverSupport")
-            .then(CommandManager.argument("boolean", BoolArgumentType.bool()))
-            .executes(ctx -> setServerSupport(ctx.getSource(), BoolArgumentType.getBool(ctx, "boolean")))))
+            .then(CommandManager.argument("boolean", BoolArgumentType.bool())
+            .executes(ctx -> setServerSupport(ctx.getSource(), BoolArgumentType.getBool(ctx, "boolean"))))))
 
             // request
             .then(CommandManager.literal("request")
@@ -91,11 +92,11 @@ public class AmspCommandRegistry {
         Iterator<UUID> iterator = NetworkUtil.getSupportClientSet().iterator();
 
         if (!iterator.hasNext()) {
-            Messenger.tell(source, Messenger.s("没有支持AMSP的客户端"));
+            Messenger.tell(source, Messenger.formatting(tr.tr("support_client_set_is_none"), Formatting.YELLOW));
             return 0;
         }
 
-        Messenger.tell(source, Messenger.s("支持AMSP的客户端列表:"));
+        Messenger.tell(source, Messenger.formatting(tr.tr("support_client_list_title"), Formatting.AQUA));
 
         while (iterator.hasNext()) {
             UUID uuid = iterator.next();
@@ -110,7 +111,7 @@ public class AmspCommandRegistry {
 
     private static int showServerSupportStatus(ServerCommandSource source) {
         Formatting formatting = NetworkUtil.getServerSupport() ? Formatting.GREEN : Formatting.RED;
-        Messenger.tell(source, Messenger.formatting(Messenger.s(NetworkUtil.getServerSupport(), formatting)));
+        Messenger.tell(source, Messenger.formatting(tr.tr("server_support_status", String.valueOf(NetworkUtil.getServerSupport())), formatting));
         return 1;
     }
 
@@ -130,16 +131,16 @@ public class AmspCommandRegistry {
                 NetworkUtil.executeOnServerThread(() -> {
                     String version = clientModVersion.get(playerUuid);
                     if (version != null) {
-                        Messenger.tell(source, Messenger.formatting(Messenger.s(version), Formatting.AQUA));
+                        Messenger.tell(source, Messenger.formatting(tr.tr("client_mod_version_success_feedback", PlayerUtil.getName(targetPlayer), version), Formatting.AQUA));
                         clientModVersion.remove(playerUuid);
                     } else {
                         if (retryCount[0] < maxRetries) {
                             retryCount[0]++;
-                            Messenger.tell(source, Messenger.formatting(Messenger.s("第 " + retryCount[0] + " 次请求版本信息..."), Formatting.YELLOW));
+                            Messenger.tell(source, Messenger.formatting(tr.tr("request_client_version", String.valueOf(retryCount[0])), Formatting.YELLOW));
                             NetworkUtil.sendS2CPacketIfSupport(targetPlayer, RequestClientModVersionPayload_S2C.create(playerUuid));
                             CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(this);
                         } else {
-                            Messenger.tell(source, Messenger.formatting(Messenger.s("经过 " + maxRetries + " 次重试后仍未收到客户端版本信息"), Formatting.RED));
+                            Messenger.tell(source, Messenger.formatting(tr.tr("client_mod_version_failed_feedback", String.valueOf(maxRetries)), Formatting.RED));
                         }
                     }
                 });
@@ -148,30 +149,30 @@ public class AmspCommandRegistry {
 
         CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(checkAndRetry);
 
-        Messenger.tell(source, Messenger.formatting(Messenger.s("已发送版本请求，等待响应..."), Formatting.GREEN));
+        Messenger.tell(source, Messenger.formatting(tr.tr("get_client_version_waiting"), Formatting.GREEN));
         return 1;
     }
 
     private static int showServerModVersion(ServerCommandSource source) {
-        Messenger.tell(source, Messenger.formatting(Messenger.s(AmsServerMod.getVersion()), Formatting.AQUA));
+        Messenger.tell(source, Messenger.formatting(tr.tr("server_mod_version_feedback", AmsServer.fancyName, AmsServerMod.getVersion()), Formatting.AQUA));
         return 1;
     }
 
     private static int denyClientConnection(ServerCommandSource source, ServerPlayerEntity targetPlayer) {
         NetworkUtil.removeSupportClient(targetPlayer.getUuid());
-        Messenger.tell(source, Messenger.formatting(Messenger.s("成功"), Formatting.GREEN));
+        Messenger.tell(source, Messenger.formatting(tr.tr("deny_client_feedback", PlayerUtil.getName(targetPlayer.getUuid())), Formatting.LIGHT_PURPLE));
         return 1;
     }
 
     private static int denyAllClientConnections(ServerCommandSource source) {
         NetworkUtil.clearClientSupport();
-        Messenger.tell(source, Messenger.formatting(Messenger.s("成功"), Formatting.GREEN));
+        Messenger.tell(source, Messenger.formatting(tr.tr("deny_all_client_feedback"), Formatting.LIGHT_PURPLE));
         return 1;
     }
 
-    private static int setServerSupport(ServerCommandSource source, Boolean isSupport) {
-        NetworkUtil.setServerSupport(isSupport);
-        Messenger.tell(source, Messenger.formatting(Messenger.s("成功"), Formatting.GREEN));
+    private static int setServerSupport(ServerCommandSource source, Boolean support) {
+        NetworkUtil.setServerSupport(support);
+        Messenger.tell(source, Messenger.formatting(tr.tr("set_server_support_feedback", String.valueOf(NetworkUtil.getServerSupport())), Formatting.GREEN));
         return 1;
     }
 
@@ -180,13 +181,9 @@ public class AmspCommandRegistry {
     }
 
     private static int requestHandShake(ServerCommandSource source, Collection<ServerPlayerEntity> players) {
-        int count = MinecraftServerUtil.getOnlinePlayers().size();
-
-        Messenger.tell(source, Messenger.formatting(Messenger.s("正在请求 " + count + " 位玩家进行握手..."), Formatting.YELLOW));
-
         for (ServerPlayerEntity player : players) {
             NetworkUtil.sendS2CPacket(player, RequestHandShakeS2CPayload.create());
-            Messenger.tell(source, Messenger.formatting(Messenger.s("已向 " + PlayerUtil.getName(player) + " 发出握手请求"), Formatting.GREEN));
+            Messenger.tell(source, Messenger.formatting(tr.tr("request_handshake_feedback", PlayerUtil.getName(player)), Formatting.GREEN));
         }
 
         return 1;

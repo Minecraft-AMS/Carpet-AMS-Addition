@@ -140,6 +140,19 @@ carpetamsaddition:
     playerPose:
       set_help: '/playerPose <player> set <pose>  ->  Set player pose'
       stop_help: '/playerPose <player> stop  ->  Stop posing'
+    amsp:
+      support_client_set_is_none: '<AMSP> No client supports AMSP'
+      support_client_list_title: 'List of clients that support AMSP:'
+      server_support_status: '<AMSP> Server support status: %s'
+      request_client_version: '<AMSP> Requesting version information for the %s time...'
+      client_mod_version_success_feedback: '<AMSP> The client version of %s is: %s'
+      client_mod_version_failed_feedback: '<AMSP> Client version information not received after %s retries'
+      get_client_version_waiting: '<AMSP> Version request sent, awaiting response...'
+      server_mod_version_feedback: '<AMSP> Server Carpet AMS Addition version: %s v%s'
+      deny_client_feedback: '<AMSP> %s has been banned from communicating with the server via AMSP'
+      deny_all_client_feedback: '<AMSP> All current clients have been prohibited from communicating with the server via AMSP'
+      set_server_support_feedback: '<AMSP> The server status has been changed to: %s'
+      request_handshake_feedback: '<AMSP> A handshake request has been sent to %s'
 
   logger:
     serverRuntime:
@@ -537,7 +550,9 @@ carpetamsaddition:
       amsNetworkProtocol:
         desc: The switch of the AMS network protocol
       commandAmspDebug:
-        desc: AMSP
+        desc: Some commands for network communication testing
+        extra:
+          '0': 'For usage instructions, refer to the web documentation if you really need it'
       commandGetClientPlayerFps:
         desc: Use command to get the FPS of the specified player
         extra:

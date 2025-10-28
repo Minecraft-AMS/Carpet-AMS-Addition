@@ -624,7 +624,7 @@ public class AmsServerSettings {
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
-    public static boolean commandAmspDebug = false;
+    public static String commandAmspDebug = "false";
 
     @Rule(
         validators = NetworkProtocolObserver.class,

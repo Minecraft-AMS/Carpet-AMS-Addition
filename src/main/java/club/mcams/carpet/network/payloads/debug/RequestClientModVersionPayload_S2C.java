@@ -21,6 +21,7 @@
 package club.mcams.carpet.network.payloads.debug;
 
 import club.mcams.carpet.AmsClient;
+import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.utils.MinecraftClientUtil;
@@ -52,7 +53,7 @@ public class RequestClientModVersionPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() -> NetworkUtil.sendC2SPacketIfSupport(MinecraftClientUtil.getCurrentPlayer(), RequestClientModVersionPayload_C2S.create("Carpet AMS Addition v" + AmsClient.getVersion(), this.uuid)));
+        NetworkUtil.executeOnClientThread(() -> NetworkUtil.sendC2SPacketIfSupport(MinecraftClientUtil.getCurrentPlayer(), RequestClientModVersionPayload_C2S.create(AmsServer.fancyName + " v" + AmsClient.getVersion(), this.uuid)));
     }
 
     public static RequestClientModVersionPayload_S2C create(UUID uuid) {

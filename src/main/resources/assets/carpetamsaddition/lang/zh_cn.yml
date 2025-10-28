@@ -141,6 +141,19 @@ carpetamsaddition:
     playerPose:
       set_help: '/playerPose <player> set <pose>  ->  设置玩家姿势'
       stop_help: '/playerPose <player> stop  ->  停止做姿势'
+    amsp:
+      support_client_set_is_none: '<AMSP> 当前没有支持AMSP的客户端'
+      support_client_list_title: '支持AMSP的客户端列表:'
+      server_support_status: '<AMSP> 服务器支持状态: %s'
+      request_client_version: '<AMSP> 第 %s 次请求客户端版本信息...'
+      client_mod_version_success_feedback: '<AMSP> %s 的客户端版本为: %s'
+      client_mod_version_failed_feedback: '<AMSP> 经过 %s 次重试后仍未收到客户端版本信息'
+      get_client_version_waiting: '<AMSP> 已发送客户端版本请求，等待响应...'
+      server_mod_version_feedback: '<AMSP> 服务器 Carpet AMS Addition 版本: %s v%s'
+      deny_client_feedback: '<AMSP> 已禁止 %s 与服务器通过AMSP通信'
+      deny_all_client_feedback: '<AMSP> 已禁止当前所有客户端通过AMSP与服务器进行通信'
+      set_server_support_feedback: '<AMSP> 服务器支持状态已更改为: %s'
+      request_handshake_feedback: '<AMSP> 已向 %s 发出握手请求'
 
   logger:
     serverRuntime:
@@ -659,8 +672,10 @@ carpetamsaddition:
         name: AMS网络协议
         desc: AMS网络协议的开关
       commandAmspDebug:
-        name: AMSP
-        desc: AMSP
+        name: AMSP网络协议Debug指令
+        desc: 一些用于网络通信测试的指令
+        extra:
+          '0': '使用说明见网页文档，如果你真的需要的话'
       commandGetClientPlayerFps:
         name: 获取客户端玩家FPS
         desc: 使用指令获取指定客户端玩家的FPS
