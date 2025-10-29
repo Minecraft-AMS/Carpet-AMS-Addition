@@ -680,7 +680,7 @@ carpetamsaddition:
         name: 获取客户端玩家FPS
         desc: 使用指令获取指定客户端玩家的FPS
         extra:
-          '0': '开启规则后，使用"/getClientPlayerFps <player>"命令查看使用说明'
+          '0': '开启规则后，使用"/getClientPlayerFps help"命令查看使用说明'
       commandSetPlayerPose:
         name: 设置玩家姿势
         desc: 使用指令设置玩家姿势
