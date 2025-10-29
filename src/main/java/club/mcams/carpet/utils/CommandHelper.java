@@ -33,7 +33,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 //#if MC>=12111
-//$$ import net.minecraft.command.permission.PermissionPredicate;
 //$$ import net.minecraft.command.permission.Permission;
 //$$ import net.minecraft.command.permission.PermissionLevel;
 //#endif
@@ -62,12 +61,7 @@ public final class CommandHelper {
                     Predicate<ServerCommandSource> defaultRequirement = CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.get(commandName);
                     if (CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(commandName)) {
                         int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(commandName);
-                        //#if MC>=12111
-                        //$$ Predicate<ServerCommandSource> permissionPredicate = createCompatPermissionPredicate(level);
-                        //$$ ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(permissionPredicate);
-                        //#else
-                        ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(source -> source.hasPermissionLevel(level));
-                        //#endif
+                        ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(source -> hasPermissionLevel(source, level));
                     } else if (defaultRequirement != null) {
                         ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(defaultRequirement);
                     }
@@ -83,12 +77,7 @@ public final class CommandHelper {
         CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
         CommandNode<ServerCommandSource> target = dispatcher.getRoot().getChild(command);
         if (target != null) {
-            //#if MC>=12111
-            //$$ Predicate<ServerCommandSource> permissionPredicate = createCompatPermissionPredicate(permissionLevel);
-            //$$ ((CommandNodeInvoker<ServerCommandSource>) target).setRequirement(permissionPredicate);
-            //#else
-            ((CommandNodeInvoker<ServerCommandSource>) target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
-            //#endif
+            ((CommandNodeInvoker<ServerCommandSource>) target).setRequirement(source -> hasPermissionLevel(source, permissionLevel));
         }
     }
 
@@ -99,23 +88,17 @@ public final class CommandHelper {
 
         if (commandLevel instanceof String) {
             final String levelStr = ((String) commandLevel).toLowerCase(Locale.ENGLISH);
+
             switch (levelStr) {
                 case "true": return true;
                 case "false": return false;
-                //#if MC>=12111
-                //$$ case "ops": return hasPermissionLevel(source, 2);
-                //#else
-                case "ops": return source.hasPermissionLevel(2);
-                //#endif
+                case "ops": return hasPermissionLevel(source, 2);
             }
+
             if (levelStr.length() == 1) {
                 char c = levelStr.charAt(0);
                 if (c >= '0' && c <= '4') {
-                    //#if MC>=12111
-                    //$$ return hasPermissionLevel(source, c - '0');
-                    //#else
-                    return source.hasPermissionLevel(c - '0');
-                    //#endif
+                    return hasPermissionLevel(source, c - '0');
                 }
             }
         }
@@ -123,24 +106,17 @@ public final class CommandHelper {
         return false;
     }
 
-    //#if MC>=12111
-    //$$ public static Predicate<ServerCommandSource> createCompatPermissionPredicate(int level) {
-    //$$     return source -> hasPermissionLevel(source, level);
-    //$$ }
-    //$$
-    //$$ public static boolean hasPermissionLevel(ServerCommandSource source, int level) {
-    //$$    Permission.Level requiredPermission = createPermissionLevel(level);
-    //$$
-    //$$    if (level > 4) {
-    //$$        return false;
-    //$$    }
-    //$$
-    //$$    return source.getPermissions().hasPermission(requiredPermission);
-    //$$ }
-    //$$
-    //$$ public static Permission.Level createPermissionLevel(int level) {
-    //$$     PermissionLevel permissionLevel = PermissionLevel.fromLevel(level);
-    //$$     return new Permission.Level(permissionLevel);
-    //$$ }
-    //#endif
+    public static boolean hasPermissionLevel(ServerCommandSource source, int level) {
+        //#if MC>=12111
+        //$$ Permission.Level requiredPermission = new Permission.Level(PermissionLevel.fromLevel(level));
+        //$$
+        //$$ if (level > 4) {
+        //$$     return false;
+        //$$ }
+        //$$
+        //$$ return source.getPermissions().hasPermission(requiredPermission);
+        //#else
+        return source.hasPermissionLevel(level);
+        //#endif
+    }
 }
