@@ -29,16 +29,21 @@ import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+@SuppressWarnings("SimplifiableConditionalExpression")
 @Mixin(EnderDragonEntity.class)
 public abstract class EnderDragonEntityMixin {
     @ModifyExpressionValue(
         method = "destroyBlocks",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/GameRules;getBoolean(Lnet/minecraft/world/GameRules$Key;)Z"
+            //#if MC>=12111
+            //$$ target = "Lnet/minecraft/server/world/ServerWorld;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
+            //#else
+            target = "Lnet/minecraft/world/World;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
+            //#endif
         )
     )
-    private boolean destroyBlocks(boolean original) {
-        return original && !AmsServerSettings.enderDragonNoDestroyBlock;
+    private boolean enderDragonNoDestroyBlock(boolean original) {
+        return AmsServerSettings.enderDragonNoDestroyBlock ? false : original;
     }
 }
