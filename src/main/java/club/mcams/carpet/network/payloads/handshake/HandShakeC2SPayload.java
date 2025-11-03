@@ -58,7 +58,7 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
     @Override
     public void handle() {
         NetworkUtil.executeOnServerThread(() -> {
-            ServerPlayerEntity player = PlayerUtil.getServerPlayerEntityFromUuid(this.playerUuid);
+            ServerPlayerEntity player = PlayerUtil.getServerPlayerEntity(this.playerUuid);
             String playerName = player != null ? PlayerUtil.getName(player) : "Unknown Player";
 
             if (this.modVersion.equals(AmsServerMod.getVersion())) {

@@ -65,7 +65,7 @@ public class GetClientPlayerFpsRegistry {
     public static void sendFpsResult(UUID playerUuid, int fps) {
         ServerCommandSource source = pendingQueries.remove(playerUuid);
         if (source != null) {
-            ServerPlayerEntity player = PlayerUtil.getServerPlayerEntityFromUuid(playerUuid);
+            ServerPlayerEntity player = PlayerUtil.getServerPlayerEntity(playerUuid);
             if (!FakePlayerHelper.isFakePlayer(player) && player != null) {
                 Messenger.tell(source, Messenger.formatting(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), Formatting.GREEN));
             }
