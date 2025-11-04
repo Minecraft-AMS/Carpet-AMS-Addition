@@ -189,6 +189,7 @@
     "rule.sneakToEditSign.SignBlockEntityMixin",
     "rule.stackableDiscount.VillageGossipTypeAccessor",
     "rule.stringDupeReintroduced.TripwireHookBlockMixin",
+    "rule.strongLeash.FireworkRocketItemMixin",
     "rule.strongLeash.HappyGhastEntityMixin",
     "rule.strongLeash.LeashableMixin",
     "rule.strongLeash.PathAwareEntityMixin",
