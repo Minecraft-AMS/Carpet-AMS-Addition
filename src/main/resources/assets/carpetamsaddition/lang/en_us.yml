@@ -551,8 +551,8 @@ carpetamsaddition:
         desc: The switch of the AMS network protocol
       commandAmspDebug:
         desc: Some commands for network communication testing
-        extra:
-          '0': 'For usage instructions, refer to the web documentation if you really need it'
+#        extra:
+#          '0': 'For usage instructions, refer to the web documentation if you really need it'
       commandGetClientPlayerFps:
         desc: Use command to get the FPS of the specified player
         extra:

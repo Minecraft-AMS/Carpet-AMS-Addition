@@ -674,8 +674,8 @@ carpetamsaddition:
       commandAmspDebug:
         name: AMSP网络协议Debug指令
         desc: 一些用于网络通信测试的指令
-        extra:
-          '0': '使用说明见网页文档，如果你真的需要的话'
+#        extra:
+#          '0': '使用说明见网页文档，如果你真的需要的话'
       commandGetClientPlayerFps:
         name: 获取客户端玩家FPS
         desc: 使用指令获取指定客户端玩家的FPS
