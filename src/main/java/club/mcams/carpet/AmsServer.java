@@ -28,18 +28,22 @@ import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 import club.mcams.carpet.commands.RegisterCommands;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
+import club.mcams.carpet.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
 import club.mcams.carpet.config.LoadConfigFromJson;
 import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
-import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
+import club.mcams.carpet.network.payloads.handshake.HandShakeS2CPayload;
+import club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
+import club.mcams.carpet.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
 import club.mcams.carpet.settings.CarpetRuleRegistrar;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.CountRulesUtil;
 import club.mcams.carpet.utils.MinecraftServerUtil;
+import club.mcams.carpet.utils.NetworkUtil;
 
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
@@ -67,8 +71,8 @@ public class AmsServer implements CarpetExtension {
     public static long serverStartTimeMillis;
     public static final int ruleCount = CountRulesUtil.countRules();
     public static final String fancyName = "Carpet AMS Addition";
-    public static final String name = AmsServerMod.getModId();
-    public static final String compactName = name.replace("-", "");  // carpetamsaddition
+    public static final String MOD_ID = AmsServerMod.getModId();
+    public static final String compactName = MOD_ID.replace("-", "");  // carpetamsaddition
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
     private static MinecraftServer minecraftServer;
     private static final AmsServer INSTANCE = new AmsServer();
@@ -143,12 +147,22 @@ public class AmsServer implements CarpetExtension {
         //#endif
     }
 
+    public void sendS2CPacketOnHandShake(ServerPlayerEntity player) {
+        NetworkUtil.sendS2CPacketIfSupport(player, HandShakeS2CPayload.create(AmsServerMod.getVersion(), NetworkUtil.isSupportServer()));
+        NetworkUtil.sendS2CPacketIfSupport(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP));
+        NetworkUtil.sendS2CPacketIfSupport(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUuid()));
+    }
+
     @Override
     public void onPlayerLoggedIn(ServerPlayerEntity player) {
         CustomWelcomeMessageConfig.getConfig().sendWelcomeMessage(player, MinecraftServerUtil.getServer());
         LeaderCommandRegistry.onPlayerLoggedIn(player);
         RecipeRuleHelper.onPlayerLoggedIn(MinecraftServerUtil.getServer(), player);
-        CustomBlockHardnessPayload.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP).sendS2CPacket(player);
+    }
+
+    @Override
+    public void onPlayerLoggedOut(ServerPlayerEntity player) {
+        NetworkUtil.removeSupportClient(player.getUuid());
     }
 
     @Override
@@ -159,11 +173,13 @@ public class AmsServer implements CarpetExtension {
 
     @Override
     public void onServerClosed(MinecraftServer server) {
+        NetworkUtil.clearClientSupport();
         FancyFakePlayerNameTeamController.removeBotTeam(server, AmsServerSettings.fancyFakePlayerName);
     }
 
     @Override
     public void onServerLoadedWorlds(MinecraftServer server) {
+        NetworkUtil.setServerSupport(true);
         FancyFakePlayerNameTeamController.removeBotTeam(server, AmsServerSettings.fancyFakePlayerName);
     }
 

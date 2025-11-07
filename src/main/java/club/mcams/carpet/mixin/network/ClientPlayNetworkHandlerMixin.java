@@ -20,11 +20,8 @@
 
 package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.handler.factory.S2CPayloadHandlerFactory;
-import club.mcams.carpet.network.payload.AMS_CustomPayload;
-
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
+import club.mcams.carpet.network.AMS_CustomPayload;
+import club.mcams.carpet.network.AMS_PayloadManager;
 
 //#if MC>=12005
 //$$ import net.minecraft.network.packet.CustomPayload;
@@ -42,7 +39,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Environment(EnvType.CLIENT)
 @Mixin(
     //#if MC>=12005
     //$$ ClientCommonNetworkHandler.class
@@ -64,7 +60,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
         //#if MC>=12005
         //$$ if (packet.payload() instanceof AMS_CustomPayload && packet.payload().getId().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
         //$$     AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
-        //$$     if (S2CPayloadHandlerFactory.HANDLER_CHAIN.handle(payload)) {
+        //$$     if (AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)) {
         //$$         ci.cancel();
         //$$     }
         //$$ }
@@ -73,8 +69,8 @@ public abstract class ClientPlayNetworkHandlerMixin {
         if (channel.equals(AMS_CustomPayload.CHANNEL_ID)) {
             PacketByteBuf packetByteBuf = ((CustomPayloadS2CPacketAccessor) packet).getData();
             try {
-                AMS_CustomPayload payload = AMS_CustomPayload.decode(packet);
-                if (payload != null && S2CPayloadHandlerFactory.HANDLER_CHAIN.handle(payload)) {
+                AMS_CustomPayload payload = AMS_PayloadManager.S2C_decodePacket(packet);
+                if (payload != null && AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)) {
                     ci.cancel();
                 }
             } finally {

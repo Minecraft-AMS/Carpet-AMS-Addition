@@ -22,10 +22,11 @@ package club.mcams.carpet.commands.rule.commandCustomBlockHardness;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.config.rule.commandCustomBlockHardness.CustomBlockHardnessConfig;
-import club.mcams.carpet.network.payload.rule.commandCustomBlockHardness.CustomBlockHardnessPayload;
+import club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
+import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.utils.RegexTools;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -124,7 +125,7 @@ public class CustomBlockHardnessCommandRegistry {
         }
         CUSTOM_BLOCK_HARDNESS_MAP.put(state, hardness);
         saveToJson();
-        sendSyncPacketToAllOnlinePlayer(server);
+        broadcastDataPack(server);
         return 1;
     }
 
@@ -133,7 +134,7 @@ public class CustomBlockHardnessCommandRegistry {
             float hardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
             CUSTOM_BLOCK_HARDNESS_MAP.remove(state);
             saveToJson();
-            sendSyncPacketToAllOnlinePlayer(server);
+            broadcastDataPack(server);
             player.sendMessage(
                 Messenger.s(
                     MESSAGE_HEAD + "- " + RegexTools.getBlockRegisterName(state) + "/" + hardness
@@ -153,7 +154,7 @@ public class CustomBlockHardnessCommandRegistry {
     private static int removeAll(MinecraftServer server, PlayerEntity player) {
         CUSTOM_BLOCK_HARDNESS_MAP.clear();
         saveToJson();
-        sendSyncPacketToAllOnlinePlayer(server);
+        broadcastDataPack(server);
         player.sendMessage(
             Messenger.s(
                 MESSAGE_HEAD + translator.tr("removeAll").getString()
@@ -207,9 +208,8 @@ public class CustomBlockHardnessCommandRegistry {
         return 1;
     }
 
-    private static void sendSyncPacketToAllOnlinePlayer(MinecraftServer server) {
-        CustomBlockHardnessPayload payload = new CustomBlockHardnessPayload(CUSTOM_BLOCK_HARDNESS_MAP);
-        server.getPlayerManager().getPlayerList().forEach(payload::sendS2CPacket);
+    private static void broadcastDataPack(MinecraftServer server) {
+        NetworkUtil.broadcastDataPack(server, CustomBlockHardnessPayload_S2C.create(CUSTOM_BLOCK_HARDNESS_MAP));
     }
 
     private static void saveToJson() {

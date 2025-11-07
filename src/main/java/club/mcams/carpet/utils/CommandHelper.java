@@ -32,6 +32,10 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+//#if MC>=12111
+//$$ import net.minecraft.command.permission.Permission;
+//$$ import net.minecraft.command.permission.PermissionLevel;
+//#endif
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,7 +61,7 @@ public final class CommandHelper {
                     Predicate<ServerCommandSource> defaultRequirement = CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.get(commandName);
                     if (CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(commandName)) {
                         int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(commandName);
-                        ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(source -> source.hasPermissionLevel(level));
+                        ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(source -> hasPermissionLevel(source, level));
                     } else if (defaultRequirement != null) {
                         ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(defaultRequirement);
                     }
@@ -72,27 +76,47 @@ public final class CommandHelper {
     public static void setPermission(MinecraftServer server, String command, int permissionLevel) {
         CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
         CommandNode<ServerCommandSource> target = dispatcher.getRoot().getChild(command);
-        ((CommandNodeInvoker<ServerCommandSource>) target).setRequirement(source -> source.hasPermissionLevel(permissionLevel));
+        if (target != null) {
+            ((CommandNodeInvoker<ServerCommandSource>) target).setRequirement(source -> hasPermissionLevel(source, permissionLevel));
+        }
     }
 
     public static boolean canUseCommand(ServerCommandSource source, Object commandLevel) {
         if (commandLevel instanceof Boolean) {
             return (Boolean) commandLevel;
         }
+
         if (commandLevel instanceof String) {
             final String levelStr = ((String) commandLevel).toLowerCase(Locale.ENGLISH);
+
             switch (levelStr) {
                 case "true": return true;
                 case "false": return false;
-                case "ops": return source.hasPermissionLevel(2);
+                case "ops": return hasPermissionLevel(source, 2);
             }
+
             if (levelStr.length() == 1) {
                 char c = levelStr.charAt(0);
                 if (c >= '0' && c <= '4') {
-                    return source.hasPermissionLevel(c - '0');
+                    return hasPermissionLevel(source, c - '0');
                 }
             }
         }
+
         return false;
+    }
+
+    public static boolean hasPermissionLevel(ServerCommandSource source, int level) {
+        //#if MC>=12111
+        //$$ Permission.Level requiredPermission = new Permission.Level(PermissionLevel.fromLevel(level));
+        //$$
+        //$$ if (level > 4) {
+        //$$     return false;
+        //$$ }
+        //$$
+        //$$ return source.getPermissions().hasPermission(requiredPermission);
+        //#else
+        return source.hasPermissionLevel(level);
+        //#endif
     }
 }

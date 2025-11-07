@@ -28,4 +28,4 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.19.4", desc = "Just a fix for https://github.com/gnembon/fabric-carpet/issues/1908")
 @Mixin(DummyClass.class)
-public class CarpetServerMixin {}
+public abstract class CarpetServerMixin {}

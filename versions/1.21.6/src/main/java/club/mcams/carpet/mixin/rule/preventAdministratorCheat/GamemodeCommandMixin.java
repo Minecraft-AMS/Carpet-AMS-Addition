@@ -27,8 +27,8 @@ import net.minecraft.server.command.ServerCommandSource;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.util.function.Predicate;
@@ -44,7 +44,7 @@ public abstract class GamemodeCommandMixin {
             remap = false
         ),
         require = 1,
-        allow = 1
+        allow = 2
     )
     private static Predicate<ServerCommandSource> preventCheat(Predicate<ServerCommandSource> predicate) {
         return source -> predicate.test(source) && PermissionHelper.canCheat(source);

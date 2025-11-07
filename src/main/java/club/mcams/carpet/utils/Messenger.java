@@ -66,6 +66,10 @@ public class Messenger {
         tell(source, text, false);
     }
 
+    public static Text endl() {
+        return Messenger.s("\n");
+    }
+
     public static BaseText formatting(BaseText text, Formatting... formattings) {
         text.formatted(formattings);
         return text;

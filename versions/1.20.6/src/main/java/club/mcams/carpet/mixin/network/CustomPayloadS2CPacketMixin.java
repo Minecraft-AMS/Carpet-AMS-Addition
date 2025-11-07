@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.network.payload.AMS_CustomPayload;
+import club.mcams.carpet.network.AMS_CustomPayload;
 
 import net.minecraft.network.packet.CustomPayload;
 import net.minecraft.network.packet.s2c.common.CustomPayloadS2CPacket;

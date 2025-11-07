@@ -26,8 +26,8 @@ import net.minecraft.server.command.ServerCommandSource;
 
 public abstract class SimpleRuleObserver<T> extends RuleObserver<T> {
     @Override
-    public T validate(ServerCommandSource source, ParsedRule<T> currentRule, T newValue, String userInput) {
-        onValueChange(currentRule.get(), newValue);
+    public T validate(ServerCommandSource source, ParsedRule<T> rule, T newValue, String userInput) {
+        onValueChange(source, rule, rule.get(), newValue);
         return newValue;
     }
 }

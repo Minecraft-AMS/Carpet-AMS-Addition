@@ -134,6 +134,25 @@ carpetamsaddition:
         list: '/customBlockHardness list  ->  Display all added blocks'
     at:
       title: '%s @ You'
+    getClientPlayerFps:
+      feedback: '%s - FPS: %s'
+      help: '/getClientPlayerFps <player>  ->  Get the FPS of the specified player'
+    playerPose:
+      set_help: '/playerPose <player> set <pose>  ->  Set player pose'
+      stop_help: '/playerPose <player> stop  ->  Stop posing'
+    amsp:
+      support_client_set_is_none: '<AMSP> No client supports AMSP'
+      support_client_list_title: 'List of clients that support AMSP:'
+      server_support_status: '<AMSP> Server support status: %s'
+      request_client_version: '<AMSP> Requesting version information for the %s time...'
+      client_mod_version_success_feedback: '<AMSP> The client version of %s is: %s'
+      client_mod_version_failed_feedback: '<AMSP> Client version information not received after %s retries'
+      get_client_version_waiting: '<AMSP> Version request sent, awaiting response...'
+      server_mod_version_feedback: '<AMSP> Server Carpet AMS Addition version: %s v%s'
+      deny_client_feedback: '<AMSP> %s has been banned from communicating with the server via AMSP'
+      deny_all_client_feedback: '<AMSP> All current clients have been prohibited from communicating with the server via AMSP'
+      set_server_support_feedback: '<AMSP> The server status has been changed to: %s'
+      request_handshake_feedback: '<AMSP> A handshake request has been sent to %s'
 
   logger:
     serverRuntime:
@@ -158,6 +177,8 @@ carpetamsaddition:
       value_range: 'The value must be 0 - 1'
     largeEnderChest:
       switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
+    amsNetworkProtocol:
+      need_enable_protocol: '[Carpet AMS Addition] Using the %s rule requires enabling the amsNetworkProtocol rule to take effect'
 
   fuzz:
     command:
@@ -167,7 +188,8 @@ carpetamsaddition:
     category:
       AMS: AMS
       crafting: crafting
-      AMS_chunkLoader: AMS_chunkLoader
+      AMS_chunkload: AMS_chunkload
+      AMS_network: AMS_network
 
     rule:
       superBow:
@@ -208,7 +230,7 @@ carpetamsaddition:
       commandCustomAntiFireItems:
         desc: Use command to control whether any item is fireproof or not
         extra:
-          '0': 'After enabling the rules, use the /customAntiFireItems help command to view the usage instructions'
+          '0': 'After enabling the rule, use the "/customAntiFireItems help" command to view the usage instructions'
       itemAntiExplosion:
         desc: Dropped items will not be destroyed by explosions
         extra:
@@ -308,13 +330,13 @@ carpetamsaddition:
       commandCustomMovableBlock:
         desc: Customize the non-pushable block to make it pushable (Container blocks are not supported, and if you need to push containers, you can use Carpet's movableBlockEntities rule)
         extra:
-          '0': 'After enabling the rules, use the /customMovableBlock help command to view the usage instructions'
+          '0': 'After enabling the rule, use the "/customMovableBlock help" command to view the usage instructions'
       easyMaxLevelBeacon:
         desc: Activate full-level beacon with just one base block
       commandCustomBlockBlastResistance:
         desc: Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled)
         extra:
-          '0': 'After enabling the rules, use the /customBlockBlastResistance help command to view the usage instructions'
+          '0': 'After enabling the rule, use the "/customBlockBlastResistance help" command to view the usage instructions'
       regeneratingDragonEgg:
         desc: Every time a player defeats the Ender Dragon, a dragon egg will be generated
         extra:
@@ -386,11 +408,11 @@ carpetamsaddition:
       commandPlayerLeader:
         desc: Designate one or more players as guides, granting them a glowing effect
         extra:
-          '0': 'After enabling the rules, use the /leader help command to view the usage instructions'
+          '0': 'After enabling the rule, use the "/leader help" command to view the usage instructions'
       commandPacketInternetGroper:
         desc: player can use the "ping" command in the game
         extra:
-          '0': 'After enabling the rules, use the /ping help command to view the usage instructions'
+          '0': 'After enabling the rule, use the "/ping help" command to view the usage instructions'
       playerNoNetherPortalTeleport:
         desc: Players cannot teleport through nether portals
       infiniteDurability:
@@ -447,7 +469,7 @@ carpetamsaddition:
       commandCustomCommandPermissionLevel:
         desc: Customize the permission level of any commands
         extra:
-          '0': 'After enabling the rules, use the /customCommandPermissionLevel command to view the usage instructions'
+          '0': 'After enabling the rule, use the "/customCommandPermissionLevel help" command to view the usage instructions'
       shulkerGolem:
         desc: A shulker can be summoned by placing a carved pumpkin on the shulker box
       headHunter:
@@ -505,7 +527,7 @@ carpetamsaddition:
       commandCustomBlockHardness:
         desc: Use command to customizing mining hardness for any block
         extra:
-          '0': 'After enabling the rules, use the /customBlockBlastResistance helper command to view the usage instructions'
+          '0': 'After enabling the rule, use the "/customBlockBlastResistance helper" command to view the usage instructions'
           '1': 'When the Carpet AMS Addition is not installed on the client, this rule is completely unavailable'
       onlyOpCanSpawnRealPlayerInWhitelist:
         desc: Only OP players can spawn players on the whitelist, regardless of whether the whitelist is enabled
@@ -525,6 +547,20 @@ carpetamsaddition:
         desc: Broadcast the news of who summoned the phantoms
       endPortalChunkLoadDisabled:
         desc: Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
+      amsNetworkProtocol:
+        desc: The switch of the AMS network protocol
+      commandAmspDebug:
+        desc: Some commands for network communication testing
+#        extra:
+#          '0': 'For usage instructions, refer to the web documentation if you really need it'
+      commandGetClientPlayerFps:
+        desc: Use command to get the FPS of the specified player
+        extra:
+          '0': 'After enabling the rule, use the "/getClientPlayerFps help" command to view the usage instructions'
+      commandSetPlayerPose:
+        desc: Use command to set player pose
+        extra:
+          '0': 'After enabling the rule, use the "/playerPose help" command to view the usage instructions'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -540,7 +576,7 @@ carpetamsaddition:
       scheduledRandomTickAllPlants:
         desc: Make all plants accepts scheduled tick as random tick
 
-      #区块加载规则
+      # 区块加载规则
       commandPlayerChunkLoadController:
         desc: Control chunk loading for players at any gamemodes
         extra:
@@ -589,7 +625,7 @@ carpetamsaddition:
       endPortalChunkLoader:
         desc: Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5 (Available for Minecraft < 1.20.6)
 
-      #合成配方规则
+      # 合成配方规则
       craftableEnchantedGoldenApples:
         desc: Enchanted Golden Apples can be crafted with 8 Gold Blocks again
       craftableBundle:

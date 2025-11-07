@@ -20,7 +20,7 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.network.payload.RegC2SPayload;
+import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.utils.AutoMixinAuditExecutor;
 
 import net.fabricmc.api.ModInitializer;
@@ -33,7 +33,7 @@ public class AmsServerMod implements ModInitializer {
     @Override
     public void onInitialize() {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
-        RegC2SPayload.register();
+        AMS_PayloadManager.registerC2SPayloads();
         AutoMixinAuditExecutor.run();
         AmsServer.init();
     }

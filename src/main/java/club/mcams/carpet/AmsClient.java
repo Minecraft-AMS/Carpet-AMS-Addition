@@ -20,19 +20,27 @@
 
 package club.mcams.carpet;
 
-import club.mcams.carpet.network.payload.ClientModVersionPayload;
-import club.mcams.carpet.network.payload.RegS2CPayload;
+import club.mcams.carpet.network.AMS_PayloadManager;
+import club.mcams.carpet.network.payloads.handshake.HandShakeC2SPayload;
 import club.mcams.carpet.utils.MinecraftClientUtil;
-import club.mcams.carpet.utils.PlayerUtil;
+import club.mcams.carpet.utils.NetworkUtil;
 
 import net.fabricmc.api.ClientModInitializer;
+
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AmsClient implements ClientModInitializer {
     private static final String MOD_ID = "carpet-ams-addition";
+    public static final String fancyName = "Carpet AMS Addition";
     public static final String name = getModId();
     public static MinecraftClient minecraftClient;
+    public static final Logger LOGGER = LogManager.getLogger(fancyName);
+    public ClientPlayerEntity player;
     private static String version;
     private static final AmsClient AMS_CLIENT_INSTANCE = new AmsClient();
 
@@ -40,7 +48,7 @@ public class AmsClient implements ClientModInitializer {
     public void onInitializeClient() {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
         minecraftClient = MinecraftClient.getInstance();
-        RegS2CPayload.register();
+        AMS_PayloadManager.registerS2CPayloads();
     }
 
     public static AmsClient getInstance() {
@@ -56,6 +64,11 @@ public class AmsClient implements ClientModInitializer {
     }
 
     public void onGameJoin() {
-        ClientModVersionPayload.create(version, PlayerUtil.getName(MinecraftClientUtil.getCurrentPlayer())).sendC2SPacket(MinecraftClientUtil.getCurrentPlayer());
+        player = MinecraftClientUtil.getCurrentPlayer();
+        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(version, player.getUuid()));
+    }
+
+    public void onDisconnect() {
+        NetworkUtil.setServerSupport(false);
     }
 }

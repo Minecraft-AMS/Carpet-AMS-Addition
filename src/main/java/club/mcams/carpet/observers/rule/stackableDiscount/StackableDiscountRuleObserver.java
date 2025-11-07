@@ -20,9 +20,12 @@
 
 package club.mcams.carpet.observers.rule.stackableDiscount;
 
+import carpet.settings.ParsedRule;
+
 import club.mcams.carpet.mixin.rule.stackableDiscount.VillageGossipTypeAccessor;
 import club.mcams.carpet.settings.SimpleRuleObserver;
 
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.village.VillageGossipType;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
@@ -31,7 +34,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @SuppressWarnings({"unused", "DataFlowIssue"})
 public class StackableDiscountRuleObserver extends SimpleRuleObserver<Boolean> {
     @Override
-    public void onValueChange(Boolean oldValue, Boolean newValue) {
+    public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue) {
             ((VillageGossipTypeAccessor) (Object) VillageGossipType.MINOR_POSITIVE).setMaxValue(200);
             ((VillageGossipTypeAccessor) (Object) VillageGossipType.MAJOR_POSITIVE).setMaxValue(100);

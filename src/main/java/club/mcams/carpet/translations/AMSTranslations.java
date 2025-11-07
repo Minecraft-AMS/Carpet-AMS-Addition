@@ -158,7 +158,11 @@ public class AMSTranslations {
     }
 
     private static BaseText updateTextWithTranslation(BaseText originalText, String formattedString, TranslatableText translatableText) {
+        //#if MC>=12111
+        //$$ TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) translatableText;
+        //#else
         TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) (Messenger.tr(formattedString, translatableText.getArgs()));
+        //#endif
         BaseText newText = createNewText(formattedString, fixedTranslatableText);
         if (newText == null) {
             return Messenger.s(formattedString);

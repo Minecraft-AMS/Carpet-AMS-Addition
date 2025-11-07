@@ -21,6 +21,7 @@
 package club.mcams.carpet.utils;
 
 import club.mcams.carpet.AmsClient;
+import club.mcams.carpet.mixin.rule.commandGetClientPlayerFPS.MinecraftClientAccessor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -34,8 +35,15 @@ public class MinecraftClientUtil {
         return AmsClient.minecraftClient.player;
     }
 
-    @SuppressWarnings("unused")
     public static MinecraftClient getCurrentClient() {
         return AmsClient.minecraftClient;
+    }
+
+    public static boolean clientIsRunning() {
+        return getCurrentClient() != null && getCurrentClient().isRunning();
+    }
+
+    public static int getClientFps() {
+        return ((MinecraftClientAccessor) getCurrentClient()).getCurrentFps();
     }
 }
