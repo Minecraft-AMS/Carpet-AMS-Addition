@@ -20,22 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.fullMoonEveryDay;
 
-import club.mcams.carpet.AmsServerSettings;
-
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-
-import net.minecraft.world.dimension.DimensionType;
+import club.mcams.carpet.utils.compat.DummyClass;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft < 1.21.11")
-@Mixin(DimensionType.class)
-public abstract class DimensionTypeMixin {
-    @ModifyReturnValue(method = "getMoonPhase", at = @At("RETURN"))
-    private int alwaysFullMoon(int original) {
-        return AmsServerSettings.fullMoonEveryDay ? 0 : original;
-    }
-}
+@Mixin(DummyClass.class)
+public abstract class DimensionTypeMixin {}

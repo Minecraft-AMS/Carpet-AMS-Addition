@@ -94,6 +94,7 @@
     "rule.foliageGenerateDisabled.FoliagePlacerMixin",
     "rule.foliageGenerateDisabled.HugeFungusFeatureMixin",
     "rule.fullMoonEveryDay.DimensionTypeMixin",
+    "rule.fullMoonEveryDay.MoonPhaseMixin",
     "rule.furnaceSmeltingTimeController.AbstractFurnaceBlockEntityMixin",
     "rule.ghastFireballExplosionDamageSourceFix.FireballEntityMixin",
     "rule.headHunter.PlayerEntityMixin",
