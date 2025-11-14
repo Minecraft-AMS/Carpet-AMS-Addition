@@ -136,6 +136,7 @@
     "rule.noEnchantedGoldenAppleEating.ItemStackMixin",
     "rule.noFamilyPlanning.PassiveEntityMixin",
     "rule.onlyOpCanSpawnRealPlayerInWhitelist.Carpet_PlayerCommandMixin",
+    "rule.onlyPlayerCanCreateNetherPortal.NetherPortalBlockMixin",
     "rule.optimizedDragonRespawn.BlockPatternMixin",
     "rule.optimizedDragonRespawn.EnderDragonFightMixin",
     "rule.perfectInvisibility_sneakInvisibility.EntityInvoker",

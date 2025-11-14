@@ -561,6 +561,8 @@ carpetamsaddition:
         desc: Use command to set player pose
         extra:
           '0': 'After enabling the rule, use the "/playerPose help" command to view the usage instructions'
+      onlyPlayerCanCreateNetherPortal:
+        desc: Only allow new portals to be generated when players pass through the Nether portal
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

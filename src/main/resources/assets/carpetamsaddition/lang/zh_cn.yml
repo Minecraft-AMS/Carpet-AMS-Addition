@@ -686,6 +686,9 @@ carpetamsaddition:
         desc: 使用指令设置玩家姿势
         extra:
           '0': '开启规则后，使用"/playerPose help"命令查看使用说明'
+      onlyPlayerCanCreateNetherPortal:
+        name: 只有玩家可以生成地狱门
+        desc: 只允许玩家穿过地狱门时生成新的地狱门
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
