@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.strongLeash;
+package club.mcams.carpet.mixin.rule.maxClientInteractionReachDistance;
 
 import club.mcams.carpet.utils.compat.DummyClass;
 
@@ -26,6 +26,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.21.6")
+@GameVersion(version = "Minecraft 1.20.5 - 1.21.10")
 @Mixin(DummyClass.class)
-public abstract class FireworkRocketItemMixin {}
+public abstract class GameRendererMixin {}

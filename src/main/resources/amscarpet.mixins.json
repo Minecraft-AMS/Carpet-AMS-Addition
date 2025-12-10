@@ -220,6 +220,7 @@
     "hooks.network.MinecraftClientMixin",
     "network.ClientPlayNetworkHandlerMixin",
     "rule.commandGetClientPlayerFPS.MinecraftClientAccessor",
+    "rule.maxClientInteractionReachDistance.ClientPlayerEntityMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
     "rule.maxClientInteractionReachDistance.GameRendererMixin",
     "rule.maxPlayerInteractionRange.GameRendererMixin"
