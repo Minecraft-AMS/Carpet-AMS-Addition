@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.mixin.carpet;
 
+import carpet.CarpetServer;
 import carpet.api.settings.SettingsManager;
 
 import club.mcams.carpet.AmsServer;
@@ -42,12 +43,13 @@ public abstract class SettingsManagerMixin {
     @Unique
     private static final Translator translator = new Translator("carpet.totalRules");
 
+    @SuppressWarnings("ConstantValue")
     @Inject(
         method = "listAllSettings",
         slice = @Slice(
             from = @At(
                 value = "CONSTANT",
-                args = "stringValue=ui.version",
+                args = "stringValue=carpet.settings.command.version",
                 ordinal = 0
             )
         ),
@@ -59,14 +61,15 @@ public abstract class SettingsManagerMixin {
         remap = false
     )
     private void printVersion(CommandSourceStack source, CallbackInfoReturnable<Integer> cir) {
-        Messenger.tell(
-            source,
-            Messenger.c(
-                String.format("g %s ", AmsServer.fancyName),
-                String.format("g %s: ", translator.tr("version").getString()),
-                String.format("g %s ", AmsServerMod.getVersion()),
-                String.format("g (%s: %d)", translator.tr("total_rules").getString(), AmsServer.ruleCount)
-            )
-        );
+        if ((Object)this == CarpetServer.settingsManager) {
+            Messenger.tell(
+                source, Messenger.c(
+                    String.format("g %s ", AmsServer.fancyName),
+                    String.format("g %s: ", translator.tr("version").getString()),
+                    String.format("g %s ", AmsServerMod.getVersion()),
+                    String.format("g (%s: %d)", translator.tr("total_rules").getString(), AmsServer.ruleCount)
+                )
+            );
+        }
     }
 }
