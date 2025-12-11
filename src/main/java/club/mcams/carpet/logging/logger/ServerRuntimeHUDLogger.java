@@ -25,8 +25,8 @@ import club.mcams.carpet.logging.AbstractHUDLogger;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.MutableText;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.chat.MutableComponent;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -45,7 +45,7 @@ public class ServerRuntimeHUDLogger extends AbstractHUDLogger {
     }
 
     @Override
-    public MutableText[] onHudUpdate(String option, PlayerEntity playerEntity) {
+    public MutableComponent[] onHudUpdate(String option, Player playerEntity) {
         Instant currentTime = Instant.now();
         Instant serverStartTime = Instant.ofEpochMilli(AmsServer.serverStartTimeMillis);
         Duration elapsedDuration = Duration.between(serverStartTime, currentTime);
@@ -55,7 +55,7 @@ public class ServerRuntimeHUDLogger extends AbstractHUDLogger {
         long minutes = remainingSeconds / 60;
         long seconds = remainingSeconds % 60;
         String formattedTime = String.format("%02d : %02d : %02d", hours, minutes, seconds);
-        return new MutableText[]{
+        return new MutableComponent[]{
             Messenger.c(
                 String.format("q %s ", translator.tr("server_runtime").getString()),
                 String.format("c %s", formattedTime)

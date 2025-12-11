@@ -31,11 +31,11 @@ import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientP
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.util.Formatting;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.ChatFormatting;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Map;
 import java.util.UUID;
@@ -43,37 +43,37 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class GetClientPlayerFpsRegistry {
     private static final Translator tr = new Translator("command.getClientPlayerFps");
-    private static final Map<UUID, ServerCommandSource> pendingQueries = new ConcurrentHashMap<>();
+    private static final Map<UUID, CommandSourceStack> pendingQueries = new ConcurrentHashMap<>();
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            CommandManager.literal("getClientPlayerFps")
+            Commands.literal("getClientPlayerFps")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetClientPlayerFps))
-            .then(CommandManager.argument("player", EntityArgumentType.player())
-            .executes(ctx -> requestFps(EntityArgumentType.getPlayer(ctx, "player"), ctx.getSource())))
-            .then(CommandManager.literal("help")
+            .then(Commands.argument("player", EntityArgument.player())
+            .executes(ctx -> requestFps(EntityArgument.getPlayer(ctx, "player"), ctx.getSource())))
+            .then(Commands.literal("help")
             .executes(ctx -> help(ctx.getSource())))
         );
     }
 
-    private static int requestFps(ServerPlayerEntity targetPlayer, ServerCommandSource source) {
-        pendingQueries.put(targetPlayer.getUuid(), source);
-        NetworkUtil.sendS2CPacketIfSupport(targetPlayer, ClientPlayerFpsPayload_S2C.create(targetPlayer.getUuid()));
+    private static int requestFps(ServerPlayer targetPlayer, CommandSourceStack source) {
+        pendingQueries.put(targetPlayer.getUUID(), source);
+        NetworkUtil.sendS2CPacketIfSupport(targetPlayer, ClientPlayerFpsPayload_S2C.create(targetPlayer.getUUID()));
         return 1;
     }
 
     public static void sendFpsResult(UUID playerUuid, int fps) {
-        ServerCommandSource source = pendingQueries.remove(playerUuid);
+        CommandSourceStack source = pendingQueries.remove(playerUuid);
         if (source != null) {
-            ServerPlayerEntity player = PlayerUtil.getServerPlayerEntity(playerUuid);
+            ServerPlayer player = PlayerUtil.getServerPlayerEntity(playerUuid);
             if (!FakePlayerHelper.isFakePlayer(player) && player != null) {
-                Messenger.tell(source, Messenger.formatting(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), Formatting.GREEN));
+                Messenger.tell(source, Messenger.formatting(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), ChatFormatting.GREEN));
             }
         }
     }
 
-    private static int help(ServerCommandSource source) {
-        Messenger.tell(source, Messenger.formatting(tr.tr("help"), Formatting.GRAY));
+    private static int help(CommandSourceStack source) {
+        Messenger.tell(source, Messenger.formatting(tr.tr("help"), ChatFormatting.GRAY));
         return 1;
     }
 }

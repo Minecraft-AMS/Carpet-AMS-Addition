@@ -25,24 +25,24 @@ import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.Messenger;
 
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.Component;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
-import net.minecraft.util.Formatting;
-
-import static net.minecraft.server.command.CommandManager.argument;
-import static net.minecraft.server.command.CommandManager.literal;
+import net.minecraft.ChatFormatting;
 
 import java.util.Objects;
+
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
 
 public class AmsUpdateSuppressionCrashFixCommandRegistry {
     private static final Translator translator = new Translator("command.amsUpdateSuppressionCrashFixForceMode");
     public static boolean amsUpdateSuppressionCrashFixForceMode = false;
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(literal("amsUpdateSuppressionCrashFixForceMode")
         .requires(source -> CommandHelper.canUseCommand(source, 2))
         .then(argument("mode", BoolArgumentType.bool())
@@ -50,11 +50,11 @@ public class AmsUpdateSuppressionCrashFixCommandRegistry {
             boolean mode = BoolArgumentType.getBool(context, "mode");
             amsUpdateSuppressionCrashFixForceMode = mode;
             ForceModeCommandConfig.saveConfigToJson(context.getSource().getServer());
-            Text message =
+            Component message =
                     mode ?
-                    Messenger.s(translator.tr("force_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)) :
-                    Messenger.s(translator.tr("lazy_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.GREEN));
-            Objects.requireNonNull(context.getSource().getPlayerOrThrow()).sendMessage(message, true);
+                    Messenger.s(translator.tr("force_mod").getString()).setStyle(Style.EMPTY.withColor(ChatFormatting.LIGHT_PURPLE)) :
+                    Messenger.s(translator.tr("lazy_mod").getString()).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN));
+            Objects.requireNonNull(context.getSource().getPlayerOrException()).displayClientMessage(message, true);
             return 1;
         })));
     }

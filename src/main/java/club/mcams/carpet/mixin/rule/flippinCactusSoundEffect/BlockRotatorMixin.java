@@ -25,14 +25,14 @@ import carpet.helpers.BlockRotator;
 import club.mcams.carpet.AmsServerSettings;
 
 import club.mcams.carpet.utils.EntityUtil;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,40 +45,40 @@ public abstract class BlockRotatorMixin {
         method = "flipBlock",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"
+            target = "Lnet/minecraft/world/level/block/state/BlockState;setValue(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;"
         )
     )
-    private static void flipBlock(BlockState state, World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<Boolean> cir) {
+    private static void flipBlock(BlockState state, Level world, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.flippinCactusSoundEffect != 0) {
             float volume, pitch;
-            SoundEvent leverClick = SoundEvents.BLOCK_LEVER_CLICK;
-            SoundEvent villagerAmbient = SoundEvents.ENTITY_VILLAGER_AMBIENT;
-            SoundEvent endermanTeleport = SoundEvents.ENTITY_ENDERMAN_TELEPORT;
+            SoundEvent leverClick = SoundEvents.LEVER_CLICK;
+            SoundEvent villagerAmbient = SoundEvents.VILLAGER_AMBIENT;
+            SoundEvent endermanTeleport = SoundEvents.ENDERMAN_TELEPORT;
             switch (AmsServerSettings.flippinCactusSoundEffect) {
                 case 1:
                     volume = 1.0F;
                     pitch = 0.95F;
-                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), leverClick, SoundCategory.BLOCKS, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.blockPosition(), leverClick, SoundSource.BLOCKS, volume, pitch);
                     break;
                 case 2:
                     volume = 1.0F;
                     pitch = 2.5F;
-                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), leverClick, SoundCategory.BLOCKS, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.blockPosition(), leverClick, SoundSource.BLOCKS, volume, pitch);
                     break;
                 case 3:
                     volume = 1.0F;
                     pitch = 0.75F;
-                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), leverClick, SoundCategory.BLOCKS, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.blockPosition(), leverClick, SoundSource.BLOCKS, volume, pitch);
                     break;
                 case 4:
                     volume = 1.0F;
                     pitch = 1.0F;
-                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), villagerAmbient, SoundCategory.BLOCKS, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.blockPosition(), villagerAmbient, SoundSource.BLOCKS, volume, pitch);
                     break;
                 case 5:
                     volume = 1.0F;
                     pitch = 1.0F;
-                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), endermanTeleport, SoundCategory.BLOCKS, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.blockPosition(), endermanTeleport, SoundSource.BLOCKS, volume, pitch);
             }
         }
     }

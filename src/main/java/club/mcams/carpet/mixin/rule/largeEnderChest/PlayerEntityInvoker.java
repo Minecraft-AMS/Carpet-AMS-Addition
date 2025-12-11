@@ -20,14 +20,14 @@
 
 package club.mcams.carpet.mixin.rule.largeEnderChest;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EnderChestInventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.PlayerEnderChestContainer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public interface PlayerEntityInvoker {
     @Invoker("getEnderChestInventory")
-    EnderChestInventory invokeGetEnderChestInventory();
+    PlayerEnderChestContainer invokeGetEnderChestInventory();
 }

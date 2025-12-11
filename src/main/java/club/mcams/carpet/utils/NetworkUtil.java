@@ -22,9 +22,9 @@ package club.mcams.carpet.utils;
 
 import club.mcams.carpet.network.AMS_CustomPayload;
 
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Set;
 import java.util.UUID;
@@ -36,30 +36,30 @@ public class NetworkUtil {
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
 
     public static void broadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
-        server.getPlayerManager().getPlayerList().forEach(player -> sendS2CPacketIfSupport(player, payload));
+        server.getPlayerList().getPlayers().forEach(player -> sendS2CPacketIfSupport(player, payload));
     }
 
     public static void forcedBroadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
-        server.getPlayerManager().getPlayerList().forEach(payload::sendS2CPacket);
+        server.getPlayerList().getPlayers().forEach(payload::sendS2CPacket);
     }
 
-    public static void sendS2CPacketIfSupport(ServerPlayerEntity player, AMS_CustomPayload payload) {
-        if (isSupportClient(player.getUuid())) {
+    public static void sendS2CPacketIfSupport(ServerPlayer player, AMS_CustomPayload payload) {
+        if (isSupportClient(player.getUUID())) {
             payload.sendS2CPacket(player);
         }
     }
 
-    public static void sendC2SPacketIfSupport(ClientPlayerEntity player, AMS_CustomPayload payload) {
+    public static void sendC2SPacketIfSupport(LocalPlayer player, AMS_CustomPayload payload) {
         if (isSupportServer()) {
             payload.sendC2SPacket(player);
         }
     }
 
-    public static void sendS2CPacket(ServerPlayerEntity player, AMS_CustomPayload payload) {
+    public static void sendS2CPacket(ServerPlayer player, AMS_CustomPayload payload) {
         payload.sendS2CPacket(player);
     }
 
-    public static void sendC2SPacket(ClientPlayerEntity player, AMS_CustomPayload payload) {
+    public static void sendC2SPacket(LocalPlayer player, AMS_CustomPayload payload) {
         payload.sendC2SPacket(player);
     }
 

@@ -22,16 +22,16 @@ package club.mcams.carpet.mixin.rule.endermanTeleportRandomlyDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.world.entity.monster.EnderMan;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(EndermanEntity.class)
+@Mixin(EnderMan.class)
 public abstract class EndermanEntityMixin {
-    @Inject(method = "teleportRandomly", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "teleport", at = @At("HEAD"), cancellable = true)
     private void teleportRandomly(CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.endermanTeleportRandomlyDisabled) {
             cir.setReturnValue(false);

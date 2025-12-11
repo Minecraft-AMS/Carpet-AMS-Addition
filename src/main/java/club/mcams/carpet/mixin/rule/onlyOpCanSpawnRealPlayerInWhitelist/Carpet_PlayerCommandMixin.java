@@ -28,8 +28,8 @@ import club.mcams.carpet.utils.PlayerUtil;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 
-import net.minecraft.server.PlayerConfigEntry;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.players.NameAndId;
+import net.minecraft.commands.CommandSourceStack;
 
 import com.mojang.brigadier.context.CommandContext;
 
@@ -42,10 +42,10 @@ public abstract class Carpet_PlayerCommandMixin {
         method = "cantSpawn",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/PlayerManager;isWhitelistEnabled()Z"
+            target = "Lnet/minecraft/server/players/PlayerList;isUsingWhitelist()Z"
         )
     )
-    private static boolean onlyOpCanSpawnRealPlayerInWhitelist(boolean isWhitelistEnabled, CommandContext<ServerCommandSource> context, @Local(name = "profile") PlayerConfigEntry gameProfile) {
+    private static boolean onlyOpCanSpawnRealPlayerInWhitelist(boolean isWhitelistEnabled, CommandContext<CommandSourceStack> context, @Local(name = "profile") NameAndId gameProfile) {
         if (AmsServerSettings.onlyOpCanSpawnRealPlayerInWhitelist && PlayerUtil.isInWhitelist(gameProfile)) {
             return isWhitelistEnabled || AmsServerSettings.onlyOpCanSpawnRealPlayerInWhitelist;
         } else {

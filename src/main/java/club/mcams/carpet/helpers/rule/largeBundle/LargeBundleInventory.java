@@ -20,52 +20,52 @@
 
 package club.mcams.carpet.helpers.rule.largeBundle;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.ShulkerBoxBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.BundleItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ContainerComponent;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.Container;
+import net.minecraft.world.item.BundleItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.core.NonNullList;
 
 import java.util.List;
 
-public class LargeBundleInventory implements Inventory {
+public class LargeBundleInventory implements Container {
     private final ItemStack stack;
-    private final List<ItemStack> items = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
+    private final List<ItemStack> items = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
 
     public LargeBundleInventory(ItemStack stack) {
         this.stack = stack;
-        ContainerComponent container = stack.get(DataComponentTypes.CONTAINER);
+        ItemContainerContents container = stack.get(DataComponents.CONTAINER);
         if (container != null) {
             List<ItemStack> containerStacks = container.stream().toList();
-            for (int i = 0; i < Math.min(containerStacks.size(), this.size()); i++) {
+            for (int i = 0; i < Math.min(containerStacks.size(), this.getContainerSize()); i++) {
                 this.items.set(i, containerStacks.get(i).copy());
             }
         }
     }
 
     @Override
-    public void markDirty() {
-        stack.set(DataComponentTypes.CONTAINER, ContainerComponent.fromStacks(items));
+    public void setChanged() {
+        stack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(items));
     }
 
     @Override
-    public void setStack(int slot, ItemStack newStack) {
+    public void setItem(int slot, ItemStack newStack) {
         this.items.set(slot, newStack.copy());
-        this.markDirty();
+        this.setChanged();
     }
 
     @Override
-    public ItemStack getStack(int slot) {
+    public ItemStack getItem(int slot) {
         return this.items.get(slot);
     }
 
     @Override
-    public int size() {
+    public int getContainerSize() {
         return 9 * 6;
     }
 
@@ -75,27 +75,27 @@ public class LargeBundleInventory implements Inventory {
     }
 
     @Override
-    public ItemStack removeStack(int slot, int amount) {
-        ItemStack result = Inventories.splitStack(this.items, slot, amount);
-        markDirty();
+    public ItemStack removeItem(int slot, int amount) {
+        ItemStack result = ContainerHelper.removeItem(this.items, slot, amount);
+        setChanged();
         return result;
     }
 
     @Override
-    public ItemStack removeStack(int slot) {
-        ItemStack result = Inventories.removeStack(this.items, slot);
-        markDirty();
+    public ItemStack removeItemNoUpdate(int slot) {
+        ItemStack result = ContainerHelper.takeItem(this.items, slot);
+        setChanged();
         return result;
     }
 
     @Override
-    public void clear() {
+    public void clearContent() {
         this.items.clear();
-        markDirty();
+        setChanged();
     }
 
     @Override
-    public boolean canPlayerUse(PlayerEntity player) {
+    public boolean stillValid(Player player) {
         return !this.stack.isEmpty();
     }
 
@@ -108,7 +108,7 @@ public class LargeBundleInventory implements Inventory {
         if (stack.getItem() instanceof BundleItem) {
             return false;
         }
-        if (Block.getBlockFromItem(stack.getItem()) instanceof ShulkerBoxBlock) {
+        if (Block.byItem(stack.getItem()) instanceof ShulkerBoxBlock) {
             return false;
         }
         return !stack.isEmpty();

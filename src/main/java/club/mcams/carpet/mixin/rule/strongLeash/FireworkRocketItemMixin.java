@@ -25,8 +25,8 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FireworkRocketItem;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FireworkRocketItem;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,10 +40,10 @@ public abstract class FireworkRocketItemMixin {
         method = "use",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/player/PlayerEntity;detachAllHeldLeashes(Lnet/minecraft/entity/player/PlayerEntity;)Z"
+            target = "Lnet/minecraft/world/entity/player/Player;dropAllLeashConnections(Lnet/minecraft/world/entity/player/Player;)Z"
         )
     )
-    private boolean strongLeash(PlayerEntity user, PlayerEntity playerEntity, Operation<Boolean> original) {
+    private boolean strongLeash(Player user, Player playerEntity, Operation<Boolean> original) {
         return !AmsServerSettings.strongLeash && original.call(user, playerEntity);
     }
 }

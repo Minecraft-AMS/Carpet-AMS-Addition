@@ -22,26 +22,26 @@ package club.mcams.carpet.mixin.rule.scheduledRandomTick;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.AbstractPlantPartBlock;
-import net.minecraft.block.AbstractPlantStemBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.world.level.block.GrowingPlantBlock;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(AbstractPlantPartBlock.class)
+@Mixin(GrowingPlantBlock.class)
 public abstract class AbstractPlantPartBlockMixin {
     @Inject(
-        method = "scheduledTick",
+        method = "tick",
         at = @At(
             value = "INVOKE",
             shift = At.Shift.AFTER,
-            target = "Lnet/minecraft/server/world/ServerWorld;breakBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
+            target = "Lnet/minecraft/server/level/ServerLevel;destroyBlock(Lnet/minecraft/core/BlockPos;Z)Z"
         ),
         cancellable = true
     )
@@ -51,9 +51,9 @@ public abstract class AbstractPlantPartBlockMixin {
         }
     }
 
-    @Inject(method = "scheduledTick", at = @At("TAIL"))
-    private void scheduleTickMixinTail(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo ci) {
-        if (state.getBlock() instanceof AbstractPlantStemBlock && (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants)) {
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void scheduleTickMixinTail(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci) {
+        if (state.getBlock() instanceof GrowingPlantHeadBlock && (AmsServerSettings.scheduledRandomTickStem || AmsServerSettings.scheduledRandomTickAllPlants)) {
             state.randomTick(world, pos, random);
         }
     }

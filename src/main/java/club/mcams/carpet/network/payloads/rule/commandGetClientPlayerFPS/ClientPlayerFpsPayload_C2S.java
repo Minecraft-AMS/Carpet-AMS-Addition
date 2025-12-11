@@ -25,7 +25,7 @@ import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.utils.NetworkUtil;
 
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.UUID;
 
@@ -40,15 +40,15 @@ public class ClientPlayerFpsPayload_C2S extends AMS_CustomPayload {
         this.fps = fps;
     }
 
-    private ClientPlayerFpsPayload_C2S(PacketByteBuf buf) {
+    private ClientPlayerFpsPayload_C2S(FriendlyByteBuf buf) {
         super(ID);
-        this.playerUuid = buf.readUuid();
+        this.playerUuid = buf.readUUID();
         this.fps = buf.readInt();
     }
 
     @Override
-    protected void writeData(PacketByteBuf buf) {
-        buf.writeUuid(playerUuid);
+    protected void writeData(FriendlyByteBuf buf) {
+        buf.writeUUID(playerUuid);
         buf.writeInt(fps);
     }
 

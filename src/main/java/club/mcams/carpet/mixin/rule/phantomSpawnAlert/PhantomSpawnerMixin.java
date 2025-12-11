@@ -27,11 +27,11 @@ import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.PlayerUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 
-import net.minecraft.entity.mob.PhantomEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.entity.monster.Phantom;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.spawner.PhantomSpawner;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.levelgen.PhantomSpawner;
 
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -45,14 +45,14 @@ public abstract class PhantomSpawnerMixin {
     private static final Translator translator = new Translator("rule.phantomSpawnAlert");
 
     @Inject(
-        method = "spawn",
+        method = "tick",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/world/ServerWorld;spawnEntityAndPassengers(Lnet/minecraft/entity/Entity;)V",
+            target = "Lnet/minecraft/world/entity/monster/Phantom;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;",
             shift = At.Shift.AFTER
         )
     )
-    private void broadcastMessage(ServerWorld world, boolean spawnMonsters, CallbackInfo ci, @Local ServerPlayerEntity playerEntity, @Local PhantomEntity phantom) {
+    private void broadcastMessage(ServerLevel world, boolean spawnMonsters, CallbackInfo ci, @Local ServerPlayer playerEntity, @Local Phantom phantom) {
         if (AmsServerSettings.phantomSpawnAlert && phantom != null) {
             MinecraftServer server = world.getServer();
             String playerName = PlayerUtil.getName(playerEntity);

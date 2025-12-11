@@ -26,25 +26,25 @@ import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHar
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PistonBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.BlockView;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.piston.PistonBaseBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = PistonBlock.class, priority = 16888)
+@Mixin(value = PistonBaseBlock.class, priority = 16888)
 public abstract class PistonBlockMixin {
     @WrapOperation(
-        method = "isMovable",
+        method = "isPushable",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/block/BlockState;getHardness(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)F"
+            target = "Lnet/minecraft/world/level/block/state/BlockState;getDestroySpeed(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;)F"
         )
     )
-    private static float noPush(BlockState blockState, BlockView blockView, BlockPos blockPos, Operation<Float> original) {
+    private static float noPush(BlockState blockState, BlockGetter blockView, BlockPos blockPos, Operation<Float> original) {
         if (!AmsServerSettings.commandCustomBlockHardness.equals("false") ) {
             Block block = blockView.getBlockState(blockPos).getBlock();
             Float defaultHardness = CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.get(block);

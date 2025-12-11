@@ -26,7 +26,7 @@ import club.mcams.carpet.utils.RegexTools;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,11 +35,11 @@ import java.util.Objects;
 
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin implements ItemEntityInvoker {
-    @ModifyReturnValue(method = "isFireImmune", at = @At("RETURN"))
+    @ModifyReturnValue(method = "fireImmune", at = @At("RETURN"))
     private boolean isFireImmune(boolean original) {
         if (
             !Objects.equals(AmsServerSettings.commandCustomAntiFireItems, "false") &&
-            CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.contains(RegexTools.getItemRegisterName(this.invokeGetStack()))
+            CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.contains(RegexTools.getItemRegisterName(this.invokeGetItem()))
         ) {
             return true;
         } else {

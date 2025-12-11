@@ -24,13 +24,13 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommandRegistry;
 import club.mcams.carpet.utils.RegexTools;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PistonBlock;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.piston.PistonBaseBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,15 +39,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
-@Mixin(PistonBlock.class)
+@Mixin(PistonBaseBlock.class)
 public abstract class PistonBlockMixin {
-    @Inject(method = "isMovable", at = @At("HEAD"), cancellable = true)
-    private static void MovableBlocks(BlockState state, World world, BlockPos blockPos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "isPushable", at = @At("HEAD"), cancellable = true)
+    private static void MovableBlocks(BlockState state, Level world, BlockPos blockPos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.commandCustomMovableBlock, "false") && CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS.contains(RegexTools.getBlockRegisterName(state))) {
             BlockEntity blockEntity = world.getBlockEntity(blockPos);
-            boolean isBottomY = blockPos.getY() == world.getBottomY();
-            boolean isTopY = blockPos.getY() == world.getTopYInclusive();
-            if (!(blockEntity instanceof LootableContainerBlockEntity)) {
+            boolean isBottomY = blockPos.getY() == world.getMinY();
+            boolean isTopY = blockPos.getY() == world.getMaxY();
+            if (!(blockEntity instanceof RandomizableContainerBlockEntity)) {
                 if (direction == Direction.DOWN && isBottomY) {
                     cir.setReturnValue(false);
                 } else if (direction == Direction.UP && isTopY) {

@@ -23,17 +23,18 @@ package club.mcams.carpet.mixin.rule.breedableParrots;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.RegexTools;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.AnimalMateGoal;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.ParrotEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.TameableShoulderEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.parrot.Parrot;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.animal.parrot.ShoulderRidingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -42,20 +43,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
-@Mixin(ParrotEntity.class)
-public abstract class ParrotEntityMixin extends TameableShoulderEntity {
-    protected ParrotEntityMixin(EntityType<? extends TameableShoulderEntity> entityType, World world) {
+@Mixin(Parrot.class)
+public abstract class ParrotEntityMixin extends ShoulderRidingEntity {
+    protected ParrotEntityMixin(EntityType<? extends @NotNull ShoulderRidingEntity> entityType, Level world) {
         super(entityType, world);
     }
 
-    @Inject(method = "initGoals", at = @At("TAIL"))
+    @Inject(method = "registerGoals", at = @At("TAIL"))
     protected void initGoals(CallbackInfo ci) {
         if (!Objects.equals(AmsServerSettings.breedableParrots, "none")) {
-            this.targetSelector.add(1, new AnimalMateGoal(this, 1.0F));
+            this.targetSelector.addGoal(1, new BreedGoal(this, 1.0F));
         }
     }
 
-    @Inject(method = "isBreedingItem", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isFood", at = @At("HEAD"), cancellable = true)
     private void isBreedingItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.breedableParrots, "none")) {
             String item = RegexTools.getItemRegisterName(stack.getItem().toString());
@@ -65,20 +66,20 @@ public abstract class ParrotEntityMixin extends TameableShoulderEntity {
         }
     }
 
-    @Inject(method = "canBreedWith", at = @At("HEAD"), cancellable = true)
-    private void canBreedWith(AnimalEntity animalEntity, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "canMate", at = @At("HEAD"), cancellable = true)
+    private void canBreedWith(Animal animalEntity, CallbackInfoReturnable<Boolean> cir) {
         if (
             !Objects.equals(AmsServerSettings.breedableParrots, "none") &&
-            animalEntity instanceof ParrotEntity
+            animalEntity instanceof Parrot
         ) {
             cir.setReturnValue(true);
         }
     }
 
-    @Inject(method = "createChild", at = @At("HEAD"), cancellable = true)
-    private void createChild(ServerWorld world, PassiveEntity entity, CallbackInfoReturnable<PassiveEntity> cir) {
+    @Inject(method = "getBreedOffspring", at = @At("HEAD"), cancellable = true)
+    private void createChild(ServerLevel world, AgeableMob entity, CallbackInfoReturnable<AgeableMob> cir) {
         if (!Objects.equals(AmsServerSettings.breedableParrots, "none")) {
-            PassiveEntity child = EntityType.PARROT.create(world, SpawnReason.BREEDING);
+            AgeableMob child = EntityType.PARROT.create(world, EntitySpawnReason.BREEDING);
             if (child != null) {
                 child.setBaby(true);
             }

@@ -22,10 +22,10 @@ package club.mcams.carpet.helpers;
 
 import carpet.patches.EntityPlayerMPFake;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 
 public class FakePlayerHelper {
-    public static boolean isFakePlayer(PlayerEntity player) {
+    public static boolean isFakePlayer(Player player) {
         return player instanceof EntityPlayerMPFake;
     }
 }

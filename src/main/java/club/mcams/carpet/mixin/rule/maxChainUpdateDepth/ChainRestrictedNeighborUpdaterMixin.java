@@ -24,7 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.world.block.ChainRestrictedNeighborUpdater;
+import net.minecraft.world.level.redstone.CollectingNeighborUpdater;
 
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,13 +33,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.19")
-@Mixin(ChainRestrictedNeighborUpdater.class)
+@Mixin(CollectingNeighborUpdater.class)
 public abstract class ChainRestrictedNeighborUpdaterMixin {
     @ModifyExpressionValue(
-        method = "enqueue",
+        method = "addAndRun",
         at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/world/block/ChainRestrictedNeighborUpdater;maxChainDepth:I",
+            target = "Lnet/minecraft/world/level/redstone/CollectingNeighborUpdater;maxChainedNeighborUpdates:I",
             opcode = Opcodes.GETFIELD
         )
     )

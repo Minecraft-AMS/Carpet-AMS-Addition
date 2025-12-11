@@ -22,27 +22,27 @@ package club.mcams.carpet.mixin.rule.quickVillagerLevelUp;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.server.level.ServerLevel;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(VillagerEntity.class)
+@Mixin(Villager.class)
 public abstract class VillagerEntityMixin implements VillagerEntityInvoker{
     @Inject(
-        method = "interactMob",
+        method = "mobInteract",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/passive/VillagerEntity;beginTradeWith(Lnet/minecraft/entity/player/PlayerEntity;)V"
+            target = "Lnet/minecraft/world/entity/npc/villager/Villager;startTrading(Lnet/minecraft/world/entity/player/Player;)V"
         )
     )
     private void quickLevelUp(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.quickVillagerLevelUp && this.invokerGetVillagerData().level() < 5) {
-            VillagerEntity villagerEntity = (VillagerEntity) (Object) this;
-            this.invokerLevelUp((ServerWorld) villagerEntity.getEntityWorld());
+            Villager villagerEntity = (Villager) (Object) this;
+            this.invokerLevelUp((ServerLevel) villagerEntity.level());
         }
     }
 }

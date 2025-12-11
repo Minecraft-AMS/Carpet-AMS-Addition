@@ -24,21 +24,21 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec3;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(net.minecraft.block.AbstractBlock.AbstractBlockState.class)
+@Mixin(net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase.class)
 public abstract class BambooBlockMixin implements AbstractBlockStateInvoker {
-    @ModifyReturnValue(method = "getModelOffset", at = @At("RETURN"))
-    public Vec3d getModelOffset(Vec3d original) {
+    @ModifyReturnValue(method = "getOffset", at = @At("RETURN"))
+    public Vec3 getModelOffset(Vec3 original) {
         if (
             AmsServerSettings.bambooModelNoOffset &&
             (this.invokeGetBlock().equals(Blocks.BAMBOO) || this.invokeGetBlock().equals(Blocks.BAMBOO_SAPLING))
         ) {
-            return Vec3d.ZERO;
+            return Vec3.ZERO;
         } else {
             return original;
         }

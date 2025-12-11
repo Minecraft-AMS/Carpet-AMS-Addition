@@ -28,42 +28,42 @@ import club.mcams.carpet.utils.compat.DimensionWrapper;
 import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import java.util.Objects;
 
 public class UpdateSuppressionContext {
     private static final Translator translator = new Translator("rule.amsUpdateSuppressionCrashFix");
 
-    public static void sendMessageToServer(BlockPos pos, World world, Throwable cause) {
+    public static void sendMessageToServer(BlockPos pos, Level world, Throwable cause) {
         if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "silence")) {
             String suppressionMessage = suppressionMessageText(pos, world, cause);
-            final Text copyButton = copyButton(pos);
+            final Component copyButton = copyButton(pos);
             Messenger.sendServerMessage(
                 MinecraftServerUtil.getServer(),
-                Messenger.s(suppressionMessage).formatted(Formatting.RED, Formatting.ITALIC).append(copyButton)
+                Messenger.s(suppressionMessage).withStyle(ChatFormatting.RED, ChatFormatting.ITALIC).append(copyButton)
             );
         }
     }
 
-    public static String suppressionMessageText(BlockPos pos, World world, Throwable cause) {
+    public static String suppressionMessageText(BlockPos pos, Level world, Throwable cause) {
         DimensionWrapper dimension = getSuppressionDimension(world);
         String location = getSuppressionPos(pos);
         // Update suppression location @ minecraft:overworld -> [ 1, 0, -24 ] | reason: StackOverflowError
         return translator.tr("msg", dimension, location, exceptionCauseText(cause)).getString();
     }
 
-    private static Text copyButton(BlockPos pos) {
-        Text hoverText = Messenger.s(translator.tr("copy")).formatted(Formatting.YELLOW);
+    private static Component copyButton(BlockPos pos) {
+        Component hoverText = Messenger.s(translator.tr("copy")).withStyle(ChatFormatting.YELLOW);
         String copyCoordText = getSuppressionPos(pos).replace(",", ""); // 1, 0, -24 -> 1 0 -24
 
         return
             Messenger.s(" [C] ").setStyle(
-                Style.EMPTY.withColor(Formatting.GREEN).withBold(true).
+                Style.EMPTY.withColor(ChatFormatting.GREEN).withBold(true).
                 withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
                 withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
             );
@@ -73,7 +73,7 @@ public class UpdateSuppressionContext {
         return pos.getX() + ", " + pos.getY() + ", " + pos.getZ();
     }
 
-    private static DimensionWrapper getSuppressionDimension(World world) {
+    private static DimensionWrapper getSuppressionDimension(Level world) {
         return DimensionWrapper.of(world);
     }
 

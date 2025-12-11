@@ -27,10 +27,10 @@ import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.util.Formatting;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.ChatFormatting;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
@@ -38,17 +38,17 @@ import java.lang.management.OperatingSystemMXBean;
 public class GetSystemInfoCommandRegistry {
     private static final Translator translator = new Translator("command.getSystemInfo");
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            CommandManager.literal("getSystemInfo")
+            Commands.literal("getSystemInfo")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetSystemInfo))
-            .executes(context -> executeGetSystemInfo(context.getSource().getPlayerOrThrow()))
+            .executes(context -> executeGetSystemInfo(context.getSource().getPlayerOrException()))
         );
     }
 
-    private static int executeGetSystemInfo(PlayerEntity player) {
+    private static int executeGetSystemInfo(Player player) {
         String formatInfo = formatInfo();
-        player.sendMessage(Messenger.s(formatInfo).formatted(Formatting.DARK_AQUA), false);
+        player.displayClientMessage(Messenger.s(formatInfo).withStyle(ChatFormatting.DARK_AQUA), false);
         return 1;
     }
 

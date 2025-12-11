@@ -22,7 +22,7 @@ package club.mcams.carpet.mixin.rule.infiniteDurability;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
-    @Inject(method = "damage(ILnet/minecraft/server/world/ServerWorld;Lnet/minecraft/server/network/ServerPlayerEntity;Ljava/util/function/Consumer;)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "hurtAndBreak(ILnet/minecraft/server/level/ServerLevel;Lnet/minecraft/server/level/ServerPlayer;Ljava/util/function/Consumer;)V", at = @At("HEAD"), cancellable = true)
     private void damage(CallbackInfo ci) {
         if (AmsServerSettings.infiniteDurability) {
             ci.cancel();

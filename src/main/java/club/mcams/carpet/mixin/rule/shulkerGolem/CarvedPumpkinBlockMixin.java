@@ -23,14 +23,14 @@ package club.mcams.carpet.mixin.rule.shulkerGolem;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.ParticleHelper;
 
-import net.minecraft.block.CarvedPumpkinBlock;
-import net.minecraft.block.ShulkerBoxBlock;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.mob.ShulkerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.CarvedPumpkinBlock;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.monster.Shulker;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,19 +41,19 @@ import java.util.Objects;
 
 @Mixin(CarvedPumpkinBlock.class)
 public abstract class CarvedPumpkinBlockMixin {
-    @Inject(method = "trySpawnEntity", at = @At("TAIL"))
-    private void trySpawnShulker(World world, BlockPos headPos, CallbackInfo ci) {
+    @Inject(method = "trySpawnGolem", at = @At("TAIL"))
+    private void trySpawnShulker(Level world, BlockPos headPos, CallbackInfo ci) {
         if (AmsServerSettings.shulkerGolem) {
-            ServerWorld serverWorld = (ServerWorld) world;
-            BlockPos bodyPos = headPos.down(1);
+            ServerLevel serverWorld = (ServerLevel) world;
+            BlockPos bodyPos = headPos.below(1);
             boolean headIsCarvedPumpkin = world.getBlockState(headPos).getBlock() instanceof CarvedPumpkinBlock;
             boolean bodyIsShulkerBox = world.getBlockState(bodyPos).getBlock() instanceof ShulkerBoxBlock;
             if (headIsCarvedPumpkin && bodyIsShulkerBox) {
-                ShulkerEntity shulkerGolem = EntityType.SHULKER.create(world, SpawnReason.MOB_SUMMONED);
-                Objects.requireNonNull(shulkerGolem).refreshPositionAndAngles(bodyPos.getX() + 0.5, bodyPos.getY(), bodyPos.getZ() + 0.5, 0.0F, 0.0F);
-                world.breakBlock(bodyPos, false);
-                world.breakBlock(headPos, false);
-                world.spawnEntity(shulkerGolem);
+                Shulker shulkerGolem = EntityType.SHULKER.create(world, EntitySpawnReason.MOB_SUMMONED);
+                Objects.requireNonNull(shulkerGolem).snapTo(bodyPos.getX() + 0.5, bodyPos.getY(), bodyPos.getZ() + 0.5, 0.0F, 0.0F);
+                world.destroyBlock(bodyPos, false);
+                world.destroyBlock(headPos, false);
+                world.addFreshEntity(shulkerGolem);
                 ParticleHelper.spawnShulkerGolemParticles(serverWorld, bodyPos);
             }
         }

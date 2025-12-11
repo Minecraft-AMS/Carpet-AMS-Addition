@@ -24,22 +24,22 @@ import club.mcams.carpet.mixin.rule.optimizedDragonRespawn.BlockPatternMixin;
 
 import com.google.common.cache.LoadingCache;
 
-import net.minecraft.block.pattern.BlockPattern;
-import net.minecraft.block.pattern.CachedBlockPosition;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldView;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.level.block.state.pattern.BlockInWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.LevelReader;
 import org.jetbrains.annotations.NotNull;
 
 public class BlockPatternHelper {
-    public static BlockPattern.Result partialSearchAround(BlockPattern pattern, WorldView world, BlockPos pos) {
-        LoadingCache<@NotNull BlockPos, @NotNull CachedBlockPosition> loadingCache = BlockPattern.makeCache(world, false);
+    public static BlockPattern.BlockPatternMatch partialSearchAround(BlockPattern pattern, LevelReader world, BlockPos pos) {
+        LoadingCache<@NotNull BlockPos, @NotNull BlockInWorld> loadingCache = BlockPattern.createLevelCache(world, false);
         int i = Math.max(Math.max(pattern.getWidth(), pattern.getHeight()), pattern.getDepth());
-        for (BlockPos blockPos : BlockPos.iterate(pos, pos.add(i - 1, 0, i - 1))) {
+        for (BlockPos blockPos : BlockPos.betweenClosed(pos, pos.offset(i - 1, 0, i - 1))) {
             for (Direction direction : Direction.values()) {
                 for (Direction direction2 : Direction.values()) {
-                    BlockPattern.Result result;
-                    if (direction2 == direction || direction2 == direction.getOpposite() || (result = ((BlockPatternMixin) pattern).invokeTestTransform(blockPos, direction, direction2, loadingCache)) == null) continue;
+                    BlockPattern.BlockPatternMatch result;
+                    if (direction2 == direction || direction2 == direction.getOpposite() || (result = ((BlockPatternMixin) pattern).invokeMatches(blockPos, direction, direction2, loadingCache)) == null) continue;
                     return result;
                 }
             }

@@ -22,13 +22,13 @@ package club.mcams.carpet.mixin.rule.regeneratingDragonEgg;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.entity.boss.dragon.EnderDragonFight;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.feature.EndPortalFeature;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.level.dimension.end.EndDragonFight;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.feature.EndPodiumFeature;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,7 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.UUID;
 
-@Mixin(EnderDragonFight.class)
+@Mixin(EndDragonFight.class)
 public abstract class EnderDragonFightMixin {
 
     @Shadow
@@ -48,18 +48,18 @@ public abstract class EnderDragonFightMixin {
 
     @Shadow
     @Final
-    private ServerWorld world;
+    private ServerLevel level;
 
     @Shadow
     private boolean previouslyKilled;
 
     @Shadow
-    private UUID dragonUuid;
+    private UUID dragonUUID;
 
-    @Inject(method = "dragonKilled", at = @At("HEAD"))
-    private void dragonKilled(EnderDragonEntity dragon, CallbackInfo ci) {
-        if (AmsServerSettings.regeneratingDragonEgg && this.previouslyKilled && dragon.getUuid().equals(this.dragonUuid)) {
-            this.world.setBlockState(this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.offsetOrigin(this.origin)), Blocks.DRAGON_EGG.getDefaultState());
+    @Inject(method = "setDragonKilled", at = @At("HEAD"))
+    private void dragonKilled(EnderDragon dragon, CallbackInfo ci) {
+        if (AmsServerSettings.regeneratingDragonEgg && this.previouslyKilled && dragon.getUUID().equals(this.dragonUUID)) {
+            this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(this.origin)), Blocks.DRAGON_EGG.defaultBlockState());
         }
     }
 }

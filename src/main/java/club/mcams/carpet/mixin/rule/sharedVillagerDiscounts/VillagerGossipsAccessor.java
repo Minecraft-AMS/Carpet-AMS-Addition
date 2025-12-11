@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.sharedVillagerDiscounts;
 
-import net.minecraft.village.VillagerGossips;
+import net.minecraft.world.entity.ai.gossip.GossipContainer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -28,8 +28,8 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 import java.util.Map;
 import java.util.UUID;
 
-@Mixin(VillagerGossips.class)
+@Mixin(GossipContainer.class)
 public interface VillagerGossipsAccessor {
-    @Accessor("entityReputation")
-    Map<UUID, Object> getEntityReputation();
+    @Accessor("gossips")
+    Map<UUID, Object> getGossips();
 }

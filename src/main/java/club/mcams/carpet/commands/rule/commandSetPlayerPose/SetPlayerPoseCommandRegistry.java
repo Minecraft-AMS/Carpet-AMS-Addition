@@ -32,11 +32,11 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Formatting;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.ChatFormatting;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -48,54 +48,54 @@ public class SetPlayerPoseCommandRegistry {
     private static final List<String> POSE = Arrays.asList("spin_attack", "swimming", "sleeping", "fall_flying", "standing", "crouching", "dying");
     public static final Map<UUID, String> DO_POSE_MAP = new ConcurrentHashMap<>();
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            CommandManager.literal("playerPose")
+            Commands.literal("playerPose")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandSetPlayerPose))
-            .then(CommandManager.argument("player", EntityArgumentType.player())
-            .then(CommandManager.literal("set")
-            .then(CommandManager.argument("pose", StringArgumentType.greedyString())
+            .then(Commands.argument("player", EntityArgument.player())
+            .then(Commands.literal("set")
+            .then(Commands.argument("pose", StringArgumentType.greedyString())
             .suggests(ListSuggestionProvider.of(POSE))
             .executes(ctx -> set(
-                EntityArgumentType.getPlayer(ctx, "player"), ctx.getSource().getServer(), StringArgumentType.getString(ctx, "pose")
+                EntityArgument.getPlayer(ctx, "player"), ctx.getSource().getServer(), StringArgumentType.getString(ctx, "pose")
             )))))
-            .then(CommandManager.argument("player", EntityArgumentType.player())
-            .then(CommandManager.literal("stop")
+            .then(Commands.argument("player", EntityArgument.player())
+            .then(Commands.literal("stop")
             .executes(ctx -> stop(
-                EntityArgumentType.getPlayer(ctx, "player"), ctx.getSource().getServer()
+                EntityArgument.getPlayer(ctx, "player"), ctx.getSource().getServer()
             ))))
-            .then(CommandManager.literal("help")
+            .then(Commands.literal("help")
             .executes(ctx -> help(ctx.getSource())))
         );
     }
 
-    private static int set(ServerPlayerEntity targetPlayer, MinecraftServer server, String pose) {
-        DO_POSE_MAP.put(targetPlayer.getUuid(), pose);
-        targetPlayer.setSneaking(true);
+    private static int set(ServerPlayer targetPlayer, MinecraftServer server, String pose) {
+        DO_POSE_MAP.put(targetPlayer.getUUID(), pose);
+        targetPlayer.setShiftKeyDown(true);
         triggerPoseUpdate(targetPlayer);
         broadcastSyncDatapack(targetPlayer, server);
         return 1;
     }
 
-    private static int stop(ServerPlayerEntity targetPlayer, MinecraftServer server) {
-        DO_POSE_MAP.remove(targetPlayer.getUuid());
+    private static int stop(ServerPlayer targetPlayer, MinecraftServer server) {
+        DO_POSE_MAP.remove(targetPlayer.getUUID());
         triggerPoseUpdate(targetPlayer);
         broadcastSyncDatapack(targetPlayer, server);
         return 1;
     }
 
-    private static int help(ServerCommandSource source) {
-        Messenger.tell(source, Messenger.formatting(tr.tr("set_help").append(Messenger.endl()).append(tr.tr("stop_help")), Formatting.GRAY));
+    private static int help(CommandSourceStack source) {
+        Messenger.tell(source, Messenger.formatting(tr.tr("set_help").append(Messenger.endl()).append(tr.tr("stop_help")), ChatFormatting.GRAY));
         return 1;
     }
 
-    private static void broadcastSyncDatapack(ServerPlayerEntity targetPlayer, MinecraftServer server) {
-        NetworkUtil.broadcastDataPack(server, UpdatePlayerPosePayload_S2C.create(DO_POSE_MAP, targetPlayer.getUuid()));
+    private static void broadcastSyncDatapack(ServerPlayer targetPlayer, MinecraftServer server) {
+        NetworkUtil.broadcastDataPack(server, UpdatePlayerPosePayload_S2C.create(DO_POSE_MAP, targetPlayer.getUUID()));
     }
 
-    private static void triggerPoseUpdate(ServerPlayerEntity targetPlayer) {
-        targetPlayer.setSneaking(true);
-        Runnable stopSneaking = () -> targetPlayer.setSneaking(false);
+    private static void triggerPoseUpdate(ServerPlayer targetPlayer) {
+        targetPlayer.setShiftKeyDown(true);
+        Runnable stopSneaking = () -> targetPlayer.setShiftKeyDown(false);
         Runnable stopSneakingOnServerThread = () -> NetworkUtil.executeOnServerThread(stopSneaking);
         CompletableFuture.delayedExecutor(100, TimeUnit.MILLISECONDS).execute(stopSneakingOnServerThread);
     }

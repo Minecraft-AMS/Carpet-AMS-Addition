@@ -25,21 +25,21 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.player.LocalPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = ClientPlayerEntity.class, priority = 1688)
+@Mixin(value = LocalPlayer.class, priority = 1688)
 public abstract class ClientPlayerEntityMixin {
     @WrapOperation(
-        method = "method_76762",
+        method = "raycastHitResult",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/network/ClientPlayerEntity;getBlockInteractionRange()D"
+            target = "Lnet/minecraft/client/player/LocalPlayer;blockInteractionRange()D"
         )
     )
-    private double modifyBlockInteractionRange(ClientPlayerEntity player, Operation<Double> original) {
+    private double modifyBlockInteractionRange(LocalPlayer player, Operation<Double> original) {
         if (AmsServerSettings.maxClientInteractionReachDistance != -1.0D) {
             return AmsServerSettings.maxClientInteractionReachDistance;
         } else {
@@ -48,13 +48,13 @@ public abstract class ClientPlayerEntityMixin {
     }
 
     @WrapOperation(
-        method = "method_76762",
+        method = "raycastHitResult",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/network/ClientPlayerEntity;getEntityInteractionRange()D"
+            target = "Lnet/minecraft/client/player/LocalPlayer;entityInteractionRange()D"
         )
     )
-    private double modifyEntityInteractionRange(ClientPlayerEntity player, Operation<Double> original) {
+    private double modifyEntityInteractionRange(LocalPlayer player, Operation<Double> original) {
         if (AmsServerSettings.maxClientInteractionReachDistance != -1.0D) {
             return AmsServerSettings.maxClientInteractionReachDistance;
         } else {

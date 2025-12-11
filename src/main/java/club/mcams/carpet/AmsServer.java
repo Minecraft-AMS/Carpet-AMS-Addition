@@ -50,12 +50,12 @@ import com.google.common.collect.Maps;
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.Identifier;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -111,33 +111,33 @@ public class AmsServer implements CarpetExtension {
     }
 
     @Override
-    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
+    public void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher, final CommandBuildContext commandBuildContext) {
         RegisterCommands.registerCommands(dispatcher, commandBuildContext);
     }
 
-    public void registerCustomRecipes(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup) {
+    public void registerCustomRecipes(Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup) {
         AmsRecipeManager amsRecipeManager = new AmsRecipeManager(AmsRecipeBuilder.getInstance());
         AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
         AmsServerCustomRecipes.getInstance().buildRecipes();
         amsRecipeManager.registerRecipes(map, wrapperLookup);
     }
 
-    public void sendS2CPacketOnHandShake(ServerPlayerEntity player) {
+    public void sendS2CPacketOnHandShake(ServerPlayer player) {
         NetworkUtil.sendS2CPacketIfSupport(player, HandShakeS2CPayload.create(AmsServerMod.getVersion(), NetworkUtil.isSupportServer()));
         NetworkUtil.sendS2CPacketIfSupport(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP));
-        NetworkUtil.sendS2CPacketIfSupport(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUuid()));
+        NetworkUtil.sendS2CPacketIfSupport(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUUID()));
     }
 
     @Override
-    public void onPlayerLoggedIn(ServerPlayerEntity player) {
+    public void onPlayerLoggedIn(ServerPlayer player) {
         CustomWelcomeMessageConfig.getConfig().sendWelcomeMessage(player, MinecraftServerUtil.getServer());
         LeaderCommandRegistry.onPlayerLoggedIn(player);
         RecipeRuleHelper.onPlayerLoggedIn(MinecraftServerUtil.getServer(), player);
     }
 
     @Override
-    public void onPlayerLoggedOut(ServerPlayerEntity player) {
-        NetworkUtil.removeSupportClient(player.getUuid());
+    public void onPlayerLoggedOut(ServerPlayer player) {
+        NetworkUtil.removeSupportClient(player.getUUID());
     }
 
     @Override

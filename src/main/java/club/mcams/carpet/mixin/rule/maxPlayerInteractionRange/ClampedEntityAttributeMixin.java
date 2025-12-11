@@ -24,19 +24,19 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.entity.attribute.ClampedEntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.world.entity.ai.attributes.RangedAttribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(ClampedEntityAttribute.class)
+@Mixin(RangedAttribute.class)
 public abstract class ClampedEntityAttributeMixin {
-    @ModifyReturnValue(method = "clamp", at = @At("RETURN"))
+    @ModifyReturnValue(method = "sanitizeValue", at = @At("RETURN"))
     private double modifyPlayerBlockInteractionMaxValue(double original, double value) {
         if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            ClampedEntityAttribute clampedEntityAttribute = (ClampedEntityAttribute) (Object) this;
-            if (clampedEntityAttribute.getTranslationKey().equals(EntityAttributes.BLOCK_INTERACTION_RANGE.value().getTranslationKey())) {
+            RangedAttribute clampedEntityAttribute = (RangedAttribute) (Object) this;
+            if (clampedEntityAttribute.getDescriptionId().equals(Attributes.BLOCK_INTERACTION_RANGE.value().getDescriptionId())) {
                 return AmsServerSettings.maxPlayerBlockInteractionRange;
             } else {
                 return original;
@@ -46,11 +46,11 @@ public abstract class ClampedEntityAttributeMixin {
         }
     }
 
-    @ModifyReturnValue(method = "clamp", at = @At("RETURN"))
+    @ModifyReturnValue(method = "sanitizeValue", at = @At("RETURN"))
     private double modifyPlayerEntityInteractionMaxValue(double original, double value) {
         if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D) {
-            ClampedEntityAttribute clampedEntityAttribute = (ClampedEntityAttribute) (Object) this;
-            if (clampedEntityAttribute.getTranslationKey().equals(EntityAttributes.ENTITY_INTERACTION_RANGE.value().getTranslationKey())) {
+            RangedAttribute clampedEntityAttribute = (RangedAttribute) (Object) this;
+            if (clampedEntityAttribute.getDescriptionId().equals(Attributes.ENTITY_INTERACTION_RANGE.value().getDescriptionId())) {
                 return AmsServerSettings.maxPlayerEntityInteractionRange;
             } else {
                 return original;

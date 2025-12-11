@@ -22,7 +22,7 @@ package club.mcams.carpet.api.recipe.builder;
 
 import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 public class SmeltingRecipeBuilder extends AbstractRecipeBuilder {
     private Item material;

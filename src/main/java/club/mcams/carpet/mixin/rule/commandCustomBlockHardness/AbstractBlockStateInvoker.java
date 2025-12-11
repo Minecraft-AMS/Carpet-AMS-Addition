@@ -20,13 +20,13 @@
 
 package club.mcams.carpet.mixin.rule.commandCustomBlockHardness;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.Block;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(AbstractBlock.AbstractBlockState.class)
+@Mixin(BlockBehaviour.BlockStateBase.class)
 public interface AbstractBlockStateInvoker {
     @Invoker("getBlock")
     Block invokerGetBlock();

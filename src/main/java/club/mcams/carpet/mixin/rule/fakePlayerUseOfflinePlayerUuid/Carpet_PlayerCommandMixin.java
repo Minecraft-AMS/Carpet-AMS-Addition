@@ -28,7 +28,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.Uuids;
+import net.minecraft.core.UUIDUtil;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,13 +44,13 @@ public abstract class Carpet_PlayerCommandMixin {
         method = "cantSpawn",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/ServerConfigHandler;getPlayerUuidByName(Lnet/minecraft/server/MinecraftServer;Ljava/lang/String;)Ljava/util/UUID;"
+            target = "Lnet/minecraft/server/players/OldUsersConverter;convertMobOwnerIfNecessary(Lnet/minecraft/server/MinecraftServer;Ljava/lang/String;)Ljava/util/UUID;"
         )
     )
     private static UUID useOfflinePlayerUUID(MinecraftServer server, String playerName, Operation<UUID> original) {
         return
             AmsServerSettings.fakePlayerUseOfflinePlayerUUID ?
-            Uuids.getOfflinePlayerUuid(playerName) :
+            UUIDUtil.createOfflinePlayerUUID(playerName) :
             original.call(server, playerName);
     }
 }

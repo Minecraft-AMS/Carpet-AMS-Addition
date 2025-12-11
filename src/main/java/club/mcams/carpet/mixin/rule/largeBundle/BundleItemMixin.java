@@ -26,17 +26,17 @@ import club.mcams.carpet.helpers.rule.largeBundle.LargeBundleInventory;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
-import net.minecraft.item.tooltip.TooltipData;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BundleItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ActionResult;
-import net.minecraft.world.World;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BundleItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -50,66 +50,66 @@ import java.util.Optional;
 @Mixin(BundleItem.class)
 public abstract class BundleItemMixin {
     @WrapMethod(method = "use")
-    private ActionResult onUse(World world, PlayerEntity user, Hand hand, Operation<ActionResult> original) {
+    private InteractionResult onUse(Level world, Player user, InteractionHand hand, Operation<InteractionResult> original) {
         if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
-            ItemStack stack = user.getStackInHand(hand);
-            SimpleNamedScreenHandlerFactory screenHandlerFactory = new SimpleNamedScreenHandlerFactory(
+            ItemStack stack = user.getItemInHand(hand);
+            SimpleMenuProvider screenHandlerFactory = new SimpleMenuProvider(
                 (syncId, playerInv, player) -> {
                     LargeBundleInventory bundleInv = new LargeBundleInventory(stack);
                     switch (AmsServerSettings.largeBundle) {
                         case "9x3":
-                            return GenericContainerScreenHandler.createGeneric9x3(syncId, playerInv, bundleInv);
+                            return ChestMenu.threeRows(syncId, playerInv, bundleInv);
                         case "9x6":
-                            return GenericContainerScreenHandler.createGeneric9x6(syncId, playerInv, bundleInv);
+                            return ChestMenu.sixRows(syncId, playerInv, bundleInv);
                     }
-                    return GenericContainerScreenHandler.createGeneric9x6(syncId, playerInv, bundleInv);
+                    return ChestMenu.sixRows(syncId, playerInv, bundleInv);
                 },
-                stack.getName()
+                stack.getHoverName()
             );
-            world.playSound(user, user.getBlockPos(), SoundEvents.ITEM_BUNDLE_DROP_CONTENTS, SoundCategory.PLAYERS, 1.5F, 1.35F);
-            user.openHandledScreen(screenHandlerFactory);
-            return ActionResult.SUCCESS;
+            world.playSound(user, user.blockPosition(), SoundEvents.BUNDLE_DROP_CONTENTS, SoundSource.PLAYERS, 1.5F, 1.35F);
+            user.openMenu(screenHandlerFactory);
+            return InteractionResult.SUCCESS;
         } else {
             return original.call(world, user, hand);
         }
     }
 
-    @Inject(method = "isItemBarVisible", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "isBarVisible", at = @At("HEAD"), cancellable = true)
     private void onIsItemBarVisible(CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
             cir.setReturnValue(false);
         }
     }
 
-    @Inject(method = "getItemBarStep", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getBarWidth", at = @At("HEAD"), cancellable = true)
     private void onGetItemBarStep(CallbackInfoReturnable<ItemStack> cir) {
         if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
             cir.setReturnValue(ItemStack.EMPTY);
         }
     }
 
-    @Inject(method = "getTooltipData", at = @At("HEAD"), cancellable = true)
-    private void onGetTooltipData(CallbackInfoReturnable<Optional<TooltipData>> cir) {
+    @Inject(method = "getTooltipImage", at = @At("HEAD"), cancellable = true)
+    private void onGetTooltipData(CallbackInfoReturnable<Optional<TooltipComponent>> cir) {
         if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
             cir.setReturnValue(Optional.empty());
         }
     }
 
-    @Inject(method = "dropFirstBundledStack", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "dropContent(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;)Z", at = @At("HEAD"), cancellable = true)
     private void onDropAllBundledItems(CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
             cir.setReturnValue(false);
         }
     }
 
-    @Inject(method = "onClicked", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "overrideOtherStackedOnMe", at = @At("HEAD"), cancellable = true)
     private void onClicked(CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
             cir.setReturnValue(false);
         }
     }
 
-    @Inject(method = "onStackClicked", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "overrideStackedOnOther", at = @At("HEAD"), cancellable = true)
     private void onStackClicked(CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
             cir.setReturnValue(false);

@@ -28,8 +28,8 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.server.network.ServerPlayerInteractionManager;
-import net.minecraft.world.GameMode;
+import net.minecraft.server.level.ServerPlayerGameMode;
+import net.minecraft.world.level.GameType;
 
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,11 +41,11 @@ public abstract class Carpet_PlayerCommandMixin {
         method = "spawn",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/network/ServerPlayerInteractionManager;getGameMode()Lnet/minecraft/world/GameMode;"
+            target = "Lnet/minecraft/server/level/ServerPlayerGameMode;getGameModeForPlayer()Lnet/minecraft/world/level/GameType;"
         )
     )
-    private static GameMode fakePlayerDefaultSurvivalMode(ServerPlayerInteractionManager managerInstance, Operation<GameMode> original) {
-        return AmsServerSettings.fakePlayerDefaultSurvivalMode ? GameMode.SURVIVAL : original.call(managerInstance);
+    private static GameType fakePlayerDefaultSurvivalMode(ServerPlayerGameMode managerInstance, Operation<GameType> original) {
+        return AmsServerSettings.fakePlayerDefaultSurvivalMode ? GameType.SURVIVAL : original.call(managerInstance);
     }
 
     @SuppressWarnings("SimplifiableConditionalExpression")
@@ -53,7 +53,7 @@ public abstract class Carpet_PlayerCommandMixin {
         method = "spawn",
         at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/entity/player/PlayerAbilities;flying:Z",
+            target = "Lnet/minecraft/world/entity/player/Abilities;flying:Z",
             opcode = Opcodes.GETFIELD
         )
     )

@@ -22,12 +22,12 @@ package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.screen.ShulkerBoxScreenHandler;
-import net.minecraft.screen.slot.ShulkerBoxSlot;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.ShulkerBoxMenu;
+import net.minecraft.world.inventory.ShulkerBoxSlot;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -37,32 +37,32 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = ShulkerBoxScreenHandler.class, priority = 1024)
-public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
-    protected ShulkerBoxScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId) {
+@Mixin(value = ShulkerBoxMenu.class, priority = 1024)
+public abstract class ShulkerBoxScreenHandlerMixin extends AbstractContainerMenu {
+    protected ShulkerBoxScreenHandlerMixin(@Nullable MenuType<?> type, int syncId) {
         super(type, syncId);
     }
 
     @ModifyArg(
-        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        method = "<init>(ILnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/Container;)V",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/screen/ScreenHandler;<init>(Lnet/minecraft/screen/ScreenHandlerType;I)V"
+            target = "Lnet/minecraft/world/inventory/AbstractContainerMenu;<init>(Lnet/minecraft/world/inventory/MenuType;I)V"
         ),
         index = 0
     )
-    private static ScreenHandlerType<?> getScreenHandlerType(ScreenHandlerType<?> type) {
+    private static MenuType<?> getScreenHandlerType(MenuType<?> type) {
         if (!AmsServerSettings.largeShulkerBox) {
             return type;
         }
-        return ScreenHandlerType.GENERIC_9X6;
+        return MenuType.GENERIC_9x6;
     }
 
     @ModifyArg(
-        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        method = "<init>(ILnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/Container;)V",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/screen/ShulkerBoxScreenHandler;checkSize(Lnet/minecraft/inventory/Inventory;I)V"
+            target = "Lnet/minecraft/world/inventory/ShulkerBoxMenu;checkContainerSize(Lnet/minecraft/world/Container;I)V"
         ),
         index = 1
     )
@@ -75,14 +75,14 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
     }
 
     @Inject(
-        method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
+        method = "<init>(ILnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/Container;)V",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/inventory/Inventory;onOpen(Lnet/minecraft/entity/ContainerUser;)V",
+            target = "Lnet/minecraft/world/Container;startOpen(Lnet/minecraft/world/entity/ContainerUser;)V",
             shift = At.Shift.AFTER
         )
     )
-    protected void addingExtraSlots(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
+    protected void addingExtraSlots(int syncId, Inventory playerInventory, Container inventory, CallbackInfo ci) {
         if (AmsServerSettings.largeShulkerBox && this.slots.isEmpty()) {
             for (int row = 3; row < 6; ++row) {
                 for (int column = 0; column < 9; ++column) {

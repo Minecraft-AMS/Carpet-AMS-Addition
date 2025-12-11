@@ -20,21 +20,21 @@
 
 package club.mcams.carpet.helpers.rule.headHunter_commandGetPlayerSkull;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.ProfileComponent;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.item.component.ResolvableProfile;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.NbtOps;
 
-import net.minecraft.nbt.NbtString;
+import net.minecraft.nbt.StringTag;
 
 public class SkullSkinHelper {
-    public static void writeNbtToPlayerSkull(PlayerEntity player, ItemStack headStack) {
-        headStack.set(DataComponentTypes.PROFILE, ProfileComponent.ofStatic(player.getGameProfile()));
+    public static void writeNbtToPlayerSkull(Player player, ItemStack headStack) {
+        headStack.set(DataComponents.PROFILE, ResolvableProfile.createResolved(player.getGameProfile()));
     }
 
     public static void writeNbtToPlayerSkull(String name, ItemStack headStack) {
-        ProfileComponent profileComponent = DataComponentTypes.PROFILE.getCodecOrThrow().parse(NbtOps.INSTANCE, NbtString.of(name)).getOrThrow();
-        headStack.set(DataComponentTypes.PROFILE, profileComponent);
+        ResolvableProfile profileComponent = DataComponents.PROFILE.codecOrThrow().parse(NbtOps.INSTANCE, StringTag.valueOf(name)).getOrThrow();
+        headStack.set(DataComponents.PROFILE, profileComponent);
     }
 }

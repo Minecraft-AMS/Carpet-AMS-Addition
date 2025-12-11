@@ -25,8 +25,8 @@ import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomB
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,10 +35,10 @@ import java.util.*;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {
-    @ModifyReturnValue(method = "getBlastResistance", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getExplosionResistance", at = @At("RETURN"))
     private float getBlastResistance(float original) {
         if (!Objects.equals(AmsServerSettings.commandCustomBlockBlastResistance, "false") && AmsServerSettings.enhancedWorldEater == -1.0F) {
-            BlockState blockState = ((Block) (Object) this).getDefaultState();
+            BlockState blockState = ((Block) (Object) this).defaultBlockState();
             return CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.getOrDefault(blockState, original);
         } else {
             return original;

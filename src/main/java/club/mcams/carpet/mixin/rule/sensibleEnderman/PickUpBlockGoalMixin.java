@@ -25,24 +25,25 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.tags.TagKey;
 
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(targets = "net.minecraft.entity.mob.EndermanEntity$PickUpBlockGoal")
+@Mixin(targets = "net.minecraft.world.entity.monster.EnderMan$EndermanTakeBlockGoal")
 public abstract class PickUpBlockGoalMixin {
     @WrapOperation(
         method = "tick()V",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"
+            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/tags/TagKey;)Z"
         )
     )
-    private boolean isBlockInTag(BlockState blockState, TagKey<Block> tag, Operation<Boolean> original) {
+    private boolean isBlockInTag(BlockState blockState, TagKey<@NotNull Block> tag, Operation<Boolean> original) {
         if (AmsServerSettings.sensibleEnderman) {
             Block block = blockState.getBlock();
             return block.equals(Blocks.MELON) || block.equals(Blocks.PUMPKIN);

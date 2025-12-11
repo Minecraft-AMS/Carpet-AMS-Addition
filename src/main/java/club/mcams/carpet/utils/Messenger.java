@@ -22,62 +22,63 @@ package club.mcams.carpet.utils;
 
 import club.mcams.carpet.utils.compat.MessengerCompatFactory;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.util.Formatting;
-import net.minecraft.text.*;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.ChatFormatting;
 
 import java.util.Objects;
 
 public class Messenger {
     // Compound Text
-    public static MutableText c(Object... fields) {
+    public static MutableComponent c(Object... fields) {
         return MessengerCompatFactory.CarpetCompoundText(fields);
     }
 
     // Simple Text
-    public static MutableText s(Object text) {
+    public static MutableComponent s(Object text) {
         return MessengerCompatFactory.LiteralText(text.toString());
     }
 
     // Simple Text with formatting
-    public static MutableText s(Object text, Formatting textFormatting) {
+    public static MutableComponent s(Object text, ChatFormatting textFormatting) {
         return formatting(s(text), textFormatting);
     }
 
     // Translation Text
-    public static MutableText tr(String key, Object... args) {
+    public static MutableComponent tr(String key, Object... args) {
         return MessengerCompatFactory.TranslatableText(key, args);
     }
 
-    public static MutableText copy(MutableText text) {
+    public static MutableComponent copy(MutableComponent text) {
         return text.copy();
     }
 
-    private static void __tell(ServerCommandSource source, MutableText text, boolean broadcastToOps) {
+    private static void __tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
         MessengerCompatFactory.sendFeedBack(source, text, broadcastToOps);
     }
 
-    public static void tell(ServerCommandSource source, MutableText text, boolean broadcastToOps) {
+    public static void tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
         __tell(source, text, broadcastToOps);
     }
 
-    public static void tell(ServerCommandSource source, MutableText text) {
+    public static void tell(CommandSourceStack source, MutableComponent text) {
         tell(source, text, false);
     }
 
-    public static Text endl() {
+    public static Component endl() {
         return Messenger.s("\n");
     }
 
-    public static MutableText formatting(MutableText text, Formatting... formattings) {
-        text.formatted(formattings);
+    public static MutableComponent formatting(MutableComponent text, ChatFormatting... formattings) {
+        text.withStyle(formattings);
         return text;
     }
 
-    public static void sendServerMessage(MinecraftServer server, Text text) {
+    public static void sendServerMessage(MinecraftServer server, Component text) {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
         MessengerCompatFactory.sendSystemMessage(server, text);
-        server.getPlayerManager().getPlayerList().forEach(player -> MessengerCompatFactory.sendSystemMessage(player, text));
+        server.getPlayerList().getPlayers().forEach(player -> MessengerCompatFactory.sendSystemMessage(player, text));
     }
 }

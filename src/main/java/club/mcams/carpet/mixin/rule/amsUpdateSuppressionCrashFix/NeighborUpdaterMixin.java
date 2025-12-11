@@ -25,12 +25,12 @@ import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.AMS_Throwable
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionContext;
 import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionException;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.world.block.WireOrientation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.block.NeighborUpdater;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.redstone.Orientation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.redstone.NeighborUpdater;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,14 +44,14 @@ import java.util.Objects;
 @Mixin(NeighborUpdater.class)
 public interface NeighborUpdaterMixin {
     @Inject(
-       method = "tryNeighborUpdate",
+       method = "executeUpdate",
        at = @At(
            value = "INVOKE",
-           target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
+           target = "Lnet/minecraft/CrashReport;forThrowable(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/CrashReport;"
        ),
        locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private static void tryNeighborUpdate(World world, BlockState state, BlockPos pos, Block sourceBlock, WireOrientation orientation, boolean notify, CallbackInfo ci, Throwable throwable) {
+    private static void tryNeighborUpdate(Level world, BlockState state, BlockPos pos, Block sourceBlock, Orientation orientation, boolean notify, CallbackInfo ci, Throwable throwable) {
         if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
             UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
             throw new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));

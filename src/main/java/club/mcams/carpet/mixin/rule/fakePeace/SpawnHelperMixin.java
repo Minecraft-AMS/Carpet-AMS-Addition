@@ -26,10 +26,10 @@ import club.mcams.carpet.utils.compat.DimensionWrapper;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.*;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.SpawnHelper;
-import net.minecraft.world.chunk.WorldChunk;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.level.NaturalSpawner;
+import net.minecraft.world.level.chunk.LevelChunk;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,21 +39,21 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Mixin(SpawnHelper.class)
+@Mixin(NaturalSpawner.class)
 public abstract class SpawnHelperMixin {
     @WrapOperation(
-        method = "spawn",
+        method = "spawnForChunk",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/SpawnHelper;spawnEntitiesInChunk(Lnet/minecraft/entity/SpawnGroup;Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/world/chunk/WorldChunk;Lnet/minecraft/world/SpawnHelper$Checker;Lnet/minecraft/world/SpawnHelper$Runner;)V"
+            target = "Lnet/minecraft/world/level/NaturalSpawner;spawnCategoryForChunk(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/LevelChunk;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V"
         )
     )
-    private static void allowsSpawning(SpawnGroup group, ServerWorld serverWorld, WorldChunk chunk, SpawnHelper.Checker checker, SpawnHelper.Runner runner, Operation<Void> original) {
-        if (!Objects.equals(AmsServerSettings.fakePeace, "false") && group.equals(SpawnGroup.MONSTER)) {
+    private static void allowsSpawning(MobCategory group, ServerLevel serverWorld, LevelChunk chunk, NaturalSpawner.SpawnPredicate checker, NaturalSpawner.AfterSpawnCallback runner, Operation<Void> original) {
+        if (!Objects.equals(AmsServerSettings.fakePeace, "false") && group.equals(MobCategory.MONSTER)) {
             DimensionWrapper worldDimension = DimensionWrapper.of(serverWorld);
             Set<String> dimensionCP = new HashSet<>(Arrays.asList(AmsServerSettings.fakePeace.split(",")));
             if (dimensionCP.contains(worldDimension.getIdentifierString()) || Objects.equals(AmsServerSettings.fakePeace, "true")) {
-                SpawnHelper.spawnEntitiesInChunk(null, serverWorld, chunk, null, null);
+                NaturalSpawner.spawnCategoryForChunk(null, serverWorld, chunk, null, null);
             } else {
                 original.call(group, serverWorld, chunk, checker, runner);
             }

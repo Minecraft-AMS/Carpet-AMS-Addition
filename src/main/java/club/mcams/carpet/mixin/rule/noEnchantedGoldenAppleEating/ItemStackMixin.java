@@ -22,9 +22,9 @@ package club.mcams.carpet.mixin.rule.noEnchantedGoldenAppleEating;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.ActionResult;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.InteractionResult;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,11 +34,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void use(CallbackInfoReturnable<ActionResult> cir) {
+    private void use(CallbackInfoReturnable<InteractionResult> cir) {
         if (AmsServerSettings.noEnchantedGoldenAppleEating) {
             ItemStack stack = (ItemStack) (Object) this;
             if (stack.getItem() == Items.ENCHANTED_GOLDEN_APPLE) {
-                cir.setReturnValue(ActionResult.FAIL);
+                cir.setReturnValue(InteractionResult.FAIL);
             }
         }
     }

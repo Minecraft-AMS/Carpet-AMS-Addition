@@ -23,18 +23,18 @@ package club.mcams.carpet.mixin.rule.commandPlayerChunkLoadController;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
 
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerChunkLoadingManager;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ChunkMap;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ServerChunkLoadingManager.class)
+@Mixin(ChunkMap.class)
 public abstract class ThreadedAnvilChunkStorageMixin {
-    @Inject(method = "doesNotGenerateChunks", at = @At("HEAD"), cancellable = true)
-    private void doesNotGenerateChunks(ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "skipPlayer", at = @At("HEAD"), cancellable = true)
+    private void doesNotGenerateChunks(ServerPlayer player, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.commandPlayerChunkLoadController) {
             String playerName = player.getName().getString();
             if (!ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true)) {

@@ -25,20 +25,20 @@ import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHar
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.AbstractBlock.AbstractBlockState;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase;
+import net.minecraft.world.level.block.state.BlockState;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(value = AbstractBlockState.class, priority = 16888)
+@Mixin(value = BlockStateBase.class, priority = 16888)
 public abstract class AbstractBlockStateMixin implements AbstractBlockStateInvoker{
-    @ModifyReturnValue(method = "getHardness", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getDestroySpeed", at = @At("RETURN"))
     private float modifyHardness(float original) {
         if (!Objects.equals(AmsServerSettings.commandCustomBlockHardness, "false")) {
-            BlockState blockState = this.invokerGetBlock().getDefaultState();
+            BlockState blockState = this.invokerGetBlock().defaultBlockState();
             return CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.getOrDefault(blockState, original);
         } else {
             return original;

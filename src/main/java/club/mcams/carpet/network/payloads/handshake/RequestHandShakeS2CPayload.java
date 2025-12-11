@@ -27,8 +27,8 @@ import club.mcams.carpet.utils.MinecraftClientUtil;
 import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.utils.Noop;
 
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.UUID;
 
@@ -39,21 +39,21 @@ public class RequestHandShakeS2CPayload extends AMS_CustomPayload {
         super(ID);
     }
 
-    private RequestHandShakeS2CPayload(PacketByteBuf buf) {
+    private RequestHandShakeS2CPayload(FriendlyByteBuf buf) {
         super(ID);
     }
 
     @Override
-    protected void writeData(PacketByteBuf buf) {
+    protected void writeData(FriendlyByteBuf buf) {
         Noop.noop();
     }
 
     @Override
     public void handle() {
         NetworkUtil.executeOnClientThread(() -> {
-            ClientPlayerEntity player = MinecraftClientUtil.getCurrentPlayer();
+            LocalPlayer player = MinecraftClientUtil.getCurrentPlayer();
             String modVersion = AmsClient.getVersion();
-            UUID uuid = player.getUuid();
+            UUID uuid = player.getUUID();
             NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(modVersion, uuid));
         });
     }

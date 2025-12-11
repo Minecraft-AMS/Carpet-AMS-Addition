@@ -22,26 +22,26 @@ package club.mcams.carpet.mixin.rule.blockChunkLoader;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.SimpleRegistry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.MappedRegistry;
 
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(SimpleRegistry.class)
+@Mixin(MappedRegistry.class)
 public abstract class ChunkTicketTypeMixin {
     @ModifyExpressionValue(
-        method = "assertNotFrozen(Lnet/minecraft/registry/RegistryKey;)V",
+        method = "validateWrite(Lnet/minecraft/resources/ResourceKey;)V",
         at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/registry/SimpleRegistry;frozen:Z",
+            target = "Lnet/minecraft/core/MappedRegistry;frozen:Z",
             opcode = Opcodes.GETFIELD
         )
     )
-    private boolean noFrozen(boolean original, RegistryKey<String> key) {
-        return key.getValue().getNamespace().equals("carpetamsaddition") ? false : original;
+    private boolean noFrozen(boolean original, ResourceKey<String> key) {
+        return key.identifier().getNamespace().equals("carpetamsaddition") ? false : original;
     }
 }
 

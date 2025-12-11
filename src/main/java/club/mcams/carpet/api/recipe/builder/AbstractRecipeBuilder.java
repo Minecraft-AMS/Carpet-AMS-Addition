@@ -22,7 +22,7 @@ package club.mcams.carpet.api.recipe.builder;
 
 import club.mcams.carpet.utils.RegexTools;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 public abstract class AbstractRecipeBuilder {
     protected final boolean enabled;
@@ -42,7 +42,7 @@ public abstract class AbstractRecipeBuilder {
     }
 
     protected String item(Item item) {
-        return RegexTools.getItemRegisterName(item.getDefaultStack());
+        return RegexTools.getItemRegisterName(item.getDefaultInstance());
     }
 
     public abstract void build();

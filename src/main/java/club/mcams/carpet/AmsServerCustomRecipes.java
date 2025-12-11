@@ -24,7 +24,7 @@ import club.mcams.carpet.api.recipe.builder.ShapedRecipeBuilder;
 import club.mcams.carpet.api.recipe.builder.ShapelessRecipeBuilder;
 import club.mcams.carpet.api.recipe.builder.SmeltingRecipeBuilder;
 
-import static net.minecraft.item.Items.*;
+import static net.minecraft.world.item.Items.*;
 
 public class AmsServerCustomRecipes {
     private static final AmsServerCustomRecipes INSTANCE = new AmsServerCustomRecipes();

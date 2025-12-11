@@ -24,17 +24,17 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.BambooBlock;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
+import net.minecraft.world.level.block.BambooStalkBlock;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(BambooBlock.class)
+@Mixin(BambooStalkBlock.class)
 public abstract class BambooBlockMixin {
     @ModifyReturnValue(method = "getCollisionShape", at = @At("RETURN"))
     private VoxelShape getCollisionShape(VoxelShape original) {
-        return AmsServerSettings.bambooCollisionBoxDisabled ? VoxelShapes.empty() : original;
+        return AmsServerSettings.bambooCollisionBoxDisabled ? Shapes.empty() : original;
     }
 }

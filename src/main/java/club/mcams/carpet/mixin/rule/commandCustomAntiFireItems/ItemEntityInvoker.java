@@ -20,14 +20,14 @@
 
 package club.mcams.carpet.mixin.rule.commandCustomAntiFireItems;
 
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(ItemEntity.class)
 public interface ItemEntityInvoker {
-    @Invoker("getStack")
-    ItemStack invokeGetStack();
+    @Invoker("getItem")
+    ItemStack invokeGetItem();
 }

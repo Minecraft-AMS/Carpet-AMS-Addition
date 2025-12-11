@@ -25,7 +25,7 @@ import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.utils.NetworkUtil;
 
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.UUID;
 
@@ -41,16 +41,16 @@ public class RequestClientModVersionPayload_C2S extends AMS_CustomPayload {
         this.uuid = uuid;
     }
 
-    public RequestClientModVersionPayload_C2S(PacketByteBuf buf) {
+    public RequestClientModVersionPayload_C2S(FriendlyByteBuf buf) {
         super(ID);
-        this.version = buf.readString();
-        this.uuid = buf.readUuid();
+        this.version = buf.readUtf();
+        this.uuid = buf.readUUID();
     }
 
     @Override
-    protected void writeData(PacketByteBuf buf) {
-        buf.writeString(this.version);
-        buf.writeUuid(this.uuid);
+    protected void writeData(FriendlyByteBuf buf) {
+        buf.writeUtf(this.version);
+        buf.writeUUID(this.uuid);
     }
 
     @Override

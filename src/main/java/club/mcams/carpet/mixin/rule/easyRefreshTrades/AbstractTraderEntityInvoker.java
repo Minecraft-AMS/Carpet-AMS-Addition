@@ -20,16 +20,16 @@
 
 package club.mcams.carpet.mixin.rule.easyRefreshTrades;
 
-import net.minecraft.entity.passive.MerchantEntity;
-import net.minecraft.village.TradeOfferList;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.village.TradeOffers;
+import net.minecraft.world.entity.npc.villager.AbstractVillager;
+import net.minecraft.world.item.trading.MerchantOffers;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.npc.villager.VillagerTrades;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(MerchantEntity.class)
+@Mixin(AbstractVillager.class)
 public interface AbstractTraderEntityInvoker {
-    @Invoker("fillRecipesFromPool")
-    void invokeFillRecipesFromPool(ServerWorld world, TradeOfferList recipeList, TradeOffers.Factory[] pool, int count);
+    @Invoker("addOffersFromItemListings")
+    void invokeAddOffersFromItemListings(ServerLevel world, MerchantOffers recipeList, VillagerTrades.ItemListing[] pool, int count);
 }

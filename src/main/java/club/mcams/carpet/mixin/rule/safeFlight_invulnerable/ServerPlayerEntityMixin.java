@@ -22,26 +22,26 @@ package club.mcams.carpet.mixin.rule.safeFlight_invulnerable;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageTypes;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ServerPlayerEntity.class)
+@Mixin(ServerPlayer.class)
 public abstract class ServerPlayerEntityMixin {
     @Inject(method = "isInvulnerableTo",at = @At("TAIL"), cancellable = true)
-    private void isInvulnerableTo(ServerWorld world, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        if (AmsServerSettings.safeFlight && damageSource.isOf(DamageTypes.FLY_INTO_WALL)) {
+    private void isInvulnerableTo(ServerLevel world, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+        if (AmsServerSettings.safeFlight && damageSource.is(DamageTypes.FLY_INTO_WALL)) {
             cir.setReturnValue(true);
             cir.cancel();
         }
 
-        if (AmsServerSettings.invulnerable && !damageSource.isOf(DamageTypes.OUT_OF_WORLD)) {
+        if (AmsServerSettings.invulnerable && !damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) {
             cir.setReturnValue(true);
             cir.cancel();
         }

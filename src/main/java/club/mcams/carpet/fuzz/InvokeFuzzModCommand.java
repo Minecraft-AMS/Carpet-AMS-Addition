@@ -25,17 +25,17 @@ import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 import club.mcams.carpet.utils.Messenger;
 
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 
 public class InvokeFuzzModCommand {
-    public static Text highlightCoordButton(String posText) {
-        final Text hoverText = new Translator("fuzz").tr("command.highlightCoordButtonHoverText").formatted(Formatting.YELLOW);
+    public static Component highlightCoordButton(String posText) {
+        final Component hoverText = new Translator("fuzz").tr("command.highlightCoordButtonHoverText").withStyle(ChatFormatting.YELLOW);
 
         return
             Messenger.s(" [+H]").setStyle(
-                Style.EMPTY.withColor(Formatting.YELLOW).withBold(true).
+                Style.EMPTY.withColor(ChatFormatting.YELLOW).withBold(true).
                 withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, "/coordCompass set " + posText.replace(",", ""))).
                 withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
             );

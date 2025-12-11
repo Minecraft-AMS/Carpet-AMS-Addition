@@ -22,36 +22,36 @@ package club.mcams.carpet.mixin.rule.shulkerHitLevitationDisabled_immuneShulkerB
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.projectile.ShulkerBulletEntity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.projectile.ShulkerBullet;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(ShulkerBulletEntity.class)
+@Mixin(ShulkerBullet.class)
 public abstract class ShulkerBulletEntityMixin {
     @ModifyArg(
-        method = "onEntityHit",
+        method = "onHitEntity",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"
+            target = "Lnet/minecraft/world/entity/LivingEntity;addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z"
         )
     )
-    private StatusEffectInstance noLevitation(StatusEffectInstance statusEffectInstance) {
+    private MobEffectInstance noLevitation(MobEffectInstance statusEffectInstance) {
         if (AmsServerSettings.shulkerHitLevitationDisabled || AmsServerSettings.immuneShulkerBullet) {
-            return new StatusEffectInstance(StatusEffects.LEVITATION, 0);
+            return new MobEffectInstance(MobEffects.LEVITATION, 0);
         } else {
             return statusEffectInstance;
         }
     }
 
     @ModifyArg(
-        method = "onEntityHit",
+        method = "onHitEntity",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/Entity;sidedDamage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
+            target = "Lnet/minecraft/world/entity/Entity;hurtOrSimulate(Lnet/minecraft/world/damagesource/DamageSource;F)Z"
         )
     )
     private float noDamage(float amount) {

@@ -29,8 +29,8 @@ particles:1
 reducedDebugInfo:false
 renderClouds:"false"
 cloudRange:128
-renderDistance:12
-simulationDistance:12
+renderDistance:32
+simulationDistance:32
 screenEffectScale:0.0
 soundDevice:"OpenAL"
 vignette:false
@@ -165,7 +165,7 @@ key_key.debug.dumpVersion:key.keyboard.v
 key_key.debug.profilingChart:key.keyboard.1
 key_key.debug.fpsCharts:key.keyboard.2
 key_key.debug.networkCharts:key.keyboard.3
-soundCategory_master:0.5182119205298014
+soundCategory_master:0.9536423841059603
 soundCategory_music:0.0
 soundCategory_record:0.02640845
 soundCategory_weather:0.0

@@ -25,7 +25,7 @@ import carpet.api.settings.SettingsManager;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,10 +37,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class Carpet_SettingsManagerMixin {
 
     @Shadow
-    protected abstract int setDefault(ServerCommandSource source, CarpetRule<?> rule, String stringValue);
+    protected abstract int setDefault(CommandSourceStack source, CarpetRule<?> rule, String stringValue);
 
     @Inject(method = "setRule", at = @At("TAIL"))
-    private void setRule(ServerCommandSource source, CarpetRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
+    private void setRule(CommandSourceStack source, CarpetRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.carpetAlwaysSetDefault) {
             setDefault(source, rule, value);
         }

@@ -23,9 +23,9 @@ package club.mcams.carpet.mixin.rule.enhancedWorldEater;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.enhancedWorldEater.BlockBlackList;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.StateManager;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,12 +39,12 @@ public abstract class BlockMixin {
 
     @Shadow
     @Final
-    protected StateManager<Block, BlockState> stateManager;
+    protected StateDefinition<Block, BlockState> stateDefinition;
 
-    @Inject(method = "getBlastResistance", at = @At("RETURN"), cancellable = true)
+    @Inject(method = "getExplosionResistance", at = @At("RETURN"), cancellable = true)
     private void getBlastResistance(CallbackInfoReturnable<Float> cir) {
         if (AmsServerSettings.enhancedWorldEater != -1.0D) {
-            Block block = stateManager.getDefaultState().getBlock();
+            Block block = stateDefinition.any().getBlock();
             float BOOM = (float) AmsServerSettings.enhancedWorldEater;
             float startBlastResistance = cir.getReturnValue();
             if (startBlastResistance >= 17.0F && !BlockBlackList.isIn(block)) {

@@ -20,13 +20,13 @@
 
 package club.mcams.carpet.mixin.rule.fakePlayerInteractLikeClient;
 
-import net.minecraft.entity.vehicle.AbstractBoatEntity;
+import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(AbstractBoatEntity.class)
+@Mixin(AbstractBoat.class)
 public interface BoatEntityInvoker {
-    @Accessor("ticksUnderwater")
-    float getTicksUnderwater();
+    @Accessor("outOfControlTicks")
+    float getOutOfControlTicks();
 }

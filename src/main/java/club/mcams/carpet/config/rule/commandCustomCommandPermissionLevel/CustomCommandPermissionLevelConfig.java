@@ -24,7 +24,7 @@ import club.mcams.carpet.config.template.AbstractMapJsonConfig;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.WorldSavePath;
+import net.minecraft.world.level.storage.LevelResource;
 
 import java.nio.file.Path;
 
@@ -50,6 +50,6 @@ public class CustomCommandPermissionLevelConfig extends AbstractMapJsonConfig<St
     }
 
     private static Path getConfigPath(MinecraftServer server) {
-        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_command_permission_level.json");
+        return server.getWorldPath(LevelResource.ROOT).resolve("carpetamsaddition/custom_command_permission_level.json");
     }
 }

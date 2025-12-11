@@ -25,47 +25,47 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(targets = "net.minecraft.entity.boss.dragon.EnderDragonSpawnState$3")
+@Mixin(targets = "net/minecraft/world/level/dimension/end/DragonRespawnAnimation$3")
 public abstract class EnderDragonSpawnStateMixin {
     @WrapOperation(
-        method = "run",
+        method = "tick",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/world/ServerWorld;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
+            target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"
         )
     )
-    private boolean onRemoveBlock(ServerWorld serverWorld, BlockPos blockPos, boolean b, Operation<Boolean> original) {
+    private boolean onRemoveBlock(ServerLevel serverWorld, BlockPos blockPos, boolean b, Operation<Boolean> original) {
         return Objects.equals(AmsServerSettings.preventEndSpikeRespawn, "false") ? original.call(serverWorld, blockPos, b) : false;
     }
 
     @WrapOperation(
-        method = "run",
+        method = "tick",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/World$ExplosionSourceType;)V"
+            target = "Lnet/minecraft/server/level/ServerLevel;explode(Lnet/minecraft/world/entity/Entity;DDDFLnet/minecraft/world/level/Level$ExplosionInteraction;)V"
         )
     )
     private void onCreateExplosion(
-        ServerWorld serverWorld,
+        ServerLevel serverWorld,
         Entity entity,
         double x, double y, double z, float power,
-        World.ExplosionSourceType destructionType,
+        Level.ExplosionInteraction destructionType,
         Operation<Void> original
     ) {
         if (Objects.equals(AmsServerSettings.preventEndSpikeRespawn, "false")) {
             original.call(serverWorld, entity, x, y, z, power, destructionType);
         } else {
-            serverWorld.createExplosion(null, 0, 0, 0, 0.0F, World.ExplosionSourceType.NONE);
+            serverWorld.explode(null, 0, 0, 0, 0.0F, Level.ExplosionInteraction.NONE);
         }
     }
 }

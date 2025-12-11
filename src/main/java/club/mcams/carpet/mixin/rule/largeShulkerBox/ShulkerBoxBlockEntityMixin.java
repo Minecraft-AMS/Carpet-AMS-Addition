@@ -22,16 +22,17 @@ package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
-import net.minecraft.block.entity.ShulkerBoxBlockEntity;
-import net.minecraft.inventory.SidedInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
+import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -41,28 +42,28 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.stream.IntStream;
 
 @Mixin(value = ShulkerBoxBlockEntity.class, priority = 1024)
-public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockEntity implements SidedInventory {
+public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBlockEntity implements WorldlyContainer {
     protected ShulkerBoxBlockEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
     }
 
     @Shadow
-    private DefaultedList<ItemStack> inventory;
+    private NonNullList<@NotNull ItemStack> itemStacks;
 
     @Shadow
-    public abstract int size();
+    public abstract int getContainerSize();
 
-    @Inject(method = "<init>(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
+    @Inject(method = "<init>(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("RETURN"))
     private void init1(CallbackInfo ci) {
-        this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
+        this.itemStacks = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
     }
 
-    @Inject(method = "<init>(Lnet/minecraft/util/DyeColor;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
+    @Inject(method = "<init>(Lnet/minecraft/world/item/DyeColor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("RETURN"))
     private void init2(CallbackInfo ci) {
-        this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
+        this.itemStacks = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
     }
 
-    @Inject(method = "size", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getContainerSize", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.largeShulkerBox) {
             cir.setReturnValue(9 * 6);
@@ -70,10 +71,10 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
         }
     }
 
-    @Inject(method = "getAvailableSlots", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getSlotsForFace", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
         if (AmsServerSettings.largeShulkerBox) {
-            int[] availableSlots = IntStream.range(0, size()).toArray();
+            int[] availableSlots = IntStream.range(0, getContainerSize()).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();
         }

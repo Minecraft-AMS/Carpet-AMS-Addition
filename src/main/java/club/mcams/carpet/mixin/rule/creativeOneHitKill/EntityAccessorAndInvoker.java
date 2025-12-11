@@ -20,16 +20,16 @@
 
 package club.mcams.carpet.mixin.rule.creativeOneHitKill;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Entity.class)
 public interface EntityAccessorAndInvoker {
-    @Accessor("world")
-    World getWorld();
+    @Accessor("level")
+    Level getLevel();
 
     @Invoker("getX")
     double invokerGetX();
@@ -40,6 +40,6 @@ public interface EntityAccessorAndInvoker {
     @Invoker("getZ")
     double invokerGetZ();
 
-    @Invoker("isSneaking")
+    @Invoker("isShiftKeyDown")
     boolean invokerIsSneaking();
 }

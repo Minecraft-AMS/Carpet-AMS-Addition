@@ -24,13 +24,13 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 import club.mcams.carpet.utils.WorldUtil;
 
-import net.minecraft.block.BellBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.BellBlock;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,11 +39,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BellBlock.class)
 public abstract class BellBlockMixin {
-    @Inject(method = "ring(Lnet/minecraft/entity/Entity;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z", at = @At("HEAD"))
-    private void ring(Entity entity, World world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "attemptToRing(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z", at = @At("HEAD"))
+    private void ring(Entity entity, Level world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.bellBlockChunkLoader && !WorldUtil.isClient(world)) {
             ChunkPos chunkPos = new ChunkPos(pos);
-            BlockChunkLoaderHelper.addBellBlockTicket((ServerWorld) world, chunkPos);
+            BlockChunkLoaderHelper.addBellBlockTicket((ServerLevel) world, chunkPos);
         }
     }
 }

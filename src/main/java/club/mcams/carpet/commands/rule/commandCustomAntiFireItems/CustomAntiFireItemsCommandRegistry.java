@@ -29,111 +29,111 @@ import club.mcams.carpet.config.rule.commandAntiFireItems.CustomAntiFireItemsCon
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.command.argument.ItemStackArgumentType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Style;
-import net.minecraft.util.Formatting;
+import net.minecraft.commands.arguments.item.ItemArgument;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.chat.Style;
+import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.minecraft.server.command.CommandManager.argument;
-import static net.minecraft.server.command.CommandManager.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
 
 public class CustomAntiFireItemsCommandRegistry {
     private static final Translator translator = new Translator("command.customAntiFireItems");
     private static final String MSG_HEAD = "<customAntiFireItems> ";
     public static final List<String> CUSTOM_ANTI_FIRE_ITEMS = new ArrayList<>();
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
         dispatcher.register(
-            CommandManager.literal("customAntiFireItems")
+            Commands.literal("customAntiFireItems")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomAntiFireItems))
             .then(literal("add")
-            .then(argument("item", ItemStackArgumentType.itemStack(commandRegistryAccess))
+            .then(argument("item", ItemArgument.item(commandRegistryAccess))
             .executes(context -> add(
-                context.getSource().getPlayerOrThrow(),
-                ItemStackArgumentType.getItemStackArgument(context, "item").createStack(1, false)
+                context.getSource().getPlayerOrException(),
+                ItemArgument.getItem(context, "item").createItemStack(1, false)
             ))))
             .then(literal("remove")
-            .then(argument("item", ItemStackArgumentType.itemStack(commandRegistryAccess))
+            .then(argument("item", ItemArgument.item(commandRegistryAccess))
             .executes(context -> remove(
-                context.getSource().getPlayerOrThrow(),
-                ItemStackArgumentType.getItemStackArgument(context, "item").createStack(1, false)
+                context.getSource().getPlayerOrException(),
+                ItemArgument.getItem(context, "item").createItemStack(1, false)
             ))))
             .then(literal("removeAll")
-            .executes(context -> removeAll(context.getSource().getPlayerOrThrow())))
+            .executes(context -> removeAll(context.getSource().getPlayerOrException())))
             .then(literal("list")
-            .executes(context -> list(context.getSource().getPlayerOrThrow())))
+            .executes(context -> list(context.getSource().getPlayerOrException())))
             .then(literal("help")
-            .executes(context -> help(context.getSource().getPlayerOrThrow())))
+            .executes(context -> help(context.getSource().getPlayerOrException())))
         );
     }
 
-    private static int add(PlayerEntity player, ItemStack itemStack) {
+    private static int add(Player player, ItemStack itemStack) {
         if (!CUSTOM_ANTI_FIRE_ITEMS.contains(getItemName(itemStack))) {
             CUSTOM_ANTI_FIRE_ITEMS.add(getItemName(itemStack));
             saveToJson();
-            player.sendMessage(Messenger.s(MSG_HEAD + "+ " + getItemName(itemStack)).formatted(Formatting.GREEN), false);
+            player.displayClientMessage(Messenger.s(MSG_HEAD + "+ " + getItemName(itemStack)).withStyle(ChatFormatting.GREEN), false);
         } else {
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(
                     MSG_HEAD + getItemName(itemStack) + translator.tr("already_exists").getString()
-                ).formatted(Formatting.YELLOW), false
+                ).withStyle(ChatFormatting.YELLOW), false
             );
         }
         return 1;
     }
 
-    private static int remove(PlayerEntity player, ItemStack itemStack) {
+    private static int remove(Player player, ItemStack itemStack) {
         if (CUSTOM_ANTI_FIRE_ITEMS.contains(getItemName(itemStack))) {
             CUSTOM_ANTI_FIRE_ITEMS.remove(getItemName(itemStack));
             saveToJson();
-            player.sendMessage(Messenger.s(MSG_HEAD + "- " + getItemName(itemStack)).formatted(Formatting.RED), false);
+            player.displayClientMessage(Messenger.s(MSG_HEAD + "- " + getItemName(itemStack)).withStyle(ChatFormatting.RED), false);
         } else {
-            player.sendMessage(Messenger.s(MSG_HEAD + getItemName(itemStack) + translator.tr("not_found").getString()).formatted(Formatting.RED), false);
+            player.displayClientMessage(Messenger.s(MSG_HEAD + getItemName(itemStack) + translator.tr("not_found").getString()).withStyle(ChatFormatting.RED), false);
         }
         return 1;
     }
 
-    private static int removeAll(PlayerEntity player) {
+    private static int removeAll(Player player) {
         CUSTOM_ANTI_FIRE_ITEMS.clear();
         saveToJson();
-        player.sendMessage(Messenger.s(MSG_HEAD + translator.tr("removeAll").getString()).formatted(Formatting.RED), false);
+        player.displayClientMessage(Messenger.s(MSG_HEAD + translator.tr("removeAll").getString()).withStyle(ChatFormatting.RED), false);
         return 1;
     }
 
-    private static int list(ServerPlayerEntity player) {
-        player.sendMessage(
+    private static int list(ServerPlayer player) {
+        player.displayClientMessage(
             Messenger.s(
-            translator.tr("list").getString() + "\n-------------------------------").formatted(Formatting.GREEN),
+            translator.tr("list").getString() + "\n-------------------------------").withStyle(ChatFormatting.GREEN),
             false
         );
         for (String blockName : CUSTOM_ANTI_FIRE_ITEMS) {
-            player.sendMessage(Messenger.s(blockName).formatted(Formatting.GREEN), false);
+            player.displayClientMessage(Messenger.s(blockName).withStyle(ChatFormatting.GREEN), false);
         }
         return 1;
     }
 
     @SuppressWarnings("DuplicatedCode")
-    private static int help(ServerPlayerEntity player) {
+    private static int help(ServerPlayer player) {
         String setHelpText = translator.tr("help.set").getString();
         String removeHelpText = translator.tr("help.remove").getString();
         String removeAllHelpText = translator.tr("help.removeAll").getString();
         String listHelpText = translator.tr("help.list").getString();
-        player.sendMessage(
+        player.displayClientMessage(
             Messenger.s(
                 "\n" +
                 setHelpText + "\n" +
                 removeHelpText + "\n" +
                 removeAllHelpText + "\n" +
                 listHelpText
-            ).setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
+            ).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)),
             false
         );
         return 1;

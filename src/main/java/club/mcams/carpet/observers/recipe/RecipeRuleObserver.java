@@ -26,11 +26,11 @@ import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
 import club.mcams.carpet.settings.SimpleRuleObserver;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 public class RecipeRuleObserver extends SimpleRuleObserver<Boolean> {
     @Override
-    public void onValueChange(ServerCommandSource source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
+    public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         RecipeRuleHelper.onValueChange(MinecraftServerUtil.getServer());
     }
 }

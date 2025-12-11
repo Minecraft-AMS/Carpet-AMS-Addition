@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.perfectInvisibility_sneakInvisibility;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
@@ -29,6 +29,6 @@ public interface EntityInvoker {
     @Invoker("isInvisible")
     boolean invokeIsInvisible();
 
-    @Invoker("isSneaky")
-    boolean invokeIsSneaky();
+    @Invoker("isDiscrete")
+    boolean invokeIsDiscrete();
 }

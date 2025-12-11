@@ -9,22 +9,19 @@ package club.mcams.carpet.network;
 
 import club.mcams.carpet.utils.IdentifierUtil;
 
-//#if MC>=12005
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.packet.CustomPayload;
-//#else
-//$$ import club.mcams.carpet.utils.compat.CustomPayload;
-//#endif
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-import net.minecraft.util.Identifier;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.resources.Identifier;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.server.level.ServerPlayer;
+import org.jetbrains.annotations.NotNull;
 
-public abstract class AMS_CustomPayload implements CustomPayload {
+public abstract class AMS_CustomPayload implements CustomPacketPayload {
     public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network/v1");
-    public static final CustomPayload.Id<AMS_CustomPayload> KEY = new CustomPayload.Id<>(CHANNEL_ID);
-    public static final PacketCodec<PacketByteBuf, AMS_CustomPayload> CODEC = CustomPayload.codecOf(AMS_CustomPayload::write, AMS_PayloadCodec::decodePayload);
+    public static final CustomPacketPayload.Type<@NotNull AMS_CustomPayload> KEY = new CustomPacketPayload.Type<>(CHANNEL_ID);
+    public static final StreamCodec<@NotNull FriendlyByteBuf, @NotNull AMS_CustomPayload> CODEC = CustomPacketPayload.codec(AMS_CustomPayload::write, AMS_PayloadCodec::decodePayload);
     private final String packetId;
 
     protected AMS_CustomPayload(String packetId) {
@@ -32,24 +29,24 @@ public abstract class AMS_CustomPayload implements CustomPayload {
     }
 
     @Override
-    public CustomPayload.Id<? extends CustomPayload> getId() {
+    public CustomPacketPayload.@NotNull Type<? extends @NotNull CustomPacketPayload> type() {
         return KEY;
     }
 
-    public final void write(PacketByteBuf buf) {
-        buf.writeString(this.packetId);
+    public final void write(FriendlyByteBuf buf) {
+        buf.writeUtf(this.packetId);
         writeData(buf);
     }
 
-    protected abstract void writeData(PacketByteBuf buf);
+    protected abstract void writeData(FriendlyByteBuf buf);
 
     protected abstract void handle();
 
-    public final void sendC2SPacket(ClientPlayerEntity player) {
+    public final void sendC2SPacket(LocalPlayer player) {
         AMS_PayloadSender.c2s(this, player);
     }
 
-    public final void sendS2CPacket(ServerPlayerEntity player) {
+    public final void sendS2CPacket(ServerPlayer player) {
         AMS_PayloadSender.s2c(this, player);
     }
 }

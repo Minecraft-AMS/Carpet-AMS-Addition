@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftServer.class)
 public abstract class MinecraftServerMixin {
-    @Inject(method = "loadWorld", at = @At("TAIL"))
+    @Inject(method = "loadLevel", at = @At("TAIL"))
     private void afterServerLoadWorld(CallbackInfo ci) {
         if (MinecraftServerUtil.serverIsRunning()) {
             AmsServer.getInstance().afterServerLoadWorlds(MinecraftServerUtil.getServer());

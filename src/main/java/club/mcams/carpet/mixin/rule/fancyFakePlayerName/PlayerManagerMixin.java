@@ -27,10 +27,10 @@ import club.mcams.carpet.helpers.FakePlayerHelper;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyNameHelper;
 
-import net.minecraft.network.ClientConnection;
-import net.minecraft.server.network.ConnectedClientData;
-import net.minecraft.server.PlayerManager;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.network.Connection;
+import net.minecraft.server.network.CommonListenerCookie;
+import net.minecraft.server.players.PlayerList;
+import net.minecraft.server.level.ServerPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,10 +39,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
-@Mixin(PlayerManager.class)
+@Mixin(PlayerList.class)
 public abstract class PlayerManagerMixin {
-    @Inject(method = "onPlayerConnect", at = @At("TAIL"))
-    private void onPlayerConnects(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci) {
+    @Inject(method = "placeNewPlayer", at = @At("TAIL"))
+    private void onPlayerConnects(Connection connection, ServerPlayer player, CommonListenerCookie clientData, CallbackInfo ci) {
         if (
             !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
             FakePlayerHelper.isFakePlayer(player) &&
@@ -56,14 +56,14 @@ public abstract class PlayerManagerMixin {
         method = "remove",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/PlayerManager;sendToAll(Lnet/minecraft/network/packet/Packet;)V"
+            target = "Lnet/minecraft/server/players/PlayerList;broadcastAll(Lnet/minecraft/network/protocol/Packet;)V"
         )
     )
-    private void kickFakePlayerFromBotTeam(ServerPlayerEntity player, CallbackInfo info) {
+    private void kickFakePlayerFromBotTeam(ServerPlayer player, CallbackInfo info) {
         if (
             !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
             FakePlayerHelper.isFakePlayer(player) &&
-            player.server.getScoreboard().getTeam(AmsServerSettings.fancyFakePlayerName) != null &&
+            player.server.getScoreboard().getPlayerTeam(AmsServerSettings.fancyFakePlayerName) != null &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {
             FancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player, AmsServerSettings.fancyFakePlayerName);

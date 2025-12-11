@@ -22,7 +22,7 @@ package club.mcams.carpet.mixin.rule.foliageGenerateDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.world.gen.foliage.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FoliagePlacer.class)
 public abstract class FoliagePlacerMixin {
-    @Inject(method = "generateSquare", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "placeLeavesRow", at = @At("HEAD"), cancellable = true)
     private void generateSquare(CallbackInfo ci) {
         if (AmsServerSettings.foliageGenerateDisabled) {
             ci.cancel();

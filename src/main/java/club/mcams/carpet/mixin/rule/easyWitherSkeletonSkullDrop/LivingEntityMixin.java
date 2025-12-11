@@ -23,10 +23,10 @@ package club.mcams.carpet.mixin.rule.easyWitherSkeletonSkullDrop;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.EntityUtil;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.WitherSkeletonEntity;
-import net.minecraft.item.Items;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
+import net.minecraft.world.item.Items;
+import net.minecraft.server.level.ServerLevel;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,12 +35,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-    @Inject(method = "onDeath", at = @At("TAIL"))
+    @Inject(method = "die", at = @At("TAIL"))
     private void dropSkull(CallbackInfo ci) {
         if (AmsServerSettings.easyWitherSkeletonSkullDrop) {
             LivingEntity entity = (LivingEntity) (Object) this;
-            if (entity instanceof WitherSkeletonEntity) {
-                entity.dropItem((ServerWorld) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);
+            if (entity instanceof WitherSkeleton) {
+                entity.spawnAtLocation((ServerLevel) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);
             }
         }
     }

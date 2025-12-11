@@ -30,10 +30,10 @@ import com.mojang.brigadier.tree.CommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.command.permission.Permission;
-import net.minecraft.command.permission.PermissionLevel;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.permissions.Permission;
+import net.minecraft.server.permissions.PermissionLevel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,35 +51,35 @@ public final class CommandHelper {
     @SuppressWarnings("unchecked")
     public static void updateAllCommandPermissions(MinecraftServer server) {
         if (!Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false")) {
-            CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
-            CommandManager serverCommandManager = server.getCommandManager();
-            for (CommandNode<ServerCommandSource> node : dispatcher.getRoot().getChildren()) {
+            CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands().getDispatcher();
+            Commands serverCommandManager = server.getCommands();
+            for (CommandNode<CommandSourceStack> node : dispatcher.getRoot().getChildren()) {
                 if (node instanceof LiteralCommandNode) {
                     String commandName = ((LiteralCommandNode<?>) node).getLiteral();
-                    Predicate<ServerCommandSource> defaultRequirement = CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.get(commandName);
+                    Predicate<CommandSourceStack> defaultRequirement = CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.get(commandName);
                     if (CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(commandName)) {
                         int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(commandName);
-                        ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(source -> hasPermissionLevel(source, level));
+                        ((CommandNodeInvoker<CommandSourceStack>) node).setRequirement(source -> hasPermissionLevel(source, level));
                     } else if (defaultRequirement != null) {
-                        ((CommandNodeInvoker<ServerCommandSource>) node).setRequirement(defaultRequirement);
+                        ((CommandNodeInvoker<CommandSourceStack>) node).setRequirement(defaultRequirement);
                     }
                 }
             }
-            server.getPlayerManager().getPlayerList().forEach(serverCommandManager::sendCommandTree);
+            server.getPlayerList().getPlayers().forEach(serverCommandManager::sendCommands);
             Messenger.sendServerMessage(server, Messenger.s("§o§7Server: " + translator.tr("refresh_cmd_tree").getString()));
         }
     }
 
     @SuppressWarnings("unchecked")
     public static void setPermission(MinecraftServer server, String command, int permissionLevel) {
-        CommandDispatcher<ServerCommandSource> dispatcher = server.getCommandManager().getDispatcher();
-        CommandNode<ServerCommandSource> target = dispatcher.getRoot().getChild(command);
+        CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands().getDispatcher();
+        CommandNode<CommandSourceStack> target = dispatcher.getRoot().getChild(command);
         if (target != null) {
-            ((CommandNodeInvoker<ServerCommandSource>) target).setRequirement(source -> hasPermissionLevel(source, permissionLevel));
+            ((CommandNodeInvoker<CommandSourceStack>) target).setRequirement(source -> hasPermissionLevel(source, permissionLevel));
         }
     }
 
-    public static boolean canUseCommand(ServerCommandSource source, Object commandLevel) {
+    public static boolean canUseCommand(CommandSourceStack source, Object commandLevel) {
         if (commandLevel instanceof Boolean) {
             return (Boolean) commandLevel;
         }
@@ -104,13 +104,13 @@ public final class CommandHelper {
         return false;
     }
 
-    public static boolean hasPermissionLevel(ServerCommandSource source, int level) {
-        Permission.Level requiredPermission = new Permission.Level(PermissionLevel.fromLevel(level));
+    public static boolean hasPermissionLevel(CommandSourceStack source, int level) {
+        Permission.HasCommandLevel requiredPermission = new Permission.HasCommandLevel(PermissionLevel.byId(level));
 
         if (level > 4) {
             return false;
         }
 
-        return source.getPermissions().hasPermission(requiredPermission);
+        return source.permissions().hasPermission(requiredPermission);
     }
 }

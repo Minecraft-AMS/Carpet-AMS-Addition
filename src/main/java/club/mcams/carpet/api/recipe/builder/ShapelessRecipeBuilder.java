@@ -23,7 +23,7 @@ package club.mcams.carpet.api.recipe.builder;
 import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
 import club.mcams.carpet.utils.ChainableList;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;

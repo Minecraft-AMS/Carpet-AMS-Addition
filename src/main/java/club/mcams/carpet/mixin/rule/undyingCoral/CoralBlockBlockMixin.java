@@ -24,14 +24,14 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.CoralBlockBlock;
+import net.minecraft.world.level.block.CoralBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(CoralBlockBlock.class)
+@Mixin(CoralBlock.class)
 public abstract class CoralBlockBlockMixin {
-    @ModifyReturnValue(method = "isInWater", at = @At("RETURN"))
+    @ModifyReturnValue(method = "scanForWater", at = @At("RETURN"))
     private boolean isInWater(boolean original) {
         return AmsServerSettings.undyingCoral || original;
     }

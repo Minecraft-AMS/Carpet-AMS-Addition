@@ -20,19 +20,19 @@
 
 package club.mcams.carpet.mixin.rule.stackableDiscount;
 
-import net.minecraft.village.VillagerGossipType;
+import net.minecraft.world.entity.ai.gossip.GossipType;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(VillagerGossipType.class)
+@Mixin(GossipType.class)
 public interface VillageGossipTypeAccessor{
-    @Accessor("maxValue")
+    @Accessor("max")
     @Mutable
-    void setMaxValue(int maxValue);
+    void setMax(int maxValue);
 
-    @Accessor("shareDecrement")
+    @Accessor("decayPerTransfer")
     @Mutable
-    void setShareDecrement(int shareDecrement);
+    void setDecayPerTransfer(int shareDecrement);
 }

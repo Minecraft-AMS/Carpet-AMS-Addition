@@ -31,14 +31,14 @@ import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientP
 import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
 import club.mcams.carpet.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
 
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.Map;
 import java.util.function.Function;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class AMS_PayloadManager {
-    protected static final Map<String, Function<PacketByteBuf, AMS_CustomPayload>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
+    protected static final Map<String, Function<FriendlyByteBuf, AMS_CustomPayload>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
     private static final PayloadHandlerChain C2S_HANDLER_CHAIN = PayloadHandlerChainCreator.createC2SHandlerChain();
     private static final PayloadHandlerChain S2C_HANDLER_CHAIN = PayloadHandlerChainCreator.createS2CHandlerChain();
 
@@ -109,7 +109,7 @@ public class AMS_PayloadManager {
         RequestClientModVersionPayload_S2C.register();
     }
 
-    public static void register(String packetId, Function<PacketByteBuf, AMS_CustomPayload> constructor) {
+    public static void register(String packetId, Function<FriendlyByteBuf, AMS_CustomPayload> constructor) {
         PAYLOAD_REGISTRY.put(packetId, constructor);
     }
 

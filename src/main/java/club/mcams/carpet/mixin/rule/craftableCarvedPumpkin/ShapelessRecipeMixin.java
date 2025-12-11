@@ -23,18 +23,18 @@ package club.mcams.carpet.mixin.rule.craftableCarvedPumpkin;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.CraftingRecipe;
-import net.minecraft.recipe.ShapelessRecipe;
-import net.minecraft.recipe.input.CraftingRecipeInput;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Holder;
+import net.minecraft.core.NonNullList;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -44,11 +44,11 @@ import java.util.Random;
 @Mixin(ShapelessRecipe.class)
 public abstract class ShapelessRecipeMixin implements CraftingRecipe {
     @Override
-    public DefaultedList<ItemStack> getRecipeRemainders(CraftingRecipeInput input) {
-        DefaultedList<ItemStack> remainders = CraftingRecipe.super.getRecipeRemainders(input);
+    public NonNullList<ItemStack> getRemainingItems(CraftingInput input) {
+        NonNullList<ItemStack> remainders = CraftingRecipe.super.getRemainingItems(input);
         if (AmsServerSettings.craftableCarvedPumpkin) {
             ShapelessRecipe recipe = (ShapelessRecipe) (Object) this;
-            ItemStack result = recipe.craft(input, MinecraftServerUtil.getServer().getRegistryManager());
+            ItemStack result = recipe.assemble(input, MinecraftServerUtil.getServer().registryAccess());
             if (result.getItem().equals(Items.CARVED_PUMPKIN)) {
                 return this.handleRemainders(input, remainders);
             }
@@ -57,15 +57,15 @@ public abstract class ShapelessRecipeMixin implements CraftingRecipe {
     }
 
     @Unique
-    private DefaultedList<ItemStack> handleRemainders(CraftingRecipeInput input, DefaultedList<ItemStack> originalRemainders) {
-        DefaultedList<ItemStack> newRemainders = DefaultedList.ofSize(originalRemainders.size(), ItemStack.EMPTY);
+    private NonNullList<ItemStack> handleRemainders(CraftingInput input, NonNullList<ItemStack> originalRemainders) {
+        NonNullList<ItemStack> newRemainders = NonNullList.withSize(originalRemainders.size(), ItemStack.EMPTY);
 
         for (int i = 0; i < originalRemainders.size(); i++) {
             newRemainders.set(i, originalRemainders.get(i).copy());
         }
 
         for (int i = 0; i < input.size(); i++) {
-            ItemStack stack = input.getStackInSlot(i);
+            ItemStack stack = input.getItem(i);
             if (stack.getItem().equals(Items.SHEARS)) {
                 ItemStack shearsResult = this.processDurability(stack);
                 if (!shearsResult.isEmpty()) {
@@ -83,9 +83,9 @@ public abstract class ShapelessRecipeMixin implements CraftingRecipe {
         ItemStack resultShears = shears.copy();
         resultShears.setCount(1);
 
-        RegistryWrapper.WrapperLookup lookup = MinecraftServerUtil.getServer().getRegistryManager();
-        RegistryEntry<Enchantment> unbreakingEntry = lookup.getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.UNBREAKING);
-        int unbreakingLevel = EnchantmentHelper.getLevel(unbreakingEntry, shears);
+        HolderLookup.Provider lookup = MinecraftServerUtil.getServer().registryAccess();
+        Holder<Enchantment> unbreakingEntry = lookup.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.UNBREAKING);
+        int unbreakingLevel = EnchantmentHelper.getItemEnchantmentLevel(unbreakingEntry, shears);
 
         Random random = new Random();
         boolean shouldDamage = true;
@@ -98,8 +98,8 @@ public abstract class ShapelessRecipeMixin implements CraftingRecipe {
         }
 
         if (shouldDamage) {
-            int newDamage = resultShears.getDamage() + 1;
-            resultShears.setDamage(newDamage);
+            int newDamage = resultShears.getDamageValue() + 1;
+            resultShears.setDamageValue(newDamage);
             if (newDamage >= resultShears.getMaxDamage()) {
                 return ItemStack.EMPTY;
             }

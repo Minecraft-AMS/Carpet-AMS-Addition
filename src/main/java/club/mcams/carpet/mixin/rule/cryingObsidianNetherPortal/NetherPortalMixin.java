@@ -24,9 +24,9 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.world.dimension.NetherPortal;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.portal.PortalShape;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.19")
-@Mixin(NetherPortal.class)
+@Mixin(PortalShape.class)
 public abstract class NetherPortalMixin {
     @ModifyReturnValue(method = "method_30487", at = @At("RETURN"))
     private static boolean acceptCryingObsidianCreateNetherPortal(boolean original, BlockState state) {

@@ -25,12 +25,12 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class SetSuggestionProvider<E> implements SuggestionProvider<ServerCommandSource> {
+public class SetSuggestionProvider<E> implements SuggestionProvider<CommandSourceStack> {
     private final Set<E> options;
 
     public SetSuggestionProvider(Set<E> options) {
@@ -42,7 +42,7 @@ public class SetSuggestionProvider<E> implements SuggestionProvider<ServerComman
     }
 
     @Override
-    public CompletableFuture<Suggestions> getSuggestions(CommandContext<ServerCommandSource> context, SuggestionsBuilder builder) {
+    public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder) {
         options.forEach(option -> builder.suggest(option.toString()));
         return builder.buildFuture();
     }

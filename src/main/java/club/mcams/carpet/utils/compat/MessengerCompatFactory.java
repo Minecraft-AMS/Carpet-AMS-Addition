@@ -20,35 +20,36 @@
 
 package club.mcams.carpet.utils.compat;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.*;
+import net.minecraft.commands.CommandSourceStack;
 
 public class MessengerCompatFactory {
-    public static MutableText CarpetCompoundText(Object... fields) {
-        return (MutableText) carpet.utils.Messenger.c(fields);
+    public static MutableComponent CarpetCompoundText(Object... fields) {
+        return (MutableComponent) carpet.utils.Messenger.c(fields);
     }
 
-    public static MutableText LiteralText(String text) {
-        return Text.literal(text);
+    public static MutableComponent LiteralText(String text) {
+        return Component.literal(text);
     }
 
-    public static void sendFeedBack(ServerCommandSource source, MutableText text, boolean broadcastToOps) {
-        source.sendFeedback(() -> text, broadcastToOps);
+    public static void sendFeedBack(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
+        source.sendSuccess(() -> text, broadcastToOps);
     }
 
     // Send system message to server
-    public static void sendSystemMessage(MinecraftServer server, Text text) {
-        server.sendMessage(text);
+    public static void sendSystemMessage(MinecraftServer server, Component text) {
+        server.sendSystemMessage(text);
     }
 
     // Send system message to player
-    public static void sendSystemMessage(PlayerEntity player, Text text) {
-        player.sendMessage(text, false);
+    public static void sendSystemMessage(Player player, Component text) {
+        player.displayClientMessage(text, false);
     }
 
-    public static MutableText TranslatableText(String key, Object... args) {
-        return Text.translatable(key, args);
+    public static MutableComponent TranslatableText(String key, Object... args) {
+        return Component.translatable(key, args);
     }
 }

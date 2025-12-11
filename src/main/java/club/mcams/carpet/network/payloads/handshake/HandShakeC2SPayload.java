@@ -27,8 +27,8 @@ import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.UUID;
 
@@ -43,22 +43,22 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
         this.playerUuid = playerUuid;
     }
 
-    private HandShakeC2SPayload(PacketByteBuf buf) {
+    private HandShakeC2SPayload(FriendlyByteBuf buf) {
         super(ID);
-        this.modVersion = buf.readString();
-        this.playerUuid = buf.readUuid();
+        this.modVersion = buf.readUtf();
+        this.playerUuid = buf.readUUID();
     }
 
     @Override
-    protected void writeData(PacketByteBuf buf) {
-        buf.writeString(this.modVersion);
-        buf.writeUuid(this.playerUuid);
+    protected void writeData(FriendlyByteBuf buf) {
+        buf.writeUtf(this.modVersion);
+        buf.writeUUID(this.playerUuid);
     }
 
     @Override
     public void handle() {
         NetworkUtil.executeOnServerThread(() -> {
-            ServerPlayerEntity player = PlayerUtil.getServerPlayerEntity(this.playerUuid);
+            ServerPlayer player = PlayerUtil.getServerPlayerEntity(this.playerUuid);
             String playerName = player != null ? PlayerUtil.getName(player) : "Unknown Player";
 
             if (this.modVersion.equals(AmsServerMod.getVersion())) {

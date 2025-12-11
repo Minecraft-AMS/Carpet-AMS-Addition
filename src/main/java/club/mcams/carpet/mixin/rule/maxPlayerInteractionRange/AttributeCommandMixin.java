@@ -27,12 +27,12 @@ import club.mcams.carpet.utils.Messenger;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.command.AttributeCommand;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.util.Formatting;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.commands.AttributeCommand;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.ChatFormatting;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -51,20 +51,20 @@ public abstract class AttributeCommandMixin {
     private static final String MSG_HEAD = "<Carpet AMS Addition> ";
 
     @WrapOperation(
-        method = "executeBaseValueSet",
+        method = "setAttributeBase",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/attribute/EntityAttributeInstance;setBaseValue(D)V"
+            target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;setBaseValue(D)V"
         )
     )
-    private static void disableBlockInteractionRangeSet(EntityAttributeInstance instance, double baseValue, Operation<Void> original, ServerCommandSource source) {
-        if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D && instance.getAttribute().equals(EntityAttributes.BLOCK_INTERACTION_RANGE)) {
-            PlayerEntity player = source.getPlayer();
+    private static void disableBlockInteractionRangeSet(AttributeInstance instance, double baseValue, Operation<Void> original, CommandSourceStack source) {
+        if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.BLOCK_INTERACTION_RANGE)) {
+            Player player = source.getPlayer();
             if (player != null) {
-                player.sendMessage(
+                player.displayClientMessage(
                     Messenger.s(
                         MSG_HEAD + translator.tr("maxPlayerBlockInteractionRange.disable_command").getString()
-                    ).formatted(Formatting.RED), false
+                    ).withStyle(ChatFormatting.RED), false
                 );
             }
         } else {
@@ -73,20 +73,20 @@ public abstract class AttributeCommandMixin {
     }
 
     @WrapOperation(
-        method = "executeBaseValueSet",
+        method = "setAttributeBase",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/attribute/EntityAttributeInstance;setBaseValue(D)V"
+            target = "Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;setBaseValue(D)V"
         )
     )
-    private static void disableEntityInteractionRangeSet(EntityAttributeInstance instance, double baseValue, Operation<Void> original, ServerCommandSource source) {
-        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && instance.getAttribute().equals(EntityAttributes.ENTITY_INTERACTION_RANGE)) {
-            PlayerEntity player = source.getPlayer();
+    private static void disableEntityInteractionRangeSet(AttributeInstance instance, double baseValue, Operation<Void> original, CommandSourceStack source) {
+        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.ENTITY_INTERACTION_RANGE)) {
+            Player player = source.getPlayer();
             if (player != null) {
-                player.sendMessage(
+                player.displayClientMessage(
                     Messenger.s(
                         MSG_HEAD + translator.tr("maxPlayerEntityInteractionRange.disable_command").getString()
-                    ).formatted(Formatting.RED), false
+                    ).withStyle(ChatFormatting.RED), false
                 );
             }
         } else {

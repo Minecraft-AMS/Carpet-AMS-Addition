@@ -28,36 +28,36 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
-import net.minecraft.command.CommandSource;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
 
 public class GetPlayerSkullCommandRegistry {
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            CommandManager.literal("getPlayerSkull")
+            Commands.literal("getPlayerSkull")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetPlayerSkull))
-            .then(CommandManager.argument("player", StringArgumentType.string())
+            .then(Commands.argument("player", StringArgumentType.string())
             .suggests(
                 (context, builder) ->
-                CommandSource.suggestMatching(context.getSource().getServer().getPlayerNames(), builder)
+                SharedSuggestionProvider.suggest(context.getSource().getServer().getPlayerNames(), builder)
             )
-            .then(CommandManager.argument("count", IntegerArgumentType.integer(1, 64))
+            .then(Commands.argument("count", IntegerArgumentType.integer(1, 64))
             .executes(context -> execute(
-                context.getSource().getPlayerOrThrow(),
+                context.getSource().getPlayerOrException(),
                 StringArgumentType.getString(context, "player"),
                 IntegerArgumentType.getInteger(context, "count")
             ))))
         );
     }
 
-    private static int execute(PlayerEntity player, String name, int count) {
+    private static int execute(Player player, String name, int count) {
         ItemStack headStack = new ItemStack(Items.PLAYER_HEAD, count);
         SkullSkinHelper.writeNbtToPlayerSkull(name, headStack);
-        player.giveItemStack(headStack);
+        player.addItem(headStack);
         return 1;
     }
 }

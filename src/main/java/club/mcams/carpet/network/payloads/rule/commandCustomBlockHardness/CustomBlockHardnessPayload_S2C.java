@@ -25,9 +25,9 @@ import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,9 +36,9 @@ public class CustomBlockHardnessPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId();
     private final Map<BlockState, Float> hardnessMap;
 
-    private CustomBlockHardnessPayload_S2C(PacketByteBuf buf) {
+    private CustomBlockHardnessPayload_S2C(FriendlyByteBuf buf) {
         super(ID);
-        this.hardnessMap = PacketByteBufExtras.readMap(buf, b -> Block.STATE_IDS.get(b.readVarInt()), PacketByteBuf::readFloat);
+        this.hardnessMap = PacketByteBufExtras.readMap(buf, b -> Block.BLOCK_STATE_REGISTRY.byId(b.readVarInt()), FriendlyByteBuf::readFloat);
     }
 
     private CustomBlockHardnessPayload_S2C(Map<BlockState, Float> hardnessMap) {
@@ -47,8 +47,8 @@ public class CustomBlockHardnessPayload_S2C extends AMS_CustomPayload {
     }
 
     @Override
-    protected void writeData(PacketByteBuf buf) {
-        PacketByteBufExtras.writeMap(buf, this.hardnessMap, (b, state) -> b.writeVarInt(Block.getRawIdFromState(state)), PacketByteBuf::writeFloat);
+    protected void writeData(FriendlyByteBuf buf) {
+        PacketByteBufExtras.writeMap(buf, this.hardnessMap, (b, state) -> b.writeVarInt(Block.getId(state)), FriendlyByteBuf::writeFloat);
     }
 
     @Override

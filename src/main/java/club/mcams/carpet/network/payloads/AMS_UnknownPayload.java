@@ -24,7 +24,7 @@ import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.utils.Noop;
 
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 
 import org.apache.logging.log4j.LogManager;
 
@@ -35,12 +35,12 @@ public class AMS_UnknownPayload extends AMS_CustomPayload {
         super(ID);
     }
 
-    private AMS_UnknownPayload(PacketByteBuf buf) {
+    private AMS_UnknownPayload(FriendlyByteBuf buf) {
         super(ID);
     }
 
     @Override
-    protected void writeData(PacketByteBuf buf) {
+    protected void writeData(FriendlyByteBuf buf) {
         Noop.noop();
     }
 

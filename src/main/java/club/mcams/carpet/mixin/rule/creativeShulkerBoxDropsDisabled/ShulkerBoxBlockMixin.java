@@ -22,11 +22,11 @@ package club.mcams.carpet.mixin.rule.creativeShulkerBoxDropsDisabled;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShulkerBoxBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.ShulkerBoxBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,14 +35,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ShulkerBoxBlock.class)
 public abstract class ShulkerBoxBlockMixin {
-    @Inject(method = "onBreak", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "playerWillDestroy", at = @At("HEAD"), cancellable = true)
     private void onBreak(
-        World world, BlockPos pos, BlockState state, PlayerEntity player,
-        CallbackInfoReturnable<BlockState> cir
+            Level world, BlockPos pos, BlockState state, Player player,
+            CallbackInfoReturnable<BlockState> cir
 
     ) {
         if (AmsServerSettings.creativeShulkerBoxDropsDisabled && player.isCreative()) {
-            world.breakBlock(pos, false);
+            world.destroyBlock(pos, false);
             cir.cancel();
         }
     }

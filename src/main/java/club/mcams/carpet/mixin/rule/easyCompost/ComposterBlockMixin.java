@@ -24,14 +24,14 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.block.ComposterBlock;
+import net.minecraft.world.level.block.ComposterBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ComposterBlock.class)
 public abstract class ComposterBlockMixin {
-    @ModifyExpressionValue(method = "addToComposter", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/random/Random;nextDouble()D"))
+    @ModifyExpressionValue(method = "addItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextDouble()D"))
     private static double easyCompost(double original) {
         return AmsServerSettings.easyCompost ? -114514.114514D : original;
     }

@@ -28,54 +28,54 @@ import java.util.Set;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.command.argument.BlockPosArgumentType;
-import net.minecraft.command.argument.DimensionArgumentType;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
+import net.minecraft.commands.arguments.DimensionArgument;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
 
 public class GotoCommandRegistry {
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-        CommandManager.literal("goto")
+        Commands.literal("goto")
         .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGoto))
-        .then(CommandManager.argument("dimension", DimensionArgumentType.dimension())
+        .then(Commands.argument("dimension", DimensionArgument.dimension())
         .executes(
             context -> executeSimpleTeleport(
-            context.getSource().getPlayerOrThrow(), DimensionArgumentType.getDimensionArgument(context, "dimension")
+            context.getSource().getPlayerOrException(), DimensionArgument.getDimension(context, "dimension")
         ))
-        .then(CommandManager.argument("destination", BlockPosArgumentType.blockPos())
+        .then(Commands.argument("destination", BlockPosArgument.blockPos())
         .executes(
             context -> executeTeleport(
-            context.getSource().getPlayerOrThrow(),
-            DimensionArgumentType.getDimensionArgument(context, "dimension"),
-            BlockPosArgumentType.getValidBlockPos(context, "destination")
+            context.getSource().getPlayerOrException(),
+            DimensionArgument.getDimension(context, "dimension"),
+            BlockPosArgument.getSpawnablePos(context, "destination")
         )))));
     }
 
-    private static int executeTeleport(ServerPlayerEntity player, ServerWorld targetDimension, BlockPos destinationPos) {
+    private static int executeTeleport(ServerPlayer player, ServerLevel targetDimension, BlockPos destinationPos) {
         int x = destinationPos.getX();
         int y = destinationPos.getY();
         int z = destinationPos.getZ();
-        player.teleport(targetDimension, x, y, z, Set.of(), player.getPitch(1), 1, false);
+        player.teleportTo(targetDimension, x, y, z, Set.of(), player.getViewXRot(1), 1, false);
         return 1;
     }
 
-    private static int executeSimpleTeleport(ServerPlayerEntity player, ServerWorld targetWorld) {
-        DimensionWrapper currentDimension = DimensionWrapper.of(player.getEntityWorld());
+    private static int executeSimpleTeleport(ServerPlayer player, ServerLevel targetWorld) {
+        DimensionWrapper currentDimension = DimensionWrapper.of(player.level());
         DimensionWrapper targetDimension = DimensionWrapper.of(targetWorld);
         return executeTeleport(player, targetWorld, calculatePos(player, currentDimension, targetDimension));
     }
 
-    private static BlockPos calculatePos(ServerPlayerEntity player, DimensionWrapper currentDimension, DimensionWrapper targetDimension) {
-        if (currentDimension.getValue().equals(ServerWorld.OVERWORLD) && targetDimension.getValue().equals(ServerWorld.NETHER)) {
+    private static BlockPos calculatePos(ServerPlayer player, DimensionWrapper currentDimension, DimensionWrapper targetDimension) {
+        if (currentDimension.getValue().equals(ServerLevel.OVERWORLD) && targetDimension.getValue().equals(ServerLevel.NETHER)) {
             return createCompatPos(player.getX() / 8, player.getY(), player.getZ() / 8);
-        } else if (currentDimension.getValue().equals(ServerWorld.NETHER) && targetDimension.getValue().equals(ServerWorld.OVERWORLD)) {
+        } else if (currentDimension.getValue().equals(ServerLevel.NETHER) && targetDimension.getValue().equals(ServerLevel.OVERWORLD)) {
             return createCompatPos(player.getX() * 8, player.getY(), player.getZ() * 8);
         } else {
-            return player.getBlockPos();
+            return player.blockPosition();
         }
     }
 

@@ -25,8 +25,8 @@ import carpet.api.settings.CarpetRule;
 import club.mcams.carpet.mixin.rule.stackableDiscount.VillageGossipTypeAccessor;
 import club.mcams.carpet.settings.SimpleRuleObserver;
 
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.village.VillagerGossipType;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.world.entity.ai.gossip.GossipType;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
@@ -34,15 +34,15 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @SuppressWarnings({"unused", "DataFlowIssue"})
 public class StackableDiscountRuleObserver extends SimpleRuleObserver<Boolean> {
     @Override
-    public void onValueChange(ServerCommandSource source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
+    public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue) {
-            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MINOR_POSITIVE).setMaxValue(200);
-            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MAJOR_POSITIVE).setMaxValue(100);
-            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MAJOR_POSITIVE).setShareDecrement(100);
+            ((VillageGossipTypeAccessor) (Object) GossipType.MINOR_POSITIVE).setMax(200);
+            ((VillageGossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setMax(100);
+            ((VillageGossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setDecayPerTransfer(100);
         } else {
-            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MINOR_POSITIVE).setMaxValue(25);
-            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MAJOR_POSITIVE).setMaxValue(20);
-            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MAJOR_POSITIVE).setShareDecrement(20);
+            ((VillageGossipTypeAccessor) (Object) GossipType.MINOR_POSITIVE).setMax(25);
+            ((VillageGossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setMax(20);
+            ((VillageGossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setDecayPerTransfer(20);
         }
     }
 }

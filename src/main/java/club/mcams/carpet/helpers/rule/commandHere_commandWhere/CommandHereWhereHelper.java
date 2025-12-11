@@ -20,18 +20,18 @@
 
 package club.mcams.carpet.helpers.rule.commandHere_commandWhere;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.commands.CommandSourceStack;
 
 public class CommandHereWhereHelper {
-    public static int[] getPos(ServerCommandSource source) {
-        int x = (int) source.getPosition().getX();
-        int y = (int) source.getPosition().getY();
-        int z = (int) source.getPosition().getZ();
+    public static int[] getPos(CommandSourceStack source) {
+        int x = (int) source.getPosition().x();
+        int y = (int) source.getPosition().y();
+        int z = (int) source.getPosition().z();
         return new int[]{x, y, z};
     }
 
-    public static int[] getPos(PlayerEntity player) {
+    public static int[] getPos(Player player) {
         int x = (int) player.getX();
         int y = (int) player.getY();
         int z = (int) player.getZ();

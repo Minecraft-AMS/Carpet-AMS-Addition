@@ -32,23 +32,21 @@ import club.mcams.carpet.utils.RegexTools;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.BlockStateArgumentType;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.commands.arguments.blocks.BlockStateArgument;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
-//#if MC>=11900
-import net.minecraft.command.CommandRegistryAccess;
-//#endif
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.util.Formatting;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.ChatFormatting;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
 
-import static net.minecraft.server.command.CommandManager.argument;
-import static net.minecraft.server.command.CommandManager.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
 
 public class CustomBlockHardnessCommandRegistry {
     private final static Translator translator = new Translator("command.customBlockHardness");
@@ -56,55 +54,55 @@ public class CustomBlockHardnessCommandRegistry {
     public static final Map<Block, Float> DEFAULT_HARDNESS_MAP = new ConcurrentHashMap<>();
     private static final String MESSAGE_HEAD = "<customBlockHardness> ";
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
         dispatcher.register(
-            CommandManager.literal("customBlockHardness")
+            Commands.literal("customBlockHardness")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomBlockHardness))
             .then(literal("set")
-            .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
             .then(argument("hardness", FloatArgumentType.floatArg())
             .executes(context -> set(
-                BlockStateArgumentType.getBlockState(context, "block").getBlockState(),
+                BlockStateArgument.getBlock(context, "block").getState(),
                 FloatArgumentType.getFloat(context, "hardness"),
                 context.getSource().getServer(),
-                context.getSource().getPlayerOrThrow()
+                context.getSource().getPlayerOrException()
             )))))
             .then(literal("remove")
-            .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
             .executes(context -> remove(
-                BlockStateArgumentType.getBlockState(context, "block").getBlockState(),
+                BlockStateArgument.getBlock(context, "block").getState(),
                 context.getSource().getServer(),
-                context.getSource().getPlayerOrThrow()
+                context.getSource().getPlayerOrException()
             ))))
             .then(literal("removeAll").executes(
                 context -> removeAll(context.getSource().getServer(),
-                context.getSource().getPlayerOrThrow())
+                context.getSource().getPlayerOrException())
             ))
-            .then(literal("list").executes(context -> list(context.getSource().getPlayerOrThrow())))
-            .then(literal("help").executes(context -> help(context.getSource().getPlayerOrThrow())))
+            .then(literal("list").executes(context -> list(context.getSource().getPlayerOrException())))
+            .then(literal("help").executes(context -> help(context.getSource().getPlayerOrException())))
             .then(literal("getDefaultHardness")
-            .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
             .executes(context -> getDefaultHardness(
-                context.getSource().getPlayerOrThrow(),
-                BlockStateArgumentType.getBlockState(context, "block").getBlockState().getBlock()
+                context.getSource().getPlayerOrException(),
+                BlockStateArgument.getBlock(context, "block").getState().getBlock()
             ))))
         );
     }
 
-    private static int set(BlockState state, float hardness, MinecraftServer server, PlayerEntity player) {
+    private static int set(BlockState state, float hardness, MinecraftServer server, Player player) {
         if (CUSTOM_BLOCK_HARDNESS_MAP.containsKey(state)) {
             float oldHardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(
                     MESSAGE_HEAD + RegexTools.getBlockRegisterName(state) + "/" + oldHardness +
                     " -> " + RegexTools.getBlockRegisterName(state) + "/" + hardness
-                ).formatted(Formatting.GREEN), false
+                ).withStyle(ChatFormatting.GREEN), false
             );
         } else {
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(
                     MESSAGE_HEAD + "+ " + RegexTools.getBlockRegisterName(state) + "/" + hardness
-                ).formatted(Formatting.GREEN), false
+                ).withStyle(ChatFormatting.GREEN), false
             );
         }
         CUSTOM_BLOCK_HARDNESS_MAP.put(state, hardness);
@@ -113,81 +111,81 @@ public class CustomBlockHardnessCommandRegistry {
         return 1;
     }
 
-    private static int remove(BlockState state, MinecraftServer server, PlayerEntity player) {
+    private static int remove(BlockState state, MinecraftServer server, Player player) {
         if (CUSTOM_BLOCK_HARDNESS_MAP.containsKey(state)) {
             float hardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
             CUSTOM_BLOCK_HARDNESS_MAP.remove(state);
             saveToJson();
             broadcastDataPack(server);
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(
                     MESSAGE_HEAD + "- " + RegexTools.getBlockRegisterName(state) + "/" + hardness
-                ).formatted(Formatting.RED), false
+                ).withStyle(ChatFormatting.RED), false
             );
             return 1;
         } else {
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(
                     MESSAGE_HEAD + RegexTools.getBlockRegisterName(state) + translator.tr("not_found").getString()
-                ).formatted(Formatting.RED), false
+                ).withStyle(ChatFormatting.RED), false
             );
             return 0;
         }
     }
 
-    private static int removeAll(MinecraftServer server, PlayerEntity player) {
+    private static int removeAll(MinecraftServer server, Player player) {
         CUSTOM_BLOCK_HARDNESS_MAP.clear();
         saveToJson();
         broadcastDataPack(server);
-        player.sendMessage(
+        player.displayClientMessage(
             Messenger.s(
                 MESSAGE_HEAD + translator.tr("removeAll").getString()
-            ).formatted(Formatting.RED), false
+            ).withStyle(ChatFormatting.RED), false
         );
         return 1;
     }
 
-    private static int getDefaultHardness(PlayerEntity player, Block block) {
+    private static int getDefaultHardness(Player player, Block block) {
         float hardness = CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.get(block);
-        String blockName = RegexTools.getBlockRegisterName(block.getDefaultState());
-        player.sendMessage(
+        String blockName = RegexTools.getBlockRegisterName(block.defaultBlockState());
+        player.displayClientMessage(
             Messenger.s(
                 String.format("%s%s %s %s", MESSAGE_HEAD, blockName, translator.tr("default_hardness").getString(), hardness)
-            ).formatted(Formatting.GREEN), false
+            ).withStyle(ChatFormatting.GREEN), false
         );
         return 1;
     }
 
-    private static int list(PlayerEntity player) {
-        player.sendMessage(
+    private static int list(Player player) {
+        player.displayClientMessage(
             Messenger.s(
                 translator.tr("list").getString() + "\n-------------------------------"
-            ).formatted(Formatting.GREEN), false
+            ).withStyle(ChatFormatting.GREEN), false
         );
         for (Map.Entry<BlockState, Float> entry : CUSTOM_BLOCK_HARDNESS_MAP.entrySet()) {
             BlockState state = entry.getKey();
             float hardness = entry.getValue();
             Block block = state.getBlock();
             String blockName = RegexTools.getBlockRegisterName(block.toString());
-            player.sendMessage(Messenger.s(blockName + "/" + hardness).formatted(Formatting.GREEN), false);
+            player.displayClientMessage(Messenger.s(blockName + "/" + hardness).withStyle(ChatFormatting.GREEN), false);
         }
         return 1;
     }
 
-    private static int help(PlayerEntity player) {
+    private static int help(Player player) {
         final String setHelpText = translator.tr("help.set").getString();
         final String removeHelpText = translator.tr("help.remove").getString();
         final String removeAllHelpText = translator.tr("help.removeAll").getString();
         final String listHelpText = translator.tr("help.list").getString();
         final String getDefaultHardnessHelpText = translator.tr("help.get_default_hardness").getString();
-        player.sendMessage(
+        player.displayClientMessage(
             Messenger.s(
                 setHelpText + "\n" +
                 removeHelpText + "\n" +
                 removeAllHelpText + "\n" +
                 getDefaultHardnessHelpText + "\n" +
                 listHelpText
-            ).formatted(Formatting.GRAY), false
+            ).withStyle(ChatFormatting.GRAY), false
         );
         return 1;
     }

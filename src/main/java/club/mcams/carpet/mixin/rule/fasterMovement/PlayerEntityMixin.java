@@ -23,11 +23,11 @@ package club.mcams.carpet.mixin.rule.fasterMovement;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.EntityUtil;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,24 +36,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
-    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+    protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
     }
 
-    @Inject(method = "getMovementSpeed", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getSpeed", at = @At("HEAD"), cancellable = true)
     private void getMovementSpeed(CallbackInfoReturnable<Float> cir) {
         if (!Objects.equals(AmsServerSettings.fasterMovement, "VANILLA")) {
-            PlayerEntity player = (PlayerEntity)(Object)this;
-            World world = EntityUtil.getEntityWorld(player);
+            Player player = (Player)(Object)this;
+            Level world = EntityUtil.getEntityWorld(player);
             if (
-                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.END && world.getRegistryKey() == World.END) ||
-                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.NETHER && world.getRegistryKey() == World.NETHER) ||
-                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.OVERWORLD  && world.getRegistryKey() == World.OVERWORLD) ||
+                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.END && world.dimension() == Level.END) ||
+                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.NETHER && world.dimension() == Level.NETHER) ||
+                (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.OVERWORLD  && world.dimension() == Level.OVERWORLD) ||
                 (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.ALL)
             ) {
-                float speed = (float)this.getAttributeValue(EntityAttributes.MOVEMENT_SPEED);
+                float speed = (float)this.getAttributeValue(Attributes.MOVEMENT_SPEED);
                 speed = switch (AmsServerSettings.fasterMovement) {
                     case "Ⅰ" -> 0.2F;
                     case "Ⅱ" -> 0.3F;

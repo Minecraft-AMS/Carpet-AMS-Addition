@@ -25,39 +25,39 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.decoration.ArmorStandEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.vehicle.BoatEntity;
-import net.minecraft.entity.vehicle.MinecartEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.boat.Boat;
+import net.minecraft.world.entity.vehicle.minecart.Minecart;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.phys.Vec3;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("PatternVariableCanBeUsed")
-@Mixin(targets = "carpet.helpers.EntityPlayerActionPack$ActionType$1")
+@Mixin(targets = "carpet/helpers/EntityPlayerActionPack$ActionType$USE")
 public abstract class EntityPlayerActionPackActionTypeMixin {
     @WrapOperation(
-        method = "execute(Lnet/minecraft/server/network/ServerPlayerEntity;Lcarpet/helpers/EntityPlayerActionPack$Action;)Z",
+        method = "execute(Lnet/minecraft/server/level/ServerPlayer;Lcarpet/helpers/EntityPlayerActionPack$Action;)Z",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/Entity;interactAt(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;"
+            target = "Lnet/minecraft/world/entity/Entity;interactAt(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
         )
     )
-    private ActionResult onInteractAt(Entity instance, PlayerEntity player, Vec3d hitPos, Hand hand, Operation<ActionResult> original) {
-        ActionResult originalResult = original.call(instance, player, hitPos, hand);
+    private InteractionResult onInteractAt(Entity instance, Player player, Vec3 hitPos, InteractionHand hand, Operation<InteractionResult> original) {
+        InteractionResult originalResult = original.call(instance, player, hitPos, hand);
         if (AmsServerSettings.fakePlayerInteractLikeClient) {
-            if (instance instanceof ArmorStandEntity) {
-                ArmorStandEntity stand = (ArmorStandEntity) instance;
-                ItemStack handItem = player.getStackInHand(hand);
+            if (instance instanceof ArmorStand) {
+                ArmorStand stand = (ArmorStand) instance;
+                ItemStack handItem = player.getItemInHand(hand);
                 if (!stand.isMarker() && handItem.getItem() != Items.NAME_TAG && !player.isSpectator()) {
-                    return ActionResult.PASS;
+                    return InteractionResult.PASS;
                 }
             }
         }
@@ -65,24 +65,24 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
     }
 
     @WrapOperation(
-        method = "execute(Lnet/minecraft/server/network/ServerPlayerEntity;Lcarpet/helpers/EntityPlayerActionPack$Action;)Z",
+        method = "execute(Lnet/minecraft/server/level/ServerPlayer;Lcarpet/helpers/EntityPlayerActionPack$Action;)Z",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/network/ServerPlayerEntity;interact(Lnet/minecraft/entity/Entity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;"
+            target = "Lnet/minecraft/server/level/ServerPlayer;interact(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
         )
     )
-    private ActionResult onInteract(ServerPlayerEntity player, Entity entity, Hand hand, Operation<ActionResult> original) {
-        ActionResult originalResult = original.call(player, entity, hand);
+    private InteractionResult onInteract(ServerPlayer player, Entity entity, InteractionHand hand, Operation<InteractionResult> original) {
+        InteractionResult originalResult = original.call(player, entity, hand);
         if (AmsServerSettings.fakePlayerInteractLikeClient) {
-            if (entity instanceof BoatEntity) {
-                BoatEntity boat = (BoatEntity) entity;
-                if (!player.shouldCancelInteraction() && ((BoatEntityInvoker) boat).getTicksUnderwater() < 60.0F) {
-                    return ActionResult.SUCCESS;
+            if (entity instanceof Boat) {
+                Boat boat = (Boat) entity;
+                if (!player.isSecondaryUseActive() && ((BoatEntityInvoker) boat).getOutOfControlTicks() < 60.0F) {
+                    return InteractionResult.SUCCESS;
                 }
-            } else if (entity instanceof MinecartEntity) {
-                MinecartEntity minecart = (MinecartEntity) entity;
-                if (!player.shouldCancelInteraction() && !minecart.hasPassengers()) {
-                    return ActionResult.SUCCESS;
+            } else if (entity instanceof Minecart) {
+                Minecart minecart = (Minecart) entity;
+                if (!player.isSecondaryUseActive() && !minecart.isVehicle()) {
+                    return InteractionResult.SUCCESS;
                 }
             }
         }

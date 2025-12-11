@@ -25,8 +25,8 @@ import club.mcams.carpet.helpers.rule.largeBundle.LargeBundleInventory;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.Slot;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,9 +38,9 @@ import java.util.Objects;
 @GameVersion(version = "Minecraft >= 1.17.1")
 @Mixin(Slot.class)
 public abstract class SlotMixin {
-    @ModifyReturnValue(method = "canInsert", at = @At("RETURN"))
+    @ModifyReturnValue(method = "mayPlace", at = @At("RETURN"))
     private boolean canInsert(boolean original, ItemStack stack) {
-        if (!Objects.equals(AmsServerSettings.largeBundle, "false") && ((SlotAccessor) this).getInventory() instanceof LargeBundleInventory) {
+        if (!Objects.equals(AmsServerSettings.largeBundle, "false") && ((SlotAccessor) this).getContainer() instanceof LargeBundleInventory) {
             return LargeBundleInventory.canInsert(stack);
         } else {
             return original;

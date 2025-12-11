@@ -24,31 +24,31 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.headHunter_commandGetPlayerSkull.SkullSkinHelper;
 import club.mcams.carpet.utils.EntityUtil;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.item.Items;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.Items;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public abstract class PlayerEntityMixin {
     @Inject(
-        method = "dropInventory",
+        method = "dropEquipment",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/player/PlayerInventory;dropAll()V"
+            target = "Lnet/minecraft/world/entity/player/Inventory;dropAll()V"
         )
     )
     private void dropPlayerSkull(CallbackInfo ci) {
         if (AmsServerSettings.headHunter) {
-            PlayerEntity player = (PlayerEntity) (Object) this;
+            Player player = (Player) (Object) this;
             ItemStack headStack = new ItemStack(Items.PLAYER_HEAD);
             SkullSkinHelper.writeNbtToPlayerSkull(player, headStack);
-            player.dropStack((ServerWorld) EntityUtil.getEntityWorld(player), headStack);
+            player.spawnAtLocation((ServerLevel) EntityUtil.getEntityWorld(player), headStack);
         }
     }
 }

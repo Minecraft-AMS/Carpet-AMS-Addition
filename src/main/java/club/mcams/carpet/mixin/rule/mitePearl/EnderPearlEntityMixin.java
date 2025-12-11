@@ -24,18 +24,18 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrownEnderpearl;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(EnderPearlEntity.class)
+@Mixin(ThrownEnderpearl.class)
 public abstract class EnderPearlEntityMixin {
     @ModifyExpressionValue(
-        method = "onCollision",
+        method = "onHit",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/util/math/random/Random;nextFloat()F"
+            target = "Lnet/minecraft/util/RandomSource;nextFloat()F"
         )
     )
     private float mitePearl(float original) {

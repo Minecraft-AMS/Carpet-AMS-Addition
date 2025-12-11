@@ -24,13 +24,17 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 import club.mcams.carpet.utils.WorldUtil;
 
-import net.minecraft.block.*;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.piston.PistonBaseBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,22 +43,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
-@Mixin(PistonBlock.class)
+@Mixin(PistonBaseBlock.class)
 public abstract class PistonBlockMixin {
-    @Inject(method = "onSyncedBlockEvent", at = @At("HEAD"))
-    private void onSyncedBlockEvent(BlockState state, World world, BlockPos pos, int type, int data, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "triggerEvent", at = @At("HEAD"))
+    private void onSyncedBlockEvent(BlockState state, Level level, BlockPos pos, int i, int j, CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.pistonBlockChunkLoader, "false")) {
-            handleChunkLoading(state, world, pos);
+            handleChunkLoading(state, level, pos);
         }
     }
 
     @Unique
-    private void handleChunkLoading(BlockState state, World world, BlockPos pos) {
+    private void handleChunkLoading(BlockState state, Level world, BlockPos pos) {
         if (!WorldUtil.isClient(world)) {
-            Direction direction = state.get(FacingBlock.FACING);
-            BlockState pistonBlockUp = world.getBlockState(pos.up(1));
-            BlockState pistonBlockDown = world.getBlockState(pos.down(1));
-            ChunkPos chunkPos = new ChunkPos(pos.offset(direction));
+            Direction direction = state.getValue(DirectionalBlock.FACING);
+            BlockState pistonBlockUp = world.getBlockState(pos.above(1));
+            BlockState pistonBlockDown = world.getBlockState(pos.below(1));
+            ChunkPos chunkPos = new ChunkPos(pos.relative(direction));
             if (optionIsBoneBlockOrAll()) {
                 loadChunkIfMatch(world, chunkPos, pistonBlockUp, Blocks.BONE_BLOCK);
             }
@@ -65,10 +69,10 @@ public abstract class PistonBlockMixin {
     }
 
     @Unique
-    private void loadChunkIfMatch(World world, ChunkPos chunkPos, BlockState blockState, Block... blocks) {
+    private void loadChunkIfMatch(Level world, ChunkPos chunkPos, BlockState blockState, Block... blocks) {
         for (Block block : blocks) {
             if (blockState.getBlock() == block) {
-                BlockChunkLoaderHelper.addPistonBlockTicket((ServerWorld) world, chunkPos);
+                BlockChunkLoaderHelper.addPistonBlockTicket((ServerLevel) world, chunkPos);
                 break;
             }
         }

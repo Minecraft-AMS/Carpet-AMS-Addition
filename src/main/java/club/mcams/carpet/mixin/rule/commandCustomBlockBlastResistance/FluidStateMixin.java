@@ -25,8 +25,8 @@ import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomB
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.fluid.FluidState;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,10 +35,10 @@ import java.util.Objects;
 
 @Mixin(FluidState.class)
 public abstract class FluidStateMixin implements FluidStateInvoker {
-    @ModifyReturnValue(method = "getBlastResistance", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getExplosionResistance", at = @At("RETURN"))
     private float getBlastResistance(float original) {
         if (!Objects.equals(AmsServerSettings.commandCustomBlockBlastResistance, "false") && AmsServerSettings.enhancedWorldEater == -1.0F) {
-            BlockState fluidState = this.invokerGetBlockState().getBlock().getDefaultState();
+            BlockState fluidState = this.invokerGetBlockState().getBlock().defaultBlockState();
             return CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.getOrDefault(fluidState, original);
         } else {
             return original;

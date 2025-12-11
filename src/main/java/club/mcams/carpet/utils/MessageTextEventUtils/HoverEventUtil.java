@@ -20,9 +20,9 @@
 
 package club.mcams.carpet.utils.MessageTextEventUtils;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.text.HoverEvent;
-import net.minecraft.text.Text;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +41,8 @@ public class HoverEventUtil {
     }
 
     static {
-        HOVER_EVENT_ACTION_MAP.put(SHOW_TEXT, value -> new HoverEvent.ShowText((Text) value));
+        HOVER_EVENT_ACTION_MAP.put(SHOW_TEXT, value -> new HoverEvent.ShowText((Component) value));
         HOVER_EVENT_ACTION_MAP.put(SHOW_ITEM, value -> new HoverEvent.ShowItem((ItemStack) value));
-        HOVER_EVENT_ACTION_MAP.put(SHOW_ENTITY, value -> new HoverEvent.ShowEntity((HoverEvent.EntityContent) value));
+        HOVER_EVENT_ACTION_MAP.put(SHOW_ENTITY, value -> new HoverEvent.ShowEntity((HoverEvent.EntityTooltipInfo) value));
     }
 }

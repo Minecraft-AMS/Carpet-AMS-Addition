@@ -22,7 +22,7 @@ package club.mcams.carpet.mixin.rule.blowUpEverything;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +31,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {
-    @ModifyReturnValue(method = "getBlastResistance", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getExplosionResistance", at = @At("RETURN"))
     private float getBlastResistance(float original) {
         return AmsServerSettings.blowUpEverything ? 0.0F : original;
     }

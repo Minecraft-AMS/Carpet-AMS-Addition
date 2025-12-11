@@ -25,12 +25,12 @@ import club.mcams.carpet.helpers.rule.customBlockUpdateSuppressor.BlockUpdateSup
 import club.mcams.carpet.utils.RegexTools;
 import club.mcams.carpet.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.world.block.WireOrientation;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.redstone.Orientation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,10 +39,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
-@Mixin(AbstractBlock.class)
+@Mixin(BlockBehaviour.class)
 public abstract class AbstractBlockMixin {
-    @Inject(method = "neighborUpdate", at = @At("HEAD"))
-    private void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, WireOrientation wireOrientation, boolean notify, CallbackInfo ci) {
+    @Inject(method = "neighborChanged", at = @At("HEAD"))
+    private void neighborUpdate(BlockState state, Level world, BlockPos pos, Block block, Orientation wireOrientation, boolean notify, CallbackInfo ci) {
         if (!Objects.equals(AmsServerSettings.customBlockUpdateSuppressor, "none")) {
             if (AmsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode) {
                 AmsServerSettings.amsUpdateSuppressionCrashFix = "true";

@@ -20,17 +20,17 @@
 
 package club.mcams.carpet.mixin.rule.quickVillagerLevelUp;
 
-import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.village.VillagerData;
+import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.npc.villager.VillagerData;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(VillagerEntity.class)
+@Mixin(Villager.class)
 public interface VillagerEntityInvoker {
-    @Invoker("levelUp")
-    void invokerLevelUp(ServerWorld world);
+    @Invoker("increaseMerchantCareer")
+    void invokerLevelUp(ServerLevel world);
 
     @Invoker("getVillagerData")
     VillagerData invokerGetVillagerData();

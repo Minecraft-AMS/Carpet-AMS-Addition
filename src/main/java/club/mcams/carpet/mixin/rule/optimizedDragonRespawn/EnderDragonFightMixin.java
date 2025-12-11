@@ -26,17 +26,17 @@ import club.mcams.carpet.helpers.rule.optimizedDragonRespawn.BlockPatternHelper;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.EndGatewayBlockEntity;
-import net.minecraft.block.entity.EndPortalBlockEntity;
-import net.minecraft.block.pattern.BlockPattern;
-import net.minecraft.entity.boss.dragon.EnderDragonFight;
-import net.minecraft.entity.decoration.EndCrystalEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.chunk.WorldChunk;
-import net.minecraft.world.gen.feature.EndPortalFeature;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity;
+import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
+import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.level.dimension.end.EndDragonFight;
+import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.levelgen.feature.EndPodiumFeature;
 
 import org.spongepowered.asm.mixin.*;
 import org.jetbrains.annotations.Nullable;
@@ -46,23 +46,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
-@Mixin(value = EnderDragonFight.class, priority = 888)
+@Mixin(value = EndDragonFight.class, priority = 888)
 public abstract class EnderDragonFightMixin {
 
     @Shadow
     @Final
-    private ServerWorld world;
+    private ServerLevel level;
 
     @Shadow
     @Final
-    private BlockPattern endPortalPattern;
+    private BlockPattern exitPortalPattern;
 
     @Nullable
     @Shadow
-    private BlockPos exitPortalLocation;
+    private BlockPos portalLocation;
 
     @Shadow
-    private boolean doLegacyCheck;
+    private boolean needsStateScanning;
 
     @Unique
     private int cacheChunkIteratorX = -8;
@@ -78,23 +78,23 @@ public abstract class EnderDragonFightMixin {
      * @reason Optimize the search of end portal
      */
 
-    @WrapMethod(method = "findEndPortal")
-    private @Nullable BlockPattern.Result findEndPortal(Operation<BlockPattern.Result> original) {
+    @WrapMethod(method = "findExitPortal")
+    private @Nullable BlockPattern.BlockPatternMatch findEndPortal(Operation<BlockPattern.BlockPatternMatch> original) {
         int i, j;
         if(!AmsServerSettings.optimizedDragonRespawn) {
             original.call();
         } else {
             for (i = cacheChunkIteratorX; i <= 8; ++i) {
                 for (j = cacheChunkIteratorZ; j <= 8; ++j) {
-                    WorldChunk worldChunk = this.world.getChunk(i, j);
+                    LevelChunk worldChunk = this.level.getChunk(i, j);
                     for (BlockEntity blockEntity : worldChunk.getBlockEntities().values()) {
-                        if (AmsServerSettings.optimizedDragonRespawn && blockEntity instanceof EndGatewayBlockEntity) continue;
-                        if (blockEntity instanceof EndPortalBlockEntity) {
-                            BlockPattern.Result result = this.endPortalPattern.searchAround(this.world, blockEntity.getPos());
+                        if (AmsServerSettings.optimizedDragonRespawn && blockEntity instanceof TheEndGatewayBlockEntity) continue;
+                        if (blockEntity instanceof TheEndPortalBlockEntity) {
+                            BlockPattern.BlockPatternMatch result = this.exitPortalPattern.find(this.level, blockEntity.getBlockPos());
                             if (result != null) {
-                                BlockPos blockPos = result.translate(3, 3, 3).getBlockPos();
-                                if (this.exitPortalLocation == null) {
-                                    this.exitPortalLocation = blockPos;
+                                BlockPos blockPos = result.getBlock(3, 3, 3).getPos();
+                                if (this.portalLocation == null) {
+                                    this.portalLocation = blockPos;
                                 }
                                 //No need to judge whether optimizing option is open
                                 cacheChunkIteratorX = i;
@@ -105,25 +105,25 @@ public abstract class EnderDragonFightMixin {
                     }
                 }
             }
-            if (this.doLegacyCheck || this.exitPortalLocation == null){
+            if (this.needsStateScanning || this.portalLocation == null){
                 if(AmsServerSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
                     i = cacheOriginIteratorY;
                 }
                 else {
-                    i = this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN)).getY();
+                    i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(BlockPos.ZERO)).getY();
                 }
                 boolean notFirstSearch = false;
                 for (j = i; j >= 0; --j) {
-                    BlockPattern.Result result2;
+                    BlockPattern.BlockPatternMatch result2;
                     if (AmsServerSettings.optimizedDragonRespawn && notFirstSearch) {
-                        result2 = BlockPatternHelper.partialSearchAround(this.endPortalPattern, this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getX(), j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
+                        result2 = BlockPatternHelper.partialSearchAround(this.exitPortalPattern, this.level, new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()));
                     }
                     else {
-                        result2 = this.endPortalPattern.searchAround(this.world, new BlockPos(EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getX(), j, EndPortalFeature.offsetOrigin(BlockPos.ORIGIN).getZ()));
+                        result2 = this.exitPortalPattern.find(this.level, new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()));
                     }
                     if (result2 != null) {
-                        if (this.exitPortalLocation == null) {
-                            this.exitPortalLocation = result2.translate(3, 3, 3).getBlockPos();
+                        if (this.portalLocation == null) {
+                            this.portalLocation = result2.getBlock(3, 3, 3).getPos();
                         }
                         cacheOriginIteratorY = j;
                         return result2;
@@ -136,7 +136,7 @@ public abstract class EnderDragonFightMixin {
     }
 
     @Inject(method = "respawnDragon(Ljava/util/List;)V", at = @At("HEAD"))
-    private void resetCache(List<EndCrystalEntity> crystals, CallbackInfo ci) {
+    private void resetCache(List<EndCrystal> crystals, CallbackInfo ci) {
         if (AmsServerSettings.optimizedDragonRespawn) {
             cacheChunkIteratorX = -8;
             cacheChunkIteratorZ = -8;

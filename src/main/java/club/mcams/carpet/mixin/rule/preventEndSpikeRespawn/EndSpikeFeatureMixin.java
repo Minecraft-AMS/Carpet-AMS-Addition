@@ -25,36 +25,36 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ModifiableWorld;
-import net.minecraft.world.gen.feature.EndSpikeFeature;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelWriter;
+import net.minecraft.world.level.levelgen.feature.SpikeFeature;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(EndSpikeFeature.class)
+@Mixin(SpikeFeature.class)
 public class EndSpikeFeatureMixin {
     @WrapOperation(
-        method="generateSpike",
+        method= "placeSpike",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/gen/feature/EndSpikeFeature;setBlockState(Lnet/minecraft/world/ModifiableWorld;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V"
+            target = "Lnet/minecraft/world/level/levelgen/feature/SpikeFeature;setBlock(Lnet/minecraft/world/level/LevelWriter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"
         )
     )
-    private void onSetBlockState(EndSpikeFeature endSpikeFeature, ModifiableWorld modifiableWorld, BlockPos blockPos, BlockState blockState, Operation<Void> original) {
+    private void onSetBlockState(SpikeFeature endSpikeFeature, LevelWriter modifiableWorld, BlockPos blockPos, BlockState blockState, Operation<Void> original) {
         if (AmsServerSettings.preventEndSpikeRespawn.equals("false")) {
             original.call(endSpikeFeature, modifiableWorld, blockPos, blockState);
         }
     }
 
     @Inject(
-        method="generateSpike",
+        method= "placeSpike",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/ServerWorldAccess;spawnEntity(Lnet/minecraft/entity/Entity;)Z"
+            target = "Lnet/minecraft/world/entity/EntityType;create(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/EntitySpawnReason;)Lnet/minecraft/world/entity/Entity;"
         ),
         cancellable = true
     )

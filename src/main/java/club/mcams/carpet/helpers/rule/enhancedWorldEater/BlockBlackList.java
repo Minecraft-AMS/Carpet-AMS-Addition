@@ -20,8 +20,8 @@
 
 package club.mcams.carpet.helpers.rule.enhancedWorldEater;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.HashSet;
 

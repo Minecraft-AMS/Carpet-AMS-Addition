@@ -20,14 +20,14 @@
 
 package club.mcams.carpet.mixin.rule.commandCustomBlockBlastResistance;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.fluid.FluidState;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(FluidState.class)
 public interface FluidStateInvoker {
-    @Invoker("getBlockState")
+    @Invoker("createLegacyBlock")
     BlockState invokerGetBlockState();
 }

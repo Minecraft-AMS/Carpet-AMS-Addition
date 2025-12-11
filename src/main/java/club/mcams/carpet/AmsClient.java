@@ -28,8 +28,8 @@ import club.mcams.carpet.utils.NetworkUtil;
 import net.fabricmc.api.ClientModInitializer;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,16 +38,16 @@ public class AmsClient implements ClientModInitializer {
     private static final String MOD_ID = "carpet-ams-addition";
     public static final String fancyName = "Carpet AMS Addition";
     public static final String name = getModId();
-    public static MinecraftClient minecraftClient;
+    public static Minecraft minecraftClient;
     public static final Logger LOGGER = LogManager.getLogger(fancyName);
-    public ClientPlayerEntity player;
+    public LocalPlayer player;
     private static String version;
     private static final AmsClient AMS_CLIENT_INSTANCE = new AmsClient();
 
     @Override
     public void onInitializeClient() {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
-        minecraftClient = MinecraftClient.getInstance();
+        minecraftClient = Minecraft.getInstance();
         AMS_PayloadManager.registerS2CPayloads();
     }
 
@@ -65,7 +65,7 @@ public class AmsClient implements ClientModInitializer {
 
     public void onGameJoin() {
         player = MinecraftClientUtil.getCurrentPlayer();
-        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(version, player.getUuid()));
+        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(version, player.getUUID()));
     }
 
     public void onDisconnect() {

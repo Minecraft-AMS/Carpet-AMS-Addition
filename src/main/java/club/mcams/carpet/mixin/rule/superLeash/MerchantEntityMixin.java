@@ -24,13 +24,13 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.entity.passive.MerchantEntity;
+import net.minecraft.world.entity.npc.villager.AbstractVillager;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(MerchantEntity.class)
+@Mixin(AbstractVillager.class)
 public abstract class MerchantEntityMixin {
     @ModifyReturnValue(method = "canBeLeashed", at = @At("RETURN"))
     private boolean allowLeashed(boolean original) {

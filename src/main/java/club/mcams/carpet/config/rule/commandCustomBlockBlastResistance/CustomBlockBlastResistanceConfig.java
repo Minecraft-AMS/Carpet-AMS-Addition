@@ -26,10 +26,10 @@ import club.mcams.carpet.utils.IdentifierUtil;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 import club.mcams.carpet.utils.RegexTools;
 
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.WorldSavePath;
-import net.minecraft.registry.Registries;
+import net.minecraft.world.level.storage.LevelResource;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -62,7 +62,7 @@ public class CustomBlockBlastResistanceConfig extends AbstractMapJsonConfig<Stri
         targetMap.clear();
         storageMap.forEach((blockId, resistance) -> {
             try {
-                Registries.BLOCK.getEntry(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().getDefaultState()).ifPresent(state -> targetMap.put(state, resistance));
+                BuiltInRegistries.BLOCK.get(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().defaultBlockState()).ifPresent(state -> targetMap.put(state, resistance));
             } catch (Exception e) {
                 AmsServer.LOGGER.error("Invalid block ID: {}", blockId, e);
             }
@@ -79,6 +79,6 @@ public class CustomBlockBlastResistanceConfig extends AbstractMapJsonConfig<Stri
     }
 
     private static Path getConfigPath(MinecraftServer server) {
-        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_block_blast_resistance.json");
+        return server.getWorldPath(LevelResource.ROOT).resolve("carpetamsaddition/custom_block_blast_resistance.json");
     }
 }

@@ -24,15 +24,15 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 import club.mcams.carpet.utils.WorldUtil;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.NoteBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
-import net.minecraft.entity.Entity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.NoteBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.server.level.ServerLevel;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -45,19 +45,19 @@ import java.util.Objects;
 @Mixin(NoteBlock.class)
 public abstract class NoteBlockMixin {
     @Inject(method = "playNote", at = @At("HEAD"))
-    private void playNoteMixin(Entity entity, BlockState blockState, World world, BlockPos pos, CallbackInfo info) {
+    private void playNoteMixin(Entity entity, BlockState blockState, Level world, BlockPos pos, CallbackInfo info) {
         if (!Objects.equals(AmsServerSettings.noteBlockChunkLoader, "false")) {
             handleChunkLoading(world, pos);
         }
     }
 
     @Unique
-    private void handleChunkLoading(World world, BlockPos pos) {
+    private void handleChunkLoading(Level world, BlockPos pos) {
         if (!WorldUtil.isClient(world)) {
             ChunkPos chunkPos = new ChunkPos(pos);
-            BlockState noteBlockUp = world.getBlockState(pos.up(1));
+            BlockState noteBlockUp = world.getBlockState(pos.above(1));
             if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "note_block")) {
-                BlockChunkLoaderHelper.addNoteBlockTicket((ServerWorld) world, chunkPos);
+                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, chunkPos);
             } else if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block")) {
                 loadChunkIfMatch(world, chunkPos, noteBlockUp, Blocks.BONE_BLOCK);
             } else if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull")) {
@@ -67,10 +67,10 @@ public abstract class NoteBlockMixin {
     }
 
     @Unique
-    private void loadChunkIfMatch(World world, ChunkPos chunkPos, BlockState blockState, Block... blocks) {
+    private void loadChunkIfMatch(Level world, ChunkPos chunkPos, BlockState blockState, Block... blocks) {
         for (Block block : blocks) {
             if (blockState.getBlock() == block) {
-                BlockChunkLoaderHelper.addNoteBlockTicket((ServerWorld) world, chunkPos);
+                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, chunkPos);
                 break;
             }
         }

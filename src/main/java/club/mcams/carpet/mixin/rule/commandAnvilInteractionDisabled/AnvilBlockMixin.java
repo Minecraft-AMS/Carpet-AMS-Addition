@@ -23,8 +23,8 @@ package club.mcams.carpet.mixin.rule.commandAnvilInteractionDisabled;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry;
 
-import net.minecraft.block.AnvilBlock;
-import net.minecraft.util.ActionResult;
+import net.minecraft.world.level.block.AnvilBlock;
+import net.minecraft.world.InteractionResult;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,10 +35,10 @@ import java.util.Objects;
 
 @Mixin(AnvilBlock.class)
 public abstract class AnvilBlockMixin {
-    @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
-    private void onUse(CallbackInfoReturnable<ActionResult> cir) {
+    @Inject(method = "useWithoutItem", at = @At("HEAD"), cancellable = true)
+    private void onUse(CallbackInfoReturnable<InteractionResult> cir) {
         if (!Objects.equals(AmsServerSettings.commandAnvilInteractionDisabled, "false") && AnvilInteractionDisabledCommandRegistry.anvilInteractionDisabled) {
-            cir.setReturnValue( ActionResult.FAIL);
+            cir.setReturnValue( InteractionResult.FAIL);
             cir.cancel();
         }
     }

@@ -30,12 +30,12 @@ import com.google.gson.JsonParseException;
 
 import com.mojang.serialization.JsonOps;
 
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 import java.util.List;
@@ -52,19 +52,19 @@ public class AmsRecipeManager {
         this.smeltingRecipes = builder.getSmeltingRecipeList();
     }
 
-    public void registerRecipes(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup) {
+    public void registerRecipes(Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup) {
         Map<Identifier, JsonElement> recipeMap = new HashMap<>();
         registerAllRecipes(recipeMap);
         recipeMap.forEach((id, json) -> addRecipe(map, wrapperLookup, id, json));
     }
 
-    private void addRecipe(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup, Identifier id, JsonElement json) {
-        RecipeEntry<?> recipeEntry = this.deserializeRecipe(RegistryKey.of(RegistryKeys.RECIPE, id), json.getAsJsonObject(), wrapperLookup);
+    private void addRecipe(Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup, Identifier id, JsonElement json) {
+        RecipeHolder<?> recipeEntry = this.deserializeRecipe(ResourceKey.create(Registries.RECIPE, id), json.getAsJsonObject(), wrapperLookup);
         map.put(id, recipeEntry.value());
     }
 
-    private RecipeEntry<?> deserializeRecipe(RegistryKey<Recipe<?>> key, JsonObject json, RegistryWrapper.WrapperLookup registries) {
-        return new RecipeEntry<>(key, Recipe.CODEC.parse(registries.getOps(JsonOps.INSTANCE), json).getOrThrow(JsonParseException::new));
+    private RecipeHolder<?> deserializeRecipe(ResourceKey<Recipe<?>> key, JsonObject json, HolderLookup.Provider registries) {
+        return new RecipeHolder<>(key, Recipe.CODEC.parse(registries.createSerializationContext(JsonOps.INSTANCE), json).getOrThrow(JsonParseException::new));
     }
 
     private void registerAllRecipes(Map<Identifier, JsonElement> recipeMap) {

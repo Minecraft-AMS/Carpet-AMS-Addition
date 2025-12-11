@@ -24,9 +24,9 @@ import carpet.logging.HUDController;
 
 import club.mcams.carpet.translations.AMSTranslations;
 
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,9 +38,9 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @Mixin(HUDController.class)
 public abstract class HUDControllerMixin {
     @ModifyVariable(method = "addMessage", at = @At("HEAD"), argsOnly = true, remap = false)
-    private static Text applyAMSTranslationToHudLoggerMessage(Text hudMessage, ServerPlayerEntity player, Text hudMessage_) {
+    private static Component applyAMSTranslationToHudLoggerMessage(Component hudMessage, ServerPlayer player, Component hudMessage_) {
         if (player != null) {
-            hudMessage = AMSTranslations.translate((MutableText) hudMessage, player);
+            hudMessage = AMSTranslations.translate((MutableComponent) hudMessage, player);
         }
         return hudMessage;
     }

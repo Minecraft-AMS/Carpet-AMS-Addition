@@ -23,12 +23,12 @@ package club.mcams.carpet.mixin.rule.renewableNetherScrap;
 import club.mcams.carpet.utils.EntityUtil;
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.item.Items;
-import net.minecraft.entity.mob.ZombifiedPiglinEntity;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.monster.zombie.ZombifiedPiglin;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +44,7 @@ public abstract class EntityMixin {
 
     @Shadow
     @Nullable
-    public abstract ItemEntity dropStack(ServerWorld par1, ItemStack par2);
+    public abstract ItemEntity spawnAtLocation(ServerLevel par1, ItemStack par2);
 
     @Unique
     private boolean hasDroppedNetherScrap = false;
@@ -53,18 +53,18 @@ public abstract class EntityMixin {
     @Unique
     private boolean isDroppingNetherScrap = false;
 
-    @Inject(method = "dropStack(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;", at = @At("TAIL"))
+    @Inject(method = "spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("TAIL"))
     private void dropNetheriteScrap(CallbackInfoReturnable<ItemEntity> cir) {
         if (AmsServerSettings.renewableNetheriteScrap != 0.0D && !this.isDroppingNetherScrap) {
             Entity entity = (Entity) (Object) this;
-            if (entity instanceof ZombifiedPiglinEntity && !((ZombifiedPiglinEntity) entity).isBaby() && !this.hasDroppedNetherScrap) {
+            if (entity instanceof ZombifiedPiglin && !((ZombifiedPiglin) entity).isBaby() && !this.hasDroppedNetherScrap) {
                 this.hasDroppedNetherScrap = true;
                 double random = Math.random();
                 double rate = AmsServerSettings.renewableNetheriteScrap;
                 if (random < rate) {
                     this.isDroppingNetherScrap = true;
                     ItemStack netherScrapStack = new ItemStack(Items.NETHERITE_SCRAP);
-                    this.dropStack((ServerWorld) EntityUtil.getEntityWorld(entity), netherScrapStack);
+                    this.spawnAtLocation((ServerLevel) EntityUtil.getEntityWorld(entity), netherScrapStack);
                     this.isDroppingNetherScrap = false;
                 }
             }

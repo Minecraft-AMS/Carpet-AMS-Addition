@@ -20,12 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.bambooModelNoOffset;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(net.minecraft.block.AbstractBlock.AbstractBlockState.class)
+@Mixin(net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase.class)
 public interface AbstractBlockStateInvoker {
     @Invoker("getBlock")
     Block invokeGetBlock();

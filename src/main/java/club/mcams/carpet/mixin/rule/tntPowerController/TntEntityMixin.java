@@ -24,15 +24,15 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.entity.TntEntity;
+import net.minecraft.world.entity.item.PrimedTnt;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(TntEntity.class)
+@Mixin(PrimedTnt.class)
 public abstract class TntEntityMixin {
     @ModifyExpressionValue(
-        method = "<init>(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V",
+        method = "<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V",
         at = @At(
             value = "CONSTANT",
             args = "floatValue=4.0F"

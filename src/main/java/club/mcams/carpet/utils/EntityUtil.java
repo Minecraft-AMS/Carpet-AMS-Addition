@@ -20,19 +20,15 @@
 
 package club.mcams.carpet.utils;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 
 import org.jetbrains.annotations.NotNull;
 
 public class EntityUtil {
-    public static World getEntityWorld(@NotNull Entity entity) {
-        //#if MC>=12106 && MC<12109
-        //$$ return entity.getWorld();
-        //#else
-        return entity.getEntityWorld();
-        //#endif
+    public static Level getEntityWorld(@NotNull Entity entity) {
+        return entity.level();
     }
 
     public static MinecraftServer getEntityServer(@NotNull Entity entity) {

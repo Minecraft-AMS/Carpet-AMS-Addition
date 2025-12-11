@@ -24,30 +24,31 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.mob.PathAwareEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.level.Level;
 
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(PassiveEntity.class)
-public abstract class PassiveEntityMixin extends PathAwareEntity {
-    protected PassiveEntityMixin(EntityType<? extends PathAwareEntity> entityType, World world) {
+@Mixin(AgeableMob.class)
+public abstract class PassiveEntityMixin extends PathfinderMob {
+    protected PassiveEntityMixin(EntityType<? extends @NotNull PathfinderMob> entityType, Level world) {
         super(entityType, world);
     }
 
     @Shadow
     @Final
-    private static TrackedData<Boolean> CHILD;
+    private static EntityDataAccessor<@NotNull Boolean> DATA_BABY_ID;
 
-    @ModifyReturnValue(method = "getBreedingAge", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getAge", at = @At("RETURN"))
     private int getBreedingAge(int original) {
-        if (AmsServerSettings.noFamilyPlanning && !this.dataTracker.get(CHILD)) {
+        if (AmsServerSettings.noFamilyPlanning && !this.entityData.get(DATA_BABY_ID)) {
             return 0;
         } else {
             return original;

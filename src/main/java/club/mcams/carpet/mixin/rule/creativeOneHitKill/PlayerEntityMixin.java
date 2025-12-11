@@ -24,14 +24,14 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.EntityUtil;
 import club.mcams.carpet.utils.WorldUtil;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.dragon.EnderDragonPart;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragonPart;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -42,11 +42,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Arrays;
 import java.util.function.Function;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public abstract class PlayerEntityMixin implements EntityAccessorAndInvoker, PlayerEntityAccessorAndInvoker {
     @Inject(method = "attack", at = @At("HEAD"))
     private void attack(Entity target, CallbackInfo ci) {
-        if (AmsServerSettings.creativeOneHitKill && !WorldUtil.isClient(this.getWorld()) && this.getPlayerAbilities().creativeMode && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(target)) {
+        if (AmsServerSettings.creativeOneHitKill && !WorldUtil.isClient(this.getLevel()) && this.getPlayerAbilities().instabuild && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target)) {
             Function<Boolean, Runnable> actionInstaKill = isSneaking -> isSneaking ? () -> aoeAttack(target) : () -> instaKill(target);
             actionInstaKill.apply(invokerIsSneaking()).run();
         }
@@ -55,31 +55,31 @@ public abstract class PlayerEntityMixin implements EntityAccessorAndInvoker, Pla
     @Unique
     private void instaKill(Entity target) {
         if (target instanceof EnderDragonPart) {
-            Arrays.stream(((EnderDragonPart) target).owner.getBodyParts()).forEach(Entity -> target.kill((ServerWorld) EntityUtil.getEntityWorld(target)));
-            ((EnderDragonPart) target).owner.kill((ServerWorld) EntityUtil.getEntityWorld(target));
+            Arrays.stream(((EnderDragonPart) target).parentMob.getSubEntities()).forEach(Entity -> target.kill((ServerLevel) EntityUtil.getEntityWorld(target)));
+            ((EnderDragonPart) target).parentMob.kill((ServerLevel) EntityUtil.getEntityWorld(target));
         } else {
-            target.kill((ServerWorld) EntityUtil.getEntityWorld(target));
+            target.kill((ServerLevel) EntityUtil.getEntityWorld(target));
         }
-        playCritSoundEffect(this.getWorld(), this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(), this.invokeGetSoundCategory());
+        playCritSoundEffect(this.getLevel(), this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(), this.invokeGetSoundSource());
     }
 
     @Unique
     private void aoeAttack(Entity target) {
-        for (Entity entity : this.getWorld().getNonSpectatingEntities(Entity.class, target.getBoundingBox().expand(2.0D, 0.50D, 2.0D))) {
-            if (entity.isAttackable() && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(entity)) {
+        for (Entity entity : this.getLevel().getEntitiesOfClass(Entity.class, target.getBoundingBox().inflate(2.0D, 0.50D, 2.0D))) {
+            if (entity.isAttackable() && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(entity)) {
                 instaKill(entity);
             }
         }
-        playSweepSoundEffect(this.getWorld(), this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(), this.invokeGetSoundCategory());
+        playSweepSoundEffect(this.getLevel(), this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(), this.invokeGetSoundSource());
     }
 
     @Unique
-    private void playSweepSoundEffect(World world, double x, double y, double z, SoundCategory soundCategory) {
-        world.playSound(null, x, y, z, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP, soundCategory, 1.0F, 1.0F);
+    private void playSweepSoundEffect(Level world, double x, double y, double z, SoundSource soundCategory) {
+        world.playSound(null, x, y, z, SoundEvents.PLAYER_ATTACK_SWEEP, soundCategory, 1.0F, 1.0F);
     }
 
     @Unique
-    private void playCritSoundEffect(World world, double x, double y, double z, SoundCategory soundCategory) {
-        world.playSound(null, x, y, z, SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, soundCategory, 1.0F, 1.0F);
+    private void playCritSoundEffect(Level world, double x, double y, double z, SoundSource soundCategory) {
+        world.playSound(null, x, y, z, SoundEvents.PLAYER_ATTACK_CRIT, soundCategory, 1.0F, 1.0F);
     }
 }

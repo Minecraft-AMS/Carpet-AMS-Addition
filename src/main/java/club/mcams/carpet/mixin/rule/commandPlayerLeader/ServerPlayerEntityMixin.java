@@ -23,7 +23,7 @@ package club.mcams.carpet.mixin.rule.commandPlayerLeader;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,13 +32,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
-@Mixin(ServerPlayerEntity.class)
+@Mixin(ServerPlayer.class)
 public abstract class ServerPlayerEntityMixin {
-    @Inject(method = "copyFrom", at = @At("TAIL"))
-    public void copyFrom(ServerPlayerEntity oldPlayer, boolean alive, CallbackInfo ci) {
-        ServerPlayerEntity newPlayer = (ServerPlayerEntity) (Object) this;
-        if (!Objects.equals(AmsServerSettings.commandPlayerLeader, "false") && !alive && LeaderCommandRegistry.LEADER_MAP.containsValue(newPlayer.getUuidAsString())) {
-            newPlayer.addStatusEffect(LeaderCommandRegistry.HIGH_LIGHT, newPlayer);
+    @Inject(method = "restoreFrom", at = @At("TAIL"))
+    public void copyFrom(ServerPlayer oldPlayer, boolean alive, CallbackInfo ci) {
+        ServerPlayer newPlayer = (ServerPlayer) (Object) this;
+        if (!Objects.equals(AmsServerSettings.commandPlayerLeader, "false") && !alive && LeaderCommandRegistry.LEADER_MAP.containsValue(newPlayer.getStringUUID())) {
+            newPlayer.addEffect(LeaderCommandRegistry.HIGH_LIGHT, newPlayer);
         }
     }
 }

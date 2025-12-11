@@ -20,8 +20,8 @@
 
 package club.mcams.carpet.mixin.rule.largeBundle;
 
-import net.minecraft.inventory.Inventory;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.world.Container;
+import net.minecraft.world.inventory.Slot;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -31,6 +31,6 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft >= 1.17.1")
 @Mixin(Slot.class)
 public interface SlotAccessor {
-    @Accessor("inventory")
-    Inventory getInventory();
+    @Accessor("container")
+    Container getContainer();
 }

@@ -20,21 +20,21 @@
 
 package club.mcams.carpet.helpers;
 
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.DragonBreathParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.PowerParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
 
 public class ParticleHelper {
-    public static void spawnParticles(ServerWorld world, ParticleEffect particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {
-        world.spawnParticles(particle, x, y, z, count, deltaX, deltaY, deltaZ, speed);
+    public static void spawnParticles(ServerLevel world, ParticleOptions particle, double x, double y, double z, int count, double deltaX, double deltaY, double deltaZ, double speed) {
+        world.sendParticles(particle, x, y, z, count, deltaX, deltaY, deltaZ, speed);
     }
 
-    public static void spawnShulkerGolemParticles(ServerWorld serverWorld, BlockPos pos) {
+    public static void spawnShulkerGolemParticles(ServerLevel serverWorld, BlockPos pos) {
         spawnParticles(
             serverWorld,
-            DragonBreathParticleEffect.of(ParticleTypes.DRAGON_BREATH, 0),
+            PowerParticleOption.create(ParticleTypes.DRAGON_BREATH, 0),
             pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
             1688, 0.8, 0.8, 0.8, 0.0168
         );

@@ -24,15 +24,15 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.entity.mob.EndermanEntity;
+import net.minecraft.world.entity.monster.EnderMan;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(EndermanEntity.class)
+@Mixin(EnderMan.class)
 public abstract class EndermanEntityMixin {
-    @ModifyReturnValue(method = "isPlayerStaring", at = @At("RETURN"))
+    @ModifyReturnValue(method = "isBeingStaredBy", at = @At("RETURN"))
     private boolean goodBaby(boolean original) {
         return AmsServerSettings.meekEnderman ? false : original;
     }

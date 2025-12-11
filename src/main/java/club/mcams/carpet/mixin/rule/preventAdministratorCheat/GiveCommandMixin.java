@@ -22,8 +22,8 @@ package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
 
 import club.mcams.carpet.helpers.rule.preventAdministratorCheat.PermissionHelper;
 
-import net.minecraft.server.command.GiveCommand;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.commands.GiveCommand;
+import net.minecraft.commands.CommandSourceStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -43,7 +43,7 @@ public abstract class GiveCommandMixin {
         require = 1,
         allow = 2
     )
-    private static Predicate<ServerCommandSource> preventCheat(Predicate<ServerCommandSource> predicate) {
+    private static Predicate<CommandSourceStack> preventCheat(Predicate<CommandSourceStack> predicate) {
         return source -> predicate.test(source) && PermissionHelper.canCheat(source);
     }
 }

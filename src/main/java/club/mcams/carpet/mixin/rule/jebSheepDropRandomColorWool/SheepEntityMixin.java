@@ -25,15 +25,16 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.loot.LootTable;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.DyeColor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.entity.animal.sheep.Sheep;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.DyeColor;
 
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,16 +42,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.function.BiConsumer;
 import java.util.Random;
 
-@Mixin(SheepEntity.class)
+@Mixin(Sheep.class)
 public abstract class SheepEntityMixin {
     @WrapOperation(
-        method = "sheared",
+        method = "shear",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/passive/SheepEntity;forEachShearedItem(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/registry/RegistryKey;Lnet/minecraft/item/ItemStack;Ljava/util/function/BiConsumer;)V"
+            target = "Lnet/minecraft/world/entity/animal/sheep/Sheep;dropFromShearingLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/item/ItemStack;Ljava/util/function/BiConsumer;)V"
         )
     )
-    private void redirectDropStack(SheepEntity sheepEntity, ServerWorld world, RegistryKey<LootTable> registryKey, ItemStack shears, BiConsumer<ServerWorld, ItemStack> consumer, Operation<Void> original) {
+    private void redirectDropStack(Sheep sheepEntity, ServerLevel world, ResourceKey<@NotNull LootTable> registryKey, ItemStack shears, BiConsumer<ServerLevel, ItemStack> consumer, Operation<Void> original) {
         if (AmsServerSettings.jebSheepDropRandomColorWool && isJebSheep(sheepEntity)) {
             Random random = new Random();
             for (int i = 0; i < 1 + random.nextInt(3); ++i) {
@@ -64,7 +65,7 @@ public abstract class SheepEntityMixin {
     }
 
     @Unique
-    private static boolean isJebSheep(SheepEntity sheepEntity) {
+    private static boolean isJebSheep(Sheep sheepEntity) {
         return sheepEntity.hasCustomName() && sheepEntity.getCustomName() != null && sheepEntity.getCustomName().getString().equals("jeb_");
     }
 

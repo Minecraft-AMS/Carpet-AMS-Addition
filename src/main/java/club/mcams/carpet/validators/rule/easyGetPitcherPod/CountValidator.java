@@ -25,7 +25,7 @@ import carpet.api.settings.Validator;
 
 import club.mcams.carpet.translations.Translator;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
@@ -35,7 +35,7 @@ public class CountValidator extends Validator<Integer> {
     private static final Translator translator = new Translator("validator.easyGetPitcherPod");
 
     @Override
-    public Integer validate(ServerCommandSource serverCommandSource, CarpetRule<Integer> parsedRule, Integer integer, String s) {
+    public Integer validate(CommandSourceStack serverCommandSource, CarpetRule<Integer> parsedRule, Integer integer, String s) {
         return ((integer >= 2 && integer <= 100) || integer == 0) ? integer : null;
     }
 

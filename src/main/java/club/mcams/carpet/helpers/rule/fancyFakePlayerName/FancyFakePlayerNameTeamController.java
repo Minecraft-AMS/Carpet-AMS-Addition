@@ -23,33 +23,33 @@ package club.mcams.carpet.helpers.rule.fancyFakePlayerName;
 import club.mcams.carpet.utils.EntityUtil;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.Team;
+import net.minecraft.world.scores.Scoreboard;
+import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Objects;
 
 public class FancyFakePlayerNameTeamController {
-    public static void kickFakePlayerFromBotTeam(ServerPlayerEntity player, String teamName) {
+    public static void kickFakePlayerFromBotTeam(ServerPlayer player, String teamName) {
         Scoreboard scoreboard = EntityUtil.getEntityServer(player).getScoreboard();
         String playerName = player.getGameProfile().name();
-        Team currentTeam = scoreboard.getScoreHolderTeam(playerName);
-        Team targetTeam = scoreboard.getTeam(teamName);
+        PlayerTeam currentTeam = scoreboard.getPlayersTeam(playerName);
+        PlayerTeam targetTeam = scoreboard.getPlayerTeam(teamName);
         if (currentTeam != null && currentTeam.equals(targetTeam)) {
-            scoreboard.removeScoreHolderFromTeam(playerName, currentTeam);
+            scoreboard.removePlayerFromTeam(playerName, currentTeam);
         }
     }
 
-    public static Team addBotTeam(MinecraftServer server, String teamName) {
-        return server.getScoreboard().addTeam(teamName);
+    public static PlayerTeam addBotTeam(MinecraftServer server, String teamName) {
+        return server.getScoreboard().addPlayerTeam(teamName);
     }
 
     public static void removeBotTeam(MinecraftServer server, String teamName) {
         if (MinecraftServerUtil.serverIsRunning()) {
-            Team fancyFakePlayerNameTeam = server.getScoreboard().getTeam(teamName);
+            PlayerTeam fancyFakePlayerNameTeam = server.getScoreboard().getPlayerTeam(teamName);
             if (!Objects.equals(teamName, "false") && fancyFakePlayerNameTeam != null) {
-                server.getScoreboard().removeTeam(fancyFakePlayerNameTeam);
+                server.getScoreboard().removePlayerTeam(fancyFakePlayerNameTeam);
             }
         }
     }

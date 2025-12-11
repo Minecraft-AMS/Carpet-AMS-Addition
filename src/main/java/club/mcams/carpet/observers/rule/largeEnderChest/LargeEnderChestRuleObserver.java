@@ -27,22 +27,22 @@ import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.MutableText;
-import net.minecraft.util.Formatting;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.ChatFormatting;
 
 public class LargeEnderChestRuleObserver extends SimpleRuleObserver<Boolean> {
     private static final Translator translator = new Translator("validator.largeEnderChest");
     private static final String MSG_HEAD = "<Carpet AMS Addition> ";
 
     @Override
-    public void onValueChange(ServerCommandSource source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
+    public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue && MinecraftServerUtil.serverIsRunning()) {
             Messenger.sendServerMessage(MinecraftServerUtil.getServer(), message());
         }
     }
 
-    private static MutableText message() {
-        return Messenger.s(MSG_HEAD + translator.tr("switch_tip").getString()).formatted(Formatting.GREEN);
+    private static MutableComponent message() {
+        return Messenger.s(MSG_HEAD + translator.tr("switch_tip").getString()).withStyle(ChatFormatting.GREEN);
     }
 }

@@ -25,13 +25,13 @@ import carpet.api.settings.Validator;
 
 import club.mcams.carpet.translations.Translator;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 public class DropRateValidator extends Validator<Double> {
     private static final Translator translator = new Translator("validator.renewableNetherScrap");
 
     @Override
-    public Double validate(ServerCommandSource serverCommandSource, CarpetRule<Double> parsedRule, Double aDouble, String s) {
+    public Double validate(CommandSourceStack serverCommandSource, CarpetRule<Double> parsedRule, Double aDouble, String s) {
         return aDouble >= 0.0D && aDouble <= 1.0D ? aDouble : null;
     }
 

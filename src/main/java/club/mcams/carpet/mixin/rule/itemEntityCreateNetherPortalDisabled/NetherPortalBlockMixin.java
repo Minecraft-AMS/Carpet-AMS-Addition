@@ -25,14 +25,14 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.block.NetherPortalBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockLocating;
-import net.minecraft.world.dimension.PortalForcer;
+import net.minecraft.world.level.block.NetherPortalBlock;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.BlockUtil;
+import net.minecraft.world.level.portal.PortalForcer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,15 +45,15 @@ import java.util.Optional;
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
     @WrapOperation(
-        method = "getOrCreateExitPortalTarget",
+        method = "getExitPortal",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/dimension/PortalForcer;createPortal(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction$Axis;)Ljava/util/Optional;"
+            target = "Lnet/minecraft/world/level/portal/PortalForcer;createPortal(Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction$Axis;)Ljava/util/Optional;"
         )
     )
-    private Optional<BlockLocating.Rectangle> itemEntityCreateNetherPortalDisabled(
-        PortalForcer forcer, BlockPos pos, Direction.Axis axis, Operation<Optional<BlockLocating.Rectangle>> original,
-        ServerWorld world, Entity entity
+    private Optional<BlockUtil.FoundRectangle> itemEntityCreateNetherPortalDisabled(
+            PortalForcer forcer, BlockPos pos, Direction.Axis axis, Operation<Optional<BlockUtil.FoundRectangle>> original,
+            ServerLevel world, Entity entity
     ) {
         if (AmsServerSettings.itemEntityCreateNetherPortalDisabled && entity instanceof ItemEntity) {
             return Optional.empty();

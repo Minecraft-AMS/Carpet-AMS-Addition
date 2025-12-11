@@ -21,39 +21,39 @@
 package club.mcams.carpet.utils.compat;
 
 import club.mcams.carpet.utils.EntityUtil;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.Identifier;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 
 import java.util.Objects;
 
 public class DimensionWrapper {
 
-    private final RegistryKey<World> dimensionType;
+    private final ResourceKey<Level> dimensionType;
 
-    public DimensionWrapper(RegistryKey<World> dimensionType) {
+    public DimensionWrapper(ResourceKey<Level> dimensionType) {
         this.dimensionType = dimensionType;
     }
 
-    public static DimensionWrapper of(RegistryKey<World> dimensionType) {
+    public static DimensionWrapper of(ResourceKey<Level> dimensionType) {
         return new DimensionWrapper(dimensionType);
     }
 
-    public static DimensionWrapper of(World world) {
-        return new DimensionWrapper(world.getRegistryKey());
+    public static DimensionWrapper of(Level world) {
+        return new DimensionWrapper(world.dimension());
     }
 
     public static DimensionWrapper of(Entity entity) {
         return of(EntityUtil.getEntityWorld(entity));
     }
 
-    public RegistryKey<World> getValue() {
+    public ResourceKey<Level> getValue() {
         return this.dimensionType;
     }
 
     public Identifier getIdentifier() {
-        return this.dimensionType.getValue();
+        return this.dimensionType.identifier();
     }
 
     @Override

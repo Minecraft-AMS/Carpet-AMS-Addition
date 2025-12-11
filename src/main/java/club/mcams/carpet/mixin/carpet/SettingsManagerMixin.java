@@ -27,7 +27,7 @@ import club.mcams.carpet.AmsServerMod;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -58,7 +58,7 @@ public abstract class SettingsManagerMixin {
         ),
         remap = false
     )
-    private void printVersion(ServerCommandSource source, CallbackInfoReturnable<Integer> cir) {
+    private void printVersion(CommandSourceStack source, CallbackInfoReturnable<Integer> cir) {
         Messenger.tell(
             source,
             Messenger.c(

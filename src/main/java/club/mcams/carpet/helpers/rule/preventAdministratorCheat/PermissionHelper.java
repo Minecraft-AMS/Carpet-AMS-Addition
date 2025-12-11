@@ -22,11 +22,11 @@ package club.mcams.carpet.helpers.rule.preventAdministratorCheat;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
 
 public class PermissionHelper {
-    public static boolean canCheat(ServerCommandSource source) {
-        return !(source.getEntity() instanceof ServerPlayerEntity) || !AmsServerSettings.preventAdministratorCheat;
+    public static boolean canCheat(CommandSourceStack source) {
+        return !(source.getEntity() instanceof ServerPlayer) || !AmsServerSettings.preventAdministratorCheat;
     }
 }

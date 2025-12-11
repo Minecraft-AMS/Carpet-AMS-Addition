@@ -30,42 +30,42 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Style;
-import net.minecraft.util.Formatting;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Style;
+import net.minecraft.ChatFormatting;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
 
-import static net.minecraft.server.command.CommandManager.argument;
-import static net.minecraft.server.command.CommandManager.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
 
 public class PingCommandRegistry {
     private static final Translator translator = new Translator("command.ping");
     private static final String MSG_HEAD = "<commandPacketInternetGroper>";
-    private static final Map<PlayerEntity, PingThread> PING_THREADS = new HashMap<>();
+    private static final Map<Player, PingThread> PING_THREADS = new HashMap<>();
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            CommandManager.literal("pings")
+            Commands.literal("pings")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandPacketInternetGroper))
             .then(argument("targetIpOrDomainName", StringArgumentType.string())
             .then(argument("pingQuantity", IntegerArgumentType.integer())
             .executes(context -> executePing(
-                context.getSource().getPlayerOrThrow(),
+                context.getSource().getPlayerOrException(),
                 StringArgumentType.getString(context, "targetIpOrDomainName"),
                 IntegerArgumentType.getInteger(context, "pingQuantity")
             ))))
-            .then(literal("stop").executes(context -> stopPing(context.getSource().getPlayerOrThrow())))
-            .then(literal("help").executes(context -> help(context.getSource().getPlayerOrThrow())))
+            .then(literal("stop").executes(context -> stopPing(context.getSource().getPlayerOrException())))
+            .then(literal("help").executes(context -> help(context.getSource().getPlayerOrException())))
         );
     }
 
-    private static int executePing(PlayerEntity player, String targetIpOrDomainName, int pingQuantity) {
+    private static int executePing(Player player, String targetIpOrDomainName, int pingQuantity) {
         PingThread thread = PING_THREADS.get(player);
         if (thread != null) {
             thread.setInterrupted();
@@ -76,11 +76,11 @@ public class PingCommandRegistry {
         return 1;
     }
 
-    private static long ping(PlayerEntity player, String targetIpOrDomainName, boolean isFirstPing) {
+    private static long ping(Player player, String targetIpOrDomainName, boolean isFirstPing) {
         try {
             InetAddress inetAddress = InetAddress.getByName(targetIpOrDomainName);
             if (isFirstPing) {
-                player.sendMessage(
+                player.displayClientMessage(
                     Messenger.s(
                         String.format(
                             "§b%s §ePing §b%s §e[ %s ] §e...",
@@ -95,7 +95,7 @@ public class PingCommandRegistry {
             long endTime = System.currentTimeMillis();
             if (isReachable) {
                 long delayTime = endTime - startTime;
-                player.sendMessage(
+                player.displayClientMessage(
                     Messenger.s(
                         String.format(
                             "§b%s §2Replay from §e[ %s ]§2 Time = %dms",
@@ -106,7 +106,7 @@ public class PingCommandRegistry {
                 );
                 return delayTime;
             } else {
-                player.sendMessage(Messenger.s(String.format("§b%s §4Request time out.", MSG_HEAD)), false);
+                player.displayClientMessage(Messenger.s(String.format("§b%s §4Request time out.", MSG_HEAD)), false);
                 return -1;
             }
         } catch (IOException e) {
@@ -115,32 +115,32 @@ public class PingCommandRegistry {
         }
     }
 
-    private static int stopPing(PlayerEntity player) {
+    private static int stopPing(Player player) {
         String stopPing = translator.tr("stop_ping").getString();
         String activePingIsNull = translator.tr("active_ping_is_null").getString();
         PingThread pingThread = PING_THREADS.get(player);
         if (pingThread != null) {
             pingThread.setInterrupted();
-            player.sendMessage(Messenger.s(String.format("§b%s §4%s", MSG_HEAD, stopPing)), false);
+            player.displayClientMessage(Messenger.s(String.format("§b%s §4%s", MSG_HEAD, stopPing)), false);
         } else {
-            player.sendMessage(Messenger.s(String.format("§b%s §4%s", MSG_HEAD, activePingIsNull)), false);
+            player.displayClientMessage(Messenger.s(String.format("§b%s §4%s", MSG_HEAD, activePingIsNull)), false);
         }
         return 1;
     }
 
-    private static int help(PlayerEntity player) {
+    private static int help(Player player) {
         String pingHelp = translator.tr("help.ping").getString();
         String stopHelp = translator.tr("help.stop").getString();
-        player.sendMessage(
+        player.displayClientMessage(
             Messenger.s(pingHelp + "\n" + stopHelp).
-            setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
+            setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)),
             false
         );
         return 1;
     }
 
-    private static void sendFinishMessage(PlayerEntity player, int totalPings, int successfulPings, int failedPings, long averageDelay) {
-        player.sendMessage(
+    private static void sendFinishMessage(Player player, int totalPings, int successfulPings, int failedPings, long averageDelay) {
+        player.displayClientMessage(
             Messenger.s(
                 String.format(
                     "§b%s §aSent = %d, Received = %d, Lost = %d, Average delay = %dms",
@@ -154,9 +154,9 @@ public class PingCommandRegistry {
     private static class PingThread extends Thread {
        private volatile boolean interrupted = false;
        private final int pingQuantity;
-       private final PlayerEntity player;
+       private final Player player;
        private final String targetIpOrDomainName;
-       private PingThread(int pingQuantity, PlayerEntity player, String targetIpOrDomainName) {
+       private PingThread(int pingQuantity, Player player, String targetIpOrDomainName) {
             this.pingQuantity = pingQuantity;
             this.player = player;
             this.targetIpOrDomainName = targetIpOrDomainName;

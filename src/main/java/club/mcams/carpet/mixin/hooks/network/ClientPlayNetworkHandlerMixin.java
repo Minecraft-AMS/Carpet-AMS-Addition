@@ -22,16 +22,16 @@ package club.mcams.carpet.mixin.hooks.network;
 
 import club.mcams.carpet.AmsClient;
 
-import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin {
-    @Inject(method = "onGameJoin", at = @At("RETURN"))
+    @Inject(method = "handleLogin", at = @At("RETURN"))
     private void onGameJoin(CallbackInfo ci) {
         AmsClient.getInstance().onGameJoin();
     }

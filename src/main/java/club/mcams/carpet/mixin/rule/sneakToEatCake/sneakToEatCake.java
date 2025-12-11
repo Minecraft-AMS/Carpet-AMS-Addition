@@ -25,12 +25,12 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CakeBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldAccess;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelAccessor;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,15 +38,15 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(CakeBlock.class)
 public abstract class sneakToEatCake {
     @WrapOperation(
-        method = "onUse",
+        method = "useWithoutItem",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/block/CakeBlock;tryEat(Lnet/minecraft/world/WorldAccess;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;)Lnet/minecraft/util/ActionResult;"
+            target = "Lnet/minecraft/world/level/block/CakeBlock;eat(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/InteractionResult;"
         )
     )
-    private ActionResult tryEat(WorldAccess world, BlockPos pos, BlockState state, PlayerEntity player, Operation<ActionResult> original) {
-        if (AmsServerSettings.sneakToEatCake && !player.isSneaking()) {
-            return ActionResult.FAIL;
+    private InteractionResult tryEat(LevelAccessor world, BlockPos pos, BlockState state, Player player, Operation<InteractionResult> original) {
+        if (AmsServerSettings.sneakToEatCake && !player.isShiftKeyDown()) {
+            return InteractionResult.FAIL;
         } else {
             return original.call(world, pos, state, player);
         }

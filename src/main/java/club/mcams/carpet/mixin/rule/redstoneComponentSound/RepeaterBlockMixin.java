@@ -22,15 +22,15 @@ package club.mcams.carpet.mixin.rule.redstoneComponentSound;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.RepeaterBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.RepeaterBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,13 +39,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(RepeaterBlock.class)
 public abstract class RepeaterBlockMixin {
-    @Inject(method = "onUse", at = @At("HEAD"))
+    @Inject(method = "useWithoutItem", at = @At("HEAD"))
     private void playSound(
-        BlockState state, World world, BlockPos pos, PlayerEntity player,
-        BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir
+            BlockState state, Level world, BlockPos pos, Player player,
+            BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
     ) {
         if (AmsServerSettings.redstoneComponentSound) {
-            world.playSound(player, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 1.0f, 0.75f);
+            world.playSound(player, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 1.0f, 0.75f);
         }
     }
 }

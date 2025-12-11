@@ -22,47 +22,47 @@ package club.mcams.carpet.helpers.rule.blockChunkLoader;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.server.world.ChunkTicketType;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.ChunkPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.server.level.TicketType;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
 
 public class BlockChunkLoaderHelper {
     private static final String TICKET_NAMESPACE = "carpetamsaddition";
 
-    private static final ChunkTicketType NOTE_BLOCK_TICKET_TYPE = registerTicketType(
+    private static final TicketType NOTE_BLOCK_TICKET_TYPE = registerTicketType(
         String.format("%s:note_block_loader", TICKET_NAMESPACE), BlockChunkLoaderHelper.getLoadTime(), 15
     );
 
-    private static final ChunkTicketType PISTON_BLOCK_TICKET_TYPE = registerTicketType(
+    private static final TicketType PISTON_BLOCK_TICKET_TYPE = registerTicketType(
         String.format("%s:piston_block_loader", TICKET_NAMESPACE), BlockChunkLoaderHelper.getLoadTime(), 15
     );
 
-    private static final ChunkTicketType BELL_BLOCK_TICKET_TYPE = registerTicketType(
+    private static final TicketType BELL_BLOCK_TICKET_TYPE = registerTicketType(
         String.format("%s:bell_block_loader", TICKET_NAMESPACE), BlockChunkLoaderHelper.getLoadTime(), 15
     );
 
-    public static void addNoteBlockTicket(ServerWorld world, ChunkPos chunkPos) {
+    public static void addNoteBlockTicket(ServerLevel world, ChunkPos chunkPos) {
         addTicket(world, chunkPos, NOTE_BLOCK_TICKET_TYPE);
     }
 
-    public static void addPistonBlockTicket(ServerWorld world, ChunkPos chunkPos) {
+    public static void addPistonBlockTicket(ServerLevel world, ChunkPos chunkPos) {
         addTicket(world, chunkPos, PISTON_BLOCK_TICKET_TYPE);
     }
 
-    public static void addBellBlockTicket(ServerWorld world, ChunkPos chunkPos) {
+    public static void addBellBlockTicket(ServerLevel world, ChunkPos chunkPos) {
         addTicket(world, chunkPos, BELL_BLOCK_TICKET_TYPE);
     }
 
-    private static void addTicket(ServerWorld world, ChunkPos chunkPos, ChunkTicketType ticketType) {
-        world.getChunkManager().addTicket(ticketType, chunkPos, getLoadRange());
+    private static void addTicket(ServerLevel world, ChunkPos chunkPos, TicketType ticketType) {
+        world.getChunkSource().addTicketWithRadius(ticketType, chunkPos, getLoadRange());
         blockChunkLoaderKeepWorldTickUpdate(world);
     }
 
-    private static void blockChunkLoaderKeepWorldTickUpdate(ServerWorld world) {
+    private static void blockChunkLoaderKeepWorldTickUpdate(ServerLevel world) {
         if (AmsServerSettings.blockChunkLoaderKeepWorldTickUpdate) {
-            world.resetIdleTimeout();
+            world.resetEmptyTime();
         }
     }
 
@@ -75,7 +75,7 @@ public class BlockChunkLoaderHelper {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static ChunkTicketType registerTicketType(String id, long expiryTicks, int flags) {
-        return Registry.register(Registries.TICKET_TYPE, id, new ChunkTicketType(expiryTicks, flags));
+    private static TicketType registerTicketType(String id, long expiryTicks, int flags) {
+        return Registry.register(BuiltInRegistries.TICKET_TYPE, id, new TicketType(expiryTicks, flags));
     }
 }

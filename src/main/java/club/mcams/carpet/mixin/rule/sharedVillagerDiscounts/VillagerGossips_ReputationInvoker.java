@@ -20,15 +20,15 @@
 
 package club.mcams.carpet.mixin.rule.sharedVillagerDiscounts;
 
-import net.minecraft.village.VillagerGossipType;
+import net.minecraft.world.entity.ai.gossip.GossipType;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.function.Predicate;
 
-@Mixin(targets = "net.minecraft.village.VillagerGossips$Reputation")
+@Mixin(targets = "net.minecraft.world.entity.ai.gossip.GossipContainer$EntityGossips")
 public interface VillagerGossips_ReputationInvoker {
-    @Invoker("getValueFor")
-    int invokeGetValueFor(Predicate<VillagerGossipType> gossipTypeFilter);
+    @Invoker("weightedValue")
+    int invokeWeightedValue(Predicate<GossipType> gossipTypeFilter);
 }

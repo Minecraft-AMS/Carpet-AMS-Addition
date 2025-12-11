@@ -23,16 +23,16 @@ package club.mcams.carpet.utils;
 import club.mcams.carpet.AmsServer;
 import static club.mcams.carpet.utils.Messenger.*;
 
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.MutableText;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.MutableComponent;
 
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
 public class MixinUtil {
-    public static boolean audit(@Nullable ServerCommandSource source) {
+    public static boolean audit(@Nullable CommandSourceStack source) {
         boolean ok;
-        MutableText response;
+        MutableComponent response;
         try {
             MixinEnvironment.getCurrentEnvironment().audit();
             response = s("Mixin environment audited successfully");

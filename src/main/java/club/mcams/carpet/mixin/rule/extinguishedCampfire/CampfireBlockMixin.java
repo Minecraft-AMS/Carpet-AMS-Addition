@@ -24,18 +24,18 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CampfireBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.CampfireBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(CampfireBlock.class)
 public abstract class CampfireBlockMixin {
-    @ModifyReturnValue(method = "getPlacementState", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getStateForPlacement", at = @At("RETURN"))
     private BlockState setPlacementState(BlockState original) {
         if (AmsServerSettings.extinguishedCampfire && original != null) {
-            return original.with(CampfireBlock.LIT, false);
+            return original.setValue(CampfireBlock.LIT, false);
         } else {
             return original;
         }

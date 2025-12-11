@@ -27,36 +27,36 @@ import club.mcams.carpet.utils.Messenger;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.scoreboard.Team;
+import net.minecraft.world.scores.Scoreboard;
+import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Formatting;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.ChatFormatting;
 
 import java.util.Objects;
 
 public class FancyNameHelper {
-    public static void addBotTeamNamePrefix(ServerPlayerEntity player, String teamName) {
+    public static void addBotTeamNamePrefix(ServerPlayer player, String teamName) {
         MinecraftServer server = EntityUtil.getEntityServer(player);
         if (server != null) {
             Scoreboard scoreboard = server.getScoreboard();
-            Team team = scoreboard.getTeam(teamName);
+            PlayerTeam team = scoreboard.getPlayerTeam(teamName);
 
             if (team == null) {
                 team = FancyFakePlayerNameTeamController.addBotTeam(server, teamName);
-                team.setPrefix(Messenger.s(String.format("[%s] ", teamName)).formatted(Formatting.BOLD));
-                team.setColor(Formatting.DARK_GREEN);
+                team.setPlayerPrefix(Messenger.s(String.format("[%s] ", teamName)).withStyle(ChatFormatting.BOLD));
+                team.setColor(ChatFormatting.DARK_GREEN);
             }
 
             String playerName = player.getGameProfile().name();
-            Team currentTeam = scoreboard.getScoreHolderTeam(playerName);
+            PlayerTeam currentTeam = scoreboard.getPlayersTeam(playerName);
 
             if (currentTeam != null && currentTeam != team) {
-                scoreboard.removeScoreHolderFromTeam(playerName, currentTeam);
+                scoreboard.removePlayerFromTeam(playerName, currentTeam);
             }
 
             if (currentTeam != team) {
-                scoreboard.addScoreHolderToTeam(playerName, team);
+                scoreboard.addPlayerToTeam(playerName, team);
             }
         }
     }

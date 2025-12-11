@@ -27,12 +27,12 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.block.EnderChestBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
-import net.minecraft.text.Text;
+import net.minecraft.world.level.block.EnderChestBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.network.chat.Component;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,24 +44,24 @@ public abstract class EnderChestBlockMixin {
 
     @Shadow
     @Final
-    private static Text CONTAINER_NAME;
+    private static Component CONTAINER_TITLE;
 
     @WrapOperation(
-        method = "onUse",
+        method = "useWithoutItem",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/player/PlayerEntity;openHandledScreen(Lnet/minecraft/screen/NamedScreenHandlerFactory;)Ljava/util/OptionalInt;"
+            target = "Lnet/minecraft/world/entity/player/Player;openMenu(Lnet/minecraft/world/MenuProvider;)Ljava/util/OptionalInt;"
         ),
         require = 0
     )
-	private OptionalInt onUse(PlayerEntity playerEntity, NamedScreenHandlerFactory namedScreenHandlerFactory, Operation<OptionalInt> original) {
+	private OptionalInt onUse(Player playerEntity, MenuProvider namedScreenHandlerFactory, Operation<OptionalInt> original) {
         if (AmsServerSettings.largeEnderChest) {
-            SimpleNamedScreenHandlerFactory factory = new SimpleNamedScreenHandlerFactory((syncId, playerInventory, playerEntityInner) ->
-                GenericContainerScreenHandler.createGeneric9x6(
+            SimpleMenuProvider factory = new SimpleMenuProvider((syncId, playerInventory, playerEntityInner) ->
+                ChestMenu.sixRows(
                     syncId, playerInventory, playerEntityInner.getEnderChestInventory()
-                ), CONTAINER_NAME
+                ), CONTAINER_TITLE
             );
-            return playerEntity.openHandledScreen(factory);
+            return playerEntity.openMenu(factory);
         } else {
             return original.call(playerEntity, namedScreenHandlerFactory);
         }

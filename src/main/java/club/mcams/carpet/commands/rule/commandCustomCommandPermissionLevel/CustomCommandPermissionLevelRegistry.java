@@ -33,12 +33,12 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Formatting;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.ChatFormatting;
 
 import java.util.Map;
 import java.util.Objects;
@@ -49,61 +49,61 @@ public class CustomCommandPermissionLevelRegistry {
     private static final Translator translator = new Translator("command.customCommandPermissionLevel");
     private static final String MSG_HEAD = "<customCommandPermissionLevel> ";
     public static final Map<String, Integer> COMMAND_PERMISSION_MAP = new ConcurrentHashMap<>();
-    public static final Map<String, Predicate<ServerCommandSource>> DEFAULT_PERMISSION_MAP = new ConcurrentHashMap<>();
+    public static final Map<String, Predicate<CommandSourceStack>> DEFAULT_PERMISSION_MAP = new ConcurrentHashMap<>();
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-        CommandManager.literal("customCommandPermissionLevel")
+        Commands.literal("customCommandPermissionLevel")
         .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomCommandPermissionLevel))
-        .then(CommandManager.literal("set")
-        .then(CommandManager.argument("command", StringArgumentType.string())
+        .then(Commands.literal("set")
+        .then(Commands.argument("command", StringArgumentType.string())
         .suggests(new LiteralCommandSuggestionProvider())
-        .then(CommandManager.argument("permissionLevel", IntegerArgumentType.integer())
+        .then(Commands.argument("permissionLevel", IntegerArgumentType.integer())
         .suggests(ListSuggestionProvider.of(CommandHelper.permissionLevels))
         .executes(context -> set(
             context.getSource().getServer(),
-            context.getSource().getPlayerOrThrow(),
+            context.getSource().getPlayerOrException(),
             StringArgumentType.getString(context, "command"),
             IntegerArgumentType.getInteger(context, "permissionLevel")
         )))))
-        .then(CommandManager.literal("remove")
-        .then(CommandManager.argument("command", StringArgumentType.string())
+        .then(Commands.literal("remove")
+        .then(Commands.argument("command", StringArgumentType.string())
         .suggests(SetSuggestionProvider.of(COMMAND_PERMISSION_MAP.keySet()))
         .executes(context -> remove(
             context.getSource().getServer(),
-            context.getSource().getPlayerOrThrow(),
+            context.getSource().getPlayerOrException(),
             StringArgumentType.getString(context, "command")
         ))))
-        .then(CommandManager.literal("removeAll")
-        .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayerOrThrow())))
-        .then(CommandManager.literal("refresh")
+        .then(Commands.literal("removeAll")
+        .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayerOrException())))
+        .then(Commands.literal("refresh")
         .executes(context -> refreshCommandTree(context.getSource().getServer())))
-        .then(CommandManager.literal("list")
-        .executes(context -> list(context.getSource().getPlayerOrThrow())))
-        .then(CommandManager.literal("help")
-        .executes(context -> help(context.getSource().getPlayerOrThrow()))));
+        .then(Commands.literal("list")
+        .executes(context -> list(context.getSource().getPlayerOrException())))
+        .then(Commands.literal("help")
+        .executes(context -> help(context.getSource().getPlayerOrException()))));
     }
 
-    private static int set(MinecraftServer server, ServerPlayerEntity player, String command, int permissionLevel) {
+    private static int set(MinecraftServer server, ServerPlayer player, String command, int permissionLevel) {
         if (Objects.equals(command, "customCommandPermissionLevel")) {
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(MSG_HEAD + translator.tr("cant_modify_self").getString())
-                .formatted(Formatting.ITALIC, Formatting.RED), false
+                .withStyle(ChatFormatting.ITALIC, ChatFormatting.RED), false
             );
             return 0;
         }
         if (COMMAND_PERMISSION_MAP.containsKey(command)) {
             int oldPermissionLevel = COMMAND_PERMISSION_MAP.get(command);
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(
                     String.format("%s%s %d -> %d", MSG_HEAD, command, oldPermissionLevel, permissionLevel)
-                ).formatted(Formatting.GREEN), false
+                ).withStyle(ChatFormatting.GREEN), false
             );
         } else {
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(
                     String.format("%s+ %s/%d", MSG_HEAD, command, permissionLevel)
-                ).formatted(Formatting.GREEN), false
+                ).withStyle(ChatFormatting.GREEN), false
             );
         }
         COMMAND_PERMISSION_MAP.put(command, permissionLevel);
@@ -113,35 +113,35 @@ public class CustomCommandPermissionLevelRegistry {
         return 1;
     }
 
-    private static int remove(MinecraftServer server, PlayerEntity player, String command) {
+    private static int remove(MinecraftServer server, Player player, String command) {
         if (COMMAND_PERMISSION_MAP.containsKey(command)) {
             COMMAND_PERMISSION_MAP.remove(command);
             saveToJson();
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(
                     String.format("%s- %s", MSG_HEAD, command)
-                ).formatted(Formatting.RED, Formatting.ITALIC), false
+                ).withStyle(ChatFormatting.RED, ChatFormatting.ITALIC), false
             );
             CommandHelper.updateAllCommandPermissions(server);
         } else {
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(
                     MSG_HEAD + command + translator.tr("not_found").getString()
-                ).formatted(Formatting.RED, Formatting.ITALIC), false
+                ).withStyle(ChatFormatting.RED, ChatFormatting.ITALIC), false
             );
         }
         return 1;
     }
 
-    private static int removeAll(MinecraftServer server, ServerPlayerEntity player) {
+    private static int removeAll(MinecraftServer server, ServerPlayer player) {
         if (!COMMAND_PERMISSION_MAP.isEmpty()) {
             COMMAND_PERMISSION_MAP.clear();
             saveToJson();
         }
-        player.sendMessage(
+        player.displayClientMessage(
             Messenger.s(
                 MSG_HEAD + translator.tr("removeAll").getString()
-            ).formatted(Formatting.RED, Formatting.ITALIC), false
+            ).withStyle(ChatFormatting.RED, ChatFormatting.ITALIC), false
         );
         CommandHelper.updateAllCommandPermissions(server);
         return 1;
@@ -152,34 +152,34 @@ public class CustomCommandPermissionLevelRegistry {
         return 1;
     }
 
-    private static int list(PlayerEntity player) {
+    private static int list(Player player) {
         final String LINE = "------------------------------------";
-        player.sendMessage(
+        player.displayClientMessage(
             Messenger.s(
                 translator.tr("list").getString() + "\n" + LINE
-            ).formatted(Formatting.AQUA, Formatting.BOLD), false
+            ).withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD), false
         );
         for (Map.Entry<String, Integer> entry : COMMAND_PERMISSION_MAP.entrySet()) {
             String command = entry.getKey();
             int permissionLevel = entry.getValue();
-            player.sendMessage(
-                Messenger.s(command + " -> " + permissionLevel).formatted(Formatting.DARK_AQUA),
+            player.displayClientMessage(
+                Messenger.s(command + " -> " + permissionLevel).withStyle(ChatFormatting.DARK_AQUA),
                 false
             );
         }
         return 1;
     }
 
-    private static int help(PlayerEntity player) {
+    private static int help(Player player) {
         final String setHelp = translator.tr("help.set").getString();
         final String removeHelp = translator.tr("help.remove").getString();
         final String removeAllHelp = translator.tr("help.removeAll").getString();
         final String refreshHelp = translator.tr("help.refresh").getString();
         final String listHelp = translator.tr("help.list").getString();
-        player.sendMessage(
+        player.displayClientMessage(
             Messenger.s(
                 setHelp + "\n" + removeHelp + "\n" + removeAllHelp + "\n" + listHelp + "\n" + refreshHelp
-            ).formatted(Formatting.GRAY), false
+            ).withStyle(ChatFormatting.GRAY), false
         );
         return 1;
     }

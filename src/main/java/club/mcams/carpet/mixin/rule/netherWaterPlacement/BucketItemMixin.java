@@ -25,9 +25,9 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.BucketItem;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BucketItem;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -37,15 +37,15 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(BucketItem.class)
 public abstract class BucketItemMixin {
     @ModifyExpressionValue(
-        method = "placeFluid",
+        method = "emptyContents",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/attribute/WorldEnvironmentAttributeAccess;getAttributeValue(Lnet/minecraft/world/attribute/EnvironmentAttribute;Lnet/minecraft/util/math/BlockPos;)Ljava/lang/Object;"
+            target = "Lnet/minecraft/world/attribute/EnvironmentAttributeSystem;getValue(Lnet/minecraft/world/attribute/EnvironmentAttribute;Lnet/minecraft/core/BlockPos;)Ljava/lang/Object;"
         )
     )
     private Object netherWaterPlacement(Object original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
         if (AmsServerSettings.netherWaterPlacement) {
-            if (entity instanceof PlayerEntity) {
+            if (entity instanceof Player) {
                 return false;
             }
         }

@@ -26,8 +26,8 @@ import club.mcams.carpet.utils.PacketByteBufExtras;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
 
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.client.player.LocalPlayer;
 
 import java.util.Map;
 import java.util.UUID;
@@ -38,10 +38,10 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
     private final Map<UUID, String> poseMap;
     private final UUID targetPlayerUuid;
 
-    private UpdatePlayerPosePayload_S2C(PacketByteBuf buf) {
+    private UpdatePlayerPosePayload_S2C(FriendlyByteBuf buf) {
         super(ID);
-        this.poseMap = PacketByteBufExtras.readMap(buf, b -> b.readUuid(), PacketByteBuf::readString);
-        this.targetPlayerUuid = buf.readUuid();
+        this.poseMap = PacketByteBufExtras.readMap(buf, b -> b.readUUID(), FriendlyByteBuf::readUtf);
+        this.targetPlayerUuid = buf.readUUID();
     }
 
     private UpdatePlayerPosePayload_S2C(Map<UUID, String> poseMap, UUID targetPlayerUuid) {
@@ -51,9 +51,9 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
     }
 
     @Override
-    protected void writeData(PacketByteBuf buf) {
-        PacketByteBufExtras.writeMap(buf, this.poseMap, (b, uuid) -> b.writeUuid(uuid), PacketByteBuf::writeString);
-        buf.writeUuid(this.targetPlayerUuid);
+    protected void writeData(FriendlyByteBuf buf) {
+        PacketByteBufExtras.writeMap(buf, this.poseMap, (b, uuid) -> b.writeUUID(uuid), FriendlyByteBuf::writeUtf);
+        buf.writeUUID(this.targetPlayerUuid);
     }
 
     @Override
@@ -61,9 +61,9 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
         SetPlayerPoseCommandRegistry.DO_POSE_MAP.clear();
         SetPlayerPoseCommandRegistry.DO_POSE_MAP.putAll(this.poseMap);
 
-        ClientPlayerEntity player = MinecraftClientUtil.getCurrentPlayer();
+        LocalPlayer player = MinecraftClientUtil.getCurrentPlayer();
 
-        if (player.getUuid().equals(this.targetPlayerUuid)) {
+        if (player.getUUID().equals(this.targetPlayerUuid)) {
             player.setPose(player.getPose());
         }
     }

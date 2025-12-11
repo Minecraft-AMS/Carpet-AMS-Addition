@@ -22,14 +22,14 @@ package club.mcams.carpet.network;
 
 import club.mcams.carpet.network.payloads.AMS_UnknownPayload;
 
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.function.Function;
 
 public class AMS_PayloadCodec {
-    protected static AMS_CustomPayload decodePayload(PacketByteBuf buf) {
-        String packetId = buf.readString();
-        Function<PacketByteBuf, AMS_CustomPayload> constructor = AMS_PayloadManager.PAYLOAD_REGISTRY.get(packetId);
+    protected static AMS_CustomPayload decodePayload(FriendlyByteBuf buf) {
+        String packetId = buf.readUtf();
+        Function<FriendlyByteBuf, AMS_CustomPayload> constructor = AMS_PayloadManager.PAYLOAD_REGISTRY.get(packetId);
 
         if (constructor != null) {
             return constructor.apply(buf);

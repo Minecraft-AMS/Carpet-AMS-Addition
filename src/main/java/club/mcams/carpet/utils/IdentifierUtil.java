@@ -20,14 +20,14 @@
 
 package club.mcams.carpet.utils;
 
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 
 public class IdentifierUtil {
 	public static Identifier of(String namespace, String path) {
-		return Identifier.of(namespace, path);
+		return Identifier.fromNamespaceAndPath(namespace, path);
 	}
 
 	public static Identifier ofId(String id) {
-		return Identifier.of(id);
+		return Identifier.parse(id);
 	}
 }

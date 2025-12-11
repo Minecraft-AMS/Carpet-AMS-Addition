@@ -24,14 +24,14 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public abstract class PlayerEntityMixin {
-    @ModifyReturnValue(method = "getBlockBreakingSpeed", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getDestroySpeed", at = @At("RETURN"))
     private float getBlockBreakingSpeed(float original) {
         return AmsServerSettings.kirinArm ? Float.MAX_VALUE : original;
     }

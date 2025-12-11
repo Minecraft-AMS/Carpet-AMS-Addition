@@ -22,31 +22,29 @@ package club.mcams.carpet.mixin.rule.cakeBlockDropOnBreak;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CakeBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CakeBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.Mixin;
 
-import static net.minecraft.block.Block.dropStack;
-
 @Mixin(Block.class)
 public abstract class BlockMixin {
-    @Inject(method = "onBreak", at = @At("HEAD"))
-    private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
-        if (AmsServerSettings.cakeBlockDropOnBreak && state.getBlock() == Blocks.CAKE && state.get(CakeBlock.BITES) == 0) {
+    @Inject(method = "playerWillDestroy", at = @At("HEAD"))
+    private void onBreak(Level world, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<BlockState> cir) {
+        if (AmsServerSettings.cakeBlockDropOnBreak && state.getBlock() == Blocks.CAKE && state.getValue(CakeBlock.BITES) == 0) {
             if (!player.isCreative()) {
                 ItemStack cakeStack = new ItemStack(Items.CAKE);
-                dropStack(world, pos, cakeStack);
+                Block.popResource(world, pos, cakeStack);
             }
         }
     }

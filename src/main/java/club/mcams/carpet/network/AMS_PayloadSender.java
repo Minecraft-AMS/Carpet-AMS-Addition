@@ -20,17 +20,17 @@
 
 package club.mcams.carpet.network;
 
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
-import net.minecraft.network.packet.s2c.common.CustomPayloadS2CPacket;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 
 public class AMS_PayloadSender {
-    protected static void s2c(AMS_CustomPayload payload, ServerPlayerEntity player) {
-        player.networkHandler.sendPacket(new CustomPayloadS2CPacket(payload));
+    protected static void s2c(AMS_CustomPayload payload, ServerPlayer player) {
+        player.connection.send(new ClientboundCustomPayloadPacket(payload));
     }
 
-    protected static void c2s(AMS_CustomPayload payload, ClientPlayerEntity player) {
-        player.networkHandler.sendPacket(new CustomPayloadC2SPacket(payload));
+    protected static void c2s(AMS_CustomPayload payload, LocalPlayer player) {
+        player.connection.send(new ServerboundCustomPayloadPacket(payload));
     }
 }

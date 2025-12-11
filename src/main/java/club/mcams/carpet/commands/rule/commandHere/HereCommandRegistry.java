@@ -30,97 +30,97 @@ import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import net.minecraft.world.World;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.level.Level;
 
 import com.mojang.brigadier.CommandDispatcher;
 
 public class HereCommandRegistry {
     private static final Translator translator = new Translator("command.here");
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            CommandManager.literal("here")
+            Commands.literal("here")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandHere))
             .executes(context -> sendMessage(
                 context.getSource(),
                 context.getSource().getServer(),
-                context.getSource().getPlayerOrThrow()
+                context.getSource().getPlayerOrException()
             ))
         );
     }
 
-    private static int sendMessage(ServerCommandSource source, MinecraftServer minecraftServer, PlayerEntity player) {
+    private static int sendMessage(CommandSourceStack source, MinecraftServer minecraftServer, Player player) {
         Messenger.sendServerMessage(minecraftServer, message(source));
         highlightPlayer(player);
         return 1;
     }
 
-    private static void highlightPlayer(PlayerEntity player) {
-        player.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 600));
+    private static void highlightPlayer(Player player) {
+        player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600));
     }
 
-    private static String getPlayerName(ServerCommandSource source) {
-        return source.getName();
+    private static String getPlayerName(CommandSourceStack source) {
+        return source.getTextName();
     }
 
-    private static String getCurrentPos(ServerCommandSource source) {
+    private static String getCurrentPos(CommandSourceStack source) {
         int[] pos = CommandHereWhereHelper.getPos(source);
         return String.format("%d, %d, %d", pos[0], pos[1], pos[2]);
     }
 
-    private static String getOtherPos(ServerCommandSource source) {
-        DimensionWrapper dimension = DimensionWrapper.of(source.getWorld());
+    private static String getOtherPos(CommandSourceStack source) {
+        DimensionWrapper dimension = DimensionWrapper.of(source.getLevel());
         int[] pos = CommandHereWhereHelper.getPos(source);
         String otherPos = null;
-        if (dimension.getValue() == World.NETHER) {
+        if (dimension.getValue() == Level.NETHER) {
             otherPos = String.format("%d, %d, %d", pos[0] * 8, pos[1], pos[2] * 8);
-        } else if (dimension.getValue() == World.OVERWORLD) {
+        } else if (dimension.getValue() == Level.OVERWORLD) {
             otherPos = String.format("%d, %d, %d", pos[0] / 8, pos[1], pos[2] / 8);
         }
         return otherPos;
     }
 
     @SuppressWarnings("DuplicatedCode")
-    private static Text message(ServerCommandSource source) {
-        DimensionWrapper dimension = DimensionWrapper.of(source.getWorld());
+    private static Component message(CommandSourceStack source) {
+        DimensionWrapper dimension = DimensionWrapper.of(source.getLevel());
         String playerName = getPlayerName(source);
         String currentPos = getCurrentPos(source);
         String otherPos = getOtherPos(source);
-        Text message = Messenger.s("Unknown dimension").formatted(Formatting.RED);
-        if (dimension.getValue() == World.END) {
+        Component message = Messenger.s("Unknown dimension").withStyle(ChatFormatting.RED);
+        if (dimension.getValue() == Level.END) {
             message = Messenger.s(
                 String.format("§d[%s] §e%s §b@ §d[ %s ]", translator.tr("the_end").getString(), playerName, currentPos))
-                .append(copyButton(currentPos, Formatting.LIGHT_PURPLE)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
-        } else if (dimension.getValue() == World.OVERWORLD) {
+                .append(copyButton(currentPos, ChatFormatting.LIGHT_PURPLE)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
+        } else if (dimension.getValue() == Level.OVERWORLD) {
             message = Messenger.s(
                 String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", translator.tr("overworld").getString(), playerName, currentPos, otherPos))
-                .append(copyButton(currentPos, Formatting.GREEN)).append(copyButton(otherPos, Formatting.DARK_RED)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
-        } else if (dimension.getValue() == World.NETHER) {
+                .append(copyButton(currentPos, ChatFormatting.GREEN)).append(copyButton(otherPos, ChatFormatting.DARK_RED)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
+        } else if (dimension.getValue() == Level.NETHER) {
             message = Messenger.s(
                 String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", translator.tr("nether").getString(), playerName, currentPos, otherPos))
-                .append(copyButton(currentPos, Formatting.DARK_RED)).append(copyButton(otherPos, Formatting.GREEN)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
+                .append(copyButton(currentPos, ChatFormatting.DARK_RED)).append(copyButton(otherPos, ChatFormatting.GREEN)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
         }
         return message;
     }
 
-    private static Text copyButton(String copyText, Formatting buttonColor) {
+    private static Component copyButton(String copyText, ChatFormatting buttonColor) {
         String copyCoordText = copyText.replace(",", ""); // 1, 0, -24 -> 1 0 -24
-        Text hoverText = null;
-        if (buttonColor == Formatting.LIGHT_PURPLE) {
-            hoverText = Messenger.s(translator.tr("the_end_button_hover").getString()).formatted(Formatting.YELLOW);
-        } else if (buttonColor == Formatting.GREEN) {
-            hoverText = Messenger.s(translator.tr("overworld_button_hover").getString()).formatted(Formatting.YELLOW);
-        } else if (buttonColor == Formatting.DARK_RED) {
-            hoverText = Messenger.s(translator.tr("nether_button_hover").getString()).formatted(Formatting.YELLOW);
+        Component hoverText = null;
+        if (buttonColor == ChatFormatting.LIGHT_PURPLE) {
+            hoverText = Messenger.s(translator.tr("the_end_button_hover").getString()).withStyle(ChatFormatting.YELLOW);
+        } else if (buttonColor == ChatFormatting.GREEN) {
+            hoverText = Messenger.s(translator.tr("overworld_button_hover").getString()).withStyle(ChatFormatting.YELLOW);
+        } else if (buttonColor == ChatFormatting.DARK_RED) {
+            hoverText = Messenger.s(translator.tr("nether_button_hover").getString()).withStyle(ChatFormatting.YELLOW);
         }
         return
             Messenger.s(" [C]").setStyle(

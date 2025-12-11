@@ -24,13 +24,13 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.world.entity.Mob;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(MobEntity.class)
+@Mixin(Mob.class)
 public abstract class MobEntityMixin {
     @ModifyReturnValue(method = "canBeLeashed", at = @At("RETURN"))
     private boolean allowLeashed(boolean original) {

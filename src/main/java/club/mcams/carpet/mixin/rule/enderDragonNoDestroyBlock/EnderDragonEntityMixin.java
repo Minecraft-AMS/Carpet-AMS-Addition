@@ -24,19 +24,19 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(EnderDragonEntity.class)
+@Mixin(EnderDragon.class)
 public abstract class EnderDragonEntityMixin {
     @ModifyExpressionValue(
-        method = "destroyBlocks",
+        method = "checkWalls",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/world/ServerWorld;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
+            target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"
         )
     )
     private boolean enderDragonNoDestroyBlock(boolean original) {

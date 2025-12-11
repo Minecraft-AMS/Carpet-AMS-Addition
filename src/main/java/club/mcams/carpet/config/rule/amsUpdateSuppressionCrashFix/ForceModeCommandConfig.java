@@ -27,7 +27,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.WorldSavePath;
+import net.minecraft.world.level.storage.LevelResource;
 
 import java.io.File;
 import java.io.FileReader;
@@ -72,6 +72,6 @@ public class ForceModeCommandConfig {
     }
 
     public static String getPath(MinecraftServer server) {
-        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/amsUpdateSuppressionCrashFixForceMode.json").toString();
+        return server.getWorldPath(LevelResource.ROOT).resolve("carpetamsaddition/amsUpdateSuppressionCrashFixForceMode.json").toString();
     }
 }

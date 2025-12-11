@@ -26,16 +26,16 @@ import club.mcams.carpet.mixin.rule.commandGetClientPlayerFPS.MinecraftClientAcc
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 
 @Environment(EnvType.CLIENT)
 public class MinecraftClientUtil {
-    public static ClientPlayerEntity getCurrentPlayer() {
+    public static LocalPlayer getCurrentPlayer() {
         return AmsClient.minecraftClient.player;
     }
 
-    public static MinecraftClient getCurrentClient() {
+    public static Minecraft getCurrentClient() {
         return AmsClient.minecraftClient;
     }
 
@@ -44,6 +44,6 @@ public class MinecraftClientUtil {
     }
 
     public static int getClientFps() {
-        return ((MinecraftClientAccessor) getCurrentClient()).getCurrentFps();
+        return ((MinecraftClientAccessor) getCurrentClient()).getFps();
     }
 }

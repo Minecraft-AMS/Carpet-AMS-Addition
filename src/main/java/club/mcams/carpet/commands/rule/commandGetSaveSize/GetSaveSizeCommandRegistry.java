@@ -28,13 +28,13 @@ import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Style;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.WorldSavePath;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Style;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.level.storage.LevelResource;
 
 import java.io.File;
 import java.util.Objects;
@@ -42,20 +42,20 @@ import java.util.Objects;
 public class GetSaveSizeCommandRegistry {
     private static final Translator translator = new Translator("command.getSaveSize");
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            CommandManager.literal("getSaveSize")
+            Commands.literal("getSaveSize")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetSaveSize))
-            .executes(context -> executeGetSaveSize(context.getSource().getPlayerOrThrow()))
+            .executes(context -> executeGetSaveSize(context.getSource().getPlayerOrException()))
         );
     }
 
-    private static int executeGetSaveSize(PlayerEntity player) {
+    private static int executeGetSaveSize(Player player) {
         MinecraftServer server = EntityUtil.getEntityServer(player);
         saveWorld(server, player);
         long size = getFolderSize(getSaveFolder(server));
         String sizeString = formatSize(size);
-        player.sendMessage(
+        player.displayClientMessage(
             Messenger.s(
                 String.format(
                     "§e%s §a§l§n%s",
@@ -67,27 +67,27 @@ public class GetSaveSizeCommandRegistry {
         return 1;
     }
 
-    private static void saveWorld(MinecraftServer server, PlayerEntity player) {
+    private static void saveWorld(MinecraftServer server, Player player) {
         if (server != null) {
             String saveAllMessage;
             final String SUCCESS_MSG = translator.tr("save_success_msg").getString();
             final String FAIL_MSG = translator.tr("save_fail_msg").getString();
             //#if MC>=11800
-            boolean saveAllSuccess = server.saveAll(false, true, true);
+            boolean saveAllSuccess = server.saveEverything(false, true, true);
             //#else
             //$$ boolean saveAllSuccess = server.save(false, true, true);
             //#endif
             saveAllMessage = saveAllSuccess ? SUCCESS_MSG : FAIL_MSG;
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s(saveAllMessage).
-                setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
+                setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)),
                 false
             );
         }
     }
 
     private static File getSaveFolder(MinecraftServer server) {
-        return Objects.requireNonNull(server).getSavePath(WorldSavePath.ROOT).toFile();
+        return Objects.requireNonNull(server).getWorldPath(LevelResource.ROOT).toFile();
     }
 
     private static long getFolderSize(File folder) {

@@ -25,8 +25,8 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.block.EndPortalBlock;
-import net.minecraft.world.TeleportTarget;
+import net.minecraft.world.level.block.EndPortalBlock;
+import net.minecraft.world.level.portal.TeleportTransition;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,14 +37,14 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @Mixin(EndPortalBlock.class)
 public abstract class EndPortalBlockMixin {
     @WrapOperation(
-        method = "createTeleportTarget",
+        method = "getPortalDestination",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/TeleportTarget$PostDimensionTransition;then(Lnet/minecraft/world/TeleportTarget$PostDimensionTransition;)Lnet/minecraft/world/TeleportTarget$PostDimensionTransition;"
+            target = "Lnet/minecraft/world/level/portal/TeleportTransition$PostTeleportTransition;then(Lnet/minecraft/world/level/portal/TeleportTransition$PostTeleportTransition;)Lnet/minecraft/world/level/portal/TeleportTransition$PostTeleportTransition;"
         )
     )
-    private TeleportTarget.PostDimensionTransition endPortalChunkLoadDisabled(TeleportTarget.PostDimensionTransition instance, TeleportTarget.PostDimensionTransition next, Operation<TeleportTarget.PostDimensionTransition> original) {
-        if (AmsServerSettings.endPortalChunkLoadDisabled && next.equals(TeleportTarget.ADD_PORTAL_CHUNK_TICKET)) {
+    private TeleportTransition.PostTeleportTransition endPortalChunkLoadDisabled(TeleportTransition.PostTeleportTransition instance, TeleportTransition.PostTeleportTransition next, Operation<TeleportTransition.PostTeleportTransition> original) {
+        if (AmsServerSettings.endPortalChunkLoadDisabled && next.equals(TeleportTransition.PLACE_PORTAL_TICKET)) {
             return entity -> {};
         } else {
             return original.call(instance, next);

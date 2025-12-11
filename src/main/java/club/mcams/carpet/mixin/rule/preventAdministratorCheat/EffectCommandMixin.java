@@ -22,8 +22,8 @@ package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
 
 import club.mcams.carpet.helpers.rule.preventAdministratorCheat.PermissionHelper;
 
-import net.minecraft.server.command.EffectCommand;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.commands.EffectCommands;
+import net.minecraft.commands.CommandSourceStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 import java.util.function.Predicate;
 
-@Mixin(EffectCommand.class)
+@Mixin(EffectCommands.class)
 public abstract class EffectCommandMixin {
     @ModifyArg(
         method = "register",
@@ -43,7 +43,7 @@ public abstract class EffectCommandMixin {
         require = 1,
         allow = 2
     )
-    private static Predicate<ServerCommandSource> preventCheat(Predicate<ServerCommandSource> predicate) {
+    private static Predicate<CommandSourceStack> preventCheat(Predicate<CommandSourceStack> predicate) {
         return source -> predicate.test(source) && PermissionHelper.canCheat(source);
     }
 }

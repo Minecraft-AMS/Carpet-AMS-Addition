@@ -43,9 +43,9 @@ import club.mcams.carpet.commands.rule.commandAnvilInteractionDisabled.AnvilInte
 import club.mcams.carpet.commands.rule.commandPlayerChunkLoadController.PlayerChunkLoadControllerCommandRegistry;
 import club.mcams.carpet.commands.rule.commandGoto.GotoCommandRegistry;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 //#if MC>=11900
-import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.commands.CommandBuildContext;
 //#endif
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -56,12 +56,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class RegisterCommands {
     private static final Queue<Runnable> AMS_CMD_QUEUE = new ConcurrentLinkedQueue<>();
 
-    public static void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
+    public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher, final CommandBuildContext commandBuildContext) {
         buildAmsCommandList(dispatcher, commandBuildContext);
         AMS_CMD_QUEUE.forEach(Runnable::run);
     }
 
-    private static void buildAmsCommandList(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
+    private static void buildAmsCommandList(CommandDispatcher<CommandSourceStack> dispatcher, final CommandBuildContext commandBuildContext) {
         AMS_CMD_QUEUE.add(() -> AmsUpdateSuppressionCrashFixCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> PlayerChunkLoadControllerCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> AnvilInteractionDisabledCommandRegistry.register(dispatcher));

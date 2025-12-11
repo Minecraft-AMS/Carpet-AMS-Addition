@@ -28,9 +28,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(targets = "net.minecraft.entity.mob.EndermanEntity$PickUpBlockGoal")
+@Mixin(targets = "net.minecraft.world.entity.monster.EnderMan$EndermanTakeBlockGoal")
 public abstract class PickUpBlockGoalMixin {
-    @ModifyReturnValue(method = "canStart", at = @At("RETURN"))
+    @ModifyReturnValue(method = "canUse", at = @At("RETURN"))
     private boolean canStart(boolean original) {
         return AmsServerSettings.endermanPickUpDisabled ? false : original;
     }

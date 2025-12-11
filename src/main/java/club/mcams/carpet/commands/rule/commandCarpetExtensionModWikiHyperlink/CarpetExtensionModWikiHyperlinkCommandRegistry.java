@@ -32,12 +32,12 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -46,26 +46,26 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
     private static final Translator translator = new Translator("command.carpetExtensionModWikiHyperlink");
     private static final Set<String> EXTENSION_NAMES = new HashSet<>();
     @SuppressWarnings("CodeBlock2Expr")
-    private static final SuggestionProvider<ServerCommandSource> getSuggestions = (context, builder) -> {
+    private static final SuggestionProvider<CommandSourceStack> getSuggestions = (context, builder) -> {
         return new SetSuggestionProvider<>(EXTENSION_NAMES).getSuggestions(context, builder);
     };
 
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            CommandManager.literal("carpetExtensionModWikiHyperlink")
+            Commands.literal("carpetExtensionModWikiHyperlink")
                 .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCarpetExtensionModWikiHyperlink))
-                .then(CommandManager.argument("extensionName", StringArgumentType.string())
+                .then(Commands.argument("extensionName", StringArgumentType.string())
                 .suggests(getSuggestions)
                 .executes(context -> execute(
-                    context.getSource().getPlayerOrThrow(), StringArgumentType.getString(context, "extensionName")
+                    context.getSource().getPlayerOrException(), StringArgumentType.getString(context, "extensionName")
                 ))
             )
         );
     }
 
-    private static int execute(PlayerEntity player, String extensionName) {
-        player.sendMessage(
-            translator.tr("click_to_jump").formatted(Formatting.AQUA)
+    private static int execute(Player player, String extensionName) {
+        player.displayClientMessage(
+            translator.tr("click_to_jump").withStyle(ChatFormatting.AQUA)
             .append(createOpenUrlButton(getUrl(extensionName))), false
         );
         return 1;
@@ -90,16 +90,16 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
         return extensionName;
     }
 
-    private static Text createOpenUrlButton(String url) {
+    private static Component createOpenUrlButton(String url) {
         return Messenger.s(getUrl(url)).setStyle(
-            Style.EMPTY.withColor(Formatting.GREEN)
+            Style.EMPTY.withColor(ChatFormatting.GREEN)
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.OPEN_URL, url))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, getCopyHoverText(url)))
         );
     }
 
-    private static Text getCopyHoverText(String url) {
-        return Messenger.s(translator.tr("click_to_jump").getString() + getUrl(url)).formatted(Formatting.YELLOW);
+    private static Component getCopyHoverText(String url) {
+        return Messenger.s(translator.tr("click_to_jump").getString() + getUrl(url)).withStyle(ChatFormatting.YELLOW);
     }
 
     static {

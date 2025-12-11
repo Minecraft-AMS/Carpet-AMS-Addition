@@ -22,13 +22,13 @@ package club.mcams.carpet.mixin.rule.easyMaxLevelBeacon;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BeaconBlockEntity;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BeaconBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,16 +36,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.Inject;
 
 @Mixin(BeaconBlockEntity.class)
-public abstract class BeaconBlockEntityMixin extends BlockEntity{
+public abstract class BeaconBlockEntityMixin extends BlockEntity {
     private BeaconBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
     }
 
-    @Inject(method = "updateLevel", at = @At("HEAD"), cancellable = true)
-    private static void updateLevel(World world, int x, int y, int z, CallbackInfoReturnable<Integer> cir) {
+    @Inject(method = "updateBase", at = @At("HEAD"), cancellable = true)
+    private static void updateLevel(Level world, int x, int y, int z, CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.easyMaxLevelBeacon) {
             BlockPos pos = new BlockPos(x, y - 1, z);
-            if (world.getBlockState(pos).isIn(BlockTags.BEACON_BASE_BLOCKS)) {
+            if (world.getBlockState(pos).is(BlockTags.BEACON_BASE_BLOCKS)) {
                 cir.setReturnValue(4);
             }
         }

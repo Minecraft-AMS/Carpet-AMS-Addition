@@ -22,7 +22,7 @@ package club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController;
 
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +40,7 @@ public class ChunkLoading {
         }
     }
 
-    protected static ServerPlayerEntity playerFromName(String name) {
-        return MinecraftServerUtil.getServer().getPlayerManager().getPlayer(name);
+    protected static ServerPlayer playerFromName(String name) {
+        return MinecraftServerUtil.getServer().getPlayerList().getPlayerByName(name);
     }
 }

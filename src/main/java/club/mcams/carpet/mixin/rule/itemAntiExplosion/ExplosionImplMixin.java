@@ -26,20 +26,20 @@ import club.mcams.carpet.utils.Noop;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.explosion.ExplosionImpl;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.ServerExplosion;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(ExplosionImpl.class)
+@Mixin(ServerExplosion.class)
 public abstract class ExplosionImplMixin {
-    @WrapOperation(method = "damageEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;addVelocity(Lnet/minecraft/util/math/Vec3d;)V"))
-    private void onSetVelocity(Entity entity, Vec3d velocity, Operation<Void> original) {
+    @WrapOperation(method = "hurtEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;push(Lnet/minecraft/world/phys/Vec3;)V"))
+    private void onSetVelocity(Entity entity, Vec3 velocity, Operation<Void> original) {
         if (Objects.equals(AmsServerSettings.itemAntiExplosion, "no_blast_wave") && entity instanceof ItemEntity) {
             Noop.noop();
         } else {

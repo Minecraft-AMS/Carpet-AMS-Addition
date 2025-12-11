@@ -20,19 +20,19 @@
 
 package club.mcams.carpet.mixin.rule.creativeOneHitKill;
 
-import net.minecraft.entity.player.PlayerAbilities;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundCategory;
+import net.minecraft.world.entity.player.Abilities;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.sounds.SoundSource;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public interface PlayerEntityAccessorAndInvoker {
     @Accessor("abilities")
-    PlayerAbilities getPlayerAbilities();
+    Abilities getPlayerAbilities();
 
-    @Invoker("getSoundCategory")
-    SoundCategory invokeGetSoundCategory();
+    @Invoker("getSoundSource")
+    SoundSource invokeGetSoundSource();
 }

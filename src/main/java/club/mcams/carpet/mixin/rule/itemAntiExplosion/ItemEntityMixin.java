@@ -24,10 +24,10 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.server.level.ServerLevel;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,14 +37,14 @@ import java.util.Objects;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin {
     @ModifyExpressionValue(
-        method = "damage",
+        method = "hurtServer",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/ItemEntity;isAlwaysInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
+            target = "Lnet/minecraft/world/entity/item/ItemEntity;isInvulnerableToBase(Lnet/minecraft/world/damagesource/DamageSource;)Z"
         )
     )
-    private boolean isInvulnerableTo(boolean original, ServerWorld world, DamageSource source) {
-        if(!Objects.equals(AmsServerSettings.itemAntiExplosion, "false") && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
+    private boolean isInvulnerableTo(boolean original, ServerLevel world, DamageSource source) {
+        if(!Objects.equals(AmsServerSettings.itemAntiExplosion, "false") && source.is(DamageTypeTags.IS_EXPLOSION)) {
             return original || !Objects.equals(AmsServerSettings.itemAntiExplosion, "false");
         } else {
             return original;

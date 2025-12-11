@@ -22,16 +22,16 @@ package club.mcams.carpet.mixin.rule.largeEnderChest;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.NonNullList;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(PlayerEntity.class)
+@Mixin(Player.class)
 public abstract class PlayerEntityMixin implements PlayerEntityInvoker {
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void largeEnderChest(CallbackInfo ci) {
@@ -39,7 +39,7 @@ public abstract class PlayerEntityMixin implements PlayerEntityInvoker {
 			final int LARGE_ENDERCHEST_SIZE = 9 * 6;
 			SimpleInventoryAccessor simpleInventoryAccessor = (SimpleInventoryAccessor) this.invokeGetEnderChestInventory();
 			simpleInventoryAccessor.setSize(LARGE_ENDERCHEST_SIZE);
-			simpleInventoryAccessor.setStacks(DefaultedList.ofSize(LARGE_ENDERCHEST_SIZE, ItemStack.EMPTY));
+			simpleInventoryAccessor.setStacks(NonNullList.withSize(LARGE_ENDERCHEST_SIZE, ItemStack.EMPTY));
 		}
 	}
 }

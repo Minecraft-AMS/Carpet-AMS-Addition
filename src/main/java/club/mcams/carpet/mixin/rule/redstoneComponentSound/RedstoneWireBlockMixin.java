@@ -22,30 +22,30 @@ package club.mcams.carpet.mixin.rule.redstoneComponentSound;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.RedstoneWireBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.RedStoneWireBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(RedstoneWireBlock.class)
+@Mixin(RedStoneWireBlock.class)
 public abstract class RedstoneWireBlockMixin {
-    @Inject(method = "onUse", at = @At(value = "RETURN", ordinal = 1))
+    @Inject(method = "useWithoutItem", at = @At(value = "RETURN", ordinal = 1))
     private void playSound(
-        BlockState state, World world, BlockPos pos, PlayerEntity player,
-        BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir
+            BlockState state, Level world, BlockPos pos, Player player,
+            BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
     ) {
         if (AmsServerSettings.redstoneComponentSound) {
-            world.playSound(player, pos, SoundEvents.BLOCK_SAND_STEP, SoundCategory.BLOCKS, 0.8f, 2.5f);
+            world.playSound(player, pos, SoundEvents.SAND_STEP, SoundSource.BLOCKS, 0.8f, 2.5f);
         }
     }
 }

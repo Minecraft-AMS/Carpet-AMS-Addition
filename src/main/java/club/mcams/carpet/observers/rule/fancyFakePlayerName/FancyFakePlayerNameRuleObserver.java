@@ -30,21 +30,21 @@ import club.mcams.carpet.settings.RuleObserver;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.List;
 import java.util.Objects;
 
 public class FancyFakePlayerNameRuleObserver extends RuleObserver<String> {
     @Override
-    public void onValueChange(ServerCommandSource source, CarpetRule<String> rule, String oldValue, String newValue) {
+    public void onValueChange(CommandSourceStack source, CarpetRule<String> rule, String oldValue, String newValue) {
         if (MinecraftServerUtil.serverIsRunning()) {
             MinecraftServer server = MinecraftServerUtil.getServer();
             FancyFakePlayerNameTeamController.removeBotTeam(server, oldValue);
             if (!Objects.equals(newValue, "false")) {
-                List<ServerPlayerEntity> playerEntities = server.getPlayerManager().getPlayerList();
-                for (ServerPlayerEntity player : playerEntities) {
+                List<ServerPlayer> playerEntities = server.getPlayerList().getPlayers();
+                for (ServerPlayer player : playerEntities) {
                     if (player instanceof EntityPlayerMPFake && !((EntityPlayerMPFake) player).isAShadow) {
                         FancyNameHelper.addBotTeamNamePrefix(player, newValue);
                     }

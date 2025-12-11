@@ -25,9 +25,9 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.block.NetherPortalBlock;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.NetherPortalBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,14 +35,14 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
     @WrapOperation(
-        method = "onEntityCollision",
+        method = "entityInside",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/Entity;canUsePortals(Z)Z"
+            target = "Lnet/minecraft/world/entity/Entity;canUsePortal(Z)Z"
         )
     )
     private boolean onEntityCollision(Entity entity, boolean canUsePortals, Operation<Boolean> original) {
-        if (AmsServerSettings.playerNoNetherPortalTeleport && entity instanceof PlayerEntity) {
+        if (AmsServerSettings.playerNoNetherPortalTeleport && entity instanceof Player) {
             return false;
         } else {
             return original.call(entity, canUsePortals);

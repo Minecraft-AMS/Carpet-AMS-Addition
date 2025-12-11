@@ -24,15 +24,15 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.NetherPortalBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.NetherPortalBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(AbstractBlock.AbstractBlockState.class)
+@Mixin(BlockBehaviour.BlockStateBase.class)
 public abstract class AbstractBlockMixin implements AbstractBlockStateInvoker {
-    @ModifyReturnValue(method = "getHardness", at = @At("RETURN"))
+    @ModifyReturnValue(method = "getDestroySpeed", at = @At("RETURN"))
     private float canBreakNetherPortalBlock(float original) {
         if (AmsServerSettings.customizedNetherPortal && this.invokeGetBlock() instanceof NetherPortalBlock) {
             return 0.518F;

@@ -20,11 +20,11 @@
 
 package club.mcams.carpet.mixin.rule.infiniteTrades;
 
-import net.minecraft.village.TradeOffer;
+import net.minecraft.world.item.trading.MerchantOffer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(TradeOffer.class)
+@Mixin(MerchantOffer.class)
 public interface TradeOfferAccessor {
     @Accessor("uses")
     void setUses(int size);

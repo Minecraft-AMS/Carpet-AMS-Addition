@@ -24,7 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.block.DragonEggBlock;
+import net.minecraft.world.level.block.DragonEggBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,7 +35,7 @@ public abstract class DragonEggBlockMixin {
         method = "teleport",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/block/BlockState;isAir()Z"
+            target = "Lnet/minecraft/world/level/block/state/BlockState;isAir()Z"
         )
     )
     private boolean teleport(boolean original) {

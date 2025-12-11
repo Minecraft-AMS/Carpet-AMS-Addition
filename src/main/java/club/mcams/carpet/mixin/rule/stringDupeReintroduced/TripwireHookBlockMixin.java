@@ -24,7 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.block.TripwireHookBlock;
+import net.minecraft.world.level.block.TripWireHookBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,13 +33,13 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
 @GameVersion(version = "Minecraft >= 1.21.2", desc = "https://bugs.mojang.com/browse/MC-59471")
-@Mixin(TripwireHookBlock.class)
+@Mixin(TripWireHookBlock.class)
 public abstract class TripwireHookBlockMixin {
     @ModifyExpressionValue(
-        method = "update",
+        method = "calculateState",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z",
+            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
             ordinal = 3
         )
     )

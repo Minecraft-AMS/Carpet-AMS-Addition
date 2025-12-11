@@ -24,12 +24,12 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.block.AbstractSignBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.SignBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,16 +37,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.20")
-@Mixin(AbstractSignBlock.class)
+@Mixin(SignBlock.class)
 public abstract class AbstractSignBlockMixin {
     @ModifyExpressionValue(
-        method = "onUse",
+        method = "useWithoutItem",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/player/PlayerEntity;canModifyBlocks()Z"
+            target = "Lnet/minecraft/world/entity/player/Player;mayBuild()Z"
         )
     )
-    public boolean onUse(boolean original, BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        return AmsServerSettings.sneakToEditSign ? original && player.isSneaking() : original;
+    public boolean onUse(boolean original, BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
+        return AmsServerSettings.sneakToEditSign ? original && player.isShiftKeyDown() : original;
     }
 }

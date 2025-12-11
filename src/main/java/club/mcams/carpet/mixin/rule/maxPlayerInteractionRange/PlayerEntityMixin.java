@@ -25,26 +25,23 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
 import java.util.Objects;
 
-@GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(value = PlayerEntity.class, priority = 1688)
+@Mixin(value = Player.class, priority = 1688)
 public abstract class PlayerEntityMixin {
     @WrapOperation(
-        method = "canInteractWithBlockAt",
+        method = "isWithinBlockInteractionRange",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/player/PlayerEntity;getBlockInteractionRange()D"
+            target = "Lnet/minecraft/world/entity/player/Player;blockInteractionRange()D"
         )
     )
-    private double canInteractWithBlockAt(PlayerEntity player, Operation<Double> original) {
+    private double canInteractWithBlockAt(Player player, Operation<Double> original) {
         if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D && Objects.equals(AmsServerSettings.maxPlayerBlockInteractionRangeScope, "server")) {
             return AmsServerSettings.maxPlayerBlockInteractionRange;
         } else {
@@ -53,13 +50,13 @@ public abstract class PlayerEntityMixin {
     }
 
     @WrapOperation(
-        method = "canInteractWithEntityIn",
+        method = "isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/player/PlayerEntity;getEntityInteractionRange()D"
+            target = "Lnet/minecraft/world/entity/player/Player;entityInteractionRange()D"
         )
     )
-    private double canInteractWithEntityAt(PlayerEntity player, Operation<Double> original) {
+    private double canInteractWithEntityAt1(Player player, Operation<Double> original) {
         if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && Objects.equals(AmsServerSettings.maxPlayerEntityInteractionRangeScope, "server")) {
             return AmsServerSettings.maxPlayerEntityInteractionRange;
         } else {

@@ -22,12 +22,12 @@ package club.mcams.carpet.mixin.rule.safePointedDripstone;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.block.PointedDripstoneBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.PointedDripstoneBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,10 +39,10 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft >= 1.17")
 @Mixin(PointedDripstoneBlock.class)
 public abstract class PointedDripstoneBlockMixin {
-    @Inject(method = "onLandedUpon", at = @At("HEAD"), cancellable = true)
-    private void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance, CallbackInfo ci) {
-        if (AmsServerSettings.safePointedDripstone && entity instanceof PlayerEntity) {
-            entity.handleFallDamage(fallDistance, 1.0F, world.getDamageSources().fall());
+    @Inject(method = "fallOn", at = @At("HEAD"), cancellable = true)
+    private void onLandedUpon(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance, CallbackInfo ci) {
+        if (AmsServerSettings.safePointedDripstone && entity instanceof Player) {
+            entity.causeFallDamage(fallDistance, 1.0F, world.damageSources().fall());
             ci.cancel();
         }
     }

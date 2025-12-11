@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.utils;
 
-import net.minecraft.network.PacketByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ import java.util.function.Function;
 import java.util.function.BiConsumer;
 
 public class PacketByteBufExtras {
-    public static <K, V> void writeMap(PacketByteBuf buf, Map<K, V> map, BiConsumer<PacketByteBuf, K> keyWriter, BiConsumer<PacketByteBuf, V> valueWriter) {
+    public static <K, V> void writeMap(FriendlyByteBuf buf, Map<K, V> map, BiConsumer<FriendlyByteBuf, K> keyWriter, BiConsumer<FriendlyByteBuf, V> valueWriter) {
         buf.writeVarInt(map.size());
         for (Map.Entry<K, V> entry : map.entrySet()) {
             keyWriter.accept(buf, entry.getKey());
@@ -36,7 +36,7 @@ public class PacketByteBufExtras {
         }
     }
 
-    public static <K, V> Map<K, V> readMap(PacketByteBuf buf, Function<PacketByteBuf, K> keyReader, Function<PacketByteBuf, V> valueReader) {
+    public static <K, V> Map<K, V> readMap(FriendlyByteBuf buf, Function<FriendlyByteBuf, K> keyReader, Function<FriendlyByteBuf, V> valueReader) {
         int size = buf.readVarInt();
         Map<K, V> map = new HashMap<>();
 

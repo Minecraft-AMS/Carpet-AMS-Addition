@@ -20,14 +20,14 @@
 
 package club.mcams.carpet.mixin.rule.sendPlayerDeathLocation;
 
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-@Mixin(ServerPlayerEntity.class)
+@Mixin(ServerPlayer.class)
 public interface ServerPlayerEntityInvoker {
-    @Invoker("getEntityWorld")
-    ServerWorld invokeGetWorld();
+    @Invoker("level")
+    ServerLevel invokeGetWorld();
 }

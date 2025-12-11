@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
-import net.minecraft.block.entity.ShulkerBoxBlockEntity;
+import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(ShulkerBoxBlockEntity.class)
 public interface ShulkerBoxBlockEntityAccessor {
-    @Accessor("INVENTORY_SIZE")
+    @Accessor("CONTAINER_SIZE")
     @Mutable
     static void setInventorySize(int size) {
         throw new AssertionError();

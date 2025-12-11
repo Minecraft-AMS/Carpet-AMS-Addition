@@ -26,68 +26,68 @@ import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Style;
-import net.minecraft.util.Formatting;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.Style;
+import net.minecraft.ChatFormatting;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 
-import static net.minecraft.server.command.CommandManager.argument;
-import static net.minecraft.server.command.CommandManager.literal;
+import static net.minecraft.commands.Commands.argument;
+import static net.minecraft.commands.Commands.literal;
 
 import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 
 public class PlayerChunkLoadControllerCommandRegistry {
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(literal("playerChunkLoading")
             .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.commandPlayerChunkLoadController))
-            .executes((c) -> listPlayerInteractions(c.getSource(), c.getSource().getName()))
+            .executes((c) -> listPlayerInteractions(c.getSource(), c.getSource().getTextName()))
             .then(argument("boolean", BoolArgumentType.bool())
-            .executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getName(), getBool(c, "boolean"))))
+            .executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getTextName(), getBool(c, "boolean"))))
         );
     }
 
-    private static int setPlayerInteraction(ServerCommandSource source, String playerName, boolean b) {
-        PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
+    private static int setPlayerInteraction(CommandSourceStack source, String playerName, boolean b) {
+        Player player = source.getServer().getPlayerList().getPlayerByName(playerName);
         ChunkLoading.setPlayerInteraction(playerName, b, true);
         if (player == null) {
             Messenger.sendServerMessage(
                 MinecraftServerUtil.getServer(), Messenger.s("No player specified").
-                setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true))
+                setStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true))
             );
             return 0;
         } else {
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s((playerName + " chunk loading " + b)).
-                setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE).withBold(true)),
+                setStyle(Style.EMPTY.withColor(ChatFormatting.LIGHT_PURPLE).withBold(true)),
                 false
             );
             return 1;
         }
     }
 
-    private static int listPlayerInteractions(ServerCommandSource source, String playerName) {
+    private static int listPlayerInteractions(CommandSourceStack source, String playerName) {
         boolean playerInteractions = ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true);
-        PlayerEntity player = source.getServer().getPlayerManager().getPlayer(playerName);
+        Player player = source.getServer().getPlayerList().getPlayerByName(playerName);
         if (player == null) {
             Messenger.sendServerMessage(
                 MinecraftServerUtil.getServer(), Messenger.s("No player specified").
-                setStyle(Style.EMPTY.withColor(Formatting.RED).withBold(true))
+                setStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true))
             );
             return 0;
         }
         if (playerInteractions) {
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s((playerName + " chunk loading: true")).
-                setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE).withBold(true)),
+                setStyle(Style.EMPTY.withColor(ChatFormatting.LIGHT_PURPLE).withBold(true)),
                 false
             );
         } else {
-            player.sendMessage(
+            player.displayClientMessage(
                 Messenger.s((playerName + " chunk loading: false")).
-                setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE).withBold(true)),
+                setStyle(Style.EMPTY.withColor(ChatFormatting.LIGHT_PURPLE).withBold(true)),
                 false
             );
         }

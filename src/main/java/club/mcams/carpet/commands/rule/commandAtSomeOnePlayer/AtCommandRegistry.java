@@ -27,40 +27,40 @@ import club.mcams.carpet.utils.*;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
-import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.MutableText;
-import net.minecraft.util.Formatting;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.ChatFormatting;
 
 public class AtCommandRegistry {
     private static final Translator tr = new Translator("command.at");
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        dispatcher.register(CommandManager.literal("@")
+    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(Commands.literal("@")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandAtSomeOnePlayer))
-            .then(CommandManager.argument("targetPlayer", EntityArgumentType.player())
-            .then(CommandManager.argument("text", StringArgumentType.greedyString())
+            .then(Commands.argument("targetPlayer", EntityArgument.player())
+            .then(Commands.argument("text", StringArgumentType.greedyString())
             .executes(context -> execute(
-                context.getSource().getPlayerOrThrow(),
-                EntityArgumentType.getPlayer(context, "targetPlayer"),
+                context.getSource().getPlayerOrException(),
+                EntityArgument.getPlayer(context, "targetPlayer"),
                 StringArgumentType.getString(context, "text")
             ))))
         );
     }
 
-    private static int execute(ServerPlayerEntity sourcePlayer, ServerPlayerEntity targetPlayer, String text) {
-        MutableText titleText = tr.tr("title", PlayerUtil.getName(sourcePlayer));
-        MutableText messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
-        targetPlayer.networkHandler.sendPacket(new TitleS2CPacket(titleText.formatted(Formatting.AQUA)));
-        MinecraftServerUtil.getServer().getPlayerManager().broadcast(messageText, false);
-        EntityUtil.getEntityWorld(targetPlayer).playSound(null, targetPlayer.getBlockPos(), SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0F, 1.0F);
+    private static int execute(ServerPlayer sourcePlayer, ServerPlayer targetPlayer, String text) {
+        MutableComponent titleText = tr.tr("title", PlayerUtil.getName(sourcePlayer));
+        MutableComponent messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
+        targetPlayer.connection.send(new ClientboundSetTitleTextPacket(titleText.withStyle(ChatFormatting.AQUA)));
+        MinecraftServerUtil.getServer().getPlayerList().broadcastSystemMessage(messageText, false);
+        EntityUtil.getEntityWorld(targetPlayer).playSound(null, targetPlayer.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.0F);
         Messenger.sendServerMessage(
             MinecraftServerUtil.getServer(),
-            Messenger.s(String.format("%s @ %s", PlayerUtil.getName(sourcePlayer), PlayerUtil.getName(targetPlayer))).formatted(Formatting.GRAY)
+            Messenger.s(String.format("%s @ %s", PlayerUtil.getName(sourcePlayer), PlayerUtil.getName(targetPlayer))).withStyle(ChatFormatting.GRAY)
         );
         return 1;
     }

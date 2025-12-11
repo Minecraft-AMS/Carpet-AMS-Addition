@@ -25,8 +25,8 @@ import club.mcams.carpet.utils.MinecraftServerUtil;
 import club.mcams.carpet.helpers.rule.sendPlayerDeathLocation.PlayerDeathLocationContext;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,14 +35,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
-@Mixin(ServerPlayerEntity.class)
+@Mixin(ServerPlayer.class)
 public abstract class ServerPlayerEntityMixin implements ServerPlayerEntityInvoker {
-    @Inject(method = "onDeath", at = @At("TAIL"))
+    @Inject(method = "die", at = @At("TAIL"))
     private void sendDeathLocation(CallbackInfo ci) {
         if (!Objects.equals(AmsServerSettings.sendPlayerDeathLocation, "false")) {
             MinecraftServer server = MinecraftServerUtil.getServer();
-            ServerPlayerEntity player = (ServerPlayerEntity) (Object) this;
-            World world = this.invokeGetWorld();
+            ServerPlayer player = (ServerPlayer) (Object) this;
+            Level world = this.invokeGetWorld();
             switch (AmsServerSettings.sendPlayerDeathLocation) {
                 case "all":
                     PlayerDeathLocationContext.sendMessage(server, player, world);

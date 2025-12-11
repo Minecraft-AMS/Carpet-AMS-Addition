@@ -28,7 +28,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,7 +40,7 @@ import java.util.Objects;
 @Mixin(value = CommandDispatcher.class, priority = 1688)
 public abstract class CommandDispatcherMixin {
     @Inject(method = "register", at = @At("HEAD"), remap = false)
-    private void saveDefaultRequirement(LiteralArgumentBuilder<ServerCommandSource> command, CallbackInfoReturnable<LiteralCommandNode<ServerCommandSource>> cir) {
+    private void saveDefaultRequirement(LiteralArgumentBuilder<CommandSourceStack> command, CallbackInfoReturnable<LiteralCommandNode<CommandSourceStack>> cir) {
         CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.putIfAbsent(command.getLiteral(), command.getRequirement());
     }
 
@@ -52,7 +52,7 @@ public abstract class CommandDispatcherMixin {
         ),
         remap = false
     )
-    private void modifyPermissionLevel(LiteralArgumentBuilder<ServerCommandSource> command, CallbackInfoReturnable<LiteralCommandNode<ServerCommandSource>> cir) {
+    private void modifyPermissionLevel(LiteralArgumentBuilder<CommandSourceStack> command, CallbackInfoReturnable<LiteralCommandNode<CommandSourceStack>> cir) {
         if (!Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false") && CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(command.getLiteral())) {
             int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(command.getLiteral());
             command.requires(source -> CommandHelper.hasPermissionLevel(source, level));

@@ -27,11 +27,11 @@ import club.mcams.carpet.settings.RuleObserver;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 import club.mcams.carpet.network.payloads.handshake.RequestHandShakeS2CPayload;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandSourceStack;
 
 public class AmsNetworkProtocolRuleObserver extends RuleObserver<Boolean> {
     @Override
-    public void onValueChange(ServerCommandSource source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
+    public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (MinecraftServerUtil.serverIsRunning()) {
             NetworkUtil.forcedBroadcastDataPack(MinecraftServerUtil.getServer(), RequestHandShakeS2CPayload.create());
         }

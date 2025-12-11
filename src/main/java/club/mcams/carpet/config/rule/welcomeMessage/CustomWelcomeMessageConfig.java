@@ -27,9 +27,9 @@ import club.mcams.carpet.utils.Messenger;
 
 import com.google.gson.*;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.WorldSavePath;
+import net.minecraft.world.level.storage.LevelResource;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -46,9 +46,9 @@ public class CustomWelcomeMessageConfig {
         return CONFIG;
     }
 
-    private static void handleMessage(PlayerEntity player, MinecraftServer server) {
+    private static void handleMessage(Player player, MinecraftServer server) {
         try {
-            Path path = server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/welcomeMessage.json");
+            Path path = server.getWorldPath(LevelResource.ROOT).resolve("carpetamsaddition/welcomeMessage.json");
             if (!Files.exists(path)) {
                 Files.createDirectories(path.getParent());
                 JsonObject defaultConfig = new JsonObject();
@@ -71,12 +71,12 @@ public class CustomWelcomeMessageConfig {
                 JsonArray messages = msgElement.getAsJsonArray();
                 for (JsonElement element : messages) {
                     String line = element.getAsString();
-                    player.sendMessage(Messenger.s(line), false);
+                    player.displayClientMessage(Messenger.s(line), false);
                 }
             } else {
                 String legacyMsg = msgElement.getAsString();
                 for (String line : legacyMsg.split("\n")) {
-                    player.sendMessage(Messenger.s(line.trim()), false);
+                    player.displayClientMessage(Messenger.s(line.trim()), false);
                 }
             }
         } catch (Exception e) {
@@ -84,7 +84,7 @@ public class CustomWelcomeMessageConfig {
         }
     }
 
-    public void sendWelcomeMessage(PlayerEntity player, MinecraftServer server) {
+    public void sendWelcomeMessage(Player player, MinecraftServer server) {
         if (AmsServerSettings.welcomeMessage) {
             handleMessage(player, server);
         }

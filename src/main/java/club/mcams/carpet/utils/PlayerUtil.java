@@ -20,37 +20,37 @@
 
 package club.mcams.carpet.utils;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.PlayerConfigEntry;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.players.NameAndId;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.UUID;
 
 public class PlayerUtil {
-    public static String getName(PlayerEntity player) {
+    public static String getName(Player player) {
         return player.getGameProfile().name();
     }
 
     public static String getName(UUID uuid) {
-        ServerPlayerEntity player = getServerPlayerEntity(uuid);
+        ServerPlayer player = getServerPlayerEntity(uuid);
         return getName(player);
     }
 
-    public static ServerPlayerEntity getServerPlayerEntity(UUID uuid) {
-        return MinecraftServerUtil.getServer().getPlayerManager().getPlayer(uuid);
+    public static ServerPlayer getServerPlayerEntity(UUID uuid) {
+        return MinecraftServerUtil.getServer().getPlayerList().getPlayer(uuid);
     }
 
     @SuppressWarnings("unused")
-    public static ServerPlayerEntity getServerPlayerEntity(String name) {
-        return MinecraftServerUtil.getServer().getPlayerManager().getPlayer(name);
+    public static ServerPlayer getServerPlayerEntity(String name) {
+        return MinecraftServerUtil.getServer().getPlayerList().getPlayerByName(name);
     }
 
     @SuppressWarnings("unused")
-    public static Boolean isInWhitelist(PlayerEntity player) {
-        return MinecraftServerUtil.getServer().getPlayerManager().getWhitelist().isAllowed(player.getPlayerConfigEntry());
+    public static Boolean isInWhitelist(Player player) {
+        return MinecraftServerUtil.getServer().getPlayerList().getWhiteList().isWhiteListed(player.nameAndId());
     }
 
-    public static Boolean isInWhitelist(PlayerConfigEntry gameProfile) {
-        return MinecraftServerUtil.getServer().getPlayerManager().getWhitelist().isAllowed(gameProfile);
+    public static Boolean isInWhitelist(NameAndId gameProfile) {
+        return MinecraftServerUtil.getServer().getPlayerList().getWhiteList().isWhiteListed(gameProfile);
     }
 }

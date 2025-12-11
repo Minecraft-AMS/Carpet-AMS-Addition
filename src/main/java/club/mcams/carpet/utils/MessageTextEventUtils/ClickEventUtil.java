@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.utils.MessageTextEventUtils;
 
-import net.minecraft.text.ClickEvent;
+import net.minecraft.network.chat.ClickEvent;
 
 import java.net.URI;
 import java.util.HashMap;

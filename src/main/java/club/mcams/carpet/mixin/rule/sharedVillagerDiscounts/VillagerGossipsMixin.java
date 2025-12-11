@@ -22,8 +22,8 @@ package club.mcams.carpet.mixin.rule.sharedVillagerDiscounts;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import net.minecraft.village.VillagerGossipType;
-import net.minecraft.village.VillagerGossips;
+import net.minecraft.world.entity.ai.gossip.GossipType;
+import net.minecraft.world.entity.ai.gossip.GossipContainer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,22 +33,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-@Mixin(VillagerGossips.class)
+@Mixin(GossipContainer.class)
 public abstract class VillagerGossipsMixin implements VillagerGossipsAccessor, VillagerGossips_ReputationInvoker {
-    @Inject(method = "getReputationFor(Ljava/util/UUID;Ljava/util/function/Predicate;)I", at = @At("HEAD"), cancellable = true)
-    private void getReputation(UUID target, Predicate<VillagerGossipType> filter, CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.sharedVillagerDiscounts && filter.test(VillagerGossipType.MAJOR_POSITIVE)) {
-            VillagerGossips_ReputationInvoker targetReputation = (VillagerGossips_ReputationInvoker) this.getEntityReputation().get(target);
+    @Inject(method = "getReputation(Ljava/util/UUID;Ljava/util/function/Predicate;)I", at = @At("HEAD"), cancellable = true)
+    private void getReputation(UUID target, Predicate<GossipType> filter, CallbackInfoReturnable<Integer> cir) {
+        if (AmsServerSettings.sharedVillagerDiscounts && filter.test(GossipType.MAJOR_POSITIVE)) {
+            VillagerGossips_ReputationInvoker targetReputation = (VillagerGossips_ReputationInvoker) this.getGossips().get(target);
             int otherRep = 0;
             if (targetReputation != null) {
-                otherRep = targetReputation.invokeGetValueFor(vgt -> filter.test(vgt) && !vgt.equals(VillagerGossipType.MAJOR_POSITIVE));
+                otherRep = targetReputation.invokeWeightedValue(vgt -> filter.test(vgt) && !vgt.equals(GossipType.MAJOR_POSITIVE));
             }
             int majorPositiveRep = 0;
-            for (Object reputation : this.getEntityReputation().values()) {
+            for (Object reputation : this.getGossips().values()) {
                 VillagerGossips_ReputationInvoker invoker = (VillagerGossips_ReputationInvoker) reputation;
-                majorPositiveRep += invoker.invokeGetValueFor(vgt -> vgt.equals(VillagerGossipType.MAJOR_POSITIVE));
+                majorPositiveRep += invoker.invokeWeightedValue(vgt -> vgt.equals(GossipType.MAJOR_POSITIVE));
             }
-            int maxMajorPositiveRep = VillagerGossipType.MAJOR_POSITIVE.maxValue * VillagerGossipType.MAJOR_POSITIVE.multiplier;
+            int maxMajorPositiveRep = GossipType.MAJOR_POSITIVE.max * GossipType.MAJOR_POSITIVE.weight;
             cir.setReturnValue(otherRep + Math.min(majorPositiveRep, maxMajorPositiveRep));
         }
     }

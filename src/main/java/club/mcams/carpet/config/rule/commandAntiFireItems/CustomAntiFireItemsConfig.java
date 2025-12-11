@@ -24,7 +24,7 @@ import club.mcams.carpet.config.template.AbstractListJsonConfig;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.WorldSavePath;
+import net.minecraft.world.level.storage.LevelResource;
 
 import java.nio.file.Path;
 
@@ -45,6 +45,6 @@ public class CustomAntiFireItemsConfig extends AbstractListJsonConfig<String> {
     }
 
     private static Path getPath(MinecraftServer server) {
-        return server.getSavePath(WorldSavePath.ROOT).resolve("carpetamsaddition/custom_anti_fire_items" + ".json");
+        return server.getWorldPath(LevelResource.ROOT).resolve("carpetamsaddition/custom_anti_fire_items" + ".json");
     }
 }
