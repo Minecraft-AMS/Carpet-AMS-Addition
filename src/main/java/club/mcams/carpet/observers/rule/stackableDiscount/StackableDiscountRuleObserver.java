@@ -20,13 +20,13 @@
 
 package club.mcams.carpet.observers.rule.stackableDiscount;
 
-import carpet.settings.ParsedRule;
+import carpet.api.settings.CarpetRule;
 
 import club.mcams.carpet.mixin.rule.stackableDiscount.VillageGossipTypeAccessor;
 import club.mcams.carpet.settings.SimpleRuleObserver;
 
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.village.VillageGossipType;
+import net.minecraft.village.VillagerGossipType;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
@@ -34,15 +34,15 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @SuppressWarnings({"unused", "DataFlowIssue"})
 public class StackableDiscountRuleObserver extends SimpleRuleObserver<Boolean> {
     @Override
-    public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
+    public void onValueChange(ServerCommandSource source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue) {
-            ((VillageGossipTypeAccessor) (Object) VillageGossipType.MINOR_POSITIVE).setMaxValue(200);
-            ((VillageGossipTypeAccessor) (Object) VillageGossipType.MAJOR_POSITIVE).setMaxValue(100);
-            ((VillageGossipTypeAccessor) (Object) VillageGossipType.MAJOR_POSITIVE).setShareDecrement(100);
+            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MINOR_POSITIVE).setMaxValue(200);
+            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MAJOR_POSITIVE).setMaxValue(100);
+            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MAJOR_POSITIVE).setShareDecrement(100);
         } else {
-            ((VillageGossipTypeAccessor) (Object) VillageGossipType.MINOR_POSITIVE).setMaxValue(25);
-            ((VillageGossipTypeAccessor) (Object) VillageGossipType.MAJOR_POSITIVE).setMaxValue(20);
-            ((VillageGossipTypeAccessor) (Object) VillageGossipType.MAJOR_POSITIVE).setShareDecrement(20);
+            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MINOR_POSITIVE).setMaxValue(25);
+            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MAJOR_POSITIVE).setMaxValue(20);
+            ((VillageGossipTypeAccessor) (Object) VillagerGossipType.MAJOR_POSITIVE).setShareDecrement(20);
         }
     }
 }

@@ -32,12 +32,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(TntEntity.class)
 public abstract class TntEntityMixin {
     @ModifyExpressionValue(
-        //#if MC>=12102
-        //$$ method = "<init>(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V",
-        //#else
-        method = "explode",
-        //#endif
-        at = @At(value = "CONSTANT", args = "floatValue=4.0F")
+        method = "<init>(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/World;)V",
+        at = @At(
+            value = "CONSTANT",
+            args = "floatValue=4.0F"
+        )
     )
     private float modifyTntPower(float original) {
         return AmsServerSettings.tntPowerController != -1.0D ? (float) AmsServerSettings.tntPowerController : original;

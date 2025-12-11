@@ -38,12 +38,7 @@ public abstract class ServerPlayerEntityMixin {
     public void copyFrom(ServerPlayerEntity oldPlayer, boolean alive, CallbackInfo ci) {
         ServerPlayerEntity newPlayer = (ServerPlayerEntity) (Object) this;
         if (!Objects.equals(AmsServerSettings.commandPlayerLeader, "false") && !alive && LeaderCommandRegistry.LEADER_MAP.containsValue(newPlayer.getUuidAsString())) {
-            newPlayer.addStatusEffect(
-                LeaderCommandRegistry.HIGH_LIGHT
-                //#if MC>=11700
-                , newPlayer
-                //#endif
-            );
+            newPlayer.addStatusEffect(LeaderCommandRegistry.HIGH_LIGHT, newPlayer);
         }
     }
 }

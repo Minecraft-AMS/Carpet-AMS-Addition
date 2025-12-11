@@ -31,10 +31,7 @@ import net.minecraft.block.NoteBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
-//#if MC>=11900
-//$$ import net.minecraft.block.BlockState;
-//$$ import net.minecraft.entity.Entity;
-//#endif
+import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,13 +45,7 @@ import java.util.Objects;
 @Mixin(NoteBlock.class)
 public abstract class NoteBlockMixin {
     @Inject(method = "playNote", at = @At("HEAD"))
-    private void playNoteMixin(
-        //#if MC>=11900
-        //$$ Entity entity,
-        //$$ BlockState blockState,
-        //#endif
-        World world, BlockPos pos, CallbackInfo info
-    ) {
+    private void playNoteMixin(Entity entity, BlockState blockState, World world, BlockPos pos, CallbackInfo info) {
         if (!Objects.equals(AmsServerSettings.noteBlockChunkLoader, "false")) {
             handleChunkLoading(world, pos);
         }

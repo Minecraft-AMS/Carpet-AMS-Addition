@@ -23,7 +23,6 @@ package club.mcams.carpet.utils;
 import club.mcams.carpet.network.AMS_CustomPayload;
 
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -106,14 +105,5 @@ public class NetworkUtil {
         if (MinecraftServerUtil.serverIsRunning()) {
             MinecraftServerUtil.getServer().execute(runnable);
         }
-    }
-
-    // 兼容 Minecraft 1.16.5
-    public static String readBufString(PacketByteBuf buf) {
-        //#if MC<11700
-        return buf.readString(Short.MAX_VALUE);
-        //#else
-        //$$ return buf.readString();
-        //#endif
     }
 }

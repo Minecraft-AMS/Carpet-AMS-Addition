@@ -22,7 +22,7 @@ package club.mcams.carpet.translations;
 
 import club.mcams.carpet.utils.Messenger;
 
-import net.minecraft.text.BaseText;
+import net.minecraft.text.MutableText;
 
 public class Translator {
     private final String translationPath;
@@ -31,7 +31,7 @@ public class Translator {
         this.translationPath = translationPath;
     }
 
-    public BaseText tr(String key, Object... args) {
+    public MutableText tr(String key, Object... args) {
         String translationKey = TranslationConstants.TRANSLATION_KEY_PREFIX + this.translationPath + "." + key;
         return Messenger.tr(translationKey, args);
     }

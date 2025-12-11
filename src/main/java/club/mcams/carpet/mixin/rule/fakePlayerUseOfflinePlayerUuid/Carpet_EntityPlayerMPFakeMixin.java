@@ -27,40 +27,30 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import com.mojang.authlib.GameProfile;
-
-//#if MC>=11900
-//$$ import net.minecraft.util.Uuids;
-//#else
-import net.minecraft.entity.player.PlayerEntity;
-//#endif
-import net.minecraft.util.UserCache;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.Uuids;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-import java.util.Optional;
+import java.util.UUID;
 
-@GameVersion(version = "Minecraft < 1.21.9")
+@GameVersion(version = "Minecraft >= 1.21.9")
 @Mixin(EntityPlayerMPFake.class)
 public abstract class Carpet_EntityPlayerMPFakeMixin {
     @WrapOperation(
         method = "createFake",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/util/UserCache;findByName(Ljava/lang/String;)Ljava/util/Optional;"
+            target = "Lnet/minecraft/server/ServerConfigHandler;getPlayerUuidByName(Lnet/minecraft/server/MinecraftServer;Ljava/lang/String;)Ljava/util/UUID;"
         )
     )
-    private static Optional<GameProfile> useOfflinePlayerUUID(UserCache userCache, String playerName, Operation<Optional<GameProfile>> original) {
+    private static UUID useOfflinePlayerUUID(MinecraftServer server, String playerName, Operation<UUID> original) {
         return
             AmsServerSettings.fakePlayerUseOfflinePlayerUUID ?
-            //#if MC>=11900
-            //$$ Optional.of(new GameProfile(Uuids.getOfflinePlayerUuid(playerName), playerName)) :
-            //#else
-            Optional.of(new GameProfile(PlayerEntity.getOfflinePlayerUuid(playerName), playerName)) :
-            //#endif
-            original.call(userCache, playerName);
+            Uuids.getOfflinePlayerUuid(playerName) :
+            original.call(server, playerName);
     }
 }

@@ -42,7 +42,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BlockRotator.class)
 public abstract class BlockRotatorMixin {
     @Inject(
-        method = "flip_block",
+        method = "flipBlock",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z"

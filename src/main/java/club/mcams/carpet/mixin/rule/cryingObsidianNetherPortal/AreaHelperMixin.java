@@ -26,7 +26,7 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.dimension.AreaHelper;
+import net.minecraft.world.dimension.NetherPortal;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft < 1.19")
-@Mixin(AreaHelper.class)
+@Mixin(NetherPortal.class)
 public abstract class AreaHelperMixin {
     @ModifyReturnValue(method = "method_30487", at = @At("RETURN"))
     private static boolean acceptCryingObsidianCreateNetherPortal(boolean original, BlockState state) {

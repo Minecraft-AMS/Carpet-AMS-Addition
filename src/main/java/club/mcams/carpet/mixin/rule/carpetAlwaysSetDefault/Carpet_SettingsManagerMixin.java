@@ -20,8 +20,8 @@
 
 package club.mcams.carpet.mixin.rule.carpetAlwaysSetDefault;
 
-import carpet.settings.ParsedRule;
-import carpet.settings.SettingsManager;
+import carpet.api.settings.CarpetRule;
+import carpet.api.settings.SettingsManager;
 
 import club.mcams.carpet.AmsServerSettings;
 
@@ -37,10 +37,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class Carpet_SettingsManagerMixin {
 
     @Shadow
-    protected abstract int setDefault(ServerCommandSource source, ParsedRule<?> rule, String stringValue);
+    protected abstract int setDefault(ServerCommandSource source, CarpetRule<?> rule, String stringValue);
 
     @Inject(method = "setRule", at = @At("TAIL"))
-    private void setRule(ServerCommandSource source, ParsedRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
+    private void setRule(ServerCommandSource source, CarpetRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.carpetAlwaysSetDefault) {
             setDefault(source, rule, value);
         }

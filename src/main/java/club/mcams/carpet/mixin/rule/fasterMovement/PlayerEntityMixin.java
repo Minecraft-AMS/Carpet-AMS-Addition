@@ -42,7 +42,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         super(entityType, world);
     }
 
-    @SuppressWarnings("EnhancedSwitchMigration")
     @Inject(method = "getMovementSpeed", at = @At("HEAD"), cancellable = true)
     private void getMovementSpeed(CallbackInfoReturnable<Float> cir) {
         if (!Objects.equals(AmsServerSettings.fasterMovement, "VANILLA")) {
@@ -54,23 +53,15 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.OVERWORLD  && world.getRegistryKey() == World.OVERWORLD) ||
                 (AmsServerSettings.fasterMovementController == AmsServerSettings.fasterMovementDimension.ALL)
             ) {
-                float speed = (float)this.getAttributeValue(EntityAttributes.GENERIC_MOVEMENT_SPEED);
-                switch (AmsServerSettings.fasterMovement) {
-                    case "Ⅰ":
-                        speed = 0.2F;
-                        break;
-                    case "Ⅱ":
-                        speed = 0.3F;
-                        break;
-                    case "Ⅲ":
-                        speed = 0.4F;
-                        break;
-                    case "Ⅳ":
-                        speed = 0.5F;
-                        break;
-                    case "Ⅴ":
-                        speed = 0.6F;
-                }
+                float speed = (float)this.getAttributeValue(EntityAttributes.MOVEMENT_SPEED);
+                speed = switch (AmsServerSettings.fasterMovement) {
+                    case "Ⅰ" -> 0.2F;
+                    case "Ⅱ" -> 0.3F;
+                    case "Ⅲ" -> 0.4F;
+                    case "Ⅳ" -> 0.5F;
+                    case "Ⅴ" -> 0.6F;
+                    default -> speed;
+                };
                 cir.setReturnValue(speed);
             }
         }

@@ -21,32 +21,14 @@
 package club.mcams.carpet.network;
 
 import club.mcams.carpet.network.payloads.AMS_UnknownPayload;
-import club.mcams.carpet.utils.NetworkUtil;
 
 import net.minecraft.network.PacketByteBuf;
-
-//#if MC<12005
-import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
-import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
-import club.mcams.carpet.mixin.network.CustomPayloadC2SPacketAccessor;
-import club.mcams.carpet.mixin.network.CustomPayloadS2CPacketAccessor;
-//#endif
 
 import java.util.function.Function;
 
 public class AMS_PayloadCodec {
-    //#if MC<12005
-    protected static AMS_CustomPayload decode(CustomPayloadS2CPacket packet) {
-        return decodePayload(((CustomPayloadS2CPacketAccessor) packet).getData());
-    }
-
-    protected static AMS_CustomPayload decode(CustomPayloadC2SPacket packet) {
-        return decodePayload(((CustomPayloadC2SPacketAccessor) packet).getData());
-    }
-    //#endif
-
     protected static AMS_CustomPayload decodePayload(PacketByteBuf buf) {
-        String packetId = NetworkUtil.readBufString(buf);
+        String packetId = buf.readString();
         Function<PacketByteBuf, AMS_CustomPayload> constructor = AMS_PayloadManager.PAYLOAD_REGISTRY.get(packetId);
 
         if (constructor != null) {

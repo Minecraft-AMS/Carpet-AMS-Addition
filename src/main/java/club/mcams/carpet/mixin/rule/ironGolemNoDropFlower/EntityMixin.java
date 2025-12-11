@@ -25,9 +25,7 @@ import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
-//#if MC>=12102
-//$$ import net.minecraft.server.world.ServerWorld;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
@@ -38,21 +36,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @Inject(
-        //#if MC>=12102
-        //$$ method = "dropStack(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;",
-        //#else
-        method = "dropStack(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;",
-        //#endif
-        at = @At("HEAD"),
-        cancellable = true
-    )
-    private void noDropPoppy(
-        //#if MC>=12102
-        //$$ ServerWorld world,
-        //#endif
-        ItemStack stack, CallbackInfoReturnable<ItemEntity> cir
-    ) {
+    @Inject(method = "dropStack(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;", at = @At("HEAD"), cancellable = true)
+    private void noDropPoppy(ServerWorld world, ItemStack stack, CallbackInfoReturnable<ItemEntity> cir) {
         if (AmsServerSettings.ironGolemNoDropFlower) {
             Entity entity = (Entity) (Object) this;
             if (entity instanceof IronGolemEntity && stack.getItem().equals(Items.POPPY)) {

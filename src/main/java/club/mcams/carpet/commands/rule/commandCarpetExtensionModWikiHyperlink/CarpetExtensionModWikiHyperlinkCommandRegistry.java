@@ -57,7 +57,7 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
                 .then(CommandManager.argument("extensionName", StringArgumentType.string())
                 .suggests(getSuggestions)
                 .executes(context -> execute(
-                    context.getSource().getPlayer(), StringArgumentType.getString(context, "extensionName")
+                    context.getSource().getPlayerOrThrow(), StringArgumentType.getString(context, "extensionName")
                 ))
             )
         );

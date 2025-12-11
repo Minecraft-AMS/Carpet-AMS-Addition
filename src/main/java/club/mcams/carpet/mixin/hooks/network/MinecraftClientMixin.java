@@ -31,18 +31,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
 public abstract class MinecraftClientMixin {
-    @Inject(
-        //#if MC>=12109
-        //$$ method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;Z)V",
-        //#elseif MC>=12106
-        //$$ method = "disconnect",
-        //#elseif MC>=12006
-        //$$ method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;Z)V",
-        //#else
-        method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;)V",
-        //#endif
-        at = @At("HEAD")
-    )
+    @Inject(method = "disconnect(Lnet/minecraft/client/gui/screen/Screen;ZZ)V", at = @At("HEAD"))
     private void onDisconnect(CallbackInfo ci) {
         AmsClient.getInstance().onDisconnect();
     }

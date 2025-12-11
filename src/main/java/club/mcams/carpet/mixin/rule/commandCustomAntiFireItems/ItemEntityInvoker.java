@@ -21,8 +21,8 @@
 package club.mcams.carpet.mixin.rule.commandCustomAntiFireItems;
 
 import net.minecraft.entity.ItemEntity;
-
 import net.minecraft.item.ItemStack;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 

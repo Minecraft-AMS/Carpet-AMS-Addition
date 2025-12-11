@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024  A Minecraft Server and contributors
+ * Copyright (C) 2023  A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -22,27 +22,28 @@ package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
 
 import club.mcams.carpet.helpers.rule.preventAdministratorCheat.PermissionHelper;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-
 import net.minecraft.server.command.GameRuleCommand;
 import net.minecraft.server.command.ServerCommandSource;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import java.util.function.Predicate;
 
-@GameVersion(version = "Minecraft < 1.21.6")
 @Mixin(GameRuleCommand.class)
 public abstract class GameRuleCommandMixin {
-    @ModifyExpressionValue(
-        method = "method_13393",
+    @ModifyArg(
+        method = "register",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-        )
+            target = "Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;requires(Ljava/util/function/Predicate;)Lcom/mojang/brigadier/builder/ArgumentBuilder;",
+            remap = false
+        ),
+        require = 1,
+        allow = 2
     )
-    private static boolean GameRuleCommand(boolean original, ServerCommandSource source) {
-        return original && PermissionHelper.canCheat(source);
+    private static Predicate<ServerCommandSource> preventCheat(Predicate<ServerCommandSource> predicate) {
+        return source -> predicate.test(source) && PermissionHelper.canCheat(source);
     }
 }

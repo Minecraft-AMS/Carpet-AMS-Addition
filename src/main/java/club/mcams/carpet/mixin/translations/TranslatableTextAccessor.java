@@ -21,7 +21,7 @@
 package club.mcams.carpet.mixin.translations;
 
 import net.minecraft.text.StringVisitable;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -31,7 +31,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import java.util.function.Consumer;
 
 @GameVersion(version = "Minecraft >= 1.18")
-@Mixin(TranslatableText.class)
+@Mixin(TranslatableTextContent.class)
 public interface TranslatableTextAccessor {
     @Invoker
     void invokeForEachPart(String translation, Consumer<StringVisitable> partsConsumer);

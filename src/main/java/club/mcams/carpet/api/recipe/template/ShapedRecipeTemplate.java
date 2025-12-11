@@ -43,7 +43,6 @@ public class ShapedRecipeTemplate implements RecipeTemplateInterface {
         this.resultCount = resultCount;
     }
 
-    @SuppressWarnings("ExtractMethodRecommender")
     @Override
     public JsonObject toJson() {
         JsonObject recipeJson = new JsonObject();
@@ -60,21 +59,15 @@ public class ShapedRecipeTemplate implements RecipeTemplateInterface {
         recipeJson.add("pattern", patternJson);
 
         JsonObject keyJson = new JsonObject();
-        //#if MC>=12102
-        //$$ for (Map.Entry<Character, String> entry : ingredients.entrySet()) {
-        //$$     keyJson.addProperty(entry.getKey().toString(), entry.getValue());
-        //$$ }
-        //#else
+
         for (Map.Entry<Character, String> entry : ingredients.entrySet()) {
-            JsonObject itemJson = new JsonObject();
-            itemJson.addProperty("item", entry.getValue());
-            keyJson.add(entry.getKey().toString(), itemJson);
+            keyJson.addProperty(entry.getKey().toString(), entry.getValue());
         }
-        //#endif
+
         recipeJson.add("key", keyJson);
 
         JsonObject resultJson = new JsonObject();
-        resultJson.addProperty(this.compatResultItemIdKey(), resultItem);
+        resultJson.addProperty("id", resultItem);
         resultJson.addProperty("count", resultCount);
         recipeJson.add("result", resultJson);
 

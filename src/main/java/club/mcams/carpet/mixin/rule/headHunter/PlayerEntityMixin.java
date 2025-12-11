@@ -22,13 +22,11 @@ package club.mcams.carpet.mixin.rule.headHunter;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.rule.headHunter_commandGetPlayerSkull.SkullSkinHelper;
+import club.mcams.carpet.utils.EntityUtil;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-//#if MC>=12102
-//$$ import net.minecraft.server.world.ServerWorld;
-//$$ import club.mcams.carpet.utils.EntityUtil;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.item.Items;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -50,11 +48,7 @@ public abstract class PlayerEntityMixin {
             PlayerEntity player = (PlayerEntity) (Object) this;
             ItemStack headStack = new ItemStack(Items.PLAYER_HEAD);
             SkullSkinHelper.writeNbtToPlayerSkull(player, headStack);
-            //#if MC>=12102
-            //$$ player.dropStack((ServerWorld) EntityUtil.getEntityWorld(player), headStack);
-            //#else
-            player.dropStack(headStack);
-            //#endif
+            player.dropStack((ServerWorld) EntityUtil.getEntityWorld(player), headStack);
         }
     }
 }

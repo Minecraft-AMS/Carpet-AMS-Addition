@@ -34,11 +34,7 @@ import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-//#if MC>12002
-//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#else
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#endif
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.Mixin;
 
 import static net.minecraft.block.Block.dropStack;
@@ -46,14 +42,7 @@ import static net.minecraft.block.Block.dropStack;
 @Mixin(Block.class)
 public abstract class BlockMixin {
     @Inject(method = "onBreak", at = @At("HEAD"))
-    private void onBreak(
-        World world, BlockPos pos, BlockState state, PlayerEntity player,
-        //#if MC>12002
-        //$$ CallbackInfoReturnable<BlockState> cir
-        //#else
-        CallbackInfo ci
-        //#endif
-    ) {
+    private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
         if (AmsServerSettings.cakeBlockDropOnBreak && state.getBlock() == Blocks.CAKE && state.get(CakeBlock.BITES) == 0) {
             if (!player.isCreative()) {
                 ItemStack cakeStack = new ItemStack(Items.CAKE);

@@ -20,12 +20,44 @@
 
 package club.mcams.carpet.mixin.rule.easyGetPitcherPod;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-import org.spongepowered.asm.mixin.Mixin;
+import java.util.Random;
+
+import static net.minecraft.block.Block.dropStack;
 
 @GameVersion(version = "Minecraft >= 1.20")
-@Mixin(DummyClass.class)
-public abstract class BlockMixin {}
+@Mixin(Block.class)
+public abstract class BlockMixin {
+    @Inject(method = "onBreak", at = @At("HEAD"))
+    private void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfoReturnable<BlockState> cir) {
+         if (AmsServerSettings.easyGetPitcherPod != 0 && state.getBlock().equals(Blocks.PITCHER_CROP)) {
+             if (!player.isCreative()) {
+                 Random random = new Random();
+                 int minDrops = 2;
+                 int maxDrops = AmsServerSettings.easyGetPitcherPod;
+                 int dropCount = minDrops + random.nextInt(maxDrops - minDrops + 1);
+                 for (int i = 0; i < dropCount; i++) {
+                     ItemStack pitcherPodStack = new ItemStack(Items.PITCHER_POD);
+                     dropStack(world, pos, pitcherPodStack);
+                 }
+             }
+         }
+    }
+}

@@ -23,31 +23,28 @@ package club.mcams.carpet.helpers.rule.recipeRule;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerCustomRecipes;
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.api.recipe.AmsRecipeManager;
 import club.mcams.carpet.api.recipe.AmsRecipeBuilder;
+import club.mcams.carpet.api.recipe.AmsRecipeManager;
 import club.mcams.carpet.settings.RecipeRule;
-import club.mcams.carpet.utils.MinecraftServerUtil;
 
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeManager;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.recipe.ServerRecipeManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
 
-@GameVersion(version = "Minecraft < 1.20.2")
+@SuppressWarnings("DuplicatedCode")
 public class RecipeRuleHelper {
     private static final String MOD_ID = AmsServer.compactName;
 
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayerEntity player) {
-        if (MinecraftServerUtil.serverIsRunning(server) && hasActiveRecipeRule()) {
-            Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
-            for (Recipe<?> recipe : allRecipes) {
-                if (recipe.getId().getNamespace().equals(MOD_ID) && !player.getRecipeBook().contains(recipe.getId())) {
+        if (server != null && server.isRunning() && hasActiveRecipeRule()) {
+            Collection<RecipeEntry<?>> allRecipes = getServerRecipeManager(server).values();
+            for (RecipeEntry<?> recipe : allRecipes) {
+                if (recipe.id().getValue().getNamespace().equals(MOD_ID) && !player.getRecipeBook().isUnlocked(recipe.id())) {
                     player.unlockRecipes(List.of(recipe));
                 }
             }
@@ -55,16 +52,16 @@ public class RecipeRuleHelper {
     }
 
     public static void onValueChange(MinecraftServer server) {
-        if (MinecraftServerUtil.serverIsRunning(server)) {
+        if (server != null && server.isRunning()) {
+            server.execute(() -> {
             AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
             AmsServerCustomRecipes.getInstance().buildRecipes();
-            server.execute(() -> {
                 needReloadServerResources(server);
-                Collection<Recipe<?>> allRecipes = getServerRecipeManager(server).values();
-                for (Recipe<?> recipe : allRecipes) {
-                    if (recipe.getId().getNamespace().equals(MOD_ID)) {
+                Collection<RecipeEntry<?>> allRecipes = getServerRecipeManager(server).values();
+                for (RecipeEntry<?> recipe : allRecipes) {
+                    if (recipe.id().getValue().getNamespace().equals(MOD_ID)) {
                         for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
-                            if (!player.getRecipeBook().contains(recipe.getId())) {
+                            if (!player.getRecipeBook().isUnlocked(recipe.id())) {
                                 player.unlockRecipes(List.of(recipe));
                             }
                         }
@@ -91,13 +88,11 @@ public class RecipeRuleHelper {
         return false;
     }
 
-    private static RecipeManager getServerRecipeManager(MinecraftServer server) {
+    private static ServerRecipeManager getServerRecipeManager(MinecraftServer server) {
         return server.getRecipeManager();
     }
 
     public static void needReloadServerResources(MinecraftServer server) {
-        if (MinecraftServerUtil.serverIsRunning(server) && hasActiveRecipeRule()) {
-            server.reloadResources(server.getDataPackManager().getEnabledNames());
-        }
+        server.reloadResources(server.getDataPackManager().getEnabledIds());
     }
 }

@@ -45,7 +45,7 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
 
     private HandShakeC2SPayload(PacketByteBuf buf) {
         super(ID);
-        this.modVersion = NetworkUtil.readBufString(buf);
+        this.modVersion = buf.readString();
         this.playerUuid = buf.readUuid();
     }
 

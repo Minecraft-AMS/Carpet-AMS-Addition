@@ -31,6 +31,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.world.GameMode;
 
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -52,7 +53,8 @@ public abstract class Carpet_PlayerCommandMixin {
         method = "spawn",
         at = @At(
             value = "FIELD",
-            target = "Lnet/minecraft/entity/player/PlayerAbilities;flying:Z"
+            target = "Lnet/minecraft/entity/player/PlayerAbilities;flying:Z",
+            opcode = Opcodes.GETFIELD
         )
     )
     private static boolean noFly(boolean original) {

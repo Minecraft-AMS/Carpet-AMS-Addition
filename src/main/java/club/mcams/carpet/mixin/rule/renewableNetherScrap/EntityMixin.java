@@ -20,15 +20,13 @@
 
 package club.mcams.carpet.mixin.rule.renewableNetherScrap;
 
+import club.mcams.carpet.utils.EntityUtil;
 import club.mcams.carpet.AmsServerSettings;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
-//#if MC>=12102
-//$$ import net.minecraft.server.world.ServerWorld;
-//$$ import club.mcams.carpet.utils.EntityUtil;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.item.Items;
 import net.minecraft.entity.mob.ZombifiedPiglinEntity;
 
@@ -46,11 +44,7 @@ public abstract class EntityMixin {
 
     @Shadow
     @Nullable
-    //#if MC>=12102
-    //$$ public abstract ItemEntity dropStack(ServerWorld par1, ItemStack par2);
-    //#else
-    public abstract ItemEntity dropStack(ItemStack stack, float yOffset);
-    //#endif
+    public abstract ItemEntity dropStack(ServerWorld par1, ItemStack par2);
 
     @Unique
     private boolean hasDroppedNetherScrap = false;
@@ -59,14 +53,7 @@ public abstract class EntityMixin {
     @Unique
     private boolean isDroppingNetherScrap = false;
 
-    @Inject(
-        //#if MC>=12102
-        //$$ method = "dropStack(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;",
-        //#else
-        method = "dropStack(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;",
-        //#endif
-        at = @At("TAIL")
-    )
+    @Inject(method = "dropStack(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/entity/ItemEntity;", at = @At("TAIL"))
     private void dropNetheriteScrap(CallbackInfoReturnable<ItemEntity> cir) {
         if (AmsServerSettings.renewableNetheriteScrap != 0.0D && !this.isDroppingNetherScrap) {
             Entity entity = (Entity) (Object) this;
@@ -77,11 +64,7 @@ public abstract class EntityMixin {
                 if (random < rate) {
                     this.isDroppingNetherScrap = true;
                     ItemStack netherScrapStack = new ItemStack(Items.NETHERITE_SCRAP);
-                    //#if MC>=12102
-                    //$$ this.dropStack((ServerWorld) EntityUtil.getEntityWorld(entity), netherScrapStack);
-                    //#else
-                    this.dropStack(netherScrapStack, 1.1F);
-                    //#endif
+                    this.dropStack((ServerWorld) EntityUtil.getEntityWorld(entity), netherScrapStack);
                     this.isDroppingNetherScrap = false;
                 }
             }

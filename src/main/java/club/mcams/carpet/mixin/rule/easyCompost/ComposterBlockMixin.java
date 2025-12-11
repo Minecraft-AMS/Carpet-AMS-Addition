@@ -31,17 +31,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(ComposterBlock.class)
 public abstract class ComposterBlockMixin {
-    @ModifyExpressionValue(
-        method = "addToComposter",
-        at = @At(
-            value = "INVOKE",
-            //#if MC>=11900
-            //$$ target = "Lnet/minecraft/util/math/random/Random;nextDouble()D"
-            //#else
-            target = "Ljava/util/Random;nextDouble()D"
-            //#endif
-        )
-    )
+    @ModifyExpressionValue(method = "addToComposter", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/random/Random;nextDouble()D"))
     private static double easyCompost(double original) {
         return AmsServerSettings.easyCompost ? -114514.114514D : original;
     }

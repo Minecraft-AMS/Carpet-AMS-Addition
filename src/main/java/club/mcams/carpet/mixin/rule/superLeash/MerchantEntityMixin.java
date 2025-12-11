@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @SuppressWarnings("SimplifiableConditionalExpression")
 @Mixin(MerchantEntity.class)
 public abstract class MerchantEntityMixin {
-    @ModifyReturnValue(method = "canBeLeashedBy", at = @At("RETURN"))
+    @ModifyReturnValue(method = "canBeLeashed", at = @At("RETURN"))
     private boolean allowLeashed(boolean original) {
         return AmsServerSettings.superLeash ? true : original;
     }

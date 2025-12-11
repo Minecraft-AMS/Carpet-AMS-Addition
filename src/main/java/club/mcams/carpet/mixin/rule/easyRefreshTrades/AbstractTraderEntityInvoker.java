@@ -22,9 +22,7 @@ package club.mcams.carpet.mixin.rule.easyRefreshTrades;
 
 import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.village.TradeOfferList;
-//#if MC>=12111
-//$$ import net.minecraft.server.world.ServerWorld;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.village.TradeOffers;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,10 +31,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(MerchantEntity.class)
 public interface AbstractTraderEntityInvoker {
     @Invoker("fillRecipesFromPool")
-    void invokeFillRecipesFromPool(
-        //#if MC>=12111
-        //$$ ServerWorld world,
-        //#endif
-        TradeOfferList recipeList, TradeOffers.Factory[] pool, int count
-    );
+    void invokeFillRecipesFromPool(ServerWorld world, TradeOfferList recipeList, TradeOffers.Factory[] pool, int count);
 }

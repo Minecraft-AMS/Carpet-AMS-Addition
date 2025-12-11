@@ -46,7 +46,7 @@ public class GetSaveSizeCommandRegistry {
         dispatcher.register(
             CommandManager.literal("getSaveSize")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetSaveSize))
-            .executes(context -> executeGetSaveSize(context.getSource().getPlayer()))
+            .executes(context -> executeGetSaveSize(context.getSource().getPlayerOrThrow()))
         );
     }
 

@@ -26,11 +26,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.entity.LivingEntity;
-//#if MC>=12102
-//$$ import net.minecraft.server.world.ServerWorld;
-//#else
-import net.minecraft.world.World;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.Difficulty;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -44,15 +40,7 @@ public abstract class WitherEntityMixin {
     @Shadow
     protected abstract void shootSkullAt(int headIndex, double targetX, double targetY, double targetZ, boolean charged);
 
-    @Inject(
-        //#if MC>=11700
-        method = "shootSkullAt(ILnet/minecraft/entity/LivingEntity;)V",
-        //#else
-        //$$ method = "method_6878",
-        //#endif
-        at = @At("HEAD"),
-        cancellable = true
-    )
+    @Inject(method = "shootSkullAt(ILnet/minecraft/entity/LivingEntity;)V", at = @At("HEAD"), cancellable = true)
     private void shootSkullAt(int headIndex, LivingEntity target, CallbackInfo ci) {
         if (AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.SURELY) {
             this.shootSkullAt(headIndex, target.getX(), target.getY() + (double)target.getStandingEyeHeight() * 0.5, target.getZ(), true);
@@ -60,25 +48,8 @@ public abstract class WitherEntityMixin {
         }
     }
 
-    @WrapOperation(
-        method = "mobTick",
-        at = @At(
-            value = "INVOKE",
-            //#if MC>=12102
-            //$$ target = "Lnet/minecraft/server/world/ServerWorld;getDifficulty()Lnet/minecraft/world/Difficulty;"
-            //#else
-            target = "Lnet/minecraft/world/World;getDifficulty()Lnet/minecraft/world/Difficulty;"
-            //#endif
-        )
-    )
-    private Difficulty modifyDifficulty(
-        //#if MC>=12102
-        //$$ ServerWorld world,
-        //#else
-        World world,
-        //#endif
-        Operation<Difficulty> original
-    ) {
+    @WrapOperation(method = "mobTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/world/ServerWorld;getDifficulty()Lnet/minecraft/world/Difficulty;"))
+    private Difficulty modifyDifficulty(ServerWorld world, Operation<Difficulty> original) {
         if (AmsServerSettings.blueSkullController == AmsServerSettings.blueSkullProbability.NEVER) {
             return Difficulty.EASY;
         } else {

@@ -27,12 +27,7 @@ import net.minecraft.block.AbstractPlantStemBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-
-//#if MC>=11900
-//$$import net.minecraft.util.math.random.Random;
-//#else
-import java.util.Random;
-//#endif
+import net.minecraft.util.math.random.Random;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

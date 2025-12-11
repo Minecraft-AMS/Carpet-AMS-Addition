@@ -22,27 +22,28 @@ package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
 
 import club.mcams.carpet.helpers.rule.preventAdministratorCheat.PermissionHelper;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-
 import net.minecraft.server.command.GiveCommand;
 import net.minecraft.server.command.ServerCommandSource;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import java.util.function.Predicate;
 
-@GameVersion(version = "Minecraft < 1.21.6")
 @Mixin(GiveCommand.class)
 public abstract class GiveCommandMixin {
-    @ModifyExpressionValue(
-        method = "method_13404",
+    @ModifyArg(
+        method = "register",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-        )
+            target = "Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;requires(Ljava/util/function/Predicate;)Lcom/mojang/brigadier/builder/ArgumentBuilder;",
+            remap = false
+        ),
+        require = 1,
+        allow = 2
     )
-    private static boolean GiveCommand(boolean original, ServerCommandSource source) {
-        return original && PermissionHelper.canCheat(source);
+    private static Predicate<ServerCommandSource> preventCheat(Predicate<ServerCommandSource> predicate) {
+        return source -> predicate.test(source) && PermissionHelper.canCheat(source);
     }
 }

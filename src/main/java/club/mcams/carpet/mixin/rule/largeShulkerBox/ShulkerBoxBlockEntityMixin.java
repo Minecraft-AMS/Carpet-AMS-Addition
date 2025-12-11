@@ -42,15 +42,9 @@ import java.util.stream.IntStream;
 
 @Mixin(value = ShulkerBoxBlockEntity.class, priority = 1024)
 public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockEntity implements SidedInventory {
-    //#if MC<11700
-    //$$ protected ShulkerBoxBlockEntityMixin(BlockEntityType<?> blockEntityType) {
-    //$$    super(blockEntityType);
-    //$$ }
-    //#else
     protected ShulkerBoxBlockEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
     }
-    //#endif
 
     @Shadow
     private DefaultedList<ItemStack> inventory;
@@ -58,20 +52,12 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Shadow
     public abstract int size();
 
-    //#if MC<11700
-    //$$ @Inject(method = "<init>()V", at = @At("RETURN"))
-    //#else
     @Inject(method = "<init>(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
-    //#endif
     private void init1(CallbackInfo ci) {
         this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
     }
 
-    //#if MC<11700
-    //$$ @Inject(method = "<init>(Lnet/minecraft/util/DyeColor;)V", at = @At("RETURN"))
-    //#else
     @Inject(method = "<init>(Lnet/minecraft/util/DyeColor;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
-    //#endif
     private void init2(CallbackInfo ci) {
         this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
     }

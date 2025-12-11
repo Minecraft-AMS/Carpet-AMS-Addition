@@ -36,7 +36,6 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.BaseText;
 import net.minecraft.util.Formatting;
 
 import java.util.*;
@@ -86,7 +85,7 @@ public class SetPlayerPoseCommandRegistry {
     }
 
     private static int help(ServerCommandSource source) {
-        Messenger.tell(source, Messenger.formatting((BaseText) tr.tr("set_help").append(Messenger.endl()).append(tr.tr("stop_help")), Formatting.GRAY));
+        Messenger.tell(source, Messenger.formatting(tr.tr("set_help").append(Messenger.endl()).append(tr.tr("stop_help")), Formatting.GRAY));
         return 1;
     }
 

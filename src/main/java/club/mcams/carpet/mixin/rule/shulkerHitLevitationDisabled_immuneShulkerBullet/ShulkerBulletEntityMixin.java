@@ -36,11 +36,7 @@ public abstract class ShulkerBulletEntityMixin {
         method = "onEntityHit",
         at = @At(
             value = "INVOKE",
-            //#if MC>=11700
             target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;Lnet/minecraft/entity/Entity;)Z"
-            //#else
-            //$$ target = "Lnet/minecraft/entity/LivingEntity;addStatusEffect(Lnet/minecraft/entity/effect/StatusEffectInstance;)Z"
-            //#endif
         )
     )
     private StatusEffectInstance noLevitation(StatusEffectInstance statusEffectInstance) {
@@ -55,11 +51,7 @@ public abstract class ShulkerBulletEntityMixin {
         method = "onEntityHit",
         at = @At(
             value = "INVOKE",
-            //#if MC>=12102
-            //$$ target = "Lnet/minecraft/entity/Entity;sidedDamage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
-            //#else
-            target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
-            //#endif
+            target = "Lnet/minecraft/entity/Entity;sidedDamage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
         )
     )
     private float noDamage(float amount) {

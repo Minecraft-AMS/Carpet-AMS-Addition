@@ -23,7 +23,7 @@ package club.mcams.carpet.mixin.translations;
 import club.mcams.carpet.translations.AMSTranslations;
 import club.mcams.carpet.translations.TranslationConstants;
 
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-@Mixin(TranslatableText.class)
+@Mixin(TranslatableTextContent.class)
 public abstract class TranslatableTextMixin {
 
     @Shadow
@@ -42,11 +42,7 @@ public abstract class TranslatableTextMixin {
         method = "updateTranslations",
         at = @At(
             value = "INVOKE",
-            //#if MC<11800
-            //$$ target = "Lnet/minecraft/text/TranslatableText;setTranslation(Ljava/lang/String;)V"
-            //#else
-            target = "Lnet/minecraft/text/TranslatableText;forEachPart(Ljava/lang/String;Ljava/util/function/Consumer;)V"
-            //#endif
+            target = "Lnet/minecraft/text/TranslatableTextContent;forEachPart(Ljava/lang/String;Ljava/util/function/Consumer;)V"
         )
     )
     private String applyAMSTranslation(String vanillaTranslatedFormattingString) {
@@ -56,6 +52,7 @@ public abstract class TranslatableTextMixin {
                 return amsTranslated;
             }
         }
+
         return vanillaTranslatedFormattingString;
     }
 }

@@ -45,7 +45,7 @@ public class GetHeldItemIDCommandRegistry {
         dispatcher.register(
             CommandManager.literal("getHeldItemID")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetHeldItemID))
-            .executes(context -> execute(context.getSource().getPlayer()))
+            .executes(context -> execute(context.getSource().getPlayerOrThrow()))
         );
     }
 

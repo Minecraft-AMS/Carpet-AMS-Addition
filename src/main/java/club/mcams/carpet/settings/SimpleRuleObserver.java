@@ -20,14 +20,14 @@
 
 package club.mcams.carpet.settings;
 
-import carpet.settings.ParsedRule;
+import carpet.api.settings.CarpetRule;
 
 import net.minecraft.server.command.ServerCommandSource;
 
 public abstract class SimpleRuleObserver<T> extends RuleObserver<T> {
     @Override
-    public T validate(ServerCommandSource source, ParsedRule<T> rule, T newValue, String userInput) {
-        onValueChange(source, rule, rule.get(), newValue);
+    public T validate(ServerCommandSource source, CarpetRule<T> rule, T newValue, String userInput) {
+        onValueChange(source, rule, rule.value(), newValue);
         return newValue;
     }
 }

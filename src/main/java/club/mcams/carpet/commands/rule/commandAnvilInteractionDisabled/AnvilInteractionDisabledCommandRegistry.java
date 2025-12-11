@@ -54,7 +54,7 @@ public class AnvilInteractionDisabledCommandRegistry {
                         mode ?
                         Messenger.s(translator.tr("disable").getString()).setStyle(Style.EMPTY.withColor(Formatting.RED)) :
                         Messenger.s(translator.tr("enable").getString()).setStyle(Style.EMPTY.withColor(Formatting.GREEN));
-                Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
+                Objects.requireNonNull(context.getSource().getPlayerOrThrow()).sendMessage(message, true);
                 return 1;
         })));
     }

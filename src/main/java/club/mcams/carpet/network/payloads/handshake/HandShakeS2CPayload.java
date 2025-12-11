@@ -40,7 +40,7 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
 
     private HandShakeS2CPayload(PacketByteBuf buf) {
         super(ID);
-        this.modVersion = NetworkUtil.readBufString(buf);
+        this.modVersion = buf.readString();
         this.isSupportServer = buf.readBoolean();
     }
 

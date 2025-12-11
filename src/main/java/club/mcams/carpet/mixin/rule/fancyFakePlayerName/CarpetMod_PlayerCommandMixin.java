@@ -36,14 +36,12 @@ import java.util.Objects;
 
 @Mixin(PlayerCommand.class)
 public abstract class CarpetMod_PlayerCommandMixin {
-    @WrapOperation(method = "spawn",
+    @WrapOperation(
+        method = "spawn",
         at = @At(
             value = "INVOKE",
             target = "Lcom/mojang/brigadier/arguments/StringArgumentType;getString(Lcom/mojang/brigadier/context/CommandContext;Ljava/lang/String;)Ljava/lang/String;"
         ),
-        //#if MC<11700
-        require = 2,
-        //#endif
         remap = false
     )
     private static String spawn(CommandContext<?> context, String name, Operation<String> original) {

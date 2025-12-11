@@ -20,12 +20,46 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import club.mcams.carpet.AmsServerSettings;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributes;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+import java.util.Objects;
 
 @GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(DummyClass.class)
-public abstract class EntityAttributeInstanceMixin {}
+@Mixin(value = EntityAttributeInstance.class, priority = 1688)
+public abstract class EntityAttributeInstanceMixin implements EntityAttributeInstanceInvoker {
+    @ModifyReturnValue(method = "getBaseValue", at = @At("RETURN"))
+    private double getPlayerBlockInteractionBaseValue(double original) {
+        if (
+            AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D &&
+            Objects.equals(AmsServerSettings.maxPlayerBlockInteractionRangeScope, "global") &&
+            this.invokeGetAttribute().equals(EntityAttributes.BLOCK_INTERACTION_RANGE)
+        ) {
+            return AmsServerSettings.maxPlayerBlockInteractionRange;
+        } else {
+            return original;
+        }
+    }
+
+    @ModifyReturnValue(method = "getBaseValue", at = @At("RETURN"))
+    private double getPlayerEntityInteractionBaseValue(double original) {
+        if (
+            AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D &&
+            Objects.equals(AmsServerSettings.maxPlayerEntityInteractionRangeScope, "global") &&
+            this.invokeGetAttribute().equals(EntityAttributes.ENTITY_INTERACTION_RANGE)
+        ) {
+            return AmsServerSettings.maxPlayerEntityInteractionRange;
+        } else {
+            return original;
+        }
+    }
+}

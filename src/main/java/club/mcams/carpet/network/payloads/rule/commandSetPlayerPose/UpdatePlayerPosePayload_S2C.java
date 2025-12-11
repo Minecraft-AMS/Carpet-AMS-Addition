@@ -38,7 +38,6 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
     private final Map<UUID, String> poseMap;
     private final UUID targetPlayerUuid;
 
-    @SuppressWarnings("Convert2MethodRef")
     private UpdatePlayerPosePayload_S2C(PacketByteBuf buf) {
         super(ID);
         this.poseMap = PacketByteBufExtras.readMap(buf, b -> b.readUuid(), PacketByteBuf::readString);
@@ -51,7 +50,6 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
         this.targetPlayerUuid = targetPlayerUuid;
     }
 
-    @SuppressWarnings("Convert2MethodRef")
     @Override
     protected void writeData(PacketByteBuf buf) {
         PacketByteBufExtras.writeMap(buf, this.poseMap, (b, uuid) -> b.writeUuid(uuid), PacketByteBuf::writeString);

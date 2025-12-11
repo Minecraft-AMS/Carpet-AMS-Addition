@@ -26,9 +26,7 @@ import club.mcams.carpet.helpers.ParticleHelper;
 import net.minecraft.block.CarvedPumpkinBlock;
 import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.entity.EntityType;
-//#if MC>=12102
-//$$ import net.minecraft.entity.SpawnReason;
-//#endif
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.ShulkerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -51,14 +49,8 @@ public abstract class CarvedPumpkinBlockMixin {
             boolean headIsCarvedPumpkin = world.getBlockState(headPos).getBlock() instanceof CarvedPumpkinBlock;
             boolean bodyIsShulkerBox = world.getBlockState(bodyPos).getBlock() instanceof ShulkerBoxBlock;
             if (headIsCarvedPumpkin && bodyIsShulkerBox) {
-                //#if MC>=12102
-                //$$ ShulkerEntity shulkerGolem = EntityType.SHULKER.create(world, SpawnReason.MOB_SUMMONED);
-                //#else
-                ShulkerEntity shulkerGolem = EntityType.SHULKER.create(world);
-                //#endif
-                Objects.requireNonNull(shulkerGolem).refreshPositionAndAngles(
-                    bodyPos.getX() + 0.5, bodyPos.getY(), bodyPos.getZ() + 0.5, 0.0F, 0.0F
-                );
+                ShulkerEntity shulkerGolem = EntityType.SHULKER.create(world, SpawnReason.MOB_SUMMONED);
+                Objects.requireNonNull(shulkerGolem).refreshPositionAndAngles(bodyPos.getX() + 0.5, bodyPos.getY(), bodyPos.getZ() + 0.5, 0.0F, 0.0F);
                 world.breakBlock(bodyPos, false);
                 world.breakBlock(headPos, false);
                 world.spawnEntity(shulkerGolem);

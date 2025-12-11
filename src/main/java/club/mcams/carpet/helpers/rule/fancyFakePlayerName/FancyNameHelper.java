@@ -48,29 +48,26 @@ public class FancyNameHelper {
                 team.setColor(Formatting.DARK_GREEN);
             }
 
-            String playerName = player.getGameProfile().getName();
-            Team currentTeam = scoreboard.getPlayerTeam(playerName);
+            String playerName = player.getGameProfile().name();
+            Team currentTeam = scoreboard.getScoreHolderTeam(playerName);
 
             if (currentTeam != null && currentTeam != team) {
-                scoreboard.removePlayerFromTeam(playerName, currentTeam);
+                scoreboard.removeScoreHolderFromTeam(playerName, currentTeam);
             }
 
             if (currentTeam != team) {
-                scoreboard.addPlayerToTeam(playerName, team);
+                scoreboard.addScoreHolderToTeam(playerName, team);
             }
         }
     }
 
     public static String addBotNameSuffix(final CommandContext<?> context, final String name, String teamName) {
         final String SUFFIX = "_" + AmsServerSettings.fancyFakePlayerName;
-        //#if MC>=11700
-        //$$ String playerName = StringArgumentType.getString(context, name);
-        //$$ if (!name.equals("player")) {
-        //$$ 	return playerName;
-        //$$ }
-        //#else
         String playerName = StringArgumentType.getString(context, name);
-        //#endif
+
+        if (!name.equals("player")) {
+        	return playerName;
+        }
 
         if (!Objects.equals(teamName, "false")) {
             playerName = playerName + SUFFIX;

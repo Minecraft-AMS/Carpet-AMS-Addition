@@ -25,7 +25,8 @@ import carpet.logging.Logger;
 import club.mcams.carpet.translations.AMSTranslations;
 
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.BaseText;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -33,13 +34,13 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft < 1.19")
+@GameVersion(version = "Minecraft >= 1.19")
 @Mixin(Logger.class)
 public abstract class LoggerMixin {
     @ModifyVariable(method = "sendPlayerMessage", at = @At("HEAD"), argsOnly = true, remap = false)
-    private BaseText[] applyAMSTranslationToLoggerMessage(BaseText[] messages, ServerPlayerEntity player, BaseText... messages_) {
+    private Text[] applyAMSTranslationToLoggerMessage(Text[] messages, ServerPlayerEntity player, Text... messages_) {
         for (int i = 0; i < messages.length; i++) {
-            messages[i] = AMSTranslations.translate(messages[i], player);
+            messages[i] = AMSTranslations.translate((MutableText) messages[i], player);
         }
         return messages;
     }

@@ -54,7 +54,7 @@ public class AmsUpdateSuppressionCrashFixCommandRegistry {
                     mode ?
                     Messenger.s(translator.tr("force_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.LIGHT_PURPLE)) :
                     Messenger.s(translator.tr("lazy_mod").getString()).setStyle(Style.EMPTY.withColor(Formatting.GREEN));
-            Objects.requireNonNull(context.getSource().getPlayer()).sendMessage(message, true);
+            Objects.requireNonNull(context.getSource().getPlayerOrThrow()).sendMessage(message, true);
             return 1;
         })));
     }

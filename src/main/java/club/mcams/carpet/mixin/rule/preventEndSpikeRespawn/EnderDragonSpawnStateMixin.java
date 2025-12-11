@@ -28,17 +28,14 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.explosion.Explosion;
-//#if MC>=11904
-//$$ import net.minecraft.world.World;
-//#endif
+import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(targets = "net/minecraft/entity/boss/dragon/EnderDragonSpawnState$3")
+@Mixin(targets = "net.minecraft.entity.boss.dragon.EnderDragonSpawnState$3")
 public abstract class EnderDragonSpawnStateMixin {
     @WrapOperation(
         method = "run",
@@ -55,44 +52,20 @@ public abstract class EnderDragonSpawnStateMixin {
         method = "run",
         at = @At(
             value = "INVOKE",
-            //#if MC>=12102
-            //$$ target = "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/World$ExplosionSourceType;)V"
-            //#elseif MC>=11904
-            //$$ target = "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/World$ExplosionSourceType;)Lnet/minecraft/world/explosion/Explosion;"
-            //#else
-            target = "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
-            //#endif
+            target = "Lnet/minecraft/server/world/ServerWorld;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/World$ExplosionSourceType;)V"
         )
     )
-    //#if MC>=12102
-    //$$ private void onCreateExplosion(
-    //#else
-    private Explosion onCreateExplosion(
-    //#endif
+    private void onCreateExplosion(
         ServerWorld serverWorld,
         Entity entity,
         double x, double y, double z, float power,
-
-        //#if MC<11904
-        Explosion.DestructionType destructionType,
-        //#else
-        //$$ World.ExplosionSourceType destructionType,
-        //#endif
-
-        //#if MC>=12102
-        //$$ Operation<Void> original
-        //#else
-        Operation<Explosion> original
-        //#endif
+        World.ExplosionSourceType destructionType,
+        Operation<Void> original
     ) {
-        //#if MC<12102
-        return Objects.equals(AmsServerSettings.preventEndSpikeRespawn, "false") ? original.call(serverWorld, entity, x, y, z, power, destructionType) : null;
-        //#else
-        //$$ if (Objects.equals(AmsServerSettings.preventEndSpikeRespawn, "false")) {
-        //$$     original.call(serverWorld, entity, x, y, z, power, destructionType);
-        //$$ } else {
-        //$$     serverWorld.createExplosion(null, 0, 0, 0, 0.0F, World.ExplosionSourceType.NONE);
-        //$$ }
-        //#endif
+        if (Objects.equals(AmsServerSettings.preventEndSpikeRespawn, "false")) {
+            original.call(serverWorld, entity, x, y, z, power, destructionType);
+        } else {
+            serverWorld.createExplosion(null, 0, 0, 0, 0.0F, World.ExplosionSourceType.NONE);
+        }
     }
 }

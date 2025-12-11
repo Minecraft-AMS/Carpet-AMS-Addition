@@ -20,8 +20,8 @@
 
 package club.mcams.carpet.validators.rule.renewableNetherScrap;
 
-import carpet.settings.ParsedRule;
-import carpet.settings.Validator;
+import carpet.api.settings.CarpetRule;
+import carpet.api.settings.Validator;
 
 import club.mcams.carpet.translations.Translator;
 
@@ -31,7 +31,7 @@ public class DropRateValidator extends Validator<Double> {
     private static final Translator translator = new Translator("validator.renewableNetherScrap");
 
     @Override
-    public Double validate(ServerCommandSource serverCommandSource, ParsedRule<Double> parsedRule, Double aDouble, String s) {
+    public Double validate(ServerCommandSource serverCommandSource, CarpetRule<Double> parsedRule, Double aDouble, String s) {
         return aDouble >= 0.0D && aDouble <= 1.0D ? aDouble : null;
     }
 

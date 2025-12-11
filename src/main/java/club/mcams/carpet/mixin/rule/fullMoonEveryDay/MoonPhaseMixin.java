@@ -20,12 +20,22 @@
 
 package club.mcams.carpet.mixin.rule.fullMoonEveryDay;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.world.MoonPhase;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21.11")
-@Mixin(DummyClass.class)
-public abstract class MoonPhaseMixin {}
+@Mixin(MoonPhase.class)
+public abstract class MoonPhaseMixin {
+    @ModifyReturnValue(method = "getIndex", at = @At("RETURN"))
+    private int fullMoonEveryDay(int original) {
+        return AmsServerSettings.fullMoonEveryDay ? 0 : original;
+    }
+}

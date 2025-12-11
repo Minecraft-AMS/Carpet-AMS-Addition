@@ -32,11 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(HopperBlockEntity.class)
 public abstract class HopperBlockEntityMixin {
     @Inject(method = "insertAndExtract", at = @At("HEAD"), cancellable = true)
-    //#if MC<11700
-    //$$ private void insertAndExtract(CallbackInfoReturnable<Boolean> cir) {
-    //#else
     private static void insertAndExtract(CallbackInfoReturnable<Boolean> cir) {
-    //#endif
         if (AmsServerSettings.hopperSuctionDisabled) {
             cir.setReturnValue(false);
             cir.cancel();

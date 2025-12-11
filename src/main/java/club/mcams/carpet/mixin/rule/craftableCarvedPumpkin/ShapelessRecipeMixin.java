@@ -20,12 +20,91 @@
 
 package club.mcams.carpet.mixin.rule.craftableCarvedPumpkin;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.MinecraftServerUtil;
+
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.recipe.CraftingRecipe;
+import net.minecraft.recipe.ShapelessRecipe;
+import net.minecraft.recipe.input.CraftingRecipeInput;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.collection.DefaultedList;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import java.util.Random;
 
-@GameVersion(version = "Minecraft >= 1.21.2")
-@Mixin(DummyClass.class)
-public abstract class ShapelessRecipeMixin {}
+@Mixin(ShapelessRecipe.class)
+public abstract class ShapelessRecipeMixin implements CraftingRecipe {
+    @Override
+    public DefaultedList<ItemStack> getRecipeRemainders(CraftingRecipeInput input) {
+        DefaultedList<ItemStack> remainders = CraftingRecipe.super.getRecipeRemainders(input);
+        if (AmsServerSettings.craftableCarvedPumpkin) {
+            ShapelessRecipe recipe = (ShapelessRecipe) (Object) this;
+            ItemStack result = recipe.craft(input, MinecraftServerUtil.getServer().getRegistryManager());
+            if (result.getItem().equals(Items.CARVED_PUMPKIN)) {
+                return this.handleRemainders(input, remainders);
+            }
+        }
+        return remainders;
+    }
+
+    @Unique
+    private DefaultedList<ItemStack> handleRemainders(CraftingRecipeInput input, DefaultedList<ItemStack> originalRemainders) {
+        DefaultedList<ItemStack> newRemainders = DefaultedList.ofSize(originalRemainders.size(), ItemStack.EMPTY);
+
+        for (int i = 0; i < originalRemainders.size(); i++) {
+            newRemainders.set(i, originalRemainders.get(i).copy());
+        }
+
+        for (int i = 0; i < input.size(); i++) {
+            ItemStack stack = input.getStackInSlot(i);
+            if (stack.getItem().equals(Items.SHEARS)) {
+                ItemStack shearsResult = this.processDurability(stack);
+                if (!shearsResult.isEmpty()) {
+                    newRemainders.set(i, shearsResult);
+                }
+                break;
+            }
+        }
+
+        return newRemainders;
+    }
+
+    @Unique
+    private ItemStack processDurability(ItemStack shears) {
+        ItemStack resultShears = shears.copy();
+        resultShears.setCount(1);
+
+        RegistryWrapper.WrapperLookup lookup = MinecraftServerUtil.getServer().getRegistryManager();
+        RegistryEntry<Enchantment> unbreakingEntry = lookup.getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.UNBREAKING);
+        int unbreakingLevel = EnchantmentHelper.getLevel(unbreakingEntry, shears);
+
+        Random random = new Random();
+        boolean shouldDamage = true;
+
+        if (unbreakingLevel > 0) {
+            float chance = (float) unbreakingLevel / (unbreakingLevel + 1);
+            if (random.nextFloat() < chance) {
+                shouldDamage = false;
+            }
+        }
+
+        if (shouldDamage) {
+            int newDamage = resultShears.getDamage() + 1;
+            resultShears.setDamage(newDamage);
+            if (newDamage >= resultShears.getMaxDamage()) {
+                return ItemStack.EMPTY;
+            }
+        }
+
+        return resultShears;
+    }
+}

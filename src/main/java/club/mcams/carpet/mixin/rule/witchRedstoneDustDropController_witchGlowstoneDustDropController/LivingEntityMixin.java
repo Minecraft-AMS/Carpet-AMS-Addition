@@ -21,13 +21,11 @@
 package club.mcams.carpet.mixin.rule.witchRedstoneDustDropController_witchGlowstoneDustDropController;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.EntityUtil;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.WitchEntity;
-//#if MC>=12102
-//$$ import net.minecraft.server.world.ServerWorld;
-//$$ import club.mcams.carpet.utils.EntityUtil;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -40,71 +38,30 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-    @Inject(
-        //#if MC>=12110
-        //$$ method = "dropLoot(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;Z)V",
-        //#else
-        method = "dropLoot",
-        //#endif
-        at = @At("TAIL")
-    )
+    @Inject(method = "dropLoot(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;Z)V", at = @At("TAIL"))
     private void customRedstoneDustDrop(CallbackInfo ci) {
         if (AmsServerSettings.witchRedstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
-            //#if MC>=12102
-            //$$ ServerWorld world = (ServerWorld) EntityUtil.getEntityWorld(livingEntity);
-            //#endif
+            ServerWorld world = (ServerWorld) EntityUtil.getEntityWorld(livingEntity);
             int redstoneCount = AmsServerSettings.witchRedstoneDustDropController;
-            compatWitchDropStack(
-                Items.REDSTONE, redstoneCount,
-                //#if MC>=12102
-                //$$ world,
-                //#endif
-                livingEntity
-            );
+            compatWitchDropStack(Items.REDSTONE, redstoneCount, world, livingEntity);
         }
     }
 
-    @Inject(
-        //#if MC>=12110
-        //$$ method = "dropLoot(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;Z)V",
-        //#else
-        method = "dropLoot",
-        //#endif
-        at = @At("TAIL")
-    )
+    @Inject(method = "dropLoot(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;Z)V", at = @At("TAIL"))
     private void customGlowstoneDustDrop(CallbackInfo ci) {
         if (AmsServerSettings.witchGlowstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
-            //#if MC>=12102
-            //$$ ServerWorld world = (ServerWorld) EntityUtil.getEntityWorld(livingEntity);
-            //#endif
+            ServerWorld world = (ServerWorld) EntityUtil.getEntityWorld(livingEntity);
             int glowstoneCount = AmsServerSettings.witchGlowstoneDustDropController;
-            compatWitchDropStack(
-                Items.GLOWSTONE_DUST, glowstoneCount,
-                //#if MC>=12102
-                //$$ world,
-                //#endif
-                livingEntity
-            );
+            compatWitchDropStack(Items.GLOWSTONE_DUST, glowstoneCount, world, livingEntity);
         }
     }
 
     @Unique
-    private static void compatWitchDropStack(
-        Item item, int count,
-        //#if MC>=12102
-        //$$ ServerWorld world,
-        //#endif
-        LivingEntity livingEntity
-    ) {
+    private static void compatWitchDropStack(Item item, int count, ServerWorld world, LivingEntity livingEntity) {
         if (livingEntity instanceof WitchEntity) {
-            livingEntity.dropStack(
-                //#if MC>=12102
-                //$$ world,
-                //#endif
-                new ItemStack(item, count)
-            );
+            livingEntity.dropStack(world, new ItemStack(item, count));
         }
     }
 }

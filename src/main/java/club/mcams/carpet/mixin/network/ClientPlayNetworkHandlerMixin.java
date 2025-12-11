@@ -23,60 +23,22 @@ package club.mcams.carpet.mixin.network;
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 
-//#if MC>=12005
-//$$ import net.minecraft.network.packet.CustomPayload;
-//$$ import net.minecraft.client.network.ClientCommonNetworkHandler;
-//$$ import net.minecraft.network.packet.s2c.common.CustomPayloadS2CPacket;
-//#else
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-//#endif
-import net.minecraft.util.Identifier;
+import net.minecraft.client.network.ClientCommonNetworkHandler;
+import net.minecraft.network.packet.s2c.common.CustomPayloadS2CPacket;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(
-    //#if MC>=12005
-    //$$ ClientCommonNetworkHandler.class
-    //#else
-    ClientPlayNetworkHandler.class
-    //#endif
-)
+@Mixin(ClientCommonNetworkHandler.class)
 public abstract class ClientPlayNetworkHandlerMixin {
-    @Inject(
-        //#if MC>=12005
-        //$$ method = "onCustomPayload(Lnet/minecraft/network/packet/s2c/common/CustomPayloadS2CPacket;)V",
-        //#else
-        method = "onCustomPayload",
-        //#endif
-        at = @At("HEAD"),
-        cancellable = true
-    )
+    @Inject(method = "onCustomPayload(Lnet/minecraft/network/packet/s2c/common/CustomPayloadS2CPacket;)V", at = @At("HEAD"), cancellable = true)
     private void onCustomPayload(CustomPayloadS2CPacket packet, CallbackInfo ci) {
-        //#if MC>=12005
-        //$$ if (packet.payload() instanceof AMS_CustomPayload && packet.payload().getId().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
-        //$$     AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
-        //$$     if (AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)) {
-        //$$         ci.cancel();
-        //$$     }
-        //$$ }
-        //#else
-        Identifier channel = ((CustomPayloadS2CPacketAccessor) packet).getChannel();
-        if (channel.equals(AMS_CustomPayload.CHANNEL_ID)) {
-            PacketByteBuf packetByteBuf = ((CustomPayloadS2CPacketAccessor) packet).getData();
-            try {
-                AMS_CustomPayload payload = AMS_PayloadManager.S2C_decodePacket(packet);
-                if (payload != null && AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)) {
-                    ci.cancel();
-                }
-            } finally {
-                packetByteBuf.release();
+        if (packet.payload() instanceof AMS_CustomPayload payload && packet.payload().getId().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
+            if (AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)) {
+                ci.cancel();
             }
         }
-        //#endif
     }
 }

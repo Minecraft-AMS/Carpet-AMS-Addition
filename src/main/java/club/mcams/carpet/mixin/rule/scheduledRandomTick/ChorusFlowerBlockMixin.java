@@ -26,12 +26,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.ChorusFlowerBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-
-//#if MC>=11900
-//$$import net.minecraft.util.math.random.Random;
-//#else
-import java.util.Random;
-//#endif
+import net.minecraft.util.math.random.Random;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -43,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ChorusFlowerBlockMixin {
 
     @Shadow
-    public abstract void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random);
+    protected abstract void randomTick(BlockState state, ServerWorld world, BlockPos pos, Random random);
 
     @Inject(
         method = "scheduledTick",

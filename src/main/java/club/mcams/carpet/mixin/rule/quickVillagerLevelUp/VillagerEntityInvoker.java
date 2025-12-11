@@ -21,9 +21,7 @@
 package club.mcams.carpet.mixin.rule.quickVillagerLevelUp;
 
 import net.minecraft.entity.passive.VillagerEntity;
-//#if MC>=12111
-//$$ import net.minecraft.server.world.ServerWorld;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.village.VillagerData;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,11 +30,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(VillagerEntity.class)
 public interface VillagerEntityInvoker {
     @Invoker("levelUp")
-    void invokerLevelUp(
-        //#if MC>=12111
-        //$$ ServerWorld world
-        //#endif
-    );
+    void invokerLevelUp(ServerWorld world);
 
     @Invoker("getVillagerData")
     VillagerData invokerGetVillagerData();

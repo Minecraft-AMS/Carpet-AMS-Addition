@@ -21,12 +21,10 @@
 package club.mcams.carpet.mixin.rule.breedableParrots;
 
 import club.mcams.carpet.AmsServerSettings;
-
 import club.mcams.carpet.utils.RegexTools;
+
 import net.minecraft.entity.EntityType;
-//#if MC>=12102
-//$$ import net.minecraft.entity.SpawnReason;
-//#endif
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ParrotEntity;
@@ -80,11 +78,7 @@ public abstract class ParrotEntityMixin extends TameableShoulderEntity {
     @Inject(method = "createChild", at = @At("HEAD"), cancellable = true)
     private void createChild(ServerWorld world, PassiveEntity entity, CallbackInfoReturnable<PassiveEntity> cir) {
         if (!Objects.equals(AmsServerSettings.breedableParrots, "none")) {
-            //#if MC>=12102
-            //$$ PassiveEntity child = EntityType.PARROT.create(world, SpawnReason.BREEDING);
-            //#else
-            PassiveEntity child = EntityType.PARROT.create(world);
-            //#endif
+            PassiveEntity child = EntityType.PARROT.create(world, SpawnReason.BREEDING);
             if (child != null) {
                 child.setBaby(true);
             }

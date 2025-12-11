@@ -71,11 +71,11 @@ public class LeaderCommandRegistry {
             .then(argument("player", EntityArgumentType.player())
             .executes(context -> remove(context.getSource().getServer(), EntityArgumentType.getPlayer(context, "player")))))
             .then(literal("removeAll")
-            .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
+            .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayerOrThrow())))
             .then(literal("list")
-            .executes(context -> list(context.getSource().getPlayer())))
+            .executes(context -> list(context.getSource().getPlayerOrThrow())))
             .then(literal("help")
-            .executes(context -> help(context.getSource().getPlayer())))
+            .executes(context -> help(context.getSource().getPlayerOrThrow())))
             .then(literal("broadcastLeaderPos")
             .then(argument("player", EntityArgumentType.player())
             .then(literal("interval")
@@ -252,17 +252,12 @@ public class LeaderCommandRegistry {
             player.removeStatusEffect(LeaderCommandRegistry.HIGH_LIGHT.getEffectType());
         }
         if (LeaderCommandRegistry.LEADER_MAP.containsValue(player.getUuidAsString())) {
-            player.addStatusEffect(
-                LeaderCommandRegistry.HIGH_LIGHT
-                //#if MC>=11700
-                , player
-                //#endif
-            );
+            player.addStatusEffect(LeaderCommandRegistry.HIGH_LIGHT, player);
         }
     }
 
     private static String getPlayerName(PlayerEntity player) {
-        return player.getGameProfile().getName();
+        return player.getGameProfile().name();
     }
 
     private static String getPlayerUUID(PlayerEntity player) {

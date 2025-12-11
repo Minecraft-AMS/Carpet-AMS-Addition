@@ -21,7 +21,7 @@
 package club.mcams.carpet.logging;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.BaseText;
+import net.minecraft.text.MutableText;
 
 public abstract class AbstractHUDLogger {
     private final String NAME;
@@ -34,5 +34,5 @@ public abstract class AbstractHUDLogger {
         return this.NAME;
     }
 
-    public abstract BaseText[] onHudUpdate(String option, PlayerEntity playerEntity);
+    public abstract MutableText[] onHudUpdate(String option, PlayerEntity playerEntity);
 }

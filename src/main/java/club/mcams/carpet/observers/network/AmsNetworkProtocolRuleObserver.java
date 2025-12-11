@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.observers.network;
 
-import carpet.settings.ParsedRule;
+import carpet.api.settings.CarpetRule;
 
 import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.settings.RuleObserver;
@@ -31,7 +31,7 @@ import net.minecraft.server.command.ServerCommandSource;
 
 public class AmsNetworkProtocolRuleObserver extends RuleObserver<Boolean> {
     @Override
-    public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
+    public void onValueChange(ServerCommandSource source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (MinecraftServerUtil.serverIsRunning()) {
             NetworkUtil.forcedBroadcastDataPack(MinecraftServerUtil.getServer(), RequestHandShakeS2CPayload.create());
         }

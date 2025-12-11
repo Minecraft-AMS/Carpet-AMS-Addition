@@ -39,20 +39,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BellBlock.class)
 public abstract class BellBlockMixin {
-    @Inject(
-        //#if MC>=11700
-        method = "ring(Lnet/minecraft/entity/Entity;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z",
-        //#else
-        //$$ method = "ring(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z",
-        //#endif
-        at = @At("HEAD")
-    )
-    private void ring(
-        //#if MC>=11700
-        Entity entity,
-        //#endif
-        World world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir
-    ) {
+    @Inject(method = "ring(Lnet/minecraft/entity/Entity;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/util/math/Direction;)Z", at = @At("HEAD"))
+    private void ring(Entity entity, World world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
         if (AmsServerSettings.bellBlockChunkLoader && !WorldUtil.isClient(world)) {
             ChunkPos chunkPos = new ChunkPos(pos);
             BlockChunkLoaderHelper.addBellBlockTicket((ServerWorld) world, chunkPos);

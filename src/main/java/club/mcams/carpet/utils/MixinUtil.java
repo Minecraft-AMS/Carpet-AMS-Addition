@@ -24,7 +24,7 @@ import club.mcams.carpet.AmsServer;
 import static club.mcams.carpet.utils.Messenger.*;
 
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.BaseText;
+import net.minecraft.text.MutableText;
 
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.MixinEnvironment;
@@ -32,7 +32,7 @@ import org.spongepowered.asm.mixin.MixinEnvironment;
 public class MixinUtil {
     public static boolean audit(@Nullable ServerCommandSource source) {
         boolean ok;
-        BaseText response;
+        MutableText response;
         try {
             MixinEnvironment.getCurrentEnvironment().audit();
             response = s("Mixin environment audited successfully");

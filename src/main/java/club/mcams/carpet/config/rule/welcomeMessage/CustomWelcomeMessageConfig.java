@@ -60,13 +60,10 @@ public class CustomWelcomeMessageConfig {
                     new Gson().toJson(defaultConfig, writer);
                 }
             }
+
             JsonObject config;
             try (InputStreamReader reader = new InputStreamReader(new FileInputStream(path.toFile()), StandardCharsets.UTF_8)) {
-                //#if MC<11800
-                //$$ config = new JsonParser().parse(reader).getAsJsonObject();
-                //#else
                 config = JsonParser.parseReader(reader).getAsJsonObject();
-                //#endif
             }
 
             JsonElement msgElement = config.get("welcomeMessage");

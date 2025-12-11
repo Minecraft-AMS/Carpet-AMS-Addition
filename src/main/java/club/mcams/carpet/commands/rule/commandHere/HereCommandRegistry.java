@@ -53,7 +53,7 @@ public class HereCommandRegistry {
             .executes(context -> sendMessage(
                 context.getSource(),
                 context.getSource().getServer(),
-                context.getSource().getPlayer()
+                context.getSource().getPlayerOrThrow()
             ))
         );
     }

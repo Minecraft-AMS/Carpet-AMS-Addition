@@ -38,7 +38,7 @@ import net.minecraft.command.argument.BlockStateArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 //#if MC>=11900
-//$$ import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.command.CommandRegistryAccess;
 //#endif
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -56,52 +56,36 @@ public class CustomBlockHardnessCommandRegistry {
     public static final Map<Block, Float> DEFAULT_HARDNESS_MAP = new ConcurrentHashMap<>();
     private static final String MESSAGE_HEAD = "<customBlockHardness> ";
 
-    //#if MC<11900
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-    //#else
-    //$$ public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
-    //#endif
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
         dispatcher.register(
             CommandManager.literal("customBlockHardness")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomBlockHardness))
             .then(literal("set")
-            //#if MC<11900
-            .then(argument("block", BlockStateArgumentType.blockState())
-            //#else
-            //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
-            //#endif
+            .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
             .then(argument("hardness", FloatArgumentType.floatArg())
             .executes(context -> set(
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState(),
                 FloatArgumentType.getFloat(context, "hardness"),
                 context.getSource().getServer(),
-                context.getSource().getPlayer()
+                context.getSource().getPlayerOrThrow()
             )))))
             .then(literal("remove")
-            //#if MC<11900
-            .then(argument("block", BlockStateArgumentType.blockState())
-            //#else
-            //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
-            //#endif
+            .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
             .executes(context -> remove(
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState(),
                 context.getSource().getServer(),
-                context.getSource().getPlayer()
+                context.getSource().getPlayerOrThrow()
             ))))
             .then(literal("removeAll").executes(
                 context -> removeAll(context.getSource().getServer(),
-                context.getSource().getPlayer())
+                context.getSource().getPlayerOrThrow())
             ))
-            .then(literal("list").executes(context -> list(context.getSource().getPlayer())))
-            .then(literal("help").executes(context -> help(context.getSource().getPlayer())))
+            .then(literal("list").executes(context -> list(context.getSource().getPlayerOrThrow())))
+            .then(literal("help").executes(context -> help(context.getSource().getPlayerOrThrow())))
             .then(literal("getDefaultHardness")
-            //#if MC<11900
-            .then(argument("block", BlockStateArgumentType.blockState())
-            //#else
-            //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
-            //#endif
+            .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
             .executes(context -> getDefaultHardness(
-                context.getSource().getPlayer(),
+                context.getSource().getPlayerOrThrow(),
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState().getBlock()
             ))))
         );

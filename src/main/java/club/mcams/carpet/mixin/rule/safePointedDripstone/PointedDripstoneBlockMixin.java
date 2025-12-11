@@ -25,7 +25,6 @@ import club.mcams.carpet.AmsServerSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.block.PointedDripstoneBlock;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -41,25 +40,9 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @Mixin(PointedDripstoneBlock.class)
 public abstract class PointedDripstoneBlockMixin {
     @Inject(method = "onLandedUpon", at = @At("HEAD"), cancellable = true)
-    private void onLandedUpon(
-        World world, BlockState state, BlockPos pos, Entity entity,
-        //#if MC<12105
-        float fallDistance,
-        //#else
-        //$$ double fallDistance,
-        //#endif
-        CallbackInfo ci
-    ) {
+    private void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance, CallbackInfo ci) {
         if (AmsServerSettings.safePointedDripstone && entity instanceof PlayerEntity) {
-            entity.handleFallDamage(
-                fallDistance,
-                1.0F,
-                //#if MC>=11900
-                //$$ world.getDamageSources().fall()
-                //#else
-                DamageSource.FALL
-                //#endif
-            );
+            entity.handleFallDamage(fallDistance, 1.0F, world.getDamageSources().fall());
             ci.cancel();
         }
     }

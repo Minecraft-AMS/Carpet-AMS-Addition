@@ -20,19 +20,15 @@
 
 package club.mcams.carpet.utils;
 
-import com.mojang.authlib.GameProfile;
-
 import net.minecraft.entity.player.PlayerEntity;
-//#if MC>=12109
-//$$ import net.minecraft.server.PlayerConfigEntry;
-//#endif
+import net.minecraft.server.PlayerConfigEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.UUID;
 
 public class PlayerUtil {
     public static String getName(PlayerEntity player) {
-        return player.getGameProfile().getName();
+        return player.getGameProfile().name();
     }
 
     public static String getName(UUID uuid) {
@@ -51,22 +47,10 @@ public class PlayerUtil {
 
     @SuppressWarnings("unused")
     public static Boolean isInWhitelist(PlayerEntity player) {
-        return MinecraftServerUtil.getServer().getPlayerManager().getWhitelist().isAllowed(
-            //#if MC>=12109
-            //$$ player.getPlayerConfigEntry()
-            //#else
-            player.getGameProfile()
-            //#endif
-        );
+        return MinecraftServerUtil.getServer().getPlayerManager().getWhitelist().isAllowed(player.getPlayerConfigEntry());
     }
 
-    public static Boolean isInWhitelist(
-        //#if MC>=12109
-        //$$ PlayerConfigEntry gameProfile
-        //#else
-        GameProfile gameProfile
-        //#endif
-    ) {
+    public static Boolean isInWhitelist(PlayerConfigEntry gameProfile) {
         return MinecraftServerUtil.getServer().getPlayerManager().getWhitelist().isAllowed(gameProfile);
     }
 }

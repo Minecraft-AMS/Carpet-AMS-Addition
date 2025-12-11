@@ -27,22 +27,23 @@ import net.minecraft.server.command.ServerCommandSource;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import java.util.function.Predicate;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft < 1.21.6")
 @Mixin(FillCommand.class)
 public abstract class FillCommandMixin {
-    @ModifyExpressionValue(
-        method = "method_13351",
+    @ModifyArg(
+        method = "register",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/command/ServerCommandSource;hasPermissionLevel(I)Z"
-        )
+            target = "Lcom/mojang/brigadier/builder/LiteralArgumentBuilder;requires(Ljava/util/function/Predicate;)Lcom/mojang/brigadier/builder/ArgumentBuilder;",
+            remap = false
+        ),
+        require = 1,
+        allow = 2
     )
-    private static boolean FillCommand(boolean original, ServerCommandSource source) {
-        return original && PermissionHelper.canCheat(source);
+    private static Predicate<ServerCommandSource> preventCheat(Predicate<ServerCommandSource> predicate) {
+        return source -> predicate.test(source) && PermissionHelper.canCheat(source);
     }
 }

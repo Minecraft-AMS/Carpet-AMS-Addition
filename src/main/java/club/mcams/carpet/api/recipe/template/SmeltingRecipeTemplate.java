@@ -47,21 +47,11 @@ public class SmeltingRecipeTemplate implements RecipeTemplateInterface {
         JsonObject recipeJson = new JsonObject();
         recipeJson.addProperty("type", "minecraft:smelting");
 
-        //#if MC<12102
-        JsonObject ingredientJson = new JsonObject();
-        ingredientJson.addProperty("item", ingredient);
-        recipeJson.add("ingredient", ingredientJson);
-        //#else
-        //$$ recipeJson.addProperty("ingredient", ingredient);
-        //#endif
+        recipeJson.addProperty("ingredient", ingredient);
 
-        //#if MC<12005
-        recipeJson.addProperty("result", resultItem);
-        //#else
-        //$$ JsonObject resultJson = new JsonObject();
-        //$$ resultJson.addProperty(this.compatResultItemIdKey(), resultItem);
-        //$$ recipeJson.add("result", resultJson);
-        //#endif
+        JsonObject resultJson = new JsonObject();
+        resultJson.addProperty("id", resultItem);
+        recipeJson.add("result", resultJson);
 
         recipeJson.addProperty("experience", experience);
         recipeJson.addProperty("cookingtime", cookingTime);

@@ -34,6 +34,7 @@ public class ChunkLoading {
         if (playerFromName(playerName) == null) {
             return;
         }
+
         if (online) {
             onlinePlayerMap.put(playerName, b);
         }

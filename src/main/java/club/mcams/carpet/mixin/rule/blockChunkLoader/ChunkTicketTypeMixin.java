@@ -20,12 +20,28 @@
 
 package club.mcams.carpet.mixin.rule.blockChunkLoader;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.SimpleRegistry;
+
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+@SuppressWarnings("SimplifiableConditionalExpression")
+@Mixin(SimpleRegistry.class)
+public abstract class ChunkTicketTypeMixin {
+    @ModifyExpressionValue(
+        method = "assertNotFrozen(Lnet/minecraft/registry/RegistryKey;)V",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/registry/SimpleRegistry;frozen:Z",
+            opcode = Opcodes.GETFIELD
+        )
+    )
+    private boolean noFrozen(boolean original, RegistryKey<String> key) {
+        return key.getValue().getNamespace().equals("carpetamsaddition") ? false : original;
+    }
+}
 
-@GameVersion(version = "Minecraft >= 1.21.5")
-@Mixin(DummyClass.class)
-public class ChunkTicketTypeMixin {}

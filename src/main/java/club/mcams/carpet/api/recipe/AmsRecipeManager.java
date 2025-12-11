@@ -25,15 +25,22 @@ import club.mcams.carpet.api.recipe.template.ShapelessRecipeTemplate;
 import club.mcams.carpet.api.recipe.template.SmeltingRecipeTemplate;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 
+import com.mojang.serialization.JsonOps;
+
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeEntry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@GameVersion(version = "Minecraft < 1.21.2")
 public class AmsRecipeManager {
     private final List<ShapelessRecipeTemplate> shapelessRecipes;
     private final List<ShapedRecipeTemplate> shapedRecipes;
@@ -45,8 +52,19 @@ public class AmsRecipeManager {
         this.smeltingRecipes = builder.getSmeltingRecipeList();
     }
 
-    public void registerRecipes(Map<Identifier, JsonElement> recipeMap) {
+    public void registerRecipes(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup) {
+        Map<Identifier, JsonElement> recipeMap = new HashMap<>();
         registerAllRecipes(recipeMap);
+        recipeMap.forEach((id, json) -> addRecipe(map, wrapperLookup, id, json));
+    }
+
+    private void addRecipe(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup, Identifier id, JsonElement json) {
+        RecipeEntry<?> recipeEntry = this.deserializeRecipe(RegistryKey.of(RegistryKeys.RECIPE, id), json.getAsJsonObject(), wrapperLookup);
+        map.put(id, recipeEntry.value());
+    }
+
+    private RecipeEntry<?> deserializeRecipe(RegistryKey<Recipe<?>> key, JsonObject json, RegistryWrapper.WrapperLookup registries) {
+        return new RecipeEntry<>(key, Recipe.CODEC.parse(registries.getOps(JsonOps.INSTANCE), json).getOrThrow(JsonParseException::new));
     }
 
     private void registerAllRecipes(Map<Identifier, JsonElement> recipeMap) {

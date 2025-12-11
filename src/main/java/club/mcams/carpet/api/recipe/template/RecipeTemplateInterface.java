@@ -31,12 +31,4 @@ public interface RecipeTemplateInterface {
     JsonObject toJson();
 
     void addToRecipeMap(Map<Identifier, JsonElement> recipeMap);
-
-    default String compatResultItemIdKey() {
-        //#if MC>=12005
-        //$$ return "id";
-        //#else
-        return "item";
-        //#endif
-    }
 }

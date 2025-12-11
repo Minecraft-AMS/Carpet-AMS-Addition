@@ -31,9 +31,7 @@ import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.command.argument.ItemStackArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
-//#if MC>=11900
-//$$ import net.minecraft.command.CommandRegistryAccess;
-//#endif
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -52,40 +50,28 @@ public class CustomAntiFireItemsCommandRegistry {
     private static final String MSG_HEAD = "<customAntiFireItems> ";
     public static final List<String> CUSTOM_ANTI_FIRE_ITEMS = new ArrayList<>();
 
-    //#if MC<11900
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-    //#else
-    //$$ public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
-    //#endif
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
         dispatcher.register(
             CommandManager.literal("customAntiFireItems")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomAntiFireItems))
             .then(literal("add")
-            //#if MC<11900
-            .then(argument("item", ItemStackArgumentType.itemStack())
-            //#else
-            //$$ .then(argument("item", ItemStackArgumentType.itemStack(commandRegistryAccess))
-            //#endif
+            .then(argument("item", ItemStackArgumentType.itemStack(commandRegistryAccess))
             .executes(context -> add(
-                context.getSource().getPlayer(),
+                context.getSource().getPlayerOrThrow(),
                 ItemStackArgumentType.getItemStackArgument(context, "item").createStack(1, false)
             ))))
             .then(literal("remove")
-            //#if MC<11900
-            .then(argument("item", ItemStackArgumentType.itemStack())
-            //#else
-            //$$ .then(argument("item", ItemStackArgumentType.itemStack(commandRegistryAccess))
-            //#endif
+            .then(argument("item", ItemStackArgumentType.itemStack(commandRegistryAccess))
             .executes(context -> remove(
-                context.getSource().getPlayer(),
+                context.getSource().getPlayerOrThrow(),
                 ItemStackArgumentType.getItemStackArgument(context, "item").createStack(1, false)
             ))))
             .then(literal("removeAll")
-            .executes(context -> removeAll(context.getSource().getPlayer())))
+            .executes(context -> removeAll(context.getSource().getPlayerOrThrow())))
             .then(literal("list")
-            .executes(context -> list(context.getSource().getPlayer())))
+            .executes(context -> list(context.getSource().getPlayerOrThrow())))
             .then(literal("help")
-            .executes(context -> help(context.getSource().getPlayer())))
+            .executes(context -> help(context.getSource().getPlayerOrThrow())))
         );
     }
 

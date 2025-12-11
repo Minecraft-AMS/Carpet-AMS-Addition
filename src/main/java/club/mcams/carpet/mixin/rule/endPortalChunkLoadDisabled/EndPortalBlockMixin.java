@@ -20,12 +20,34 @@
 
 package club.mcams.carpet.mixin.rule.endPortalChunkLoadDisabled;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
+import net.minecraft.block.EndPortalBlock;
+import net.minecraft.world.TeleportTarget;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21")
-@Mixin(DummyClass.class)
-public abstract class EndPortalBlockMixin {}
+@Mixin(EndPortalBlock.class)
+public abstract class EndPortalBlockMixin {
+    @WrapOperation(
+        method = "createTeleportTarget",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/TeleportTarget$PostDimensionTransition;then(Lnet/minecraft/world/TeleportTarget$PostDimensionTransition;)Lnet/minecraft/world/TeleportTarget$PostDimensionTransition;"
+        )
+    )
+    private TeleportTarget.PostDimensionTransition endPortalChunkLoadDisabled(TeleportTarget.PostDimensionTransition instance, TeleportTarget.PostDimensionTransition next, Operation<TeleportTarget.PostDimensionTransition> original) {
+        if (AmsServerSettings.endPortalChunkLoadDisabled && next.equals(TeleportTarget.ADD_PORTAL_CHUNK_TICKET)) {
+            return entity -> {};
+        } else {
+            return original.call(instance, next);
+        }
+    }
+}

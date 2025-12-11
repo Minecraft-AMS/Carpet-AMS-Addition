@@ -31,38 +31,38 @@ import java.util.Objects;
 
 public class Messenger {
     // Compound Text
-    public static BaseText c(Object... fields) {
+    public static MutableText c(Object... fields) {
         return MessengerCompatFactory.CarpetCompoundText(fields);
     }
 
     // Simple Text
-    public static BaseText s(Object text) {
+    public static MutableText s(Object text) {
         return MessengerCompatFactory.LiteralText(text.toString());
     }
 
     // Simple Text with formatting
-    public static BaseText s(Object text, Formatting textFormatting) {
+    public static MutableText s(Object text, Formatting textFormatting) {
         return formatting(s(text), textFormatting);
     }
 
     // Translation Text
-    public static BaseText tr(String key, Object... args) {
+    public static MutableText tr(String key, Object... args) {
         return MessengerCompatFactory.TranslatableText(key, args);
     }
 
-    public static BaseText copy(BaseText text) {
-        return (BaseText) text.shallowCopy();
+    public static MutableText copy(MutableText text) {
+        return text.copy();
     }
 
-    private static void __tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
+    private static void __tell(ServerCommandSource source, MutableText text, boolean broadcastToOps) {
         MessengerCompatFactory.sendFeedBack(source, text, broadcastToOps);
     }
 
-    public static void tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
+    public static void tell(ServerCommandSource source, MutableText text, boolean broadcastToOps) {
         __tell(source, text, broadcastToOps);
     }
 
-    public static void tell(ServerCommandSource source, BaseText text) {
+    public static void tell(ServerCommandSource source, MutableText text) {
         tell(source, text, false);
     }
 
@@ -70,7 +70,7 @@ public class Messenger {
         return Messenger.s("\n");
     }
 
-    public static BaseText formatting(BaseText text, Formatting... formattings) {
+    public static MutableText formatting(MutableText text, Formatting... formattings) {
         text.formatted(formattings);
         return text;
     }

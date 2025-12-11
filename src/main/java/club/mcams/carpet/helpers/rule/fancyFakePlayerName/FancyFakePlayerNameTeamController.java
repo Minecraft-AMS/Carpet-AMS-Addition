@@ -33,11 +33,11 @@ import java.util.Objects;
 public class FancyFakePlayerNameTeamController {
     public static void kickFakePlayerFromBotTeam(ServerPlayerEntity player, String teamName) {
         Scoreboard scoreboard = EntityUtil.getEntityServer(player).getScoreboard();
-        String playerName = player.getGameProfile().getName();
-        Team currentTeam = scoreboard.getPlayerTeam(playerName);
+        String playerName = player.getGameProfile().name();
+        Team currentTeam = scoreboard.getScoreHolderTeam(playerName);
         Team targetTeam = scoreboard.getTeam(teamName);
         if (currentTeam != null && currentTeam.equals(targetTeam)) {
-            scoreboard.removePlayerFromTeam(playerName, currentTeam);
+            scoreboard.removeScoreHolderFromTeam(playerName, currentTeam);
         }
     }
 

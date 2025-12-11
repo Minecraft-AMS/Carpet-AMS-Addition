@@ -78,11 +78,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
         at = @At(
             value = "INVOKE",
-            //#if MC>=12109
-            //$$ target = "Lnet/minecraft/inventory/Inventory;onOpen(Lnet/minecraft/entity/ContainerUser;)V",
-            //#else
-            target = "Lnet/minecraft/inventory/Inventory;onOpen(Lnet/minecraft/entity/player/PlayerEntity;)V",
-            //#endif
+            target = "Lnet/minecraft/inventory/Inventory;onOpen(Lnet/minecraft/entity/ContainerUser;)V",
             shift = At.Shift.AFTER
         )
     )

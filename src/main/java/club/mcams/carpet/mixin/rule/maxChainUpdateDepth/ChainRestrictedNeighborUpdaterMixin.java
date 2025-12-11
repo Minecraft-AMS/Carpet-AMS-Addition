@@ -20,12 +20,30 @@
 
 package club.mcams.carpet.mixin.rule.maxChainUpdateDepth;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
+import net.minecraft.world.block.ChainRestrictedNeighborUpdater;
+
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.19")
-@Mixin(DummyClass.class)
-public abstract class ChainRestrictedNeighborUpdaterMixin {}
+@Mixin(ChainRestrictedNeighborUpdater.class)
+public abstract class ChainRestrictedNeighborUpdaterMixin {
+    @ModifyExpressionValue(
+        method = "enqueue",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/world/block/ChainRestrictedNeighborUpdater;maxChainDepth:I",
+            opcode = Opcodes.GETFIELD
+        )
+    )
+    private int modifyMaxChainDepth(int original) {
+        return AmsServerSettings.maxChainUpdateDepth == -1 ? original : AmsServerSettings.maxChainUpdateDepth;
+    }
+}

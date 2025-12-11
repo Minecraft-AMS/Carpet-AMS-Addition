@@ -20,12 +20,28 @@
 
 package club.mcams.carpet.mixin.rule.cryingObsidianNetherPortal;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.world.dimension.NetherPortal;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.19")
-@Mixin(DummyClass.class)
-public abstract class NetherPortalMixin {}
+@Mixin(NetherPortal.class)
+public abstract class NetherPortalMixin {
+    @ModifyReturnValue(method = "method_30487", at = @At("RETURN"))
+    private static boolean acceptCryingObsidianCreateNetherPortal(boolean original, BlockState state) {
+        if (AmsServerSettings.cryingObsidianNetherPortal) {
+            return original || state.getBlock().equals(Blocks.CRYING_OBSIDIAN);
+        } else {
+            return original;
+        }
+    }
+}

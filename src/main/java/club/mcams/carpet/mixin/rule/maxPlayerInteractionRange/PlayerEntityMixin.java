@@ -20,12 +20,50 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
+import net.minecraft.entity.player.PlayerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+import java.util.Objects;
+
 @GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(DummyClass.class)
-public abstract class PlayerEntityMixin {}
+@Mixin(value = PlayerEntity.class, priority = 1688)
+public abstract class PlayerEntityMixin {
+    @WrapOperation(
+        method = "canInteractWithBlockAt",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;getBlockInteractionRange()D"
+        )
+    )
+    private double canInteractWithBlockAt(PlayerEntity player, Operation<Double> original) {
+        if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D && Objects.equals(AmsServerSettings.maxPlayerBlockInteractionRangeScope, "server")) {
+            return AmsServerSettings.maxPlayerBlockInteractionRange;
+        } else {
+            return original.call(player);
+        }
+    }
+
+    @WrapOperation(
+        method = "canInteractWithEntityIn",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;getEntityInteractionRange()D"
+        )
+    )
+    private double canInteractWithEntityAt(PlayerEntity player, Operation<Double> original) {
+        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && Objects.equals(AmsServerSettings.maxPlayerEntityInteractionRangeScope, "server")) {
+            return AmsServerSettings.maxPlayerEntityInteractionRange;
+        } else {
+            return original.call(player);
+        }
+    }
+}

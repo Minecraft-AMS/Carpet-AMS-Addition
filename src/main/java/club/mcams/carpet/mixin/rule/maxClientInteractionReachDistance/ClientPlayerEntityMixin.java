@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2024 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,12 +20,45 @@
 
 package club.mcams.carpet.mixin.rule.maxClientInteractionReachDistance;
 
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
 import net.minecraft.client.network.ClientPlayerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+@Mixin(value = ClientPlayerEntity.class, priority = 1688)
+public abstract class ClientPlayerEntityMixin {
+    @WrapOperation(
+        method = "method_76762",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/network/ClientPlayerEntity;getBlockInteractionRange()D"
+        )
+    )
+    private double modifyBlockInteractionRange(ClientPlayerEntity player, Operation<Double> original) {
+        if (AmsServerSettings.maxClientInteractionReachDistance != -1.0D) {
+            return AmsServerSettings.maxClientInteractionReachDistance;
+        } else {
+            return original.call(player);
+        }
+    }
 
-@GameVersion(version = "Minecraft >= 1.21.11")
-@Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin {}
+    @WrapOperation(
+        method = "method_76762",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/network/ClientPlayerEntity;getEntityInteractionRange()D"
+        )
+    )
+    private double modifyEntityInteractionRange(ClientPlayerEntity player, Operation<Double> original) {
+        if (AmsServerSettings.maxClientInteractionReachDistance != -1.0D) {
+            return AmsServerSettings.maxClientInteractionReachDistance;
+        } else {
+            return original.call(player);
+        }
+    }
+}

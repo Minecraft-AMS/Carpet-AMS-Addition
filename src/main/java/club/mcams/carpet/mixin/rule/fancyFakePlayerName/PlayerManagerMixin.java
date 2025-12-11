@@ -28,9 +28,7 @@ import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTea
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyNameHelper;
 
 import net.minecraft.network.ClientConnection;
-//#if MC>=12002
-//$$ import net.minecraft.server.network.ConnectedClientData;
-//#endif
+import net.minecraft.server.network.ConnectedClientData;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 
@@ -44,14 +42,7 @@ import java.util.Objects;
 @Mixin(PlayerManager.class)
 public abstract class PlayerManagerMixin {
     @Inject(method = "onPlayerConnect", at = @At("TAIL"))
-    private void onPlayerConnects(
-        ClientConnection connection,
-        ServerPlayerEntity player,
-        //#if MC>=12002
-        //$$ ConnectedClientData clientData,
-        //#endif
-        CallbackInfo ci
-    ) {
+    private void onPlayerConnects(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci) {
         if (
             !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
             FakePlayerHelper.isFakePlayer(player) &&
@@ -65,7 +56,7 @@ public abstract class PlayerManagerMixin {
         method = "remove",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/PlayerManager;sendToAll(Lnet/minecraft/network/Packet;)V"
+            target = "Lnet/minecraft/server/PlayerManager;sendToAll(Lnet/minecraft/network/packet/Packet;)V"
         )
     )
     private void kickFakePlayerFromBotTeam(ServerPlayerEntity player, CallbackInfo info) {

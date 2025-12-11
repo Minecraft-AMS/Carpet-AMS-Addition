@@ -29,7 +29,7 @@ import club.mcams.carpet.utils.RegexTools;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.WorldSavePath;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
 
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -62,14 +62,7 @@ public class CustomBlockBlastResistanceConfig extends AbstractMapJsonConfig<Stri
         targetMap.clear();
         storageMap.forEach((blockId, resistance) -> {
             try {
-                //#if MC>=12102
-                //$$ BlockState state = Registries.BLOCK.getEntry(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().getDefaultState()).orElse(null);
-                //#else
-                BlockState state = Registry.BLOCK.get(IdentifierUtil.ofId(blockId)).getDefaultState();
-                //#endif
-                if (state != null) {
-                    targetMap.put(state, resistance);
-                }
+                Registries.BLOCK.getEntry(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().getDefaultState()).ifPresent(state -> targetMap.put(state, resistance));
             } catch (Exception e) {
                 AmsServer.LOGGER.error("Invalid block ID: {}", blockId, e);
             }

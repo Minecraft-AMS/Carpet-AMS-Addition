@@ -20,12 +20,30 @@
 
 package club.mcams.carpet.mixin.rule.strongLeash;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.FireworkRocketItem;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21.6")
-@Mixin(DummyClass.class)
-public abstract class FireworkRocketItemMixin {}
+@Mixin(FireworkRocketItem.class)
+public abstract class FireworkRocketItemMixin {
+    @WrapOperation(
+        method = "use",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/player/PlayerEntity;detachAllHeldLeashes(Lnet/minecraft/entity/player/PlayerEntity;)Z"
+        )
+    )
+    private boolean strongLeash(PlayerEntity user, PlayerEntity playerEntity, Operation<Boolean> original) {
+        return !AmsServerSettings.strongLeash && original.call(user, playerEntity);
+    }
+}

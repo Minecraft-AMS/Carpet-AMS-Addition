@@ -48,21 +48,15 @@ public class ShapelessRecipeTemplate implements RecipeTemplateInterface {
         recipeJson.addProperty("type", "minecraft:crafting_shapeless");
 
         JsonArray ingredientsJson = new JsonArray();
-        //#if MC>=12102
-        //$$ for (String ingredient : ingredients) {
-        //$$     ingredientsJson.add(ingredient);
-        //$$ }
-        //#else
+
         for (String ingredient : ingredients) {
-            JsonObject itemJson = new JsonObject();
-            itemJson.addProperty("item", ingredient);
-            ingredientsJson.add(itemJson);
+            ingredientsJson.add(ingredient);
         }
-        //#endif
+
         recipeJson.add("ingredients", ingredientsJson);
 
         JsonObject resultJson = new JsonObject();
-        resultJson.addProperty(this.compatResultItemIdKey(), resultItem);
+        resultJson.addProperty("id", resultItem);
         resultJson.addProperty("count", resultCount);
         recipeJson.add("result", resultJson);
         return recipeJson;

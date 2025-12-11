@@ -62,7 +62,7 @@ public class CustomCommandPermissionLevelRegistry {
         .suggests(ListSuggestionProvider.of(CommandHelper.permissionLevels))
         .executes(context -> set(
             context.getSource().getServer(),
-            context.getSource().getPlayer(),
+            context.getSource().getPlayerOrThrow(),
             StringArgumentType.getString(context, "command"),
             IntegerArgumentType.getInteger(context, "permissionLevel")
         )))))
@@ -71,17 +71,17 @@ public class CustomCommandPermissionLevelRegistry {
         .suggests(SetSuggestionProvider.of(COMMAND_PERMISSION_MAP.keySet()))
         .executes(context -> remove(
             context.getSource().getServer(),
-            context.getSource().getPlayer(),
+            context.getSource().getPlayerOrThrow(),
             StringArgumentType.getString(context, "command")
         ))))
         .then(CommandManager.literal("removeAll")
-        .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayer())))
+        .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayerOrThrow())))
         .then(CommandManager.literal("refresh")
         .executes(context -> refreshCommandTree(context.getSource().getServer())))
         .then(CommandManager.literal("list")
-        .executes(context -> list(context.getSource().getPlayer())))
+        .executes(context -> list(context.getSource().getPlayerOrThrow())))
         .then(CommandManager.literal("help")
-        .executes(context -> help(context.getSource().getPlayer()))));
+        .executes(context -> help(context.getSource().getPlayerOrThrow()))));
     }
 
     private static int set(MinecraftServer server, ServerPlayerEntity player, String command, int permissionLevel) {

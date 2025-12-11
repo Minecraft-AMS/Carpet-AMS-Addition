@@ -20,12 +20,18 @@
 
 package club.mcams.carpet.mixin.rule.maxPlayerInteractionRange;
 
-import club.mcams.carpet.utils.compat.DummyInterface;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.registry.entry.RegistryEntry;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(DummyInterface.class)
-public interface EntityAttributeInstanceInvoker {}
+@Mixin(EntityAttributeInstance.class)
+public interface EntityAttributeInstanceInvoker {
+    @Invoker("getAttribute")
+    RegistryEntry<EntityAttribute> invokeGetAttribute();
+}

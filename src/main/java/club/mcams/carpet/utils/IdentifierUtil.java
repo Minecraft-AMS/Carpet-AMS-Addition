@@ -24,18 +24,10 @@ import net.minecraft.util.Identifier;
 
 public class IdentifierUtil {
 	public static Identifier of(String namespace, String path) {
-		//#if MC>=12100
-		//$$ return Identifier.of(namespace, path);
-		//#else
-		return new Identifier(namespace, path);
-		//#endif
+		return Identifier.of(namespace, path);
 	}
 
 	public static Identifier ofId(String id) {
-		//#if MC>=12100
-		//$$ return Identifier.of(id);
-		//#else
-		return new Identifier(id);
-		//#endif
+		return Identifier.of(id);
 	}
 }

@@ -20,12 +20,30 @@
 
 package club.mcams.carpet.mixin.rule.stringDupeReintroduced;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
+import net.minecraft.block.TripwireHookBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+@SuppressWarnings("SimplifiableConditionalExpression")
 @GameVersion(version = "Minecraft >= 1.21.2", desc = "https://bugs.mojang.com/browse/MC-59471")
-@Mixin(DummyClass.class)
-public abstract class TripwireHookBlockMixin {}
+@Mixin(TripwireHookBlock.class)
+public abstract class TripwireHookBlockMixin {
+    @ModifyExpressionValue(
+        method = "update",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z",
+            ordinal = 3
+        )
+    )
+    private static boolean stringDupeReintroduced(boolean original) {
+        return AmsServerSettings.stringDupeReintroduced ? true : original;
+    }
+}

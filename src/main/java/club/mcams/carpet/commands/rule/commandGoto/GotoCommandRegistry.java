@@ -24,9 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 
-//#if MC>=12102
-//$$ import java.util.Set;
-//#endif
+import java.util.Set;
 
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -46,14 +44,14 @@ public class GotoCommandRegistry {
         .then(CommandManager.argument("dimension", DimensionArgumentType.dimension())
         .executes(
             context -> executeSimpleTeleport(
-            context.getSource().getPlayer(), DimensionArgumentType.getDimensionArgument(context, "dimension")
+            context.getSource().getPlayerOrThrow(), DimensionArgumentType.getDimensionArgument(context, "dimension")
         ))
         .then(CommandManager.argument("destination", BlockPosArgumentType.blockPos())
         .executes(
             context -> executeTeleport(
-            context.getSource().getPlayer(),
+            context.getSource().getPlayerOrThrow(),
             DimensionArgumentType.getDimensionArgument(context, "dimension"),
-            BlockPosArgumentType.getBlockPos(context, "destination")
+            BlockPosArgumentType.getValidBlockPos(context, "destination")
         )))));
     }
 
@@ -61,16 +59,12 @@ public class GotoCommandRegistry {
         int x = destinationPos.getX();
         int y = destinationPos.getY();
         int z = destinationPos.getZ();
-        //#if MC>=12102
-        //$$ player.teleport(targetDimension, x, y, z, Set.of(), player.getPitch(1), 1, false);
-        //#else
-        player.teleport(targetDimension, x, y, z, player.getYaw(1), player.getPitch(1));
-        //#endif
+        player.teleport(targetDimension, x, y, z, Set.of(), player.getPitch(1), 1, false);
         return 1;
     }
 
     private static int executeSimpleTeleport(ServerPlayerEntity player, ServerWorld targetWorld) {
-        DimensionWrapper currentDimension = DimensionWrapper.of(player.getWorld());
+        DimensionWrapper currentDimension = DimensionWrapper.of(player.getEntityWorld());
         DimensionWrapper targetDimension = DimensionWrapper.of(targetWorld);
         return executeTeleport(player, targetWorld, calculatePos(player, currentDimension, targetDimension));
     }
@@ -86,10 +80,6 @@ public class GotoCommandRegistry {
     }
 
     public static BlockPos createCompatPos(double x, double y, double z) {
-        //#if MC<11900
-        return new BlockPos(x, y, z);
-        //#else
-        //$$ return new BlockPos((int) x, (int) y, (int) z);
-        //#endif
+        return new BlockPos((int) x, (int) y, (int) z);
     }
 }

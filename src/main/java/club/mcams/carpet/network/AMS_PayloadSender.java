@@ -22,33 +22,15 @@ package club.mcams.carpet.network;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
-//#if MC<12005
-import net.minecraft.network.PacketByteBuf;
-import io.netty.buffer.Unpooled;
-//#endif
-import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
-import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
+import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
+import net.minecraft.network.packet.s2c.common.CustomPayloadS2CPacket;
 
 public class AMS_PayloadSender {
     protected static void s2c(AMS_CustomPayload payload, ServerPlayerEntity player) {
-        //#if MC>=12005
-        //$$ player.networkHandler.sendPacket(new CustomPayloadS2CPacket(payload));
-        //#else
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        payload.write(buf);
-        CustomPayloadS2CPacket packet = new CustomPayloadS2CPacket(AMS_CustomPayload.CHANNEL_ID, buf);
-        player.networkHandler.sendPacket(packet);
-        //#endif
+        player.networkHandler.sendPacket(new CustomPayloadS2CPacket(payload));
     }
 
     protected static void c2s(AMS_CustomPayload payload, ClientPlayerEntity player) {
-        //#if MC>=12005
-        //$$ player.networkHandler.sendPacket(new CustomPayloadC2SPacket(payload));
-        //#else
-        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
-        payload.write(buf);
-        CustomPayloadC2SPacket packet = new CustomPayloadC2SPacket(AMS_CustomPayload.CHANNEL_ID, buf);
-        player.networkHandler.sendPacket(packet);
-        //#endif
+        player.networkHandler.sendPacket(new CustomPayloadC2SPacket(payload));
     }
 }

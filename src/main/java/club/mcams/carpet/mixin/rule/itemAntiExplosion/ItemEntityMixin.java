@@ -25,13 +25,9 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import net.minecraft.entity.ItemEntity;
-//#if MC>=11900
-//$$ import net.minecraft.registry.tag.DamageTypeTags;
-//#endif
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.entity.damage.DamageSource;
-//#if MC>=12102
-//$$ import net.minecraft.server.world.ServerWorld;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,32 +37,14 @@ import java.util.Objects;
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin {
     @ModifyExpressionValue(
-        //#if MC>=12102
-        //$$ method = "damage",
-        //#else
         method = "damage",
-        //#endif
         at = @At(
             value = "INVOKE",
-            //#if MC>=12102
-            //$$ target = "Lnet/minecraft/entity/ItemEntity;isAlwaysInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
-            //#else
-            target = "Lnet/minecraft/entity/ItemEntity;isInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
-            //#endif
+            target = "Lnet/minecraft/entity/ItemEntity;isAlwaysInvulnerableTo(Lnet/minecraft/entity/damage/DamageSource;)Z"
         )
     )
-    private boolean isInvulnerableTo(
-        boolean original,
-        //#if MC>=12102
-        //$$ ServerWorld world,
-        //#endif
-        DamageSource source
-    ) {
-        //#if MC>=11900
-        //$$ if(!Objects.equals(AmsServerSettings.itemAntiExplosion, "false") && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
-        //#else
-        if (!Objects.equals(AmsServerSettings.itemAntiExplosion, "false") && source.isExplosive()) {
-        //#endif
+    private boolean isInvulnerableTo(boolean original, ServerWorld world, DamageSource source) {
+        if(!Objects.equals(AmsServerSettings.itemAntiExplosion, "false") && source.isIn(DamageTypeTags.IS_EXPLOSION)) {
             return original || !Objects.equals(AmsServerSettings.itemAntiExplosion, "false");
         } else {
             return original;

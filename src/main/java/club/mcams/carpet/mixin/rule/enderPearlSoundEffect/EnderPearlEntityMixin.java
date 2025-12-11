@@ -20,45 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.enderPearlSoundEffect;
 
-import club.mcams.carpet.AmsServerSettings;
-
-import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.world.World;
+import club.mcams.carpet.utils.compat.DummyClass;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft < 1.20")
-@Mixin(EnderPearlEntity.class)
-public abstract class EnderPearlEntityMixin extends ThrownItemEntity {
-    public EnderPearlEntityMixin(EntityType<? extends ThrownItemEntity> entityType, World world) {
-        super(entityType, world);
-    }
-
-    @Inject(
-        method = "onCollision",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
-        )
-    )
-    private void onCollision(CallbackInfo ci) {
-        if (AmsServerSettings.enderPearlSoundEffect) {
-            this.world.playSound(
-                null,
-                this.getX(), this.getY(), this.getZ(),
-                SoundEvents.ENTITY_ENDERMAN_TELEPORT,
-                SoundCategory.PLAYERS,
-                1.0F, 1.0F
-            );
-        }
-    }
-}
+@Mixin(DummyClass.class)
+public abstract class EnderPearlEntityMixin {}

@@ -46,20 +46,15 @@ import club.mcams.carpet.utils.MinecraftServerUtil;
 import club.mcams.carpet.utils.NetworkUtil;
 
 import com.google.common.collect.Maps;
-import com.google.gson.JsonElement;
 
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
-//#if MC>=11900
-//$$ import net.minecraft.command.CommandRegistryAccess;
-//#endif
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.network.ServerPlayerEntity;
-//#if MC>=12102
-//$$ import net.minecraft.recipe.Recipe;
-//$$ import net.minecraft.registry.RegistryWrapper;
-//#endif
+import net.minecraft.recipe.Recipe;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.Identifier;
 
 import org.apache.logging.log4j.LogManager;
@@ -116,35 +111,15 @@ public class AmsServer implements CarpetExtension {
     }
 
     @Override
-    public void registerCommands(
-        CommandDispatcher<ServerCommandSource> dispatcher
-        //#if MC>=11900
-        //$$ , final CommandRegistryAccess commandBuildContext
-        //#endif
-    ) {
-        RegisterCommands.registerCommands(
-            dispatcher
-            //#if MC>=11900
-            //$$ , commandBuildContext
-            //#endif
-        );
+    public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, final CommandRegistryAccess commandBuildContext) {
+        RegisterCommands.registerCommands(dispatcher, commandBuildContext);
     }
 
-    public void registerCustomRecipes(
-        //#if MC>=12102
-        //$$ Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup
-        //#else
-        Map<Identifier, JsonElement> map
-        //#endif
-    ) {
+    public void registerCustomRecipes(Map<Identifier, Recipe<?>> map, RegistryWrapper.WrapperLookup wrapperLookup) {
         AmsRecipeManager amsRecipeManager = new AmsRecipeManager(AmsRecipeBuilder.getInstance());
         AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
         AmsServerCustomRecipes.getInstance().buildRecipes();
-        //#if MC>=12102
-        //$$ amsRecipeManager.registerRecipes(map, wrapperLookup);
-        //#else
-        amsRecipeManager.registerRecipes(map);
-        //#endif
+        amsRecipeManager.registerRecipes(map, wrapperLookup);
     }
 
     public void sendS2CPacketOnHandShake(ServerPlayerEntity player) {
@@ -196,9 +171,7 @@ public class AmsServer implements CarpetExtension {
         AMSTranslations.getTranslation(lang).forEach((key, value) -> {
             if (key.startsWith(prefix)) {
                 String newKey = key.substring(prefix.length());
-                //#if MC>=11900
-                //$$ newKey = "carpet." + newKey;
-                //#endif
+                newKey = "carpet." + newKey;
                 trimmedTranslation.put(newKey, value);
             }
         });

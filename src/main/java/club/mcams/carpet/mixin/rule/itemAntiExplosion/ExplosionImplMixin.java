@@ -20,12 +20,30 @@
 
 package club.mcams.carpet.mixin.rule.itemAntiExplosion;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.Noop;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.explosion.ExplosionImpl;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import java.util.Objects;
 
-@GameVersion(version = "Minecraft >= 1.21.2")
-@Mixin(DummyClass.class)
-public abstract class ExplosionImplMixin {}
+@Mixin(ExplosionImpl.class)
+public abstract class ExplosionImplMixin {
+    @WrapOperation(method = "damageEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;addVelocity(Lnet/minecraft/util/math/Vec3d;)V"))
+    private void onSetVelocity(Entity entity, Vec3d velocity, Operation<Void> original) {
+        if (Objects.equals(AmsServerSettings.itemAntiExplosion, "no_blast_wave") && entity instanceof ItemEntity) {
+            Noop.noop();
+        } else {
+            original.call(entity, velocity);
+        }
+    }
+}

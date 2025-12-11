@@ -64,39 +64,14 @@ public class AmsServerCustomRecipes {
         .define('P', PHANTOM_MEMBRANE).define('S', STICK).define('*', SADDLE).define('L', STRING)
         .output(ELYTRA, 1).build();
 
-        //#if MC<11900 && MC>=11700
-        ShapedRecipeBuilder.create(AmsServerSettings.craftableSculkSensor, "sculk_sensor")
-        .pattern("   ")
-        .pattern("RQR")
-        .pattern("DDD")
-        .define('D', DEEPSLATE).define('R', REDSTONE).define('Q', QUARTZ)
-        .output(SCULK_SENSOR, 1).build();
-        //#endif
-
-        //#if MC<12105
-        ShapedRecipeBuilder.create(AmsServerSettings.useNewLodestoneRecipe, "lodestone")
-        .pattern("CCC")
-        .pattern("CIC")
-        .pattern("CCC")
-        .define('C', CHISELED_STONE_BRICKS).define('I', IRON_INGOT)
-        .output(LODESTONE, 1).build();
-        //#endif
-
         /*
          * 无序合成配方
          */
         ShapelessRecipeBuilder.create(AmsServerSettings.betterCraftableDispenser, "dispenser2")
         .addIngredient(BOW).addIngredient(DROPPER).output(DISPENSER, 1).build();
 
-        //#if MC>=11700 && MC<12102
-        ShapelessRecipeBuilder.create(AmsServerSettings.craftableBundle, "bundle")
-        .addIngredient(STRING).addIngredient(LEATHER).output(BUNDLE, 1).build();
-        //#endif
-
-        //#if MC>=11700
         ShapelessRecipeBuilder.create(AmsServerSettings.betterCraftablePolishedBlackStoneButton, "polished_blackstone_button")
         .addIngredient(DEEPSLATE).output(POLISHED_BLACKSTONE_BUTTON, 1).build();
-        //#endif
 
         // Mixin实现
         ShapelessRecipeBuilder.create(AmsServerSettings.craftableCarvedPumpkin, "carved_pumpkin")

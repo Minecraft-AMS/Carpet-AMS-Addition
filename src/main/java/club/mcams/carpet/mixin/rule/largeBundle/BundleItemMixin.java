@@ -26,7 +26,7 @@ import club.mcams.carpet.helpers.rule.largeBundle.LargeBundleInventory;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
-import net.minecraft.client.item.TooltipData;
+import net.minecraft.item.tooltip.TooltipData;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BundleItem;
 import net.minecraft.item.ItemStack;
@@ -35,11 +35,7 @@ import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-//#if MC>=12102
-//$$ import net.minecraft.util.ActionResult;
-//#else
-import net.minecraft.util.TypedActionResult;
-//#endif
+import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -47,21 +43,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
 import java.util.Objects;
 import java.util.Optional;
 
-@GameVersion(version = "Minecraft >= 1.17.1")
 @SuppressWarnings("EnhancedSwitchMigration")
 @Mixin(BundleItem.class)
 public abstract class BundleItemMixin {
     @WrapMethod(method = "use")
-    //#if MC>=12102
-    //$$ private ActionResult onUse(World world, PlayerEntity user, Hand hand, Operation<ActionResult> original) {
-    //#else
-    private TypedActionResult<ItemStack> onUse(World world, PlayerEntity user, Hand hand, Operation<TypedActionResult<ItemStack>> original) {
-    //#endif
+    private ActionResult onUse(World world, PlayerEntity user, Hand hand, Operation<ActionResult> original) {
         if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
             ItemStack stack = user.getStackInHand(hand);
             SimpleNamedScreenHandlerFactory screenHandlerFactory = new SimpleNamedScreenHandlerFactory(
@@ -77,15 +66,9 @@ public abstract class BundleItemMixin {
                 },
                 stack.getName()
             );
-            //#if MC>=11800
             world.playSound(user, user.getBlockPos(), SoundEvents.ITEM_BUNDLE_DROP_CONTENTS, SoundCategory.PLAYERS, 1.5F, 1.35F);
-            //#endif
             user.openHandledScreen(screenHandlerFactory);
-            //#if MC>=12102
-            //$$ return ActionResult.SUCCESS;
-            //#else
-            return TypedActionResult.success(stack);
-            //#endif
+            return ActionResult.SUCCESS;
         } else {
             return original.call(world, user, hand);
         }
@@ -112,21 +95,8 @@ public abstract class BundleItemMixin {
         }
     }
 
-    //#if MC<12006
-    @Inject(method = "removeFirstStack", at = @At("HEAD"), cancellable = true)
-    private static void onRemoveFirstStack(CallbackInfoReturnable<Optional<ItemStack>> cir) {
-        if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
-            cir.setReturnValue(Optional.empty());
-        }
-    }
-    //#endif
-
-    @Inject(method = "dropAllBundledItems", at = @At("HEAD"), cancellable = true)
-    //#if MC<12102
-    private static void onDropAllBundledItems(CallbackInfoReturnable<Boolean> cir) {
-    //#else
-    //$$ private void onDropAllBundledItems(CallbackInfoReturnable<Boolean> cir) {
-    //#endif
+    @Inject(method = "dropFirstBundledStack", at = @At("HEAD"), cancellable = true)
+    private void onDropAllBundledItems(CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
             cir.setReturnValue(false);
         }

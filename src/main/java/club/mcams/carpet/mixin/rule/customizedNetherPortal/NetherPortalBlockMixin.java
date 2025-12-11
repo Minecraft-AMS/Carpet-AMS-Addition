@@ -27,13 +27,8 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.NetherPortalBlock;
 import net.minecraft.util.math.BlockPos;
-//#if MC>=12102
-//$$ import net.minecraft.world.WorldView;
-//$$ import net.minecraft.world.tick.ScheduledTickView;
-//#else
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
-//#endif
+import net.minecraft.world.WorldView;
+import net.minecraft.world.tick.ScheduledTickView;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,14 +36,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
     @ModifyReturnValue(method = "getStateForNeighborUpdate", at = @At("RETURN"))
-    private BlockState noBreak(
-        BlockState original,
-        //#if MC>=12102
-        //$$ BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos
-        //#else
-        BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos
-        //#endif
-    ) {
+    private BlockState noBreak(BlockState original, BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos) {
         if (AmsServerSettings.customizedNetherPortal) {
             return world.getBlockState(pos);
         } else {

@@ -44,20 +44,11 @@ public abstract class sneakToEatCake {
             target = "Lnet/minecraft/block/CakeBlock;tryEat(Lnet/minecraft/world/WorldAccess;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;)Lnet/minecraft/util/ActionResult;"
         )
     )
-    private ActionResult tryEat(
-        //#if MC<11700
-        //$$ CakeBlock cake,
-        //#endif
-        WorldAccess world, BlockPos pos, BlockState state, PlayerEntity player, Operation<ActionResult> original
-    ) {
+    private ActionResult tryEat(WorldAccess world, BlockPos pos, BlockState state, PlayerEntity player, Operation<ActionResult> original) {
         if (AmsServerSettings.sneakToEatCake && !player.isSneaking()) {
             return ActionResult.FAIL;
         } else {
-            //#if MC<11700
-            //$$ return original.call(cake, world, pos, state, player);
-            //#else
             return original.call(world, pos, state, player);
-            //#endif
         }
     }
 }

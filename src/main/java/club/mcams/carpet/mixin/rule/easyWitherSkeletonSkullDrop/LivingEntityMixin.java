@@ -21,14 +21,12 @@
 package club.mcams.carpet.mixin.rule.easyWitherSkeletonSkullDrop;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.EntityUtil;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
 import net.minecraft.item.Items;
-//#if MC>=12102
-//$$ import net.minecraft.server.world.ServerWorld;
-//$$ import club.mcams.carpet.utils.EntityUtil;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -42,11 +40,7 @@ public abstract class LivingEntityMixin {
         if (AmsServerSettings.easyWitherSkeletonSkullDrop) {
             LivingEntity entity = (LivingEntity) (Object) this;
             if (entity instanceof WitherSkeletonEntity) {
-                //#if MC>=12102
-                //$$ entity.dropItem((ServerWorld) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);
-                //#else
-                entity.dropItem(Items.WITHER_SKELETON_SKULL, 1);
-                //#endif
+                entity.dropItem((ServerWorld) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);
             }
         }
     }

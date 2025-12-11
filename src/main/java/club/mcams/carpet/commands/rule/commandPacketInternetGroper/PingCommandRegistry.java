@@ -56,12 +56,12 @@ public class PingCommandRegistry {
             .then(argument("targetIpOrDomainName", StringArgumentType.string())
             .then(argument("pingQuantity", IntegerArgumentType.integer())
             .executes(context -> executePing(
-                context.getSource().getPlayer(),
+                context.getSource().getPlayerOrThrow(),
                 StringArgumentType.getString(context, "targetIpOrDomainName"),
                 IntegerArgumentType.getInteger(context, "pingQuantity")
             ))))
-            .then(literal("stop").executes(context -> stopPing(context.getSource().getPlayer())))
-            .then(literal("help").executes(context -> help(context.getSource().getPlayer())))
+            .then(literal("stop").executes(context -> stopPing(context.getSource().getPlayerOrThrow())))
+            .then(literal("help").executes(context -> help(context.getSource().getPlayerOrThrow())))
         );
     }
 

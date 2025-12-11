@@ -35,7 +35,7 @@ import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.text.BaseText;
+import net.minecraft.text.MutableText;
 import net.minecraft.util.Formatting;
 
 import java.util.Collection;
@@ -102,7 +102,7 @@ public class AmspCommandRegistry {
             UUID uuid = iterator.next();
             String strUuid = uuid.toString();
             String playerName = PlayerUtil.getName(uuid);
-            BaseText text = Messenger.formatting(Messenger.s(strUuid + " - " + playerName), Formatting.AQUA);
+            MutableText text = Messenger.formatting(Messenger.s(strUuid + " - " + playerName), Formatting.AQUA);
             Messenger.tell(source, text);
         }
 

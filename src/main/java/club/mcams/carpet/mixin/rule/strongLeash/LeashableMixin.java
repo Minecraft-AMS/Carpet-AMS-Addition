@@ -20,12 +20,22 @@
 
 package club.mcams.carpet.mixin.rule.strongLeash;
 
-import club.mcams.carpet.utils.compat.DummyInterface;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.entity.Leashable;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.21")
-@Mixin(DummyInterface.class)
-public interface LeashableMixin {}
+@GameVersion(version = "Minecraft >= 1.21.6")
+@Mixin(Leashable.class)
+public interface LeashableMixin {
+    @ModifyReturnValue(method = "getLeashSnappingDistance", at = @At("RETURN"))
+    private double modifyLeashSnappingDistance(double original) {
+        return AmsServerSettings.strongLeash ? Math.max(original, Double.MAX_VALUE) : original;
+    }
+}

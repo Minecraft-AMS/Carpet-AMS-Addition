@@ -20,12 +20,34 @@
 
 package club.mcams.carpet.mixin.network;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.network.AMS_CustomPayload;
+
+import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(DummyClass.class)
-public abstract class CustomPayloadC2SPacketMixin {}
+@Mixin(CustomPayloadC2SPacket.class)
+public abstract class CustomPayloadC2SPacketMixin {
+    @ModifyArg(
+        method = "<clinit>",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/network/packet/CustomPayload;createCodec(Lnet/minecraft/network/packet/CustomPayload$CodecFactory;Ljava/util/List;)Lnet/minecraft/network/codec/PacketCodec;"
+        )
+    )
+    private static List<?> registerAMSPayloadC2S(List<CustomPayload.Type<?, ?>> types) {
+        types = new ArrayList<>(types);
+        types.add(new CustomPayload.Type<>(AMS_CustomPayload.KEY, AMS_CustomPayload.CODEC));
+        return Collections.unmodifiableList(types);
+    }
+}

@@ -47,7 +47,7 @@ public class GetPlayerSkullCommandRegistry {
             )
             .then(CommandManager.argument("count", IntegerArgumentType.integer(1, 64))
             .executes(context -> execute(
-                context.getSource().getPlayer(),
+                context.getSource().getPlayerOrThrow(),
                 StringArgumentType.getString(context, "player"),
                 IntegerArgumentType.getInteger(context, "count")
             ))))

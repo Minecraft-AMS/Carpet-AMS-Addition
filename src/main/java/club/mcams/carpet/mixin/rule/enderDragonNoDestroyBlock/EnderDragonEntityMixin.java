@@ -36,11 +36,7 @@ public abstract class EnderDragonEntityMixin {
         method = "destroyBlocks",
         at = @At(
             value = "INVOKE",
-            //#if MC>=12102
-            //$$ target = "Lnet/minecraft/server/world/ServerWorld;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
-            //#else
-            target = "Lnet/minecraft/world/World;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
-            //#endif
+            target = "Lnet/minecraft/server/world/ServerWorld;removeBlock(Lnet/minecraft/util/math/BlockPos;Z)Z"
         )
     )
     private boolean enderDragonNoDestroyBlock(boolean original) {

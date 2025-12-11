@@ -27,52 +27,30 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.BundleItem;
 import net.minecraft.item.ItemStack;
-//#if MC>=12005
-//$$ import net.minecraft.component.DataComponentTypes;
-//$$ import net.minecraft.component.type.ContainerComponent;
-//$$ import java.util.List;
-//#else
-import net.minecraft.nbt.NbtCompound;
-//#endif
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.util.collection.DefaultedList;
+
+import java.util.List;
 
 public class LargeBundleInventory implements Inventory {
     private final ItemStack stack;
-    //#if MC>=12005
-    //$$ private final List<ItemStack> items = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
-    //#else
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
-    //#endif
+    private final List<ItemStack> items = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
 
     public LargeBundleInventory(ItemStack stack) {
         this.stack = stack;
-        //#if MC>=12005
-        //$$ ContainerComponent container = stack.get(DataComponentTypes.CONTAINER);
-        //$$ if (container != null) {
-        //$$     List<ItemStack> containerStacks = container.stream().toList();
-        //$$     for (int i = 0; i < Math.min(containerStacks.size(), this.size()); i++) {
-        //$$        if (this.items != null) {
-        //$$            this.items.set(i, containerStacks.get(i).copy());
-        //$$        }
-        //$$     }
-        //$$ }
-        //#else
-        NbtCompound tag = stack.getOrCreateNbt();
-        if (tag.contains("Items")) {
-            Inventories.readNbt(tag, this.items);
+        ContainerComponent container = stack.get(DataComponentTypes.CONTAINER);
+        if (container != null) {
+            List<ItemStack> containerStacks = container.stream().toList();
+            for (int i = 0; i < Math.min(containerStacks.size(), this.size()); i++) {
+                this.items.set(i, containerStacks.get(i).copy());
+            }
         }
-        //#endif
     }
 
     @Override
     public void markDirty() {
-        //#if MC>=12005
-        //$$ stack.set(DataComponentTypes.CONTAINER, ContainerComponent.fromStacks(items));
-        //#else
-        NbtCompound tag = stack.getOrCreateNbt();
-        Inventories.writeNbt(tag, this.items, true);
-        stack.setNbt(tag);
-        //#endif
+        stack.set(DataComponentTypes.CONTAINER, ContainerComponent.fromStacks(items));
     }
 
     @Override
@@ -123,7 +101,7 @@ public class LargeBundleInventory implements Inventory {
 
     /**
      * 在Mixin中调用
-     * @see net.minecraft.item.BundleItem
+     * @see BundleItem
      * @see club.mcams.carpet.mixin.rule.largeBundle.BundleItemMixin
      */
     public static boolean canInsert(ItemStack stack) {

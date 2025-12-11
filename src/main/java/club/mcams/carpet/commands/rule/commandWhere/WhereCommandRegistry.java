@@ -58,7 +58,7 @@ public class WhereCommandRegistry {
             .then(argument("player", EntityArgumentType.player())
             .executes(context -> sendMessage(
                 context.getSource().getServer(),
-                context.getSource().getPlayer(),
+                context.getSource().getPlayerOrThrow(),
                 EntityArgumentType.getPlayer(context, "player")
             )))
         );
@@ -94,7 +94,7 @@ public class WhereCommandRegistry {
     }
 
     private static String getPlayerName(PlayerEntity player) {
-        return player.getGameProfile().getName();
+        return player.getGameProfile().name();
     }
 
     private static String getCurrentPos(PlayerEntity player) {

@@ -25,7 +25,7 @@ import club.mcams.carpet.commands.rule.commandCustomBlockHardness.CustomBlockHar
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class BlocksMixin {
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void registerCustomBlockHardness(CallbackInfo ci) {
-        for (Block block : Registry.BLOCK) {
+        for (Block block : Registries.BLOCK) {
             BlockState state = block.getDefaultState();
             float hardness = state.getHardness(null, null);
             CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.put(block, hardness);

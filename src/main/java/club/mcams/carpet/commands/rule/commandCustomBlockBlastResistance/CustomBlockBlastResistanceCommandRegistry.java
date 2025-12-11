@@ -34,9 +34,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-//#if MC>=11900
-//$$ import net.minecraft.command.CommandRegistryAccess;
-//#endif
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.BlockStateArgumentType;
 import net.minecraft.text.Style;
 import net.minecraft.util.Formatting;
@@ -52,39 +50,27 @@ public class CustomBlockBlastResistanceCommandRegistry {
     private static final String MSG_HEAD = "<customBlockBlastResistance> ";
     public static final Map<BlockState, Float> CUSTOM_BLOCK_BLAST_RESISTANCE_MAP = new ConcurrentHashMap<>();
 
-    //#if MC<11900
-    public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-    //#else
-    //$$ public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
-    //#endif
+    public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
         dispatcher.register(
             CommandManager.literal("customBlockBlastResistance")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomBlockBlastResistance))
             .then(literal("set")
-            //#if MC<11900
-            .then(argument("block", BlockStateArgumentType.blockState())
-            //#else
-            //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
-            //#endif
+            .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
             .then(argument("resistance", FloatArgumentType.floatArg())
             .executes(context -> set(
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState(),
                 FloatArgumentType.getFloat(context, "resistance"),
-                context.getSource().getPlayer()
+                context.getSource().getPlayerOrThrow()
             )))))
             .then(literal("remove")
-            //#if MC<11900
-            .then(argument("block", BlockStateArgumentType.blockState())
-            //#else
-            //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
-            //#endif
+            .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
             .executes(context -> remove(
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState(),
-                context.getSource().getPlayer()
+                context.getSource().getPlayerOrThrow()
             ))))
-            .then(literal("removeAll").executes(context -> removeAll(context.getSource().getPlayer())))
-            .then(literal("list").executes(context -> list(context.getSource().getPlayer())))
-            .then(literal("help").executes(context -> help(context.getSource().getPlayer())))
+            .then(literal("removeAll").executes(context -> removeAll(context.getSource().getPlayerOrThrow())))
+            .then(literal("list").executes(context -> list(context.getSource().getPlayerOrThrow())))
+            .then(literal("help").executes(context -> help(context.getSource().getPlayerOrThrow())))
         );
     }
 

@@ -42,7 +42,7 @@ public class GetSystemInfoCommandRegistry {
         dispatcher.register(
             CommandManager.literal("getSystemInfo")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetSystemInfo))
-            .executes(context -> executeGetSystemInfo(context.getSource().getPlayer()))
+            .executes(context -> executeGetSystemInfo(context.getSource().getPlayerOrThrow()))
         );
     }
 

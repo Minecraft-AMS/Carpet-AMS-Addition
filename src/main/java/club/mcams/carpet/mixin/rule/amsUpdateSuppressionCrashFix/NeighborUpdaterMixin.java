@@ -20,12 +20,41 @@
 
 package club.mcams.carpet.mixin.rule.amsUpdateSuppressionCrashFix;
 
-import club.mcams.carpet.utils.compat.DummyInterface;
+import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.AMS_ThrowableSuppression;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionContext;
+import club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionException;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.world.block.WireOrientation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraft.world.block.NeighborUpdater;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import java.util.Objects;
 
-@GameVersion(version = "Minecraft >= 1.19")
-@Mixin(DummyInterface.class)
-public interface NeighborUpdaterMixin {}
+@SuppressWarnings("InjectLocalCaptureCanBeReplacedWithLocal")
+@Mixin(NeighborUpdater.class)
+public interface NeighborUpdaterMixin {
+    @Inject(
+       method = "tryNeighborUpdate",
+       at = @At(
+           value = "INVOKE",
+           target = "Lnet/minecraft/util/crash/CrashReport;create(Ljava/lang/Throwable;Ljava/lang/String;)Lnet/minecraft/util/crash/CrashReport;"
+       ),
+       locals = LocalCapture.CAPTURE_FAILHARD
+    )
+    private static void tryNeighborUpdate(World world, BlockState state, BlockPos pos, Block sourceBlock, WireOrientation orientation, boolean notify, CallbackInfo ci, Throwable throwable) {
+        if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
+            UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
+            throw new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));
+        }
+    }
+}

@@ -29,10 +29,11 @@ import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldView;
+import org.jetbrains.annotations.NotNull;
 
 public class BlockPatternHelper {
     public static BlockPattern.Result partialSearchAround(BlockPattern pattern, WorldView world, BlockPos pos) {
-        LoadingCache<BlockPos, CachedBlockPosition> loadingCache = BlockPattern.makeCache(world, false);
+        LoadingCache<@NotNull BlockPos, @NotNull CachedBlockPosition> loadingCache = BlockPattern.makeCache(world, false);
         int i = Math.max(Math.max(pattern.getWidth(), pattern.getHeight()), pattern.getDepth());
         for (BlockPos blockPos : BlockPos.iterate(pos, pos.add(i - 1, 0, i - 1))) {
             for (Direction direction : Direction.values()) {

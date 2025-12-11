@@ -20,28 +20,24 @@
 
 package club.mcams.carpet.settings;
 
-import carpet.settings.ParsedRule;
-import carpet.settings.Validator;
+import carpet.api.settings.CarpetRule;
+import carpet.api.settings.Validator;
 
 import net.minecraft.server.command.ServerCommandSource;
 
 public abstract class RuleObserver<T> extends Validator<T> {
     @Override
-    public T validate(ServerCommandSource source, ParsedRule<T> rule, T newValue, String userInput) {
-        if (rule.get() != newValue) {
-            onValueChange(source, rule, rule.get(), newValue);
+    public T validate(ServerCommandSource source, CarpetRule<T> rule, T newValue, String userInput) {
+        if (rule.value() != newValue) {
+            onValueChange(source, rule, rule.value(), newValue);
         }
 
         return newValue;
     }
 
-    public abstract void onValueChange(ServerCommandSource source, ParsedRule<T> rule, T oldValue, T newValue);
+    public abstract void onValueChange(ServerCommandSource source, CarpetRule<T> rule, T oldValue, T newValue);
 
-    public String getRuleName(ParsedRule<T> rule) {
-        //#if MC>=11900
-        //$$ return rule.name();
-        //#else
-        return rule.name;
-        //#endif
+    public String getRuleName(CarpetRule<T> rule) {
+        return rule.name();
     }
 }

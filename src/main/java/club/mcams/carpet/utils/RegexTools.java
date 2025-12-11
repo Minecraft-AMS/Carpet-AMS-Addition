@@ -22,7 +22,7 @@ package club.mcams.carpet.utils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registries;
 
 public class RegexTools {
     //state.getBlock.toString(); | Block{minecraft:bedrock} -> minecraft:bedrock
@@ -40,6 +40,6 @@ public class RegexTools {
     }
 
     public static String getItemRegisterName(ItemStack itemStack) {
-        return Registry.ITEM.getId(itemStack.getItem()).toString().replaceAll(".*?(minecraft:[a-z_]+).*", "$1");
+        return Registries.ITEM.getId(itemStack.getItem()).toString().replaceAll(".*?(minecraft:[a-z_]+).*", "$1");
     }
 }

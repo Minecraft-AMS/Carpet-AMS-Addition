@@ -35,11 +35,7 @@ public abstract class EnderPearlEntityMixin {
         method = "onCollision",
         at = @At(
             value = "INVOKE",
-            //#if MC<11900
-            target = "Ljava/util/Random;nextFloat()F"
-            //#else
-            //$$ target = "Lnet/minecraft/util/math/random/Random;nextFloat()F"
-            //#endif
+            target = "Lnet/minecraft/util/math/random/Random;nextFloat()F"
         )
     )
     private float mitePearl(float original) {

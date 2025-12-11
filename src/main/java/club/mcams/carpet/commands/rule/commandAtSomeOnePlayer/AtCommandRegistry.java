@@ -28,15 +28,13 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.network.MessageType;
-import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.BaseText;
+import net.minecraft.text.MutableText;
 import net.minecraft.util.Formatting;
 
 public class AtCommandRegistry {
@@ -47,7 +45,7 @@ public class AtCommandRegistry {
             .then(CommandManager.argument("targetPlayer", EntityArgumentType.player())
             .then(CommandManager.argument("text", StringArgumentType.greedyString())
             .executes(context -> execute(
-                context.getSource().getPlayer(),
+                context.getSource().getPlayerOrThrow(),
                 EntityArgumentType.getPlayer(context, "targetPlayer"),
                 StringArgumentType.getString(context, "text")
             ))))
@@ -55,28 +53,15 @@ public class AtCommandRegistry {
     }
 
     private static int execute(ServerPlayerEntity sourcePlayer, ServerPlayerEntity targetPlayer, String text) {
-        BaseText titleText = tr.tr("title", PlayerUtil.getName(sourcePlayer));
-        BaseText messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
-
-        //#if MC<11700
-        //$$ targetPlayer.networkHandler.sendPacket(new TitleS2CPacket(TitleS2CPacket.Action.TITLE, titleText.formatted(Formatting.AQUA)));
-        //#else
+        MutableText titleText = tr.tr("title", PlayerUtil.getName(sourcePlayer));
+        MutableText messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
         targetPlayer.networkHandler.sendPacket(new TitleS2CPacket(titleText.formatted(Formatting.AQUA)));
-        //#endif
-
-        //#if MC>=11900
-        //$$ MinecraftServerUtil.getServer().getPlayerManager().broadcast(messageText, false);
-        //#else
-        MinecraftServerUtil.getServer().getPlayerManager().broadcast(messageText, MessageType.CHAT, sourcePlayer.getUuid());
-        //#endif
-
+        MinecraftServerUtil.getServer().getPlayerManager().broadcast(messageText, false);
         EntityUtil.getEntityWorld(targetPlayer).playSound(null, targetPlayer.getBlockPos(), SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0F, 1.0F);
-
         Messenger.sendServerMessage(
             MinecraftServerUtil.getServer(),
             Messenger.s(String.format("%s @ %s", PlayerUtil.getName(sourcePlayer), PlayerUtil.getName(targetPlayer))).formatted(Formatting.GRAY)
         );
-
         return 1;
     }
 }

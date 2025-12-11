@@ -23,9 +23,7 @@ package club.mcams.carpet.mixin.rule.regeneratingDragonEgg;
 import club.mcams.carpet.AmsServerSettings;
 
 import net.minecraft.block.Blocks;
-//#if MC>=12000
-//$$ import net.minecraft.util.math.BlockPos;
-//#endif
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonFight;
 import net.minecraft.server.world.ServerWorld;
@@ -44,11 +42,9 @@ import java.util.UUID;
 @Mixin(EnderDragonFight.class)
 public abstract class EnderDragonFightMixin {
 
-    //#if MC>=12000
-    //$$ @Shadow
-    //$$ @Final
-    //$$private BlockPos origin;
-    //#endif
+    @Shadow
+    @Final
+    private BlockPos origin;
 
     @Shadow
     @Final
@@ -63,11 +59,7 @@ public abstract class EnderDragonFightMixin {
     @Inject(method = "dragonKilled", at = @At("HEAD"))
     private void dragonKilled(EnderDragonEntity dragon, CallbackInfo ci) {
         if (AmsServerSettings.regeneratingDragonEgg && this.previouslyKilled && dragon.getUuid().equals(this.dragonUuid)) {
-            //#if MC>=12000
-            //$$ this.world.setBlockState(this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.offsetOrigin(this.origin)), Blocks.DRAGON_EGG.getDefaultState());
-            //#else
-            this.world.setBlockState(this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.ORIGIN), Blocks.DRAGON_EGG.getDefaultState());
-            //#endif
+            this.world.setBlockState(this.world.getTopPosition(Heightmap.Type.MOTION_BLOCKING, EndPortalFeature.offsetOrigin(this.origin)), Blocks.DRAGON_EGG.getDefaultState());
         }
     }
 }

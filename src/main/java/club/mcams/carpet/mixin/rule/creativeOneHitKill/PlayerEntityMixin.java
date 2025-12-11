@@ -21,16 +21,14 @@
 package club.mcams.carpet.mixin.rule.creativeOneHitKill;
 
 import club.mcams.carpet.AmsServerSettings;
-
+import club.mcams.carpet.utils.EntityUtil;
 import club.mcams.carpet.utils.WorldUtil;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.dragon.EnderDragonPart;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.predicate.entity.EntityPredicates;
-//#if MC>=12102
-//$$ import net.minecraft.server.world.ServerWorld;
-//$$ import club.mcams.carpet.utils.EntityUtil;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
@@ -57,19 +55,10 @@ public abstract class PlayerEntityMixin implements EntityAccessorAndInvoker, Pla
     @Unique
     private void instaKill(Entity target) {
         if (target instanceof EnderDragonPart) {
-            //#if MC>=12102
-            //$$ Arrays.stream(((EnderDragonPart) target).owner.getBodyParts()).forEach(Entity -> target.kill((ServerWorld) EntityUtil.getEntityWorld(target)));
-            //$$ ((EnderDragonPart) target).owner.kill((ServerWorld) EntityUtil.getEntityWorld(target));
-            //#else
-            Arrays.stream(((EnderDragonPart) target).owner.getBodyParts()).forEach(Entity::kill);
-            ((EnderDragonPart) target).owner.kill();
-            //#endif
+            Arrays.stream(((EnderDragonPart) target).owner.getBodyParts()).forEach(Entity -> target.kill((ServerWorld) EntityUtil.getEntityWorld(target)));
+            ((EnderDragonPart) target).owner.kill((ServerWorld) EntityUtil.getEntityWorld(target));
         } else {
-            //#if MC>=12102
-            //$$ target.kill((ServerWorld) EntityUtil.getEntityWorld(target));
-            //#else
-            target.kill();
-            //#endif
+            target.kill((ServerWorld) EntityUtil.getEntityWorld(target));
         }
         playCritSoundEffect(this.getWorld(), this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(), this.invokeGetSoundCategory());
     }

@@ -20,19 +20,29 @@
 
 package club.mcams.carpet.utils.MessageTextEventUtils;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.text.HoverEvent;
 import net.minecraft.text.Text;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Function;
 
-@GameVersion(version = "Minecraft < 1.21.5")
 @SuppressWarnings("unused")
 public class HoverEventUtil {
-    public static HoverEvent.Action<Text> SHOW_TEXT = HoverEvent.Action.SHOW_TEXT;
-    public static HoverEvent.Action<HoverEvent.ItemStackContent> SHOW_ITEM = HoverEvent.Action.SHOW_ITEM;
-    public static HoverEvent.Action<HoverEvent.EntityContent> SHOW_ENTITY = HoverEvent.Action.SHOW_ENTITY;
+    public static final HoverEvent.Action SHOW_TEXT = HoverEvent.Action.SHOW_TEXT;
+    public static final HoverEvent.Action SHOW_ITEM = HoverEvent.Action.SHOW_ITEM;
+    public static final HoverEvent.Action SHOW_ENTITY = HoverEvent.Action.SHOW_ENTITY;
+    private static final Map<HoverEvent.Action, Function<Object, HoverEvent>> HOVER_EVENT_ACTION_MAP = new HashMap<>();
 
-    public static <T> HoverEvent event(HoverEvent.Action<T> action, T value) {
-        return new HoverEvent(action, value);
+    public static HoverEvent event(HoverEvent.Action action, Object value) {
+        return Optional.ofNullable(HOVER_EVENT_ACTION_MAP.get(action)).map(function -> function.apply(value)).orElseThrow(() -> new IllegalArgumentException("Invalid action or value type"));
+    }
+
+    static {
+        HOVER_EVENT_ACTION_MAP.put(SHOW_TEXT, value -> new HoverEvent.ShowText((Text) value));
+        HOVER_EVENT_ACTION_MAP.put(SHOW_ITEM, value -> new HoverEvent.ShowItem((ItemStack) value));
+        HOVER_EVENT_ACTION_MAP.put(SHOW_ENTITY, value -> new HoverEvent.ShowEntity((HoverEvent.EntityContent) value));
     }
 }

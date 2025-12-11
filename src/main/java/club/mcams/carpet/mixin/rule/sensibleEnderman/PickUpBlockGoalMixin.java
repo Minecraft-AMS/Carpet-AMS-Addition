@@ -25,21 +25,21 @@ import club.mcams.carpet.AmsServerSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Block;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.tag.TagKey;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(targets = "net/minecraft/entity/mob/EndermanEntity$PickUpBlockGoal")
+@Mixin(targets = "net.minecraft.entity.mob.EndermanEntity$PickUpBlockGoal")
 public abstract class PickUpBlockGoalMixin {
     @WrapOperation(
         method = "tick()V",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/tag/TagKey;)Z"
+            target = "Lnet/minecraft/block/BlockState;isIn(Lnet/minecraft/registry/tag/TagKey;)Z"
         )
     )
     private boolean isBlockInTag(BlockState blockState, TagKey<Block> tag, Operation<Boolean> original) {

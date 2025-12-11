@@ -21,9 +21,7 @@
 package club.mcams.carpet.mixin.rule.easyRefreshTrades;
 
 import net.minecraft.entity.passive.VillagerEntity;
-//#if MC>=12111
-//$$ import net.minecraft.server.world.ServerWorld;
-//#endif
+import net.minecraft.server.world.ServerWorld;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -31,9 +29,5 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(VillagerEntity.class)
 public interface VillagerEntityInvoker {
     @Invoker("fillRecipes")
-    void invokeFillRecipes(
-        //#if MC>=12111
-        //$$ ServerWorld world
-        //#endif
-    );
+    void invokeFillRecipes(ServerWorld world);
 }

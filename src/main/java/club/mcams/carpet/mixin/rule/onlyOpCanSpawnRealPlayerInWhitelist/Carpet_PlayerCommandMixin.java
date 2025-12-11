@@ -28,14 +28,10 @@ import club.mcams.carpet.utils.PlayerUtil;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 
-//#if MC>=12109
-//$$ import net.minecraft.server.PlayerConfigEntry;
-//#else
-import com.mojang.authlib.GameProfile;
-//#endif
-import com.mojang.brigadier.context.CommandContext;
-
+import net.minecraft.server.PlayerConfigEntry;
 import net.minecraft.server.command.ServerCommandSource;
+
+import com.mojang.brigadier.context.CommandContext;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -49,14 +45,7 @@ public abstract class Carpet_PlayerCommandMixin {
             target = "Lnet/minecraft/server/PlayerManager;isWhitelistEnabled()Z"
         )
     )
-    private static boolean onlyOpCanSpawnRealPlayerInWhitelist(
-        boolean isWhitelistEnabled, CommandContext<ServerCommandSource> context,
-        //#if MC>=12109
-        //$$ @Local PlayerConfigEntry gameProfile
-        //#else
-        @Local GameProfile gameProfile
-        //#endif
-    ) {
+    private static boolean onlyOpCanSpawnRealPlayerInWhitelist(boolean isWhitelistEnabled, CommandContext<ServerCommandSource> context, @Local(name = "profile") PlayerConfigEntry gameProfile) {
         if (AmsServerSettings.onlyOpCanSpawnRealPlayerInWhitelist && PlayerUtil.isInWhitelist(gameProfile)) {
             return isWhitelistEnabled || AmsServerSettings.onlyOpCanSpawnRealPlayerInWhitelist;
         } else {

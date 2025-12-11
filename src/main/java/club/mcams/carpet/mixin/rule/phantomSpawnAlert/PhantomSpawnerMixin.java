@@ -28,22 +28,14 @@ import club.mcams.carpet.utils.PlayerUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 
 import net.minecraft.entity.mob.PhantomEntity;
-//#if MC>=12006
-//$$ import net.minecraft.server.network.ServerPlayerEntity;
-//#else
-import net.minecraft.entity.player.PlayerEntity;
-//#endif
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.spawner.PhantomSpawner;
 
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-//#if MC>=12105
-//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#else
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#endif
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -60,25 +52,7 @@ public abstract class PhantomSpawnerMixin {
             shift = At.Shift.AFTER
         )
     )
-    //#if MC<12109
-    private void broadcastMessage(
-        ServerWorld world, boolean spawnMonsters, boolean spawnAnimals,
-        //#if MC>=12105
-        //$$ CallbackInfo ci,
-        //#else
-        CallbackInfoReturnable<Integer> cir,
-        //#endif
-        //#if MC>=12006
-        //$$ @Local ServerPlayerEntity playerEntity,
-        //#else
-        @Local PlayerEntity playerEntity,
-        //#endif
-        @Local PhantomEntity phantom
-    )
-    //#else
-    //$$ private void broadcastMessage(ServerWorld world, boolean spawnMonsters, CallbackInfo ci, @Local ServerPlayerEntity playerEntity, @Local PhantomEntity phantom)
-    //#endif
-    {
+    private void broadcastMessage(ServerWorld world, boolean spawnMonsters, CallbackInfo ci, @Local ServerPlayerEntity playerEntity, @Local PhantomEntity phantom) {
         if (AmsServerSettings.phantomSpawnAlert && phantom != null) {
             MinecraftServer server = world.getServer();
             String playerName = PlayerUtil.getName(playerEntity);

@@ -1,4 +1,4 @@
-version:4662
+version:4671
 ao:true
 biomeBlendRadius:4
 chunkSectionFadeInTime:0.75
@@ -19,6 +19,7 @@ fullscreen:false
 gamma:0.5
 guiScale:4
 maxAnisotropyBit:2
+textureFiltering:0
 maxFps:260
 improvedTransparency:false
 inactivityFpsLimit:"afk"

@@ -22,9 +22,7 @@ package club.mcams.carpet;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-//#if MC>=12002
-//$$ import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
-//#endif
+import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 import club.mcams.carpet.observers.network.NetworkProtocolObserver;
 import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
 import club.mcams.carpet.observers.recipe.RecipeRuleObserver;
@@ -38,15 +36,13 @@ import club.mcams.carpet.validators.rule.blockChunkLoaderTimeController.MaxTimeV
 import club.mcams.carpet.validators.rule.commandPlayerChunkLoadController.MaxRangeValidator;
 import club.mcams.carpet.validators.rule.enhancedWorldEater.BlastResistanceValidator;
 import club.mcams.carpet.validators.rule.maxClientInteractionReachDistance.MaxClientInteractionReachDistanceValidator;
-//#if MC>=12000
-//$$ import club.mcams.carpet.validators.rule.easyGetPitcherPod.CountValidator;
-//#endif
+import club.mcams.carpet.validators.rule.easyGetPitcherPod.CountValidator;
 import club.mcams.carpet.validators.rule.renewableNetherScrap.DropRateValidator;
 
 import club.mcams.carpet.settings.Rule;
 import club.mcams.carpet.settings.RecipeRule;
 
-import static carpet.settings.RuleCategory.*;
+import static carpet.api.settings.RuleCategory.*;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
 public class AmsServerSettings {
@@ -177,9 +173,9 @@ public class AmsServerSettings {
     public static String amsUpdateSuppressionCrashFix = "false";
 
     //#if MC<11900
-    @GameVersion(version = "Minecraft < 1.19.3")
-    @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL, BUGFIX})
-    public static boolean ghastFireballExplosionDamageSourceFix = false;
+    //$$ @GameVersion(version = "Minecraft < 1.19.3")
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL, BUGFIX})
+    //$$ public static boolean ghastFireballExplosionDamageSourceFix = false;
     //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
@@ -214,21 +210,21 @@ public class AmsServerSettings {
     public static double maxPlayerEntityInteractionRange = -1.0D;
 
     //#if MC>=12005
-    //$$ @GameVersion(version = "Minecraft >= 1.20.5")
-    //$$ @Rule(
-    //$$     options = {"server", "global"},
-    //$$     categories = {AMS, FEATURE, SURVIVAL}
-    //$$ )
-    //$$ public static String maxPlayerBlockInteractionRangeScope = "server";
+    @GameVersion(version = "Minecraft >= 1.20.5")
+    @Rule(
+        options = {"server", "global"},
+        categories = {AMS, FEATURE, SURVIVAL}
+    )
+    public static String maxPlayerBlockInteractionRangeScope = "server";
     //#endif
 
     //#if MC>=12005
-    //$$ @GameVersion(version = "Minecraft >= 1.20.5")
-    //$$ @Rule(
-    //$$     options = {"server", "global"},
-    //$$     categories = {AMS, FEATURE, SURVIVAL}
-    //$$ )
-    //$$ public static String maxPlayerEntityInteractionRangeScope = "server";
+    @GameVersion(version = "Minecraft >= 1.20.5")
+    @Rule(
+        options = {"server", "global"},
+        categories = {AMS, FEATURE, SURVIVAL}
+    )
+    public static String maxPlayerEntityInteractionRangeScope = "server";
     //#endif
 
     @Rule(
@@ -329,9 +325,9 @@ public class AmsServerSettings {
     public static boolean mitePearl = false;
 
     //#if MC<12000
-    @GameVersion(version = "Minecraft < 1.20")
-    @Rule(categories = {AMS, FEATURE})
-    public static boolean enderPearlSoundEffect = false;
+    //$$ @GameVersion(version = "Minecraft < 1.20")
+    //$$ @Rule(categories = {AMS, FEATURE})
+    //$$ public static boolean enderPearlSoundEffect = false;
     //#endif
 
     @Rule(
@@ -422,14 +418,14 @@ public class AmsServerSettings {
     public static boolean ironGolemNoDropFlower = false;
 
     //#if MC>=12000
-    //$$ @GameVersion(version = "Minecraft >= 1.20")
-    //$$ @Rule(
-    //$$     options = {"0"},
-    //$$     categories = {AMS, FEATURE, SURVIVAL},
-    //$$     validators = CountValidator.class,
-    //$$     strict = false
-    //$$ )
-    //$$ public static int easyGetPitcherPod = 0;
+    @GameVersion(version = "Minecraft >= 1.20")
+    @Rule(
+        options = {"0"},
+        categories = {AMS, FEATURE, SURVIVAL},
+        validators = CountValidator.class,
+        strict = false
+    )
+    public static int easyGetPitcherPod = 0;
     //#endif
 
     @Rule(
@@ -463,12 +459,12 @@ public class AmsServerSettings {
     public static boolean headHunter = false;
 
     //#if MC>=12002
-    //$$ @GameVersion(version = "Minecraft >= 1.20.2")
-    //$$ @Rule(
-    //$$     categories = {AMS, FEATURE, SURVIVAL},
-    //$$     validators = StackableDiscountRuleObserver.class
-    //$$ )
-    //$$ public static boolean stackableDiscounts = false;
+    @GameVersion(version = "Minecraft >= 1.20.2")
+    @Rule(
+        categories = {AMS, FEATURE, SURVIVAL},
+        validators = StackableDiscountRuleObserver.class
+    )
+    public static boolean stackableDiscounts = false;
     //#endif
 
     @Rule(
@@ -528,8 +524,8 @@ public class AmsServerSettings {
     public static String commandGetHeldItemID = "false";
 
     //#if MC>=12102
-    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    //$$ public static boolean stringDupeReintroduced = false;
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean stringDupeReintroduced = false;
     //#endif
 
     @Rule(
@@ -569,9 +565,9 @@ public class AmsServerSettings {
     public static boolean onlyOpCanSpawnRealPlayerInWhitelist = false;
 
     //#if MC>=12100
-    //$$ @GameVersion(version = "Minecraft >= 1.21")
-    //$$ @Rule(categories = {AMS, FEATURE})
-    //$$ public static boolean itemEntityCreateNetherPortalDisabled = false;
+    @GameVersion(version = "Minecraft >= 1.21")
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean itemEntityCreateNetherPortalDisabled = false;
     //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
@@ -593,26 +589,26 @@ public class AmsServerSettings {
     //#endif
 
     //#if MC>=11900
-    //$$ @GameVersion(version = "Minecraft >= 1.19")
-    //$$ @Rule(
-    //$$     options = {"-1", "100000", "200000", "300000"},
-    //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
-    //$$     strict = false
-    //$$ )
-    //$$ public static int maxChainUpdateDepth = -1;
+    @GameVersion(version = "Minecraft >= 1.19")
+    @Rule(
+        options = {"-1", "100000", "200000", "300000"},
+        categories = {AMS, FEATURE, EXPERIMENTAL},
+        strict = false
+    )
+    public static int maxChainUpdateDepth = -1;
     //#endif
 
     @Rule(categories = {AMS, SURVIVAL})
     public static boolean phantomSpawnAlert = false;
 
     //#if MC>=12005
-    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    //$$ public static boolean endPortalChunkLoadDisabled = false;
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean endPortalChunkLoadDisabled = false;
     //#endif
 
     //#if MC>=12100
-    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    //$$ public static boolean onlyPlayerCanCreateNetherPortal = false;
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean onlyPlayerCanCreateNetherPortal = false;
     //#endif
 
     /*
@@ -696,9 +692,9 @@ public class AmsServerSettings {
     public static boolean commandPlayerChunkLoadController = false;
 
     //#if MC<12005
-    @GameVersion(version = "Minecraft < 1.20.5")
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
-    public static boolean endPortalChunkLoader = false;
+    //$$ @GameVersion(version = "Minecraft < 1.20.5")
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    //$$ public static boolean endPortalChunkLoader = false;
     //#endif
 
     /*
@@ -709,17 +705,17 @@ public class AmsServerSettings {
     public static boolean craftableEnchantedGoldenApples = false;
 
     //#if MC>=11700 && MC<12102
-    @GameVersion(version = "Minecraft 1.17 - 1.21.1")
-    @RecipeRule
-    @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
-    public static boolean craftableBundle = false;
+    //$$ @GameVersion(version = "Minecraft 1.17 - 1.21.1")
+    //$$ @RecipeRule
+    //$$ @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    //$$ public static boolean craftableBundle = false;
     //#endif
 
     //#if MC<11900 && MC>=11700
-    @GameVersion(version = "Minecraft 1.17 - 1.18")
-    @RecipeRule
-    @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
-    public static boolean craftableSculkSensor = false;
+    //$$ @GameVersion(version = "Minecraft 1.17 - 1.18")
+    //$$ @RecipeRule
+    //$$ @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    //$$ public static boolean craftableSculkSensor = false;
     //#endif
 
     @RecipeRule
@@ -746,10 +742,10 @@ public class AmsServerSettings {
     public static boolean rottenFleshBurnedIntoLeather = false;
 
     //#if MC<12105
-    @GameVersion(version = "Minecraft < 1.21.5")
-    @RecipeRule
-    @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
-    public static boolean useNewLodestoneRecipe = false;
+    //$$ @GameVersion(version = "Minecraft < 1.21.5")
+    //$$ @RecipeRule
+    //$$ @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    //$$ public static boolean useNewLodestoneRecipe = false;
     //#endif
 
     @RecipeRule

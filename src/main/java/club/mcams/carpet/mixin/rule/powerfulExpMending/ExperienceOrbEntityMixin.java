@@ -22,48 +22,72 @@ package club.mcams.carpet.mixin.rule.powerfulExpMending;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import com.google.common.collect.Lists;
-
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.ExperienceOrbEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-@GameVersion(version = "Minecraft >= 1.17")
+@GameVersion(version = "Minecraft >= 1.21")
 @Mixin(ExperienceOrbEntity.class)
 public abstract class ExperienceOrbEntityMixin {
     @Inject(method = "repairPlayerGears", at = @At("HEAD"), cancellable = true)
-    private void fixAllItem(PlayerEntity player, int amount, CallbackInfoReturnable<Integer> cir) {
+    private void fixAllItems(ServerPlayerEntity player, int amount, CallbackInfoReturnable<Integer> cir) {
         if (AmsServerSettings.powerfulExpMending) {
-            List<ItemStack> allItems = Lists.newArrayList();
-            allItems.addAll(player.getInventory().main);
-            allItems.addAll(player.getInventory().armor);
-            allItems.addAll(player.getInventory().offHand);
-            Collections.shuffle(allItems);
             int remaining = amount;
-            for (ItemStack stack : allItems) {
-                if (!stack.isEmpty() && stack.isDamaged() && EnchantmentHelper.getLevel(Enchantments.MENDING, stack) > 0) {
-                    int repairAmount = Math.min(remaining * 2, stack.getDamage());
-                    stack.setDamage(stack.getDamage() - repairAmount);
-                    remaining -= repairAmount / 2;
-                    if (remaining <= 0) {
-                        break;
-                    }
+            List<ItemStack> repairList = new ArrayList<>();
+            Inventory inventory = player.getInventory();
+            for (int slot = 0; slot < inventory.size(); slot++) {
+                ItemStack stack = inventory.getStack(slot);
+                if (hasMendingEnchantment(stack)) {
+                    repairList.add(stack);
                 }
             }
-            cir.setReturnValue(remaining);
+
+            Collections.shuffle(repairList);
+
+            for (ItemStack stack : repairList) {
+                if (remaining <= 0) {
+                    break;
+                }
+                int maxRepair = EnchantmentHelper.getRepairWithExperience(player.getEntityWorld(), stack, remaining);
+                int actualRepair = Math.min(maxRepair, stack.getDamage());
+                if (actualRepair > 0) {
+                    stack.setDamage(stack.getDamage() - actualRepair);
+                    remaining -= (actualRepair * remaining) / maxRepair;
+                }
+            }
+
+            cir.setReturnValue(Math.max(remaining, 0));
             cir.cancel();
         }
+    }
+
+    @Unique
+    public boolean hasMendingEnchantment(ItemStack stack) {
+        Set<RegistryEntry<Enchantment>> entries = stack.getEnchantments().getEnchantments();
+        RegistryKey<Enchantment> mendingKey = Enchantments.MENDING;
+
+        for (RegistryEntry<Enchantment> entry : entries) {
+            if (entry.matchesKey(mendingKey)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -62,7 +62,7 @@ public abstract class EntityMixin {
         POSE_MAPPING.put("spin_attack", EntityPose.SPIN_ATTACK);
         POSE_MAPPING.put("swimming", EntityPose.SWIMMING);
         POSE_MAPPING.put("sleeping", EntityPose.SLEEPING);
-        POSE_MAPPING.put("fall_flying", EntityPose.FALL_FLYING);
+        POSE_MAPPING.put("fall_flying", EntityPose.GLIDING);
         POSE_MAPPING.put("standing", EntityPose.STANDING);
         POSE_MAPPING.put("crouching", EntityPose.CROUCHING);
         POSE_MAPPING.put("dying", EntityPose.DYING);

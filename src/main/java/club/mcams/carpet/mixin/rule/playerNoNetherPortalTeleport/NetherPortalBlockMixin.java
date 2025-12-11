@@ -38,28 +38,14 @@ public abstract class NetherPortalBlockMixin {
         method = "onEntityCollision",
         at = @At(
             value = "INVOKE",
-            //#if MC>=12100
-            //$$ target = "Lnet/minecraft/entity/Entity;canUsePortals(Z)Z"
-            //#else
-            target = "Lnet/minecraft/entity/Entity;canUsePortals()Z"
-            //#endif
+            target = "Lnet/minecraft/entity/Entity;canUsePortals(Z)Z"
         )
     )
-    private boolean onEntityCollision(
-        Entity entity,
-        //#if MC>=12100
-        //$$ boolean canUsePortals,
-        //#endif
-        Operation<Boolean> original
-    ) {
+    private boolean onEntityCollision(Entity entity, boolean canUsePortals, Operation<Boolean> original) {
         if (AmsServerSettings.playerNoNetherPortalTeleport && entity instanceof PlayerEntity) {
             return false;
         } else {
-            //#if MC>=12100
-            //$$ return original.call(entity, canUsePortals);
-            //#else
-            return original.call(entity);
-            //#endif
+            return original.call(entity, canUsePortals);
         }
     }
 }

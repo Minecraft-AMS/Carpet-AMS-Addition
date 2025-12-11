@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.settings;
 
-import carpet.settings.Validator;
+import carpet.api.settings.Validator;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -30,13 +30,8 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-//#if MC>=11900
-//$$ import net.minecraft.world.WorldView;
-//$$ import net.minecraft.util.math.random.Random;
-//#else
-import java.util.Random;
-import net.minecraft.world.BlockView;
-//#endif
+import net.minecraft.world.WorldView;
+import net.minecraft.util.math.random.Random;
 
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -45,13 +40,7 @@ import static net.minecraft.block.Block.dropStack;
 @Mixin(FlowerBlock.class)
 public abstract class FlowerBlockMixin implements Fertilizable {
     @Override
-    //#if MC>=12002
-    //$$ public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-    //#elseif MC>=11900
-    //$$ public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-    //#else
-    public boolean isFertilizable(BlockView world, BlockPos pos, BlockState state, boolean isClient) {
-    //#endif
+    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
         return AmsServerSettings.fertilizableSmallFlower;
     }
 

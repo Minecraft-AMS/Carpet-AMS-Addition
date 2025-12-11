@@ -20,12 +20,13 @@
 
 package club.mcams.carpet.mixin.rule.maxChainUpdateDepth;
 
-import club.mcams.carpet.utils.compat.DummyInterface;
+import net.minecraft.world.block.ChainRestrictedNeighborUpdater;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.gen.Accessor;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.19")
-@Mixin(DummyInterface.class)
-public interface ChainRestrictedNeighborUpdaterAccessor {}
+@Mixin(ChainRestrictedNeighborUpdater.class)
+public interface ChainRestrictedNeighborUpdaterAccessor {
+    @Accessor("maxChainDepth")
+    int getMaxChainDepth();
+}

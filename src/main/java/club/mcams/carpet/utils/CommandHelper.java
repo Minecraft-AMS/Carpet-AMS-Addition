@@ -32,10 +32,8 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-//#if MC>=12111
-//$$ import net.minecraft.command.permission.Permission;
-//$$ import net.minecraft.command.permission.PermissionLevel;
-//#endif
+import net.minecraft.command.permission.Permission;
+import net.minecraft.command.permission.PermissionLevel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -107,16 +105,12 @@ public final class CommandHelper {
     }
 
     public static boolean hasPermissionLevel(ServerCommandSource source, int level) {
-        //#if MC>=12111
-        //$$ Permission.Level requiredPermission = new Permission.Level(PermissionLevel.fromLevel(level));
-        //$$
-        //$$ if (level > 4) {
-        //$$     return false;
-        //$$ }
-        //$$
-        //$$ return source.getPermissions().hasPermission(requiredPermission);
-        //#else
-        return source.hasPermissionLevel(level);
-        //#endif
+        Permission.Level requiredPermission = new Permission.Level(PermissionLevel.fromLevel(level));
+
+        if (level > 4) {
+            return false;
+        }
+
+        return source.getPermissions().hasPermission(requiredPermission);
     }
 }

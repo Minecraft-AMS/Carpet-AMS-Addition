@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.observers.recipe;
 
-import carpet.settings.ParsedRule;
+import carpet.api.settings.CarpetRule;
 
 import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
 import club.mcams.carpet.settings.SimpleRuleObserver;
@@ -30,7 +30,7 @@ import net.minecraft.server.command.ServerCommandSource;
 
 public class RecipeRuleObserver extends SimpleRuleObserver<Boolean> {
     @Override
-    public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
+    public void onValueChange(ServerCommandSource source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         RecipeRuleHelper.onValueChange(MinecraftServerUtil.getServer());
     }
 }

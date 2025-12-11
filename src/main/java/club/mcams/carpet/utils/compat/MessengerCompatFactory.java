@@ -24,58 +24,31 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.*;
-import net.minecraft.util.Util;
 
 public class MessengerCompatFactory {
-    public static BaseText CarpetCompoundText(Object... fields) {
-        //#if MC>=11900
-        //$$ return (MutableText) carpet.utils.Messenger.c(fields);
-        //#else
-        return carpet.utils.Messenger.c(fields);
-        //#endif
+    public static MutableText CarpetCompoundText(Object... fields) {
+        return (MutableText) carpet.utils.Messenger.c(fields);
     }
 
-    //#if MC<11900
-    public static LiteralText LiteralText(String text) {
-        return new LiteralText(text);
+    public static MutableText LiteralText(String text) {
+        return Text.literal(text);
     }
-    //#else
-    //$$ public static MutableText LiteralText(String text) {
-    //$$     return Text.literal(text);
-    //$$ }
-    //#endif
 
-    public static void sendFeedBack(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
-        //#if MC>=12000
-        //$$ source.sendFeedback(() -> text, broadcastToOps);
-        //#else
-        source.sendFeedback(text, broadcastToOps);
-        //#endif
+    public static void sendFeedBack(ServerCommandSource source, MutableText text, boolean broadcastToOps) {
+        source.sendFeedback(() -> text, broadcastToOps);
     }
 
     // Send system message to server
     public static void sendSystemMessage(MinecraftServer server, Text text) {
-        //#if MC<11900
-        server.sendSystemMessage(text, Util.NIL_UUID);
-        //#else
-        //$$ server.sendMessage(text);
-        //#endif
+        server.sendMessage(text);
     }
 
     // Send system message to player
     public static void sendSystemMessage(PlayerEntity player, Text text) {
-        //#if MC<11900
-        player.sendSystemMessage(text, Util.NIL_UUID);
-        //#else
-        //$$ player.sendMessage(text, false);
-        //#endif
+        player.sendMessage(text, false);
     }
 
-    public static BaseText TranslatableText(String key, Object... args) {
-        //#if MC>=11900
-        //$$ return Text.translatable(key, args);
-        //#else
-        return new TranslatableText(key, args);
-        //#endif
+    public static MutableText TranslatableText(String key, Object... args) {
+        return Text.translatable(key, args);
     }
 }

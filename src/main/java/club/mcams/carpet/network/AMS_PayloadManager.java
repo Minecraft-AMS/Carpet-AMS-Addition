@@ -32,10 +32,6 @@ import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientP
 import club.mcams.carpet.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
 
 import net.minecraft.network.PacketByteBuf;
-//#if MC<12005
-import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
-import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
-//#endif
 
 import java.util.Map;
 import java.util.function.Function;
@@ -112,16 +108,6 @@ public class AMS_PayloadManager {
         UpdatePlayerPosePayload_S2C.register();
         RequestClientModVersionPayload_S2C.register();
     }
-
-    //#if MC<12005
-    public static AMS_CustomPayload C2S_decodePacket(CustomPayloadC2SPacket packet) {
-        return AMS_PayloadCodec.decode(packet);
-    }
-
-    public static AMS_CustomPayload S2C_decodePacket(CustomPayloadS2CPacket packet) {
-        return AMS_PayloadCodec.decode(packet);
-    }
-    //#endif
 
     public static void register(String packetId, Function<PacketByteBuf, AMS_CustomPayload> constructor) {
         PAYLOAD_REGISTRY.put(packetId, constructor);

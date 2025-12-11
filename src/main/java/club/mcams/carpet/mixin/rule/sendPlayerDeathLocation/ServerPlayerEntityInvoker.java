@@ -28,10 +28,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(ServerPlayerEntity.class)
 public interface ServerPlayerEntityInvoker {
-    //#if MC>=12000
-    //$$ @Invoker("getServerWorld")
-    //#else
-    @Invoker("getWorld")
-    //#endif
+    @Invoker("getEntityWorld")
     ServerWorld invokeGetWorld();
 }

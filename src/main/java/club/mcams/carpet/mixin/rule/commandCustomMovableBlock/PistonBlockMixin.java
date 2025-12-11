@@ -45,13 +45,8 @@ public abstract class PistonBlockMixin {
     private static void MovableBlocks(BlockState state, World world, BlockPos blockPos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(AmsServerSettings.commandCustomMovableBlock, "false") && CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS.contains(RegexTools.getBlockRegisterName(state))) {
             BlockEntity blockEntity = world.getBlockEntity(blockPos);
-            //#if MC>=11700
             boolean isBottomY = blockPos.getY() == world.getBottomY();
-            boolean isTopY = blockPos.getY() == world.getTopY();
-            //#else
-            //$$ boolean isBottomY = blockPos.getY() == 0;
-            //$$ boolean isTopY = blockPos.getY() == world.getHeight() - 1;
-            //#endif
+            boolean isTopY = blockPos.getY() == world.getTopYInclusive();
             if (!(blockEntity instanceof LootableContainerBlockEntity)) {
                 if (direction == Direction.DOWN && isBottomY) {
                     cir.setReturnValue(false);

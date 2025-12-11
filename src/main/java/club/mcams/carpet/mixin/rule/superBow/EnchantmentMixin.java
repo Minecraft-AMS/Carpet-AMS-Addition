@@ -20,12 +20,40 @@
 
 package club.mcams.carpet.mixin.rule.superBow;
 
-import club.mcams.carpet.utils.compat.DummyClass;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import java.util.Optional;
+import java.util.Set;
 
-@GameVersion(version = "Minecraft >= 1.21")
-@Mixin(DummyClass.class)
-public abstract class EnchantmentMixin {}
+@Mixin(Enchantment.class)
+public abstract class EnchantmentMixin {
+    @ModifyReturnValue(method = "canBeCombined", at = @At("RETURN"))
+    private static boolean canBeCombined(boolean original, RegistryEntry<Enchantment> first, RegistryEntry<Enchantment> second) {
+        return original || (AmsServerSettings.superBow && canBeCombinedEnchantments(first, second, Set.of(Enchantments.INFINITY, Enchantments.MENDING)));
+    }
+
+    @Unique
+    private static boolean canBeCombinedEnchantments(RegistryEntry<Enchantment> first, RegistryEntry<Enchantment> second, Set<RegistryKey<Enchantment>> enchantments) {
+        boolean firstMatches = enchantments.stream().anyMatch(first::matchesKey);
+        boolean secondMatches = enchantments.stream().anyMatch(second::matchesKey);
+        Optional<RegistryKey<Enchantment>> secondKeyOpt = second.getKey();
+        boolean notMatchSecond = true;
+
+        if (secondKeyOpt.isPresent()) {
+            notMatchSecond = !first.matchesKey(secondKeyOpt.get());
+        }
+
+        return firstMatches && secondMatches && notMatchSecond;
+    }
+}

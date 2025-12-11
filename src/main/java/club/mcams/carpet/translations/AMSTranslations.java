@@ -86,7 +86,7 @@ public class AMSTranslations {
         return translation;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "IfCanBeSwitch"})
     private static void buildTranslationMap(Map<String, String> translation, Map<String, Object> yaml, String prefix) {
         yaml.forEach((key, value) -> {
             String fullKey = prefix.isEmpty() ? key : prefix + "." + key;
@@ -116,7 +116,7 @@ public class AMSTranslations {
         return getTranslation(lang).get(key);
     }
 
-    public static BaseText translate(BaseText text, ServerPlayerEntity player) {
+    public static MutableText translate(MutableText text, ServerPlayerEntity player) {
         if (player instanceof ServerPlayerEntityWithClientLanguage) {
             String lang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
             return translate(text, lang);
@@ -124,24 +124,16 @@ public class AMSTranslations {
         return text;
     }
 
-    public static BaseText translate(BaseText text, String lang) {
+    public static MutableText translate(MutableText text, String lang) {
         return translate(text, lang, false);
     }
 
     @SuppressWarnings("PatternVariableCanBeUsed")
-    public static BaseText translate(BaseText text, String lang, boolean suppressWarnings) {
-        //#if MC>=11900
-        //$$ if (!(text.getContent() instanceof TranslatableTextContent)) {
-        //#else
-        if (!(text instanceof TranslatableText)) {
-        //#endif
+    public static MutableText translate(MutableText text, String lang, boolean suppressWarnings) {
+        if (!(text.getContent() instanceof TranslatableTextContent)) {
             return text;
         }
-        //#if MC>=11900
-        //$$ TranslatableTextContent translatableText = (TranslatableTextContent) text.getContent();
-        //#else
-        TranslatableText translatableText = (TranslatableText) text;
-        //#endif
+        TranslatableTextContent translatableText = (TranslatableTextContent) text.getContent();
         String translationKey = translatableText.getKey();
         if (!translationKey.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
             return text;
@@ -150,20 +142,16 @@ public class AMSTranslations {
         return formattedString != null ? updateTextWithTranslation(text, formattedString, translatableText) : translationLog(translationKey, suppressWarnings, text);
     }
 
-    private static BaseText translationLog(String translationKey, boolean suppressWarnings, BaseText text) {
+    private static MutableText translationLog(String translationKey, boolean suppressWarnings, MutableText text) {
         if (!suppressWarnings) {
             AmsServer.LOGGER.warn("Unknown translation key: {}. Check if the translation exists or the key is correct.", translationKey);
         }
         return text;
     }
 
-    private static BaseText updateTextWithTranslation(BaseText originalText, String formattedString, TranslatableText translatableText) {
-        //#if MC>=12111
-        //$$ TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) translatableText;
-        //#else
-        TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) (Messenger.tr(formattedString, translatableText.getArgs()));
-        //#endif
-        BaseText newText = createNewText(formattedString, fixedTranslatableText);
+    private static MutableText updateTextWithTranslation(MutableText originalText, String formattedString, TranslatableTextContent translatableText) {
+        TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) translatableText;
+        MutableText newText = createNewText(formattedString, fixedTranslatableText);
         if (newText == null) {
             return Messenger.s(formattedString);
         } else {
@@ -173,19 +161,15 @@ public class AMSTranslations {
         }
     }
 
-    private static BaseText createNewText(String formattedString, TranslatableTextAccessor fixedTranslatableText) {
+    private static MutableText createNewText(String formattedString, TranslatableTextAccessor fixedTranslatableText) {
         try {
             List<StringVisitable> translations = Lists.newArrayList();
-            //#if MC>=11800
             fixedTranslatableText.invokeForEachPart(formattedString, translations::add);
-            //#else
-            //$$ fixedTranslatableText.invokeSetTranslation(formattedString);
-            //#endif
-            BaseText[] textArray = new BaseText[translations.size()];
+            MutableText[] textArray = new MutableText[translations.size()];
             for (int i = 0; i < translations.size(); i++) {
                 StringVisitable stringVisitable = translations.get(i);
-                if (stringVisitable instanceof BaseText) {
-                    textArray[i] = (BaseText) stringVisitable;
+                if (stringVisitable instanceof MutableText) {
+                    textArray[i] = (MutableText) stringVisitable;
                 } else {
                     textArray[i] = Messenger.s(stringVisitable.getString());
                 }
