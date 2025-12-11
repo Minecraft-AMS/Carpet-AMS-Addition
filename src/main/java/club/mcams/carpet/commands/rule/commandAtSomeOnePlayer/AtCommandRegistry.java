@@ -22,16 +22,14 @@ package club.mcams.carpet.commands.rule.commandAtSomeOnePlayer;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.CommandHelper;
-import club.mcams.carpet.utils.Messenger;
-import club.mcams.carpet.utils.MinecraftServerUtil;
-import club.mcams.carpet.utils.PlayerUtil;
+import club.mcams.carpet.utils.*;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.network.MessageType;
+import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -72,7 +70,7 @@ public class AtCommandRegistry {
         MinecraftServerUtil.getServer().getPlayerManager().broadcast(messageText, MessageType.CHAT, sourcePlayer.getUuid());
         //#endif
 
-        targetPlayer.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        EntityUtil.getEntityWorld(targetPlayer).playSound(null, targetPlayer.getBlockPos(), SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.PLAYERS, 1.0F, 1.0F);
 
         Messenger.sendServerMessage(
             MinecraftServerUtil.getServer(),
