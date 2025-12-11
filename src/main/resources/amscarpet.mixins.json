@@ -136,6 +136,7 @@
     "rule.noEnchantedGoldenAppleEating.ItemStackMixin",
     "rule.noFamilyPlanning.PassiveEntityMixin",
     "rule.onlyOpCanSpawnRealPlayerInWhitelist.Carpet_PlayerCommandMixin",
+    "rule.onlyPlayerCanCreateNetherPortal.NetherPortalBlockMixin",
     "rule.optimizedDragonRespawn.BlockPatternMixin",
     "rule.optimizedDragonRespawn.EnderDragonFightMixin",
     "rule.perfectInvisibility_sneakInvisibility.EntityInvoker",
@@ -219,6 +220,7 @@
     "hooks.network.MinecraftClientMixin",
     "network.ClientPlayNetworkHandlerMixin",
     "rule.commandGetClientPlayerFPS.MinecraftClientAccessor",
+    "rule.maxClientInteractionReachDistance.ClientPlayerEntityMixin",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
     "rule.maxClientInteractionReachDistance.GameRendererMixin",
     "rule.maxPlayerInteractionRange.GameRendererMixin"

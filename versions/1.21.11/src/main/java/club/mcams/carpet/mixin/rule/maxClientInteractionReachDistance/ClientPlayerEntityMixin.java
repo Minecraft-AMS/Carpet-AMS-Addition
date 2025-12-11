@@ -26,18 +26,17 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.render.GameRenderer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft 1.20.5 - 1.21.10")
-@Mixin(value = GameRenderer.class, priority = 1688)
-public abstract class GameRendererMixin {
+@GameVersion(version = "Minecraft >= 1.21.11")
+@Mixin(value = ClientPlayerEntity.class, priority = 1688)
+public abstract class ClientPlayerEntityMixin {
     @WrapOperation(
-        method = "updateCrosshairTarget",
+        method = "method_76762",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/network/ClientPlayerEntity;getBlockInteractionRange()D"
@@ -52,7 +51,7 @@ public abstract class GameRendererMixin {
     }
 
     @WrapOperation(
-        method = "updateCrosshairTarget",
+        method = "method_76762",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/network/ClientPlayerEntity;getEntityInteractionRange()D"

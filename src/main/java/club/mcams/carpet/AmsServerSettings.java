@@ -610,6 +610,11 @@ public class AmsServerSettings {
     //$$ public static boolean endPortalChunkLoadDisabled = false;
     //#endif
 
+    //#if MC>=12100
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    //$$ public static boolean onlyPlayerCanCreateNetherPortal = false;
+    //#endif
+
     /*
      * AMS网络协议规则
      */

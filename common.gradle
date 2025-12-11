@@ -146,9 +146,11 @@ java {
 }
 
 jar {
-	from(rootProject.file('LICENSE')) {
-		rename { "${it}_${project.archivesBaseName}"}
-	}
+    from(rootProject.file('LICENSE')) {
+        rename {
+            "${it}_${base.archivesName.get()}"
+        }
+    }
 }
 
 // https://github.com/hierynomus/license-gradle-plugin

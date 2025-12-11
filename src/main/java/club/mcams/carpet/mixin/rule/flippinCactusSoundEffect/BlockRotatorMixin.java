@@ -24,6 +24,7 @@ import carpet.helpers.BlockRotator;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import club.mcams.carpet.utils.EntityUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -53,33 +54,31 @@ public abstract class BlockRotatorMixin {
             SoundEvent leverClick = SoundEvents.BLOCK_LEVER_CLICK;
             SoundEvent villagerAmbient = SoundEvents.ENTITY_VILLAGER_AMBIENT;
             SoundEvent endermanTeleport = SoundEvents.ENTITY_ENDERMAN_TELEPORT;
-            SoundCategory blocks = SoundCategory.BLOCKS;
-            SoundCategory players = SoundCategory.PLAYERS;
             switch (AmsServerSettings.flippinCactusSoundEffect) {
                 case 1:
                     volume = 1.0F;
                     pitch = 0.95F;
-                    player.playSound(leverClick, blocks, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), leverClick, SoundCategory.BLOCKS, volume, pitch);
                     break;
                 case 2:
                     volume = 1.0F;
                     pitch = 2.5F;
-                    player.playSound(leverClick, blocks, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), leverClick, SoundCategory.BLOCKS, volume, pitch);
                     break;
                 case 3:
                     volume = 1.0F;
                     pitch = 0.75F;
-                    player.playSound(leverClick, blocks, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), leverClick, SoundCategory.BLOCKS, volume, pitch);
                     break;
                 case 4:
                     volume = 1.0F;
                     pitch = 1.0F;
-                    player.playSound(villagerAmbient, players, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), villagerAmbient, SoundCategory.BLOCKS, volume, pitch);
                     break;
                 case 5:
                     volume = 1.0F;
                     pitch = 1.0F;
-                    player.playSound(endermanTeleport, players, volume, pitch);
+                    EntityUtil.getEntityWorld(player).playSound(null, player.getBlockPos(), endermanTeleport, SoundCategory.BLOCKS, volume, pitch);
             }
         }
     }
