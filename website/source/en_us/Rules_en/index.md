@@ -2602,6 +2602,26 @@ Some commands for network communication testing.
 
 * Categroies: `AMS`, `AMS_NETWORK`, `COMMAND`
 
+## onlyPlayerCanCreateNetherPortal
+
+Only allow new portals to be generated when players pass through the Nether portal.
+
+&lt;Available for Minecraft >= 1.21&gt;
+
+- Type: `boolean`
+
+  
+
+- Default: `false`
+
+  
+
+- Suggested options: `false`, `true`
+
+  
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
