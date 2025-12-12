@@ -22,11 +22,8 @@ package carpetamsaddition.commands.rule.commandAtSomeOnePlayer;
 
 import carpetamsaddition.AmsServerSettings;
 import carpetamsaddition.translations.Translator;
+import carpetamsaddition.utils.*;
 
-import carpetamsaddition.utils.EntityUtil;
-import carpetamsaddition.utils.Messenger;
-import carpetamsaddition.utils.MinecraftServerUtil;
-import carpetamsaddition.utils.PlayerUtil;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
@@ -44,7 +41,7 @@ public class AtCommandRegistry {
     private static final Translator tr = new Translator("command.at");
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("@")
-            .requires(source -> carpetamsaddition.utils.CommandHelper.canUseCommand(source, AmsServerSettings.commandAtSomeOnePlayer))
+            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandAtSomeOnePlayer))
             .then(Commands.argument("targetPlayer", EntityArgument.player())
             .then(Commands.argument("text", StringArgumentType.greedyString())
             .executes(context -> execute(
@@ -57,11 +54,11 @@ public class AtCommandRegistry {
 
     private static int execute(ServerPlayer sourcePlayer, ServerPlayer targetPlayer, String text) {
         MutableComponent titleText = tr.tr("title", PlayerUtil.getName(sourcePlayer));
-        MutableComponent messageText = carpetamsaddition.utils.Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
+        MutableComponent messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
         targetPlayer.connection.send(new ClientboundSetTitleTextPacket(titleText.withStyle(ChatFormatting.AQUA)));
         MinecraftServerUtil.getServer().getPlayerList().broadcastSystemMessage(messageText, false);
         EntityUtil.getEntityWorld(targetPlayer).playSound(null, targetPlayer.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.0F);
-        carpetamsaddition.utils.Messenger.sendServerMessage(
+        Messenger.sendServerMessage(
             MinecraftServerUtil.getServer(),
             Messenger.s(String.format("%s @ %s", PlayerUtil.getName(sourcePlayer), PlayerUtil.getName(targetPlayer))).withStyle(ChatFormatting.GRAY)
         );
