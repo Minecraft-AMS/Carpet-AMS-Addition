@@ -26,11 +26,8 @@ import carpetamsaddition.AmsServerSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.network.payloads.handshake.RequestHandShakeS2CPayload;
 import carpetamsaddition.network.payloads.debug.RequestClientModVersionPayload_S2C;
+import carpetamsaddition.utils.*;
 
-import carpetamsaddition.utils.Messenger;
-import carpetamsaddition.utils.MinecraftServerUtil;
-import carpetamsaddition.utils.NetworkUtil;
-import carpetamsaddition.utils.PlayerUtil;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 
@@ -55,7 +52,7 @@ public class AmspCommandRegistry {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("amsp")
-            .requires(source -> carpetamsaddition.utils.CommandHelper.canUseCommand(source, AmsServerSettings.commandAmspDebug))
+            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandAmspDebug))
             // show
             .then(Commands.literal("show")
             .then(Commands.literal("supportClientList")
@@ -95,18 +92,18 @@ public class AmspCommandRegistry {
         Iterator<UUID> iterator = NetworkUtil.getSupportClientSet().iterator();
 
         if (!iterator.hasNext()) {
-            carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("support_client_set_is_none"), ChatFormatting.YELLOW));
+            Messenger.tell(source, Messenger.formatting(tr.tr("support_client_set_is_none"), ChatFormatting.YELLOW));
             return 0;
         }
 
-        carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("support_client_list_title"), ChatFormatting.AQUA));
+        Messenger.tell(source, Messenger.formatting(tr.tr("support_client_list_title"), ChatFormatting.AQUA));
 
         while (iterator.hasNext()) {
             UUID uuid = iterator.next();
             String strUuid = uuid.toString();
             String playerName = PlayerUtil.getName(uuid);
-            MutableComponent text = carpetamsaddition.utils.Messenger.formatting(carpetamsaddition.utils.Messenger.s(strUuid + " - " + playerName), ChatFormatting.AQUA);
-            carpetamsaddition.utils.Messenger.tell(source, text);
+            MutableComponent text = Messenger.formatting(Messenger.s(strUuid + " - " + playerName), ChatFormatting.AQUA);
+            Messenger.tell(source, text);
         }
 
         return 1;
@@ -114,7 +111,7 @@ public class AmspCommandRegistry {
 
     private static int showServerSupportStatus(CommandSourceStack source) {
         ChatFormatting formatting = NetworkUtil.getServerSupport() ? ChatFormatting.GREEN : ChatFormatting.RED;
-        carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("server_support_status", String.valueOf(NetworkUtil.getServerSupport())), formatting));
+        Messenger.tell(source, Messenger.formatting(tr.tr("server_support_status", String.valueOf(NetworkUtil.getServerSupport())), formatting));
         return 1;
     }
 
@@ -134,16 +131,16 @@ public class AmspCommandRegistry {
                 NetworkUtil.executeOnServerThread(() -> {
                     String version = clientModVersion.get(playerUuid);
                     if (version != null) {
-                        carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("client_mod_version_success_feedback", PlayerUtil.getName(targetPlayer), version), ChatFormatting.AQUA));
+                        Messenger.tell(source, Messenger.formatting(tr.tr("client_mod_version_success_feedback", PlayerUtil.getName(targetPlayer), version), ChatFormatting.AQUA));
                         clientModVersion.remove(playerUuid);
                     } else {
                         if (retryCount[0] < maxRetries) {
                             retryCount[0]++;
-                            carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("request_client_version", String.valueOf(retryCount[0])), ChatFormatting.YELLOW));
+                            Messenger.tell(source, Messenger.formatting(tr.tr("request_client_version", String.valueOf(retryCount[0])), ChatFormatting.YELLOW));
                             NetworkUtil.sendS2CPacketIfSupport(targetPlayer, RequestClientModVersionPayload_S2C.create(playerUuid));
                             CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(this);
                         } else {
-                            carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("client_mod_version_failed_feedback", String.valueOf(maxRetries)), ChatFormatting.RED));
+                            Messenger.tell(source, Messenger.formatting(tr.tr("client_mod_version_failed_feedback", String.valueOf(maxRetries)), ChatFormatting.RED));
                         }
                     }
                 });
@@ -152,30 +149,30 @@ public class AmspCommandRegistry {
 
         CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(checkAndRetry);
 
-        carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("get_client_version_waiting"), ChatFormatting.GREEN));
+        Messenger.tell(source, Messenger.formatting(tr.tr("get_client_version_waiting"), ChatFormatting.GREEN));
         return 1;
     }
 
     private static int showServerModVersion(CommandSourceStack source) {
-        carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("server_mod_version_feedback", AmsServer.fancyName, AmsServerMod.getVersion()), ChatFormatting.AQUA));
+        Messenger.tell(source, Messenger.formatting(tr.tr("server_mod_version_feedback", AmsServer.fancyName, AmsServerMod.getVersion()), ChatFormatting.AQUA));
         return 1;
     }
 
     private static int denyClientConnection(CommandSourceStack source, ServerPlayer targetPlayer) {
         NetworkUtil.removeSupportClient(targetPlayer.getUUID());
-        carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("deny_client_feedback", PlayerUtil.getName(targetPlayer.getUUID())), ChatFormatting.LIGHT_PURPLE));
+        Messenger.tell(source, Messenger.formatting(tr.tr("deny_client_feedback", PlayerUtil.getName(targetPlayer.getUUID())), ChatFormatting.LIGHT_PURPLE));
         return 1;
     }
 
     private static int denyAllClientConnections(CommandSourceStack source) {
         NetworkUtil.clearClientSupport();
-        carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("deny_all_client_feedback"), ChatFormatting.LIGHT_PURPLE));
+        Messenger.tell(source, Messenger.formatting(tr.tr("deny_all_client_feedback"), ChatFormatting.LIGHT_PURPLE));
         return 1;
     }
 
     private static int setServerSupport(CommandSourceStack source, Boolean support) {
         NetworkUtil.setServerSupport(support);
-        carpetamsaddition.utils.Messenger.tell(source, carpetamsaddition.utils.Messenger.formatting(tr.tr("set_server_support_feedback", String.valueOf(NetworkUtil.getServerSupport())), ChatFormatting.GREEN));
+        Messenger.tell(source, Messenger.formatting(tr.tr("set_server_support_feedback", String.valueOf(NetworkUtil.getServerSupport())), ChatFormatting.GREEN));
         return 1;
     }
 
@@ -186,7 +183,7 @@ public class AmspCommandRegistry {
     private static int requestHandShake(CommandSourceStack source, Collection<ServerPlayer> players) {
         for (ServerPlayer player : players) {
             NetworkUtil.sendS2CPacket(player, RequestHandShakeS2CPayload.create());
-            carpetamsaddition.utils.Messenger.tell(source, Messenger.formatting(tr.tr("request_handshake_feedback", PlayerUtil.getName(player)), ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.formatting(tr.tr("request_handshake_feedback", PlayerUtil.getName(player)), ChatFormatting.GREEN));
         }
 
         return 1;
