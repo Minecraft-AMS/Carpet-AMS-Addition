@@ -281,8 +281,6 @@ carpetamsaddition:
           "2": '[silence] - Enable but no send server messages'
           '3': 'Use the following command to control whether it is forcibly enabled when "customBlockUpdateSuppressor" is enabled, with a permission level of 2:'
           '4': '/amsUpdateSuppressionCrashFixForceMode true/false'
-      ghastFireballExplosionDamageSourceFix:
-        desc: Fix MC-193297 that the large fireball does not create explosion with correct damage source
       cakeBlockDropOnBreak:
         desc: When the cake is destroyed, it can drop cake (the cake will only drop when it is intact)
       noCakeEating:
@@ -387,8 +385,6 @@ carpetamsaddition:
         desc: Using an Ender Pearl each time will spawn an Endermite
       stackableDiscounts:
         desc: Reintroduce the stackable discounts feature in <23w31a
-      enderPearlSoundEffect:
-        desc: A sound effect will be played when the player uses an ender pearl for teleportation
       commandHere:
         desc: Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect
         extra:
@@ -426,8 +422,6 @@ carpetamsaddition:
         desc: Use the "/getSaveSize" command to get the current save size
       carpetAlwaysSetDefault:
         desc: Whenever you set the carpet rule, it will be automatically set to the default value
-      experimentalContentCheckDisabled:
-        desc: Allow playing Minecraft experimental content in the game by adding data packs (need restart server)
       fertilizableSmallFlower:
         desc: Allow small flowers such as dandelion can also be ripened by bone meal
       safePointedDripstone:
@@ -624,16 +618,10 @@ carpetamsaddition:
         extra:
           '0': 'Affected rules: '
           '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
-      endPortalChunkLoader:
-        desc: Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5 (Available for Minecraft < 1.20.6)
 
       # 合成配方规则
       craftableEnchantedGoldenApples:
         desc: Enchanted Golden Apples can be crafted with 8 Gold Blocks again
-      craftableBundle:
-        desc: Crafted bundle in minecraft 1.17/1.18/1.19
-      craftableSculkSensor:
-        desc: Crafted sculk_sensor in minecraft 1.17/1.18
       betterCraftableBoneBlock:
         desc: Use nine bones to crafted three bone_blocks
       craftableElytra:
@@ -644,8 +632,6 @@ carpetamsaddition:
         desc: Use deepslate to crafted polished_blackstone_button in minecraft
       rottenFleshBurnedIntoLeather:
         desc: Rotten flesh can be burned into leather in a furnace
-      useNewLodestoneRecipe:
-        desc: Use iron ingots to craft Lodestone
       craftableCarvedPumpkin:
         desc: Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpkin reduces the shears durability by 1 (affected by unbreaking enchantments)
 

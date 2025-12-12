@@ -25,17 +25,17 @@
   "environment": "*",
   "entrypoints": {
     "preLaunch": [
-      "club.mcams.carpet.AmsServerPreLaunch"
+      "carpetamsaddition.AmsServerPreLaunch"
     ],
     "main": [
-      "club.mcams.carpet.AmsServerMod"
+      "carpetamsaddition.AmsServerMod"
     ],
     "client": [
-      "club.mcams.carpet.AmsClient"
+      "carpetamsaddition.AmsClient"
     ]
   },
   "mixins": [
-    "amscarpet.mixins.json"
+    "carpetamsaddition.mixins.json"
   ],
   "accessWidener": "carpetamsaddition.accesswidener",
   "depends": {

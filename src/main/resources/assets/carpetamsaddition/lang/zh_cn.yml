@@ -310,9 +310,6 @@ carpetamsaddition:
           "2": '[silence] - 启用但不发送服务器消息'
           '3': '使用如下指令来控制其是否在"customBlockUpdateSuppressor"开启时强制启动，权限等级为2:'
           '4': '/amsUpdateSuppressionCrashFixForceMode true/false'
-      ghastFireballExplosionDamageSourceFix:
-        name: 恶魂火球爆炸伤害源修复
-        desc: 修复MC-193297中，恶魂火球爆炸时不会正确传递伤害源
       cakeBlockDropOnBreak:
         name: 可掉落蛋糕
         desc: 蛋糕在被破坏时可以掉落蛋糕（蛋糕是完整的情况下才会掉落）
@@ -446,9 +443,6 @@ carpetamsaddition:
       mitePearl:
         name: 螨虫珍珠
         desc: 每一次使用末影珍珠都会生成一只末影螨
-      enderPearlSoundEffect:
-        name: 末影珍珠音效
-        desc: 玩家在使用末影珍珠进行传送时会播放音效
       commandHere:
         name: 我在哪
         desc: 使用/here命令发送当前自身所在维度、坐标、对应的主世界/下界坐标，同时给予自身30s的发光效果。
@@ -497,9 +491,6 @@ carpetamsaddition:
       carpetAlwaysSetDefault:
         name: 地毯规则总是设置为默认
         desc: 每当你设置carpet规则时，都会自动设置为默认值
-      experimentalContentCheckDisabled:
-        name: 禁用实验性内容检查
-        desc: 允许在游戏中通过添加数据包来游玩Minecraft的实验性内容（需要重启服务器）
       fertilizableSmallFlower:
         name: 可施肥小花
         desc: 使诸如蒲公英的小花也可以被骨粉催熟
@@ -764,20 +755,11 @@ carpetamsaddition:
         extra:
           '0': '受影响的规则：'
           '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
-      endPortalChunkLoader:
-        name: 末地门加载器
-        desc: 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致 (Minecraft < 1.20.6可用)
 
       # 合成配方规则
       craftableEnchantedGoldenApples:
         name: 可合成附魔金苹果
         desc: 使用老版本的方式来合成附魔金苹果（8金块+1苹果）
-      craftableBundle:
-        name: 可合成收纳袋
-        desc: 玩家可以在Minecraft 1.17/1.18/1.19中合成收纳袋
-      craftableSculkSensor:
-        name: 可合成幽匿感测体
-        desc: 玩家可以在Minecraft 1.17/1.18中合成幽匿感测体
       betterCraftableBoneBlock:
         name: 更好的骨块合成
         desc: 使用9个骨头可以合成出3个骨块(一点都不卡！)
@@ -793,9 +775,6 @@ carpetamsaddition:
       rottenFleshBurnedIntoLeather:
         name: 腐肉烧皮革
         desc: 腐肉可以在熔炉中烧成皮革
-      useNewLodestoneRecipe:
-        name: 使用新的磁石配方
-        desc: 使用铁锭来合成磁石
       craftableCarvedPumpkin:
         name: 可合成南瓜头
         desc: 使用剪刀和南瓜合成南瓜头，每合成一个南瓜头剪刀-1耐久（受耐久附魔影响）

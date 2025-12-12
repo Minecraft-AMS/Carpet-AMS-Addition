@@ -29,8 +29,8 @@ particles:1
 reducedDebugInfo:false
 renderClouds:"false"
 cloudRange:128
-renderDistance:32
-simulationDistance:32
+renderDistance:10
+simulationDistance:10
 screenEffectScale:0.0
 soundDevice:"OpenAL"
 vignette:false

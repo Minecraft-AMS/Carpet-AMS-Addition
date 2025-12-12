@@ -129,7 +129,7 @@ processResources {
 		expand valueMap
 	}
 
-	filesMatching("amscarpet.mixins.json") {
+	filesMatching("carpetamsaddition.mixins.json") {
 		filter {
 			text -> text.replace("/*JAVA_VERSION*/", "JAVA_${MIXIN_COMPATIBILITY_LEVEL.ordinal() + 1}")
 		}

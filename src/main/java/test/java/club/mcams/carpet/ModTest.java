@@ -20,8 +20,8 @@
 
 package test.java.club.mcams.carpet;
 
-import club.mcams.carpet.translations.AMSTranslations;
-import club.mcams.carpet.utils.CountRulesUtil;
+import carpetamsaddition.translations.AMSTranslations;
+import carpetamsaddition.utils.CountRulesUtil;
 
 import java.io.File;
 
