@@ -20,6 +20,8 @@
 
 package carpetamsaddition;
 
+import carpet.api.settings.Rule;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import carpetamsaddition.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
@@ -39,7 +41,6 @@ import carpetamsaddition.validators.rule.maxClientInteractionReachDistance.MaxCl
 import carpetamsaddition.validators.rule.easyGetPitcherPod.CountValidator;
 import carpetamsaddition.validators.rule.renewableNetherScrap.DropRateValidator;
 
-import carpetamsaddition.settings.Rule;
 import carpetamsaddition.settings.RecipeRule;
 
 import static carpet.api.settings.RuleCategory.*;

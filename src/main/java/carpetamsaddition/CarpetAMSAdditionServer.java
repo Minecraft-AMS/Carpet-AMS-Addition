@@ -37,7 +37,6 @@ import carpetamsaddition.logging.AmsCarpetLoggerRegistry;
 import carpetamsaddition.network.payloads.handshake.HandShakeS2CPayload;
 import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
-import carpetamsaddition.settings.CarpetRuleRegistrar;
 import carpetamsaddition.translations.AMSTranslations;
 import carpetamsaddition.translations.TranslationConstants;
 import carpetamsaddition.utils.CommandHelper;
@@ -92,7 +91,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         LOGGER.info("Open Source: https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
         LOGGER.info("Issues: https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
         LOGGER.info("Wiki: https://minecraft-ams.github.io/carpetamsaddition/");
-        CarpetRuleRegistrar.register(CarpetServer.settingsManager, CarpetAMSAdditionSettings.class);
+        CarpetServer.settingsManager.parseSettingsClass(CarpetAMSAdditionSettings.class);
     }
 
     @Override
