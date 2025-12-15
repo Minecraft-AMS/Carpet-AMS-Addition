@@ -26,8 +26,8 @@ import carpetamsaddition.utils.MinecraftClientUtil;
 import carpetamsaddition.utils.NetworkUtil;
 
 import net.fabricmc.api.ClientModInitializer;
-
 import net.fabricmc.loader.api.FabricLoader;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 
