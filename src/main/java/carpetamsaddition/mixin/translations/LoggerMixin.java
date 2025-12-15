@@ -32,16 +32,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.19")
 @Mixin(Logger.class)
 public abstract class LoggerMixin {
-    @ModifyVariable(method = "sendPlayerMessage", at = @At("HEAD"), argsOnly = true, remap = false)
+    @ModifyVariable(method = "sendPlayerMessage", at = @At("HEAD"), argsOnly = true, remap = false, name = "arg2")
     private Component[] applyAMSTranslationToLoggerMessage(Component[] messages, ServerPlayer player, Component... messages_) {
         for (int i = 0; i < messages.length; i++) {
             messages[i] = AMSTranslations.translate((MutableComponent) messages[i], player);
         }
+
         return messages;
     }
 }

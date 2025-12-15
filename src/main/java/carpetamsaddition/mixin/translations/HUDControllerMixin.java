@@ -32,12 +32,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.19")
 @Mixin(HUDController.class)
 public abstract class HUDControllerMixin {
-    @ModifyVariable(method = "addMessage", at = @At("HEAD"), argsOnly = true, remap = false)
+    @ModifyVariable(method = "addMessage", at = @At("HEAD"), argsOnly = true, remap = false, name = "arg1")
     private static Component applyAMSTranslationToHudLoggerMessage(Component hudMessage, ServerPlayer player, Component hudMessage_) {
         if (player != null) {
             hudMessage = AMSTranslations.translate((MutableComponent) hudMessage, player);
