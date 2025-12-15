@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandPlayerLeader;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.suggestionProviders.SetSuggestionProvider;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
@@ -63,7 +63,7 @@ public class LeaderCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("leader")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandPlayerLeader))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandPlayerLeader))
             .then(literal("add")
             .then(argument("player", EntityArgument.player())
             .executes(context -> add(context.getSource().getServer(), EntityArgument.getPlayer(context, "player")))))
@@ -108,7 +108,7 @@ public class LeaderCommandRegistry {
     }
 
     public static void tick() {
-        if (!Objects.equals(AmsServerSettings.commandPlayerLeader, "false") && !PLAYER_TICK_INTERVAL.isEmpty() && !PLAYER_TICK_COUNTER.isEmpty()) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandPlayerLeader, "false") && !PLAYER_TICK_INTERVAL.isEmpty() && !PLAYER_TICK_COUNTER.isEmpty()) {
             // 存储需要移除的玩家UUID
             List<String> needRemovePlayer = new ArrayList<>();
             for (Map.Entry<String, Integer> entry : PLAYER_TICK_INTERVAL.entrySet()) {

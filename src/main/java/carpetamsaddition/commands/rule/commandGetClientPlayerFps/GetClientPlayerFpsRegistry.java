@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandGetClientPlayerFps;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
@@ -48,7 +48,7 @@ public class GetClientPlayerFpsRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("getClientPlayerFps")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetClientPlayerFps))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandGetClientPlayerFps))
             .then(Commands.argument("player", EntityArgument.player())
             .executes(ctx -> requestFps(EntityArgument.getPlayer(ctx, "player"), ctx.getSource())))
             .then(Commands.literal("help")

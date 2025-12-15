@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.safePointedDripstone;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.Entity;
@@ -34,14 +34,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.17")
 @Mixin(PointedDripstoneBlock.class)
 public abstract class PointedDripstoneBlockMixin {
     @Inject(method = "fallOn", at = @At("HEAD"), cancellable = true)
     private void onLandedUpon(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance, CallbackInfo ci) {
-        if (AmsServerSettings.safePointedDripstone && entity instanceof Player) {
+        if (CarpetAMSAdditionSettings.safePointedDripstone && entity instanceof Player) {
             entity.causeFallDamage(fallDistance, 1.0F, world.damageSources().fall());
             ci.cancel();
         }

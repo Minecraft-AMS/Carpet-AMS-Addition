@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.customizedNetherPortal;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -37,7 +37,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class NetherPortalBlockMixin {
     @ModifyReturnValue(method = "updateShape", at = @At("RETURN"))
     private BlockState noBreak(BlockState original, BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos) {
-        if (AmsServerSettings.customizedNetherPortal) {
+        if (CarpetAMSAdditionSettings.customizedNetherPortal) {
             return world.getBlockState(pos);
         } else {
             return original;

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandWhere;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.fuzz.InvokeFuzzModCommand;
 import carpetamsaddition.helpers.rule.commandHere_commandWhere.CommandHereWhereHelper;
 import carpetamsaddition.translations.Translator;
@@ -54,7 +54,7 @@ public class WhereCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("where")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandWhere))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandWhere))
             .then(argument("player", EntityArgument.player())
             .executes(context -> sendMessage(
                 context.getSource().getServer(),

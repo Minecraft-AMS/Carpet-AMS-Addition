@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.commandCustomBlockHardness;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -45,7 +45,7 @@ public abstract class PistonBlockMixin {
         )
     )
     private static float noPush(BlockState blockState, BlockGetter blockView, BlockPos blockPos, Operation<Float> original) {
-        if (!AmsServerSettings.commandCustomBlockHardness.equals("false") ) {
+        if (!CarpetAMSAdditionSettings.commandCustomBlockHardness.equals("false") ) {
             Block block = blockView.getBlockState(blockPos).getBlock();
             Float defaultHardness = CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.get(block);
             if (defaultHardness != null && defaultHardness == -1.0F) {

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.easyGetPitcherPod;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -45,11 +45,11 @@ import java.util.Random;
 public abstract class BlockMixin {
     @Inject(method = "playerWillDestroy", at = @At("HEAD"))
     private void onBreak(Level world, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<BlockState> cir) {
-         if (AmsServerSettings.easyGetPitcherPod != 0 && state.getBlock().equals(Blocks.PITCHER_CROP)) {
+         if (CarpetAMSAdditionSettings.easyGetPitcherPod != 0 && state.getBlock().equals(Blocks.PITCHER_CROP)) {
              if (!player.isCreative()) {
                  Random random = new Random();
                  int minDrops = 2;
-                 int maxDrops = AmsServerSettings.easyGetPitcherPod;
+                 int maxDrops = CarpetAMSAdditionSettings.easyGetPitcherPod;
                  int dropCount = minDrops + random.nextInt(maxDrops - minDrops + 1);
                  for (int i = 0; i < dropCount; i++) {
                      ItemStack pitcherPodStack = new ItemStack(Items.PITCHER_POD);

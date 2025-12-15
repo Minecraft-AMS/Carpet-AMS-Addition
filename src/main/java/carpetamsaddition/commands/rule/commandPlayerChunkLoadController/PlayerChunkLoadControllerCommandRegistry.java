@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandPlayerChunkLoadController;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
@@ -42,7 +42,7 @@ import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 public class PlayerChunkLoadControllerCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(literal("playerChunkLoading")
-            .requires((player) -> CommandHelper.canUseCommand(player, AmsServerSettings.commandPlayerChunkLoadController))
+            .requires((player) -> CommandHelper.canUseCommand(player, CarpetAMSAdditionSettings.commandPlayerChunkLoadController))
             .executes((c) -> listPlayerInteractions(c.getSource(), c.getSource().getTextName()))
             .then(argument("boolean", BoolArgumentType.bool())
             .executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getTextName(), getBool(c, "boolean"))))

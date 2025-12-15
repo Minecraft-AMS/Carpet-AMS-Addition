@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.foliageGenerateDisabled;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 
@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class FoliagePlacerMixin {
     @Inject(method = "placeLeavesRow", at = @At("HEAD"), cancellable = true)
     private void generateSquare(CallbackInfo ci) {
-        if (AmsServerSettings.foliageGenerateDisabled) {
+        if (CarpetAMSAdditionSettings.foliageGenerateDisabled) {
             ci.cancel();
         }
     }

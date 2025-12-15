@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.extinguishedCampfire;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class CampfireBlockMixin {
     @ModifyReturnValue(method = "getStateForPlacement", at = @At("RETURN"))
     private BlockState setPlacementState(BlockState original) {
-        if (AmsServerSettings.extinguishedCampfire && original != null) {
+        if (CarpetAMSAdditionSettings.extinguishedCampfire && original != null) {
             return original.setValue(CampfireBlock.LIT, false);
         } else {
             return original;

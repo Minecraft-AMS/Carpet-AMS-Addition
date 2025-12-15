@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandGetPlayerSkull;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.helpers.rule.headHunter_commandGetPlayerSkull.SkullSkinHelper;
 
@@ -39,7 +39,7 @@ public class GetPlayerSkullCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("getPlayerSkull")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetPlayerSkull))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandGetPlayerSkull))
             .then(Commands.argument("player", StringArgumentType.string())
             .suggests(
                 (context, builder) ->

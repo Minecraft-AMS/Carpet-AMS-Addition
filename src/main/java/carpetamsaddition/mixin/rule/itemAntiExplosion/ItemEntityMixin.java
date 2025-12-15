@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.itemAntiExplosion;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
@@ -44,8 +44,8 @@ public abstract class ItemEntityMixin {
         )
     )
     private boolean isInvulnerableTo(boolean original, ServerLevel world, DamageSource source) {
-        if(!Objects.equals(AmsServerSettings.itemAntiExplosion, "false") && source.is(DamageTypeTags.IS_EXPLOSION)) {
-            return original || !Objects.equals(AmsServerSettings.itemAntiExplosion, "false");
+        if(!Objects.equals(CarpetAMSAdditionSettings.itemAntiExplosion, "false") && source.is(DamageTypeTags.IS_EXPLOSION)) {
+            return original || !Objects.equals(CarpetAMSAdditionSettings.itemAntiExplosion, "false");
         } else {
             return original;
         }

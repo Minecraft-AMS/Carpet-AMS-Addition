@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.cakeBlockDropOnBreak;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class BlockMixin {
     @Inject(method = "playerWillDestroy", at = @At("HEAD"))
     private void onBreak(Level world, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<BlockState> cir) {
-        if (AmsServerSettings.cakeBlockDropOnBreak && state.getBlock() == Blocks.CAKE && state.getValue(CakeBlock.BITES) == 0) {
+        if (CarpetAMSAdditionSettings.cakeBlockDropOnBreak && state.getBlock() == Blocks.CAKE && state.getValue(CakeBlock.BITES) == 0) {
             if (!player.isCreative()) {
                 ItemStack cakeStack = new ItemStack(Items.CAKE);
                 Block.popResource(world, pos, cakeStack);

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandGetSystemInfo;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
@@ -41,7 +41,7 @@ public class GetSystemInfoCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("getSystemInfo")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetSystemInfo))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandGetSystemInfo))
             .executes(context -> executeGetSystemInfo(context.getSource().getPlayerOrException()))
         );
     }

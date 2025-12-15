@@ -22,7 +22,7 @@ package carpetamsaddition.observers.rule.stackableDiscount;
 
 import carpet.api.settings.CarpetRule;
 
-import carpetamsaddition.mixin.rule.stackableDiscount.VillageGossipTypeAccessor;
+import carpetamsaddition.mixin.rule.stackableDiscount.GossipTypeAccessor;
 import carpetamsaddition.settings.SimpleRuleObserver;
 
 import net.minecraft.commands.CommandSourceStack;
@@ -33,13 +33,13 @@ public class StackableDiscountRuleObserver extends SimpleRuleObserver<Boolean> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue) {
-            ((VillageGossipTypeAccessor) (Object) GossipType.MINOR_POSITIVE).setMax(200);
-            ((VillageGossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setMax(100);
-            ((VillageGossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setDecayPerTransfer(100);
+            ((GossipTypeAccessor) (Object) GossipType.MINOR_POSITIVE).setMax(200);
+            ((GossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setMax(100);
+            ((GossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setDecayPerTransfer(100);
         } else {
-            ((VillageGossipTypeAccessor) (Object) GossipType.MINOR_POSITIVE).setMax(25);
-            ((VillageGossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setMax(20);
-            ((VillageGossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setDecayPerTransfer(20);
+            ((GossipTypeAccessor) (Object) GossipType.MINOR_POSITIVE).setMax(25);
+            ((GossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setMax(20);
+            ((GossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setDecayPerTransfer(20);
         }
     }
 }

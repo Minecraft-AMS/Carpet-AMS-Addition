@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.noCakeEating;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -34,6 +34,6 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class CakeBlockMixin {
     @ModifyReturnValue(method = "useWithoutItem", at = @At("RETURN"))
     private InteractionResult noEat(InteractionResult original) {
-        return AmsServerSettings.noCakeEating ? InteractionResult.FAIL : original;
+        return CarpetAMSAdditionSettings.noCakeEating ? InteractionResult.FAIL : original;
     }
 }

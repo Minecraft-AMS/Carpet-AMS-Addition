@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.blockChunkLoader;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 import carpetamsaddition.utils.WorldUtil;
 
@@ -41,7 +41,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class BellBlockMixin {
     @Inject(method = "attemptToRing(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z", at = @At("HEAD"))
     private void ring(Entity entity, Level world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        if (AmsServerSettings.bellBlockChunkLoader && !WorldUtil.isClient(world)) {
+        if (CarpetAMSAdditionSettings.bellBlockChunkLoader && !WorldUtil.isClient(world)) {
             ChunkPos chunkPos = new ChunkPos(pos);
             BlockChunkLoaderHelper.addBellBlockTicket((ServerLevel) world, chunkPos);
         }

@@ -20,8 +20,8 @@
 
 package carpetamsaddition.utils;
 
-import carpetamsaddition.AmsClient;
-import carpetamsaddition.mixin.rule.commandGetClientPlayerFPS.MinecraftClientAccessor;
+import carpetamsaddition.CarpetAMSAdditionClient;
+import carpetamsaddition.mixin.rule.commandGetClientPlayerFPS.MinecraftInvoker;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -32,11 +32,11 @@ import net.minecraft.client.player.LocalPlayer;
 @Environment(EnvType.CLIENT)
 public class MinecraftClientUtil {
     public static LocalPlayer getCurrentPlayer() {
-        return AmsClient.minecraftClient.player;
+        return CarpetAMSAdditionClient.minecraftClient.player;
     }
 
     public static Minecraft getCurrentClient() {
-        return AmsClient.minecraftClient;
+        return CarpetAMSAdditionClient.minecraftClient;
     }
 
     public static boolean clientIsRunning() {
@@ -44,6 +44,6 @@ public class MinecraftClientUtil {
     }
 
     public static int getClientFps() {
-        return ((MinecraftClientAccessor) getCurrentClient()).getFps();
+        return ((MinecraftInvoker) getCurrentClient()).invokeGetFps();
     }
 }

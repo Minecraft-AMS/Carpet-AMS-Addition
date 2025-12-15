@@ -20,7 +20,7 @@
 
 package carpetamsaddition.config.template;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -63,7 +63,7 @@ public abstract class AbstractMapJsonConfig<K, V> {
                 targetMap.putAll(loadedMap);
             }
         } catch (IOException e) {
-            AmsServer.LOGGER.error("Failed to load map config: {}", configPath, e);
+            CarpetAMSAdditionServer.LOGGER.error("Failed to load map config: {}", configPath, e);
         }
     }
 
@@ -73,7 +73,7 @@ public abstract class AbstractMapJsonConfig<K, V> {
             Files.createDirectories(configPath.getParent());
             Files.write(configPath, gson.toJson(map, mapType).getBytes(StandardCharsets.UTF_8));
         } catch (IOException e) {
-            AmsServer.LOGGER.error("Failed to save map config: {}", configPath, e);
+            CarpetAMSAdditionServer.LOGGER.error("Failed to save map config: {}", configPath, e);
         }
     }
 }

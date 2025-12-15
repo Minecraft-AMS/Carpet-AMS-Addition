@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.stringDupeReintroduced;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
@@ -44,6 +44,6 @@ public abstract class TripwireHookBlockMixin {
         )
     )
     private static boolean stringDupeReintroduced(boolean original) {
-        return AmsServerSettings.stringDupeReintroduced ? true : original;
+        return CarpetAMSAdditionSettings.stringDupeReintroduced ? true : original;
     }
 }

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.api.recipe;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.api.recipe.template.ShapedRecipeTemplate;
 import carpetamsaddition.api.recipe.template.ShapelessRecipeTemplate;
 import carpetamsaddition.api.recipe.template.SmeltingRecipeTemplate;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AmsRecipeBuilder {
-    private static final String MOD_ID = AmsServer.compactName;
+    private static final String MOD_ID = CarpetAMSAdditionServer.compactName;
     private static final AmsRecipeBuilder INSTANCE = new AmsRecipeBuilder();
     private static final List<ShapedRecipeTemplate> shapedRecipeList = new ArrayList<>();
     private static final List<ShapelessRecipeTemplate> shapelessRecipeList = new ArrayList<>();

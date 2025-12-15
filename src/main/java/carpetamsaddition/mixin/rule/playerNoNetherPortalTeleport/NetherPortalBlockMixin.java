@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.playerNoNetherPortalTeleport;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -42,7 +42,7 @@ public abstract class NetherPortalBlockMixin {
         )
     )
     private boolean onEntityCollision(Entity entity, boolean canUsePortals, Operation<Boolean> original) {
-        if (AmsServerSettings.playerNoNetherPortalTeleport && entity instanceof Player) {
+        if (CarpetAMSAdditionSettings.playerNoNetherPortalTeleport && entity instanceof Player) {
             return false;
         } else {
             return original.call(entity, canUsePortals);

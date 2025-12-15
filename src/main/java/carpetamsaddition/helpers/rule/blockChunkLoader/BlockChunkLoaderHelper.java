@@ -20,7 +20,7 @@
 
 package carpetamsaddition.helpers.rule.blockChunkLoader;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.Registry;
@@ -61,17 +61,17 @@ public class BlockChunkLoaderHelper {
     }
 
     private static void blockChunkLoaderKeepWorldTickUpdate(ServerLevel world) {
-        if (AmsServerSettings.blockChunkLoaderKeepWorldTickUpdate) {
+        if (CarpetAMSAdditionSettings.blockChunkLoaderKeepWorldTickUpdate) {
             world.resetEmptyTime();
         }
     }
 
     private static int getLoadTime() {
-        return AmsServerSettings.blockChunkLoaderTimeController;
+        return CarpetAMSAdditionSettings.blockChunkLoaderTimeController;
     }
 
     private static int getLoadRange() {
-        return AmsServerSettings.blockChunkLoaderRangeController;
+        return CarpetAMSAdditionSettings.blockChunkLoaderRangeController;
     }
 
     @SuppressWarnings("SameParameterValue")

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.craftableCarvedPumpkin;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -47,13 +47,15 @@ public abstract class ShapelessRecipeMixin implements CraftingRecipe {
     @Override
     public @NotNull NonNullList<@NotNull ItemStack> getRemainingItems(@NotNull CraftingInput input) {
         NonNullList<@NotNull ItemStack> remainders = CraftingRecipe.super.getRemainingItems(input);
-        if (AmsServerSettings.craftableCarvedPumpkin) {
+
+        if (CarpetAMSAdditionSettings.craftableCarvedPumpkin) {
             ShapelessRecipe recipe = (ShapelessRecipe) (Object) this;
             ItemStack result = recipe.assemble(input, MinecraftServerUtil.getServer().registryAccess());
             if (result.getItem().equals(Items.CARVED_PUMPKIN)) {
                 return this.handleRemainders(input, remainders);
             }
         }
+
         return remainders;
     }
 

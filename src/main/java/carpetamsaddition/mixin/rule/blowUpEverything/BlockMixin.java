@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.blowUpEverything;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.Block;
 
@@ -33,6 +33,6 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 public abstract class BlockMixin {
     @ModifyReturnValue(method = "getExplosionResistance", at = @At("RETURN"))
     private float getBlastResistance(float original) {
-        return AmsServerSettings.blowUpEverything ? 0.0F : original;
+        return CarpetAMSAdditionSettings.blowUpEverything ? 0.0F : original;
     }
 }

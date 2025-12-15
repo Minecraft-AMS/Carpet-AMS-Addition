@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.hooks.network;
 
-import carpetamsaddition.AmsClient;
+import carpetamsaddition.CarpetAMSAdditionClient;
 
 import net.minecraft.client.Minecraft;
 
@@ -33,6 +33,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MinecraftClientMixin {
     @Inject(method = "disconnect(Lnet/minecraft/client/gui/screens/Screen;ZZ)V", at = @At("HEAD"))
     private void onDisconnect(CallbackInfo ci) {
-        AmsClient.getInstance().onDisconnect();
+        CarpetAMSAdditionClient.getInstance().onDisconnect();
     }
 }

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.cryingObsidianNetherPortal;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -38,7 +38,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class NetherPortalMixin {
     @ModifyReturnValue(method = "method_30487", at = @At("RETURN"))
     private static boolean acceptCryingObsidianCreateNetherPortal(boolean original, BlockState state) {
-        if (AmsServerSettings.cryingObsidianNetherPortal) {
+        if (CarpetAMSAdditionSettings.cryingObsidianNetherPortal) {
             return original || state.getBlock().equals(Blocks.CRYING_OBSIDIAN);
         } else {
             return original;

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandAnvilInteractionDisabled;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
@@ -45,7 +45,7 @@ public class AnvilInteractionDisabledCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("anvilInteractionDisabled")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandAnvilInteractionDisabled))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandAnvilInteractionDisabled))
             .then(argument("mode", BoolArgumentType.bool())
             .executes(context -> {
                 boolean mode = BoolArgumentType.getBool(context, "mode");

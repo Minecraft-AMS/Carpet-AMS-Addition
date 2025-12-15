@@ -20,8 +20,8 @@
 
 package carpetamsaddition.network.payloads.handshake;
 
-import carpetamsaddition.AmsServer;
-import carpetamsaddition.AmsServerMod;
+import carpetamsaddition.CarpetAMSAdditionServer;
+import carpetamsaddition.CarpetAMSAdditionMod;
 import carpetamsaddition.utils.PlayerUtil;
 import carpetamsaddition.utils.NetworkUtil;
 import carpetamsaddition.network.AMS_CustomPayload;
@@ -61,18 +61,18 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
             ServerPlayer player = PlayerUtil.getServerPlayerEntity(this.playerUuid);
             String playerName = player != null ? PlayerUtil.getName(player) : "Unknown Player";
 
-            if (this.modVersion.equals(AmsServerMod.getVersion())) {
-                AmsServer.LOGGER.info("{} joined with matched carpet-ams-addition v{}", playerName, this.modVersion);
+            if (this.modVersion.equals(CarpetAMSAdditionMod.getVersion())) {
+                CarpetAMSAdditionServer.LOGGER.info("{} joined with matched carpet-ams-addition v{}", playerName, this.modVersion);
             } else {
-                AmsServer.LOGGER.info("{} joined with mismatched carpet-ams-addition version (client: v{}, server: v{})", playerName, this.modVersion, AmsServerMod.getVersion());
+                CarpetAMSAdditionServer.LOGGER.info("{} joined with mismatched carpet-ams-addition version (client: v{}, server: v{})", playerName, this.modVersion, CarpetAMSAdditionMod.getVersion());
             }
 
             NetworkUtil.addSupportClient(this.playerUuid);
 
             if (player != null) {
-                AmsServer.getInstance().sendS2CPacketOnHandShake(player);
+                CarpetAMSAdditionServer.getInstance().sendS2CPacketOnHandShake(player);
             } else {
-                AmsServer.LOGGER.warn("Could not find player entity for UUID: {}", this.playerUuid);
+                CarpetAMSAdditionServer.LOGGER.warn("Could not find player entity for UUID: {}", this.playerUuid);
             }
         });
     }

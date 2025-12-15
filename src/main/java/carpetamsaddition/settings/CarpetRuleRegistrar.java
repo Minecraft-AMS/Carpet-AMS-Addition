@@ -20,7 +20,7 @@
 
 package carpetamsaddition.settings;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
@@ -92,7 +92,7 @@ public class CarpetRuleRegistrar {
             try {
                 this.settingsManager.addCarpetRule(rule);
             } catch (UnsupportedOperationException e) {
-                AmsServer.LOGGER.warn("Failed to register rule {} to fabric carpet: {}", rule.name(), e);
+                CarpetAMSAdditionServer.LOGGER.warn("Failed to register rule {} to fabric carpet: {}", rule.name(), e);
             }
         }
     }

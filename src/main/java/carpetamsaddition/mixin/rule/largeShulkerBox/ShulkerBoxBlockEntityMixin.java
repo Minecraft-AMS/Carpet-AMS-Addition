@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.largeShulkerBox;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -65,7 +65,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
 
     @Inject(method = "getContainerSize", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.largeShulkerBox) {
+        if (CarpetAMSAdditionSettings.largeShulkerBox) {
             cir.setReturnValue(9 * 6);
             cir.cancel();
         }
@@ -73,7 +73,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
 
     @Inject(method = "getSlotsForFace", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
-        if (AmsServerSettings.largeShulkerBox) {
+        if (CarpetAMSAdditionSettings.largeShulkerBox) {
             int[] availableSlots = IntStream.range(0, getContainerSize()).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();

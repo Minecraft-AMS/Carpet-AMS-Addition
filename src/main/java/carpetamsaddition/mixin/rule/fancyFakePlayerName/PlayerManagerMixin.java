@@ -22,7 +22,7 @@ package carpetamsaddition.mixin.rule.fancyFakePlayerName;
 
 import carpet.patches.EntityPlayerMPFake;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyNameHelper;
@@ -44,11 +44,11 @@ public abstract class PlayerManagerMixin {
     @Inject(method = "placeNewPlayer", at = @At("TAIL"))
     private void onPlayerConnects(Connection connection, ServerPlayer player, CommonListenerCookie clientData, CallbackInfo ci) {
         if (
-            !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
+            !Objects.equals(CarpetAMSAdditionSettings.fancyFakePlayerName, "false") &&
             FakePlayerHelper.isFakePlayer(player) &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {
-            FancyNameHelper.addBotTeamNamePrefix(player, AmsServerSettings.fancyFakePlayerName);
+            FancyNameHelper.addBotTeamNamePrefix(player, CarpetAMSAdditionSettings.fancyFakePlayerName);
         }
     }
 
@@ -61,12 +61,12 @@ public abstract class PlayerManagerMixin {
     )
     private void kickFakePlayerFromBotTeam(ServerPlayer player, CallbackInfo info) {
         if (
-            !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") &&
+            !Objects.equals(CarpetAMSAdditionSettings.fancyFakePlayerName, "false") &&
             FakePlayerHelper.isFakePlayer(player) &&
-            player.server.getScoreboard().getPlayerTeam(AmsServerSettings.fancyFakePlayerName) != null &&
+            player.server.getScoreboard().getPlayerTeam(CarpetAMSAdditionSettings.fancyFakePlayerName) != null &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {
-            FancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player, AmsServerSettings.fancyFakePlayerName);
+            FancyFakePlayerNameTeamController.kickFakePlayerFromBotTeam(player, CarpetAMSAdditionSettings.fancyFakePlayerName);
         }
     }
 }

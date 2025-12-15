@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.fullMoonEveryDay;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -36,6 +36,6 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class MoonPhaseMixin {
     @ModifyReturnValue(method = "index", at = @At("RETURN"))
     private int fullMoonEveryDay(int original) {
-        return AmsServerSettings.fullMoonEveryDay ? 0 : original;
+        return CarpetAMSAdditionSettings.fullMoonEveryDay ? 0 : original;
     }
 }

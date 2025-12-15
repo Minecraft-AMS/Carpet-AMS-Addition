@@ -20,7 +20,7 @@
 
 package carpetamsaddition.config.rule.commandCustomBlockBlastResistance;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.config.template.AbstractMapJsonConfig;
 import carpetamsaddition.utils.IdentifierUtil;
 import carpetamsaddition.utils.MinecraftServerUtil;
@@ -64,7 +64,7 @@ public class CustomBlockBlastResistanceConfig extends AbstractMapJsonConfig<Stri
             try {
                 BuiltInRegistries.BLOCK.get(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().defaultBlockState()).ifPresent(state -> targetMap.put(state, resistance));
             } catch (Exception e) {
-                AmsServer.LOGGER.error("Invalid block ID: {}", blockId, e);
+                CarpetAMSAdditionServer.LOGGER.error("Invalid block ID: {}", blockId, e);
             }
         });
     }

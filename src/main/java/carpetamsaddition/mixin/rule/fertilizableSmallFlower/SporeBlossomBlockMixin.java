@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.fertilizableSmallFlower;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.util.RandomSource;
@@ -41,17 +41,17 @@ import org.spongepowered.asm.mixin.Mixin;
 public abstract class SporeBlossomBlockMixin implements BonemealableBlock {
     @Override
     public boolean isValidBonemealTarget(@NotNull LevelReader world, @NotNull BlockPos pos, @NotNull BlockState state) {
-        return AmsServerSettings.fertilizableSmallFlower;
+        return CarpetAMSAdditionSettings.fertilizableSmallFlower;
     }
 
     @Override
     public boolean isBonemealSuccess(@NotNull Level world, @NotNull RandomSource random, @NotNull BlockPos pos, @NotNull BlockState state) {
-        return AmsServerSettings.fertilizableSmallFlower;
+        return CarpetAMSAdditionSettings.fertilizableSmallFlower;
     }
 
     @Override
     public void performBonemeal(@NotNull ServerLevel world, @NotNull RandomSource random, @NotNull BlockPos pos, @NotNull BlockState state) {
-        if (AmsServerSettings.fertilizableSmallFlower) {
+        if (CarpetAMSAdditionSettings.fertilizableSmallFlower) {
             Block.popResource(world, pos, new ItemStack((ItemLike) this));
         }
     }

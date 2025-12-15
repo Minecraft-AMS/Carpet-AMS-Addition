@@ -20,7 +20,7 @@
 
 package carpetamsaddition.logging.logger;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.logging.AbstractHUDLogger;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
@@ -47,7 +47,7 @@ public class ServerRuntimeHUDLogger extends AbstractHUDLogger {
     @Override
     public MutableComponent[] onHudUpdate(String option, Player playerEntity) {
         Instant currentTime = Instant.now();
-        Instant serverStartTime = Instant.ofEpochMilli(AmsServer.serverStartTimeMillis);
+        Instant serverStartTime = Instant.ofEpochMilli(CarpetAMSAdditionServer.serverStartTimeMillis);
         Duration elapsedDuration = Duration.between(serverStartTime, currentTime);
         long elapsedSeconds = elapsedDuration.getSeconds();
         long hours = elapsedSeconds / 3600;

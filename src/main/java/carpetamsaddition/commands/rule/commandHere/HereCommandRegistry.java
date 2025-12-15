@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandHere;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.fuzz.InvokeFuzzModCommand;
 import carpetamsaddition.helpers.rule.commandHere_commandWhere.CommandHereWhereHelper;
 import carpetamsaddition.translations.Translator;
@@ -49,7 +49,7 @@ public class HereCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("here")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandHere))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandHere))
             .executes(context -> sendMessage(
                 context.getSource(),
                 context.getSource().getServer(),

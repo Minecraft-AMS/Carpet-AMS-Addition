@@ -23,7 +23,7 @@ package carpetamsaddition.mixin.rule.carpetAlwaysSetDefault;
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.commands.CommandSourceStack;
 
@@ -41,7 +41,7 @@ public abstract class Carpet_SettingsManagerMixin {
 
     @Inject(method = "setRule", at = @At("TAIL"))
     private void setRule(CommandSourceStack source, CarpetRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.carpetAlwaysSetDefault) {
+        if (CarpetAMSAdditionSettings.carpetAlwaysSetDefault) {
             setDefault(source, rule, value);
         }
     }

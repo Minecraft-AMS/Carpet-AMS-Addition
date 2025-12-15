@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.commandCustomAntiFireItems;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
 import carpetamsaddition.utils.RegexTools;
 
@@ -38,7 +38,7 @@ public abstract class ItemEntityMixin implements ItemEntityInvoker {
     @ModifyReturnValue(method = "fireImmune", at = @At("RETURN"))
     private boolean isFireImmune(boolean original) {
         if (
-            !Objects.equals(AmsServerSettings.commandCustomAntiFireItems, "false") &&
+            !Objects.equals(CarpetAMSAdditionSettings.commandCustomAntiFireItems, "false") &&
             CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.contains(RegexTools.getItemRegisterName(this.invokeGetItem()))
         ) {
             return true;

@@ -22,7 +22,7 @@ package carpetamsaddition.mixin.rule.onlyOpCanSpawnRealPlayerInWhitelist;
 
 import carpet.commands.PlayerCommand;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.PlayerUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -46,8 +46,8 @@ public abstract class Carpet_PlayerCommandMixin {
         )
     )
     private static boolean onlyOpCanSpawnRealPlayerInWhitelist(boolean isWhitelistEnabled, CommandContext<CommandSourceStack> context, @Local(name = "profile") NameAndId gameProfile) {
-        if (AmsServerSettings.onlyOpCanSpawnRealPlayerInWhitelist && PlayerUtil.isInWhitelist(gameProfile)) {
-            return isWhitelistEnabled || AmsServerSettings.onlyOpCanSpawnRealPlayerInWhitelist;
+        if (CarpetAMSAdditionSettings.onlyOpCanSpawnRealPlayerInWhitelist && PlayerUtil.isInWhitelist(gameProfile)) {
+            return isWhitelistEnabled || CarpetAMSAdditionSettings.onlyOpCanSpawnRealPlayerInWhitelist;
         } else {
             return isWhitelistEnabled;
         }

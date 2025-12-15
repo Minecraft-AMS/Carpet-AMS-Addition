@@ -20,7 +20,7 @@
 
 package carpetamsaddition.utils;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 import static carpetamsaddition.utils.Messenger.*;
 
 import net.minecraft.commands.CommandSourceStack;
@@ -33,18 +33,21 @@ public class MixinUtil {
     public static boolean audit(@Nullable CommandSourceStack source) {
         boolean ok;
         MutableComponent response;
+
         try {
             MixinEnvironment.getCurrentEnvironment().audit();
             response = s("Mixin environment audited successfully");
             ok = true;
         } catch (Exception e) {
-            AmsServer.LOGGER.error("Error when auditing mixin", e);
+            CarpetAMSAdditionServer.LOGGER.error("Error when auditing mixin", e);
             response = Messenger.s(String.format("Mixin environment auditing failed, check console for more information (%s)", e));
             ok = false;
         }
+
         if (source != null) {
             Messenger.tell(source, response);
         }
+
         return ok;
     }
 }

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.noEnchantedGoldenAppleEating;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ItemStackMixin {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void use(CallbackInfoReturnable<InteractionResult> cir) {
-        if (AmsServerSettings.noEnchantedGoldenAppleEating) {
+        if (CarpetAMSAdditionSettings.noEnchantedGoldenAppleEating) {
             ItemStack stack = (ItemStack) (Object) this;
             if (stack.getItem() == Items.ENCHANTED_GOLDEN_APPLE) {
                 cir.setReturnValue(InteractionResult.FAIL);

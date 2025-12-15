@@ -20,9 +20,9 @@
 
 package carpetamsaddition.helpers.rule.recipeRule;
 
-import carpetamsaddition.AmsServer;
-import carpetamsaddition.AmsServerCustomRecipes;
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionServer;
+import carpetamsaddition.CarpetAMSAdditionCustomRecipes;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.api.recipe.AmsRecipeBuilder;
 import carpetamsaddition.api.recipe.AmsRecipeManager;
 import carpetamsaddition.settings.RecipeRule;
@@ -38,7 +38,7 @@ import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
 public class RecipeRuleHelper {
-    private static final String MOD_ID = AmsServer.compactName;
+    private static final String MOD_ID = CarpetAMSAdditionServer.compactName;
 
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayer player) {
         if (server != null && server.isRunning() && hasActiveRecipeRule()) {
@@ -55,7 +55,7 @@ public class RecipeRuleHelper {
         if (server != null && server.isRunning()) {
             server.execute(() -> {
             AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
-            AmsServerCustomRecipes.getInstance().buildRecipes();
+            CarpetAMSAdditionCustomRecipes.getInstance().buildRecipes();
                 needReloadServerResources(server);
                 Collection<RecipeHolder<?>> allRecipes = getServerRecipeManager(server).getRecipes();
                 for (RecipeHolder<?> recipe : allRecipes) {
@@ -72,7 +72,7 @@ public class RecipeRuleHelper {
     }
 
     private static boolean hasActiveRecipeRule() {
-        Field[] fields = AmsServerSettings.class.getDeclaredFields();
+        Field[] fields = CarpetAMSAdditionSettings.class.getDeclaredFields();
         for (Field field : fields) {
             if (field.isAnnotationPresent(RecipeRule.class)) {
                 try {
@@ -81,7 +81,7 @@ public class RecipeRuleHelper {
                         return true;
                     }
                 } catch (IllegalAccessException e) {
-                    AmsServer.LOGGER.warn("Failed to access RecipeRule field: {}", field.getName(), e);
+                    CarpetAMSAdditionServer.LOGGER.warn("Failed to access RecipeRule field: {}", field.getName(), e);
                 }
             }
         }

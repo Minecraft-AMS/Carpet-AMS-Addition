@@ -20,8 +20,8 @@
 
 package carpetamsaddition.network.payloads.debug;
 
-import carpetamsaddition.AmsClient;
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionClient;
+import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.utils.MinecraftClientUtil;
@@ -53,7 +53,7 @@ public class RequestClientModVersionPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() -> NetworkUtil.sendC2SPacketIfSupport(MinecraftClientUtil.getCurrentPlayer(), RequestClientModVersionPayload_C2S.create(AmsServer.fancyName + " v" + AmsClient.getVersion(), this.uuid)));
+        NetworkUtil.executeOnClientThread(() -> NetworkUtil.sendC2SPacketIfSupport(MinecraftClientUtil.getCurrentPlayer(), RequestClientModVersionPayload_C2S.create(CarpetAMSAdditionServer.fancyName + " v" + CarpetAMSAdditionClient.getVersion(), this.uuid)));
     }
 
     public static RequestClientModVersionPayload_S2C create(UUID uuid) {

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.amsUpdateSuppressionCrashFix;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionException;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -45,7 +45,7 @@ public abstract class MinecraftServerMixin {
         )
     )
     private void tickWorlds(ServerLevel serverWorld, BooleanSupplier shouldKeepTicking, Operation<Void> original) {
-        if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.amsUpdateSuppressionCrashFix, "false")) {
             try {
                 original.call(serverWorld, shouldKeepTicking);
             } catch (Throwable throwable) {

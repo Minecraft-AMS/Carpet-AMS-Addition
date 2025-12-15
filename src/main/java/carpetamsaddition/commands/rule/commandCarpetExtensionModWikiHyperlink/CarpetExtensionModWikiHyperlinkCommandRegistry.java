@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandCarpetExtensionModWikiHyperlink;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.suggestionProviders.SetSuggestionProvider;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
@@ -53,7 +53,7 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("carpetExtensionModWikiHyperlink")
-                .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCarpetExtensionModWikiHyperlink))
+                .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCarpetExtensionModWikiHyperlink))
                 .then(Commands.argument("extensionName", StringArgumentType.string())
                 .suggests(getSuggestions)
                 .executes(context -> execute(

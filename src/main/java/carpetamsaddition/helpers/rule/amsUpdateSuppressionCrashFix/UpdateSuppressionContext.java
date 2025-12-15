@@ -20,7 +20,7 @@
 
 package carpetamsaddition.helpers.rule.amsUpdateSuppressionCrashFix;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.MinecraftServerUtil;
@@ -40,7 +40,7 @@ public class UpdateSuppressionContext {
     private static final Translator translator = new Translator("rule.amsUpdateSuppressionCrashFix");
 
     public static void sendMessageToServer(BlockPos pos, Level world, Throwable cause) {
-        if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "silence")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.amsUpdateSuppressionCrashFix, "silence")) {
             String suppressionMessage = suppressionMessageText(pos, world, cause);
             final Component copyButton = copyButton(pos);
             Messenger.sendServerMessage(

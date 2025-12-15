@@ -20,9 +20,9 @@
 
 package carpetamsaddition.commands.debug.network;
 
-import carpetamsaddition.AmsServer;
-import carpetamsaddition.AmsServerMod;
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionServer;
+import carpetamsaddition.CarpetAMSAdditionMod;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.network.payloads.handshake.RequestHandShakeS2CPayload;
 import carpetamsaddition.network.payloads.debug.RequestClientModVersionPayload_S2C;
@@ -52,7 +52,7 @@ public class AmspCommandRegistry {
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("amsp")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandAmspDebug))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandAmspDebug))
             // show
             .then(Commands.literal("show")
             .then(Commands.literal("supportClientList")
@@ -154,7 +154,7 @@ public class AmspCommandRegistry {
     }
 
     private static int showServerModVersion(CommandSourceStack source) {
-        Messenger.tell(source, Messenger.formatting(tr.tr("server_mod_version_feedback", AmsServer.fancyName, AmsServerMod.getVersion()), ChatFormatting.AQUA));
+        Messenger.tell(source, Messenger.formatting(tr.tr("server_mod_version_feedback", CarpetAMSAdditionServer.fancyName, CarpetAMSAdditionMod.getVersion()), ChatFormatting.AQUA));
         return 1;
     }
 

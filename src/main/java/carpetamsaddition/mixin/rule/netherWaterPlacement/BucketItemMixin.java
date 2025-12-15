@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.netherWaterPlacement;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -44,7 +44,7 @@ public abstract class BucketItemMixin {
         )
     )
     private Object netherWaterPlacement(Object original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
-        if (AmsServerSettings.netherWaterPlacement) {
+        if (CarpetAMSAdditionSettings.netherWaterPlacement) {
             if (entity instanceof Player) {
                 return false;
             }

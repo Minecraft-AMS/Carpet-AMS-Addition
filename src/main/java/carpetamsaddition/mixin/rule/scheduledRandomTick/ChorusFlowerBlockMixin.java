@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.scheduledRandomTick;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.ChorusFlowerBlock;
@@ -50,14 +50,14 @@ public abstract class ChorusFlowerBlockMixin {
         cancellable = true
     )
     private void scheduleTickMixinInvoke(CallbackInfo ci) {
-        if (AmsServerSettings.scheduledRandomTickChorusFlower || AmsServerSettings.scheduledRandomTickAllPlants) {
+        if (CarpetAMSAdditionSettings.scheduledRandomTickChorusFlower || CarpetAMSAdditionSettings.scheduledRandomTickAllPlants) {
             ci.cancel();
         }
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void scheduleTickMixinTail(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        if (AmsServerSettings.scheduledRandomTickChorusFlower || AmsServerSettings.scheduledRandomTickAllPlants) {
+        if (CarpetAMSAdditionSettings.scheduledRandomTickChorusFlower || CarpetAMSAdditionSettings.scheduledRandomTickAllPlants) {
             this.randomTick(state, world, pos, random);
         }
     }

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandCustomBlockHardness;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.config.rule.commandCustomBlockHardness.CustomBlockHardnessConfig;
 import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
 import carpetamsaddition.translations.Translator;
@@ -57,7 +57,7 @@ public class CustomBlockHardnessCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
         dispatcher.register(
             Commands.literal("customBlockHardness")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomBlockHardness))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomBlockHardness))
             .then(literal("set")
             .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
             .then(argument("hardness", FloatArgumentType.floatArg())

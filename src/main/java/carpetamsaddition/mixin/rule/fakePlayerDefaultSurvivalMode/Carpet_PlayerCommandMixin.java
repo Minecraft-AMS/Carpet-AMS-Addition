@@ -22,7 +22,7 @@ package carpetamsaddition.mixin.rule.fakePlayerDefaultSurvivalMode;
 
 import carpet.commands.PlayerCommand;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -45,7 +45,7 @@ public abstract class Carpet_PlayerCommandMixin {
         )
     )
     private static GameType fakePlayerDefaultSurvivalMode(ServerPlayerGameMode managerInstance, Operation<GameType> original) {
-        return AmsServerSettings.fakePlayerDefaultSurvivalMode ? GameType.SURVIVAL : original.call(managerInstance);
+        return CarpetAMSAdditionSettings.fakePlayerDefaultSurvivalMode ? GameType.SURVIVAL : original.call(managerInstance);
     }
 
     @SuppressWarnings("SimplifiableConditionalExpression")
@@ -58,6 +58,6 @@ public abstract class Carpet_PlayerCommandMixin {
         )
     )
     private static boolean noFly(boolean original) {
-        return AmsServerSettings.fakePlayerDefaultSurvivalMode ? false : original;
+        return CarpetAMSAdditionSettings.fakePlayerDefaultSurvivalMode ? false : original;
     }
 }

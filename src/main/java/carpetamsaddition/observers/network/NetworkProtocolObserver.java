@@ -23,7 +23,7 @@ package carpetamsaddition.observers.network;
 import carpet.api.settings.CarpetRule;
 
 import carpetamsaddition.utils.Messenger;
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.settings.SimpleRuleObserver;
 import carpetamsaddition.utils.MinecraftServerUtil;
@@ -36,7 +36,7 @@ public class NetworkProtocolObserver extends SimpleRuleObserver<Object> {
 
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Object> rule, Object oldValue, Object newValue) {
-        if (!AmsServerSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning()) {
+        if (!CarpetAMSAdditionSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning()) {
             Messenger.tell(source, Messenger.formatting(tr.tr("need_enable_protocol", getRuleName(rule)), ChatFormatting.YELLOW));
         }
     }

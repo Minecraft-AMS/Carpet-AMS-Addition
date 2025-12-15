@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.fakePlayerPickUpController;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.FakePlayerHelper;
 
 import net.minecraft.world.entity.item.ItemEntity;
@@ -38,11 +38,11 @@ import java.util.Objects;
 public abstract class ItemEntityMixin {
     @Inject(method = "playerTouch", at = @At("HEAD"), cancellable = true)
     private void onCanReplaceCurrentItem(Player player, CallbackInfo ci) {
-        if (!Objects.equals(AmsServerSettings.fakePlayerPickUpController, "false") && FakePlayerHelper.isFakePlayer(player)) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.fakePlayerPickUpController, "false") && FakePlayerHelper.isFakePlayer(player)) {
             ItemStack mainHandStack = player.getMainHandItem();
-            if (Objects.equals(AmsServerSettings.fakePlayerPickUpController, "MainHandOnly") && !mainHandStack.isEmpty()) {
+            if (Objects.equals(CarpetAMSAdditionSettings.fakePlayerPickUpController, "MainHandOnly") && !mainHandStack.isEmpty()) {
                 ci.cancel();
-            } else if (Objects.equals(AmsServerSettings.fakePlayerPickUpController, "NoPickUp")) {
+            } else if (Objects.equals(CarpetAMSAdditionSettings.fakePlayerPickUpController, "NoPickUp")) {
                 ci.cancel();
             }
         }

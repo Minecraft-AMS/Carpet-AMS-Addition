@@ -20,13 +20,13 @@
 
 package carpetamsaddition.helpers.rule.preventAdministratorCheat;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
 
 public class PermissionHelper {
     public static boolean canCheat(CommandSourceStack source) {
-        return !(source.getEntity() instanceof ServerPlayer) || !AmsServerSettings.preventAdministratorCheat;
+        return !(source.getEntity() instanceof ServerPlayer) || !CarpetAMSAdditionSettings.preventAdministratorCheat;
     }
 }

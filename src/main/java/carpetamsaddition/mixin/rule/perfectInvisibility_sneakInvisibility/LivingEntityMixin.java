@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.perfectInvisibility_sneakInvisibility;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class LivingEntityMixin implements EntityInvoker {
     @ModifyReturnValue(method = "getVisibilityPercent", at = @At("RETURN"))
     private double modifyAttackDistanceScalingFactor(double original) {
-        if (AmsServerSettings.perfectInvisibility && this.invokeIsInvisible()) {
+        if (CarpetAMSAdditionSettings.perfectInvisibility && this.invokeIsInvisible()) {
             return 0.0D;
         } else {
             return original;
@@ -42,7 +42,7 @@ public abstract class LivingEntityMixin implements EntityInvoker {
 
     @ModifyReturnValue(method = "getVisibilityPercent", at = @At("RETURN"))
     private double sneakInvisibility(double original) {
-        if (AmsServerSettings.sneakInvisibility && this.invokeIsDiscrete()) {
+        if (CarpetAMSAdditionSettings.sneakInvisibility && this.invokeIsDiscrete()) {
             return 0.0D;
         } else {
             return original;

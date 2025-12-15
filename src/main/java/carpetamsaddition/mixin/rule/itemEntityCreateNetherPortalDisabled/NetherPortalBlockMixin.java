@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.itemEntityCreateNetherPortalDisabled;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -37,11 +37,8 @@ import net.minecraft.world.level.portal.PortalForcer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
 import java.util.Optional;
 
-@GameVersion(version = "Minecraft >= 1.21")
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
     @WrapOperation(
@@ -55,7 +52,7 @@ public abstract class NetherPortalBlockMixin {
             PortalForcer forcer, BlockPos pos, Direction.Axis axis, Operation<Optional<BlockUtil.FoundRectangle>> original,
             ServerLevel world, Entity entity
     ) {
-        if (AmsServerSettings.itemEntityCreateNetherPortalDisabled && entity instanceof ItemEntity) {
+        if (CarpetAMSAdditionSettings.itemEntityCreateNetherPortalDisabled && entity instanceof ItemEntity) {
             return Optional.empty();
         } else {
             return original.call(forcer, pos, axis);

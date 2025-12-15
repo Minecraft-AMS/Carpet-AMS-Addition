@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.commandCustomCommandPermissionLevel;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
 
@@ -53,7 +53,7 @@ public abstract class CommandDispatcherMixin {
         remap = false
     )
     private void modifyPermissionLevel(LiteralArgumentBuilder<CommandSourceStack> command, CallbackInfoReturnable<LiteralCommandNode<CommandSourceStack>> cir) {
-        if (!Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false") && CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(command.getLiteral())) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomCommandPermissionLevel, "false") && CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(command.getLiteral())) {
             int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(command.getLiteral());
             command.requires(source -> CommandHelper.hasPermissionLevel(source, level));
         }

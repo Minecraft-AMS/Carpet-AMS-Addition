@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.endPortalChunkLoadDisabled;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -44,7 +44,7 @@ public abstract class EndPortalBlockMixin {
         )
     )
     private TeleportTransition.PostTeleportTransition endPortalChunkLoadDisabled(TeleportTransition.PostTeleportTransition instance, TeleportTransition.PostTeleportTransition next, Operation<TeleportTransition.PostTeleportTransition> original) {
-        if (AmsServerSettings.endPortalChunkLoadDisabled && next.equals(TeleportTransition.PLACE_PORTAL_TICKET)) {
+        if (CarpetAMSAdditionSettings.endPortalChunkLoadDisabled && next.equals(TeleportTransition.PLACE_PORTAL_TICKET)) {
             return entity -> {};
         } else {
             return original.call(instance, next);

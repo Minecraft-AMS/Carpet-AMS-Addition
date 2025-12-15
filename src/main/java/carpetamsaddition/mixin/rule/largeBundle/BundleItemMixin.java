@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.largeBundle;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.largeBundle.LargeBundleInventory;
 
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
@@ -51,12 +51,12 @@ import java.util.Optional;
 public abstract class BundleItemMixin {
     @WrapMethod(method = "use")
     private InteractionResult onUse(Level world, Player user, InteractionHand hand, Operation<InteractionResult> original) {
-        if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             ItemStack stack = user.getItemInHand(hand);
             SimpleMenuProvider screenHandlerFactory = new SimpleMenuProvider(
                 (syncId, playerInv, player) -> {
                     LargeBundleInventory bundleInv = new LargeBundleInventory(stack);
-                    switch (AmsServerSettings.largeBundle) {
+                    switch (CarpetAMSAdditionSettings.largeBundle) {
                         case "9x3":
                             return ChestMenu.threeRows(syncId, playerInv, bundleInv);
                         case "9x6":
@@ -76,42 +76,42 @@ public abstract class BundleItemMixin {
 
     @Inject(method = "isBarVisible", at = @At("HEAD"), cancellable = true)
     private void onIsItemBarVisible(CallbackInfoReturnable<Boolean> cir) {
-        if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             cir.setReturnValue(false);
         }
     }
 
     @Inject(method = "getBarWidth", at = @At("HEAD"), cancellable = true)
     private void onGetItemBarStep(CallbackInfoReturnable<ItemStack> cir) {
-        if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             cir.setReturnValue(ItemStack.EMPTY);
         }
     }
 
     @Inject(method = "getTooltipImage", at = @At("HEAD"), cancellable = true)
     private void onGetTooltipData(CallbackInfoReturnable<Optional<TooltipComponent>> cir) {
-        if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             cir.setReturnValue(Optional.empty());
         }
     }
 
     @Inject(method = "dropContent(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;)Z", at = @At("HEAD"), cancellable = true)
     private void onDropAllBundledItems(CallbackInfoReturnable<Boolean> cir) {
-        if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             cir.setReturnValue(false);
         }
     }
 
     @Inject(method = "overrideOtherStackedOnMe", at = @At("HEAD"), cancellable = true)
     private void onClicked(CallbackInfoReturnable<Boolean> cir) {
-        if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             cir.setReturnValue(false);
         }
     }
 
     @Inject(method = "overrideStackedOnOther", at = @At("HEAD"), cancellable = true)
     private void onStackClicked(CallbackInfoReturnable<Boolean> cir) {
-        if (!Objects.equals(AmsServerSettings.largeBundle, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             cir.setReturnValue(false);
         }
     }

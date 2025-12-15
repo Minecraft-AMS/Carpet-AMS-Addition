@@ -20,7 +20,7 @@
 
 package carpetamsaddition.network.payloads.handshake;
 
-import carpetamsaddition.AmsClient;
+import carpetamsaddition.CarpetAMSAdditionClient;
 import carpetamsaddition.utils.NetworkUtil;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
@@ -53,10 +53,10 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
     @Override
     public void handle() {
         NetworkUtil.executeOnClientThread(() -> {
-            if (this.modVersion.equals(AmsClient.getVersion())) {
-                AmsClient.LOGGER.info("You joined server with matched carpet-ams-addition v{}", this.modVersion);
+            if (this.modVersion.equals(CarpetAMSAdditionClient.getVersion())) {
+                CarpetAMSAdditionClient.LOGGER.info("You joined server with matched carpet-ams-addition v{}", this.modVersion);
             } else {
-                AmsClient.LOGGER.info("You joined server with mismatched carpet-ams-addition version (client: v{}, server: v{})", AmsClient.getVersion(), this.modVersion);
+                CarpetAMSAdditionClient.LOGGER.info("You joined server with mismatched carpet-ams-addition version (client: v{}, server: v{})", CarpetAMSAdditionClient.getVersion(), this.modVersion);
             }
             NetworkUtil.setServerSupport(this.isSupportServer);
         });

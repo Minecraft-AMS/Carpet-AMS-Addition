@@ -20,7 +20,7 @@
 
 package carpetamsaddition.network.payloads.handshake;
 
-import carpetamsaddition.AmsClient;
+import carpetamsaddition.CarpetAMSAdditionClient;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.utils.MinecraftClientUtil;
@@ -52,7 +52,7 @@ public class RequestHandShakeS2CPayload extends AMS_CustomPayload {
     public void handle() {
         NetworkUtil.executeOnClientThread(() -> {
             LocalPlayer player = MinecraftClientUtil.getCurrentPlayer();
-            String modVersion = AmsClient.getVersion();
+            String modVersion = CarpetAMSAdditionClient.getVersion();
             UUID uuid = player.getUUID();
             NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(modVersion, uuid));
         });

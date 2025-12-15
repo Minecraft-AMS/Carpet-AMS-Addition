@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.onlyPlayerCanCreateNetherPortal;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -52,7 +52,7 @@ public abstract class NetherPortalBlockMixin {
             PortalForcer forcer, BlockPos pos, Direction.Axis axis, Operation<Optional<BlockUtil.FoundRectangle>> original,
             ServerLevel world, Entity entity
     ) {
-        if (AmsServerSettings.onlyPlayerCanCreateNetherPortal && !(entity instanceof Player)) {
+        if (CarpetAMSAdditionSettings.onlyPlayerCanCreateNetherPortal && !(entity instanceof Player)) {
             return Optional.empty();
         } else {
             return original.call(forcer, pos, axis);

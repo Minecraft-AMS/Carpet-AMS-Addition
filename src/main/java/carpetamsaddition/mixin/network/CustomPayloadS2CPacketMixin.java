@@ -29,13 +29,10 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@GameVersion(version = "Minecraft >= 1.20.5")
 @Mixin(ClientboundCustomPayloadPacket.class)
 public abstract class CustomPayloadS2CPacketMixin {
     @ModifyArg(

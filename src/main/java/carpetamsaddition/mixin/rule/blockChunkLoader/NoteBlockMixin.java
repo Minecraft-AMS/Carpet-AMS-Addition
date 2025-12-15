@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.blockChunkLoader;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 import carpetamsaddition.utils.WorldUtil;
 
@@ -46,7 +46,7 @@ import java.util.Objects;
 public abstract class NoteBlockMixin {
     @Inject(method = "playNote", at = @At("HEAD"))
     private void playNoteMixin(Entity entity, BlockState blockState, Level world, BlockPos pos, CallbackInfo info) {
-        if (!Objects.equals(AmsServerSettings.noteBlockChunkLoader, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "false")) {
             handleChunkLoading(world, pos);
         }
     }
@@ -56,11 +56,11 @@ public abstract class NoteBlockMixin {
         if (!WorldUtil.isClient(world)) {
             ChunkPos chunkPos = new ChunkPos(pos);
             BlockState noteBlockUp = world.getBlockState(pos.above(1));
-            if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "note_block")) {
+            if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "note_block")) {
                 BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, chunkPos);
-            } else if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "bone_block")) {
+            } else if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "bone_block")) {
                 loadChunkIfMatch(world, chunkPos, noteBlockUp, Blocks.BONE_BLOCK);
-            } else if (Objects.equals(AmsServerSettings.noteBlockChunkLoader, "wither_skeleton_skull")) {
+            } else if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "wither_skeleton_skull")) {
                 loadChunkIfMatch(world, chunkPos, noteBlockUp, Blocks.WITHER_SKELETON_SKULL, Blocks.WITHER_SKELETON_WALL_SKULL);
             }
         }

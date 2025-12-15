@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.phantomSpawnAlert;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
 
@@ -53,7 +53,7 @@ public abstract class PhantomSpawnerMixin {
         )
     )
     private void broadcastMessage(ServerLevel world, boolean spawnMonsters, CallbackInfo ci, @Local ServerPlayer playerEntity, @Local Phantom phantom) {
-        if (AmsServerSettings.phantomSpawnAlert && phantom != null) {
+        if (CarpetAMSAdditionSettings.phantomSpawnAlert && phantom != null) {
             MinecraftServer server = world.getServer();
             String playerName = PlayerUtil.getName(playerEntity);
             double x = phantom.getX();

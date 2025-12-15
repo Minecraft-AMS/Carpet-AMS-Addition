@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandGoto;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
@@ -40,7 +40,7 @@ public class GotoCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
         Commands.literal("goto")
-        .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGoto))
+        .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandGoto))
         .then(Commands.argument("dimension", DimensionArgument.dimension())
         .executes(
             context -> executeSimpleTeleport(

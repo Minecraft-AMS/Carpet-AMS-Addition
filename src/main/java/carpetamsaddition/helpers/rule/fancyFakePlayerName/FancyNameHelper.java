@@ -20,7 +20,7 @@
 
 package carpetamsaddition.helpers.rule.fancyFakePlayerName;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.EntityUtil;
 import carpetamsaddition.utils.Messenger;
 
@@ -62,7 +62,7 @@ public class FancyNameHelper {
     }
 
     public static String addBotNameSuffix(final CommandContext<?> context, final String name, String teamName) {
-        final String SUFFIX = "_" + AmsServerSettings.fancyFakePlayerName;
+        final String SUFFIX = "_" + CarpetAMSAdditionSettings.fancyFakePlayerName;
         String playerName = StringArgumentType.getString(context, name);
 
         if (!name.equals("player")) {

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.hooks.server;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
@@ -35,7 +35,7 @@ public abstract class MinecraftServerMixin {
     @Inject(method = "loadLevel", at = @At("TAIL"))
     private void afterServerLoadWorld(CallbackInfo ci) {
         if (MinecraftServerUtil.serverIsRunning()) {
-            AmsServer.getInstance().afterServerLoadWorlds(MinecraftServerUtil.getServer());
+            CarpetAMSAdditionServer.getInstance().afterServerLoadWorlds(MinecraftServerUtil.getServer());
         }
     }
 }

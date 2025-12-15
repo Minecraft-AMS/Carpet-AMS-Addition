@@ -20,7 +20,7 @@
 
 package carpetamsaddition.utils;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,7 +30,7 @@ import java.util.Collections;
 
 public class MinecraftServerUtil {
     public static MinecraftServer getServer() {
-        return AmsServer.getInstance().getMinecraftServer();
+        return CarpetAMSAdditionServer.getInstance().getMinecraftServer();
     }
 
     public static boolean serverIsRunning() {

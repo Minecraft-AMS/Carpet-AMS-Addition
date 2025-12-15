@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandCustomCommandPermissionLevel;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.suggestionProviders.ListSuggestionProvider;
 import carpetamsaddition.commands.suggestionProviders.LiteralCommandSuggestionProvider;
 import carpetamsaddition.commands.suggestionProviders.SetSuggestionProvider;
@@ -54,7 +54,7 @@ public class CustomCommandPermissionLevelRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
         Commands.literal("customCommandPermissionLevel")
-        .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomCommandPermissionLevel))
+        .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomCommandPermissionLevel))
         .then(Commands.literal("set")
         .then(Commands.argument("command", StringArgumentType.string())
         .suggests(new LiteralCommandSuggestionProvider())

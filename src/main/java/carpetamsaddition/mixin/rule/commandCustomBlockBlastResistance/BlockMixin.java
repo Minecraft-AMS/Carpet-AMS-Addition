@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.commandCustomBlockBlastResistance;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -37,7 +37,7 @@ import java.util.*;
 public abstract class BlockMixin {
     @ModifyReturnValue(method = "getExplosionResistance", at = @At("RETURN"))
     private float getBlastResistance(float original) {
-        if (!Objects.equals(AmsServerSettings.commandCustomBlockBlastResistance, "false") && AmsServerSettings.enhancedWorldEater == -1.0F) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomBlockBlastResistance, "false") && CarpetAMSAdditionSettings.enhancedWorldEater == -1.0F) {
             BlockState blockState = ((Block) (Object) this).defaultBlockState();
             return CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.getOrDefault(blockState, original);
         } else {

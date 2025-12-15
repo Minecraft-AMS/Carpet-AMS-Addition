@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandSetPlayerPose;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
@@ -51,7 +51,7 @@ public class SetPlayerPoseCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("playerPose")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandSetPlayerPose))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandSetPlayerPose))
             .then(Commands.argument("player", EntityArgument.player())
             .then(Commands.literal("set")
             .then(Commands.argument("pose", StringArgumentType.greedyString())

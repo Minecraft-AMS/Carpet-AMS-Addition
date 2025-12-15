@@ -22,7 +22,7 @@ package carpetamsaddition.mixin.rule.fancyFakePlayerName;
 
 import carpet.commands.PlayerCommand;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyNameHelper;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -46,8 +46,8 @@ public abstract class CarpetMod_PlayerCommandMixin {
     )
     private static String spawn(CommandContext<?> context, String name, Operation<String> original) {
        return
-           !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") ?
-           FancyNameHelper.addBotNameSuffix(context, name, AmsServerSettings.fancyFakePlayerName) :
+           !Objects.equals(CarpetAMSAdditionSettings.fancyFakePlayerName, "false") ?
+           FancyNameHelper.addBotNameSuffix(context, name, CarpetAMSAdditionSettings.fancyFakePlayerName) :
            original.call(context, name);
     }
 
@@ -62,8 +62,8 @@ public abstract class CarpetMod_PlayerCommandMixin {
     )
     private static String cantSpawn(CommandContext<?> context, String name, Operation<String> original) {
         return
-            !Objects.equals(AmsServerSettings.fancyFakePlayerName, "false") ?
-            FancyNameHelper.addBotNameSuffix(context, name, AmsServerSettings.fancyFakePlayerName) :
+            !Objects.equals(CarpetAMSAdditionSettings.fancyFakePlayerName, "false") ?
+            FancyNameHelper.addBotNameSuffix(context, name, CarpetAMSAdditionSettings.fancyFakePlayerName) :
             original.call(context, name);
     }
 }

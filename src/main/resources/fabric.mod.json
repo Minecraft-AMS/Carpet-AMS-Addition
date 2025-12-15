@@ -25,13 +25,13 @@
   "environment": "*",
   "entrypoints": {
     "preLaunch": [
-      "carpetamsaddition.AmsServerPreLaunch"
+      "carpetamsaddition.CarpetAMSAdditionPreLaunch"
     ],
     "main": [
-      "carpetamsaddition.AmsServerMod"
+      "carpetamsaddition.CarpetAMSAdditionMod"
     ],
     "client": [
-      "carpetamsaddition.AmsClient"
+      "carpetamsaddition.CarpetAMSAdditionClient"
     ]
   },
   "mixins": [

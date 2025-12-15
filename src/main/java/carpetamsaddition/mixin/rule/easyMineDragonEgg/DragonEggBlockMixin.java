@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.easyMineDragonEgg;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
@@ -39,6 +39,6 @@ public abstract class DragonEggBlockMixin {
         )
     )
     private boolean teleport(boolean original) {
-        return original && !AmsServerSettings.easyMineDragonEgg;
+        return original && !CarpetAMSAdditionSettings.easyMineDragonEgg;
     }
 }

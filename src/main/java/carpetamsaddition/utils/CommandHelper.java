@@ -20,7 +20,7 @@
 
 package carpetamsaddition.utils;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.mixin.rule.commandCustomCommandPermissionLevel.CommandNodeInvoker;
 import carpetamsaddition.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
@@ -50,7 +50,7 @@ public final class CommandHelper {
 
     @SuppressWarnings("unchecked")
     public static void updateAllCommandPermissions(MinecraftServer server) {
-        if (!Objects.equals(AmsServerSettings.commandCustomCommandPermissionLevel, "false")) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomCommandPermissionLevel, "false")) {
             CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands().getDispatcher();
             Commands serverCommandManager = server.getCommands();
             for (CommandNode<CommandSourceStack> node : dispatcher.getRoot().getChildren()) {

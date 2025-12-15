@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandAtSomeOnePlayer;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.*;
 
@@ -41,7 +41,7 @@ public class AtCommandRegistry {
     private static final Translator tr = new Translator("command.at");
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("@")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandAtSomeOnePlayer))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandAtSomeOnePlayer))
             .then(Commands.argument("targetPlayer", EntityArgument.player())
             .then(Commands.argument("text", StringArgumentType.greedyString())
             .executes(context -> execute(

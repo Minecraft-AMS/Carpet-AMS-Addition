@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.redstoneComponentSound;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.DaylightDetectorBlock;
@@ -44,7 +44,7 @@ public abstract class DaylightDetectorBlockMixin {
             BlockState state, Level world, BlockPos pos, Player player,
             BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
     ) {
-        if (AmsServerSettings.redstoneComponentSound) {
+        if (CarpetAMSAdditionSettings.redstoneComponentSound) {
             world.playSound(player, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 1.0f, 0.95f);
         }
     }

@@ -20,8 +20,8 @@
 
 package carpetamsaddition.commands.rule.commandPacketInternetGroper;
 
-import carpetamsaddition.AmsServer;
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionServer;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
@@ -52,7 +52,7 @@ public class PingCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("pings")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandPacketInternetGroper))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandPacketInternetGroper))
             .then(argument("targetIpOrDomainName", StringArgumentType.string())
             .then(argument("pingQuantity", IntegerArgumentType.integer())
             .executes(context -> executePing(
@@ -110,7 +110,7 @@ public class PingCommandRegistry {
                 return -1;
             }
         } catch (IOException e) {
-            AmsServer.LOGGER.error("[commandPing] An error occurred while performing ping operation");
+            CarpetAMSAdditionServer.LOGGER.error("[commandPing] An error occurred while performing ping operation");
             return -1;
         }
     }

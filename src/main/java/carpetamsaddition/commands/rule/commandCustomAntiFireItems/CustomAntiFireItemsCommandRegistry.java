@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandCustomAntiFireItems;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
@@ -53,7 +53,7 @@ public class CustomAntiFireItemsCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
         dispatcher.register(
             Commands.literal("customAntiFireItems")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomAntiFireItems))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomAntiFireItems))
             .then(literal("add")
             .then(argument("item", ItemArgument.item(commandRegistryAccess))
             .executes(context -> add(

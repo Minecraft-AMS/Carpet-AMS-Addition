@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.easyWitherSkeletonSkullDrop;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.EntityUtil;
 
 import net.minecraft.world.entity.LivingEntity;
@@ -37,7 +37,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LivingEntityMixin {
     @Inject(method = "die", at = @At("TAIL"))
     private void dropSkull(CallbackInfo ci) {
-        if (AmsServerSettings.easyWitherSkeletonSkullDrop) {
+        if (CarpetAMSAdditionSettings.easyWitherSkeletonSkullDrop) {
             LivingEntity entity = (LivingEntity) (Object) this;
             if (entity instanceof WitherSkeleton) {
                 entity.spawnAtLocation((ServerLevel) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);

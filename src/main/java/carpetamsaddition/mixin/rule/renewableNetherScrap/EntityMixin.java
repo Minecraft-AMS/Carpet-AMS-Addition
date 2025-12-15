@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.renewableNetherScrap;
 
 import carpetamsaddition.utils.EntityUtil;
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -55,12 +55,12 @@ public abstract class EntityMixin {
 
     @Inject(method = "spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("TAIL"))
     private void dropNetheriteScrap(CallbackInfoReturnable<ItemEntity> cir) {
-        if (AmsServerSettings.renewableNetheriteScrap != 0.0D && !this.isDroppingNetherScrap) {
+        if (CarpetAMSAdditionSettings.renewableNetheriteScrap != 0.0D && !this.isDroppingNetherScrap) {
             Entity entity = (Entity) (Object) this;
             if (entity instanceof ZombifiedPiglin && !((ZombifiedPiglin) entity).isBaby() && !this.hasDroppedNetherScrap) {
                 this.hasDroppedNetherScrap = true;
                 double random = Math.random();
-                double rate = AmsServerSettings.renewableNetheriteScrap;
+                double rate = CarpetAMSAdditionSettings.renewableNetheriteScrap;
                 if (random < rate) {
                     this.isDroppingNetherScrap = true;
                     ItemStack netherScrapStack = new ItemStack(Items.NETHERITE_SCRAP);

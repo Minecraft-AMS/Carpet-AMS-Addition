@@ -20,7 +20,7 @@
 
 package carpetamsaddition.utils;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.settings.Rule;
 
 import java.lang.reflect.Field;
@@ -28,7 +28,7 @@ import java.lang.reflect.Field;
 public class CountRulesUtil {
     public static int countRules() {
         int ruleCount = 0;
-        Field[] fields = AmsServerSettings.class.getDeclaredFields();
+        Field[] fields = CarpetAMSAdditionSettings.class.getDeclaredFields();
         for (Field field : fields) {
             if (field.isAnnotationPresent(Rule.class)) {
                 ruleCount++;

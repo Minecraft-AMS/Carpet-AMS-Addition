@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.network;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.network.AMS_CustomPayload;
 
@@ -36,14 +36,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerPlayNetworkHandlerMixin {
     @Inject(method = "handleCustomPayload", at = @At("HEAD"), cancellable = true)
     private void onCustomPayload(ServerboundCustomPayloadPacket packet, CallbackInfo ci) {
-        if (!AmsServerSettings.amsNetworkProtocol) {
+        if (!CarpetAMSAdditionSettings.amsNetworkProtocol) {
             return;
         }
 
-        if (packet.payload() instanceof AMS_CustomPayload payload && packet.payload().type().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
-            if (AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload)) {
-                ci.cancel();
-            }
+        if (
+            packet.payload() instanceof AMS_CustomPayload payload &&
+            packet.payload().type().id().equals(AMS_CustomPayload.CHANNEL_ID) &&
+            AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload)
+        ) {
+            ci.cancel();
         }
     }
 }

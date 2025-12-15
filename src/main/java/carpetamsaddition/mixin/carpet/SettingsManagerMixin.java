@@ -23,8 +23,8 @@ package carpetamsaddition.mixin.carpet;
 import carpet.CarpetServer;
 import carpet.api.settings.SettingsManager;
 
-import carpetamsaddition.AmsServer;
-import carpetamsaddition.AmsServerMod;
+import carpetamsaddition.CarpetAMSAdditionServer;
+import carpetamsaddition.CarpetAMSAdditionMod;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
 
@@ -64,10 +64,10 @@ public abstract class SettingsManagerMixin {
         if ((Object)this == CarpetServer.settingsManager) {
             Messenger.tell(
                 source, Messenger.c(
-                    String.format("g %s ", AmsServer.fancyName),
+                    String.format("g %s ", CarpetAMSAdditionServer.fancyName),
                     String.format("g %s: ", translator.tr("version").getString()),
-                    String.format("g %s ", AmsServerMod.getVersion()),
-                    String.format("g (%s: %d)", translator.tr("total_rules").getString(), AmsServer.ruleCount)
+                    String.format("g %s ", CarpetAMSAdditionMod.getVersion()),
+                    String.format("g (%s: %d)", translator.tr("total_rules").getString(), CarpetAMSAdditionServer.ruleCount)
                 )
             );
         }

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandCustomMovableBlock;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.config.rule.commandCustomMovableBlock.CustomMovableBlockConfig;
@@ -53,7 +53,7 @@ public class CustomMovableBlockCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
         dispatcher.register(
             Commands.literal("customMovableBlock")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomMovableBlock))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomMovableBlock))
             .then(literal("add")
             .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
             .executes(context -> add(

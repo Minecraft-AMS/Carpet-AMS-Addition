@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.scheduledRandomTick;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.CactusBlock;
@@ -50,14 +50,14 @@ public abstract class CactusBlockMixin {
         cancellable = true
     )
     private void scheduleTickMixinInvoke(CallbackInfo ci) {
-        if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants) {
+        if (CarpetAMSAdditionSettings.scheduledRandomTickCactus || CarpetAMSAdditionSettings.scheduledRandomTickAllPlants) {
             ci.cancel();
         }
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void scheduleTickMixinTail(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo ci) {
-        if (AmsServerSettings.scheduledRandomTickCactus || AmsServerSettings.scheduledRandomTickAllPlants) {
+        if (CarpetAMSAdditionSettings.scheduledRandomTickCactus || CarpetAMSAdditionSettings.scheduledRandomTickAllPlants) {
             this.randomTick(state, world, pos, random);
         }
     }

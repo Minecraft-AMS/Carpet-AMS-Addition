@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.strongLeash;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -29,13 +29,10 @@ import net.minecraft.world.entity.Leashable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.21.6")
 @Mixin(Leashable.class)
 public interface LeashableMixin {
     @ModifyReturnValue(method = "leashSnapDistance", at = @At("RETURN"))
     private double modifyLeashSnappingDistance(double original) {
-        return AmsServerSettings.strongLeash ? Math.max(original, Double.MAX_VALUE) : original;
+        return CarpetAMSAdditionSettings.strongLeash ? Math.max(original, Double.MAX_VALUE) : original;
     }
 }

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.largeEnderChest;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -32,12 +32,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Player.class)
-public abstract class PlayerEntityMixin implements PlayerEntityInvoker {
+public abstract class PlayerEntityMixin implements PlayerInvoker {
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void largeEnderChest(CallbackInfo ci) {
-		if (AmsServerSettings.largeEnderChest) {
+		if (CarpetAMSAdditionSettings.largeEnderChest) {
 			final int LARGE_ENDERCHEST_SIZE = 9 * 6;
-			SimpleInventoryAccessor simpleInventoryAccessor = (SimpleInventoryAccessor) this.invokeGetEnderChestInventory();
+			SimpleContainerAccessor simpleInventoryAccessor = (SimpleContainerAccessor) this.invokeGetEnderChestInventory();
 			simpleInventoryAccessor.setSize(LARGE_ENDERCHEST_SIZE);
 			simpleInventoryAccessor.setStacks(NonNullList.withSize(LARGE_ENDERCHEST_SIZE, ItemStack.EMPTY));
 		}

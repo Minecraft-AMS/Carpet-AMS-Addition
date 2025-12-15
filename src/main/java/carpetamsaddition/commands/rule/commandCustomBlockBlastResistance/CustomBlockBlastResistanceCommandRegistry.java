@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandCustomBlockBlastResistance;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
@@ -53,7 +53,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
         dispatcher.register(
             Commands.literal("customBlockBlastResistance")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCustomBlockBlastResistance))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomBlockBlastResistance))
             .then(literal("set")
             .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
             .then(argument("resistance", FloatArgumentType.floatArg())

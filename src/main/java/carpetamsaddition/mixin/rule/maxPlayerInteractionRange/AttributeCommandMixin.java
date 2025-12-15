@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
 
@@ -58,7 +58,7 @@ public abstract class AttributeCommandMixin {
         )
     )
     private static void disableBlockInteractionRangeSet(AttributeInstance instance, double baseValue, Operation<Void> original, CommandSourceStack source) {
-        if (AmsServerSettings.maxPlayerBlockInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.BLOCK_INTERACTION_RANGE)) {
+        if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.BLOCK_INTERACTION_RANGE)) {
             Player player = source.getPlayer();
             if (player != null) {
                 player.displayClientMessage(
@@ -80,7 +80,7 @@ public abstract class AttributeCommandMixin {
         )
     )
     private static void disableEntityInteractionRangeSet(AttributeInstance instance, double baseValue, Operation<Void> original, CommandSourceStack source) {
-        if (AmsServerSettings.maxPlayerEntityInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.ENTITY_INTERACTION_RANGE)) {
+        if (CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.ENTITY_INTERACTION_RANGE)) {
             Player player = source.getPlayer();
             if (player != null) {
                 player.displayClientMessage(

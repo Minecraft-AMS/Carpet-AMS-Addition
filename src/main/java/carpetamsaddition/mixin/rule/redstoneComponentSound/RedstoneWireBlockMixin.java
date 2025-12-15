@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.redstoneComponentSound;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.RedStoneWireBlock;
@@ -44,7 +44,7 @@ public abstract class RedstoneWireBlockMixin {
             BlockState state, Level world, BlockPos pos, Player player,
             BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
     ) {
-        if (AmsServerSettings.redstoneComponentSound) {
+        if (CarpetAMSAdditionSettings.redstoneComponentSound) {
             world.playSound(player, pos, SoundEvents.SAND_STEP, SoundSource.BLOCKS, 0.8f, 2.5f);
         }
     }

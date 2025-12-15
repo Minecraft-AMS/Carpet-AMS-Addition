@@ -23,7 +23,7 @@ package carpetamsaddition.translations;
 import carpet.CarpetSettings;
 
 import carpetamsaddition.utils.Messenger;
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.utils.FileUtil;
 import carpetamsaddition.mixin.translations.TranslatableTextAccessor;
 
@@ -60,11 +60,11 @@ public class AMSTranslations {
                     translations.put(language, translation);
                     languages.add(language);
                 } catch (IOException | YamlParseException e) {
-                    AmsServer.LOGGER.warn("Failed to load translation for language: {}", language, e);
+                    CarpetAMSAdditionServer.LOGGER.warn("Failed to load translation for language: {}", language, e);
                 }
             });
         } catch (IOException | YamlParseException e) {
-            AmsServer.LOGGER.warn("Failed to get available languages", e);
+            CarpetAMSAdditionServer.LOGGER.warn("Failed to get available languages", e);
         }
     }
 
@@ -147,7 +147,7 @@ public class AMSTranslations {
 
     private static MutableComponent translationLog(String translationKey, boolean suppressWarnings, MutableComponent text) {
         if (!suppressWarnings) {
-            AmsServer.LOGGER.warn("Unknown translation key: {}. Check if the translation exists or the key is correct.", translationKey);
+            CarpetAMSAdditionServer.LOGGER.warn("Unknown translation key: {}. Check if the translation exists or the key is correct.", translationKey);
         }
         return text;
     }

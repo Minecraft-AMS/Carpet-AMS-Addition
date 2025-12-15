@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.hopperSuctionDisabled;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 
@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class HopperBlockEntityMixin {
     @Inject(method = "tryMoveItems", at = @At("HEAD"), cancellable = true)
     private static void insertAndExtract(CallbackInfoReturnable<Boolean> cir) {
-        if (AmsServerSettings.hopperSuctionDisabled) {
+        if (CarpetAMSAdditionSettings.hopperSuctionDisabled) {
             cir.setReturnValue(false);
             cir.cancel();
         }

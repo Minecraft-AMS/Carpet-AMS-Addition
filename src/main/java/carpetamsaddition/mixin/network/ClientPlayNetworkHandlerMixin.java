@@ -35,10 +35,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ClientPlayNetworkHandlerMixin {
     @Inject(method = "handleCustomPayload(Lnet/minecraft/network/protocol/common/ClientboundCustomPayloadPacket;)V", at = @At("HEAD"), cancellable = true)
     private void onCustomPayload(ClientboundCustomPayloadPacket packet, CallbackInfo ci) {
-        if (packet.payload() instanceof AMS_CustomPayload payload && packet.payload().type().id().equals(AMS_CustomPayload.CHANNEL_ID)) {
-            if (AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)) {
-                ci.cancel();
-            }
+        if (
+            packet.payload() instanceof AMS_CustomPayload payload &&
+            packet.payload().type().id().equals(AMS_CustomPayload.CHANNEL_ID) &&
+            AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)
+        ) {
+            ci.cancel();
         }
     }
 }

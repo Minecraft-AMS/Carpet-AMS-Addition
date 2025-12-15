@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.infiniteDurability;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.item.ItemStack;
 
@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 public abstract class ItemStackMixin {
     @Inject(method = "hurtAndBreak(ILnet/minecraft/server/level/ServerLevel;Lnet/minecraft/server/level/ServerPlayer;Ljava/util/function/Consumer;)V", at = @At("HEAD"), cancellable = true)
     private void damage(CallbackInfo ci) {
-        if (AmsServerSettings.infiniteDurability) {
+        if (CarpetAMSAdditionSettings.infiniteDurability) {
             ci.cancel();
         }
     }

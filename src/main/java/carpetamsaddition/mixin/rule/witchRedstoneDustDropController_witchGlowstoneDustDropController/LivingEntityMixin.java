@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.witchRedstoneDustDropController_witchGlowstoneDustDropController;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.EntityUtil;
 
 import net.minecraft.world.entity.LivingEntity;
@@ -40,20 +40,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LivingEntityMixin {
     @Inject(method = "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V", at = @At("TAIL"))
     private void customRedstoneDustDrop(CallbackInfo ci) {
-        if (AmsServerSettings.witchRedstoneDustDropController != -1) {
+        if (CarpetAMSAdditionSettings.witchRedstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
             ServerLevel world = (ServerLevel) EntityUtil.getEntityWorld(livingEntity);
-            int redstoneCount = AmsServerSettings.witchRedstoneDustDropController;
+            int redstoneCount = CarpetAMSAdditionSettings.witchRedstoneDustDropController;
             compatWitchDropStack(Items.REDSTONE, redstoneCount, world, livingEntity);
         }
     }
 
     @Inject(method = "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V", at = @At("TAIL"))
     private void customGlowstoneDustDrop(CallbackInfo ci) {
-        if (AmsServerSettings.witchGlowstoneDustDropController != -1) {
+        if (CarpetAMSAdditionSettings.witchGlowstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
             ServerLevel world = (ServerLevel) EntityUtil.getEntityWorld(livingEntity);
-            int glowstoneCount = AmsServerSettings.witchGlowstoneDustDropController;
+            int glowstoneCount = CarpetAMSAdditionSettings.witchGlowstoneDustDropController;
             compatWitchDropStack(Items.GLOWSTONE_DUST, glowstoneCount, world, livingEntity);
         }
     }

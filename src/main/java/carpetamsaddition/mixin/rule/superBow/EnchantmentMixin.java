@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.superBow;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -29,6 +29,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.Holder;
 
+import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,15 +40,15 @@ import java.util.Set;
 @Mixin(Enchantment.class)
 public abstract class EnchantmentMixin {
     @ModifyReturnValue(method = "areCompatible", at = @At("RETURN"))
-    private static boolean canBeCombined(boolean original, Holder<Enchantment> first, Holder<Enchantment> second) {
-        return original || (AmsServerSettings.superBow && canBeCombinedEnchantments(first, second, Set.of(Enchantments.INFINITY, Enchantments.MENDING)));
+    private static boolean canBeCombined(boolean original, Holder<@NotNull Enchantment> first, Holder<@NotNull Enchantment> second) {
+        return original || (CarpetAMSAdditionSettings.superBow && canBeCombinedEnchantments(first, second, Set.of(Enchantments.INFINITY, Enchantments.MENDING)));
     }
 
     @Unique
-    private static boolean canBeCombinedEnchantments(Holder<Enchantment> first, Holder<Enchantment> second, Set<ResourceKey<Enchantment>> enchantments) {
+    private static boolean canBeCombinedEnchantments(Holder<@NotNull Enchantment> first, Holder<@NotNull Enchantment> second, Set<ResourceKey<@NotNull Enchantment>> enchantments) {
         boolean firstMatches = enchantments.stream().anyMatch(first::is);
         boolean secondMatches = enchantments.stream().anyMatch(second::is);
-        Optional<ResourceKey<Enchantment>> secondKeyOpt = second.unwrapKey();
+        Optional<ResourceKey<@NotNull Enchantment>> secondKeyOpt = second.unwrapKey();
         boolean notMatchSecond = true;
 
         if (secondKeyOpt.isPresent()) {

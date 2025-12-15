@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.strongLeash;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -44,6 +44,6 @@ public abstract class FireworkRocketItemMixin {
         )
     )
     private boolean strongLeash(Player user, Player playerEntity, Operation<Boolean> original) {
-        return !AmsServerSettings.strongLeash && original.call(user, playerEntity);
+        return !CarpetAMSAdditionSettings.strongLeash && original.call(user, playerEntity);
     }
 }

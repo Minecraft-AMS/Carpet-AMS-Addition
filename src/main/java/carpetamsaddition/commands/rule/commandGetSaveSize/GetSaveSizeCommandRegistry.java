@@ -20,7 +20,7 @@
 
 package carpetamsaddition.commands.rule.commandGetSaveSize;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.EntityUtil;
@@ -45,7 +45,7 @@ public class GetSaveSizeCommandRegistry {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("getSaveSize")
-            .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetSaveSize))
+            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandGetSaveSize))
             .executes(context -> executeGetSaveSize(context.getSource().getPlayerOrException()))
         );
     }

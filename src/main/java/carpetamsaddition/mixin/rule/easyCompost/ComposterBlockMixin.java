@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.easyCompost;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
@@ -39,6 +39,6 @@ public abstract class ComposterBlockMixin {
         )
     )
     private static double easyCompost(double original) {
-        return AmsServerSettings.easyCompost ? -114514.114514D : original;
+        return CarpetAMSAdditionSettings.easyCompost ? -114514.114514D : original;
     }
 }

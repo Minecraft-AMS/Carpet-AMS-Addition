@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.easyMaxLevelBeacon;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BeaconBlockEntity;
@@ -43,7 +43,7 @@ public abstract class BeaconBlockEntityMixin extends BlockEntity {
 
     @Inject(method = "updateBase", at = @At("HEAD"), cancellable = true)
     private static void updateLevel(Level world, int x, int y, int z, CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.easyMaxLevelBeacon) {
+        if (CarpetAMSAdditionSettings.easyMaxLevelBeacon) {
             BlockPos pos = new BlockPos(x, y - 1, z);
             if (world.getBlockState(pos).is(BlockTags.BEACON_BASE_BLOCKS)) {
                 cir.setReturnValue(4);

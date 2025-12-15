@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.foliageGenerateDisabled;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.levelgen.feature.HugeFungusFeature;
 
@@ -33,14 +33,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class HugeFungusFeatureMixin {
     @Inject(method = "tryPlaceWeepingVines", at = @At("HEAD"), cancellable = true)
     private static void generateVines(CallbackInfo ci) {
-        if (AmsServerSettings.foliageGenerateDisabled) {
+        if (CarpetAMSAdditionSettings.foliageGenerateDisabled) {
             ci.cancel();
         }
     }
 
     @Inject(method = "placeHat", at = @At("HEAD"), cancellable = true)
     private void generateHat(CallbackInfo ci) {
-        if (AmsServerSettings.foliageGenerateDisabled) {
+        if (CarpetAMSAdditionSettings.foliageGenerateDisabled) {
             ci.cancel();
         }
     }

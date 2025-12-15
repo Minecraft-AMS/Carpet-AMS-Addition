@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.amsUpdateSuppressionCrashFix;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.amsUpdateSuppressionCrashFix.AMS_ThrowableSuppression;
 import carpetamsaddition.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionContext;
 import carpetamsaddition.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppressionException;
@@ -52,7 +52,7 @@ public interface NeighborUpdaterMixin {
        locals = LocalCapture.CAPTURE_FAILHARD
     )
     private static void tryNeighborUpdate(Level world, BlockState state, BlockPos pos, Block sourceBlock, Orientation orientation, boolean notify, CallbackInfo ci, Throwable throwable) {
-        if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
             UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
             throw new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));
         }

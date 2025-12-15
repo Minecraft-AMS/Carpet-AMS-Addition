@@ -22,7 +22,7 @@ package carpetamsaddition.mixin.rule.fakePlayerUseOfflinePlayerUuid;
 
 import carpet.commands.PlayerCommand;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -33,11 +33,8 @@ import net.minecraft.core.UUIDUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
 import java.util.UUID;
 
-@GameVersion(version = "Minecraft >= 1.21.9")
 @Mixin(PlayerCommand.class)
 public abstract class Carpet_PlayerCommandMixin {
     @WrapOperation(
@@ -49,7 +46,7 @@ public abstract class Carpet_PlayerCommandMixin {
     )
     private static UUID useOfflinePlayerUUID(MinecraftServer server, String playerName, Operation<UUID> original) {
         return
-            AmsServerSettings.fakePlayerUseOfflinePlayerUUID ?
+            CarpetAMSAdditionSettings.fakePlayerUseOfflinePlayerUUID ?
             UUIDUtil.createOfflinePlayerUUID(playerName) :
             original.call(server, playerName);
     }

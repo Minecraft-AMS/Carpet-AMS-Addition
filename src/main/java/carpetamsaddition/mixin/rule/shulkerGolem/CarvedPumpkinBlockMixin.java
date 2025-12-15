@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.shulkerGolem;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.ParticleHelper;
 
 import net.minecraft.world.level.block.CarvedPumpkinBlock;
@@ -43,7 +43,7 @@ import java.util.Objects;
 public abstract class CarvedPumpkinBlockMixin {
     @Inject(method = "trySpawnGolem", at = @At("TAIL"))
     private void trySpawnShulker(Level world, BlockPos headPos, CallbackInfo ci) {
-        if (AmsServerSettings.shulkerGolem) {
+        if (CarpetAMSAdditionSettings.shulkerGolem) {
             ServerLevel serverWorld = (ServerLevel) world;
             BlockPos bodyPos = headPos.below(1);
             boolean headIsCarvedPumpkin = world.getBlockState(headPos).getBlock() instanceof CarvedPumpkinBlock;

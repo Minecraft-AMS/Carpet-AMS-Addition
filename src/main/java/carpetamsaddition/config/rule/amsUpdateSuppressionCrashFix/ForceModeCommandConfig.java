@@ -20,7 +20,7 @@
 
 package carpetamsaddition.config.rule.amsUpdateSuppressionCrashFix;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,7 +45,7 @@ public class ForceModeCommandConfig {
         if (!configFile.getParentFile().exists()) {
             boolean dirsCreated = configFile.getParentFile().mkdirs();
             if (!dirsCreated) {
-                AmsServer.LOGGER.error("Failed to create directories for config file: {}", configFile.getParentFile().getPath());
+                CarpetAMSAdditionServer.LOGGER.error("Failed to create directories for config file: {}", configFile.getParentFile().getPath());
                 return;
             }
         }
@@ -53,7 +53,7 @@ public class ForceModeCommandConfig {
         try (FileWriter writer = new FileWriter(configFile)) {
             GSON.toJson(json, writer);
         } catch (IOException e) {
-            AmsServer.LOGGER.warn("Failed to save config", e);
+            CarpetAMSAdditionServer.LOGGER.warn("Failed to save config", e);
         }
     }
 
@@ -66,7 +66,7 @@ public class ForceModeCommandConfig {
                     amsUpdateSuppressionCrashFixForceMode = json.get("amsUpdateSuppressionCrashFixForceMode").getAsBoolean();
                 }
             } catch (IOException e) {
-                AmsServer.LOGGER.warn("Failed to load config", e);
+                CarpetAMSAdditionServer.LOGGER.warn("Failed to load config", e);
             }
         }
     }

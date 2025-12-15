@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.enhancedWorldEater;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.enhancedWorldEater.BlockBlackList;
 
 import net.minecraft.world.level.block.Block;
@@ -44,9 +44,9 @@ public abstract class BlockMixin {
 
     @Inject(method = "getExplosionResistance", at = @At("RETURN"), cancellable = true)
     private void getBlastResistance(CallbackInfoReturnable<Float> cir) {
-        if (AmsServerSettings.enhancedWorldEater != -1.0D) {
+        if (CarpetAMSAdditionSettings.enhancedWorldEater != -1.0D) {
             Block block = stateDefinition.any().getBlock();
-            float BOOM = (float) AmsServerSettings.enhancedWorldEater;
+            float BOOM = (float) CarpetAMSAdditionSettings.enhancedWorldEater;
             float startBlastResistance = cir.getReturnValue();
             if (startBlastResistance >= 17.0F && !BlockBlackList.isIn(block)) {
                 cir.setReturnValue(BOOM);

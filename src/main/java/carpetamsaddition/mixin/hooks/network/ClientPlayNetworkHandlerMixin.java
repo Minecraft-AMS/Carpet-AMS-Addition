@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.hooks.network;
 
-import carpetamsaddition.AmsClient;
+import carpetamsaddition.CarpetAMSAdditionClient;
 
 import net.minecraft.client.multiplayer.ClientPacketListener;
 
@@ -33,6 +33,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ClientPlayNetworkHandlerMixin {
     @Inject(method = "handleLogin", at = @At("RETURN"))
     private void onGameJoin(CallbackInfo ci) {
-        AmsClient.getInstance().onGameJoin();
+        CarpetAMSAdditionClient.getInstance().onGameJoin();
     }
 }

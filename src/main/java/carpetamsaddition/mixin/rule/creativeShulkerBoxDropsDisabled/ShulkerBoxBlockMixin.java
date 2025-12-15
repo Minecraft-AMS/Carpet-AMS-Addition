@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.creativeShulkerBoxDropsDisabled;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
@@ -41,7 +41,7 @@ public abstract class ShulkerBoxBlockMixin {
             CallbackInfoReturnable<BlockState> cir
 
     ) {
-        if (AmsServerSettings.creativeShulkerBoxDropsDisabled && player.isCreative()) {
+        if (CarpetAMSAdditionSettings.creativeShulkerBoxDropsDisabled && player.isCreative()) {
             world.destroyBlock(pos, false);
             cir.cancel();
         }

@@ -20,8 +20,8 @@
 
 package carpetamsaddition.config.rule.welcomeMessage;
 
-import carpetamsaddition.AmsServer;
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionServer;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
 
@@ -80,12 +80,12 @@ public class CustomWelcomeMessageConfig {
                 }
             }
         } catch (Exception e) {
-            AmsServer.LOGGER.error("An error occurred while processing the welcome message configuration", e);
+            CarpetAMSAdditionServer.LOGGER.error("An error occurred while processing the welcome message configuration", e);
         }
     }
 
     public void sendWelcomeMessage(Player player, MinecraftServer server) {
-        if (AmsServerSettings.welcomeMessage) {
+        if (CarpetAMSAdditionSettings.welcomeMessage) {
             handleMessage(player, server);
         }
     }

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.furnaceSmeltingTimeController;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -33,6 +33,6 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class AbstractFurnaceBlockEntityMixin {
     @ModifyReturnValue(method = "getTotalCookTime", at = @At("RETURN"))
     private static int setCookTime(int original) {
-        return AmsServerSettings.furnaceSmeltingTimeController != -1 ? AmsServerSettings.furnaceSmeltingTimeController : original;
+        return CarpetAMSAdditionSettings.furnaceSmeltingTimeController != -1 ? CarpetAMSAdditionSettings.furnaceSmeltingTimeController : original;
     }
 }

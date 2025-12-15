@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.ironGolemNoDropFlower;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EntityMixin {
     @Inject(method = "spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"), cancellable = true)
     private void noDropPoppy(ServerLevel world, ItemStack stack, CallbackInfoReturnable<ItemEntity> cir) {
-        if (AmsServerSettings.ironGolemNoDropFlower) {
+        if (CarpetAMSAdditionSettings.ironGolemNoDropFlower) {
             Entity entity = (Entity) (Object) this;
             if (entity instanceof IronGolem && stack.getItem().equals(Items.POPPY)) {
                 cir.setReturnValue(null);

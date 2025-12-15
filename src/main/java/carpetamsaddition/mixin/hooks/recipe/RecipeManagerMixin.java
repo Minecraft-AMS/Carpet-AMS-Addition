@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.hooks.recipe;
 
-import carpetamsaddition.AmsServer;
+import carpetamsaddition.CarpetAMSAdditionServer;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
@@ -64,7 +64,7 @@ public abstract class RecipeManagerMixin {
         SortedMap<Identifier, Recipe<?>> sortedMap = new TreeMap<>();
         SortedMap<Identifier, Recipe<?>> originalMap = cir.getReturnValue().values().stream().collect(Collectors.toMap(recipeEntry -> recipeEntry.id().identifier(), RecipeHolder::value, (a, b) -> a, TreeMap::new));
         sortedMap.putAll(originalMap);
-        AmsServer.getInstance().registerCustomRecipes(sortedMap, wrapperLookup);
+        CarpetAMSAdditionServer.getInstance().registerCustomRecipes(sortedMap, wrapperLookup);
         List<RecipeHolder<?>> list = new ArrayList<>(sortedMap.size());
         sortedMap.forEach((id, recipe) -> {
             ResourceKey<@NotNull Recipe<?>> registryKey = ResourceKey.create(Registries.RECIPE, id);

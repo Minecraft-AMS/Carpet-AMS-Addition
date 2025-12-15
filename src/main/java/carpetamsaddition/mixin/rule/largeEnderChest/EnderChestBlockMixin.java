@@ -22,7 +22,7 @@ package carpetamsaddition.mixin.rule.largeEnderChest;
 
 import java.util.OptionalInt;
 
-import carpetamsaddition.AmsServerSettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -55,7 +55,7 @@ public abstract class EnderChestBlockMixin {
         require = 0
     )
 	private OptionalInt onUse(Player playerEntity, MenuProvider namedScreenHandlerFactory, Operation<OptionalInt> original) {
-        if (AmsServerSettings.largeEnderChest) {
+        if (CarpetAMSAdditionSettings.largeEnderChest) {
             SimpleMenuProvider factory = new SimpleMenuProvider((syncId, playerInventory, playerEntityInner) ->
                 ChestMenu.sixRows(
                     syncId, playerInventory, playerEntityInner.getEnderChestInventory()
