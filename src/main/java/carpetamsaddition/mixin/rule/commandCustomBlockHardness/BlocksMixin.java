@@ -23,7 +23,6 @@ package carpetamsaddition.mixin.rule.commandCustomBlockHardness;
 import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
 
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -37,8 +36,7 @@ public abstract class BlocksMixin {
     @Inject(method = "<clinit>", at = @At("RETURN"))
     private static void registerCustomBlockHardness(CallbackInfo ci) {
         for (Block block : BuiltInRegistries.BLOCK) {
-            BlockState state = block.defaultBlockState();
-            float hardness = state.getDestroySpeed(null, null);
+            float hardness = block.defaultDestroyTime();
             CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.put(block, hardness);
         }
     }
