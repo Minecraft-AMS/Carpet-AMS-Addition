@@ -1,4 +1,4 @@
-version:4671
+version:4764
 ao:true
 biomeBlendRadius:4
 chunkSectionFadeInTime:0.75
@@ -165,6 +165,7 @@ key_key.debug.dumpVersion:key.keyboard.v
 key_key.debug.profilingChart:key.keyboard.1
 key_key.debug.fpsCharts:key.keyboard.2
 key_key.debug.networkCharts:key.keyboard.3
+key_key.debug.lightmapTexture:key.keyboard.4
 soundCategory_master:0.9536423841059603
 soundCategory_music:0.0
 soundCategory_record:0.02640845

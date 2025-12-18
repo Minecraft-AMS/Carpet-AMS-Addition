@@ -1,6 +1,6 @@
 apply plugin: 'maven-publish'
 apply plugin: 'com.github.hierynomus.license'
-apply plugin: 'fabric-loom'
+apply plugin: 'net.fabricmc.fabric-loom'
 apply plugin: 'com.replaymod.preprocess'
 
 int mcVersion = 1
@@ -26,21 +26,20 @@ repositories {
 
 // https://github.com/FabricMC/fabric-loader/issues/783
 configurations {
-	modRuntimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
+	//runtimeOnly.exclude group: 'net.fabricmc', module: 'fabric-loader'
 }
 
 dependencies {
 	// loom
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// mods
 	//modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") // modrinth
-	modImplementation "carpet:fabric-carpet:${project.carpet_core_version}" // masa
+	implementation "carpet:fabric-carpet:${project.carpet_core_version}" // masa
 
 	// library mods
-	include(modImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
+	include(implementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 
 	// Dependencies
@@ -72,7 +71,9 @@ loom {
 }
 
 JavaVersion JAVA_VERSION
-if (mcVersion >= 12005) {
+if (mcVersion >= 260000) {
+    JAVA_VERSION = JavaVersion.VERSION_25
+} else if (mcVersion >= 12005) {
 	JAVA_VERSION = JavaVersion.VERSION_21
 } else if (mcVersion >= 11800) {
 	JAVA_VERSION = JavaVersion.VERSION_17

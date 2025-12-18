@@ -31,8 +31,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.trading.MerchantOffers;
-import net.minecraft.world.entity.npc.villager.VillagerTrades;
 
+import net.minecraft.world.item.trading.VillagerTrades;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,46 +41,46 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Villager.class)
 public abstract class VillagerMixin implements AbstractVillagerInvoker, VillagerInvoker {
-    @WrapOperation(
-        method = "updateTrades",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/npc/villager/Villager;addOffersFromItemListings(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/trading/MerchantOffers;[Lnet/minecraft/world/entity/npc/villager/VillagerTrades$ItemListing;I)V"
-        )
-    )
-    private void refreshRecipes(
-        Villager villagerEntity,
-        ServerLevel world,
-        MerchantOffers tradeOffers,
-        VillagerTrades.ItemListing[] factories, int count, Operation<Void> original
-    ) {
-        if (CarpetAMSAdditionSettings.easyRefreshTrades && isNewMerchant(villagerEntity)) {
-            MerchantOffers traderOfferList = villagerEntity.getOffers();
-            traderOfferList.clear();
-            this.invokeAddOffersFromItemListings(world, traderOfferList, factories, count);
-        } else {
-            original.call(villagerEntity, world, tradeOffers, factories, count);
-        }
-    }
-
-    @Inject(
-        method = "mobInteract",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/npc/villager/Villager;startTrading(Lnet/minecraft/world/entity/player/Player;)V"
-        )
-    )
-    private void updateRecipes(Player player, InteractionHand hand, CallbackInfoReturnable<Boolean> cir) {
-        if (CarpetAMSAdditionSettings.easyRefreshTrades) {
-            Villager villagerEntity = (Villager) (Object) this;
-            if (isNewMerchant(villagerEntity) && !player.getMainHandItem().getItem().equals(Items.EMERALD_BLOCK)) {
-                this.invokeUpdateTrades((ServerLevel) villagerEntity.level());
-            }
-        }
-    }
-
-    @Unique
-    private static boolean isNewMerchant(Villager villagerEntity) {
-        return villagerEntity.getVillagerXp() <= 0 && villagerEntity.getVillagerData().level() <= 1;
-    }
+//    @WrapOperation(
+//        method = "updateTrades",
+//        at = @At(
+//            value = "INVOKE",
+//            target = "Lnet/minecraft/world/entity/npc/villager/Villager;addOffersFromItemListings(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/trading/MerchantOffers;[Lnet/minecraft/world/entity/npc/villager/VillagerTrades$ItemListing;I)V"
+//        )
+//    )
+//    private void refreshRecipes(
+//            Villager villagerEntity,
+//            ServerLevel world,
+//            MerchantOffers tradeOffers,
+//            VillagerTrades.ItemListing[] factories, int count, Operation<Void> original
+//    ) {
+//        if (CarpetAMSAdditionSettings.easyRefreshTrades && isNewMerchant(villagerEntity)) {
+//            MerchantOffers traderOfferList = villagerEntity.getOffers();
+//            traderOfferList.clear();
+//            this.invokeAddOffersFromItemListings(world, traderOfferList, factories, count);
+//        } else {
+//            original.call(villagerEntity, world, tradeOffers, factories, count);
+//        }
+//    }
+//
+//    @Inject(
+//        method = "mobInteract",
+//        at = @At(
+//            value = "INVOKE",
+//            target = "Lnet/minecraft/world/entity/npc/villager/Villager;startTrading(Lnet/minecraft/world/entity/player/Player;)V"
+//        )
+//    )
+//    private void updateRecipes(Player player, InteractionHand hand, CallbackInfoReturnable<Boolean> cir) {
+//        if (CarpetAMSAdditionSettings.easyRefreshTrades) {
+//            Villager villagerEntity = (Villager) (Object) this;
+//            if (isNewMerchant(villagerEntity) && !player.getMainHandItem().getItem().equals(Items.EMERALD_BLOCK)) {
+//                this.invokeUpdateTrades((ServerLevel) villagerEntity.level());
+//            }
+//        }
+//    }
+//
+//    @Unique
+//    private static boolean isNewMerchant(Villager villagerEntity) {
+//        return villagerEntity.getVillagerXp() <= 0 && villagerEntity.getVillagerData().level() <= 1;
+//    }
 }
