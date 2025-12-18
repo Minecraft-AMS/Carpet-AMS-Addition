@@ -22,7 +22,7 @@ package carpetamsaddition.observers.rule.largeEnderChest;
 
 import carpet.api.settings.CarpetRule;
 
-import carpetamsaddition.settings.SimpleRuleObserver;
+import carpetamsaddition.settings.RuleObserver;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.MinecraftServerUtil;
@@ -31,7 +31,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.ChatFormatting;
 
-public class LargeEnderChestRuleObserver extends SimpleRuleObserver<Boolean> {
+public class LargeEnderChestRuleObserver extends RuleObserver<Boolean> {
     private static final Translator translator = new Translator("validator.largeEnderChest");
     private static final String MSG_HEAD = "<Carpet AMS Addition> ";
 

@@ -22,16 +22,16 @@ package carpetamsaddition.observers.network;
 
 import carpet.api.settings.CarpetRule;
 
+import carpetamsaddition.settings.RuleObserver;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.settings.SimpleRuleObserver;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.ChatFormatting;
 
-public class NetworkProtocolObserver extends SimpleRuleObserver<Object> {
+public class NetworkProtocolObserver extends RuleObserver<Object> {
     private final Translator tr = new Translator("validator.amsNetworkProtocol");
 
     @Override

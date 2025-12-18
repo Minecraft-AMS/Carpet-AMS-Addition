@@ -23,13 +23,13 @@ package carpetamsaddition.observers.rule.stackableDiscount;
 import carpet.api.settings.CarpetRule;
 
 import carpetamsaddition.mixin.rule.stackableDiscount.GossipTypeAccessor;
-import carpetamsaddition.settings.SimpleRuleObserver;
+import carpetamsaddition.settings.RuleObserver;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.ai.gossip.GossipType;
 
 @SuppressWarnings({"unused", "DataFlowIssue"})
-public class StackableDiscountRuleObserver extends SimpleRuleObserver<Boolean> {
+public class StackableDiscountRuleObserver extends RuleObserver<Boolean> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue) {

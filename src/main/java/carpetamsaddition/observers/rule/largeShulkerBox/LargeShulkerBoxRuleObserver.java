@@ -23,11 +23,11 @@ package carpetamsaddition.observers.rule.largeShulkerBox;
 import carpet.api.settings.CarpetRule;
 
 import carpetamsaddition.mixin.rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor;
-import carpetamsaddition.settings.SimpleRuleObserver;
+import carpetamsaddition.settings.RuleObserver;
 
 import net.minecraft.commands.CommandSourceStack;
 
-public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver<Boolean> {
+public class LargeShulkerBoxRuleObserver extends RuleObserver<Boolean> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue) {

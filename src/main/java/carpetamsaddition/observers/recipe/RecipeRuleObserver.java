@@ -23,12 +23,12 @@ package carpetamsaddition.observers.recipe;
 import carpet.api.settings.CarpetRule;
 
 import carpetamsaddition.helpers.rule.recipeRule.RecipeRuleHelper;
-import carpetamsaddition.settings.SimpleRuleObserver;
+import carpetamsaddition.settings.RuleObserver;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.commands.CommandSourceStack;
 
-public class RecipeRuleObserver extends SimpleRuleObserver<Boolean> {
+public class RecipeRuleObserver extends RuleObserver<Boolean> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         RecipeRuleHelper.onValueChange(MinecraftServerUtil.getServer());
