@@ -330,3 +330,46 @@
 - **/playerPose help**
 
   查看使用说明。
+
+### 下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）
+
+- **/playerNoNetherPortalTeleport globalMode [true/false]**
+
+  设置全局模式。
+
+
+
+- **/playerNoNetherPortalTeleport globalMode**
+
+  查看全局模式状态。
+
+
+
+- **/playerNoNetherPortalTeleport add &lt;player&gt;**
+
+  查看使用说明。
+
+
+
+- **/playerNoNetherPortalTeleport remove &lt;player&gt;**
+
+  将某名玩家从黑名单中移除。
+
+
+
+- **/playerNoNetherPortalTeleport clear**
+
+  清空黑名单。
+
+
+
+- **/playerNoNetherPortalTeleport list**
+
+  查看黑名单。
+
+
+
+- **/playerNoNetherPortalTeleport help**
+
+  查看使用说明。
+

@@ -1476,11 +1476,13 @@ global模式下修改值后需要玩家重新进入游戏。
 
 - 分类: `AMS`, `COMMAND`
 
-## 下界传送门不传送玩家（playerNoNetherPortalTeleport）
+## 下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）
 
 玩家无法通过下界传送门进行传送。
 
-- 类型: `boolean`
+开启规则后，使用`/plerNoNetherPortalTeleport help`命令查看使用说明
+
+- 类型: `String`
   
   
 
@@ -1488,11 +1490,11 @@ global模式下修改值后需要玩家重新进入游戏。
   
   
 
-- 参考选项: `false`, `true`
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
   
   
 
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+- 分类: `AMS`, `FEATURE`, `SURVIVAL` `COMMAND`
 
 ## 无限耐久（infiniteDurability）
 

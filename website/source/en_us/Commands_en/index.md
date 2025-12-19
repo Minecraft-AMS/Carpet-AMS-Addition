@@ -325,3 +325,45 @@
 
   View the usage instructions.
 
+### commandPlayerNoNetherPortalTeleport
+
+- **/playerNoNetherPortalTeleport globalMode [true/false]**
+
+  Set global mode.
+
+
+
+- **/playerNoNetherPortalTeleport globalMode**
+
+  View the global mode status.
+
+
+
+- **/playerNoNetherPortalTeleport add &lt;player&gt;**
+
+  Add a player to the blacklist.
+
+
+
+- **/playerNoNetherPortalTeleport remove &lt;player&gt;**
+
+  Remove a player from the blacklist.
+
+
+
+- **/playerNoNetherPortalTeleport clear**
+
+  Clear the blacklist.
+
+
+
+- **/playerNoNetherPortalTeleport list**
+
+  View the blacklist.
+
+
+
+- **/playerNoNetherPortalTeleport help**
+
+  View the usage instructions.
+
