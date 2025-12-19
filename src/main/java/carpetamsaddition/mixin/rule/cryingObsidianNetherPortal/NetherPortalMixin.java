@@ -36,7 +36,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft >= 1.19")
 @Mixin(PortalShape.class)
 public abstract class NetherPortalMixin {
-    @ModifyReturnValue(method = "method_30487", at = @At("RETURN"))
+    @ModifyReturnValue(method = "lambda$static$0", at = @At("RETURN"))
     private static boolean acceptCryingObsidianCreateNetherPortal(boolean original, BlockState state) {
         if (CarpetAMSAdditionSettings.cryingObsidianNetherPortal) {
             return original || state.getBlock().equals(Blocks.CRYING_OBSIDIAN);

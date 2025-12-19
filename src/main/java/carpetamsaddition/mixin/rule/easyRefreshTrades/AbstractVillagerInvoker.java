@@ -20,18 +20,17 @@
 
 package carpetamsaddition.mixin.rule.easyRefreshTrades;
 
-import net.minecraft.core.HolderSet;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.item.trading.MerchantOffers;
+import net.minecraft.world.item.trading.TradeSet;
 
-import net.minecraft.world.item.trading.VillagerTrade;
-import net.minecraft.world.level.storage.loot.LootContext;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(AbstractVillager.class)
 public interface AbstractVillagerInvoker {
-    @Invoker("addOffersFromItemListings")
-    void invokeAddOffersFromItemListings(final LootContext lootContext, final MerchantOffers merchantOffers, final HolderSet<@NotNull VillagerTrade> potentialOffers, final int numberOfOffers);
+    @Invoker("addOffersFromTradeSet")
+    void invokeAddOffersFromTradeSet(final ServerLevel level, final MerchantOffers offers, final ResourceKey<TradeSet> resourceKey);
 }
