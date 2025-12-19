@@ -14,11 +14,11 @@ Access the website to view all the relevant information about carpet-ams-additio
 
 ## Support Version
 
-✔ 正在维护
+✔ Under maintenance
 
-✖ 停止维护
+✖ Discontinued maintenance
 
-❓ 通常只修复BUG，需要增加正在维护版本中的功能可以提交issue
+❓ Usually only bug fixes
 
 |      Game Version       | Development Status |                                                  Last Supported Version                                                   |
 |:-----------------------:|:------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
