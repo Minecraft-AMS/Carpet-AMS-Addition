@@ -13,30 +13,27 @@
 
 ## 版本支持
 
-|         游戏版本         | 开发状态 |                                                          最后支持版本                                                           |
-|:--------------------:|:----:|:-------------------------------------------------------------------------------------------------------------------------:|
-|       1.21.11        |  ✔   |                                                            ---                                                            |
-|       1.21.10        |  ✔   |                                                            ---                                                            |
-|        1.21.9        |  ✔   |                                                            ---                                                            |
-|        1.21.8        |  ✔   |                                                            ---                                                            |
-|        1.21.7        |  ✔   |                                                            ---                                                            |
-|        1.21.6        |  ✔   |                                                            ---                                                            |
-|        1.21.5        |  ✔   |                                                            ---                                                            |
-|        1.21.4        |  ✔   |                                                            ---                                                            |
-|        1.21.3        |  ✔   |                                                            ---                                                            |
-|        1.21.2        |  ✔   |                                                            ---                                                            |
-|        1.21.1        |  ✔   |                                                            ---                                                            |
-|         1.21         |  ✔   |                                                            ---                                                            |
-|        1.20.6        |  ✔   |                                                            ---                                                            |
-|    1.20 - 1.20.5     |  ✖   |  [Carpet-AMS-Addition-mc1.20-1.20.5-v2.54.0](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v2.54.0)   |
-|        1.19.4        |  ✔   |                                                            ---                                                            |
-|        1.19.3        |  ✖   | [Carpet-AMS-Addition-mc1.19.3-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
-|        1.19.2        |  ✖   | [Carpet-AMS-Addition-mc1.19.2-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
-| **<u>1.18.2(主)</u>** |  ✔   |                                                            ---                                                            |
-|        1.17.1        |  ✔   |                                                            ---                                                            |
-|        1.16.5        |  ✔   |                                                            ---                                                            |
-|        1.15.2        |  ❓   |                [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy)                 |
-|        1.14.4        |  ❓   |                [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy)                 |
+✔ 正在维护
+
+✖ 停止维护
+
+❓ 通常只修复BUG，需要增加正在维护版本中的功能可以提交issue
+
+|      游戏版本       | 开发状态 |                         最后支持版本                         |
+| :-----------------: | :------: | :----------------------------------------------------------: |
+| **<u>26.1(主)</u>** |    ✔     |                             ---                              |
+|       1.21.11       |    ❓     |                             ---                              |
+|   1.21 - 1.21.10    |    ✖     |                             ---                              |
+|       1.20.6        |    ❓     |                             ---                              |
+|    1.20 - 1.20.5    |    ✖     | [Carpet-AMS-Addition-mc1.20-1.20.5-v2.54.0](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v2.54.0) |
+|       1.19.4        |    ❓     |                             ---                              |
+|       1.19.3        |    ✖     | [Carpet-AMS-Addition-mc1.19.3-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
+|       1.19.2        |    ✖     | [Carpet-AMS-Addition-mc1.19.2-v1.5.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v1.11.2%26v1.5.3) |
+|       1.18.2        |    ❓     |                             ---                              |
+|       1.17.1        |    ❓     |                             ---                              |
+|       1.16.5        |    ❓     |                             ---                              |
+|       1.15.2        |    ❓     | [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy) |
+|       1.14.4        |    ❓     | [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy) |
 
 ## 许可
 此项目在 [ LGPL-v3.0 ](https://choosealicense.com/licenses/lgpl-3.0/) 许可证下可用,您可以随意从中学习并将其纳入您自己的项目中。
