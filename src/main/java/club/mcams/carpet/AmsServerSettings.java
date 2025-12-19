@@ -367,8 +367,11 @@ public class AmsServerSettings {
     )
     public static String commandPacketInternetGroper = "false";
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL})
-    public static boolean playerNoNetherPortalTeleport = false;
+    @Rule(
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, FEATURE, SURVIVAL, COMMAND}
+    )
+    public static String commandPlayerNoNetherPortalTeleport = "false";
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean infiniteDurability = false;

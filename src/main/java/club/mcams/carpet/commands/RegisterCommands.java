@@ -35,6 +35,7 @@ import club.mcams.carpet.commands.rule.commandGetSystemInfo.GetSystemInfoCommand
 import club.mcams.carpet.commands.rule.commandHere.HereCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPacketInternetGroper.PingCommandRegistry;
 import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
+import club.mcams.carpet.commands.rule.commandPlayerNoNetherPortalTeleport.PlayerNoNetherPortalTeleportRegistry;
 import club.mcams.carpet.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
 import club.mcams.carpet.commands.rule.commandWhere.WhereCommandRegistry;
 import club.mcams.carpet.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
@@ -128,5 +129,6 @@ public class RegisterCommands {
         AMS_CMD_QUEUE.add(() -> GetClientPlayerFpsRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> SetPlayerPoseCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> AmspCommandRegistry.register(dispatcher));
+        AMS_CMD_QUEUE.add(() -> PlayerNoNetherPortalTeleportRegistry.register(dispatcher));
     }
 }

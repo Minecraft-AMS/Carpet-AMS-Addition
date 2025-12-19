@@ -153,6 +153,24 @@ carpetamsaddition:
       deny_all_client_feedback: '<AMSP> All current clients have been prohibited from communicating with the server via AMSP'
       set_server_support_feedback: '<AMSP> The server status has been changed to: %s'
       request_handshake_feedback: '<AMSP> A handshake request has been sent to %s'
+    playerNoNetherPortalTeleport:
+      globalMode_enable: '<playerNoNetherPortalTeleport> Global mode is turned on'
+      globalMode_disable: '<playerNoNetherPortalTeleport> Global mode is turned off'
+      globalMode_state: '<playerNoNetherPortalTeleport> Global mode: %s'
+      add_success: '<playerNoNetherPortalTeleport> %s teleportation through the nether portal has been prohibited'
+      add_fail: '<playerNoNetherPortalTeleport> %s is already on the blacklist'
+      remove_success: '<playerNoNetherPortalTeleport> %s has been removed from the blacklist'
+      remove_fail: '<playerNoNetherPortalTeleport> %s does not exist in the blacklist'
+      clear_success: '<playerNoNetherPortalTeleport> The blacklist has been cleared'
+      clear_fail: '<playerNoNetherPortalTeleport> The blacklist is empty'
+      list_title: '[ Nether portal teleports player blacklist ]'
+      help:
+        globalMode: '/playerNoNetherPortalTeleport globalMode [true/false] - Set global mode'
+        globalModeState: '/playerNoNetherPortalTeleport globalMode - View the global mode status'
+        add: '/playerNoNetherPortalTeleport add <player> - Add a player to the blacklist'
+        remove: '/playerNoNetherPortalTeleport remove <player> - Remove a player from the blacklist'
+        clear: '/playerNoNetherPortalTeleport clear - Clear the blacklist'
+        list: '/playerNoNetherPortalTeleport list - View the blacklist'
 
   logger:
     serverRuntime:
@@ -413,8 +431,10 @@ carpetamsaddition:
         desc: player can use the "ping" command in the game
         extra:
           '0': 'After enabling the rule, use the "/ping help" command to view the usage instructions'
-      playerNoNetherPortalTeleport:
+      commandPlayerNoNetherPortalTeleport:
         desc: Players cannot teleport through nether portals
+        extra:
+          '0': 'After enabling the rule, use the "/plerNoNetherPortalTeleport help" command to view the usage instructions'
       infiniteDurability:
         desc: Use items without losing durability
       welcomeMessage:

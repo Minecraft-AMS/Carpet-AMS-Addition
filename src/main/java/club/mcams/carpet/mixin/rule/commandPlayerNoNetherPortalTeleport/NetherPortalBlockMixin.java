@@ -18,9 +18,10 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.playerNoNetherPortalTeleport;
+package club.mcams.carpet.mixin.rule.commandPlayerNoNetherPortalTeleport;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.commands.rule.commandPlayerNoNetherPortalTeleport.PlayerNoNetherPortalTeleportRegistry;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -30,7 +31,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.block.NetherPortalBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.Objects;
 
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
@@ -52,7 +56,7 @@ public abstract class NetherPortalBlockMixin {
         //#endif
         Operation<Boolean> original
     ) {
-        if (AmsServerSettings.playerNoNetherPortalTeleport && entity instanceof PlayerEntity) {
+        if (shouldPreventTeleport(entity)) {
             return false;
         } else {
             //#if MC>=12100
@@ -61,5 +65,18 @@ public abstract class NetherPortalBlockMixin {
             return original.call(entity);
             //#endif
         }
+    }
+
+    @Unique
+    private boolean shouldPreventTeleport(Entity entity) {
+        if (Objects.equals(AmsServerSettings.commandPlayerNoNetherPortalTeleport, "false")) {
+            return false;
+        }
+
+        if (!(entity instanceof PlayerEntity)) {
+            return false;
+        }
+
+        return PlayerNoNetherPortalTeleportRegistry.isGlobalMode || PlayerNoNetherPortalTeleportRegistry.NO_NETHER_PORTAL_TELEPORT_SET.contains(entity);
     }
 }

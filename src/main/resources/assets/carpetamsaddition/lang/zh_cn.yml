@@ -154,6 +154,24 @@ carpetamsaddition:
       deny_all_client_feedback: '<AMSP> 已禁止当前所有客户端通过AMSP与服务器进行通信'
       set_server_support_feedback: '<AMSP> 服务器支持状态已更改为: %s'
       request_handshake_feedback: '<AMSP> 已向 %s 发出握手请求'
+    playerNoNetherPortalTeleport:
+      globalMode_enable: '<playerNoNetherPortalTeleport> 已开启全局模式'
+      globalMode_disable: '<playerNoNetherPortalTeleport> 已关闭全局模式'
+      globalMode_state: '<playerNoNetherPortalTeleport> 全局模式: %s'
+      add_success: '<playerNoNetherPortalTeleport> 已禁止 %s 通过地狱门进行传送'
+      add_fail: '<playerNoNetherPortalTeleport> %s 已在黑名单中'
+      remove_success: '<playerNoNetherPortalTeleport> %s 已从黑名单中移除'
+      remove_fail: '<playerNoNetherPortalTeleport> %s 不存在于黑名单中'
+      clear_success: '<playerNoNetherPortalTeleport> 已清空黑名单'
+      clear_fail: '<playerNoNetherPortalTeleport> 黑名单为空'
+      list_title: '[ 地狱门传送玩家黑名单 ]'
+      help:
+        globalMode: '/playerNoNetherPortalTeleport globalMode [true/false] - 设置全局模式'
+        globalModeState: '/playerNoNetherPortalTeleport globalMode - 查看全局模式状态'
+        add: '/playerNoNetherPortalTeleport add <player> - 添加某名玩家到黑名单'
+        remove: '/playerNoNetherPortalTeleport remove <player> - 将某名玩家从黑名单中移除'
+        clear: '/playerNoNetherPortalTeleport clear - 清空黑名单'
+        list: '/playerNoNetherPortalTeleport list - 查看黑名单'
 
   logger:
     serverRuntime:
@@ -482,6 +500,8 @@ carpetamsaddition:
       playerNoNetherPortalTeleport:
         name: 下界传送门不传送玩家
         desc: 玩家无法通过下界传送门进行传送
+        extra:
+          '0': '开启规则后，使用"/plerNoNetherPortalTeleport help"命令查看使用说明'
       infiniteDurability:
         name: 无限耐久
         desc: 使用物品不会丢失耐久

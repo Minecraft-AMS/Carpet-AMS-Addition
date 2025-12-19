@@ -1526,23 +1526,25 @@ After enabling the rules, use the `/ping help` command to view the usage instruc
 
 - Categroies: `AMS`, `COMMAND`
 
-## playerNoNetherPortalTeleport
+## commandPlayerNoNetherPortalTeleport
 
 Players cannot teleport through nether portals.
 
-- Type: `boolean`
-  
-  
+After enabling the rule, use the `/plerNoNetherPortalTeleport help` command to view the usage instructions
+
+- Type: `String`
+
+
 
 - Default: `false`
-  
-  
 
-- Suggested options: `false`, `true`
-  
-  
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL` `COMMAND`
 
 ## infiniteDurability
 
