@@ -22,20 +22,27 @@ package carpetamsaddition.mixin.rule.hopperSuctionDisabled;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.function.BooleanSupplier;
+
+@SuppressWarnings("SimplifiableConditionalExpression")
 @Mixin(HopperBlockEntity.class)
 public abstract class HopperBlockEntityMixin {
-    @Inject(method = "tryMoveItems", at = @At("HEAD"), cancellable = true)
-    private static void insertAndExtract(CallbackInfoReturnable<Boolean> cir) {
-        if (CarpetAMSAdditionSettings.hopperSuctionDisabled) {
-            cir.setReturnValue(false);
-            cir.cancel();
-        }
+    @WrapOperation(
+        method = "tryMoveItems",
+        at = @At(
+            value = "INVOKE",
+            target = "Ljava/util/function/BooleanSupplier;getAsBoolean()Z"
+        )
+    )
+    private static boolean redirectSuckInItems(BooleanSupplier boolSupplier, Operation<Boolean> original) {
+        return CarpetAMSAdditionSettings.hopperSuctionDisabled ? false : original.call(boolSupplier);
     }
 }
