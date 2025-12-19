@@ -31,9 +31,6 @@ import net.minecraft.world.level.portal.PortalShape;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.19")
 @Mixin(PortalShape.class)
 public abstract class NetherPortalMixin {
     @ModifyReturnValue(method = "lambda$static$0", at = @At("RETURN"))
