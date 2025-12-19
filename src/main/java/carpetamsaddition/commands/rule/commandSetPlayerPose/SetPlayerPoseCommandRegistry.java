@@ -52,6 +52,7 @@ public class SetPlayerPoseCommandRegistry {
         dispatcher.register(
             Commands.literal("playerPose")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandSetPlayerPose))
+            // playerPose <player> set <pose>
             .then(Commands.argument("player", EntityArgument.player())
             .then(Commands.literal("set")
             .then(Commands.argument("pose", StringArgumentType.greedyString())
@@ -59,11 +60,15 @@ public class SetPlayerPoseCommandRegistry {
             .executes(ctx -> set(
                 EntityArgument.getPlayer(ctx, "player"), ctx.getSource().getServer(), StringArgumentType.getString(ctx, "pose")
             )))))
+
+            // playerPose <player> stop
             .then(Commands.argument("player", EntityArgument.player())
             .then(Commands.literal("stop")
             .executes(ctx -> stop(
                 EntityArgument.getPlayer(ctx, "player"), ctx.getSource().getServer()
             ))))
+
+            // help
             .then(Commands.literal("help")
             .executes(ctx -> help(ctx.getSource())))
         );

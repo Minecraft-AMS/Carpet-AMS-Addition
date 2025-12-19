@@ -36,11 +36,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
 import java.util.Random;
 
-@GameVersion(version = "Minecraft >= 1.20")
 @Mixin(Block.class)
 public abstract class BlockMixin {
     @Inject(method = "playerWillDestroy", at = @At("HEAD"))

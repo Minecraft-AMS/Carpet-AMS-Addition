@@ -31,9 +31,6 @@ import net.minecraft.world.item.FireworkRocketItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.21.6")
 @Mixin(FireworkRocketItem.class)
 public abstract class FireworkRocketItemMixin {
     @WrapOperation(

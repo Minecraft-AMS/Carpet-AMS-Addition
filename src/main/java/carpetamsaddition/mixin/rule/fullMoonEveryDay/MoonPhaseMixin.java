@@ -29,9 +29,6 @@ import net.minecraft.world.level.MoonPhase;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.21.11")
 @Mixin(MoonPhase.class)
 public abstract class MoonPhaseMixin {
     @ModifyReturnValue(method = "index", at = @At("RETURN"))

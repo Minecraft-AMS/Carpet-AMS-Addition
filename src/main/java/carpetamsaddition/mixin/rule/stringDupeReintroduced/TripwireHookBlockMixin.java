@@ -35,15 +35,15 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft >= 1.21.2", desc = "https://bugs.mojang.com/browse/MC-59471")
 @Mixin(TripWireHookBlock.class)
 public abstract class TripwireHookBlockMixin {
-//    @ModifyExpressionValue(
-//        method = "calculateState",
-//        at = @At(
-//            value = "INVOKE",
-//            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
-//            ordinal = 3
-//        )
-//    )
-//    private static boolean stringDupeReintroduced(boolean original) {
-//        return CarpetAMSAdditionSettings.stringDupeReintroduced ? true : original;
-//    }
+    @ModifyExpressionValue(
+        method = "calculateState",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
+            ordinal = 3
+        )
+    )
+    private static boolean stringDupeReintroduced(boolean original) {
+        return CarpetAMSAdditionSettings.stringDupeReintroduced ? true : original;
+    }
 }
