@@ -35,6 +35,7 @@ import carpetamsaddition.commands.rule.commandGetSystemInfo.GetSystemInfoCommand
 import carpetamsaddition.commands.rule.commandHere.HereCommandRegistry;
 import carpetamsaddition.commands.rule.commandPacketInternetGroper.PingCommandRegistry;
 import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
+import carpetamsaddition.commands.rule.commandPlayerNoNetherPortalTeleport.PlayerNoNetherPortalTeleportRegistry;
 import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
 import carpetamsaddition.commands.rule.commandWhere.WhereCommandRegistry;
 import carpetamsaddition.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
@@ -44,9 +45,7 @@ import carpetamsaddition.commands.rule.commandPlayerChunkLoadController.PlayerCh
 import carpetamsaddition.commands.rule.commandGoto.GotoCommandRegistry;
 
 import net.minecraft.commands.CommandSourceStack;
-//#if MC>=11900
 import net.minecraft.commands.CommandBuildContext;
-//#endif
 
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -84,5 +83,6 @@ public class RegisterCommands {
         AMS_CMD_QUEUE.add(() -> GetClientPlayerFpsRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> SetPlayerPoseCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> AmspCommandRegistry.register(dispatcher));
+        AMS_CMD_QUEUE.add(() -> PlayerNoNetherPortalTeleportRegistry.register(dispatcher));
     }
 }

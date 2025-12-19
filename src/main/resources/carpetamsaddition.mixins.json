@@ -127,7 +127,7 @@
     "rule.perfectInvisibility_sneakInvisibility.EntityInvoker",
     "rule.perfectInvisibility_sneakInvisibility.LivingEntityMixin",
     "rule.phantomSpawnAlert.PhantomSpawnerMixin",
-    "rule.playerNoNetherPortalTeleport.NetherPortalBlockMixin",
+    "rule.commandPlayerNoNetherPortalTeleport.NetherPortalBlockMixin",
     "rule.pointedDripstoneCollisionBoxDisabled.BlockStateBaseMixin",
     "rule.powerfulExpMending.ExperienceOrbMixin",
     "rule.preventAdministratorCheat.AdvancementCommandsMixin",

@@ -36,10 +36,10 @@ carpetamsaddition:
       removeAll: 'All custom block blast resistance values have been removed.'
       list: '[ Block / Blast resistance ]'
       help:
-        set: '/customBlockBlastResistance set <block> <hardness>  ->  Add or modify blocks and their blast resistance'
-        remove: '/customBlockBlastResistance remove <block>  ->  Remove a block from the list'
-        removeAll: '/customBlockBlastResistance removeAll  ->  Remove all blocks from the list'
-        list: '/customBlockBlastResistance list  ->  Display all added blocks'
+        set: '/customBlockBlastResistance set <block> <hardness> - Add or modify blocks and their blast resistance'
+        remove: '/customBlockBlastResistance remove <block> - Remove a block from the list'
+        removeAll: '/customBlockBlastResistance removeAll - Remove all blocks from the list'
+        list: '/customBlockBlastResistance list - Display all added blocks'
     here:
       overworld: 'overworld'
       nether: 'nether'
@@ -63,17 +63,17 @@ carpetamsaddition:
       removeAll: 'All the guides were dismissed'
       list: '[ Leader list ]'
       help:
-        add: '/leader add <PlayerName>  ->  Add a tour guide'
-        remove: '/leader remove <PlayerName>  ->  Remove a tour guide'
-        removeAll: '/leader removeAll  ->  Remove all tour guide'
-        broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick>  ->  Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting'
-        list: '/leader list  ->  View tour guide list'
+        add: '/leader add <PlayerName> - Add a tour guide'
+        remove: '/leader remove <PlayerName> - Remove a tour guide'
+        removeAll: '/leader removeAll - Remove all tour guide'
+        broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick> - Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting'
+        list: '/leader list - View tour guide list'
     ping:
       stop_ping: 'Ping operation stopped.'
       active_ping_is_null: 'No active ping operation to stop.'
       help:
-        ping: '/pings <targetIpOrDomainName> <pingQuantity>  ->  Ping a specific host'
-        stop: '/pings stop  ->  Interrupt the ping operation'
+        ping: '/pings <targetIpOrDomainName> <pingQuantity> - Ping a specific host'
+        stop: '/pings stop - Interrupt the ping operation'
     getSaveSize:
       size_msg: 'Current save size:'
       save_success_msg: '[ Save world success ]'
@@ -91,21 +91,21 @@ carpetamsaddition:
       removeAll: 'All entries have been removed'
       list: '[ Custom command permission level list ]'
       help:
-        set: '/customCommandPermissionLevel set <command> <permissionLevel>  ->  Set the permission level of a command'
-        remove: '/customCommandPermissionLevel remove <command>  ->  Remove a modified command'
-        refresh: '/customCommandPermissionLevel refresh  ->  Refresh command tree'
-        removeAll: '/customCommandPermissionLevel removeAll  ->  Remove all modified commands'
-        list: '/customCommandPermissionLevel list  ->  View the list of modified commands'
+        set: '/customCommandPermissionLevel set <command> <permissionLevel> - Set the permission level of a command'
+        remove: '/customCommandPermissionLevel remove <command> - Remove a modified command'
+        refresh: '/customCommandPermissionLevel refresh - Refresh command tree'
+        removeAll: '/customCommandPermissionLevel removeAll - Remove all modified commands'
+        list: '/customCommandPermissionLevel list - View the list of modified commands'
     customMovableBlock:
       already_exists: " is already exists"
       not_found: " not found"
       removeAll: "All block have been removed from list"
       list: "[ Moveable block list ]"
       help:
-        set: '/customMovableBlock add <block>  ->  Added a movable block'
-        remove: '/customMovableBlock remove <block>  ->  Delete a movable block'
-        removeAll: '/customMovableBlock removeAll  ->  Removes all added movable blocks'
-        list: '/customMovableBlock list  ->  Check out the list of movable blocks'
+        set: '/customMovableBlock add <block> - Added a movable block'
+        remove: '/customMovableBlock remove <block> - Delete a movable block'
+        removeAll: '/customMovableBlock removeAll - Removes all added movable blocks'
+        list: '/customMovableBlock list - Check out the list of movable blocks'
     commandGetHeldItemID:
       getHeldItemID:
         copy: 'Copy to clipboard'
@@ -115,10 +115,10 @@ carpetamsaddition:
       removeAll: "All item have been removed from list"
       list: "[ Anti Fire item list ]"
       help:
-        set: '/customAntiFireItems add <item>  ->  Added a anti fire item'
-        remove: '/customAntiFireItems remove <item>  ->  Delete a anti fire item'
-        removeAll: '/customAntiFireItems removeAll  ->  Removes all added anti fire item'
-        list: '/customAntiFireItems list  ->  Check out the list of anti fire item'
+        set: '/customAntiFireItems add <item> - Added a anti fire item'
+        remove: '/customAntiFireItems remove <item> - Delete a anti fire item'
+        removeAll: '/customAntiFireItems removeAll - Removes all added anti fire item'
+        list: '/customAntiFireItems list - Check out the list of anti fire item'
     carpetExtensionModWikiHyperlink:
       click_to_jump: 'Click link to jump: '
     customBlockHardness:
@@ -127,19 +127,19 @@ carpetamsaddition:
       list: '[ Block / Hardness ]'
       default_hardness: 'default hardness:'
       help:
-        set: '/customBlockHardness set <block> <hardness>  ->  Add or modify blocks and their hardness'
-        remove: '/customBlockHardness remove <block>  ->  Remove a block from the list'
-        removeAll: '/customBlockHardness removeAll  ->  Remove all blocks from the list'
-        get_default_hardness: '/customBlockHardness getDefaultHardness <block>  ->  Query the default hardness of blocks'
-        list: '/customBlockHardness list  ->  Display all added blocks'
+        set: '/customBlockHardness set <block> <hardness> - Add or modify blocks and their hardness'
+        remove: '/customBlockHardness remove <block> - Remove a block from the list'
+        removeAll: '/customBlockHardness removeAll - Remove all blocks from the list'
+        get_default_hardness: '/customBlockHardness getDefaultHardness <block> - Query the default hardness of blocks'
+        list: '/customBlockHardness list - Display all added blocks'
     at:
       title: '%s @ You'
     getClientPlayerFps:
       feedback: '%s - FPS: %s'
-      help: '/getClientPlayerFps <player>  ->  Get the FPS of the specified player'
+      help: '/getClientPlayerFps <player> - Get the FPS of the specified player'
     playerPose:
-      set_help: '/playerPose <player> set <pose>  ->  Set player pose'
-      stop_help: '/playerPose <player> stop  ->  Stop posing'
+      set_help: '/playerPose <player> set <pose> - Set player pose'
+      stop_help: '/playerPose <player> stop - Stop posing'
     amsp:
       support_client_set_is_none: '<AMSP> No client supports AMSP'
       support_client_list_title: 'List of clients that support AMSP:'
@@ -153,6 +153,24 @@ carpetamsaddition:
       deny_all_client_feedback: '<AMSP> All current clients have been prohibited from communicating with the server via AMSP'
       set_server_support_feedback: '<AMSP> The server status has been changed to: %s'
       request_handshake_feedback: '<AMSP> A handshake request has been sent to %s'
+    playerNoNetherPortalTeleport:
+      globalMode_enable: '<playerNoNetherPortalTeleport> Global mode is turned on'
+      globalMode_disable: '<playerNoNetherPortalTeleport> Global mode is turned off'
+      globalMode_state: '<playerNoNetherPortalTeleport> Global mode: %s'
+      add_success: '<playerNoNetherPortalTeleport> %s teleportation through the nether portal has been prohibited'
+      add_fail: '<playerNoNetherPortalTeleport> %s is already on the blacklist'
+      remove_success: '<playerNoNetherPortalTeleport> %s has been removed from the blacklist'
+      remove_fail: '<playerNoNetherPortalTeleport> %s does not exist in the blacklist'
+      clear_success: '<playerNoNetherPortalTeleport> The blacklist has been cleared'
+      clear_fail: '<playerNoNetherPortalTeleport> The blacklist is empty'
+      list_title: '[ Nether portal teleports player blacklist ]'
+      help:
+        globalMode: '/playerNoNetherPortalTeleport globalMode [true/false] - Set global mode'
+        globalModeState: '/playerNoNetherPortalTeleport globalMode - View the global mode status'
+        add: '/playerNoNetherPortalTeleport add <player> - Add a player to the blacklist'
+        remove: '/playerNoNetherPortalTeleport remove <player> - Remove a player from the blacklist'
+        clear: '/playerNoNetherPortalTeleport clear - Clear the blacklist'
+        list: '/playerNoNetherPortalTeleport list - View the blacklist'
 
   logger:
     serverRuntime:
@@ -409,8 +427,10 @@ carpetamsaddition:
         desc: player can use the "ping" command in the game
         extra:
           '0': 'After enabling the rule, use the "/ping help" command to view the usage instructions'
-      playerNoNetherPortalTeleport:
+      commandPlayerNoNetherPortalTeleport:
         desc: Players cannot teleport through nether portals
+        extra:
+          '0': 'After enabling the rule, use the "/plerNoNetherPortalTeleport help" command to view the usage instructions'
       infiniteDurability:
         desc: Use items without losing durability
       welcomeMessage:

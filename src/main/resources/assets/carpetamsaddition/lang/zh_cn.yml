@@ -37,10 +37,10 @@ carpetamsaddition:
       removeAll: '所有自定义方块及其爆炸抗性已从列表删除'
       list: '[ 方块 / 爆炸抗性 ]'
       help:
-        set: '/customBlockBlastResistance set <block> <hardness>  ->  添加或修改方块及其爆炸抗性'
-        remove: '/customBlockBlastResistance remove <block>  ->  从列表中移除方块'
-        removeAll: '/customBlockBlastResistance removeAll  ->  移除列表中的所有方块'
-        list: '/customBlockBlastResistance list  ->  显示所有添加的方块'
+        set: '/customBlockBlastResistance set <block> <hardness> - 添加或修改方块及其爆炸抗性'
+        remove: '/customBlockBlastResistance remove <block> - 从列表中移除方块'
+        removeAll: '/customBlockBlastResistance removeAll - 移除列表中的所有方块'
+        list: '/customBlockBlastResistance list - 显示所有添加的方块'
     here:
       overworld: '主世界'
       nether: '下界'
@@ -64,17 +64,17 @@ carpetamsaddition:
       removeAll: '所有的导游都被解雇了'
       list: '[ 导游列表 ]'
       help:
-        add: '/leader add <PlayerName>  ->  添加一名导游'
-        remove: '/leader remove <PlayerName>  ->  移除一名导游'
-        removeAll: '/leader removeAll  ->  解雇所有导游'
-        broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick>  ->  定时广播一名导游的坐标，时间设置为负数停止广播'
-        list: '/leader list  ->  查看导游列表'
+        add: '/leader add <PlayerName> - 添加一名导游'
+        remove: '/leader remove <PlayerName> - 移除一名导游'
+        removeAll: '/leader removeAll - 解雇所有导游'
+        broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick> - 定时广播一名导游的坐标，时间设置为负数停止广播'
+        list: '/leader list - 查看导游列表'
     ping:
       stop_ping: '已中断ping操作'
       active_ping_is_null: '没有正在活动的ping操作'
       help:
-        ping: '/pings <目标IP/域名> <ping的次数>  ->  ping某个主机'
-        stop: '/pings stop  ->  中断ping操作'
+        ping: '/pings <目标IP/域名> <ping的次数> - ping某个主机'
+        stop: '/pings stop - 中断ping操作'
     getSaveSize:
       size_msg: '当前存档大小：'
       save_success_msg: '[ 保存世界成功 ]'
@@ -92,21 +92,21 @@ carpetamsaddition:
       removeAll: '已删除所有条目'
       list: '[ 自定义指令权限等级列表 ]'
       help:
-        set: '/customCommandPermissionLevel set <指令> <权限等级>  ->  设置某个指令的权限等级'
-        remove: '/customCommandPermissionLevel remove <指令>  ->  删除某个被修改的指令'
-        refresh: '/customCommandPermissionLevel refresh  ->  刷新指令树'
-        removeAll: '/customCommandPermissionLevel removeAll  ->  删除所有被修改的指令'
-        list: '/customCommandPermissionLevel list  ->  查看被修改的指令列表'
+        set: '/customCommandPermissionLevel set <指令> <权限等级> - 设置某个指令的权限等级'
+        remove: '/customCommandPermissionLevel remove <指令> - 删除某个被修改的指令'
+        refresh: '/customCommandPermissionLevel refresh - 刷新指令树'
+        removeAll: '/customCommandPermissionLevel removeAll - 删除所有被修改的指令'
+        list: '/customCommandPermissionLevel list - 查看被修改的指令列表'
     customMovableBlock:
       already_exists: " 已存在"
       not_found: " 不存在"
       removeAll: "已删除所有条目"
       list: "[ 可移动方块列表 ]"
       help:
-        set: '/customMovableBlock add <方块注册名>  ->  增加一个可移动方块'
-        remove: '/customMovableBlock remove <方块注册名>  ->  删除一个可移动方块'
-        removeAll: '/customMovableBlock removeAll  ->  删除所有添加的可移动方块'
-        list: '/customMovableBlock list  ->  查看可移动方块列表'
+        set: '/customMovableBlock add <方块注册名> - 增加一个可移动方块'
+        remove: '/customMovableBlock remove <方块注册名> - 删除一个可移动方块'
+        removeAll: '/customMovableBlock removeAll - 删除所有添加的可移动方块'
+        list: '/customMovableBlock list - 查看可移动方块列表'
     commandGetHeldItemID:
       getHeldItemID:
         copy: '复制到剪切板'
@@ -116,10 +116,10 @@ carpetamsaddition:
       removeAll: "已删除所有条目"
       list: "[ 防火物品列表 ]"
       help:
-        set: '/customAntiFireItems add <物品注册名>  ->  增加一个防火物品'
-        remove: '/customAntiFireItems remove <物品注册名>  ->  删除一个防火物品'
-        removeAll: '/customAntiFireItems removeAll  ->  删除所有添加的防火物品'
-        list: '/customAntiFireItems list  ->  查看防火物品列表'
+        set: '/customAntiFireItems add <物品注册名> - 增加一个防火物品'
+        remove: '/customAntiFireItems remove <物品注册名> - 删除一个防火物品'
+        removeAll: '/customAntiFireItems removeAll - 删除所有添加的防火物品'
+        list: '/customAntiFireItems list - 查看防火物品列表'
     carpetExtensionModWikiHyperlink:
       click_to_jump: '点击此链接访问页面: '
     customBlockHardness:
@@ -128,19 +128,19 @@ carpetamsaddition:
       list: '[ 方块 / 硬度 ]'
       default_hardness: '的默认硬度为:'
       help:
-        set: '/customBlockHardness set <block> <hardness>  ->  添加或修改方块及其硬度'
-        remove: '/customBlockHardness remove <block>  ->  从列表中移除方块'
-        removeAll: '/customBlockHardness removeAll  ->  移除列表中的所有方块'
-        get_default_hardness: '/customBlockHardness getDefaultHardness <block>  ->  查询方块的默认硬度'
-        list: '/customBlockHardness list  ->  显示所有添加的方块'
+        set: '/customBlockHardness set <block> <hardness> - 添加或修改方块及其硬度'
+        remove: '/customBlockHardness remove <block> - 从列表中移除方块'
+        removeAll: '/customBlockHardness removeAll - 移除列表中的所有方块'
+        get_default_hardness: '/customBlockHardness getDefaultHardness <block> - 查询方块的默认硬度'
+        list: '/customBlockHardness list - 显示所有添加的方块'
     at:
       title: '%s @ 了你'
     getClientPlayerFps:
       feedback: '%s - FPS: %s'
-      help: '/getClientPlayerFps <player>  ->  获取指定玩家的FPS'
+      help: '/getClientPlayerFps <player> - 获取指定玩家的FPS'
     playerPose:
-      set_help: '/playerPose <player> set <pose>  ->  设置玩家姿势'
-      stop_help: '/playerPose <player> stop  ->  停止做姿势'
+      set_help: '/playerPose <player> set <pose> - 设置玩家姿势'
+      stop_help: '/playerPose <player> stop - 停止做姿势'
     amsp:
       support_client_set_is_none: '<AMSP> 当前没有支持AMSP的客户端'
       support_client_list_title: '支持AMSP的客户端列表:'
@@ -154,6 +154,24 @@ carpetamsaddition:
       deny_all_client_feedback: '<AMSP> 已禁止当前所有客户端通过AMSP与服务器进行通信'
       set_server_support_feedback: '<AMSP> 服务器支持状态已更改为: %s'
       request_handshake_feedback: '<AMSP> 已向 %s 发出握手请求'
+    playerNoNetherPortalTeleport:
+      globalMode_enable: '<playerNoNetherPortalTeleport> 已开启全局模式'
+      globalMode_disable: '<playerNoNetherPortalTeleport> 已关闭全局模式'
+      globalMode_state: '<playerNoNetherPortalTeleport> 全局模式: %s'
+      add_success: '<playerNoNetherPortalTeleport> 已禁止 %s 通过地狱门进行传送'
+      add_fail: '<playerNoNetherPortalTeleport> %s 已在黑名单中'
+      remove_success: '<playerNoNetherPortalTeleport> %s 已从黑名单中移除'
+      remove_fail: '<playerNoNetherPortalTeleport> %s 不存在于黑名单中'
+      clear_success: '<playerNoNetherPortalTeleport> 已清空黑名单'
+      clear_fail: '<playerNoNetherPortalTeleport> 黑名单为空'
+      list_title: '[ 地狱门传送玩家黑名单 ]'
+      help:
+        globalMode: '/playerNoNetherPortalTeleport globalMode [true/false] - 设置全局模式'
+        globalModeState: '/playerNoNetherPortalTeleport globalMode - 查看全局模式状态'
+        add: '/playerNoNetherPortalTeleport add <player> - 添加某名玩家到黑名单'
+        remove: '/playerNoNetherPortalTeleport remove <player> - 将某名玩家从黑名单中移除'
+        clear: '/playerNoNetherPortalTeleport clear - 清空黑名单'
+        list: '/playerNoNetherPortalTeleport list - 查看黑名单'
 
   logger:
     serverRuntime:
@@ -473,9 +491,11 @@ carpetamsaddition:
         desc: 玩家可以在游戏中使用ping命令
         extra:
           '0': '开启规则后，使用"/ping help"命令查看使用说明'
-      playerNoNetherPortalTeleport:
+      commandPlayerNoNetherPortalTeleport:
         name: 下界传送门不传送玩家
-        desc: 玩家无法通过下界传送门进行传送
+        desc: 让玩家无法通过下界传送门进行传送
+        extra:
+          '0': '开启规则后，使用"/plerNoNetherPortalTeleport help"命令查看使用说明'
       infiniteDurability:
         name: 无限耐久
         desc: 使用物品不会丢失耐久

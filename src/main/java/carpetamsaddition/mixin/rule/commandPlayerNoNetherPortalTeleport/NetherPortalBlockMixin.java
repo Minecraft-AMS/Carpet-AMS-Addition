@@ -18,9 +18,10 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.rule.playerNoNetherPortalTeleport;
+package carpetamsaddition.mixin.rule.commandPlayerNoNetherPortalTeleport;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.commands.rule.commandPlayerNoNetherPortalTeleport.PlayerNoNetherPortalTeleportRegistry;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -30,10 +31,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.NetherPortalBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+
+import java.util.Objects;
 
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
+    @SuppressWarnings("SimplifiableConditionalExpression")
     @WrapOperation(
         method = "entityInside",
         at = @At(
@@ -41,11 +46,20 @@ public abstract class NetherPortalBlockMixin {
             target = "Lnet/minecraft/world/entity/Entity;canUsePortal(Z)Z"
         )
     )
-    private boolean onEntityCollision(Entity entity, boolean canUsePortals, Operation<Boolean> original) {
-        if (CarpetAMSAdditionSettings.playerNoNetherPortalTeleport && entity instanceof Player) {
+    private boolean preventPlayerTeleport(Entity entity, boolean canUsePortals, Operation<Boolean> original) {
+        return shouldPreventTeleport(entity) ? false : original.call(entity, canUsePortals);
+    }
+
+    @Unique
+    private boolean shouldPreventTeleport(Entity entity) {
+        if (Objects.equals(CarpetAMSAdditionSettings.commandPlayerNoNetherPortalTeleport, "false")) {
             return false;
-        } else {
-            return original.call(entity, canUsePortals);
         }
+
+        if (!(entity instanceof Player)) {
+            return false;
+        }
+
+        return PlayerNoNetherPortalTeleportRegistry.isGlobalMode || PlayerNoNetherPortalTeleportRegistry.NO_NETHER_PORTAL_TELEPORT_SET.contains(entity);
     }
 }
