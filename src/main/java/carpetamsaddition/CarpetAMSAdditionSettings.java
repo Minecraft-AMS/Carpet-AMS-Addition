@@ -677,7 +677,7 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean rottenFleshBurnedIntoLeather = false;
 
-    @RecipeRule
+    @RecipeRule(desc = "Implemented in Mixin")
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean craftableCarvedPumpkin = false;
 
