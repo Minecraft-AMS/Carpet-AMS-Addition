@@ -49,6 +49,10 @@ public class PlayerUtil {
         return MinecraftServerUtil.getServer().getPlayerManager().getPlayer(name);
     }
 
+    public static UUID getPlayerUUID(PlayerEntity player) {
+        return player.getUuid();
+    }
+
     @SuppressWarnings("unused")
     public static Boolean isInWhitelist(PlayerEntity player) {
         return MinecraftServerUtil.getServer().getPlayerManager().getWhitelist().isAllowed(
