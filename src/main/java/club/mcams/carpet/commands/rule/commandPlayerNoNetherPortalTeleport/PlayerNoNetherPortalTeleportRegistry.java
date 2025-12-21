@@ -38,12 +38,13 @@ import net.minecraft.util.Formatting;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class PlayerNoNetherPortalTeleportRegistry {
-    public static final Set<PlayerEntity> NO_NETHER_PORTAL_TELEPORT_SET = new LinkedHashSet<>();
+    public static final Set<UUID> NO_NETHER_PORTAL_TELEPORT_SET = new LinkedHashSet<>();
     public static boolean isGlobalMode;
     private static final Translator tr = new Translator("command.playerNoNetherPortalTeleport");
 
@@ -80,8 +81,8 @@ public class PlayerNoNetherPortalTeleportRegistry {
     }
 
     private static int add(ServerCommandSource source, PlayerEntity player) {
-        if (!NO_NETHER_PORTAL_TELEPORT_SET.contains(player)) {
-            NO_NETHER_PORTAL_TELEPORT_SET.add(player);
+        if (!NO_NETHER_PORTAL_TELEPORT_SET.contains(PlayerUtil.getPlayerUUID(player))) {
+            NO_NETHER_PORTAL_TELEPORT_SET.add(PlayerUtil.getPlayerUUID(player));
             Messenger.tell(source, (BaseText) tr.tr("add_success", PlayerUtil.getName(player)).formatted(Formatting.GREEN));
             return 1;
         } else {
@@ -91,8 +92,8 @@ public class PlayerNoNetherPortalTeleportRegistry {
     }
 
     private static int remove(ServerCommandSource source, PlayerEntity player) {
-        if (NO_NETHER_PORTAL_TELEPORT_SET.contains(player)) {
-            NO_NETHER_PORTAL_TELEPORT_SET.remove(player);
+        if (NO_NETHER_PORTAL_TELEPORT_SET.contains(PlayerUtil.getPlayerUUID(player))) {
+            NO_NETHER_PORTAL_TELEPORT_SET.remove(PlayerUtil.getPlayerUUID(player));
             Messenger.tell(source, (BaseText) tr.tr("remove_success", PlayerUtil.getName(player)).formatted(Formatting.GREEN));
             return 1;
         } else {
@@ -116,8 +117,8 @@ public class PlayerNoNetherPortalTeleportRegistry {
         Messenger.tell(source, (BaseText) tr.tr("list_title").formatted(Formatting.AQUA));
         Messenger.tell(source, Messenger.s("======================================", Formatting.AQUA));
 
-        for (PlayerEntity player : NO_NETHER_PORTAL_TELEPORT_SET) {
-            Messenger.tell(source, Messenger.s(PlayerUtil.getName(player), Formatting.AQUA));
+        for (UUID uuid : NO_NETHER_PORTAL_TELEPORT_SET) {
+            Messenger.tell(source, Messenger.s(PlayerUtil.getName(PlayerUtil.getServerPlayerEntity(uuid)), Formatting.AQUA));
         }
 
         return 1;

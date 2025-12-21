@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.commandPlayerNoNetherPortalTeleport;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.PlayerUtil;
 import club.mcams.carpet.commands.rule.commandPlayerNoNetherPortalTeleport.PlayerNoNetherPortalTeleportRegistry;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -77,6 +78,8 @@ public abstract class NetherPortalBlockMixin {
             return false;
         }
 
-        return PlayerNoNetherPortalTeleportRegistry.isGlobalMode || PlayerNoNetherPortalTeleportRegistry.NO_NETHER_PORTAL_TELEPORT_SET.contains(entity);
+        return
+            PlayerNoNetherPortalTeleportRegistry.isGlobalMode ||
+            PlayerNoNetherPortalTeleportRegistry.NO_NETHER_PORTAL_TELEPORT_SET.contains(PlayerUtil.getPlayerUUID((PlayerEntity) entity));
     }
 }

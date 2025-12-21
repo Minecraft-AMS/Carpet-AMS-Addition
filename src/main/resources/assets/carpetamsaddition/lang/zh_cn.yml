@@ -497,7 +497,7 @@ carpetamsaddition:
         desc: 玩家可以在游戏中使用ping命令
         extra:
           '0': '开启规则后，使用"/ping help"命令查看使用说明'
-      playerNoNetherPortalTeleport:
+      commandPlayerNoNetherPortalTeleport:
         name: 下界传送门不传送玩家
         desc: 玩家无法通过下界传送门进行传送
         extra:
