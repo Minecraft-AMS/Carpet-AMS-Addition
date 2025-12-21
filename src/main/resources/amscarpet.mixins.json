@@ -45,6 +45,7 @@
     "rule.commandCustomMovableBlock.PistonBlockMixin",
     "rule.commandPlayerChunkLoadController.ThreadedAnvilChunkStorageMixin",
     "rule.commandPlayerLeader.ServerPlayerEntityMixin",
+    "rule.commandPlayerNoNetherPortalTeleport.NetherPortalBlockMixin",
     "rule.commandSetPlayerPose.EntityMixin",
     "rule.craftableCarvedPumpkin.RecipeMixin",
     "rule.craftableCarvedPumpkin.ShapelessRecipeMixin",
@@ -142,7 +143,6 @@
     "rule.perfectInvisibility_sneakInvisibility.EntityInvoker",
     "rule.perfectInvisibility_sneakInvisibility.LivingEntityMixin",
     "rule.phantomSpawnAlert.PhantomSpawnerMixin",
-    "rule.commandPlayerNoNetherPortalTeleport.NetherPortalBlockMixin",
     "rule.pointedDripstoneCollisionBoxDisabled.AbstractBlockStateMixin",
     "rule.powerfulExpMending.ExperienceOrbEntityMixin",
     "rule.preventAdministratorCheat.AdvancementCommandMixin",
@@ -208,10 +208,6 @@
     "rule.witchRedstoneDustDropController_witchGlowstoneDustDropController.LivingEntityMixin",
     "setting.ParsedRuleAccessor",
     "setting.SettingsManagerAccessor",
-    "translations.ClientSettingsC2SPacketAccessor",
-    "translations.HUDControllerMixin",
-    "translations.LoggerMixin",
-    "translations.TranslatableTextAccessor",
     "translations.TranslatableTextMixin"
   ],
   "client": [

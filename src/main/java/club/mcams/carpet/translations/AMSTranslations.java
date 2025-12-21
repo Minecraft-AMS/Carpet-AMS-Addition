@@ -22,16 +22,12 @@ package club.mcams.carpet.translations;
 
 import carpet.CarpetSettings;
 
-import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.utils.FileUtil;
-import club.mcams.carpet.mixin.translations.TranslatableTextAccessor;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.*;
 
 import org.jetbrains.annotations.NotNull;
@@ -114,85 +110,5 @@ public class AMSTranslations {
     @Nullable
     public static String translateKeyToFormattedString(String lang, String key) {
         return getTranslation(lang).get(key);
-    }
-
-    public static BaseText translate(BaseText text, ServerPlayerEntity player) {
-        if (player instanceof ServerPlayerEntityWithClientLanguage) {
-            String lang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
-            return translate(text, lang);
-        }
-        return text;
-    }
-
-    public static BaseText translate(BaseText text, String lang) {
-        return translate(text, lang, false);
-    }
-
-    @SuppressWarnings("PatternVariableCanBeUsed")
-    public static BaseText translate(BaseText text, String lang, boolean suppressWarnings) {
-        //#if MC>=11900
-        //$$ if (!(text.getContent() instanceof TranslatableTextContent)) {
-        //#else
-        if (!(text instanceof TranslatableText)) {
-        //#endif
-            return text;
-        }
-        //#if MC>=11900
-        //$$ TranslatableTextContent translatableText = (TranslatableTextContent) text.getContent();
-        //#else
-        TranslatableText translatableText = (TranslatableText) text;
-        //#endif
-        String translationKey = translatableText.getKey();
-        if (!translationKey.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
-            return text;
-        }
-        String formattedString = Optional.ofNullable(translateKeyToFormattedString(lang, translationKey)).orElseGet(() -> translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, translationKey));
-        return formattedString != null ? updateTextWithTranslation(text, formattedString, translatableText) : translationLog(translationKey, suppressWarnings, text);
-    }
-
-    private static BaseText translationLog(String translationKey, boolean suppressWarnings, BaseText text) {
-        if (!suppressWarnings) {
-            AmsServer.LOGGER.warn("Unknown translation key: {}. Check if the translation exists or the key is correct.", translationKey);
-        }
-        return text;
-    }
-
-    private static BaseText updateTextWithTranslation(BaseText originalText, String formattedString, TranslatableText translatableText) {
-        //#if MC>=12111
-        //$$ TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) translatableText;
-        //#else
-        TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) (Messenger.tr(formattedString, translatableText.getArgs()));
-        //#endif
-        BaseText newText = createNewText(formattedString, fixedTranslatableText);
-        if (newText == null) {
-            return Messenger.s(formattedString);
-        } else {
-            newText.getSiblings().addAll(originalText.getSiblings());
-            newText.setStyle(originalText.getStyle());
-            return newText;
-        }
-    }
-
-    private static BaseText createNewText(String formattedString, TranslatableTextAccessor fixedTranslatableText) {
-        try {
-            List<StringVisitable> translations = Lists.newArrayList();
-            //#if MC>=11800
-            fixedTranslatableText.invokeForEachPart(formattedString, translations::add);
-            //#else
-            //$$ fixedTranslatableText.invokeSetTranslation(formattedString);
-            //#endif
-            BaseText[] textArray = new BaseText[translations.size()];
-            for (int i = 0; i < translations.size(); i++) {
-                StringVisitable stringVisitable = translations.get(i);
-                if (stringVisitable instanceof BaseText) {
-                    textArray[i] = (BaseText) stringVisitable;
-                } else {
-                    textArray[i] = Messenger.s(stringVisitable.getString());
-                }
-            }
-            return Messenger.c((Object) textArray);
-        } catch (TranslationException e) {
-            return null;
-        }
     }
 }
