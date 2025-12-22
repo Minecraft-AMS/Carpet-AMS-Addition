@@ -30,14 +30,17 @@ carpetamsaddition:
       refresh_cmd_tree: 'Commands has been refreshed'
 
     amsUpdateSuppressionCrashFixForceMode:
-      lazy_mod: '[ lazy mode ]'
-      force_mod: '[ force mode ]'
+      lazy_mode: '[ lazy mode ]'
+      force_mode: '[ force mode ]'
     anvilInteractionDisabled:
       disable: '[ Anvil Interaction Disable ]'
       enable: '[ Anvil Interaction Enable ]'
     customBlockBlastResistance:
-      not_found: ' not found !'
-      removeAll: 'All custom block blast resistance values have been removed.'
+      modify_set: '<customBlockBlastResistance> %s/%s -> %s/%s'
+      set: '<customBlockBlastResistance> + %s/%s'
+      remove: '<customBlockBlastResistance> - %s/%s'
+      not_found: '<customBlockBlastResistance> %s not found !'
+      removeAll: '<customBlockBlastResistance> All custom block blast resistance values have been removed.'
       list: '[ Block / Blast resistance ]'
       help:
         set: '/customBlockBlastResistance set <block> <hardness> - Add or modify blocks and their blast resistance'
@@ -114,9 +117,11 @@ carpetamsaddition:
       getHeldItemID:
         copy: 'Copy to clipboard'
     customAntiFireItems:
-      already_exists: " is already exists"
-      not_found: " not found"
-      removeAll: "All item have been removed from list"
+      add: '<customAntiFireItems> + %s'
+      already_exists: "<customAntiFireItems> %s is already exists"
+      not_found: "<customAntiFireItems> not found"
+      remove: '<customAntiFireItems> - %s'
+      removeAll: "<customAntiFireItems> All item have been removed from list"
       list: "[ Anti Fire item list ]"
       help:
         set: '/customAntiFireItems add <item> - Added a anti fire item'
@@ -126,10 +131,13 @@ carpetamsaddition:
     carpetExtensionModWikiHyperlink:
       click_to_jump: 'Click link to jump: '
     customBlockHardness:
-      not_found: ' not found !'
-      removeAll: 'All custom block hardness values have been removed.'
+      modify_set: '<customBlockHardness> %s/%s -> %s/%s'
+      set: '<customBlockHardness> + %s/%s'
+      remove: '<customBlockHardness> - %s/%s'
+      not_found: '<customBlockHardness> %s not found !'
+      removeAll: '<customBlockHardness> All custom block hardness values have been removed.'
       list: '[ Block / Hardness ]'
-      default_hardness: 'default hardness:'
+      default_hardness: '%s default hardness: %s'
       help:
         set: '/customBlockHardness set <block> <hardness> - Add or modify blocks and their hardness'
         remove: '/customBlockHardness remove <block> - Remove a block from the list'
@@ -657,4 +665,6 @@ carpetamsaddition:
 
       # 测试用规则
       testRule:
+        desc: Just for test
+      amsTranslationSide:
         desc: Just for test

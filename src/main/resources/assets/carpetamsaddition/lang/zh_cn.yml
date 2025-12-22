@@ -31,14 +31,17 @@ carpetamsaddition:
       refresh_cmd_tree: '命令已被刷新'
 
     amsUpdateSuppressionCrashFixForceMode:
-      lazy_mod: '[ lazy 模式 ]'
-      force_mod: '[ force 模式 ]'
+      lazy_mode: '[ lazy 模式 ]'
+      force_mode: '[ force 模式 ]'
     anvilInteractionDisabled:
       disable: '[ 铁砧交互已关闭 ]'
       enable: '[ 铁砧交互已开启 ]'
     customBlockBlastResistance:
-      not_found: ' 不存在 !'
-      removeAll: '所有自定义方块及其爆炸抗性已从列表删除'
+      modify_set: '<customBlockBlastResistance> %s/%s -> %s/%s'
+      set: '<customBlockBlastResistance> + %s/%s'
+      remove: '<customBlockBlastResistance> - %s/%s'
+      not_found: '<customBlockBlastResistance> %s 不存在 !'
+      removeAll: '<customBlockBlastResistance> 所有自定义方块及其爆炸抗性已从列表删除'
       list: '[ 方块 / 爆炸抗性 ]'
       help:
         set: '/customBlockBlastResistance set <block> <hardness> - 添加或修改方块及其爆炸抗性'
@@ -115,9 +118,11 @@ carpetamsaddition:
       getHeldItemID:
         copy: '复制到剪切板'
     customAntiFireItems:
-      already_exists: " 已存在"
-      not_found: " 不存在"
-      removeAll: "已删除所有条目"
+      add: '<customAntiFireItems> + %s'
+      already_exists: "<customAntiFireItems> 已存在"
+      not_found: "<customAntiFireItems> 不存在"
+      remove: '<customAntiFireItems> - %s'
+      removeAll: "<customAntiFireItems> 已删除所有条目"
       list: "[ 防火物品列表 ]"
       help:
         set: '/customAntiFireItems add <物品注册名> - 增加一个防火物品'
@@ -127,10 +132,13 @@ carpetamsaddition:
     carpetExtensionModWikiHyperlink:
       click_to_jump: '点击此链接访问页面: '
     customBlockHardness:
-      not_found: ' 不存在 !'
-      removeAll: '所有自定义方块及其硬度已从列表删除'
+      modify_set: '<customBlockHardness> %s/%s -> %s/%s'
+      set: '<customBlockHardness> + %s/%s'
+      remove: '<customBlockHardness> - %s/%s'
+      not_found: '<customBlockHardness> %s 不存在 !'
+      removeAll: '<customBlockHardness> 所有自定义方块及其硬度已从列表删除'
       list: '[ 方块 / 硬度 ]'
-      default_hardness: '的默认硬度为:'
+      default_hardness: '<customBlockHardness> %s 的默认硬度为: %s'
       help:
         set: '/customBlockHardness set <block> <hardness> - 添加或修改方块及其硬度'
         remove: '/customBlockHardness remove <block> - 从列表中移除方块'
@@ -802,4 +810,7 @@ carpetamsaddition:
       # 测试用规则
       testRule:
         name: 测试用规则
-        desc: 仅用于测试，没有什么作用
+        desc: 仅用于测试
+      amsTranslationSide:
+        name: 测试用规则
+        desc: 仅用于测试

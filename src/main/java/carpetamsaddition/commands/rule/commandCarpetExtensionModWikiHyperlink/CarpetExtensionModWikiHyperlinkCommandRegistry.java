@@ -23,6 +23,7 @@ package carpetamsaddition.commands.rule.commandCarpetExtensionModWikiHyperlink;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.suggestionProviders.SetSuggestionProvider;
 import carpetamsaddition.translations.Translator;
+import carpetamsaddition.utils.Colors;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
 import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
@@ -32,18 +33,17 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class CarpetExtensionModWikiHyperlinkCommandRegistry {
-    private static final Translator translator = new Translator("command.carpetExtensionModWikiHyperlink");
+    private static final Translator tr = new Translator("command.carpetExtensionModWikiHyperlink");
     private static final Set<String> EXTENSION_NAMES = new HashSet<>();
     @SuppressWarnings("CodeBlock2Expr")
     private static final SuggestionProvider<CommandSourceStack> getSuggestions = (context, builder) -> {
@@ -56,18 +56,18 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
                 .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCarpetExtensionModWikiHyperlink))
                 .then(Commands.argument("extensionName", StringArgumentType.string())
                 .suggests(getSuggestions)
-                .executes(context -> execute(
-                    context.getSource().getPlayerOrException(), StringArgumentType.getString(context, "extensionName")
-                ))
+                .executes(context -> execute(context.getSource(), StringArgumentType.getString(context, "extensionName")))
             )
         );
     }
 
-    private static int execute(Player player, String extensionName) {
-        player.displayClientMessage(
-            translator.tr("click_to_jump").withStyle(ChatFormatting.AQUA)
-            .append(createOpenUrlButton(getUrl(extensionName))), false
+    private static int execute(CommandSourceStack source, String extensionName) {
+        Messenger.tell(
+            source,
+            tr.tr("click_to_jump").withStyle(ChatFormatting.AQUA)
+            .append(createOpenUrlButton(getUrl(extensionName)))
         );
+
         return 1;
     }
 
@@ -87,10 +87,11 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
             case "Carpet-Extra-Extras": return "https://github.com/Thedustbustr/Carpet-Extra-Extras/";
             case "Gugle-Carpet-Addition": return "https://github.com/Gu-ZT/gugle-carpet-addition/";
         }
+
         return extensionName;
     }
 
-    private static Component createOpenUrlButton(String url) {
+    private static MutableComponent createOpenUrlButton(String url) {
         return Messenger.s(getUrl(url)).setStyle(
             Style.EMPTY.withColor(ChatFormatting.GREEN)
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.OPEN_URL, url))
@@ -98,8 +99,8 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
         );
     }
 
-    private static Component getCopyHoverText(String url) {
-        return Messenger.s(translator.tr("click_to_jump").getString() + getUrl(url)).withStyle(ChatFormatting.YELLOW);
+    private static MutableComponent getCopyHoverText(String url) {
+        return Messenger.s(tr.tr("click_to_jump").append(getUrl(url)).getString()).withColor(Colors.YELLOW);
     }
 
     static {

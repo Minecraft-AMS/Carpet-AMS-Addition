@@ -72,11 +72,7 @@ public class GetSaveSizeCommandRegistry {
             String saveAllMessage;
             final String SUCCESS_MSG = translator.tr("save_success_msg").getString();
             final String FAIL_MSG = translator.tr("save_fail_msg").getString();
-            //#if MC>=11800
             boolean saveAllSuccess = server.saveEverything(false, true, true);
-            //#else
-            //$$ boolean saveAllSuccess = server.save(false, true, true);
-            //#endif
             saveAllMessage = saveAllSuccess ? SUCCESS_MSG : FAIL_MSG;
             player.displayClientMessage(
                 Messenger.s(saveAllMessage).

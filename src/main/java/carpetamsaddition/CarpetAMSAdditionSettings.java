@@ -694,7 +694,15 @@ public class CarpetAMSAdditionSettings {
         ALL
     }
 
+    public enum translationSides {
+        CLIENT,
+        SERVER
+    }
+
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
     public static boolean testRule = false;
+
+    @Rule(categories = AMS)
+    public static translationSides amsTranslationSide = translationSides.CLIENT;
 }

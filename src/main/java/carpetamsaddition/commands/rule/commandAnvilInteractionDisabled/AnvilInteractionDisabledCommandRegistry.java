@@ -21,41 +21,44 @@
 package carpetamsaddition.commands.rule.commandAnvilInteractionDisabled;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
+import carpetamsaddition.utils.Colors;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
 
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.Component;
-import net.minecraft.commands.Commands;
+import com.mojang.brigadier.context.CommandContext;
+
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.commands.CommandSourceStack;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
-import net.minecraft.ChatFormatting;
 
 import static net.minecraft.commands.Commands.argument;
-
-import java.util.Objects;
+import static net.minecraft.commands.Commands.literal;
 
 public class AnvilInteractionDisabledCommandRegistry {
-    private static final Translator translator = new Translator("command.anvilInteractionDisabled");
+    private static final Translator tr = new Translator("command.anvilInteractionDisabled");
     public static boolean anvilInteractionDisabled = false;
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
-            Commands.literal("anvilInteractionDisabled")
+            literal("anvilInteractionDisabled")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandAnvilInteractionDisabled))
             .then(argument("mode", BoolArgumentType.bool())
-            .executes(context -> {
-                boolean mode = BoolArgumentType.getBool(context, "mode");
-                anvilInteractionDisabled = mode;
-                Component message =
-                        mode ?
-                        Messenger.s(translator.tr("disable").getString()).setStyle(Style.EMPTY.withColor(ChatFormatting.RED)) :
-                        Messenger.s(translator.tr("enable").getString()).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN));
-                Objects.requireNonNull(context.getSource().getPlayerOrException()).displayClientMessage(message, true);
-                return 1;
-        })));
+            .executes(c -> setMode(c, c.getSource())
+        )));
+    }
+
+    private static int setMode(CommandContext<CommandSourceStack> context, CommandSourceStack source) {
+        anvilInteractionDisabled = BoolArgumentType.getBool(context, "mode");
+        MutableComponent message =
+            anvilInteractionDisabled ?
+            tr.tr("disable").withColor(Colors.LIGHT_PURPLE) :
+            tr.tr("enable").withColor(Colors.GREEN);
+        Messenger.tell(source, message, true);
+        ForceModeCommandConfig.saveConfigToJson(context.getSource().getServer());
+        return 1;
     }
 }

@@ -39,6 +39,7 @@ import net.minecraft.ChatFormatting;
 
 public class AtCommandRegistry {
     private static final Translator tr = new Translator("command.at");
+
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(Commands.literal("@")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandAtSomeOnePlayer))
@@ -53,10 +54,10 @@ public class AtCommandRegistry {
     }
 
     private static int execute(ServerPlayer sourcePlayer, ServerPlayer targetPlayer, String text) {
-        MutableComponent titleText = tr.tr("title", PlayerUtil.getName(sourcePlayer));
+        MutableComponent titleText = Messenger.s(tr.tr("title", PlayerUtil.getName(sourcePlayer)).getString()).withColor(Colors.AQUA);
         MutableComponent messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
-        targetPlayer.connection.send(new ClientboundSetTitleTextPacket(titleText.withStyle(ChatFormatting.AQUA)));
-        MinecraftServerUtil.getServer().getPlayerList().broadcastSystemMessage(messageText, false);
+        targetPlayer.connection.send(new ClientboundSetTitleTextPacket(titleText));
+        Messenger.sendServerMessage(MinecraftServerUtil.getServer(), messageText);
         EntityUtil.getEntityWorld(targetPlayer).playSound(null, targetPlayer.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.0F);
         Messenger.sendServerMessage(
             MinecraftServerUtil.getServer(),

@@ -23,6 +23,7 @@ package carpetamsaddition.translations;
 import carpet.CarpetSettings;
 
 import carpetamsaddition.CarpetAMSAdditionServer;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.FileUtil;
 
 import carpetamsaddition.utils.Messenger;
@@ -115,13 +116,19 @@ public class AMSTranslations {
         return getTranslation(lang).get(key);
     }
 
-    public static MutableComponent translate(MutableComponent component, ServerPlayer player) {
+    public static MutableComponent translate(MutableComponent text, ServerPlayer player) {
         if (!(player instanceof ServerPlayerEntityWithClientLanguage)) {
-            return component;
+            return text;
         }
 
         String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS();
-        return translateComponent(component, clientLang);
+        String serverLang = AMSTranslations.getServerLanguage();
+
+        if (CarpetAMSAdditionSettings.amsTranslationSide == CarpetAMSAdditionSettings.translationSides.SERVER) {
+            return translateComponent(text, serverLang);
+        }
+
+        return translateComponent(text, clientLang);
     }
 
     private static MutableComponent translateComponent(MutableComponent text, String lang) {

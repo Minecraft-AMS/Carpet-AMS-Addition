@@ -22,6 +22,7 @@ package carpetamsaddition.commands.rule.commandCustomBlockBlastResistance;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
+import carpetamsaddition.utils.Colors;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.RegexTools;
@@ -31,12 +32,10 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.arguments.blocks.BlockStateArgument;
-import net.minecraft.network.chat.Style;
 import net.minecraft.ChatFormatting;
 
 import java.util.Map;
@@ -46,120 +45,131 @@ import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
 public class CustomBlockBlastResistanceCommandRegistry {
-    private static final Translator translator = new Translator("command.customBlockBlastResistance");
-    private static final String MSG_HEAD = "<customBlockBlastResistance> ";
+    private static final Translator tr = new Translator("command.customBlockBlastResistance");
     public static final Map<BlockState, Float> CUSTOM_BLOCK_BLAST_RESISTANCE_MAP = new ConcurrentHashMap<>();
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
         dispatcher.register(
             Commands.literal("customBlockBlastResistance")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomBlockBlastResistance))
+
+            // set
             .then(literal("set")
             .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
             .then(argument("resistance", FloatArgumentType.floatArg())
             .executes(context -> set(
+                context.getSource(),
                 BlockStateArgument.getBlock(context, "block").getState(),
-                FloatArgumentType.getFloat(context, "resistance"),
-                context.getSource().getPlayerOrException()
+                FloatArgumentType.getFloat(context, "resistance")
             )))))
+
+            // remove
             .then(literal("remove")
             .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
             .executes(context -> remove(
-                BlockStateArgument.getBlock(context, "block").getState(),
-                context.getSource().getPlayerOrException()
+                context.getSource(),
+                BlockStateArgument.getBlock(context, "block").getState()
             ))))
-            .then(literal("removeAll").executes(context -> removeAll(context.getSource().getPlayerOrException())))
-            .then(literal("list").executes(context -> list(context.getSource().getPlayerOrException())))
-            .then(literal("help").executes(context -> help(context.getSource().getPlayerOrException())))
+
+            // remove all
+            .then(literal("removeAll").executes(context -> removeAll(context.getSource())))
+
+            // list
+            .then(literal("list").executes(context -> list(context.getSource())))
+
+            // help
+            .then(literal("help").executes(context -> help(context.getSource())))
         );
     }
 
-    private static int set(BlockState state, float blastResistance, Player player) {
+    private static int set(CommandSourceStack source, BlockState state, float blastResistance) {
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float oldBlastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
-            player.displayClientMessage(
-                Messenger.s(
-                    MSG_HEAD + getBlockRegisterName(state) + "/" + oldBlastResistance +
-                    " -> " + getBlockRegisterName(state) + "/" + blastResistance
-                ).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN).withBold(true)), false
+            Messenger.tell(
+                source, tr.tr(
+                    "modify_set",
+                    getBlockRegisterName(state),
+                    oldBlastResistance,
+                    getBlockRegisterName(state),
+                    blastResistance
+                ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)
             );
         } else {
-            player.displayClientMessage(
-                Messenger.s(
-                    MSG_HEAD + "+ " + getBlockRegisterName(state) + "/" + blastResistance
-                ).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN).withBold(true)), false
+            Messenger.tell(
+                source, tr.tr(
+                    "set",
+                    getBlockRegisterName(state),
+                    blastResistance
+                ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)
             );
         }
+
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, blastResistance);
         saveToJson();
         return 1;
     }
 
-    private static int remove(BlockState state, Player player) {
+    private static int remove(CommandSourceStack source, BlockState state) {
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float blastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.remove(state);
             saveToJson();
-            player.displayClientMessage(
-                Messenger.s(
-                    MSG_HEAD + "- " + getBlockRegisterName(state) + "/" + blastResistance
-                ).setStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true)), false
+            Messenger.tell(
+                source, tr.tr(
+                    "remove",
+                    getBlockRegisterName(state),
+                    blastResistance
+                ).withStyle(ChatFormatting.RED, ChatFormatting.BOLD)
             );
             return 1;
         } else {
-            player.displayClientMessage(
-                Messenger.s(
-                    MSG_HEAD + getBlockRegisterName(state) + translator.tr("not_found").getString()
-                ).setStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true)), false
+            Messenger.tell(
+                source, tr.tr(
+                    "not_found",
+                    getBlockRegisterName(state)
+                ).withStyle(ChatFormatting.RED, ChatFormatting.BOLD)
             );
             return 0;
         }
     }
 
-    private static int removeAll(Player player) {
+    private static int removeAll(CommandSourceStack source) {
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
         saveToJson();
-        player.displayClientMessage(
-            Messenger.s(
-                MSG_HEAD + translator.tr("removeAll").getString()
-            ).setStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true)), false
-        );
+        Messenger.tell(source, tr.tr("removeAll").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
         return 1;
     }
 
-    private static int list(Player player) {
-        player.displayClientMessage(
-            Messenger.s(
-                translator.tr("list").getString() + "\n-------------------------------"
-            ).setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN).withBold(true)),
-            false
+    private static int list(CommandSourceStack source) {
+        Messenger.tell(
+            source,
+            Messenger.c(
+                tr.tr("list"),
+                Messenger.endl(),
+                Messenger.sline()
+            ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)
         );
+
         for (Map.Entry<BlockState, Float> entry : CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.entrySet()) {
             BlockState state = entry.getKey();
             float blastResistance = entry.getValue();
             String blockName = getBlockRegisterName(state);
-            player.displayClientMessage(
-                Messenger.s(blockName + " / " + blastResistance).
-                setStyle(Style.EMPTY.withColor(ChatFormatting.GREEN)), false
-            );
+            Messenger.tell(source, Messenger.s(blockName + " / " + blastResistance).withColor(Colors.GREEN));
         }
+
         return 1;
     }
 
     @SuppressWarnings("DuplicatedCode")
-    private static int help(Player player) {
-        String setHelpText = translator.tr("help.set").getString();
-        String removeHelpText = translator.tr("help.remove").getString();
-        String removeAllHelpText = translator.tr("help.removeAll").getString();
-        String listHelpText = translator.tr("help.list").getString();
-        player.displayClientMessage(
-                Messenger.s(
-                "\n" +
-                setHelpText + "\n" +
-                removeHelpText + "\n" +
-                removeAllHelpText + "\n" +
-                listHelpText
-            ).setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)), false
+    private static int help(CommandSourceStack source) {
+        Messenger.tell(
+            source,
+            Messenger.c(
+                tr.tr("help.set"), Messenger.endl(),
+                tr.tr("help.remove"), Messenger.endl(),
+                tr.tr("help.removeAll"), Messenger.endl(),
+                tr.tr("help.list"), Messenger.endl()
+            ).withColor(Colors.GRAY)
         );
         return 1;
     }

@@ -78,6 +78,14 @@ public class Messenger {
         return Messenger.s("\n");
     }
 
+    public static Component sline() {
+        return Messenger.s("-------------------------------");
+    }
+
+    public static Component dline() {
+        return Messenger.s("===============================");
+    }
+
     @NotNull
     public static MutableComponent formatting(MutableComponent text, ChatFormatting... formattings) {
         text.withStyle(formattings);
@@ -87,7 +95,7 @@ public class Messenger {
     public static void sendServerMessage(MinecraftServer server, Component text) {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
         MessengerCompatFactory.sendSystemMessage(server, text);
-        server.getPlayerList().getPlayers().forEach(player -> MessengerCompatFactory.sendSystemMessage(player, text));
+        MinecraftServerUtil.getOnlinePlayers().forEach(player -> MessengerCompatFactory.sendSystemMessage(player, text));
     }
 
     @NotNull
