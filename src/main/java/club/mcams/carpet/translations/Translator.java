@@ -33,6 +33,17 @@ public class Translator {
 
     public BaseText tr(String key, Object... args) {
         String translationKey = TranslationConstants.TRANSLATION_KEY_PREFIX + this.translationPath + "." + key;
-        return Messenger.tr(translationKey, args);
+        return translateText(translationKey, args);
+    }
+
+    private BaseText translateText(String key, Object... args) {
+        String serverLang = AMSTranslations.getServerLanguage();
+        String translated = AMSTranslations.translateKeyToFormattedString(serverLang, key);
+
+        if (translated != null && !translated.equals(key)) {
+            return Messenger.s(String.format(translated, args));
+        }
+
+        return Messenger.s(key);
     }
 }
