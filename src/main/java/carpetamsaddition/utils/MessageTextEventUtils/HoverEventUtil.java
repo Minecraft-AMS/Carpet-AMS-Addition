@@ -21,8 +21,8 @@
 package carpetamsaddition.utils.MessageTextEventUtils;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.HoverEvent;
 
 import java.util.HashMap;
 import java.util.Map;

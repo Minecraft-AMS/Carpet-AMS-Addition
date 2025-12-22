@@ -20,13 +20,18 @@
 
 package carpetamsaddition.utils;
 
+import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
+import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
 import carpetamsaddition.utils.compat.MessengerCompatFactory;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.ChatFormatting;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -51,6 +56,7 @@ public class Messenger {
         return MessengerCompatFactory.TranslatableText(key, args);
     }
 
+    @NotNull
     public static MutableComponent copy(MutableComponent text) {
         return text.copy();
     }
@@ -67,10 +73,12 @@ public class Messenger {
         tell(source, text, false);
     }
 
+    @NotNull
     public static Component endl() {
         return Messenger.s("\n");
     }
 
+    @NotNull
     public static MutableComponent formatting(MutableComponent text, ChatFormatting... formattings) {
         text.withStyle(formattings);
         return text;
@@ -80,5 +88,25 @@ public class Messenger {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
         MessengerCompatFactory.sendSystemMessage(server, text);
         server.getPlayerList().getPlayers().forEach(player -> MessengerCompatFactory.sendSystemMessage(player, text));
+    }
+
+    @NotNull
+    public static Style simpleCmdButtonStyle(String command, Component hoverText, ChatFormatting... hoverTextFormattings) {
+        return
+            emptyStyle()
+            .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, Messenger.s(hoverText.getString()).withStyle(hoverTextFormattings)));
+    }
+
+    @NotNull
+    public static Style simpleCopyButtonStyle(String text, Component hoverText, ChatFormatting... hoverTextFormattings) {
+        return
+            emptyStyle()
+            .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, text))
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, Messenger.s(hoverText.getString()).withStyle(hoverTextFormattings)));
+    }
+
+    private static Style emptyStyle() {
+        return Style.EMPTY;
     }
 }

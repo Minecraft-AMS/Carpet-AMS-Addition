@@ -26,8 +26,6 @@ import carpetamsaddition.helpers.rule.commandHere_commandWhere.CommandHereWhereH
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.EntityUtil;
-import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
-import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.MinecraftServerUtil;
 import carpetamsaddition.utils.compat.DimensionWrapper;
@@ -46,10 +44,12 @@ import net.minecraft.world.level.Level;
 
 import com.mojang.brigadier.CommandDispatcher;
 
+import java.util.Objects;
+
 import static net.minecraft.commands.Commands.argument;
 
 public class WhereCommandRegistry {
-    private static final Translator translator = new Translator("command.where");
+    private static final Translator tr = new Translator("command.where");
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
@@ -81,7 +81,7 @@ public class WhereCommandRegistry {
     private static void sendWhoGetWhoMessage(MinecraftServer minecraftServer, Player senderPlayer, Player targetPlayer) {
         String senderPlayerName = getPlayerName(senderPlayer);
         String targetPlayerName = getPlayerName(targetPlayer);
-        String message = translator.tr("who_get_who", senderPlayerName, targetPlayerName).getString();
+        String message = tr.tr("who_get_who", senderPlayerName, targetPlayerName).getString();
         Messenger.sendServerMessage(
             minecraftServer,
             Messenger.s(message).
@@ -122,35 +122,35 @@ public class WhereCommandRegistry {
         Component message = Messenger.s("Unknown dimension").withStyle(ChatFormatting.RED);
         if (dimension.getValue() == Level.END) {
             message = Messenger.s(
-                String.format("§d[%s] §e%s §b@ §d[ %s ]", translator.tr("the_end").getString(), playerName, currentPos))
+                String.format("§d[%s] §e%s §b@ §d[ %s ]", tr.tr("the_end").getString(), playerName, currentPos))
                 .append(copyButton(currentPos, ChatFormatting.LIGHT_PURPLE)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
         } else if (dimension.getValue() == Level.OVERWORLD) {
             message = Messenger.s(
-                String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", translator.tr("overworld").getString(), playerName, currentPos, otherPos))
+                String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", tr.tr("overworld").getString(), playerName, currentPos, otherPos))
                 .append(copyButton(currentPos, ChatFormatting.GREEN)).append(copyButton(otherPos, ChatFormatting.DARK_RED)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
         } else if (dimension.getValue() == Level.NETHER) {
             message = Messenger.s(
-                String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", translator.tr("nether").getString(), playerName, currentPos, otherPos))
+                String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", tr.tr("nether").getString(), playerName, currentPos, otherPos))
                 .append(copyButton(currentPos, ChatFormatting.DARK_RED)).append(copyButton(otherPos, ChatFormatting.GREEN)).append(InvokeFuzzModCommand.highlightCoordButton(otherPos));
         }
         return message;
     }
 
     private static Component copyButton(String copyText, ChatFormatting buttonColor) {
-        Component hoverText = Messenger.s(translator.tr("copy").getString()).withStyle(ChatFormatting.YELLOW);
         String copyCoordText = copyText.replace(",", ""); // 1, 0, -24 -> 1 0 -24
+        Component hoverText = null;
+
         if (buttonColor == ChatFormatting.LIGHT_PURPLE) {
-            hoverText = translator.tr("the_end_button_hover").withStyle(ChatFormatting.YELLOW);
+            hoverText = tr.tr("the_end_button_hover");
         } else if (buttonColor == ChatFormatting.GREEN) {
-            hoverText = translator.tr("overworld_button_hover").withStyle(ChatFormatting.YELLOW);
+            hoverText = tr.tr("overworld_button_hover");
         } else if (buttonColor == ChatFormatting.DARK_RED) {
-            hoverText = translator.tr("nether_button_hover").withStyle(ChatFormatting.YELLOW);
+            hoverText = tr.tr("nether_button_hover");
         }
+
         return
-            Messenger.s(" [C]").setStyle(
-                Style.EMPTY.withColor(buttonColor).withBold(true).
-                withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
-                withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
-            );
+            Messenger.s(" [C]")
+            .setStyle(Messenger.simpleCopyButtonStyle(copyCoordText, Objects.requireNonNull(hoverText), ChatFormatting.YELLOW))
+            .withStyle(ChatFormatting.BOLD, buttonColor);
     }
 }

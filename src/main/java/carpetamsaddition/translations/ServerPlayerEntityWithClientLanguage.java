@@ -18,22 +18,8 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.fuzz;
+package carpetamsaddition.translations;
 
-import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Messenger;
-
-import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
-
-public class InvokeFuzzModCommand {
-    private static final Translator tr = new Translator("fuzz.command");
-
-    public static Component highlightCoordButton(String posText) {
-        String cmd = "/coordCompass set " + posText.replace(",", "");
-
-        return
-            Messenger.s(" [+H]").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
-            .withStyle(Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), ChatFormatting.YELLOW));
-    }
+public interface ServerPlayerEntityWithClientLanguage {
+    String getClientLanguage$AMS();
 }

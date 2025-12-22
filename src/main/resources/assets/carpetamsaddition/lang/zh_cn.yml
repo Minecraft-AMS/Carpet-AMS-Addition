@@ -4,6 +4,10 @@ carpetamsaddition:
       version: '版本'
       total_rules: '规则总数'
 
+  fuzz:
+    command:
+      highlightCoordButtonHoverText: '使用Fuzz模组高亮路径点，使用/coordCompass clear取消高亮'
+
   rule:
     amsUpdateSuppressionCrashFix:
       msg: '更新抑制位置 @ %s -> [ %s ] | 原因：%s'
@@ -198,10 +202,6 @@ carpetamsaddition:
       switch_tip: '侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
     amsNetworkProtocol:
       need_enable_protocol: '[Carpet AMS Addition] 使用%s规则需要启用amsNetworkProtocol规则才能生效'
-
-  fuzz:
-    command:
-      highlightCoordButtonHoverText: 使用Fuzz模组高亮路径点，使用/coordCompass clear取消高亮
 
   carpet_translations:
     category:

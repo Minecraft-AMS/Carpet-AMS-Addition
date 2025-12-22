@@ -25,9 +25,14 @@ import carpet.CarpetSettings;
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.utils.FileUtil;
 
+import carpetamsaddition.utils.Messenger;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,5 +113,69 @@ public class AMSTranslations {
     @Nullable
     public static String translateKeyToFormattedString(String lang, String key) {
         return getTranslation(lang).get(key);
+    }
+
+    public static MutableComponent translate(MutableComponent component, ServerPlayer player) {
+        if (!(player instanceof ServerPlayerEntityWithClientLanguage)) {
+            return component;
+        }
+
+        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS();
+        return translateComponent(component, clientLang);
+    }
+
+    private static MutableComponent translateComponent(MutableComponent text, String lang) {
+        if (text.getContents() instanceof TranslatableContents translatableContents) {
+
+            String key = translatableContents.getKey();
+
+            if (key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
+
+                String translated = translateKeyToFormattedString(lang, key);
+
+                if (translated != null && !translated.equals(key)) {
+                    Object[] args = translatableContents.getArgs();
+                    if (args.length > 0) {
+
+                        Object[] translatedArgs = new Object[args.length];
+
+                        for (int i = 0; i < args.length; i++) {
+                            if (args[i] instanceof MutableComponent argComponent) {
+                                translatedArgs[i] = translateComponent(argComponent, lang);
+                            } else {
+                                translatedArgs[i] = args[i];
+                            }
+                        }
+
+                        translated = String.format(translated, translatedArgs);
+                    }
+
+                    MutableComponent newComponent = Messenger.s(translated).setStyle(text.getStyle());
+
+                    for (Component sibling : text.getSiblings()) {
+                        if (sibling instanceof MutableComponent mutableSibling) {
+                            newComponent.append(translateComponent(mutableSibling, lang));
+                        } else {
+                            newComponent.append(sibling);
+                        }
+                    }
+
+                    return newComponent;
+                }
+            }
+        }
+
+        MutableComponent result = Messenger.copy(text);
+        result.getSiblings().clear();
+
+        for (Component sibling : text.getSiblings()) {
+            if (sibling instanceof MutableComponent mutableSibling) {
+                result.append(translateComponent(mutableSibling, lang));
+            } else {
+                result.append(sibling);
+            }
+        }
+
+        return result;
     }
 }

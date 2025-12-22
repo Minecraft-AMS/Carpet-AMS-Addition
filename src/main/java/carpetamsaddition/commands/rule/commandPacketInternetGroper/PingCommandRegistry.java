@@ -23,6 +23,7 @@ package carpetamsaddition.commands.rule.commandPacketInternetGroper;
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
+import carpetamsaddition.utils.Colors;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
 
@@ -30,11 +31,9 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.Style;
-import net.minecraft.ChatFormatting;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -45,9 +44,9 @@ import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
 public class PingCommandRegistry {
-    private static final Translator translator = new Translator("command.ping");
+    private static final Translator tr = new Translator("command.ping");
     private static final String MSG_HEAD = "<commandPacketInternetGroper>";
-    private static final Map<Player, PingThread> PING_THREADS = new HashMap<>();
+    private static final Map<CommandSourceStack, PingThread> PING_THREADS = new HashMap<>();
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
@@ -56,38 +55,37 @@ public class PingCommandRegistry {
             .then(argument("targetIpOrDomainName", StringArgumentType.string())
             .then(argument("pingQuantity", IntegerArgumentType.integer())
             .executes(context -> executePing(
-                context.getSource().getPlayerOrException(),
+                context.getSource(),
                 StringArgumentType.getString(context, "targetIpOrDomainName"),
                 IntegerArgumentType.getInteger(context, "pingQuantity")
             ))))
-            .then(literal("stop").executes(context -> stopPing(context.getSource().getPlayerOrException())))
-            .then(literal("help").executes(context -> help(context.getSource().getPlayerOrException())))
+            .then(literal("stop").executes(context -> stopPing(context.getSource())))
+            .then(literal("help").executes(context -> help(context.getSource())))
         );
     }
 
-    private static int executePing(Player player, String targetIpOrDomainName, int pingQuantity) {
-        PingThread thread = PING_THREADS.get(player);
+    private static int executePing(CommandSourceStack source, String targetIpOrDomainName, int pingQuantity) {
+        PingThread thread = PING_THREADS.get(source);
         if (thread != null) {
             thread.setInterrupted();
         }
-        PingThread pingThread = new PingThread(pingQuantity, player, targetIpOrDomainName);
+        PingThread pingThread = new PingThread(pingQuantity, source, targetIpOrDomainName);
         pingThread.start();
-        PING_THREADS.put(player, pingThread);
+        PING_THREADS.put(source, pingThread);
         return 1;
     }
 
-    private static long ping(Player player, String targetIpOrDomainName, boolean isFirstPing) {
+    private static long ping(CommandSourceStack source, String targetIpOrDomainName, boolean isFirstPing) {
         try {
             InetAddress inetAddress = InetAddress.getByName(targetIpOrDomainName);
             if (isFirstPing) {
-                player.displayClientMessage(
-                    Messenger.s(
+                Messenger.tell(
+                    source, Messenger.s(
                         String.format(
                             "§b%s §ePing §b%s §e[ %s ] §e...",
                             MSG_HEAD, targetIpOrDomainName, inetAddress.getHostAddress()
                         )
-                    ),
-                    false
+                    )
                 );
             }
             long startTime = System.currentTimeMillis();
@@ -95,70 +93,64 @@ public class PingCommandRegistry {
             long endTime = System.currentTimeMillis();
             if (isReachable) {
                 long delayTime = endTime - startTime;
-                player.displayClientMessage(
-                    Messenger.s(
+                Messenger.tell(
+                    source, Messenger.s(
                         String.format(
                             "§b%s §2Replay from §e[ %s ]§2 Time = %dms",
                             MSG_HEAD, inetAddress.getHostAddress(), delayTime
                         )
-                    ),
-                    false
+                    )
                 );
                 return delayTime;
             } else {
-                player.displayClientMessage(Messenger.s(String.format("§b%s §4Request time out.", MSG_HEAD)), false);
+                Messenger.tell(source, Messenger.s(String.format("§b%s §4Request time out.", MSG_HEAD)));
                 return -1;
             }
         } catch (IOException e) {
-            CarpetAMSAdditionServer.LOGGER.error("[commandPing] An error occurred while performing ping operation");
+            CarpetAMSAdditionServer.LOGGER.error("[commandPings] An error occurred while performing ping operation");
             return -1;
         }
     }
 
-    private static int stopPing(Player player) {
-        String stopPing = translator.tr("stop_ping").getString();
-        String activePingIsNull = translator.tr("active_ping_is_null").getString();
-        PingThread pingThread = PING_THREADS.get(player);
+    private static int stopPing(CommandSourceStack source) {
+        String stopPing = tr.tr("stop_ping").getString();
+        String activePingIsNull = tr.tr("active_ping_is_null").getString();
+        PingThread pingThread = PING_THREADS.get(source);
         if (pingThread != null) {
             pingThread.setInterrupted();
-            player.displayClientMessage(Messenger.s(String.format("§b%s §4%s", MSG_HEAD, stopPing)), false);
+            Messenger.tell(source, Messenger.s(String.format("§b%s §4%s", MSG_HEAD, stopPing)));
         } else {
-            player.displayClientMessage(Messenger.s(String.format("§b%s §4%s", MSG_HEAD, activePingIsNull)), false);
+            Messenger.tell(source, Messenger.s(String.format("§b%s §4%s", MSG_HEAD, activePingIsNull)));
         }
         return 1;
     }
 
-    private static int help(Player player) {
-        String pingHelp = translator.tr("help.ping").getString();
-        String stopHelp = translator.tr("help.stop").getString();
-        player.displayClientMessage(
-            Messenger.s(pingHelp + "\n" + stopHelp).
-            setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)),
-            false
-        );
+    private static int help(CommandSourceStack source) {
+        MutableComponent pingHelp = tr.tr("help.ping");
+        MutableComponent stopHelp = tr.tr("help.stop");
+        Messenger.tell(source, Messenger.c(pingHelp, Messenger.endl(), stopHelp).withColor(Colors.GRAY));
         return 1;
     }
 
-    private static void sendFinishMessage(Player player, int totalPings, int successfulPings, int failedPings, long averageDelay) {
-        player.displayClientMessage(
-            Messenger.s(
+    private static void sendFinishMessage(CommandSourceStack source, int totalPings, int successfulPings, int failedPings, long averageDelay) {
+        Messenger.tell(
+            source, Messenger.s(
                 String.format(
                     "§b%s §aSent = %d, Received = %d, Lost = %d, Average delay = %dms",
                     MSG_HEAD, totalPings, successfulPings, failedPings, averageDelay
                 )
-            ),
-            false
+            )
         );
     }
 
     private static class PingThread extends Thread {
        private volatile boolean interrupted = false;
        private final int pingQuantity;
-       private final Player player;
+       private final CommandSourceStack source;
        private final String targetIpOrDomainName;
-       private PingThread(int pingQuantity, Player player, String targetIpOrDomainName) {
+       private PingThread(int pingQuantity, CommandSourceStack source, String targetIpOrDomainName) {
             this.pingQuantity = pingQuantity;
-            this.player = player;
+            this.source = source;
             this.targetIpOrDomainName = targetIpOrDomainName;
             this.setDaemon(true);
        }
@@ -174,7 +166,7 @@ public class PingCommandRegistry {
                    if (interrupted){
                        return;
                    }
-                   long delay = ping(player, targetIpOrDomainName, isFirstPing);
+                   long delay = ping(source, targetIpOrDomainName, isFirstPing);
                    if (delay >= 0) {
                        successfulPings++;
                        totalDelay += delay;
@@ -184,10 +176,10 @@ public class PingCommandRegistry {
                    isFirstPing = false;
                    Thread.sleep(1000);
                }
-               sendFinishMessage(player, pingQuantity, successfulPings, failedPings, successfulPings > 0 ? totalDelay / successfulPings : 0);
+               sendFinishMessage(source, pingQuantity, successfulPings, failedPings, successfulPings > 0 ? totalDelay / successfulPings : 0);
            } catch (InterruptedException ignored) {
            } finally {
-               PING_THREADS.remove(player);
+               PING_THREADS.remove(source);
            }
        }
 

@@ -4,6 +4,10 @@ carpetamsaddition:
       version: 'version'
       total_rules: 'total rules'
 
+  fuzz:
+    command:
+      highlightCoordButtonHoverText: 'Use fuzz mod to highlight waypoints, use /coordCompass clear to remove the highlight'
+
   rule:
     amsUpdateSuppressionCrashFix:
       msg: 'Update suppression location @ %s -> [ %s ] | reason: %s'
@@ -197,10 +201,6 @@ carpetamsaddition:
       switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
     amsNetworkProtocol:
       need_enable_protocol: '[Carpet AMS Addition] Using the %s rule requires enabling the amsNetworkProtocol rule to take effect'
-
-  fuzz:
-    command:
-      highlightCoordButtonHoverText: Use fuzz mod to highlight waypoints, use /coordCompass clear to remove the highlight
 
   carpet_translations:
     category:
