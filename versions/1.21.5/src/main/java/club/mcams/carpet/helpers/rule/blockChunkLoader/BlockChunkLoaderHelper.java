@@ -32,37 +32,9 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21.5")
 public class BlockChunkLoaderHelper {
-    private static final String TICKET_NAMESPACE = "carpetamsaddition";
-
-    private static final ChunkTicketType NOTE_BLOCK_TICKET_TYPE = registerTicketType(
-        String.format("%s:note_block_loader", TICKET_NAMESPACE),
-        BlockChunkLoaderHelper.getLoadTime(),
-        //#if MC>=12109
-        //$$ 15
-        //#else
-        true, ChunkTicketType.Use.LOADING_AND_SIMULATION
-        //#endif
-    );
-
-    private static final ChunkTicketType PISTON_BLOCK_TICKET_TYPE = registerTicketType(
-        String.format("%s:piston_block_loader", TICKET_NAMESPACE),
-        BlockChunkLoaderHelper.getLoadTime(),
-        //#if MC>=12109
-        //$$ 15
-        //#else
-        true, ChunkTicketType.Use.LOADING_AND_SIMULATION
-        //#endif
-    );
-
-    private static final ChunkTicketType BELL_BLOCK_TICKET_TYPE = registerTicketType(
-        String.format("%s:bell_block_loader", TICKET_NAMESPACE),
-        BlockChunkLoaderHelper.getLoadTime(),
-        //#if MC>=12109
-        //$$ 15
-        //#else
-        true, ChunkTicketType.Use.LOADING_AND_SIMULATION
-        //#endif
-    );
+    public static ChunkTicketType NOTE_BLOCK_TICKET_TYPE;
+    public static ChunkTicketType PISTON_BLOCK_TICKET_TYPE;
+    public static ChunkTicketType BELL_BLOCK_TICKET_TYPE;
 
     public static void addNoteBlockTicket(ServerWorld world, ChunkPos chunkPos) {
         addTicket(world, chunkPos, NOTE_BLOCK_TICKET_TYPE);
@@ -87,16 +59,16 @@ public class BlockChunkLoaderHelper {
         }
     }
 
-    private static int getLoadTime() {
+    public static int getLoadTime() {
         return AmsServerSettings.blockChunkLoaderTimeController;
     }
 
-    private static int getLoadRange() {
+    public static int getLoadRange() {
         return AmsServerSettings.blockChunkLoaderRangeController;
     }
 
     //#if MC>=12109
-    //$$ private static ChunkTicketType registerTicketType(String id, long expiryTicks, int flags) {
+    //$$ public static ChunkTicketType registerTicketType(String id, long expiryTicks, int flags) {
     //$$     return (ChunkTicketType)Registry.register(Registries.TICKET_TYPE, id, new ChunkTicketType(expiryTicks, flags));
     //$$ }
     //#else
