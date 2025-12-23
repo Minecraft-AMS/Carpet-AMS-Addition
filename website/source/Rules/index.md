@@ -2589,18 +2589,38 @@ AMS网络协议的开关。
 <该规则 Minecraft >= 1.21 可用>
 
 - 类型: `boolean`
-
+  
   
 
 - 默认值: `false`
-
+  
   
 
 - 参考选项: `false`, `true`
-
+  
   
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 防止服务器暂停（preventServerPause）
+
+防止服务器60s后暂停。
+
+<该规则 Minecraft >= 1.21.2 可用>
+
+- 类型: `boolean`
+  
+  
+
+- 默认值: `false`
+  
+  
+
+- 参考选项: `false`, `true`
+  
+  
+
+- 分类: `AMS`, `FEATURE`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
@@ -2783,4 +2803,3 @@ AMS网络协议的开关。
   
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
-

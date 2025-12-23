@@ -2611,18 +2611,32 @@ Only allow new portals to be generated when players pass through the Nether port
 &lt;Available for Minecraft >= 1.21&gt;
 
 - Type: `boolean`
-
+  
   
 
 - Default: `false`
-
+  
   
 
 - Suggested options: `false`, `true`
-
+  
   
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## preventServerPause
+
+Prevent server pause after 60s.
+
+&lt;Available for Minecraft >= 1.21.2&gt;
+
+* Type: `boolean`
+
+* Default: `false`
+
+* Suggested options: `false`, `true`
+
+* Categroies: `AMS`, `FEATURE`
 
 ## craftableEnchantedGoldApple
 
