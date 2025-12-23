@@ -618,6 +618,12 @@ public class AmsServerSettings {
     //$$ public static boolean onlyPlayerCanCreateNetherPortal = false;
     //#endif
 
+    //#if MC>=12102
+    //$$ @GameVersion(version = "Minecraft >= 1.21.2")
+    //$$ @Rule(categories = {AMS, FEATURE})
+    //$$ public static boolean preventServerPause = false;
+    //#endif
+
     /*
      * AMS网络协议规则
      */
@@ -702,12 +708,6 @@ public class AmsServerSettings {
     @GameVersion(version = "Minecraft < 1.20.5")
     @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
     public static boolean endPortalChunkLoader = false;
-    //#endif
-
-    //#if MC>=12102
-    //$$ @GameVersion(version = "Minecraft >= 1.21.2")
-    //$$ @Rule(categories = {AMS, FEATURE})
-    //$$ public static boolean preventServerPause = false;
     //#endif
 
     /*
