@@ -704,6 +704,12 @@ public class AmsServerSettings {
     public static boolean endPortalChunkLoader = false;
     //#endif
 
+    //#if MC>=12102
+    //$$ @GameVersion(version = "Minecraft >= 1.21.2")
+    //$$ @Rule(categories = {AMS, FEATURE})
+    //$$ public static boolean preventServerPause = false;
+    //#endif
+
     /*
      * 合成表规则
      */

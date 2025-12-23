@@ -21,7 +21,6 @@ carpetamsaddition:
     phantomSpawnAlert:
       msg: '§b<phantomSpawnAlert> §r§e%s §r§d召唤了幻翼 §r§e@ §r§a[ %s ]'
 
-
   command:
     commandHelper:
       refresh_cmd_tree: '命令已被刷新'
@@ -709,6 +708,9 @@ carpetamsaddition:
       onlyPlayerCanCreateNetherPortal:
         name: 只有玩家可以生成地狱门
         desc: 只允许玩家穿过地狱门时生成新的地狱门
+      preventServerPause:
+        name: 防止服务器暂停
+        desc: 防止服务器60s后暂停
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
