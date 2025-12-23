@@ -1533,16 +1533,16 @@ Players cannot teleport through nether portals.
 After enabling the rule, use the `/plerNoNetherPortalTeleport help` command to view the usage instructions
 
 - Type: `String`
-
-
+  
+  
 
 - Default: `false`
-
-
+  
+  
 
 - Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-
-
+  
+  
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL` `COMMAND`
 
@@ -2611,18 +2611,30 @@ Only allow new portals to be generated when players pass through the Nether port
 &lt;Available for Minecraft >= 1.21&gt;
 
 - Type: `boolean`
-
+  
   
 
 - Default: `false`
-
+  
   
 
 - Suggested options: `false`, `true`
-
+  
   
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## preventServerPause
+
+Prevent server pause after 60s.
+
+* Type: `boolean`
+
+* Default: `false`
+
+* Suggested options: `false`, `true`
+
+* Categroies: `AMS`, `FEATURE`
 
 ## craftableEnchantedGoldApple
 
