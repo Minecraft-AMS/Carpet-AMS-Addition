@@ -2628,6 +2628,8 @@ Only allow new portals to be generated when players pass through the Nether port
 
 Prevent server pause after 60s.
 
+&lt;Available for Minecraft >= 1.21.2&gt;
+
 * Type: `boolean`
 
 * Default: `false`

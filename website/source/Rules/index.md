@@ -2604,6 +2604,8 @@ AMS网络协议的开关。
 
 ## 防止服务器暂停（preventServerPause）
 
+<该规则 Minecraft >= 1.21.2 可用>
+
 防止服务器60s后暂停。
 
 - 类型: `boolean`
