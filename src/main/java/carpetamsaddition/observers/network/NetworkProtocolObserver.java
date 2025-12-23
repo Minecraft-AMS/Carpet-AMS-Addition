@@ -37,7 +37,7 @@ public class NetworkProtocolObserver extends RuleObserver<Object> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Object> rule, Object oldValue, Object newValue) {
         if (!CarpetAMSAdditionSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning()) {
-            Messenger.tell(source, Messenger.formatting(tr.tr("need_enable_protocol", getRuleName(rule)), ChatFormatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", getRuleName(rule)), ChatFormatting.YELLOW));
         }
     }
 }

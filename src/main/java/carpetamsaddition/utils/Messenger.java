@@ -48,7 +48,7 @@ public class Messenger {
 
     // Simple Text with formatting
     public static MutableComponent s(Object text, ChatFormatting textFormatting) {
-        return formatting(s(text), textFormatting);
+        return f(s(text), textFormatting);
     }
 
     // Translation Text
@@ -87,7 +87,7 @@ public class Messenger {
     }
 
     @NotNull
-    public static MutableComponent formatting(MutableComponent text, ChatFormatting... formattings) {
+    public static MutableComponent f(MutableComponent text, ChatFormatting... formattings) {
         text.withStyle(formattings);
         return text;
     }

@@ -67,13 +67,13 @@ public class GetClientPlayerFpsRegistry {
         if (source != null) {
             ServerPlayer player = PlayerUtil.getServerPlayerEntity(playerUuid);
             if (!FakePlayerHelper.isFakePlayer(player) && player != null) {
-                Messenger.tell(source, Messenger.formatting(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), ChatFormatting.GREEN));
+                Messenger.tell(source, Messenger.f(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), ChatFormatting.GREEN));
             }
         }
     }
 
     private static int help(CommandSourceStack source) {
-        Messenger.tell(source, Messenger.formatting(tr.tr("help"), ChatFormatting.GRAY));
+        Messenger.tell(source, Messenger.f(tr.tr("help"), ChatFormatting.GRAY));
         return 1;
     }
 }
