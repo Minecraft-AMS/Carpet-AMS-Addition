@@ -18,31 +18,21 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.rule.blockChunkLoader;
+package carpetamsaddition.mixin.hooks.rule.blockChunkLoader;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.MappedRegistry;
+import net.minecraft.server.level.TicketType;
 
-import org.objectweb.asm.Opcodes;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(MappedRegistry.class)
-public abstract class MappedRegistryMixin {
-    @ModifyExpressionValue(
-        method = "validateWrite(Lnet/minecraft/resources/ResourceKey;)V",
-        at = @At(
-            value = "FIELD",
-            target = "Lnet/minecraft/core/MappedRegistry;frozen:Z",
-            opcode = Opcodes.GETFIELD
-        )
-    )
-    private boolean noFrozen(boolean original, @NotNull ResourceKey<@NotNull String> key) {
-        return key.identifier().getNamespace().equals("carpetamsaddition") ? false : original;
+@Mixin(TicketType.class)
+public abstract class TicketTypeMixin {
+    @Inject(method = "<clinit>", at = @At("TAIL"))
+    private static void addAmsTicketType(CallbackInfo ci) {
+        BlockChunkLoaderHelper.registerTicketTypeToMinecraft();
     }
 }
-
