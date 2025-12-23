@@ -585,6 +585,8 @@ carpetamsaddition:
           '0': 'After enabling the rule, use the "/playerPose help" command to view the usage instructions'
       onlyPlayerCanCreateNetherPortal:
         desc: Only allow new portals to be generated when players pass through the Nether portal
+      preventServerPause:
+        desc: Prevent server pause after 60s
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

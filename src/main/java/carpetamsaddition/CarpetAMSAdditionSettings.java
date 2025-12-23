@@ -570,6 +570,9 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean onlyPlayerCanCreateNetherPortal = false;
 
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean preventServerPause  = false;
+
     /*
      * AMS网络协议规则
      */
