@@ -26,14 +26,15 @@ import carpetamsaddition.utils.Messenger;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 
+import org.jetbrains.annotations.NotNull;
+
 public class InvokeFuzzModCommand {
     private static final Translator tr = new Translator("fuzz.command");
 
+    @NotNull
     public static Component highlightCoordButton(String posText) {
         String cmd = "/coordCompass set " + posText.replace(",", "");
 
-        return
-            Messenger.s(" [+H]").withStyle(ChatFormatting.YELLOW, ChatFormatting.BOLD)
-            .withStyle(Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), ChatFormatting.YELLOW));
+        return Messenger.f(Messenger.s(" [+H]").withStyle(Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), ChatFormatting.YELLOW)), ChatFormatting.YELLOW);
     }
 }

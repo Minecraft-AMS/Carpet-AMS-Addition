@@ -33,7 +33,7 @@ public class AmsNetworkProtocolRuleObserver extends RuleObserver<Boolean> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (MinecraftServerUtil.serverIsRunning()) {
-            NetworkUtil.forcedBroadcastDataPack(MinecraftServerUtil.getServer(), RequestHandShakeS2CPayload.create());
+            NetworkUtil.broadcastDataPack(RequestHandShakeS2CPayload.create(), NetworkUtil.SendMode.FORCE);
         }
     }
 }

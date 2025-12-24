@@ -58,17 +58,17 @@ public class GetHeldItemIDCommandRegistry {
 
     private static MutableComponent buildMessage(String itemID) {
         return
-            Messenger.s("")
-            .append(Messenger.s(MSG_HEAD).withStyle(ChatFormatting.AQUA))
-            .append(Messenger.s(itemID).withStyle(ChatFormatting.GREEN))
-            .append(createCopyButton(itemID));
+            Messenger.c(
+                Messenger.f(Messenger.s(MSG_HEAD), ChatFormatting.AQUA),
+                Messenger.f(Messenger.s(itemID), ChatFormatting.GREEN)
+            ).append(createCopyButton(itemID));
     }
 
     private static Component createCopyButton(String itemID) {
         return
-            Messenger.f(Messenger.s(" [C] "), ChatFormatting.GREEN, ChatFormatting.BOLD).setStyle(
+            Messenger.f(Messenger.s(" [C] ").setStyle(
                 Messenger.simpleCopyButtonStyle(itemID, tr.tr("getHeldItemID.copy"), ChatFormatting.YELLOW)
-            ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD);
+            ), ChatFormatting.GREEN, ChatFormatting.BOLD);
     }
 
     private static String getHeldItemRegisterName(Player player) {

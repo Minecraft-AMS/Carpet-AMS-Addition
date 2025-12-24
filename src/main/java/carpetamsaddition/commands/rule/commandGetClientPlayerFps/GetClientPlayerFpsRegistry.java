@@ -58,7 +58,7 @@ public class GetClientPlayerFpsRegistry {
 
     private static int requestFps(ServerPlayer targetPlayer, CommandSourceStack source) {
         pendingQueries.put(targetPlayer.getUUID(), source);
-        NetworkUtil.sendS2CPacketIfSupport(targetPlayer, ClientPlayerFpsPayload_S2C.create(targetPlayer.getUUID()));
+        NetworkUtil.sendS2CPacket(targetPlayer, ClientPlayerFpsPayload_S2C.create(targetPlayer.getUUID()), NetworkUtil.SendMode.NEED_SUPPORT);
         return 1;
     }
 

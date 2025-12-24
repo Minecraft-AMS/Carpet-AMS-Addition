@@ -31,7 +31,6 @@ import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayer
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -58,14 +57,14 @@ public class SetPlayerPoseCommandRegistry {
             .then(Commands.argument("pose", StringArgumentType.greedyString())
             .suggests(ListSuggestionProvider.of(POSE))
             .executes(ctx -> set(
-                EntityArgument.getPlayer(ctx, "player"), ctx.getSource().getServer(), StringArgumentType.getString(ctx, "pose")
+                EntityArgument.getPlayer(ctx, "player"), StringArgumentType.getString(ctx, "pose")
             )))))
 
             // playerPose <player> stop
             .then(Commands.argument("player", EntityArgument.player())
             .then(Commands.literal("stop")
             .executes(ctx -> stop(
-                EntityArgument.getPlayer(ctx, "player"), ctx.getSource().getServer()
+                EntityArgument.getPlayer(ctx, "player")
             ))))
 
             // help
@@ -74,18 +73,18 @@ public class SetPlayerPoseCommandRegistry {
         );
     }
 
-    private static int set(ServerPlayer targetPlayer, MinecraftServer server, String pose) {
+    private static int set(ServerPlayer targetPlayer, String pose) {
         DO_POSE_MAP.put(targetPlayer.getUUID(), pose);
         targetPlayer.setShiftKeyDown(true);
         triggerPoseUpdate(targetPlayer);
-        broadcastSyncDatapack(targetPlayer, server);
+        broadcastSyncDatapack(targetPlayer);
         return 1;
     }
 
-    private static int stop(ServerPlayer targetPlayer, MinecraftServer server) {
+    private static int stop(ServerPlayer targetPlayer) {
         DO_POSE_MAP.remove(targetPlayer.getUUID());
         triggerPoseUpdate(targetPlayer);
-        broadcastSyncDatapack(targetPlayer, server);
+        broadcastSyncDatapack(targetPlayer);
         return 1;
     }
 
@@ -104,8 +103,8 @@ public class SetPlayerPoseCommandRegistry {
         return 1;
     }
 
-    private static void broadcastSyncDatapack(ServerPlayer targetPlayer, MinecraftServer server) {
-        NetworkUtil.broadcastDataPack(server, UpdatePlayerPosePayload_S2C.create(DO_POSE_MAP, targetPlayer.getUUID()));
+    private static void broadcastSyncDatapack(ServerPlayer targetPlayer) {
+        NetworkUtil.broadcastDataPack(UpdatePlayerPosePayload_S2C.create(DO_POSE_MAP, targetPlayer.getUUID()), NetworkUtil.SendMode.NEED_SUPPORT);
     }
 
     private static void triggerPoseUpdate(ServerPlayer targetPlayer) {

@@ -23,9 +23,9 @@ package carpetamsaddition.utils;
 import carpetamsaddition.network.AMS_CustomPayload;
 
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,32 +35,35 @@ public class NetworkUtil {
     private static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
 
-    public static void broadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
-        server.getPlayerList().getPlayers().forEach(player -> sendS2CPacketIfSupport(player, payload));
+    public enum SendMode {
+        FORCE,
+        NEED_SUPPORT
     }
 
-    public static void forcedBroadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
-        server.getPlayerList().getPlayers().forEach(payload::sendS2CPacket);
+    public static void broadcastDataPack(AMS_CustomPayload payload, SendMode sendMode) {
+        MinecraftServerUtil.getOnlinePlayers().forEach(player -> sendS2CPacket(player, payload, sendMode));
     }
 
-    public static void sendS2CPacketIfSupport(ServerPlayer player, AMS_CustomPayload payload) {
-        if (isSupportClient(player.getUUID())) {
+    public static void sendS2CPacket(ServerPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
+        boolean shouldSend = switch (sendMode) {
+            case FORCE -> true;
+            case NEED_SUPPORT -> isSupportClient(player.getUUID());
+        };
+
+        if (shouldSend) {
             payload.sendS2CPacket(player);
         }
     }
 
-    public static void sendC2SPacketIfSupport(LocalPlayer player, AMS_CustomPayload payload) {
-        if (isSupportServer()) {
+    public static void sendC2SPacket(LocalPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
+        boolean shouldSend = switch (sendMode) {
+            case FORCE -> true;
+            case NEED_SUPPORT -> isSupportServer();
+        };
+
+        if (shouldSend) {
             payload.sendC2SPacket(player);
         }
-    }
-
-    public static void sendS2CPacket(ServerPlayer player, AMS_CustomPayload payload) {
-        payload.sendS2CPacket(player);
-    }
-
-    public static void sendC2SPacket(LocalPlayer player, AMS_CustomPayload payload) {
-        payload.sendC2SPacket(player);
     }
 
     public static boolean isSupportClient(UUID uuid) {
@@ -96,14 +99,10 @@ public class NetworkUtil {
     }
 
     public static void executeOnClientThread(Runnable runnable) {
-        if (MinecraftClientUtil.clientIsRunning()) {
-            MinecraftClientUtil.getCurrentClient().execute(runnable);
-        }
+        Optional.of(MinecraftClientUtil.clientIsRunning()).filter(Boolean::booleanValue).ifPresent(_ -> MinecraftClientUtil.getCurrentClient().execute(runnable));
     }
 
     public static void executeOnServerThread(Runnable runnable) {
-        if (MinecraftServerUtil.serverIsRunning()) {
-            MinecraftServerUtil.getServer().execute(runnable);
-        }
+        Optional.of(MinecraftServerUtil.serverIsRunning()).filter(Boolean::booleanValue).ifPresent(_ -> MinecraftServerUtil.getServer().execute(runnable));
     }
 }

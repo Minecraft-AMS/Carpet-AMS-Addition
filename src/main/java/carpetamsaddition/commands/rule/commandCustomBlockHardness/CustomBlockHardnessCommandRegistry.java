@@ -32,7 +32,6 @@ import com.mojang.brigadier.arguments.FloatArgumentType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.commands.arguments.blocks.BlockStateArgument;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
@@ -61,8 +60,7 @@ public class CustomBlockHardnessCommandRegistry {
             .executes(context -> set(
                 context.getSource(),
                 BlockStateArgument.getBlock(context, "block").getState(),
-                FloatArgumentType.getFloat(context, "hardness"),
-                context.getSource().getServer()
+                FloatArgumentType.getFloat(context, "hardness")
             )))))
 
             // remove
@@ -70,15 +68,13 @@ public class CustomBlockHardnessCommandRegistry {
             .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
             .executes(context -> remove(
                 context.getSource(),
-                BlockStateArgument.getBlock(context, "block").getState(),
-                context.getSource().getServer()
+                BlockStateArgument.getBlock(context, "block").getState()
             ))))
 
             // removeAll
             .then(literal("removeAll").executes(
                 context -> removeAll(
-                context.getSource(),
-                context.getSource().getServer()
+                context.getSource()
             )))
 
             // list
@@ -97,7 +93,7 @@ public class CustomBlockHardnessCommandRegistry {
         );
     }
 
-    private static int set(CommandSourceStack source, BlockState state, float hardness, MinecraftServer server) {
+    private static int set(CommandSourceStack source, BlockState state, float hardness) {
         if (CUSTOM_BLOCK_HARDNESS_MAP.containsKey(state)) {
             float oldHardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
             Messenger.tell(
@@ -114,16 +110,16 @@ public class CustomBlockHardnessCommandRegistry {
         }
         CUSTOM_BLOCK_HARDNESS_MAP.put(state, hardness);
         saveToJson();
-        broadcastDataPack(server);
+        broadcastDataPack();
         return 1;
     }
 
-    private static int remove(CommandSourceStack source, BlockState state, MinecraftServer server) {
+    private static int remove(CommandSourceStack source, BlockState state) {
         if (CUSTOM_BLOCK_HARDNESS_MAP.containsKey(state)) {
             float hardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
             CUSTOM_BLOCK_HARDNESS_MAP.remove(state);
             saveToJson();
-            broadcastDataPack(server);
+            broadcastDataPack();
 
             Messenger.tell(source, Messenger.f(tr.tr("remove", RegexTools.getBlockRegisterName(state), hardness), ChatFormatting.RED, ChatFormatting.BOLD));
 
@@ -137,10 +133,10 @@ public class CustomBlockHardnessCommandRegistry {
         }
     }
 
-    private static int removeAll(CommandSourceStack source, MinecraftServer server) {
+    private static int removeAll(CommandSourceStack source) {
         CUSTOM_BLOCK_HARDNESS_MAP.clear();
         saveToJson();
-        broadcastDataPack(server);
+        broadcastDataPack();
         Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.GREEN, ChatFormatting.BOLD));
         return 1;
     }
@@ -186,8 +182,8 @@ public class CustomBlockHardnessCommandRegistry {
         return 1;
     }
 
-    private static void broadcastDataPack(MinecraftServer server) {
-        NetworkUtil.broadcastDataPack(server, CustomBlockHardnessPayload_S2C.create(CUSTOM_BLOCK_HARDNESS_MAP));
+    private static void broadcastDataPack() {
+        NetworkUtil.broadcastDataPack(CustomBlockHardnessPayload_S2C.create(CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
     }
 
     private static void saveToJson() {

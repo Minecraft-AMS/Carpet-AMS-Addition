@@ -128,9 +128,8 @@ public class HereCommandRegistry {
             hoverText = tr.tr("nether_button_hover");
         }
 
-        return
-            Messenger.s(" [C]")
-            .setStyle(Messenger.simpleCopyButtonStyle(copyCoordText, Objects.requireNonNull(hoverText), ChatFormatting.YELLOW))
-            .withStyle(ChatFormatting.BOLD, buttonColor);
+        return Messenger.f(Messenger.s(" [C]").setStyle(
+            Messenger.simpleCopyButtonStyle(copyCoordText, Objects.requireNonNull(hoverText), ChatFormatting.YELLOW)), ChatFormatting.BOLD, buttonColor
+        );
     }
 }

@@ -120,7 +120,7 @@ public class AmspCommandRegistry {
 
         clientModVersion.clear();
 
-        NetworkUtil.sendS2CPacketIfSupport(targetPlayer, RequestClientModVersionPayload_S2C.create(playerUuid));
+        NetworkUtil.sendS2CPacket(targetPlayer, RequestClientModVersionPayload_S2C.create(playerUuid), NetworkUtil.SendMode.NEED_SUPPORT);
 
         final int[] retryCount = {0};
         final int maxRetries = 5;
@@ -137,7 +137,7 @@ public class AmspCommandRegistry {
                         if (retryCount[0] < maxRetries) {
                             retryCount[0]++;
                             Messenger.tell(source, Messenger.f(tr.tr("request_client_version", String.valueOf(retryCount[0])), ChatFormatting.YELLOW));
-                            NetworkUtil.sendS2CPacketIfSupport(targetPlayer, RequestClientModVersionPayload_S2C.create(playerUuid));
+                            NetworkUtil.sendS2CPacket(targetPlayer, RequestClientModVersionPayload_S2C.create(playerUuid), NetworkUtil.SendMode.NEED_SUPPORT);
                             CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(this);
                         } else {
                             Messenger.tell(source, Messenger.f(tr.tr("client_mod_version_failed_feedback", String.valueOf(maxRetries)), ChatFormatting.RED));
@@ -182,7 +182,7 @@ public class AmspCommandRegistry {
 
     private static int requestHandShake(CommandSourceStack source, Collection<ServerPlayer> players) {
         for (ServerPlayer player : players) {
-            NetworkUtil.sendS2CPacket(player, RequestHandShakeS2CPayload.create());
+            NetworkUtil.sendS2CPacket(player, RequestHandShakeS2CPayload.create(), NetworkUtil.SendMode.FORCE);
             Messenger.tell(source, Messenger.f(tr.tr("request_handshake_feedback", PlayerUtil.getName(player)), ChatFormatting.GREEN));
         }
 

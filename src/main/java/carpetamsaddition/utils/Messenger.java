@@ -92,18 +92,16 @@ public class Messenger {
 
     @NotNull
     public static Style simpleCmdButtonStyle(String command, Component hoverText, ChatFormatting... hoverTextFormattings) {
-        return
-            emptyStyle()
+        return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, Messenger.s(hoverText.getString()).withStyle(hoverTextFormattings)));
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));
     }
 
     @NotNull
-    public static Style simpleCopyButtonStyle(String text, Component hoverText, ChatFormatting... hoverTextFormattings) {
-        return
-            emptyStyle()
-            .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, text))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, Messenger.s(hoverText.getString()).withStyle(hoverTextFormattings)));
+    public static Style simpleCopyButtonStyle(String copyText, Component hoverText, ChatFormatting... hoverTextFormattings) {
+        return emptyStyle()
+            .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));
     }
 
     private static Style emptyStyle() {

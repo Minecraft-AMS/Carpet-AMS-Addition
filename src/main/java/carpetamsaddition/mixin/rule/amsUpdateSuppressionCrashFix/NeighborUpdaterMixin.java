@@ -54,7 +54,7 @@ public interface NeighborUpdaterMixin {
     private static void tryNeighborUpdate(Level world, BlockState state, BlockPos pos, Block sourceBlock, Orientation orientation, boolean notify, CallbackInfo ci, Throwable throwable) {
         if (!Objects.equals(CarpetAMSAdditionSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
             UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
-            throw new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));
+            throw new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable).getString());
         }
     }
 }
