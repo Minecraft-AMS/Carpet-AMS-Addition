@@ -74,17 +74,17 @@
 控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。
 玩家上下线时会将交互状态重置回加载以避免[MC-157812](https://bugs.mojang.com/browse/MC-157812)。
 
-命令：/playerChunkLoading true/false
+命令：/playerChunkLoading [true/false]
 
-- 类型: `boolean`
-  
-  
+- 类型: `String`
+
+
 
 - 默认值: `false`
-  
-  
 
-- 参考选项: `false`, `true`
+
+
+- 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
   
   
 

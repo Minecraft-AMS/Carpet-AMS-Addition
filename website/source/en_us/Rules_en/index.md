@@ -82,19 +82,19 @@ Greatly optimized the code related to dragon fight starting. Provide performance
 
 Control chunkloading of player. Won't remove player detection of deminsion like main island loading in the end. Will be reset after player loging out to avoid [MC-157812](https://bugs.mojang.com/browse/MC-157812).
 
-Command: /playerChunkLoading true/false
+Command: /playerChunkLoading [true/false]
 
-- Type: `boolean`
-  
-  
+- Type: `String`
+
+
 
 - Default: `false`
-  
-  
 
-- Suggested options: `false`, `true`
-  
-  
+
+
+- Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
+
+
 
 - Categroies: `AMS`, `COMMAND`, `AMS_chunkLoader`
 

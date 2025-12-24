@@ -22,7 +22,6 @@ package carpetamsaddition.commands.rule.commandCustomAntiFireItems;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Colors;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.RegexTools;
