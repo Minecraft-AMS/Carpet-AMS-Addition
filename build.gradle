@@ -10,7 +10,7 @@ preprocess {
 
 	def mc260100 = createNode('26.1', 26_01_00, '')
 
-    mc260100.link(mc260100, file('versions/mapping-1.21.11-1.21.11.txt'))
+    mc260100.link(mc260100, file('versions/mapping-26.1-26.1.txt'))
 }
 
 tasks.register('buildAndGather') {
