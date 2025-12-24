@@ -90,7 +90,17 @@ public class SetPlayerPoseCommandRegistry {
     }
 
     private static int help(CommandSourceStack source) {
-        Messenger.tell(source, Messenger.f(tr.tr("set_help").append(Messenger.endl()).append(tr.tr("stop_help")), ChatFormatting.GRAY));
+        Messenger.tell(
+            source, Messenger.f(
+                Messenger.c(
+                    tr.tr("set_help"),
+                    Messenger.endl(),
+                    tr.tr("stop_help"),
+                    Messenger.endl()
+                ), ChatFormatting.GRAY
+            )
+        );
+
         return 1;
     }
 

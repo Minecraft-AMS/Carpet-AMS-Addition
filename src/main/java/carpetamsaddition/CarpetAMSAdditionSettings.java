@@ -650,7 +650,10 @@ public class CarpetAMSAdditionSettings {
     )
     public static int blockChunkLoaderRangeController = 3;
 
-    @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
+    @Rule(
+        categories = {AMS, COMMAND, AMS_CHUNKLOADER},
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"}
+    )
     public static boolean commandPlayerChunkLoadController = false;
 
     /*

@@ -22,13 +22,13 @@ package carpetamsaddition.commands.rule.commandAnvilInteractionDisabled;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
-import carpetamsaddition.utils.Colors;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
 
 import com.mojang.brigadier.context.CommandContext;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.commands.CommandSourceStack;
 
@@ -55,8 +55,8 @@ public class AnvilInteractionDisabledCommandRegistry {
         anvilInteractionDisabled = BoolArgumentType.getBool(context, "mode");
         MutableComponent message =
             anvilInteractionDisabled ?
-            tr.tr("disable").withColor(Colors.LIGHT_PURPLE) :
-            tr.tr("enable").withColor(Colors.GREEN);
+            Messenger.f(tr.tr("disable"), ChatFormatting.LIGHT_PURPLE) :
+            Messenger.f(tr.tr("enable"), ChatFormatting.GREEN);
         Messenger.tell(source, message, true);
         ForceModeCommandConfig.saveConfigToJson(context.getSource().getServer());
         return 1;

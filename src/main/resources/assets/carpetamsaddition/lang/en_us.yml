@@ -27,8 +27,14 @@ carpetamsaddition:
 
   command:
     commandHelper:
-      refresh_cmd_tree: 'Commands has been refreshed'
+      refresh_cmd_tree: '[Carpet AMS Addition] Command tree has been refreshed'
 
+    playerChunkLoading:
+      no_player_specified: '<commandPlayerChunkLoadController> No player specified'
+      set: '<commandPlayerChunkLoadController> %s chunk loading %s'
+      chunk_loading_true: '<commandPlayerChunkLoadController> chunk loading: true'
+      chunk_loading_false: '<commandPlayerChunkLoadController> chunk_loading_false'
+      help: '/playerChunkLoading [true/false] - Control chunk loading of player. Can only manipulate yourself'
     amsUpdateSuppressionCrashFixForceMode:
       lazy_mode: '[ lazy mode ]'
       force_mode: '[ force mode ]'
@@ -63,12 +69,12 @@ carpetamsaddition:
       overworld_button_hover: 'copy overworld coord'
       nether_button_hover: 'copy nether coord'
     leader:
-      add: 'became a tour guide'
-      is_already_leader: 'is already leader'
-      remove: 'not a tour guide anymore'
-      is_not_leader: 'is not leader'
-      removeAll: 'All the guides were dismissed'
-      list: '[ Leader list ]'
+      add: '<commandPlayerLeader> %s became a tour guide'
+      is_already_leader: '<commandPlayerLeader> %s is already leader'
+      remove: '<commandPlayerLeader> %s not a tour guide anymore'
+      is_not_leader: '<commandPlayerLeader> %s is not leader'
+      removeAll: '<commandPlayerLeader> All the guides were dismissed'
+      list_title: '[ Leader list ]'
       help:
         add: '/leader add <PlayerName> - Add a tour guide'
         remove: '/leader remove <PlayerName> - Remove a tour guide'
@@ -86,17 +92,20 @@ carpetamsaddition:
       save_success_msg: '[ Save world success ]'
       save_fail_msg: '[ Save world failed ]'
     getSystemInfo:
-      os: 'OS:'
-      os_arch: 'Arch:'
-      available_processors: 'Available Processors:'
-      max_memory: 'Max Memory:'
-      total_memory: 'Total Memory:'
-      free_memory: 'Free Memory:'
+      os: 'OS: %s'
+      os_arch: 'Arch: %s'
+      available_processors: 'Available Processors: %s'
+      max_memory: 'Max Memory: %s'
+      total_memory: 'Total Memory: %s'
+      free_memory: 'Free Memory: %s'
     customCommandPermissionLevel:
-      not_found: ' Does not exist in the configuration file'
-      cant_modify_self: 'You cannot modify the permissions of the command'
-      removeAll: 'All entries have been removed'
-      list: '[ Custom command permission level list ]'
+      modify_set: '<customCommandPermissionLevel> %s %d -> %d'
+      set: '<customCommandPermissionLevel> + %s/%d'
+      remove: '<customCommandPermissionLevel> - %s'
+      not_found: '<customCommandPermissionLevel> Command: %s does not exist in the configuration file'
+      cant_modify_self: '<customCommandPermissionLevel> You cannot modify the permissions of the command'
+      removeAll: '<customCommandPermissionLevel> All entries have been removed'
+      list_title: '[ Custom command permission level list ]'
       help:
         set: '/customCommandPermissionLevel set <command> <permissionLevel> - Set the permission level of a command'
         remove: '/customCommandPermissionLevel remove <command> - Remove a modified command'
@@ -104,9 +113,11 @@ carpetamsaddition:
         removeAll: '/customCommandPermissionLevel removeAll - Remove all modified commands'
         list: '/customCommandPermissionLevel list - View the list of modified commands'
     customMovableBlock:
-      already_exists: " is already exists"
-      not_found: " not found"
-      removeAll: "All block have been removed from list"
+      add: '<customMovableBlock> + %s'
+      already_exists: "<customMovableBlock> %s is already exists"
+      remove: '<customMovableBlock> - %s'
+      not_found: "<customMovableBlock> %s not found"
+      removeAll: "<customMovableBlock> All block have been removed from list"
       list: "[ Moveable block list ]"
       help:
         set: '/customMovableBlock add <block> - Added a movable block'
@@ -122,7 +133,7 @@ carpetamsaddition:
       not_found: "<customAntiFireItems> not found"
       remove: '<customAntiFireItems> - %s'
       removeAll: "<customAntiFireItems> All item have been removed from list"
-      list: "[ Anti Fire item list ]"
+      list_title: "[ Anti Fire item list ]"
       help:
         set: '/customAntiFireItems add <item> - Added a anti fire item'
         remove: '/customAntiFireItems remove <item> - Delete a anti fire item'

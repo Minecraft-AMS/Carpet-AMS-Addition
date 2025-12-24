@@ -52,22 +52,32 @@ public class CustomAntiFireItemsCommandRegistry {
         dispatcher.register(
             Commands.literal("customAntiFireItems")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomAntiFireItems))
+
+            // add
             .then(literal("add")
             .then(argument("item", ItemArgument.item(commandRegistryAccess))
             .executes(context -> add(
                 context.getSource(),
                 ItemArgument.getItem(context, "item").createItemStack(1, false)
             ))))
+
+            // remove
             .then(literal("remove")
             .then(argument("item", ItemArgument.item(commandRegistryAccess))
             .executes(context -> remove(
                 context.getSource(),
                 ItemArgument.getItem(context, "item").createItemStack(1, false)
             ))))
+
+            // removeAll
             .then(literal("removeAll")
             .executes(context -> removeAll(context.getSource())))
+
+            // list
             .then(literal("list")
             .executes(context -> list(context.getSource())))
+
+            // help
             .then(literal("help")
             .executes(context -> help(context.getSource())))
         );
@@ -77,9 +87,9 @@ public class CustomAntiFireItemsCommandRegistry {
         if (!CUSTOM_ANTI_FIRE_ITEMS.contains(getItemName(itemStack))) {
             CUSTOM_ANTI_FIRE_ITEMS.add(getItemName(itemStack));
             saveToJson();
-            Messenger.tell(source, tr.tr("add", getItemName(itemStack)).withColor(Colors.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("add", getItemName(itemStack)), ChatFormatting.GREEN));
         } else {
-            Messenger.tell(source, tr.tr("already_exists", getItemName(itemStack)).withColor(Colors.YELLOW));
+              Messenger.tell(source, Messenger.f(tr.tr("already_exists", getItemName(itemStack)), ChatFormatting.YELLOW));
         }
         return 1;
     }
@@ -88,9 +98,9 @@ public class CustomAntiFireItemsCommandRegistry {
         if (CUSTOM_ANTI_FIRE_ITEMS.contains(getItemName(itemStack))) {
             CUSTOM_ANTI_FIRE_ITEMS.remove(getItemName(itemStack));
             saveToJson();
-            Messenger.tell(source, tr.tr("remove", getItemName(itemStack)).withColor(Colors.RED));
+            Messenger.tell(source, Messenger.f(tr.tr("remove", getItemName(itemStack)), ChatFormatting.RED));
         } else {
-            Messenger.tell(source, tr.tr("not_found", getItemName(itemStack)).withColor(Colors.RED));
+            Messenger.tell(source, Messenger.f(tr.tr("not_found", getItemName(itemStack)), ChatFormatting.RED));
         }
         return 1;
     }
@@ -98,30 +108,31 @@ public class CustomAntiFireItemsCommandRegistry {
     private static int removeAll(CommandSourceStack source) {
         CUSTOM_ANTI_FIRE_ITEMS.clear();
         saveToJson();
-        Messenger.tell(source, tr.tr("removeAll").withColor(Colors.RED));
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.RED));
         return 1;
     }
 
     private static int list(CommandSourceStack source) {
-        Messenger.tell(source, Messenger.c(tr.tr("list"), Messenger.endl(), Messenger.sline()).withColor(Colors.GREEN));
+        Messenger.tell(source, Messenger.f(Messenger.c(
+            tr.tr("list_title"), Messenger.endl(), Messenger.sline()), ChatFormatting.GREEN)
+        );
 
         for (String blockName : CUSTOM_ANTI_FIRE_ITEMS) {
-            Messenger.tell(source, Messenger.s(blockName).withStyle(ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(Messenger.s(blockName), ChatFormatting.GREEN));
         }
 
         return 1;
     }
 
-    @SuppressWarnings("DuplicatedCode")
     private static int help(CommandSourceStack source) {
         Messenger.tell(
-            source, Messenger.c(
+            source, Messenger.f(Messenger.c(
                 tr.tr("help.set"), Messenger.endl(),
                 tr.tr("help.remove"), Messenger.endl(),
                 tr.tr("help.removeAll"), Messenger.endl(),
                 tr.tr("help.removeAll"), Messenger.endl(),
                 tr.tr("help.list"), Messenger.endl()
-            ).withColor(Colors.GRAY)
+            ), ChatFormatting.GRAY)
         );
 
         return 1;

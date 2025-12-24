@@ -29,6 +29,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.tree.CommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
@@ -44,7 +45,7 @@ import java.util.function.Predicate;
 @SuppressWarnings("EnhancedSwitchMigration")
 public final class CommandHelper {
     public static final List<String> permissionLevels = Arrays.asList("0", "1", "2", "3", "4");
-    private static final Translator translator = new Translator("command.commandHelper");
+    private static final Translator tr = new Translator("command.commandHelper");
 
     private CommandHelper() {}
 
@@ -53,6 +54,7 @@ public final class CommandHelper {
         if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomCommandPermissionLevel, "false")) {
             CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands().getDispatcher();
             Commands serverCommandManager = server.getCommands();
+
             for (CommandNode<CommandSourceStack> node : dispatcher.getRoot().getChildren()) {
                 if (node instanceof LiteralCommandNode) {
                     String commandName = ((LiteralCommandNode<?>) node).getLiteral();
@@ -65,8 +67,9 @@ public final class CommandHelper {
                     }
                 }
             }
+
             server.getPlayerList().getPlayers().forEach(serverCommandManager::sendCommands);
-            Messenger.sendServerMessage(server, Messenger.s("§o§7Server: " + translator.tr("refresh_cmd_tree").getString()));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), ChatFormatting.GRAY));
         }
     }
 
@@ -74,6 +77,7 @@ public final class CommandHelper {
     public static void setPermission(MinecraftServer server, String command, int permissionLevel) {
         CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands().getDispatcher();
         CommandNode<CommandSourceStack> target = dispatcher.getRoot().getChild(command);
+
         if (target != null) {
             ((CommandNodeInvoker<CommandSourceStack>) target).setRequirement(source -> hasPermissionLevel(source, permissionLevel));
         }

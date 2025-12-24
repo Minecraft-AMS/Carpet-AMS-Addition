@@ -28,8 +28,14 @@ carpetamsaddition:
 
   command:
     commandHelper:
-      refresh_cmd_tree: '命令已被刷新'
+      refresh_cmd_tree: '[Carpet AMS Addition] 命令树已被刷新'
 
+    playerChunkLoading:
+      no_player_specified: '<commandPlayerChunkLoadController> 没有指定任何玩家'
+      set: '<commandPlayerChunkLoadController> %s 区块加载 %s'
+      chunk_loading_true: '<commandPlayerChunkLoadController> 区块加载: true'
+      chunk_loading_false: '<commandPlayerChunkLoadController> 区块加载: false'
+      help: '/playerChunkLoading [true/false] - 开关玩家自身加载'
     amsUpdateSuppressionCrashFixForceMode:
       lazy_mode: '[ lazy 模式 ]'
       force_mode: '[ force 模式 ]'
@@ -64,12 +70,12 @@ carpetamsaddition:
       overworld_button_hover: '复制主世界坐标'
       nether_button_hover: '复制下界坐标'
     leader:
-      add: '成为了导游'
-      is_already_leader: '已经是一名导游'
-      remove: '不再是导游了'
-      is_not_leader: '不是一名导游'
-      removeAll: '所有的导游都被解雇了'
-      list: '[ 导游列表 ]'
+      add: '<commandPlayerLeader> %s 成为了导游'
+      is_already_leader: '<commandPlayerLeader> %s 已经是一名导游'
+      remove: '<commandPlayerLeader> %s 不再是导游了'
+      is_not_leader: '<commandPlayerLeader> %s 不是一名导游'
+      removeAll: '<commandPlayerLeader> 所有的导游都被解雇了'
+      list_title: '[ 导游列表 ]'
       help:
         add: '/leader add <PlayerName> - 添加一名导游'
         remove: '/leader remove <PlayerName> - 移除一名导游'
@@ -87,17 +93,20 @@ carpetamsaddition:
       save_success_msg: '[ 保存世界成功 ]'
       save_fail_msg: '[ 保存世界失败 ]'
     getSystemInfo:
-      os: '操作系统：'
-      os_arch: '架构：'
-      available_processors: '可用处理器：'
-      max_memory: '总内存：'
-      total_memory: '已分配内存：'
-      free_memory: '可用内存：'
+      os: '操作系统: %s'
+      os_arch: '架构: %s'
+      available_processors: '可用处理器: %s'
+      max_memory: '总内存: %s'
+      total_memory: '已分配内存: %s'
+      free_memory: '可用内存: %s'
     customCommandPermissionLevel:
-      not_found: ' 不存在于配置文件中'
-      cant_modify_self: '您不能修改该命令的权限'
-      removeAll: '已删除所有条目'
-      list: '[ 自定义指令权限等级列表 ]'
+      modify_set: '<customCommandPermissionLevel> %s %d -> %d'
+      set: '<customCommandPermissionLevel> + %s/%d'
+      remove: '<customCommandPermissionLevel> - %s'
+      not_found: '<customCommandPermissionLevel> 指令: %s 不存在于配置文件中'
+      cant_modify_self: '<customCommandPermissionLevel> 您不能修改该指令的权限'
+      removeAll: '<customCommandPermissionLevel> 已删除所有条目'
+      list_title: '[ 自定义指令权限等级列表 ]'
       help:
         set: '/customCommandPermissionLevel set <指令> <权限等级> - 设置某个指令的权限等级'
         remove: '/customCommandPermissionLevel remove <指令> - 删除某个被修改的指令'
@@ -105,9 +114,11 @@ carpetamsaddition:
         removeAll: '/customCommandPermissionLevel removeAll - 删除所有被修改的指令'
         list: '/customCommandPermissionLevel list - 查看被修改的指令列表'
     customMovableBlock:
-      already_exists: " 已存在"
-      not_found: " 不存在"
-      removeAll: "已删除所有条目"
+      add: '<customMovableBlock> + %s'
+      already_exists: "<customMovableBlock> %s 已存在"
+      remove: '<customMovableBlock> - %s'
+      not_found: "<customMovableBlock> %s 不存在"
+      removeAll: "<customMovableBlock> 已删除所有条目"
       list: "[ 可移动方块列表 ]"
       help:
         set: '/customMovableBlock add <方块注册名> - 增加一个可移动方块'
@@ -123,7 +134,7 @@ carpetamsaddition:
       not_found: "<customAntiFireItems> 不存在"
       remove: '<customAntiFireItems> - %s'
       removeAll: "<customAntiFireItems> 已删除所有条目"
-      list: "[ 防火物品列表 ]"
+      list_title: "[ 防火物品列表 ]"
       help:
         set: '/customAntiFireItems add <物品注册名> - 增加一个防火物品'
         remove: '/customAntiFireItems remove <物品注册名> - 删除一个防火物品'

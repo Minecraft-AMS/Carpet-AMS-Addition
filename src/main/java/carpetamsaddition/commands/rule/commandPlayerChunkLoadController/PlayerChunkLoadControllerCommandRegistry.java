@@ -21,14 +21,13 @@
 package carpetamsaddition.commands.rule.commandPlayerChunkLoadController;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
-import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.Style;
 import net.minecraft.ChatFormatting;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -40,30 +39,27 @@ import static net.minecraft.commands.Commands.literal;
 import static com.mojang.brigadier.arguments.BoolArgumentType.getBool;
 
 public class PlayerChunkLoadControllerCommandRegistry {
+    private static final Translator tr = new Translator("command.playerChunkLoading");
+
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(literal("playerChunkLoading")
             .requires((player) -> CommandHelper.canUseCommand(player, CarpetAMSAdditionSettings.commandPlayerChunkLoadController))
             .executes((c) -> listPlayerInteractions(c.getSource(), c.getSource().getTextName()))
             .then(argument("boolean", BoolArgumentType.bool())
             .executes((c) -> setPlayerInteraction(c.getSource(), c.getSource().getTextName(), getBool(c, "boolean"))))
+            .then(literal("help").executes(c -> help(c.getSource())))
         );
     }
 
     private static int setPlayerInteraction(CommandSourceStack source, String playerName, boolean b) {
         Player player = source.getServer().getPlayerList().getPlayerByName(playerName);
         ChunkLoading.setPlayerInteraction(playerName, b, true);
+
         if (player == null) {
-            Messenger.sendServerMessage(
-                MinecraftServerUtil.getServer(), Messenger.s("No player specified").
-                setStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true))
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("no_player_specified"), ChatFormatting.RED, ChatFormatting.BOLD));
             return 0;
         } else {
-            player.displayClientMessage(
-                Messenger.s((playerName + " chunk loading " + b)).
-                setStyle(Style.EMPTY.withColor(ChatFormatting.LIGHT_PURPLE).withBold(true)),
-                false
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("set", playerName, String.valueOf(b)), ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD));
             return 1;
         }
     }
@@ -71,26 +67,23 @@ public class PlayerChunkLoadControllerCommandRegistry {
     private static int listPlayerInteractions(CommandSourceStack source, String playerName) {
         boolean playerInteractions = ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true);
         Player player = source.getServer().getPlayerList().getPlayerByName(playerName);
+
         if (player == null) {
-            Messenger.sendServerMessage(
-                MinecraftServerUtil.getServer(), Messenger.s("No player specified").
-                setStyle(Style.EMPTY.withColor(ChatFormatting.RED).withBold(true))
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("no_player_specified"), ChatFormatting.RED, ChatFormatting.BOLD));
             return 0;
         }
+
         if (playerInteractions) {
-            player.displayClientMessage(
-                Messenger.s((playerName + " chunk loading: true")).
-                setStyle(Style.EMPTY.withColor(ChatFormatting.LIGHT_PURPLE).withBold(true)),
-                false
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("chunk_loading_true"), ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD));
         } else {
-            player.displayClientMessage(
-                Messenger.s((playerName + " chunk loading: false")).
-                setStyle(Style.EMPTY.withColor(ChatFormatting.LIGHT_PURPLE).withBold(true)),
-                false
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("chunk_loading_false"), ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD));
         }
+
+        return 1;
+    }
+
+    private static int help(CommandSourceStack source) {
+        Messenger.tell(source, Messenger.f(tr.tr("help"), ChatFormatting.GRAY));
         return 1;
     }
 }

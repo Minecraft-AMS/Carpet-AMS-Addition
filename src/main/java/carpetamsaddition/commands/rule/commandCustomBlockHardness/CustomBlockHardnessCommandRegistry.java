@@ -101,22 +101,16 @@ public class CustomBlockHardnessCommandRegistry {
         if (CUSTOM_BLOCK_HARDNESS_MAP.containsKey(state)) {
             float oldHardness = CUSTOM_BLOCK_HARDNESS_MAP.get(state);
             Messenger.tell(
-                source, tr.tr(
+                source, Messenger.f(tr.tr(
                     "modify_set",
                     RegexTools.getBlockRegisterName(state),
                     oldHardness,
                     RegexTools.getBlockRegisterName(state),
                     hardness
-                ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)
+                ), ChatFormatting.GREEN, ChatFormatting.BOLD)
             );
         } else {
-            Messenger.tell(
-                source, tr.tr(
-                    "set",
-                    RegexTools.getBlockRegisterName(state),
-                    hardness
-                ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("set", RegexTools.getBlockRegisterName(state), hardness), ChatFormatting.GREEN, ChatFormatting.BOLD));
         }
         CUSTOM_BLOCK_HARDNESS_MAP.put(state, hardness);
         saveToJson();
@@ -131,21 +125,12 @@ public class CustomBlockHardnessCommandRegistry {
             saveToJson();
             broadcastDataPack(server);
 
-            Messenger.tell(
-                source, tr.tr(
-                    "remove",
-                    RegexTools.getBlockRegisterName(state),
-                    hardness
-                ).withStyle(ChatFormatting.RED, ChatFormatting.BOLD)
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("remove", RegexTools.getBlockRegisterName(state), hardness), ChatFormatting.RED, ChatFormatting.BOLD));
 
             return 1;
         } else {
             Messenger.tell(
-                source, tr.tr(
-                    "not_found",
-                    RegexTools.getBlockRegisterName(state)
-                ).withStyle(ChatFormatting.RED, ChatFormatting.BOLD)
+                source, Messenger.f(tr.tr("not_found", RegexTools.getBlockRegisterName(state)), ChatFormatting.RED, ChatFormatting.BOLD)
             );
 
             return 0;
@@ -156,24 +141,24 @@ public class CustomBlockHardnessCommandRegistry {
         CUSTOM_BLOCK_HARDNESS_MAP.clear();
         saveToJson();
         broadcastDataPack(server);
-        Messenger.tell(source, tr.tr("removeAll").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.GREEN, ChatFormatting.BOLD));
         return 1;
     }
 
     private static int getDefaultHardness(CommandSourceStack source, Block block) {
         float hardness = CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.get(block);
         String blockName = RegexTools.getBlockRegisterName(block.defaultBlockState());
-        Messenger.tell(source, tr.tr("default_hardness", blockName, hardness).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+        Messenger.tell(source, Messenger.f(tr.tr("default_hardness", blockName, hardness), ChatFormatting.GREEN, ChatFormatting.BOLD));
         return 1;
     }
 
     private static int list(CommandSourceStack source) {
         Messenger.tell(
-            source, Messenger.c(
+            source, Messenger.f(Messenger.c(
                 tr.tr("list"),
                 Messenger.endl(),
                 Messenger.sline()
-            ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)
+            ), ChatFormatting.GREEN, ChatFormatting.BOLD)
         );
 
         for (Map.Entry<BlockState, Float> entry : CUSTOM_BLOCK_HARDNESS_MAP.entrySet()) {
@@ -181,7 +166,7 @@ public class CustomBlockHardnessCommandRegistry {
             float hardness = entry.getValue();
             Block block = state.getBlock();
             String blockName = RegexTools.getBlockRegisterName(block.toString());
-            Messenger.tell(source, Messenger.s(blockName + "/" + hardness).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD));
+            Messenger.tell(source, Messenger.f(Messenger.s(blockName + "/" + hardness), ChatFormatting.GREEN, ChatFormatting.BOLD));
         }
 
         return 1;
@@ -189,13 +174,13 @@ public class CustomBlockHardnessCommandRegistry {
 
     private static int help(CommandSourceStack source) {
         Messenger.tell(
-            source, Messenger.c(
+            source, Messenger.f(Messenger.c(
                 tr.tr("help.set"), Messenger.endl(),
                 tr.tr("help.remove"), Messenger.endl(),
                 tr.tr("help.removeAll"), Messenger.endl(),
                 tr.tr("help.list"), Messenger.endl(),
                 tr.tr("help.get_default_hardness"), Messenger.endl()
-            ).withColor(Colors.GRAY)
+            ), ChatFormatting.GRAY)
         );
 
         return 1;

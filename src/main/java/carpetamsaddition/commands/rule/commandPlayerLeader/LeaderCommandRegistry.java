@@ -28,6 +28,7 @@ import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.config.rule.commandLeader.LeaderConfig;
 import carpetamsaddition.commands.rule.commandWhere.WhereCommandRegistry;
 import carpetamsaddition.utils.MinecraftServerUtil;
+import carpetamsaddition.utils.PlayerUtil;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -41,7 +42,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.Style;
 import net.minecraft.ChatFormatting;
 
 import java.util.*;
@@ -51,31 +51,42 @@ import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
 public class LeaderCommandRegistry {
-    private static final Translator translator = new Translator("command.leader");
-    private static final String MSG_HEAD = "<commandPlayerLeader> ";
-    private static final int GLOWING_TIME = Integer.MAX_VALUE;
+    private static final Translator tr = new Translator("command.leader");
+    // private static final String MSG_HEAD = "<commandPlayerLeader> ";
     private static final Set<Integer> suggestionIntervalOptions = ImmutableSet.of(20, 40, 80, 160, 320, 640, -1024);
-    private static final Map<String, Integer> PLAYER_TICK_INTERVAL = new ConcurrentHashMap<>();
-    private static final Map<String, Integer> PLAYER_TICK_COUNTER = new ConcurrentHashMap<>();
-    public static final MobEffectInstance HIGH_LIGHT = new MobEffectInstance(MobEffects.GLOWING, GLOWING_TIME);
-    public static final Map<String, String> LEADER_MAP = new HashMap<>();
+    private static final Map<UUID, Integer> PLAYER_TICK_INTERVAL = new ConcurrentHashMap<>();
+    private static final Map<UUID, Integer> PLAYER_TICK_COUNTER = new ConcurrentHashMap<>();
+    public static final MobEffectInstance HIGH_LIGHT = new MobEffectInstance(MobEffects.GLOWING, MobEffectInstance.INFINITE_DURATION);
+    public static final Map<String, UUID> LEADER_MAP = new ConcurrentHashMap<>();
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("leader")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandPlayerLeader))
+
+            // add
             .then(literal("add")
             .then(argument("player", EntityArgument.player())
-            .executes(context -> add(context.getSource().getServer(), EntityArgument.getPlayer(context, "player")))))
+            .executes(c -> add(c.getSource().getServer(), EntityArgument.getPlayer(c, "player")))))
+
+            // remove
             .then(literal("remove")
             .then(argument("player", EntityArgument.player())
-            .executes(context -> remove(context.getSource().getServer(), EntityArgument.getPlayer(context, "player")))))
+            .executes(c -> remove(c.getSource().getServer(), EntityArgument.getPlayer(c, "player")))))
+
+            // removeAll
             .then(literal("removeAll")
-            .executes(context -> removeAll(context.getSource().getServer(), context.getSource().getPlayerOrException())))
+            .executes(c -> removeAll(c.getSource().getServer(), c.getSource())))
+
+            // list
             .then(literal("list")
-            .executes(context -> list(context.getSource().getPlayerOrException())))
+            .executes(c -> list(c.getSource(), c.getSource().getPlayer())))
+
+            // help
             .then(literal("help")
-            .executes(context -> help(context.getSource().getPlayerOrException())))
+            .executes(c -> help(c.getSource())))
+
+            // broadcastLeaderPos
             .then(literal("broadcastLeaderPos")
             .then(argument("player", EntityArgument.player())
             .then(literal("interval")
@@ -89,30 +100,32 @@ public class LeaderCommandRegistry {
     }
 
     public static int broadcastPosTickInterval(Player targetPlayer, MinecraftServer server, int interval) {
-        if (!LEADER_MAP.containsKey(getPlayerName(targetPlayer))) {
-            Messenger.sendServerMessage(server,
-                Messenger.s(
-                    String.format(MSG_HEAD + getPlayerName(targetPlayer) + " " + translator.tr("is_not_leader").getString())
-                ).withStyle(ChatFormatting.RED, ChatFormatting.ITALIC)
+        if (!LEADER_MAP.containsKey(PlayerUtil.getName(targetPlayer))) {
+            Messenger.sendServerMessage(
+                server, Messenger.f(tr.tr("is_not_leader", PlayerUtil.getName(targetPlayer)), ChatFormatting.RED, ChatFormatting.ITALIC)
             );
+
             return 0;
         }
-        String playerUUID = getPlayerUUID(targetPlayer);
+
+        UUID playerUUID = PlayerUtil.getPlayerUUID(targetPlayer);
         PLAYER_TICK_INTERVAL.put(playerUUID, interval);
         PLAYER_TICK_COUNTER.put(playerUUID, 0);
+
         // 立马先发一遍
         if (canBroadcastPos(targetPlayer)) {
             WhereCommandRegistry.sendMessage(targetPlayer);
         }
+
         return 1;
     }
 
     public static void tick() {
         if (!Objects.equals(CarpetAMSAdditionSettings.commandPlayerLeader, "false") && !PLAYER_TICK_INTERVAL.isEmpty() && !PLAYER_TICK_COUNTER.isEmpty()) {
             // 存储需要移除的玩家UUID
-            List<String> needRemovePlayer = new ArrayList<>();
-            for (Map.Entry<String, Integer> entry : PLAYER_TICK_INTERVAL.entrySet()) {
-                String playerUUID = entry.getKey();
+            List<UUID> needRemovePlayer = new ArrayList<>();
+            for (Map.Entry<UUID, Integer> entry : PLAYER_TICK_INTERVAL.entrySet()) {
+                UUID playerUUID = entry.getKey();
                 int interval = entry.getValue();
                 if (interval <= -1 || !LEADER_MAP.containsValue(playerUUID)) {
                     needRemovePlayer.add(playerUUID);
@@ -126,13 +139,13 @@ public class LeaderCommandRegistry {
             });
 
             // 继续处理广播
-            for (Map.Entry<String, Integer> entry : PLAYER_TICK_INTERVAL.entrySet()) {
-                String playerUUID = entry.getKey();
+            for (Map.Entry<UUID, Integer> entry : PLAYER_TICK_INTERVAL.entrySet()) {
+                UUID playerUUID = entry.getKey();
                 int interval = entry.getValue();
                 int tickCounter = PLAYER_TICK_COUNTER.getOrDefault(playerUUID, 0);
                 tickCounter++;
                 if (tickCounter >= interval && MinecraftServerUtil.serverIsRunning()) {
-                    Player player = MinecraftServerUtil.getServer().getPlayerList().getPlayer(UUID.fromString(playerUUID));
+                    Player player = MinecraftServerUtil.getServer().getPlayerList().getPlayer(playerUUID);
                     if (canBroadcastPos(player)) {
                         WhereCommandRegistry.sendMessage(player);
                     }
@@ -148,120 +161,98 @@ public class LeaderCommandRegistry {
         return
             player != null &&
             player.isAlive() &&
-            LEADER_MAP.containsValue(getPlayerUUID(player)) &&
-            LEADER_MAP.containsKey(getPlayerName(player));
+            LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(player)) &&
+            LEADER_MAP.containsKey(PlayerUtil.getName(player));
     }
 
     private static int add(MinecraftServer server, Player targetPlayer) {
-        if (!LEADER_MAP.containsValue(getPlayerUUID(targetPlayer))) {
+        if (!LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(targetPlayer))) {
             targetPlayer.addEffect(HIGH_LIGHT);
-            Messenger.sendServerMessage(
-                server,
-                Messenger.s(
-                    String.format("%s %s %s", MSG_HEAD, getPlayerName(targetPlayer), translator.tr("add").getString())
-                ).withStyle(ChatFormatting.GRAY)
-            );
-            LEADER_MAP.put(getPlayerName(targetPlayer), getPlayerUUID(targetPlayer));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("add", PlayerUtil.getName(targetPlayer)), ChatFormatting.GRAY));
+            LEADER_MAP.put(PlayerUtil.getName(targetPlayer), PlayerUtil.getPlayerUUID(targetPlayer));
             saveToJson();
         } else {
-            Messenger.sendServerMessage(
-                server,
-                Messenger.s(
-                    MSG_HEAD + getPlayerName(targetPlayer) + " " + translator.tr("is_already_leader").getString()
-                ).withStyle(ChatFormatting.RED, ChatFormatting.ITALIC)
-            );
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("is_already_leader", PlayerUtil.getName(targetPlayer)), ChatFormatting.RED, ChatFormatting.ITALIC));
         }
+
         return 1;
     }
 
     private static int remove(MinecraftServer server, Player targetPlayer) {
-        if (LEADER_MAP.containsValue(getPlayerUUID(targetPlayer))) {
+        if (LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(targetPlayer))) {
             targetPlayer.removeEffect(HIGH_LIGHT.getEffect());
-            Messenger.sendServerMessage(
-                server,
-                Messenger.s(
-                    String.format("%s %s %s", MSG_HEAD, getPlayerName(targetPlayer), translator.tr("remove").getString())
-                ).withStyle(ChatFormatting.GRAY)
-            );
-            LEADER_MAP.remove(getPlayerName(targetPlayer), getPlayerUUID(targetPlayer));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("remove", PlayerUtil.getName(targetPlayer)), ChatFormatting.GRAY));
+            LEADER_MAP.remove(PlayerUtil.getName(targetPlayer), PlayerUtil.getPlayerUUID(targetPlayer));
             saveToJson();
         } else {
-            Messenger.sendServerMessage(
-                server,
-                Messenger.s(
-                    String.format(MSG_HEAD + getPlayerName(targetPlayer) + " " + translator.tr("is_not_leader").getString())
-                ).withStyle(ChatFormatting.RED, ChatFormatting.ITALIC)
-            );
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("is_not_leader", PlayerUtil.getName(targetPlayer)), ChatFormatting.RED, ChatFormatting.ITALIC));
         }
         return 1;
     }
 
-    private static int removeAll(MinecraftServer server, Player player) {
-        Iterator<Map.Entry<String, String>> iterator = LEADER_MAP.entrySet().iterator();
+    private static int removeAll(MinecraftServer server, CommandSourceStack source) {
+        Iterator<Map.Entry<String, UUID>> iterator = LEADER_MAP.entrySet().iterator();
+
         while (iterator.hasNext()) {
-            Map.Entry<String, String> entry = iterator.next();
-            String playerUUID = entry.getValue();
-            Player targetPlayer = server.getPlayerList().getPlayer(UUID.fromString(playerUUID));
+            Map.Entry<String, UUID> entry = iterator.next();
+            UUID playerUUID = entry.getValue();
+            Player targetPlayer = server.getPlayerList().getPlayer(playerUUID);
+
             if (targetPlayer != null) {
                 targetPlayer.removeEffect(HIGH_LIGHT.getEffect());
             }
+
             iterator.remove();
         }
+
         LEADER_MAP.clear();
         saveToJson();
-        player.displayClientMessage(
-            Messenger.s(MSG_HEAD + translator.tr("removeAll").getString()).withStyle(ChatFormatting.YELLOW), false
-        );
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.YELLOW));
         return 1;
     }
 
-    private static int list(Player player) {
-        final String LINE = "-----------------------------------------";
-        player.displayClientMessage(
-            Messenger.s(
-                translator.tr("list").getString() + "\n" + LINE
-            ).withStyle(ChatFormatting.AQUA, ChatFormatting.BOLD), false
+    private static int list(CommandSourceStack source, Player player) {
+        Messenger.tell(source, Messenger.f(
+            Messenger.c(
+                tr.tr("list_title"),
+                Messenger.endl(),
+                Messenger.dline()
+            ), ChatFormatting.AQUA, ChatFormatting.BOLD)
         );
-        for (Map.Entry<String, String> entry : LEADER_MAP.entrySet()) {
+
+        for (Map.Entry<String, UUID> entry : LEADER_MAP.entrySet()) {
             String playerName = entry.getKey();
-            String playerUUID = getPlayerUUID(player);
-            player.displayClientMessage(Messenger.s(playerName + " - " + playerUUID).withStyle(ChatFormatting.DARK_AQUA), false);
+            UUID playerUUID = PlayerUtil.getPlayerUUID(player);
+            Messenger.tell(source, Messenger.f(Messenger.s(playerName + " - " + playerUUID), ChatFormatting.DARK_AQUA));
         }
+
         return 1;
     }
 
-    private static int help(Player player) {
-        String addHelp = translator.tr("help.add").getString();
-        String removeHelp = translator.tr("help.remove").getString();
-        String removeAllHelp = translator.tr("help.removeAll").getString();
-        String broadcastLeaderPos = translator.tr("help.broadcast_leader_pos").getString();
-        String listHelp = translator.tr("help.list").getString();
-        player.displayClientMessage(
-            Messenger.s(addHelp + "\n" + removeHelp + "\n" + removeAllHelp + "\n" + broadcastLeaderPos +  "\n" + listHelp).
-            setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)), false
-        );
+    private static int help(CommandSourceStack source) {
+        Messenger.tell(source, Messenger.f(Messenger.c(
+            tr.tr("help.add"), Messenger.endl(),
+            tr.tr("help.remove"), Messenger.endl(),
+            tr.tr("help.removeAll"), Messenger.endl(),
+            tr.tr("help.broadcast_leader_pos"), Messenger.endl(),
+            tr.tr("help.list"), Messenger.endl()
+        ), ChatFormatting.GRAY));
+
         return 1;
     }
 
     public static void onPlayerLoggedIn(Player player) {
         if (
             player.getActiveEffectsMap().containsKey(LeaderCommandRegistry.HIGH_LIGHT.getEffect()) &&
-            !LEADER_MAP.containsValue(getPlayerUUID(player)) &&
-            !LEADER_MAP.containsKey(getPlayerName(player))
+            !LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(player)) &&
+            !LEADER_MAP.containsKey(PlayerUtil.getName(player))
         ) {
             player.removeEffect(LeaderCommandRegistry.HIGH_LIGHT.getEffect());
         }
-        if (LeaderCommandRegistry.LEADER_MAP.containsValue(player.getStringUUID())) {
+
+        if (LeaderCommandRegistry.LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(player))) {
             player.addEffect(LeaderCommandRegistry.HIGH_LIGHT, player);
         }
-    }
-
-    private static String getPlayerName(Player player) {
-        return player.getGameProfile().name();
-    }
-
-    private static String getPlayerUUID(Player player) {
-        return player.getStringUUID();
     }
 
     private static void saveToJson() {

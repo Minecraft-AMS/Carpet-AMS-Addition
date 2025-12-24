@@ -23,40 +23,40 @@ package carpetamsaddition.commands.rule.commandGetHeldItemID;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
-import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
-import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.RegexTools;
 
 import com.mojang.brigadier.CommandDispatcher;
 
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 
+import java.util.Objects;
+
 public class GetHeldItemIDCommandRegistry {
-    private static final Translator translator = new Translator("command.commandGetHeldItemID");
+    private static final Translator tr = new Translator("command.commandGetHeldItemID");
     private static final String MSG_HEAD = "<commandGetHeldItemID> ";
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("getHeldItemID")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandGetHeldItemID))
-            .executes(context -> execute(context.getSource().getPlayerOrException()))
+            .executes(context -> execute(context.getSource()))
         );
     }
 
-    private static int execute(Player player) {
-        String mainHandItemID = getHeldItemRegisterName(player);
-        Component message = buildMessage(mainHandItemID);
-        player.displayClientMessage(message, false);
+    private static int execute(CommandSourceStack source) {
+        String mainHandItemID = getHeldItemRegisterName(Objects.requireNonNull(source.getPlayer()));
+        MutableComponent message = buildMessage(mainHandItemID);
+        Messenger.tell(source, message);
         return 1;
     }
 
-    private static Component buildMessage(String itemID) {
+    private static MutableComponent buildMessage(String itemID) {
         return
             Messenger.s("")
             .append(Messenger.s(MSG_HEAD).withStyle(ChatFormatting.AQUA))
@@ -65,18 +65,13 @@ public class GetHeldItemIDCommandRegistry {
     }
 
     private static Component createCopyButton(String itemID) {
-        return Messenger.s(" [C] ").setStyle(
-            Style.EMPTY.withColor(ChatFormatting.GREEN).withBold(true)
-            .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, itemID))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, getCopyHoverText()))
-        );
-    }
-
-    private static Component getCopyHoverText() {
-        return Messenger.s(translator.tr("getHeldItemID.copy")).withStyle(ChatFormatting.YELLOW);
+        return
+            Messenger.f(Messenger.s(" [C] "), ChatFormatting.GREEN, ChatFormatting.BOLD).setStyle(
+                Messenger.simpleCopyButtonStyle(itemID, tr.tr("getHeldItemID.copy"), ChatFormatting.YELLOW)
+            ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD);
     }
 
     private static String getHeldItemRegisterName(Player player) {
-        return RegexTools.getItemRegisterName(player.getMainHandItem().getItem().toString());
+        return RegexTools.getItemRegisterName(player.getMainHandItem());
     }
 }

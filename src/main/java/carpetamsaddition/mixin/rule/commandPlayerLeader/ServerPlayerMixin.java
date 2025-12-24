@@ -22,6 +22,7 @@ package carpetamsaddition.mixin.rule.commandPlayerLeader;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
+import carpetamsaddition.utils.PlayerUtil;
 
 import net.minecraft.server.level.ServerPlayer;
 
@@ -37,7 +38,11 @@ public abstract class ServerPlayerMixin {
     @Inject(method = "restoreFrom", at = @At("TAIL"))
     public void copyFrom(ServerPlayer oldPlayer, boolean alive, CallbackInfo ci) {
         ServerPlayer newPlayer = (ServerPlayer) (Object) this;
-        if (!Objects.equals(CarpetAMSAdditionSettings.commandPlayerLeader, "false") && !alive && LeaderCommandRegistry.LEADER_MAP.containsValue(newPlayer.getStringUUID())) {
+        if (
+            !Objects.equals(CarpetAMSAdditionSettings.commandPlayerLeader, "false") &&
+            !alive &&
+            LeaderCommandRegistry.LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(newPlayer))
+        ) {
             newPlayer.addEffect(LeaderCommandRegistry.HIGH_LIGHT, newPlayer);
         }
     }

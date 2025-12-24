@@ -85,23 +85,17 @@ public class CustomBlockBlastResistanceCommandRegistry {
     private static int set(CommandSourceStack source, BlockState state, float blastResistance) {
         if (CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.containsKey(state)) {
             float oldBlastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
-            Messenger.tell(
-                source, tr.tr(
+            Messenger.tell(source, Messenger.f(
+                tr.tr(
                     "modify_set",
                     getBlockRegisterName(state),
                     oldBlastResistance,
                     getBlockRegisterName(state),
                     blastResistance
-                ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)
+                ), ChatFormatting.GREEN, ChatFormatting.BOLD)
             );
         } else {
-            Messenger.tell(
-                source, tr.tr(
-                    "set",
-                    getBlockRegisterName(state),
-                    blastResistance
-                ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("set", getBlockRegisterName(state), blastResistance), ChatFormatting.GREEN, ChatFormatting.BOLD));
         }
 
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, blastResistance);
@@ -114,21 +108,10 @@ public class CustomBlockBlastResistanceCommandRegistry {
             float blastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.remove(state);
             saveToJson();
-            Messenger.tell(
-                source, tr.tr(
-                    "remove",
-                    getBlockRegisterName(state),
-                    blastResistance
-                ).withStyle(ChatFormatting.RED, ChatFormatting.BOLD)
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("remove", getBlockRegisterName(state), blastResistance), ChatFormatting.RED, ChatFormatting.BOLD));
             return 1;
         } else {
-            Messenger.tell(
-                source, tr.tr(
-                    "not_found",
-                    getBlockRegisterName(state)
-                ).withStyle(ChatFormatting.RED, ChatFormatting.BOLD)
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("not_found", getBlockRegisterName(state)), ChatFormatting.RED, ChatFormatting.BOLD));
             return 0;
         }
     }
@@ -136,25 +119,18 @@ public class CustomBlockBlastResistanceCommandRegistry {
     private static int removeAll(CommandSourceStack source) {
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
         saveToJson();
-        Messenger.tell(source, tr.tr("removeAll").withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.RED, ChatFormatting.BOLD));
         return 1;
     }
 
     private static int list(CommandSourceStack source) {
-        Messenger.tell(
-            source,
-            Messenger.c(
-                tr.tr("list"),
-                Messenger.endl(),
-                Messenger.sline()
-            ).withStyle(ChatFormatting.GREEN, ChatFormatting.BOLD)
-        );
+        Messenger.tell(source, Messenger.f(Messenger.c(tr.tr("list"), Messenger.endl(), Messenger.sline()), ChatFormatting.GREEN, ChatFormatting.BOLD));
 
         for (Map.Entry<BlockState, Float> entry : CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.entrySet()) {
             BlockState state = entry.getKey();
             float blastResistance = entry.getValue();
             String blockName = getBlockRegisterName(state);
-            Messenger.tell(source, Messenger.s(blockName + " / " + blastResistance).withColor(Colors.GREEN));
+            Messenger.tell(source, Messenger.f(Messenger.s(blockName + " / " + blastResistance), ChatFormatting.GREEN));
         }
 
         return 1;
@@ -162,20 +138,17 @@ public class CustomBlockBlastResistanceCommandRegistry {
 
     @SuppressWarnings("DuplicatedCode")
     private static int help(CommandSourceStack source) {
-        Messenger.tell(
-            source,
-            Messenger.c(
-                tr.tr("help.set"), Messenger.endl(),
-                tr.tr("help.remove"), Messenger.endl(),
-                tr.tr("help.removeAll"), Messenger.endl(),
-                tr.tr("help.list"), Messenger.endl()
-            ).withColor(Colors.GRAY)
-        );
+        Messenger.tell(source, Messenger.f(Messenger.c(
+            tr.tr("help.set"), Messenger.endl(),
+            tr.tr("help.remove"), Messenger.endl(),
+            tr.tr("help.removeAll"), Messenger.endl(),
+            tr.tr("help.list"), Messenger.endl()
+        ), ChatFormatting.GRAY));
         return 1;
     }
 
     private static String getBlockRegisterName(BlockState state) {
-        return RegexTools.getBlockRegisterName(state.getBlock().toString());
+        return RegexTools.getBlockRegisterName(state);
     }
 
     private static void saveToJson() {

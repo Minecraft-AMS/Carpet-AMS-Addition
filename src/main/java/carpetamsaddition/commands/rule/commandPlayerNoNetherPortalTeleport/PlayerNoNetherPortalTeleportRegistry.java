@@ -33,6 +33,7 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.LinkedHashSet;
@@ -113,10 +114,10 @@ public class PlayerNoNetherPortalTeleportRegistry {
 
     private static int list(CommandSourceStack source) {
         Messenger.tell(source, tr.tr("list_title").withStyle(ChatFormatting.AQUA));
-        Messenger.tell(source, Messenger.s("======================================", ChatFormatting.AQUA));
+        Messenger.tell(source, Messenger.f((MutableComponent) Messenger.dline(), ChatFormatting.AQUA));
 
         for (UUID player : NO_NETHER_PORTAL_TELEPORT_SET) {
-            Messenger.tell(source, Messenger.s(PlayerUtil.getName(player), ChatFormatting.AQUA));
+            Messenger.tell(source, Messenger.f(Messenger.s(PlayerUtil.getName(player)), ChatFormatting.AQUA));
         }
 
         return 1;

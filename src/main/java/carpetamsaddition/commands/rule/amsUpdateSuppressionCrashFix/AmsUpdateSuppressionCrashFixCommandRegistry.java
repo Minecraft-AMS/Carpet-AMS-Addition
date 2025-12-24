@@ -22,11 +22,11 @@ package carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix;
 
 import carpetamsaddition.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Colors;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Messenger;
 
 import com.mojang.brigadier.context.CommandContext;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -51,8 +51,8 @@ public class AmsUpdateSuppressionCrashFixCommandRegistry {
         amsUpdateSuppressionCrashFixForceMode = BoolArgumentType.getBool(context, "mode");
         MutableComponent message =
             amsUpdateSuppressionCrashFixForceMode ?
-            tr.tr("force_mode").withColor(Colors.LIGHT_PURPLE) :
-            tr.tr("lazy_mode").withColor(Colors.GREEN);
+            Messenger.f(tr.tr("force_mode"), ChatFormatting.LIGHT_PURPLE) :
+            Messenger.f(tr.tr("lazy_mode"), ChatFormatting.GREEN);
         Messenger.tell(source, message);
         ForceModeCommandConfig.saveConfigToJson(context.getSource().getServer());
         return 1;

@@ -28,67 +28,66 @@ import carpetamsaddition.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
 
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.Style;
 import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.storage.LevelResource;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.Objects;
 
 public class GetSaveSizeCommandRegistry {
-    private static final Translator translator = new Translator("command.getSaveSize");
+    private static final Translator tr = new Translator("command.getSaveSize");
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("getSaveSize")
-            .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandGetSaveSize))
-            .executes(context -> executeGetSaveSize(context.getSource().getPlayerOrException()))
+            .requires(s -> CommandHelper.canUseCommand(s, CarpetAMSAdditionSettings.commandGetSaveSize))
+            .executes(c -> executeGetSaveSize(c.getSource(), c.getSource().getPlayer()))
         );
     }
 
-    private static int executeGetSaveSize(Player player) {
+    private static int executeGetSaveSize(CommandSourceStack source, Player player) {
         MinecraftServer server = EntityUtil.getEntityServer(player);
-        saveWorld(server, player);
+        saveWorld(source, server);
         long size = getFolderSize(getSaveFolder(server));
         String sizeString = formatSize(size);
-        player.displayClientMessage(
+
+        Messenger.tell(
+            source,
             Messenger.s(
                 String.format(
                     "§e%s §a§l§n%s",
-                    translator.tr("size_msg").getString(),
+                    tr.tr("size_msg").getString(),
                     sizeString
                 )
-            ), false
+            )
         );
+
         return 1;
     }
 
-    private static void saveWorld(MinecraftServer server, Player player) {
+    private static void saveWorld(CommandSourceStack source, MinecraftServer server) {
         if (server != null) {
-            String saveAllMessage;
-            final String SUCCESS_MSG = translator.tr("save_success_msg").getString();
-            final String FAIL_MSG = translator.tr("save_fail_msg").getString();
             boolean saveAllSuccess = server.saveEverything(false, true, true);
-            saveAllMessage = saveAllSuccess ? SUCCESS_MSG : FAIL_MSG;
-            player.displayClientMessage(
-                Messenger.s(saveAllMessage).
-                setStyle(Style.EMPTY.withColor(ChatFormatting.GRAY)),
-                false
-            );
+            MutableComponent message = saveAllSuccess ? tr.tr("save_success_msg") : tr.tr("save_fail_msg");
+            Messenger.tell(source, Messenger.f(message, ChatFormatting.GRAY));
         }
     }
 
+    @NotNull
     private static File getSaveFolder(MinecraftServer server) {
         return Objects.requireNonNull(server).getWorldPath(LevelResource.ROOT).toFile();
     }
 
-    private static long getFolderSize(File folder) {
+    private static long getFolderSize(@NotNull File folder) {
         long length = 0;
         File[] files = folder.listFiles();
+
         if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
@@ -98,9 +97,11 @@ public class GetSaveSizeCommandRegistry {
                 }
             }
         }
+
         return length;
     }
 
+    @NotNull
     private static String formatSize(long size) {
         double sizeGB = size / (1024.0 * 1024.0 * 1024.0);
         return String.format("%.3f GB", sizeGB);

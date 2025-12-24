@@ -36,22 +36,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 public class Messenger {
-    // Compound Text
     public static MutableComponent c(Object... fields) {
         return MessengerCompatFactory.CarpetCompoundText(fields);
     }
 
-    // Simple Text
     public static MutableComponent s(Object text) {
         return MessengerCompatFactory.LiteralText(text.toString());
     }
 
-    // Simple Text with formatting
-    public static MutableComponent s(Object text, ChatFormatting textFormatting) {
-        return f(s(text), textFormatting);
+    @NotNull
+    public static MutableComponent f(MutableComponent text, ChatFormatting... formattings) {
+        text.withStyle(formattings);
+        return text;
     }
 
-    // Translation Text
     public static MutableComponent tr(String key, Object... args) {
         return MessengerCompatFactory.TranslatableText(key, args);
     }
@@ -79,17 +77,11 @@ public class Messenger {
     }
 
     public static Component sline() {
-        return Messenger.s("-------------------------------");
+        return Messenger.s("-----------------------------------");
     }
 
     public static Component dline() {
-        return Messenger.s("===============================");
-    }
-
-    @NotNull
-    public static MutableComponent f(MutableComponent text, ChatFormatting... formattings) {
-        text.withStyle(formattings);
-        return text;
+        return Messenger.s("===================================");
     }
 
     public static void sendServerMessage(MinecraftServer server, Component text) {
