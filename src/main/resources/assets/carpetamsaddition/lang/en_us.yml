@@ -16,9 +16,9 @@ carpetamsaddition:
       modify_content_in: 'Modify the content in：'
       save_path: '[ save path ]'
     maxPlayerBlockInteractionRange:
-      disable_command: 'This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
+      disable_command: '<Carpet AMS Addition> This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
     maxPlayerEntityInteractionRange:
-      disable_command: 'This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
+      disable_command: '<Carpet AMS Addition> This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
     sendPlayerDeathLocation:
       location: 'death location'
       copy: 'copy coord to clipboard'
@@ -217,7 +217,7 @@ carpetamsaddition:
     renewableNetherScrap:
       value_range: 'The value must be 0 - 1'
     largeEnderChest:
-      switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
+      switch_tip: '<Carpet AMS Addition> The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
     amsNetworkProtocol:
       need_enable_protocol: '[Carpet AMS Addition] Using the %s rule requires enabling the amsNetworkProtocol rule to take effect'
 

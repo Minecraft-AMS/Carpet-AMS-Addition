@@ -23,13 +23,13 @@ package carpetamsaddition.observers.network;
 import carpet.api.settings.CarpetRule;
 
 import carpetamsaddition.settings.RuleObserver;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.ChatFormatting;
 
 public class NetworkProtocolObserver extends RuleObserver<Object> {
     private final Translator tr = new Translator("validator.amsNetworkProtocol");
@@ -37,7 +37,7 @@ public class NetworkProtocolObserver extends RuleObserver<Object> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Object> rule, Object oldValue, Object newValue) {
         if (!CarpetAMSAdditionSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning()) {
-            Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", getRuleName(rule)), ChatFormatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", getRuleName(rule)), Layout.YELLOW));
         }
     }
 }

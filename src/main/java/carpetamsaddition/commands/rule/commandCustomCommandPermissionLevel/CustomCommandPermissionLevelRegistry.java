@@ -26,6 +26,7 @@ import carpetamsaddition.commands.suggestionProviders.LiteralCommandSuggestionPr
 import carpetamsaddition.commands.suggestionProviders.SetSuggestionProvider;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.config.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelConfig;
 
@@ -36,7 +37,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.ChatFormatting;
 
 import java.util.Map;
 import java.util.Objects;
@@ -95,15 +95,15 @@ public class CustomCommandPermissionLevelRegistry {
 
     private static int set(CommandSourceStack source, MinecraftServer server, String command, int permissionLevel) {
         if (Objects.equals(command, "customCommandPermissionLevel")) {
-            Messenger.tell(source, Messenger.f(tr.tr("cant_modify_self"), ChatFormatting.ITALIC, ChatFormatting.RED));
+            Messenger.tell(source, Messenger.f(tr.tr("cant_modify_self"), Layout.ITALIC, Layout.RED));
             return 0;
         }
 
         if (COMMAND_PERMISSION_MAP.containsKey(command)) {
             int oldPermissionLevel = COMMAND_PERMISSION_MAP.get(command);
-            Messenger.tell(source, Messenger.f(tr.tr("modify_set", command, oldPermissionLevel, permissionLevel), ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("modify_set", command, oldPermissionLevel, permissionLevel), Layout.GREEN));
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("set", command, permissionLevel), ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("set", command, permissionLevel), Layout.GREEN));
         }
 
         COMMAND_PERMISSION_MAP.put(command, permissionLevel);
@@ -118,10 +118,10 @@ public class CustomCommandPermissionLevelRegistry {
         if (COMMAND_PERMISSION_MAP.containsKey(command)) {
             COMMAND_PERMISSION_MAP.remove(command);
             saveToJson();
-            Messenger.tell(source, Messenger.f(tr.tr("remove", command), ChatFormatting.ITALIC, ChatFormatting.RED));
+            Messenger.tell(source, Messenger.f(tr.tr("remove", command), Layout.ITALIC, Layout.RED));
             CommandHelper.updateAllCommandPermissions(server);
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("not_found", command), ChatFormatting.ITALIC, ChatFormatting.RED));
+            Messenger.tell(source, Messenger.f(tr.tr("not_found", command), Layout.ITALIC, Layout.RED));
         }
 
         return 1;
@@ -133,7 +133,7 @@ public class CustomCommandPermissionLevelRegistry {
             saveToJson();
         }
 
-        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.ITALIC, ChatFormatting.RED));
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), Layout.ITALIC, Layout.RED));
         CommandHelper.updateAllCommandPermissions(server);
 
         return 1;
@@ -150,13 +150,13 @@ public class CustomCommandPermissionLevelRegistry {
                 tr.tr("list_title"),
                 Messenger.endl(),
                 Messenger.dline()
-            ), ChatFormatting.DARK_AQUA, ChatFormatting.BOLD
+            ), Layout.DARK_AQUA, Layout.BOLD
         ));
 
         for (Map.Entry<String, Integer> entry : COMMAND_PERMISSION_MAP.entrySet()) {
             String command = entry.getKey();
             int permissionLevel = entry.getValue();
-            Messenger.tell(source, Messenger.f(Messenger.s(String.format("%s -> %s", command, permissionLevel)), ChatFormatting.DARK_AQUA));
+            Messenger.tell(source, Messenger.f(Messenger.s(String.format("%s -> %s", command, permissionLevel)), Layout.DARK_AQUA));
         }
 
         return 1;
@@ -170,7 +170,7 @@ public class CustomCommandPermissionLevelRegistry {
                 tr.tr("help.removeAll"), Messenger.endl(),
                 tr.tr("help.refresh"), Messenger.endl(),
                 tr.tr("help.list"), Messenger.endl()
-            ), ChatFormatting.GRAY
+            ), Layout.GRAY
         ));
 
         return 1;

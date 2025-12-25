@@ -23,6 +23,7 @@ package carpetamsaddition.commands.rule.commandCustomBlockBlastResistance;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.RegexTools;
 import carpetamsaddition.config.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceConfig;
@@ -35,7 +36,6 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.arguments.blocks.BlockStateArgument;
-import net.minecraft.ChatFormatting;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -91,10 +91,10 @@ public class CustomBlockBlastResistanceCommandRegistry {
                     oldBlastResistance,
                     getBlockRegisterName(state),
                     blastResistance
-                ), ChatFormatting.GREEN, ChatFormatting.BOLD)
+                ), Layout.GREEN, Layout.BOLD)
             );
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("set", getBlockRegisterName(state), blastResistance), ChatFormatting.GREEN, ChatFormatting.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("set", getBlockRegisterName(state), blastResistance), Layout.GREEN, Layout.BOLD));
         }
 
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.put(state, blastResistance);
@@ -107,10 +107,10 @@ public class CustomBlockBlastResistanceCommandRegistry {
             float blastResistance = CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.get(state);
             CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.remove(state);
             saveToJson();
-            Messenger.tell(source, Messenger.f(tr.tr("remove", getBlockRegisterName(state), blastResistance), ChatFormatting.RED, ChatFormatting.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("remove", getBlockRegisterName(state), blastResistance), Layout.RED, Layout.BOLD));
             return 1;
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("not_found", getBlockRegisterName(state)), ChatFormatting.RED, ChatFormatting.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("not_found", getBlockRegisterName(state)), Layout.RED, Layout.BOLD));
             return 0;
         }
     }
@@ -118,18 +118,18 @@ public class CustomBlockBlastResistanceCommandRegistry {
     private static int removeAll(CommandSourceStack source) {
         CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.clear();
         saveToJson();
-        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.RED, ChatFormatting.BOLD));
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), Layout.RED, Layout.BOLD));
         return 1;
     }
 
     private static int list(CommandSourceStack source) {
-        Messenger.tell(source, Messenger.f(Messenger.c(tr.tr("list"), Messenger.endl(), Messenger.sline()), ChatFormatting.GREEN, ChatFormatting.BOLD));
+        Messenger.tell(source, Messenger.f(Messenger.c(tr.tr("list"), Messenger.endl(), Messenger.sline()), Layout.GREEN, Layout.BOLD));
 
         for (Map.Entry<BlockState, Float> entry : CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.entrySet()) {
             BlockState state = entry.getKey();
             float blastResistance = entry.getValue();
             String blockName = getBlockRegisterName(state);
-            Messenger.tell(source, Messenger.f(Messenger.s(blockName + " / " + blastResistance), ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(Messenger.s(blockName + " / " + blastResistance), Layout.GREEN));
         }
 
         return 1;
@@ -142,7 +142,7 @@ public class CustomBlockBlastResistanceCommandRegistry {
             tr.tr("help.remove"), Messenger.endl(),
             tr.tr("help.removeAll"), Messenger.endl(),
             tr.tr("help.list"), Messenger.endl()
-        ), ChatFormatting.GRAY));
+        ), Layout.GRAY));
         return 1;
     }
 

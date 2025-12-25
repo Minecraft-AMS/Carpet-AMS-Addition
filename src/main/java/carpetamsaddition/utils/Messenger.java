@@ -31,6 +31,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.ChatFormatting;
 
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -45,9 +47,14 @@ public class Messenger {
     }
 
     @NotNull
-    public static MutableComponent f(MutableComponent text, ChatFormatting... formattings) {
-        text.withStyle(formattings);
-        return text;
+    public static MutableComponent f(MutableComponent text, Layout... formattings) {
+        ChatFormatting[] chatFormattings = new ChatFormatting[formattings.length];
+
+        for (int i = 0; i < formattings.length; i++) {
+            chatFormattings[i] = formattings[i].getFormatting();
+        }
+
+        return text.withStyle(chatFormattings);
     }
 
     public static MutableComponent tr(String key, Object... args) {
@@ -71,6 +78,14 @@ public class Messenger {
         tell(source, text, false);
     }
 
+    public static void tell(Player player, MutableComponent text, Boolean overlay) {
+        player.displayClientMessage(text, overlay);
+    }
+
+    public static void tell(ServerPlayer player, MutableComponent text, Boolean overlay) {
+        player.displayClientMessage(text, overlay);
+    }
+
     @NotNull
     public static Component endl() {
         return Messenger.s("\n");
@@ -87,18 +102,18 @@ public class Messenger {
     public static void sendServerMessage(MinecraftServer server, Component text) {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
         MessengerCompatFactory.sendSystemMessage(server, text);
-        MinecraftServerUtil.getOnlinePlayers().forEach(player -> MessengerCompatFactory.sendSystemMessage(player, text));
+        MinecraftServerUtil.getOnlinePlayers().forEach(player -> tell(player, (MutableComponent) text, false));
     }
 
     @NotNull
-    public static Style simpleCmdButtonStyle(String command, Component hoverText, ChatFormatting... hoverTextFormattings) {
+    public static Style simpleCmdButtonStyle(String command, Component hoverText, Layout... hoverTextFormattings) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));
     }
 
     @NotNull
-    public static Style simpleCopyButtonStyle(String copyText, Component hoverText, ChatFormatting... hoverTextFormattings) {
+    public static Style simpleCopyButtonStyle(String copyText, Component hoverText, Layout... hoverTextFormattings) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));

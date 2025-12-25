@@ -21,13 +21,13 @@
 package carpetamsaddition.helpers.rule.amsUpdateSuppressionCrashFix;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.MinecraftServerUtil;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.Level;
@@ -42,7 +42,7 @@ public class UpdateSuppressionContext {
             final Component copyButton = copyButton(pos);
             Messenger.sendServerMessage(
                 MinecraftServerUtil.getServer(),
-                Messenger.f(suppressionMessageText(pos, world, cause), ChatFormatting.RED, ChatFormatting.ITALIC).append(copyButton)
+                Messenger.f(suppressionMessageText(pos, world, cause), Layout.RED, Layout.ITALIC).append(copyButton)
             );
         }
     }
@@ -56,14 +56,11 @@ public class UpdateSuppressionContext {
 
     private static Component copyButton(BlockPos pos) {
 
-        return Messenger.f(Messenger.s(" [C] ").
-            setStyle(
-                Messenger.simpleCopyButtonStyle(
-                getSuppressionPos(pos).replace(",", ""), // 1, 0, -24 -> 1 0 -24
-                tr.tr("copy"), ChatFormatting.YELLOW)
-            ),
-            ChatFormatting.GREEN
-        );
+        return Messenger.f(Messenger.s(" [C] ").setStyle(
+            Messenger.simpleCopyButtonStyle(
+            getSuppressionPos(pos).replace(",", ""), // 1, 0, -24 -> 1 0 -24
+            tr.tr("copy"), Layout.YELLOW)
+        ), Layout.GREEN, Layout.BOLD);
     }
 
     private static String getSuppressionPos(BlockPos pos) {

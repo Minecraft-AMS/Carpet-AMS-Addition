@@ -23,6 +23,7 @@ package carpetamsaddition.commands.rule.commandPlayerNoNetherPortalTeleport;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.PlayerUtil;
 
@@ -30,7 +31,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.MutableComponent;
@@ -82,10 +82,10 @@ public class PlayerNoNetherPortalTeleportRegistry {
     private static int add(CommandSourceStack source, Player player) {
         if (!NO_NETHER_PORTAL_TELEPORT_SET.contains(PlayerUtil.getPlayerUUID(player))) {
             NO_NETHER_PORTAL_TELEPORT_SET.add(PlayerUtil.getPlayerUUID(player));
-            Messenger.tell(source, tr.tr("add_success", PlayerUtil.getName(player)).withStyle(ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("add_success", PlayerUtil.getName(player)), Layout.GREEN));
             return 1;
         } else {
-            Messenger.tell(source, tr.tr("add_fail", PlayerUtil.getName(player)).withStyle(ChatFormatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("add_fail", PlayerUtil.getName(player)), Layout.YELLOW));
             return 0;
         }
     }
@@ -93,31 +93,31 @@ public class PlayerNoNetherPortalTeleportRegistry {
     private static int remove(CommandSourceStack source, Player player) {
         if (NO_NETHER_PORTAL_TELEPORT_SET.contains(PlayerUtil.getPlayerUUID(player))) {
             NO_NETHER_PORTAL_TELEPORT_SET.remove(PlayerUtil.getPlayerUUID(player));
-            Messenger.tell(source, tr.tr("remove_success", PlayerUtil.getName(player)).withStyle(ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("remove_success", PlayerUtil.getName(player)), Layout.GREEN));
             return 1;
         } else {
-            Messenger.tell(source, tr.tr("remove_fail", PlayerUtil.getName(player)).withStyle(ChatFormatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("remove_fail", PlayerUtil.getName(player)), Layout.YELLOW));
             return 0;
         }
     }
 
     private static int clear(CommandSourceStack source) {
         if (NO_NETHER_PORTAL_TELEPORT_SET.isEmpty()) {
-            Messenger.tell(source, tr.tr("clear_fail").withStyle(ChatFormatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("clear_fail"), Layout.YELLOW));
             return 0;
         } else {
             NO_NETHER_PORTAL_TELEPORT_SET.clear();
-            Messenger.tell(source, tr.tr("clear_success").withStyle(ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("clear_success"), Layout.GREEN));
             return 1;
         }
     }
 
     private static int list(CommandSourceStack source) {
-        Messenger.tell(source, tr.tr("list_title").withStyle(ChatFormatting.AQUA));
-        Messenger.tell(source, Messenger.f((MutableComponent) Messenger.dline(), ChatFormatting.AQUA));
+        Messenger.tell(source, Messenger.f(tr.tr("list_title"), Layout.AQUA));
+        Messenger.tell(source, Messenger.f((MutableComponent) Messenger.dline(), Layout.AQUA));
 
         for (UUID player : NO_NETHER_PORTAL_TELEPORT_SET) {
-            Messenger.tell(source, Messenger.f(Messenger.s(PlayerUtil.getName(player)), ChatFormatting.AQUA));
+            Messenger.tell(source, Messenger.f(Messenger.s(PlayerUtil.getName(player)), Layout.AQUA));
         }
 
         return 1;
@@ -127,9 +127,9 @@ public class PlayerNoNetherPortalTeleportRegistry {
         isGlobalMode = BoolArgumentType.getBool(context, "bool");
 
         if (isGlobalMode) {
-            Messenger.tell(source, tr.tr("globalMode_enable").withStyle(ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("globalMode_enable"), Layout.GREEN));
         } else {
-            Messenger.tell(source, tr.tr("globalMode_disable").withStyle(ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("globalMode_disable"), Layout.GREEN));
         }
 
         return 1;
@@ -137,20 +137,20 @@ public class PlayerNoNetherPortalTeleportRegistry {
 
     private static int showGlobalModeState(CommandSourceStack source) {
         String globalModeState = isGlobalMode ? "true" : "false";
-        Messenger.tell(source, tr.tr("globalMode_state", globalModeState).withStyle(ChatFormatting.AQUA));
+        Messenger.tell(source, Messenger.f(tr.tr("globalMode_state", globalModeState), Layout.AQUA));
         return 1;
     }
 
     private static int help(CommandSourceStack source) {
         Messenger.tell(
-            source, Messenger.c(
+            source, Messenger.f(Messenger.c(
                 tr.tr("help.globalMode"), Messenger.endl(),
                 tr.tr("help.globalModeState"), Messenger.endl(),
                 tr.tr("help.add"), Messenger.endl(),
                 tr.tr("help.remove"), Messenger.endl(),
                 tr.tr("help.clear"), Messenger.endl(),
                 tr.tr("help.list")
-            ).withStyle(ChatFormatting.GRAY)
+            ), Layout.GRAY)
         );
 
         return 1;

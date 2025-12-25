@@ -23,21 +23,18 @@ package carpetamsaddition.commands.rule.commandCarpetExtensionModWikiHyperlink;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.suggestionProviders.SetSuggestionProvider;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Colors;
 import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
 import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
 import carpetamsaddition.utils.Messenger;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
-
-import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.ChatFormatting;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -62,12 +59,7 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
     }
 
     private static int execute(CommandSourceStack source, String extensionName) {
-        Messenger.tell(
-            source,
-            tr.tr("click_to_jump").withStyle(ChatFormatting.AQUA)
-            .append(createOpenUrlButton(getUrl(extensionName)))
-        );
-
+        Messenger.tell(source, Messenger.c(Messenger.f(tr.tr("click_to_jump"), Layout.AQUA), createOpenUrlButton(getUrl(extensionName))));
         return 1;
     }
 
@@ -93,14 +85,14 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
 
     private static MutableComponent createOpenUrlButton(String url) {
         return Messenger.s(getUrl(url)).setStyle(
-            Style.EMPTY.withColor(ChatFormatting.GREEN)
+            Style.EMPTY.withColor(Layout.GREEN.getFormatting())
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.OPEN_URL, url))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, getCopyHoverText(url)))
         );
     }
 
     private static MutableComponent getCopyHoverText(String url) {
-        return Messenger.s(tr.tr("click_to_jump").append(getUrl(url)).getString()).withColor(Colors.YELLOW);
+        return Messenger.f(Messenger.s(tr.tr("click_to_jump").append(getUrl(url)).getString()), Layout.YELLOW);
     }
 
     static {

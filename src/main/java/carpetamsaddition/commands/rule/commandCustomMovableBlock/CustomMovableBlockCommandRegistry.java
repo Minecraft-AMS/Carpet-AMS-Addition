@@ -24,6 +24,7 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.config.rule.commandCustomMovableBlock.CustomMovableBlockConfig;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.RegexTools;
 
@@ -34,7 +35,6 @@ import net.minecraft.commands.arguments.blocks.BlockStateArgument;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.ChatFormatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,9 +85,9 @@ public class CustomMovableBlockCommandRegistry {
         if (!CUSTOM_MOVABLE_BLOCKS.contains(getBlockName(blockState))) {
             CUSTOM_MOVABLE_BLOCKS.add(getBlockName(blockState));
             saveToJson();
-            Messenger.tell(source, Messenger.f(tr.tr("add", getBlockName(blockState)), ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("add", getBlockName(blockState)), Layout.GREEN));
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("already_exists", getBlockName(blockState)), ChatFormatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("already_exists", getBlockName(blockState)), Layout.YELLOW));
         }
 
         return 1;
@@ -97,9 +97,9 @@ public class CustomMovableBlockCommandRegistry {
         if (CUSTOM_MOVABLE_BLOCKS.contains(getBlockName(blockState))) {
             CUSTOM_MOVABLE_BLOCKS.remove(getBlockName(blockState));
             saveToJson();
-            Messenger.tell(source, Messenger.f(tr.tr("remove", getBlockName(blockState)), ChatFormatting.RED));
+            Messenger.tell(source, Messenger.f(tr.tr("remove", getBlockName(blockState)), Layout.RED));
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("not_found", getBlockName(blockState)), ChatFormatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("not_found", getBlockName(blockState)), Layout.YELLOW));
         }
         return 1;
     }
@@ -107,7 +107,7 @@ public class CustomMovableBlockCommandRegistry {
     private static int removeAll(CommandSourceStack source) {
         CUSTOM_MOVABLE_BLOCKS.clear();
         saveToJson();
-        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.GREEN));
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), Layout.GREEN));
         return 1;
     }
 
@@ -117,11 +117,11 @@ public class CustomMovableBlockCommandRegistry {
                 tr.tr("list"),
                 Messenger.endl(),
                 Messenger.dline()
-            ), ChatFormatting.GREEN
+            ), Layout.GREEN
         ));
 
         for (String blockName : CUSTOM_MOVABLE_BLOCKS) {
-            Messenger.tell(source, Messenger.f(Messenger.s(blockName), ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(Messenger.s(blockName), Layout.GREEN));
         }
 
         return 1;
@@ -135,7 +135,7 @@ public class CustomMovableBlockCommandRegistry {
                 tr.tr("help.remove"), Messenger.endl(),
                 tr.tr("help.removeAll"), Messenger.endl(),
                 tr.tr("help.list"), Messenger.endl()
-            ), ChatFormatting.GRAY
+            ), Layout.GRAY
         ));
 
         return 1;

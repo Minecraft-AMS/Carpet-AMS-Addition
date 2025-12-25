@@ -23,7 +23,7 @@ package carpetamsaddition.logging.logger;
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.logging.AbstractHUDLogger;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Colors;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 
 import net.minecraft.world.entity.player.Player;
@@ -58,8 +58,8 @@ public class ServerRuntimeHUDLogger extends AbstractHUDLogger {
         String formattedTime = String.format(" %02d : %02d : %02d", hours, minutes, seconds);
         return new MutableComponent[]{
             Messenger.c(
-                tr.tr("server_runtime").withColor(Colors.DARK_AQUA),
-                Messenger.s(formattedTime).withColor(Colors.AQUA)
+                Messenger.f(tr.tr("server_runtime"), Layout.DARK_AQUA),
+                Messenger.f(Messenger.s(formattedTime), Layout.AQUA)
             )
         };
     }

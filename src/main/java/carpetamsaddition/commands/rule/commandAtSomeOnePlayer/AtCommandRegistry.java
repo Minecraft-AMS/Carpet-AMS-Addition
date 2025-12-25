@@ -35,7 +35,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.ChatFormatting;
 
 public class AtCommandRegistry {
     private static final Translator tr = new Translator("command.at");
@@ -54,14 +53,14 @@ public class AtCommandRegistry {
     }
 
     private static int execute(ServerPlayer sourcePlayer, ServerPlayer targetPlayer, String text) {
-        MutableComponent titleText = Messenger.s(tr.tr("title", PlayerUtil.getName(sourcePlayer)).getString()).withColor(Colors.AQUA);
+        MutableComponent titleText = Messenger.f(Messenger.s(tr.tr("title", PlayerUtil.getName(sourcePlayer))), Layout.AQUA);
         MutableComponent messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
         targetPlayer.connection.send(new ClientboundSetTitleTextPacket(titleText));
         Messenger.sendServerMessage(MinecraftServerUtil.getServer(), messageText);
         EntityUtil.getEntityWorld(targetPlayer).playSound(null, targetPlayer.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.0F);
         Messenger.sendServerMessage(
             MinecraftServerUtil.getServer(),
-            Messenger.f(Messenger.s(String.format("%s @ %s", PlayerUtil.getName(sourcePlayer), PlayerUtil.getName(targetPlayer))), ChatFormatting.GRAY)
+            Messenger.f(Messenger.s(String.format("%s @ %s", PlayerUtil.getName(sourcePlayer), PlayerUtil.getName(targetPlayer))), Layout.GRAY)
         );
         return 1;
     }

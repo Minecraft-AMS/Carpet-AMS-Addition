@@ -23,6 +23,7 @@ package carpetamsaddition.commands.rule.commandGetSystemInfo;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -30,7 +31,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.ChatFormatting;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
@@ -47,7 +47,7 @@ public class GetSystemInfoCommandRegistry {
     }
 
     private static int executeGetSystemInfo(CommandSourceStack source) {
-        Messenger.tell(source, Messenger.f(formatInfo(), ChatFormatting.DARK_AQUA));
+        Messenger.tell(source, Messenger.f(formatInfo(), Layout.DARK_AQUA));
         return 1;
     }
 

@@ -44,11 +44,6 @@ public class MessengerCompatFactory {
         server.sendSystemMessage(text);
     }
 
-    // Send system message to player
-    public static void sendSystemMessage(Player player, Component text) {
-        player.displayClientMessage(text, false);
-    }
-
     public static MutableComponent TranslatableText(String key, Object... args) {
         return Component.translatable(key, args);
     }

@@ -20,28 +20,73 @@
 
 package carpetamsaddition.utils;
 
-@SuppressWarnings("unused")
-public class Colors {
-    public static int BLACK = 0;
-    public static int DARK_BLUE = 170;
-    public static int DARK_GREEN = 43520;
-    public static int DARK_AQUA = 43690;
-    public static int DARK_RED = 11141120;
-    public static int DARK_PURPLE = 11141290;
-    public static int GOLD = 16755200;
-    public static int GRAY = 11184810;
-    public static int DARK_GRAY = 5592405;
-    public static int BLUE = 5592575;
-    public static int GREEN = 5635925;
-    public static int AQUA = 5636095;
-    public static int RED = 16733525;
-    public static int LIGHT_PURPLE = 16733695;
-    public static int YELLOW =  16777045;
-    public static int WHITE = 16777215;
-    public static int HOTPINK = 0xFF1493;
+import net.minecraft.ChatFormatting;
+
+public enum Layout {
+    BLACK(ChatFormatting.BLACK),
+    DARK_BLUE(ChatFormatting.DARK_BLUE),
+    DARK_GREEN(ChatFormatting.DARK_GREEN),
+    DARK_AQUA(ChatFormatting.DARK_AQUA),
+    DARK_RED(ChatFormatting.DARK_RED),
+    DARK_PURPLE(ChatFormatting.DARK_PURPLE),
+    GOLD(ChatFormatting.GOLD),
+    GRAY(ChatFormatting.GRAY),
+    DARK_GRAY(ChatFormatting.DARK_GRAY),
+    BLUE(ChatFormatting.BLUE),
+    GREEN(ChatFormatting.GREEN),
+    AQUA(ChatFormatting.AQUA),
+    RED(ChatFormatting.RED),
+    LIGHT_PURPLE(ChatFormatting.LIGHT_PURPLE),
+    YELLOW(ChatFormatting.YELLOW),
+    WHITE(ChatFormatting.WHITE),
+    OBFUSCATED(ChatFormatting.OBFUSCATED),
+    BOLD(ChatFormatting.BOLD),
+    STRIKETHROUGH(ChatFormatting.STRIKETHROUGH),
+    UNDERLINE(ChatFormatting.UNDERLINE),
+    ITALIC(ChatFormatting.ITALIC),
+    RESET(ChatFormatting.RESET);
+
+    private final ChatFormatting formatting;
+
+    Layout(ChatFormatting formatting) {
+        this.formatting = formatting;
+    }
+
+    public ChatFormatting getFormatting() {
+        return formatting;
+    }
+
+    @Override
+    public String toString() {
+        return formatting.toString();
+    }
+}
 
 /*
     //////////////////////////////////Minecraft Style//////////////////////////////////
+    BLACK("BLACK", '0', 0, 0),
+    DARK_BLUE("DARK_BLUE", '1', 1, 170),
+    DARK_GREEN("DARK_GREEN", '2', 2, 43520),
+    DARK_AQUA("DARK_AQUA", '3', 3, 43690),
+    DARK_RED("DARK_RED", '4', 4, 11141120),
+    DARK_PURPLE("DARK_PURPLE", '5', 5, 11141290),
+    GOLD("GOLD", '6', 6, 16755200),
+    GRAY("GRAY", '7', 7, 11184810),
+    DARK_GRAY("DARK_GRAY", '8', 8, 5592405),
+    BLUE("BLUE", '9', 9, 5592575),
+    GREEN("GREEN", 'a', 10, 5635925),
+    AQUA("AQUA", 'b', 11, 5636095),
+    RED("RED", 'c', 12, 16733525),
+    LIGHT_PURPLE("LIGHT_PURPLE", 'd', 13, 16733695),
+    YELLOW("YELLOW", 'e', 14, 16777045),
+    WHITE("WHITE", 'f', 15, 16777215),
+    OBFUSCATED("OBFUSCATED", 'k', true),
+    BOLD("BOLD", 'l', true),
+    STRIKETHROUGH("STRIKETHROUGH", 'm', true),
+    UNDERLINE("UNDERLINE", 'n', true),
+    ITALIC("ITALIC", 'o', true),
+    RESET("RESET", 'r', -1, (Integer)null);
+
     "\u001B[0;30m", // Black §0
     "\u001B[0;34m", // Dark Blue §1
     "\u001B[0;32m", // Dark Green §2
@@ -91,4 +136,3 @@ public class Colors {
     DARK_BLUE   ('v', (s, f) -> s.withColor(Formatting.DARK_BLUE)), // navy
     BLACK       ('k', (s, f) -> s.withColor(Formatting.BLACK)),
  */
-}

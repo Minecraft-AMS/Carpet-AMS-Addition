@@ -21,20 +21,21 @@
 package carpetamsaddition.commands.rule.commandCustomAntiFireItems;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.config.rule.commandAntiFireItems.CustomAntiFireItemsConfig;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.RegexTools;
-import carpetamsaddition.config.rule.commandAntiFireItems.CustomAntiFireItemsConfig;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.commands.arguments.item.ItemArgument;
 import net.minecraft.commands.CommandBuildContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.ChatFormatting;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.item.ItemArgument;
+import net.minecraft.world.item.ItemStack;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -86,9 +87,9 @@ public class CustomAntiFireItemsCommandRegistry {
         if (!CUSTOM_ANTI_FIRE_ITEMS.contains(getItemName(itemStack))) {
             CUSTOM_ANTI_FIRE_ITEMS.add(getItemName(itemStack));
             saveToJson();
-            Messenger.tell(source, Messenger.f(tr.tr("add", getItemName(itemStack)), ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("add", getItemName(itemStack)), Layout.GREEN));
         } else {
-              Messenger.tell(source, Messenger.f(tr.tr("already_exists", getItemName(itemStack)), ChatFormatting.YELLOW));
+              Messenger.tell(source, Messenger.f(tr.tr("already_exists", getItemName(itemStack)), Layout.YELLOW));
         }
         return 1;
     }
@@ -97,9 +98,9 @@ public class CustomAntiFireItemsCommandRegistry {
         if (CUSTOM_ANTI_FIRE_ITEMS.contains(getItemName(itemStack))) {
             CUSTOM_ANTI_FIRE_ITEMS.remove(getItemName(itemStack));
             saveToJson();
-            Messenger.tell(source, Messenger.f(tr.tr("remove", getItemName(itemStack)), ChatFormatting.RED));
+            Messenger.tell(source, Messenger.f(tr.tr("remove", getItemName(itemStack)), Layout.RED));
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("not_found", getItemName(itemStack)), ChatFormatting.RED));
+            Messenger.tell(source, Messenger.f(tr.tr("not_found", getItemName(itemStack)), Layout.RED));
         }
         return 1;
     }
@@ -107,17 +108,17 @@ public class CustomAntiFireItemsCommandRegistry {
     private static int removeAll(CommandSourceStack source) {
         CUSTOM_ANTI_FIRE_ITEMS.clear();
         saveToJson();
-        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.RED));
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), Layout.RED));
         return 1;
     }
 
     private static int list(CommandSourceStack source) {
         Messenger.tell(source, Messenger.f(Messenger.c(
-            tr.tr("list_title"), Messenger.endl(), Messenger.sline()), ChatFormatting.GREEN)
+            tr.tr("list_title"), Messenger.endl(), Messenger.sline()), Layout.GREEN)
         );
 
         for (String blockName : CUSTOM_ANTI_FIRE_ITEMS) {
-            Messenger.tell(source, Messenger.f(Messenger.s(blockName), ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(Messenger.s(blockName), Layout.GREEN));
         }
 
         return 1;
@@ -131,7 +132,7 @@ public class CustomAntiFireItemsCommandRegistry {
                 tr.tr("help.removeAll"), Messenger.endl(),
                 tr.tr("help.removeAll"), Messenger.endl(),
                 tr.tr("help.list"), Messenger.endl()
-            ), ChatFormatting.GRAY)
+            ), Layout.GRAY)
         );
 
         return 1;

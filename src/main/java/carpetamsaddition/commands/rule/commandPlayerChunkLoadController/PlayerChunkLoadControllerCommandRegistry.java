@@ -23,12 +23,12 @@ package carpetamsaddition.commands.rule.commandPlayerChunkLoadController;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.ChatFormatting;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
@@ -56,10 +56,10 @@ public class PlayerChunkLoadControllerCommandRegistry {
         ChunkLoading.setPlayerInteraction(playerName, b, true);
 
         if (player == null) {
-            Messenger.tell(source, Messenger.f(tr.tr("no_player_specified"), ChatFormatting.RED, ChatFormatting.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("no_player_specified"), Layout.RED, Layout.BOLD));
             return 0;
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("set", playerName, String.valueOf(b)), ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("set", playerName, String.valueOf(b)), Layout.LIGHT_PURPLE, Layout.BOLD));
             return 1;
         }
     }
@@ -69,21 +69,21 @@ public class PlayerChunkLoadControllerCommandRegistry {
         Player player = source.getServer().getPlayerList().getPlayerByName(playerName);
 
         if (player == null) {
-            Messenger.tell(source, Messenger.f(tr.tr("no_player_specified"), ChatFormatting.RED, ChatFormatting.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("no_player_specified"), Layout.RED, Layout.BOLD));
             return 0;
         }
 
         if (playerInteractions) {
-            Messenger.tell(source, Messenger.f(tr.tr("chunk_loading_true"), ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("chunk_loading_true"), Layout.LIGHT_PURPLE, Layout.BOLD));
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("chunk_loading_false"), ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("chunk_loading_false"), Layout.LIGHT_PURPLE, Layout.BOLD));
         }
 
         return 1;
     }
 
     private static int help(CommandSourceStack source) {
-        Messenger.tell(source, Messenger.f(tr.tr("help"), ChatFormatting.GRAY));
+        Messenger.tell(source, Messenger.f(tr.tr("help"), Layout.GRAY));
         return 1;
     }
 }

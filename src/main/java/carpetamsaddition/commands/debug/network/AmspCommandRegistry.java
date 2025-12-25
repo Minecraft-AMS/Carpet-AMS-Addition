@@ -36,7 +36,6 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.ChatFormatting;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -92,17 +91,17 @@ public class AmspCommandRegistry {
         Iterator<UUID> iterator = NetworkUtil.getSupportClientSet().iterator();
 
         if (!iterator.hasNext()) {
-            Messenger.tell(source, Messenger.f(tr.tr("support_client_set_is_none"), ChatFormatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("support_client_set_is_none"), Layout.YELLOW));
             return 0;
         }
 
-        Messenger.tell(source, Messenger.f(tr.tr("support_client_list_title"), ChatFormatting.AQUA));
+        Messenger.tell(source, Messenger.f(tr.tr("support_client_list_title"), Layout.AQUA));
 
         while (iterator.hasNext()) {
             UUID uuid = iterator.next();
             String strUuid = uuid.toString();
             String playerName = PlayerUtil.getName(uuid);
-            MutableComponent text = Messenger.f(Messenger.s(strUuid + " - " + playerName), ChatFormatting.AQUA);
+            MutableComponent text = Messenger.f(Messenger.s(strUuid + " - " + playerName), Layout.AQUA);
             Messenger.tell(source, text);
         }
 
@@ -110,7 +109,7 @@ public class AmspCommandRegistry {
     }
 
     private static int showServerSupportStatus(CommandSourceStack source) {
-        ChatFormatting formatting = NetworkUtil.getServerSupport() ? ChatFormatting.GREEN : ChatFormatting.RED;
+        Layout formatting = NetworkUtil.getServerSupport() ? Layout.GREEN : Layout.RED;
         Messenger.tell(source, Messenger.f(tr.tr("server_support_status", String.valueOf(NetworkUtil.getServerSupport())), formatting));
         return 1;
     }
@@ -131,16 +130,16 @@ public class AmspCommandRegistry {
                 NetworkUtil.executeOnServerThread(() -> {
                     String version = clientModVersion.get(playerUuid);
                     if (version != null) {
-                        Messenger.tell(source, Messenger.f(tr.tr("client_mod_version_success_feedback", PlayerUtil.getName(targetPlayer), version), ChatFormatting.AQUA));
+                        Messenger.tell(source, Messenger.f(tr.tr("client_mod_version_success_feedback", PlayerUtil.getName(targetPlayer), version), Layout.AQUA));
                         clientModVersion.remove(playerUuid);
                     } else {
                         if (retryCount[0] < maxRetries) {
                             retryCount[0]++;
-                            Messenger.tell(source, Messenger.f(tr.tr("request_client_version", String.valueOf(retryCount[0])), ChatFormatting.YELLOW));
+                            Messenger.tell(source, Messenger.f(tr.tr("request_client_version", String.valueOf(retryCount[0])), Layout.YELLOW));
                             NetworkUtil.sendS2CPacket(targetPlayer, RequestClientModVersionPayload_S2C.create(playerUuid), NetworkUtil.SendMode.NEED_SUPPORT);
                             CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(this);
                         } else {
-                            Messenger.tell(source, Messenger.f(tr.tr("client_mod_version_failed_feedback", String.valueOf(maxRetries)), ChatFormatting.RED));
+                            Messenger.tell(source, Messenger.f(tr.tr("client_mod_version_failed_feedback", String.valueOf(maxRetries)), Layout.RED));
                         }
                     }
                 });
@@ -149,30 +148,30 @@ public class AmspCommandRegistry {
 
         CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(checkAndRetry);
 
-        Messenger.tell(source, Messenger.f(tr.tr("get_client_version_waiting"), ChatFormatting.GREEN));
+        Messenger.tell(source, Messenger.f(tr.tr("get_client_version_waiting"), Layout.GREEN));
         return 1;
     }
 
     private static int showServerModVersion(CommandSourceStack source) {
-        Messenger.tell(source, Messenger.f(tr.tr("server_mod_version_feedback", CarpetAMSAdditionServer.fancyName, CarpetAMSAdditionMod.getVersion()), ChatFormatting.AQUA));
+        Messenger.tell(source, Messenger.f(tr.tr("server_mod_version_feedback", CarpetAMSAdditionServer.fancyName, CarpetAMSAdditionMod.getVersion()), Layout.AQUA));
         return 1;
     }
 
     private static int denyClientConnection(CommandSourceStack source, ServerPlayer targetPlayer) {
         NetworkUtil.removeSupportClient(targetPlayer.getUUID());
-        Messenger.tell(source, Messenger.f(tr.tr("deny_client_feedback", PlayerUtil.getName(targetPlayer.getUUID())), ChatFormatting.LIGHT_PURPLE));
+        Messenger.tell(source, Messenger.f(tr.tr("deny_client_feedback", PlayerUtil.getName(targetPlayer.getUUID())), Layout.LIGHT_PURPLE));
         return 1;
     }
 
     private static int denyAllClientConnections(CommandSourceStack source) {
         NetworkUtil.clearClientSupport();
-        Messenger.tell(source, Messenger.f(tr.tr("deny_all_client_feedback"), ChatFormatting.LIGHT_PURPLE));
+        Messenger.tell(source, Messenger.f(tr.tr("deny_all_client_feedback"), Layout.LIGHT_PURPLE));
         return 1;
     }
 
     private static int setServerSupport(CommandSourceStack source, Boolean support) {
         NetworkUtil.setServerSupport(support);
-        Messenger.tell(source, Messenger.f(tr.tr("set_server_support_feedback", String.valueOf(NetworkUtil.getServerSupport())), ChatFormatting.GREEN));
+        Messenger.tell(source, Messenger.f(tr.tr("set_server_support_feedback", String.valueOf(NetworkUtil.getServerSupport())), Layout.GREEN));
         return 1;
     }
 
@@ -183,7 +182,7 @@ public class AmspCommandRegistry {
     private static int requestHandShake(CommandSourceStack source, Collection<ServerPlayer> players) {
         for (ServerPlayer player : players) {
             NetworkUtil.sendS2CPacket(player, RequestHandShakeS2CPayload.create(), NetworkUtil.SendMode.FORCE);
-            Messenger.tell(source, Messenger.f(tr.tr("request_handshake_feedback", PlayerUtil.getName(player)), ChatFormatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("request_handshake_feedback", PlayerUtil.getName(player)), Layout.GREEN));
         }
 
         return 1;

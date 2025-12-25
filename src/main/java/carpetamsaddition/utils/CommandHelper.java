@@ -29,7 +29,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.tree.CommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
@@ -42,7 +41,6 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-@SuppressWarnings("EnhancedSwitchMigration")
 public final class CommandHelper {
     public static final List<String> permissionLevels = Arrays.asList("0", "1", "2", "3", "4");
     private static final Translator tr = new Translator("command.commandHelper");
@@ -69,7 +67,7 @@ public final class CommandHelper {
             }
 
             server.getPlayerList().getPlayers().forEach(serverCommandManager::sendCommands);
-            Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), ChatFormatting.GRAY));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), Layout.GRAY));
         }
     }
 

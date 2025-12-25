@@ -23,6 +23,7 @@ package carpetamsaddition.commands.rule.commandSetPlayerPose;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.translations.Translator;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.NetworkUtil;
 import carpetamsaddition.commands.suggestionProviders.ListSuggestionProvider;
@@ -35,7 +36,6 @@ import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.ChatFormatting;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -96,7 +96,7 @@ public class SetPlayerPoseCommandRegistry {
                     Messenger.endl(),
                     tr.tr("stop_help"),
                     Messenger.endl()
-                ), ChatFormatting.GRAY
+                ), Layout.GRAY
             )
         );
 

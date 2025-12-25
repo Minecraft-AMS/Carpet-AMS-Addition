@@ -24,6 +24,7 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.EntityUtil;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -33,8 +34,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.storage.LevelResource;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -75,7 +76,7 @@ public class GetSaveSizeCommandRegistry {
         if (server != null) {
             boolean saveAllSuccess = server.saveEverything(false, true, true);
             MutableComponent message = saveAllSuccess ? tr.tr("save_success_msg") : tr.tr("save_fail_msg");
-            Messenger.tell(source, Messenger.f(message, ChatFormatting.GRAY));
+            Messenger.tell(source, Messenger.f(message, Layout.GRAY));
         }
     }
 

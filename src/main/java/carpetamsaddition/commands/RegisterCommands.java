@@ -33,7 +33,7 @@ import carpetamsaddition.commands.rule.commandGetPlayerSkull.GetPlayerSkullComma
 import carpetamsaddition.commands.rule.commandGetSaveSize.GetSaveSizeCommandRegistry;
 import carpetamsaddition.commands.rule.commandGetSystemInfo.GetSystemInfoCommandRegistry;
 import carpetamsaddition.commands.rule.commandHere.HereCommandRegistry;
-import carpetamsaddition.commands.rule.commandPacketInternetGroper.PingCommandRegistry;
+import carpetamsaddition.commands.rule.commandPacketInternetGroper.PingsCommandRegistry;
 import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
 import carpetamsaddition.commands.rule.commandPlayerNoNetherPortalTeleport.PlayerNoNetherPortalTeleportRegistry;
 import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
@@ -68,7 +68,7 @@ public class RegisterCommands {
         AMS_CMD_QUEUE.add(() -> HereCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> WhereCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> LeaderCommandRegistry.register(dispatcher));
-        AMS_CMD_QUEUE.add(() -> PingCommandRegistry.register(dispatcher));
+        AMS_CMD_QUEUE.add(() -> PingsCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> GetSaveSizeCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> GetSystemInfoCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> GotoCommandRegistry.register(dispatcher));

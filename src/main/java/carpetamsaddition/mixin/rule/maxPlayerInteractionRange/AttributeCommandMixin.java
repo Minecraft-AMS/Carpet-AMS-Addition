@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.translations.Translator;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -29,24 +29,14 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.commands.AttributeCommand;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.ChatFormatting;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(value = AttributeCommand.class, priority = 1688)
 public abstract class AttributeCommandMixin {
-
-    @Unique
-    private static final Translator translator = new Translator("rule");
-
-    @Unique
-    private static final String MSG_HEAD = "<Carpet AMS Addition> ";
-
     @WrapOperation(
         method = "setAttributeBase",
         at = @At(
@@ -55,15 +45,8 @@ public abstract class AttributeCommandMixin {
         )
     )
     private static void disableBlockInteractionRangeSet(AttributeInstance instance, double baseValue, Operation<Void> original, CommandSourceStack source) {
-        if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.BLOCK_INTERACTION_RANGE)) {
-            Player player = source.getPlayer();
-            if (player != null) {
-                player.displayClientMessage(
-                    Messenger.s(
-                        MSG_HEAD + translator.tr("maxPlayerBlockInteractionRange.disable_command").getString()
-                    ).withStyle(ChatFormatting.RED), false
-                );
-            }
+        if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.BLOCK_INTERACTION_RANGE) && source != null) {
+            Messenger.tell(source, Messenger.f(Messenger.tr("rule.maxPlayerBlockInteractionRange.disable_command"), Layout.RED));
         } else {
             original.call(instance, baseValue);
         }
@@ -77,15 +60,8 @@ public abstract class AttributeCommandMixin {
         )
     )
     private static void disableEntityInteractionRangeSet(AttributeInstance instance, double baseValue, Operation<Void> original, CommandSourceStack source) {
-        if (CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.ENTITY_INTERACTION_RANGE)) {
-            Player player = source.getPlayer();
-            if (player != null) {
-                player.displayClientMessage(
-                    Messenger.s(
-                        MSG_HEAD + translator.tr("maxPlayerEntityInteractionRange.disable_command").getString()
-                    ).withStyle(ChatFormatting.RED), false
-                );
-            }
+        if (CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange != -1.0D && instance.getAttribute().equals(Attributes.ENTITY_INTERACTION_RANGE) && source != null) {
+            Messenger.tell(source, Messenger.f(Messenger.tr("rule.maxPlayerEntityInteractionRange.disable_command"), Layout.RED));
         } else {
             original.call(instance, baseValue);
         }

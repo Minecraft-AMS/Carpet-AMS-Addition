@@ -23,15 +23,11 @@ package carpetamsaddition.commands.rule.commandGetClientPlayerFps;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.CommandHelper;
-import carpetamsaddition.utils.Messenger;
-import carpetamsaddition.utils.NetworkUtil;
-import carpetamsaddition.utils.PlayerUtil;
+import carpetamsaddition.utils.*;
 import carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.CommandSourceStack;
@@ -67,13 +63,13 @@ public class GetClientPlayerFpsRegistry {
         if (source != null) {
             ServerPlayer player = PlayerUtil.getServerPlayerEntity(playerUuid);
             if (!FakePlayerHelper.isFakePlayer(player) && player != null) {
-                Messenger.tell(source, Messenger.f(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), ChatFormatting.GREEN));
+                Messenger.tell(source, Messenger.f(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), Layout.GREEN));
             }
         }
     }
 
     private static int help(CommandSourceStack source) {
-        Messenger.tell(source, Messenger.f(tr.tr("help"), ChatFormatting.GRAY));
+        Messenger.tell(source, Messenger.f(tr.tr("help"), Layout.GRAY));
         return 1;
     }
 }

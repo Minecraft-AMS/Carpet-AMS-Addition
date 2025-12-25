@@ -16,9 +16,9 @@ carpetamsaddition:
       modify_content_in: '在该路径下修改内容：'
       save_path: '[ 存档文件夹 ]'
     maxPlayerBlockInteractionRange:
-      disable_command: '由于已开启maxPlayerBlockInteractionRange规则，该改动不会生效'
+      disable_command: '<Carpet AMS Addition> 由于已开启maxPlayerBlockInteractionRange规则，该改动不会生效'
     maxPlayerEntityInteractionRange:
-      disable_command: '由于已开启maxPlayerEntityInteractionRange规则，该改动不会生效'
+      disable_command: '<Carpet AMS Addition> 由于已开启maxPlayerEntityInteractionRange规则，该改动不会生效'
     sendPlayerDeathLocation:
       location: '死亡位置'
       copy: '复制坐标到剪切板'
@@ -218,7 +218,7 @@ carpetamsaddition:
     renewableNetherScrap:
       value_range: '设定的值必须为 0 - 1'
     largeEnderChest:
-      switch_tip: '侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
+      switch_tip: '<Carpet AMS Addition> 侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
     amsNetworkProtocol:
       need_enable_protocol: '[Carpet AMS Addition] 使用%s规则需要启用amsNetworkProtocol规则才能生效'
 

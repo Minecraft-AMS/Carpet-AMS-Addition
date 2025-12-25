@@ -22,6 +22,7 @@ package carpetamsaddition.helpers.rule.fancyFakePlayerName;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.EntityUtil;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -31,7 +32,6 @@ import net.minecraft.world.scores.Scoreboard;
 import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.ChatFormatting;
 
 import java.util.Objects;
 
@@ -44,8 +44,8 @@ public class FancyNameHelper {
 
             if (team == null) {
                 team = FancyFakePlayerNameTeamController.addBotTeam(server, teamName);
-                team.setPlayerPrefix(Messenger.s(String.format("[%s] ", teamName)).withStyle(ChatFormatting.BOLD));
-                team.setColor(ChatFormatting.DARK_GREEN);
+                team.setPlayerPrefix(Messenger.f(Messenger.s(String.format("[%s] ", teamName)), Layout.BOLD));
+                team.setColor(Layout.DARK_GREEN.getFormatting());
             }
 
             String playerName = player.getGameProfile().name();

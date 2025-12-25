@@ -23,8 +23,8 @@ package carpetamsaddition.commands.rule.commandPacketInternetGroper;
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Colors;
 import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -43,7 +43,7 @@ import java.util.Map;
 import static net.minecraft.commands.Commands.argument;
 import static net.minecraft.commands.Commands.literal;
 
-public class PingCommandRegistry {
+public class PingsCommandRegistry {
     private static final Translator tr = new Translator("command.ping");
     private static final String MSG_HEAD = "<commandPacketInternetGroper>";
     private static final Map<CommandSourceStack, PingThread> PING_THREADS = new HashMap<>();
@@ -66,9 +66,11 @@ public class PingCommandRegistry {
 
     private static int executePing(CommandSourceStack source, String targetIpOrDomainName, int pingQuantity) {
         PingThread thread = PING_THREADS.get(source);
+
         if (thread != null) {
             thread.setInterrupted();
         }
+
         PingThread pingThread = new PingThread(pingQuantity, source, targetIpOrDomainName);
         pingThread.start();
         PING_THREADS.put(source, pingThread);
@@ -88,9 +90,11 @@ public class PingCommandRegistry {
                     )
                 );
             }
+
             long startTime = System.currentTimeMillis();
             boolean isReachable = inetAddress.isReachable(5000);
             long endTime = System.currentTimeMillis();
+
             if (isReachable) {
                 long delayTime = endTime - startTime;
                 Messenger.tell(
@@ -101,14 +105,15 @@ public class PingCommandRegistry {
                         )
                     )
                 );
+
                 return delayTime;
             } else {
                 Messenger.tell(source, Messenger.s(String.format("§b%s §4Request time out.", MSG_HEAD)));
-                return -1;
+                return 0;
             }
         } catch (IOException e) {
-            CarpetAMSAdditionServer.LOGGER.error("[commandPings] An error occurred while performing ping operation");
-            return -1;
+            CarpetAMSAdditionServer.LOGGER.error("[commandPacketInternetGroper] An error occurred while performing ping operation");
+            return 0;
         }
     }
 
@@ -128,7 +133,7 @@ public class PingCommandRegistry {
     private static int help(CommandSourceStack source) {
         MutableComponent pingHelp = tr.tr("help.ping");
         MutableComponent stopHelp = tr.tr("help.stop");
-        Messenger.tell(source, Messenger.c(pingHelp, Messenger.endl(), stopHelp).withColor(Colors.GRAY));
+        Messenger.tell(source, Messenger.f(Messenger.c(pingHelp, Messenger.endl(), stopHelp), Layout.GRAY));
         return 1;
     }
 
@@ -148,6 +153,7 @@ public class PingCommandRegistry {
        private final int pingQuantity;
        private final CommandSourceStack source;
        private final String targetIpOrDomainName;
+
        private PingThread(int pingQuantity, CommandSourceStack source, String targetIpOrDomainName) {
             this.pingQuantity = pingQuantity;
             this.source = source;
@@ -160,22 +166,27 @@ public class PingCommandRegistry {
            int successfulPings = 0;
            int failedPings = 0;
            long totalDelay = 0;
+
            try {
                boolean isFirstPing = true;
                for (int i = 0; i < pingQuantity; i++) {
                    if (interrupted){
                        return;
                    }
+
                    long delay = ping(source, targetIpOrDomainName, isFirstPing);
+
                    if (delay >= 0) {
                        successfulPings++;
                        totalDelay += delay;
                    } else {
                        failedPings++;
                    }
+
                    isFirstPing = false;
                    Thread.sleep(1000);
                }
+
                sendFinishMessage(source, pingQuantity, successfulPings, failedPings, successfulPings > 0 ? totalDelay / successfulPings : 0);
            } catch (InterruptedException ignored) {
            } finally {

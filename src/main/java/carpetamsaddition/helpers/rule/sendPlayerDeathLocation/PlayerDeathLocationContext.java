@@ -23,29 +23,26 @@ package carpetamsaddition.helpers.rule.sendPlayerDeathLocation;
 import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.fuzz.InvokeFuzzModCommand;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
-import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
 import net.minecraft.world.level.Level;
 
 public class PlayerDeathLocationContext {
-    private static final Translator translator = new Translator("rule.sendPlayerDeathLocation");
+    private static final Translator tr = new Translator("rule.sendPlayerDeathLocation");
 
     public static void sendMessage(MinecraftServer server, ServerPlayer player, Level world) {
         final Component copyButton = copyButton(player);
         String message = formatMessage(player, world);
-        Messenger.sendServerMessage(
-            server, Messenger.s(message).withStyle(ChatFormatting.RED)
-            .append(copyButton)
-            .append(InvokeFuzzModCommand.highlightCoordButton(getPlayerPos(player).replace(",", "")))
-        );
+        Messenger.sendServerMessage(server, Messenger.c(
+            Messenger.f(Messenger.s(message), Layout.RED),
+            copyButton,
+            InvokeFuzzModCommand.highlightCoordButton(getPlayerPos(player).replace(",", ""))
+        ));
     }
 
     public static void realPlayerSendMessage(MinecraftServer server, ServerPlayer player, Level world) {
@@ -73,15 +70,10 @@ public class PlayerDeathLocationContext {
     }
 
     private static Component copyButton(ServerPlayer player) {
-        Component hoverText = Messenger.s(translator.tr("copy")).withStyle(ChatFormatting.YELLOW);
+        Component hoverText = Messenger.f(tr.tr("copy"), Layout.YELLOW);
         String copyCoordText = getPlayerPos(player).replace(",", ""); // 1, 0, -24 -> 1 0 -24
 
-        return
-            Messenger.s(" [C]").setStyle(
-            Style.EMPTY.withColor(ChatFormatting.GREEN).withBold(true).
-            withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
-            withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
-        );
+        return Messenger.f(Messenger.s(" [C]").setStyle(Messenger.simpleCopyButtonStyle(copyCoordText, hoverText, Layout.YELLOW)), Layout.GREEN, Layout.BOLD);
     }
 
     // Alex 死亡位置 @ minecraft:overworld -> [ 888, 20, 999 ]
@@ -91,7 +83,7 @@ public class PlayerDeathLocationContext {
         return String.format(
             "%s %s @ %s -> [ %s ]",
             playerName,
-            translator.tr("location").getString(),
+            tr.tr("location").getString(),
             dimension,
             getPlayerPos(player)
         );

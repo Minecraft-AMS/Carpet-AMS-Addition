@@ -23,6 +23,7 @@ package carpetamsaddition.commands.rule.commandGetHeldItemID;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.RegexTools;
 
@@ -33,7 +34,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
 
 import java.util.Objects;
 
@@ -59,16 +59,16 @@ public class GetHeldItemIDCommandRegistry {
     private static MutableComponent buildMessage(String itemID) {
         return
             Messenger.c(
-                Messenger.f(Messenger.s(MSG_HEAD), ChatFormatting.AQUA),
-                Messenger.f(Messenger.s(itemID), ChatFormatting.GREEN)
+                Messenger.f(Messenger.s(MSG_HEAD), Layout.AQUA),
+                Messenger.f(Messenger.s(itemID), Layout.GREEN)
             ).append(createCopyButton(itemID));
     }
 
     private static Component createCopyButton(String itemID) {
         return
             Messenger.f(Messenger.s(" [C] ").setStyle(
-                Messenger.simpleCopyButtonStyle(itemID, tr.tr("getHeldItemID.copy"), ChatFormatting.YELLOW)
-            ), ChatFormatting.GREEN, ChatFormatting.BOLD);
+                Messenger.simpleCopyButtonStyle(itemID, tr.tr("getHeldItemID.copy"), Layout.YELLOW)
+            ), Layout.GREEN, Layout.BOLD);
     }
 
     private static String getHeldItemRegisterName(Player player) {

@@ -21,10 +21,10 @@
 package carpetamsaddition.fuzz;
 
 import carpetamsaddition.translations.Translator;
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.ChatFormatting;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -35,6 +35,6 @@ public class InvokeFuzzModCommand {
     public static Component highlightCoordButton(String posText) {
         String cmd = "/coordCompass set " + posText.replace(",", "");
 
-        return Messenger.f(Messenger.s(" [+H]").withStyle(Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), ChatFormatting.YELLOW)), ChatFormatting.YELLOW);
+        return Messenger.f(Messenger.s(" [+H]").withStyle(Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), Layout.YELLOW)), Layout.YELLOW, Layout.BOLD);
     }
 }

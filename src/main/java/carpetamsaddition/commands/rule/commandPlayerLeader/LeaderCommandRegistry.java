@@ -23,12 +23,9 @@ package carpetamsaddition.commands.rule.commandPlayerLeader;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.suggestionProviders.SetSuggestionProvider;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.CommandHelper;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.*;
 import carpetamsaddition.config.rule.commandLeader.LeaderConfig;
 import carpetamsaddition.commands.rule.commandWhere.WhereCommandRegistry;
-import carpetamsaddition.utils.MinecraftServerUtil;
-import carpetamsaddition.utils.PlayerUtil;
 
 import com.google.common.collect.ImmutableSet;
 
@@ -42,7 +39,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.ChatFormatting;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -52,7 +48,6 @@ import static net.minecraft.commands.Commands.literal;
 
 public class LeaderCommandRegistry {
     private static final Translator tr = new Translator("command.leader");
-    // private static final String MSG_HEAD = "<commandPlayerLeader> ";
     private static final Set<Integer> suggestionIntervalOptions = ImmutableSet.of(20, 40, 80, 160, 320, 640, -1024);
     private static final Map<UUID, Integer> PLAYER_TICK_INTERVAL = new ConcurrentHashMap<>();
     private static final Map<UUID, Integer> PLAYER_TICK_COUNTER = new ConcurrentHashMap<>();
@@ -102,7 +97,7 @@ public class LeaderCommandRegistry {
     public static int broadcastPosTickInterval(Player targetPlayer, MinecraftServer server, int interval) {
         if (!LEADER_MAP.containsKey(PlayerUtil.getName(targetPlayer))) {
             Messenger.sendServerMessage(
-                server, Messenger.f(tr.tr("is_not_leader", PlayerUtil.getName(targetPlayer)), ChatFormatting.RED, ChatFormatting.ITALIC)
+                server, Messenger.f(tr.tr("is_not_leader", PlayerUtil.getName(targetPlayer)), Layout.RED, Layout.ITALIC)
             );
 
             return 0;
@@ -168,11 +163,11 @@ public class LeaderCommandRegistry {
     private static int add(MinecraftServer server, Player targetPlayer) {
         if (!LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(targetPlayer))) {
             targetPlayer.addEffect(HIGH_LIGHT);
-            Messenger.sendServerMessage(server, Messenger.f(tr.tr("add", PlayerUtil.getName(targetPlayer)), ChatFormatting.GRAY));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("add", PlayerUtil.getName(targetPlayer)), Layout.GRAY));
             LEADER_MAP.put(PlayerUtil.getName(targetPlayer), PlayerUtil.getPlayerUUID(targetPlayer));
             saveToJson();
         } else {
-            Messenger.sendServerMessage(server, Messenger.f(tr.tr("is_already_leader", PlayerUtil.getName(targetPlayer)), ChatFormatting.RED, ChatFormatting.ITALIC));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("is_already_leader", PlayerUtil.getName(targetPlayer)), Layout.RED, Layout.ITALIC));
         }
 
         return 1;
@@ -181,11 +176,11 @@ public class LeaderCommandRegistry {
     private static int remove(MinecraftServer server, Player targetPlayer) {
         if (LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(targetPlayer))) {
             targetPlayer.removeEffect(HIGH_LIGHT.getEffect());
-            Messenger.sendServerMessage(server, Messenger.f(tr.tr("remove", PlayerUtil.getName(targetPlayer)), ChatFormatting.GRAY));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("remove", PlayerUtil.getName(targetPlayer)), Layout.GRAY));
             LEADER_MAP.remove(PlayerUtil.getName(targetPlayer), PlayerUtil.getPlayerUUID(targetPlayer));
             saveToJson();
         } else {
-            Messenger.sendServerMessage(server, Messenger.f(tr.tr("is_not_leader", PlayerUtil.getName(targetPlayer)), ChatFormatting.RED, ChatFormatting.ITALIC));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("is_not_leader", PlayerUtil.getName(targetPlayer)), Layout.RED, Layout.ITALIC));
         }
         return 1;
     }
@@ -207,7 +202,7 @@ public class LeaderCommandRegistry {
 
         LEADER_MAP.clear();
         saveToJson();
-        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), ChatFormatting.YELLOW));
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), Layout.YELLOW));
         return 1;
     }
 
@@ -217,13 +212,13 @@ public class LeaderCommandRegistry {
                 tr.tr("list_title"),
                 Messenger.endl(),
                 Messenger.dline()
-            ), ChatFormatting.AQUA, ChatFormatting.BOLD)
+            ), Layout.AQUA, Layout.BOLD)
         );
 
         for (Map.Entry<String, UUID> entry : LEADER_MAP.entrySet()) {
             String playerName = entry.getKey();
             UUID playerUUID = PlayerUtil.getPlayerUUID(player);
-            Messenger.tell(source, Messenger.f(Messenger.s(playerName + " - " + playerUUID), ChatFormatting.DARK_AQUA));
+            Messenger.tell(source, Messenger.f(Messenger.s(playerName + " - " + playerUUID), Layout.DARK_AQUA));
         }
 
         return 1;
@@ -236,7 +231,7 @@ public class LeaderCommandRegistry {
             tr.tr("help.removeAll"), Messenger.endl(),
             tr.tr("help.broadcast_leader_pos"), Messenger.endl(),
             tr.tr("help.list"), Messenger.endl()
-        ), ChatFormatting.GRAY));
+        ), Layout.GRAY));
 
         return 1;
     }
