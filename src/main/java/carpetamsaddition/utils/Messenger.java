@@ -22,7 +22,6 @@ package carpetamsaddition.utils;
 
 import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
 import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
-import carpetamsaddition.utils.compat.MessengerCompatFactory;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -39,11 +38,11 @@ import java.util.Objects;
 
 public class Messenger {
     public static MutableComponent c(Object... fields) {
-        return MessengerCompatFactory.CarpetCompoundText(fields);
+        return (MutableComponent) carpet.utils.Messenger.c(fields);
     }
 
     public static MutableComponent s(Object text) {
-        return MessengerCompatFactory.LiteralText(text.toString());
+        return Component.literal(text.toString());
     }
 
     @NotNull
@@ -58,7 +57,7 @@ public class Messenger {
     }
 
     public static MutableComponent tr(String key, Object... args) {
-        return MessengerCompatFactory.TranslatableText(key, args);
+        return Component.translatable(key, args);
     }
 
     @NotNull
@@ -67,7 +66,7 @@ public class Messenger {
     }
 
     private static void __tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
-        MessengerCompatFactory.sendFeedBack(source, text, broadcastToOps);
+        source.sendSuccess(() -> text, broadcastToOps);
     }
 
     public static void tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
@@ -101,7 +100,7 @@ public class Messenger {
 
     public static void sendServerMessage(MinecraftServer server, Component text) {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
-        MessengerCompatFactory.sendSystemMessage(server, text);
+        server.sendSystemMessage(text);
         MinecraftServerUtil.getOnlinePlayers().forEach(player -> tell(player, (MutableComponent) text, false));
     }
 
