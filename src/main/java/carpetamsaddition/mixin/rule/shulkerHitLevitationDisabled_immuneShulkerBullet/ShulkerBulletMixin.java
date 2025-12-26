@@ -22,8 +22,6 @@ package carpetamsaddition.mixin.rule.shulkerHitLevitationDisabled_immuneShulkerB
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.projectile.ShulkerBullet;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,15 +34,11 @@ public abstract class ShulkerBulletMixin {
         method = "onHitEntity",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/LivingEntity;addEffect(Lnet/minecraft/world/effect/MobEffectInstance;Lnet/minecraft/world/entity/Entity;)Z"
+            target = "Lnet/minecraft/world/effect/MobEffectInstance;<init>(Lnet/minecraft/core/Holder;I)V"
         )
     )
-    private MobEffectInstance noLevitation(MobEffectInstance statusEffectInstance) {
-        if (CarpetAMSAdditionSettings.shulkerHitLevitationDisabled || CarpetAMSAdditionSettings.immuneShulkerBullet) {
-            return new MobEffectInstance(MobEffects.LEVITATION, 0);
-        } else {
-            return statusEffectInstance;
-        }
+    private int noLevitation(int effectDuration) {
+        return CarpetAMSAdditionSettings.shulkerHitLevitationDisabled || CarpetAMSAdditionSettings.immuneShulkerBullet ? 0 : effectDuration;
     }
 
     @ModifyArg(

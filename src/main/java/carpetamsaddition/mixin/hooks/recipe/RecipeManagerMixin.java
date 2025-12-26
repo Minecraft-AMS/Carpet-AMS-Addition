@@ -62,7 +62,7 @@ public abstract class RecipeManagerMixin {
     @Inject(method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;", at = @At("RETURN"), cancellable = true)
     private void addCustomRecipes(ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfoReturnable<RecipeMap> cir) {
         SortedMap<Identifier, Recipe<?>> sortedMap = new TreeMap<>();
-        SortedMap<Identifier, Recipe<?>> originalMap = cir.getReturnValue().values().stream().collect(Collectors.toMap(recipeEntry -> recipeEntry.id().identifier(), RecipeHolder::value, (a, b) -> a, TreeMap::new));
+        SortedMap<Identifier, Recipe<?>> originalMap = cir.getReturnValue().values().stream().collect(Collectors.toMap(recipeEntry -> recipeEntry.id().identifier(), RecipeHolder::value, (a, _) -> a, TreeMap::new));
         sortedMap.putAll(originalMap);
         CarpetAMSAdditionServer.getInstance().registerCustomRecipes(sortedMap, wrapperLookup);
         List<RecipeHolder<?>> list = new ArrayList<>(sortedMap.size());
