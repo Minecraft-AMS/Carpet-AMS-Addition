@@ -21,8 +21,13 @@
 package carpetamsaddition.mixin.rule.shulkerHitLevitationDisabled_immuneShulkerBullet;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.Noop;
+
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 import net.minecraft.world.entity.projectile.ShulkerBullet;
+import net.minecraft.world.phys.EntityHitResult;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,17 +43,15 @@ public abstract class ShulkerBulletMixin {
         )
     )
     private int noLevitation(int effectDuration) {
-        return CarpetAMSAdditionSettings.shulkerHitLevitationDisabled || CarpetAMSAdditionSettings.immuneShulkerBullet ? 0 : effectDuration;
+        return CarpetAMSAdditionSettings.shulkerHitLevitationDisabled ? 0 : effectDuration;
     }
 
-    @ModifyArg(
-        method = "onHitEntity",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/Entity;hurtOrSimulate(Lnet/minecraft/world/damagesource/DamageSource;F)Z"
-        )
-    )
-    private float noDamage(float amount) {
-        return CarpetAMSAdditionSettings.immuneShulkerBullet ? 0.0F : amount;
+    @WrapMethod(method = "onHitEntity")
+    private void immuneShulkerBullet(EntityHitResult hitResult, Operation<Void> original) {
+        if (CarpetAMSAdditionSettings.immuneShulkerBullet) {
+            Noop.noop();
+        } else {
+            original.call(hitResult);
+        }
     }
 }

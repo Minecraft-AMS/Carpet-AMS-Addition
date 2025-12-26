@@ -22,25 +22,18 @@ package carpetamsaddition.mixin.rule.easyMaxLevelBeacon;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.entity.BeaconBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BeaconBlockEntity;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BeaconBlockEntity.class)
-public abstract class BeaconBlockEntityMixin extends BlockEntity {
-    private BeaconBlockEntityMixin(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
-    }
-
+public abstract class BeaconBlockEntityMixin {
     @Inject(method = "updateBase", at = @At("HEAD"), cancellable = true)
     private static void updateLevel(Level world, int x, int y, int z, CallbackInfoReturnable<Integer> cir) {
         if (CarpetAMSAdditionSettings.easyMaxLevelBeacon) {

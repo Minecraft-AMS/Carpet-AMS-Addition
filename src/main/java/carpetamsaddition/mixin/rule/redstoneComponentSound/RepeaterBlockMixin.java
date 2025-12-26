@@ -41,8 +41,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class RepeaterBlockMixin {
     @Inject(method = "useWithoutItem", at = @At("HEAD"))
     private void playSound(
-            BlockState state, Level world, BlockPos pos, Player player,
-            BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
+        BlockState state, Level world, BlockPos pos, Player player,
+        BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
     ) {
         if (CarpetAMSAdditionSettings.redstoneComponentSound) {
             world.playSound(player, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 1.0f, 0.75f);

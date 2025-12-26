@@ -28,7 +28,7 @@ import carpetamsaddition.translations.Translator;
 import net.minecraft.commands.CommandSourceStack;
 
 public class MaxTimeValidator extends Validator<Integer> {
-    private static final Translator translator = new Translator("validator.blockChunkLoaderTimeController");
+    private static final Translator tr = new Translator("validator.blockChunkLoaderTimeController");
 
     @Override
     public Integer validate(CommandSourceStack serverCommandSource, CarpetRule<Integer> parsedRule, Integer integer, String s) {
@@ -37,6 +37,6 @@ public class MaxTimeValidator extends Validator<Integer> {
 
     @Override
     public String description() {
-        return translator.tr("value_range").getString();
+        return tr.tr("value_range").getString();
     }
 }

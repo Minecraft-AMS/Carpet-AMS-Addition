@@ -24,10 +24,11 @@ import carpet.api.settings.CarpetRule;
 import carpet.api.settings.Validator;
 
 import carpetamsaddition.translations.Translator;
+
 import net.minecraft.commands.CommandSourceStack;
 
 public class MaxClientInteractionReachDistanceValidator extends Validator<Double> {
-    private static final Translator translator = new Translator("validator.maxClientInteractionReachDistance");
+    private static final Translator tr = new Translator("validator.maxClientInteractionReachDistance");
 
     @Override
     public Double validate(CommandSourceStack serverCommandSource, CarpetRule<Double> parsedRule, Double aDouble, String s) {
@@ -36,6 +37,6 @@ public class MaxClientInteractionReachDistanceValidator extends Validator<Double
 
     @Override
     public String description() {
-        return translator.tr("value_range").getString();
+        return tr.tr("value_range").getString();
     }
 }

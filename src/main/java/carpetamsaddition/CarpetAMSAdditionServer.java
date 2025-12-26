@@ -160,7 +160,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     public void afterServerLoadWorlds(MinecraftServer server) {
         LoadConfigFromJson.load(server);
         CommandHelper.updateAllCommandPermissions(server);
-        RecipeRuleHelper.needReloadServerResources(server);
+        RecipeRuleHelper.reloadServerResources(server);
     }
 
     @Override

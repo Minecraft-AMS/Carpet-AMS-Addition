@@ -26,6 +26,7 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.api.recipe.AmsRecipeBuilder;
 import carpetamsaddition.api.recipe.AmsRecipeManager;
 import carpetamsaddition.settings.RecipeRule;
+import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -41,7 +42,7 @@ public class RecipeRuleHelper {
     private static final String MOD_ID = CarpetAMSAdditionServer.compactName;
 
     public static void onPlayerLoggedIn(MinecraftServer server, ServerPlayer player) {
-        if (server != null && server.isRunning() && hasActiveRecipeRule()) {
+        if (MinecraftServerUtil.serverIsRunning(server) && hasActiveRecipeRule()) {
             Collection<RecipeHolder<?>> allRecipes = getServerRecipeManager(server).getRecipes();
             for (RecipeHolder<?> recipe : allRecipes) {
                 if (recipe.id().identifier().getNamespace().equals(MOD_ID) && !player.getRecipeBook().contains(recipe.id())) {
@@ -52,11 +53,11 @@ public class RecipeRuleHelper {
     }
 
     public static void onValueChange(MinecraftServer server) {
-        if (server != null && server.isRunning()) {
+        if (MinecraftServerUtil.serverIsRunning(server)) {
             server.execute(() -> {
             AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
             CarpetAMSAdditionCustomRecipes.getInstance().buildRecipes();
-                needReloadServerResources(server);
+                reloadServerResources(server);
                 Collection<RecipeHolder<?>> allRecipes = getServerRecipeManager(server).getRecipes();
                 for (RecipeHolder<?> recipe : allRecipes) {
                     if (recipe.id().identifier().getNamespace().equals(MOD_ID)) {
@@ -92,7 +93,7 @@ public class RecipeRuleHelper {
         return server.getRecipeManager();
     }
 
-    public static void needReloadServerResources(MinecraftServer server) {
+    public static void reloadServerResources(MinecraftServer server) {
         server.reloadResources(server.getPackRepository().getSelectedIds());
     }
 }

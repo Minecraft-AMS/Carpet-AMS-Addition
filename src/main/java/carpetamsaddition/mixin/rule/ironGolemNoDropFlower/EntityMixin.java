@@ -22,27 +22,24 @@ package carpetamsaddition.mixin.rule.ironGolemNoDropFlower;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.animal.golem.IronGolem;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.animal.golem.IronGolem;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @Inject(method = "spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"), cancellable = true)
-    private void noDropPoppy(ServerLevel world, ItemStack stack, CallbackInfoReturnable<ItemEntity> cir) {
-        if (CarpetAMSAdditionSettings.ironGolemNoDropFlower) {
-            Entity entity = (Entity) (Object) this;
-            if (entity instanceof IronGolem && stack.getItem().equals(Items.POPPY)) {
-                cir.setReturnValue(null);
-            }
+    @ModifyVariable(method = "spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"), argsOnly = true)
+    private ItemStack noDropPoppy(ItemStack itemStack) {
+        Entity entity = (Entity) (Object) this;
+        if (CarpetAMSAdditionSettings.ironGolemNoDropFlower && entity instanceof IronGolem && itemStack.getItem().equals(Items.POPPY)) {
+            return ItemStack.EMPTY;
+        } else {
+            return itemStack;
         }
     }
 }

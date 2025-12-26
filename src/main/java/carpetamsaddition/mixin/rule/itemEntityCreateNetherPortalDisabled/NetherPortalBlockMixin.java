@@ -49,8 +49,8 @@ public abstract class NetherPortalBlockMixin {
         )
     )
     private Optional<BlockUtil.FoundRectangle> itemEntityCreateNetherPortalDisabled(
-            PortalForcer forcer, BlockPos pos, Direction.Axis axis, Operation<Optional<BlockUtil.FoundRectangle>> original,
-            ServerLevel world, Entity entity
+        PortalForcer forcer, BlockPos pos, Direction.Axis axis, Operation<Optional<BlockUtil.FoundRectangle>> original,
+        ServerLevel world, Entity entity
     ) {
         if (CarpetAMSAdditionSettings.itemEntityCreateNetherPortalDisabled && entity instanceof ItemEntity) {
             return Optional.empty();

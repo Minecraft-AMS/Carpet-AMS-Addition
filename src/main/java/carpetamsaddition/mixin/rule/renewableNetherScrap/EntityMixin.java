@@ -49,7 +49,6 @@ public abstract class EntityMixin {
     @Unique
     private boolean hasDroppedNetherScrap = false;
 
-
     @Unique
     private boolean isDroppingNetherScrap = false;
 

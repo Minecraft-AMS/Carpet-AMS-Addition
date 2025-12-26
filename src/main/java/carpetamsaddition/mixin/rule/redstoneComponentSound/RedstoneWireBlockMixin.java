@@ -41,8 +41,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class RedstoneWireBlockMixin {
     @Inject(method = "useWithoutItem", at = @At(value = "RETURN", ordinal = 1))
     private void playSound(
-            BlockState state, Level world, BlockPos pos, Player player,
-            BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
+        BlockState state, Level world, BlockPos pos, Player player,
+        BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
     ) {
         if (CarpetAMSAdditionSettings.redstoneComponentSound) {
             world.playSound(player, pos, SoundEvents.SAND_STEP, SoundSource.BLOCKS, 0.8f, 2.5f);

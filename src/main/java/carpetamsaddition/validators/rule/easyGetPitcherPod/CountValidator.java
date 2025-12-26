@@ -28,7 +28,7 @@ import carpetamsaddition.translations.Translator;
 import net.minecraft.commands.CommandSourceStack;
 
 public class CountValidator extends Validator<Integer> {
-    private static final Translator translator = new Translator("validator.easyGetPitcherPod");
+    private static final Translator tr = new Translator("validator.easyGetPitcherPod");
 
     @Override
     public Integer validate(CommandSourceStack serverCommandSource, CarpetRule<Integer> parsedRule, Integer integer, String s) {
@@ -37,6 +37,6 @@ public class CountValidator extends Validator<Integer> {
 
     @Override
     public String description() {
-        return translator.tr("value_range").getString();
+        return tr.tr("value_range").getString();
     }
 }

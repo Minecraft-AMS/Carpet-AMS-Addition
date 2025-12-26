@@ -54,7 +54,7 @@ public abstract class BundleItemMixin {
         if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             ItemStack stack = user.getItemInHand(hand);
             SimpleMenuProvider screenHandlerFactory = new SimpleMenuProvider(
-                (syncId, playerInv, player) -> {
+                (syncId, playerInv, _) -> {
                     LargeBundleInventory bundleInv = new LargeBundleInventory(stack);
                     switch (CarpetAMSAdditionSettings.largeBundle) {
                         case "9x3":

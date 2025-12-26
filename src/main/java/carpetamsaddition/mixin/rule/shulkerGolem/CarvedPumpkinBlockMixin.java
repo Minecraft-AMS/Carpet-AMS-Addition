@@ -48,6 +48,7 @@ public abstract class CarvedPumpkinBlockMixin {
             BlockPos bodyPos = headPos.below(1);
             boolean headIsCarvedPumpkin = world.getBlockState(headPos).getBlock() instanceof CarvedPumpkinBlock;
             boolean bodyIsShulkerBox = world.getBlockState(bodyPos).getBlock() instanceof ShulkerBoxBlock;
+
             if (headIsCarvedPumpkin && bodyIsShulkerBox) {
                 Shulker shulkerGolem = EntityType.SHULKER.create(world, EntitySpawnReason.MOB_SUMMONED);
                 Objects.requireNonNull(shulkerGolem).snapTo(bodyPos.getX() + 0.5, bodyPos.getY(), bodyPos.getZ() + 0.5, 0.0F, 0.0F);

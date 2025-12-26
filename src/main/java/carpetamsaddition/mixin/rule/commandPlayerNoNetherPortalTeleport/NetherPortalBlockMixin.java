@@ -22,8 +22,8 @@ package carpetamsaddition.mixin.rule.commandPlayerNoNetherPortalTeleport;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.rule.commandPlayerNoNetherPortalTeleport.PlayerNoNetherPortalTeleportRegistry;
-
 import carpetamsaddition.utils.PlayerUtil;
+
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 

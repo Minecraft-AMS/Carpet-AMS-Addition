@@ -28,7 +28,7 @@ import carpetamsaddition.translations.Translator;
 import net.minecraft.commands.CommandSourceStack;
 
 public class MaxPlayerEntityInteractionRangeValidator extends Validator<Double> {
-    private static final Translator translator = new Translator("validator.maxPlayerEntityInteractionRange");
+    private static final Translator tr = new Translator("validator.maxPlayerEntityInteractionRange");
 
     @Override
     public Double validate(CommandSourceStack serverCommandSource, CarpetRule<Double> parsedRule, Double aDouble, String s) {
@@ -37,6 +37,6 @@ public class MaxPlayerEntityInteractionRangeValidator extends Validator<Double> 
 
     @Override
     public String description() {
-        return translator.tr("value_range").getString();
+        return tr.tr("value_range").getString();
     }
 }

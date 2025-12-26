@@ -40,15 +40,20 @@ public abstract class GossipContainerMixin implements GossipContainerAccessor, E
         if (CarpetAMSAdditionSettings.sharedVillagerDiscounts && filter.test(GossipType.MAJOR_POSITIVE)) {
             EntityGossipsInvoker targetReputation = (EntityGossipsInvoker) this.getGossips().get(target);
             int otherRep = 0;
+
             if (targetReputation != null) {
                 otherRep = targetReputation.invokeWeightedValue(vgt -> filter.test(vgt) && !vgt.equals(GossipType.MAJOR_POSITIVE));
             }
+
             int majorPositiveRep = 0;
+
             for (Object reputation : this.getGossips().values()) {
                 EntityGossipsInvoker invoker = (EntityGossipsInvoker) reputation;
                 majorPositiveRep += invoker.invokeWeightedValue(vgt -> vgt.equals(GossipType.MAJOR_POSITIVE));
             }
+
             int maxMajorPositiveRep = GossipType.MAJOR_POSITIVE.max * GossipType.MAJOR_POSITIVE.weight;
+
             cir.setReturnValue(otherRep + Math.min(majorPositiveRep, maxMajorPositiveRep));
         }
     }

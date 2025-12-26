@@ -22,32 +22,18 @@ package carpetamsaddition.mixin.rule.itemAntiExplosion;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.server.level.ServerLevel;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import java.util.Objects;
 
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin {
-    @ModifyExpressionValue(
-        method = "hurtServer",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/item/ItemEntity;isInvulnerableToBase(Lnet/minecraft/world/damagesource/DamageSource;)Z"
-        )
-    )
-    private boolean isInvulnerableTo(boolean original, ServerLevel world, DamageSource source) {
-        if(!Objects.equals(CarpetAMSAdditionSettings.itemAntiExplosion, "false") && source.is(DamageTypeTags.IS_EXPLOSION)) {
-            return original || !Objects.equals(CarpetAMSAdditionSettings.itemAntiExplosion, "false");
-        } else {
-            return original;
-        }
+    @ModifyVariable(method = "hurtServer", at = @At("HEAD"), argsOnly = true)
+    private float noDamage(float damage) {
+        return !Objects.equals(CarpetAMSAdditionSettings.itemAntiExplosion, "false") ? 0 : damage;
     }
 }

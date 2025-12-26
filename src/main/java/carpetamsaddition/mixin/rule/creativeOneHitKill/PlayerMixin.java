@@ -55,7 +55,7 @@ public abstract class PlayerMixin implements EntityAccessorAndInvoker, PlayerAcc
     @Unique
     private void instaKill(Entity target) {
         if (target instanceof EnderDragonPart) {
-            Arrays.stream(((EnderDragonPart) target).parentMob.getSubEntities()).forEach(Entity -> target.kill((ServerLevel) EntityUtil.getEntityWorld(target)));
+            Arrays.stream(((EnderDragonPart) target).parentMob.getSubEntities()).forEach(_ -> target.kill((ServerLevel) EntityUtil.getEntityWorld(target)));
             ((EnderDragonPart) target).parentMob.kill((ServerLevel) EntityUtil.getEntityWorld(target));
         } else {
             target.kill((ServerLevel) EntityUtil.getEntityWorld(target));

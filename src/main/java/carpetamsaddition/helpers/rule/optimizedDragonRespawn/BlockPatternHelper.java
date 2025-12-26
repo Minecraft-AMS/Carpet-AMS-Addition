@@ -35,6 +35,7 @@ public class BlockPatternHelper {
     public static BlockPattern.BlockPatternMatch partialSearchAround(BlockPattern pattern, LevelReader world, BlockPos pos) {
         LoadingCache<@NotNull BlockPos, @NotNull BlockInWorld> loadingCache = BlockPattern.createLevelCache(world, false);
         int i = Math.max(Math.max(pattern.getWidth(), pattern.getHeight()), pattern.getDepth());
+
         for (BlockPos blockPos : BlockPos.betweenClosed(pos, pos.offset(i - 1, 0, i - 1))) {
             for (Direction direction : Direction.values()) {
                 for (Direction direction2 : Direction.values()) {
@@ -44,6 +45,7 @@ public class BlockPatternHelper {
                 }
             }
         }
+
         return null;
     }
 }

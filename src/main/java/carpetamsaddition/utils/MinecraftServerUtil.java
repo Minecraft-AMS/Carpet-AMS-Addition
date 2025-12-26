@@ -24,6 +24,7 @@ import carpetamsaddition.CarpetAMSAdditionServer;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.PlayerList;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -49,5 +50,13 @@ public class MinecraftServerUtil {
         }
 
         return Collections.emptyList();
+    }
+
+    public static PlayerList getPlayerList() {
+        if (serverIsRunning()) {
+            return getServer().getPlayerList();
+        } else {
+            return null;
+        }
     }
 }

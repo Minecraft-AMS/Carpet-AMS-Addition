@@ -38,7 +38,13 @@ import java.util.Objects;
 
 @Mixin(ServerExplosion.class)
 public abstract class ServerExplosionMixin {
-    @WrapOperation(method = "hurtEntities", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;push(Lnet/minecraft/world/phys/Vec3;)V"))
+    @WrapOperation(
+        method = "hurtEntities",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/Entity;push(Lnet/minecraft/world/phys/Vec3;)V"
+        )
+    )
     private void onSetVelocity(Entity entity, Vec3 velocity, Operation<Void> original) {
         if (Objects.equals(CarpetAMSAdditionSettings.itemAntiExplosion, "no_blast_wave") && entity instanceof ItemEntity) {
             Noop.noop();

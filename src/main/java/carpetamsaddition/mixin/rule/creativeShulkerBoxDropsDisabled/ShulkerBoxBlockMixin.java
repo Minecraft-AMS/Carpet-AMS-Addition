@@ -37,9 +37,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ShulkerBoxBlockMixin {
     @Inject(method = "playerWillDestroy", at = @At("HEAD"), cancellable = true)
     private void onBreak(
-            Level world, BlockPos pos, BlockState state, Player player,
-            CallbackInfoReturnable<BlockState> cir
-
+        Level world, BlockPos pos, BlockState state, Player player,
+        CallbackInfoReturnable<BlockState> cir
     ) {
         if (CarpetAMSAdditionSettings.creativeShulkerBoxDropsDisabled && player.isCreative()) {
             world.destroyBlock(pos, false);

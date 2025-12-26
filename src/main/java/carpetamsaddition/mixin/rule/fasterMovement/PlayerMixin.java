@@ -23,13 +23,10 @@ package carpetamsaddition.mixin.rule.fasterMovement;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.EntityUtil;
 
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -38,23 +35,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Objects;
 
 @Mixin(Player.class)
-public abstract class PlayerMixin extends LivingEntity {
-    protected PlayerMixin(EntityType<? extends @NotNull LivingEntity> entityType, Level world) {
-        super(entityType, world);
-    }
-
+public abstract class PlayerMixin {
     @Inject(method = "getSpeed", at = @At("HEAD"), cancellable = true)
     private void getMovementSpeed(CallbackInfoReturnable<Float> cir) {
         if (!Objects.equals(CarpetAMSAdditionSettings.fasterMovement, "VANILLA")) {
             Player player = (Player)(Object)this;
             Level world = EntityUtil.getEntityWorld(player);
+
             if (
                 (CarpetAMSAdditionSettings.fasterMovementController == CarpetAMSAdditionSettings.fasterMovementDimension.END && world.dimension() == Level.END) ||
                 (CarpetAMSAdditionSettings.fasterMovementController == CarpetAMSAdditionSettings.fasterMovementDimension.NETHER && world.dimension() == Level.NETHER) ||
                 (CarpetAMSAdditionSettings.fasterMovementController == CarpetAMSAdditionSettings.fasterMovementDimension.OVERWORLD  && world.dimension() == Level.OVERWORLD) ||
                 (CarpetAMSAdditionSettings.fasterMovementController == CarpetAMSAdditionSettings.fasterMovementDimension.ALL)
             ) {
-                float speed = (float)this.getAttributeValue(Attributes.MOVEMENT_SPEED);
+
+                float speed = (float) player.getAttributeValue(Attributes.MOVEMENT_SPEED);
+
                 speed = switch (CarpetAMSAdditionSettings.fasterMovement) {
                     case "Ⅰ" -> 0.2F;
                     case "Ⅱ" -> 0.3F;
@@ -63,6 +59,7 @@ public abstract class PlayerMixin extends LivingEntity {
                     case "Ⅴ" -> 0.6F;
                     default -> speed;
                 };
+
                 cir.setReturnValue(speed);
             }
         }
