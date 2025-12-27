@@ -24,7 +24,6 @@ import carpetamsaddition.CarpetAMSAdditionServer;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -37,10 +36,8 @@ import net.minecraft.world.item.crafting.RecipeMap;
 import org.jetbrains.annotations.NotNull;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
@@ -51,28 +48,20 @@ import java.util.stream.Collectors;
 
 @Mixin(RecipeManager.class)
 public abstract class RecipeManagerMixin {
-
-    @Unique
-    private HolderLookup.Provider wrapperLookup;
-
-    @Inject(method = "<init>", at = @At("TAIL"))
-    private void init(HolderLookup.Provider registries, CallbackInfo ci) {
-        this.wrapperLookup = registries;
-    }
-
-    @SuppressWarnings("DuplicatedCode")
     @Inject(method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;", at = @At("RETURN"), cancellable = true)
     private void addCustomRecipes(ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfoReturnable<RecipeMap> cir) {
         SortedMap<Identifier, Recipe<?>> sortedMap = new TreeMap<>();
         SortedMap<Identifier, Recipe<?>> originalMap = cir.getReturnValue().values().stream().collect(Collectors.toMap(recipeEntry -> recipeEntry.id().identifier(), RecipeHolder::value, (a, _) -> a, TreeMap::new));
         sortedMap.putAll(originalMap);
-        CarpetAMSAdditionServer.getInstance().registerCustomRecipes(sortedMap, wrapperLookup);
+        CarpetAMSAdditionServer.getInstance().registerCustomRecipes(sortedMap, ((RecipeManagerAccessor) this).getRegistries());
         List<RecipeHolder<?>> list = new ArrayList<>(sortedMap.size());
+
         sortedMap.forEach((id, recipe) -> {
             ResourceKey<@NotNull Recipe<?>> registryKey = ResourceKey.create(Registries.RECIPE, id);
             RecipeHolder<?> recipeEntry = new RecipeHolder<>(registryKey, recipe);
             list.add(recipeEntry);
         });
+
         cir.setReturnValue(RecipeMap.create(list));
     }
 }

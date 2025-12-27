@@ -48,7 +48,7 @@ public abstract class PlayerMixin implements EntityAccessorAndInvoker, PlayerAcc
     private void attack(Entity target, CallbackInfo ci) {
         if (CarpetAMSAdditionSettings.creativeOneHitKill && !WorldUtil.isClient(this.getLevel()) && this.getPlayerAbilities().instabuild && EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(target)) {
             Function<Boolean, Runnable> actionInstaKill = isSneaking -> isSneaking ? () -> aoeAttack(target) : () -> instaKill(target);
-            actionInstaKill.apply(invokerIsSneaking()).run();
+            actionInstaKill.apply(invokeIsSneaking()).run();
         }
     }
 
