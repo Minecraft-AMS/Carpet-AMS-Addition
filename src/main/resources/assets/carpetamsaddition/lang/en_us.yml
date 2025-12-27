@@ -598,6 +598,11 @@ carpetamsaddition:
         desc: Only allow new portals to be generated when players pass through the Nether portal
       preventServerPause:
         desc: Prevent server pause after 60s
+      flippinCactusExtras:
+        desc: Enables flippinCactus rules to work on more blocks
+        extra:
+          '0': 'Affected blocks:'
+          '1': 'barrel, chiseled_bookshelf, crafter, shelf'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

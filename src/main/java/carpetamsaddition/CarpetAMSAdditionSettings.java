@@ -573,6 +573,9 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean preventServerPause  = false;
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL, CREATIVE})
+    public static boolean flippinCactusExtras = false;
+
     /*
      * AMS网络协议规则
      */

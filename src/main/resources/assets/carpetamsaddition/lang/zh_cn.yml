@@ -722,6 +722,12 @@ carpetamsaddition:
       preventServerPause:
         name: 防止服务器暂停
         desc: 防止服务器60s后暂停
+      flippinCactusExtras:
+        name: 仙人掌扳手拓展
+        desc: 使flippin仙人掌规则能适用于更多方块
+        extra:
+          '0': '受影响的方块:'
+          '1': '木桶、雕文书架、合成器、展示架'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
