@@ -590,6 +590,8 @@ carpetamsaddition:
         extra:
           '0': 'Affected blocks:'
           '1': 'barrel, chiseled_bookshelf, crafter, shelf'
+      minecartMaxSpeed:
+        desc: test
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

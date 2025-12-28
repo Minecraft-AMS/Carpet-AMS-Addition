@@ -40,16 +40,4 @@ public abstract class FeatureSetMixin {
     private boolean contains(boolean original) {
         return AmsServerSettings.experimentalContentCheckDisabled ? true : original;
     }
-
-//    @ModifyReturnValue(
-//        method = {
-//            "of(Lnet/minecraft/resource/featuretoggle/FeatureUniverse;Ljava/util/Collection;)Lnet/minecraft/resource/featuretoggle/FeatureSet;",
-//            "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;",
-//            "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;[Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;"
-//        },
-//        at = @At("RETURN")
-//    )
-//    private static FeatureSet of(FeatureSet original) {
-//        return FeatureSet.empty();
-//    }
 }

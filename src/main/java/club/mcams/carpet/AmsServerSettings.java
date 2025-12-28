@@ -627,6 +627,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean flippinCactusExtras = false;
 
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    public static double minecartMaxSpeed = -1.0D;
+
     /*
      * AMS网络协议规则
      */

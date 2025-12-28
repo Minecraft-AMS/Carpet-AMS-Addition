@@ -717,6 +717,8 @@ carpetamsaddition:
         extra:
           '0': '受影响的方块:'
           '1': '木桶、雕文书架、合成器、展示架'
+      minecartMaxSpeed:
+        desc: test
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
