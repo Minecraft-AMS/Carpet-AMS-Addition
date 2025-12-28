@@ -20,6 +20,7 @@
 
 package carpetamsaddition.mixin.rule.flippinCactusExtras;
 
+import carpet.CarpetSettings;
 import carpet.helpers.BlockRotator;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
@@ -45,7 +46,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class Carpet_BlockRotatorMixin {
     @Inject(method = "flipBlock", at = @At("HEAD"), cancellable = true)
     private static void flipCactusExtras(BlockState state, Level world, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<Boolean> cir) {
-        if (CarpetAMSAdditionSettings.flippinCactusExtras) {
+        if (CarpetAMSAdditionSettings.flippinCactusExtras && CarpetSettings.flippinCactus) {
             Block block = state.getBlock();
             BlockPos pos = hit.getBlockPos();
             BlockState newState = null;

@@ -20,6 +20,7 @@
 
 package carpetamsaddition.mixin.rule.flippinCactusSoundEffect;
 
+import carpet.CarpetSettings;
 import carpet.helpers.BlockRotator;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
@@ -46,7 +47,7 @@ public abstract class Carpet_BlockRotatorMixin {
         )
     )
     private static void playFlipSound(BlockState state, Level world, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<Boolean> cir) {
-        if (CarpetAMSAdditionSettings.flippinCactusSoundEffect != 0) {
+        if (CarpetAMSAdditionSettings.flippinCactusSoundEffect != 0 && CarpetSettings.flippinCactus) {
             SoundEffectHelper.playFlipSound(player, world);
         }
     }
