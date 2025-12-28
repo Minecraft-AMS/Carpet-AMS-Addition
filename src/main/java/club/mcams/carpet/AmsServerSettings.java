@@ -624,6 +624,9 @@ public class AmsServerSettings {
     //$$ public static boolean preventServerPause = false;
     //#endif
 
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean flippinCactusExtras = false;
+
     /*
      * AMS网络协议规则
      */
