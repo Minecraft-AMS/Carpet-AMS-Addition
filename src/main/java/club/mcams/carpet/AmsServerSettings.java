@@ -630,6 +630,9 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static double minecartMaxSpeed = -1.0D;
 
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    public static boolean minecartImprovementsEnabled = false;
+
     /*
      * AMS网络协议规则
      */

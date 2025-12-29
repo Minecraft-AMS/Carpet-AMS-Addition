@@ -592,6 +592,8 @@ carpetamsaddition:
           '1': 'barrel, chiseled_bookshelf, crafter, shelf'
       minecartMaxSpeed:
         desc: test
+      minecartImprovementsEnabled:
+        desc: test
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

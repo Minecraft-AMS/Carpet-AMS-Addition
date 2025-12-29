@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2024 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,31 +20,26 @@
 
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import club.mcams.carpet.AmsServerSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 
 import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.resource.featuretoggle.FeatureSet;
-import net.minecraft.world.GameRules;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(GameRules.class)
+@Mixin(FeatureSet.class)
 public abstract class FeatureSetMixin {
-    @WrapOperation(
-        method = "<clinit>",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/resource/featuretoggle/FeatureSet;of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;"
-        )
-    )
-    private static FeatureSet get(FeatureFlag feature, Operation<FeatureSet> original) {
-        if (feature.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
-            return FeatureSet.empty();
+    @ModifyReturnValue(method = "contains", at = @At("RETURN"))
+    private boolean contains(boolean original, @Local(argsOnly = true) FeatureFlag flag) {
+        if (AmsServerSettings.minecartImprovementsEnabled && flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
+            return true;
+        } else {
+            return original;
         }
-
-        return original.call(feature);
     }
 }

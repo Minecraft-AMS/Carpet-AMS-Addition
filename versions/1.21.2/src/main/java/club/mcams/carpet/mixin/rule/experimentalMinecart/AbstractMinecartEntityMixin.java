@@ -24,15 +24,10 @@ import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.entity.vehicle.DefaultMinecartController;
 import net.minecraft.entity.vehicle.ExperimentalMinecartController;
-import net.minecraft.entity.vehicle.MinecartController;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
 
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -41,43 +36,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21.2")
-@SuppressWarnings("SimplifiableConditionalExpression")
 @Mixin(AbstractMinecartEntity.class)
 public abstract class AbstractMinecartEntityMixin {
-
-    @Mutable
-    @Shadow
-    @Final
-    private MinecartController controller;
-
-    @Shadow
-    protected abstract void moveOnRail(ServerWorld world);
+    @Unique
+    private boolean isExperimentalMinecart$AMS = false;
 
     @ModifyReturnValue(method = "areMinecartImprovementsEnabled", at = @At("RETURN"))
     private static boolean setExMinecartEnabled(boolean original) {
-        return AmsServerSettings.minecartMaxSpeed != -1.0D ? true : original;
+        return AmsServerSettings.minecartImprovementsEnabled || original;
     }
 
-    @Unique
-    private boolean isExperimental$AMS = false;
-
-    @Inject(method = "tick", at = @At("TAIL"))
+    @Inject(method = "tick", at = @At("HEAD"))
     private void checkAndUpdateController(CallbackInfo ci) {
-        AbstractMinecartEntity self = (AbstractMinecartEntity) (Object) this;
-        boolean shouldUseExperimental = AbstractMinecartEntity.areMinecartImprovementsEnabled(self.getWorld());
-
-        if (shouldUseExperimental != isExperimental$AMS) {
-            isExperimental$AMS = shouldUseExperimental;
-
-            if (shouldUseExperimental) {
-                ExperimentalMinecartController newController = new ExperimentalMinecartController(self);
-                BlockPos blockPos = self.getRailOrMinecartPos();
-                BlockState blockState = self.getWorld().getBlockState(blockPos);
-                newController.adjustToRail(blockPos, blockState, true);
-                this.controller = newController;
-            }
-            else {
-                this.controller = new DefaultMinecartController(self);
+        if (AmsServerSettings.minecartImprovementsEnabled != isExperimentalMinecart$AMS) {
+            AbstractMinecartEntity minecart = (AbstractMinecartEntity) (Object) this;
+            isExperimentalMinecart$AMS = AmsServerSettings.minecartImprovementsEnabled;
+            ExperimentalMinecartController experimentalMinecartController = new ExperimentalMinecartController(minecart);
+            DefaultMinecartController defaultMinecartController = new DefaultMinecartController(minecart);
+            if (AmsServerSettings.minecartImprovementsEnabled) {
+                ((AbstractMinecartEntityAccessor) minecart).setController(experimentalMinecartController);
+            } else {
+                ((AbstractMinecartEntityAccessor) minecart).setController(defaultMinecartController);
             }
         }
     }

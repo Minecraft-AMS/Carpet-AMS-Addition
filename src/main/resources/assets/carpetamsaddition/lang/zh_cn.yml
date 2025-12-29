@@ -719,6 +719,8 @@ carpetamsaddition:
           '1': '木桶、雕文书架、合成器、展示架'
       minecartMaxSpeed:
         desc: test
+      minecartImprovementsEnabled:
+        desc: test
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
