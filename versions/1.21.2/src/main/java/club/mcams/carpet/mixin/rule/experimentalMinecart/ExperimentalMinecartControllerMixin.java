@@ -22,25 +22,24 @@ package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
 import club.mcams.carpet.AmsServerSettings;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
 import net.minecraft.entity.vehicle.ExperimentalMinecartController;
-import net.minecraft.server.world.ServerWorld;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21.2")
 @Mixin(value = ExperimentalMinecartController.class, priority = 1024)
 public abstract class ExperimentalMinecartControllerMixin implements MinecartControllerAccessor {
-    @Inject(method = "getMaxSpeed", at = @At("HEAD"), cancellable = true)
-    private void setMaxSpeed(ServerWorld world, CallbackInfoReturnable<Double> cir) {
-        if (AmsServerSettings.minecartMaxSpeed != -1.0D) {
-            double modifySpeed = AmsServerSettings.minecartMaxSpeed * (this.getMinecart().isTouchingWater() ? (double)0.5F : (double)1.0F) / (double)20.0F;
-            cir.setReturnValue(modifySpeed);
-            cir.cancel();
+    @ModifyReturnValue(method = "getMaxSpeed", at = @At("RETURN"))
+    private double setMaxSpeed(double original) {
+        if (AmsServerSettings.minecartMaxSpeed != -1.0D && AmsServerSettings.minecartImprovementsEnabled) {
+            return AmsServerSettings.minecartMaxSpeed * (this.getMinecart().isTouchingWater() ? (double)0.5F : (double)1.0F) / (double)20.0F;
+        } else {
+            return original;
         }
     }
 }

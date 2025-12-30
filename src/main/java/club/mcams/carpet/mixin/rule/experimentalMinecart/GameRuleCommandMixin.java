@@ -20,29 +20,12 @@
 
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
-import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.compat.DummyClass;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-
-import net.minecraft.entity.vehicle.AbstractMinecartEntity;
-
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21.2")
-@Mixin(AbstractMinecartEntity.class)
-public abstract class AbstractMinecartEntityMixin {
-    @Unique
-    private static final boolean ENABLE_FLAG$AMS;
-
-    static {
-        ENABLE_FLAG$AMS = AmsServerSettings.minecartImprovementsEnabled;
-    }
-
-    @ModifyReturnValue(method = "areMinecartImprovementsEnabled", at = @At("RETURN"))
-    private static boolean setExMinecartEnabled(boolean original) {
-        return ENABLE_FLAG$AMS || original;
-    }
-}
+@Mixin(DummyClass.class)
+public abstract class GameRuleCommandMixin {}
