@@ -126,7 +126,6 @@
     "rule.largeEnderChest.PlayerEntityInvoker",
     "rule.largeEnderChest.PlayerEntityMixin",
     "rule.largeEnderChest.SimpleInventoryAccessor",
-    "rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor",
     "rule.largeShulkerBox.ShulkerBoxBlockEntityMixin",
     "rule.largeShulkerBox.ShulkerBoxScreenHandlerMixin",
     "rule.maxChainUpdateDepth.ChainRestrictedNeighborUpdaterAccessor",

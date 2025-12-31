@@ -32,6 +32,7 @@ import net.minecraft.screen.slot.ShulkerBoxSlot;
 import org.jetbrains.annotations.Nullable;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -43,6 +44,12 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         super(type, syncId);
     }
 
+    @Unique
+    private static final boolean ENABLE_FLAG$AMS;
+
+    static {
+        ENABLE_FLAG$AMS = AmsServerSettings.largeShulkerBox;
+    }
     @ModifyArg(
         method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
         at = @At(
@@ -52,7 +59,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         index = 0
     )
     private static ScreenHandlerType<?> getScreenHandlerType(ScreenHandlerType<?> type) {
-        if (!AmsServerSettings.largeShulkerBox) {
+        if (!ENABLE_FLAG$AMS) {
             return type;
         }
         return ScreenHandlerType.GENERIC_9X6;
@@ -67,7 +74,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         index = 1
     )
     private int checkLargerSize(int size) {
-        if (AmsServerSettings.largeShulkerBox) {
+        if (ENABLE_FLAG$AMS) {
             return 9 * 6;
         } else {
             return size;
@@ -87,7 +94,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         )
     )
     protected void addingExtraSlots(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
-        if (AmsServerSettings.largeShulkerBox && this.slots.isEmpty()) {
+        if (ENABLE_FLAG$AMS && this.slots.isEmpty()) {
             for (int row = 3; row < 6; ++row) {
                 for (int column = 0; column < 9; ++column) {
                     this.addSlot(new ShulkerBoxSlot(inventory, column + row * 9, 8 + column * 18, 18 + row * 18));

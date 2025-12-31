@@ -20,12 +20,12 @@
 
 package club.mcams.carpet;
 
+import club.mcams.carpet.observers.rule.NeedRestartServerOrClientObserver;
 import club.mcams.carpet.settings.MustSetDefault;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 //#if MC>=12102
-//$$ import club.mcams.carpet.observers.rule.NeedRestartServerOrClientObserver;
 //$$ import club.mcams.carpet.validators.rule.experimentalMinecartSpeed.MaxSpeedRangeValidator;
 //#endif
 
@@ -33,7 +33,6 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 //$$ import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 //#endif
 import club.mcams.carpet.observers.network.NetworkProtocolObserver;
-import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
 import club.mcams.carpet.observers.recipe.RecipeRuleObserver;
 import club.mcams.carpet.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import club.mcams.carpet.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
@@ -203,9 +202,10 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
+    @MustSetDefault
     @Rule(
         categories = {AMS, FEATURE, EXPERIMENTAL},
-        validators = LargeShulkerBoxRuleObserver.class
+        validators = NeedRestartServerOrClientObserver.class
     )
     public static boolean largeShulkerBox = false;
 

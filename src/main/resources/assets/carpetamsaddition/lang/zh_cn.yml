@@ -353,11 +353,8 @@ carpetamsaddition:
         name: 大潜影盒
         desc: 让潜影盒容量增加一倍（与大箱子相同）
         extra:
-          '0': '使用该规则请遵循以下步骤：'
-          '1': '1 - 确保没有潜影盒被加载'
-          '2': '2 - 输入指令：/carpet setDefault largeShulkerBox true 开启规则'
-          '3': '3 - 重启服务器/单人世界'
-          '4': '4 - 关闭该规则同理'
+          '0': '服务器环境切换该规则设置时需要重启服务器'
+          '1': '客户端环境切换该规则设置时需要重启客户端'
       maxPlayerBlockInteractionRange:
         name: 最大玩家方块交互距离
         desc: 更改服务器允许玩家与方块的最大交互距离，设置为“-1”禁用该规则

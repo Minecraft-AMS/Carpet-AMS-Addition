@@ -320,11 +320,8 @@ carpetamsaddition:
       largeShulkerBox:
         desc: Doubles the size of your ShulkerBox
         extra:
-          '0': 'To use this rule, please follow the steps below:'
-          '1': '1 - To ensure that no shulker boxes are loaded'
-          '2': '2 - Enter the command: /carpet setDefault largeShulkerBox true, to turn on the rule'
-          '3': '3 - Restart the server/single-player world'
-          '4': '4 - Disabling the rule follows the same process'
+          '0': 'When the server environment switches the rule setting, the server needs to be restarted'
+          '1': 'When the client environment switches the rule settings, the client needs to be restarted'
       maxPlayerBlockInteractionRange:
         desc: Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule
         extra:

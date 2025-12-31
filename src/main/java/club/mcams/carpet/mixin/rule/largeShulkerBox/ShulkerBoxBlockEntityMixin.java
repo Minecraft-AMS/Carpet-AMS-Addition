@@ -52,11 +52,15 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     }
     //#endif
 
-    @Shadow
-    private DefaultedList<ItemStack> inventory;
+    @Unique
+    private static final boolean ENABLE_FLAG$AMS;
+
+    static {
+        ENABLE_FLAG$AMS = AmsServerSettings.largeShulkerBox;
+    }
 
     @Shadow
-    public abstract int size();
+    private DefaultedList<ItemStack> inventory;
 
     //#if MC<11700
     //$$ @Inject(method = "<init>()V", at = @At("RETURN"))
@@ -64,7 +68,9 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Inject(method = "<init>(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
     private void init1(CallbackInfo ci) {
-        this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
+        if (ENABLE_FLAG$AMS) {
+            this.inventory = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
+        }
     }
 
     //#if MC<11700
@@ -73,12 +79,14 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Inject(method = "<init>(Lnet/minecraft/util/DyeColor;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
     private void init2(CallbackInfo ci) {
-        this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
+        if (ENABLE_FLAG$AMS) {
+            this.inventory = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
+        }
     }
 
     @Inject(method = "size", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.largeShulkerBox) {
+        if (ENABLE_FLAG$AMS) {
             cir.setReturnValue(9 * 6);
             cir.cancel();
         }
@@ -86,8 +94,8 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
 
     @Inject(method = "getAvailableSlots", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
-        if (AmsServerSettings.largeShulkerBox) {
-            int[] availableSlots = IntStream.range(0, size()).toArray();
+        if (ENABLE_FLAG$AMS) {
+            int[] availableSlots = IntStream.range(0, 9 * 6).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();
         }
