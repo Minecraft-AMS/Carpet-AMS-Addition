@@ -20,6 +20,8 @@ carpetamsaddition:
       copy: '复制坐标到剪切板'
     phantomSpawnAlert:
       msg: '§b<phantomSpawnAlert> §r§e%s §r§d召唤了幻翼 §r§e@ §r§a[ %s ]'
+    experimentalMinecartSpeed:
+      vanilla_command_disabled: '<Carpet AMS Addition> 该游戏规则已由 minecartMaxSpeed 地毯规则接管'
 
   command:
     commandHelper:
@@ -197,6 +199,9 @@ carpetamsaddition:
       switch_tip: '侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
     amsNetworkProtocol:
       need_enable_protocol: '[Carpet AMS Addition] 使用%s规则需要启用amsNetworkProtocol规则才能生效'
+    need_restart_server_or_client:
+      is_client_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启客户端后生效'
+      is_server_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启服务器后生效'
 
   fuzz:
     command:
@@ -717,10 +722,17 @@ carpetamsaddition:
         extra:
           '0': '受影响的方块:'
           '1': '木桶、雕文书架、合成器、展示架'
-      minecartMaxSpeed:
-        desc: test
-      minecartImprovementsEnabled:
-        desc: test
+      experimentalMinecartSpeed:
+        name: 实验性矿车速度
+        desc: 设置实验性矿车的速度
+        extra:
+          '0': '启用该规则将覆盖游戏规则'
+      experimentalMinecartEnabled:
+        name: 启用实验性矿车
+        desc: 启用实验性矿车（需客户端支持以确保矿车渲染正常）
+        extra:
+          '0': '服务器环境切换该规则设置时需要重启服务器'
+          '1': '客户端环境切换该规则设置时需要重启客户端'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

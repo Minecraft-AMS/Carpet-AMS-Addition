@@ -40,7 +40,7 @@ public abstract class FeatureSetMixin {
     private static final boolean ENABLE_FLAG$AMS;
 
     static {
-        ENABLE_FLAG$AMS = AmsServerSettings.minecartImprovementsEnabled;
+        ENABLE_FLAG$AMS = AmsServerSettings.experimentalMinecartEnabled;
     }
 
     @ModifyReturnValue(method = "contains", at = @At("RETURN"))

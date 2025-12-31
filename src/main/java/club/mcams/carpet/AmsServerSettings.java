@@ -26,6 +26,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 //#if MC>=12002
 //$$ import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
+//$$ import club.mcams.carpet.observers.rule.NeedRestartServerOrClientObserver;
 //#endif
 import club.mcams.carpet.observers.network.NetworkProtocolObserver;
 import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
@@ -640,13 +641,16 @@ public class AmsServerSettings {
     //$$     options = {"-1", "1000"},
     //$$     strict = false
     //$$ )
-    //$$ public static double minecartMaxSpeed = -1.0D;
+    //$$ public static double experimentalMinecartSpeed = -1.0D;
     //#endif
 
     //#if MC>=12102
     //$$ @MustSetDefault
-    //$$ @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
-    //$$ public static boolean minecartImprovementsEnabled = false;
+    //$$ @Rule(
+    //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
+    //$$     validators = NeedRestartServerOrClientObserver.class
+    //$$ )
+    //$$ public static boolean experimentalMinecartEnabled = false;
     //#endif
 
     /*

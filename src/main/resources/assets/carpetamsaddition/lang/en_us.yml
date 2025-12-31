@@ -20,6 +20,8 @@ carpetamsaddition:
       copy: 'copy coord to clipboard'
     phantomSpawnAlert:
       msg: '§b<phantomSpawnAlert> §r§e%s §r§dsummoned phantoms §r§e@ §r§a[ %s ]'
+    experimentalMinecartSpeed:
+      vanilla_command_disabled: '<Carpet AMS Addition> The rules of the game have been taken over by the minecartMaxSpeed carpet rules'
 
   command:
     commandHelper:
@@ -197,6 +199,9 @@ carpetamsaddition:
       switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
     amsNetworkProtocol:
       need_enable_protocol: '[Carpet AMS Addition] Using the %s rule requires enabling the amsNetworkProtocol rule to take effect'
+    need_restart_server_or_client:
+      is_client_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the client'
+      is_server_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the server'
 
   fuzz:
     command:
@@ -590,10 +595,15 @@ carpetamsaddition:
         extra:
           '0': 'Affected blocks:'
           '1': 'barrel, chiseled_bookshelf, crafter, shelf'
-      minecartMaxSpeed:
-        desc: test
-      minecartImprovementsEnabled:
-        desc: test
+      experimentalMinecartSpeed:
+        desc: Set the speed of the experimental minecart
+        extra:
+          '0': 'Enabling this rule will override the game rules'
+      experimentalMinecartEnabled:
+        desc: Enable experimental minecarts (Client support is required to ensure that the minecart renders correctly)
+        extra:
+          '0': 'When the server environment switches the rule setting, the server needs to be restarted'
+          '1': 'When the client environment switches the rule settings, the client needs to be restarted'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

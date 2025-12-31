@@ -38,7 +38,7 @@ public abstract class AbstractMinecartEntityMixin {
     private static final boolean ENABLE_FLAG$AMS;
 
     static {
-        ENABLE_FLAG$AMS = AmsServerSettings.minecartImprovementsEnabled;
+        ENABLE_FLAG$AMS = AmsServerSettings.experimentalMinecartEnabled;
     }
 
     @ModifyReturnValue(method = "areMinecartImprovementsEnabled", at = @At("RETURN"))

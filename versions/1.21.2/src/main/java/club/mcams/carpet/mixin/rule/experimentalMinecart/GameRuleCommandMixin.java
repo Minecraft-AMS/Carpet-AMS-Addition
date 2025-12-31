@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.context.CommandContext;
@@ -34,12 +35,16 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.GameRules;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = GameRuleCommand.class, priority = 1024)
 public abstract class GameRuleCommandMixin {
+    @Unique
+    private static final Translator tr = new Translator("rule.experimentalMinecartSpeed");
+
     @Inject(method = "executeSet", at = @At("HEAD"), cancellable = true)
     private static void onSet(
         CommandContext<ServerCommandSource> context,
@@ -50,8 +55,8 @@ public abstract class GameRuleCommandMixin {
         //#endif
         CallbackInfoReturnable<Integer> cir
     ) {
-        if (AmsServerSettings.minecartImprovementsEnabled && AmsServerSettings.minecartMaxSpeed != -1.0D && key.equals(GameRules.MINECART_MAX_SPEED)) {
-            Messenger.tell(context.getSource(), Messenger.s("<Carpet AMS Addition> 该游戏规则已由 minecartMaxSpeed 地毯规则接管", Formatting.RED));
+        if (AmsServerSettings.experimentalMinecartEnabled && AmsServerSettings.experimentalMinecartSpeed != -1.0D && key.equals(GameRules.MINECART_MAX_SPEED)) {
+            Messenger.tell(context.getSource(), Messenger.formatting(tr.tr("vanilla_command_disabled"), Formatting.RED));
             cir.setReturnValue(0);
             cir.cancel();
         }

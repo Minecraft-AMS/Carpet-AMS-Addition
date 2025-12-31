@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,14 +18,25 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.settings;
+package club.mcams.carpet.helpers;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface MustSetDefault {
+public class EnvironmentHelper {
+    private static final EnvType ENV_TYPE = FabricLoader.getInstance().getEnvironmentType();
+    private static final Boolean IS_CLIENT = ENV_TYPE.equals(EnvType.CLIENT);
+    private static final Boolean IS_SERVER = ENV_TYPE.equals(EnvType.SERVER);
+
+    public static boolean isClient() {
+        return IS_CLIENT;
+    }
+
+    public static boolean isServer() {
+        return IS_SERVER;
+    }
+
+    public static EnvType getEnvType() {
+        return ENV_TYPE;
+    }
 }
