@@ -44,6 +44,6 @@ public class MinecraftClientUtil {
     }
 
     public static int getClientFps() {
-        return ((MinecraftClientAccessor) getCurrentClient()).getCurrentFps();
+        return MinecraftClientAccessor.getCurrentFps();
     }
 }
