@@ -20,6 +20,8 @@
 
 package club.mcams.carpet;
 
+import club.mcams.carpet.settings.MustSetDefault;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 //#if MC>=12002
@@ -46,10 +48,15 @@ import club.mcams.carpet.validators.rule.renewableNetherScrap.DropRateValidator;
 import club.mcams.carpet.settings.Rule;
 import club.mcams.carpet.settings.RecipeRule;
 
+import java.lang.reflect.Field;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static carpet.settings.RuleCategory.*;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
 public class AmsServerSettings {
+    public static final Set<String> MUST_SET_DEFAULT_RULES = new LinkedHashSet<>();
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean superBow = false;
@@ -627,11 +634,20 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean flippinCactusExtras = false;
 
-    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
-    public static double minecartMaxSpeed = -1.0D;
+    //#if MC>=12102
+    //$$ @Rule(
+    //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
+    //$$     options = {"-1", "1000"},
+    //$$     strict = false
+    //$$ )
+    //$$ public static double minecartMaxSpeed = -1.0D;
+    //#endif
 
-    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
-    public static boolean minecartImprovementsEnabled = false;
+    //#if MC>=12102
+    //$$ @MustSetDefault
+    //$$ @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    //$$ public static boolean minecartImprovementsEnabled = false;
+    //#endif
 
     /*
      * AMS网络协议规则
@@ -790,4 +806,12 @@ public class AmsServerSettings {
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
     public static boolean testRule = false;
+
+    static {
+        for (Field field : AmsServerSettings.class.getDeclaredFields()) {
+            if (field.isAnnotationPresent(MustSetDefault.class)) {
+                MUST_SET_DEFAULT_RULES.add(field.getName());
+            }
+        }
+    }
 }

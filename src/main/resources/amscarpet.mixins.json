@@ -9,6 +9,7 @@
     "carpet.SettingsManagerMixin",
     "hooks.recipe.RecipeManagerMixin",
     "hooks.server.MinecraftServerMixin",
+    "hooks.settings.Carpet_SettingsManagerMixin",
     "network.CustomPayloadC2SPacketAccessor",
     "network.CustomPayloadC2SPacketMixin",
     "network.CustomPayloadS2CPacketAccessor",
