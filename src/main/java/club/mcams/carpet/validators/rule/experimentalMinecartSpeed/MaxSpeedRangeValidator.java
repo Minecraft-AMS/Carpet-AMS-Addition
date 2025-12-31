@@ -16,7 +16,7 @@ public class MaxSpeedRangeValidator extends Validator<Integer> {
 
     @Override
     public Integer validate(ServerCommandSource serverCommandSource, ParsedRule<Integer> parsedRule, Integer integer, String s) {
-        return integer >= 1 && integer <= 300 ? integer : null;
+        return integer >= -1 && integer <= 1000 ? integer : null;
     }
 
     @Override
