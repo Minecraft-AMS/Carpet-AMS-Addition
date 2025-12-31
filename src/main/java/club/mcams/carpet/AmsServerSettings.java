@@ -24,9 +24,13 @@ import club.mcams.carpet.settings.MustSetDefault;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+//#if MC>=12102
+//$$ import club.mcams.carpet.observers.rule.NeedRestartServerOrClientObserver;
+//$$ import club.mcams.carpet.validators.rule.experimentalMinecartSpeed.MaxSpeedRangeValidator;
+//#endif
+
 //#if MC>=12002
 //$$ import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
-//$$ import club.mcams.carpet.observers.rule.NeedRestartServerOrClientObserver;
 //#endif
 import club.mcams.carpet.observers.network.NetworkProtocolObserver;
 import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
@@ -639,9 +643,10 @@ public class AmsServerSettings {
     //$$ @Rule(
     //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
     //$$     options = {"-1", "1000"},
+    //$$     validators = MaxSpeedRangeValidator.class,
     //$$     strict = false
     //$$ )
-    //$$ public static double experimentalMinecartSpeed = -1.0D;
+    //$$ public static int experimentalMinecartSpeed = -1;
     //#endif
 
     //#if MC>=12102

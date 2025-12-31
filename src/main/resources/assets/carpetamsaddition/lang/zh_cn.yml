@@ -202,6 +202,8 @@ carpetamsaddition:
     need_restart_server_or_client:
       is_client_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启客户端后生效'
       is_server_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启服务器后生效'
+    experimentalMinecartSpeed:
+      value_range: '设定的值必须为 0 - 1000 或 -1'
 
   fuzz:
     command:

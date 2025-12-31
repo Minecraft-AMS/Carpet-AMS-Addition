@@ -202,6 +202,8 @@ carpetamsaddition:
     need_restart_server_or_client:
       is_client_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the client'
       is_server_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the server'
+    experimentalMinecartSpeed:
+      value_range: 'The value must be 0 - 1000 or -1'
 
   fuzz:
     command:
