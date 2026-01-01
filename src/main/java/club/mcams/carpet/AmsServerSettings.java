@@ -812,9 +812,17 @@ public class AmsServerSettings {
         ALL
     }
 
+    public enum translationSides {
+        CLIENT,
+        SERVER
+    }
+
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
     public static boolean testRule = false;
+
+    @Rule(categories = AMS)
+    public static translationSides amsTranslationSide = translationSides.CLIENT;
 
     static {
         for (Field field : AmsServerSettings.class.getDeclaredFields()) {

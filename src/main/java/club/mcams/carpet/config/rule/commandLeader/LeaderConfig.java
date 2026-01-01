@@ -27,8 +27,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.WorldSavePath;
 
 import java.nio.file.Path;
+import java.util.UUID;
 
-public class LeaderConfig extends AbstractMapJsonConfig<String, String> {
+public class LeaderConfig extends AbstractMapJsonConfig<String, UUID> {
     private static final LeaderConfig INSTANCE = new LeaderConfig();
 
     public LeaderConfig() {
@@ -45,8 +46,8 @@ public class LeaderConfig extends AbstractMapJsonConfig<String, String> {
     }
 
     @Override
-    protected Class<String> getValueType() {
-        return String.class;
+    protected Class<UUID> getValueType() {
+        return UUID.class;
     }
 
     private static Path getConfigPath(MinecraftServer server) {

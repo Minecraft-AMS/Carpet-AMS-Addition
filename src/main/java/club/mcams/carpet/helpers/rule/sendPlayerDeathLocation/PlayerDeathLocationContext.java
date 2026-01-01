@@ -23,29 +23,27 @@ package club.mcams.carpet.helpers.rule.sendPlayerDeathLocation;
 import club.mcams.carpet.helpers.FakePlayerHelper;
 import club.mcams.carpet.fuzz.InvokeFuzzModCommand;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
-import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Style;
+import net.minecraft.text.BaseText;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 
 public class PlayerDeathLocationContext {
-    private static final Translator translator = new Translator("rule.sendPlayerDeathLocation");
+    private static final Translator tr = new Translator("rule.sendPlayerDeathLocation");
 
     public static void sendMessage(MinecraftServer server, ServerPlayerEntity player, World world) {
         final Text copyButton = copyButton(player);
         String message = formatMessage(player, world);
-        Messenger.sendServerMessage(
-            server, Messenger.s(message).formatted(Formatting.RED)
-            .append(copyButton)
-            .append(InvokeFuzzModCommand.highlightCoordButton(getPlayerPos(player).replace(",", "")))
-        );
+        Messenger.sendServerMessage(server, Messenger.c(
+                Messenger.f(Messenger.s(message), Layout.RED),
+                copyButton,
+                InvokeFuzzModCommand.highlightCoordButton(getPlayerPos(player).replace(",", ""))
+        ));
     }
 
     public static void realPlayerSendMessage(MinecraftServer server, ServerPlayerEntity player, World world) {
@@ -72,16 +70,10 @@ public class PlayerDeathLocationContext {
         return player.getBlockPos().getX() + ", " + player.getBlockPos().getY() + ", " + player.getBlockPos().getZ();
     }
 
-    private static Text copyButton(ServerPlayerEntity player) {
-        Text hoverText = Messenger.s(translator.tr("copy")).formatted(Formatting.YELLOW);
+    private static BaseText copyButton(ServerPlayerEntity player) {
+        BaseText hoverText = Messenger.f(tr.tr("copy"), Layout.YELLOW);
         String copyCoordText = getPlayerPos(player).replace(",", ""); // 1, 0, -24 -> 1 0 -24
-
-        return
-            Messenger.s(" [C]").setStyle(
-            Style.EMPTY.withColor(Formatting.GREEN).withBold(true).
-            withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
-            withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
-        );
+        return Messenger.f((BaseText) Messenger.s(" [C]").setStyle(Messenger.simpleCopyButtonStyle(copyCoordText, hoverText, Layout.YELLOW)), Layout.GREEN, Layout.BOLD);
     }
 
     // Alex 死亡位置 @ minecraft:overworld -> [ 888, 20, 999 ]
@@ -91,7 +83,7 @@ public class PlayerDeathLocationContext {
         return String.format(
             "%s %s @ %s -> [ %s ]",
             playerName,
-            translator.tr("location").getString(),
+            tr.tr("location").getString(),
             dimension,
             getPlayerPos(player)
         );

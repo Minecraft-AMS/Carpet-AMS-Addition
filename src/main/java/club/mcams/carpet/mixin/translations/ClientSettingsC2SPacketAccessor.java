@@ -18,29 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.validators.rule.experimentalMinecartSpeed;
+package club.mcams.carpet.mixin.translations;
 
-import carpet.settings.ParsedRule;
-import carpet.settings.Validator;
+import club.mcams.carpet.utils.compat.DummyInterface;
 
-import club.mcams.carpet.translations.Translator;
-
-import net.minecraft.server.command.ServerCommandSource;
+import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.21.2")
-@SuppressWarnings("unused")
-public class MaxSpeedRangeValidator extends Validator<Integer> {
-    private static final Translator translator = new Translator("validator.experimentalMinecartSpeed");
-
-    @Override
-    public Integer validate(ServerCommandSource serverCommandSource, ParsedRule<Integer> parsedRule, Integer integer, String s) {
-        return integer >= -1 && integer <= 1000 ? integer : null;
-    }
-
-    @Override
-    public String description() {
-        return translator.tr("value_range").getString();
-    }
-}
+@GameVersion(version = "Minecraft < 1.18")
+@Mixin(DummyInterface.class)
+public interface ClientSettingsC2SPacketAccessor {}

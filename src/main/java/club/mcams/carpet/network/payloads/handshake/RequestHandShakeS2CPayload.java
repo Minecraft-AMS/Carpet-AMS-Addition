@@ -54,7 +54,7 @@ public class RequestHandShakeS2CPayload extends AMS_CustomPayload {
             ClientPlayerEntity player = MinecraftClientUtil.getCurrentPlayer();
             String modVersion = AmsClient.getVersion();
             UUID uuid = player.getUuid();
-            NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(modVersion, uuid));
+            NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(modVersion, uuid), NetworkUtil.SendMode.FORCE);
         });
     }
 

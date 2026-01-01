@@ -23,11 +23,14 @@ package club.mcams.carpet.translations;
 import carpet.CarpetSettings;
 
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.FileUtil;
+import club.mcams.carpet.utils.Messenger;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.*;
 
 import org.jetbrains.annotations.NotNull;
@@ -110,5 +113,79 @@ public class AMSTranslations {
     @Nullable
     public static String translateKeyToFormattedString(String lang, String key) {
         return getTranslation(lang).get(key);
+    }
+
+    public static BaseText translate(BaseText text, ServerPlayerEntity player) {
+        if (!(player instanceof ServerPlayerEntityWithClientLanguage)) {
+            return text;
+        }
+
+        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS();
+        String serverLang = AMSTranslations.getServerLanguage();
+
+        if (AmsServerSettings.amsTranslationSide == AmsServerSettings.translationSides.SERVER) {
+            return translateTextComponent(text, serverLang);
+        }
+
+        return translateTextComponent(text, clientLang);
+    }
+
+    @SuppressWarnings("PatternVariableCanBeUsed")
+    @NotNull
+    private static BaseText translateTextComponent(@NotNull BaseText text, String lang) {
+        //#if MC>=11900
+        //$$ if (text.getContent() instanceof TranslatableTextContent) {
+        //$$     TranslatableTextContent translatableContents = (TranslatableTextContent) text.getContent();
+        //#else
+        if (text instanceof TranslatableText) {
+            TranslatableText translatableContents = (TranslatableText) text;
+            //#endif
+            String key = translatableContents.getKey();
+
+            if (key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
+
+                String translated = translateKeyToFormattedString(lang, key);
+
+                if (translated != null && !translated.equals(key)) {
+                    Object[] args = translatableContents.getArgs();
+                    if (args.length > 0) {
+                        Object[] translatedArgs = new Object[args.length];
+                        for (int i = 0; i < args.length; i++) {
+                            if (args[i] instanceof BaseText) {
+                                translatedArgs[i] = translateTextComponent((BaseText) args[i], lang);
+                            } else {
+                                translatedArgs[i] = args[i];
+                            }
+                        }
+                        translated = String.format(translated, translatedArgs);
+                    }
+
+                    BaseText newComponent = (BaseText) Messenger.s(translated).setStyle(text.getStyle());
+
+                    for (Text sibling : text.getSiblings()) {
+                        if (sibling instanceof BaseText) {
+                            newComponent.append(translateTextComponent((BaseText) sibling, lang));
+                        } else {
+                            newComponent.append(sibling);
+                        }
+                    }
+
+                    return newComponent;
+                }
+            }
+        }
+
+        BaseText result = Messenger.copy(text);
+        result.getSiblings().clear();
+
+        for (Text sibling : text.getSiblings()) {
+            if (sibling instanceof BaseText) {
+                result.append(translateTextComponent((BaseText) sibling, lang));
+            } else {
+                result.append(sibling);
+            }
+        }
+
+        return result;
     }
 }

@@ -51,7 +51,7 @@ public abstract class WorldMixin {
         if (!AmsServerSettings.amsUpdateSuppressionCrashFix.equals("false") && UpdateSuppressionException.isUpdateSuppression(original)) {
             World world = (World) (Object) this;
             UpdateSuppressionContext.sendMessageToServer(sourcePos, world, original);
-            return new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(sourcePos, world, original));
+            return new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(sourcePos, world, original).getString());
         } else {
             return original;
         }

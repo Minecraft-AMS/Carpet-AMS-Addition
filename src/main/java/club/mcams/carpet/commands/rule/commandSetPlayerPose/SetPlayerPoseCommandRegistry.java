@@ -23,6 +23,7 @@ package club.mcams.carpet.commands.rule.commandSetPlayerPose;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.translations.Translator;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.commands.suggestionProviders.ListSuggestionProvider;
@@ -31,13 +32,10 @@ import club.mcams.carpet.network.payloads.rule.commandSetPlayerPose.UpdatePlayer
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.Formatting;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -53,45 +51,60 @@ public class SetPlayerPoseCommandRegistry {
         dispatcher.register(
             CommandManager.literal("playerPose")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandSetPlayerPose))
+            // playerPose <player> set <pose>
             .then(CommandManager.argument("player", EntityArgumentType.player())
             .then(CommandManager.literal("set")
             .then(CommandManager.argument("pose", StringArgumentType.greedyString())
             .suggests(ListSuggestionProvider.of(POSE))
             .executes(ctx -> set(
-                EntityArgumentType.getPlayer(ctx, "player"), ctx.getSource().getServer(), StringArgumentType.getString(ctx, "pose")
+                EntityArgumentType.getPlayer(ctx, "player"), StringArgumentType.getString(ctx, "pose")
             )))))
+
+            // playerPose <player> stop
             .then(CommandManager.argument("player", EntityArgumentType.player())
             .then(CommandManager.literal("stop")
             .executes(ctx -> stop(
-                EntityArgumentType.getPlayer(ctx, "player"), ctx.getSource().getServer()
+                EntityArgumentType.getPlayer(ctx, "player")
             ))))
+
+            // help
             .then(CommandManager.literal("help")
             .executes(ctx -> help(ctx.getSource())))
         );
     }
 
-    private static int set(ServerPlayerEntity targetPlayer, MinecraftServer server, String pose) {
+    private static int set(ServerPlayerEntity targetPlayer, String pose) {
         DO_POSE_MAP.put(targetPlayer.getUuid(), pose);
         targetPlayer.setSneaking(true);
         triggerPoseUpdate(targetPlayer);
-        broadcastSyncDatapack(targetPlayer, server);
+        broadcastSyncDatapack(targetPlayer);
         return 1;
     }
 
-    private static int stop(ServerPlayerEntity targetPlayer, MinecraftServer server) {
+    private static int stop(ServerPlayerEntity targetPlayer) {
         DO_POSE_MAP.remove(targetPlayer.getUuid());
         triggerPoseUpdate(targetPlayer);
-        broadcastSyncDatapack(targetPlayer, server);
+        broadcastSyncDatapack(targetPlayer);
         return 1;
     }
 
     private static int help(ServerCommandSource source) {
-        Messenger.tell(source, Messenger.formatting((BaseText) tr.tr("set_help").append(Messenger.endl()).append(tr.tr("stop_help")), Formatting.GRAY));
+        Messenger.tell(
+            source, Messenger.f(
+                Messenger.c(
+                    tr.tr("set_help"),
+                    Messenger.endl(),
+                    tr.tr("stop_help"),
+                    Messenger.endl()
+                ), Layout.GRAY
+            )
+        );
+
         return 1;
     }
 
-    private static void broadcastSyncDatapack(ServerPlayerEntity targetPlayer, MinecraftServer server) {
-        NetworkUtil.broadcastDataPack(server, UpdatePlayerPosePayload_S2C.create(DO_POSE_MAP, targetPlayer.getUuid()));
+    private static void broadcastSyncDatapack(ServerPlayerEntity targetPlayer) {
+        NetworkUtil.broadcastDataPack(UpdatePlayerPosePayload_S2C.create(DO_POSE_MAP, targetPlayer.getUuid()), NetworkUtil.SendMode.NEED_SUPPORT);
     }
 
     private static void triggerPoseUpdate(ServerPlayerEntity targetPlayer) {

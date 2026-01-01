@@ -22,6 +22,7 @@ package club.mcams.carpet.observers.network;
 
 import carpet.settings.ParsedRule;
 
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
@@ -29,7 +30,6 @@ import club.mcams.carpet.settings.SimpleRuleObserver;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.util.Formatting;
 
 public class NetworkProtocolObserver extends SimpleRuleObserver<Object> {
     private final Translator tr = new Translator("validator.amsNetworkProtocol");
@@ -37,7 +37,7 @@ public class NetworkProtocolObserver extends SimpleRuleObserver<Object> {
     @Override
     public void onValueChange(ServerCommandSource source, ParsedRule<Object> rule, Object oldValue, Object newValue) {
         if (!AmsServerSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning()) {
-            Messenger.tell(source, Messenger.formatting(tr.tr("need_enable_protocol", getRuleName(rule)), Formatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", getRuleName(rule)), Layout.YELLOW));
         }
     }
 }

@@ -29,7 +29,6 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.network.MessageType;
-import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;
 import net.minecraft.network.packet.s2c.play.TitleS2CPacket;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -74,7 +73,7 @@ public class AtCommandRegistry {
 
         Messenger.sendServerMessage(
             MinecraftServerUtil.getServer(),
-            Messenger.s(String.format("%s @ %s", PlayerUtil.getName(sourcePlayer), PlayerUtil.getName(targetPlayer))).formatted(Formatting.GRAY)
+            Messenger.f(Messenger.s(String.format("%s @ %s", PlayerUtil.getName(sourcePlayer), PlayerUtil.getName(targetPlayer))), Layout.GRAY)
         );
 
         return 1;

@@ -22,13 +22,13 @@ package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.context.CommandContext;
 
 import net.minecraft.server.command.GameRuleCommand;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.util.Formatting;
 //#if MC>=12111
 //$$ import net.minecraft.world.rule.GameRule;
 //#endif
@@ -56,7 +56,7 @@ public abstract class GameRuleCommandMixin {
         CallbackInfoReturnable<Integer> cir
     ) {
         if (AmsServerSettings.experimentalMinecartEnabled && AmsServerSettings.experimentalMinecartSpeed != -1.0D && key.equals(GameRules.MINECART_MAX_SPEED)) {
-            Messenger.tell(context.getSource(), Messenger.formatting(tr.tr("vanilla_command_disabled"), Formatting.RED));
+            Messenger.tell(context.getSource(), Messenger.f(tr.tr("vanilla_command_disabled"), Layout.RED));
             cir.setReturnValue(0);
             cir.cancel();
         }

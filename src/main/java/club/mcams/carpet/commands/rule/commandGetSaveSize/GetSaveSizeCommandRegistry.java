@@ -24,6 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.utils.EntityUtil;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -32,67 +33,57 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.Style;
-import net.minecraft.util.Formatting;
+import net.minecraft.text.BaseText;
 import net.minecraft.util.WorldSavePath;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.Objects;
 
 public class GetSaveSizeCommandRegistry {
-    private static final Translator translator = new Translator("command.getSaveSize");
+    private static final Translator tr = new Translator("command.getSaveSize");
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         dispatcher.register(
             CommandManager.literal("getSaveSize")
             .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandGetSaveSize))
-            .executes(context -> executeGetSaveSize(context.getSource().getPlayer()))
+            .executes(context -> executeGetSaveSize(context.getSource(), context.getSource().getPlayer()))
         );
     }
 
-    private static int executeGetSaveSize(PlayerEntity player) {
+    private static int executeGetSaveSize(ServerCommandSource source, PlayerEntity player) {
         MinecraftServer server = EntityUtil.getEntityServer(player);
-        saveWorld(server, player);
+        saveWorld(source, server);
         long size = getFolderSize(getSaveFolder(server));
         String sizeString = formatSize(size);
-        player.sendMessage(
-            Messenger.s(
-                String.format(
-                    "§e%s §a§l§n%s",
-                    translator.tr("size_msg").getString(),
-                    sizeString
-                )
-            ), false
-        );
+
+        Messenger.tell(source, Messenger.s(String.format("§e%s §a§l§n%s", tr.tr("size_msg").getString(), sizeString)));
+
         return 1;
     }
 
-    private static void saveWorld(MinecraftServer server, PlayerEntity player) {
+    private static void saveWorld(ServerCommandSource source, MinecraftServer server) {
         if (server != null) {
-            String saveAllMessage;
-            final String SUCCESS_MSG = translator.tr("save_success_msg").getString();
-            final String FAIL_MSG = translator.tr("save_fail_msg").getString();
             //#if MC>=11800
             boolean saveAllSuccess = server.saveAll(false, true, true);
             //#else
             //$$ boolean saveAllSuccess = server.save(false, true, true);
             //#endif
-            saveAllMessage = saveAllSuccess ? SUCCESS_MSG : FAIL_MSG;
-            player.sendMessage(
-                Messenger.s(saveAllMessage).
-                setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
-                false
-            );
+            BaseText message = saveAllSuccess ? tr.tr("save_success_msg") : tr.tr("save_fail_msg");
+            Messenger.tell(source, Messenger.f(message, Layout.GRAY));
         }
     }
 
+    @NotNull
     private static File getSaveFolder(MinecraftServer server) {
         return Objects.requireNonNull(server).getSavePath(WorldSavePath.ROOT).toFile();
     }
 
-    private static long getFolderSize(File folder) {
+    private static long getFolderSize(@NotNull File folder) {
         long length = 0;
         File[] files = folder.listFiles();
+
         if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
@@ -102,9 +93,11 @@ public class GetSaveSizeCommandRegistry {
                 }
             }
         }
+
         return length;
     }
 
+    @NotNull
     private static String formatSize(long size) {
         double sizeGB = size / (1024.0 * 1024.0 * 1024.0);
         return String.format("%.3f GB", sizeGB);

@@ -216,6 +216,9 @@
     "rule.witchRedstoneDustDropController_witchGlowstoneDustDropController.LivingEntityMixin",
     "setting.ParsedRuleAccessor",
     "setting.SettingsManagerAccessor",
+    "translations.ClientSettingsC2SPacketAccessor",
+    "translations.HUDControllerMixin",
+    "translations.ServerPlayerEntityMixin",
     "translations.TranslatableTextMixin"
   ],
   "client": [

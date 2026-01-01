@@ -25,11 +25,11 @@ import carpet.settings.ParsedRule;
 import club.mcams.carpet.helpers.EnvironmentHelper;
 import club.mcams.carpet.settings.RuleObserver;
 import club.mcams.carpet.translations.Translator;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.BaseText;
-import net.minecraft.util.Formatting;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
@@ -49,7 +49,7 @@ public class NeedRestartServerOrClientObserver extends RuleObserver<Object> {
         }
 
         if (message != null && source != null) {
-            Messenger.tell(source, Messenger.formatting(message, Formatting.YELLOW));
+            Messenger.tell(source, Messenger.f(message, Layout.YELLOW));
         }
     }
 }

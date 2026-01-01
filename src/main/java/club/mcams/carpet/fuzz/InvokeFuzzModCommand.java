@@ -21,23 +21,20 @@
 package club.mcams.carpet.fuzz;
 
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
-import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.text.BaseText;
+
+import org.jetbrains.annotations.NotNull;
 
 public class InvokeFuzzModCommand {
-    public static Text highlightCoordButton(String posText) {
-        final Text hoverText = new Translator("fuzz").tr("command.highlightCoordButtonHoverText").formatted(Formatting.YELLOW);
+    private static final Translator tr = new Translator("fuzz.command");
 
-        return
-            Messenger.s(" [+H]").setStyle(
-                Style.EMPTY.withColor(Formatting.YELLOW).withBold(true).
-                withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, "/coordCompass set " + posText.replace(",", ""))).
-                withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
-            );
+    @NotNull
+    public static BaseText highlightCoordButton(String posText) {
+        String cmd = "/coordCompass set " + posText.replace(",", "");
+
+        return Messenger.f((BaseText) Messenger.s(" [+H]").setStyle(Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), Layout.YELLOW)), Layout.YELLOW, Layout.BOLD);
     }
 }

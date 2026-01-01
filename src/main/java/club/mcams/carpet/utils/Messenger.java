@@ -20,38 +20,48 @@
 
 package club.mcams.carpet.utils;
 
+import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
+import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 import club.mcams.carpet.utils.compat.MessengerCompatFactory;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.text.*;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class Messenger {
-    // Compound Text
     public static BaseText c(Object... fields) {
         return MessengerCompatFactory.CarpetCompoundText(fields);
     }
 
-    // Simple Text
     public static BaseText s(Object text) {
         return MessengerCompatFactory.LiteralText(text.toString());
     }
 
-    // Simple Text with formatting
-    public static BaseText s(Object text, Formatting textFormatting) {
-        return formatting(s(text), textFormatting);
+    @NotNull
+    public static BaseText f(BaseText text, Layout... formattings) {
+        Formatting[] chatFormattings = new Formatting[formattings.length];
+
+        for (int i = 0; i < formattings.length; i++) {
+            chatFormattings[i] = formattings[i].getFormatting();
+        }
+
+        return (BaseText) text.formatted(chatFormattings);
     }
 
-    // Translation Text
     public static BaseText tr(String key, Object... args) {
         return MessengerCompatFactory.TranslatableText(key, args);
     }
 
+    @NotNull
     public static BaseText copy(BaseText text) {
-        return (BaseText) text.shallowCopy();
+        return text.copy();
     }
 
     private static void __tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
@@ -66,18 +76,48 @@ public class Messenger {
         tell(source, text, false);
     }
 
-    public static Text endl() {
+    public static void tell(PlayerEntity player, BaseText text, Boolean overlay) {
+        player.sendMessage(text, overlay);
+    }
+
+    public static void tell(ServerPlayerEntity player, BaseText text, Boolean overlay) {
+        player.sendMessage(text, overlay);
+    }
+
+    @NotNull
+    public static BaseText endl() {
         return Messenger.s("\n");
     }
 
-    public static BaseText formatting(BaseText text, Formatting... formattings) {
-        text.formatted(formattings);
-        return text;
+    public static BaseText sline() {
+        return Messenger.s("-----------------------------------");
     }
 
-    public static void sendServerMessage(MinecraftServer server, Text text) {
+    public static BaseText dline() {
+        return Messenger.s("===================================");
+    }
+
+    public static void sendServerMessage(MinecraftServer server, BaseText text) {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
         MessengerCompatFactory.sendSystemMessage(server, text);
-        server.getPlayerManager().getPlayerList().forEach(player -> MessengerCompatFactory.sendSystemMessage(player, text));
+        MinecraftServerUtil.getOnlinePlayers().forEach(player -> tell(player, text, false));
+    }
+
+    @NotNull
+    public static Style simpleCmdButtonStyle(String command, BaseText hoverText, Layout... hoverTextFormattings) {
+        return emptyStyle()
+            .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));
+    }
+
+    @NotNull
+    public static Style simpleCopyButtonStyle(String copyText, BaseText hoverText, Layout... hoverTextFormattings) {
+        return emptyStyle()
+            .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));
+    }
+
+    private static Style emptyStyle() {
+        return Style.EMPTY;
     }
 }

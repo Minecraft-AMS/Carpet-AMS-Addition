@@ -24,6 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.commands.suggestionProviders.SetSuggestionProvider;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
 import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 import club.mcams.carpet.utils.Messenger;
@@ -32,18 +33,16 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class CarpetExtensionModWikiHyperlinkCommandRegistry {
-    private static final Translator translator = new Translator("command.carpetExtensionModWikiHyperlink");
+    private static final Translator tr = new Translator("command.carpetExtensionModWikiHyperlink");
     private static final Set<String> EXTENSION_NAMES = new HashSet<>();
     @SuppressWarnings("CodeBlock2Expr")
     private static final SuggestionProvider<ServerCommandSource> getSuggestions = (context, builder) -> {
@@ -56,18 +55,12 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
                 .requires(source -> CommandHelper.canUseCommand(source, AmsServerSettings.commandCarpetExtensionModWikiHyperlink))
                 .then(CommandManager.argument("extensionName", StringArgumentType.string())
                 .suggests(getSuggestions)
-                .executes(context -> execute(
-                    context.getSource().getPlayer(), StringArgumentType.getString(context, "extensionName")
-                ))
-            )
+                .executes(context -> execute(context.getSource(), StringArgumentType.getString(context, "extensionName"))))
         );
     }
 
-    private static int execute(PlayerEntity player, String extensionName) {
-        player.sendMessage(
-            translator.tr("click_to_jump").formatted(Formatting.AQUA)
-            .append(createOpenUrlButton(getUrl(extensionName))), false
-        );
+    private static int execute(ServerCommandSource source, String extensionName) {
+        Messenger.tell(source, Messenger.c(Messenger.f(tr.tr("click_to_jump"), Layout.AQUA), createOpenUrlButton(getUrl(extensionName))));
         return 1;
     }
 
@@ -87,19 +80,20 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
             case "Carpet-Extra-Extras": return "https://github.com/Thedustbustr/Carpet-Extra-Extras/";
             case "Gugle-Carpet-Addition": return "https://github.com/Gu-ZT/gugle-carpet-addition/";
         }
+
         return extensionName;
     }
 
-    private static Text createOpenUrlButton(String url) {
+    private static MutableText createOpenUrlButton(String url) {
         return Messenger.s(getUrl(url)).setStyle(
-            Style.EMPTY.withColor(Formatting.GREEN)
-            .withClickEvent(ClickEventUtil.event(ClickEventUtil.OPEN_URL, url))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, getCopyHoverText(url)))
+                Style.EMPTY.withColor(Layout.GREEN.getFormatting())
+                    .withClickEvent(ClickEventUtil.event(ClickEventUtil.OPEN_URL, url))
+                    .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, getCopyHoverText(url)))
         );
     }
 
-    private static Text getCopyHoverText(String url) {
-        return Messenger.s(translator.tr("click_to_jump").getString() + getUrl(url)).formatted(Formatting.YELLOW);
+    private static MutableText getCopyHoverText(String url) {
+        return Messenger.f(Messenger.s(tr.tr("click_to_jump").append(getUrl(url)).getString()), Layout.YELLOW);
     }
 
     static {
