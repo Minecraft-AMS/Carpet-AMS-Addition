@@ -42,13 +42,13 @@ public class NeedRestartServerOrClientObserver extends RuleObserver<Object> {
     public void onValueChange(ServerCommandSource source, ParsedRule<Object> rule, Object oldValue, Object newValue) {
         BaseText message = null;
 
-        if (EnvironmentHelper.isClient()) {
+        if (EnvironmentHelper.isClient() && newValue != oldValue) {
             message = tr.tr("is_client_message", this.getRuleName(rule));
         } else if (EnvironmentHelper.isServer()) {
             message = tr.tr("is_server_message", this.getRuleName(rule));
         }
 
-        if (message != null) {
+        if (message != null && source != null) {
             Messenger.tell(source, Messenger.formatting(message, Formatting.YELLOW));
         }
     }
