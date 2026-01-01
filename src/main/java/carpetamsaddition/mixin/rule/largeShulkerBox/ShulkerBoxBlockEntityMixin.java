@@ -33,6 +33,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 
 import org.jetbrains.annotations.NotNull;
+
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -47,6 +48,13 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
         super(blockEntityType, blockPos, blockState);
     }
 
+    @Unique
+    private static final boolean ENABLE_FLAG$AMS;
+
+    static {
+        ENABLE_FLAG$AMS = CarpetAMSAdditionSettings.largeShulkerBox;
+    }
+
     @Shadow
     private NonNullList<@NotNull ItemStack> itemStacks;
 
@@ -55,17 +63,21 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
 
     @Inject(method = "<init>(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("RETURN"))
     private void init1(CallbackInfo ci) {
-        this.itemStacks = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        if (ENABLE_FLAG$AMS) {
+            this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
+        }
     }
 
     @Inject(method = "<init>(Lnet/minecraft/world/item/DyeColor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("RETURN"))
     private void init2(CallbackInfo ci) {
-        this.itemStacks = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        if (ENABLE_FLAG$AMS) {
+            this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
+        }
     }
 
     @Inject(method = "getContainerSize", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
-        if (CarpetAMSAdditionSettings.largeShulkerBox) {
+        if (ENABLE_FLAG$AMS) {
             cir.setReturnValue(9 * 6);
             cir.cancel();
         }
@@ -73,7 +85,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
 
     @Inject(method = "getSlotsForFace", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
-        if (CarpetAMSAdditionSettings.largeShulkerBox) {
+        if (ENABLE_FLAG$AMS) {
             int[] availableSlots = IntStream.range(0, getContainerSize()).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();
