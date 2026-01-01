@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,22 +18,25 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.observers.rule.largeShulkerBox;
+package carpetamsaddition.validators.rule.experimentalMinecartSpeed;
 
+import carpet.api.settings.Validator;
 import carpet.api.settings.CarpetRule;
 
-import carpetamsaddition.mixin.rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor;
-import carpetamsaddition.settings.RuleObserver;
+import carpetamsaddition.translations.Translator;
 
 import net.minecraft.commands.CommandSourceStack;
 
-public class LargeShulkerBoxRuleObserver extends RuleObserver<Boolean> {
+public class MaxSpeedRangeValidator extends Validator<Integer> {
+    private static final Translator translator = new Translator("validator.experimentalMinecartSpeed");
+
     @Override
-    public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
-        if (newValue) {
-            ShulkerBoxBlockEntityAccessor.setInventorySize(54);
-        } else {
-            ShulkerBoxBlockEntityAccessor.setInventorySize(27);
-        }
+    public Integer validate(CommandSourceStack source, CarpetRule<Integer> parsedRule, Integer integer, String s) {
+        return integer >= -1 && integer <= 1000 ? integer : null;
+    }
+
+    @Override
+    public String description() {
+        return translator.tr("value_range").getString();
     }
 }

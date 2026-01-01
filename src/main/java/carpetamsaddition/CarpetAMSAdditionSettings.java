@@ -22,11 +22,14 @@ package carpetamsaddition;
 
 import carpet.api.settings.Rule;
 
+import carpetamsaddition.observers.NeedRestartServerOrClientObserver;
+import carpetamsaddition.settings.MustSetDefault;
+import carpetamsaddition.validators.rule.experimentalMinecartSpeed.MaxSpeedRangeValidator;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import carpetamsaddition.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 import carpetamsaddition.observers.network.NetworkProtocolObserver;
-import carpetamsaddition.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
 import carpetamsaddition.observers.recipe.RecipeRuleObserver;
 import carpetamsaddition.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import carpetamsaddition.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
@@ -43,10 +46,15 @@ import carpetamsaddition.validators.rule.renewableNetherScrap.DropRateValidator;
 
 import carpetamsaddition.settings.RecipeRule;
 
+import java.lang.reflect.Field;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static carpet.api.settings.RuleCategory.*;
 import static carpetamsaddition.settings.AmsRuleCategory.*;
 
 public class CarpetAMSAdditionSettings {
+    public static final Set<String> MUST_SET_DEFAULT_RULES = new LinkedHashSet<>();
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean superBow = false;
@@ -182,9 +190,10 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
+    @MustSetDefault
     @Rule(
         categories = {AMS, FEATURE, EXPERIMENTAL},
-        validators = LargeShulkerBoxRuleObserver.class
+        validators = NeedRestartServerOrClientObserver.class
     )
     public static boolean largeShulkerBox = false;
 
@@ -576,6 +585,21 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL, CREATIVE})
     public static boolean flippinCactusExtras = false;
 
+    @Rule(
+        categories = {AMS, FEATURE, EXPERIMENTAL},
+        options = {"-1", "1000"},
+        validators = MaxSpeedRangeValidator.class,
+        strict = false
+    )
+    public static int experimentalMinecartSpeed = -1;
+
+    @MustSetDefault
+    @Rule(
+        categories = {AMS, FEATURE, EXPERIMENTAL},
+        validators = NeedRestartServerOrClientObserver.class
+    )
+    public static boolean experimentalMinecartEnabled = false;
+
     /*
      * AMS网络协议规则
      */
@@ -714,4 +738,12 @@ public class CarpetAMSAdditionSettings {
 
     @Rule(categories = AMS)
     public static translationSides amsTranslationSide = translationSides.CLIENT;
+
+    static {
+        for (Field field : CarpetAMSAdditionSettings.class.getDeclaredFields()) {
+            if (field.isAnnotationPresent(MustSetDefault.class)) {
+                MUST_SET_DEFAULT_RULES.add(field.getName());
+            }
+        }
+    }
 }
