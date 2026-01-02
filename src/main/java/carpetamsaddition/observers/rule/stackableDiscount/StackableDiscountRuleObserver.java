@@ -28,7 +28,7 @@ import carpetamsaddition.settings.RuleObserver;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.ai.gossip.GossipType;
 
-@SuppressWarnings({"unused", "DataFlowIssue"})
+@SuppressWarnings("DataFlowIssue")
 public class StackableDiscountRuleObserver extends RuleObserver<Boolean> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {

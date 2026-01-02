@@ -25,6 +25,7 @@ import carpetamsaddition.network.AMS_CustomPayload;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -82,8 +83,8 @@ public class NetworkUtil {
         return SUPPORT_SERVER.get();
     }
 
-    public static Set<UUID> getSupportClientSet() {
-        return SUPPORT_CLIENT;
+    public static Iterator<UUID> supportClientSetIterator() {
+        return SUPPORT_CLIENT.iterator();
     }
 
     public static void addSupportClient(UUID uuid) {

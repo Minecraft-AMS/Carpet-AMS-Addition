@@ -88,7 +88,7 @@ public class AmspCommandRegistry {
     }
 
     private static int showSupportClientList(CommandSourceStack source) {
-        Iterator<UUID> iterator = NetworkUtil.getSupportClientSet().iterator();
+        Iterator<UUID> iterator = NetworkUtil.supportClientSetIterator();
 
         if (!iterator.hasNext()) {
             Messenger.tell(source, Messenger.f(tr.tr("support_client_set_is_none"), Layout.YELLOW));
