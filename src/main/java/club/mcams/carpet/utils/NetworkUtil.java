@@ -26,6 +26,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -101,8 +102,8 @@ public class NetworkUtil {
         return SUPPORT_SERVER.get();
     }
 
-    public static Set<UUID> getSupportClientSet() {
-        return SUPPORT_CLIENT;
+    public static Iterator<UUID> supportClientSetIterator() {
+        return SUPPORT_CLIENT.iterator();
     }
 
     public static void addSupportClient(UUID uuid) {
