@@ -195,7 +195,7 @@ carpetamsaddition:
 
   logger:
     serverRuntime:
-      server_runtime: 'Server Runtime'
+      server_runtime: 'Server Runtime '
 
   validator:
     enhancedWorldEater:

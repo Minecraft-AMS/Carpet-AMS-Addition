@@ -120,7 +120,7 @@ public class AMSTranslations {
             return text;
         }
 
-        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS();
+        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
         String serverLang = AMSTranslations.getServerLanguage();
 
         if (AmsServerSettings.amsTranslationSide == AmsServerSettings.translationSides.SERVER) {
@@ -139,7 +139,7 @@ public class AMSTranslations {
         //#else
         if (text instanceof TranslatableText) {
             TranslatableText translatableContents = (TranslatableText) text;
-            //#endif
+        //#endif
             String key = translatableContents.getKey();
 
             if (key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
@@ -160,7 +160,9 @@ public class AMSTranslations {
                         translated = String.format(translated, translatedArgs);
                     }
 
-                    BaseText newComponent = (BaseText) Messenger.s(translated).setStyle(text.getStyle());
+                    BaseText newComponent = Messenger.s(translated);
+                    newComponent.setStyle(text.getStyle());
+                    newComponent.getSiblings().clear();
 
                     for (Text sibling : text.getSiblings()) {
                         if (sibling instanceof BaseText) {

@@ -23,6 +23,7 @@ package club.mcams.carpet.logging.logger;
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.logging.AbstractHUDLogger;
 import club.mcams.carpet.translations.Translator;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,7 +33,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 public class ServerRuntimeHUDLogger extends AbstractHUDLogger {
-    private static final Translator translator = new Translator("logger.serverRuntime");
+    private static final Translator tr = new Translator("logger.serverRuntime");
     public static final String NAME = "serverRuntime";
     private static final ServerRuntimeHUDLogger INSTANCE = new ServerRuntimeHUDLogger();
 
@@ -57,8 +58,8 @@ public class ServerRuntimeHUDLogger extends AbstractHUDLogger {
         String formattedTime = String.format("%02d : %02d : %02d", hours, minutes, seconds);
         return new BaseText[]{
             Messenger.c(
-                String.format("q %s ", translator.tr("server_runtime").getString()),
-                String.format("c %s", formattedTime)
+                Messenger.f(tr.tr("server_runtime"), Layout.DARK_AQUA),
+                Messenger.f(Messenger.s(formattedTime), Layout.AQUA)
             )
         };
     }
