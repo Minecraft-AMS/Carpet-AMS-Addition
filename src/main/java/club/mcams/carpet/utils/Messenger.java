@@ -61,7 +61,7 @@ public class Messenger {
 
     @NotNull
     public static BaseText copy(BaseText text) {
-        return text.copy();
+        return (BaseText) text.shallowCopy();
     }
 
     private static void __tell(ServerCommandSource source, BaseText text, boolean broadcastToOps) {
