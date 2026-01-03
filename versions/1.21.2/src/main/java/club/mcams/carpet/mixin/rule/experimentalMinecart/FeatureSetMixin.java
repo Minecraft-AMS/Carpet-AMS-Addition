@@ -20,8 +20,6 @@
 
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
-import club.mcams.carpet.AmsServerSettings;
-
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 
@@ -30,28 +28,10 @@ import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(FeatureSet.class)
 public abstract class FeatureSetMixin {
-
-    @Unique
-    private static final boolean ENABLE_FLAG$AMS;
-
-    static {
-        ENABLE_FLAG$AMS = AmsServerSettings.experimentalMinecartEnabled;
-    }
-
-    @ModifyReturnValue(method = "contains", at = @At("RETURN"))
-    private boolean contains(boolean original, @Local(argsOnly = true) FeatureFlag flag) {
-        if (ENABLE_FLAG$AMS && flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
-            return true;
-        } else {
-            return original;
-        }
-    }
-
     @ModifyReturnValue(method = "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;", at = @At("RETURN"))
     private static FeatureSet noCheckFlag(FeatureSet original, @Local(argsOnly = true) FeatureFlag flag) {
         if (flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {

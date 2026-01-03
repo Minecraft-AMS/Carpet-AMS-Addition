@@ -34,6 +34,7 @@ import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
+import club.mcams.carpet.network.payloads.core.StaticSettingsPayload_S2C;
 import club.mcams.carpet.network.payloads.handshake.HandShakeS2CPayload;
 import club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
 import club.mcams.carpet.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
@@ -151,6 +152,7 @@ public class AmsServer implements CarpetExtension {
         NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(AmsServerMod.getVersion(), NetworkUtil.isSupportServer()), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUuid()), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(player, StaticSettingsPayload_S2C.create(AmsServerStaticSettings.ENABLED_RULES), NetworkUtil.SendMode.NEED_SUPPORT);
     }
 
     @Override
