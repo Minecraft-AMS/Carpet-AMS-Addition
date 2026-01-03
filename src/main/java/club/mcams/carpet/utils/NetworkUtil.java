@@ -74,7 +74,7 @@ public class NetworkUtil {
                 shouldSend = true;
                 break;
             case NEED_SUPPORT:
-                shouldSend = isSupportServer();
+                shouldSend = getServerSupportState();
                 break;
             default:
                 shouldSend = false;
@@ -90,15 +90,11 @@ public class NetworkUtil {
         return SUPPORT_CLIENT.contains(uuid);
     }
 
-    public static boolean isSupportServer() {
-        return SUPPORT_SERVER.get();
-    }
-
     public static void setServerSupport(boolean support) {
         SUPPORT_SERVER.set(support);
     }
 
-    public static Boolean getServerSupport() {
+    public static boolean getServerSupportState() {
         return SUPPORT_SERVER.get();
     }
 

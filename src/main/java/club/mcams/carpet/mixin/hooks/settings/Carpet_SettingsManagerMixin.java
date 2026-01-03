@@ -23,8 +23,8 @@ package club.mcams.carpet.mixin.hooks.settings;
 import carpet.settings.ParsedRule;
 import carpet.settings.SettingsManager;
 
+import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.AmsServerStaticSettings;
 
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -55,6 +55,6 @@ public abstract class Carpet_SettingsManagerMixin {
 
     @Inject(method = "loadConfigurationFromConf", at = @At("TAIL"))
     private void loadStaticAMSRule(CallbackInfo ci) {
-        AmsServerStaticSettings.Assignment();
+        AmsServer.getInstance().afterCarpetLoadConfigurationFromConf();
     }
 }

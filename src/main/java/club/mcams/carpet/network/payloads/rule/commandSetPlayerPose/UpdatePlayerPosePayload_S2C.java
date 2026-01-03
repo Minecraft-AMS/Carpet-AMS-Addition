@@ -22,6 +22,7 @@ package club.mcams.carpet.network.payloads.rule.commandSetPlayerPose;
 
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.utils.MinecraftClientUtil;
+import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.utils.PacketByteBufExtras;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
@@ -60,14 +61,16 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        SetPlayerPoseCommandRegistry.DO_POSE_MAP.clear();
-        SetPlayerPoseCommandRegistry.DO_POSE_MAP.putAll(this.poseMap);
+        NetworkUtil.executeOnClientThread(() -> {
+            SetPlayerPoseCommandRegistry.DO_POSE_MAP.clear();
+            SetPlayerPoseCommandRegistry.DO_POSE_MAP.putAll(this.poseMap);
 
-        ClientPlayerEntity player = MinecraftClientUtil.getCurrentPlayer();
+            ClientPlayerEntity player = MinecraftClientUtil.getCurrentPlayer();
 
-        if (player.getUuid().equals(this.targetPlayerUuid)) {
-            player.setPose(player.getPose());
-        }
+            if (player.getUuid().equals(this.targetPlayerUuid)) {
+                player.setPose(player.getPose());
+            }
+        });
     }
 
     public static void register() {

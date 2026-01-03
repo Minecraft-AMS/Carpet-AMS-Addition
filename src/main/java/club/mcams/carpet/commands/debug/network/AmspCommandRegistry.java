@@ -109,8 +109,8 @@ public class AmspCommandRegistry {
     }
 
     private static int showServerSupportStatus(ServerCommandSource source) {
-        Layout formatting = NetworkUtil.getServerSupport() ? Layout.GREEN : Layout.RED;
-        Messenger.tell(source, Messenger.f(tr.tr("server_support_status", String.valueOf(NetworkUtil.getServerSupport())), formatting));
+        Layout formatting = NetworkUtil.getServerSupportState() ? Layout.GREEN : Layout.RED;
+        Messenger.tell(source, Messenger.f(tr.tr("server_support_status", String.valueOf(NetworkUtil.getServerSupportState())), formatting));
         return 1;
     }
 
@@ -171,7 +171,7 @@ public class AmspCommandRegistry {
 
     private static int setServerSupport(ServerCommandSource source, Boolean support) {
         NetworkUtil.setServerSupport(support);
-        Messenger.tell(source, Messenger.f(tr.tr("set_server_support_feedback", String.valueOf(NetworkUtil.getServerSupport())), Layout.GREEN));
+        Messenger.tell(source, Messenger.f(tr.tr("set_server_support_feedback", String.valueOf(NetworkUtil.getServerSupportState())), Layout.GREEN));
         return 1;
     }
 

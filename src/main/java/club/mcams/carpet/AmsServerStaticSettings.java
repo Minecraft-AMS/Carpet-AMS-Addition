@@ -30,10 +30,14 @@ public class AmsServerStaticSettings {
         LARGE_SHULKER_BOX
     }
 
-    public static final EnumSet<Rule> ENABLED_RULES = EnumSet.noneOf(Rule.class);
+    public static final EnumSet<Rule> RULES = EnumSet.noneOf(Rule.class);
 
-    public static void Assignment() {
-        ENABLED_RULES.clear();
+    /**
+     * Call after Carpet loads the config
+     * @see club.mcams.carpet.mixin.hooks.settings.Carpet_SettingsManagerMixin
+     */
+    public static void addStaticSettings() {
+        RULES.clear();
 
         conditionAdd(AmsServerSettings.largeShulkerBox, Rule.LARGE_SHULKER_BOX);
         //#if MC>=12102
@@ -44,11 +48,11 @@ public class AmsServerStaticSettings {
     @SuppressWarnings("SameParameterValue")
     private static void conditionAdd(boolean amsRule, Rule staticRule) {
         if (amsRule) {
-            ENABLED_RULES.add(staticRule);
+            RULES.add(staticRule);
         }
     }
 
     public static boolean isEnabled(Rule rule) {
-        return ENABLED_RULES.contains(rule);
+        return RULES.contains(rule);
     }
 }

@@ -68,7 +68,7 @@ public final class CommandHelper {
                 }
             }
             server.getPlayerManager().getPlayerList().forEach(serverCommandManager::sendCommandTree);
-            Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), Layout.GRAY));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), Layout.GRAY), true);
         }
     }
 

@@ -98,8 +98,16 @@ public class Messenger {
     }
 
     public static void sendServerMessage(MinecraftServer server, BaseText text) {
-        Objects.requireNonNull(server, "Server is null, message not delivered !");
-        MessengerCompatFactory.sendSystemMessage(server, text);
+        sendServerMessage(server, text, false);
+    }
+
+    public static void sendServerMessage(MinecraftServer server, BaseText text, boolean onlyToPlayer) {
+        Objects.requireNonNull(server, "Server is null, message not delivered!");
+
+        if (!onlyToPlayer) {
+            MessengerCompatFactory.sendSystemMessage(server, text);
+        }
+
         MinecraftServerUtil.getOnlinePlayers().forEach(player -> tell(player, text, false));
     }
 

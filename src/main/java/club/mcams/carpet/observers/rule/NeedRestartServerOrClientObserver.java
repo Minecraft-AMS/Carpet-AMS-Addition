@@ -27,6 +27,7 @@ import club.mcams.carpet.settings.RuleObserver;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.BaseText;
@@ -48,7 +49,7 @@ public class NeedRestartServerOrClientObserver extends RuleObserver<Object> {
             message = tr.tr("is_server_message", this.getRuleName(rule));
         }
 
-        if (message != null && source != null) {
+        if (message != null && source != null && MinecraftServerUtil.serverIsRunning()) {
             Messenger.tell(source, Messenger.f(message, Layout.YELLOW));
         }
     }

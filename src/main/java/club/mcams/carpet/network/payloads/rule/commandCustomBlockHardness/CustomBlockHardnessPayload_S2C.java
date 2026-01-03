@@ -20,7 +20,6 @@
 
 package club.mcams.carpet.network.payloads.rule.commandCustomBlockHardness;
 
-import club.mcams.carpet.utils.NetworkUtil;
 import club.mcams.carpet.utils.PacketByteBufExtras;
 import club.mcams.carpet.network.AMS_PayloadManager;
 import club.mcams.carpet.network.AMS_CustomPayload;
@@ -54,10 +53,8 @@ public class CustomBlockHardnessPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() -> {
-            CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
-            CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(this.hardnessMap);
-        });
+        CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
+        CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(this.hardnessMap);
     }
 
     public static void register() {
