@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
-import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.AmsServerStaticSettings;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -32,7 +32,6 @@ import net.minecraft.screen.slot.ShulkerBoxSlot;
 import org.jetbrains.annotations.Nullable;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
@@ -44,12 +43,6 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         super(type, syncId);
     }
 
-    @Unique
-    private static final boolean ENABLE_FLAG$AMS;
-
-    static {
-        ENABLE_FLAG$AMS = AmsServerSettings.largeShulkerBox;
-    }
     @ModifyArg(
         method = "<init>(ILnet/minecraft/entity/player/PlayerInventory;Lnet/minecraft/inventory/Inventory;)V",
         at = @At(
@@ -59,7 +52,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         index = 0
     )
     private static ScreenHandlerType<?> getScreenHandlerType(ScreenHandlerType<?> type) {
-        if (!ENABLE_FLAG$AMS) {
+        if (!AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
             return type;
         }
         return ScreenHandlerType.GENERIC_9X6;
@@ -74,7 +67,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         index = 1
     )
     private int checkLargerSize(int size) {
-        if (ENABLE_FLAG$AMS) {
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
             return 9 * 6;
         } else {
             return size;
@@ -94,7 +87,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         )
     )
     protected void addingExtraSlots(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
-        if (ENABLE_FLAG$AMS && this.slots.isEmpty()) {
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX) && this.slots.isEmpty()) {
             for (int row = 3; row < 6; ++row) {
                 for (int column = 0; column < 9; ++column) {
                     this.addSlot(new ShulkerBoxSlot(inventory, column + row * 9, 8 + column * 18, 18 + row * 18));
