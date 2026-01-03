@@ -111,6 +111,10 @@ public class AmsServer implements CarpetExtension {
         LeaderCommandRegistry.tick();
     }
 
+    public void afterCarpetLoadConfigurationFromConf() {
+        AmsServerStaticSettings.addStaticSettings();
+    }
+
     @Override
     public void registerLoggers() {
         AmsCarpetLoggerRegistry.registerLoggers();
@@ -149,10 +153,10 @@ public class AmsServer implements CarpetExtension {
     }
 
     public void sendS2CPacketOnHandShake(ServerPlayerEntity player) {
-        NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(AmsServerMod.getVersion(), NetworkUtil.isSupportServer()), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(AmsServerMod.getVersion(), NetworkUtil.getServerSupportState()), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUuid()), NetworkUtil.SendMode.NEED_SUPPORT);
-        NetworkUtil.sendS2CPacket(player, StaticSettingsPayload_S2C.create(AmsServerStaticSettings.ENABLED_RULES), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(player, StaticSettingsPayload_S2C.create(AmsServerStaticSettings.RULES), NetworkUtil.SendMode.NEED_SUPPORT);
     }
 
     @Override

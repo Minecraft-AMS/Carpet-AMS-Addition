@@ -24,7 +24,6 @@ import club.mcams.carpet.AmsServerStaticSettings;
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 
-import club.mcams.carpet.utils.NetworkUtil;
 import net.minecraft.network.PacketByteBuf;
 
 import java.util.EnumSet;
@@ -63,10 +62,8 @@ public class StaticSettingsPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() -> {
-            AmsServerStaticSettings.ENABLED_RULES.clear();
-            AmsServerStaticSettings.ENABLED_RULES.addAll(this.rules);
-        });
+        AmsServerStaticSettings.RULES.clear();
+        AmsServerStaticSettings.RULES.addAll(this.rules);
     }
 
     public static void register() {
