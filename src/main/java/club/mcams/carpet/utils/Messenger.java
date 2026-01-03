@@ -84,6 +84,10 @@ public class Messenger {
         player.sendMessage(text, overlay);
     }
 
+    public static void tell(ServerPlayerEntity player, BaseText text) {
+        player.sendMessage(text, false);
+    }
+
     @NotNull
     public static BaseText endl() {
         return Messenger.s("\n");
@@ -108,7 +112,7 @@ public class Messenger {
             MessengerCompatFactory.sendSystemMessage(server, text);
         }
 
-        MinecraftServerUtil.getOnlinePlayers().forEach(player -> tell(player, text, false));
+        MinecraftServerUtil.getOnlinePlayers().forEach(player -> tell(player, text));
     }
 
     @NotNull
