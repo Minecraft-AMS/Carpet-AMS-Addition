@@ -70,5 +70,6 @@ public class CarpetAMSAdditionClient implements ClientModInitializer {
 
     public void onDisconnect() {
         NetworkUtil.setServerSupport(false);
+        CarpetAMSAdditionStaticSettings.RULES.clear();
     }
 }

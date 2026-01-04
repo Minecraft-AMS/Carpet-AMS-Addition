@@ -85,34 +85,50 @@ public class Messenger {
         player.displayClientMessage(text, overlay);
     }
 
+    public static void tell(ServerPlayer player, MutableComponent text) {
+        player.displayClientMessage(text, false);
+    }
+
+    public static void tell(Player player, MutableComponent text) {
+        player.displayClientMessage(text, false);
+    }
+
     @NotNull
-    public static Component endl() {
+    public static MutableComponent endl() {
         return Messenger.s("\n");
     }
 
-    public static Component sline() {
+    public static MutableComponent sline() {
         return Messenger.s("-----------------------------------");
     }
 
-    public static Component dline() {
+    public static MutableComponent dline() {
         return Messenger.s("===================================");
     }
 
-    public static void sendServerMessage(MinecraftServer server, Component text) {
+    public static void sendServerMessage(MinecraftServer server, MutableComponent text) {
+        sendServerMessage(server, text, false);
+    }
+
+    public static void sendServerMessage(MinecraftServer server, MutableComponent text, boolean onlyToPlayer) {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
-        server.sendSystemMessage(text);
-        MinecraftServerUtil.getOnlinePlayers().forEach(player -> tell(player, (MutableComponent) text, false));
+
+        if (!onlyToPlayer) {
+            server.sendSystemMessage(text);
+        }
+
+        MinecraftServerUtil.getOnlinePlayers().forEach(player -> tell(player, text));
     }
 
     @NotNull
-    public static Style simpleCmdButtonStyle(String command, Component hoverText, Layout... hoverTextFormattings) {
+    public static Style simpleCmdButtonStyle(String command, MutableComponent hoverText, Layout... hoverTextFormattings) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));
     }
 
     @NotNull
-    public static Style simpleCopyButtonStyle(String copyText, Component hoverText, Layout... hoverTextFormattings) {
+    public static Style simpleCopyButtonStyle(String copyText, MutableComponent hoverText, Layout... hoverTextFormattings) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));

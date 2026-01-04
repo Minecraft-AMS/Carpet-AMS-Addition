@@ -28,13 +28,13 @@ import carpetamsaddition.utils.*;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -105,12 +105,12 @@ public class WhereCommandRegistry {
         return otherPos;
     }
 
-    private static Component message(Player player) {
+    private static MutableComponent message(Player player) {
         DimensionWrapper dimension = DimensionWrapper.of(EntityUtil.getEntityWorld(player));
         String playerName = getPlayerName(player);
         String currentPos = getCurrentPos(player);
         String otherPos = getOtherPos(player);
-        Component message = Messenger.f(Messenger.s("Unknown dimension"), Layout.RED);
+        MutableComponent message = Messenger.f(Messenger.s("Unknown dimension"), Layout.RED);
         if (dimension.getValue() == Level.END) {
             message = Messenger.s(
                 String.format("§d[%s] §e%s §b@ §d[ %s ]", tr.tr("the_end").getString(), playerName, currentPos))
@@ -127,9 +127,9 @@ public class WhereCommandRegistry {
         return message;
     }
 
-    private static Component copyButton(String copyText, Layout buttonColor) {
+    private static MutableComponent copyButton(String copyText, Layout buttonColor) {
         String copyCoordText = copyText.replace(",", ""); // 1, 0, -24 -> 1 0 -24
-        Component hoverText = null;
+        MutableComponent hoverText = null;
 
         if (buttonColor == Layout.LIGHT_PURPLE) {
             hoverText = tr.tr("the_end_button_hover");

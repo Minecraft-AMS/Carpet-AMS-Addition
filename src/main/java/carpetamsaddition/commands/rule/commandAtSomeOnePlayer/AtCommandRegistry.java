@@ -53,7 +53,7 @@ public class AtCommandRegistry {
     }
 
     private static int execute(ServerPlayer sourcePlayer, ServerPlayer targetPlayer, String text) {
-        MutableComponent titleText = Messenger.f(Messenger.s(tr.tr("title", PlayerUtil.getName(sourcePlayer))), Layout.AQUA);
+        MutableComponent titleText = Messenger.f(tr.tr("title", PlayerUtil.getName(sourcePlayer)), Layout.AQUA);
         MutableComponent messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
         targetPlayer.connection.send(new ClientboundSetTitleTextPacket(titleText));
         Messenger.sendServerMessage(MinecraftServerUtil.getServer(), messageText);

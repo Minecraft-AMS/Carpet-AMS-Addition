@@ -20,8 +20,7 @@
 
 package carpetamsaddition.mixin.rule.largeShulkerBox;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
-
+import carpetamsaddition.CarpetAMSAdditionStaticSettings;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -32,23 +31,17 @@ import net.minecraft.world.inventory.ShulkerBoxSlot;
 import org.jetbrains.annotations.Nullable;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import static carpetamsaddition.CarpetAMSAdditionStaticSettings.Rule.*;
+
 @Mixin(value = ShulkerBoxMenu.class, priority = 1024)
 public abstract class ShulkerBoxMenuMixin extends AbstractContainerMenu {
     protected ShulkerBoxMenuMixin(@Nullable MenuType<?> type, int syncId) {
         super(type, syncId);
-    }
-
-    @Unique
-    private static final boolean ENABLE_FLAG$AMS;
-
-    static {
-        ENABLE_FLAG$AMS = CarpetAMSAdditionSettings.largeShulkerBox;
     }
 
     @ModifyArg(
@@ -60,7 +53,7 @@ public abstract class ShulkerBoxMenuMixin extends AbstractContainerMenu {
         index = 0
     )
     private static MenuType<?> getScreenHandlerType(MenuType<?> type) {
-        if (!ENABLE_FLAG$AMS) {
+        if (!CarpetAMSAdditionStaticSettings.isEnabled(LARGE_SHULKER_BOX)) {
             return type;
         }
         return MenuType.GENERIC_9x6;
@@ -75,7 +68,7 @@ public abstract class ShulkerBoxMenuMixin extends AbstractContainerMenu {
         index = 1
     )
     private int checkLargerSize(int size) {
-        if (ENABLE_FLAG$AMS) {
+        if (CarpetAMSAdditionStaticSettings.isEnabled(LARGE_SHULKER_BOX)) {
             return 9 * 6;
         } else {
             return size;
@@ -91,7 +84,7 @@ public abstract class ShulkerBoxMenuMixin extends AbstractContainerMenu {
         )
     )
     protected void addingExtraSlots(int syncId, Inventory playerInventory, Container inventory, CallbackInfo ci) {
-        if (ENABLE_FLAG$AMS && this.slots.isEmpty()) {
+        if (CarpetAMSAdditionStaticSettings.isEnabled(LARGE_SHULKER_BOX) && this.slots.isEmpty()) {
             for (int row = 3; row < 6; ++row) {
                 for (int column = 0; column < 9; ++column) {
                     this.addSlot(new ShulkerBoxSlot(inventory, column + row * 9, 8 + column * 18, 18 + row * 18));

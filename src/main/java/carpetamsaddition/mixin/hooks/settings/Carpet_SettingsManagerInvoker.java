@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,22 +18,18 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.rule.experimentalMinecart;
+package carpetamsaddition.mixin.hooks.settings;
 
-import carpetamsaddition.CarpetAMSAdditionStaticSettings;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import carpet.api.settings.CarpetRule;
+import carpet.api.settings.SettingsManager;
 
-import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
+import net.minecraft.commands.CommandSourceStack;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-import static carpetamsaddition.CarpetAMSAdditionStaticSettings.Rule.*;
-
-@Mixin(AbstractMinecart.class)
-public abstract class AbstractMinecartMixin {
-    @ModifyReturnValue(method = "useExperimentalMovement", at = @At("RETURN"))
-    private static boolean setExMinecartEnabled(boolean original) {
-        return CarpetAMSAdditionStaticSettings.isEnabled(EXPERIMENTAL_MINECART_ENABLED) || original;
-    }
+@Mixin(SettingsManager.class)
+public interface Carpet_SettingsManagerInvoker {
+    @Invoker("setDefault")
+    int invokeSetDefault(CommandSourceStack source, CarpetRule<?> rule, String value);
 }

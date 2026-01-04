@@ -196,7 +196,8 @@
     "rule.undyingCoral.CoralBlockMixin",
     "rule.useItemCooldownDisabled.ItemCooldownsMixin",
     "rule.witchRedstoneDustDropController_witchGlowstoneDustDropController.LivingEntityMixin",
-    "settings.Carpet_SettingsManagerMixin",
+    "hooks.settings.Carpet_SettingsManagerInvoker",
+    "hooks.settings.Carpet_SettingsManagerMixin",
     "translations.HUDControllerMixin",
     "translations.ServerPlayerMixin",
     "translations.TranslatableTextMixin"

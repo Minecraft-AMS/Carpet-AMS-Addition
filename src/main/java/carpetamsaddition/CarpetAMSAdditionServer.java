@@ -122,9 +122,13 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     }
 
     public void sendS2CPacketOnHandShake(ServerPlayer player) {
-        NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(CarpetAMSAdditionMod.getVersion(), NetworkUtil.isSupportServer()), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(CarpetAMSAdditionMod.getVersion(), NetworkUtil.getServerSupportState()), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUUID()), NetworkUtil.SendMode.NEED_SUPPORT);
+    }
+
+    public void afterCarpetLoadConfigurationFromConf() {
+        CarpetAMSAdditionStaticSettings.addStaticSettings();
     }
 
     @Override

@@ -42,6 +42,6 @@ public class LargeEnderChestRuleObserver extends RuleObserver<Boolean> {
     }
 
     private static MutableComponent message() {
-        return Messenger.f(Messenger.s(tr.tr("switch_tip")), Layout.GREEN);
+        return Messenger.f(tr.tr("switch_tip"), Layout.GREEN);
     }
 }

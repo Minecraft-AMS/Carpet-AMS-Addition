@@ -59,7 +59,7 @@ public class NetworkUtil {
     public static void sendC2SPacket(LocalPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
         boolean shouldSend = switch (sendMode) {
             case FORCE -> true;
-            case NEED_SUPPORT -> isSupportServer();
+            case NEED_SUPPORT -> getServerSupportState();
         };
 
         if (shouldSend) {
@@ -71,15 +71,11 @@ public class NetworkUtil {
         return SUPPORT_CLIENT.contains(uuid);
     }
 
-    public static boolean isSupportServer() {
-        return SUPPORT_SERVER.get();
-    }
-
     public static void setServerSupport(boolean support) {
         SUPPORT_SERVER.set(support);
     }
 
-    public static Boolean getServerSupport() {
+    public static boolean getServerSupportState() {
         return SUPPORT_SERVER.get();
     }
 

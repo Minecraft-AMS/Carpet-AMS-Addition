@@ -27,6 +27,7 @@ import carpetamsaddition.settings.RuleObserver;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.MutableComponent;
@@ -44,7 +45,7 @@ public class NeedRestartServerOrClientObserver extends RuleObserver<Object> {
             message = tr.tr("is_server_message", this.getRuleName(rule));
         }
 
-        if (message != null && source != null) {
+        if (message != null && source != null && MinecraftServerUtil.serverIsRunning(source.getServer())) {
             Messenger.tell(source, Messenger.f(message, Layout.YELLOW));
         }
     }
