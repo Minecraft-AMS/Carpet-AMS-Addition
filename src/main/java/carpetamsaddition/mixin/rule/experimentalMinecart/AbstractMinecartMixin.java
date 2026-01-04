@@ -21,6 +21,7 @@
 package carpetamsaddition.mixin.rule.experimentalMinecart;
 
 import carpetamsaddition.CarpetAMSAdditionStaticSettings;
+
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
