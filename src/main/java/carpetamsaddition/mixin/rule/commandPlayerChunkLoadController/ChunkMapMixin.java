@@ -31,11 +31,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Objects;
+
 @Mixin(ChunkMap.class)
 public abstract class ChunkMapMixin {
     @Inject(method = "skipPlayer", at = @At("HEAD"), cancellable = true)
     private void doesNotGenerateChunks(ServerPlayer player, CallbackInfoReturnable<Boolean> cir) {
-        if (CarpetAMSAdditionSettings.commandPlayerChunkLoadController) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandPlayerChunkLoadController, "false")) {
             String playerName = player.getName().getString();
             if (!ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true)) {
                 cir.setReturnValue(true);

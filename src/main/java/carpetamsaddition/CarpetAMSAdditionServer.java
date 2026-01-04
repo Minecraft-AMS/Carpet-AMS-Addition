@@ -34,6 +34,7 @@ import carpetamsaddition.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import carpetamsaddition.helpers.rule.recipeRule.RecipeRuleHelper;
 import carpetamsaddition.logging.AmsCarpetLoggerRegistry;
+import carpetamsaddition.network.payloads.core.StaticSettingsPayload_S2C;
 import carpetamsaddition.network.payloads.handshake.HandShakeS2CPayload;
 import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
@@ -125,6 +126,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(CarpetAMSAdditionMod.getVersion(), NetworkUtil.getServerSupportState()), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUUID()), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(player, StaticSettingsPayload_S2C.create(CarpetAMSAdditionStaticSettings.RULES), NetworkUtil.SendMode.FORCE);
     }
 
     public void afterCarpetLoadConfigurationFromConf() {
