@@ -36,7 +36,7 @@ import club.mcams.carpet.observers.network.NetworkProtocolObserver;
 import club.mcams.carpet.observers.recipe.RecipeRuleObserver;
 import club.mcams.carpet.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import club.mcams.carpet.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
-import club.mcams.carpet.observers.network.AmsNetworkProtocolRuleObserver;
+import club.mcams.carpet.observers.network.AmspRuleObserver;
 
 import club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
@@ -653,7 +653,7 @@ public class AmsServerSettings {
     //$$ @MustSetDefault
     //$$ @Rule(
     //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
-    //$$     validators = NeedRestartServerOrClientObserver.class
+    //$$     validators = {NeedRestartServerOrClientObserver.class, NetworkProtocolObserver.class}
     //$$ )
     //$$ public static boolean experimentalMinecartEnabled = false;
     //#endif
@@ -662,7 +662,7 @@ public class AmsServerSettings {
      * AMS网络协议规则
      */
     @Rule(
-        validators = AmsNetworkProtocolRuleObserver.class,
+        validators = AmspRuleObserver.class,
         categories = {AMS, AMS_NETWORK}
     )
     public static boolean amsNetworkProtocol = false;
@@ -735,8 +735,11 @@ public class AmsServerSettings {
     )
     public static int blockChunkLoaderRangeController = 3;
 
-    @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
-    public static boolean commandPlayerChunkLoadController = false;
+    @Rule(
+        categories = {AMS, COMMAND, AMS_CHUNKLOADER},
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"}
+    )
+    public static String commandPlayerChunkLoadController = "false";
 
     //#if MC<12005
     @GameVersion(version = "Minecraft < 1.20.5")

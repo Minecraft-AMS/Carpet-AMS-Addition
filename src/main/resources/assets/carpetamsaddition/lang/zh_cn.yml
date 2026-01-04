@@ -25,7 +25,7 @@ carpetamsaddition:
 
   command:
     commandHelper:
-      refresh_cmd_tree: '[Carpet AMS Addition] 命令树已被刷新'
+      refresh_cmd_tree: '<Carpet AMS Addition> 命令树已被刷新'
 
     playerChunkLoading:
       no_player_specified: '<commandPlayerChunkLoadController> 没有指定任何玩家'
@@ -217,7 +217,7 @@ carpetamsaddition:
     largeEnderChest:
       switch_tip: '<Carpet AMS Addition> 侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
     amsNetworkProtocol:
-      need_enable_protocol: '[Carpet AMS Addition] 使用%s规则需要启用amsNetworkProtocol规则才能生效'
+      need_enable_protocol: '<Carpet AMS Addition> 使用%s规则需要启用amsNetworkProtocol规则才能生效'
     need_restart_server_or_client:
       is_client_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启客户端后生效'
       is_server_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启服务器后生效'

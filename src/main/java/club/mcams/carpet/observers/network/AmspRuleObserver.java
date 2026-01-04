@@ -29,7 +29,7 @@ import club.mcams.carpet.network.payloads.handshake.RequestHandShakeS2CPayload;
 
 import net.minecraft.server.command.ServerCommandSource;
 
-public class AmsNetworkProtocolRuleObserver extends RuleObserver<Boolean> {
+public class AmspRuleObserver extends RuleObserver<Boolean> {
     @Override
     public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (MinecraftServerUtil.serverIsRunning()) {

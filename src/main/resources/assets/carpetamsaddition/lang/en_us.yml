@@ -25,7 +25,7 @@ carpetamsaddition:
 
   command:
     commandHelper:
-      refresh_cmd_tree: '[Carpet AMS Addition] Command tree has been refreshed'
+      refresh_cmd_tree: '<Carpet AMS Addition> Command tree has been refreshed'
 
     playerChunkLoading:
       no_player_specified: '<commandPlayerChunkLoadController> No player specified'
@@ -217,7 +217,7 @@ carpetamsaddition:
     largeEnderChest:
       switch_tip: '<Carpet AMS Addition> The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
     amsNetworkProtocol:
-      need_enable_protocol: '[Carpet AMS Addition] Using the %s rule requires enabling the amsNetworkProtocol rule to take effect'
+      need_enable_protocol: '<Carpet AMS Addition> Using the %s rule requires enabling the amsNetworkProtocol rule to take effect'
     need_restart_server_or_client:
       is_client_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the client'
       is_server_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the server'
