@@ -37,7 +37,11 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class AbstractMinecartEntityMixin {
     @ModifyReturnValue(method = "areMinecartImprovementsEnabled", at = @At("RETURN"))
     private static boolean setExMinecartEnabled(boolean original) {
-        if (AmsServerSettings.experimentalMinecartEnabled && AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
+        if (!AmsServerSettings.experimentalMinecartEnabled) {
+            return original;
+        }
+
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
             return true;
         }
 
