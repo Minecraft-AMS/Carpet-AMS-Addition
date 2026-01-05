@@ -45,7 +45,7 @@ public class NeedRestartServerOrClientObserver extends RuleObserver<Object> {
             message = tr.tr("is_server_message", this.getRuleName(rule));
         }
 
-        if (message != null && source != null && MinecraftServerUtil.serverIsRunning(source.getServer())) {
+        if (message != null && source != null && MinecraftServerUtil.serverIsRunning()) {
             Messenger.tell(source, Messenger.f(message, Layout.YELLOW));
         }
     }

@@ -29,7 +29,7 @@ import carpetamsaddition.network.payloads.handshake.RequestHandShakeS2CPayload;
 
 import net.minecraft.commands.CommandSourceStack;
 
-public class AmsNetworkProtocolRuleObserver extends RuleObserver<Boolean> {
+public class AmspRuleObserver extends RuleObserver<Boolean> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (MinecraftServerUtil.serverIsRunning()) {

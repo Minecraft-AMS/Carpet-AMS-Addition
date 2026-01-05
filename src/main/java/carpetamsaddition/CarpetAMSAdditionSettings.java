@@ -33,7 +33,7 @@ import carpetamsaddition.observers.network.NetworkProtocolObserver;
 import carpetamsaddition.observers.recipe.RecipeRuleObserver;
 import carpetamsaddition.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import carpetamsaddition.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
-import carpetamsaddition.observers.network.AmsNetworkProtocolRuleObserver;
+import carpetamsaddition.observers.network.AmspRuleObserver;
 
 import carpetamsaddition.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import carpetamsaddition.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
@@ -596,7 +596,7 @@ public class CarpetAMSAdditionSettings {
     @MustSetDefault
     @Rule(
         categories = {AMS, FEATURE, EXPERIMENTAL},
-        validators = NeedRestartServerOrClientObserver.class
+        validators = {NeedRestartServerOrClientObserver.class, NetworkProtocolObserver.class}
     )
     public static boolean experimentalMinecartEnabled = false;
 
@@ -604,7 +604,7 @@ public class CarpetAMSAdditionSettings {
      * AMS网络协议规则
      */
     @Rule(
-        validators = AmsNetworkProtocolRuleObserver.class,
+        validators = AmspRuleObserver.class,
         categories = {AMS, AMS_NETWORK}
     )
     public static boolean amsNetworkProtocol = false;
@@ -681,7 +681,7 @@ public class CarpetAMSAdditionSettings {
         categories = {AMS, COMMAND, AMS_CHUNKLOADER},
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"}
     )
-    public static boolean commandPlayerChunkLoadController = false;
+    public static String commandPlayerChunkLoadController = "false";
 
     /*
      * 合成表规则

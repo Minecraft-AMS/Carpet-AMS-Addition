@@ -76,15 +76,15 @@ public class SetPlayerPoseCommandRegistry {
     private static int set(ServerPlayer targetPlayer, String pose) {
         DO_POSE_MAP.put(targetPlayer.getUUID(), pose);
         targetPlayer.setShiftKeyDown(true);
-        triggerPoseUpdate(targetPlayer);
         broadcastSyncDatapack(targetPlayer);
+        triggerPoseUpdate(targetPlayer);
         return 1;
     }
 
     private static int stop(ServerPlayer targetPlayer) {
         DO_POSE_MAP.remove(targetPlayer.getUUID());
-        triggerPoseUpdate(targetPlayer);
         broadcastSyncDatapack(targetPlayer);
+        triggerPoseUpdate(targetPlayer);
         return 1;
     }
 
