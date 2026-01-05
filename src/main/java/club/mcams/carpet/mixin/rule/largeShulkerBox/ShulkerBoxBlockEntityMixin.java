@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.AmsServerStaticSettings;
 
 import net.minecraft.block.BlockState;
@@ -61,7 +62,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Inject(method = "<init>(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
     private void init1(CallbackInfo ci) {
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX) && AmsServerSettings.largeShulkerBox) {
             this.inventory = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
         }
     }
@@ -72,14 +73,14 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Inject(method = "<init>(Lnet/minecraft/util/DyeColor;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
     private void init2(CallbackInfo ci) {
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX) && AmsServerSettings.largeShulkerBox) {
             this.inventory = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
         }
     }
 
     @Inject(method = "size", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX) && AmsServerSettings.largeShulkerBox) {
             cir.setReturnValue(9 * 6);
             cir.cancel();
         }
@@ -87,7 +88,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
 
     @Inject(method = "getAvailableSlots", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX) && AmsServerSettings.largeShulkerBox) {
             int[] availableSlots = IntStream.range(0, 9 * 6).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();

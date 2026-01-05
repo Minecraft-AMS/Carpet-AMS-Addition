@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.AmsServerStaticSettings;
 
 import net.minecraft.entity.player.PlayerInventory;
@@ -52,10 +53,11 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         index = 0
     )
     private static ScreenHandlerType<?> getScreenHandlerType(ScreenHandlerType<?> type) {
-        if (!AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
-            return type;
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX) && AmsServerSettings.largeShulkerBox) {
+            return ScreenHandlerType.GENERIC_9X6;
         }
-        return ScreenHandlerType.GENERIC_9X6;
+
+        return type;
     }
 
     @ModifyArg(
@@ -67,11 +69,11 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         index = 1
     )
     private int checkLargerSize(int size) {
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX) && AmsServerSettings.largeShulkerBox) {
             return 9 * 6;
-        } else {
-            return size;
         }
+
+        return size;
     }
 
     @Inject(
@@ -87,7 +89,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         )
     )
     protected void addingExtraSlots(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX) && this.slots.isEmpty()) {
+        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX) && AmsServerSettings.largeShulkerBox && this.slots.isEmpty()) {
             for (int row = 3; row < 6; ++row) {
                 for (int column = 0; column < 9; ++column) {
                     this.addSlot(new ShulkerBoxSlot(inventory, column + row * 9, 8 + column * 18, 18 + row * 18));

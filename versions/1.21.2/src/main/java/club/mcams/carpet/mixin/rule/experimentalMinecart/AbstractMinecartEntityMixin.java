@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.AmsServerStaticSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -36,6 +37,10 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class AbstractMinecartEntityMixin {
     @ModifyReturnValue(method = "areMinecartImprovementsEnabled", at = @At("RETURN"))
     private static boolean setExMinecartEnabled(boolean original) {
-        return AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.EXPERIMENTAL_MINECART_ENABLED) || original;
+        if (AmsServerSettings.experimentalMinecartEnabled && AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
+            return true;
+        }
+
+        return original;
     }
 }
