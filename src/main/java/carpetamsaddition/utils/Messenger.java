@@ -124,14 +124,14 @@ public class Messenger {
     public static Style simpleCmdButtonStyle(String command, MutableComponent hoverText, Layout... hoverTextFormattings) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(hoverText, hoverTextFormattings)));
     }
 
     @NotNull
     public static Style simpleCopyButtonStyle(String copyText, MutableComponent hoverText, Layout... hoverTextFormattings) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(s(hoverText.getString()), hoverTextFormattings)));
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(hoverText, hoverTextFormattings)));
     }
 
     private static Style emptyStyle() {

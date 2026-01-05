@@ -92,7 +92,7 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
     }
 
     private static MutableComponent getCopyHoverText(String url) {
-        return Messenger.f(Messenger.s(tr.tr("click_to_jump").append(getUrl(url)).getString()), Layout.YELLOW);
+        return Messenger.f(tr.tr("click_to_jump").append(getUrl(url)), Layout.YELLOW);
     }
 
     static {
