@@ -22,7 +22,7 @@ package club.mcams.carpet.observers.rule.largeEnderChest;
 
 import carpet.settings.ParsedRule;
 
-import club.mcams.carpet.settings.SimpleRuleObserver;
+import club.mcams.carpet.settings.RuleObserver;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
@@ -31,7 +31,7 @@ import club.mcams.carpet.utils.MinecraftServerUtil;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.BaseText;
 
-public class LargeEnderChestRuleObserver extends SimpleRuleObserver<Boolean> {
+public class LargeEnderChestRuleObserver extends RuleObserver<Boolean> {
     private static final Translator tr = new Translator("validator.largeEnderChest");
 
     @Override

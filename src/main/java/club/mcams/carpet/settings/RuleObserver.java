@@ -44,4 +44,12 @@ public abstract class RuleObserver<T> extends Validator<T> {
         return rule.name;
         //#endif
     }
+
+    public T getDefaultValue(ParsedRule<T> rule) {
+        //#if MC>=11900
+        //$$ return rule.defaultValue();
+        //#else
+        return rule.defaultValue;
+        //#endif
+    }
 }
