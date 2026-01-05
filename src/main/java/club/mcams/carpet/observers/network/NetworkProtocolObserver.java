@@ -26,18 +26,18 @@ import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.settings.SimpleRuleObserver;
 import club.mcams.carpet.utils.MinecraftServerUtil;
+import club.mcams.carpet.settings.RuleObserver;
 
 import net.minecraft.server.command.ServerCommandSource;
 
-public class NetworkProtocolObserver extends SimpleRuleObserver<Object> {
+public class NetworkProtocolObserver extends RuleObserver<Object> {
     private final Translator tr = new Translator("validator.amsNetworkProtocol");
 
     @Override
     public void onValueChange(ServerCommandSource source, ParsedRule<Object> rule, Object oldValue, Object newValue) {
-        if (!AmsServerSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning()) {
-            Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", getRuleName(rule)), Layout.YELLOW));
+        if (!AmsServerSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning() && newValue != this.getDefaultValue(rule) && newValue != oldValue) {
+            Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", this.getRuleName(rule)), Layout.YELLOW));
         }
     }
 }
