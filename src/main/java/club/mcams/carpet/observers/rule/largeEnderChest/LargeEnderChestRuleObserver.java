@@ -32,7 +32,7 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.BaseText;
 
 public class LargeEnderChestRuleObserver extends RuleObserver<Boolean> {
-    private static final Translator tr = new Translator("validator.largeEnderChest");
+    private static final Translator tr = new Translator("observer.largeEnderChest");
 
     @Override
     public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {

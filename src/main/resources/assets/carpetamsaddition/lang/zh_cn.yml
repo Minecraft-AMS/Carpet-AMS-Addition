@@ -214,15 +214,17 @@ carpetamsaddition:
       value_range: '设定的值必须为 1 - 100 或 0'
     renewableNetherScrap:
       value_range: '设定的值必须为 0 - 1'
+    experimentalMinecartSpeed:
+      value_range: '设定的值必须为 0 - 1000 或 -1'
+
+  observer:
     largeEnderChest:
       switch_tip: '<Carpet AMS Addition> 侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
     amsNetworkProtocol:
-      need_enable_protocol: '<Carpet AMS Addition> 使用%s规则需要启用amsNetworkProtocol规则才能生效'
+      need_enable_protocol: '<Carpet AMS Addition> 已将 %s 重置为默认值，需要先启用amsNetworkProtocol规则'
     need_restart_server_or_client:
       is_client_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启客户端后生效'
       is_server_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启服务器后生效'
-    experimentalMinecartSpeed:
-      value_range: '设定的值必须为 0 - 1000 或 -1'
 
   fuzz:
     command:

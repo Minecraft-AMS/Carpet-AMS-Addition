@@ -37,7 +37,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft >= 1.21.2")
 @SuppressWarnings("unused")
 public class NeedRestartServerOrClientObserver extends RuleObserver<Object> {
-    private static final Translator tr = new Translator("validator.need_restart_server_or_client");
+    private static final Translator tr = new Translator("observer.need_restart_server_or_client");
 
     @Override
     public void onValueChange(ServerCommandSource source, ParsedRule<Object> rule, Object oldValue, Object newValue) {
