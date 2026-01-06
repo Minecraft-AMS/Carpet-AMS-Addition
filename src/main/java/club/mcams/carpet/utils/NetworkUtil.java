@@ -20,22 +20,24 @@
 
 package club.mcams.carpet.utils;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.network.AMS_CustomPayload;
+import club.mcams.carpet.settings.AmsRuleCategory;
+import club.mcams.carpet.settings.Rule;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-import java.util.Iterator;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.lang.reflect.Field;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NetworkUtil {
     private static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
+    public static final Set<String> AMS_NETWORK_RULE_NAMES = new LinkedHashSet<>();
 
     public enum SendMode {
         FORCE,
@@ -129,5 +131,19 @@ public class NetworkUtil {
         //#else
         //$$ return buf.readString();
         //#endif
+    }
+
+    public static void collectNetworkRuleNames() {
+        for (Field field : AmsServerSettings.class.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Rule.class)) {
+                Rule ruleAnnotation = field.getAnnotation(Rule.class);
+                for (String category : ruleAnnotation.categories()) {
+                    if (category.equals(AmsRuleCategory.AMS_NETWORK)) {
+                        AMS_NETWORK_RULE_NAMES.add(field.getName());
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

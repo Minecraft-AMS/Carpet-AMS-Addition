@@ -32,7 +32,6 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 //#if MC>=12002
 //$$ import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 //#endif
-import club.mcams.carpet.observers.network.NetworkProtocolObserver;
 import club.mcams.carpet.observers.recipe.RecipeRuleObserver;
 import club.mcams.carpet.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import club.mcams.carpet.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
@@ -649,15 +648,6 @@ public class AmsServerSettings {
     //$$ public static int experimentalMinecartSpeed = -1;
     //#endif
 
-    //#if MC>=12102
-    //$$ @MustSetDefault
-    //$$ @Rule(
-    //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
-    //$$     validators = {NeedRestartServerOrClientObserver.class, NetworkProtocolObserver.class}
-    //$$ )
-    //$$ public static boolean experimentalMinecartEnabled = false;
-    //#endif
-
     /*
      * AMS网络协议规则
      */
@@ -668,32 +658,37 @@ public class AmsServerSettings {
     public static boolean amsNetworkProtocol = false;
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
     public static String commandAmspDebug = "false";
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, FEATURE, SURVIVAL, AMS_NETWORK, COMMAND}
     )
     public static String commandCustomBlockHardness = "false";
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
     public static String commandGetClientPlayerFps = "false";
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
     public static String commandSetPlayerPose = "false";
+
+    //#if MC>=12102
+    //$$ @MustSetDefault
+    //$$ @Rule(
+    //$$     categories = {AMS, FEATURE, EXPERIMENTAL, AMS_NETWORK},
+    //$$     validators = NeedRestartServerOrClientObserver.class
+    //$$ )
+    //$$ public static boolean experimentalMinecartEnabled = false;
+    //#endif
 
     /*
      * 区块加载规则
