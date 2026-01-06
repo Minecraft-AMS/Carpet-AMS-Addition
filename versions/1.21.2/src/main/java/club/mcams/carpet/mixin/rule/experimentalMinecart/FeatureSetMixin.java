@@ -20,24 +20,41 @@
 
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.llamalad7.mixinextras.sugar.Local;
+import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.AmsServerStaticSettings;
+
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
+
+import static club.mcams.carpet.AmsServerStaticSettings.Rule.EXPERIMENTAL_MINECART_ENABLED;
 
 @Mixin(FeatureSet.class)
 public abstract class FeatureSetMixin {
-    @ModifyReturnValue(method = "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;", at = @At("RETURN"))
-    private static FeatureSet noCheckFlag(FeatureSet original, @Local(argsOnly = true) FeatureFlag flag) {
+    @WrapMethod(method = "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;")
+    private static FeatureSet noCheckExperimentalMinecartFlag(FeatureFlag flag, Operation<FeatureSet> original) {
         if (flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
             return FeatureSet.of(FeatureFlags.VANILLA);
         } else {
-            return original;
+            return original.call(flag);
         }
+    }
+
+    @WrapMethod(method = "contains")
+    private boolean includeExperimentalMinecart(FeatureFlag flag, Operation<Boolean> original) {
+        if (!AmsServerSettings.experimentalMinecartEnabled) {
+            return original.call(flag);
+        }
+
+        if (AmsServerStaticSettings.isEnabled(EXPERIMENTAL_MINECART_ENABLED)) {
+            return true;
+        }
+
+        return original.call(flag);
     }
 }

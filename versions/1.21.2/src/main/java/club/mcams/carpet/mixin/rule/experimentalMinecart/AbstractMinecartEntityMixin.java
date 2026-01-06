@@ -23,28 +23,31 @@ package club.mcams.carpet.mixin.rule.experimentalMinecart;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.AmsServerStaticSettings;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import net.minecraft.world.World;
 
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+import static club.mcams.carpet.AmsServerStaticSettings.Rule.EXPERIMENTAL_MINECART_ENABLED;
 
 @GameVersion(version = "Minecraft >= 1.21.2")
 @Mixin(AbstractMinecartEntity.class)
 public abstract class AbstractMinecartEntityMixin {
-    @ModifyReturnValue(method = "areMinecartImprovementsEnabled", at = @At("RETURN"))
-    private static boolean setExMinecartEnabled(boolean original) {
+    @WrapMethod(method = "areMinecartImprovementsEnabled")
+    private static boolean setExMinecartEnabled(World world, Operation<Boolean> original) {
         if (!AmsServerSettings.experimentalMinecartEnabled) {
-            return original;
+            return original.call(world);
         }
 
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
+        if (AmsServerStaticSettings.isEnabled(EXPERIMENTAL_MINECART_ENABLED)) {
             return true;
         }
 
-        return original;
+        return original.call(world);
     }
 }
