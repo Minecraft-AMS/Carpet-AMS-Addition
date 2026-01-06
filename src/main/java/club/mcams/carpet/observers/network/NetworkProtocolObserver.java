@@ -32,11 +32,14 @@ import club.mcams.carpet.settings.RuleObserver;
 import net.minecraft.server.command.ServerCommandSource;
 
 public class NetworkProtocolObserver extends RuleObserver<Object> {
-    private final Translator tr = new Translator("validator.amsNetworkProtocol");
+    private final Translator tr = new Translator("observer.amsNetworkProtocol");
 
     @Override
     public void onValueChange(ServerCommandSource source, ParsedRule<Object> rule, Object oldValue, Object newValue) {
-        if (!AmsServerSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning() && newValue != this.getDefaultValue(rule) && newValue != oldValue) {
+        if (!AmsServerSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning() && newValue != this.getDefaultValue(rule)) {
+            try {
+                rule.set(source, (String) this.getDefaultValue(rule));
+            } catch (Throwable ignored) {}
             Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", this.getRuleName(rule)), Layout.YELLOW));
         }
     }
