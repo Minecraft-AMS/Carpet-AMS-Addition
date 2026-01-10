@@ -20,8 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
-import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.AmsServerStaticSettings;
+import club.mcams.carpet.AmsServerLazySettings;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
@@ -62,11 +61,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Inject(method = "<init>(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
     private void init1(CallbackInfo ci) {
-        if (!AmsServerSettings.largeShulkerBox) {
-            return;
-        }
-
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
             this.inventory = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
         }
     }
@@ -77,22 +72,14 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Inject(method = "<init>(Lnet/minecraft/util/DyeColor;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
     private void init2(CallbackInfo ci) {
-        if (!AmsServerSettings.largeShulkerBox) {
-            return;
-        }
-
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
             this.inventory = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
         }
     }
 
     @Inject(method = "size", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
-        if (!AmsServerSettings.largeShulkerBox) {
-            return;
-        }
-
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
             cir.setReturnValue(9 * 6);
             cir.cancel();
         }
@@ -100,11 +87,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
 
     @Inject(method = "getAvailableSlots", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
-        if (!AmsServerSettings.largeShulkerBox) {
-            return;
-        }
-
-        if (AmsServerStaticSettings.isEnabled(AmsServerStaticSettings.Rule.LARGE_SHULKER_BOX)) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
             int[] availableSlots = IntStream.range(0, 9 * 6).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();

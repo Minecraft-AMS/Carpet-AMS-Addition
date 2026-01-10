@@ -133,7 +133,7 @@ public class NetworkUtil {
         //#endif
     }
 
-    public static void collectNetworkRuleNames() {
+    public static void collectAmsNetworkRuleNames() {
         for (Field field : AmsServerSettings.class.getDeclaredFields()) {
             if (field.isAnnotationPresent(Rule.class)) {
                 Rule ruleAnnotation = field.getAnnotation(Rule.class);

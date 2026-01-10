@@ -22,19 +22,11 @@ package club.mcams.carpet.mixin.network;
 
 import carpet.settings.ParsedRule;
 import carpet.settings.SettingsManager;
-//#if MC>=11900
-//$$ import carpet.api.settings.InvalidRuleValueException;
-//$$ import org.spongepowered.asm.mixin.Final;
-//$$ import club.mcams.carpet.AmsServer;
-//#endif
 
 import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.Layout;
-import club.mcams.carpet.utils.Messenger;
-import club.mcams.carpet.utils.MinecraftServerUtil;
-import club.mcams.carpet.utils.NetworkUtil;
+import club.mcams.carpet.utils.*;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
@@ -42,12 +34,16 @@ import net.minecraft.server.command.ServerCommandSource;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+//#if MC>=11900
+//$$ import org.spongepowered.asm.mixin.Final;
+//#endif
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Map;
+import java.util.Objects;
 
 @SuppressWarnings({"LoggingSimilarMessage", "PatternVariableCanBeUsed"})
 @Mixin(SettingsManager.class)
@@ -61,12 +57,15 @@ public abstract class Carpet_SettingsManagerMixin {
     @Shadow
     private MinecraftServer server;
 
+    @Shadow
+    protected abstract int setDefault(ServerCommandSource source, ParsedRule<?> parsedRule, String value);
+
     @Unique
     private final Translator tr = new Translator("observer.amsNetworkProtocol");
 
     @Inject(method = "<clinit>", at = @At("TAIL"))
     private static void collectAmsNetworkRuleNames(CallbackInfo ci) {
-        NetworkUtil.collectNetworkRuleNames();
+        NetworkUtil.collectAmsNetworkRuleNames();
     }
 
     @Inject(method = "loadConfigurationFromConf", at = @At("TAIL"))
@@ -95,21 +94,18 @@ public abstract class Carpet_SettingsManagerMixin {
                     continue;
                 }
 
+                if (targetRule.equals(amsNetworkProtocolRule)) {
+                    continue;
+                }
+
+                if (Objects.equals(CarpetUtil.getRuleCurrentValue(targetRule), CarpetUtil.getRuleDefaultValue(targetRule))) {
+                    continue;
+                }
+
                 try {
-                    //#if MC>=11900
-                    //$$ targetRule.set(source, String.valueOf(targetRule.defaultValue()));
-                    //#else
-                    targetRule.set(source, targetRule.defaultAsString);
-                    //#endif
+                    this.setDefault(source, targetRule, CarpetUtil.getRuleDefaultValue(targetRule));
                 } catch (Exception e) {
-                    AmsServer.LOGGER.error(
-                        "Failed to set {} rule to default value",
-                        //#if MC>=11900
-                        //$$ targetRule.name()
-                        //#else
-                        targetRule.name
-                        //#endif
-                    );
+                    AmsServer.LOGGER.error("Failed to set {} rule to default value", ruleName);
                 }
             }
         }
@@ -118,42 +114,17 @@ public abstract class Carpet_SettingsManagerMixin {
     @Inject(method = {"setRule", "setDefault"}, at = @At("HEAD"), cancellable = true)
     private void resetAmsNetworkRulesOnSetRule(ServerCommandSource source, ParsedRule<?> rule, String newValue, CallbackInfoReturnable<Integer> cir) {
         ParsedRule<?> amsNetworkProtocolRule = rules.get("amsNetworkProtocol");
-
-        String ruleName;
-        //#if MC>=11900
-        //$$ ruleName = rule.name();
-        //#else
-        ruleName = rule.name;
-        //#endif
+        String ruleName = CarpetUtil.getRuleName(rule);
 
         if (!NetworkUtil.AMS_NETWORK_RULE_NAMES.contains(ruleName) || rule.equals(amsNetworkProtocolRule)) {
             return;
         }
 
-        if (
-            !AmsServerSettings.amsNetworkProtocol &&
-            //#if MC>=11900
-            //$$ newValue != rule.defaultValue() &&
-            //#else
-            newValue != rule.defaultValue &&
-            //#endif
-            MinecraftServerUtil.serverIsRunning()
-        ) {
+        if (!AmsServerSettings.amsNetworkProtocol && !Objects.equals(newValue, CarpetUtil.getRuleDefaultValue(rule)) && MinecraftServerUtil.serverIsRunning()) {
             try {
-                //#if MC>=11900
-                //$$ rule.set(source, String.valueOf(rule.defaultValue()));
-                //#else
-                rule.set(source, rule.defaultAsString);
-                //#endif
+                rule.set(source, CarpetUtil.getRuleDefaultValue(rule));
             } catch (Exception e) {
-                AmsServer.LOGGER.error(
-                    "Failed to set {} rule to default value",
-                    //#if MC>=11900
-                    //$$ rule.name()
-                    //#else
-                    rule.name
-                    //#endif
-                );
+                AmsServer.LOGGER.error("Failed to set {} rule to default value", ruleName);
             }
 
             Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", ruleName), Layout.YELLOW));
