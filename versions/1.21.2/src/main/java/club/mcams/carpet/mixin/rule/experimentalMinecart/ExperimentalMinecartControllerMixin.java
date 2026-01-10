@@ -32,10 +32,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21.2")
-@Mixin(value = ExperimentalMinecartController.class, priority = 1024)
+@Mixin(value = ExperimentalMinecartController.class, priority = 168)
 public abstract class ExperimentalMinecartControllerMixin implements MinecartControllerAccessor {
     @ModifyReturnValue(method = "getMaxSpeed", at = @At("RETURN"))
-    private double setMaxSpeed(double original) {
+    private double setExMinecartMaxSpeed(double original) {
         if (AmsServerSettings.experimentalMinecartSpeed != -1.0D && AmsServerSettings.experimentalMinecartEnabled) {
             return AmsServerSettings.experimentalMinecartSpeed * (this.getMinecart().isTouchingWater() ? (double)0.5F : (double)1.0F) / (double)20.0F;
         } else {

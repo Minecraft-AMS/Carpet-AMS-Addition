@@ -20,41 +20,38 @@
 
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
-import club.mcams.carpet.AmsServerSettings;
-import club.mcams.carpet.AmsServerStaticSettings;
+import club.mcams.carpet.AmsServerLazySettings;
 
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 
 import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.resource.featuretoggle.FeatureSet;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
 
-import static club.mcams.carpet.AmsServerStaticSettings.Rule.EXPERIMENTAL_MINECART_ENABLED;
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@Mixin(FeatureSet.class)
+@GameVersion(version = "Minecraft >= 1.21.2")
+@Mixin(value = FeatureSet.class, priority = 168)
 public abstract class FeatureSetMixin {
-    @WrapMethod(method = "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;")
-    private static FeatureSet noCheckExperimentalMinecartFlag(FeatureFlag flag, Operation<FeatureSet> original) {
-        if (flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
+    @ModifyReturnValue(method = "of(Lnet/minecraft/resource/featuretoggle/FeatureFlag;)Lnet/minecraft/resource/featuretoggle/FeatureSet;", at = @At("RETURN"))
+    private static FeatureSet beVanilla(FeatureSet original, @Local(argsOnly = true) FeatureFlag flag) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED) && flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
             return FeatureSet.of(FeatureFlags.VANILLA);
         } else {
-            return original.call(flag);
+            return original;
         }
     }
 
-    @WrapMethod(method = "contains")
-    private boolean includeExperimentalMinecart(FeatureFlag flag, Operation<Boolean> original) {
-        if (!AmsServerSettings.experimentalMinecartEnabled) {
-            return original.call(flag);
-        }
-
-        if (AmsServerStaticSettings.isEnabled(EXPERIMENTAL_MINECART_ENABLED)) {
+    @ModifyReturnValue(method = "contains", at = @At("RETURN"))
+    private boolean includeExperimentalMinecart(boolean original, @Local(argsOnly = true) FeatureFlag flag) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED) && flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
             return true;
+        } else {
+            return original;
         }
-
-        return original.call(flag);
     }
 }

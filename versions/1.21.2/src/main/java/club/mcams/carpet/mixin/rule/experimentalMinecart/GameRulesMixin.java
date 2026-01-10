@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,26 +20,29 @@
 
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
-import club.mcams.carpet.AmsServerLazySettings;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.resource.featuretoggle.FeatureFlag;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
+import net.minecraft.world.GameRules;
 
-import net.minecraft.entity.vehicle.AbstractMinecartEntity;
-
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
+
 import org.spongepowered.asm.mixin.injection.At;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.21.2")
-@Mixin(value = AbstractMinecartEntity.class, priority = 168)
-public abstract class AbstractMinecartEntityMixin {
-    @ModifyReturnValue(method = "areMinecartImprovementsEnabled", at = @At("RETURN"))
-    private static boolean setExMinecartEnabled(boolean original) {
-        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
-            return true;
-        } else {
-            return original;
-        }
+@Mixin(value = GameRules.class, priority = 168)
+public abstract class GameRulesMixin {
+    @WrapOperation(
+        method = "<clinit>",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/resource/featuretoggle/FeatureFlags;MINECART_IMPROVEMENTS:Lnet/minecraft/resource/featuretoggle/FeatureFlag;",
+            opcode = Opcodes.GETSTATIC
+        )
+    )
+    private static FeatureFlag beVanilla(Operation<FeatureFlag> original) {
+        return FeatureFlags.VANILLA;
     }
 }

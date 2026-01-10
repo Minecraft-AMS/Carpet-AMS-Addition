@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,19 +18,25 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.rule.experimentalMinecart;
+package club.mcams.carpet.helpers;
 
-import net.minecraft.entity.vehicle.AbstractMinecartEntity;
-import net.minecraft.entity.vehicle.MinecartController;
+import club.mcams.carpet.utils.MinecraftServerUtil;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
+import net.minecraft.server.MinecraftServer;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+import org.jetbrains.annotations.Nullable;
 
-@GameVersion(version = "Minecraft >= 1.21.2")
-@Mixin(value = MinecartController.class, priority = 1688)
-public interface MinecartControllerAccessor {
-    @Accessor("minecart")
-    AbstractMinecartEntity getMinecart();
+import java.util.concurrent.atomic.AtomicBoolean;
+
+public class FeatureChecker {
+    public static final AtomicBoolean EX_MINECART_FEATURE = new AtomicBoolean(false);
+
+    public static boolean hasMinecartImprovements(@Nullable MinecraftServer server) {
+        if (MinecraftServerUtil.serverIsRunning(server)) {
+            return server.getSaveProperties().getEnabledFeatures().contains(FeatureFlags.MINECART_IMPROVEMENTS);
+        }
+
+        return false;
+    }
 }

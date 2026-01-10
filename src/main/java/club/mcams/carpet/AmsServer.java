@@ -31,6 +31,9 @@ import club.mcams.carpet.commands.rule.commandPlayerLeader.LeaderCommandRegistry
 import club.mcams.carpet.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
 import club.mcams.carpet.config.LoadConfigFromJson;
 import club.mcams.carpet.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
+//#if MC>=12102
+//$$ import club.mcams.carpet.helpers.FeatureChecker;
+//#endif
 import club.mcams.carpet.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import club.mcams.carpet.helpers.rule.recipeRule.RecipeRuleHelper;
 import club.mcams.carpet.logging.AmsCarpetLoggerRegistry;
@@ -111,10 +114,6 @@ public class AmsServer implements CarpetExtension {
         LeaderCommandRegistry.tick();
     }
 
-    public void afterCarpetLoadConfigurationFromConf() {
-        AmsServerStaticSettings.addStaticSettings();
-    }
-
     @Override
     public void registerLoggers() {
         AmsCarpetLoggerRegistry.registerLoggers();
@@ -156,7 +155,7 @@ public class AmsServer implements CarpetExtension {
         NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(AmsServerMod.getVersion(), NetworkUtil.getServerSupportState()), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUuid()), NetworkUtil.SendMode.NEED_SUPPORT);
-        NetworkUtil.sendS2CPacket(player, StaticSettingsPayload_S2C.create(AmsServerStaticSettings.RULES), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(player, StaticSettingsPayload_S2C.create(AmsServerLazySettings.RULES), NetworkUtil.SendMode.NEED_SUPPORT);
     }
 
     @Override
@@ -175,6 +174,12 @@ public class AmsServer implements CarpetExtension {
     public void onServerLoaded(MinecraftServer server) {
         minecraftServer = server;
         serverStartTimeMillis = System.currentTimeMillis();
+        AmsServerLazySettings.initRules();
+        //#if MC>=12102
+        //$$ if (FeatureChecker.hasMinecartImprovements(server)) {
+        //$$     FeatureChecker.EX_MINECART_FEATURE.set(true);
+        //$$ }
+        //#endif
     }
 
     @Override

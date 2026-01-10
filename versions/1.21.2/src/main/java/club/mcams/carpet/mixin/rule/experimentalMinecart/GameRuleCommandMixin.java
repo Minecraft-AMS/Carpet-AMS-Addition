@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.helpers.FeatureChecker;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
@@ -40,7 +41,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = GameRuleCommand.class, priority = 1024)
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21.2")
+@Mixin(value = GameRuleCommand.class, priority = 168)
 public abstract class GameRuleCommandMixin {
     @Unique
     private static final Translator tr = new Translator("rule.experimentalMinecartSpeed");
@@ -58,6 +62,11 @@ public abstract class GameRuleCommandMixin {
         if (AmsServerSettings.experimentalMinecartEnabled && AmsServerSettings.experimentalMinecartSpeed != -1.0D && key.equals(GameRules.MINECART_MAX_SPEED)) {
             Messenger.tell(context.getSource(), Messenger.f(tr.tr("vanilla_command_disabled"), Layout.RED));
             cir.setReturnValue(0);
+            cir.cancel();
+        }
+
+        if (!FeatureChecker.EX_MINECART_FEATURE.get()) {//Minecart improvements have not been introduced
+            Messenger.tell(context.getSource(), Messenger.f(tr.tr("not_introduced"), Layout.RED));
             cir.cancel();
         }
     }

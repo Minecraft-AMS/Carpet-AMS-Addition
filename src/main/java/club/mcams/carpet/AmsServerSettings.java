@@ -648,6 +648,15 @@ public class AmsServerSettings {
     //$$ public static int experimentalMinecartSpeed = -1;
     //#endif
 
+    //#if MC>=12102
+    //$$ @MustSetDefault
+    //$$ @Rule(
+    //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
+    //$$     validators = NeedRestartServerOrClientObserver.class
+    //$$ )
+    //$$ public static boolean experimentalMinecartEnabled = false;
+    //#endif
+
     /*
      * AMS网络协议规则
      */
@@ -680,15 +689,6 @@ public class AmsServerSettings {
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
     public static String commandSetPlayerPose = "false";
-
-    //#if MC>=12102
-    //$$ @MustSetDefault
-    //$$ @Rule(
-    //$$     categories = {AMS, FEATURE, EXPERIMENTAL, AMS_NETWORK},
-    //$$     validators = NeedRestartServerOrClientObserver.class
-    //$$ )
-    //$$ public static boolean experimentalMinecartEnabled = false;
-    //#endif
 
     /*
      * 区块加载规则

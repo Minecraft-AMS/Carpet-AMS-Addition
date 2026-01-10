@@ -18,13 +18,13 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.hooks.settings;
+package club.mcams.carpet.mixin.util.settings;
 
 import carpet.settings.ParsedRule;
 import carpet.settings.SettingsManager;
 
-import club.mcams.carpet.AmsServer;
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.CarpetUtil;
 
 import net.minecraft.server.command.ServerCommandSource;
 
@@ -32,7 +32,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SettingsManager.class)
@@ -41,20 +40,9 @@ public abstract class Carpet_SettingsManagerMixin {
     protected abstract int setDefault(ServerCommandSource source, ParsedRule<?> rule, String value);
 
     @Inject(method = "setRule", at = @At("RETURN"))
-    private void alwaysSetDefaultRule(ServerCommandSource source, ParsedRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
-        if (
-            //#if MC>=11900
-            //$$ AmsServerSettings.MUST_SET_DEFAULT_RULES.contains(rule.name())
-            //#else
-            AmsServerSettings.MUST_SET_DEFAULT_RULES.contains(rule.name)
-            //#endif
-        ) {
+    private void isMustSetDefaultRule(ServerCommandSource source, ParsedRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
+        if (AmsServerSettings.MUST_SET_DEFAULT_RULES.contains(CarpetUtil.getRuleName(rule))) {
             this.setDefault(source, rule, value);
         }
-    }
-
-    @Inject(method = "loadConfigurationFromConf", at = @At("TAIL"))
-    private void loadStaticAMSRule(CallbackInfo ci) {
-        AmsServer.getInstance().afterCarpetLoadConfigurationFromConf();
     }
 }

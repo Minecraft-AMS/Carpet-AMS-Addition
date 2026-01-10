@@ -20,20 +20,19 @@
 
 package club.mcams.carpet.network.payloads.core;
 
-import club.mcams.carpet.AmsServerStaticSettings;
+import club.mcams.carpet.AmsServerLazySettings;
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 
 import net.minecraft.network.PacketByteBuf;
 
 import java.util.EnumSet;
-import java.util.Set;
 
 public class StaticSettingsPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.STATIC_SETTINGS_S2C.getId();
-    private final Set<AmsServerStaticSettings.Rule> rules;
+    private final EnumSet<AmsServerLazySettings.Rule> rules;
 
-    private StaticSettingsPayload_S2C(EnumSet<AmsServerStaticSettings.Rule> rules) {
+    private StaticSettingsPayload_S2C(EnumSet<AmsServerLazySettings.Rule> rules) {
         super(ID);
         this.rules = EnumSet.copyOf(rules);
     }
@@ -42,11 +41,11 @@ public class StaticSettingsPayload_S2C extends AMS_CustomPayload {
         super(ID);
 
         int size = buf.readVarInt();
-        this.rules = EnumSet.noneOf(AmsServerStaticSettings.Rule.class);
+        this.rules = EnumSet.noneOf(AmsServerLazySettings.Rule.class);
 
         for (int i = 0; i < size; i++) {
             String ruleName = buf.readString();
-            AmsServerStaticSettings.Rule rule = AmsServerStaticSettings.Rule.valueOf(ruleName);
+            AmsServerLazySettings.Rule rule = AmsServerLazySettings.Rule.valueOf(ruleName);
             rules.add(rule);
         }
     }
@@ -55,22 +54,22 @@ public class StaticSettingsPayload_S2C extends AMS_CustomPayload {
     protected void writeData(PacketByteBuf buf) {
         buf.writeVarInt(rules.size());
 
-        for (AmsServerStaticSettings.Rule rule : rules) {
+        for (AmsServerLazySettings.Rule rule : rules) {
             buf.writeString(rule.name());
         }
     }
 
     @Override
     public void handle() {
-        AmsServerStaticSettings.RULES.clear();
-        AmsServerStaticSettings.RULES.addAll(this.rules);
+        AmsServerLazySettings.clear();
+        AmsServerLazySettings.addAll(this.rules);
     }
 
     public static void register() {
         AMS_PayloadManager.register(ID, StaticSettingsPayload_S2C::new);
     }
 
-    public static StaticSettingsPayload_S2C create(EnumSet<AmsServerStaticSettings.Rule> rules) {
+    public static StaticSettingsPayload_S2C create(EnumSet<AmsServerLazySettings.Rule> rules) {
         return new StaticSettingsPayload_S2C(rules);
     }
 }
