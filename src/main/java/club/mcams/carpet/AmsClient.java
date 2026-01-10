@@ -70,6 +70,10 @@ public class AmsClient implements ClientModInitializer {
 
     public void onDisconnect() {
         NetworkUtil.setServerSupport(false);
-        AmsServerStaticSettings.RULES.clear();
+        AmsServerLazySettings.clear();
+    }
+
+    public void onTick() {
+        // On client tick
     }
 }
