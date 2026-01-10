@@ -65,8 +65,7 @@ public abstract class GameRuleCommandMixin {
             cir.cancel();
         }
 
-        if (!FeatureChecker.EX_MINECART_FEATURE.get()) {//Minecart improvements have not been introduced
-            Messenger.tell(context.getSource(), Messenger.f(tr.tr("not_introduced"), Layout.RED));
+        if (!FeatureChecker.EX_MINECART_FEATURE.get()) {
             cir.cancel();
         }
     }
