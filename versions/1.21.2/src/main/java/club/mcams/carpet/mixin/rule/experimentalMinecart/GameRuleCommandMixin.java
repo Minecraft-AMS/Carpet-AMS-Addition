@@ -66,6 +66,7 @@ public abstract class GameRuleCommandMixin {
         }
 
         if (!FeatureChecker.EX_MINECART_FEATURE.get()) {
+            cir.setReturnValue(0);
             cir.cancel();
         }
     }
