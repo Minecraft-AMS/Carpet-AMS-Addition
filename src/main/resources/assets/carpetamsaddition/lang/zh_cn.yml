@@ -738,7 +738,7 @@ carpetamsaddition:
         desc: 防止服务器60s后暂停
       flippinCactusExtras:
         name: 仙人掌扳手拓展
-        desc: 使flippin仙人掌规则能适用于更多方块
+        desc: 使仙人掌扳手能适用于更多方块
         extra:
           '0': '受影响的方块:'
           '1': '木桶、雕文书架、合成器、展示架'
@@ -749,10 +749,16 @@ carpetamsaddition:
           '0': '启用该规则将覆盖游戏规则'
       experimentalMinecartEnabled:
         name: 启用实验性矿车
-        desc: 启用实验性矿车（需客户端支持以确保矿车渲染正常）
+        desc: 启用实验性矿车
         extra:
           '0': '服务器环境切换该规则设置时需要重启服务器'
           '1': '客户端环境切换该规则设置时需要重启客户端'
+      amsTranslationMode:
+        name: AMS翻译模式
+        desc: 切换Carpet AMS Addition的翻译模式
+        extra:
+          '0': '[client] - 优先使用客户端自己的语言向客户端发送翻译文本'
+          '1': '[server] - 统一使用服务端设置的语言进行翻译'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -868,5 +874,3 @@ carpetamsaddition:
       testRule:
         name: 测试用规则
         desc: 仅用于测试，没有什么作用
-      amsTranslationSide:
-        desc: Just for test

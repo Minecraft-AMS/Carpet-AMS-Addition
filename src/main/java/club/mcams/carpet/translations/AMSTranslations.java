@@ -123,7 +123,7 @@ public class AMSTranslations {
         String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
         String serverLang = AMSTranslations.getServerLanguage();
 
-        if (AmsServerSettings.amsTranslationSide == AmsServerSettings.translationSides.SERVER) {
+        if (AmsServerSettings.amsTranslationMode == AmsServerSettings.translationModes.SERVER) {
             return translateTextComponent(text, serverLang);
         }
 

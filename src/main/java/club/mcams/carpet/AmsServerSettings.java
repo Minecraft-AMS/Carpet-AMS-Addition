@@ -657,6 +657,9 @@ public class AmsServerSettings {
     //$$ public static boolean experimentalMinecartEnabled = false;
     //#endif
 
+    @Rule(categories = AMS)
+    public static translationModes amsTranslationMode = translationModes.CLIENT;
+
     /*
      * AMS网络协议规则
      */
@@ -810,7 +813,7 @@ public class AmsServerSettings {
         ALL
     }
 
-    public enum translationSides {
+    public enum translationModes {
         CLIENT,
         SERVER
     }
@@ -818,9 +821,6 @@ public class AmsServerSettings {
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
     public static boolean testRule = false;
-
-    @Rule(categories = AMS)
-    public static translationSides amsTranslationSide = translationSides.CLIENT;
 
     static {
         for (Field field : AmsServerSettings.class.getDeclaredFields()) {
