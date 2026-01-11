@@ -20,6 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
+import club.mcams.carpet.AmsServerLazySettings;
 import club.mcams.carpet.AmsServerSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -36,7 +37,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class ExperimentalMinecartControllerMixin implements MinecartControllerAccessor {
     @ModifyReturnValue(method = "getMaxSpeed", at = @At("RETURN"))
     private double setExMinecartMaxSpeed(double original) {
-        if (AmsServerSettings.experimentalMinecartSpeed != -1.0D && AmsServerSettings.experimentalMinecartEnabled) {
+        if (AmsServerSettings.experimentalMinecartSpeed != -1.0D && AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
             return AmsServerSettings.experimentalMinecartSpeed * (this.getMinecart().isTouchingWater() ? (double)0.5F : (double)1.0F) / (double)20.0F;
         } else {
             return original;
