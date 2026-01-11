@@ -51,7 +51,7 @@ public class ClientPlayerFpsPayload_S2C extends AMS_CustomPayload {
     @Override
     public void handle() {
         NetworkUtil.executeOnClientThread(() ->
-            NetworkUtil.sendC2SPacketIfSupport(MinecraftClientUtil.getCurrentPlayer(), ClientPlayerFpsPayload_C2S.create(this.uuid, MinecraftClientUtil.getClientFps()))
+            NetworkUtil.sendC2SPacket(MinecraftClientUtil.getCurrentPlayer(), ClientPlayerFpsPayload_C2S.create(this.uuid, MinecraftClientUtil.getClientFps()), NetworkUtil.SendMode.NEED_SUPPORT)
         );
     }
 

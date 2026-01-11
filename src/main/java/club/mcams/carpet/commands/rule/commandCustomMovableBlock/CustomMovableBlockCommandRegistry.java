@@ -24,6 +24,7 @@ import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
 import club.mcams.carpet.config.rule.commandCustomMovableBlock.CustomMovableBlockConfig;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.RegexTools;
 
@@ -31,15 +32,11 @@ import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.command.argument.BlockStateArgumentType;
-import net.minecraft.entity.player.PlayerEntity;
 //#if MC>=11900
 //$$ import net.minecraft.command.CommandRegistryAccess;
 //#endif
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Style;
-import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +45,7 @@ import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class CustomMovableBlockCommandRegistry {
-    private static final Translator translator = new Translator("command.customMovableBlock");
-    private static final String MSG_HEAD = "<customMovableBlock> ";
+    private static final Translator tr = new Translator("command.customMovableBlock");
     public static final List<String> CUSTOM_MOVABLE_BLOCKS = new ArrayList<>();
 
     //#if MC<11900
@@ -67,7 +63,7 @@ public class CustomMovableBlockCommandRegistry {
             //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
             //#endif
             .executes(context -> add(
-                context.getSource().getPlayer(),
+                context.getSource(),
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState()
             ))))
             .then(literal("remove")
@@ -77,79 +73,75 @@ public class CustomMovableBlockCommandRegistry {
             //$$ .then(argument("block", BlockStateArgumentType.blockState(commandRegistryAccess))
             //#endif
             .executes(context -> remove(
-                context.getSource().getPlayer(),
+                context.getSource(),
                 BlockStateArgumentType.getBlockState(context, "block").getBlockState())
             )))
             .then(literal("removeAll")
-            .executes(context -> removeAll(context.getSource().getPlayer())))
+            .executes(context -> removeAll(context.getSource())))
             .then(literal("list")
-            .executes(context -> list(context.getSource().getPlayer())))
+            .executes(context -> list(context.getSource())))
             .then(literal("help")
-            .executes(context -> help(context.getSource().getPlayer())))
+            .executes(context -> help(context.getSource())))
         );
     }
 
-    private static int add(PlayerEntity player, BlockState blockState) {
+    private static int add(ServerCommandSource source, BlockState blockState) {
         if (!CUSTOM_MOVABLE_BLOCKS.contains(getBlockName(blockState))) {
             CUSTOM_MOVABLE_BLOCKS.add(getBlockName(blockState));
             saveToJson();
-            player.sendMessage(Messenger.s(MSG_HEAD + "+ " + getBlockName(blockState)).formatted(Formatting.GREEN), false);
+            Messenger.tell(source, Messenger.f(tr.tr("add", getBlockName(blockState)), Layout.GREEN));
         } else {
-            player.sendMessage(
-                Messenger.s(
-                    MSG_HEAD + getBlockName(blockState) + translator.tr("already_exists").getString()
-                ).formatted(Formatting.YELLOW), false
-            );
+            Messenger.tell(source, Messenger.f(tr.tr("already_exists", getBlockName(blockState)), Layout.YELLOW));
         }
+
         return 1;
     }
 
-    private static int remove(PlayerEntity player, BlockState blockState) {
+    private static int remove(ServerCommandSource source, BlockState blockState) {
         if (CUSTOM_MOVABLE_BLOCKS.contains(getBlockName(blockState))) {
             CUSTOM_MOVABLE_BLOCKS.remove(getBlockName(blockState));
             saveToJson();
-            player.sendMessage(Messenger.s(MSG_HEAD + "- " + getBlockName(blockState)).formatted(Formatting.RED), false);
+            Messenger.tell(source, Messenger.f(tr.tr("remove", getBlockName(blockState)), Layout.RED));
         } else {
-            player.sendMessage(Messenger.s(MSG_HEAD + getBlockName(blockState) + translator.tr("not_found").getString()).formatted(Formatting.RED), false);
+            Messenger.tell(source, Messenger.f(tr.tr("not_found", getBlockName(blockState)), Layout.YELLOW));
         }
         return 1;
     }
 
-    private static int removeAll(PlayerEntity player) {
+    private static int removeAll(ServerCommandSource source) {
         CUSTOM_MOVABLE_BLOCKS.clear();
         saveToJson();
-        player.sendMessage(Messenger.s(MSG_HEAD + translator.tr("removeAll").getString()).formatted(Formatting.RED), false);
+        Messenger.tell(source, Messenger.f(tr.tr("removeAll"), Layout.GREEN));
         return 1;
     }
 
-    private static int list(ServerPlayerEntity player) {
-        player.sendMessage(
-            Messenger.s(
-            translator.tr("list").getString() + "\n-------------------------------").formatted(Formatting.GREEN),
-            false
-        );
+    private static int list(ServerCommandSource source) {
+        Messenger.tell(source, Messenger.f(
+            Messenger.c(
+                tr.tr("list"),
+                Messenger.endl(),
+                Messenger.dline()
+            ), Layout.GREEN
+        ));
+
         for (String blockName : CUSTOM_MOVABLE_BLOCKS) {
-            player.sendMessage(Messenger.s(blockName).formatted(Formatting.GREEN), false);
+            Messenger.tell(source, Messenger.f(Messenger.s(blockName), Layout.GREEN));
         }
+
         return 1;
     }
 
     @SuppressWarnings("DuplicatedCode")
-    private static int help(ServerPlayerEntity player) {
-        String setHelpText = translator.tr("help.set").getString();
-        String removeHelpText = translator.tr("help.remove").getString();
-        String removeAllHelpText = translator.tr("help.removeAll").getString();
-        String listHelpText = translator.tr("help.list").getString();
-        player.sendMessage(
-            Messenger.s(
-                "\n" +
-                setHelpText + "\n" +
-                removeHelpText + "\n" +
-                removeAllHelpText + "\n" +
-                listHelpText
-            ).setStyle(Style.EMPTY.withColor(Formatting.GRAY)),
-            false
-        );
+    private static int help(ServerCommandSource source) {
+        Messenger.tell(source, Messenger.f(
+            Messenger.c(
+                tr.tr("help.set"), Messenger.endl(),
+                tr.tr("help.remove"), Messenger.endl(),
+                tr.tr("help.removeAll"), Messenger.endl(),
+                tr.tr("help.list"), Messenger.endl()
+            ), Layout.GRAY
+        ));
+
         return 1;
     }
 

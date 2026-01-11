@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,16 +18,34 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.settings;
+package club.mcams.carpet.utils;
 
 import carpet.settings.ParsedRule;
 
-import net.minecraft.server.command.ServerCommandSource;
+import org.jetbrains.annotations.NotNull;
 
-public abstract class SimpleRuleObserver<T> extends RuleObserver<T> {
-    @Override
-    public T validate(ServerCommandSource source, ParsedRule<T> rule, T newValue, String userInput) {
-        onValueChange(source, rule, rule.get(), newValue);
-        return newValue;
+public class CarpetUtil {
+    public static String getRuleName(@NotNull ParsedRule<?> rule) {
+        //#if MC>=11900
+        //$$ return rule.name();
+        //#else
+        return rule.name;
+        //#endif
+    }
+
+    public static String getRuleDefaultValue(@NotNull ParsedRule<?> rule) {
+        //#if MC>=11900
+        //$$ return String.valueOf(rule.defaultValue());
+        //#else
+        return rule.defaultAsString;
+        //#endif
+    }
+
+    public static String getRuleCurrentValue(@NotNull ParsedRule<?> rule) {
+        //#if MC>=11900
+        //$$ return String.valueOf(rule.value());
+        //#else
+        return rule.getAsString();
+        //#endif
     }
 }

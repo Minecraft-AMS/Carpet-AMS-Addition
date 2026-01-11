@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2023  A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -11,11 +11,11 @@
  *
  * Carpet AMS Addition is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
+ * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
 package club.mcams.carpet.mixin.translations;
@@ -37,7 +37,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft >= 1.19")
 @Mixin(HUDController.class)
 public abstract class HUDControllerMixin {
-    @ModifyVariable(method = "addMessage", at = @At("HEAD"), argsOnly = true, remap = false)
+    @ModifyVariable(method = "addMessage", at = @At("HEAD"), argsOnly = true, remap = false, name = "arg1")
     private static Text applyAMSTranslationToHudLoggerMessage(Text hudMessage, ServerPlayerEntity player, Text hudMessage_) {
         if (player != null) {
             hudMessage = AMSTranslations.translate((MutableText) hudMessage, player);

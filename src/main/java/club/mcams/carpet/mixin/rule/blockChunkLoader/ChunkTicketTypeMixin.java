@@ -28,4 +28,4 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.21.5")
 @Mixin(DummyClass.class)
-public class ChunkTicketTypeMixin {}
+public abstract class ChunkTicketTypeMixin {}

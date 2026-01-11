@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
-import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.AmsServerLazySettings;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
@@ -55,16 +55,15 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Shadow
     private DefaultedList<ItemStack> inventory;
 
-    @Shadow
-    public abstract int size();
-
     //#if MC<11700
     //$$ @Inject(method = "<init>()V", at = @At("RETURN"))
     //#else
     @Inject(method = "<init>(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
     private void init1(CallbackInfo ci) {
-        this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
+            this.inventory = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
+        }
     }
 
     //#if MC<11700
@@ -73,12 +72,14 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
     @Inject(method = "<init>(Lnet/minecraft/util/DyeColor;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;)V", at = @At("RETURN"))
     //#endif
     private void init2(CallbackInfo ci) {
-        this.inventory = DefaultedList.ofSize(size(), ItemStack.EMPTY);
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
+            this.inventory = DefaultedList.ofSize(9 * 6, ItemStack.EMPTY);
+        }
     }
 
     @Inject(method = "size", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
-        if (AmsServerSettings.largeShulkerBox) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
             cir.setReturnValue(9 * 6);
             cir.cancel();
         }
@@ -86,8 +87,8 @@ public abstract class ShulkerBoxBlockEntityMixin extends LootableContainerBlockE
 
     @Inject(method = "getAvailableSlots", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
-        if (AmsServerSettings.largeShulkerBox) {
-            int[] availableSlots = IntStream.range(0, size()).toArray();
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
+            int[] availableSlots = IntStream.range(0, 9 * 6).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();
         }

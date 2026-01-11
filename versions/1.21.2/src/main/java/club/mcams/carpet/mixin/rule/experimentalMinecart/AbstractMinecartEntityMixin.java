@@ -18,22 +18,28 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.observers.network;
+package club.mcams.carpet.mixin.rule.experimentalMinecart;
 
-import carpet.settings.ParsedRule;
+import club.mcams.carpet.AmsServerLazySettings;
 
-import club.mcams.carpet.utils.NetworkUtil;
-import club.mcams.carpet.settings.RuleObserver;
-import club.mcams.carpet.utils.MinecraftServerUtil;
-import club.mcams.carpet.network.payloads.handshake.RequestHandShakeS2CPayload;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 
-public class AmsNetworkProtocolRuleObserver extends RuleObserver<Boolean> {
-    @Override
-    public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
-        if (MinecraftServerUtil.serverIsRunning()) {
-            NetworkUtil.forcedBroadcastDataPack(MinecraftServerUtil.getServer(), RequestHandShakeS2CPayload.create());
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21.2")
+@Mixin(value = AbstractMinecartEntity.class, priority = 168)
+public abstract class AbstractMinecartEntityMixin {
+    @ModifyReturnValue(method = "areMinecartImprovementsEnabled", at = @At("RETURN"))
+    private static boolean setExMinecartEnabled(boolean original) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
+            return true;
+        } else {
+            return original;
         }
     }
 }

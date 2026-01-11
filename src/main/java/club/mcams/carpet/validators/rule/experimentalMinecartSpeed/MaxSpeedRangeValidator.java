@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,26 +18,29 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.observers.network;
+package club.mcams.carpet.validators.rule.experimentalMinecartSpeed;
 
 import carpet.settings.ParsedRule;
+import carpet.settings.Validator;
 
-import club.mcams.carpet.utils.Messenger;
-import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.settings.SimpleRuleObserver;
-import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.util.Formatting;
 
-public class NetworkProtocolObserver extends SimpleRuleObserver<Object> {
-    private final Translator tr = new Translator("validator.amsNetworkProtocol");
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21.2")
+@SuppressWarnings("unused")
+public class MaxSpeedRangeValidator extends Validator<Integer> {
+    private static final Translator translator = new Translator("validator.experimentalMinecartSpeed");
 
     @Override
-    public void onValueChange(ServerCommandSource source, ParsedRule<Object> rule, Object oldValue, Object newValue) {
-        if (!AmsServerSettings.amsNetworkProtocol && MinecraftServerUtil.serverIsRunning()) {
-            Messenger.tell(source, Messenger.formatting(tr.tr("need_enable_protocol", getRuleName(rule)), Formatting.YELLOW));
-        }
+    public Integer validate(ServerCommandSource serverCommandSource, ParsedRule<Integer> parsedRule, Integer integer, String s) {
+        return integer >= -1 && integer <= 1000 ? integer : null;
+    }
+
+    @Override
+    public String description() {
+        return translator.tr("value_range").getString();
     }
 }

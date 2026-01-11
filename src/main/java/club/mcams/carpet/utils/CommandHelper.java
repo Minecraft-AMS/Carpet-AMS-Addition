@@ -46,7 +46,7 @@ import java.util.function.Predicate;
 @SuppressWarnings("EnhancedSwitchMigration")
 public final class CommandHelper {
     public static final List<String> permissionLevels = Arrays.asList("0", "1", "2", "3", "4");
-    private static final Translator translator = new Translator("command.commandHelper");
+    private static final Translator tr = new Translator("command.commandHelper");
 
     private CommandHelper() {}
 
@@ -68,7 +68,7 @@ public final class CommandHelper {
                 }
             }
             server.getPlayerManager().getPlayerList().forEach(serverCommandManager::sendCommandTree);
-            Messenger.sendServerMessage(server, Messenger.s("§o§7Server: " + translator.tr("refresh_cmd_tree").getString()));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), Layout.GRAY), true);
         }
     }
 

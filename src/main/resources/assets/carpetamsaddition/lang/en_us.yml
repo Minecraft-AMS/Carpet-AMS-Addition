@@ -20,26 +20,37 @@ carpetamsaddition:
       copy: 'copy coord to clipboard'
     phantomSpawnAlert:
       msg: '§b<phantomSpawnAlert> §r§e%s §r§dsummoned phantoms §r§e@ §r§a[ %s ]'
+    experimentalMinecartSpeed:
+      vanilla_command_disabled: '<Carpet AMS Addition> The rules of the game have been taken over by the minecartMaxSpeed carpet rules'
 
   command:
     commandHelper:
-      refresh_cmd_tree: 'Commands has been refreshed'
+      refresh_cmd_tree: '<Carpet AMS Addition> Command tree has been refreshed'
 
+    playerChunkLoading:
+      no_player_specified: '<commandPlayerChunkLoadController> No player specified'
+      set: '<commandPlayerChunkLoadController> %s chunk loading %s'
+      chunk_loading_true: '<commandPlayerChunkLoadController> chunk loading: true'
+      chunk_loading_false: '<commandPlayerChunkLoadController> chunk_loading_false'
+      help: '/playerChunkLoading [true/false] - Control chunk loading of player. Can only manipulate yourself'
     amsUpdateSuppressionCrashFixForceMode:
-      lazy_mod: '[ lazy mode ]'
-      force_mod: '[ force mode ]'
+      lazy_mode: '[ lazy mode ]'
+      force_mode: '[ force mode ]'
     anvilInteractionDisabled:
       disable: '[ Anvil Interaction Disable ]'
       enable: '[ Anvil Interaction Enable ]'
     customBlockBlastResistance:
-      not_found: ' not found !'
-      removeAll: 'All custom block blast resistance values have been removed.'
+      modify_set: '<customBlockBlastResistance> %s/%s -> %s/%s'
+      set: '<customBlockBlastResistance> + %s/%s'
+      remove: '<customBlockBlastResistance> - %s/%s'
+      not_found: '<customBlockBlastResistance> %s not found !'
+      removeAll: '<customBlockBlastResistance> All custom block blast resistance values have been removed.'
       list: '[ Block / Blast resistance ]'
       help:
-        set: '/customBlockBlastResistance set <block> <hardness>  ->  Add or modify blocks and their blast resistance'
-        remove: '/customBlockBlastResistance remove <block>  ->  Remove a block from the list'
-        removeAll: '/customBlockBlastResistance removeAll  ->  Remove all blocks from the list'
-        list: '/customBlockBlastResistance list  ->  Display all added blocks'
+        set: '/customBlockBlastResistance set <block> <hardness> - Add or modify blocks and their blast resistance'
+        remove: '/customBlockBlastResistance remove <block> - Remove a block from the list'
+        removeAll: '/customBlockBlastResistance removeAll - Remove all blocks from the list'
+        list: '/customBlockBlastResistance list - Display all added blocks'
     here:
       overworld: 'overworld'
       nether: 'nether'
@@ -56,90 +67,100 @@ carpetamsaddition:
       overworld_button_hover: 'copy overworld coord'
       nether_button_hover: 'copy nether coord'
     leader:
-      add: 'became a tour guide'
-      is_already_leader: 'is already leader'
-      remove: 'not a tour guide anymore'
-      is_not_leader: 'is not leader'
-      removeAll: 'All the guides were dismissed'
-      list: '[ Leader list ]'
+      add: '<commandPlayerLeader> %s became a tour guide'
+      is_already_leader: '<commandPlayerLeader> %s is already leader'
+      remove: '<commandPlayerLeader> %s not a tour guide anymore'
+      is_not_leader: '<commandPlayerLeader> %s is not leader'
+      removeAll: '<commandPlayerLeader> All the guides were dismissed'
+      list_title: '[ Leader list ]'
       help:
-        add: '/leader add <PlayerName>  ->  Add a tour guide'
-        remove: '/leader remove <PlayerName>  ->  Remove a tour guide'
-        removeAll: '/leader removeAll  ->  Remove all tour guide'
-        broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick>  ->  Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting'
-        list: '/leader list  ->  View tour guide list'
+        add: '/leader add <PlayerName> - Add a tour guide'
+        remove: '/leader remove <PlayerName> - Remove a tour guide'
+        removeAll: '/leader removeAll - Remove all tour guide'
+        broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick> - Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting'
+        list: '/leader list - View tour guide list'
     ping:
       stop_ping: 'Ping operation stopped.'
       active_ping_is_null: 'No active ping operation to stop.'
       help:
-        ping: '/pings <targetIpOrDomainName> <pingQuantity>  ->  Ping a specific host'
-        stop: '/pings stop  ->  Interrupt the ping operation'
+        ping: '/pings <targetIpOrDomainName> <pingQuantity> - Ping a specific host'
+        stop: '/pings stop - Interrupt the ping operation'
     getSaveSize:
       size_msg: 'Current save size:'
       save_success_msg: '[ Save world success ]'
       save_fail_msg: '[ Save world failed ]'
     getSystemInfo:
-      os: 'OS:'
-      os_arch: 'Arch:'
-      available_processors: 'Available Processors:'
-      max_memory: 'Max Memory:'
-      total_memory: 'Total Memory:'
-      free_memory: 'Free Memory:'
+      os: 'OS: %s'
+      os_arch: 'Arch: %s'
+      available_processors: 'Available Processors: %s'
+      max_memory: 'Max Memory: %s'
+      total_memory: 'Total Memory: %s'
+      free_memory: 'Free Memory: %s'
     customCommandPermissionLevel:
-      not_found: ' Does not exist in the configuration file'
-      cant_modify_self: 'You cannot modify the permissions of the command'
-      removeAll: 'All entries have been removed'
-      list: '[ Custom command permission level list ]'
+      modify_set: '<customCommandPermissionLevel> %s %d -> %d'
+      set: '<customCommandPermissionLevel> + %s/%d'
+      remove: '<customCommandPermissionLevel> - %s'
+      not_found: '<customCommandPermissionLevel> Command: %s does not exist in the configuration file'
+      cant_modify_self: '<customCommandPermissionLevel> You cannot modify the permissions of the command'
+      removeAll: '<customCommandPermissionLevel> All entries have been removed'
+      list_title: '[ Custom command permission level list ]'
       help:
-        set: '/customCommandPermissionLevel set <command> <permissionLevel>  ->  Set the permission level of a command'
-        remove: '/customCommandPermissionLevel remove <command>  ->  Remove a modified command'
-        refresh: '/customCommandPermissionLevel refresh  ->  Refresh command tree'
-        removeAll: '/customCommandPermissionLevel removeAll  ->  Remove all modified commands'
-        list: '/customCommandPermissionLevel list  ->  View the list of modified commands'
+        set: '/customCommandPermissionLevel set <command> <permissionLevel> - Set the permission level of a command'
+        remove: '/customCommandPermissionLevel remove <command> - Remove a modified command'
+        refresh: '/customCommandPermissionLevel refresh - Refresh command tree'
+        removeAll: '/customCommandPermissionLevel removeAll - Remove all modified commands'
+        list: '/customCommandPermissionLevel list - View the list of modified commands'
     customMovableBlock:
-      already_exists: " is already exists"
-      not_found: " not found"
-      removeAll: "All block have been removed from list"
+      add: '<customMovableBlock> + %s'
+      already_exists: "<customMovableBlock> %s is already exists"
+      remove: '<customMovableBlock> - %s'
+      not_found: "<customMovableBlock> %s not found"
+      removeAll: "<customMovableBlock> All block have been removed from list"
       list: "[ Moveable block list ]"
       help:
-        set: '/customMovableBlock add <block>  ->  Added a movable block'
-        remove: '/customMovableBlock remove <block>  ->  Delete a movable block'
-        removeAll: '/customMovableBlock removeAll  ->  Removes all added movable blocks'
-        list: '/customMovableBlock list  ->  Check out the list of movable blocks'
+        set: '/customMovableBlock add <block> - Added a movable block'
+        remove: '/customMovableBlock remove <block> - Delete a movable block'
+        removeAll: '/customMovableBlock removeAll - Removes all added movable blocks'
+        list: '/customMovableBlock list - Check out the list of movable blocks'
     commandGetHeldItemID:
       getHeldItemID:
         copy: 'Copy to clipboard'
     customAntiFireItems:
-      already_exists: " is already exists"
-      not_found: " not found"
-      removeAll: "All item have been removed from list"
-      list: "[ Anti Fire item list ]"
+      add: '<customAntiFireItems> + %s'
+      already_exists: "<customAntiFireItems> %s is already exists"
+      not_found: "<customAntiFireItems> not found"
+      remove: '<customAntiFireItems> - %s'
+      removeAll: "<customAntiFireItems> All item have been removed from list"
+      list_title: "[ Anti Fire item list ]"
       help:
-        set: '/customAntiFireItems add <item>  ->  Added a anti fire item'
-        remove: '/customAntiFireItems remove <item>  ->  Delete a anti fire item'
-        removeAll: '/customAntiFireItems removeAll  ->  Removes all added anti fire item'
-        list: '/customAntiFireItems list  ->  Check out the list of anti fire item'
+        set: '/customAntiFireItems add <item> - Added a anti fire item'
+        remove: '/customAntiFireItems remove <item> - Delete a anti fire item'
+        removeAll: '/customAntiFireItems removeAll - Removes all added anti fire item'
+        list: '/customAntiFireItems list - Check out the list of anti fire item'
     carpetExtensionModWikiHyperlink:
       click_to_jump: 'Click link to jump: '
     customBlockHardness:
-      not_found: ' not found !'
-      removeAll: 'All custom block hardness values have been removed.'
+      modify_set: '<customBlockHardness> %s/%s -> %s/%s'
+      set: '<customBlockHardness> + %s/%s'
+      remove: '<customBlockHardness> - %s/%s'
+      not_found: '<customBlockHardness> %s not found !'
+      removeAll: '<customBlockHardness> All custom block hardness values have been removed.'
       list: '[ Block / Hardness ]'
-      default_hardness: 'default hardness:'
+      default_hardness: '%s default hardness: %s'
       help:
-        set: '/customBlockHardness set <block> <hardness>  ->  Add or modify blocks and their hardness'
-        remove: '/customBlockHardness remove <block>  ->  Remove a block from the list'
-        removeAll: '/customBlockHardness removeAll  ->  Remove all blocks from the list'
-        get_default_hardness: '/customBlockHardness getDefaultHardness <block>  ->  Query the default hardness of blocks'
-        list: '/customBlockHardness list  ->  Display all added blocks'
+        set: '/customBlockHardness set <block> <hardness> - Add or modify blocks and their hardness'
+        remove: '/customBlockHardness remove <block> - Remove a block from the list'
+        removeAll: '/customBlockHardness removeAll - Remove all blocks from the list'
+        get_default_hardness: '/customBlockHardness getDefaultHardness <block> - Query the default hardness of blocks'
+        list: '/customBlockHardness list - Display all added blocks'
     at:
       title: '%s @ You'
     getClientPlayerFps:
       feedback: '%s - FPS: %s'
-      help: '/getClientPlayerFps <player>  ->  Get the FPS of the specified player'
+      help: '/getClientPlayerFps <player> - Get the FPS of the specified player'
     playerPose:
-      set_help: '/playerPose <player> set <pose>  ->  Set player pose'
-      stop_help: '/playerPose <player> stop  ->  Stop posing'
+      set_help: '/playerPose <player> set <pose> - Set player pose'
+      stop_help: '/playerPose <player> stop - Stop posing'
     amsp:
       support_client_set_is_none: '<AMSP> No client supports AMSP'
       support_client_list_title: 'List of clients that support AMSP:'
@@ -174,7 +195,7 @@ carpetamsaddition:
 
   logger:
     serverRuntime:
-      server_runtime: 'Server Runtime'
+      server_runtime: 'Server Runtime '
 
   validator:
     enhancedWorldEater:
@@ -193,10 +214,17 @@ carpetamsaddition:
       value_range: 'The value must be 2 - 100 or 0'
     renewableNetherScrap:
       value_range: 'The value must be 0 - 1'
-    largeEnderChest:
-      switch_tip: 'The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
-    amsNetworkProtocol:
-      need_enable_protocol: '[Carpet AMS Addition] Using the %s rule requires enabling the amsNetworkProtocol rule to take effect'
+    experimentalMinecartSpeed:
+      value_range: 'The value must be 0 - 1000 or -1'
+
+    observer:
+      largeEnderChest:
+        switch_tip: '<Carpet AMS Addition> The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
+      amsNetworkProtocol:
+        need_enable_protocol: '<Carpet AMS Addition> %s has been reset to the default value. The amsNetworkProtocol rule needs to be enabled first'
+      need_restart_server_or_client:
+        is_client_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the client'
+        is_server_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the server'
 
   fuzz:
     command:
@@ -313,11 +341,8 @@ carpetamsaddition:
       largeShulkerBox:
         desc: Doubles the size of your ShulkerBox
         extra:
-          '0': 'To use this rule, please follow the steps below:'
-          '1': '1 - To ensure that no shulker boxes are loaded'
-          '2': '2 - Enter the command: /carpet setDefault largeShulkerBox true, to turn on the rule'
-          '3': '3 - Restart the server/single-player world'
-          '4': '4 - Disabling the rule follows the same process'
+          '0': 'When the server environment switches the rule setting, the server needs to be restarted'
+          '1': 'When the client environment switches the rule settings, the client needs to be restarted'
       maxPlayerBlockInteractionRange:
         desc: Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule
         extra:
@@ -583,6 +608,27 @@ carpetamsaddition:
           '0': 'After enabling the rule, use the "/playerPose help" command to view the usage instructions'
       onlyPlayerCanCreateNetherPortal:
         desc: Only allow new portals to be generated when players pass through the Nether portal
+      preventServerPause:
+        desc: Prevent server pause after 60s
+      flippinCactusExtras:
+        desc: Enables flippinCactus rules to work on more blocks
+        extra:
+          '0': 'Affected blocks:'
+          '1': 'barrel, chiseled_bookshelf, crafter, shelf'
+      experimentalMinecartSpeed:
+        desc: Set the speed of the experimental minecart
+        extra:
+          '0': 'Enabling this rule will override the game rules'
+      experimentalMinecartEnabled:
+        desc: Enable experimental minecarts
+        extra:
+          '0': 'When the server environment switches the rule setting, the server needs to be restarted'
+          '1': 'When the client environment switches the rule settings, the client needs to be restarted'
+      amsTranslationMode:
+        desc: Switch the translation mode of Carpet AMS Addition
+        extra:
+          '0': '[client] - Prefer sending translated text to the client using the client’s own language'
+          '1': '[server] - Use the language set by the server for all translations'
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

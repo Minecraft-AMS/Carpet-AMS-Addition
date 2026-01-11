@@ -30,24 +30,24 @@ import net.minecraft.network.PacketByteBuf;
 public class HandShakeS2CPayload extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.HANDSHAKE_S2C.getId();
     private final String modVersion;
-    private final boolean isSupportServer;
+    private final boolean serverSupport;
 
-    private HandShakeS2CPayload(String modVersion, boolean isSupportServer) {
+    private HandShakeS2CPayload(String modVersion, boolean serverSupport) {
         super(ID);
         this.modVersion = modVersion;
-        this.isSupportServer = isSupportServer;
+        this.serverSupport = serverSupport;
     }
 
     private HandShakeS2CPayload(PacketByteBuf buf) {
         super(ID);
         this.modVersion = NetworkUtil.readBufString(buf);
-        this.isSupportServer = buf.readBoolean();
+        this.serverSupport = buf.readBoolean();
     }
 
     @Override
     protected void writeData(PacketByteBuf buf) {
         buf.writeString(this.modVersion);
-        buf.writeBoolean(this.isSupportServer);
+        buf.writeBoolean(this.serverSupport);
     }
 
     @Override
@@ -58,12 +58,12 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
             } else {
                 AmsClient.LOGGER.info("You joined server with mismatched carpet-ams-addition version (client: v{}, server: v{})", AmsClient.getVersion(), this.modVersion);
             }
-            NetworkUtil.setServerSupport(this.isSupportServer);
+            NetworkUtil.setServerSupport(this.serverSupport);
         });
     }
 
-    public static HandShakeS2CPayload create(String modVersion, boolean isSupportServer) {
-        return new HandShakeS2CPayload(modVersion, isSupportServer);
+    public static HandShakeS2CPayload create(String modVersion, boolean serverSupport) {
+        return new HandShakeS2CPayload(modVersion, serverSupport);
     }
 
     public static void register() {

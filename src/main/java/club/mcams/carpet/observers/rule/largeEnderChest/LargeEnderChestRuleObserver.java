@@ -22,18 +22,17 @@ package club.mcams.carpet.observers.rule.largeEnderChest;
 
 import carpet.settings.ParsedRule;
 
-import club.mcams.carpet.settings.SimpleRuleObserver;
+import club.mcams.carpet.settings.RuleObserver;
 import club.mcams.carpet.translations.Translator;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.MutableText;
-import net.minecraft.util.Formatting;
+import net.minecraft.text.BaseText;
 
-public class LargeEnderChestRuleObserver extends SimpleRuleObserver<Boolean> {
-    private static final Translator translator = new Translator("validator.largeEnderChest");
-    private static final String MSG_HEAD = "<Carpet AMS Addition> ";
+public class LargeEnderChestRuleObserver extends RuleObserver<Boolean> {
+    private static final Translator tr = new Translator("observer.largeEnderChest");
 
     @Override
     public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
@@ -42,7 +41,7 @@ public class LargeEnderChestRuleObserver extends SimpleRuleObserver<Boolean> {
         }
     }
 
-    private static MutableText message() {
-        return Messenger.s(MSG_HEAD + translator.tr("switch_tip").getString()).formatted(Formatting.GREEN);
+    private static BaseText message() {
+        return Messenger.f(tr.tr("switch_tip"), Layout.GREEN);
     }
 }

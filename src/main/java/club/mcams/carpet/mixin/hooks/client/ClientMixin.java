@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,24 +18,21 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.observers.rule.largeShulkerBox;
+package club.mcams.carpet.mixin.hooks.client;
 
-import carpet.settings.ParsedRule;
+import club.mcams.carpet.AmsClient;
 
-import club.mcams.carpet.mixin.rule.largeShulkerBox.ShulkerBoxBlockEntityAccessor;
-import club.mcams.carpet.settings.SimpleRuleObserver;
+import net.minecraft.client.MinecraftClient;
 
-import net.minecraft.server.command.ServerCommandSource;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-public class LargeShulkerBoxRuleObserver extends SimpleRuleObserver<Boolean> {
-    @Override
-    public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
-        //#if MC>=11700
-        if (newValue) {
-            ShulkerBoxBlockEntityAccessor.setInventorySize(54);
-        } else {
-            ShulkerBoxBlockEntityAccessor.setInventorySize(27);
-        }
-        //#endif
+@Mixin(MinecraftClient.class)
+public abstract class ClientMixin {
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void onTick(CallbackInfo ci) {
+        AmsClient.getInstance().onTick();
     }
 }

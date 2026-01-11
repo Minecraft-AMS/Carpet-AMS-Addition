@@ -20,68 +20,88 @@
 
 package club.mcams.carpet.utils;
 
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.network.AMS_CustomPayload;
+import club.mcams.carpet.settings.AmsRuleCategory;
+import club.mcams.carpet.settings.Rule;
 
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.lang.reflect.Field;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NetworkUtil {
     private static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
+    public static final Set<String> AMS_NETWORK_RULE_NAMES = new LinkedHashSet<>();
 
-    public static void broadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
-        server.getPlayerManager().getPlayerList().forEach(player -> sendS2CPacketIfSupport(player, payload));
+    public enum SendMode {
+        FORCE,
+        NEED_SUPPORT
     }
 
-    public static void forcedBroadcastDataPack(MinecraftServer server, AMS_CustomPayload payload) {
-        server.getPlayerManager().getPlayerList().forEach(payload::sendS2CPacket);
+    public static void broadcastDataPack(AMS_CustomPayload payload, SendMode sendMode) {
+        MinecraftServerUtil.getOnlinePlayers().forEach(player -> sendS2CPacket(player, payload, sendMode));
     }
 
-    public static void sendS2CPacketIfSupport(ServerPlayerEntity player, AMS_CustomPayload payload) {
-        if (isSupportClient(player.getUuid())) {
+    @SuppressWarnings("EnhancedSwitchMigration")
+    public static void sendS2CPacket(ServerPlayerEntity player, AMS_CustomPayload payload, SendMode sendMode) {
+        boolean shouldSend;
+        switch (sendMode) {
+            case FORCE:
+                shouldSend = true;
+                break;
+            case NEED_SUPPORT:
+                shouldSend = isSupportClient(player.getUuid());
+                break;
+            default:
+                shouldSend = false;
+                break;
+        }
+
+        if (shouldSend) {
             payload.sendS2CPacket(player);
         }
     }
 
-    public static void sendC2SPacketIfSupport(ClientPlayerEntity player, AMS_CustomPayload payload) {
-        if (isSupportServer()) {
+    @SuppressWarnings("EnhancedSwitchMigration")
+    public static void sendC2SPacket(ClientPlayerEntity player, AMS_CustomPayload payload, SendMode sendMode) {
+        boolean shouldSend;
+        switch (sendMode) {
+            case FORCE:
+                shouldSend = true;
+                break;
+            case NEED_SUPPORT:
+                shouldSend = getServerSupportState();
+                break;
+            default:
+                shouldSend = false;
+                break;
+        }
+
+        if (shouldSend) {
             payload.sendC2SPacket(player);
         }
-    }
-
-    public static void sendS2CPacket(ServerPlayerEntity player, AMS_CustomPayload payload) {
-        payload.sendS2CPacket(player);
-    }
-
-    public static void sendC2SPacket(ClientPlayerEntity player, AMS_CustomPayload payload) {
-        payload.sendC2SPacket(player);
     }
 
     public static boolean isSupportClient(UUID uuid) {
         return SUPPORT_CLIENT.contains(uuid);
     }
 
-    public static boolean isSupportServer() {
-        return SUPPORT_SERVER.get();
-    }
-
     public static void setServerSupport(boolean support) {
         SUPPORT_SERVER.set(support);
     }
 
-    public static Boolean getServerSupport() {
+    public static boolean getServerSupportState() {
         return SUPPORT_SERVER.get();
     }
 
-    public static Set<UUID> getSupportClientSet() {
-        return SUPPORT_CLIENT;
+    public static Iterator<UUID> supportClientSetIterator() {
+        return SUPPORT_CLIENT.iterator();
     }
 
     public static void addSupportClient(UUID uuid) {
@@ -97,15 +117,11 @@ public class NetworkUtil {
     }
 
     public static void executeOnClientThread(Runnable runnable) {
-        if (MinecraftClientUtil.clientIsRunning()) {
-            MinecraftClientUtil.getCurrentClient().execute(runnable);
-        }
+        Optional.of(MinecraftClientUtil.clientIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftClientUtil.getCurrentClient().execute(runnable));
     }
 
     public static void executeOnServerThread(Runnable runnable) {
-        if (MinecraftServerUtil.serverIsRunning()) {
-            MinecraftServerUtil.getServer().execute(runnable);
-        }
+        Optional.of(MinecraftServerUtil.serverIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftServerUtil.getServer().execute(runnable));
     }
 
     // 兼容 Minecraft 1.16.5
@@ -115,5 +131,19 @@ public class NetworkUtil {
         //#else
         //$$ return buf.readString();
         //#endif
+    }
+
+    public static void collectAmsNetworkRuleNames() {
+        for (Field field : AmsServerSettings.class.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Rule.class)) {
+                Rule ruleAnnotation = field.getAnnotation(Rule.class);
+                for (String category : ruleAnnotation.categories()) {
+                    if (category.equals(AmsRuleCategory.AMS_NETWORK)) {
+                        AMS_NETWORK_RULE_NAMES.add(field.getName());
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

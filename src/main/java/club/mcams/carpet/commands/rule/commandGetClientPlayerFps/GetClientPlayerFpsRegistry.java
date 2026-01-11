@@ -23,15 +23,11 @@ package club.mcams.carpet.commands.rule.commandGetClientPlayerFps;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.helpers.FakePlayerHelper;
 import club.mcams.carpet.translations.Translator;
-import club.mcams.carpet.utils.CommandHelper;
-import club.mcams.carpet.utils.Messenger;
-import club.mcams.carpet.utils.NetworkUtil;
-import club.mcams.carpet.utils.PlayerUtil;
+import club.mcams.carpet.utils.*;
 import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.util.Formatting;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
@@ -58,7 +54,7 @@ public class GetClientPlayerFpsRegistry {
 
     private static int requestFps(ServerPlayerEntity targetPlayer, ServerCommandSource source) {
         pendingQueries.put(targetPlayer.getUuid(), source);
-        NetworkUtil.sendS2CPacketIfSupport(targetPlayer, ClientPlayerFpsPayload_S2C.create(targetPlayer.getUuid()));
+        NetworkUtil.sendS2CPacket(targetPlayer, ClientPlayerFpsPayload_S2C.create(targetPlayer.getUuid()), NetworkUtil.SendMode.NEED_SUPPORT);
         return 1;
     }
 
@@ -67,13 +63,13 @@ public class GetClientPlayerFpsRegistry {
         if (source != null) {
             ServerPlayerEntity player = PlayerUtil.getServerPlayerEntity(playerUuid);
             if (!FakePlayerHelper.isFakePlayer(player) && player != null) {
-                Messenger.tell(source, Messenger.formatting(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), Formatting.GREEN));
+                Messenger.tell(source, Messenger.f(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), Layout.GREEN));
             }
         }
     }
 
     private static int help(ServerCommandSource source) {
-        Messenger.tell(source, Messenger.formatting(tr.tr("help"), Formatting.GRAY));
+        Messenger.tell(source, Messenger.f(tr.tr("help"), Layout.GRAY));
         return 1;
     }
 }

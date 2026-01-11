@@ -23,7 +23,7 @@ package club.mcams.carpet.observers.rule.stackableDiscount;
 import carpet.settings.ParsedRule;
 
 import club.mcams.carpet.mixin.rule.stackableDiscount.VillageGossipTypeAccessor;
-import club.mcams.carpet.settings.SimpleRuleObserver;
+import club.mcams.carpet.settings.RuleObserver;
 
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.village.VillageGossipType;
@@ -32,7 +32,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft >= 1.20.2")
 @SuppressWarnings({"unused", "DataFlowIssue"})
-public class StackableDiscountRuleObserver extends SimpleRuleObserver<Boolean> {
+public class StackableDiscountRuleObserver extends RuleObserver<Boolean> {
     @Override
     public void onValueChange(ServerCommandSource source, ParsedRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue) {

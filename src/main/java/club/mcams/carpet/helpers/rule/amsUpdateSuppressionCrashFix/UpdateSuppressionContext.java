@@ -21,52 +21,46 @@
 package club.mcams.carpet.helpers.rule.amsUpdateSuppressionCrashFix;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.MinecraftServerUtil;
 import club.mcams.carpet.utils.compat.DimensionWrapper;
-import club.mcams.carpet.utils.MessageTextEventUtils.ClickEventUtil;
-import club.mcams.carpet.utils.MessageTextEventUtils.HoverEventUtil;
 
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.text.BaseText;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Objects;
 
 public class UpdateSuppressionContext {
-    private static final Translator translator = new Translator("rule.amsUpdateSuppressionCrashFix");
+    private static final Translator tr = new Translator("rule.amsUpdateSuppressionCrashFix");
 
     public static void sendMessageToServer(BlockPos pos, World world, Throwable cause) {
         if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "silence")) {
-            String suppressionMessage = suppressionMessageText(pos, world, cause);
-            final Text copyButton = copyButton(pos);
+            final BaseText copyButton = copyButton(pos);
             Messenger.sendServerMessage(
                 MinecraftServerUtil.getServer(),
-                Messenger.s(suppressionMessage).formatted(Formatting.RED, Formatting.ITALIC).append(copyButton)
+                (BaseText) Messenger.f(suppressionMessageText(pos, world, cause), Layout.RED, Layout.ITALIC).append(copyButton)
             );
         }
     }
 
-    public static String suppressionMessageText(BlockPos pos, World world, Throwable cause) {
+    public static BaseText suppressionMessageText(BlockPos pos, World world, Throwable cause) {
         DimensionWrapper dimension = getSuppressionDimension(world);
         String location = getSuppressionPos(pos);
         // Update suppression location @ minecraft:overworld -> [ 1, 0, -24 ] | reason: StackOverflowError
-        return translator.tr("msg", dimension, location, exceptionCauseText(cause)).getString();
+        return tr.tr("msg", dimension, location, exceptionCauseText(cause));
     }
 
-    private static Text copyButton(BlockPos pos) {
-        Text hoverText = Messenger.s(translator.tr("copy")).formatted(Formatting.YELLOW);
-        String copyCoordText = getSuppressionPos(pos).replace(",", ""); // 1, 0, -24 -> 1 0 -24
+    private static BaseText copyButton(BlockPos pos) {
 
-        return
-            Messenger.s(" [C] ").setStyle(
-                Style.EMPTY.withColor(Formatting.GREEN).withBold(true).
-                withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyCoordText)).
-                withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, hoverText))
-            );
+        return Messenger.f((BaseText) Messenger.s(" [C] ").setStyle(
+            Messenger.simpleCopyButtonStyle(
+            getSuppressionPos(pos).replace(",", ""), // 1, 0, -24 -> 1 0 -24
+            tr.tr("copy"), Layout.YELLOW
+        )
+        ), Layout.GREEN, Layout.BOLD);
     }
 
     private static String getSuppressionPos(BlockPos pos) {

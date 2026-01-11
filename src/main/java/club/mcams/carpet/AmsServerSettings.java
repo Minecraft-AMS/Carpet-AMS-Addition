@@ -20,17 +20,22 @@
 
 package club.mcams.carpet;
 
+import club.mcams.carpet.observers.rule.NeedRestartServerOrClientObserver;
+import club.mcams.carpet.settings.MustSetDefault;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+//#if MC>=12102
+//$$ import club.mcams.carpet.validators.rule.experimentalMinecartSpeed.MaxSpeedRangeValidator;
+//#endif
 
 //#if MC>=12002
 //$$ import club.mcams.carpet.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 //#endif
-import club.mcams.carpet.observers.network.NetworkProtocolObserver;
-import club.mcams.carpet.observers.rule.largeShulkerBox.LargeShulkerBoxRuleObserver;
 import club.mcams.carpet.observers.recipe.RecipeRuleObserver;
 import club.mcams.carpet.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import club.mcams.carpet.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
-import club.mcams.carpet.observers.network.AmsNetworkProtocolRuleObserver;
+import club.mcams.carpet.observers.network.AmspRuleObserver;
 
 import club.mcams.carpet.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import club.mcams.carpet.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
@@ -46,10 +51,15 @@ import club.mcams.carpet.validators.rule.renewableNetherScrap.DropRateValidator;
 import club.mcams.carpet.settings.Rule;
 import club.mcams.carpet.settings.RecipeRule;
 
+import java.lang.reflect.Field;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static carpet.settings.RuleCategory.*;
 import static club.mcams.carpet.settings.AmsRuleCategory.*;
 
 public class AmsServerSettings {
+    public static final Set<String> MUST_SET_DEFAULT_RULES = new LinkedHashSet<>();
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean superBow = false;
@@ -191,9 +201,10 @@ public class AmsServerSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
+    @MustSetDefault
     @Rule(
         categories = {AMS, FEATURE, EXPERIMENTAL},
-        validators = LargeShulkerBoxRuleObserver.class
+        validators = NeedRestartServerOrClientObserver.class
     )
     public static boolean largeShulkerBox = false;
 
@@ -618,38 +629,65 @@ public class AmsServerSettings {
     //$$ public static boolean onlyPlayerCanCreateNetherPortal = false;
     //#endif
 
+    //#if MC>=12102
+    //$$ @GameVersion(version = "Minecraft >= 1.21.2")
+    //$$ @Rule(categories = {AMS, FEATURE})
+    //$$ public static boolean preventServerPause = false;
+    //#endif
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
+    public static boolean flippinCactusExtras = false;
+
+    //#if MC>=12102
+    //$$ @Rule(
+    //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
+    //$$     options = {"-1", "1000"},
+    //$$     validators = MaxSpeedRangeValidator.class,
+    //$$     strict = false
+    //$$ )
+    //$$ public static int experimentalMinecartSpeed = -1;
+    //#endif
+
+    //#if MC>=12102
+    //$$ @MustSetDefault
+    //$$ @Rule(
+    //$$     categories = {AMS, FEATURE, EXPERIMENTAL},
+    //$$     validators = NeedRestartServerOrClientObserver.class
+    //$$ )
+    //$$ public static boolean experimentalMinecartEnabled = false;
+    //#endif
+
+    @Rule(categories = AMS)
+    public static translationModes amsTranslationMode = translationModes.CLIENT;
+
     /*
      * AMS网络协议规则
      */
     @Rule(
-        validators = AmsNetworkProtocolRuleObserver.class,
+        validators = AmspRuleObserver.class,
         categories = {AMS, AMS_NETWORK}
     )
     public static boolean amsNetworkProtocol = false;
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
     public static String commandAmspDebug = "false";
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, FEATURE, SURVIVAL, AMS_NETWORK, COMMAND}
     )
     public static String commandCustomBlockHardness = "false";
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
     public static String commandGetClientPlayerFps = "false";
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
@@ -695,8 +733,11 @@ public class AmsServerSettings {
     )
     public static int blockChunkLoaderRangeController = 3;
 
-    @Rule(categories = {AMS, COMMAND, AMS_CHUNKLOADER})
-    public static boolean commandPlayerChunkLoadController = false;
+    @Rule(
+        categories = {AMS, COMMAND, AMS_CHUNKLOADER},
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"}
+    )
+    public static String commandPlayerChunkLoadController = "false";
 
     //#if MC<12005
     @GameVersion(version = "Minecraft < 1.20.5")
@@ -772,7 +813,20 @@ public class AmsServerSettings {
         ALL
     }
 
+    public enum translationModes {
+        CLIENT,
+        SERVER
+    }
+
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
     public static boolean testRule = false;
+
+    static {
+        for (Field field : AmsServerSettings.class.getDeclaredFields()) {
+            if (field.isAnnotationPresent(MustSetDefault.class)) {
+                MUST_SET_DEFAULT_RULES.add(field.getName());
+            }
+        }
+    }
 }

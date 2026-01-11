@@ -22,12 +22,11 @@ package club.mcams.carpet.translations;
 
 import carpet.CarpetSettings;
 
-import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.AmsServer;
+import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.utils.FileUtil;
-import club.mcams.carpet.mixin.translations.TranslatableTextAccessor;
+import club.mcams.carpet.utils.Messenger;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -117,82 +116,78 @@ public class AMSTranslations {
     }
 
     public static BaseText translate(BaseText text, ServerPlayerEntity player) {
-        if (player instanceof ServerPlayerEntityWithClientLanguage) {
-            String lang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
-            return translate(text, lang);
+        if (!(player instanceof ServerPlayerEntityWithClientLanguage)) {
+            return text;
         }
-        return text;
-    }
 
-    public static BaseText translate(BaseText text, String lang) {
-        return translate(text, lang, false);
+        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
+        String serverLang = AMSTranslations.getServerLanguage();
+
+        if (AmsServerSettings.amsTranslationMode == AmsServerSettings.translationModes.SERVER) {
+            return translateTextComponent(text, serverLang);
+        }
+
+        return translateTextComponent(text, clientLang);
     }
 
     @SuppressWarnings("PatternVariableCanBeUsed")
-    public static BaseText translate(BaseText text, String lang, boolean suppressWarnings) {
+    @NotNull
+    private static BaseText translateTextComponent(@NotNull BaseText text, String lang) {
         //#if MC>=11900
-        //$$ if (!(text.getContent() instanceof TranslatableTextContent)) {
+        //$$ if (text.getContent() instanceof TranslatableTextContent) {
+        //$$     TranslatableTextContent translatableContents = (TranslatableTextContent) text.getContent();
         //#else
-        if (!(text instanceof TranslatableText)) {
+        if (text instanceof TranslatableText) {
+            TranslatableText translatableContents = (TranslatableText) text;
         //#endif
-            return text;
-        }
-        //#if MC>=11900
-        //$$ TranslatableTextContent translatableText = (TranslatableTextContent) text.getContent();
-        //#else
-        TranslatableText translatableText = (TranslatableText) text;
-        //#endif
-        String translationKey = translatableText.getKey();
-        if (!translationKey.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
-            return text;
-        }
-        String formattedString = Optional.ofNullable(translateKeyToFormattedString(lang, translationKey)).orElseGet(() -> translateKeyToFormattedString(TranslationConstants.DEFAULT_LANGUAGE, translationKey));
-        return formattedString != null ? updateTextWithTranslation(text, formattedString, translatableText) : translationLog(translationKey, suppressWarnings, text);
-    }
+            String key = translatableContents.getKey();
 
-    private static BaseText translationLog(String translationKey, boolean suppressWarnings, BaseText text) {
-        if (!suppressWarnings) {
-            AmsServer.LOGGER.warn("Unknown translation key: {}. Check if the translation exists or the key is correct.", translationKey);
-        }
-        return text;
-    }
+            if (key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
 
-    private static BaseText updateTextWithTranslation(BaseText originalText, String formattedString, TranslatableText translatableText) {
-        //#if MC>=12111
-        //$$ TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) translatableText;
-        //#else
-        TranslatableTextAccessor fixedTranslatableText = (TranslatableTextAccessor) (Messenger.tr(formattedString, translatableText.getArgs()));
-        //#endif
-        BaseText newText = createNewText(formattedString, fixedTranslatableText);
-        if (newText == null) {
-            return Messenger.s(formattedString);
-        } else {
-            newText.getSiblings().addAll(originalText.getSiblings());
-            newText.setStyle(originalText.getStyle());
-            return newText;
-        }
-    }
+                String translated = translateKeyToFormattedString(lang, key);
 
-    private static BaseText createNewText(String formattedString, TranslatableTextAccessor fixedTranslatableText) {
-        try {
-            List<StringVisitable> translations = Lists.newArrayList();
-            //#if MC>=11800
-            fixedTranslatableText.invokeForEachPart(formattedString, translations::add);
-            //#else
-            //$$ fixedTranslatableText.invokeSetTranslation(formattedString);
-            //#endif
-            BaseText[] textArray = new BaseText[translations.size()];
-            for (int i = 0; i < translations.size(); i++) {
-                StringVisitable stringVisitable = translations.get(i);
-                if (stringVisitable instanceof BaseText) {
-                    textArray[i] = (BaseText) stringVisitable;
-                } else {
-                    textArray[i] = Messenger.s(stringVisitable.getString());
+                if (translated != null && !translated.equals(key)) {
+                    Object[] args = translatableContents.getArgs();
+                    if (args.length > 0) {
+                        Object[] translatedArgs = new Object[args.length];
+                        for (int i = 0; i < args.length; i++) {
+                            if (args[i] instanceof BaseText) {
+                                translatedArgs[i] = translateTextComponent((BaseText) args[i], lang);
+                            } else {
+                                translatedArgs[i] = args[i];
+                            }
+                        }
+                        translated = String.format(translated, translatedArgs);
+                    }
+
+                    BaseText newComponent = Messenger.s(translated);
+                    newComponent.setStyle(text.getStyle());
+                    newComponent.getSiblings().clear();
+
+                    for (Text sibling : text.getSiblings()) {
+                        if (sibling instanceof BaseText) {
+                            newComponent.append(translateTextComponent((BaseText) sibling, lang));
+                        } else {
+                            newComponent.append(sibling);
+                        }
+                    }
+
+                    return newComponent;
                 }
             }
-            return Messenger.c((Object) textArray);
-        } catch (TranslationException e) {
-            return null;
         }
+
+        BaseText result = Messenger.copy(text);
+        result.getSiblings().clear();
+
+        for (Text sibling : text.getSiblings()) {
+            if (sibling instanceof BaseText) {
+                result.append(translateTextComponent((BaseText) sibling, lang));
+            } else {
+                result.append(sibling);
+            }
+        }
+
+        return result;
     }
 }

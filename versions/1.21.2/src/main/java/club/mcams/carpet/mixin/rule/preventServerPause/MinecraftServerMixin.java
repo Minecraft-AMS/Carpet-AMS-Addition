@@ -18,30 +18,31 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.translations;
+package club.mcams.carpet.mixin.rule.preventServerPause;
 
-import carpet.logging.Logger;
+import club.mcams.carpet.AmsServerSettings;
 
-import club.mcams.carpet.translations.AMSTranslations;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
+import net.minecraft.server.MinecraftServer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.19")
-@Mixin(Logger.class)
-public abstract class LoggerMixin {
-    @ModifyVariable(method = "sendPlayerMessage", at = @At("HEAD"), argsOnly = true, remap = false)
-    private Text[] applyAMSTranslationToLoggerMessage(Text[] messages, ServerPlayerEntity player, Text... messages_) {
-        for (int i = 0; i < messages.length; i++) {
-            messages[i] = AMSTranslations.translate((MutableText) messages[i], player);
-        }
-        return messages;
+@GameVersion(version = "Minecraft >= 1.21.2")
+@Mixin(MinecraftServer.class)
+public abstract class MinecraftServerMixin {
+    @WrapOperation(
+        method = "tick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/MinecraftServer;getPauseWhenEmptySeconds()I"
+        )
+    )
+    private int preventServerPause(MinecraftServer server, Operation<Integer> original) {
+        return AmsServerSettings.preventServerPause ? -114514 : original.call(server);
     }
 }

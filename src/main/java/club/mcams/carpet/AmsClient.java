@@ -65,10 +65,15 @@ public class AmsClient implements ClientModInitializer {
 
     public void onGameJoin() {
         player = MinecraftClientUtil.getCurrentPlayer();
-        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(version, player.getUuid()));
+        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(version, player.getUuid()), NetworkUtil.SendMode.FORCE);
     }
 
     public void onDisconnect() {
         NetworkUtil.setServerSupport(false);
+        AmsServerLazySettings.clear();
+    }
+
+    public void onTick() {
+        // On client tick
     }
 }

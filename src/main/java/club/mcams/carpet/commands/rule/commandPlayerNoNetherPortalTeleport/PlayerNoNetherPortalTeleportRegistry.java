@@ -23,6 +23,7 @@ package club.mcams.carpet.commands.rule.commandPlayerNoNetherPortalTeleport;
 import club.mcams.carpet.AmsServerSettings;
 import club.mcams.carpet.translations.Translator;
 import club.mcams.carpet.utils.CommandHelper;
+import club.mcams.carpet.utils.Layout;
 import club.mcams.carpet.utils.Messenger;
 import club.mcams.carpet.utils.PlayerUtil;
 
@@ -33,17 +34,16 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.text.BaseText;
-import net.minecraft.util.Formatting;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class PlayerNoNetherPortalTeleportRegistry {
-    public static final Set<PlayerEntity> NO_NETHER_PORTAL_TELEPORT_SET = new LinkedHashSet<>();
+    public static final Set<UUID> NO_NETHER_PORTAL_TELEPORT_SET = new LinkedHashSet<>();
     public static boolean isGlobalMode;
     private static final Translator tr = new Translator("command.playerNoNetherPortalTeleport");
 
@@ -80,44 +80,44 @@ public class PlayerNoNetherPortalTeleportRegistry {
     }
 
     private static int add(ServerCommandSource source, PlayerEntity player) {
-        if (!NO_NETHER_PORTAL_TELEPORT_SET.contains(player)) {
-            NO_NETHER_PORTAL_TELEPORT_SET.add(player);
-            Messenger.tell(source, (BaseText) tr.tr("add_success", PlayerUtil.getName(player)).formatted(Formatting.GREEN));
+        if (!NO_NETHER_PORTAL_TELEPORT_SET.contains(PlayerUtil.getPlayerUUID(player))) {
+            NO_NETHER_PORTAL_TELEPORT_SET.add(PlayerUtil.getPlayerUUID(player));
+            Messenger.tell(source, Messenger.f(tr.tr("add_success", PlayerUtil.getName(player)), Layout.GREEN));
             return 1;
         } else {
-            Messenger.tell(source, (BaseText) tr.tr("add_fail", PlayerUtil.getName(player)).formatted(Formatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("add_fail", PlayerUtil.getName(player)), Layout.YELLOW));
             return 0;
         }
     }
 
     private static int remove(ServerCommandSource source, PlayerEntity player) {
-        if (NO_NETHER_PORTAL_TELEPORT_SET.contains(player)) {
-            NO_NETHER_PORTAL_TELEPORT_SET.remove(player);
-            Messenger.tell(source, (BaseText) tr.tr("remove_success", PlayerUtil.getName(player)).formatted(Formatting.GREEN));
+        if (NO_NETHER_PORTAL_TELEPORT_SET.contains(PlayerUtil.getPlayerUUID(player))) {
+            NO_NETHER_PORTAL_TELEPORT_SET.remove(PlayerUtil.getPlayerUUID(player));
+            Messenger.tell(source, Messenger.f(tr.tr("remove_success", PlayerUtil.getName(player)), Layout.GREEN));
             return 1;
         } else {
-            Messenger.tell(source, (BaseText) tr.tr("remove_fail", PlayerUtil.getName(player)).formatted(Formatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("remove_fail", PlayerUtil.getName(player)), Layout.YELLOW));
             return 0;
         }
     }
 
     private static int clear(ServerCommandSource source) {
         if (NO_NETHER_PORTAL_TELEPORT_SET.isEmpty()) {
-            Messenger.tell(source, (BaseText) tr.tr("clear_fail").formatted(Formatting.YELLOW));
+            Messenger.tell(source, Messenger.f(tr.tr("clear_fail"), Layout.YELLOW));
             return 0;
         } else {
             NO_NETHER_PORTAL_TELEPORT_SET.clear();
-            Messenger.tell(source, (BaseText) tr.tr("clear_success").formatted(Formatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("clear_success"), Layout.GREEN));
             return 1;
         }
     }
 
     private static int list(ServerCommandSource source) {
-        Messenger.tell(source, (BaseText) tr.tr("list_title").formatted(Formatting.AQUA));
-        Messenger.tell(source, Messenger.s("======================================", Formatting.AQUA));
+        Messenger.tell(source, Messenger.f(tr.tr("list_title"), Layout.AQUA));
+        Messenger.tell(source, Messenger.f(Messenger.dline(), Layout.AQUA));
 
-        for (PlayerEntity player : NO_NETHER_PORTAL_TELEPORT_SET) {
-            Messenger.tell(source, Messenger.s(PlayerUtil.getName(player), Formatting.AQUA));
+        for (UUID player : NO_NETHER_PORTAL_TELEPORT_SET) {
+            Messenger.tell(source, Messenger.f(Messenger.s(PlayerUtil.getName(player)), Layout.AQUA));
         }
 
         return 1;
@@ -127,9 +127,9 @@ public class PlayerNoNetherPortalTeleportRegistry {
         isGlobalMode = BoolArgumentType.getBool(context, "bool");
 
         if (isGlobalMode) {
-            Messenger.tell(source, (BaseText) tr.tr("globalMode_enable").formatted(Formatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("globalMode_enable"), Layout.GREEN));
         } else {
-            Messenger.tell(source, (BaseText) tr.tr("globalMode_disable").formatted(Formatting.GREEN));
+            Messenger.tell(source, Messenger.f(tr.tr("globalMode_disable"), Layout.GREEN));
         }
 
         return 1;
@@ -137,20 +137,20 @@ public class PlayerNoNetherPortalTeleportRegistry {
 
     private static int showGlobalModeState(ServerCommandSource source) {
         String globalModeState = isGlobalMode ? "true" : "false";
-        Messenger.tell(source, (BaseText) tr.tr("globalMode_state", globalModeState).formatted(Formatting.AQUA));
+        Messenger.tell(source, Messenger.f(tr.tr("globalMode_state", globalModeState), Layout.AQUA));
         return 1;
     }
 
     private static int help(ServerCommandSource source) {
         Messenger.tell(
-            source, (BaseText) Messenger.c(
+            source, Messenger.f(Messenger.c(
                 tr.tr("help.globalMode"), Messenger.endl(),
                 tr.tr("help.globalModeState"), Messenger.endl(),
                 tr.tr("help.add"), Messenger.endl(),
                 tr.tr("help.remove"), Messenger.endl(),
                 tr.tr("help.clear"), Messenger.endl(),
                 tr.tr("help.list")
-            ).formatted(Formatting.GRAY)
+            ), Layout.GRAY)
         );
 
         return 1;

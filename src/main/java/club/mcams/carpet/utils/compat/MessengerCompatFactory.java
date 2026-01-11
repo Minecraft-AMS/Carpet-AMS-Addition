@@ -54,7 +54,7 @@ public class MessengerCompatFactory {
     }
 
     // Send system message to server
-    public static void sendSystemMessage(MinecraftServer server, Text text) {
+    public static void sendSystemMessage(MinecraftServer server, BaseText text) {
         //#if MC<11900
         server.sendSystemMessage(text, Util.NIL_UUID);
         //#else
@@ -63,7 +63,7 @@ public class MessengerCompatFactory {
     }
 
     // Send system message to player
-    public static void sendSystemMessage(PlayerEntity player, Text text) {
+    public static void sendSystemMessage(PlayerEntity player, BaseText text) {
         //#if MC<11900
         player.sendSystemMessage(text, Util.NIL_UUID);
         //#else

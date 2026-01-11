@@ -67,7 +67,7 @@ public interface NeighborUpdaterMixin {
     ) {
         if (!Objects.equals(AmsServerSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
             UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
-            throw new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable));
+            throw new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable).getString());
         }
     }
 }

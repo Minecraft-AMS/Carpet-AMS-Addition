@@ -20,7 +20,7 @@
 
 package club.mcams.carpet.mixin.rule.largeShulkerBox;
 
-import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.AmsServerLazySettings;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -52,10 +52,11 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         index = 0
     )
     private static ScreenHandlerType<?> getScreenHandlerType(ScreenHandlerType<?> type) {
-        if (!AmsServerSettings.largeShulkerBox) {
-            return type;
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
+            return ScreenHandlerType.GENERIC_9X6;
         }
-        return ScreenHandlerType.GENERIC_9X6;
+
+        return type;
     }
 
     @ModifyArg(
@@ -67,11 +68,11 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         index = 1
     )
     private int checkLargerSize(int size) {
-        if (AmsServerSettings.largeShulkerBox) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX)) {
             return 9 * 6;
-        } else {
-            return size;
         }
+
+        return size;
     }
 
     @Inject(
@@ -87,7 +88,7 @@ public abstract class ShulkerBoxScreenHandlerMixin extends ScreenHandler {
         )
     )
     protected void addingExtraSlots(int syncId, PlayerInventory playerInventory, Inventory inventory, CallbackInfo ci) {
-        if (AmsServerSettings.largeShulkerBox && this.slots.isEmpty()) {
+        if (AmsServerLazySettings.isEnabled(AmsServerLazySettings.Rule.LARGE_SHULKER_BOX) && this.slots.isEmpty()) {
             for (int row = 3; row < 6; ++row) {
                 for (int column = 0; column < 9; ++column) {
                     this.addSlot(new ShulkerBoxSlot(inventory, column + row * 9, 8 + column * 18, 18 + row * 18));
