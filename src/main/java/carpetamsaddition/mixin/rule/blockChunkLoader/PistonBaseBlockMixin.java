@@ -58,7 +58,7 @@ public abstract class PistonBaseBlockMixin {
             Direction direction = state.getValue(DirectionalBlock.FACING);
             BlockState pistonBlockUp = world.getBlockState(pos.above(1));
             BlockState pistonBlockDown = world.getBlockState(pos.below(1));
-            ChunkPos chunkPos = new ChunkPos(pos.relative(direction));
+            ChunkPos chunkPos = new ChunkPos(pos.relative(direction).getX(), pos.relative(direction).getZ());
             if (optionIsBoneBlockOrAll()) {
                 loadChunkIfMatch(world, chunkPos, pistonBlockUp, Blocks.BONE_BLOCK);
             }

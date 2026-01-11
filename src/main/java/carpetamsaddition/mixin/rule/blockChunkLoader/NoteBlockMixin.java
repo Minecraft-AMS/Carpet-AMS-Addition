@@ -54,7 +54,7 @@ public abstract class NoteBlockMixin {
     @Unique
     private void handleChunkLoading(Level world, BlockPos pos) {
         if (!WorldUtil.isClient(world)) {
-            ChunkPos chunkPos = new ChunkPos(pos);
+            ChunkPos chunkPos = new ChunkPos(pos.getX(), pos.getZ());
             BlockState noteBlockUp = world.getBlockState(pos.above(1));
             if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "note_block")) {
                 BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, chunkPos);

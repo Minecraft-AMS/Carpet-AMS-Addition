@@ -42,7 +42,7 @@ public abstract class BellBlockMixin {
     @Inject(method = "attemptToRing(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z", at = @At("HEAD"))
     private void ring(Entity entity, Level world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
         if (CarpetAMSAdditionSettings.bellBlockChunkLoader && !WorldUtil.isClient(world)) {
-            ChunkPos chunkPos = new ChunkPos(pos);
+            ChunkPos chunkPos = new ChunkPos(pos.getX(), pos.getX());
             BlockChunkLoaderHelper.addBellBlockTicket((ServerLevel) world, chunkPos);
         }
     }
