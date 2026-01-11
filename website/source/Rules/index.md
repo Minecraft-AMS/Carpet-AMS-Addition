@@ -2604,9 +2604,9 @@ AMS网络协议的开关。
 
 ## 防止服务器暂停（preventServerPause）
 
-<该规则 Minecraft >= 1.21.2 可用>
-
 防止服务器60s后暂停。
+
+<该规则 Minecraft >= 1.21.2 可用>
 
 - 类型: `boolean`
   
@@ -2621,6 +2621,97 @@ AMS网络协议的开关。
   
 
 - 分类: `AMS`, `FEATURE`
+  
+## 仙人掌扳手拓展（flippinCactusExtras）
+
+使仙人掌扳手能适用于更多方块。
+
+受影响的方块:
+
+木桶、雕文书架、合成器、展示架
+
+- 类型: `boolean`
+  
+  
+
+- 默认值: `false`
+  
+  
+
+- 参考选项: `false`, `true`
+  
+  
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
+
+## 实验性矿车速度（experimentalMinecartSpeed）
+
+设置实验性矿车的速度。
+
+启用该规则将覆盖游戏规则
+
+<该规则 Minecraft >= 1.21.2 可用>
+
+- 类型: `int`
+  
+  
+
+- 默认值: `-1`
+  
+  
+
+- 参考选项: `-1`, `1000`
+  
+  
+
+- 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
+
+## 启用实验性矿车（experimentalMinecartEnabled）
+
+启用实验性矿车。
+
+服务器环境切换该规则设置时需要重启服务器
+
+客户端环境切换该规则设置时需要重启客户端
+
+<该规则 Minecraft >= 1.21.2 可用>
+
+- 类型: `boolean`
+  
+  
+
+- 默认值: `false`
+  
+  
+
+- 参考选项: `false`, `true`
+  
+  
+
+- 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
+
+## AMS翻译模式（amsTranslationMode）
+
+切换Carpet AMS Addition的翻译模式。
+
+[client] - 优先使用客户端自己的语言向客户端发送翻译文本
+
+[server] - 统一使用服务端设置的语言进行翻译
+
+
+- 类型: `enum`
+  
+  
+
+- 默认值: `CLIENT`
+  
+  
+
+- 参考选项: `CLIENT`, `SERVER`
+  
+  
+
+- 分类: `AMS`
 
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 

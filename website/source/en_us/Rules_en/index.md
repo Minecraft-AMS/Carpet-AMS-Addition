@@ -627,7 +627,7 @@ When enabled，You can choose whether to have Withering always shoot blue skulls
 `NEVER`: Never shoot blue skull。
 `VANILLA`: VANILLA。
 
-- Type: `String`
+- Type: `enum`
   
   
 
@@ -683,7 +683,7 @@ Five gears are provided to allow players to move faster.
 
 Used to control in which dimensions fasterMovement rule is effective.
 
-- Type: `String`
+- Type: `enum`
   
   
 
@@ -2631,12 +2631,108 @@ Prevent server pause after 60s.
 &lt;Available for Minecraft >= 1.21.2&gt;
 
 * Type: `boolean`
+  
+  
 
 * Default: `false`
+  
+  
 
 * Suggested options: `false`, `true`
+  
+  
 
 * Categroies: `AMS`, `FEATURE`
+
+## flippinCactusExtras
+
+Enables flippinCactus rules to work on more blocks.
+
+Affected blocks:
+
+barrel, chiseled_bookshelf, crafter, shelf
+
+&lt;Available for Minecraft >= 1.21.2&gt;
+
+- Type: `boolean`
+  
+  
+
+- Default: `false`
+  
+  
+
+- Suggested options: `false`, `true`
+  
+  
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
+## experimentalMinecartSpeed
+
+Set the speed of the experimental minecart.
+
+&lt;Available for Minecraft >= 1.21.2&gt;
+
+* Type: `int`
+  
+  
+
+* Default: `-1`
+  
+  
+
+* Suggested options: `-1`, `1000`
+  
+  
+
+* Categroies: `AMS`, `FEATURE`, `EXPERIMENTAL`
+
+## experimentalMinecartEnabled
+
+Enable experimental minecarts.
+
+When the server environment switches the rule setting, the server needs to be restarted
+
+When the client environment switches the rule settings, the client needs to be restarted
+
+&lt;Available for Minecraft >= 1.21.2&gt;
+
+* Type: `boolean`
+  
+  
+
+* Default: `false`
+  
+  
+
+* Suggested options: `false`, `true`
+  
+  
+
+* Categroies: `AMS`, `FEATURE`, `EXPERIMENTAL`
+
+## amsTranslationMode
+
+Switch the translation mode of Carpet AMS Addition.
+
+[client] - Prefer sending translated text to the client using the client’s own language
+
+[server] - Use the language set by the server for all translations
+
+* Type: `enum`
+  
+  
+
+* Default: `CLIENT`
+  
+  
+
+* Suggested options: `CLIENT`, `SERVER`
+  
+  
+
+* Categroies: `AMS`
 
 ## craftableEnchantedGoldApple
 
