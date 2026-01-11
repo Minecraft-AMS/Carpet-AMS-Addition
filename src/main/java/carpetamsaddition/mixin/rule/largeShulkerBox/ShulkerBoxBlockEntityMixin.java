@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.largeShulkerBox;
 
-import carpetamsaddition.CarpetAMSAdditionStaticSettings;
+import carpetamsaddition.CarpetAMSAdditionLazySettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -42,7 +42,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.stream.IntStream;
 
-import static carpetamsaddition.CarpetAMSAdditionStaticSettings.Rule.*;
+import static carpetamsaddition.CarpetAMSAdditionLazySettings.Rule.*;
 
 @Mixin(value = ShulkerBoxBlockEntity.class, priority = 1024)
 public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBlockEntity implements WorldlyContainer {
@@ -58,21 +58,21 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
 
     @Inject(method = "<init>(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("RETURN"))
     private void init1(CallbackInfo ci) {
-        if (CarpetAMSAdditionStaticSettings.isEnabled(LARGE_SHULKER_BOX)) {
+        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
             this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
         }
     }
 
     @Inject(method = "<init>(Lnet/minecraft/world/item/DyeColor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("RETURN"))
     private void init2(CallbackInfo ci) {
-        if (CarpetAMSAdditionStaticSettings.isEnabled(LARGE_SHULKER_BOX)) {
+        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
             this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
         }
     }
 
     @Inject(method = "getContainerSize", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
-        if (CarpetAMSAdditionStaticSettings.isEnabled(LARGE_SHULKER_BOX)) {
+        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
             cir.setReturnValue(9 * 6);
             cir.cancel();
         }
@@ -80,7 +80,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
 
     @Inject(method = "getSlotsForFace", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
-        if (CarpetAMSAdditionStaticSettings.isEnabled(LARGE_SHULKER_BOX)) {
+        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
             int[] availableSlots = IntStream.range(0, getContainerSize()).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();

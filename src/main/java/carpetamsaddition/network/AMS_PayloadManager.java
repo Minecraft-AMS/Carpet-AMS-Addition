@@ -21,7 +21,7 @@
 package carpetamsaddition.network;
 
 import carpetamsaddition.network.payloads.AMS_UnknownPayload;
-import carpetamsaddition.network.payloads.core.StaticSettingsPayload_S2C;
+import carpetamsaddition.network.payloads.core.LazySettingsPayload_S2C;
 import carpetamsaddition.network.payloads.debug.RequestClientModVersionPayload_C2S;
 import carpetamsaddition.network.payloads.debug.RequestClientModVersionPayload_S2C;
 import carpetamsaddition.network.payloads.handshake.HandShakeC2SPayload;
@@ -54,7 +54,7 @@ public class AMS_PayloadManager {
         CLIENT_PLAYER_FPS_C2S("client_player_fps_c2s"),
         CLIENT_PLAYER_FPS_S2C("client_player_fps_s2c"),
         UPDATE_PLAYER_POSE_S2C("update_player_pose_s2c"),
-        STATIC_SETTINGS_S2C("static_settings_s2c");
+        LAZY_SETTINGS_S2C("lazy_settings_s2c");
 
         private final String id;
 
@@ -87,8 +87,7 @@ public class AMS_PayloadManager {
         chain.addHandlerFor(ClientPlayerFpsPayload_S2C.class, ClientPlayerFpsPayload_S2C::handle);
         chain.addHandlerFor(UpdatePlayerPosePayload_S2C.class,  UpdatePlayerPosePayload_S2C::handle);
         chain.addHandlerFor(RequestClientModVersionPayload_S2C.class, RequestClientModVersionPayload_S2C::handle);
-        chain.addHandlerFor(StaticSettingsPayload_S2C.class, StaticSettingsPayload_S2C::handle);
-
+        chain.addHandlerFor(LazySettingsPayload_S2C.class, LazySettingsPayload_S2C::handle);
     }
 
     /*
@@ -111,7 +110,7 @@ public class AMS_PayloadManager {
         ClientPlayerFpsPayload_S2C.register();
         UpdatePlayerPosePayload_S2C.register();
         RequestClientModVersionPayload_S2C.register();
-        StaticSettingsPayload_S2C.register();
+        LazySettingsPayload_S2C.register();
     }
 
     public static void register(String packetId, Function<FriendlyByteBuf, AMS_CustomPayload> constructor) {

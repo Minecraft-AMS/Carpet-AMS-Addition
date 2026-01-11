@@ -18,18 +18,22 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.hooks.settings;
+package carpetamsaddition.utils;
 
 import carpet.api.settings.CarpetRule;
-import carpet.api.settings.SettingsManager;
 
-import net.minecraft.commands.CommandSourceStack;
+import org.jetbrains.annotations.NotNull;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Invoker;
+public class CarpetUtil {
+    public static String getRuleName(@NotNull CarpetRule<?> rule) {
+        return rule.name();
+    }
 
-@Mixin(SettingsManager.class)
-public interface Carpet_SettingsManagerInvoker {
-    @Invoker("setDefault")
-    int invokeSetDefault(CommandSourceStack source, CarpetRule<?> rule, String value);
+    public static String getRuleDefaultValue(@NotNull CarpetRule<?> rule) {
+        return String.valueOf(rule.defaultValue());
+    }
+
+    public static String getRuleCurrentValue(@NotNull CarpetRule<?> rule) {
+        return String.valueOf(rule.value());
+    }
 }

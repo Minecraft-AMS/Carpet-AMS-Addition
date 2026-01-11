@@ -21,6 +21,7 @@
 package carpetamsaddition.mixin.rule.experimentalMinecart;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.FeatureChecker;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
@@ -47,6 +48,11 @@ public abstract class GameRuleCommandMixin {
     private static void onSet(CommandContext<CommandSourceStack> context, GameRule<?> gameRule, CallbackInfoReturnable<Integer> cir) {
         if (CarpetAMSAdditionSettings.experimentalMinecartEnabled && CarpetAMSAdditionSettings.experimentalMinecartSpeed != -1.0D && gameRule.equals(GameRules.MAX_MINECART_SPEED)) {
             Messenger.tell(context.getSource(), Messenger.f(tr.tr("vanilla_command_disabled"), Layout.RED));
+            cir.setReturnValue(0);
+            cir.cancel();
+        }
+
+        if (!FeatureChecker.EX_MINECART_FEATURE.get()) {
             cir.setReturnValue(0);
             cir.cancel();
         }

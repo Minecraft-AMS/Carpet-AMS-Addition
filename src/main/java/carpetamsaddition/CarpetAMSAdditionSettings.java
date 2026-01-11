@@ -29,7 +29,6 @@ import carpetamsaddition.validators.rule.experimentalMinecartSpeed.MaxSpeedRange
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import carpetamsaddition.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
-import carpetamsaddition.observers.network.NetworkProtocolObserver;
 import carpetamsaddition.observers.recipe.RecipeRuleObserver;
 import carpetamsaddition.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
 import carpetamsaddition.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
@@ -596,9 +595,12 @@ public class CarpetAMSAdditionSettings {
     @MustSetDefault
     @Rule(
         categories = {AMS, FEATURE, EXPERIMENTAL},
-        validators = {NeedRestartServerOrClientObserver.class, NetworkProtocolObserver.class}
+        validators = NeedRestartServerOrClientObserver.class
     )
     public static boolean experimentalMinecartEnabled = false;
+
+    @Rule(categories = AMS)
+    public static translationModes amsTranslationMode = translationModes.CLIENT;
 
     /*
      * AMS网络协议规则
@@ -610,28 +612,24 @@ public class CarpetAMSAdditionSettings {
     public static boolean amsNetworkProtocol = false;
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
     public static String commandAmspDebug = "false";
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, FEATURE, SURVIVAL, AMS_NETWORK, COMMAND}
     )
     public static String commandCustomBlockHardness = "false";
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
     public static String commandGetClientPlayerFps = "false";
 
     @Rule(
-        validators = NetworkProtocolObserver.class,
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
         categories = {AMS, AMS_NETWORK, COMMAND}
     )
@@ -727,7 +725,7 @@ public class CarpetAMSAdditionSettings {
         ALL
     }
 
-    public enum translationSides {
+    public enum translationModes {
         CLIENT,
         SERVER
     }
@@ -735,9 +733,6 @@ public class CarpetAMSAdditionSettings {
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
     public static boolean testRule = false;
-
-    @Rule(categories = AMS)
-    public static translationSides amsTranslationSide = translationSides.CLIENT;
 
     static {
         for (Field field : CarpetAMSAdditionSettings.class.getDeclaredFields()) {

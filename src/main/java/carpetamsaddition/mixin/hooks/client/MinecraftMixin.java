@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,22 +18,21 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.settings;
+package carpetamsaddition.mixin.hooks.client;
 
-import carpet.api.settings.CarpetRule;
-import carpet.api.settings.Validator;
+import carpetamsaddition.CarpetAMSAdditionClient;
 
-import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.client.Minecraft;
 
-public abstract class RuleObserver<T> extends Validator<T> {
-    @Override
-    public T validate(CommandSourceStack source, CarpetRule<T> rule, T newValue, String userInput) {
-        if (rule.value() != newValue) {
-            onValueChange(source, rule, rule.value(), newValue);
-        }
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-        return newValue;
+@Mixin(Minecraft.class)
+public abstract class MinecraftMixin {
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void onTick(CallbackInfo ci) {
+        CarpetAMSAdditionClient.getInstance().onTick();
     }
-
-    public abstract void onValueChange(CommandSourceStack source, CarpetRule<T> rule, T oldValue, T newValue);
 }

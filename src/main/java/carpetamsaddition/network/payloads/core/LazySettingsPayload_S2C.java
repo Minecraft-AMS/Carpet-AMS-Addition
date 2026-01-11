@@ -20,33 +20,32 @@
 
 package carpetamsaddition.network.payloads.core;
 
-import carpetamsaddition.CarpetAMSAdditionStaticSettings;
+import carpetamsaddition.CarpetAMSAdditionLazySettings;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
 
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.EnumSet;
-import java.util.Set;
 
-public class StaticSettingsPayload_S2C extends AMS_CustomPayload {
-    private static final String ID = AMS_PayloadManager.PacketId.STATIC_SETTINGS_S2C.getId();
-    private final Set<CarpetAMSAdditionStaticSettings.Rule> rules;
+public class LazySettingsPayload_S2C extends AMS_CustomPayload {
+    private static final String ID = AMS_PayloadManager.PacketId.LAZY_SETTINGS_S2C.getId();
+    private final EnumSet<CarpetAMSAdditionLazySettings.Rule> rules;
 
-    private StaticSettingsPayload_S2C(EnumSet<CarpetAMSAdditionStaticSettings.Rule> rules) {
+    private LazySettingsPayload_S2C(EnumSet<CarpetAMSAdditionLazySettings.Rule> rules) {
         super(ID);
         this.rules = EnumSet.copyOf(rules);
     }
 
-    protected StaticSettingsPayload_S2C(FriendlyByteBuf buf) {
+    protected LazySettingsPayload_S2C(FriendlyByteBuf buf) {
         super(ID);
 
         int size = buf.readVarInt();
-        this.rules = EnumSet.noneOf(CarpetAMSAdditionStaticSettings.Rule.class);
+        this.rules = EnumSet.noneOf(CarpetAMSAdditionLazySettings.Rule.class);
 
         for (int i = 0; i < size; i++) {
             String ruleName = buf.readUtf();
-            CarpetAMSAdditionStaticSettings.Rule rule = CarpetAMSAdditionStaticSettings.Rule.valueOf(ruleName);
+            CarpetAMSAdditionLazySettings.Rule rule = CarpetAMSAdditionLazySettings.Rule.valueOf(ruleName);
             rules.add(rule);
         }
     }
@@ -55,22 +54,22 @@ public class StaticSettingsPayload_S2C extends AMS_CustomPayload {
     protected void writeData(FriendlyByteBuf buf) {
         buf.writeVarInt(rules.size());
 
-        for (CarpetAMSAdditionStaticSettings.Rule rule : rules) {
+        for (CarpetAMSAdditionLazySettings.Rule rule : rules) {
             buf.writeUtf(rule.name());
         }
     }
 
     @Override
     public void handle() {
-        CarpetAMSAdditionStaticSettings.RULES.clear();
-        CarpetAMSAdditionStaticSettings.RULES.addAll(this.rules);
+        CarpetAMSAdditionLazySettings.clear();
+        CarpetAMSAdditionLazySettings.addAll(this.rules);
     }
 
     public static void register() {
-        AMS_PayloadManager.register(ID, StaticSettingsPayload_S2C::new);
+        AMS_PayloadManager.register(ID, LazySettingsPayload_S2C::new);
     }
 
-    public static StaticSettingsPayload_S2C create(EnumSet<CarpetAMSAdditionStaticSettings.Rule> rules) {
-        return new StaticSettingsPayload_S2C(rules);
+    public static LazySettingsPayload_S2C create(EnumSet<CarpetAMSAdditionLazySettings.Rule> rules) {
+        return new LazySettingsPayload_S2C(rules);
     }
 }

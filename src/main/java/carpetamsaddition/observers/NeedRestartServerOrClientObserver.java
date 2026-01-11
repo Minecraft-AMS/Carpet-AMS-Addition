@@ -25,6 +25,7 @@ import carpet.api.settings.CarpetRule;
 import carpetamsaddition.helpers.EnvironmentHelper;
 import carpetamsaddition.settings.RuleObserver;
 import carpetamsaddition.translations.Translator;
+import carpetamsaddition.utils.CarpetUtil;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.MinecraftServerUtil;
@@ -33,16 +34,16 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.MutableComponent;
 
 public class NeedRestartServerOrClientObserver extends RuleObserver<Object> {
-    private static final Translator tr = new Translator("validator.need_restart_server_or_client");
+    private static final Translator tr = new Translator("observer.need_restart_server_or_client");
 
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Object> rule, Object oldValue, Object newValue) {
         MutableComponent message = null;
 
         if (EnvironmentHelper.isClient() && newValue != oldValue) {
-            message = tr.tr("is_client_message", this.getRuleName(rule));
+            message = tr.tr("is_client_message", CarpetUtil.getRuleName(rule));
         } else if (EnvironmentHelper.isServer()) {
-            message = tr.tr("is_server_message", this.getRuleName(rule));
+            message = tr.tr("is_server_message", CarpetUtil.getRuleName(rule));
         }
 
         if (message != null && source != null && MinecraftServerUtil.serverIsRunning()) {

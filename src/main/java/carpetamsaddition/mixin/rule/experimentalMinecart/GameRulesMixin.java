@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,23 +20,29 @@
 
 package carpetamsaddition.mixin.rule.experimentalMinecart;
 
-import carpetamsaddition.CarpetAMSAdditionLazySettings;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.world.flag.FeatureFlag;
+import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.level.gamerules.GameRules;
 
-import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
+import org.objectweb.asm.Opcodes;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(value = AbstractMinecart.class, priority = 168)
-public abstract class AbstractMinecartMixin {
-    @ModifyReturnValue(method = "useExperimentalMovement", at = @At("RETURN"))
-    private static boolean setExMinecartEnabled(boolean original) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(CarpetAMSAdditionLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
-            return true;
-        } else {
-            return original;
-        }
+@Mixin(value = GameRules.class, priority = 168)
+public abstract class GameRulesMixin {
+    @WrapOperation(
+        method = "<clinit>",
+        at = @At(
+            value = "FIELD",
+            target = "Lnet/minecraft/world/flag/FeatureFlags;MINECART_IMPROVEMENTS:Lnet/minecraft/world/flag/FeatureFlag;",
+            opcode = Opcodes.GETSTATIC
+        )
+    )
+    private static FeatureFlag beVanilla(Operation<FeatureFlag> original) {
+        return FeatureFlags.VANILLA;
     }
 }

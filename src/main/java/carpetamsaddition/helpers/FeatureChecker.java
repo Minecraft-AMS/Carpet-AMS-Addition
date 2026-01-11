@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,22 +18,25 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.settings;
+package carpetamsaddition.helpers;
 
-import carpet.api.settings.CarpetRule;
-import carpet.api.settings.Validator;
+import carpetamsaddition.utils.MinecraftServerUtil;
 
-import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.flag.FeatureFlags;
 
-public abstract class RuleObserver<T> extends Validator<T> {
-    @Override
-    public T validate(CommandSourceStack source, CarpetRule<T> rule, T newValue, String userInput) {
-        if (rule.value() != newValue) {
-            onValueChange(source, rule, rule.value(), newValue);
+import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
+public class FeatureChecker {
+    public static final AtomicBoolean EX_MINECART_FEATURE = new AtomicBoolean(false);
+
+    public static boolean hasMinecartImprovements(@Nullable MinecraftServer server) {
+        if (MinecraftServerUtil.serverIsRunning(server)) {
+            return server.getWorldData().getDataConfiguration().enabledFeatures().contains(FeatureFlags.MINECART_IMPROVEMENTS);
         }
 
-        return newValue;
+        return false;
     }
-
-    public abstract void onValueChange(CommandSourceStack source, CarpetRule<T> rule, T oldValue, T newValue);
 }

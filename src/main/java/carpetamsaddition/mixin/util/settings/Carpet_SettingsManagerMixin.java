@@ -18,33 +18,31 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.hooks.settings;
+package carpetamsaddition.mixin.util.settings;
 
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
 
-import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.CarpetUtil;
 
 import net.minecraft.commands.CommandSourceStack;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SettingsManager.class)
 public abstract class Carpet_SettingsManagerMixin {
-    @Inject(method = "setRule", at = @At("RETURN"))
-    private void alwaysSetDefaultRule(CommandSourceStack source, CarpetRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
-        if (CarpetAMSAdditionSettings.MUST_SET_DEFAULT_RULES.contains(rule.name())) {
-            ((Carpet_SettingsManagerInvoker) this).invokeSetDefault(source, rule, value);
-        }
-    }
+    @Shadow
+    protected abstract int setDefault(CommandSourceStack source, CarpetRule<?> rule, String value);
 
-    @Inject(method = "loadConfigurationFromConf", at = @At("TAIL"))
-    private void loadStaticAMSRule(CallbackInfo ci) {
-        CarpetAMSAdditionServer.getInstance().afterCarpetLoadConfigurationFromConf();
+    @Inject(method = "setRule", at = @At("RETURN"))
+    private void isMustSetDefaultRule(CommandSourceStack source, CarpetRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
+        if (CarpetAMSAdditionSettings.MUST_SET_DEFAULT_RULES.contains(CarpetUtil.getRuleName(rule))) {
+            this.setDefault(source, rule, value);
+        }
     }
 }
