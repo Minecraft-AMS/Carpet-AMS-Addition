@@ -24,8 +24,8 @@ import carpet.api.settings.Rule;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.network.AMS_CustomPayload;
-
 import carpetamsaddition.settings.AmsRuleCategory;
+
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
 
