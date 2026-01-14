@@ -41,22 +41,20 @@ import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@SuppressWarnings("PatternVariableCanBeUsed")
 @Mixin(targets = "carpet/helpers/EntityPlayerActionPack$ActionType$1")
 public abstract class EntityPlayerActionPackActionTypeMixin {
     @WrapOperation(
         method = "execute(Lnet/minecraft/server/level/ServerPlayer;Lcarpet/helpers/EntityPlayerActionPack$Action;)Z",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/Entity;interactAt(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
+            target = "Lnet/minecraft/world/entity/Entity;interact(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/InteractionResult;"
         )
     )
-    private InteractionResult onInteractAt(Entity instance, Player player, Vec3 hitPos, InteractionHand hand, Operation<InteractionResult> original) {
-        InteractionResult originalResult = original.call(instance, player, hitPos, hand);
+    private InteractionResult onInteractAt(Entity entity, Player player, InteractionHand hand, Vec3 hitPos, Operation<InteractionResult> original) {
+        InteractionResult originalResult = original.call(entity, player, hand, hitPos);
 
         if (CarpetAMSAdditionSettings.fakePlayerInteractLikeClient) {
-            if (instance instanceof ArmorStand) {
-                ArmorStand stand = (ArmorStand) instance;
+            if (entity instanceof ArmorStand stand) {
                 ItemStack handItem = player.getItemInHand(hand);
                 if (!stand.isMarker() && handItem.getItem() != Items.NAME_TAG && !player.isSpectator()) {
                     return InteractionResult.PASS;
@@ -71,26 +69,23 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
         method = "execute(Lnet/minecraft/server/level/ServerPlayer;Lcarpet/helpers/EntityPlayerActionPack$Action;)Z",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/level/ServerPlayer;interactOn(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
+            target = "Lnet/minecraft/server/level/ServerPlayer;interactOn(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/InteractionResult;"
         )
     )
-    private InteractionResult onInteract(ServerPlayer player, Entity entity, InteractionHand hand, Operation<InteractionResult> original) {
-        InteractionResult originalResult = original.call(player, entity, hand);
+    private InteractionResult onInteract(ServerPlayer player, Entity entity, InteractionHand hand, Vec3 hitPos, Operation<InteractionResult> original) {
+        InteractionResult originalResult = original.call(player, entity, hand, hitPos);
 
         if (CarpetAMSAdditionSettings.fakePlayerInteractLikeClient) {
-            if (entity instanceof Boat) {
-                Boat boat = (Boat) entity;
+            if (entity instanceof Boat boat) {
                 if (!player.isSecondaryUseActive() && ((AbstractBoatInvoker) boat).getOutOfControlTicks() < 60.0F) {
                     return InteractionResult.SUCCESS;
                 }
-            } else if (entity instanceof Minecart) {
-                Minecart minecart = (Minecart) entity;
+            } else if (entity instanceof Minecart minecart) {
                 if (!player.isSecondaryUseActive() && !minecart.isVehicle()) {
                     return InteractionResult.SUCCESS;
                 }
-            } else if (entity instanceof Raft) {
-                Raft boat = (Raft) entity;
-                if (!player.isSecondaryUseActive() && ((AbstractBoatInvoker) boat).getOutOfControlTicks() < 60.0F) {
+            } else if (entity instanceof Raft raft) {
+                if (!player.isSecondaryUseActive() && ((AbstractBoatInvoker) raft).getOutOfControlTicks() < 60.0F) {
                     return InteractionResult.SUCCESS;
                 }
             }

@@ -21,6 +21,7 @@
 package carpetamsaddition.helpers.rule.largeBundle;
 
 import carpetamsaddition.mixin.rule.largeBundle.BundleItemMixin;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
 import net.minecraft.world.entity.player.Player;
@@ -31,6 +32,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.core.NonNullList;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -43,7 +45,7 @@ public class LargeBundleInventory implements Container {
         this.stack = stack;
         ItemContainerContents container = stack.get(DataComponents.CONTAINER);
         if (container != null) {
-            List<ItemStack> containerStacks = container.stream().toList();
+            List<ItemStack> containerStacks = container.allItemsCopyStream().toList();
             for (int i = 0; i < Math.min(containerStacks.size(), this.getContainerSize()); i++) {
                 this.items.set(i, containerStacks.get(i).copy());
             }

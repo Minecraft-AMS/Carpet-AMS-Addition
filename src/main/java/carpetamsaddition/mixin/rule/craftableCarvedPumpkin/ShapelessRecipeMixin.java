@@ -37,6 +37,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 
 import org.jetbrains.annotations.NotNull;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
@@ -50,7 +51,7 @@ public abstract class ShapelessRecipeMixin implements CraftingRecipe {
 
         if (CarpetAMSAdditionSettings.craftableCarvedPumpkin) {
             ShapelessRecipe recipe = (ShapelessRecipe) (Object) this;
-            ItemStack result = recipe.assemble(input, MinecraftServerUtil.getServer().registryAccess());
+            ItemStack result = recipe.assemble(input);
             if (result.getItem().equals(Items.CARVED_PUMPKIN)) {
                 return this.handleRemainders(input, remainders);
             }
