@@ -27,27 +27,43 @@ import carpetamsaddition.network.AMS_PayloadManager;
 
 import net.minecraft.network.FriendlyByteBuf;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class HandShakeS2CPayload extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.HANDSHAKE_S2C.getId();
     private final String modVersion;
     private final boolean isSupportServer;
+    private final Set<String> supportedPackets;
 
-    private HandShakeS2CPayload(String modVersion, boolean isSupportServer) {
+    public HandShakeS2CPayload(String modVersion, boolean isSupportServer, Set<String> supportedPackets) {
         super(ID);
         this.modVersion = modVersion;
         this.isSupportServer = isSupportServer;
+        this.supportedPackets = supportedPackets;
     }
 
-    private HandShakeS2CPayload(FriendlyByteBuf buf) {
+    public HandShakeS2CPayload(FriendlyByteBuf buf) {
         super(ID);
         this.modVersion = buf.readUtf();
         this.isSupportServer = buf.readBoolean();
+        int packetCount = buf.readVarInt();
+        this.supportedPackets = new HashSet<>();
+
+        for (int i = 0; i < packetCount; i++) {
+            this.supportedPackets.add(buf.readUtf());
+        }
     }
 
     @Override
     protected void writeData(FriendlyByteBuf buf) {
         buf.writeUtf(this.modVersion);
         buf.writeBoolean(this.isSupportServer);
+        buf.writeVarInt(this.supportedPackets.size());
+
+        for (String packetId : this.supportedPackets) {
+            buf.writeUtf(packetId);
+        }
     }
 
     @Override
@@ -58,15 +74,16 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
             } else {
                 CarpetAMSAdditionClient.LOGGER.info("You joined server with mismatched carpet-ams-addition version (client: v{}, server: v{})", CarpetAMSAdditionClient.getVersion(), this.modVersion);
             }
+
             NetworkUtil.setServerSupport(this.isSupportServer);
+            NetworkUtil.setServerSupportedPackets(this.supportedPackets);
+
+            CarpetAMSAdditionClient.LOGGER.info("Server supports {} packet types", this.supportedPackets.size());
         });
     }
 
     public static HandShakeS2CPayload create(String modVersion, boolean isSupportServer) {
-        return new HandShakeS2CPayload(modVersion, isSupportServer);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, HandShakeS2CPayload::new);
+        Set<String> supportedPackets = NetworkUtil.getLocalSupportedPackets();
+        return new HandShakeS2CPayload(modVersion, isSupportServer, supportedPackets);
     }
 }

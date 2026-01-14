@@ -30,29 +30,45 @@ import carpetamsaddition.network.AMS_PayloadManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class HandShakeC2SPayload extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.HANDSHAKE_C2S.getId();
     private final String modVersion;
     private final UUID playerUuid;
+    private final Set<String> supportedPackets;
 
-    private HandShakeC2SPayload(String modVersion, UUID playerUuid) {
+    public HandShakeC2SPayload(String modVersion, UUID playerUuid, Set<String> supportedPackets) {
         super(ID);
         this.modVersion = modVersion;
         this.playerUuid = playerUuid;
+        this.supportedPackets = supportedPackets;
     }
 
-    private HandShakeC2SPayload(FriendlyByteBuf buf) {
+    public HandShakeC2SPayload(FriendlyByteBuf buf) {
         super(ID);
+
         this.modVersion = buf.readUtf();
         this.playerUuid = buf.readUUID();
+        int packetCount = buf.readVarInt();
+        this.supportedPackets = new HashSet<>();
+
+        for (int i = 0; i < packetCount; i++) {
+            this.supportedPackets.add(buf.readUtf());
+        }
     }
 
     @Override
     protected void writeData(FriendlyByteBuf buf) {
         buf.writeUtf(this.modVersion);
         buf.writeUUID(this.playerUuid);
+        buf.writeVarInt(this.supportedPackets.size());
+
+        for (String packetId : this.supportedPackets) {
+            buf.writeUtf(packetId);
+        }
     }
 
     @Override
@@ -67,7 +83,10 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
                 CarpetAMSAdditionServer.LOGGER.info("{} joined with mismatched carpet-ams-addition version (client: v{}, server: v{})", playerName, this.modVersion, CarpetAMSAdditionMod.getVersion());
             }
 
+            NetworkUtil.setClientSupportedPackets(this.playerUuid, this.supportedPackets);
             NetworkUtil.addSupportClient(this.playerUuid);
+
+            CarpetAMSAdditionServer.LOGGER.info("{} supports {} packet types", playerName, this.supportedPackets.size());
 
             if (player != null) {
                 CarpetAMSAdditionServer.getInstance().sendS2CPacketOnHandShake(player);
@@ -78,10 +97,7 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
     }
 
     public static HandShakeC2SPayload create(String modVersion, UUID playerUuid) {
-        return new HandShakeC2SPayload(modVersion, playerUuid);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, HandShakeC2SPayload::new);
+        Set<String> supportedPackets = NetworkUtil.getLocalSupportedPackets();
+        return new HandShakeC2SPayload(modVersion, playerUuid, supportedPackets);
     }
 }

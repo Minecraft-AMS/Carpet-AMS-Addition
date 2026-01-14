@@ -33,9 +33,9 @@ public class CarpetAMSAdditionMod implements ModInitializer {
     @Override
     public void onInitialize() {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
-        AMS_PayloadManager.registerC2SPayloads();
         AutoMixinAuditExecutor.run();
         CarpetAMSAdditionServer.init();
+        AMS_PayloadManager.registerPayloads();
     }
 
     public static String getModId() {

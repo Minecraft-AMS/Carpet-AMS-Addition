@@ -24,13 +24,14 @@ import carpet.api.settings.Rule;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.network.AMS_CustomPayload;
+import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.settings.AmsRuleCategory;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.lang.reflect.Field;
 import java.util.*;
+import java.lang.reflect.Field;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -38,6 +39,8 @@ public class NetworkUtil {
     private static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
     public static final Set<String> AMS_NETWORK_RULE_NAMES = new LinkedHashSet<>();
+    private static final Map<UUID, Set<String>> CLIENT_SUPPORTED_PACKETS = new ConcurrentHashMap<>();
+    private static final Set<String> SERVER_SUPPORTED_PACKETS = ConcurrentHashMap.newKeySet();
 
     public enum SendMode {
         FORCE,
@@ -51,7 +54,7 @@ public class NetworkUtil {
     public static void sendS2CPacket(ServerPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
         boolean shouldSend = switch (sendMode) {
             case FORCE -> true;
-            case NEED_SUPPORT -> isSupportClient(player.getUUID());
+            case NEED_SUPPORT -> isSupportClient(player.getUUID()) && isClientPacketSupported(player.getUUID(), payload.getPacketId());
         };
 
         if (shouldSend) {
@@ -62,12 +65,50 @@ public class NetworkUtil {
     public static void sendC2SPacket(LocalPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
         boolean shouldSend = switch (sendMode) {
             case FORCE -> true;
-            case NEED_SUPPORT -> getServerSupportState();
+            case NEED_SUPPORT -> getServerSupportState() && isServerPacketSupported(payload.getPacketId());
         };
 
         if (shouldSend) {
             payload.sendC2SPacket(player);
         }
+    }
+
+    public static boolean isClientPacketSupported(UUID clientUuid, String packetId) {
+        Set<String> supportedPackets = CLIENT_SUPPORTED_PACKETS.get(clientUuid);
+        return supportedPackets != null && supportedPackets.contains(packetId);
+    }
+
+    public static boolean isServerPacketSupported(String packetId) {
+        return SERVER_SUPPORTED_PACKETS.contains(packetId);
+    }
+
+    public static void setClientSupportedPackets(UUID clientUuid, Set<String> packetIds) {
+        CLIENT_SUPPORTED_PACKETS.put(clientUuid, new HashSet<>(packetIds));
+    }
+
+    public static Set<String> getClientSupportedPackets(UUID clientUuid) {
+        return CLIENT_SUPPORTED_PACKETS.getOrDefault(clientUuid, Collections.emptySet());
+    }
+
+    public static void setServerSupportedPackets(Set<String> packetIds) {
+        SERVER_SUPPORTED_PACKETS.clear();
+        SERVER_SUPPORTED_PACKETS.addAll(packetIds);
+    }
+
+    public static Set<String> getServerSupportedPackets() {
+        return new HashSet<>(SERVER_SUPPORTED_PACKETS);
+    }
+
+    public static Set<String> getLocalSupportedPackets() {
+        return new HashSet<>(AMS_PayloadManager.PAYLOAD_REGISTRY.keySet());
+    }
+
+    public static void removeClientSupportedPackets(UUID clientUuid) {
+        CLIENT_SUPPORTED_PACKETS.remove(clientUuid);
+    }
+
+    public static void clearAllClientSupportedPackets() {
+        CLIENT_SUPPORTED_PACKETS.clear();
     }
 
     public static boolean isSupportClient(UUID uuid) {
@@ -92,10 +133,12 @@ public class NetworkUtil {
 
     public static void removeSupportClient(UUID uuid) {
         SUPPORT_CLIENT.remove(uuid);
+        removeClientSupportedPackets(uuid);
     }
 
     public static void clearClientSupport() {
         SUPPORT_CLIENT.clear();
+        clearAllClientSupportedPackets();
     }
 
     public static void executeOnClientThread(Runnable runnable) {

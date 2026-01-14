@@ -39,7 +39,7 @@ import java.util.function.Function;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class AMS_PayloadManager {
-    protected static final Map<String, Function<FriendlyByteBuf, AMS_CustomPayload>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
+    public static final Map<String, Function<FriendlyByteBuf, AMS_CustomPayload>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
     private static final PayloadHandlerChain C2S_HANDLER_CHAIN = PayloadHandlerChainCreator.createC2SHandlerChain();
     private static final PayloadHandlerChain S2C_HANDLER_CHAIN = PayloadHandlerChainCreator.createS2CHandlerChain();
 
@@ -68,6 +68,28 @@ public class AMS_PayloadManager {
     }
 
     /*
+     * Register Payloads
+     */
+    public static void registerPayloads() {
+        // C2S Payloads
+        registerPayload(PacketId.HANDSHAKE_C2S.getId(), HandShakeC2SPayload::new);
+        registerPayload(PacketId.CLIENT_PLAYER_FPS_C2S.getId(), ClientPlayerFpsPayload_C2S::new);
+        registerPayload(PacketId.REQUEST_CLIENT_MOD_VERSION_C2S.getId(), RequestClientModVersionPayload_C2S::new);
+
+        // S2C Payloads
+        registerPayload(PacketId.HANDSHAKE_S2C.getId(), HandShakeS2CPayload::new);
+        registerPayload(PacketId.REQUEST_HANDSHAKE_S2C.getId(), _ -> new RequestHandShakeS2CPayload());
+        registerPayload(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId(), CustomBlockHardnessPayload_S2C::new);
+        registerPayload(PacketId.CLIENT_PLAYER_FPS_S2C.getId(), ClientPlayerFpsPayload_S2C::new);
+        registerPayload(PacketId.UPDATE_PLAYER_POSE_S2C.getId(), UpdatePlayerPosePayload_S2C::new);
+        registerPayload(PacketId.REQUEST_CLIENT_MOD_VERSION_S2C.getId(), RequestClientModVersionPayload_S2C::new);
+        registerPayload(PacketId.LAZY_SETTINGS_S2C.getId(), LazySettingsPayload_S2C::new);
+
+        // Both Payloads
+        registerPayload(PacketId.UNKNOWN.getId(), _ -> new AMS_UnknownPayload());
+    }
+
+    /*
      * Register Payload Handlers
      */
     // C2S
@@ -90,30 +112,7 @@ public class AMS_PayloadManager {
         chain.addHandlerFor(LazySettingsPayload_S2C.class, LazySettingsPayload_S2C::handle);
     }
 
-    /*
-     * Register Payloads
-     */
-    // C2S
-    public static void registerC2SPayloads() {
-        HandShakeC2SPayload.register();
-        AMS_UnknownPayload.register();
-        ClientPlayerFpsPayload_C2S.register();
-        RequestClientModVersionPayload_C2S.register();
-    }
-
-    // S2C
-    public static void registerS2CPayloads() {
-        HandShakeS2CPayload.register();
-        RequestHandShakeS2CPayload.register();
-        CustomBlockHardnessPayload_S2C.register();
-        AMS_UnknownPayload.register();
-        ClientPlayerFpsPayload_S2C.register();
-        UpdatePlayerPosePayload_S2C.register();
-        RequestClientModVersionPayload_S2C.register();
-        LazySettingsPayload_S2C.register();
-    }
-
-    public static void register(String packetId, Function<FriendlyByteBuf, AMS_CustomPayload> constructor) {
+    private static void registerPayload(String packetId, Function<FriendlyByteBuf, AMS_CustomPayload> constructor) {
         PAYLOAD_REGISTRY.put(packetId, constructor);
     }
 

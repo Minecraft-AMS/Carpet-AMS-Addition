@@ -16,6 +16,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
+
 import org.jetbrains.annotations.NotNull;
 
 public abstract class AMS_CustomPayload implements CustomPacketPayload {
@@ -26,6 +27,10 @@ public abstract class AMS_CustomPayload implements CustomPacketPayload {
 
     protected AMS_CustomPayload(String packetId) {
         this.packetId = packetId;
+    }
+
+    public String getPacketId() {
+        return this.packetId;
     }
 
     @Override

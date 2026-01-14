@@ -32,12 +32,12 @@ public class LazySettingsPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.LAZY_SETTINGS_S2C.getId();
     private final EnumSet<CarpetAMSAdditionLazySettings.Rule> rules;
 
-    private LazySettingsPayload_S2C(EnumSet<CarpetAMSAdditionLazySettings.Rule> rules) {
+    public LazySettingsPayload_S2C(EnumSet<CarpetAMSAdditionLazySettings.Rule> rules) {
         super(ID);
         this.rules = EnumSet.copyOf(rules);
     }
 
-    protected LazySettingsPayload_S2C(FriendlyByteBuf buf) {
+    public LazySettingsPayload_S2C(FriendlyByteBuf buf) {
         super(ID);
 
         int size = buf.readVarInt();
@@ -63,10 +63,6 @@ public class LazySettingsPayload_S2C extends AMS_CustomPayload {
     public void handle() {
         CarpetAMSAdditionLazySettings.clear();
         CarpetAMSAdditionLazySettings.addAll(this.rules);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, LazySettingsPayload_S2C::new);
     }
 
     public static LazySettingsPayload_S2C create(EnumSet<CarpetAMSAdditionLazySettings.Rule> rules) {
