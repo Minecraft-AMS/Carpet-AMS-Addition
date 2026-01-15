@@ -86,8 +86,6 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
             NetworkUtil.setClientSupportedPackets(this.playerUuid, this.supportedPackets);
             NetworkUtil.addSupportClient(this.playerUuid);
 
-            CarpetAMSAdditionServer.LOGGER.info("{} supports {} packet types", playerName, this.supportedPackets.size());
-
             if (player != null) {
                 CarpetAMSAdditionServer.getInstance().sendS2CPacketOnHandShake(player);
             } else {

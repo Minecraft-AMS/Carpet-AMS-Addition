@@ -77,8 +77,6 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
 
             NetworkUtil.setServerSupport(this.isSupportServer);
             NetworkUtil.setServerSupportedPackets(this.supportedPackets);
-
-            CarpetAMSAdditionClient.LOGGER.info("Server supports {} packet types", this.supportedPackets.size());
         });
     }
 

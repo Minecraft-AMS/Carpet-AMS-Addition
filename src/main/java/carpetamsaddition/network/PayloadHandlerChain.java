@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PayloadHandlerChain {
     private final Map<Class<? extends AMS_CustomPayload>, CovariantHandlerList<?>> PAYLOAD_HANDLERS = new ConcurrentHashMap<>();
 
-    public <T extends AMS_CustomPayload> void addHandlerFor(Class<T> payloadClass, Consumer<T> handler) {
+    public <T extends AMS_CustomPayload> void put(Class<T> payloadClass, Consumer<T> handler) {
         CovariantHandlerList<T> list = getOrCreate(payloadClass);
         list.addHandler(handler);
     }
