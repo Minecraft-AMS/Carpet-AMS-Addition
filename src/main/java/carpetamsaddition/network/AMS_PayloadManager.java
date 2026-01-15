@@ -34,6 +34,8 @@ import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayer
 
 import net.minecraft.network.FriendlyByteBuf;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Map;
 import java.util.function.Function;
 import java.util.concurrent.ConcurrentHashMap;
@@ -93,7 +95,7 @@ public class AMS_PayloadManager {
      * Register Payload Handlers
      */
     // C2S
-    private static void registerC2SHandlers(PayloadHandlerChain chain) {
+    private static void registerC2SHandlers(@NotNull PayloadHandlerChain chain) {
         chain.put(HandShakeC2SPayload.class, HandShakeC2SPayload::handle);
         chain.put(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
         chain.put(ClientPlayerFpsPayload_C2S.class, ClientPlayerFpsPayload_C2S::handle);
@@ -101,7 +103,7 @@ public class AMS_PayloadManager {
     }
 
     // S2C
-    private static void registerS2CHandlers(PayloadHandlerChain chain) {
+    private static void registerS2CHandlers(@NotNull PayloadHandlerChain chain) {
         chain.put(HandShakeS2CPayload.class, HandShakeS2CPayload::handle);
         chain.put(RequestHandShakeS2CPayload.class, RequestHandShakeS2CPayload::handle);
         chain.put(CustomBlockHardnessPayload_S2C.class, CustomBlockHardnessPayload_S2C::handle);

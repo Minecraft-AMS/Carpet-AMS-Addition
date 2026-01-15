@@ -32,6 +32,7 @@ import net.minecraft.ChatFormatting;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
