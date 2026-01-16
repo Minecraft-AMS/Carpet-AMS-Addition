@@ -40,13 +40,13 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
     private final UUID targetPlayerUuid;
 
     @SuppressWarnings("Convert2MethodRef")
-    private UpdatePlayerPosePayload_S2C(PacketByteBuf buf) {
+    public UpdatePlayerPosePayload_S2C(PacketByteBuf buf) {
         super(ID);
         this.poseMap = PacketByteBufExtras.readMap(buf, b -> b.readUuid(), PacketByteBuf::readString);
         this.targetPlayerUuid = buf.readUuid();
     }
 
-    private UpdatePlayerPosePayload_S2C(Map<UUID, String> poseMap, UUID targetPlayerUuid) {
+    public UpdatePlayerPosePayload_S2C(Map<UUID, String> poseMap, UUID targetPlayerUuid) {
         super(ID);
         this.poseMap = new HashMap<>(poseMap);
         this.targetPlayerUuid = targetPlayerUuid;
@@ -71,10 +71,6 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
                 player.setPose(player.getPose());
             }
         });
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, UpdatePlayerPosePayload_S2C::new);
     }
 
     public static UpdatePlayerPosePayload_S2C create(Map<UUID, String> poseMap, UUID targetPlayerUuid) {

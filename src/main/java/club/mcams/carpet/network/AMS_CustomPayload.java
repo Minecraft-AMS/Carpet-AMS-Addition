@@ -33,6 +33,10 @@ public abstract class AMS_CustomPayload implements CustomPayload {
         this.packetId = packetId;
     }
 
+    public String getPacketId() {
+        return this.packetId;
+    }
+
     //#if MC>=12005
     //$$ @Override
     //$$ public CustomPayload.Id<? extends CustomPayload> getId() {

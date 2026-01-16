@@ -31,11 +31,7 @@ import org.apache.logging.log4j.LogManager;
 public class AMS_UnknownPayload extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.UNKNOWN.getId();
 
-    private AMS_UnknownPayload() {
-        super(ID);
-    }
-
-    private AMS_UnknownPayload(PacketByteBuf buf) {
+    public AMS_UnknownPayload() {
         super(ID);
     }
 
@@ -51,9 +47,5 @@ public class AMS_UnknownPayload extends AMS_CustomPayload {
 
     public static AMS_UnknownPayload create() {
         return new AMS_UnknownPayload();
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, AMS_UnknownPayload::new);
     }
 }

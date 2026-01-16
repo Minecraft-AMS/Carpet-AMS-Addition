@@ -34,13 +34,13 @@ public class ClientPlayerFpsPayload_C2S extends AMS_CustomPayload {
     private final UUID playerUuid;
     private final int fps;
 
-    private ClientPlayerFpsPayload_C2S(UUID playerUuid, int fps) {
+    public ClientPlayerFpsPayload_C2S(UUID playerUuid, int fps) {
         super(ID);
         this.playerUuid = playerUuid;
         this.fps = fps;
     }
 
-    private ClientPlayerFpsPayload_C2S(PacketByteBuf buf) {
+    public ClientPlayerFpsPayload_C2S(PacketByteBuf buf) {
         super(ID);
         this.playerUuid = buf.readUuid();
         this.fps = buf.readInt();
@@ -59,9 +59,5 @@ public class ClientPlayerFpsPayload_C2S extends AMS_CustomPayload {
 
     public static ClientPlayerFpsPayload_C2S create(UUID playerUuid, int fps) {
         return new ClientPlayerFpsPayload_C2S(playerUuid, fps);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, ClientPlayerFpsPayload_C2S::new);
     }
 }

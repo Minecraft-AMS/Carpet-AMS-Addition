@@ -35,11 +35,7 @@ import java.util.UUID;
 public class RequestHandShakeS2CPayload extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.REQUEST_HANDSHAKE_S2C.getId();
 
-    private RequestHandShakeS2CPayload() {
-        super(ID);
-    }
-
-    private RequestHandShakeS2CPayload(PacketByteBuf buf) {
+    public RequestHandShakeS2CPayload() {
         super(ID);
     }
 
@@ -60,9 +56,5 @@ public class RequestHandShakeS2CPayload extends AMS_CustomPayload {
 
     public static RequestHandShakeS2CPayload create() {
         return new RequestHandShakeS2CPayload();
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, RequestHandShakeS2CPayload::new);
     }
 }

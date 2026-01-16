@@ -33,17 +33,17 @@ import club.mcams.carpet.network.payloads.rule.commandGetClientPlayerFPS.ClientP
 import club.mcams.carpet.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
 
 import net.minecraft.network.PacketByteBuf;
-//#if MC<12005
 import net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;
 import net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;
-//#endif
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.function.Function;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class AMS_PayloadManager {
-    protected static final Map<String, Function<PacketByteBuf, AMS_CustomPayload>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
+    public static final Map<String, Function<PacketByteBuf, AMS_CustomPayload>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
     private static final PayloadHandlerChain C2S_HANDLER_CHAIN = PayloadHandlerChainCreator.createC2SHandlerChain();
     private static final PayloadHandlerChain S2C_HANDLER_CHAIN = PayloadHandlerChainCreator.createS2CHandlerChain();
 
@@ -72,49 +72,52 @@ public class AMS_PayloadManager {
     }
 
     /*
-     * Register Payload Handlers
+     * Register Payloads
      */
-    // C2S
-    private static void registerC2SHandlers(PayloadHandlerChain chain) {
-        chain.addHandlerFor(HandShakeC2SPayload.class, HandShakeC2SPayload::handle);
-        chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
-        chain.addHandlerFor(ClientPlayerFpsPayload_C2S.class, ClientPlayerFpsPayload_C2S::handle);
-        chain.addHandlerFor(RequestClientModVersionPayload_C2S.class, RequestClientModVersionPayload_C2S::handle);
-    }
+    public static void registerPayloads() {
+        // C2S
+        registerPayload(PacketId.HANDSHAKE_C2S.getId(), HandShakeC2SPayload::new);
+        registerPayload(PacketId.CLIENT_PLAYER_FPS_C2S.getId(), ClientPlayerFpsPayload_C2S::new);
+        registerPayload(PacketId.REQUEST_CLIENT_MOD_VERSION_C2S.getId(), RequestClientModVersionPayload_C2S::new);
 
-    // S2C
-    private static void registerS2CHandlers(PayloadHandlerChain chain) {
-        chain.addHandlerFor(HandShakeS2CPayload.class, HandShakeS2CPayload::handle);
-        chain.addHandlerFor(RequestHandShakeS2CPayload.class, RequestHandShakeS2CPayload::handle);
-        chain.addHandlerFor(CustomBlockHardnessPayload_S2C.class, CustomBlockHardnessPayload_S2C::handle);
-        chain.addHandlerFor(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
-        chain.addHandlerFor(ClientPlayerFpsPayload_S2C.class, ClientPlayerFpsPayload_S2C::handle);
-        chain.addHandlerFor(UpdatePlayerPosePayload_S2C.class,  UpdatePlayerPosePayload_S2C::handle);
-        chain.addHandlerFor(RequestClientModVersionPayload_S2C.class, RequestClientModVersionPayload_S2C::handle);
-        chain.addHandlerFor(StaticSettingsPayload_S2C.class, StaticSettingsPayload_S2C::handle);
+        // S2C
+        registerPayload(PacketId.HANDSHAKE_S2C.getId(), HandShakeS2CPayload::new);
+        registerPayload(PacketId.REQUEST_HANDSHAKE_S2C.getId(), buf -> new RequestHandShakeS2CPayload());
+        registerPayload(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId(), CustomBlockHardnessPayload_S2C::new);
+        registerPayload(PacketId.CLIENT_PLAYER_FPS_S2C.getId(), ClientPlayerFpsPayload_S2C::new);
+        registerPayload(PacketId.UPDATE_PLAYER_POSE_S2C.getId(), UpdatePlayerPosePayload_S2C::new);
+        registerPayload(PacketId.REQUEST_CLIENT_MOD_VERSION_S2C.getId(), RequestClientModVersionPayload_S2C::new);
+        registerPayload(PacketId.STATIC_SETTINGS_S2C.getId(), StaticSettingsPayload_S2C::new);
+
+        // Both
+        registerPayload(PacketId.UNKNOWN.getId(), buf -> new AMS_UnknownPayload());
     }
 
     /*
-     * Register Payloads
+     * Register Payload Handlers
      */
     // C2S
-    public static void registerC2SPayloads() {
-        HandShakeC2SPayload.register();
-        AMS_UnknownPayload.register();
-        ClientPlayerFpsPayload_C2S.register();
-        RequestClientModVersionPayload_C2S.register();
+    private static void registerC2SHandlers(@NotNull PayloadHandlerChain chain) {
+        chain.put(HandShakeC2SPayload.class, HandShakeC2SPayload::handle);
+        chain.put(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
+        chain.put(ClientPlayerFpsPayload_C2S.class, ClientPlayerFpsPayload_C2S::handle);
+        chain.put(RequestClientModVersionPayload_C2S.class, RequestClientModVersionPayload_C2S::handle);
     }
 
     // S2C
-    public static void registerS2CPayloads() {
-        HandShakeS2CPayload.register();
-        RequestHandShakeS2CPayload.register();
-        CustomBlockHardnessPayload_S2C.register();
-        AMS_UnknownPayload.register();
-        ClientPlayerFpsPayload_S2C.register();
-        UpdatePlayerPosePayload_S2C.register();
-        RequestClientModVersionPayload_S2C.register();
-        StaticSettingsPayload_S2C.register();
+    private static void registerS2CHandlers(@NotNull PayloadHandlerChain chain) {
+        chain.put(HandShakeS2CPayload.class, HandShakeS2CPayload::handle);
+        chain.put(RequestHandShakeS2CPayload.class, RequestHandShakeS2CPayload::handle);
+        chain.put(CustomBlockHardnessPayload_S2C.class, CustomBlockHardnessPayload_S2C::handle);
+        chain.put(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
+        chain.put(ClientPlayerFpsPayload_S2C.class, ClientPlayerFpsPayload_S2C::handle);
+        chain.put(UpdatePlayerPosePayload_S2C.class,  UpdatePlayerPosePayload_S2C::handle);
+        chain.put(RequestClientModVersionPayload_S2C.class, RequestClientModVersionPayload_S2C::handle);
+        chain.put(StaticSettingsPayload_S2C.class, StaticSettingsPayload_S2C::handle);
+    }
+
+    private static void registerPayload(String packetId, Function<PacketByteBuf, AMS_CustomPayload> constructor) {
+        PAYLOAD_REGISTRY.put(packetId, constructor);
     }
 
     //#if MC<12005
@@ -126,10 +129,6 @@ public class AMS_PayloadManager {
         return AMS_PayloadCodec.decode(packet);
     }
     //#endif
-
-    public static void register(String packetId, Function<PacketByteBuf, AMS_CustomPayload> constructor) {
-        PAYLOAD_REGISTRY.put(packetId, constructor);
-    }
 
     public static class HandlerChainGetter {
         public static PayloadHandlerChain getC2SHandlerChain() {

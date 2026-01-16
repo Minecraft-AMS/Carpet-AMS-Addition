@@ -48,7 +48,7 @@ public class AmsClient implements ClientModInitializer {
     public void onInitializeClient() {
         version = FabricLoader.getInstance().getModContainer(MOD_ID).orElseThrow(RuntimeException::new).getMetadata().getVersion().getFriendlyString();
         minecraftClient = MinecraftClient.getInstance();
-        AMS_PayloadManager.registerS2CPayloads();
+        AMS_PayloadManager.registerPayloads();
     }
 
     public static AmsClient getInstance() {

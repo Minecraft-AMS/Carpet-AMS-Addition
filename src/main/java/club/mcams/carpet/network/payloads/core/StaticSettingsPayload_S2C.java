@@ -24,6 +24,7 @@ import club.mcams.carpet.AmsServerLazySettings;
 import club.mcams.carpet.network.AMS_CustomPayload;
 import club.mcams.carpet.network.AMS_PayloadManager;
 
+import club.mcams.carpet.utils.NetworkUtil;
 import net.minecraft.network.PacketByteBuf;
 
 import java.util.EnumSet;
@@ -32,19 +33,19 @@ public class StaticSettingsPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.STATIC_SETTINGS_S2C.getId();
     private final EnumSet<AmsServerLazySettings.Rule> rules;
 
-    private StaticSettingsPayload_S2C(EnumSet<AmsServerLazySettings.Rule> rules) {
+    public StaticSettingsPayload_S2C(EnumSet<AmsServerLazySettings.Rule> rules) {
         super(ID);
         this.rules = EnumSet.copyOf(rules);
     }
 
-    protected StaticSettingsPayload_S2C(PacketByteBuf buf) {
+    public StaticSettingsPayload_S2C(PacketByteBuf buf) {
         super(ID);
 
         int size = buf.readVarInt();
         this.rules = EnumSet.noneOf(AmsServerLazySettings.Rule.class);
 
         for (int i = 0; i < size; i++) {
-            String ruleName = buf.readString();
+            String ruleName = NetworkUtil.readBufString(buf);
             AmsServerLazySettings.Rule rule = AmsServerLazySettings.Rule.valueOf(ruleName);
             rules.add(rule);
         }
@@ -63,10 +64,6 @@ public class StaticSettingsPayload_S2C extends AMS_CustomPayload {
     public void handle() {
         AmsServerLazySettings.clear();
         AmsServerLazySettings.addAll(this.rules);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, StaticSettingsPayload_S2C::new);
     }
 
     public static StaticSettingsPayload_S2C create(EnumSet<AmsServerLazySettings.Rule> rules) {
