@@ -1054,7 +1054,7 @@ global模式下修改值后需要玩家重新进入游戏。
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL` `TNT`
   
-  ## 潜行编辑告示牌（sneakToEditSign）
+## 潜行编辑告示牌（sneakToEditSign）
 
 开启后，玩家可以在潜行状态且双手为空时对已经放置的告示牌按使用键来编辑它，Minecraft >= 1.20 时表现为必须潜行。
 
@@ -1071,6 +1071,24 @@ global模式下修改值后需要玩家重新进入游戏。
   
 
 - 分类: `AMS`, `FEATURE`
+
+## 潜行吃蛋糕（sneakToEatCake）
+
+玩家只能在潜行状态下吃蛋糕。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## 花哨的假人名称（fancyFakePlayerName）
 
@@ -1863,8 +1881,6 @@ json位置：
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## 获取玩家头颅（commandGetPlayerSkull）
-
-自定义任何命令的权限等级。
 
 使用 “/getPlayerSkull <玩家> <数量>” 命令来获取一名在线玩家的头颅。
 
