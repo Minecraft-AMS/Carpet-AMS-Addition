@@ -65,7 +65,7 @@ public abstract class GameRuleCommandMixin {
             cir.cancel();
         }
 
-        if (!FeatureChecker.EX_MINECART_FEATURE.get()) {
+        if (!FeatureChecker.EX_MINECART_FEATURE.get() && key.equals(GameRules.MINECART_MAX_SPEED)) {
             cir.setReturnValue(0);
             cir.cancel();
         }
