@@ -36,12 +36,12 @@ public class CustomBlockHardnessPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId();
     private final Map<BlockState, Float> hardnessMap;
 
-    private CustomBlockHardnessPayload_S2C(PacketByteBuf buf) {
+    public CustomBlockHardnessPayload_S2C(PacketByteBuf buf) {
         super(ID);
         this.hardnessMap = PacketByteBufExtras.readMap(buf, b -> Block.STATE_IDS.get(b.readVarInt()), PacketByteBuf::readFloat);
     }
 
-    private CustomBlockHardnessPayload_S2C(Map<BlockState, Float> hardnessMap) {
+    public CustomBlockHardnessPayload_S2C(Map<BlockState, Float> hardnessMap) {
         super(ID);
         this.hardnessMap = new HashMap<>(hardnessMap);
     }
@@ -55,10 +55,6 @@ public class CustomBlockHardnessPayload_S2C extends AMS_CustomPayload {
     public void handle() {
         CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
         CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(this.hardnessMap);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, CustomBlockHardnessPayload_S2C::new);
     }
 
     public static CustomBlockHardnessPayload_S2C create(Map<BlockState, Float> hardnessMap) {

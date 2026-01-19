@@ -33,12 +33,12 @@ public class ClientPlayerFpsPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.CLIENT_PLAYER_FPS_S2C.getId();
     private final UUID uuid;
 
-    private ClientPlayerFpsPayload_S2C(UUID uuid) {
+    public ClientPlayerFpsPayload_S2C(UUID uuid) {
         super(ID);
         this.uuid = uuid;
     }
 
-    private ClientPlayerFpsPayload_S2C(PacketByteBuf buf) {
+    public ClientPlayerFpsPayload_S2C(PacketByteBuf buf) {
         super(ID);
         this.uuid = buf.readUuid();
     }
@@ -57,9 +57,5 @@ public class ClientPlayerFpsPayload_S2C extends AMS_CustomPayload {
 
     public static ClientPlayerFpsPayload_S2C create(UUID targetPlayerUuid) {
         return new ClientPlayerFpsPayload_S2C(targetPlayerUuid);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, ClientPlayerFpsPayload_S2C::new);
     }
 }

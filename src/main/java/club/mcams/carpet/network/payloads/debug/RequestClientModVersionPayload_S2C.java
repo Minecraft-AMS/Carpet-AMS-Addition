@@ -36,7 +36,7 @@ public class RequestClientModVersionPayload_S2C extends AMS_CustomPayload {
 
     private final UUID uuid;
 
-    protected RequestClientModVersionPayload_S2C(UUID uuid) {
+    public RequestClientModVersionPayload_S2C(UUID uuid) {
         super(ID);
         this.uuid = uuid;
     }
@@ -64,9 +64,5 @@ public class RequestClientModVersionPayload_S2C extends AMS_CustomPayload {
 
     public static RequestClientModVersionPayload_S2C create(UUID uuid) {
         return new RequestClientModVersionPayload_S2C(uuid);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, RequestClientModVersionPayload_S2C::new);
     }
 }

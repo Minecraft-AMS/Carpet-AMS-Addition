@@ -1122,6 +1122,24 @@ When enabled，Players can sneak with empty hands to edit already placed signs b
 
 - Categroies: `AMS`, `FEATURE`
 
+## sneakToEatCake
+
+Players can only eat cake while sneaking.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+
 ## fancyFakePlayerName
 
 Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn't need to be input when using the command, but the suffix is indeed present.

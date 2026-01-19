@@ -27,27 +27,43 @@ import club.mcams.carpet.network.AMS_PayloadManager;
 
 import net.minecraft.network.PacketByteBuf;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class HandShakeS2CPayload extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.HANDSHAKE_S2C.getId();
     private final String modVersion;
-    private final boolean serverSupport;
+    private final boolean isSupportServer;
+    private final Set<String> supportedPackets;
 
-    private HandShakeS2CPayload(String modVersion, boolean serverSupport) {
+    public HandShakeS2CPayload(String modVersion, boolean isSupportServer, Set<String> supportedPackets) {
         super(ID);
         this.modVersion = modVersion;
-        this.serverSupport = serverSupport;
+        this.isSupportServer = isSupportServer;
+        this.supportedPackets = supportedPackets;
     }
 
-    private HandShakeS2CPayload(PacketByteBuf buf) {
+    public HandShakeS2CPayload(PacketByteBuf buf) {
         super(ID);
         this.modVersion = NetworkUtil.readBufString(buf);
-        this.serverSupport = buf.readBoolean();
+        this.isSupportServer = buf.readBoolean();
+        int packetCount = buf.readVarInt();
+        this.supportedPackets = new HashSet<>();
+
+        for (int i = 0; i < packetCount; i++) {
+            this.supportedPackets.add(NetworkUtil.readBufString(buf));
+        }
     }
 
     @Override
     protected void writeData(PacketByteBuf buf) {
         buf.writeString(this.modVersion);
-        buf.writeBoolean(this.serverSupport);
+        buf.writeBoolean(this.isSupportServer);
+        buf.writeVarInt(this.supportedPackets.size());
+
+        for (String packetId : this.supportedPackets) {
+            buf.writeString(packetId);
+        }
     }
 
     @Override
@@ -58,15 +74,14 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
             } else {
                 AmsClient.LOGGER.info("You joined server with mismatched carpet-ams-addition version (client: v{}, server: v{})", AmsClient.getVersion(), this.modVersion);
             }
-            NetworkUtil.setServerSupport(this.serverSupport);
+
+            NetworkUtil.setServerSupport(this.isSupportServer);
+            NetworkUtil.setServerSupportedPackets(this.supportedPackets);
         });
     }
 
-    public static HandShakeS2CPayload create(String modVersion, boolean serverSupport) {
-        return new HandShakeS2CPayload(modVersion, serverSupport);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, HandShakeS2CPayload::new);
+    public static HandShakeS2CPayload create(String modVersion, boolean isSupportServer) {
+        Set<String> supportedPackets = NetworkUtil.getLocalSupportedPackets();
+        return new HandShakeS2CPayload(modVersion, isSupportServer, supportedPackets);
     }
 }

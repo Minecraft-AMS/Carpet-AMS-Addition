@@ -30,29 +30,44 @@ import club.mcams.carpet.network.AMS_PayloadManager;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class HandShakeC2SPayload extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.HANDSHAKE_C2S.getId();
     private final String modVersion;
     private final UUID playerUuid;
+    private final Set<String> supportedPackets;
 
-    private HandShakeC2SPayload(String modVersion, UUID playerUuid) {
+    public HandShakeC2SPayload(String modVersion, UUID playerUuid, Set<String> supportedPackets) {
         super(ID);
         this.modVersion = modVersion;
         this.playerUuid = playerUuid;
+        this.supportedPackets = supportedPackets;
     }
 
-    private HandShakeC2SPayload(PacketByteBuf buf) {
+    public HandShakeC2SPayload(PacketByteBuf buf) {
         super(ID);
         this.modVersion = NetworkUtil.readBufString(buf);
         this.playerUuid = buf.readUuid();
+        int packetCount = buf.readVarInt();
+        this.supportedPackets = new HashSet<>();
+
+        for (int i = 0; i < packetCount; i++) {
+            this.supportedPackets.add(NetworkUtil.readBufString(buf));
+        }
     }
 
     @Override
     protected void writeData(PacketByteBuf buf) {
         buf.writeString(this.modVersion);
         buf.writeUuid(this.playerUuid);
+        buf.writeVarInt(this.supportedPackets.size());
+
+        for (String packetId : this.supportedPackets) {
+            buf.writeString(packetId);
+        }
     }
 
     @Override
@@ -67,6 +82,7 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
                 AmsServer.LOGGER.info("{} joined with mismatched carpet-ams-addition version (client: v{}, server: v{})", playerName, this.modVersion, AmsServerMod.getVersion());
             }
 
+            NetworkUtil.setClientSupportedPackets(this.playerUuid, this.supportedPackets);
             NetworkUtil.addSupportClient(this.playerUuid);
 
             if (player != null) {
@@ -78,10 +94,7 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
     }
 
     public static HandShakeC2SPayload create(String modVersion, UUID playerUuid) {
-        return new HandShakeC2SPayload(modVersion, playerUuid);
-    }
-
-    public static void register() {
-        AMS_PayloadManager.register(ID, HandShakeC2SPayload::new);
+        Set<String> supportedPackets = NetworkUtil.getLocalSupportedPackets();
+        return new HandShakeC2SPayload(modVersion, playerUuid, supportedPackets);
     }
 }
