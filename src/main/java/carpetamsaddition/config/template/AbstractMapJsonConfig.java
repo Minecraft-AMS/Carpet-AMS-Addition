@@ -31,7 +31,6 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.Map;
 
 public abstract class AbstractMapJsonConfig<K, V> {
@@ -50,15 +49,14 @@ public abstract class AbstractMapJsonConfig<K, V> {
 
     public void loadFromJson(Map<K, V> targetMap) {
         targetMap.clear();
-        try {
-            if (Files.notExists(configPath)) {
-                saveToJson(Collections.emptyMap());
-                return;
-            }
 
+        if (Files.notExists(configPath)) {
+            return;
+        }
+
+        try {
             byte[] bytes = Files.readAllBytes(configPath);
             Map<K, V> loadedMap = gson.fromJson(new String(bytes, StandardCharsets.UTF_8), mapType);
-
             if (loadedMap != null) {
                 targetMap.putAll(loadedMap);
             }

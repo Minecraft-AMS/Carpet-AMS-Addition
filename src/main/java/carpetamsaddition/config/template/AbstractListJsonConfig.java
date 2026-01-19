@@ -31,7 +31,6 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractListJsonConfig<T> {
@@ -49,15 +48,14 @@ public abstract class AbstractListJsonConfig<T> {
 
     public void loadFromJson(List<T> targetList) {
         targetList.clear();
-        try {
-            if (Files.notExists(configPath)) {
-                saveToJson(Collections.emptyList());
-                return;
-            }
 
+        if (Files.notExists(configPath)) {
+            return;
+        }
+
+        try {
             byte[] bytes = Files.readAllBytes(configPath);
             List<T> loadedList = gson.fromJson(new String(bytes, StandardCharsets.UTF_8), listType);
-
             if (loadedList != null) {
                 targetList.addAll(loadedList);
             }
