@@ -22,46 +22,30 @@ package carpetamsaddition.mixin.hooks.recipe;
 
 import carpetamsaddition.CarpetAMSAdditionServer;
 
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.profiling.ProfilerFiller;
+import com.llamalad7.mixinextras.sugar.Local;
 
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeMap;
-
-import org.jetbrains.annotations.NotNull;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.SortedMap;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
 
-@Mixin(RecipeManager.class)
+@Mixin(value = RecipeManager.class, priority = 16888)
 public abstract class RecipeManagerMixin {
-    @Inject(method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;", at = @At("RETURN"), cancellable = true)
-    private void addCustomRecipes(ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfoReturnable<RecipeMap> cir) {
-        SortedMap<Identifier, Recipe<?>> sortedMap = new TreeMap<>();
-        SortedMap<Identifier, Recipe<?>> originalMap = cir.getReturnValue().values().stream().collect(Collectors.toMap(recipeEntry -> recipeEntry.id().identifier(), RecipeHolder::value, (a, _) -> a, TreeMap::new));
-        sortedMap.putAll(originalMap);
-        CarpetAMSAdditionServer.getInstance().registerCustomRecipes(sortedMap, ((RecipeManagerAccessor) this).getRegistries());
-        List<RecipeHolder<?>> list = new ArrayList<>(sortedMap.size());
-
-        sortedMap.forEach((id, recipe) -> {
-            ResourceKey<@NotNull Recipe<?>> registryKey = ResourceKey.create(Registries.RECIPE, id);
-            RecipeHolder<?> recipeEntry = new RecipeHolder<>(registryKey, recipe);
-            list.add(recipeEntry);
-        });
-
-        cir.setReturnValue(RecipeMap.create(list));
+    @Inject(
+        method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;",
+        at = @At(
+            value = "INVOKE",
+            target = "Ljava/util/ArrayList;<init>(I)V"
+        )
+    )
+    private void addCustomRecipes(CallbackInfoReturnable<RecipeMap> cir, @Local SortedMap<Identifier, Recipe<?>> recipes) {
+        CarpetAMSAdditionServer.getInstance().registerCustomRecipes(recipes, ((RecipeManagerAccessor) this).getRegistries());
     }
 }
