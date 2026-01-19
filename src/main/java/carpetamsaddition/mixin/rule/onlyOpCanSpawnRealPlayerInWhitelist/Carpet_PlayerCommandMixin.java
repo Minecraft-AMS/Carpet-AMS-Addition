@@ -45,7 +45,7 @@ public abstract class Carpet_PlayerCommandMixin {
             target = "Lnet/minecraft/server/players/PlayerList;isUsingWhitelist()Z"
         )
     )
-    private static boolean onlyOpCanSpawnRealPlayerInWhitelist(boolean isWhitelistEnabled, CommandContext<CommandSourceStack> context, @Local(name = "profile") NameAndId gameProfile) {
+    private static boolean onlyOpCanSpawnRealPlayerInWhitelist(boolean isWhitelistEnabled, CommandContext<CommandSourceStack> context, @Local NameAndId gameProfile) {
         if (CarpetAMSAdditionSettings.onlyOpCanSpawnRealPlayerInWhitelist && PlayerUtil.isInWhitelist(gameProfile)) {
             return isWhitelistEnabled || CarpetAMSAdditionSettings.onlyOpCanSpawnRealPlayerInWhitelist;
         } else {
