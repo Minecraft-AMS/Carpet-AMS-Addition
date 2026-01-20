@@ -99,6 +99,7 @@
     "rule.fancyFakePlayerName.CarpetMod_PlayerCommandMixin",
     "rule.fancyFakePlayerName.PlayerManagerMixin",
     "rule.fasterMovement.PlayerEntityMixin",
+    "rule.fertilizableSmallFlower.FlowerBlockMixin",
     "rule.fertilizableSmallFlower.SporeBlossomBlockMixin",
     "rule.flippinCactusExtras.Carpet_BlockRotatorMixin",
     "rule.flippinCactusSoundEffect.BlockRotatorMixin",
@@ -225,7 +226,6 @@
     "util.settings.Carpet_SettingsManagerMixin"
   ],
   "client": [
-    "builtin.CreativeInventoryExtras.CreativeInventoryScreenMixin",
     "hooks.client.ClientMixin",
     "hooks.network.ClientPlayNetworkHandlerMixin",
     "hooks.network.MinecraftClientMixin",
