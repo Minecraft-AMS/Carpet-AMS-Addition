@@ -33,7 +33,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public class SkullSkinHelper {
     public static void writeNbtToPlayerSkull(PlayerEntity player, ItemStack headStack) {
         //#if MC>=12109
-        //$$ headStack.set(DataComponentTypes.PROFILE, ProfileComponent.ofDynamic(player.getUuid()));
+        //$$ headStack.set(DataComponentTypes.PROFILE, ProfileComponent.ofStatic(player.getGameProfile()));
         //#else
         headStack.set(DataComponentTypes.PROFILE, new ProfileComponent(player.getGameProfile()));
         //#endif
