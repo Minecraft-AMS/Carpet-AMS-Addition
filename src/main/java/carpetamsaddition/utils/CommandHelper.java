@@ -67,7 +67,7 @@ public final class CommandHelper {
             }
 
             MinecraftServerUtil.getOnlinePlayers().forEach(serverCommandManager::sendCommands);
-            Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), Layout.GRAY));
+            Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), Layout.GRAY), true);
         }
     }
 
