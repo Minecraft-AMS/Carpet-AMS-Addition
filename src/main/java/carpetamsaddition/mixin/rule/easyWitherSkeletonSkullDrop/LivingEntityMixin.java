@@ -39,7 +39,7 @@ public abstract class LivingEntityMixin {
     private void dropSkull(CallbackInfo ci) {
         if (CarpetAMSAdditionSettings.easyWitherSkeletonSkullDrop) {
             LivingEntity entity = (LivingEntity) (Object) this;
-            if (entity instanceof WitherSkeleton) {
+            if (entity instanceof WitherSkeleton && !EntityUtil.getEntityWorld(entity).isClientSide()) {
                 entity.spawnAtLocation((ServerLevel) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);
             }
         }
