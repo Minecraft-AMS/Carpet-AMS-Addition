@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,20 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package club.mcams.carpet.mixin.builtin.CreativeInventoryExtras;
+package club.mcams.carpet.mixin.rule.preventAdministratorCheat;
 
 import club.mcams.carpet.utils.compat.DummyClass;
-
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 
 import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-// 这是一个在Minecraft 1.16.5的创造物品栏的红石选项卡下添加蜜块、黏液块、各种命令方块的客户端功能
-// TODO: 在我决定制作新的客户端模组之前，暂时（也有可能长期）内置这个功能，毕竟也只有1.16.5中存在，且代码很绿色健康
-@Environment(value = EnvType.CLIENT)
-@GameVersion(version = "Minecraft < 1.17")
+@GameVersion(version = "Minecraft >= 1.21.6")
 @Mixin(DummyClass.class)
-public abstract class CreativeInventoryScreenMixin {}
+public abstract class ServerPlayNetworkHandlerMixin {}

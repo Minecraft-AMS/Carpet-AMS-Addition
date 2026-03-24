@@ -525,7 +525,7 @@ carpetamsaddition:
         name: 下界传送门不传送玩家
         desc: 玩家无法通过下界传送门进行传送
         extra:
-          '0': '开启规则后，使用"/plerNoNetherPortalTeleport help"命令查看使用说明'
+          '0': '开启规则后，使用"/playerNoNetherPortalTeleport help"命令查看使用说明'
       infiniteDurability:
         name: 无限耐久
         desc: 使用物品不会丢失耐久

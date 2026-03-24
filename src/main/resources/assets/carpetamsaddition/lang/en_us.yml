@@ -459,7 +459,7 @@ carpetamsaddition:
       commandPlayerNoNetherPortalTeleport:
         desc: Players cannot teleport through nether portals
         extra:
-          '0': 'After enabling the rule, use the "/plerNoNetherPortalTeleport help" command to view the usage instructions'
+          '0': 'After enabling the rule, use the "/playerNoNetherPortalTeleport help" command to view the usage instructions'
       infiniteDurability:
         desc: Use items without losing durability
       welcomeMessage:

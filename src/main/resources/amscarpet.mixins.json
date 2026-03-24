@@ -7,8 +7,8 @@
     "carpet.CarpetServerMixin",
     "carpet.HUDControllerMixin",
     "carpet.SettingsManagerMixin",
-    "hooks.recipe.ServerRecipeManagerMixin",
     "hooks.recipe.ServerRecipeManagerAccessor",
+    "hooks.recipe.ServerRecipeManagerMixin",
     "hooks.server.MinecraftServerMixin",
     "network.Carpet_SettingsManagerMixin",
     "network.CustomPayloadC2SPacketAccessor",
@@ -99,6 +99,7 @@
     "rule.fancyFakePlayerName.CarpetMod_PlayerCommandMixin",
     "rule.fancyFakePlayerName.PlayerManagerMixin",
     "rule.fasterMovement.PlayerEntityMixin",
+    "rule.fertilizableSmallFlower.FlowerBlockMixin",
     "rule.fertilizableSmallFlower.SporeBlossomBlockMixin",
     "rule.flippinCactusExtras.Carpet_BlockRotatorMixin",
     "rule.flippinCactusSoundEffect.BlockRotatorMixin",
@@ -166,6 +167,7 @@
     "rule.preventAdministratorCheat.GameRuleCommandMixin",
     "rule.preventAdministratorCheat.GiveCommandMixin",
     "rule.preventAdministratorCheat.KillCommandMixin",
+    "rule.preventAdministratorCheat.ServerPlayNetworkHandlerMixin",
     "rule.preventAdministratorCheat.SetBlockCommandMixin",
     "rule.preventAdministratorCheat.SummonCommandMixin",
     "rule.preventAdministratorCheat.TeleportCommandMixin",
@@ -225,7 +227,6 @@
     "util.settings.Carpet_SettingsManagerMixin"
   ],
   "client": [
-    "builtin.CreativeInventoryExtras.CreativeInventoryScreenMixin",
     "hooks.client.ClientMixin",
     "hooks.network.ClientPlayNetworkHandlerMixin",
     "hooks.network.MinecraftClientMixin",

@@ -21,6 +21,7 @@
 package club.mcams.carpet.mixin.rule.easyWitherSkeletonSkullDrop;
 
 import club.mcams.carpet.AmsServerSettings;
+import club.mcams.carpet.utils.EntityUtil;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.WitherSkeletonEntity;
@@ -41,7 +42,7 @@ public abstract class LivingEntityMixin {
     private void dropSkull(CallbackInfo ci) {
         if (AmsServerSettings.easyWitherSkeletonSkullDrop) {
             LivingEntity entity = (LivingEntity) (Object) this;
-            if (entity instanceof WitherSkeletonEntity) {
+            if (entity instanceof WitherSkeletonEntity && !EntityUtil.getEntityWorld(entity).isClient()) {
                 //#if MC>=12102
                 //$$ entity.dropItem((ServerWorld) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);
                 //#else
