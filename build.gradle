@@ -9,8 +9,9 @@ preprocess {
 	preprocess.strictExtraMappings.set(false)
 
 	def mc260100 = createNode('26.1', 26_01_00, '')
+	def mc260101 = createNode('26.1.1', 26_01_01, '')
 
-    mc260100.link(mc260100, file('versions/mapping-26.1-26.1.txt'))
+    mc260100.link(mc260101, file('versions/mapping-26.1-26.1.1.txt'))
 }
 
 tasks.register('buildAndGather') {
