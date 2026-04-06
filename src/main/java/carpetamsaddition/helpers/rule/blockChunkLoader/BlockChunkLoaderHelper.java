@@ -20,17 +20,13 @@
 
 package carpetamsaddition.helpers.rule.blockChunkLoader;
 
-import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionSettings;
-
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.Registry;
-import net.minecraft.server.level.TicketType;
+import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.TicketType;
 import net.minecraft.world.level.ChunkPos;
 
 public class BlockChunkLoaderHelper {
-    private static final String TICKET_NAMESPACE = CarpetAMSAdditionServer.compactName;
     private static TicketType NOTE_BLOCK_TICKET_TYPE;
     private static TicketType PISTON_BLOCK_TICKET_TYPE;
     private static TicketType BELL_BLOCK_TICKET_TYPE;
@@ -48,7 +44,10 @@ public class BlockChunkLoaderHelper {
     }
 
     private static void addTicket(ServerLevel world, ChunkPos chunkPos, TicketType ticketType) {
-        world.getChunkSource().addTicketWithRadius(ticketType, chunkPos, getLoadRange());
+        ServerChunkCache chunkCache = world.getChunkSource();
+        int loadRange = getLoadRange();
+        chunkCache.addTicketWithRadius(ticketType, chunkPos, loadRange);
+        chunkCache.runDistanceManagerUpdates();
         blockChunkLoaderKeepWorldTickUpdate(world);
     }
 
@@ -67,21 +66,13 @@ public class BlockChunkLoaderHelper {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static TicketType registerTicketType(String id, long expiryTicks, int flags) {
-        return Registry.register(BuiltInRegistries.TICKET_TYPE, id, new TicketType(expiryTicks, flags));
+    private static TicketType registerTicketType(String id, int flags) {
+        return TicketType.register(id, getLoadTime(), flags);
     }
 
     public static void registerTicketTypeToMinecraft() {
-        NOTE_BLOCK_TICKET_TYPE = registerTicketType(
-            String.format("%s:note_block_loader", TICKET_NAMESPACE), BlockChunkLoaderHelper.getLoadTime(), 15
-        );
-
-        PISTON_BLOCK_TICKET_TYPE = registerTicketType(
-            String.format("%s:piston_block_loader", TICKET_NAMESPACE), BlockChunkLoaderHelper.getLoadTime(), 15
-        );
-
-        BELL_BLOCK_TICKET_TYPE = registerTicketType(
-            String.format("%s:bell_block_loader", TICKET_NAMESPACE), BlockChunkLoaderHelper.getLoadTime(), 15
-        );
+        NOTE_BLOCK_TICKET_TYPE = registerTicketType("note_block_loader", 15);
+        PISTON_BLOCK_TICKET_TYPE = registerTicketType("piston_block_loader", 15);
+        BELL_BLOCK_TICKET_TYPE = registerTicketType("bell_block_loader", 15);
     }
 }

@@ -21,7 +21,7 @@
     "rule.bambooModelNoOffset.BlockStateBaseInvoker",
     "rule.bambooModelNoOffset.BlockStateBaseMixin",
     "rule.blockChunkLoader.BellBlockMixin",
-    "rule.blockChunkLoader.MappedRegistryMixin",
+    "rule.blockChunkLoader.BuiltInRegistriesMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.blockChunkLoader.PistonBaseBlockMixin",
     "rule.blowUpEverything.BlockMixin",
