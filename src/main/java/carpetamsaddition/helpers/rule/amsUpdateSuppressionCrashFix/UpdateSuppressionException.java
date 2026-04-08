@@ -37,5 +37,6 @@ public class UpdateSuppressionException {
         exceptionPredicates.add(throwable -> throwable instanceof StackOverflowError);
         exceptionPredicates.add(throwable -> throwable instanceof OutOfMemoryError);
         exceptionPredicates.add(throwable -> throwable instanceof IllegalArgumentException);
+        exceptionPredicates.add(throwable -> throwable instanceof IllegalStateException);
     }
 }

@@ -21,6 +21,7 @@
 package carpetamsaddition.helpers.rule.blockChunkLoader;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.TicketType;
@@ -31,16 +32,16 @@ public class BlockChunkLoaderHelper {
     private static TicketType PISTON_BLOCK_TICKET_TYPE;
     private static TicketType BELL_BLOCK_TICKET_TYPE;
 
-    public static void addNoteBlockTicket(ServerLevel world, ChunkPos chunkPos) {
-        addTicket(world, chunkPos, NOTE_BLOCK_TICKET_TYPE);
+    public static void addNoteBlockTicket(ServerLevel world, BlockPos blockPos) {
+        addTicket(world, ChunkPos.containing(blockPos), NOTE_BLOCK_TICKET_TYPE);
     }
 
-    public static void addPistonBlockTicket(ServerLevel world, ChunkPos chunkPos) {
-        addTicket(world, chunkPos, PISTON_BLOCK_TICKET_TYPE);
+    public static void addPistonBlockTicket(ServerLevel world, BlockPos blockPos) {
+        addTicket(world, ChunkPos.containing(blockPos), PISTON_BLOCK_TICKET_TYPE);
     }
 
-    public static void addBellBlockTicket(ServerLevel world, ChunkPos chunkPos) {
-        addTicket(world, chunkPos, BELL_BLOCK_TICKET_TYPE);
+    public static void addBellBlockTicket(ServerLevel world, BlockPos blockPos) {
+        addTicket(world, ChunkPos.containing(blockPos), BELL_BLOCK_TICKET_TYPE);
     }
 
     private static void addTicket(ServerLevel world, ChunkPos chunkPos, TicketType ticketType) {

@@ -9,7 +9,6 @@
     "carpet.SettingsManagerMixin",
     "hooks.recipe.RecipeManagerAccessor",
     "hooks.recipe.RecipeManagerMixin",
-    "hooks.rule.blockChunkLoader.TicketTypeMixin",
     "hooks.server.MinecraftServerMixin",
     "network.Carpet_SettingsManagerMixin",
     "network.CustomPayloadC2SPacketMixin",
