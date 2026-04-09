@@ -24,6 +24,7 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 import carpetamsaddition.utils.WorldUtil;
 
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
@@ -36,14 +37,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Objects;
 
 @Mixin(NoteBlock.class)
 public abstract class NoteBlockMixin {
-    @Inject(method = "triggerEvent", at = @At("HEAD"))
-    private void playNoteMixin(BlockState state, Level level, BlockPos pos, int b0, int b1, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "playNote", at = @At("HEAD"))
+    private void playNoteMixin(Entity source, BlockState state, Level level, BlockPos pos, CallbackInfo ci) {
         if (!Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "false")) {
             handleChunkLoading(level, pos);
         }
@@ -66,7 +67,7 @@ public abstract class NoteBlockMixin {
     @Unique
     private void loadChunkIfMatch(Level world, BlockPos blockPos, BlockState blockState, Block... blocks) {
         for (Block block : blocks) {
-            if (blockState.getBlock() == block) {
+            if (blockState.getBlock().equals(block)) {
                 BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, blockPos);
                 break;
             }

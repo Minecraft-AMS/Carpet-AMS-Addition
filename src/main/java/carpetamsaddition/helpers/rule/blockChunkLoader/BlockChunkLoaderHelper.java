@@ -21,6 +21,7 @@
 package carpetamsaddition.helpers.rule.blockChunkLoader;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
@@ -48,11 +49,6 @@ public class BlockChunkLoaderHelper {
         ServerChunkCache chunkCache = world.getChunkSource();
         int loadRange = getLoadRange();
         chunkCache.addTicketWithRadius(ticketType, chunkPos, loadRange);
-        chunkCache.runDistanceManagerUpdates();
-        blockChunkLoaderKeepWorldTickUpdate(world);
-    }
-
-    public static void blockChunkLoaderKeepWorldTickUpdate(ServerLevel world) {
         if (CarpetAMSAdditionSettings.blockChunkLoaderKeepWorldTickUpdate) {
             world.resetEmptyTime();
         }
