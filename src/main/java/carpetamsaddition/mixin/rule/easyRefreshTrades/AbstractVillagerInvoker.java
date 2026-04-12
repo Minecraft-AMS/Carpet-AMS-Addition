@@ -43,7 +43,10 @@ public interface AbstractVillagerInvoker {
         //#endif
     )
     void invokeAddOffersFromTradeSet(
-        final ServerLevel level, final MerchantOffers offers,
+        //#if MC>=12111
+        final ServerLevel level,
+        //#endif
+        final MerchantOffers offers,
         //#if MC>=26000
         //$$ final ResourceKey<TradeSet> resourceKey
         //#else

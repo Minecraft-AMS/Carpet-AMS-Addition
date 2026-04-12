@@ -39,7 +39,7 @@ public abstract class GameRuleCommand_visitMixin {
         //#if MC>=12111
         GameRule<?> rule,
         //#else
-        //$$ GameRules.Key<?> rule,
+        //$$ GameRules.Key<?> rule, GameRules.Type<?> type,
         //#endif
         CallbackInfo ci
     ) {

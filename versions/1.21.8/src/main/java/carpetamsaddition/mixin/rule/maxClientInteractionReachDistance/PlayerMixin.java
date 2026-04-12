@@ -24,6 +24,9 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.player.Player;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,11 +35,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "mc < 1.21.11")
+@Environment(value = EnvType.CLIENT)
 @Mixin(value = Player.class, priority = 1688)
 public abstract class PlayerMixin {
     @ModifyReturnValue(method = "blockInteractionRange", at = @At("RETURN"))
     private double modifyBlockInteractionRange(double original) {
-        if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {
+        Player player = (Player) (Object) this;
+        if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D && player instanceof LocalPlayer) {
             return CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
         } else {
             return original;
@@ -45,7 +50,8 @@ public abstract class PlayerMixin {
 
     @ModifyReturnValue(method = "entityInteractionRange", at = @At("RETURN"))
     private double modifyEntityInteractionRange(double original) {
-        if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {
+        Player player = (Player) (Object) this;
+        if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D && player instanceof LocalPlayer) {
             return CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
         } else {
             return original;

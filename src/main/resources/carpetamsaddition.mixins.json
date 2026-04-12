@@ -120,7 +120,6 @@
     "rule.largeShulkerBox.ShulkerBoxMenuMixin",
     "rule.maxChainUpdateDepth.CollectingNeighborUpdaterAccessor",
     "rule.maxChainUpdateDepth.CollectingNeighborUpdaterMixin",
-    "rule.maxClientInteractionReachDistance.PlayerMixin",
     "rule.maxPlayerInteractionRange.AttributeCommandMixin",
     "rule.maxPlayerInteractionRange.AttributeInstanceInvoker",
     "rule.maxPlayerInteractionRange.AttributeInstanceMixin",
@@ -213,7 +212,8 @@
     "hooks.network.MinecraftClientMixin",
     "network.ClientPlayNetworkHandlerMixin",
     "rule.commandGetClientPlayerFPS.MinecraftInvoker",
-    "rule.maxClientInteractionReachDistance.LocalPlayerMixin"
+    "rule.maxClientInteractionReachDistance.LocalPlayerMixin",
+    "rule.maxClientInteractionReachDistance.PlayerMixin"
   ],
   "server": [],
   "injectors": {

@@ -33,7 +33,14 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(PortalShape.class)
 public abstract class PortalShapeMixin {
-    @ModifyReturnValue(method = "lambda$static$0", at = @At("RETURN"))
+    @ModifyReturnValue(
+        //#if MC>=260000
+        //$$ method = "lambda$static$0",
+        //#else
+        method = "method_30487",
+        //#endif
+        at = @At("RETURN")
+    )
     private static boolean acceptCryingObsidianCreateNetherPortal(boolean original, BlockState state) {
         if (CarpetAMSAdditionSettings.cryingObsidianNetherPortal) {
             return original || state.getBlock().equals(Blocks.CRYING_OBSIDIAN);

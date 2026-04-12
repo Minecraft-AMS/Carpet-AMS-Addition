@@ -23,8 +23,8 @@ package carpetamsaddition.mixin.rule.phantomSpawnAlert;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Messenger;
-
 import carpetamsaddition.utils.PlayerUtil;
+
 import com.llamalad7.mixinextras.sugar.Local;
 
 import net.minecraft.world.entity.monster.Phantom;
@@ -39,6 +39,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
+@SuppressWarnings("LocalMayUseName")
 @Mixin(PhantomSpawner.class)
 public abstract class PhantomSpawnerMixin {
     @Unique
@@ -52,7 +53,13 @@ public abstract class PhantomSpawnerMixin {
             shift = At.Shift.AFTER
         )
     )
-    private void broadcastMessage(ServerLevel world, boolean spawnMonsters, CallbackInfo ci, @Local ServerPlayer playerEntity, @Local Phantom phantom) {
+    private void broadcastMessage(
+        ServerLevel world, boolean spawnMonsters,
+        //#if MC<12111
+        //$$ boolean b,
+        //#endif
+        CallbackInfo ci,
+        @Local ServerPlayer playerEntity, @Local Phantom phantom) {
         if (CarpetAMSAdditionSettings.phantomSpawnAlert && phantom != null) {
             MinecraftServer server = world.getServer();
             String playerName = PlayerUtil.getName(playerEntity);

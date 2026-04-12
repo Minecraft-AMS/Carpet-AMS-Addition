@@ -80,8 +80,12 @@ public abstract class ShulkerBoxMenuMixin extends AbstractContainerMenu {
         method = "<init>(ILnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/Container;)V",
         at = @At(
             value = "INVOKE",
+            //#if MC>=12111
             target = "Lnet/minecraft/world/Container;startOpen(Lnet/minecraft/world/entity/ContainerUser;)V",
-            shift = At.Shift.AFTER
+            //#else
+            //$$ target = "Lnet/minecraft/world/Container;startOpen(Lnet/minecraft/world/entity/player/Player;)V",
+            //#endif
+                shift = At.Shift.AFTER
         )
     )
     protected void addingExtraSlots(int syncId, Inventory playerInventory, Container inventory, CallbackInfo ci) {

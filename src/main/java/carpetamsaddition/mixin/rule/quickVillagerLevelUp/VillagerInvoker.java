@@ -21,7 +21,9 @@
 package carpetamsaddition.mixin.rule.quickVillagerLevelUp;
 
 import net.minecraft.world.entity.npc.villager.Villager;
+//#if MC>=12111
 import net.minecraft.server.level.ServerLevel;
+//#endif
 import net.minecraft.world.entity.npc.villager.VillagerData;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,7 +32,11 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(Villager.class)
 public interface VillagerInvoker {
     @Invoker("increaseMerchantCareer")
-    void invokerLevelUp(ServerLevel world);
+    void invokerLevelUp(
+        //#if MC>=12111
+        ServerLevel level
+        //#endif
+    );
 
     @Invoker("getVillagerData")
     VillagerData invokerGetVillagerData();

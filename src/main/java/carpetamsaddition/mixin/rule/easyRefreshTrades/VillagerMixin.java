@@ -21,7 +21,6 @@
 package carpetamsaddition.mixin.rule.easyRefreshTrades;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-
 import carpetamsaddition.utils.EntityUtil;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -54,13 +53,19 @@ public abstract class VillagerMixin {
             value = "INVOKE",
             //#if MC>=260000
             //$$ target = "Lnet/minecraft/world/entity/npc/villager/Villager;addOffersFromTradeSet(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/trading/MerchantOffers;Lnet/minecraft/resources/ResourceKey;)V"
-            //#else
+            //#elseif MC>=12111
             target = "Lnet/minecraft/world/entity/npc/villager/Villager;addOffersFromItemListings(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/trading/MerchantOffers;[Lnet/minecraft/world/entity/npc/villager/VillagerTrades$ItemListing;I)V"
+            //#else
+            //$$ target = "Lnet/minecraft/world/entity/npc/Villager;addOffersFromItemListings(Lnet/minecraft/world/item/trading/MerchantOffers;[Lnet/minecraft/world/entity/npc/VillagerTrades$ItemListing;I)V"
             //#endif
         )
     )
     private void refreshRecipes(
-        Villager villager, ServerLevel serverLevel, MerchantOffers merchantOffers,
+        Villager villager,
+        //#if MC>=12111
+        ServerLevel serverLevel,
+        //#endif
+        MerchantOffers merchantOffers,
         //#if MC>=260000
         //$$ ResourceKey<TradeSet> resourceKey,
         //#else
@@ -72,7 +77,10 @@ public abstract class VillagerMixin {
             MerchantOffers traderOfferList = villager.getOffers();
             traderOfferList.clear();
             ((AbstractVillagerInvoker) villager).invokeAddOffersFromTradeSet(
-                serverLevel, merchantOffers,
+                //#if MC>=12111
+                serverLevel,
+                //#endif
+                merchantOffers,
                 //#if MC>=260000
                 //$$ resourceKey
                 //#else
@@ -81,7 +89,11 @@ public abstract class VillagerMixin {
             );
         } else {
             original.call(
-                villager, serverLevel, merchantOffers,
+                villager,
+                //#if MC>=12111
+                serverLevel,
+                //#endif
+                merchantOffers,
                 //#if MC>=260000
                 //$$ resourceKey
                 //#else
@@ -102,7 +114,11 @@ public abstract class VillagerMixin {
         if (CarpetAMSAdditionSettings.easyRefreshTrades) {
             Villager villagerEntity = (Villager) (Object) this;
             if (isNewMerchant(villagerEntity) && !player.getMainHandItem().getItem().equals(Items.EMERALD_BLOCK)) {
-                ((VillagerInvoker) villagerEntity).invokeUpdateTrades((ServerLevel) EntityUtil.getEntityWorld(villagerEntity));
+                ((VillagerInvoker) villagerEntity).invokeUpdateTrades(
+                    //#if MC>=12111
+                    (ServerLevel) EntityUtil.getEntityWorld(villagerEntity)
+                    //#endif
+                );
             }
         }
     }
