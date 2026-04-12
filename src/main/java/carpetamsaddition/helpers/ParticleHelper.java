@@ -21,7 +21,9 @@
 package carpetamsaddition.helpers;
 
 import net.minecraft.core.particles.ParticleOptions;
+//#if MC>=12111
 import net.minecraft.core.particles.PowerParticleOption;
+//#endif
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
@@ -34,7 +36,11 @@ public class ParticleHelper {
     public static void spawnShulkerGolemParticles(ServerLevel serverWorld, BlockPos pos) {
         spawnParticles(
             serverWorld,
+            //#if MC>=12111
             PowerParticleOption.create(ParticleTypes.DRAGON_BREATH, 0),
+            //#else
+            //$$ ParticleTypes.DRAGON_BREATH,
+            //#endif
             pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5,
             1688, 0.8, 0.8, 0.8, 0.0168
         );

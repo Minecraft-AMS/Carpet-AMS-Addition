@@ -61,7 +61,9 @@ public abstract class Carpet_BlockRotatorMixin {
                 Direction currentFacing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 Direction newFacing = currentFacing.getOpposite();
                 newState = state.setValue(BlockStateProperties.HORIZONTAL_FACING, newFacing);
-            } else if (block instanceof ShelfBlock) {
+            }
+            //#if MC>=12111
+            else if (block instanceof ShelfBlock) {
                 Direction currentFacing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 Direction newFacing = switch (currentFacing) {
                     case NORTH -> Direction.EAST;
@@ -72,6 +74,7 @@ public abstract class Carpet_BlockRotatorMixin {
                 };
                 newState = state.setValue(BlockStateProperties.HORIZONTAL_FACING, newFacing);
             }
+            //#endif
 
             if (newState != null) {
                 world.setBlock(pos, newState, Block.UPDATE_CLIENTS | 1024);

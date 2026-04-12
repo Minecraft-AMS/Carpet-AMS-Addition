@@ -32,8 +32,10 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
+//#if MC>=12111
 import net.minecraft.server.permissions.Permission;
 import net.minecraft.server.permissions.PermissionLevel;
+//#endif
 
 import java.util.Arrays;
 import java.util.List;
@@ -107,6 +109,7 @@ public final class CommandHelper {
     }
 
     public static boolean hasPermissionLevel(CommandSourceStack source, int level) {
+        //#if MC>=12111
         Permission.HasCommandLevel requiredPermission = new Permission.HasCommandLevel(PermissionLevel.byId(level));
 
         if (level > 4) {
@@ -114,5 +117,8 @@ public final class CommandHelper {
         }
 
         return source.permissions().hasPermission(requiredPermission);
+        //#else
+        //$$ return source.hasPermission(level);
+        //#endif
     }
 }

@@ -30,7 +30,9 @@ import com.mojang.brigadier.context.CommandContext;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.commands.GameRuleCommand;
+//#if MC>=12111
 import net.minecraft.world.level.gamerules.GameRule;
+//#endif
 import net.minecraft.world.level.gamerules.GameRules;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -45,7 +47,15 @@ public abstract class GameRuleCommandMixin {
     private static final Translator tr = new Translator("rule.experimentalMinecartSpeed");
 
     @Inject(method = "setRule", at = @At("HEAD"), cancellable = true)
-    private static void onSet(CommandContext<CommandSourceStack> context, GameRule<?> gameRule, CallbackInfoReturnable<Integer> cir) {
+    private static void onSet(
+        CommandContext<CommandSourceStack> context,
+        //#if MC>=12111
+        GameRule<?> gameRule,
+        //#else
+        //$$ GameRules.Key<?> gameRule,
+        //#endif
+        CallbackInfoReturnable<Integer> cir
+    ) {
         if (CarpetAMSAdditionSettings.experimentalMinecartEnabled && CarpetAMSAdditionSettings.experimentalMinecartSpeed != -1.0D && gameRule.equals(GameRules.MAX_MINECART_SPEED)) {
             Messenger.tell(context.getSource(), Messenger.f(tr.tr("vanilla_command_disabled"), Layout.RED));
             cir.setReturnValue(0);

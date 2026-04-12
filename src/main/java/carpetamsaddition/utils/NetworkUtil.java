@@ -142,11 +142,11 @@ public class NetworkUtil {
     }
 
     public static void executeOnClientThread(Runnable runnable) {
-        Optional.of(MinecraftClientUtil.clientIsRunning()).filter(Boolean::booleanValue).ifPresent(_ -> MinecraftClientUtil.getCurrentClient().execute(runnable));
+        Optional.of(MinecraftClientUtil.clientIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftClientUtil.getCurrentClient().execute(runnable));
     }
 
     public static void executeOnServerThread(Runnable runnable) {
-        Optional.of(MinecraftServerUtil.serverIsRunning()).filter(Boolean::booleanValue).ifPresent(_ -> MinecraftServerUtil.getServer().execute(runnable));
+        Optional.of(MinecraftServerUtil.serverIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftServerUtil.getServer().execute(runnable));
     }
 
     public static void collectAmsNetworkRuleNames() {

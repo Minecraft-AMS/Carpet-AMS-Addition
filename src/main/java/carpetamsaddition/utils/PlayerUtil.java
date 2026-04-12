@@ -21,14 +21,22 @@
 package carpetamsaddition.utils;
 
 import net.minecraft.world.entity.player.Player;
+//#if MC>=12111
 import net.minecraft.server.players.NameAndId;
+//#else
+//$$ import com.mojang.authlib.GameProfile;
+//#endif
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.UUID;
 
 public class PlayerUtil {
     public static String getName(Player player) {
+        //#if MC>=12111
         return player.getGameProfile().name();
+        //#else
+        //$$ return player.getGameProfile().getName();
+        //#endif
     }
 
     public static String getName(UUID uuid) {
@@ -51,10 +59,22 @@ public class PlayerUtil {
 
     @SuppressWarnings("unused")
     public static Boolean isInWhitelist(Player player) {
-        return MinecraftServerUtil.getServer().getPlayerList().getWhiteList().isWhiteListed(player.nameAndId());
+        return MinecraftServerUtil.getServer().getPlayerList().getWhiteList().isWhiteListed(
+            //#if MC>=12111
+            player.nameAndId()
+            //#else
+            //$$ player.getGameProfile()
+            //#endif
+        );
     }
 
-    public static Boolean isInWhitelist(NameAndId gameProfile) {
+    public static Boolean isInWhitelist(
+        //#if MC>=12111
+        NameAndId gameProfile
+        //#else
+        //$$ GameProfile gameProfile
+        //#endif
+    ) {
         return MinecraftServerUtil.getServer().getPlayerList().getWhiteList().isWhiteListed(gameProfile);
     }
 }

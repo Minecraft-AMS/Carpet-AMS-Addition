@@ -22,7 +22,9 @@ package carpetamsaddition.mixin.rule.experimentalMinecart;
 
 import carpetamsaddition.helpers.FeatureChecker;
 
+//#if MC>=12111
 import net.minecraft.world.level.gamerules.GameRule;
+//#endif
 import net.minecraft.world.level.gamerules.GameRules;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,7 +35,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(targets = "net.minecraft.server.commands.GameRuleCommand$1", priority = 168)
 public abstract class GameRuleCommand_visitMixin {
     @Inject(method = "visit", at = @At("HEAD"), cancellable = true)
-    private void test(GameRule<?> rule, CallbackInfo ci) {
+    private void test(
+        //#if MC>=12111
+        GameRule<?> rule,
+        //#else
+        //$$ GameRules.Key<?> rule,
+        //#endif
+        CallbackInfo ci
+    ) {
         if (rule.equals(GameRules.MAX_MINECART_SPEED) && !FeatureChecker.EX_MINECART_FEATURE.get()) {
             ci.cancel();
         }

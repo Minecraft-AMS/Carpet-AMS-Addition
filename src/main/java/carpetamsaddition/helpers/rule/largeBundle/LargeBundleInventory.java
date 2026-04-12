@@ -45,7 +45,11 @@ public class LargeBundleInventory implements Container {
         this.stack = stack;
         ItemContainerContents container = stack.get(DataComponents.CONTAINER);
         if (container != null) {
-            List<ItemStack> containerStacks = container.allItemsCopyStream().toList();
+            //#if MC>=260000
+            //$$ List<ItemStack> containerStacks = container.allItemsCopyStream().toList();
+            //#else
+            List<ItemStack> containerStacks = container.stream().toList();
+            //#endif
             for (int i = 0; i < Math.min(containerStacks.size(), this.getContainerSize()); i++) {
                 this.items.set(i, containerStacks.get(i).copy());
             }

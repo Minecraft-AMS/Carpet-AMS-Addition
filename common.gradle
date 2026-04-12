@@ -1,12 +1,12 @@
+final int mcVersion = project.mcVersion as int
+final boolean unobfuscated = mcVersion >= 26_00_00
+
 apply plugin: 'maven-publish'
 apply plugin: 'com.github.hierynomus.license'
-apply plugin: 'net.fabricmc.fabric-loom'
+apply plugin: unobfuscated ? 'net.fabricmc.fabric-loom' : 'net.fabricmc.fabric-loom-remap'
 apply plugin: 'com.replaymod.preprocess'
 
-int mcVersion = 1
-
 preprocess {
-	mcVersion = vars.get()["MC"] as int
 }
 
 repositories {
@@ -30,20 +30,52 @@ configurations {
 }
 
 dependencies {
+	def processDependency = { dep ->
+		// https://github.com/FabricMC/fabric-loader/issues/783
+		if (dep instanceof ModuleDependency) {
+			if (!(dep.group == 'net.fabricmc' && dep.name == 'fabric-loader')) {
+				dep.exclude group: 'net.fabricmc', module: 'fabric-loader'
+			}
+		}
+
+		return dep
+	}
+
+	def autoImplementation = {
+		Object... args -> processDependency(unobfuscated ? implementation(*args) : modImplementation(*args))
+	}
+	def autoRuntimeOnly = {
+		Object... args -> processDependency(unobfuscated ? runtimeOnly(*args) : modRuntimeOnly(*args))
+	}
+	def autoCompileOnly = {
+		Object... args -> processDependency(unobfuscated ? compileOnly(*args) : modCompileOnly(*args))
+	}
+
 	// loom
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	if (!unobfuscated) {
+		mappings loom.layered() {
+			officialMojangMappings()
+		}
+	}
+
+	autoImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	// loom
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	autoImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// mods
 	//modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") // modrinth
-	implementation "carpet:fabric-carpet:${project.carpet_core_version}" // masa
+	autoImplementation "carpet:fabric-carpet:${project.carpet_core_version}" // masa
 
 	// library mods
-	include(implementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
-	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
+	include(autoImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
+	include(autoImplementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 
 	// Dependencies
-    include(implementation("top.1024byteeeee:tiny_yaml:${project.tiny_yaml_version}"))
+    include(autoImplementation("top.1024byteeeee:tiny_yaml:${project.tiny_yaml_version}"))
 }
 
 loom {

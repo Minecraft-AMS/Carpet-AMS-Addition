@@ -34,15 +34,39 @@ public class BlockChunkLoaderHelper {
     private static TicketType BELL_BLOCK_TICKET_TYPE;
 
     public static void addNoteBlockTicket(ServerLevel world, BlockPos blockPos) {
-        addTicket(world, ChunkPos.containing(blockPos), NOTE_BLOCK_TICKET_TYPE);
+        addTicket(
+            world,
+            //#if MC>=260000
+            //$$ ChunkPos.containing(blockPos),
+            //#else
+            new ChunkPos(blockPos),
+            //#endif
+            NOTE_BLOCK_TICKET_TYPE
+        );
     }
 
     public static void addPistonBlockTicket(ServerLevel world, BlockPos blockPos) {
-        addTicket(world, ChunkPos.containing(blockPos), PISTON_BLOCK_TICKET_TYPE);
+        addTicket(
+            world,
+            //#if MC>=260000
+            //$$ ChunkPos.containing(blockPos),
+            //#else
+            new ChunkPos(blockPos),
+            //#endif
+            PISTON_BLOCK_TICKET_TYPE
+        );
     }
 
     public static void addBellBlockTicket(ServerLevel world, BlockPos blockPos) {
-        addTicket(world, ChunkPos.containing(blockPos), BELL_BLOCK_TICKET_TYPE);
+        addTicket(
+            world,
+            //#if MC>=260000
+            //$$ ChunkPos.containing(blockPos),
+            //#else
+            new ChunkPos(blockPos),
+            //#endif
+            BELL_BLOCK_TICKET_TYPE
+        );
     }
 
     private static void addTicket(ServerLevel world, ChunkPos chunkPos, TicketType ticketType) {
@@ -64,7 +88,14 @@ public class BlockChunkLoaderHelper {
 
     @SuppressWarnings("SameParameterValue")
     private static TicketType registerTicketType(String id, int flags) {
-        return TicketType.register(id, getLoadTime(), flags);
+        return TicketType.register(
+            id, getLoadTime(),
+            //#if MC>=12111
+            flags
+            //#else
+            //$$ true, TicketType.TicketUse.LOADING_AND_SIMULATION
+            //#endif
+        );
     }
 
     public static void registerTicketTypeToMinecraft() {

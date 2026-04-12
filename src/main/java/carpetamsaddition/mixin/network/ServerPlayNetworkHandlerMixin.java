@@ -40,12 +40,14 @@ public abstract class ServerPlayNetworkHandlerMixin {
             return;
         }
 
-        if (
-            packet.payload() instanceof AMS_CustomPayload payload &&
-            packet.payload().type().id().equals(AMS_CustomPayload.CHANNEL_ID) &&
-            AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload)
-        ) {
-            ci.cancel();
+        if (packet.payload() instanceof AMS_CustomPayload) {
+            AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
+            if (
+                payload.type().id().equals(AMS_CustomPayload.CHANNEL_ID) &&
+                AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload)
+            ) {
+                ci.cancel();
+            }
         }
     }
 }
