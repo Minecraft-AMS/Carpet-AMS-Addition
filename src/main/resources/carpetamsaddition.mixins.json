@@ -120,6 +120,7 @@
     "rule.largeShulkerBox.ShulkerBoxMenuMixin",
     "rule.maxChainUpdateDepth.CollectingNeighborUpdaterAccessor",
     "rule.maxChainUpdateDepth.CollectingNeighborUpdaterMixin",
+    "rule.maxClientInteractionReachDistance.PlayerMixin",
     "rule.maxPlayerInteractionRange.AttributeCommandMixin",
     "rule.maxPlayerInteractionRange.AttributeInstanceInvoker",
     "rule.maxPlayerInteractionRange.AttributeInstanceMixin",

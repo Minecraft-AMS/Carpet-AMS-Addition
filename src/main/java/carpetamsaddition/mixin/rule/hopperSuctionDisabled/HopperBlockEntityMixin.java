@@ -26,6 +26,9 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import net.minecraft.world.level.block.entity.HopperBlockEntity;
 
+//#if MC<12111
+//$$ import org.objectweb.asm.Opcodes;
+//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -34,8 +37,14 @@ public abstract class HopperBlockEntityMixin {
     @ModifyExpressionValue(
         method = "tryMoveItems",
         at = @At(
+            //#if MC>=12111
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/Level;isClientSide()Z"
+            //#else
+            //$$ value = "FIELD",
+            //$$ target = "Lnet/minecraft/world/level/Level;isClientSide:Z",
+            //$$ opcode = Opcodes.GETFIELD
+            //#endif
         )
     )
     private static boolean redirectSuckInItems(boolean original) {

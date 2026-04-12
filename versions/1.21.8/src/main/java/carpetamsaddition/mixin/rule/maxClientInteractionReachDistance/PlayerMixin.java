@@ -22,45 +22,33 @@ package carpetamsaddition.mixin.rule.maxClientInteractionReachDistance;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.world.entity.player.Player;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "mc >= 1.21.11")
-@Mixin(value = LocalPlayer.class, priority = 1688)
-public abstract class LocalPlayerMixin {
-    @WrapOperation(
-        method = "raycastHitResult",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/player/LocalPlayer;blockInteractionRange()D"
-        )
-    )
-    private double modifyBlockInteractionRange(LocalPlayer player, Operation<Double> original) {
+@GameVersion(version = "mc < 1.21.11")
+@Mixin(value = Player.class, priority = 1688)
+public abstract class PlayerMixin {
+    @ModifyReturnValue(method = "blockInteractionRange", at = @At("RETURN"))
+    private double modifyBlockInteractionRange(double original) {
         if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {
             return CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
         } else {
-            return original.call(player);
+            return original;
         }
     }
 
-    @WrapOperation(
-        method = "raycastHitResult",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/player/LocalPlayer;entityInteractionRange()D"
-        )
-    )
-    private double modifyEntityInteractionRange(LocalPlayer player, Operation<Double> original) {
+    @ModifyReturnValue(method = "entityInteractionRange", at = @At("RETURN"))
+    private double modifyEntityInteractionRange(double original) {
         if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {
             return CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
         } else {
-            return original.call(player);
+            return original;
         }
     }
 }

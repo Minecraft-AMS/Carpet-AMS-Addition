@@ -40,10 +40,18 @@ public abstract class BucketItemMixin {
         method = "emptyContents",
         at = @At(
             value = "INVOKE",
+            //#if MC>=12111
             target = "Lnet/minecraft/world/attribute/EnvironmentAttributeSystem;getValue(Lnet/minecraft/world/attribute/EnvironmentAttribute;Lnet/minecraft/core/BlockPos;)Ljava/lang/Object;"
+            //#else
+            //$$ target = "Lnet/minecraft/world/level/dimension/DimensionType;ultraWarm()Z"
+            //#endif
         )
     )
+    //#if MC>=12111
     private Object netherWaterPlacement(Object original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
+    //#else
+    //$$ private boolean netherWaterPlacement(boolean original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
+    //#endif
         if (CarpetAMSAdditionSettings.netherWaterPlacement) {
             if (entity instanceof Player) {
                 return false;
