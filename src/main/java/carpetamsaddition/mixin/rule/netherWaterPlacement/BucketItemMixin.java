@@ -47,11 +47,11 @@ public abstract class BucketItemMixin {
             //#endif
         )
     )
-    //#if MC>=12111
-    private Object netherWaterPlacement(Object original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
-    //#else
-    //$$ private boolean netherWaterPlacement(boolean original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
-    //#endif
+        //#if MC>=12111
+        private Object netherWaterPlacement(Object original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
+        //#else
+        //$$ private boolean netherWaterPlacement(boolean original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
+        //#endif
         if (CarpetAMSAdditionSettings.netherWaterPlacement) {
             if (entity instanceof Player) {
                 return false;
