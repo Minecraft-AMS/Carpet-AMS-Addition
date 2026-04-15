@@ -24,14 +24,13 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 import carpetamsaddition.utils.WorldUtil;
 
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NoteBlock;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -45,32 +44,31 @@ import java.util.Objects;
 @Mixin(NoteBlock.class)
 public abstract class NoteBlockMixin {
     @Inject(method = "playNote", at = @At("HEAD"))
-    private void playNoteMixin(Entity entity, BlockState blockState, Level world, BlockPos pos, CallbackInfo info) {
+    private void playNoteMixin(Entity source, BlockState state, Level level, BlockPos pos, CallbackInfo ci) {
         if (!Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "false")) {
-            handleChunkLoading(world, pos);
+            handleChunkLoading(level, pos);
         }
     }
 
     @Unique
-    private void handleChunkLoading(Level world, BlockPos pos) {
-        if (!WorldUtil.isClient(world)) {
-            ChunkPos chunkPos = new ChunkPos(pos.getX(), pos.getZ());
-            BlockState noteBlockUp = world.getBlockState(pos.above(1));
+    private void handleChunkLoading(Level level, BlockPos pos) {
+        if (!WorldUtil.isClient(level)) {
+            BlockState noteBlockUp = level.getBlockState(pos.above(1));
             if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "note_block")) {
-                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, chunkPos);
+                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) level, pos);
             } else if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "bone_block")) {
-                loadChunkIfMatch(world, chunkPos, noteBlockUp, Blocks.BONE_BLOCK);
+                loadChunkIfMatch(level, pos, noteBlockUp, Blocks.BONE_BLOCK);
             } else if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "wither_skeleton_skull")) {
-                loadChunkIfMatch(world, chunkPos, noteBlockUp, Blocks.WITHER_SKELETON_SKULL, Blocks.WITHER_SKELETON_WALL_SKULL);
+                loadChunkIfMatch(level, pos, noteBlockUp, Blocks.WITHER_SKELETON_SKULL, Blocks.WITHER_SKELETON_WALL_SKULL);
             }
         }
     }
 
     @Unique
-    private void loadChunkIfMatch(Level world, ChunkPos chunkPos, BlockState blockState, Block... blocks) {
+    private void loadChunkIfMatch(Level world, BlockPos blockPos, BlockState blockState, Block... blocks) {
         for (Block block : blocks) {
-            if (blockState.getBlock() == block) {
-                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, chunkPos);
+            if (blockState.getBlock().equals(block)) {
+                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, blockPos);
                 break;
             }
         }

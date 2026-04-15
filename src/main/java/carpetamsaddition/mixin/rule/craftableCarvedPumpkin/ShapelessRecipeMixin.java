@@ -51,7 +51,12 @@ public abstract class ShapelessRecipeMixin implements CraftingRecipe {
 
         if (CarpetAMSAdditionSettings.craftableCarvedPumpkin) {
             ShapelessRecipe recipe = (ShapelessRecipe) (Object) this;
-            ItemStack result = recipe.assemble(input);
+            ItemStack result = recipe.assemble(
+                input
+                //#if MC<260000
+                , MinecraftServerUtil.getServer().registryAccess()
+                //#endif
+            );
             if (result.getItem().equals(Items.CARVED_PUMPKIN)) {
                 return this.handleRemainders(input, remainders);
             }

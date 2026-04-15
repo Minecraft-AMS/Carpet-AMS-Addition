@@ -25,7 +25,9 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.world.item.ItemInstance;
+//#if MC>=260000
+//$$ import net.minecraft.world.item.ItemInstance;
+//#endif
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.animal.sheep.Sheep;
@@ -49,10 +51,22 @@ public abstract class SheepMixin {
         method = "shear",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/animal/sheep/Sheep;dropFromShearingLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/item/ItemInstance;Ljava/util/function/BiConsumer;)V"
+            //#if MC>=260000
+            //$$ target = "Lnet/minecraft/world/entity/animal/sheep/Sheep;dropFromShearingLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/item/ItemInstance;Ljava/util/function/BiConsumer;)V"
+            //#else
+            target = "Lnet/minecraft/world/entity/animal/sheep/Sheep;dropFromShearingLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/item/ItemStack;Ljava/util/function/BiConsumer;)V"
+            //#endif
         )
     )
-    private void redirectDropStack(Sheep sheepEntity, ServerLevel serverLevel, ResourceKey<@NotNull LootTable> resourceKey, ItemInstance shears, BiConsumer<ServerLevel, ItemStack> biConsumer, Operation<Void> original) {
+    private void redirectDropStack(
+        Sheep sheepEntity, ServerLevel serverLevel, ResourceKey<@NotNull LootTable> resourceKey,
+        //#if MC>=260000
+        //$$ ItemInstance shears,
+        //#else
+        ItemStack shears,
+        //#endif
+        BiConsumer<ServerLevel, ItemStack> biConsumer, Operation<Void> original
+    ) {
         if (CarpetAMSAdditionSettings.jebSheepDropRandomColorWool && isJebSheep(sheepEntity)) {
             Random random = new Random();
             for (int i = 0; i < 1 + random.nextInt(3); ++i) {

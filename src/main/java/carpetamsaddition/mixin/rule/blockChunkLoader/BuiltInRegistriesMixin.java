@@ -20,29 +20,26 @@
 
 package carpetamsaddition.mixin.rule.blockChunkLoader;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.MappedRegistry;
+import net.minecraft.core.registries.BuiltInRegistries;
 
-import org.objectweb.asm.Opcodes;
-import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@SuppressWarnings("SimplifiableConditionalExpression")
-@Mixin(MappedRegistry.class)
-public abstract class MappedRegistryMixin {
-    @ModifyExpressionValue(
-        method = "validateWrite(Lnet/minecraft/resources/ResourceKey;)V",
+@Mixin(BuiltInRegistries.class)
+public abstract class BuiltInRegistriesMixin {
+    @Inject(
+        method = "bootStrap",
         at = @At(
-            value = "FIELD",
-            target = "Lnet/minecraft/core/MappedRegistry;frozen:Z",
-            opcode = Opcodes.GETFIELD
+            value = "INVOKE",
+            target = "Lnet/minecraft/core/registries/BuiltInRegistries;createContents()V",
+            shift = At.Shift.AFTER
         )
     )
-    private boolean noFrozen(boolean original, @NotNull ResourceKey<@NotNull String> key) {
-        return key.identifier().getNamespace().equals("carpetamsaddition") ? false : original;
+    private static void addAmsTicketType(CallbackInfo ci) {
+        BlockChunkLoaderHelper.registerTicketTypeToMinecraft();
     }
 }
-

@@ -58,7 +58,12 @@ public class CustomAntiFireItemsCommandRegistry {
             .then(argument("item", ItemArgument.item(commandRegistryAccess))
             .executes(context -> add(
                 context.getSource(),
-                ItemArgument.getItem(context, "item").createItemStack(1)
+                ItemArgument.getItem(context, "item").createItemStack(
+                    1
+                    //#if MC<26000
+                    ,false
+                    //#endif
+                )
             ))))
 
             // remove
@@ -66,7 +71,12 @@ public class CustomAntiFireItemsCommandRegistry {
             .then(argument("item", ItemArgument.item(commandRegistryAccess))
             .executes(context -> remove(
                 context.getSource(),
-                ItemArgument.getItem(context, "item").createItemStack(1)
+                ItemArgument.getItem(context, "item").createItemStack(
+                    1
+                    //#if MC<26000
+                    ,false
+                    //#endif
+                )
             ))))
 
             // removeAll

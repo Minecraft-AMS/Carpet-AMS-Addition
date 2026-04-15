@@ -20,17 +20,37 @@
 
 package carpetamsaddition.mixin.rule.easyRefreshTrades;
 
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.npc.villager.AbstractVillager;
 import net.minecraft.world.item.trading.MerchantOffers;
-import net.minecraft.world.item.trading.TradeSet;
+//#if MC>=260000
+//$$ import net.minecraft.world.item.trading.TradeSet;
+//$$ import net.minecraft.resources.ResourceKey;
+//#else
+import net.minecraft.world.entity.npc.villager.VillagerTrades;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(AbstractVillager.class)
 public interface AbstractVillagerInvoker {
-    @Invoker("addOffersFromTradeSet")
-    void invokeAddOffersFromTradeSet(final ServerLevel level, final MerchantOffers offers, final ResourceKey<TradeSet> resourceKey);
+    @Invoker(
+        //#if MC>=26000
+        //$$ "addOffersFromTradeSet"
+        //#else
+        "addOffersFromItemListings"
+        //#endif
+    )
+    void invokeAddOffersFromTradeSet(
+        //#if MC>=12111
+        final ServerLevel level,
+        //#endif
+        final MerchantOffers offers,
+        //#if MC>=26000
+        //$$ final ResourceKey<TradeSet> resourceKey
+        //#else
+        VillagerTrades.ItemListing[] pool, int count
+        //#endif
+    );
 }

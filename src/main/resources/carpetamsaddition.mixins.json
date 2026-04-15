@@ -9,7 +9,6 @@
     "carpet.SettingsManagerMixin",
     "hooks.recipe.RecipeManagerAccessor",
     "hooks.recipe.RecipeManagerMixin",
-    "hooks.rule.blockChunkLoader.TicketTypeMixin",
     "hooks.server.MinecraftServerMixin",
     "network.Carpet_SettingsManagerMixin",
     "network.CustomPayloadC2SPacketMixin",
@@ -21,7 +20,7 @@
     "rule.bambooModelNoOffset.BlockStateBaseInvoker",
     "rule.bambooModelNoOffset.BlockStateBaseMixin",
     "rule.blockChunkLoader.BellBlockMixin",
-    "rule.blockChunkLoader.MappedRegistryMixin",
+    "rule.blockChunkLoader.BuiltInRegistriesMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.blockChunkLoader.PistonBaseBlockMixin",
     "rule.blowUpEverything.BlockMixin",
@@ -95,6 +94,7 @@
     "rule.flippinCactusSoundEffect.Carpet_BlockRotatorMixin",
     "rule.foliageGenerateDisabled.FoliagePlacerMixin",
     "rule.foliageGenerateDisabled.HugeFungusFeatureMixin",
+    "rule.fullMoonEveryDay.DimensionTypeMixin",
     "rule.fullMoonEveryDay.MoonPhaseMixin",
     "rule.furnaceSmeltingTimeController.AbstractFurnaceBlockEntityMixin",
     "rule.headHunter.PlayerMixin",
@@ -135,6 +135,7 @@
     "rule.onlyPlayerCanCreateNetherPortal.NetherPortalBlockMixin",
     "rule.optimizedDragonRespawn.BlockPatternMixin",
     "rule.optimizedDragonRespawn.EndDragonFightMixin",
+    "rule.optimizedDragonRespawn.EnderDragonFightMixin",
     "rule.perfectInvisibility_sneakInvisibility.EntityInvoker",
     "rule.perfectInvisibility_sneakInvisibility.LivingEntityMixin",
     "rule.phantomSpawnAlert.PhantomSpawnerMixin",
@@ -211,7 +212,8 @@
     "hooks.network.MinecraftClientMixin",
     "network.ClientPlayNetworkHandlerMixin",
     "rule.commandGetClientPlayerFPS.MinecraftInvoker",
-    "rule.maxClientInteractionReachDistance.LocalPlayerMixin"
+    "rule.maxClientInteractionReachDistance.LocalPlayerMixin",
+    "rule.maxClientInteractionReachDistance.PlayerMixin"
   ],
   "server": [],
   "injectors": {

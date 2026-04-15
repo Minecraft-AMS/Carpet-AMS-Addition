@@ -80,7 +80,7 @@ public class AMS_PayloadManager {
 
         // S2C
         registerPayload(PacketId.HANDSHAKE_S2C.getId(), HandShakeS2CPayload::new);
-        registerPayload(PacketId.REQUEST_HANDSHAKE_S2C.getId(), _ -> new RequestHandShakeS2CPayload());
+        registerPayload(PacketId.REQUEST_HANDSHAKE_S2C.getId(), buf -> new RequestHandShakeS2CPayload());
         registerPayload(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId(), CustomBlockHardnessPayload_S2C::new);
         registerPayload(PacketId.CLIENT_PLAYER_FPS_S2C.getId(), ClientPlayerFpsPayload_S2C::new);
         registerPayload(PacketId.UPDATE_PLAYER_POSE_S2C.getId(), UpdatePlayerPosePayload_S2C::new);
@@ -88,7 +88,7 @@ public class AMS_PayloadManager {
         registerPayload(PacketId.LAZY_SETTINGS_S2C.getId(), LazySettingsPayload_S2C::new);
 
         // Both
-        registerPayload(PacketId.UNKNOWN.getId(), _ -> new AMS_UnknownPayload());
+        registerPayload(PacketId.UNKNOWN.getId(), buf -> new AMS_UnknownPayload());
     }
 
     /*

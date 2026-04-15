@@ -22,7 +22,11 @@ package carpetamsaddition.utils.MessageTextEventUtils;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
-import net.minecraft.world.item.ItemStackTemplate;
+//#if MC>=260000
+//$$ import net.minecraft.world.item.ItemStackTemplate;
+//#else
+import net.minecraft.world.item.ItemStack;
+//#endif
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,7 +46,14 @@ public class HoverEventUtil {
 
     static {
         HOVER_EVENT_ACTION_MAP.put(SHOW_TEXT, value -> new HoverEvent.ShowText((Component) value));
-        HOVER_EVENT_ACTION_MAP.put(SHOW_ITEM, value -> new HoverEvent.ShowItem((ItemStackTemplate) value));
+        HOVER_EVENT_ACTION_MAP.put(
+            SHOW_ITEM, value ->
+            //#if MC>=260000
+            //$$ new HoverEvent.ShowItem((ItemStackTemplate) value)
+            //#else
+            new HoverEvent.ShowItem((ItemStack) value)
+            //#endif
+        );
         HOVER_EVENT_ACTION_MAP.put(SHOW_ENTITY, value -> new HoverEvent.ShowEntity((HoverEvent.EntityTooltipInfo) value));
     }
 }

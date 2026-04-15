@@ -27,7 +27,9 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+//#if MC>=12111
 import net.minecraft.server.MinecraftServer;
+//#endif
 import net.minecraft.core.UUIDUtil;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -41,13 +43,28 @@ public abstract class Carpet_EntityPlayerMPFakeMixin {
         method = "createFake",
         at = @At(
             value = "INVOKE",
+            //#if MC>=12111
             target = "Lnet/minecraft/server/players/OldUsersConverter;convertMobOwnerIfNecessary(Lnet/minecraft/server/MinecraftServer;Ljava/lang/String;)Ljava/util/UUID;"
+            //#else
+            //$$ target = "Lnet/minecraft/core/UUIDUtil;createOfflinePlayerUUID(Ljava/lang/String;)Ljava/util/UUID;"
+            //#endif
         )
     )
-    private static UUID useOfflinePlayerUUID(MinecraftServer server, String playerName, Operation<UUID> original) {
+    private static UUID useOfflinePlayerUUID(
+        //#if MC>=12111
+        MinecraftServer server,
+        //#endif
+        String playerName,
+        Operation<UUID> original
+    ) {
         return
             CarpetAMSAdditionSettings.fakePlayerUseOfflinePlayerUUID ?
             UUIDUtil.createOfflinePlayerUUID(playerName) :
-            original.call(server, playerName);
+            original.call(
+                //#if MC>=12111
+                server,
+                //#endif
+                playerName
+            );
     }
 }

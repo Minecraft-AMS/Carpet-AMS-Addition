@@ -32,14 +32,18 @@ import org.spongepowered.asm.mixin.injection.At;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
-@GameVersion(version = "Minecraft >= 1.21.2", desc = "https://bugs.mojang.com/browse/MC-59471")
+@GameVersion(version = "mc >= 1.21.2", desc = "https://bugs.mojang.com/browse/MC-59471")
 @Mixin(TripWireHookBlock.class)
 public abstract class TripwireHookBlockMixin {
     @ModifyExpressionValue(
         method = "calculateState",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
+            //#if MC>=260000
+            //$$ target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
+            //#else
+            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
+            //#endif
             ordinal = 3
         )
     )

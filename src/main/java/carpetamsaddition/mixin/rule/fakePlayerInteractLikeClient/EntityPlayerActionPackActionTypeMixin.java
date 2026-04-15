@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -29,9 +29,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.boat.Boat;
-import net.minecraft.world.entity.vehicle.boat.Raft;
-import net.minecraft.world.entity.vehicle.minecart.Minecart;
+import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.InteractionResult;
@@ -41,17 +40,36 @@ import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(targets = "carpet/helpers/EntityPlayerActionPack$ActionType$1")
+@Mixin(targets = "carpet.helpers.EntityPlayerActionPack$ActionType$1")
 public abstract class EntityPlayerActionPackActionTypeMixin {
     @WrapOperation(
         method = "execute(Lnet/minecraft/server/level/ServerPlayer;Lcarpet/helpers/EntityPlayerActionPack$Action;)Z",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/Entity;interact(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/InteractionResult;"
+            //#if MC>=260000
+            //$$ target = "Lnet/minecraft/world/entity/Entity;interact(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/InteractionResult;"
+            //#else
+            target = "Lnet/minecraft/world/entity/Entity;interactAt(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
+            //#endif
         )
     )
-    private InteractionResult onInteractAt(Entity entity, Player player, InteractionHand hand, Vec3 hitPos, Operation<InteractionResult> original) {
-        InteractionResult originalResult = original.call(entity, player, hand, hitPos);
+    private InteractionResult onInteractAt(
+        Entity entity, Player player,
+        //#if MC>=260000
+        //$$ InteractionHand hand, Vec3 hitPos,
+        //#else
+        Vec3 hitPos, InteractionHand hand,
+        //#endif
+        Operation<InteractionResult> original
+    ) {
+        InteractionResult originalResult = original.call(
+            entity, player,
+            //#if MC>=260000
+            //$$ hand, hitPos
+            //#else
+            hitPos, hand
+            //#endif
+        );
 
         if (CarpetAMSAdditionSettings.fakePlayerInteractLikeClient) {
             if (entity instanceof ArmorStand stand) {
@@ -69,23 +87,38 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
         method = "execute(Lnet/minecraft/server/level/ServerPlayer;Lcarpet/helpers/EntityPlayerActionPack$Action;)Z",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/server/level/ServerPlayer;interactOn(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/InteractionResult;"
+            //#if MC>=260000
+            //$$ target = "Lnet/minecraft/server/level/ServerPlayer;interactOn(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/InteractionResult;"
+            //#else
+            target = "Lnet/minecraft/server/level/ServerPlayer;interactOn(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/world/InteractionResult;"
+            //#endif
         )
     )
-    private InteractionResult onInteract(ServerPlayer player, Entity entity, InteractionHand hand, Vec3 hitPos, Operation<InteractionResult> original) {
-        InteractionResult originalResult = original.call(player, entity, hand, hitPos);
+    private InteractionResult onInteractOn(
+        ServerPlayer player, Entity entity,
+        //#if MC>=260000
+        //$$ InteractionHand hand, Vec3 hitPos,
+        //#else
+        InteractionHand hand,
+        //#endif
+        Operation<InteractionResult> original
+    ) {
+        InteractionResult originalResult = original.call(
+            player, entity,
+            //#if MC>=260000
+            //$$ hand, hitPos
+            //#else
+            hand
+            //#endif
+        );
 
         if (CarpetAMSAdditionSettings.fakePlayerInteractLikeClient) {
-            if (entity instanceof Boat boat) {
-                if (!player.isSecondaryUseActive() && ((AbstractBoatInvoker) boat).getOutOfControlTicks() < 60.0F) {
+            if (entity instanceof AbstractBoat) {
+                if (!player.isSecondaryUseActive()) {
                     return InteractionResult.SUCCESS;
                 }
-            } else if (entity instanceof Minecart minecart) {
+            } else if (entity instanceof AbstractMinecart minecart) {
                 if (!player.isSecondaryUseActive() && !minecart.isVehicle()) {
-                    return InteractionResult.SUCCESS;
-                }
-            } else if (entity instanceof Raft raft) {
-                if (!player.isSecondaryUseActive() && ((AbstractBoatInvoker) raft).getOutOfControlTicks() < 60.0F) {
                     return InteractionResult.SUCCESS;
                 }
             }

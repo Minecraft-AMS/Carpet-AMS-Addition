@@ -49,7 +49,11 @@ public record DimensionWrapper(ResourceKey<@NotNull Level> dimensionType) {
     }
 
     public Identifier getIdentifier() {
+        //#if MC>=12111
         return this.dimensionType.identifier();
+        //#else
+        //$$ return this.dimensionType.location();
+        //#endif
     }
 
     @Override

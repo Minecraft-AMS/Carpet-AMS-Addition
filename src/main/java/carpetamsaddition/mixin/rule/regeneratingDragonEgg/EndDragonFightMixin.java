@@ -26,10 +26,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.dimension.end.EnderDragonFight;
+import net.minecraft.world.level.dimension.end.EndDragonFight;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.EndPodiumFeature;
 
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,12 +39,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.UUID;
 
-@Mixin(EnderDragonFight.class)
+@Mixin(EndDragonFight.class)
 public abstract class EndDragonFightMixin {
 
+    @Final
     @Shadow
     private BlockPos origin;
 
+    @Final
     @Shadow
     private ServerLevel level;
 
@@ -51,11 +54,23 @@ public abstract class EndDragonFightMixin {
     private UUID dragonUUID;
 
     @Shadow
-    private boolean hasPreviouslyKilledDragon;
+    //#if MC>=260000
+    //$$ private boolean hasPreviouslyKilledDragon;
+    //#else
+    public abstract boolean hasPreviouslyKilledDragon();
+    //#endif
 
     @Inject(method = "setDragonKilled", at = @At("HEAD"))
     private void dragonKilled(EnderDragon dragon, CallbackInfo ci) {
-        if (CarpetAMSAdditionSettings.regeneratingDragonEgg && this.hasPreviouslyKilledDragon && dragon.getUUID().equals(this.dragonUUID)) {
+        if (
+            CarpetAMSAdditionSettings.regeneratingDragonEgg &&
+            //#if MC>=260000
+            //$$ this.hasPreviouslyKilledDragon &&
+            //#else
+            this.hasPreviouslyKilledDragon() &&
+            //#endif
+            dragon.getUUID().equals(this.dragonUUID)
+        ) {
             this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(this.origin)), Blocks.DRAGON_EGG.defaultBlockState());
         }
     }

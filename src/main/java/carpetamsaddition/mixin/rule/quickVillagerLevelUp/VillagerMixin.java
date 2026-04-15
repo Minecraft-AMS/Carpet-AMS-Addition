@@ -42,7 +42,11 @@ public abstract class VillagerMixin implements VillagerInvoker {
     private void quickLevelUp(CallbackInfoReturnable<Integer> cir) {
         if (CarpetAMSAdditionSettings.quickVillagerLevelUp && this.invokerGetVillagerData().level() < 5) {
             Villager villagerEntity = (Villager) (Object) this;
-            this.invokerLevelUp((ServerLevel) villagerEntity.level());
+            this.invokerLevelUp(
+                //#if MC>=12111
+                (ServerLevel) villagerEntity.level()
+                //#endif
+            );
         }
     }
 }

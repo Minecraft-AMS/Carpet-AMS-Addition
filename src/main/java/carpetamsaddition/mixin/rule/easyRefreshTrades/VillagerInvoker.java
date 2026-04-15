@@ -21,7 +21,9 @@
 package carpetamsaddition.mixin.rule.easyRefreshTrades;
 
 import net.minecraft.world.entity.npc.villager.Villager;
+//#if MC>=12111
 import net.minecraft.server.level.ServerLevel;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
@@ -29,5 +31,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(Villager.class)
 public interface VillagerInvoker {
     @Invoker("updateTrades")
-    void invokeUpdateTrades(ServerLevel world);
+    void invokeUpdateTrades(
+        //#if MC>=12111
+        ServerLevel world
+        //#endif
+    );
 }

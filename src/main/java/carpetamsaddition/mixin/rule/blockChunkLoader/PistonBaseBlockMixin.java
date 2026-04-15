@@ -26,13 +26,10 @@ import carpetamsaddition.utils.WorldUtil;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.ChunkPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
-
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -56,24 +53,26 @@ public abstract class PistonBaseBlockMixin {
     @Unique
     private void handleChunkLoading(BlockState state, Level world, BlockPos pos) {
         if (!WorldUtil.isClient(world)) {
-            Direction direction = state.getValue(DirectionalBlock.FACING);
+            Direction direction = state.getValue(PistonBaseBlock.FACING);
+            BlockPos targetPos = pos.relative(direction);
             BlockState pistonBlockUp = world.getBlockState(pos.above(1));
             BlockState pistonBlockDown = world.getBlockState(pos.below(1));
-            ChunkPos chunkPos = new ChunkPos(pos.relative(direction).getX(), pos.relative(direction).getZ());
+
             if (optionIsBoneBlockOrAll()) {
-                loadChunkIfMatch(world, chunkPos, pistonBlockUp, Blocks.BONE_BLOCK);
+                loadChunkIfMatch(world, targetPos, pistonBlockUp, Blocks.BONE_BLOCK);
             }
+
             if (optionIsBedRockOrAll()) {
-                loadChunkIfMatch(world, chunkPos, pistonBlockDown, Blocks.BEDROCK);
+                loadChunkIfMatch(world, targetPos, pistonBlockDown, Blocks.BEDROCK);
             }
         }
     }
 
     @Unique
-    private void loadChunkIfMatch(Level world, ChunkPos chunkPos, BlockState blockState, Block... blocks) {
+    private void loadChunkIfMatch(Level world, BlockPos targetPos, BlockState blockState, Block... blocks) {
         for (Block block : blocks) {
-            if (blockState.getBlock() == block) {
-                BlockChunkLoaderHelper.addPistonBlockTicket((ServerLevel) world, chunkPos);
+            if (blockState.is(block)) {
+                BlockChunkLoaderHelper.addPistonBlockTicket((ServerLevel) world, targetPos);
                 break;
             }
         }

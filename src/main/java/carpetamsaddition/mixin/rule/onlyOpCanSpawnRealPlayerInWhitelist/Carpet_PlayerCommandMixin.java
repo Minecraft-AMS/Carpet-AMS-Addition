@@ -28,7 +28,11 @@ import carpetamsaddition.utils.PlayerUtil;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 
+//#if MC<12111
+//$$ import com.mojang.authlib.GameProfile;
+//#else
 import net.minecraft.server.players.NameAndId;
+//#endif
 import net.minecraft.commands.CommandSourceStack;
 
 import com.mojang.brigadier.context.CommandContext;
@@ -36,6 +40,7 @@ import com.mojang.brigadier.context.CommandContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+@SuppressWarnings("LocalMayUseName")
 @Mixin(PlayerCommand.class)
 public abstract class Carpet_PlayerCommandMixin {
     @ModifyExpressionValue(
@@ -45,7 +50,14 @@ public abstract class Carpet_PlayerCommandMixin {
             target = "Lnet/minecraft/server/players/PlayerList;isUsingWhitelist()Z"
         )
     )
-    private static boolean onlyOpCanSpawnRealPlayerInWhitelist(boolean isWhitelistEnabled, CommandContext<CommandSourceStack> context, @Local NameAndId gameProfile) {
+    private static boolean onlyOpCanSpawnRealPlayerInWhitelist(
+        boolean isWhitelistEnabled, CommandContext<CommandSourceStack> context,
+        //#if MC>=12111
+        @Local NameAndId gameProfile
+        //#else
+        //$$ @Local GameProfile gameProfile
+        //#endif
+    ) {
         if (CarpetAMSAdditionSettings.onlyOpCanSpawnRealPlayerInWhitelist && PlayerUtil.isInWhitelist(gameProfile)) {
             return isWhitelistEnabled || CarpetAMSAdditionSettings.onlyOpCanSpawnRealPlayerInWhitelist;
         } else {

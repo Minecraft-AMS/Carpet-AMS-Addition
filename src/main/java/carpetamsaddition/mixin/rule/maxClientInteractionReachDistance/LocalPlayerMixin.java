@@ -29,7 +29,9 @@ import net.minecraft.client.player.LocalPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+@GameVersion(version = "mc >= 1.21.11")
 @Mixin(value = LocalPlayer.class, priority = 1688)
 public abstract class LocalPlayerMixin {
     @WrapOperation(

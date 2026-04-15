@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2024 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -18,21 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.hooks.rule.blockChunkLoader;
+package carpetamsaddition.mixin.rule.maxClientInteractionReachDistance;
 
-import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
-
-import net.minecraft.server.level.TicketType;
+import net.minecraft.world.entity.player.Player;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(TicketType.class)
-public abstract class TicketTypeMixin {
-    @Inject(method = "<clinit>", at = @At("TAIL"))
-    private static void addAmsTicketType(CallbackInfo ci) {
-        BlockChunkLoaderHelper.registerTicketTypeToMinecraft();
-    }
-}
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "mc < 1.21.11")
+@Mixin(value = Player.class, priority = 1688)
+public abstract class PlayerMixin {}

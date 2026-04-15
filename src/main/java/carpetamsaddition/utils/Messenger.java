@@ -87,7 +87,11 @@ public class Messenger {
     }
 
     public static void tell(Player player, MutableComponent text) {
-        player.sendSystemMessage(text);
+        //#if MC>=260000
+        //$$ player.sendSystemMessage(text);
+        //#else
+        player.displayClientMessage(text, false);
+        //#endif
     }
 
     @NotNull

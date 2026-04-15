@@ -21,20 +21,23 @@
 package carpetamsaddition.mixin.rule.easyRefreshTrades;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-
 import carpetamsaddition.utils.EntityUtil;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.trading.MerchantOffers;
-import net.minecraft.world.item.trading.TradeSet;
+//#if MC>=260000
+//$$ import net.minecraft.resources.ResourceKey;
+//$$ import net.minecraft.world.item.trading.TradeSet;
+//#else
+import net.minecraft.world.entity.npc.villager.VillagerTrades;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -48,18 +51,55 @@ public abstract class VillagerMixin {
         method = "updateTrades",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/npc/villager/Villager;addOffersFromTradeSet(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/trading/MerchantOffers;Lnet/minecraft/resources/ResourceKey;)V"
+            //#if MC>=260000
+            //$$ target = "Lnet/minecraft/world/entity/npc/villager/Villager;addOffersFromTradeSet(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/trading/MerchantOffers;Lnet/minecraft/resources/ResourceKey;)V"
+            //#elseif MC>=12111
+            target = "Lnet/minecraft/world/entity/npc/villager/Villager;addOffersFromItemListings(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/trading/MerchantOffers;[Lnet/minecraft/world/entity/npc/villager/VillagerTrades$ItemListing;I)V"
+            //#else
+            //$$ target = "Lnet/minecraft/world/entity/npc/Villager;addOffersFromItemListings(Lnet/minecraft/world/item/trading/MerchantOffers;[Lnet/minecraft/world/entity/npc/VillagerTrades$ItemListing;I)V"
+            //#endif
         )
     )
     private void refreshRecipes(
-            Villager villager, ServerLevel serverLevel, MerchantOffers merchantOffers, ResourceKey<TradeSet> resourceKey, Operation<Void> original
+        Villager villager,
+        //#if MC>=12111
+        ServerLevel serverLevel,
+        //#endif
+        MerchantOffers merchantOffers,
+        //#if MC>=260000
+        //$$ ResourceKey<TradeSet> resourceKey,
+        //#else
+        VillagerTrades.ItemListing[] factories, int count,
+        //#endif
+        Operation<Void> original
     ) {
         if (CarpetAMSAdditionSettings.easyRefreshTrades && isNewMerchant(villager)) {
             MerchantOffers traderOfferList = villager.getOffers();
             traderOfferList.clear();
-            ((AbstractVillagerInvoker) villager).invokeAddOffersFromTradeSet(serverLevel, merchantOffers,resourceKey);
+            ((AbstractVillagerInvoker) villager).invokeAddOffersFromTradeSet(
+                //#if MC>=12111
+                serverLevel,
+                //#endif
+                merchantOffers,
+                //#if MC>=260000
+                //$$ resourceKey
+                //#else
+                factories, count
+                //#endif
+            );
         } else {
-            original.call(villager, serverLevel, merchantOffers, resourceKey);
+            original.call(
+                villager,
+                //#if MC>=12111
+                serverLevel,
+                //#endif
+                merchantOffers,
+                //#if MC>=260000
+                //$$ resourceKey
+                //#else
+                factories, count
+                //#endif
+            );
         }
     }
 
@@ -74,7 +114,11 @@ public abstract class VillagerMixin {
         if (CarpetAMSAdditionSettings.easyRefreshTrades) {
             Villager villagerEntity = (Villager) (Object) this;
             if (isNewMerchant(villagerEntity) && !player.getMainHandItem().getItem().equals(Items.EMERALD_BLOCK)) {
-                ((VillagerInvoker) villagerEntity).invokeUpdateTrades((ServerLevel) EntityUtil.getEntityWorld(villagerEntity));
+                ((VillagerInvoker) villagerEntity).invokeUpdateTrades(
+                    //#if MC>=12111
+                    (ServerLevel) EntityUtil.getEntityWorld(villagerEntity)
+                    //#endif
+                );
             }
         }
     }

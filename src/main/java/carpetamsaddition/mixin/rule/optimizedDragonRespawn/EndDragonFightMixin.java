@@ -30,10 +30,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity;
 import net.minecraft.world.level.block.entity.TheEndPortalBlockEntity;
 import net.minecraft.world.level.block.state.pattern.BlockPattern;
+import net.minecraft.world.level.dimension.end.EndDragonFight;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.dimension.end.EnderDragonFight;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.levelgen.feature.EndPodiumFeature;
@@ -43,24 +43,28 @@ import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.util.List;
 
-@Mixin(value = EnderDragonFight.class, priority = 16888)
+@GameVersion(version = "mc < 26.1")
+@Mixin(value = EndDragonFight.class, priority = 888)
 public abstract class EndDragonFightMixin {
 
     @Shadow
+    @Final
     private ServerLevel level;
 
     @Shadow
     @Final
     private BlockPattern exitPortalPattern;
 
+    @Nullable
     @Shadow
-    private boolean needsStateScanning;
+    private BlockPos portalLocation;
 
     @Shadow
-    private @Nullable BlockPos exitPortalLocation;
+    private boolean needsStateScanning;
 
     @Unique
     private int cacheChunkIteratorX = -8;
@@ -77,21 +81,25 @@ public abstract class EndDragonFightMixin {
      */
     @WrapMethod(method = "findExitPortal")
     private @Nullable BlockPattern.BlockPatternMatch findEndPortal(Operation<BlockPattern.BlockPatternMatch> original) {
-        int i, j;
         if(!CarpetAMSAdditionSettings.optimizedDragonRespawn) {
             original.call();
         } else {
+            int i, j;
+
             for (i = cacheChunkIteratorX; i <= 8; ++i) {
                 for (j = cacheChunkIteratorZ; j <= 8; ++j) {
                     LevelChunk worldChunk = this.level.getChunk(i, j);
                     for (BlockEntity blockEntity : worldChunk.getBlockEntities().values()) {
-                        if (CarpetAMSAdditionSettings.optimizedDragonRespawn && blockEntity instanceof TheEndGatewayBlockEntity) continue;
+                        if (CarpetAMSAdditionSettings.optimizedDragonRespawn && blockEntity instanceof TheEndGatewayBlockEntity) {
+                            continue;
+                        }
+
                         if (blockEntity instanceof TheEndPortalBlockEntity) {
                             BlockPattern.BlockPatternMatch result = this.exitPortalPattern.find(this.level, blockEntity.getBlockPos());
                             if (result != null) {
                                 BlockPos blockPos = result.getBlock(3, 3, 3).getPos();
-                                if (this.exitPortalLocation == null) {
-                                    this.exitPortalLocation = blockPos;
+                                if (this.portalLocation == null) {
+                                    this.portalLocation = blockPos;
                                 }
                                 //No need to judge whether optimizing option is open
                                 cacheChunkIteratorX = i;
@@ -102,33 +110,39 @@ public abstract class EndDragonFightMixin {
                     }
                 }
             }
-            if (this.needsStateScanning || this.exitPortalLocation == null){
+
+            if (this.needsStateScanning || this.portalLocation == null){
                 if(CarpetAMSAdditionSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
                     i = cacheOriginIteratorY;
                 }
                 else {
                     i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(BlockPos.ZERO)).getY();
                 }
+
                 boolean notFirstSearch = false;
+
                 for (j = i; j >= 0; --j) {
                     BlockPattern.BlockPatternMatch result2;
+
                     if (CarpetAMSAdditionSettings.optimizedDragonRespawn && notFirstSearch) {
                         result2 = BlockPatternHelper.partialSearchAround(this.exitPortalPattern, this.level, new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()));
-                    }
-                    else {
+                    } else {
                         result2 = this.exitPortalPattern.find(this.level, new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()));
                     }
+
                     if (result2 != null) {
-                        if (this.exitPortalLocation == null) {
-                            this.exitPortalLocation = result2.getBlock(3, 3, 3).getPos();
+                        if (this.portalLocation == null) {
+                            this.portalLocation = result2.getBlock(3, 3, 3).getPos();
                         }
                         cacheOriginIteratorY = j;
                         return result2;
                     }
+
                     notFirstSearch = true;
                 }
             }
         }
+
         return null;
     }
 

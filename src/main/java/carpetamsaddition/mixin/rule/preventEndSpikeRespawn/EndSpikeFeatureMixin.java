@@ -28,25 +28,25 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelWriter;
-import net.minecraft.world.level.levelgen.feature.EndSpikeFeature;
+import net.minecraft.world.level.levelgen.feature.SpikeFeature;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(EndSpikeFeature.class)
+@Mixin(SpikeFeature.class)
 public abstract class EndSpikeFeatureMixin {
     @WrapOperation(
         method= "placeSpike",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/levelgen/feature/EndSpikeFeature;setBlock(Lnet/minecraft/world/level/LevelWriter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"
+            target = "Lnet/minecraft/world/level/levelgen/feature/SpikeFeature;setBlock(Lnet/minecraft/world/level/LevelWriter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V"
         )
     )
-    private void onSetBlockState(EndSpikeFeature endSpikeFeature, LevelWriter levelWriter, BlockPos blockPos, BlockState state, Operation<Void> original) {
+    private void onSetBlockState(SpikeFeature endSpikeFeature, LevelWriter modifiableWorld, BlockPos blockPos, BlockState blockState, Operation<Void> original) {
         if (CarpetAMSAdditionSettings.preventEndSpikeRespawn.equals("false")) {
-            original.call(endSpikeFeature, levelWriter, blockPos, state);
+            original.call(endSpikeFeature, modifiableWorld, blockPos, blockState);
         }
     }
 

@@ -25,12 +25,18 @@ import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.NbtOps;
-
 import net.minecraft.nbt.StringTag;
 
 public class SkullSkinHelper {
     public static void writeNbtToPlayerSkull(Player player, ItemStack headStack) {
-        headStack.set(DataComponents.PROFILE, ResolvableProfile.createResolved(player.getGameProfile()));
+        headStack.set(
+            DataComponents.PROFILE,
+            //#if MC>=12111
+            ResolvableProfile.createResolved(player.getGameProfile())
+            //#else
+            //$$ new ResolvableProfile(player.getGameProfile())
+            //#endif
+        );
     }
 
     public static void writeNbtToPlayerSkull(String name, ItemStack headStack) {
