@@ -25,7 +25,11 @@ import carpetamsaddition.helpers.ParticleHelper;
 
 import net.minecraft.world.level.block.CarvedPumpkinBlock;
 import net.minecraft.world.level.block.ShulkerBoxBlock;
+//#if MC>=260200
+//$$ import net.minecraft.world.entity.EntityTypes;
+//#else
 import net.minecraft.world.entity.EntityType;
+//#endif
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.server.level.ServerLevel;
@@ -50,7 +54,11 @@ public abstract class CarvedPumpkinBlockMixin {
             boolean bodyIsShulkerBox = world.getBlockState(bodyPos).getBlock() instanceof ShulkerBoxBlock;
 
             if (headIsCarvedPumpkin && bodyIsShulkerBox) {
+                //#if MC>=260200
+                //$$ Shulker shulkerGolem = EntityTypes.SHULKER.create(world, EntitySpawnReason.MOB_SUMMONED);
+                //#else
                 Shulker shulkerGolem = EntityType.SHULKER.create(world, EntitySpawnReason.MOB_SUMMONED);
+                //#endif
                 Objects.requireNonNull(shulkerGolem).snapTo(bodyPos.getX() + 0.5, bodyPos.getY(), bodyPos.getZ() + 0.5, 0.0F, 0.0F);
                 world.destroyBlock(bodyPos, false);
                 world.destroyBlock(headPos, false);

@@ -36,6 +36,9 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.DyeColor;
+//#if MC>=260200
+//$$ import net.minecraft.world.level.block.ColorCollection;
+//#endif
 
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
@@ -70,8 +73,13 @@ public abstract class SheepMixin {
         if (CarpetAMSAdditionSettings.jebSheepDropRandomColorWool && isJebSheep(sheepEntity)) {
             Random random = new Random();
             for (int i = 0; i < 1 + random.nextInt(3); ++i) {
+                //#if MC>=260200
+                //$$ DyeColor randomColor = ColorCollection.VALUES.asList().get(random.nextInt(ColorCollection.VALUES.asList().size()));
+                //$$ Block coloredWoolBlock = Blocks.WOOL.pick(randomColor);
+                //#else
                 DyeColor randomColor = DyeColor.values()[random.nextInt(DyeColor.values().length)];
                 Block coloredWoolBlock = getWoolBlockFromColor(randomColor);
+                //#endif
                 biConsumer.accept(serverLevel, new ItemStack(coloredWoolBlock.asItem()));
             }
         } else {
@@ -84,6 +92,7 @@ public abstract class SheepMixin {
         return sheepEntity.hasCustomName() && sheepEntity.getCustomName() != null && sheepEntity.getCustomName().getString().equals("jeb_");
     }
 
+    //#if MC<260200
     @Unique
     private static Block getWoolBlockFromColor(DyeColor color) {
         return switch (color) {
@@ -105,4 +114,5 @@ public abstract class SheepMixin {
             case BLACK -> Blocks.BLACK_WOOL;
         };
     }
+    //#endif
 }

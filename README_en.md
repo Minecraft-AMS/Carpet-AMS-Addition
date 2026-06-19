@@ -22,6 +22,7 @@ Access the website to view all the relevant information about carpet-ams-additio
 
 |      Game Version       | Development Status |                                                  Last Supported Version                                                   |
 |:-----------------------:|:------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
+|          26.2           |         ✔          |                                                            ---                                                            |
 |         26.1.1          |         ✔          |                                                            ---                                                            |
 | **<u>26.1(master)</u>** |         ✔          |                                                            ---                                                            |
 |         1.21.11         |         ✔          |                                                            ---                                                            |

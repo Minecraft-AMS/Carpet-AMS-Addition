@@ -24,6 +24,9 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.RegexTools;
 
 import net.minecraft.world.entity.EntityType;
+//#if MC>=260200
+//$$ import net.minecraft.world.entity.EntityTypes;
+//#endif
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.animal.Animal;
@@ -79,7 +82,11 @@ public abstract class ParrotMixin extends ShoulderRidingEntity {
     @Inject(method = "getBreedOffspring", at = @At("HEAD"), cancellable = true)
     private void createChild(ServerLevel world, AgeableMob entity, CallbackInfoReturnable<AgeableMob> cir) {
         if (!Objects.equals(CarpetAMSAdditionSettings.breedableParrots, "none")) {
+            //#if MC>=260200
+            //$$ AgeableMob child = EntityTypes.PARROT.create(world, EntitySpawnReason.BREEDING);
+            //#else
             AgeableMob child = EntityType.PARROT.create(world, EntitySpawnReason.BREEDING);
+            //#endif
 
             if (child != null) {
                 child.setBaby(true);

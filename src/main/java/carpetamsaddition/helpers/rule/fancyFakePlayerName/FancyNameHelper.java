@@ -32,6 +32,10 @@ import net.minecraft.world.scores.Scoreboard;
 import net.minecraft.world.scores.PlayerTeam;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+//#if MC>=260200
+//$$ import net.minecraft.world.scores.TeamColor;
+//$$ import java.util.Optional;
+//#endif
 
 import java.util.Objects;
 
@@ -45,7 +49,11 @@ public class FancyNameHelper {
             if (team == null) {
                 team = FancyFakePlayerNameTeamController.addBotTeam(server, teamName);
                 team.setPlayerPrefix(Messenger.f(Messenger.s(String.format("[%s] ", teamName)), Layout.BOLD));
+                //#if MC>=260200
+                //$$ team.setColor(Optional.of(TeamColor.DARK_GREEN));
+                //#else
                 team.setColor(Layout.DARK_GREEN.getFormatting());
+                //#endif
             }
 
             String playerName = player.getGameProfile().name();
