@@ -31,17 +31,17 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "mc < 26.3")
+@GameVersion(version = "mc >= 26.3")
 @Mixin(ComposterBlock.class)
 public abstract class ComposterBlockMixin {
     @ModifyExpressionValue(
-        method = "addItem",
+        method = "addLayer",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/util/RandomSource;nextDouble()D"
+            target = "Lnet/minecraft/world/level/storage/loot/providers/number/NumberProvider;getInt(Lnet/minecraft/world/level/storage/loot/LootContext;)I"
         )
     )
-    private static double easyCompost(double original) {
-        return CarpetAMSAdditionSettings.easyCompost ? -114514.114514D : original;
+    private static int easyCompost(int original) {
+        return CarpetAMSAdditionSettings.easyCompost ? 1 : original;
     }
 }

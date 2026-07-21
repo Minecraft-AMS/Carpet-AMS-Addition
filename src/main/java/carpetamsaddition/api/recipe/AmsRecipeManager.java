@@ -64,8 +64,10 @@ public class AmsRecipeManager {
         map.put(id, recipeEntry.value());
     }
 
+    @SuppressWarnings("RedundantCast")
     private RecipeHolder<?> deserializeRecipe(ResourceKey<@NotNull Recipe<?>> key, JsonObject json, HolderLookup.Provider registries) {
-        return new RecipeHolder<>(key, Recipe.CODEC.parse(registries.createSerializationContext(JsonOps.INSTANCE), json).getOrThrow(JsonParseException::new));
+        Recipe<?> recipe = (Recipe<?>) Recipe.CODEC.parse(registries.createSerializationContext(JsonOps.INSTANCE), json).getOrThrow(JsonParseException::new);
+        return new RecipeHolder<>(key, recipe);
     }
 
     private void registerAllRecipes(Map<Identifier, JsonElement> recipeMap) {

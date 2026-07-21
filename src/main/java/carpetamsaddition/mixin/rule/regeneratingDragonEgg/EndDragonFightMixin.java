@@ -71,7 +71,11 @@ public abstract class EndDragonFightMixin {
             //#endif
             dragon.getUUID().equals(this.dragonUUID)
         ) {
+            //#if MC>=260300
+            //$$ this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, ((EnderDragonFightInvoker) this).invokeGetPodiumLocation(this.origin)), Blocks.DRAGON_EGG.defaultBlockState());
+            //#else
             this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(this.origin)), Blocks.DRAGON_EGG.defaultBlockState());
+            //#endif
         }
     }
 }

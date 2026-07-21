@@ -45,7 +45,9 @@ public class LargeBundleInventory implements Container {
         this.stack = stack;
         ItemContainerContents container = stack.get(DataComponents.CONTAINER);
         if (container != null) {
-            //#if MC>=260000
+            //#if MC>=260300
+            //$$ List<ItemStack> containerStacks = container.itemCopies().toList();
+            //#elseif MC>=260000
             //$$ List<ItemStack> containerStacks = container.allItemsCopyStream().toList();
             //#else
             List<ItemStack> containerStacks = container.stream().toList();
@@ -116,9 +118,11 @@ public class LargeBundleInventory implements Container {
         if (stack.getItem() instanceof BundleItem) {
             return false;
         }
+
         if (Block.byItem(stack.getItem()) instanceof ShulkerBoxBlock) {
             return false;
         }
+
         return !stack.isEmpty();
     }
 }
