@@ -23,6 +23,10 @@ preprocess {
     mc260101.link(mc260102, file('versions/mapping-26.1.1-26.1.2.txt'))
     mc260102.link(mc260200, file('versions/mapping-26.1.2-26.2.txt'))
     mc260200.link(mc260300, file('versions/mapping-26.2-26.3.txt'))
+
+    for (final def node in getNodes()) {
+        findProject(node.project).ext.mcVersion = node.mcVersion
+    }
 }
 
 tasks.register('buildAndGather') {

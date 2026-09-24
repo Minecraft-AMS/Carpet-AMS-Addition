@@ -38,7 +38,7 @@ public abstract class ComposterBlockMixin {
         method = "addLayer",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/world/level/storage/loot/providers/number/NumberProvider;getInt(Lnet/minecraft/world/level/storage/loot/LootContext;)I"
+            target = "Lnet/minecraft/world/level/storage/loot/providers/number/ints/ResolvableInt;get(Lnet/minecraft/world/level/storage/loot/LootContext;I)I"
         )
     )
     private static int easyCompost(int original) {

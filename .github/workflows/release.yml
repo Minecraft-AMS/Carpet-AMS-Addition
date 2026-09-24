@@ -39,10 +39,10 @@ jobs:
       matrix: ${{ fromJson(needs.matrix_prep.outputs.matrix) }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: build-artifacts
           path: build-artifacts

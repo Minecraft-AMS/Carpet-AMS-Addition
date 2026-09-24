@@ -7,6 +7,7 @@
     "carpet.CarpetServerMixin",
     "carpet.HUDControllerMixin",
     "carpet.SettingsManagerMixin",
+    "hooks.recipe.FileToIdConverterMixin",
     "hooks.recipe.RecipeManagerAccessor",
     "hooks.recipe.RecipeManagerMixin",
     "hooks.server.MinecraftServerMixin",

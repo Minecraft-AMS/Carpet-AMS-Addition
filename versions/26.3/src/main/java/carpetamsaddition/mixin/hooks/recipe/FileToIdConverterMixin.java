@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2024 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -22,32 +22,30 @@ package carpetamsaddition.mixin.hooks.recipe;
 
 import carpetamsaddition.CarpetAMSAdditionServer;
 
-import com.llamalad7.mixinextras.sugar.Local;
-
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeMap;
+import net.minecraft.server.packs.resources.Resource;
+import net.minecraft.server.packs.resources.ResourceManager;
 
 import org.spongepowered.asm.mixin.Mixin;
+
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-import java.util.SortedMap;
+import java.util.Map;
 
-@GameVersion(version = "Minecraft < 26.3")
-@Mixin(value = RecipeManager.class, priority = 16888)
-public abstract class RecipeManagerMixin {
-    @Inject(
-        method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;",
-        at = @At(
-            value = "INVOKE",
-            target = "Ljava/util/ArrayList;<init>(I)V"
-        )
-    )
-    private void addCustomRecipes(CallbackInfoReturnable<RecipeMap> cir, @Local SortedMap<Identifier, Recipe<?>> recipes) {
-        CarpetAMSAdditionServer.getInstance().registerCustomRecipes(recipes, ((RecipeManagerAccessor) this).getRegistries());
+@GameVersion(version = "Minecraft >= 26.3")
+@Mixin(FileToIdConverter.class)
+public abstract class FileToIdConverterMixin {
+    @Inject(method = "listMatchingResources", at = @At("RETURN"), cancellable = true)
+    private void addCustomRecipes(ResourceManager resourceManager, CallbackInfoReturnable<Map<Identifier, Resource>> cir) {
+        FileToIdConverter converter = (FileToIdConverter) (Object) this;
+        if (converter.prefix().equals(Registries.elementsDirPath(Registries.RECIPE))) {
+            cir.setReturnValue(CarpetAMSAdditionServer.getInstance().registerCustomRecipeResources(converter, resourceManager, cir.getReturnValue()));
+        }
     }
 }
