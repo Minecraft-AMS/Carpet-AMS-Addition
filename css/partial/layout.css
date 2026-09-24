@@ -1,0 +1,12 @@
+.body-container {
+  margin: 0 auto;
+  max-width: 98%;
+  display: flex;
+  flex-direction: column;
+}
+.body-container > div:not(:last-child) {
+  margin-bottom: 20px;
+}
+.body-container p {
+  text-align: justify;
+}

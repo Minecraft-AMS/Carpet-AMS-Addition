@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+        
+            Carpet AMS Addition v2.14.0 |
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-title">
+                <h1>Carpet AMS Addition v2.14.0</h1>
+            </div>
+            <div class="post-meta">
+                <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date">2023/11/23</span>
+            </div>
+            
+            <div class="post-content">
+                <h1 id="新增规则"><a href="#新增规则" class="headerlink" title="新增规则"></a>新增规则</h1><h2 id="maxBlockInteractionDistance（最大方块交互距离）"><a href="#maxBlockInteractionDistance（最大方块交互距离）" class="headerlink" title="maxBlockInteractionDistance（最大方块交互距离）"></a>maxBlockInteractionDistance（最大方块交互距离）</h2><p>更改服务器允许的最大方块交互距离，设置为 <code>-1</code> 禁用该规则。</p>
+<ul>
+<li><p>类型: <code>double</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="maxClientBlockReachDistance（客户端最大方块放置距离）"><a href="#maxClientBlockReachDistance（客户端最大方块放置距离）" class="headerlink" title="maxClientBlockReachDistance（客户端最大方块放置距离）"></a>maxClientBlockReachDistance（客户端最大方块放置距离）</h2><p>更改客户端允许的最大方块放置距离，设置为 <code>-1</code> 禁用该规则。</p>
+<ul>
+<li><p>类型: <code>float</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h1 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h1><ul>
+<li><p>MixinExtras -&gt; v0.2.0 -&gt; v0.2.1</p>
+</li>
+<li><p>Fabric loom v1.3-SNAPSHOT -&gt; v1.4-SNAPSHOT</p>
+</li>
+<li><p>gradle v8.1.1 -&gt; v8.3</p>
+</li>
+</ul>
+<h1 id="优化："><a href="#优化：" class="headerlink" title="优化："></a>优化：</h1><ul>
+<li>开启 <code>enhancedWorldEater</code> 规则时，处铁砧与基岩外其他的方块硬度修改为 <code>3F</code> 使其更加稳定。</li>
+</ul>
+<hr>
+<h1 id="New-Rules"><a href="#New-Rules" class="headerlink" title="New Rules"></a>New Rules</h1><h2 id="maxBlockInteractionDistance"><a href="#maxBlockInteractionDistance" class="headerlink" title="maxBlockInteractionDistance"></a>maxBlockInteractionDistance</h2><p>Change the maximum block interaction distance allowed by the server, set to <code>-1</code> to disable this rule</p>
+<ul>
+<li><p>Type: <code>double</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="maxClientBlockReachDistance"><a href="#maxClientBlockReachDistance" class="headerlink" title="maxClientBlockReachDistance"></a>maxClientBlockReachDistance</h2><p>Change the maximum block placement distance allowed by the client, set to <code>-1</code> to disable this rule.</p>
+<ul>
+<li><p>Type: <code>float</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h1 id="Changes"><a href="#Changes" class="headerlink" title="Changes"></a>Changes</h1><ul>
+<li><p>MixinExtras -&gt; v0.2.0 -&gt; v0.2.1</p>
+</li>
+<li><p>Fabric loom v1.3-SNAPSHOT -&gt; v1.4-SNAPSHOT</p>
+</li>
+<li><p>gradle v8.1.1 -&gt; v8.3</p>
+</li>
+</ul>
+<h1 id="Optimize"><a href="#Optimize" class="headerlink" title="Optimize"></a>Optimize</h1><ul>
+<li>When the <code>enhancedWorldEater</code> rule is enabled, the hardness of blocks outside of anvils and bedrock is modified to <code>3F</code> to make it more stable.</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

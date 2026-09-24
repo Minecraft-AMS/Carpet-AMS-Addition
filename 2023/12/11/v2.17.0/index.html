@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+        
+            Carpet AMS Addition v2.17.0 |
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-title">
+                <h1>Carpet AMS Addition v2.17.0</h1>
+            </div>
+            <div class="post-meta">
+                <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date">2023/12/11</span>
+            </div>
+            
+            <div class="post-content">
+                <h1 id="新增规则"><a href="#新增规则" class="headerlink" title="新增规则"></a>新增规则</h1><h3 id="自定义方块更新抑制器（customBlockUpdateSuppressor）"><a href="#自定义方块更新抑制器（customBlockUpdateSuppressor）" class="headerlink" title="自定义方块更新抑制器（customBlockUpdateSuppressor）"></a>自定义方块更新抑制器（customBlockUpdateSuppressor）</h3><p>自定义一个方块成为更新抑制器。</p>
+<p>默认开启时会同步打开 <code>更新抑制崩溃修复（amsUpdateSuppressionCrashFix）</code> 规则。</p>
+<p>不是所有的方块都能设置为更新抑制器。</p>
+<p>使用如下指令来禁用&#x2F;启用强制启动:</p>
+<p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
+<p>命令格式：</p>
+<p>&#x2F;carpet customBlockUpdateSuppressor minecraft:BlockName</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>none</code></p>
+</li>
+<li><p>参考选项: <code>none</code>, <code>minecraft:bone_block</code>, <code>minecraft:diamond_ore</code>, <code>minecraft:magma_block</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h3 id="潜行编辑告示牌（sneakToEditSign）"><a href="#潜行编辑告示牌（sneakToEditSign）" class="headerlink" title="潜行编辑告示牌（sneakToEditSign）"></a>潜行编辑告示牌（sneakToEditSign）</h3><p>开启后，玩家可以潜行时右键告示牌来编辑它，Minecraft &gt;&#x3D; 1.20 时表现为必须潜行右键。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h1 id="更改"><a href="#更改" class="headerlink" title="更改"></a>更改</h1><ul>
+<li><p>移除了 <code>骨块更新抑制器（boneBlockUpdateSuppressor）</code> 规则，取而代之的是 <code>自定义方块更新抑制器customBlockUpdateSuppressor</code> 规则。</p>
+</li>
+<li><p>为 <code>更新抑制崩溃修复（amsUpdateSuppressionCrashFix）</code> 新增一条指令用于控制在开启 <code>自定义方块更新抑制器（customBlockUpdateSuppressor）</code> 时是否强制启用。</p>
+<blockquote>
+<p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
+</blockquote>
+</li>
+<li><p>现在如下规则全版本可用：</p>
+<ul>
+<li><p>自定义方块更新抑制器（customBlockUpdateSuppressor）</p>
+</li>
+<li><p>更新抑制崩溃修复（amsUpdateSuppressionCrashFix）</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="New-Rules"><a href="#New-Rules" class="headerlink" title="New Rules"></a>New Rules</h1><h3 id="customBlockUpdateSuppressor"><a href="#customBlockUpdateSuppressor" class="headerlink" title="customBlockUpdateSuppressor"></a>customBlockUpdateSuppressor</h3><p>Customize a block to be an update suppressor.</p>
+<p>The <code>amsUpdateSuppressionCrashFix </code>rule will also be enabled when it is opened</p>
+<p>Not all blocks can be set as update suppressor.</p>
+<p>To disable&#x2F;enable forced startup, use the following command: </p>
+<p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
+<p>Command format:</p>
+<p>&#x2F;carpet customBlockUpdateSuppressor minecraft:BlockName</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>none</code>, <code>minecraft:bone_block</code>, <code>minecraft:diamond_ore</code>, <code>minecraft:magma_block</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h3 id="sneakToEditSign"><a href="#sneakToEditSign" class="headerlink" title="sneakToEditSign"></a>sneakToEditSign</h3><p>When enabled，Players can sneak and right-click on a sign to edit it, In <code>Minecraft &gt;= 1.20</code>, the behavior is such that players must sneak in order to edit a sign.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>none</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h1 id="Changes"><a href="#Changes" class="headerlink" title="Changes"></a>Changes</h1><ul>
+<li><p>The <code>boneBlockUpdateSuppressor </code> rule has been removed and replaced with the <code>customBlockUpdateSuppressor </code> rule.</p>
+</li>
+<li><p>Add a new command for <code>amsUpdateSuppressionCrashFix </code> to control whether forced startup is enabled when <code>customBlockUpdateSuppressor </code> is enabled.</p>
+</li>
+<li><p>Now, the following rules are available in all versions：</p>
+<ul>
+<li><p>customBlockUpdateSuppressor</p>
+</li>
+<li><p>amsUpdateSuppressionCrashFix</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>&emsp;</p>
+<p>&emsp;</p>
+<p><em><strong>Translate into English from Chat-GPT</strong></em></p>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

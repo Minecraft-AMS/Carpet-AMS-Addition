@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+        
+            Carpet AMS Addition v2.54.1 |
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-title">
+                <h1>Carpet AMS Addition v2.54.1</h1>
+            </div>
+            <div class="post-meta">
+                <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date">2025/02/08</span>
+            </div>
+            
+            <div class="post-content">
+                <h1 id="增强"><a href="#增强" class="headerlink" title="增强"></a>增强</h1><p>命令详情见WIKI。</p>
+<ul>
+<li><code>/leader</code> 命令现在增加了一项子命令用于定时广播指定导游的坐标。</li>
+<li><code>/customBlockHardness</code> 命令现在增加了一项子命令用于获取方块的默认硬度。</li>
+<li><code>/customCommandPermissionLevel</code> 命令现在增加了一项子命令用于手动刷新命令树。</li>
+</ul>
+<h1 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h1><ul>
+<li><p><strong>玩家导游（commandPlayerLeader）</strong></p>
+<p>修复导游死亡后会丢失发光效果的BUG。</p>
+</li>
+<li><p><strong>玩家导游（commandPlayerLeader）</strong></p>
+<p>修复导游在离线时被解雇后，进入游戏时仍然拥有发光效果的BUG。</p>
+</li>
+<li><p><strong>自定义命令权限等级（commandCustomCommandPermissionLevel）</strong></p>
+<p>修复代码无用且激进导致的兼容性问题。<a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/160">#160</a></p>
+</li>
+</ul>
+<h1 id="更改"><a href="#更改" class="headerlink" title="更改"></a>更改</h1><ul>
+<li>移除了以下规则，它们现在都可以被 <code>自定义方块硬度（commandCustomBlockHardness）</code> 规则取代。<ul>
+<li><strong>易碎深板岩（softDeepslate）</strong></li>
+<li><strong>易碎黑曜石（softObsidian）</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>支持 <code>Minecraft 25w06a</code>。</li>
+</ul>
+<hr>
+<h1 id="Enhance"><a href="#Enhance" class="headerlink" title="Enhance"></a>Enhance</h1><p>For command details, please refer to the WIKI.</p>
+<ul>
+<li><code>/leader</code> command now includes a sub-command for scheduling broadcasts of a designated guide’s coordinates.</li>
+<li><code>/customBlockHardness</code> The command now includes a sub-command for obtaining the default hardness of a block.</li>
+<li><code>/customCommandPermissionLevel</code> The command now includes a sub-command for manually refreshing the command tree.</li>
+</ul>
+<h1 id="Fix"><a href="#Fix" class="headerlink" title="Fix"></a>Fix</h1><ul>
+<li><p><strong>commandPlayerLeader</strong></p>
+<p>Fixed a bug where the guide would lose the glowing effect upon death.</p>
+</li>
+<li><p><strong>commandPlayerLeader</strong></p>
+<p>Fixed a bug where the guide would retain the glowing effect upon entering the game after being dismissed while offline.</p>
+</li>
+<li><p><strong>commandCustomCommandPermissionLevel</strong></p>
+<p>Fixed compatibility issues caused by redundant and aggressive code. <a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/160">#160</a></p>
+</li>
+</ul>
+<h1 id="Change"><a href="#Change" class="headerlink" title="Change"></a>Change</h1><ul>
+<li>The following rules have been removed, as they can now be replaced by the <code>commandCustomBlockHardness</code> rule.<ul>
+<li><strong>softDeepslate</strong></li>
+<li><strong>softObsidian</strong></li>
+</ul>
+</li>
+</ul>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><ul>
+<li>Support <code>Minecraft 25w06a</code>。</li>
+</ul>
+<p>&emsp;</p>
+<p>&emsp;</p>
+<p><em><strong>Translate into English from DeepSeek</strong></em></p>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

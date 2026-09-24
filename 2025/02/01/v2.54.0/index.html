@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+        
+            Carpet AMS Addition v2.54.0 |
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-title">
+                <h1>Carpet AMS Addition v2.54.0</h1>
+            </div>
+            <div class="post-meta">
+                <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date">2025/02/01</span>
+            </div>
+            
+            <div class="post-content">
+                <h1 id="新规则"><a href="#新规则" class="headerlink" title="新规则"></a>新规则</h1><ul>
+<li><p><strong>仅OP可召唤白名单中的玩家（onlyOpCanSpawnRealPlayerInWhitelist）</strong><a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/154">#154</a></p>
+<p>只有OP玩家可以召唤在白名单中的玩家，无论白名单是否开启。</p>
+</li>
+<li><p><strong>自定义方块硬度（commandCustomBlockHardness）</strong></p>
+<p>使用指令来自定义任何方块的挖掘硬度。</p>
+<p>开启规则后使用 <code>/customBlockHardness help</code> 命令来查看使用说明。</p>
+<p>客户端没有安装 <code>Carpet AMS Addition</code> 时，该规则完全不可用。</p>
+</li>
+</ul>
+<h1 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h1><ul>
+<li>修复 <code>禁用铁砧交互（commandAnvilInteractionDisabled）</code> 规则开启后依然会打开铁砧UI的BUG。</li>
+<li>修复 <code>自定义命令权限等级（commandCustomCommandPermissionLevel）</code> 规则重启服务器后自定义权限不生效的BUG。</li>
+<li>补全了 <code>自定义命令权限等级（commandCustomCommandPermissionLevel）</code> 遗漏的相关实现。</li>
+<li>修复 <a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/pull/156">#156</a>。</li>
+<li>修复 <code>地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）</code> 规则导致的游戏崩溃。</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li>这真真真真真真的大概率是 <code>Minecraft 1.20 - 1.20.5</code> 的最后一个版本。</li>
+<li>支持 <code>Minecraft 25w05a</code>。</li>
+</ul>
+<hr>
+<h1 id="New-Rules"><a href="#New-Rules" class="headerlink" title="New Rules"></a>New Rules</h1><ul>
+<li><p><strong>onlyOpCanSpawnRealPlayerInWhitelist</strong> <a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/154">#154</a></p>
+<p>Only OP players can spawn players on the whitelist, regardless of whether the whitelist is enabled.</p>
+</li>
+<li><p><strong>commandCustomBlockHardness</strong></p>
+<p>Use command to customizing mining hardness for any block.</p>
+<p>After enabling the rules, use the <code>/customBlockBlastResistance helper</code> command to view the usage instructions.</p>
+<p>When the <code>Carpet AMS Addition</code> is not installed on the client, this rule is completely unavailable.</p>
+</li>
+</ul>
+<h1 id="Fix"><a href="#Fix" class="headerlink" title="Fix"></a>Fix</h1><ul>
+<li>Fixed a bug where the anvil UI would still open when the <code>commandAnvilInteractionDisabled</code> rule was enabled.</li>
+<li>Fixed a bug where custom permissions did not take effect after server restart with the <code>commandCustomCommandPermissionLevel </code> rule.</li>
+<li>Completed the missing relevant implementations for <code>commandCustomCommandPermissionLevel</code> rule.</li>
+<li>Fix <a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/pull/156">#156</a>。</li>
+<li>Fixed a game crash caused by the <code>commandCarpetExtensionModWikiHyperlink</code> rule.</li>
+</ul>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><ul>
+<li>This is, like, super duper, mega, ultra, probably, almost definitely, the very very last version for <code>Minecraft 1.20 - 1.20.5</code> No take-backsies! </li>
+<li>Support <code>Minecraft 25w05a</code>.</li>
+</ul>
+<p>&emsp;</p>
+<p>&emsp;</p>
+<p><em><strong>Translate into English from DeepSeek</strong></em></p>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

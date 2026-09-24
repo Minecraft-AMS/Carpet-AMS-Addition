@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-content">
+                <h3 id="中文-English"><a href="#中文-English" class="headerlink" title="[ 中文 | English ]"></a>[ 中文 | <a href="/en_us/Commands_en">English</a> ]</h3><h1 id="——-指-令-——"><a href="#——-指-令-——" class="headerlink" title="—— 指 令 ——"></a><center>—— 指 令 ——</center></h1><p>&emsp;</p>
+<h3 id="区块加载控制（commandPlayerChunkLoadController）"><a href="#区块加载控制（commandPlayerChunkLoadController）" class="headerlink" title="区块加载控制（commandPlayerChunkLoadController）"></a>区块加载控制（commandPlayerChunkLoadController）</h3><ul>
+<li><strong>&#x2F;playerChunkLoading [true&#x2F;false]</strong><br>开关玩家自身加载。</li>
+</ul>
+<h3 id="禁用铁砧交互（commandAnvilInteractionDisabled"><a href="#禁用铁砧交互（commandAnvilInteractionDisabled" class="headerlink" title="禁用铁砧交互（commandAnvilInteractionDisabled)"></a>禁用铁砧交互（commandAnvilInteractionDisabled)</h3><ul>
+<li><strong>&#x2F;anvilInteractionDisabled [true&#x2F;false]</strong><br>控制玩家是否可与铁砧交互。</li>
+</ul>
+<h3 id="更新抑制崩溃修复（amsUpdateSuppressionCrashFix）"><a href="#更新抑制崩溃修复（amsUpdateSuppressionCrashFix）" class="headerlink" title="更新抑制崩溃修复（amsUpdateSuppressionCrashFix）"></a>更新抑制崩溃修复（amsUpdateSuppressionCrashFix）</h3><ul>
+<li><strong>&#x2F;amsUpdateSuppressionCrashFixForceMode [true&#x2F;false]</strong><br>控制是否在开启 <code>自定义方块更新抑制器（customBlockUpdateSuppressor）</code> 规则开启时是否强制开启。</li>
+</ul>
+<h3 id="自定义方块爆炸抗性（commandCustomBlockBlastResistance）"><a href="#自定义方块爆炸抗性（commandCustomBlockBlastResistance）" class="headerlink" title="自定义方块爆炸抗性（commandCustomBlockBlastResistance）"></a>自定义方块爆炸抗性（commandCustomBlockBlastResistance）</h3><ul>
+<li><p><strong>&#x2F;customBlockBlastResistance set &lt;方块&gt; &lt;抗性&gt;</strong><br>添加或修改方块及其爆炸抗性。</p>
+</li>
+<li><p><strong>&#x2F;customBlockBlastResistance remove &lt;方块&gt;</strong><br>从列表中移除方块。</p>
+</li>
+<li><p><strong>&#x2F;customBlockBlastResistance removeAll</strong><br>移除列表中的所有方块。</p>
+</li>
+<li><p><strong>&#x2F;customBlockBlastResistance list</strong><br>显示所有添加的方块。</p>
+</li>
+<li><p><strong>&#x2F;customBlockBlastResistance help</strong><br>查看使用说明。</p>
+</li>
+</ul>
+<h3 id="我在哪（commandHere）"><a href="#我在哪（commandHere）" class="headerlink" title="我在哪（commandHere）"></a>我在哪（commandHere）</h3><ul>
+<li><strong>&#x2F;here</strong><br>发送当前自身所在维度、坐标、对应的主世界&#x2F;下界坐标，同时给予自身30s的发光效果。</li>
+</ul>
+<h3 id="你在哪（commandWhere）"><a href="#你在哪（commandWhere）" class="headerlink" title="你在哪（commandWhere）"></a>你在哪（commandWhere）</h3><ul>
+<li><strong>&#x2F;where</strong><br>获取指定玩家所在维度、坐标、对应的主世界&#x2F;下界坐标，同时给予目标玩家30s的发光效果。</li>
+</ul>
+<h3 id="玩家导游（commandPlayerLeader）"><a href="#玩家导游（commandPlayerLeader）" class="headerlink" title="玩家导游（commandPlayerLeader）"></a>玩家导游（commandPlayerLeader）</h3><ul>
+<li><p><strong>&#x2F;leader add &lt;玩家&gt;</strong><br>添加一名导游。</p>
+</li>
+<li><p><strong>&#x2F;leader remove &lt;玩家&gt;</strong><br>移除一名导游。</p>
+</li>
+<li><p><strong>&#x2F;leader removeAll</strong><br>解雇所有导游。</p>
+</li>
+<li><p><strong>&#x2F;leader broadcastLeaderPos &lt;玩家&gt; interval &lt;tick&gt;</strong><br>定时广播一名导游的坐标，时间设置为负数停止广播。</p>
+</li>
+<li><p><strong>&#x2F;leader list</strong><br>查看导游列表。</p>
+</li>
+<li><p><strong>&#x2F;leader help</strong><br>查看使用说明。</p>
+</li>
+</ul>
+<h3 id="ping命令（commandPacketInternetGroper）"><a href="#ping命令（commandPacketInternetGroper）" class="headerlink" title="ping命令（commandPacketInternetGroper）"></a>ping命令（commandPacketInternetGroper）</h3><ul>
+<li><p><strong>&#x2F;pings &lt;目标IP&#x2F;域名&gt; &lt;ping的次数&gt;</strong><br>ping某个主机。</p>
+</li>
+<li><p><strong>&#x2F;pings stop</strong><br>中断ping操作。</p>
+</li>
+</ul>
+<h3 id="获取存档大小（commandGetSaveSize）"><a href="#获取存档大小（commandGetSaveSize）" class="headerlink" title="获取存档大小（commandGetSaveSize）"></a>获取存档大小（commandGetSaveSize）</h3><ul>
+<li><strong>&#x2F;getSaveSize</strong><br>获取存档大小。</li>
+</ul>
+<h3 id="获取系统信息（commandGetSystemInfo）"><a href="#获取系统信息（commandGetSystemInfo）" class="headerlink" title="获取系统信息（commandGetSystemInfo）"></a>获取系统信息（commandGetSystemInfo）</h3><ul>
+<li><strong>&#x2F;getSystemInfo</strong><br>获取服务器的系统信息。</li>
+</ul>
+<h3 id="goto命令（commandGoto）"><a href="#goto命令（commandGoto）" class="headerlink" title="goto命令（commandGoto）"></a>goto命令（commandGoto）</h3><ul>
+<li><p><strong>&#x2F;goto &lt;维度&gt; <x> <y> <z></strong><br>传送到指定维度的指定坐标。</p>
+</li>
+<li><p><strong>&#x2F;goto &lt;维度&gt;</strong><br>传送至当前玩家所在位置的对应坐标。</p>
+</li>
+</ul>
+<h3 id="自定义命令权限等级（commandCustomCommandPermissionLevel）"><a href="#自定义命令权限等级（commandCustomCommandPermissionLevel）" class="headerlink" title="自定义命令权限等级（commandCustomCommandPermissionLevel）"></a>自定义命令权限等级（commandCustomCommandPermissionLevel）</h3><ul>
+<li><p><strong>&#x2F;customCommandPermissionLevel set &lt;指令&gt; &lt;权限等级&gt;</strong><br>设置某个指令的权限等级。</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel remove &lt;指令&gt;</strong><br>删除某个被修改的指令。</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel removeAll</strong><br>删除所有被修改的指令。</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel refresh</strong><br>刷新指令树。</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel list</strong><br>查看被修改的指令列表。</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel help</strong><br>查看使用说明。</p>
+</li>
+</ul>
+<h3 id="获取玩家头颅（commandGetPlayerSkull）"><a href="#获取玩家头颅（commandGetPlayerSkull）" class="headerlink" title="获取玩家头颅（commandGetPlayerSkull）"></a>获取玩家头颅（commandGetPlayerSkull）</h3><ul>
+<li><strong>&#x2F;getPlayerSkull &lt;玩家&gt; &lt;数量&gt;</strong><br>获取指定玩家的头颅。</li>
+</ul>
+<h3 id="自定义可移动方块（commandCustomMovableBlock）"><a href="#自定义可移动方块（commandCustomMovableBlock）" class="headerlink" title="自定义可移动方块（commandCustomMovableBlock）"></a>自定义可移动方块（commandCustomMovableBlock）</h3><ul>
+<li><p><strong>&#x2F;customMovableBlock add &lt;方块注册名&gt;</strong><br>增加一个可移动方块。</p>
+</li>
+<li><p><strong>&#x2F;customMovableBlock remove &lt;方块注册名&gt;</strong><br>删除一个可移动方块。</p>
+</li>
+<li><p><strong>&#x2F;customMovableBlock removeAll</strong><br>删除所有添加的可移动方块。</p>
+</li>
+<li><p><strong>&#x2F;customMovableBlock list</strong><br>查看可移动方块列表。</p>
+</li>
+<li><p><strong>&#x2F;customMovableBlock help</strong><br>查看使用说明。</p>
+</li>
+</ul>
+<h3 id="获取主手物品ID（commandGetHeldItemID）"><a href="#获取主手物品ID（commandGetHeldItemID）" class="headerlink" title="获取主手物品ID（commandGetHeldItemID）"></a>获取主手物品ID（commandGetHeldItemID）</h3><ul>
+<li><strong>&#x2F;getHeldItemID</strong><br>获取玩家主手物品的物品ID。</li>
+</ul>
+<h3 id="自定义防火物品（commandCustomAntiFireItems）"><a href="#自定义防火物品（commandCustomAntiFireItems）" class="headerlink" title="自定义防火物品（commandCustomAntiFireItems）"></a>自定义防火物品（commandCustomAntiFireItems）</h3><ul>
+<li><p><strong>&#x2F;customAntiFireItems add &lt;物品注册名&gt;</strong><br>增加一个防火物品。</p>
+</li>
+<li><p><strong>&#x2F;customAntiFireItems remove &lt;物品注册名&gt;</strong><br>删除一个可防火物品。</p>
+</li>
+<li><p><strong>&#x2F;customAntiFireItems removeAll</strong><br>删除所有添加的防火物品。</p>
+</li>
+<li><p><strong>&#x2F;customAntiFireItems list</strong><br>查看防火物品列表。</p>
+</li>
+<li><p><strong>&#x2F;customAntiFireItems help</strong><br>查看使用说明。</p>
+</li>
+</ul>
+<h3 id="地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）"><a href="#地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）" class="headerlink" title="地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）"></a>地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）</h3><ul>
+<li><strong>&#x2F;carpetExtensionModWikiHyperlink &lt;拓展模组名&gt;</strong><br>获取某个Carpet拓展模组的Wiki链接。</li>
+</ul>
+<h3 id="自定义方块硬度（commandCustomBlockHardness）"><a href="#自定义方块硬度（commandCustomBlockHardness）" class="headerlink" title="自定义方块硬度（commandCustomBlockHardness）"></a>自定义方块硬度（commandCustomBlockHardness）</h3><ul>
+<li><p><strong>&#x2F;customBlockHardness set &lt;方块&gt; &lt;硬度&gt;</strong><br>添加或修改方块及其硬度。</p>
+</li>
+<li><p><strong>&#x2F;customBlockHardness remove &lt;方块&gt;</strong><br>从列表中移除方块。</p>
+</li>
+<li><p><strong>&#x2F;customBlockHardness removeAll</strong><br>移除列表中的所有方块。</p>
+</li>
+<li><p><strong>&#x2F;customBlockBlastResistance getDefaultHardness &lt;方块&gt;</strong><br>查询方块的默认硬度。</p>
+</li>
+<li><p><strong>&#x2F;customBlockHardness list</strong><br>显示所有添加的方块。</p>
+</li>
+<li><p><strong>&#x2F;customBlockHardness help</strong><br>查看使用说明。</p>
+</li>
+</ul>
+<h3 id="玩家（commandAtSomeOnePlayer）"><a href="#玩家（commandAtSomeOnePlayer）" class="headerlink" title="@玩家（commandAtSomeOnePlayer）"></a>@玩家（commandAtSomeOnePlayer）</h3><ul>
+<li><strong>&#x2F;@ &lt;玩家</strong>&gt;<br>@某位玩家。</li>
+</ul>
+<h3 id="获取客户端玩家FPS（commandGetClientPlayerFps）"><a href="#获取客户端玩家FPS（commandGetClientPlayerFps）" class="headerlink" title="获取客户端玩家FPS（commandGetClientPlayerFps）"></a>获取客户端玩家FPS（commandGetClientPlayerFps）</h3><ul>
+<li><p><strong>&#x2F;getClientPlayerFps &lt;玩家&gt;</strong><br>获取指定玩家的FPS。</p>
+</li>
+<li><p><strong>&#x2F;getClientPlayerFps help</strong><br>查看使用说明。</p>
+</li>
+</ul>
+<h3 id="设置玩家姿势（commandSetPlayerPose）"><a href="#设置玩家姿势（commandSetPlayerPose）" class="headerlink" title="设置玩家姿势（commandSetPlayerPose）"></a>设置玩家姿势（commandSetPlayerPose）</h3><ul>
+<li><p><strong>&#x2F;playerPose &lt;玩家&gt; set &lt;姿势&gt;</strong><br>设置玩家姿势。</p>
+</li>
+<li><p><strong>&#x2F;playerPose &lt;玩家&gt; stop</strong><br>停止做姿势。</p>
+</li>
+<li><p><strong>&#x2F;playerPose help</strong><br>查看使用说明。</p>
+</li>
+</ul>
+<h3 id="下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）"><a href="#下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）" class="headerlink" title="下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）"></a>下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）</h3><ul>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport globalMode [true&#x2F;false]</strong><br>设置全局模式。</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport globalMode</strong><br>查看全局模式状态。</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport add &lt;player&gt;</strong><br>添加某名玩家到黑名单。</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport remove &lt;player&gt;</strong><br>将某名玩家从黑名单中移除。</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport clear</strong><br>清空黑名单。</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport list</strong><br>查看黑名单。</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport help</strong><br>查看使用说明。</p>
+</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

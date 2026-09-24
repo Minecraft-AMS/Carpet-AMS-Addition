@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-content">
+                <h3 id="中文-English"><a href="#中文-English" class="headerlink" title="[ 中文 | English ]"></a>[ <a href="/Rules">中文</a> | English ]</h3><h1 id="——-Rules-——"><a href="#——-Rules-——" class="headerlink" title="—— Rules ——"></a><center>—— Rules ——</center></h1><p>&emsp;</p>
+<h2 id="superBow"><a href="#superBow" class="headerlink" title="superBow"></a>superBow</h2><p>Let enchantments Infinity and Mending be compatible with each other on bow.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="scheduledRandomTickAllPlants"><a href="#scheduledRandomTickAllPlants" class="headerlink" title="scheduledRandomTickAllPlants"></a>scheduledRandomTickAllPlants</h2><p>When enabled, plants will execute codes related to growth in tileTick events planed by finding invaild position. Use to restore 0tick farms&#x2F;force updates farm in higher version. you can also control specific plants to have force updates.</p>
+<ul>
+<li><p><code>scheduledRandomTickCactus</code>: Enable 0tick farm of cactus.</p>
+</li>
+<li><p><code>scheduledRandomTickBamboo</code>: Enable 0tick farm of bamboo.</p>
+</li>
+<li><p><code>scheduledRandomTickChorusFlower</code>: Enable 0tick farm of chorus flower.</p>
+</li>
+<li><p><code>scheduledRandomTickSugarCane</code>: Enable 0tick farm of sugar cane.</p>
+</li>
+<li><p><code>scheduledRandomTickStem</code>: Enable 0tick farm of twisting vines, weeping vines and kelp.</p>
+</li>
+</ul>
+<p>&lt;Ported from <a target="_blank" rel="noopener" href="https://github.com/hit-mc/OhMyVanillaMinecraft">OhMyVanillaMinecraft</a> &gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="optimizedDragonRespawn"><a href="#optimizedDragonRespawn" class="headerlink" title="optimizedDragonRespawn"></a>optimizedDragonRespawn</h2><p>Greatly optimized the code related to dragon fight starting. Provide performance enhancement for endstone farm based on re-summoning of ender dragon. Warning: couldn’t ensure same behavior as vanilla Minecraft after enabling this rule.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>OPTIMIZATION</code></p>
+</li>
+</ul>
+<h2 id="commandPlayerChunkLoadController"><a href="#commandPlayerChunkLoadController" class="headerlink" title="commandPlayerChunkLoadController"></a>commandPlayerChunkLoadController</h2><p>Control chunkloading of player. Won’t remove player detection of deminsion like main island loading in the end. Will be reset after player loging out to avoid <a target="_blank" rel="noopener" href="https://bugs.mojang.com/browse/MC-157812">MC-157812</a>.</p>
+<p>Command: &#x2F;playerChunkLoading true&#x2F;false</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="noteBlockChunkLoader"><a href="#noteBlockChunkLoader" class="headerlink" title="noteBlockChunkLoader"></a>noteBlockChunkLoader</h2><p>When a note block is triggered by rising edge of redstone signal, the chunk which the note block located will be added a ticket with level 30 and type <code>note_block</code>, which will expire after 300gt. Note blocks that can be used to add ticket must meet the requirement set by the rule option, You can use the rules of <code>blockChunkLoaderTimeController</code> and <code>blockChunkLoaderRangeController</code> to control their loading time and range.</p>
+<p>the option is interpreted as follow:</p>
+<ul>
+<li><p><code>bone_block</code>: The note block must have a bone block just above it.</p>
+</li>
+<li><p><code>wither_skeleton_skull</code> The note block must have a wither skeleton skull just above it. This skull can be either on the note block or attach to another block.</p>
+</li>
+<li><p><code>note_block</code>: No special requirement for note blocks to add tickets. Warning: as many high frequency clock will use note block, please take it carefully as it may make some chunks loading permanently in an unexpect way.</p>
+</li>
+<li><p><code>false</code>: Disable the rule.</p>
+</li>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>bone_block</code>, <code>wither_skeleton_skull</code>, <code>note_block</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<p>Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the <code>blockChunkLoaderKeepWorldTickUpdate </code>or <code>keepWorldTickUpdate</code> rules to solve this issue.</p>
+<h2 id="bellBlockChunkLoader"><a href="#bellBlockChunkLoader" class="headerlink" title="bellBlockChunkLoader"></a>bellBlockChunkLoader</h2><p>When a bell block is triggered by rising edge of redstone signal, the chunk which the bell block located will be added a ticket with level 30 and type <code>bell_block</code>, which will expire after 300gt. Bell blocks have no special requirement to add tickets, You can use the rules of <code>blockChunkLoaderTimeController</code> and <code>blockChunkLoaderRangeController</code> to control their loading time and range.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<p>Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the <code>blockChunkLoaderKeepWorldTickUpdate </code>or <code>keepWorldTickUpdate </code>rules to solve this issue.</p>
+<h2 id="pistonBlockChunkLoader"><a href="#pistonBlockChunkLoader" class="headerlink" title="pistonBlockChunkLoader"></a>pistonBlockChunkLoader</h2><p>When a piston (also available for sticky piston) successfully push or pull its head, the chunk which the piston head (the moving block representing piston head) located will be added a ticket with level 30 and type <code>piston_block</code>, which will expire after 300gt. The ticket will be added at the tick when the moving block is created. Pistons that can be used to add ticket must meet the requirement set by the rule option, You can use the rules of <code>blockChunkLoaderTimeController</code> and <code>blockChunkLoaderRangeController</code> to control their loading time and range.</p>
+<p>the option is interpreted as follow:</p>
+<ul>
+<li><p><code>bone_block</code>: The piston must have a bone block just above it.</p>
+</li>
+<li><p><code>bedrock</code>: The piston must have a bedrock just under it.</p>
+</li>
+<li><p><code>all</code>: When boe_block is on the piston or bed rock is under the piston.</p>
+</li>
+<li><p><code>false</code>: Disable the rule.</p>
+</li>
+</ul>
+<p>Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the <code>blockChunkLoaderKeepWorldTickUpdate </code>or <code>keepWorldTickUpdate </code>rules to solve this issue.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>bone_block</code>, <code>bedrock</code>, <code>all</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="blockChunkLoaderKeepWorldTickUpdate"><a href="#blockChunkLoaderKeepWorldTickUpdate" class="headerlink" title="blockChunkLoaderKeepWorldTickUpdate"></a>blockChunkLoaderKeepWorldTickUpdate</h2><p>After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.</p>
+<p>Affected rules: <code>noteBlockChunkLoader</code>, <code>pistonBlockChunkLoader</code>, <code>bellBlockChunkLoader</code></p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="keepWorldTickUpdate"><a href="#keepWorldTickUpdate" class="headerlink" title="keepWorldTickUpdate"></a>keepWorldTickUpdate</h2><p>After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="blockChunkLoaderTimeController"><a href="#blockChunkLoaderTimeController" class="headerlink" title="blockChunkLoaderTimeController"></a>blockChunkLoaderTimeController</h2><p>Used to control the loading time of block loader series rules.  (need restart server)</p>
+<p>Affected rules: </p>
+<p>noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader</p>
+<ul>
+<li><p>Type: <code>int</code></p>
+</li>
+<li><p>Default: <code>300</code></p>
+</li>
+<li><p>Suggested options: <code>1 - 300</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="blockChunkLoaderRangeController"><a href="#blockChunkLoaderRangeController" class="headerlink" title="blockChunkLoaderRangeController"></a>blockChunkLoaderRangeController</h2><p>Used to control the loading range of block loader series rules.  (need restart server)</p>
+<p>Affected rules: </p>
+<p>noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader</p>
+<ul>
+<li><p>Type: <code>int</code></p>
+</li>
+<li><p>Default: <code>3</code></p>
+</li>
+<li><p>Suggested options: <code>1 - 32</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="netherWaterPlacement"><a href="#netherWaterPlacement" class="headerlink" title="netherWaterPlacement"></a>netherWaterPlacement</h2><p>Player can place water source in the nether by using water bucket.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="fakePeace"><a href="#fakePeace" class="headerlink" title="fakePeace"></a>fakePeace</h2><p>No mob will spawn without change difficulty, Simulation fake Peace, You can customize the dimensions in which it works, or you can customize the combination and use “,” to separate.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="blowUpEverything"><a href="#blowUpEverything" class="headerlink" title="blowUpEverything"></a>blowUpEverything</h2><p>Blast resistence of every block will be set to 0.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>TNT</code></p>
+</li>
+</ul>
+<h2 id="sharedVillagerDiscounts"><a href="#sharedVillagerDiscounts" class="headerlink" title="sharedVillagerDiscounts"></a>sharedVillagerDiscounts</h2><p>Villagers cured from zombified villager will give trade discounts to every player.</p>
+<p>&lt;Ported from <a target="_blank" rel="noopener" href="https://github.com/totorewa/totos-carpet-tweaks">totos-carpet-tweaks</a>&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="extinguishedCampfire"><a href="#extinguishedCampfire" class="headerlink" title="extinguishedCampfire"></a>extinguishedCampfire</h2><p>Campfire will be extinguished by default when being placed.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="safeFlight"><a href="#safeFlight" class="headerlink" title="safeFlight"></a>safeFlight</h2><p>Hitting surface will cause no damage to player when flying with elytra.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="customBlockUpdateSuppressor"><a href="#customBlockUpdateSuppressor" class="headerlink" title="customBlockUpdateSuppressor"></a>customBlockUpdateSuppressor</h2><p>Customize a block to be an update suppressor (Not all blocks can be set as update suppressor).</p>
+<p>Command format:</p>
+<p>&#x2F;carpet customBlockUpdateSuppressor minecraft:BlockName</p>
+<p>Use the following command to control whether the “amsUpdateSuppressionCrashFix” rule is automatically enabled when this rule is enabled: </p>
+<p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>none</code>, <code>minecraft:bone_block</code>, <code>minecraft:diamond_ore</code>, <code>minecraft:magma_block</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="infiniteTrades"><a href="#infiniteTrades" class="headerlink" title="infiniteTrades"></a>infiniteTrades</h2><p>When enabled, villager trades will be prevented from locking up.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="invulnerable"><a href="#invulnerable" class="headerlink" title="invulnerable"></a>invulnerable</h2><p>When enabled, Players will be invulnerable.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="creativeOneHitKill"><a href="#creativeOneHitKill" class="headerlink" title="creativeOneHitKill"></a>creativeOneHitKill</h2><p>When enabled, Allows players in Creative mode to kill entities in one hit, If the player is sneaking, other entities around the target get killed too.</p>
+<p>&lt;Ported from <a target="_blank" rel="noopener" href="https://github.com/Lunaar-SMP/lunaar-carpet-addons">lunaar-carpet-addons</a>&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>CREATIVE</code></p>
+</li>
+</ul>
+<h2 id="largeEnderChest"><a href="#largeEnderChest" class="headerlink" title="largeEnderChest"></a>largeEnderChest</h2><p>When enabled, Doubles the size of your EnderChest.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="bambooModelNoOffset"><a href="#bambooModelNoOffset" class="headerlink" title="bambooModelNoOffset"></a>bambooModelNoOffset</h2><p>When enabled, The block model of bamboo will not generate offset.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>OPTIMIZATION</code></p>
+</li>
+</ul>
+<h2 id="bambooCollisionBoxDisabled"><a href="#bambooCollisionBoxDisabled" class="headerlink" title="bambooCollisionBoxDisabled"></a>bambooCollisionBoxDisabled</h2><p>When enabled, players can pass through bamboo.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="commandCustomAntiFireItems"><a href="#commandCustomAntiFireItems" class="headerlink" title="commandCustomAntiFireItems"></a>commandCustomAntiFireItems</h2><p>Use command to control whether any item is fireproof or not.</p>
+<p>After enabling the rules, use the <code>/customAntiFireItems help</code> command to view the usage instructions</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="itemAntiExplosion"><a href="#itemAntiExplosion" class="headerlink" title="itemAntiExplosion"></a><strong>itemAntiExplosion</strong></h2><p>When enabled, Dropped items will not be destroyed by explosions.</p>
+<p>false: Disable rule</p>
+<p>true: enable rule</p>
+<p>no_blast_wave: Explosion-proof and non-shockwave, the explosion will not push the item</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code>, <code>no_blast_wave</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>TNT</code></p>
+</li>
+</ul>
+<h2 id="creativeShulkerBoxDropsDisabled"><a href="#creativeShulkerBoxDropsDisabled" class="headerlink" title="creativeShulkerBoxDropsDisabled"></a><strong>creativeShulkerBoxDropsDisabled</strong></h2><p>When enabled, Breaking a shulker box with items in creative mode will not cause drops.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>CREATIVE</code></p>
+</li>
+</ul>
+<h2 id="shulkerHitLevitationDisabled"><a href="#shulkerHitLevitationDisabled" class="headerlink" title="shulkerHitLevitationDisabled"></a>shulkerHitLevitationDisabled</h2><p>When enabled, When hit by a shulker, the player only takes damage and does not gain the levitation effect.</p>
+<ul>
+<li><p>Type <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="immuneShulkerBullet"><a href="#immuneShulkerBullet" class="headerlink" title="immuneShulkerBullet"></a>immuneShulkerBullet</h2><p>When enabled, Players are now completely immune to bullets fired by shulkers.</p>
+<ul>
+<li><p>Type <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="blueSkullController"><a href="#blueSkullController" class="headerlink" title="blueSkullController"></a>blueSkullController</h2><p>When enabled，You can choose whether to have Withering always shoot blue skulls or never shoot blue skull.<br><code>SURELY</code>: Always shoot blue skulls。<br><code>NEVER</code>: Never shoot blue skull。<br><code>VANILLA</code>: VANILLA。</p>
+<ul>
+<li><p>Type: <code>enum</code></p>
+</li>
+<li><p>Default: <code>VANILLA</code></p>
+</li>
+<li><p>Suggested options: <code>SURELY</code> , <code>NEVER</code> , <code>VANILLA</code> </p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="endermanTeleportRandomlyDisabled"><a href="#endermanTeleportRandomlyDisabled" class="headerlink" title="endermanTeleportRandomlyDisabled"></a>endermanTeleportRandomlyDisabled</h2><p>When enabled, Random teleportation by EnderMan is prohibited.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="fasterMovement"><a href="#fasterMovement" class="headerlink" title="fasterMovement"></a>fasterMovement</h2><p>Five gears are provided to allow players to move faster.</p>
+<blockquote>
+<p>You can use fasterMovementController rule to control in which dimensions this rule is effective. By default, it is effective in all dimensions.</p>
+</blockquote>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>VANILLA</code></p>
+</li>
+<li><p>Suggested options: <code>Ⅰ</code>, <code>Ⅱ</code>, <code>Ⅲ</code>, <code>Ⅳ</code>, <code>Ⅴ</code>, <code>VANILLA</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="fasterMovementController"><a href="#fasterMovementController" class="headerlink" title="fasterMovementController"></a>fasterMovementController</h2><p>Used to control in which dimensions fasterMovement rule is effective.</p>
+<ul>
+<li><p>Type: <code>enum</code></p>
+</li>
+<li><p>Default: <code>all</code></p>
+</li>
+<li><p>Suggested options: <code>overworld</code> , <code>nether</code>, <code>end</code>, <code>all</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="easyWitherSkeletonSkullDrop"><a href="#easyWitherSkeletonSkullDrop" class="headerlink" title="easyWitherSkeletonSkullDrop"></a>easyWitherSkeletonSkullDrop</h2><p>When enabled, 100% Wither Skeleton Skull Drop.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="commandAnvilInteractionDisabled"><a href="#commandAnvilInteractionDisabled" class="headerlink" title="commandAnvilInteractionDisabled"></a>commandAnvilInteractionDisabled</h2><p>When enabled, Players cannot open the UI of the Anvil.<br>Command: &#x2F;anvilInteractionDisabledSwitch true&#x2F;false</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="preventAdministratorCheat"><a href="#preventAdministratorCheat" class="headerlink" title="preventAdministratorCheat"></a>preventAdministratorCheat</h2><p>Disable some command to prevent accidentally cheating.</p>
+<p>Affects command list: &#x2F;gamemode, &#x2F;tp, &#x2F;teleport, &#x2F;give, &#x2F;setblock, &#x2F;summon, &#x2F;difficulty, &#x2F;kill, &#x2F;time, &#x2F;weather, &#x2F;fill, &#x2F;setblock, &#x2F;enchant, &#x2F;experience, &#x2F;advancement, &#x2F;effect, &#x2F;data, &#x2F;defaultgamemode, &#x2F;gamerule</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code> , <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="amsUpdateSuppressionCrashFix"><a href="#amsUpdateSuppressionCrashFix" class="headerlink" title="amsUpdateSuppressionCrashFix"></a>amsUpdateSuppressionCrashFix</h2><p>When enabled, Update suppression does not cause the server to crash, while providing the coordinates and dimensions where the update suppression occurred.</p>
+<p>Use the following command to control whether it is forcibly enabled when <code>customBlockUpdateSuppressor </code> is enabled, with a permission level of 2: </p>
+<p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
+<ul>
+<li><p><code>false</code>: Disable rule</p>
+</li>
+<li><p><code>true</code>: Enable rule</p>
+</li>
+<li><p><code>silence</code>: Enable but no send server messages</p>
+</li>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code>, <code>silence</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code> , <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="ghastFireballExplosionDamageSourceFix"><a href="#ghastFireballExplosionDamageSourceFix" class="headerlink" title="ghastFireballExplosionDamageSourceFix"></a>ghastFireballExplosionDamageSourceFix</h2><p>Fix MC-193297 that the large fireball does not create explosion with correct damage source.</p>
+<p>&lt;Available for Minecraft &lt; 1.19.3&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code> , <code>EXPERIMENTAL</code>, <code>BUGFIX</code></p>
+</li>
+</ul>
+<h2 id="cakeBlockDropOnBreak"><a href="#cakeBlockDropOnBreak" class="headerlink" title="cakeBlockDropOnBreak"></a>cakeBlockDropOnBreak</h2><p>When enabled, When the cake is destroyed, it can drop cake (the cake will only drop when it is intact).</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="noCakeEating"><a href="#noCakeEating" class="headerlink" title="noCakeEating"></a>noCakeEating</h2><p>When enabled, Players are not allowed to consume cake.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="redstoneComponentSound"><a href="#redstoneComponentSound" class="headerlink" title="redstoneComponentSound"></a>redstoneComponentSound</h2><p>When enabled, When players right-click on the redstone component, it will emit a sound</p>
+<p>Affected components: daylight detector, redstone dust, repeater</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="largeShulkerBox"><a href="#largeShulkerBox" class="headerlink" title="largeShulkerBox"></a>largeShulkerBox</h2><p>Doubles the size of your ShulkerBox.<br>To use this rule, please follow the steps below:</p>
+<p>1 - To ensure that no shulker boxes are loaded.</p>
+<p>2 - Enter the command: <code>/carpet setDefault largeShulkerBox true</code>, to turn on the rule.</p>
+<p>3 - Restart the server&#x2F;single-player world.</p>
+<p>4 - Disabling the rule follows the same process.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code> , <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="maxPlayerBlockInteractionRange"><a href="#maxPlayerBlockInteractionRange" class="headerlink" title="maxPlayerBlockInteractionRange"></a>maxPlayerBlockInteractionRange</h2><p>Change the maximum block interaction distance allowed by the server, set to “-1” to disable this rule.</p>
+<p>When Minecraft &gt;&#x3D; 1.20.5, you can use the rule “maxPlayerBlockInteractionRangeScope” to modify its scope.</p>
+<p>Changing a value in global mode requires the player to re-enter the game.</p>
+<ul>
+<li><p>Type: <code>double</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="maxPlayerEntityInteractionRange"><a href="#maxPlayerEntityInteractionRange" class="headerlink" title="maxPlayerEntityInteractionRange"></a>maxPlayerEntityInteractionRange</h2><p>Change the maximum entity interaction distance allowed by the server, set to “-1” to disable this rule.</p>
+<p>When Minecraft &gt;&#x3D; 1.20.5, you can use the rule “maxPlayerEntityInteractionRangeScope” to modify its scope.</p>
+<p>Changing a value in global mode requires the player to re-enter the game.</p>
+<ul>
+<li><p>Type: <code>double</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="maxPlayerBlockInteractionRangeScope"><a href="#maxPlayerBlockInteractionRangeScope" class="headerlink" title="maxPlayerBlockInteractionRangeScope"></a>maxPlayerBlockInteractionRangeScope</h2><p>Change the scope of the “maxPlayerBlockInteractionRange” rule.</p>
+<p>[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.</p>
+<p>[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.</p>
+<p>&lt; Available for Minecraft &gt;&#x3D; 1.20.5 &gt;</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>server</code></p>
+</li>
+<li><p>Suggested options: <code>server</code>, <code>global</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="maxPlayerEntityInteractionRangeScope"><a href="#maxPlayerEntityInteractionRangeScope" class="headerlink" title="maxPlayerEntityInteractionRangeScope"></a>maxPlayerEntityInteractionRangeScope</h2><p>Change the scope of the “maxPlayerEntityInteractionRange” rule.</p>
+<p>[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.</p>
+<p>[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.</p>
+<p>&lt; Available for Minecraft &gt;&#x3D; 1.20.5 &gt;</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>server</code></p>
+</li>
+<li><p>Suggested options: <code>server</code>, <code>global</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="maxClientInteractionReachDistance"><a href="#maxClientInteractionReachDistance" class="headerlink" title="maxClientInteractionReachDistance"></a>maxClientInteractionReachDistance</h2><p>Change the maximum interaction distance allowed by the client, set to <code>-1</code> to disable this rule.</p>
+<p>Need to disable the tweakBlockReachOverride feature in Tweakeroo.</p>
+<ul>
+<li><p>Type: <code>double</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="commandCustomMovableBlock"><a href="#commandCustomMovableBlock" class="headerlink" title="commandCustomMovableBlock"></a>commandCustomMovableBlock</h2><p>Customize the non-pushable block to make it pushable (Container blocks are not supported, and if you need to push containers, you can use Carpet’s movableBlockEntities rule).</p>
+<p>After enabling the rules, use the <code>/customMovableBlock help</code> command to view the usage instructions</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="easyMaxLevelBeacon"><a href="#easyMaxLevelBeacon" class="headerlink" title="easyMaxLevelBeacon"></a>easyMaxLevelBeacon</h2><p>When enabled, Activate full-level beacon with just one base block.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="commandCustomBlockBlastResistance"><a href="#commandCustomBlockBlastResistance" class="headerlink" title="commandCustomBlockBlastResistance"></a>commandCustomBlockBlastResistance</h2><p>Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled).<br>After enabling the rules, use the <code>/customBlockBlastResistance help</code> command to view the usage instructions.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>TNT</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="regeneratingDragonEgg"><a href="#regeneratingDragonEgg" class="headerlink" title="regeneratingDragonEgg"></a>regeneratingDragonEgg</h2><p>When enabled，Every time a player defeats the Ender Dragon, a dragon egg will be generated.</p>
+<blockquote>
+<p>For Dnsolx eggs</p>
+</blockquote>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="enhancedWorldEater"><a href="#enhancedWorldEater" class="headerlink" title="enhancedWorldEater"></a>enhancedWorldEater</h2><p>Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the <code>customBlowUpBlock </code> rule when enabled)</p>
+<p>Block list:</p>
+<p>Blocks with blast resistance &lt; 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway</p>
+<ul>
+<li><p>Type: <code>double</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>-1</code> , <code>0 - 16</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code> <code>TNT</code></p>
+</li>
+</ul>
+<h2 id="sneakToEditSign"><a href="#sneakToEditSign" class="headerlink" title="sneakToEditSign"></a>sneakToEditSign</h2><p>When enabled，Players can sneak with empty hands to edit already placed signs by using the interact key, In <code>Minecraft &gt;= 1.20</code>, the behavior is such that players must sneak in order to edit a sign.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="sneakToEatCake"><a href="#sneakToEatCake" class="headerlink" title="sneakToEatCake"></a>sneakToEatCake</h2><p>Players can only eat cake while sneaking.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="fancyFakePlayerName"><a href="#fancyFakePlayerName" class="headerlink" title="fancyFakePlayerName"></a>fancyFakePlayerName</h2><p>Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn’t need to be input when using the command, but the suffix is indeed present.</p>
+<p>Note: This rule will create a team named with the value you input</p>
+<p>Example：1024_byteeeee -&gt; [bot] 1024_byteeeee_bot</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>bot</code>, <code>fake_player</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="fakePlayerNoScoreboardCounter"><a href="#fakePlayerNoScoreboardCounter" class="headerlink" title="fakePlayerNoScoreboardCounter"></a>fakePlayerNoScoreboardCounter</h2><p>The scoreboard will hide the fake player.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="noFamilyPlanning"><a href="#noFamilyPlanning" class="headerlink" title="noFamilyPlanning"></a>noFamilyPlanning</h2><p>Allow players to continuously feed animals to breed them.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="hopperSuctionDisabled"><a href="#hopperSuctionDisabled" class="headerlink" title="hopperSuctionDisabled"></a>hopperSuctionDisabled</h2><p>When enabled，The hopper will not suck in items.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="noEnchantedGoldenAppleEating"><a href="#noEnchantedGoldenAppleEating" class="headerlink" title="noEnchantedGoldenAppleEating"></a>noEnchantedGoldenAppleEating</h2><p>Prevent players from accidentally eating Enchanted Golden Apples.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="useItemCooldownDisabled"><a href="#useItemCooldownDisabled" class="headerlink" title="useItemCooldownDisabled"></a>useItemCooldownDisabled</h2><p>Remove cooldown time for using items.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="flippinCactusSoundEffect"><a href="#flippinCactusSoundEffect" class="headerlink" title="flippinCactusSoundEffect"></a>flippinCactusSoundEffect</h2><p>When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing five different sound options, Setting it to 0 disables the sound effects).</p>
+<ul>
+<li><p>Type: <code>int</code></p>
+</li>
+<li><p>Default: <code>0</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="undyingCoral"><a href="#undyingCoral" class="headerlink" title="undyingCoral"></a>undyingCoral</h2><p>Prevent coral blocks and coral fans from dying.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="enderDragonNoDestroyBlock"><a href="#enderDragonNoDestroyBlock" class="headerlink" title="enderDragonNoDestroyBlock"></a>enderDragonNoDestroyBlock</h2><p>Make the Ender Dragon unable to destroy any blocks.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="easyCompost"><a href="#easyCompost" class="headerlink" title="easyCompost"></a>easyCompost</h2><p>Make every composting successful.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="easyMineDragonEgg"><a href="#easyMineDragonEgg" class="headerlink" title="easyMineDragonEgg"></a>easyMineDragonEgg</h2><p>Makes the dragon egg not teleport, Players can mine dragon eggs to collect them.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="breedableParrots"><a href="#breedableParrots" class="headerlink" title="breedableParrots"></a>breedableParrots</h2><p>Customize a food to feed the parrots and breed them (You can also feed them with stones if you really want to).</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="sensibleEnderman"><a href="#sensibleEnderman" class="headerlink" title="sensibleEnderman"></a>sensibleEnderman</h2><p>Make Endermen only pick up watermelons and pumpkins.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="endermanPickUpDisabled"><a href="#endermanPickUpDisabled" class="headerlink" title="endermanPickUpDisabled"></a>endermanPickUpDisabled</h2><p>Preventing Endermen from picking up blocks.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="mitePearl"><a href="#mitePearl" class="headerlink" title="mitePearl"></a>mitePearl</h2><p>Using an Ender Pearl each time will spawn an Endermite.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="enderPearlSoundEffect"><a href="#enderPearlSoundEffect" class="headerlink" title="enderPearlSoundEffect"></a>enderPearlSoundEffect</h2><p>A sound effect will be played when the player uses an ender pearl for teleportation.</p>
+<p>&lt;Available for Minecraft &lt; 1.20&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="commandHere"><a href="#commandHere" class="headerlink" title="commandHere"></a>commandHere</h2><p>Use the “&#x2F;here” command to send the current dimension, coordinates, and corresponding overworld&#x2F;nether coordinates of your current location and give oneself a 30s glowing effect.</p>
+<p>When the client has installed <code>Carpet Org Addition</code>, they can click the <code>+H</code> button at the end of the message to highlight the waypoint, and use the <code>/highlight clear</code> command to remove the highlight.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="commandWhere"><a href="#commandWhere" class="headerlink" title="commandWhere"></a>commandWhere</h2><p>Use the “&#x2F;where” command to get the specified player’s dimension, coordinates, and corresponding Overworld&#x2F;Nether coordinates and give the target player a 30s glowing effect.</p>
+<p>When the client has installed <code>Carpet Org Addition</code>, they can click the <code>+H</code> button at the end of the message to highlight the waypoint, and use the <code>/highlight clear</code> command to remove the highlight.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="fakePlayerPickUpController"><a href="#fakePlayerPickUpController" class="headerlink" title="fakePlayerPickUpController"></a>fakePlayerPickUpController</h2><p>Two modes are provided to control whether fake player can pick up items.</p>
+<ul>
+<li><p>[MainHandOnly] - Only the main hand can pick up items</p>
+</li>
+<li><p>[NoPickUp] - Unable to pick up items at all</p>
+</li>
+<li><p>[false] - Disable rule</p>
+</li>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>MainHandOnly</code>, <code>NoPickUp</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="commandPlayerLeader"><a href="#commandPlayerLeader" class="headerlink" title="commandPlayerLeader"></a>commandPlayerLeader</h2><p>Designate one or more players as guides, granting them a glowing effect.</p>
+<p>After enabling the rules, use the <code>/leader help</code> command to view the usage instructions</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="commandPacketInternetGroper"><a href="#commandPacketInternetGroper" class="headerlink" title="commandPacketInternetGroper"></a>commandPacketInternetGroper</h2><p>player can use the “ping” command in the game.</p>
+<p>After enabling the rules, use the <code>/ping help</code> command to view the usage instructions</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="commandPlayerNoNetherPortalTeleport"><a href="#commandPlayerNoNetherPortalTeleport" class="headerlink" title="commandPlayerNoNetherPortalTeleport"></a>commandPlayerNoNetherPortalTeleport</h2><p>Players cannot teleport through nether portals.</p>
+<p>After enabling the rule, use the <code>/plerNoNetherPortalTeleport help</code> command to view the usage instructions</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code> <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="infiniteDurability"><a href="#infiniteDurability" class="headerlink" title="infiniteDurability"></a>infiniteDurability</h2><p>Use items without losing durability.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="welcomeMessage"><a href="#welcomeMessage" class="headerlink" title="welcomeMessage"></a>welcomeMessage</h2><p>When players join the server, send them a custom message (Use json files to customize messages).</p>
+<p>json location:</p>
+<p>[ save path ]&#x2F;carpetamsaddition&#x2F;welcomeMessage.json</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code></p>
+</li>
+</ul>
+<h2 id="commandGetSaveSize"><a href="#commandGetSaveSize" class="headerlink" title="commandGetSaveSize"></a>commandGetSaveSize</h2><p>Use the “&#x2F;getSaveSize” command to get the current save size.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="carpetAlwaysSetDefault"><a href="#carpetAlwaysSetDefault" class="headerlink" title="carpetAlwaysSetDefault"></a>carpetAlwaysSetDefault</h2><p>Whenever you set the carpet rule, it will be automatically set to the default value.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="experimentalContentCheckDisabled"><a href="#experimentalContentCheckDisabled" class="headerlink" title="experimentalContentCheckDisabled"></a>experimentalContentCheckDisabled</h2><p>Allow playing Minecraft experimental content in the game by adding data packs  (need restart server). </p>
+<p>&lt; Available for Minecraft 1.19 - 1.21.1 &gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="fertilizableSmallFlower"><a href="#fertilizableSmallFlower" class="headerlink" title="fertilizableSmallFlower"></a>fertilizableSmallFlower</h2><p>Allow small flowers such as dandelion can also be ripened by bone meal.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="safePointedDripstone"><a href="#safePointedDripstone" class="headerlink" title="safePointedDripstone"></a>safePointedDripstone</h2><p>When players land on pointed dripstone, they do not take additional damage from it.</p>
+<p>&lt; Available for Minecraft &gt;&#x3D; 1.17 &gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="pointedDripstoneCollisionBoxDisabled"><a href="#pointedDripstoneCollisionBoxDisabled" class="headerlink" title="pointedDripstoneCollisionBoxDisabled"></a>pointedDripstoneCollisionBoxDisabled</h2><p>Allow players to pass through pointed dripstone.</p>
+<p>&lt; Available for Minecraft &gt;&#x3D; 1.17 &gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="foliageGenerateDisabled"><a href="#foliageGenerateDisabled" class="headerlink" title="foliageGenerateDisabled"></a>foliageGenerateDisabled</h2><p>The foliage will not generate in any way.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="commandGetSystemInfo"><a href="#commandGetSystemInfo" class="headerlink" title="commandGetSystemInfo"></a>commandGetSystemInfo</h2><p>Use the “&#x2F;getSystemInfo” command to get the system information of the server.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="ironGolemNoDropFlower"><a href="#ironGolemNoDropFlower" class="headerlink" title="ironGolemNoDropFlower"></a>ironGolemNoDropFlower</h2><p>Iron golems will not drop flowers.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="easyGetPitcherPod"><a href="#easyGetPitcherPod" class="headerlink" title="easyGetPitcherPod"></a>easyGetPitcherPod</h2><p>Players can harvest a random amount of pitcher pods by planting pitcher (The maximum quantity is customizable, while the minimum quantity is fixed at 2).</p>
+<p>&lt; Available for Minecraft &gt;&#x3D; 1.20 &gt;</p>
+<ul>
+<li><p>Type: <code>int</code></p>
+</li>
+<li><p>Default: <code>0</code></p>
+</li>
+<li><p>Suggested options: <code>0 or 2 - 100</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="commandGoto"><a href="#commandGoto" class="headerlink" title="commandGoto"></a>commandGoto</h2><p>Use the “&#x2F;goto” command to teleport to the specified dimension and coordinates, When no coordinates are specified, it will teleport to the corresponding coordinates of the current player location.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="sendPlayerDeathLocation"><a href="#sendPlayerDeathLocation" class="headerlink" title="sendPlayerDeathLocation"></a>sendPlayerDeathLocation</h2><p>When a player dies, a message with their death coordinates and dimension will be broadcasted.</p>
+<p>When the client has installed <code>Carpet Org Addition</code>, they can click the <code>+H</code> button at the end of the message to highlight the waypoint, and use the <code>/highlight clear</code> command to remove the highlight.</p>
+<p><code>false</code>: Disable rule.</p>
+<p><code>all</code>: Always send messages.</p>
+<p><code>realPlayerOnly</code>: Messages will only be sent when real players die.</p>
+<p><code>fakePlayerOnly</code>: Messages will only be sent when fake players die.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>all</code>, <code>realPlayerOnly</code>, <code>fakePlayerOnly</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="perfectInvisibility"><a href="#perfectInvisibility" class="headerlink" title="perfectInvisibility"></a>perfectInvisibility</h2><p>When the player is invisible, they will be completely hidden from mobs, even when wearing a full set of armor.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="sneakInvisibility"><a href="#sneakInvisibility" class="headerlink" title="sneakInvisibility"></a>sneakInvisibility</h2><p>When the player is sneak, they will be completely hidden from mobs, even when wearing a full set of armor.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="commandCustomCommandPermissionLevel"><a href="#commandCustomCommandPermissionLevel" class="headerlink" title="commandCustomCommandPermissionLevel"></a>commandCustomCommandPermissionLevel</h2><p>Customize the permission level of any commands.</p>
+<p>After enabling the rules, use the <code>/customCommandPermissionLevel help</code> command to view the usage instructions.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="shulkerGolem"><a href="#shulkerGolem" class="headerlink" title="shulkerGolem"></a>shulkerGolem</h2><p>A shulker can be summoned by placing a carved pumpkin on the shulker box.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="headHunter"><a href="#headHunter" class="headerlink" title="headHunter"></a>headHunter</h2><p>When a player dies, they will drop their own skull.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="commandGetPlayerSkull"><a href="#commandGetPlayerSkull" class="headerlink" title="commandGetPlayerSkull"></a>commandGetPlayerSkull</h2><p>Use the “&#x2F;getPlayerSkull &lt;player&gt; &lt;count&gt;” command to get a player skull.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="quickVillagerLevelUp"><a href="#quickVillagerLevelUp" class="headerlink" title="quickVillagerLevelUp"></a>quickVillagerLevelUp</h2><p>Each time the trading screen is opened, the villager will level up.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="renewableNetheriteScrap"><a href="#renewableNetheriteScrap" class="headerlink" title="renewableNetheriteScrap"></a>renewableNetheriteScrap</h2><p>Customize the drop rate of netherite scrap from zombified piglin.</p>
+<ul>
+<li><p>Type: <code>Double</code></p>
+</li>
+<li><p>Default: <code>0.0</code></p>
+</li>
+<li><p>Suggested options: <code>0.0</code>, <code>0.01</code>, <code>0.1</code>, <code>1.0</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="stackableDiscounts"><a href="#stackableDiscounts" class="headerlink" title="stackableDiscounts"></a>stackableDiscounts</h2><p>Reintroduce the stackable discounts feature in &lt;23w31a.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="preventEndSpikeRespawn"><a href="#preventEndSpikeRespawn" class="headerlink" title="preventEndSpikeRespawn"></a>preventEndSpikeRespawn</h2><p>Prevent end spikes (obsidian spikes in the_end) from spawning.</p>
+<p>[true] - Prohibited from generating</p>
+<p>[false] - Disable Rule</p>
+<p>[keepEndCrystal] - Preserve crystal generation</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code>, <code>keepEndCrystal</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="strongLeash"><a href="#strongLeash" class="headerlink" title="strongLeash"></a>strongLeash</h2><p>The leash will not break due to excessive distance.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="superZombieDoctor"><a href="#superZombieDoctor" class="headerlink" title="superZombieDoctor"></a>superZombieDoctor</h2><p>Players can use a Weakness Potion + Golden Apple to instantly convert a Zombie Villager into a Villager.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="fakePlayerUseOfflinePlayerUUID"><a href="#fakePlayerUseOfflinePlayerUUID" class="headerlink" title="fakePlayerUseOfflinePlayerUUID"></a>fakePlayerUseOfflinePlayerUUID</h2><p>Let fake players use offline UUIDs.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="superLeash"><a href="#superLeash" class="headerlink" title="superLeash"></a>superLeash</h2><p>Villagers and monsters can be leashed as well.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="fullMoonEveryDay"><a href="#fullMoonEveryDay" class="headerlink" title="fullMoonEveryDay"></a>fullMoonEveryDay</h2><p>Full moon every day.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="easyRefreshTrades"><a href="#easyRefreshTrades" class="headerlink" title="easyRefreshTrades"></a>easyRefreshTrades</h2><p>When a villager has not made a deal with the player before, each time the trade screen is opened, the content sold by the villager will be refreshed.</p>
+<p>When the player is holding an emerald block in their main hand, the refresh will not be triggered.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="jebSheepDropRandomColorWool"><a href="#jebSheepDropRandomColorWool" class="headerlink" title="jebSheepDropRandomColorWool"></a>jebSheepDropRandomColorWool</h2><p>When a sheep is named <code>jeb_</code>, shearing its wool will drop wool of a random color.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="cryingObsidianNetherPortal"><a href="#cryingObsidianNetherPortal" class="headerlink" title="cryingObsidianNetherPortal"></a>cryingObsidianNetherPortal</h2><p>Nether portals can be constructed using crying obsidian.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="furnaceSmeltingTimeController"><a href="#furnaceSmeltingTimeController" class="headerlink" title="furnaceSmeltingTimeController"></a>furnaceSmeltingTimeController</h2><p>The time required to control the smelting of items in the furnace (unit: Tick).</p>
+<ul>
+<li><p>Type: <code>int</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>-1</code>, <code>1 - ?</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="fakePlayerDefaultSurvivalMode"><a href="#fakePlayerDefaultSurvivalMode" class="headerlink" title="fakePlayerDefaultSurvivalMode"></a>fakePlayerDefaultSurvivalMode</h2><p>When summoning fake players, they are default to survival mode anyway.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="commandGetHeldItemID"><a href="#commandGetHeldItemID" class="headerlink" title="commandGetHeldItemID"></a>commandGetHeldItemID</h2><p>Use “&#x2F;getHeldItemID” command to get item ID of the player main hand item.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="stringDupeReintroduced"><a href="#stringDupeReintroduced" class="headerlink" title="stringDupeReintroduced"></a>stringDupeReintroduced</h2><p>Reintroduced the string dupe feature, you can use this rule to continue using the string farm.</p>
+<p>&lt; Available for Minecraft &gt;&#x3D; 1.21.2 &gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="witchRedstoneDustDropController"><a href="#witchRedstoneDustDropController" class="headerlink" title="witchRedstoneDustDropController"></a>witchRedstoneDustDropController</h2><p>Set the guaranteed minimum amount of Redstone Dust dropped by witches.</p>
+<ul>
+<li><p>Type: <code>int</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>-1 - 999999</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="witchGlowstoneDustDropController"><a href="#witchGlowstoneDustDropController" class="headerlink" title="witchGlowstoneDustDropController"></a>witchGlowstoneDustDropController</h2><p>Set the guaranteed minimum amount of Glowstone Dust dropped by witches.</p>
+<ul>
+<li><p>Type: <code>int</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>-1 - 999999</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="tntPowerController"><a href="#tntPowerController" class="headerlink" title="tntPowerController"></a>tntPowerController</h2><p>Controls the explosive power of TNT, setting it to “-1” to disable the rule.</p>
+<ul>
+<li><p>Type: <code>double</code></p>
+</li>
+<li><p>Default: <code>-1.0D</code></p>
+</li>
+<li><p>Suggested options: <code>-1.0D - 999999D</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>TNT</code></p>
+</li>
+</ul>
+<h2 id="meekEnderman"><a href="#meekEnderman" class="headerlink" title="meekEnderman"></a>meekEnderman</h2><p>You can casually glance at endermen.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="customizedNetherPortal"><a href="#customizedNetherPortal" class="headerlink" title="customizedNetherPortal"></a>customizedNetherPortal</h2><p>Fully customizable Nether portal. after enabled, the Nether portal blocks can be mined, and mining the Nether portal frame or the portal itself will not cause the nether portal to broken.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="commandCarpetExtensionModWikiHyperlink"><a href="#commandCarpetExtensionModWikiHyperlink" class="headerlink" title="commandCarpetExtensionModWikiHyperlink"></a>commandCarpetExtensionModWikiHyperlink</h2><p>Some commonly used Carpet extension wiki links are listed. You only need to use the <code>/carpetExtensionModWikiHyperlink &lt;ExtensionName&gt;</code> command to get the hyperlink in the chat box, and you can click the link to jump to it.</p>
+<p>As the version is updated, the list of mods will be constantly adjusted.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="commandCustomBlockHardness"><a href="#commandCustomBlockHardness" class="headerlink" title="commandCustomBlockHardness"></a>commandCustomBlockHardness</h2><p>Use command to customizing mining hardness for any block.</p>
+<p>After enabling the rules, use the <code>/customBlockHardness help</code> command to view the usage instructions.</p>
+<p>When the <code>Carpet AMS Addition</code> is not installed on the client, this rule is completely unavailable.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>AMS_NETWORK</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="onlyOpCanSpawnRealPlayerInWhitelist"><a href="#onlyOpCanSpawnRealPlayerInWhitelist" class="headerlink" title="onlyOpCanSpawnRealPlayerInWhitelist"></a>onlyOpCanSpawnRealPlayerInWhitelist</h2><p>Only OP players can spawn players on the whitelist, regardless of whether the whitelist is enabled.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="itemEntityCreateNetherPortalDisabled"><a href="#itemEntityCreateNetherPortalDisabled" class="headerlink" title="itemEntityCreateNetherPortalDisabled"></a>itemEntityCreateNetherPortalDisabled</h2><p>Prevent item entities from creating portals when passing through Nether portals.</p>
+<p>&lt;Available for Minecraft &gt;&#x3D; 1.21&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="powerfulExpMending"><a href="#powerfulExpMending" class="headerlink" title="powerfulExpMending"></a>powerfulExpMending</h2><p>Allow items to receive the Mending effect simply by being in the backpack, without needing to be held in hand.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="commandAtSomeOnePlayer"><a href="#commandAtSomeOnePlayer" class="headerlink" title="commandAtSomeOnePlayer"></a>commandAtSomeOnePlayer</h2><p>Use <code>/@</code> command to @ some one player.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="largeBundle"><a href="#largeBundle" class="headerlink" title="largeBundle"></a>largeBundle</h2><p>Let the bundle have a 9x3 or 9x6 UI, and right-click in the hand to open the UI.</p>
+<p>This rule does not allow bundle and shulker boxes to be placed in bundle.</p>
+<p>&lt;Available for Minecraft &gt;&#x3D; 1.17.1&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="maxChainUpdateDepth"><a href="#maxChainUpdateDepth" class="headerlink" title="maxChainUpdateDepth"></a>maxChainUpdateDepth</h2><p>Modify max chain update depth, Set to “-1” to disable the rule.</p>
+<p>&lt;Available for Minecraft &gt;&#x3D; 1.19&gt;</p>
+<ul>
+<li><p>Type: <code>int</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>-1</code>, <code>100000</code>, <code>200000</code>, <code>300000</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="phantomSpawnAlert"><a href="#phantomSpawnAlert" class="headerlink" title="phantomSpawnAlert"></a>phantomSpawnAlert</h2><p>Broadcast the news of who summoned the phantoms.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="endPortalChunkLoadDisabled"><a href="#endPortalChunkLoadDisabled" class="headerlink" title="endPortalChunkLoadDisabled"></a>endPortalChunkLoadDisabled</h2><p>Entities passing through the End Portal will not cause chunk loading.</p>
+<p>&lt;Available for Minecraft &gt;&#x3D; 1.20.6&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="endPortalChunkLoader"><a href="#endPortalChunkLoader" class="headerlink" title="endPortalChunkLoader"></a>endPortalChunkLoader</h2><p>Passing entities through the End Portal causes chunk loading, consistent with Minecraft &gt;&#x3D; 1.20.5.</p>
+<p>&lt;Available for Minecraft &lt; 1.20.6&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="amsNetworkProtocol"><a href="#amsNetworkProtocol" class="headerlink" title="amsNetworkProtocol"></a>amsNetworkProtocol</h2><p>The switch of the AMS network protocol.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>AMS_NETWORK</code></p>
+</li>
+</ul>
+<h2 id="commandGetClientPlayerFps"><a href="#commandGetClientPlayerFps" class="headerlink" title="commandGetClientPlayerFps"></a>commandGetClientPlayerFps</h2><p>Use command to get the FPS of the specified player.</p>
+<p>After enabling the rule, use the “&#x2F;getClientPlayerFps help” command to view the usage instructions</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>AMS_NETWORK</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="commandSetPlayerPose"><a href="#commandSetPlayerPose" class="headerlink" title="commandSetPlayerPose"></a>commandSetPlayerPose</h2><p>Use command to set player pose.</p>
+<p>After enabling the rule, use the “&#x2F;playerPose help” command to view the usage instructions</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>AMS_NETWORK</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="commandAmspDebug"><a href="#commandAmspDebug" class="headerlink" title="commandAmspDebug"></a>commandAmspDebug</h2><p>Some commands for network communication testing.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>AMS_NETWORK</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="onlyPlayerCanCreateNetherPortal"><a href="#onlyPlayerCanCreateNetherPortal" class="headerlink" title="onlyPlayerCanCreateNetherPortal"></a>onlyPlayerCanCreateNetherPortal</h2><p>Only allow new portals to be generated when players pass through the Nether portal.</p>
+<p>&lt;Available for Minecraft &gt;&#x3D; 1.21&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="preventServerPause"><a href="#preventServerPause" class="headerlink" title="preventServerPause"></a>preventServerPause</h2><p>Prevent server pause after 60s.</p>
+<p>&lt;Available for Minecraft &gt;&#x3D; 1.21.2&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="flippinCactusExtras"><a href="#flippinCactusExtras" class="headerlink" title="flippinCactusExtras"></a>flippinCactusExtras</h2><p>Enables flippinCactus rules to work on more blocks.</p>
+<p>Affected blocks:</p>
+<p>barrel, chiseled_bookshelf, crafter, shelf</p>
+<p>&lt;Available for Minecraft &gt;&#x3D; 1.21.2&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="experimentalMinecartSpeed"><a href="#experimentalMinecartSpeed" class="headerlink" title="experimentalMinecartSpeed"></a>experimentalMinecartSpeed</h2><p>Set the speed of the experimental minecart.</p>
+<p>&lt;Available for Minecraft &gt;&#x3D; 1.21.2&gt;</p>
+<ul>
+<li><p>Type: <code>int</code></p>
+</li>
+<li><p>Default: <code>-1</code></p>
+</li>
+<li><p>Suggested options: <code>-1</code>, <code>1000</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="experimentalMinecartEnabled"><a href="#experimentalMinecartEnabled" class="headerlink" title="experimentalMinecartEnabled"></a>experimentalMinecartEnabled</h2><p>Enable experimental minecarts.</p>
+<p>When the server environment switches the rule setting, the server needs to be restarted</p>
+<p>When the client environment switches the rule settings, the client needs to be restarted</p>
+<p>&lt;Available for Minecraft &gt;&#x3D; 1.21.2&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="amsTranslationMode"><a href="#amsTranslationMode" class="headerlink" title="amsTranslationMode"></a>amsTranslationMode</h2><p>Switch the translation mode of Carpet AMS Addition.</p>
+<p>[client] - Prefer sending translated text to the client using the client’s own language</p>
+<p>[server] - Use the language set by the server for all translations</p>
+<ul>
+<li><p>Type: <code>enum</code></p>
+</li>
+<li><p>Default: <code>CLIENT</code></p>
+</li>
+<li><p>Suggested options: <code>CLIENT</code>, <code>SERVER</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code></p>
+</li>
+</ul>
+<h2 id="craftableEnchantedGoldApple"><a href="#craftableEnchantedGoldApple" class="headerlink" title="craftableEnchantedGoldApple"></a>craftableEnchantedGoldApple</h2><p>Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="craftableBundle"><a href="#craftableBundle" class="headerlink" title="craftableBundle"></a>craftableBundle</h2><p>Bundle can be crafted using string and rabbit hide.<br>&lt;Available for Minecraft &gt;&#x3D; 1.17&gt;</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>9x3</code>, <code>9x6</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="craftableSculkSensor"><a href="#craftableSculkSensor" class="headerlink" title="craftableSculkSensor"></a>craftableSculkSensor</h2><p>Sculk sensor can be crafted using deepslate, redstone and quartz.<br>&lt;Only available for Minecraft &#x3D;&#x3D; 1.17 or Minecraft &#x3D;&#x3D; 1.18&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="craftableElytra"><a href="#craftableElytra" class="headerlink" title="craftableElytra"></a>craftableElytra</h2><p>Elytra can be crafted using phantom membrane, saddle, stick and string.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="betterCraftableBoneBlock"><a href="#betterCraftableBoneBlock" class="headerlink" title="betterCraftableBoneBlock"></a>betterCraftableBoneBlock</h2><p>Bone block can be crafted better. Directed use 9 bones to craft 3 bone blocks.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="betterCraftableDispenser"><a href="#betterCraftableDispenser" class="headerlink" title="betterCraftableDispenser"></a>betterCraftableDispenser</h2><p>Dispenser can be crafted more flexible. It can be crafted using bow and dropper, or using raw material of bow and dropper.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="betterCraftablePolishedBlackStoneButton"><a href="#betterCraftablePolishedBlackStoneButton" class="headerlink" title="betterCraftablePolishedBlackStoneButton"></a>betterCraftablePolishedBlackStoneButton</h2><p>Use deepslate to crafted polished_blackstone_button in minecraft.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="rottenFleshBurnedIntoLeather"><a href="#rottenFleshBurnedIntoLeather" class="headerlink" title="rottenFleshBurnedIntoLeather"></a>rottenFleshBurnedIntoLeather</h2><p>Rotten flesh can be burned into leather in a furnace.</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="useNewLodestoneRecipe"><a href="#useNewLodestoneRecipe" class="headerlink" title="useNewLodestoneRecipe"></a>useNewLodestoneRecipe</h2><p>Use iron ingots to craft Lodestone.</p>
+<p>&lt;Available for Minecraft &lt; 1.21.5&gt;</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="craftableCarvedPumpkin"><a href="#craftableCarvedPumpkin" class="headerlink" title="craftableCarvedPumpkin"></a>craftableCarvedPumpkin</h2><p>Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpkin reduces the shears durability by 1 (affected by unbreaking enchantments).</p>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

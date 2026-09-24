@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-content">
+                <h3 id="中文-English"><a href="#中文-English" class="headerlink" title="[ 中文 | English ]"></a>[ 中文 | <a href="/en_us/Rules_en">English</a> ]</h3><h1 id="——-规-则-——"><a href="#——-规-则-——" class="headerlink" title="—— 规 则 ——"></a><center>—— 规 则 ——</center></h1><p>&emsp;</p>
+<h2 id="超级弓（superBow）"><a href="#超级弓（superBow）" class="headerlink" title="超级弓（superBow）"></a>超级弓（superBow）</h2><p>开启后，可以让弓同时拥有无限和经验修补附魔。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="计划刻催熟所有作物（scheduledRandomTickAllPlants）"><a href="#计划刻催熟所有作物（scheduledRandomTickAllPlants）" class="headerlink" title="计划刻催熟所有作物（scheduledRandomTickAllPlants）"></a>计划刻催熟所有作物（scheduledRandomTickAllPlants）</h2><p>开启后，使计划刻事件可触发以下所有植物的随机刻生长行为，用于恢复1.15版本的强制催熟特性。亦可通过以下指令单独控制特定植物是否可强制催熟。</p>
+<ul>
+<li><p><code>scheduledRandomTickCactus</code>: 开启后，使计划刻事件可触发仙人掌的随机刻生长行为。</p>
+</li>
+<li><p><code>scheduledRandomTickBamboo</code>: 开启后，使计划刻事件可触发竹子的随机刻生长行为。</p>
+</li>
+<li><p><code>scheduledRandomTickChorusFlower</code>: 开启后，使计划刻事件可触发紫颂花的随机刻生长行为。</p>
+</li>
+<li><p><code>scheduledRandomTickSugarCane</code>: 开启后，使计划刻事件可触发甘蔗的随机刻生长行为。</p>
+</li>
+<li><p><code>scheduledRandomTickStem</code>: 开启后，使计划刻事件可触发海带、缠怨藤、垂泪藤的随机刻生长行为。<br>&lt;该规则从 <a target="_blank" rel="noopener" href="https://github.com/hit-mc/OhMyVanillaMinecraft">OhMyVanillaMinecraft</a> 移植&gt;</p>
+</li>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="龙战优化（optimizedDragonRespawn）"><a href="#龙战优化（optimizedDragonRespawn）" class="headerlink" title="龙战优化（optimizedDragonRespawn）"></a>龙战优化（optimizedDragonRespawn）</h2><p>大幅度优化了龙战判定代码的性能表现，为基于末地祭坛设计的末地石农场提供性能优化。注意：本选项开启后可能影响原版特性。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>OPTIMIZATION</code></p>
+</li>
+</ul>
+<h2 id="区块加载控制（commandPlayerChunkLoadController）"><a href="#区块加载控制（commandPlayerChunkLoadController）" class="headerlink" title="区块加载控制（commandPlayerChunkLoadController）"></a>区块加载控制（commandPlayerChunkLoadController）</h2><p>控制玩家的区块加载，有时候会有比较奇怪的情况，可以挪到附近的区块再回来，可能因为某些未知原因所在区块还会加载。不会移除所在维度的玩家检测，例如主世界出生点区块加载和末地主岛加载。<br>玩家上下线时会将交互状态重置回加载以避免<a target="_blank" rel="noopener" href="https://bugs.mojang.com/browse/MC-157812">MC-157812</a>。</p>
+<p>命令：&#x2F;playerChunkLoading true&#x2F;false</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="音符盒区块加载（noteBlockChunkLoader）"><a href="#音符盒区块加载（noteBlockChunkLoader）" class="headerlink" title="音符盒区块加载（noteBlockChunkLoader）"></a>音符盒区块加载（noteBlockChunkLoader）</h2><p>开启后，当上边沿红石信号激活音符盒时，为该音符盒所在区块添加类型为”note_block”，加载等级为30的加载票，持续时间为300gt（15s），你可以使用blockChunkLoaderTimeController与blockChunkLoaderRangeController规则来控制其加载时间与范围。</p>
+<p><code>bone_block</code>: 音符盒上有骨块时可以触发加载。</p>
+<p><code>wither_skeleton_skull</code>: 音符盒上有凋灵骷髅头（可以是挂在墙上的也可以是放在音符盒上的）时可以触发加载。</p>
+<p><code>note_block</code>: 无需条件，只有音符盒即可加载。</p>
+<p><code>false</code>: 禁用该规则。</p>
+<p>由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用<code>blockChunkLoaderKeepWorldTickUpdate</code>或<code>keepWorldTickUpdate</code>规则来解决这个问题。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>bone_block</code>, <code>wither_skeleton_skull</code>, <code>note_block</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="钟区块加载（bellBlockChunkLoader）"><a href="#钟区块加载（bellBlockChunkLoader）" class="headerlink" title="钟区块加载（bellBlockChunkLoader）"></a>钟区块加载（bellBlockChunkLoader）</h2><p>开启后，当上边沿红石信号激活钟时，为钟方块所在区块添加类型为”bell_block”，加载等级为30的加载票，持续时间为300gt（15s），你可以使用blockChunkLoaderTimeController与blockChunkLoaderRangeController规则来控制其加载时间与范围。</p>
+<p>由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用<code>blockChunkLoaderKeepWorldTickUpdate</code>或<code>keepWorldTickUpdate</code>规则来解决这个问题。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="活塞头区块加载（pistonBlockChunkLoader）"><a href="#活塞头区块加载（pistonBlockChunkLoader）" class="headerlink" title="活塞头区块加载（pistonBlockChunkLoader）"></a>活塞头区块加载（pistonBlockChunkLoader）</h2><p>开启后，当该活塞&#x2F;黏性活塞产生活塞头的推出&#x2F;拉回事件时，在创建推出&#x2F;拉回事件的那一游戏刻为<strong>活塞头方块所在区块</strong>添加类型为”piston_block”，加载等级为30的加载票，持续时间为300gt（15s）。注意，黏性活塞的失败收回事件（如尝试拉回超过12个方块时）也可创建加载票，你可以使用blockChunkLoaderTimeController与blockChunkLoaderRangeController规则来控制其加载时间与范围。</p>
+<p><code>bone_block</code>: 活塞\黏性活塞上有骨块时触发加载。</p>
+<p><code>bedrock</code>: 活塞\黏性活塞下有基岩时触发加载。</p>
+<p><code>all</code>: 活塞\黏性活塞下有骨块或基岩时触发加载。</p>
+<p><code>false</code>: 禁用该规则。</p>
+<p>由于在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，因此每当当前维度中没有玩家时使用该规则加载的区块中漏斗将会停止工作，你可以启用<code>blockChunkLoaderKeepWorldTickUpdate</code>或<code>keepWorldTickUpdate</code>规则来解决这个问题。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>bone_block</code>, <code>bedrock</code>, <code>all</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="方块区块加载保持实体更新（blockChunkLoaderKeepWorldTickUpdate）"><a href="#方块区块加载保持实体更新（blockChunkLoaderKeepWorldTickUpdate）" class="headerlink" title="方块区块加载保持实体更新（blockChunkLoaderKeepWorldTickUpdate）"></a>方块区块加载保持实体更新（blockChunkLoaderKeepWorldTickUpdate）</h2><p>在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制。<br>受影响的规则：<code>noteBlockChunkLoader</code>、<code>pistonBlockChunkLoader</code>、<code>bellBlockChunkLoader</code></p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="保持实体更新（keepWorldTickUpdate）"><a href="#保持实体更新（keepWorldTickUpdate）" class="headerlink" title="保持实体更新（keepWorldTickUpdate）"></a>保持实体更新（keepWorldTickUpdate）</h2><p>在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_chunkLoader</code></p>
+</li>
+</ul>
+<h2 id="方块加载时长控制器（blockChunkLoaderTimeController）"><a href="#方块加载时长控制器（blockChunkLoaderTimeController）" class="headerlink" title="方块加载时长控制器（blockChunkLoaderTimeController）"></a>方块加载时长控制器（blockChunkLoaderTimeController）</h2><p>用于控制方块加载系列规则的加载时长（需要重启服务器）。</p>
+<p>受影响的规则：</p>
+<p>noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader</p>
+<h2 id="方块加载范围控制器（blockChunkLoaderRangeController）"><a href="#方块加载范围控制器（blockChunkLoaderRangeController）" class="headerlink" title="方块加载范围控制器（blockChunkLoaderRangeController）"></a>方块加载范围控制器（blockChunkLoaderRangeController）</h2><p>用于控制方块加载系列规则的加载范围（需要重启服务器）。</p>
+<p>受影响的规则：</p>
+<p>noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader</p>
+<h2 id="地狱可放水（netherWaterPlacement）"><a href="#地狱可放水（netherWaterPlacement）" class="headerlink" title="地狱可放水（netherWaterPlacement）"></a>地狱可放水（netherWaterPlacement）</h2><p>开启后，玩家可通过使用水桶的方式在地狱维度中放置水源。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="伪和平（fakePeace）"><a href="#伪和平（fakePeace）" class="headerlink" title="伪和平（fakePeace）"></a>伪和平（fakePeace）</h2><p>开启后，所有生物不会生成，但不影响困难难度（类似伪和平），你可以自定义其生效的维度，也可以自定义生效的维度组合，使用“,”隔开即可。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code>, <code>minecraft:overworld</code>, <code>minecraft:the_end</code>, <code>minecraft:the_nether</code>, <code>minecraft:the_end,minecraft:the_nether</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="炸毁所有方块（blowUpEverything）"><a href="#炸毁所有方块（blowUpEverything）" class="headerlink" title="炸毁所有方块（blowUpEverything）"></a>炸毁所有方块（blowUpEverything）</h2><p>开启后，所有方块的爆炸抗性均为 0。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>TNT</code></p>
+</li>
+</ul>
+<h2 id="共享打折（sharedVillagerDiscounts）"><a href="#共享打折（sharedVillagerDiscounts）" class="headerlink" title="共享打折（sharedVillagerDiscounts）"></a>共享打折（sharedVillagerDiscounts）</h2><p>开启后，玩家将僵尸村民治疗为村民后的获得的折扣将共享给所有玩家。</p>
+<p>&lt;该规则从 <a target="_blank" rel="noopener" href="https://github.com/totorewa/totos-carpet-tweaks">totos-carpet-tweaks</a> 移植&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="熄灭的篝火（extinguishedCampfire）"><a href="#熄灭的篝火（extinguishedCampfire）" class="headerlink" title="熄灭的篝火（extinguishedCampfire）"></a>熄灭的篝火（extinguishedCampfire）</h2><p>开启后，当玩家放置篝火时，篝火处于熄灭状态。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="安全飞行（safeFlight）"><a href="#安全飞行（safeFlight）" class="headerlink" title="安全飞行（safeFlight）"></a>安全飞行（safeFlight）</h2><p>开启后，玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="自定义方块更新抑制器（customBlockUpdateSuppressor）"><a href="#自定义方块更新抑制器（customBlockUpdateSuppressor）" class="headerlink" title="自定义方块更新抑制器（customBlockUpdateSuppressor）"></a>自定义方块更新抑制器（customBlockUpdateSuppressor）</h2><p>自定义一个方块成为更新抑制器（不是所有的方块都能设置为更新抑制器）。</p>
+<p>命令格式：</p>
+<p>&#x2F;carpet customBlockUpdateSuppressor minecraft:BlockName</p>
+<p>使用如下指令来控制是否在启用该规则时自动开启 <code>amsUpdateSuppressionCrashFix </code> 规则: </p>
+<p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>none</code></p>
+</li>
+<li><p>参考选项: <code>none</code>, <code>minecraft:bone_block</code>, <code>minecraft:diamond_ore</code>, <code>minecraft:magma_block</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="无限交易（infiniteTrades）"><a href="#无限交易（infiniteTrades）" class="headerlink" title="无限交易（infiniteTrades）"></a>无限交易（infiniteTrades）</h2><p>开启后，村民交易将不会被锁定。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="无懈可击（invulnerable）"><a href="#无懈可击（invulnerable）" class="headerlink" title="无懈可击（invulnerable）"></a>无懈可击（invulnerable）</h2><p>开启后，玩家将免受除虚空外的一切伤害。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="创造模式一击必杀（creativeOneHitKill）"><a href="#创造模式一击必杀（creativeOneHitKill）" class="headerlink" title="创造模式一击必杀（creativeOneHitKill）"></a>创造模式一击必杀（creativeOneHitKill）</h2><p>开启后，当玩家在创造模式下时可以做到一击必杀，当玩家处于潜行状态时，周围的实体也会被杀死。</p>
+<p>&lt;该规则从 <a target="_blank" rel="noopener" href="https://github.com/Lunaar-SMP/lunaar-carpet-addons">lunaar-carpet-addons</a> 移植&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>CREATIVE</code></p>
+</li>
+</ul>
+<h2 id="大末影箱（largeEnderChest）"><a href="#大末影箱（largeEnderChest）" class="headerlink" title="大末影箱（largeEnderChest）"></a>大末影箱（largeEnderChest）</h2><p>开启后，让你的末影箱容量增加一倍（与大箱子相同）。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="竹子模型无偏移（bambooModelNoOffset）"><a href="#竹子模型无偏移（bambooModelNoOffset）" class="headerlink" title="竹子模型无偏移（bambooModelNoOffset）"></a>竹子模型无偏移（bambooModelNoOffset）</h2><p>开启后，让竹子的模型不会产生偏移。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>OPTIMIZATION</code></p>
+</li>
+</ul>
+<h2 id="禁用竹子碰撞箱（bambooCollisionBoxDisabled）"><a href="#禁用竹子碰撞箱（bambooCollisionBoxDisabled）" class="headerlink" title="禁用竹子碰撞箱（bambooCollisionBoxDisabled）"></a>禁用竹子碰撞箱（bambooCollisionBoxDisabled）</h2><p>开启后，玩家可以穿过竹子。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="自定义防火物品（commandCustomAntiFireItems）"><a href="#自定义防火物品（commandCustomAntiFireItems）" class="headerlink" title="自定义防火物品（commandCustomAntiFireItems）"></a>自定义防火物品（commandCustomAntiFireItems）</h2><p>用命令控制任何物品是否防火。</p>
+<p>开启规则后使用<code>/customAntiFireItems help</code>命令查看使用说明</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="掉落物防爆（itemAntiExplosion）"><a href="#掉落物防爆（itemAntiExplosion）" class="headerlink" title="掉落物防爆（itemAntiExplosion）"></a>掉落物防爆（itemAntiExplosion）</h2><p>开启后，掉落物将不会被爆炸摧毁。</p>
+<p>false: 禁用规则</p>
+<p>true: 启用规则</p>
+<p>no_blast_wave: 防爆且无冲击波，爆炸将不会推动掉落物</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code>, <code>no_blast_wave</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>TNT</code></p>
+</li>
+</ul>
+<h2 id="创造模式潜影盒无掉落（creativeShulkerBoxDropsDisabled）"><a href="#创造模式潜影盒无掉落（creativeShulkerBoxDropsDisabled）" class="headerlink" title="创造模式潜影盒无掉落（creativeShulkerBoxDropsDisabled）"></a>创造模式潜影盒无掉落（creativeShulkerBoxDropsDisabled）</h2><p>开启后，当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>CREATIVE</code></p>
+</li>
+</ul>
+<h2 id="禁止潜影贝给予漂浮效果（shulkerHitLevitationDisabled）"><a href="#禁止潜影贝给予漂浮效果（shulkerHitLevitationDisabled）" class="headerlink" title="禁止潜影贝给予漂浮效果（shulkerHitLevitationDisabled）"></a>禁止潜影贝给予漂浮效果（shulkerHitLevitationDisabled）</h2><p>开启后，玩家被潜影贝击中时只会受到伤害而不会获得漂浮BUFF。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="免疫潜影贝飞弹（immuneShulkerBullet）"><a href="#免疫潜影贝飞弹（immuneShulkerBullet）" class="headerlink" title="免疫潜影贝飞弹（immuneShulkerBullet）"></a>免疫潜影贝飞弹（immuneShulkerBullet）</h2><p>开启后，玩家将完全免疫潜影贝发射的飞弹。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="凋零蓝头控制器（blueSkullController）"><a href="#凋零蓝头控制器（blueSkullController）" class="headerlink" title="凋零蓝头控制器（blueSkullController）"></a>凋零蓝头控制器（blueSkullController）</h2><p>开启后，可以选择让凋零总是发射蓝头还是从不发射蓝头。</p>
+<p><code>SURELY</code>: 总是发射蓝头</p>
+<p><code>NEVER</code>: 从不发射蓝头</p>
+<p><code>VANILLA</code>: 原版表现</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>VANILLA</code></p>
+</li>
+<li><p>参考选项: <code>SURELY</code> , <code>NEVER</code> , <code>VANILLA</code> </p>
+</li>
+<li><p>分类: <code>AMS</code> , <code>FEATURE</code> , <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="禁止末影人随机传送（endermanTeleportRandomlyDisabled）"><a href="#禁止末影人随机传送（endermanTeleportRandomlyDisabled）" class="headerlink" title="禁止末影人随机传送（endermanTeleportRandomlyDisabled）"></a>禁止末影人随机传送（endermanTeleportRandomlyDisabled）</h2><p>开启后，末影人不会随机传送。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code> , <code>FEATURE</code> , <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="更快移动（fasterMovement）"><a href="#更快移动（fasterMovement）" class="headerlink" title="更快移动（fasterMovement）"></a>更快移动（fasterMovement）</h2><p>提供了五个挡位，让玩家移动速度更快。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>VANILLA</code></p>
+</li>
+<li><p>参考选项: <code>Ⅰ</code>, <code>Ⅱ</code>, <code>Ⅲ</code>, <code>Ⅳ</code>, <code>Ⅴ</code>, <code>VANILLA</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code> , <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="更快移动规则控制器（fasterMovementController）"><a href="#更快移动规则控制器（fasterMovementController）" class="headerlink" title="更快移动规则控制器（fasterMovementController）"></a>更快移动规则控制器（fasterMovementController）</h2><p>用于控制更快移动规则在哪个维度生效。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>all</code></p>
+</li>
+<li><p>参考选项: <code>overworld</code>, <code>nether</code>, <code>end</code>, <code>all</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="轻松掉落凋零骷髅头（easyWitherSkeletonSkullDrop）"><a href="#轻松掉落凋零骷髅头（easyWitherSkeletonSkullDrop）" class="headerlink" title="轻松掉落凋零骷髅头（easyWitherSkeletonSkullDrop）"></a>轻松掉落凋零骷髅头（easyWitherSkeletonSkullDrop）</h2><p>开启后，击杀凋零骷髅会百分百掉落凋零骷髅头。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="禁用铁砧交互（commandAnvilInteractionDisabled）"><a href="#禁用铁砧交互（commandAnvilInteractionDisabled）" class="headerlink" title="禁用铁砧交互（commandAnvilInteractionDisabled）"></a>禁用铁砧交互（commandAnvilInteractionDisabled）</h2><p>开启后，玩家无法打开铁砧的UI界面。<br>命令：&#x2F;anvilInteractionDisabledSwitch true&#x2F;false</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="防止管理员作弊（preventAdministratorCheat）"><a href="#防止管理员作弊（preventAdministratorCheat）" class="headerlink" title="防止管理员作弊（preventAdministratorCheat）"></a>防止管理员作弊（preventAdministratorCheat）</h2><p>禁用部分指令以避免op玩家意外地作弊。</p>
+<p>影响的指令列表: &#x2F;gamemode, &#x2F;tp, &#x2F;teleport, &#x2F;give, &#x2F;setblock, &#x2F;summon, &#x2F;difficulty, &#x2F;kill, &#x2F;time, &#x2F;weather, &#x2F;fill, &#x2F;setblock, &#x2F;enchant, &#x2F;experience, &#x2F;advancement, &#x2F;effect, &#x2F;data, &#x2F;defaultgamemode, &#x2F;gamerule</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="更新抑制崩溃修复（amsUpdateSuppressionCrashFix）"><a href="#更新抑制崩溃修复（amsUpdateSuppressionCrashFix）" class="headerlink" title="更新抑制崩溃修复（amsUpdateSuppressionCrashFix）"></a>更新抑制崩溃修复（amsUpdateSuppressionCrashFix）</h2><p>开启后，更新抑制不会导致服务器崩溃，同时提供发生更新抑制的坐标与维度。</p>
+<p>使用如下指令来控制其是否在”customBlockUpdateSuppressor”开启时强制启动，权限等级为2:</p>
+<p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
+<ul>
+<li><p><code>false</code>: 禁用规则</p>
+</li>
+<li><p><code>true</code>: 启用规则</p>
+</li>
+<li><p><code>silence</code>: 启用但不发送服务器消息</p>
+</li>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）"><a href="#恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）" class="headerlink" title="恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）"></a>恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）</h2><p>修复MC-193297中，恶魂火球爆炸时不会正确传递伤害源。</p>
+<p>&lt;该规则 Minecraft &lt; 1.19.3 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>EXPERIMENTAL</code>, <code>BUGFIX</code></p>
+</li>
+</ul>
+<h2 id="可掉落蛋糕（cakeBlockDropOnBreak）"><a href="#可掉落蛋糕（cakeBlockDropOnBreak）" class="headerlink" title="可掉落蛋糕（cakeBlockDropOnBreak）"></a>可掉落蛋糕（cakeBlockDropOnBreak）</h2><p>开启后，蛋糕在被破坏时可以掉落蛋糕（蛋糕是完整的情况下才会掉落）。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="不准吃蛋糕（noCakeEating）"><a href="#不准吃蛋糕（noCakeEating）" class="headerlink" title="不准吃蛋糕（noCakeEating）"></a>不准吃蛋糕（noCakeEating）</h2><p>开启后，玩家不可以吃蛋糕</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="红石元件音效（redstoneComponentSound）"><a href="#红石元件音效（redstoneComponentSound）" class="headerlink" title="红石元件音效（redstoneComponentSound）"></a>红石元件音效（redstoneComponentSound）</h2><p>开启后，玩家右键红石元件时会播放声音。</p>
+<p>影响的元件：阳光传感器、红石粉、中继器。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="大潜影盒（largeShulkerBox）"><a href="#大潜影盒（largeShulkerBox）" class="headerlink" title="大潜影盒（largeShulkerBox）"></a>大潜影盒（largeShulkerBox）</h2><p>让潜影盒容量增加一倍（与大箱子相同）。</p>
+<p>使用该规则请遵循以下步骤：</p>
+<p>1 - 确保没有潜影盒被加载。</p>
+<p>2 - 输入指令：<code>/carpet setDefault largeShulkerBox true</code> 开启规则。</p>
+<p>3 - 重启服务器&#x2F;单人世界。</p>
+<p>4 - 关闭该规则同理。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="最大玩家方块交互距离（maxPlayerBlockInteractionRange）"><a href="#最大玩家方块交互距离（maxPlayerBlockInteractionRange）" class="headerlink" title="最大玩家方块交互距离（maxPlayerBlockInteractionRange）"></a>最大玩家方块交互距离（maxPlayerBlockInteractionRange）</h2><p>更改服务器允许玩家与方块的最大交互距离，设置为“-1”禁用该规则。</p>
+<p>Minecraft &gt;&#x3D; 1.20.5 时可以使用maxPlayerBlockInteractionRangeScope规则来修改其作用域。</p>
+<p>global模式下修改值后需要玩家重新进入游戏。</p>
+<ul>
+<li><p>类型: <code>double</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="最大玩家实体交互距离（maxPlayerEntityInteractionRange）"><a href="#最大玩家实体交互距离（maxPlayerEntityInteractionRange）" class="headerlink" title="最大玩家实体交互距离（maxPlayerEntityInteractionRange）"></a>最大玩家实体交互距离（maxPlayerEntityInteractionRange）</h2><p>更改服务器允许玩家与实体的最大交互距离，设置为“-1”禁用该规则。</p>
+<p>Minecraft &gt;&#x3D; 1.20.5 时可以使用maxPlayerEntityInteractionRangeScope规则来修改其作用域。</p>
+<p>global模式下修改值后需要玩家重新进入游戏。</p>
+<ul>
+<li><p>类型: <code>double</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="最大玩家方块交互距离作用域（maxPlayerBlockInteractionRangeScope）"><a href="#最大玩家方块交互距离作用域（maxPlayerBlockInteractionRangeScope）" class="headerlink" title="最大玩家方块交互距离作用域（maxPlayerBlockInteractionRangeScope）"></a>最大玩家方块交互距离作用域（maxPlayerBlockInteractionRangeScope）</h2><p>更改maxPlayerBlockInteractionRange规则的作用域。</p>
+<p>[server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行。</p>
+<p>[global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.20.5 可用&gt;</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>server</code></p>
+</li>
+<li><p>参考选项: <code>server</code>, <code>global</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="最大玩家实体交互距离作用域（maxPlayerEntityInteractionRangeScope）"><a href="#最大玩家实体交互距离作用域（maxPlayerEntityInteractionRangeScope）" class="headerlink" title="最大玩家实体交互距离作用域（maxPlayerEntityInteractionRangeScope）"></a>最大玩家实体交互距离作用域（maxPlayerEntityInteractionRangeScope）</h2><p>更改maxPlayerEntityInteractionRange规则的作用域。</p>
+<p>[server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行。</p>
+<p>[global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.20.5 可用&gt;</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>server</code></p>
+</li>
+<li><p>参考选项: <code>server</code>, <code>global</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="客户端最大方块放置距离（maxClientInteractionReachDistance）"><a href="#客户端最大方块放置距离（maxClientInteractionReachDistance）" class="headerlink" title="客户端最大方块放置距离（maxClientInteractionReachDistance）"></a>客户端最大方块放置距离（maxClientInteractionReachDistance）</h2><p>更改客户端允许的最大交互距离，设置为 <code>-1</code> 禁用该规则。</p>
+<p>需要关闭Tweakeroo的tweakBlockReachOverride功能。</p>
+<ul>
+<li><p>类型: <code>double</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>0 - 512</code>, <code>-1</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="自定义可移动方块（commandCustomMovableBlock）"><a href="#自定义可移动方块（commandCustomMovableBlock）" class="headerlink" title="自定义可移动方块（commandCustomMovableBlock）"></a>自定义可移动方块（commandCustomMovableBlock）</h2><p>可自定义的让不能被推动的方块变得能被推动（不支持容器方块，如果需要推动容器可以使用Carpet的movableBlockEntities规则）。</p>
+<p>开启规则后使用<code>/customMovableBlock help</code>命令查看使用说明</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="简易满级信标（easyMaxLevelBeacon）"><a href="#简易满级信标（easyMaxLevelBeacon）" class="headerlink" title="简易满级信标（easyMaxLevelBeacon）"></a>简易满级信标（easyMaxLevelBeacon）</h2><p>开启后，只需一个底座方块就能激活满级信标。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="自定义方块爆炸抗性（commandCustomBlockBlastResistance）"><a href="#自定义方块爆炸抗性（commandCustomBlockBlastResistance）" class="headerlink" title="自定义方块爆炸抗性（commandCustomBlockBlastResistance）"></a>自定义方块爆炸抗性（commandCustomBlockBlastResistance）</h2><p>用指令自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）。</p>
+<p>开启规则后使用 <code>/customBlockBlastResistance help</code> 命令查看使用说明</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>TNT</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="再生成龙蛋（regeneratingDragonEgg）"><a href="#再生成龙蛋（regeneratingDragonEgg）" class="headerlink" title="再生成龙蛋（regeneratingDragonEgg）"></a>再生成龙蛋（regeneratingDragonEgg）</h2><p>开启后，玩家每次击败末影龙都会生成一个龙蛋。</p>
+<blockquote>
+<p>为了Dnsolx的蛋</p>
+</blockquote>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="增强型世界吞噬者（enhancedWorldEater）"><a href="#增强型世界吞噬者（enhancedWorldEater）" class="headerlink" title="增强型世界吞噬者（enhancedWorldEater）"></a>增强型世界吞噬者（enhancedWorldEater）</h2><p>通过自定义除以下方块的爆炸抗性来让世界吞噬者一路畅通（该规则开启时，<code>自定义炸毁方块(customBlowUpBlock)</code> 规则将不会生效）。</p>
+<p>方块列表：</p>
+<p>爆炸抗性 &lt; 17.0F的方块、基岩、铁砧、末地传送门框架、末地传送门、折跃门</p>
+<ul>
+<li><p>类型: <code>double</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项:  <code>-1</code>, <code>0 - 16</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code> <code>TNT</code></p>
+</li>
+</ul>
+<h2 id="潜行编辑告示牌（sneakToEditSign）"><a href="#潜行编辑告示牌（sneakToEditSign）" class="headerlink" title="潜行编辑告示牌（sneakToEditSign）"></a>潜行编辑告示牌（sneakToEditSign）</h2><p>开启后，玩家可以在潜行状态且双手为空时对已经放置的告示牌按使用键来编辑它，Minecraft &gt;&#x3D; 1.20 时表现为必须潜行。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="潜行吃蛋糕（sneakToEatCake）"><a href="#潜行吃蛋糕（sneakToEatCake）" class="headerlink" title="潜行吃蛋糕（sneakToEatCake）"></a>潜行吃蛋糕（sneakToEatCake）</h2><p>玩家只能在潜行状态下吃蛋糕。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="花哨的假人名称（fancyFakePlayerName）"><a href="#花哨的假人名称（fancyFakePlayerName）" class="headerlink" title="花哨的假人名称（fancyFakePlayerName）"></a>花哨的假人名称（fancyFakePlayerName）</h2><p>为carpet mod所召唤出来的假人加上绿色的前缀与后缀，输入命令时不用输入前缀，而后缀则是真实存在的。</p>
+<p>注意：该规则会创建一个名为你输入的值的team</p>
+<p>例：1024_byteeeee -&gt; [bot] 1024_byteeeee_bot</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>bot</code>, <code>fake_player</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="假人不计入计分板（fakePlayerNoScoreboardCounter）"><a href="#假人不计入计分板（fakePlayerNoScoreboardCounter）" class="headerlink" title="假人不计入计分板（fakePlayerNoScoreboardCounter）"></a>假人不计入计分板（fakePlayerNoScoreboardCounter）</h2><p>开启后，计分板将会屏蔽假人。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="没有计划生育（noFamilyPlanning）"><a href="#没有计划生育（noFamilyPlanning）" class="headerlink" title="没有计划生育（noFamilyPlanning）"></a>没有计划生育（noFamilyPlanning）</h2><p>允许玩家一直喂食动物来繁殖它们。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="禁止漏斗吸入（hopperSuctionDisabled）"><a href="#禁止漏斗吸入（hopperSuctionDisabled）" class="headerlink" title="禁止漏斗吸入（hopperSuctionDisabled）"></a>禁止漏斗吸入（hopperSuctionDisabled）</h2><p>开启后，漏斗将不会吸入物品。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="不准吃附魔金苹果（noEnchantedGoldenAppleEating）"><a href="#不准吃附魔金苹果（noEnchantedGoldenAppleEating）" class="headerlink" title="不准吃附魔金苹果（noEnchantedGoldenAppleEating）"></a>不准吃附魔金苹果（noEnchantedGoldenAppleEating）</h2><p>防止玩家意外吃掉附魔金苹果。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="禁用物品使用冷却（useItemCooldownDisabled）"><a href="#禁用物品使用冷却（useItemCooldownDisabled）" class="headerlink" title="禁用物品使用冷却（useItemCooldownDisabled）"></a>禁用物品使用冷却（useItemCooldownDisabled）</h2><p>让使用物品没有冷却时间。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="仙人掌扳手音效（flippinCactusSoundEffect）"><a href="#仙人掌扳手音效（flippinCactusSoundEffect）" class="headerlink" title="仙人掌扳手音效（flippinCactusSoundEffect）"></a>仙人掌扳手音效（flippinCactusSoundEffect）</h2><p>在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了五种不同音效，设置为0禁用音效）。</p>
+<ul>
+<li><p>类型: <code>int</code></p>
+</li>
+<li><p>默认值: <code>0</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="禁用珊瑚失活（undyingCoral）"><a href="#禁用珊瑚失活（undyingCoral）" class="headerlink" title="禁用珊瑚失活（undyingCoral）"></a>禁用珊瑚失活（undyingCoral）</h2><p>让珊瑚扇和珊瑚块不会因缺水失活。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="禁止末影龙破坏方块（enderDragonNoDestroyBlock）"><a href="#禁止末影龙破坏方块（enderDragonNoDestroyBlock）" class="headerlink" title="禁止末影龙破坏方块（enderDragonNoDestroyBlock）"></a>禁止末影龙破坏方块（enderDragonNoDestroyBlock）</h2><p>使末影龙不能破坏任何方块。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="轻松堆肥（easyCompost）"><a href="#轻松堆肥（easyCompost）" class="headerlink" title="轻松堆肥（easyCompost）"></a>轻松堆肥（easyCompost）</h2><p>让每次堆肥都可以成功。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="易采集龙蛋（easyMineDragonEgg）"><a href="#易采集龙蛋（easyMineDragonEgg）" class="headerlink" title="易采集龙蛋（easyMineDragonEgg）"></a>易采集龙蛋（easyMineDragonEgg）</h2><p>让龙蛋不会瞬移，玩家可以直接挖掉龙蛋来收集它。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="可繁殖鹦鹉（breedableParrots）"><a href="#可繁殖鹦鹉（breedableParrots）" class="headerlink" title="可繁殖鹦鹉（breedableParrots）"></a>可繁殖鹦鹉（breedableParrots）</h2><p>自定义一种食物来喂食鹦鹉繁殖它们（你也可以用石头来喂它们，如果你真的这么想的话）。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="懂事的末影人（sensibleEnderman）"><a href="#懂事的末影人（sensibleEnderman）" class="headerlink" title="懂事的末影人（sensibleEnderman）"></a>懂事的末影人（sensibleEnderman）</h2><p>让末影人只会拾起西瓜和南瓜。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="禁止末影人拾起方块（endermanPickUpDisabled）"><a href="#禁止末影人拾起方块（endermanPickUpDisabled）" class="headerlink" title="禁止末影人拾起方块（endermanPickUpDisabled）"></a>禁止末影人拾起方块（endermanPickUpDisabled）</h2><p>禁止末影人拾起方块。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="螨虫珍珠（mitePearl）"><a href="#螨虫珍珠（mitePearl）" class="headerlink" title="螨虫珍珠（mitePearl）"></a>螨虫珍珠（mitePearl）</h2><p>每一次使用末影珍珠都会生成一只末影螨。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="末影珍珠音效（enderPearlSoundEffect）"><a href="#末影珍珠音效（enderPearlSoundEffect）" class="headerlink" title="末影珍珠音效（enderPearlSoundEffect）"></a>末影珍珠音效（enderPearlSoundEffect）</h2><p>玩家在使用末影珍珠进行传送时会播放音效。</p>
+<p>&lt;该规则 Minecraft &lt; 1.20 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="我在哪（commandHere）"><a href="#我在哪（commandHere）" class="headerlink" title="我在哪（commandHere）"></a>我在哪（commandHere）</h2><p>使用 “&#x2F;here” 命令发送当前自身所在维度、坐标、对应的主世界&#x2F;下界坐标，同时给予自身30s的发光效果。</p>
+<p>当客户端安装了<code>Carpet Org Addition</code>时，可以单击消息末尾的<code>+H</code>按钮高亮路径点，使用<code>/highlight clear</code>命令来取消高亮。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="你在哪（commandWhere）"><a href="#你在哪（commandWhere）" class="headerlink" title="你在哪（commandWhere）"></a>你在哪（commandWhere）</h2><p>使用 “&#x2F;where” 命令获取指定玩家所在维度、坐标、对应的主世界&#x2F;下界坐标，同时给予目标玩家30s的发光效果。</p>
+<p>当客户端安装了<code>Carpet Org Addition</code>时，可以单击消息末尾的<code>+H</code>按钮高亮路径点，使用<code>/highlight clear</code>命令来取消高亮。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="假人拾取控制器（fakePlayerPickUpController）"><a href="#假人拾取控制器（fakePlayerPickUpController）" class="headerlink" title="假人拾取控制器（fakePlayerPickUpController）"></a>假人拾取控制器（fakePlayerPickUpController）</h2><p>提供了两种模式来控制假人是否可以拾取物品。</p>
+<ul>
+<li><p>[MainHandOnly] - 仅主手可拾取物品</p>
+</li>
+<li><p>[NoPickUp] - 完全无法拾取物品</p>
+</li>
+<li><p>[false] - 禁用规则</p>
+</li>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>MainHandOnly</code>, <code>NoPickUp</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="玩家导游（commandPlayerLeader）"><a href="#玩家导游（commandPlayerLeader）" class="headerlink" title="玩家导游（commandPlayerLeader）"></a>玩家导游（commandPlayerLeader）</h2><p>指定一名或多名玩家成为导游，使他们拥有发光效果。</p>
+<p>开启规则后使用 <code>/leader help</code> 命令查看使用说明</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="ping命令（commandPacketInternetGroper）"><a href="#ping命令（commandPacketInternetGroper）" class="headerlink" title="ping命令（commandPacketInternetGroper）"></a>ping命令（commandPacketInternetGroper）</h2><p>玩家可以在游戏中使用ping命令。</p>
+<p>开启规则后使用 <code>/ping help</code> 命令查看使用说明</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）"><a href="#下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）" class="headerlink" title="下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）"></a>下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）</h2><p>玩家无法通过下界传送门进行传送。</p>
+<p>开启规则后，使用<code>/plerNoNetherPortalTeleport help</code>命令查看使用说明</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code> <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="无限耐久（infiniteDurability）"><a href="#无限耐久（infiniteDurability）" class="headerlink" title="无限耐久（infiniteDurability）"></a>无限耐久（infiniteDurability）</h2><p>使用物品不会丢失耐久。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="欢迎消息（welcomeMessage）"><a href="#欢迎消息（welcomeMessage）" class="headerlink" title="欢迎消息（welcomeMessage）"></a>欢迎消息（welcomeMessage）</h2><p>在玩家进入服务器时发送一条自定义消息给玩家（使用json文件来自定义消息）。</p>
+<p>json位置：</p>
+<p>[ 存档文件夹 ]&#x2F;carpetamsaddition&#x2F;welcomeMessage.json</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code></p>
+</li>
+</ul>
+<h2 id="获取存档大小（commandGetSaveSize）"><a href="#获取存档大小（commandGetSaveSize）" class="headerlink" title="获取存档大小（commandGetSaveSize）"></a>获取存档大小（commandGetSaveSize）</h2><p>使用 “&#x2F;getSaveSize” 命令获取当前存档大小。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="地毯规则总是设置为默认（carpetAlwaysSetDefault）"><a href="#地毯规则总是设置为默认（carpetAlwaysSetDefault）" class="headerlink" title="地毯规则总是设置为默认（carpetAlwaysSetDefault）"></a>地毯规则总是设置为默认（carpetAlwaysSetDefault）</h2><p>每当你设置carpet规则时，都会自动设置为默认值。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="禁用实验性内容检查（experimentalContentCheckDisabled）"><a href="#禁用实验性内容检查（experimentalContentCheckDisabled）" class="headerlink" title="禁用实验性内容检查（experimentalContentCheckDisabled）"></a>禁用实验性内容检查（experimentalContentCheckDisabled）</h2><p>允许在游戏中通过添加数据包来游玩Minecraft的实验性内容（需要重启服务器）。</p>
+<p>&lt;该规则 Minecraft 1.19 - 1.21.1 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="可施肥小花（fertilizableSmallFlower）"><a href="#可施肥小花（fertilizableSmallFlower）" class="headerlink" title="可施肥小花（fertilizableSmallFlower）"></a>可施肥小花（fertilizableSmallFlower）</h2><p>使诸如蒲公英的小花也可以被骨粉催熟。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="安全的滴水石锥（safePointedDripstone）"><a href="#安全的滴水石锥（safePointedDripstone）" class="headerlink" title="安全的滴水石锥（safePointedDripstone）"></a>安全的滴水石锥（safePointedDripstone）</h2><p>玩家落在滴水石锥上时，不会受到它的附加伤害。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.17 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="禁用滴水石锥碰撞箱（pointedDripstoneCollisionBoxDisabled）"><a href="#禁用滴水石锥碰撞箱（pointedDripstoneCollisionBoxDisabled）" class="headerlink" title="禁用滴水石锥碰撞箱（pointedDripstoneCollisionBoxDisabled）"></a>禁用滴水石锥碰撞箱（pointedDripstoneCollisionBoxDisabled）</h2><p>开启后，玩家可以穿过滴水石锥。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.17 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="禁止树叶生成（foliageGenerateDisabled）"><a href="#禁止树叶生成（foliageGenerateDisabled）" class="headerlink" title="禁止树叶生成（foliageGenerateDisabled）"></a>禁止树叶生成（foliageGenerateDisabled）</h2><p>树叶不会以任何方式生成。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="获取系统信息（commandGetSystemInfo）"><a href="#获取系统信息（commandGetSystemInfo）" class="headerlink" title="获取系统信息（commandGetSystemInfo）"></a>获取系统信息（commandGetSystemInfo）</h2><p>使用“&#x2F;getSystemInfo”命令获取服务器的系统信息。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="铁傀儡不掉落花（ironGolemNoDropFlower）"><a href="#铁傀儡不掉落花（ironGolemNoDropFlower）" class="headerlink" title="铁傀儡不掉落花（ironGolemNoDropFlower）"></a>铁傀儡不掉落花（ironGolemNoDropFlower）</h2><p>铁傀儡不会掉落花。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="轻松获取瓶子草荚果（easyGetPitcherPod）"><a href="#轻松获取瓶子草荚果（easyGetPitcherPod）" class="headerlink" title="轻松获取瓶子草荚果（easyGetPitcherPod）"></a>轻松获取瓶子草荚果（easyGetPitcherPod）</h2><p>玩家可以通过种植瓶子草来收获随机数量的瓶子草荚果（其最大数量是自定义的，最小数量为固定2个）。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.20 可用&gt;</p>
+<ul>
+<li><p>类型: <code>int</code></p>
+</li>
+<li><p>默认值: <code>0</code></p>
+</li>
+<li><p>参考选项: <code>0 或 2 - 100</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="goto命令（commandGoto）"><a href="#goto命令（commandGoto）" class="headerlink" title="goto命令（commandGoto）"></a>goto命令（commandGoto）</h2><p>使用 “&#x2F;goto” 命令快速传送到指定维度的指定坐标，没有指定坐标时会传送至当前玩家所在位置的对应坐标。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="发送玩家死亡位置（sendPlayerDeathLocation）"><a href="#发送玩家死亡位置（sendPlayerDeathLocation）" class="headerlink" title="发送玩家死亡位置（sendPlayerDeathLocation）"></a>发送玩家死亡位置（sendPlayerDeathLocation）</h2><p>当玩家死亡时，会广播一条包含该玩家死亡坐标以及维度的消息。</p>
+<p>当客户端安装了<code>Carpet Org Addition</code>时，可以单击消息末尾的<code>+H</code>按钮高亮路径点，使用<code>/highlight clear</code>命令来取消高亮。</p>
+<p><code>false</code>: 禁用规则。</p>
+<p><code>all</code>: 总是发送消息。</p>
+<p><code>realPlayerOnly</code>: 只有真实玩家死亡时发送消息。</p>
+<p><code>fakePlayerOnly</code>: 只有假人死亡时发送消息。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>all</code>, <code>realPlayerOnly</code>, <code>fakePlayerOnly</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="完美隐身（perfectInvisibility）"><a href="#完美隐身（perfectInvisibility）" class="headerlink" title="完美隐身（perfectInvisibility）"></a>完美隐身（perfectInvisibility）</h2><p>当玩家拥有隐身效果时将完全隐身，即使穿着全套盔甲。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="潜行隐身（sneakInvisibility）"><a href="#潜行隐身（sneakInvisibility）" class="headerlink" title="潜行隐身（sneakInvisibility）"></a>潜行隐身（sneakInvisibility）</h2><p>当玩家潜行时将对生物完全隐身，即使穿着全套盔甲。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="自定义命令权限等级（commandCustomCommandPermissionLevel）"><a href="#自定义命令权限等级（commandCustomCommandPermissionLevel）" class="headerlink" title="自定义命令权限等级（commandCustomCommandPermissionLevel）"></a>自定义命令权限等级（commandCustomCommandPermissionLevel）</h2><p>自定义任何命令的权限等级。</p>
+<p>开启规则后使用 <code>/customCommandPermissionLevel help</code> 命令查看使用说明。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="潜影贝傀儡（shulkerGolem）"><a href="#潜影贝傀儡（shulkerGolem）" class="headerlink" title="潜影贝傀儡（shulkerGolem）"></a>潜影贝傀儡（shulkerGolem）</h2><p>可以通过在潜影盒上放置一个雕刻南瓜来召唤一只潜影贝。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="猎头（headHunter）"><a href="#猎头（headHunter）" class="headerlink" title="猎头（headHunter）"></a>猎头（headHunter）</h2><p>当玩家死亡时他们会掉落一个自己的头颅。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="获取玩家头颅（commandGetPlayerSkull）"><a href="#获取玩家头颅（commandGetPlayerSkull）" class="headerlink" title="获取玩家头颅（commandGetPlayerSkull）"></a>获取玩家头颅（commandGetPlayerSkull）</h2><p>使用 “&#x2F;getPlayerSkull &lt;玩家&gt; &lt;数量&gt;” 命令来获取一名在线玩家的头颅。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="快速升级村民（quickVillagerLevelUp）"><a href="#快速升级村民（quickVillagerLevelUp）" class="headerlink" title="快速升级村民（quickVillagerLevelUp）"></a>快速升级村民（quickVillagerLevelUp）</h2><p>每次打开交易屏幕时村民都会升级。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="可再生下界合金碎片（renewableNetheriteScrap）"><a href="#可再生下界合金碎片（renewableNetheriteScrap）" class="headerlink" title="可再生下界合金碎片（renewableNetheriteScrap）"></a>可再生下界合金碎片（renewableNetheriteScrap）</h2><p>自定义僵尸猪灵掉落下界合金碎片的概率。</p>
+<ul>
+<li><p>类型: <code>Double</code></p>
+</li>
+<li><p>默认值: <code>0.0</code></p>
+</li>
+<li><p>参考选项: <code>0.0</code>, <code>0.01</code>, <code>0.1</code>, <code>1.0</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="村民折扣叠加（stackableDiscounts）"><a href="#村民折扣叠加（stackableDiscounts）" class="headerlink" title="村民折扣叠加（stackableDiscounts）"></a>村民折扣叠加（stackableDiscounts）</h2><p>重新引入&lt;23w31a的打骨折机制，让治疗村民的折扣可以叠加。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="禁用末地黑曜石柱重新生成（preventEndSpikeRespawn）"><a href="#禁用末地黑曜石柱重新生成（preventEndSpikeRespawn）" class="headerlink" title="禁用末地黑曜石柱重新生成（preventEndSpikeRespawn）"></a>禁用末地黑曜石柱重新生成（preventEndSpikeRespawn）</h2><p>复活龙时末地的黑曜石柱子不会重新生成。</p>
+<p>[true] - 禁止生成</p>
+<p>[false] - 禁用规则</p>
+<p>[keepEndCrystal] - 保留水晶生成</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code>, <code>keepEndCrystal</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="假人交互同步客户端行为（fakePlayerInteractLikeClient）"><a href="#假人交互同步客户端行为（fakePlayerInteractLikeClient）" class="headerlink" title="假人交互同步客户端行为（fakePlayerInteractLikeClient）"></a>假人交互同步客户端行为（fakePlayerInteractLikeClient）</h2><p>修复几个假人和盔甲架、矿车、船在特定情况下与客户端相应行为结果不一样的问题。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>BUGFIX</code></p>
+</li>
+</ul>
+<h2 id="强力拴绳（strongLeash）"><a href="#强力拴绳（strongLeash）" class="headerlink" title="强力拴绳（strongLeash）"></a>强力拴绳（strongLeash）</h2><p>使拴绳不会因为距离过远而断裂。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="超级僵尸医生（superZombieDoctor）"><a href="#超级僵尸医生（superZombieDoctor）" class="headerlink" title="超级僵尸医生（superZombieDoctor）"></a>超级僵尸医生（superZombieDoctor）</h2><p>玩家可以使用虚弱药水 + 金苹果瞬间将僵尸村民转化为村民。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="假玩家使用离线UUID（fakePlayerUseOfflinePlayerUUID）"><a href="#假玩家使用离线UUID（fakePlayerUseOfflinePlayerUUID）" class="headerlink" title="假玩家使用离线UUID（fakePlayerUseOfflinePlayerUUID）"></a>假玩家使用离线UUID（fakePlayerUseOfflinePlayerUUID）</h2><p>让假玩家使用离线UUID。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="超级拴绳（superLeash）"><a href="#超级拴绳（superLeash）" class="headerlink" title="超级拴绳（superLeash）"></a>超级拴绳（superLeash）</h2><p>让村民与怪物同样可以被拴绳栓住。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="每天都是满月（fullMoonEveryDay）"><a href="#每天都是满月（fullMoonEveryDay）" class="headerlink" title="每天都是满月（fullMoonEveryDay）"></a>每天都是满月（fullMoonEveryDay）</h2><p>每天都是满月。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="轻松刷新交易（easyRefreshTrades）"><a href="#轻松刷新交易（easyRefreshTrades）" class="headerlink" title="轻松刷新交易（easyRefreshTrades）"></a>轻松刷新交易（easyRefreshTrades）</h2><p>当村民之前没有与玩家达成过交易时，每次打开交易界面都会刷新村民出售的内容。</p>
+<p>当玩家主手拿着绿宝石块时将不会触发刷新。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="jeb羊掉落随机颜色羊毛（jebSheepDropRandomColorWool）"><a href="#jeb羊掉落随机颜色羊毛（jebSheepDropRandomColorWool）" class="headerlink" title="jeb羊掉落随机颜色羊毛（jebSheepDropRandomColorWool）"></a>jeb羊掉落随机颜色羊毛（jebSheepDropRandomColorWool）</h2><p>当羊被命名为<code>jeb_</code>后，修剪羊毛会掉落随机颜色的羊毛。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="哭泣的黑曜石下界传送门（cryingObsidianNetherPortal）"><a href="#哭泣的黑曜石下界传送门（cryingObsidianNetherPortal）" class="headerlink" title="哭泣的黑曜石下界传送门（cryingObsidianNetherPortal）"></a>哭泣的黑曜石下界传送门（cryingObsidianNetherPortal）</h2><p>可以使用哭泣的黑曜石构建下界传送门。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="熔炉冶炼时间控制器（furnaceSmeltingTimeController）"><a href="#熔炉冶炼时间控制器（furnaceSmeltingTimeController）" class="headerlink" title="熔炉冶炼时间控制器（furnaceSmeltingTimeController）"></a>熔炉冶炼时间控制器（furnaceSmeltingTimeController）</h2><p>控制熔炉冶炼物品所需要的时间（单位：Tick）。</p>
+<ul>
+<li><p>类型: <code>int</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>-1</code>, <code>-1 - ?</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="假人默认生存模式（fakePlayerDefaultSurvivalMode）"><a href="#假人默认生存模式（fakePlayerDefaultSurvivalMode）" class="headerlink" title="假人默认生存模式（fakePlayerDefaultSurvivalMode）"></a>假人默认生存模式（fakePlayerDefaultSurvivalMode）</h2><p>当召唤假人时，无论如何假人都默认为生存模式。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="获取主手物品ID（commandGetHeldItemID）"><a href="#获取主手物品ID（commandGetHeldItemID）" class="headerlink" title="获取主手物品ID（commandGetHeldItemID）"></a>获取主手物品ID（commandGetHeldItemID）</h2><p>使用“&#x2F;getHeldItemID”命令来获取玩家主手物品的物品ID。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="重新引入拌线欺骗特性（stringDupeReintroduced）"><a href="#重新引入拌线欺骗特性（stringDupeReintroduced）" class="headerlink" title="重新引入拌线欺骗特性（stringDupeReintroduced）"></a>重新引入拌线欺骗特性（stringDupeReintroduced）</h2><p>重新引入拌线欺骗特性，可以通过此规则来继续使用刷线机。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.21.2 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="女巫红石粉掉落控制器（witchRedstoneDustDropController）"><a href="#女巫红石粉掉落控制器（witchRedstoneDustDropController）" class="headerlink" title="女巫红石粉掉落控制器（witchRedstoneDustDropController）"></a>女巫红石粉掉落控制器（witchRedstoneDustDropController）</h2><p>设置女巫掉落红石粉的保底数量。</p>
+<ul>
+<li><p>类型: <code>int</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>-1 - 999999</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="女巫萤石粉掉落控制器（witchGlowstoneDustDropController）"><a href="#女巫萤石粉掉落控制器（witchGlowstoneDustDropController）" class="headerlink" title="女巫萤石粉掉落控制器（witchGlowstoneDustDropController）"></a>女巫萤石粉掉落控制器（witchGlowstoneDustDropController）</h2><p>设置女巫掉落萤石粉的保底数量。</p>
+<ul>
+<li><p>类型: <code>int</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>-1 - 999999</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="TNT威力控制器（tntPowerController）"><a href="#TNT威力控制器（tntPowerController）" class="headerlink" title="TNT威力控制器（tntPowerController）"></a>TNT威力控制器（tntPowerController）</h2><p>控制TNT的爆炸威力，设置为”-1”禁用规则。</p>
+<ul>
+<li><p>类型: <code>double</code></p>
+</li>
+<li><p>默认值: <code>-1.0D</code></p>
+</li>
+<li><p>参考选项: <code>-1.0D - 999999D</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>TNT</code></p>
+</li>
+</ul>
+<h2 id="温顺的末影人（meekEnderman）"><a href="#温顺的末影人（meekEnderman）" class="headerlink" title="温顺的末影人（meekEnderman）"></a>温顺的末影人（meekEnderman）</h2><p>你可以随便瞅末影人。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="客制化地狱门（customizedNetherPortal）"><a href="#客制化地狱门（customizedNetherPortal）" class="headerlink" title="客制化地狱门（customizedNetherPortal）"></a>客制化地狱门（customizedNetherPortal）</h2><p>完全自定义地狱门，开启后，地狱门方块将可以被挖掘且挖掘地狱门框架和地狱门都不会让整个地狱门破碎。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）"><a href="#地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）" class="headerlink" title="地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）"></a>地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）</h2><p>列举了一些常用Carpet拓展的Wiki链接，你只需要使用 <code>/carpetExtensionModWikiHyperlink &lt;ExtensionName&gt;</code> 指令即可在聊天框中获取到跳转链接，点击链接即可跳转。</p>
+<p>随着版本更新该规则的拓展模组列表会不断调整。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="自定义方块硬度（commandCustomBlockHardness）"><a href="#自定义方块硬度（commandCustomBlockHardness）" class="headerlink" title="自定义方块硬度（commandCustomBlockHardness）"></a>自定义方块硬度（commandCustomBlockHardness）</h2><p>使用指令来自定义任何方块的挖掘硬度。</p>
+<p>开启规则后使用 <code>/customBlockHardness help</code> 命令来查看使用说明。</p>
+<p>客户端没有安装 <code>Carpet AMS Addition</code> 时，该规则完全不可用。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>AMS_NETWORK</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="仅OP可召唤白名单中的玩家（onlyOpCanSpawnRealPlayerInWhitelist）"><a href="#仅OP可召唤白名单中的玩家（onlyOpCanSpawnRealPlayerInWhitelist）" class="headerlink" title="仅OP可召唤白名单中的玩家（onlyOpCanSpawnRealPlayerInWhitelist）"></a>仅OP可召唤白名单中的玩家（onlyOpCanSpawnRealPlayerInWhitelist）</h2><p>只有OP玩家可以召唤在白名单中的玩家，无论白名单是否开启。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="禁止物品实体创建下界传送门（itemEntityCreateNetherPortalDisabled）"><a href="#禁止物品实体创建下界传送门（itemEntityCreateNetherPortalDisabled）" class="headerlink" title="禁止物品实体创建下界传送门（itemEntityCreateNetherPortalDisabled）"></a>禁止物品实体创建下界传送门（itemEntityCreateNetherPortalDisabled）</h2><p>让物品实体穿过下界传送门时不会创建传送门。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.21 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="强效经验修补（powerfulExpMending）"><a href="#强效经验修补（powerfulExpMending）" class="headerlink" title="强效经验修补（powerfulExpMending）"></a>强效经验修补（powerfulExpMending）</h2><p>让物品只需要在背包内即可受到经验修补的效果，无需拿在手上。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="玩家（commandAtSomeOnePlayer）"><a href="#玩家（commandAtSomeOnePlayer）" class="headerlink" title="@玩家（commandAtSomeOnePlayer）"></a>@玩家（commandAtSomeOnePlayer）</h2><p>使用<code>/@</code>指令去@某位玩家。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>COMMAND</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="大收纳袋（largeBundle）"><a href="#大收纳袋（largeBundle）" class="headerlink" title="大收纳袋（largeBundle）"></a>大收纳袋（largeBundle）</h2><p>让收纳袋拥有一个<code>9x3</code>或<code>9x6</code>的UI，手持收纳袋右键即可打开UI。</p>
+<p>该规则不允许在收纳袋中放入收纳袋和潜影盒。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.17.1 可用&gt;</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>9x3</code>, <code>9x6</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="最大链式更新深度（maxChainUpdateDepth）"><a href="#最大链式更新深度（maxChainUpdateDepth）" class="headerlink" title="最大链式更新深度（maxChainUpdateDepth）"></a>最大链式更新深度（maxChainUpdateDepth）</h2><p>修改最大链式更新深度，设置为“-1”禁用规则。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.19 可用&gt;</p>
+<ul>
+<li><p>类型: <code>int</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>-1</code>, <code>100000</code>, <code>200000</code>, <code>300000</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="幻翼生成警告（phantomSpawnAlert）"><a href="#幻翼生成警告（phantomSpawnAlert）" class="headerlink" title="幻翼生成警告（phantomSpawnAlert）"></a>幻翼生成警告（phantomSpawnAlert）</h2><p>广播谁召唤了幻翼的消息。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="禁用末地门加载（endPortalChunkLoadDisabled）"><a href="#禁用末地门加载（endPortalChunkLoadDisabled）" class="headerlink" title="禁用末地门加载（endPortalChunkLoadDisabled）"></a>禁用末地门加载（endPortalChunkLoadDisabled）</h2><p>让实体穿过末地门不会发生区块加载。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.20.6 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="末地门加载器（endPortalChunkLoader）"><a href="#末地门加载器（endPortalChunkLoader）" class="headerlink" title="末地门加载器（endPortalChunkLoader）"></a>末地门加载器（endPortalChunkLoader）</h2><p>让实体穿过末地门时会发生区块加载，与Minecraft &gt;&#x3D; 1.20.5时保持一致。</p>
+<p>&lt;该规则 Minecraft &lt; 1.20.6 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>AMS_CHUNKLOADER</code></p>
+</li>
+</ul>
+<h2 id="AMS网络协议（amsNetworkProtocol）"><a href="#AMS网络协议（amsNetworkProtocol）" class="headerlink" title="AMS网络协议（amsNetworkProtocol）"></a>AMS网络协议（amsNetworkProtocol）</h2><p>AMS网络协议的开关。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>AMS_NETWORK</code></p>
+</li>
+</ul>
+<h2 id="获取客户端玩家FPS（commandGetClientPlayerFps）"><a href="#获取客户端玩家FPS（commandGetClientPlayerFps）" class="headerlink" title="获取客户端玩家FPS（commandGetClientPlayerFps）"></a>获取客户端玩家FPS（commandGetClientPlayerFps）</h2><p>使用指令获取指定客户端玩家的FPS。</p>
+<p>开启规则后，使用“&#x2F;getClientPlayerFps help”命令查看使用说明</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>AMS_NETWORK</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="设置玩家姿势（commandSetPlayerPose）"><a href="#设置玩家姿势（commandSetPlayerPose）" class="headerlink" title="设置玩家姿势（commandSetPlayerPose）"></a>设置玩家姿势（commandSetPlayerPose）</h2><p>使用指令设置玩家姿势。</p>
+<p>开启规则后，使用“&#x2F;playerPose help”命令查看使用说明</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>AMS_NETWORK</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="AMSP网络协议Debug指令（commandAmspDebug）"><a href="#AMSP网络协议Debug指令（commandAmspDebug）" class="headerlink" title="AMSP网络协议Debug指令（commandAmspDebug）"></a>AMSP网络协议Debug指令（commandAmspDebug）</h2><p>一些用于网络通信测试的指令。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>ops</code>, <code>true</code>, <code>false</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>AMS_NETWORK</code>, <code>COMMAND</code></p>
+</li>
+</ul>
+<h2 id="只有玩家可以生成地狱门（onlyPlayerCanCreateNetherPortal）"><a href="#只有玩家可以生成地狱门（onlyPlayerCanCreateNetherPortal）" class="headerlink" title="只有玩家可以生成地狱门（onlyPlayerCanCreateNetherPortal）"></a>只有玩家可以生成地狱门（onlyPlayerCanCreateNetherPortal）</h2><p>只允许玩家穿过地狱门时生成新的地狱门。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.21 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="防止服务器暂停（preventServerPause）"><a href="#防止服务器暂停（preventServerPause）" class="headerlink" title="防止服务器暂停（preventServerPause）"></a>防止服务器暂停（preventServerPause）</h2><p>防止服务器60s后暂停。</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.21.2 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h2 id="仙人掌扳手拓展（flippinCactusExtras）"><a href="#仙人掌扳手拓展（flippinCactusExtras）" class="headerlink" title="仙人掌扳手拓展（flippinCactusExtras）"></a>仙人掌扳手拓展（flippinCactusExtras）</h2><p>使仙人掌扳手能适用于更多方块。</p>
+<p>受影响的方块:</p>
+<p>木桶、雕文书架、合成器、展示架</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
+</li>
+</ul>
+<h2 id="实验性矿车速度（experimentalMinecartSpeed）"><a href="#实验性矿车速度（experimentalMinecartSpeed）" class="headerlink" title="实验性矿车速度（experimentalMinecartSpeed）"></a>实验性矿车速度（experimentalMinecartSpeed）</h2><p>设置实验性矿车的速度。</p>
+<p>启用该规则将覆盖游戏规则</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.21.2 可用&gt;</p>
+<ul>
+<li><p>类型: <code>int</code></p>
+</li>
+<li><p>默认值: <code>-1</code></p>
+</li>
+<li><p>参考选项: <code>-1</code>, <code>1000</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="启用实验性矿车（experimentalMinecartEnabled）"><a href="#启用实验性矿车（experimentalMinecartEnabled）" class="headerlink" title="启用实验性矿车（experimentalMinecartEnabled）"></a>启用实验性矿车（experimentalMinecartEnabled）</h2><p>启用实验性矿车。</p>
+<p>服务器环境切换该规则设置时需要重启服务器</p>
+<p>客户端环境切换该规则设置时需要重启客户端</p>
+<p>&lt;该规则 Minecraft &gt;&#x3D; 1.21.2 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
+</li>
+</ul>
+<h2 id="AMS翻译模式（amsTranslationMode）"><a href="#AMS翻译模式（amsTranslationMode）" class="headerlink" title="AMS翻译模式（amsTranslationMode）"></a>AMS翻译模式（amsTranslationMode）</h2><p>切换Carpet AMS Addition的翻译模式。</p>
+<p>[client] - 优先使用客户端自己的语言向客户端发送翻译文本</p>
+<p>[server] - 统一使用服务端设置的语言进行翻译</p>
+<ul>
+<li><p>类型: <code>enum</code></p>
+</li>
+<li><p>默认值: <code>CLIENT</code></p>
+</li>
+<li><p>参考选项: <code>CLIENT</code>, <code>SERVER</code></p>
+</li>
+<li><p>分类: <code>AMS</code></p>
+</li>
+</ul>
+<h2 id="可合成附魔金苹果（craftableEnchantedGoldenApples）"><a href="#可合成附魔金苹果（craftableEnchantedGoldenApples）" class="headerlink" title="可合成附魔金苹果（craftableEnchantedGoldenApples）"></a>可合成附魔金苹果（craftableEnchantedGoldenApples）</h2><p>开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="更好的合成骨块（betterCraftableBoneBlock）"><a href="#更好的合成骨块（betterCraftableBoneBlock）" class="headerlink" title="更好的合成骨块（betterCraftableBoneBlock）"></a>更好的合成骨块（betterCraftableBoneBlock）</h2><p>开启后，可更好的合成骨块（可用9个骨头合成三个骨块，大幅降低合成卡顿）。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="可合成收纳袋（craftableBundle）"><a href="#可合成收纳袋（craftableBundle）" class="headerlink" title="可合成收纳袋（craftableBundle）"></a>可合成收纳袋（craftableBundle）</h2><p>开启后，玩家可以在Minecraft 1.17&#x2F;1.18&#x2F;1.19中合成收纳袋。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="可合成幽匿感测体（craftableSculkSensor）"><a href="#可合成幽匿感测体（craftableSculkSensor）" class="headerlink" title="可合成幽匿感测体（craftableSculkSensor）"></a>可合成幽匿感测体（craftableSculkSensor）</h2><p>开启后，玩家可以在Minecraft 1.17&#x2F;1.18中合成幽匿感测体。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="可合成鞘翅（craftableElytra）"><a href="#可合成鞘翅（craftableElytra）" class="headerlink" title="可合成鞘翅（craftableElytra）"></a>可合成鞘翅（craftableElytra）</h2><p>开启后，玩家可以在Minecraft中合成鞘翅。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code> , <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="更好的合成发射器（betterCraftableDispenser）"><a href="#更好的合成发射器（betterCraftableDispenser）" class="headerlink" title="更好的合成发射器（betterCraftableDispenser）"></a>更好的合成发射器（betterCraftableDispenser）</h2><p>开启后，玩家可以使用更灵活的合成配方来合成发射器。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）"><a href="#更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）" class="headerlink" title="更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）"></a>更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）</h2><p>使用深板岩来合成磨制黑石按钮。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="腐肉烧皮革（rottenFleshBurnedIntoLeather）"><a href="#腐肉烧皮革（rottenFleshBurnedIntoLeather）" class="headerlink" title="腐肉烧皮革（rottenFleshBurnedIntoLeather）"></a>腐肉烧皮革（rottenFleshBurnedIntoLeather）</h2><p>腐肉可以在熔炉中烧成皮革。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="使用新的磁石配方（useNewLodestoneRecipe）"><a href="#使用新的磁石配方（useNewLodestoneRecipe）" class="headerlink" title="使用新的磁石配方（useNewLodestoneRecipe）"></a>使用新的磁石配方（useNewLodestoneRecipe）</h2><p>使用铁锭来合成磁石。</p>
+<p>&lt;该规则 Minecraft &lt; 1.21.5 可用&gt;</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+<h2 id="可合成南瓜头（craftableCarvedPumpkin）"><a href="#可合成南瓜头（craftableCarvedPumpkin）" class="headerlink" title="可合成南瓜头（craftableCarvedPumpkin）"></a>可合成南瓜头（craftableCarvedPumpkin）</h2><p>使用剪刀和南瓜合成南瓜头，每合成一个南瓜头剪刀-1耐久（受耐久附魔影响）。</p>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
+</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

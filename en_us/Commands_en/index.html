@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-content">
+                <h3 id="中文-English"><a href="#中文-English" class="headerlink" title="[ 中文 | English ]"></a>[ <a href="/Commands">中文</a> | English ]</h3><h1 id="——-Commands-——"><a href="#——-Commands-——" class="headerlink" title="—— Commands ——"></a><center>—— Commands ——</center></h1><p>&emsp;</p>
+<h3 id="commandPlayerChunkLoadController"><a href="#commandPlayerChunkLoadController" class="headerlink" title="commandPlayerChunkLoadController"></a>commandPlayerChunkLoadController</h3><ul>
+<li><p><strong>&#x2F;playerChunkLoading [true&#x2F;false]</strong></p>
+<p>Control chunk loading of player. Can only manipulate yourself.</p>
+</li>
+</ul>
+<h3 id="commandAnvilInteractionDisabled"><a href="#commandAnvilInteractionDisabled" class="headerlink" title="commandAnvilInteractionDisabled"></a>commandAnvilInteractionDisabled</h3><ul>
+<li><p><strong>&#x2F;anvilInteractionDisabled [true&#x2F;false]</strong></p>
+<p>Controls whether the player can interact with the anvil.</p>
+</li>
+</ul>
+<h3 id="amsUpdateSuppressionCrashFix"><a href="#amsUpdateSuppressionCrashFix" class="headerlink" title="amsUpdateSuppressionCrashFix"></a>amsUpdateSuppressionCrashFix</h3><ul>
+<li><p><strong>&#x2F;amsUpdateSuppressionCrashFixForceMode [true&#x2F;false]</strong></p>
+<p>Control whether forced startup is enabled when the <code>customBlockUpdateSuppressor</code>  rule is enabled.</p>
+</li>
+</ul>
+<h3 id="commandCustomBlockBlastResistance"><a href="#commandCustomBlockBlastResistance" class="headerlink" title="commandCustomBlockBlastResistance"></a>commandCustomBlockBlastResistance</h3><ul>
+<li><p><strong>&#x2F;customBlockBlastResistance set &lt;block&gt; &lt;resistance&gt;</strong></p>
+<p>Add or modify blocks and their blast resistance.</p>
+</li>
+<li><p>**&#x2F;customBlockBlastResistance remove  &lt;block&gt; **</p>
+<p>Remove a block from the list.</p>
+</li>
+<li><p><strong>&#x2F;customBlockBlastResistance removeAll</strong></p>
+<p>Remove all blocks from the list.</p>
+</li>
+<li><p><strong>&#x2F;customBlockBlastResistance list</strong></p>
+<p>Display all added blocks.</p>
+</li>
+<li><p><strong>&#x2F;customBlockBlastResistance help</strong></p>
+<p>View the usage instructions.</p>
+</li>
+</ul>
+<h3 id="commandHere"><a href="#commandHere" class="headerlink" title="commandHere"></a>commandHere</h3><ul>
+<li><p><strong>&#x2F;here</strong></p>
+<p>send the current dimension, coordinates, and corresponding overworld&#x2F;nether coordinates of your current location and give oneself a 30s glowing effect.</p>
+</li>
+</ul>
+<h3 id="commandWhere"><a href="#commandWhere" class="headerlink" title="commandWhere"></a>commandWhere</h3><ul>
+<li><p><strong>&#x2F;where</strong></p>
+<p>get the specified player’s dimension, coordinates, and corresponding Overworld&#x2F;Nether coordinates and give the target player a 30s glowing effect.</p>
+</li>
+</ul>
+<h3 id="commandPlayerLeader"><a href="#commandPlayerLeader" class="headerlink" title="commandPlayerLeader"></a>commandPlayerLeader</h3><ul>
+<li><p><strong>&#x2F;leader add &lt;player&gt;</strong></p>
+<p>Add a tour guide.</p>
+</li>
+<li><p><strong>&#x2F;leader remove &lt;player&gt;</strong></p>
+<p>remove a tour guide.</p>
+</li>
+<li><p><strong>&#x2F;leader removeAll</strong></p>
+<p>Remove all tour guide.</p>
+</li>
+<li><p><strong>&#x2F;leader broadcastLeaderPos &lt;player&gt; interval &lt;tick&gt;</strong></p>
+<p>Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting.</p>
+</li>
+<li><p><strong>&#x2F;leader list</strong></p>
+<p>View tour guide list.</p>
+</li>
+<li><p><strong>&#x2F;leader help</strong></p>
+<p>View the usage instructions.</p>
+</li>
+</ul>
+<h3 id="commandPacketInternetGroper"><a href="#commandPacketInternetGroper" class="headerlink" title="commandPacketInternetGroper"></a>commandPacketInternetGroper</h3><ul>
+<li><p><strong>&#x2F;pings &lt;targetIpOrDomainName&gt; &lt;pingQuantity&gt;</strong></p>
+<p>Ping a specific host.</p>
+</li>
+<li><p><strong>&#x2F;pings stop</strong></p>
+<p>Interrupt the ping operation.</p>
+</li>
+</ul>
+<h3 id="commandGetSaveSize"><a href="#commandGetSaveSize" class="headerlink" title="commandGetSaveSize"></a>commandGetSaveSize</h3><ul>
+<li><p><strong>&#x2F;getSaveSize</strong></p>
+<p>Get save size.</p>
+</li>
+</ul>
+<h3 id="commandGetSystemInfo"><a href="#commandGetSystemInfo" class="headerlink" title="commandGetSystemInfo"></a>commandGetSystemInfo</h3><ul>
+<li><p><strong>&#x2F;getSystemInfo</strong></p>
+<p>Get the system information of the server.</p>
+</li>
+</ul>
+<h3 id="commandGoto"><a href="#commandGoto" class="headerlink" title="commandGoto"></a>commandGoto</h3><ul>
+<li><p><strong>&#x2F;goto &lt;dimension&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt;</strong></p>
+<p>teleport to the specified dimension and coordinates.</p>
+</li>
+<li><p><strong>&#x2F;goto &lt;dimension&gt;</strong></p>
+<p>Teleport to the corresponding coordinates of the current player location.</p>
+</li>
+</ul>
+<h3 id="commandCustomCommandPermissionLevel"><a href="#commandCustomCommandPermissionLevel" class="headerlink" title="commandCustomCommandPermissionLevel"></a>commandCustomCommandPermissionLevel</h3><ul>
+<li><p><strong>&#x2F;customCommandPermissionLevel set &lt;command&gt; &lt;permissionLevel&gt;</strong></p>
+<p>Set the permission level of a command.</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel remove &lt;command&gt;</strong></p>
+<p>Remove a modified command.</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel removeAll</strong></p>
+<p>Remove all modified commands.</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel refresh</strong></p>
+<p>Refresh command tree.</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel list</strong></p>
+<p>View the list of modified commands.</p>
+</li>
+<li><p><strong>&#x2F;customCommandPermissionLevel help</strong></p>
+<p>View the usage instructions.</p>
+</li>
+</ul>
+<h3 id="commandGetPlayerSkull"><a href="#commandGetPlayerSkull" class="headerlink" title="commandGetPlayerSkull"></a>commandGetPlayerSkull</h3><ul>
+<li><p><strong>&#x2F;getPlayerSkull &lt;player&gt; &lt;count&gt;</strong></p>
+<p>Get the skull of a specified player.</p>
+</li>
+</ul>
+<h3 id="commandCustomMovableBlock"><a href="#commandCustomMovableBlock" class="headerlink" title="commandCustomMovableBlock"></a>commandCustomMovableBlock</h3><ul>
+<li><p><strong>&#x2F;customMovableBlock add &lt;block&gt;</strong></p>
+<p>Added a movable block.</p>
+</li>
+<li><p><strong>&#x2F;customMovableBlock remove &lt;block&gt;</strong></p>
+<p>Delete a movable block.</p>
+</li>
+<li><p><strong>&#x2F;customMovableBlock removeAll</strong></p>
+<p>Removes all added movable blocks.</p>
+</li>
+<li><p><strong>&#x2F;customMovableBlock list</strong></p>
+<p>Check out the list of movable blocks.</p>
+</li>
+<li><p><strong>&#x2F;customMovableBlock help</strong></p>
+<p>View the usage instructions.</p>
+</li>
+</ul>
+<h3 id="commandGetHeldItemID"><a href="#commandGetHeldItemID" class="headerlink" title="commandGetHeldItemID"></a>commandGetHeldItemID</h3><ul>
+<li><p><strong>&#x2F;getHeldItemID</strong></p>
+<p>Get item ID of the player main hand item.</p>
+</li>
+</ul>
+<h3 id="commandCustomAntiFireItems"><a href="#commandCustomAntiFireItems" class="headerlink" title="commandCustomAntiFireItems"></a>commandCustomAntiFireItems</h3><ul>
+<li><p><strong>&#x2F;customAntiFireItems add &lt;item&gt;</strong></p>
+<p>Added a anti fire item.</p>
+</li>
+<li><p><strong>&#x2F;customAntiFireItems  remove &lt;block&gt;</strong></p>
+<p>Delete a anti fire item.</p>
+</li>
+<li><p><strong>&#x2F;customAntiFireItems removeAll</strong></p>
+<p>Removes all added anti fire items.</p>
+</li>
+<li><p><strong>&#x2F;customAntiFireItems  list</strong></p>
+<p>Check out the list of anti fire item.</p>
+</li>
+<li><p><strong>&#x2F;customAntiFireItems help</strong></p>
+<p>View the usage instructions.</p>
+</li>
+</ul>
+<h3 id="commandCarpetExtensionModWikiHyperlink"><a href="#commandCarpetExtensionModWikiHyperlink" class="headerlink" title="commandCarpetExtensionModWikiHyperlink"></a>commandCarpetExtensionModWikiHyperlink</h3><ul>
+<li><p><strong>&#x2F;carpetExtensionModWikiHyperlink &lt;ExtensionName&gt;</strong></p>
+<p>Get the Wiki link for a carpet extension mod.</p>
+</li>
+</ul>
+<h3 id="commandCustomBlockHardness"><a href="#commandCustomBlockHardness" class="headerlink" title="commandCustomBlockHardness"></a>commandCustomBlockHardness</h3><ul>
+<li><p><strong>&#x2F;customBlockHardness set &lt;block&gt; &lt;hardness&gt;</strong> </p>
+<p>Add or modify blocks and their hardness.</p>
+</li>
+<li><p><strong>&#x2F;customBlockHardness remove &lt;block&gt;</strong></p>
+<p>Remove a block from the list.</p>
+</li>
+<li><p><strong>&#x2F;customBlockHardness removeAll</strong></p>
+<p>Remove all blocks from the list.</p>
+</li>
+<li><p><strong>&#x2F;customBlockHardness getDefaultHardness</strong></p>
+<p>Query the default hardness of blocks.</p>
+</li>
+<li><p><strong>&#x2F;customBlockHardness list</strong></p>
+<p>Display all added blocks.</p>
+</li>
+<li><p><strong>&#x2F;customBlockHardness help</strong></p>
+<p>View the usage instructions.</p>
+</li>
+</ul>
+<h3 id="commandAtSomeOnePlayer"><a href="#commandAtSomeOnePlayer" class="headerlink" title="commandAtSomeOnePlayer"></a>commandAtSomeOnePlayer</h3><ul>
+<li><p><strong>&#x2F;@ &lt;player&gt;</strong></p>
+<p>@ some one player.</p>
+</li>
+</ul>
+<h3 id="commandGetClientPlayerFps"><a href="#commandGetClientPlayerFps" class="headerlink" title="commandGetClientPlayerFps"></a>commandGetClientPlayerFps</h3><ul>
+<li><p><strong>&#x2F;getClientPlayerFps &lt;player</strong>&gt;</p>
+<p>Get the FPS of the specified player.</p>
+</li>
+<li><p><strong>&#x2F;getClientPlayerFps help</strong></p>
+<p>View the usage instructions.</p>
+</li>
+</ul>
+<h3 id="commandSetPlayerPose"><a href="#commandSetPlayerPose" class="headerlink" title="commandSetPlayerPose"></a>commandSetPlayerPose</h3><ul>
+<li><p><strong>&#x2F;playerPose &lt;player&gt; set &lt;pose&gt;</strong></p>
+<p>Set player pose.</p>
+</li>
+<li><p><strong>&#x2F;playerPose &lt;player&gt; stop</strong></p>
+<p>Stop posing.</p>
+</li>
+<li><p><strong>&#x2F;playerPose help</strong></p>
+<p>View the usage instructions.</p>
+</li>
+</ul>
+<h3 id="commandPlayerNoNetherPortalTeleport"><a href="#commandPlayerNoNetherPortalTeleport" class="headerlink" title="commandPlayerNoNetherPortalTeleport"></a>commandPlayerNoNetherPortalTeleport</h3><ul>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport globalMode [true&#x2F;false]</strong></p>
+<p>Set global mode.</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport globalMode</strong></p>
+<p>View the global mode status.</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport add &lt;player&gt;</strong></p>
+<p>Add a player to the blacklist.</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport remove &lt;player&gt;</strong></p>
+<p>Remove a player from the blacklist.</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport clear</strong></p>
+<p>Clear the blacklist.</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport list</strong></p>
+<p>View the blacklist.</p>
+</li>
+<li><p><strong>&#x2F;playerNoNetherPortalTeleport help</strong></p>
+<p>View the usage instructions.</p>
+</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

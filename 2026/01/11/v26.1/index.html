@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+        
+            Carpet AMS Addition v26.1 |
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-title">
+                <h1>Carpet AMS Addition v26.1</h1>
+            </div>
+            <div class="post-meta">
+                <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date">2026/01/11</span>
+            </div>
+            
+            <div class="post-content">
+                <h1 id="新规则"><a href="#新规则" class="headerlink" title="新规则"></a>新规则</h1><ul>
+<li><p><strong>防止服务器暂停（preventServerPause）</strong><br>防止服务器60s后暂停</p>
+</li>
+<li><p><strong>仙人掌扳手拓展（flippinCactusExtras）</strong><br>使flippin仙人掌规则能适用于更多方块<br>受影响的方块：木桶、雕文书架、合成器、展示架</p>
+</li>
+<li><p><strong>实验性矿车速度（experimentalMinecartSpeed）</strong><br>设置实验性矿车的速度<br>启用该规则将覆盖游戏规则</p>
+</li>
+<li><p><strong>启用实验性矿车（experimentalMinecartEnabled）</strong><br>启用实验性矿车<br>服务器环境切换该规则设置时需要重启服务器<br>客户端环境切换该规则设置时需要重启客户端</p>
+</li>
+<li><p><strong>AMS翻译模式（amsTranslationMode）</strong><br>切换Carpet AMS Addition的翻译模式</p>
+</li>
+</ul>
+<h1 id="变化"><a href="#变化" class="headerlink" title="变化"></a>变化</h1><ul>
+<li><p>现在服务端默认使用客户端的语言向客户端发送翻译，你可以通过 <strong>AMS翻译模式（amsTranslationMode）</strong>规则来切换模式</p>
+</li>
+<li><p>现在，在 <strong>AMS_NETWORK</strong> 分类下的规则在 <strong>AMS网络协议（amsNetworkProtocol）</strong>规则未启用时将无法开启，且当服务器启动时如果 <strong>AMS网络协议（amsNetworkProtocol）</strong>未开启，会将在 <strong>AMS_NETWORK</strong> 分类下的规则恢复至默认值</p>
+</li>
+<li><p>现在，各别规则在设置它们时会将其强制设置为默认，且必须在重启服务器后生效，因此，<strong>大潜影盒（largeShulkerBox）</strong>规则已经变得足够安全</p>
+</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ul>
+<li><p><strong>启用实验性矿车（experimentalMinecartEnabled）</strong>规则貌似有一点小问题，不过通过多重启几次服务器可以解决，不建议在自己的常玩存档中频繁切换该规则 <a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/212">#212</a></p>
+</li>
+<li><p>修复了一些BUG（同时也有可能制造了新的BUG），具体是哪些懒得写了 XD</p>
+</li>
+</ul>
+<hr>
+<h1 id="New-Rules"><a href="#New-Rules" class="headerlink" title="New Rules"></a>New Rules</h1><ul>
+<li><p><strong>preventServerPause</strong><br>Prevent server pause after 60s</p>
+</li>
+<li><p><strong>flippinCactusExtras</strong><br>Enables flippinCactus rules to work on more blocks<br>Affected blocks: barrel, chiseled_bookshelf, crafter, shelf</p>
+</li>
+<li><p><strong>experimentalMinecartSpeed</strong><br>Set the speed of the experimental minecart<br>Enabling this rule will override the game rules</p>
+</li>
+<li><p><strong>experimentalMinecartEnabled</strong><br>Enable experimental minecarts<br>When the server environment switches the rule setting, the server needs to be restarted<br>When the client environment switches the rule settings, the client needs to be restarted</p>
+</li>
+<li><p><strong>amsTranslationMode</strong><br>Switch the translation mode of Carpet AMS Addition.</p>
+</li>
+</ul>
+<h1 id="Changes"><a href="#Changes" class="headerlink" title="Changes"></a>Changes</h1><ul>
+<li><p>The server now uses the client’s language by default when sending translated messages. You can switch this behavior using the <strong>amsTranslationMode</strong> rule.</p>
+</li>
+<li><p>Rules under the <strong>AMS_NETWORK</strong> category can no longer be enabled unless the <strong>amsNetworkProtocol</strong> rule is active. When the server starts with <strong>AMS Network Protocol</strong> disabled, all rules under the <strong>AMS_NETWORK</strong> category will automatically reset to their default values.</p>
+</li>
+<li><p>Some rules are now force-set to their default values when changed and require a server restart to take effect. As a result, the <strong>largeShulkerBox</strong> rule is now considered safe to use.</p>
+</li>
+</ul>
+<h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><ul>
+<li><p>The <strong>experimentalMinecartEnabled</strong> rule may behave inconsistently Restarting the server several times usually resolves the issue, but frequent toggling in your main world is <strong>not recommended</strong>.<br>See <a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues/212">#212</a> for details.</p>
+</li>
+<li><p>Fixed some bugs (and probably introduced new ones). Not going to list them all XD</p>
+</li>
+</ul>
+<p>&emsp;</p>
+<p>&emsp;</p>
+<p><em><strong>Translate into English from DeepSeek</strong></em></p>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

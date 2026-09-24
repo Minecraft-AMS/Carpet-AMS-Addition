@@ -1,0 +1,122 @@
+.post-details {
+  color: #008b8b;
+  font-size: 0.9em;
+  width: 100%;
+  margin: 0 10px;
+  line-height: 1.8em;
+}
+.post-details a:not(.nonstyle) {
+  text-decoration: none;
+  color: #a3d2e2;
+  box-shadow: 0 1px 0 #555;
+}
+.post-details a:not(.nonstyle):hover {
+  box-shadow: 0 1px 0 #a3d2e2;
+}
+.post-details .post-title {
+  margin-bottom: 10px;
+}
+.post-details .post-title h1 {
+  color: #00ced1;
+  font-size: 2em;
+  font-weight: normal;
+  margin-block: 0;
+}
+.post-details .post-meta {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #00ced1;
+}
+.post-details .post-content h1,
+.post-details .post-content h2,
+.post-details .post-content h3,
+.post-details .post-content h4,
+.post-details .post-content h5,
+.post-details .post-content h6 {
+  color: #00ced1;
+  margin-block: 0;
+  margin-inline: 0;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  line-height: 1.2em;
+}
+.post-details .post-content h1 {
+  font-size: 1.4em;
+}
+.post-details .post-content h2 {
+  font-size: 1.3em;
+}
+.post-details .post-content h3 {
+  font-size: 1.2em;
+}
+.post-details .post-content h4 {
+  font-size: 1.1em;
+}
+.post-details .post-content h5 {
+  font-size: 1em;
+}
+.post-details .post-content h6 {
+  font-size: 0.9em;
+}
+.post-details .post-content p {
+  margin-block: 0;
+  line-height: 1.8em;
+  text-align: left;
+}
+.post-details .post-content p:not(:last-child) {
+  margin: 0 0 10px;
+}
+.post-details .post-content li {
+  line-height: 2em;
+}
+.post-details .post-content img {
+  max-width: 100%;
+}
+.post-details .post-content blockquote {
+  margin-block: 0;
+  margin-inline: 0;
+  padding: 3px 10px;
+  background-color: #000;
+  border-left: 7px solid #41e199;
+}
+.post-details .post-content blockquote > p {
+  margin: 0 0;
+}
+.post-details .post-content kbd {
+  padding: 1px 3px;
+  background-color: #eee;
+  box-shadow: 1px 2px #999;
+  border-radius: 3px;
+}
+.post-details .post-content mark,
+.post-details .post-content code:not(.hljs) {
+  padding: 2px 3px;
+  background-color: #41e199;
+  border-radius: 10px;
+  font-family: "Consolas", sans-serif; /* 设置字体 */
+}
+.post-details .post-content table {
+  text-align: left;
+  border-collapse: collapse;
+  margin: 1em 0;
+  width: 100%;
+}
+.post-details .post-content th,
+.post-details .post-content td {
+  padding: 5px;
+  border: 1px solid #00ced1;
+}
+.post-details .post-content tr:nth-child(even) {
+  background-color: #000;
+}
+.post-details .post-content th {
+  font-weight: 400;
+  background-color: #00ced1 v;
+}
+.post-details .katex > .katex-html {
+  white-space: normal;
+}
+.post-details .katex .base {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

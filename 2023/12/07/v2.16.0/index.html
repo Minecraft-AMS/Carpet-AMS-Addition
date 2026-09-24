@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+        
+            Carpet AMS Addition v2.16.0 |
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-title">
+                <h1>Carpet AMS Addition v2.16.0</h1>
+            </div>
+            <div class="post-meta">
+                <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date">2023/12/07</span>
+            </div>
+            
+            <div class="post-content">
+                <h1 id="新增规则"><a href="#新增规则" class="headerlink" title="新增规则"></a>新增规则</h1><h3 id="再生成龙蛋（regeneratingDragonEgg）"><a href="#再生成龙蛋（regeneratingDragonEgg）" class="headerlink" title="再生成龙蛋（regeneratingDragonEgg）"></a>再生成龙蛋（regeneratingDragonEgg）</h3><p>开启后，玩家每次击败末影龙都会生成一个龙蛋。</p>
+<blockquote>
+<p>为了Dnsolx的蛋</p>
+</blockquote>
+<ul>
+<li><p>类型: <code>boolean</code></p>
+</li>
+<li><p>默认值: <code>false</code></p>
+</li>
+<li><p>参考选项: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h3 id="自定义炸毁方块（customBlowUpBlock）"><a href="#自定义炸毁方块（customBlowUpBlock）" class="headerlink" title="自定义炸毁方块（customBlowUpBlock）"></a>自定义炸毁方块（customBlowUpBlock）</h3><p>自定义任何方块的爆炸抗性使其与石头相同。</p>
+<ul>
+<li><p>类型: <code>String</code></p>
+</li>
+<li><p>默认值: <code>VANILLA</code></p>
+</li>
+<li><p>参考选项: <code>minecraft:bedrock</code>, <code>minecraft:bedrock,minecraft:obsidian</code></p>
+</li>
+<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h1 id="更改"><a href="#更改" class="headerlink" title="更改"></a>更改</h1><ul>
+<li><p>Carpet AMS Addition 支持 1.20.3</p>
+</li>
+<li><p>移除 <code>weakXXX</code> 系列规则以及 <code>增强型世界吞噬者（enhancedWorldEater）</code>规则，取而代之的是 <code>自定义炸毁方块（customBlowUpBlock）</code> 规则</p>
+</li>
+<li><p>现在 <code>可掉落蛋糕（cakeBlockDropOnBreak）</code> 规则开启时，创造模式下的玩家破坏蛋糕不会产生掉落</p>
+</li>
+</ul>
+<hr>
+<h1 id="New-Rules"><a href="#New-Rules" class="headerlink" title="New Rules"></a>New Rules</h1><h3 id="regeneratingDragonEgg"><a href="#regeneratingDragonEgg" class="headerlink" title="regeneratingDragonEgg"></a>regeneratingDragonEgg</h3><p>When enabled，Every time a player defeats the Ender Dragon, a dragon egg will be generated.</p>
+<blockquote>
+<p>For Dnsolx eggs</p>
+</blockquote>
+<ul>
+<li><p>Type: <code>boolean</code></p>
+</li>
+<li><p>Default: <code>false</code></p>
+</li>
+<li><p>Suggested options: <code>false</code>, <code>true</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h3 id="customBlowUpBlock"><a href="#customBlowUpBlock" class="headerlink" title="customBlowUpBlock"></a>customBlowUpBlock</h3><p>Customize the explosion resistance of any block to be equivalent to stone.</p>
+<ul>
+<li><p>Type: <code>String</code></p>
+</li>
+<li><p>Default: <code>VANILLA</code></p>
+</li>
+<li><p>Suggested options: <code>minecraft:bedrock</code>, <code>minecraft:bedrock,minecraft:obsidian</code></p>
+</li>
+<li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
+</li>
+</ul>
+<h1 id="Changes"><a href="#Changes" class="headerlink" title="Changes"></a>Changes</h1><ul>
+<li><p>Carpet AMS Addition supports 1.20.3</p>
+</li>
+<li><p>Remove the <code>weakXXX</code> series rules and the <code>enhancedWorldEater</code> rule, and in their place, introduce the <code>customBlowUpBlock</code> rule</p>
+</li>
+<li><p>When the <code>cakeBlockDropOnBreak </code> rule is enabled, breaking a cake block in creative mode will not produce any drops</p>
+</li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+        
+            Carpet AMS Addition v2.41.0 |
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-title">
+                <h1>Carpet AMS Addition v2.41.0</h1>
+            </div>
+            <div class="post-meta">
+                <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date">2024/04/27</span>
+            </div>
+            
+            <div class="post-content">
+                <h1 id="新增规则"><a href="#新增规则" class="headerlink" title="新增规则"></a>新增规则</h1><ul>
+<li><p><strong>最大玩家方块交互距离作用域（maxPlayerBlockInteractionRangeScope）<code>Minecraft &gt;= 1.20.5</code></strong></p>
+<p>更改maxPlayerBlockInteractionRange规则的作用域。</p>
+<ul>
+<li>[server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行。</li>
+<li>[global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离。</li>
+</ul>
+</li>
+<li><p><strong>最大玩家实体交互距离作用域（maxPlayerEntityInteractionRangeScope）<code>Minecraft &gt;= 1.20.5</code></strong></p>
+<p>当更改maxPlayerEntityInteractionRange规则的作用域。</p>
+<ul>
+<li>[server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行。</li>
+<li>[global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离。</li>
+</ul>
+</li>
+</ul>
+<h1 id="变化"><a href="#变化" class="headerlink" title="变化"></a>变化</h1><ul>
+<li><p>现在使用<strong>方块加载时长控制器（blockChunkLoaderTimeController）</strong>或<strong>方块加载范围控制器（blockChunkLoaderRangeController）</strong>规则对方块加载器的加载时长和范围修改后需重启服务器才会生效。</p>
+</li>
+<li><p>1.20.5版重新引入了<strong>客户端最大交互距离（maxClientInteractionReachDistance）</strong>规则。</p>
+</li>
+</ul>
+<h1 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h1><ul>
+<li><p>修复了方块加载器导致的内存溢出问题。</p>
+</li>
+<li><p>修复了客户端规则不同步问题。<a target="_blank" rel="noopener" href="https://github.com/gnembon/fabric-carpet/issues/1903">Fabric Carpet  #1903</a></p>
+</li>
+</ul>
+<hr>
+<h1 id="New-Rules"><a href="#New-Rules" class="headerlink" title="New Rules"></a>New Rules</h1><ul>
+<li><p><strong>maxPlayerBlockInteractionRangeScope <code>Minecraft &gt;= 1.20.5</code></strong></p>
+<p>Change the scope of the “maxPlayerBlockInteractionRange” rule.</p>
+<ul>
+<li>[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.</li>
+<li>[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.</li>
+</ul>
+</li>
+<li><p><strong>maxPlayerEntityInteractionRangeScope <code>Minecraft &gt;= 1.20.5</code></strong></p>
+<p>Change the scope of the “maxPlayerEntityInteractionRange” rule.</p>
+<ul>
+<li>[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.</li>
+<li>[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.</li>
+</ul>
+</li>
+</ul>
+<p>​		</p>
+<h1 id="Changes"><a href="#Changes" class="headerlink" title="Changes"></a>Changes</h1><ul>
+<li><p>After modifying the loading duration and range of block chunk loaders using either the <strong>blockChunkLoaderTimeController</strong> or <strong>blockChunkLoaderRangeController</strong> rule, a server restart is required for the changes to take effect.</p>
+</li>
+<li><p>1.20.5 reintroduces the <strong>maxClientInteractionReachDistance</strong> rule.</p>
+</li>
+</ul>
+<h1 id="Fix"><a href="#Fix" class="headerlink" title="Fix"></a>Fix</h1><ul>
+<li><p>Fixed the memory overflow issue caused by block chunk loader.</p>
+</li>
+<li><p>Fixed the issue of client rule sync. <a target="_blank" rel="noopener" href="https://github.com/gnembon/fabric-carpet/issues/1903">Fabric Carpet  #1903</a></p>
+</li>
+</ul>
+<p>&emsp;</p>
+<p>&emsp;</p>
+<p><em><strong>Translate into English from Chat-GPT</strong></em></p>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

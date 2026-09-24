@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="shortcut icon" href="/images/icon.png" type="image/x-icon" />
+    <title>
+        
+            Carpet AMS Addition v2.18.0 |
+         
+        Carpet AMS Addition
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/css/solid.min.css">
+
+    
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+<body>
+
+    <div class="body-container">
+        <div class="header-wrapper"><header>
+    <div class="header-container">
+        <div class="header-menu-list">
+            <ul>
+            
+                <li>
+                    <a href="/">日志[logs]</a>
+                </li>
+            
+                <li>
+                    <a href="/Rules">规则[Rules]</a>
+                </li>
+            
+                <li>
+                    <a href="/Loggers">记录器[Loggers]</a>
+                </li>
+            
+                <li>
+                    <a href="/Commands">指令[Commands]</a>
+                </li>
+            
+                <li>
+                    <a href="/Development">开发[Development]</a>
+                </li>
+            
+                <li>
+                    <a href="/Download">下载[Download]</a>
+                </li>
+            
+                <li>
+                    <a href="/OpenSource">开源[Open Source]</a>
+                </li>
+            
+            </ul>
+        </div>
+    </div>
+</header>
+</div>
+        <div class="main-wrapper"><main>
+    <div class="main-container">
+        <div class="post-details">
+            
+            <div class="post-title">
+                <h1>Carpet AMS Addition v2.18.0</h1>
+            </div>
+            <div class="post-meta">
+                <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date">2023/12/17</span>
+            </div>
+            
+            <div class="post-content">
+                <h1 id="新增规则"><a href="#新增规则" class="headerlink" title="新增规则"></a>新增规则</h1><h3 id="花哨的假人名称（fancyFakePlayerName）"><a href="#花哨的假人名称（fancyFakePlayerName）" class="headerlink" title="花哨的假人名称（fancyFakePlayerName）"></a>花哨的假人名称（fancyFakePlayerName）</h3><p>为carpet mod所召唤出来的假人加上绿色的前缀与后缀，输入命令时不用输入前缀，而后缀则是真实存在的。</p>
+<blockquote>
+<p>例：1024_byteeeee -&gt; [bot] 1024_byteeeee_bot</p>
+</blockquote>
+<h3 id="假人不计入计分板（fakePlayerNoScoreboardCounter）"><a href="#假人不计入计分板（fakePlayerNoScoreboardCounter）" class="headerlink" title="假人不计入计分板（fakePlayerNoScoreboardCounter）"></a>假人不计入计分板（fakePlayerNoScoreboardCounter）</h3><p>计分板将会屏蔽假人。</p>
+<h1 id="更改"><a href="#更改" class="headerlink" title="更改"></a>更改</h1><ul>
+<li><p><code>op玩家不准作弊拓展(opPlayerNoCheat)</code> 规则重命名为防止 <code>管理员作弊（preventAdministratorCheat）</code> 且包含Carpet TIS Addition所禁用的指令，不再作为Carpet TIS Addition的拓展</p>
+<blockquote>
+<p>影响的指令列表:</p>
+<p>&#x2F;gamemode, &#x2F;tp, &#x2F;teleport, &#x2F;give, &#x2F;setblock, &#x2F;summon, &#x2F;difficulty, &#x2F;kill, &#x2F;time, &#x2F;weather, &#x2F;fill, &#x2F;setblock, &#x2F;enchant, &#x2F;experience, &#x2F;advancement, &#x2F;effect, &#x2F;data, &#x2F;defaultgamemode</p>
+</blockquote>
+</li>
+<li><p><code>更新抑制崩溃修复（amsUpdateSuppressionCrashFix）</code> 规则不再默认在 <code>自定义方块更新抑制器（customBlockUpdateSuppression）</code>  开启时强制开启，但依然可以通过 <code>/amsUpdateSuppressionCrashFixForceMode true/false</code> 命令来控制是否强制开启</p>
+</li>
+<li><p><code>区块加载控制（commandChunkLoading）</code> 规则重命名为 <code>区块加载控制（playerChunkLoadController）</code> 规则，且指令更改为 <code>/playerChunkLoading true/false</code></p>
+</li>
+<li><p>MixinExtras v0.3.1 -&gt; v0.3.2</p>
+</li>
+<li><p>一堆代码上的调整与优化以及规则描述的更改（偷个懒不写了 :&lt;）</p>
+</li>
+</ul>
+<hr>
+<h1 id="New-Rules"><a href="#New-Rules" class="headerlink" title="New Rules"></a>New Rules</h1><h3 id="fancyFakePlayerName"><a href="#fancyFakePlayerName" class="headerlink" title="fancyFakePlayerName"></a>fancyFakePlayerName</h3><p>Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn’t need to be input when using the command, but the suffix is indeed present.</p>
+<blockquote>
+<p>Example：1024_byteeeee -&gt; [bot] 1024_byteeeee_bot</p>
+</blockquote>
+<h3 id="fakePlayerNoScoreboardCounter"><a href="#fakePlayerNoScoreboardCounter" class="headerlink" title="fakePlayerNoScoreboardCounter"></a>fakePlayerNoScoreboardCounter</h3><p>The scoreboard will hide the fake player.</p>
+<h1 id="Changes"><a href="#Changes" class="headerlink" title="Changes"></a>Changes</h1><ul>
+<li><p>The <code>opPlayerNoCheat</code> rule has been renamed to <code>preventAdministratorCheat</code> and includes commands disabled by <a target="_blank" rel="noopener" href="https://github.com/TISUnion/Carpet-TIS-Addition">Carpet TIS Addition</a>, no longer serving as an extension of <a target="_blank" rel="noopener" href="https://github.com/TISUnion/Carpet-TIS-Addition">Carpet TIS Addition</a></p>
+<blockquote>
+<p>Affects command list:</p>
+<p>&#x2F;gamemode, &#x2F;tp, &#x2F;teleport, &#x2F;give, &#x2F;setblock, &#x2F;summon, &#x2F;difficulty, &#x2F;kill, &#x2F;time, &#x2F;weather, &#x2F;fill, &#x2F;setblock, &#x2F;enchant, &#x2F;experience, &#x2F;advancement, &#x2F;effect, &#x2F;data, &#x2F;defaultgamemode</p>
+</blockquote>
+</li>
+<li><p>The <code>amsUpdateSuppressionCrashFix </code> rule is no longer enabled by default when <code>customBlockUpdateSuppression </code> is enabled, but it can still be controlled by the <code>/amsUpdateSuppressionCrashFixForceMode true/false</code> command to determine whether it is forcefully enabled</p>
+</li>
+<li><p>The <code>commandChunkLoading</code> rule has been renamed to <code>playerChunkLoadController</code> rule, and the command has been changed to <code>/playerChunkLoading true/false</code></p>
+</li>
+<li><p>MixinExtras v0.3.1 -&gt; v0.3.2</p>
+</li>
+<li><p>Adjustments and optimizations have been made to a bunch of code, as well as changes to the rule descriptions (I’m being lazy and not writing them :&lt;)</p>
+</li>
+</ul>
+<p>&emsp;</p>
+<p><em><strong>Translate into English from Chat-GPT</strong></em></p>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+
+</div>
+        <div class="footer-wrapper"><footer>
+    <div id="top">
+    <a href="#">▲</a>
+</div>
+    
+    <div class="footer-container">
+        <div class="footer-meta">
+            
+                <div class="footer-meta-copyright">
+                    &copy; 2026 A Minecraft Server.
+                </div>
+            
+            
+                <div class="footer-meta-licenese">
+                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                </div>
+            
+            
+                <div class="footer-meta-rss">
+                    <a target="_blank" rel="noopener" href="https://mcams.club/"><i class="fa-solid fa-rss"></i></a>
+                </div>
+            
+        </div>
+    </div>
+</footer></div>
+    </div>
+
+    <!-- 动态线条背景 -->
+    
+
+    <style>
+        body {
+            background-color: #000000;
+        }
+    </style>
+
+</body>
+</html>

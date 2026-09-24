@@ -1,0 +1,343 @@
+body {
+  color: #222;
+  font-size: 22px;
+  font-family: Consolas, Consolas, Consolas, Consolas, Consolas, Consolas, Consolas, Consolas;
+}
+a {
+  text-decoration: none;
+  color: #00ced1;
+}
+.body-container {
+  margin: 0 auto;
+  max-width: 98%;
+  display: flex;
+  flex-direction: column;
+}
+.body-container > div:not(:last-child) {
+  margin-bottom: 20px;
+}
+.body-container p {
+  text-align: justify;
+}
+.header-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.header-menu-list {
+  width: 100%;
+  margin: 0 10px;
+}
+.header-menu-list ul {
+  text-align: left;
+  list-style-type: none;
+  margin: 0;
+  display: inline-flex;
+  font-weight: bold;
+  border: 10px double #00ced1;
+  padding: 20px;
+}
+.header-menu-list li:not(:last-child) {
+  margin-right: 50px;
+}
+@media screen and (max-width: 1500px) {
+  .header-menu-list ul {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .header-menu-list li:not(:last-child) {
+    margin-right: 1px;
+  }
+}
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+.post-list {
+  margin-top: 50px;
+  font-size: 30px;
+}
+.post-item {
+  width: 100%;
+  text-align: left;
+}
+.post-item:not(:last-child) {
+  margin-bottom: 10px;
+}
+.post-item-date {
+  font-size: 0.9em;
+  color: #008b8b;
+}
+.footer-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.footer-meta {
+  font-size: 15px;
+  color: #0ff;
+  width: 100%;
+  margin: 0 0;
+  display: inline-flex;
+}
+.footer-meta a {
+  color: #0ff;
+}
+.footer-meta a:hover {
+  color: #0ff;
+}
+.footer-meta > div:not(:last-child) {
+  margin-right: 20px;
+}
+#top {
+  width: 30px;
+  height: 30px;
+  background: rgba(85,85,85,0.3) none repeat scroll 0% 0%;
+  position: fixed;
+  bottom: 1%;
+  right: 3%;
+  text-align: center;
+  cursor: pointer;
+  filter: invert(0%) !important; /* 使#top元素不受反转影响 */
+}
+#top a {
+  display: block;
+  font-size: 25px;
+  line-height: 25px;
+  color: #0ff; /* 设置链接颜色 */
+  text-decoration: none;
+}
+.post-details {
+  color: #008b8b;
+  font-size: 0.9em;
+  width: 100%;
+  margin: 0 10px;
+  line-height: 1.8em;
+}
+.post-details a:not(.nonstyle) {
+  text-decoration: none;
+  color: #a3d2e2;
+  box-shadow: 0 1px 0 #555;
+}
+.post-details a:not(.nonstyle):hover {
+  box-shadow: 0 1px 0 #a3d2e2;
+}
+.post-details .post-title {
+  margin-bottom: 10px;
+}
+.post-details .post-title h1 {
+  color: #00ced1;
+  font-size: 2em;
+  font-weight: normal;
+  margin-block: 0;
+}
+.post-details .post-meta {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #00ced1;
+}
+.post-details .post-content h1,
+.post-details .post-content h2,
+.post-details .post-content h3,
+.post-details .post-content h4,
+.post-details .post-content h5,
+.post-details .post-content h6 {
+  color: #00ced1;
+  margin-block: 0;
+  margin-inline: 0;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  line-height: 1.2em;
+}
+.post-details .post-content h1 {
+  font-size: 1.4em;
+}
+.post-details .post-content h2 {
+  font-size: 1.3em;
+}
+.post-details .post-content h3 {
+  font-size: 1.2em;
+}
+.post-details .post-content h4 {
+  font-size: 1.1em;
+}
+.post-details .post-content h5 {
+  font-size: 1em;
+}
+.post-details .post-content h6 {
+  font-size: 0.9em;
+}
+.post-details .post-content p {
+  margin-block: 0;
+  line-height: 1.8em;
+  text-align: left;
+}
+.post-details .post-content p:not(:last-child) {
+  margin: 0 0 10px;
+}
+.post-details .post-content li {
+  line-height: 2em;
+}
+.post-details .post-content img {
+  max-width: 100%;
+}
+.post-details .post-content blockquote {
+  margin-block: 0;
+  margin-inline: 0;
+  padding: 3px 10px;
+  background-color: #000;
+  border-left: 7px solid #41e199;
+}
+.post-details .post-content blockquote > p {
+  margin: 0 0;
+}
+.post-details .post-content kbd {
+  padding: 1px 3px;
+  background-color: #eee;
+  box-shadow: 1px 2px #999;
+  border-radius: 3px;
+}
+.post-details .post-content mark,
+.post-details .post-content code:not(.hljs) {
+  padding: 2px 3px;
+  background-color: #41e199;
+  border-radius: 10px;
+  font-family: "Consolas", sans-serif; /* 设置字体 */
+}
+.post-details .post-content table {
+  text-align: left;
+  border-collapse: collapse;
+  margin: 1em 0;
+  width: 100%;
+}
+.post-details .post-content th,
+.post-details .post-content td {
+  padding: 5px;
+  border: 1px solid #00ced1;
+}
+.post-details .post-content tr:nth-child(even) {
+  background-color: #000;
+}
+.post-details .post-content th {
+  font-weight: 400;
+  background-color: #00ced1 v;
+}
+.post-details .katex > .katex-html {
+  white-space: normal;
+}
+.post-details .katex .base {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+/*
+  Theme: GitHub Dark Dimmed
+  Description: Dark dimmed theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Colors taken from GitHub's CSS
+*/
+.hljs {
+  color: #adbac7;
+  background: #22272e;
+}
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+/* prettylights-syntax-keyword */
+  color: #f47067;
+}
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+/* prettylights-syntax-entity */
+  color: #dcbdfb;
+}
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+/* prettylights-syntax-constant */
+  color: #6cb6ff;
+}
+.hljs-regexp,
+.hljs-string,
+.hljs-meta .hljs-string {
+/* prettylights-syntax-string */
+  color: #96d0ff;
+}
+.hljs-built_in,
+.hljs-symbol {
+/* prettylights-syntax-variable */
+  color: #f69d50;
+}
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+/* prettylights-syntax-comment */
+  color: #768390;
+}
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+/* prettylights-syntax-entity-tag */
+  color: #8ddb8c;
+}
+.hljs-subst {
+/* prettylights-syntax-storage-modifier-import */
+  color: #adbac7;
+}
+.hljs-section {
+/* prettylights-syntax-markup-heading */
+  color: #316dca;
+  font-weight: bold;
+}
+.hljs-bullet {
+/* prettylights-syntax-markup-list */
+  color: #eac55f;
+}
+.hljs-emphasis {
+/* prettylights-syntax-markup-italic */
+  color: #adbac7;
+  font-style: italic;
+}
+.hljs-strong {
+/* prettylights-syntax-markup-bold */
+  color: #adbac7;
+  font-weight: bold;
+}
+.hljs-addition {
+/* prettylights-syntax-markup-inserted */
+  color: #b4f1b4;
+  background-color: #1b4721;
+}
+.hljs-deletion {
+/* prettylights-syntax-markup-deleted */
+  color: #ffd8d3;
+  background-color: #78191b;
+}
+.utterances {
+  margin-top: 20px;
+}
