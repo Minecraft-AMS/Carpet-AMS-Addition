@@ -22,17 +22,23 @@ package club.mcams.carpet.mixin.rule.enderDragonNoDestroyBlock;
 
 import club.mcams.carpet.AmsServerSettings;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 
+//#if MC>=12102
+//$$ import net.minecraft.server.world.ServerWorld;
+//#endif
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @SuppressWarnings("SimplifiableConditionalExpression")
 @Mixin(EnderDragonEntity.class)
 public abstract class EnderDragonEntityMixin {
-    @ModifyExpressionValue(
+    @WrapOperation(
         method = "destroyBlocks",
         at = @At(
             value = "INVOKE",
@@ -43,7 +49,14 @@ public abstract class EnderDragonEntityMixin {
             //#endif
         )
     )
-    private boolean enderDragonNoDestroyBlock(boolean original) {
-        return AmsServerSettings.enderDragonNoDestroyBlock ? false : original;
+    private boolean enderDragonNoDestroyBlock(
+        //#if MC>=12102
+        //$$ ServerWorld world,
+        //#else
+        World world,
+        //#endif
+        BlockPos pos, boolean move, Operation<Boolean> original
+    ) {
+        return AmsServerSettings.enderDragonNoDestroyBlock ? false : original.call(world, pos, move);
     }
 }
