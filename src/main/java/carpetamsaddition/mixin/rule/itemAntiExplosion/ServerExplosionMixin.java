@@ -42,7 +42,11 @@ public abstract class ServerExplosionMixin {
         method = "hurtEntities",
         at = @At(
             value = "INVOKE",
+            //#if MC>=260300
+            //$$ target = "Lnet/minecraft/world/entity/Entity;pushFromExplosion(Lnet/minecraft/world/phys/Vec3;)V"
+            //#else
             target = "Lnet/minecraft/world/entity/Entity;push(Lnet/minecraft/world/phys/Vec3;)V"
+            //#endif
         )
     )
     private void onSetVelocity(Entity entity, Vec3 velocity, Operation<Void> original) {

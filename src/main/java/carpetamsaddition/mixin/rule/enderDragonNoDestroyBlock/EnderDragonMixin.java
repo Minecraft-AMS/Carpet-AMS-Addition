@@ -22,8 +22,11 @@ package carpetamsaddition.mixin.rule.enderDragonNoDestroyBlock;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,14 +35,14 @@ import org.spongepowered.asm.mixin.injection.At;
 @SuppressWarnings("SimplifiableConditionalExpression")
 @Mixin(EnderDragon.class)
 public abstract class EnderDragonMixin {
-    @ModifyExpressionValue(
+    @WrapOperation(
         method = "checkWalls",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"
         )
     )
-    private boolean enderDragonNoDestroyBlock(boolean original) {
-        return CarpetAMSAdditionSettings.enderDragonNoDestroyBlock ? false : original;
+    private boolean enderDragonNoDestroyBlock(ServerLevel serverLevel, BlockPos pos, boolean b, Operation<Boolean> original) {
+        return CarpetAMSAdditionSettings.enderDragonNoDestroyBlock ? false : original.call(serverLevel, pos, b);
     }
 }

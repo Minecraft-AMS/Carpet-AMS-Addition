@@ -2,7 +2,7 @@
  * This file is part of the Carpet AMS Addition project, licensed under the
  * GNU Lesser General Public License v3.0
  *
- * Copyright (C) 2025 A Minecraft Server and contributors
+ * Copyright (C) 2026 A Minecraft Server and contributors
  *
  * Carpet AMS Addition is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,22 +20,12 @@
 
 package carpetamsaddition.mixin.hooks.recipe;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.world.item.crafting.RecipeManager;
-//#if MC>=260300
-//$$ import net.minecraft.world.item.crafting.RecipeMap;
-//#endif
+import carpetamsaddition.utils.compat.DummyClass;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(RecipeManager.class)
-public interface RecipeManagerAccessor {
-    //#if MC>=260300
-    //$$ @Accessor("recipes")
-    //$$ RecipeMap carpet_ams_addition$getRecipeMap();
-    //#else
-    @Accessor("registries")
-    HolderLookup.Provider getRegistries();
-    //#endif
-}
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 26.3")
+@Mixin(DummyClass.class)
+public abstract class FileToIdConverterMixin {}

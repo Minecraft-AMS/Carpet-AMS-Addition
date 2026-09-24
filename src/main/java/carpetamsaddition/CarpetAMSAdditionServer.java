@@ -57,9 +57,22 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.Identifier;
+//#if MC>=260300
+//$$ import com.google.gson.JsonElement;
+//$$ import net.minecraft.resources.FileToIdConverter;
+//$$ import net.minecraft.server.packs.PackResources;
+//$$ import net.minecraft.server.packs.resources.Resource;
+//$$ import net.minecraft.server.packs.resources.ResourceManager;
+//#endif
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+//#if MC>=260300
+//$$ import java.io.ByteArrayInputStream;
+//$$ import java.nio.charset.StandardCharsets;
+//$$ import java.util.HashMap;
+//#endif
 
 import java.util.Map;
 
@@ -117,10 +130,34 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     }
 
     public void registerCustomRecipes(Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup) {
-        AmsRecipeManager amsRecipeManager = new AmsRecipeManager(AmsRecipeBuilder.getInstance());
+        this.rebuildCustomRecipes();
+        new AmsRecipeManager(AmsRecipeBuilder.getInstance()).registerRecipes(map, wrapperLookup);
+    }
+
+    //#if MC>=260300
+    //$$ public Map<Identifier, JsonElement> buildCustomRecipeJson() {
+    //$$     this.rebuildCustomRecipes();
+    //$$     return new AmsRecipeManager(AmsRecipeBuilder.getInstance()).createRecipeJsonMap();
+    //$$ }
+    //#endif
+
+    //#if MC>=260300
+    //$$ public Map<Identifier, Resource> registerCustomRecipeResources(FileToIdConverter converter, ResourceManager resourceManager, Map<Identifier, Resource> original) {
+    //$$     Map<Identifier, JsonElement> customRecipes = this.buildCustomRecipeJson();
+    //$$     if (customRecipes.isEmpty()) {
+    //$$         return original;
+    //$$     }
+    //$$     Map<Identifier, Resource> recipes = new HashMap<>(original);
+    //$$     try (PackResources source = recipes.values().stream().findFirst().map(Resource::source).orElseGet(() -> resourceManager.listPacks().findFirst().orElseThrow())) {
+    //$$         customRecipes.forEach((id, json) -> recipes.put(converter.idToFile(id), new Resource(source, () -> new ByteArrayInputStream(json.toString().getBytes(StandardCharsets.UTF_8)))));
+    //$$     }
+    //$$     return recipes;
+    //$$ }
+    //#endif
+
+    private void rebuildCustomRecipes() {
         AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
         CarpetAMSAdditionCustomRecipes.getInstance().buildRecipes();
-        amsRecipeManager.registerRecipes(map, wrapperLookup);
     }
 
     public void sendS2CPacketOnHandShake(ServerPlayer player) {

@@ -18,24 +18,30 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.hooks.recipe;
+package carpetamsaddition.mixin.rule.easyCompost;
 
-import net.minecraft.core.HolderLookup;
-import net.minecraft.world.item.crafting.RecipeManager;
-//#if MC>=260300
-//$$ import net.minecraft.world.item.crafting.RecipeMap;
-//#endif
+import carpetamsaddition.CarpetAMSAdditionSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
+import net.minecraft.world.level.block.ComposterBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(RecipeManager.class)
-public interface RecipeManagerAccessor {
-    //#if MC>=260300
-    //$$ @Accessor("recipes")
-    //$$ RecipeMap carpet_ams_addition$getRecipeMap();
-    //#else
-    @Accessor("registries")
-    HolderLookup.Provider getRegistries();
-    //#endif
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "mc >= 26.3")
+@Mixin(ComposterBlock.class)
+public abstract class ComposterBlockMixin {
+    @ModifyExpressionValue(
+        method = "addLayer",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/level/storage/loot/providers/number/ints/ResolvableInt;get(Lnet/minecraft/world/level/storage/loot/LootContext;I)I"
+        )
+    )
+    private static int easyCompost(int original) {
+        return CarpetAMSAdditionSettings.easyCompost ? 1 : original;
+    }
 }

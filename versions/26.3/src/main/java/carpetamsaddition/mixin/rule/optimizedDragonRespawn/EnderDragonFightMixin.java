@@ -22,8 +22,10 @@ package carpetamsaddition.mixin.rule.optimizedDragonRespawn;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.optimizedDragonRespawn.BlockPatternHelper;
+
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.boss.enderdragon.EndCrystal;
@@ -34,8 +36,9 @@ import net.minecraft.world.level.block.state.pattern.BlockPattern;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.dimension.end.EnderDragonFight;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.feature.EndPodiumFeature;
+
 import org.jetbrains.annotations.Nullable;
+
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -63,6 +66,9 @@ public abstract class EnderDragonFightMixin {
 
     @Shadow
     private @Nullable BlockPos exitPortalLocation;
+
+    @Shadow
+    private BlockPos origin;
 
     @Unique
     private int cacheChunkIteratorX = -8;
@@ -114,7 +120,7 @@ public abstract class EnderDragonFightMixin {
                 if(CarpetAMSAdditionSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
                     i = cacheOriginIteratorY;
                 } else {
-                    i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(BlockPos.ZERO)).getY();
+                    i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, ((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin)).getY();
                 }
 
                 boolean notFirstSearch = false;
@@ -125,10 +131,10 @@ public abstract class EnderDragonFightMixin {
                     if (CarpetAMSAdditionSettings.optimizedDragonRespawn && notFirstSearch) {
                         result2 = BlockPatternHelper.partialSearchAround(
                             this.exitPortalPattern, this.level,
-                            new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ())
+                            new BlockPos(((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin).getX(), j, ((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin).getZ())
                         );
                     } else {
-                        result2 = this.exitPortalPattern.find(this.level, new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()));
+                        result2 = this.exitPortalPattern.find(this.level, new BlockPos(((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin).getX(), j, ((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin).getZ()));
                     }
 
                     if (result2 != null) {

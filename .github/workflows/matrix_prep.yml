@@ -17,7 +17,10 @@ jobs:
   matrix_prep:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
 
       - name: Display context
         run: | 
@@ -26,13 +29,12 @@ jobs:
           echo target_release_tag = ${{ github.event.inputs.target_release_tag }}
 
       - id: setmatrix
-        uses: JoshuaTheMiller/conditional-build-matrix@v2.0.1
-        with:
-          # inputFile: '.github/workflows/matrix_includes.json' # Default input file path
-          filter: '[? `${{ github.event_name }}` == `release` || `${{ github.event.inputs.target_subproject }}` == `` || `"${{ github.event.inputs.target_subproject }}"` == subproject_dir ]'
+        run: python .github/workflows/scripts/matrix.py
+        env:
+          TARGET_SUBPROJECT: ${{ inputs.target_subproject }}
 
       - name: Print matrix
-        run: echo ${{ steps.setmatrix.outputs.matrix }}
+        run: echo '${{ steps.setmatrix.outputs.matrix }}'
 
     outputs:
       matrix: ${{ steps.setmatrix.outputs.matrix }}

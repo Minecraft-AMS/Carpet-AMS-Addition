@@ -29,6 +29,9 @@ import net.minecraft.world.level.block.ComposterBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "mc < 26.3")
 @Mixin(ComposterBlock.class)
 public abstract class ComposterBlockMixin {
     @ModifyExpressionValue(

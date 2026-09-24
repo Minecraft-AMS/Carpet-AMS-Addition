@@ -1,4 +1,4 @@
-final int mcVersion = project.mcVersion as int
+final int mcVersion = project.mcVersion
 final boolean unobfuscated = mcVersion >= 26_00_00
 
 apply plugin: 'maven-publish'
@@ -67,8 +67,11 @@ dependencies {
 	autoImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// mods
-	//modImplementation("maven.modrinth:Carpet:${project.carpet_core_version}") // modrinth
-	autoImplementation "carpet:fabric-carpet:${project.carpet_core_version}" // masa
+	if (mcVersion == 26_03_00) {
+		autoImplementation "com.github.gnembon:fabric-carpet:v26.3"
+	} else {
+		autoImplementation "carpet:fabric-carpet:${project.carpet_core_version}"
+	}
 
 	// library mods
 	include(autoImplementation("com.github.1024-byteeeee:AnnotationToolBox:${project.annotationtoolbox_version}"))
