@@ -37,6 +37,7 @@ jobs:
 
     strategy:
       matrix: ${{ fromJson(needs.matrix_prep.outputs.matrix) }}
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v4
@@ -79,7 +80,7 @@ jobs:
           echo 'EOF' >> $GITHUB_OUTPUT
 
       - name: Publish Minecraft Mods
-        uses: Kir-Antipov/mc-publish@v3.3.0
+        uses: Kira-NT/mc-publish@v3.3.1
         with:
           modrinth-id: q4fx1eTg
           modrinth-token: ${{ secrets.MODRINTH_API_TOKEN }}
@@ -98,6 +99,7 @@ jobs:
           changelog: ${{ format('{0}{1}', github.event.release.body, steps.get_release.outputs.body) }}  # one of them should be an empty string (null)
 
           loaders: fabric
+          environment: client | server
           game-versions: ${{ steps.game_versions.outputs.value }}
           game-version-filter: any
 
