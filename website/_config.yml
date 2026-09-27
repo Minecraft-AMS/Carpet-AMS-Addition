@@ -99,8 +99,8 @@ theme: carpet-ams-addition-website
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: git@github.com:Minecraft-AMS/carpetamsaddition.git
-  branch: master
+  repo: git@github.com:Minecraft-AMS/Carpet-AMS-Addition.git
+  branch: website
 
 highlight:
   enable: true
