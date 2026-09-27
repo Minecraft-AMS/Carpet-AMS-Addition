@@ -1,11 +1,68 @@
-body
-    color: #222
-    font-size: 22px
-    font-family:Consolas, Consolas, Consolas, Consolas, Consolas, Consolas, Consolas, Consolas
-a
-    text-decoration: none
-    color: #00CED1
+:root
+    --page: #101716
+    --surface: #15201e
+    --surface-soft: #182321
+    --text: #edf3ef
+    --muted: #9ba9a4
+    --line: #2d3935
+    --accent: #78cbbf
+    --accent-strong: #b1efe5
+    --code: #0c1110
+    color-scheme: dark
 
+:root[data-theme='light']
+    --page: #f5f4ef
+    --surface: #eeefe9
+    --surface-soft: #e7e9e2
+    --text: #17211e
+    --muted: #68746e
+    --line: #cfd5cd
+    --accent: #1e756b
+    --accent-strong: #135d55
+    --code: #e1e5dc
+    color-scheme: light
+
+*
+    box-sizing: border-box
+
+html
+    scroll-behavior: smooth
+    scrollbar-color: var(--muted) var(--surface)
+    scrollbar-width: thin
+
+html::-webkit-scrollbar
+    width: 12px
+
+html::-webkit-scrollbar-track
+    background: var(--surface)
+    border-left: 1px solid var(--line)
+
+html::-webkit-scrollbar-thumb
+    min-height: 48px
+    background: var(--muted)
+    border: 3px solid var(--surface)
+    border-radius: 999px
+
+html::-webkit-scrollbar-thumb:hover
+    background: var(--accent)
+
+body
+    margin: 0
+    background: var(--page)
+    color: var(--text)
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif
+    font-size: 16px
+    line-height: 1.6
+    transition: background-color .18s ease, color .18s ease
+
+a
+    color: inherit
+    text-decoration: none
+
+button
+    font: inherit
+
+// Shared partial styles, including navigation, pagination, and full-width sticky article outlines, are bundled into this generated stylesheet.
 @import './partial/layout'
 @import './partial/header'
 @import './partial/index'

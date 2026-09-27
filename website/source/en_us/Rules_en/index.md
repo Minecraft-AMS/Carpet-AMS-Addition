@@ -1,9 +1,3 @@
-### [ [中文](/Rules) | English ]
-
-# <center>------ Rules ------</center>
-
-&emsp;
-
 ## superBow
 
 Let enchantments Infinity and Mending be compatible with each other on bow.

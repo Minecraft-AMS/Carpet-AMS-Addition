@@ -5,12 +5,12 @@
         <div class="footer-meta">
             <% if (theme.copyright) { %>
                 <div class="footer-meta-copyright">
-                    &copy; <%= date(new Date(), 'YYYY') %> <%= theme.copyright.name || config.author %>.
+                    &copy; <%= date(new Date(), 'YYYY') %> <%= theme.copyright.name || config.author %>
                 </div>
             <% } %>
             <% if (theme.license) { %>
                 <div class="footer-meta-licenese">
-                    Licensed under <a href="<%- url_for(theme.license.url) %>"><%= theme.license.name %></a>
+                    <span data-i18n-cn="许可证" data-i18n-en="License">许可证</span> <a href="<%- url_for(theme.license.url) %>"><%= theme.license.name %></a>
                 </div>
             <% } %>
             <% if (theme.rss) { %>
