@@ -1,17 +1,44 @@
 <main>
+    <% const staticPageTitles = { '/Rules': ['规则', 'Rules'], '/Loggers': ['记录器', 'Loggers'], '/Commands': ['指令', 'Commands'], '/Development': ['开发', 'Development'], '/Download': ['下载', 'Download'], '/OpenSource': ['开源', 'Open Source'], '/en_us/Rules_en': ['规则', 'Rules'], '/en_us/Loggers_en': ['记录器', 'Loggers'], '/en_us/Commands_en': ['指令', 'Commands'], '/en_us/Development_en': ['开发', 'Development'], '/en_us/Download_en': ['下载', 'Download'], '/en_us/OpenSource_en': ['开源', 'Open Source'] }; %>
+    <% const staticPageKey = ('/' + (page.path || '').replace(/index\.html$/, '')).replace(/\/$/, '') || '/'; %>
+    <% const staticPageTitle = staticPageTitles[staticPageKey]; %>
+    <% const searchableStaticPage = ['/Rules', '/Loggers', '/Commands', '/en_us/Rules_en', '/en_us/Loggers_en', '/en_us/Commands_en'].includes(staticPageKey); %>
+    <% const forcePageToc = ['/Loggers', '/en_us/Loggers_en'].includes(staticPageKey); %>
     <div class="main-container">
+        <div class="article-layout" data-article-layout<%= forcePageToc ? ' data-force-page-toc' : '' %>>
         <div class="post-details">
+            <% if (staticPageTitle) { %>
+            <div class="post-title static-page-title">
+                <p class="eyebrow" data-i18n-cn="文档" data-i18n-en="Documentation">文档</p>
+                <h1 data-i18n-cn="<%= staticPageTitle[0] %>" data-i18n-en="<%= staticPageTitle[1] %>"><%= staticPageTitle[0] %></h1>
+            </div>
+            <% } %>
             <% if (is_post()) { %>
             <div class="post-title">
-                <h1><%= page.title %></h1>
+                <p class="eyebrow" data-i18n-cn="文档" data-i18n-en="Documentation">文档</p>
+                <h1 data-title-cn="<%= page.title %>" data-title-en="<%= page.title_en || page.title %>"><%= page.title %></h1>
             </div>
             <div class="post-meta">
                 <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date"><%= date(page.date, 'YYYY/MM/DD') %></span>
             </div>
             <% } %>
-            <div class="post-content">
+            <% if (searchableStaticPage) { %>
+            <div class="content-search document-search">
+                <label class="sr-only" for="document-search" data-i18n-cn="搜索当前文档" data-i18n-en="Search this document">搜索当前文档</label>
+                <input id="document-search" class="site-search" type="search" autocomplete="off" data-document-search data-i18n-placeholder-cn="搜索名称、指令或说明" data-i18n-placeholder-en="Search names, commands, or descriptions" placeholder="搜索名称、指令或说明">
+            </div>
+            <p class="search-empty" data-document-search-empty hidden data-i18n-cn="没有找到匹配内容。" data-i18n-en="No matching content found.">没有找到匹配内容。</p>
+            <% } %>
+            <div class="post-content<%= staticPageTitle ? ' static-page-content' : '' %>"<%= searchableStaticPage ? ' data-searchable-content' : '' %>>
                 <%- page.content %>
             </div>
+        </div>
+        <aside class="page-toc" data-page-toc aria-label="Page outline" hidden>
+            <div class="page-toc-inner">
+                <p class="page-toc-title" data-i18n-cn="本页目录" data-i18n-en="On this page">本页目录</p>
+                <nav data-page-toc-links></nav>
+            </div>
+        </aside>
         </div>
     </div>
 </main>

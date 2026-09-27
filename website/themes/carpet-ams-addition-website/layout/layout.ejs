@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" data-theme="dark">
 <%- partial('partial/head') %>
 <body>
 
@@ -9,7 +9,6 @@
         <div class="footer-wrapper"><%- partial('partial/footer') %></div>
     </div>
 
-    <!-- 动态线条背景 -->
     <% if (theme.canvas_nest.enable){ %>
         <script type="text/javascript" color="<%=theme.canvas_nest.color %>" opacity="<%=theme.canvas_nest.opacity %>" 
             zIndex="<%=theme.canvas_nest.zIndex %>" count="<%=theme.canvas_nest.count %>" 
@@ -17,11 +16,7 @@
         </script>
     <% } %>
 
-    <style>
-        body {
-            background-color: #000000;
-        }
-    </style>
+    <%- js('js/site') %>
 
 </body>
 </html>

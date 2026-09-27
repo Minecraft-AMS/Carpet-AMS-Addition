@@ -1,12 +1,69 @@
 <main>
-    <div class="main-container">
-        <div class="post-list">
-            <% var posts = site.posts.sort('date', 'desc'); %>
-            <% posts.forEach(post => { %>
-                <div class="post-item">
-                    <a href="<%- url_for(post.path) %>"><span class="post-item-date"><%= date(post.date, 'YYYY/MM/DD') %></span> <%- post.title %></a>
+    <% const englishPaths = { '日志[logs]': '/', '规则[Rules]': '/en_us/Rules_en/', '记录器[Loggers]': '/en_us/Loggers_en/', '指令[Commands]': '/en_us/Commands_en/', '开发[Development]': '/en_us/Development_en/', '下载[Download]': '/en_us/Download_en/', '开源[Open Source]': '/en_us/OpenSource_en/' }; %>
+    <% const allPosts = site.posts.sort('date', 'desc'); %>
+    <% const posts = page.posts || allPosts; %>
+    <% const latest = allPosts.first(); %>
+    <% const searchCatalog = allPosts.map(post => ({ date: date(post.date, 'YYYY-MM-DD'), path: url_for(post.path), title: post.title, titleEn: post.title_en || post.title, searchText: [post.title, post.title_en, strip_html(post.content || '')].filter(Boolean).join(' ') })); %>
+    <div class="main-container home-layout">
+        <section class="home-content">
+            <div class="home-intro">
+                <p class="eyebrow">CARPET AMS ADDITION</p>
+                <h1 data-i18n-cn="更新日志" data-i18n-en="Changelog">更新日志</h1>
+            </div>
+            <a class="release-row" href="<%- latest ? url_for(latest.path) : url_for('/Download') %>">
+                <span data-i18n-cn="最新版本" data-i18n-en="Latest release">最新版本</span>
+                <strong><%= latest ? latest.title : '—' %></strong>
+                <span class="release-action" data-i18n-cn="查看更新 →" data-i18n-en="View release →">查看更新 →</span>
+            </a>
+            <div class="section-heading">
+                <h2 data-i18n-cn="最新文章" data-i18n-en="Latest articles">最新文章</h2>
+                <div class="section-tools">
+                    <span class="post-count"><%= allPosts.length %> <span data-i18n-cn="篇" data-i18n-en="posts">篇</span></span>
+                    <div class="content-search compact-search" role="search">
+                        <label class="sr-only" for="post-search" data-i18n-cn="搜索更新日志" data-i18n-en="Search changelog">搜索更新日志</label>
+                        <input id="post-search" class="site-search" type="search" autocomplete="off" data-list-search data-i18n-placeholder-cn="搜索版本或更新内容" data-i18n-placeholder-en="Search versions or updates" placeholder="搜索版本或更新内容">
+                    </div>
                 </div>
-            <% }) %>
-        </div>
+            </div>
+            <p class="search-empty" data-list-search-empty hidden data-i18n-cn="没有找到匹配的文章。" data-i18n-en="No matching articles found.">没有找到匹配的文章。</p>
+            <script id="post-search-catalog" type="application/json"><%- JSON.stringify(searchCatalog).replace(/</g, '\\u003c') %></script>
+            <div class="post-list" data-list-search-results>
+                <% posts.forEach(post => { %>
+                    <a class="post-item" href="<%- url_for(post.path) %>" data-search-item data-search-text="<%= [post.title, post.title_en, strip_html(post.content || '')].filter(Boolean).join(' ') %>">
+                        <time class="post-item-date" datetime="<%= date(post.date, 'YYYY-MM-DD') %>"><%= date(post.date, 'YYYY-MM-DD') %></time>
+                        <span class="post-item-title" data-title-cn="<%= post.title %>" data-title-en="<%= post.title_en || post.title %>"><%= post.title %></span>
+                    </a>
+                <% }) %>
+            </div>
+            <% if (page.total > 1) { %>
+            <nav class="pagination" data-list-pagination aria-label="Pagination">
+                <div class="pagination-start">
+                    <% if (page.current > 1) { %>
+                    <a href="<%- url_for('/') %>" data-i18n-cn="« 首页" data-i18n-en="« First">« 首页</a>
+                    <% } %>
+                    <% if (page.prev_link) { %>
+                    <a href="<%- url_for(page.prev_link) %>" data-i18n-cn="← 上一页" data-i18n-en="← Previous">← 上一页</a>
+                    <% } %>
+                </div>
+                <span class="pagination-status"><%= page.current %> / <%= page.total %></span>
+                <div class="pagination-end">
+                    <% if (page.next_link) { %>
+                    <a href="<%- url_for(page.next_link) %>" data-i18n-cn="下一页 →" data-i18n-en="Next →">下一页 →</a>
+                    <% } %>
+                    <% if (page.current < page.total) { %>
+                    <a href="<%- url_for('/page/' + page.total + '/') %>" data-i18n-cn="尾页 »" data-i18n-en="Last »">尾页 »</a>
+                    <% } %>
+                </div>
+            </nav>
+            <% } %>
+        </section>
+        <aside class="home-aside" aria-label="Documentation navigation">
+            <h2 data-i18n-cn="快速浏览" data-i18n-en="Browse">快速浏览</h2>
+            <% for (let name in theme.menu) { %>
+                <% const englishName = { '日志[logs]': 'Logs', '规则[Rules]': 'Rules', '记录器[Loggers]': 'Loggers', '指令[Commands]': 'Commands', '开发[Development]': 'Development', '下载[Download]': 'Download', '开源[Open Source]': 'Source' }[name] || name; %>
+                <% const chineseName = name.replace(/\[.*\]/, ''); %>
+                <a href="<%- url_for(theme.menu[name]) %>" data-i18n-cn="<%= chineseName %>" data-i18n-en="<%= englishName %>" data-url-cn="<%- url_for(theme.menu[name]) %>" data-url-en="<%- url_for(englishPaths[name] || theme.menu[name]) %>"><%= chineseName %></a>
+            <% } %>
+        </aside>
     </div>
 </main>

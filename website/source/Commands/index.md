@@ -1,11 +1,4 @@
 
-
-### [ 中文 | [English](/en_us/Commands_en) ]
-
-# <center>------ 指 令 ------</center>
-
-&emsp;
-
 ### 区块加载控制（commandPlayerChunkLoadController）
 
 - **/playerChunkLoading [true/false]**

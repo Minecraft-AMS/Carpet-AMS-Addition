@@ -1,9 +1,3 @@
-### [ 中文 | [English](/en_us/Rules_en) ]
-
-# <center>------ 规 则 ------</center>
-
-&emsp;
-
 ## 超级弓（superBow）
 
 开启后，可以让弓同时拥有无限和经验修补附魔。

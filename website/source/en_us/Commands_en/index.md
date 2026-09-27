@@ -1,11 +1,4 @@
 
-
-### [ [中文](/Commands) | English ]
-
-# <center>------ Commands ------</center>
-
-&emsp;
-
 ### commandPlayerChunkLoadController
 
 - **/playerChunkLoading [true/false]**

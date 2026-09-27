@@ -1,13 +1,33 @@
 <header>
+    <% const englishPaths = { '日志[logs]': '/', '规则[Rules]': '/en_us/Rules_en/', '记录器[Loggers]': '/en_us/Loggers_en/', '指令[Commands]': '/en_us/Commands_en/', '开发[Development]': '/en_us/Development_en/', '下载[Download]': '/en_us/Download_en/', '开源[Open Source]': '/en_us/OpenSource_en/' }; %>
+    <% const englishToChinese = { '/en_us/Rules_en': '/Rules', '/en_us/Loggers_en': '/Loggers', '/en_us/Commands_en': '/Commands', '/en_us/Development_en': '/Development', '/en_us/Download_en': '/Download', '/en_us/OpenSource_en': '/OpenSource' }; %>
+    <% const currentPath = ('/' + (page.path || '').replace(/index\.html$/, '')).replace(/\/$/, '') || '/'; %>
+    <% const chineseTarget = englishToChinese[currentPath] || currentPath; %>
+    <% const englishTarget = englishToChinese[currentPath] ? currentPath : englishPaths[Object.keys(theme.menu).find((name) => url_for(theme.menu[name]) === currentPath)] || currentPath; %>
     <div class="header-container">
-        <div class="header-menu-list">
+        <a class="site-brand" href="<%- url_for('/') %>" aria-label="Carpet AMS Addition">
+            <span>Carpet <strong>AMS</strong> Addition</span>
+        </a>
+        <nav class="header-menu-list" aria-label="Primary navigation">
             <ul>
             <% for (let name in theme.menu) { %>
+                <% const englishName = { '日志[logs]': 'Logs', '规则[Rules]': 'Rules', '记录器[Loggers]': 'Loggers', '指令[Commands]': 'Commands', '开发[Development]': 'Development', '下载[Download]': 'Download', '开源[Open Source]': 'Source' }[name] || name; %>
+                <% const chineseName = name.replace(/\[.*\]/, ''); %>
                 <li>
-                    <a href="<%- url_for(theme.menu[name]) %>"><%= name %></a>
+                    <a href="<%- url_for(theme.menu[name]) %>" data-i18n-cn="<%= chineseName %>" data-i18n-en="<%= englishName %>" data-url-cn="<%- url_for(theme.menu[name]) %>" data-url-en="<%- url_for(englishPaths[name] || theme.menu[name]) %>"><%= chineseName %></a>
                 </li>
             <% } %>
             </ul>
+        </nav>
+        <div class="header-controls">
+            <div class="segmented-control theme-control" role="group" aria-label="Theme">
+                <button type="button" data-set-theme="light" aria-label="浅色模式"><i class="fa-solid fa-sun"></i><span data-i18n-cn="浅色" data-i18n-en="Light">浅色</span></button>
+                <button type="button" data-set-theme="dark" aria-label="深色模式"><i class="fa-solid fa-moon"></i><span data-i18n-cn="深色" data-i18n-en="Dark">深色</span></button>
+            </div>
+            <div class="segmented-control language-control" role="group" aria-label="Language">
+                <button type="button" data-set-language="zh-CN" data-language-target="<%- url_for(chineseTarget) %>" lang="zh-CN">中文</button>
+                <button type="button" data-set-language="en" data-language-target="<%- url_for(englishTarget) %>" lang="en">EN</button>
+            </div>
         </div>
     </div>
 </header>
