@@ -5,7 +5,7 @@
     <% const searchableStaticPage = ['/Rules', '/Loggers', '/Commands', '/en_us/Rules_en', '/en_us/Loggers_en', '/en_us/Commands_en'].includes(staticPageKey); %>
     <% const forcePageToc = ['/Loggers', '/en_us/Loggers_en'].includes(staticPageKey); %>
     <div class="main-container">
-        <div class="article-layout" data-article-layout<%= forcePageToc ? ' data-force-page-toc' : '' %>>
+        <div class="article-layout" data-article-layout<%= searchableStaticPage ? ' data-page-toc-enabled' : '' %><%= forcePageToc ? ' data-force-page-toc' : '' %>>
         <div class="post-details">
             <% if (staticPageTitle) { %>
             <div class="post-title static-page-title">
