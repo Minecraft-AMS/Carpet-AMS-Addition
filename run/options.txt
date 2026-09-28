@@ -1,4 +1,4 @@
-version:4903
+version:4790
 ao:true
 biomeBlendRadius:4
 chunkSectionFadeInTime:0.75
@@ -13,7 +13,6 @@ fovEffectScale:1.0
 darknessEffectScale:1.0
 glintSpeed:0.5
 glintStrength:0.75
-preferredGraphicsBackend:"vulkan"
 graphicsPreset:"custom"
 prioritizeChunkUpdates:0
 fullscreen:false
@@ -50,6 +49,7 @@ invertYMouse:false
 realmsNotifications:false
 showSubtitles:false
 directionalAudio:false
+touchscreen:false
 bobView:false
 toggleCrouch:false
 toggleSprint:false
@@ -98,8 +98,6 @@ joinedFirstServer:true
 syncChunkWrites:true
 showAutosaveIndicator:true
 allowServerListing:true
-inGameNotification:false
-sharePresence:"all"
 onlyShowSecureChat:false
 saveChatDrafts:false
 panoramaScrollSpeed:1.0
@@ -124,7 +122,6 @@ key_key.chat:key.keyboard.enter
 key_key.playerlist:key.keyboard.tab
 key_key.pickItem:key.mouse.middle
 key_key.command:key.keyboard.slash
-key_key.friends:key.keyboard.o
 key_key.socialInteractions:key.keyboard.unknown
 key_key.toggleGui:key.keyboard.f1
 key_key.toggleSpectatorShaderEffects:key.keyboard.f4
