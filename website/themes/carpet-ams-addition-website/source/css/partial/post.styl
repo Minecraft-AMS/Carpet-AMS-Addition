@@ -134,6 +134,238 @@
     .static-page-content
         padding-top: 34px
 
+    .resource-page
+        display: grid
+        gap: 30px
+
+    .resource-hero
+        display: grid
+        grid-template-columns: minmax(0, 1fr) minmax(190px, 28%)
+        align-items: end
+        gap: 28px
+        padding: 2px 0 30px
+        border-bottom: 1px solid var(--line)
+
+    .resource-kicker
+        grid-column: 1 / -1
+        margin: 0
+        color: var(--accent)
+        font-size: 11px
+        font-weight: 700
+        letter-spacing: .14em
+
+        i
+            margin-right: 7px
+
+    .resource-intro
+        grid-column: 1 / 2
+        margin: 0
+        color: var(--text)
+        font-family: Georgia, "Songti SC", "STSong", serif
+        font-size: clamp(24px, 3vw, 34px)
+        line-height: 1.32
+        letter-spacing: -.025em
+
+    .resource-section
+        margin: 0
+
+    .resource-card-grid
+        display: grid
+        gap: 14px
+
+    .download-card-grid, .source-action-grid
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+
+    .resource-card
+        min-height: 280px
+        display: flex
+        flex-direction: column
+        padding: 24px
+        border: 1px solid var(--line)
+        background: var(--surface)
+        color: var(--text)
+        transition: border-color .16s ease, background-color .16s ease, transform .16s ease
+
+        &:hover
+            border-color: var(--accent)
+            background: var(--surface-soft)
+            transform: translateY(-3px)
+
+            .resource-action
+                color: var(--accent-strong)
+
+                i
+                    transform: translateX(4px)
+
+        h2
+            margin: 20px 0 9px
+            font-family: Georgia, "Songti SC", "STSong", serif
+            font-size: 25px
+            line-height: 1.15
+            letter-spacing: -.025em
+
+        p
+            margin: 0
+            color: var(--muted)
+            font-size: 14px
+            line-height: 1.7
+
+    .resource-card-top
+        min-height: 37px
+        display: flex
+        justify-content: space-between
+        align-items: flex-start
+        gap: 8px
+
+    .download-channels
+        padding-top: 4px
+
+    .download-card
+        min-height: 222px
+
+    .resource-platform-logo
+        width: 48px
+        height: 48px
+        display: block
+        object-fit: contain
+
+    .github-logo
+        filter: invert(1)
+
+    .resource-icon
+        width: 37px
+        height: 37px
+        display: grid
+        place-items: center
+        border: 1px solid var(--accent)
+        border-radius: 50%
+        color: var(--accent)
+
+    .resource-badge
+        padding: 4px 8px
+        border-radius: 999px
+        background: var(--accent)
+        color: var(--page)
+        font-size: 10px
+        font-weight: 700
+        letter-spacing: .06em
+
+    .resource-action
+        display: flex
+        align-items: center
+        justify-content: space-between
+        gap: 12px
+        margin-top: auto
+        padding-top: 20px
+        color: var(--accent)
+        font-size: 13px
+        font-weight: 600
+
+        i
+            transition: transform .16s ease
+
+    .resource-note
+        display: flex
+        align-items: center
+        gap: 13px
+        margin: 0
+        padding: 15px 18px
+        border-top: 1px solid var(--line)
+        border-bottom: 1px solid var(--line)
+        color: var(--muted)
+
+        > i
+            color: var(--accent)
+
+        p
+            margin: 0
+            font-size: 13px
+
+        strong
+            margin-right: 8px
+            color: var(--text)
+
+    .repository-panel
+        display: grid
+        grid-template-columns: auto minmax(0, 1fr) auto
+        align-items: center
+        gap: 20px
+        padding: 28px
+        border: 1px solid var(--line)
+        background: var(--surface)
+        transition: border-color .16s ease, background-color .16s ease
+
+        &:hover
+            border-color: var(--accent)
+            background: var(--surface-soft)
+
+            .repository-external
+                color: var(--accent-strong)
+                transform: translate(2px, -2px)
+
+    .repository-mark
+        width: 64px
+        height: 64px
+        display: grid
+        place-items: center
+        border-radius: 50%
+        background: var(--accent)
+        color: var(--page)
+        font-size: 29px
+
+    .repository-copy
+        p
+            margin: 0 0 2px
+            color: var(--muted)
+            font-size: 12px
+
+        h2
+            margin: 0 0 7px
+            font-family: Georgia, "Songti SC", "STSong", serif
+            font-size: clamp(25px, 3vw, 38px)
+            line-height: 1.1
+            letter-spacing: -.03em
+
+        span
+            color: var(--muted)
+            font-size: 14px
+
+    .repository-external
+        color: var(--accent)
+        transition: color .16s ease, transform .16s ease
+
+    .repository-facts
+        display: grid
+        grid-template-columns: repeat(3, minmax(0, 1fr))
+        gap: 10px
+        margin-top: -16px
+
+        span
+            display: flex
+            align-items: center
+            justify-content: center
+            gap: 8px
+            min-height: 48px
+            padding: 8px 12px
+            border: 1px solid var(--line)
+            color: var(--muted)
+            font-size: 12px
+            text-align: center
+
+        i
+            color: var(--accent)
+
+    .source-action-card
+        min-height: 220px
+
+        > i
+            color: var(--accent)
+            font-size: 22px
+
+        h2
+            margin-top: 18px
+            font-size: 21px
+
     .static-page-content[data-searchable-content]
         padding-top: 18px
 
@@ -163,6 +395,68 @@
 
     .post-content
         font-size: 16px
+
+    .post-details .resource-page
+        gap: 22px
+
+    .post-details .resource-hero
+        display: block
+        padding-bottom: 24px
+
+    .post-details .resource-kicker
+        margin-bottom: 16px
+
+    .post-details .resource-intro
+        font-size: 26px
+
+    .post-details .download-card-grid, .post-details .source-action-grid
+        grid-template-columns: 1fr
+
+    .post-details .resource-card
+        min-height: 208px
+        padding: 20px
+
+    .post-details .resource-card h2
+        margin-top: 16px
+
+    .post-details .repository-panel
+        grid-template-columns: auto minmax(0, 1fr)
+        gap: 15px
+        padding: 20px
+
+    .post-details .repository-mark
+        width: 48px
+        height: 48px
+        font-size: 22px
+
+    .post-details .repository-copy h2
+        font-size: 26px
+        overflow-wrap: anywhere
+
+    .post-details .repository-copy span
+        font-size: 13px
+
+    .post-details .repository-external
+        display: none
+
+    .post-details .repository-facts
+        grid-template-columns: 1fr
+        gap: 7px
+        margin-top: -9px
+
+    .post-details .repository-facts span
+        justify-content: flex-start
+        min-height: 39px
+
+    .post-details .resource-note
+        align-items: flex-start
+        padding: 13px 0
+
+        p
+            font-size: 12px
+
+:root[data-theme='light'] .post-details .github-logo
+    filter: none
 
 @media screen and (max-width: 1279px)
     .article-layout.has-page-toc

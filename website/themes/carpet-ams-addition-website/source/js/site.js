@@ -138,6 +138,8 @@
 
     const headings = [...content.querySelectorAll('h2, h3')];
     const forceToc = layout.hasAttribute('data-force-page-toc');
+    const pageTocEnabled = layout.hasAttribute('data-page-toc-enabled');
+    if (!pageTocEnabled) return;
     if (!forceToc && headings.length < 4) return;
 
     headings.forEach((heading, index) => {
