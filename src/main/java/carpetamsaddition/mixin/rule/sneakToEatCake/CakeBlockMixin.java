@@ -38,7 +38,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(CakeBlock.class)
 public abstract class CakeBlockMixin {
     @WrapOperation(
+        //#if MC>=12005
         method = "useWithoutItem",
+        //#else
+        //$$ method = "use",
+        //#endif
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/block/CakeBlock;eat(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/InteractionResult;"

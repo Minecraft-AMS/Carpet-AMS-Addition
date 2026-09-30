@@ -116,7 +116,11 @@ public abstract class EndDragonFightMixin {
                     i = cacheOriginIteratorY;
                 }
                 else {
+                    //#if MC>=12006
                     i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(BlockPos.ZERO)).getY();
+                    //#else
+                    //$$ i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION).getY();
+                    //#endif
                 }
 
                 boolean notFirstSearch = false;
@@ -125,9 +129,17 @@ public abstract class EndDragonFightMixin {
                     BlockPattern.BlockPatternMatch result2;
 
                     if (CarpetAMSAdditionSettings.optimizedDragonRespawn && notFirstSearch) {
+                        //#if MC>=12006
                         result2 = BlockPatternHelper.partialSearchAround(this.exitPortalPattern, this.level, new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()));
+                        //#else
+                        //$$ result2 = BlockPatternHelper.partialSearchAround(this.exitPortalPattern, this.level, new BlockPos(EndPodiumFeature.END_PODIUM_LOCATION.getX(), j, EndPodiumFeature.END_PODIUM_LOCATION.getZ()));
+                        //#endif
                     } else {
+                        //#if MC>=12006
                         result2 = this.exitPortalPattern.find(this.level, new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()));
+                        //#else
+                        //$$ result2 = this.exitPortalPattern.find(this.level, new BlockPos(EndPodiumFeature.END_PODIUM_LOCATION.getX(), j, EndPodiumFeature.END_PODIUM_LOCATION.getZ()));
+                        //#endif
                     }
 
                     if (result2 != null) {

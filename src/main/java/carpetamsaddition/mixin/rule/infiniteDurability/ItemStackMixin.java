@@ -34,8 +34,10 @@ public abstract class ItemStackMixin {
         method =
         //#if MC>12006
         "processDurabilityChange",
-        //#else
+        //#elseif MC>=12005
         //$$ "hurtAndBreak(ILnet/minecraft/util/RandomSource;Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/Runnable;)V",
+        //#else
+        //$$ "hurt(ILnet/minecraft/util/RandomSource;Lnet/minecraft/server/level/ServerPlayer;)Z",
         //#endif
         at = @At("HEAD"),
         argsOnly = true,

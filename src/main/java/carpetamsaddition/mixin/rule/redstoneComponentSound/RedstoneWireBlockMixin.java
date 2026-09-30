@@ -28,6 +28,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
+//#if MC<12005
+//$$ import net.minecraft.world.InteractionHand;
+//#endif
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -39,9 +42,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(RedStoneWireBlock.class)
 public abstract class RedstoneWireBlockMixin {
-    @Inject(method = "useWithoutItem", at = @At(value = "RETURN", ordinal = 1))
+    @Inject(
+        //#if MC>=12005
+        method = "useWithoutItem",
+        //#else
+        //$$ method = "use",
+        //#endif
+        at = @At(value = "RETURN", ordinal = 1)
+    )
     private void playSound(
         BlockState state, Level world, BlockPos pos, Player player,
+        //#if MC<12005
+        //$$ InteractionHand hand,
+        //#endif
         BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
     ) {
         if (CarpetAMSAdditionSettings.redstoneComponentSound) {

@@ -28,7 +28,9 @@ import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTea
 import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyNameHelper;
 
 import net.minecraft.network.Connection;
+//#if MC>=12002
 import net.minecraft.server.network.CommonListenerCookie;
+//#endif
 import net.minecraft.server.players.PlayerList;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -42,7 +44,14 @@ import java.util.Objects;
 @Mixin(PlayerList.class)
 public abstract class PlayerManagerMixin {
     @Inject(method = "placeNewPlayer", at = @At("TAIL"))
-    private void onPlayerConnects(Connection connection, ServerPlayer player, CommonListenerCookie clientData, CallbackInfo ci) {
+    private void onPlayerConnects(
+        Connection connection,
+        ServerPlayer player,
+        //#if MC>=12002
+        CommonListenerCookie clientData,
+        //#endif
+        CallbackInfo ci
+    ) {
         if (
             !Objects.equals(CarpetAMSAdditionSettings.fancyFakePlayerName, "false") &&
             FakePlayerHelper.isFakePlayer(player) &&

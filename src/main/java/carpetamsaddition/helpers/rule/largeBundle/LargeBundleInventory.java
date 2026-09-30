@@ -29,8 +29,12 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.BundleItem;
 import net.minecraft.world.item.ItemStack;
+//#if MC>=12005
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.ItemContainerContents;
+//#else
+//$$ import net.minecraft.nbt.CompoundTag;
+//#endif
 import net.minecraft.core.NonNullList;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,10 +43,11 @@ import java.util.List;
 
 public class LargeBundleInventory implements Container {
     private final ItemStack stack;
-    private final List<ItemStack> items = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
+    private final NonNullList<ItemStack> items = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
 
     public LargeBundleInventory(ItemStack stack) {
         this.stack = stack;
+        //#if MC>=12005
         ItemContainerContents container = stack.get(DataComponents.CONTAINER);
         if (container != null) {
             //#if MC>=260300
@@ -56,11 +61,23 @@ public class LargeBundleInventory implements Container {
                 this.items.set(i, containerStacks.get(i).copy());
             }
         }
+        //#else
+        //$$ CompoundTag tag = stack.getOrCreateTag();
+        //$$ if (tag.contains("Items")) {
+        //$$     ContainerHelper.loadAllItems(tag, this.items);
+        //$$ }
+        //#endif
     }
 
     @Override
     public void setChanged() {
+        //#if MC>=12005
         stack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(items));
+        //#else
+        //$$ CompoundTag tag = stack.getOrCreateTag();
+        //$$ ContainerHelper.saveAllItems(tag, items);
+        //$$ stack.setTag(tag);
+        //#endif
     }
 
     @Override

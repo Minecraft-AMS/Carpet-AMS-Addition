@@ -38,20 +38,23 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(FlowerBlock.class)
 public abstract class BlockMixin implements BonemealableBlock{
     @Override
-    public boolean isValidBonemealTarget(
-        LevelReader reader, BlockPos pos, BlockState state
-        //#if MC>=260300
-        //$$ , BonemealSource bonemealSource
-        //#endif
-    ) {
+    //#if MC>=260300
+    //$$ public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, BonemealSource bonemealSource) {
+    //#elseif MC>=12002
+    public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state) {
+    //#else
+    //$$ public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, boolean isClient) {
+    //#endif
         if (CarpetAMSAdditionSettings.fertilizableSmallFlower && (state.getBlock() instanceof FlowerBlock || state.getBlock() instanceof SporeBlossomBlock)) {
             return true;
         }
 
         //#if MC>=260300
         //$$ return this.isValidBonemealTarget(reader, pos, state, bonemealSource);
-        //#else
+        //#elseif MC>=12002
         return this.isValidBonemealTarget(reader, pos, state);
+        //#else
+        //$$ return this.isValidBonemealTarget(reader, pos, state, isClient);
         //#endif
     }
 

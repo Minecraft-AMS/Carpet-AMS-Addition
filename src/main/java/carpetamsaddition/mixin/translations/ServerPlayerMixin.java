@@ -26,7 +26,11 @@ import carpetamsaddition.translations.ServerPlayerEntityWithClientLanguage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
+//#if MC>=12002
 import net.minecraft.server.level.ClientInformation;
+//#else
+//$$ import net.minecraft.network.protocol.game.ServerboundClientInformationPacket;
+//#endif
 import net.minecraft.server.level.ServerPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,7 +46,14 @@ public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientL
     private String clientLanguage$AMS = "en_US";
 
     @Inject(method = "updateOptions", at = @At("HEAD"))
-    private void getClientLanguage(ClientInformation information, CallbackInfo ci) {
+    private void getClientLanguage(
+        //#if MC>=12002
+        ClientInformation information,
+        //#else
+        //$$ ServerboundClientInformationPacket information,
+        //#endif
+        CallbackInfo ci
+    ) {
         this.clientLanguage$AMS = information.language();
     }
 

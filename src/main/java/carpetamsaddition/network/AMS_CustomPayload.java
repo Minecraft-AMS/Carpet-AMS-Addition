@@ -9,20 +9,34 @@ package carpetamsaddition.network;
 
 import carpetamsaddition.utils.IdentifierUtil;
 
+//#if MC>=12005
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+//#else
+//$$ import carpetamsaddition.utils.compat.CustomPayload;
+//#endif
 
 import net.minecraft.resources.Identifier;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
 
+//#if MC>=12005
 import org.jetbrains.annotations.NotNull;
+//#endif
 
-public abstract class AMS_CustomPayload implements CustomPacketPayload {
+public abstract class AMS_CustomPayload implements
+    //#if MC>=12005
+    CustomPacketPayload
+    //#else
+    //$$ CustomPayload
+    //#endif
+{
     public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network/v1");
+    //#if MC>=12005
     public static final CustomPacketPayload.Type<@NotNull AMS_CustomPayload> KEY = new CustomPacketPayload.Type<>(CHANNEL_ID);
     public static final StreamCodec<@NotNull FriendlyByteBuf, @NotNull AMS_CustomPayload> CODEC = CustomPacketPayload.codec(AMS_CustomPayload::write, AMS_PayloadCodec::decodePayload);
+    //#endif
     private final String packetId;
 
     protected AMS_CustomPayload(String packetId) {
@@ -33,11 +47,16 @@ public abstract class AMS_CustomPayload implements CustomPacketPayload {
         return this.packetId;
     }
 
+    //#if MC>=12005
     @Override
     public CustomPacketPayload.@NotNull Type<? extends @NotNull CustomPacketPayload> type() {
         return KEY;
     }
+    //#endif
 
+    //#if MC<12005
+    //$$ @Override
+    //#endif
     public final void write(FriendlyByteBuf buf) {
         buf.writeUtf(this.packetId);
         writeData(buf);

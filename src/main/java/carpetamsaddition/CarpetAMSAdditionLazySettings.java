@@ -29,7 +29,9 @@ public class CarpetAMSAdditionLazySettings {
     public static EnumSet<Rule> RULES = EnumSet.noneOf(Rule.class);
 
     public enum Rule {
+        //#if MC>12102
         EXPERIMENTAL_MINECART_ENABLED(() -> CarpetAMSAdditionSettings.experimentalMinecartEnabled),
+        //#endif
         LARGE_SHULKER_BOX(() -> CarpetAMSAdditionSettings.largeShulkerBox);
 
         private final BooleanSupplier enabledSupplier;

@@ -33,6 +33,10 @@ import carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS.ClientP
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
 
 import net.minecraft.network.FriendlyByteBuf;
+//#if MC<12005
+//$$ import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+//$$ import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+//#endif
 
 import org.jetbrains.annotations.NotNull;
 
@@ -117,6 +121,16 @@ public class AMS_PayloadManager {
     private static void registerPayload(String packetId, Function<FriendlyByteBuf, AMS_CustomPayload> constructor) {
         PAYLOAD_REGISTRY.put(packetId, constructor);
     }
+
+    //#if MC<12005
+    //$$ public static AMS_CustomPayload decodeC2SPacket(ServerboundCustomPayloadPacket packet) {
+    //$$     return AMS_PayloadCodec.decode(packet);
+    //$$ }
+
+    //$$ public static AMS_CustomPayload decodeS2CPacket(ClientboundCustomPayloadPacket packet) {
+    //$$     return AMS_PayloadCodec.decode(packet);
+    //$$ }
+    //#endif
 
     public static class HandlerChainGetter {
         public static PayloadHandlerChain getC2SHandlerChain() {

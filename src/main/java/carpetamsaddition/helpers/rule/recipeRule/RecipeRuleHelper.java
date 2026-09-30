@@ -33,11 +33,14 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
+@GameVersion(version = "Minecraft >= 1.20.2")
 public class RecipeRuleHelper {
     private static final String MOD_ID = CarpetAMSAdditionServer.compactName;
 

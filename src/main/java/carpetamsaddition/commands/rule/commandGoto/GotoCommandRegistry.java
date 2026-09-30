@@ -69,7 +69,13 @@ public class GotoCommandRegistry {
     }
 
     private static int executeSimpleTeleport(ServerPlayer player, ServerLevel targetWorld) {
-        DimensionWrapper currentDimension = DimensionWrapper.of(player.level());
+        DimensionWrapper currentDimension = DimensionWrapper.of(
+            //#if MC>=12006
+            player.level()
+            //#else
+            //$$ player.level
+            //#endif
+        );
         DimensionWrapper targetDimension = DimensionWrapper.of(targetWorld);
         return executeTeleport(player, targetWorld, calculatePos(player, currentDimension, targetDimension));
     }

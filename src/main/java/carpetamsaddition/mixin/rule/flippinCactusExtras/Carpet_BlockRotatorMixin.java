@@ -55,9 +55,13 @@ public abstract class Carpet_BlockRotatorMixin {
                 Direction currentFacing = state.getValue(BarrelBlock.FACING);
                 Direction newFacing = currentFacing.getOpposite();
                 newState = state.setValue(BarrelBlock.FACING, newFacing);
-            } else if (block instanceof CrafterBlock) {
+            }
+            //#if MC>=12100
+            else if (block instanceof CrafterBlock) {
                 newState = state.rotate(Rotation.CLOCKWISE_180);
-            } else if (block instanceof ChiseledBookShelfBlock) {
+            }
+            //#endif
+            else if (block instanceof ChiseledBookShelfBlock) {
                 Direction currentFacing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 Direction newFacing = currentFacing.getOpposite();
                 newState = state.setValue(BlockStateProperties.HORIZONTAL_FACING, newFacing);

@@ -32,7 +32,15 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(CakeBlock.class)
 public abstract class CakeBlockMixin {
-    @ModifyReturnValue(method = "useWithoutItem", at = @At("RETURN"))
+    @ModifyReturnValue(
+        method =
+            //#if MC>=12005
+            "useWithoutItem",
+            //#else
+            //$$ "use",
+            //#endif
+        at = @At("RETURN")
+    )
     private InteractionResult noEat(InteractionResult original) {
         return CarpetAMSAdditionSettings.noCakeEating ? InteractionResult.FAIL : original;
     }

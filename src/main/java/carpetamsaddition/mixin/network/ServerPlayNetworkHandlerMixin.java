@@ -24,7 +24,11 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.network.AMS_CustomPayload;
 
+//#if MC>=12005
 import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
+//#else
+//$$ import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+//#endif
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -40,6 +44,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
             return;
         }
 
+        //#if MC>=12005
         if (packet.payload() instanceof AMS_CustomPayload) {
             AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
             if (
@@ -49,5 +54,13 @@ public abstract class ServerPlayNetworkHandlerMixin {
                 ci.cancel();
             }
         }
+        //#else
+        //$$ if (packet.getIdentifier().equals(AMS_CustomPayload.CHANNEL_ID)) {
+        //$$     AMS_CustomPayload payload = AMS_PayloadManager.decodeC2SPacket(packet);
+        //$$     if (AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload)) {
+        //$$         ci.cancel();
+        //$$     }
+        //$$ }
+        //#endif
     }
 }

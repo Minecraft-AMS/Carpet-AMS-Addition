@@ -67,7 +67,11 @@ public class Messenger {
     }
 
     private static void __tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
+        //#if MC>=12006
         source.sendSuccess(() -> text, broadcastToOps);
+        //#else
+        //$$ source.sendSuccess(text, broadcastToOps);
+        //#endif
     }
 
     public static void tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
