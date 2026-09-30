@@ -32,6 +32,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21.2")
 @Mixin(targets = "net.minecraft.server.commands.GameRuleCommand$1", priority = 168)
 public abstract class GameRuleCommand_visitMixin {
     @Inject(method = "visit", at = @At("HEAD"), cancellable = true)

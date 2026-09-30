@@ -29,6 +29,9 @@ import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21.2")
 @Mixin(value = AbstractMinecart.class, priority = 168)
 public abstract class AbstractMinecartMixin {
     @ModifyReturnValue(method = "useExperimentalMovement", at = @At("RETURN"))

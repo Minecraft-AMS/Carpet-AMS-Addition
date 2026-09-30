@@ -59,7 +59,12 @@ public class GotoCommandRegistry {
         int x = destinationPos.getX();
         int y = destinationPos.getY();
         int z = destinationPos.getZ();
-        player.teleportTo(targetDimension, x, y, z, Set.of(), player.getViewXRot(1), 1, false);
+        player.teleportTo(
+            targetDimension, x, y, z, Set.of(), player.getViewXRot(1), 1
+            //#if MC>12006
+            , false
+            //#endif
+        );
         return 1;
     }
 

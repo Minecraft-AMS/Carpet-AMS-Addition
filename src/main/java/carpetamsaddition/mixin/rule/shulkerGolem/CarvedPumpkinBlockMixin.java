@@ -30,7 +30,9 @@ import net.minecraft.world.level.block.ShulkerBoxBlock;
 //#else
 import net.minecraft.world.entity.EntityType;
 //#endif
+//#if MC>12006
 import net.minecraft.world.entity.EntitySpawnReason;
+//#endif
 import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
@@ -56,8 +58,10 @@ public abstract class CarvedPumpkinBlockMixin {
             if (headIsCarvedPumpkin && bodyIsShulkerBox) {
                 //#if MC>=260200
                 //$$ Shulker shulkerGolem = EntityTypes.SHULKER.create(world, EntitySpawnReason.MOB_SUMMONED);
-                //#else
+                //#elseif MC>12006
                 Shulker shulkerGolem = EntityType.SHULKER.create(world, EntitySpawnReason.MOB_SUMMONED);
+                //#else
+                //$$ Shulker shulkerGolem = EntityType.SHULKER.create(world);
                 //#endif
                 Objects.requireNonNull(shulkerGolem).snapTo(bodyPos.getX() + 0.5, bodyPos.getY(), bodyPos.getZ() + 0.5, 0.0F, 0.0F);
                 world.destroyBlock(bodyPos, false);

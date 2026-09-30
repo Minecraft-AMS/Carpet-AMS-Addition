@@ -20,15 +20,23 @@
 
 package carpetamsaddition.mixin.rule.renewableNetherScrap;
 
-import carpetamsaddition.utils.EntityUtil;
 import carpetamsaddition.CarpetAMSAdditionSettings;
+//#if MC>12006
+import carpetamsaddition.utils.EntityUtil;
+//#endif
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+//#if MC>12006
 import net.minecraft.server.level.ServerLevel;
+//#endif
 import net.minecraft.world.item.Items;
+//#if MC>12006
 import net.minecraft.world.entity.monster.zombie.ZombifiedPiglin;
+//#else
+//$$ import net.minecraft.world.entity.monster.ZombifiedPiglin;
+//#endif
 
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +52,12 @@ public abstract class EntityMixin {
 
     @Shadow
     @Nullable
-    public abstract ItemEntity spawnAtLocation(ServerLevel par1, ItemStack par2);
+    public abstract ItemEntity spawnAtLocation(
+        //#if MC>12006
+        ServerLevel world,
+        //#endif
+        ItemStack stack
+    );
 
     @Unique
     private boolean hasDroppedNetherScrap = false;
@@ -52,7 +65,14 @@ public abstract class EntityMixin {
     @Unique
     private boolean isDroppingNetherScrap = false;
 
-    @Inject(method = "spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("TAIL"))
+    @Inject(
+        //#if MC>12006
+        method = "spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;",
+        //#else
+        //$$ method = "spawnAtLocation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;",
+        //#endif
+        at = @At("TAIL")
+    )
     private void dropNetheriteScrap(CallbackInfoReturnable<ItemEntity> cir) {
         if (CarpetAMSAdditionSettings.renewableNetheriteScrap != 0.0D && !this.isDroppingNetherScrap) {
             Entity entity = (Entity) (Object) this;
@@ -63,7 +83,12 @@ public abstract class EntityMixin {
                 if (random < rate) {
                     this.isDroppingNetherScrap = true;
                     ItemStack netherScrapStack = new ItemStack(Items.NETHERITE_SCRAP);
-                    this.spawnAtLocation((ServerLevel) EntityUtil.getEntityWorld(entity), netherScrapStack);
+                    this.spawnAtLocation(
+                        //#if MC>12006
+                        (ServerLevel) EntityUtil.getEntityWorld(entity),
+                        //#endif
+                        netherScrapStack
+                    );
                     this.isDroppingNetherScrap = false;
                 }
             }

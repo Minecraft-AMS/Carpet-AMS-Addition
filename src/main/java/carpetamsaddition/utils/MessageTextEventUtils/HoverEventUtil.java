@@ -28,12 +28,15 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.world.item.ItemStack;
 //#endif
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
+@GameVersion(version = "Minecraft > 1.20.6")
 public class HoverEventUtil {
     public static final HoverEvent.Action SHOW_TEXT = HoverEvent.Action.SHOW_TEXT;
     public static final HoverEvent.Action SHOW_ITEM = HoverEvent.Action.SHOW_ITEM;

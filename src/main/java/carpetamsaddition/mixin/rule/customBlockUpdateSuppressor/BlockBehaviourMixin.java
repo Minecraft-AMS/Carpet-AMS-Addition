@@ -26,7 +26,9 @@ import carpetamsaddition.utils.RegexTools;
 import carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
+//#if MC>12006
 import net.minecraft.world.level.redstone.Orientation;
+//#endif
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
@@ -42,7 +44,15 @@ import java.util.Objects;
 @Mixin(BlockBehaviour.class)
 public abstract class BlockBehaviourMixin {
     @Inject(method = "neighborChanged", at = @At("HEAD"))
-    private void neighborUpdate(BlockState state, Level world, BlockPos pos, Block block, Orientation wireOrientation, boolean notify, CallbackInfo ci) {
+    private void neighborUpdate(
+        BlockState state, Level world, BlockPos pos, Block block,
+        //#if MC>12006
+        Orientation wireOrientation,
+        //#else
+        //$$ BlockPos wireOrientation,
+        //#endif
+        boolean notify, CallbackInfo ci
+    ) {
         if (!Objects.equals(CarpetAMSAdditionSettings.customBlockUpdateSuppressor, "none")) {
             if (AmsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode) {
                 CarpetAMSAdditionSettings.amsUpdateSuppressionCrashFix = "true";

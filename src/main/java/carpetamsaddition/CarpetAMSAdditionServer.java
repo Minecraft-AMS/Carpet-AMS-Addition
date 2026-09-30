@@ -54,9 +54,17 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.server.level.ServerPlayer;
+//#if MC>12006
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.core.HolderLookup;
+//#endif
+
+//#if MC<=12006
+//$$ import com.google.gson.JsonElement;
+//#endif
+
 import net.minecraft.resources.Identifier;
+
 //#if MC>=260300
 //$$ import com.google.gson.JsonElement;
 //$$ import net.minecraft.resources.FileToIdConverter;
@@ -129,9 +137,20 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         RegisterCommands.registerCommands(dispatcher, commandBuildContext);
     }
 
-    public void registerCustomRecipes(Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup) {
+    public void registerCustomRecipes(
+        //#if MC>12006
+        Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup
+        //#else
+        //$$ Map<ResourceLocation, JsonElement> map
+        //#endif
+    ) {
+        AmsRecipeManager amsRecipeManager = new AmsRecipeManager(AmsRecipeBuilder.getInstance());
         this.rebuildCustomRecipes();
-        new AmsRecipeManager(AmsRecipeBuilder.getInstance()).registerRecipes(map, wrapperLookup);
+        //#if MC>12006
+        amsRecipeManager.registerRecipes(map, wrapperLookup);
+        //#else
+        //$$ amsRecipeManager.registerRecipes(map);
+        //#endif
     }
 
     //#if MC>=260300
@@ -184,9 +203,11 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         minecraftServer = server;
         serverStartTimeMillis = System.currentTimeMillis();
         CarpetAMSAdditionLazySettings.initRules();
+        //#if MC>12006
         if (FeatureChecker.hasMinecartImprovements(server)) {
             FeatureChecker.EX_MINECART_FEATURE.set(true);
         }
+        //#endif
     }
 
     @Override

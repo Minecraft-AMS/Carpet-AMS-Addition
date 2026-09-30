@@ -28,6 +28,9 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.TicketType;
 import net.minecraft.world.level.ChunkPos;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft > 1.20.6")
 public class BlockChunkLoaderHelper {
     private static TicketType NOTE_BLOCK_TICKET_TYPE;
     private static TicketType PISTON_BLOCK_TICKET_TYPE;
@@ -86,7 +89,6 @@ public class BlockChunkLoaderHelper {
         return CarpetAMSAdditionSettings.blockChunkLoaderRangeController;
     }
 
-    @SuppressWarnings("SameParameterValue")
     private static TicketType registerTicketType(String id, int flags) {
         return TicketType.register(
             id, getLoadTime(),

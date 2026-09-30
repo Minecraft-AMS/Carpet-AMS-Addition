@@ -26,7 +26,11 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.world.Difficulty;
+//#if MC>12006
 import net.minecraft.server.level.ServerLevel;
+//#else
+//$$ import net.minecraft.world.level.Level;
+//#endif
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,10 +47,21 @@ public abstract class WitherBossMixin {
         method = "customServerAiStep",
         at = @At(
             value = "INVOKE",
+            //#if MC>12006
             target = "Lnet/minecraft/server/level/ServerLevel;getDifficulty()Lnet/minecraft/world/Difficulty;"
+            //#else
+            //$$ target = "Lnet/minecraft/world/level/Level;getDifficulty()Lnet/minecraft/world/Difficulty;"
+            //#endif
         )
     )
-    private Difficulty modifyDifficulty(ServerLevel world, Operation<Difficulty> original) {
+    private Difficulty modifyDifficulty(
+        //#if MC>12006
+        ServerLevel world,
+        //#else
+        //$$ Level world,
+        //#endif
+        Operation<Difficulty> original
+    ) {
         if (CarpetAMSAdditionSettings.blueSkullController.equals(CarpetAMSAdditionSettings.blueSkullProbability.NEVER)) {
             return Difficulty.EASY;
         } else {

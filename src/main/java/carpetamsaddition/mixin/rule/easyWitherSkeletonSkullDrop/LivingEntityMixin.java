@@ -26,7 +26,9 @@ import carpetamsaddition.utils.EntityUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.skeleton.WitherSkeleton;
 import net.minecraft.world.item.Items;
+//#if MC>12006
 import net.minecraft.server.level.ServerLevel;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -40,7 +42,11 @@ public abstract class LivingEntityMixin {
         if (CarpetAMSAdditionSettings.easyWitherSkeletonSkullDrop) {
             LivingEntity entity = (LivingEntity) (Object) this;
             if (entity instanceof WitherSkeleton && !EntityUtil.getEntityWorld(entity).isClientSide()) {
+                //#if MC>12006
                 entity.spawnAtLocation((ServerLevel) EntityUtil.getEntityWorld(entity), Items.WITHER_SKELETON_SKULL);
+                //#else
+                //$$ entity.spawnAtLocation(Items.WITHER_SKELETON_SKULL, 1);
+                //#endif
             }
         }
     }

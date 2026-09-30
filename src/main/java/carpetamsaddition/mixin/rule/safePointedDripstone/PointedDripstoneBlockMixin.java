@@ -37,7 +37,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(PointedDripstoneBlock.class)
 public abstract class PointedDripstoneBlockMixin {
     @Inject(method = "fallOn", at = @At("HEAD"), cancellable = true)
-    private void onLandedUpon(Level world, BlockState state, BlockPos pos, Entity entity, double fallDistance, CallbackInfo ci) {
+    private void onLandedUpon(
+            Level world, BlockState state, BlockPos pos, Entity entity,
+            //#if MC>12006
+            double fallDistance,
+            //#else
+            //$$ float fallDistance,
+            //#endif
+            CallbackInfo ci
+    ) {
         if (CarpetAMSAdditionSettings.safePointedDripstone && entity instanceof Player) {
             entity.causeFallDamage(fallDistance, 1.0F, world.damageSources().fall());
             ci.cancel();

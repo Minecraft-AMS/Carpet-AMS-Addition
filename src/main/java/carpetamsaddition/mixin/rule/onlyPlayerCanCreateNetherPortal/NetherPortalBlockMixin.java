@@ -37,8 +37,11 @@ import net.minecraft.world.level.portal.PortalForcer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.util.Optional;
 
+@GameVersion(version = "Minecraft >= 1.21")
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
     @WrapOperation(

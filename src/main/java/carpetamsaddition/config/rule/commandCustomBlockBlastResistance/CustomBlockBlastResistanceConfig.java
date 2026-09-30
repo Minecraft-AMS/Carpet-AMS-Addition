@@ -62,7 +62,14 @@ public class CustomBlockBlastResistanceConfig extends AbstractMapJsonConfig<Stri
         targetMap.clear();
         storageMap.forEach((blockId, resistance) -> {
             try {
-                BuiltInRegistries.BLOCK.get(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().defaultBlockState()).ifPresent(state -> targetMap.put(state, resistance));
+                //#if MC>=12102
+                BlockState state = BuiltInRegistries.BLOCK.get(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().defaultBlockState()).orElse(null);
+                //#else
+                //$$ BlockState state = BuiltInRegistries.BLOCK.get(IdentifierUtil.ofId(blockId)).defaultBlockState();
+                //#endif
+                if (state != null) {
+                    targetMap.put(state, resistance);
+                }
             } catch (Exception e) {
                 CarpetAMSAdditionServer.LOGGER.error("Invalid block ID: {}", blockId, e);
             }

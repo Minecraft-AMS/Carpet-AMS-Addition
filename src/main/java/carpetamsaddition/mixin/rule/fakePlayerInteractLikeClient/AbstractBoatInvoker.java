@@ -24,7 +24,9 @@ import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+@GameVersion(version = "Minecraft > 1.20.6")
 @Mixin(AbstractBoat.class)
 public interface AbstractBoatInvoker {
     @Accessor("outOfControlTicks")

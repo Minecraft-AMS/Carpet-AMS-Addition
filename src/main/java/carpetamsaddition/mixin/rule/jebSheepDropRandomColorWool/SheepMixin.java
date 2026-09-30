@@ -28,6 +28,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 //#if MC>=260000
 //$$ import net.minecraft.world.item.ItemInstance;
 //#endif
+//#if MC>12006
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.entity.animal.sheep.Sheep;
@@ -35,21 +36,29 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+//#else
+//$$ import net.minecraft.world.entity.animal.Sheep;
+//#endif
 import net.minecraft.world.item.DyeColor;
 //#if MC>=260200
 //$$ import net.minecraft.world.level.block.ColorCollection;
 //#endif
 
+//#if MC>12006
 import org.jetbrains.annotations.NotNull;
+//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
-import java.util.function.BiConsumer;
 import java.util.Random;
+//#if MC>12006
+import java.util.function.BiConsumer;
+//#endif
 
 @Mixin(Sheep.class)
 public abstract class SheepMixin {
+    //#if MC>12006
     @WrapOperation(
         method = "shear",
         at = @At(
@@ -86,13 +95,28 @@ public abstract class SheepMixin {
             original.call(sheepEntity, serverLevel, resourceKey, shears, biConsumer);
         }
     }
+    //#else
+    //$$ @WrapOperation(
+    //$$     method = "shear",
+    //$$     at = @At(
+    //$$         value = "INVOKE",
+    //$$         target = "Lnet/minecraft/world/entity/animal/Sheep;getColor()Lnet/minecraft/world/item/DyeColor;"
+    //$$     )
+    //$$ )
+    //$$ private DyeColor randomColor(Sheep sheep, Operation<DyeColor> original) {
+    //$$     if (CarpetAMSAdditionSettings.jebSheepDropRandomColorWool && isJebSheep(sheep)) {
+    //$$         return DyeColor.values()[new Random().nextInt(DyeColor.values().length)];
+    //$$     }
+    //$$     return original.call(sheep);
+    //$$ }
+    //#endif
 
     @Unique
     private static boolean isJebSheep(Sheep sheepEntity) {
         return sheepEntity.hasCustomName() && sheepEntity.getCustomName() != null && sheepEntity.getCustomName().getString().equals("jeb_");
     }
 
-    //#if MC<260200
+    //#if MC>12006 && MC<260200
     @Unique
     private static Block getWoolBlockFromColor(DyeColor color) {
         return switch (color) {

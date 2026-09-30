@@ -50,13 +50,19 @@ public class ShapelessRecipeTemplate implements RecipeTemplateInterface {
         JsonArray ingredientsJson = new JsonArray();
 
         for (String ingredient : ingredients) {
+            //#if MC>=12102
             ingredientsJson.add(ingredient);
+            //#else
+            //$$ JsonObject ingredientJson = new JsonObject();
+            //$$ ingredientJson.addProperty("item", ingredient);
+            //$$ ingredientsJson.add(ingredientJson);
+            //#endif
         }
 
         recipeJson.add("ingredients", ingredientsJson);
 
         JsonObject resultJson = new JsonObject();
-        resultJson.addProperty("id", resultItem);
+        resultJson.addProperty(this.compatResultItemIdKey(), resultItem);
         resultJson.addProperty("count", resultCount);
         recipeJson.add("result", resultJson);
         return recipeJson;

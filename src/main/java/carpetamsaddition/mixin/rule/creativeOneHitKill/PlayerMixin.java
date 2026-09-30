@@ -21,14 +21,18 @@
 package carpetamsaddition.mixin.rule.creativeOneHitKill;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+//#if MC>12006
 import carpetamsaddition.utils.EntityUtil;
+//#endif
 import carpetamsaddition.utils.WorldUtil;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragonPart;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.EntitySelector;
+//#if MC>12006
 import net.minecraft.server.level.ServerLevel;
+//#endif
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.Level;
@@ -55,10 +59,24 @@ public abstract class PlayerMixin implements EntityAccessorAndInvoker, PlayerAcc
     @Unique
     private void instaKill(Entity target) {
         if (target instanceof EnderDragonPart) {
-            Arrays.stream(((EnderDragonPart) target).parentMob.getSubEntities()).forEach(part -> target.kill((ServerLevel) EntityUtil.getEntityWorld(target)));
+            Arrays.stream(((EnderDragonPart) target).parentMob.getSubEntities()).forEach(part ->
+                //#if MC>12006
+                target.kill((ServerLevel) EntityUtil.getEntityWorld(target))
+                //#else
+                //$$ target.kill()
+                //#endif
+            );
+            //#if MC>12006
             ((EnderDragonPart) target).parentMob.kill((ServerLevel) EntityUtil.getEntityWorld(target));
+            //#else
+            //$$ ((EnderDragonPart) target).parentMob.kill();
+            //#endif
         } else {
+            //#if MC>12006
             target.kill((ServerLevel) EntityUtil.getEntityWorld(target));
+            //#else
+            //$$ target.kill();
+            //#endif
         }
         playCritSoundEffect(this.getLevel(), this.invokerGetX(), this.invokerGetY(), this.invokerGetZ(), this.invokeGetSoundSource());
     }

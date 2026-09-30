@@ -40,8 +40,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.util.*;
 
+@GameVersion(version = "Minecraft > 1.20.6")
 @Mixin(ExperienceOrb.class)
 public abstract class ExperienceOrbMixin {
     @Inject(method = "repairPlayerItems", at = @At("HEAD"), cancellable = true)

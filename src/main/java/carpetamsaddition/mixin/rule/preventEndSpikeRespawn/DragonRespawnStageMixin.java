@@ -22,7 +22,9 @@ package carpetamsaddition.mixin.rule.preventEndSpikeRespawn;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
+//#if MC>12006
 import carpetamsaddition.utils.Noop;
+//#endif
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
@@ -30,13 +32,23 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+//#if MC<=12006
+//$$ import net.minecraft.world.level.Explosion;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.Objects;
 
-@Mixin(targets = "net/minecraft/world/level/dimension/end/DragonRespawnStage$3")
+@Mixin(
+    targets =
+    //#if MC>12006
+    "net/minecraft/world/level/dimension/end/DragonRespawnStage$3"
+    //#else
+    //$$ "net/minecraft/world/level/dimension/end/DragonRespawnAnimation$3"
+    //#endif
+)
 public abstract class DragonRespawnStageMixin {
     @WrapOperation(
         method = "tick",
@@ -53,20 +65,36 @@ public abstract class DragonRespawnStageMixin {
         method = "tick",
         at = @At(
             value = "INVOKE",
+            //#if MC>12006
             target = "Lnet/minecraft/server/level/ServerLevel;explode(Lnet/minecraft/world/entity/Entity;DDDFLnet/minecraft/world/level/Level$ExplosionInteraction;)V"
+            //#else
+            //$$ target = "Lnet/minecraft/server/level/ServerLevel;explode(Lnet/minecraft/world/entity/Entity;DDDFLnet/minecraft/world/level/Level$ExplosionInteraction;)Lnet/minecraft/world/level/Explosion;"
+            //#endif
         )
     )
+    //#if MC>12006
     private void onCreateExplosion(
+    //#else
+    //$$ private Explosion onCreateExplosion(
+    //#endif
         ServerLevel serverWorld,
         Entity entity,
         double x, double y, double z, float power,
         Level.ExplosionInteraction destructionType,
+        //#if MC>12006
         Operation<Void> original
+        //#else
+        //$$ Operation<Explosion> original
+        //#endif
     ) {
+        //#if MC>12006
         if (Objects.equals(CarpetAMSAdditionSettings.preventEndSpikeRespawn, "false")) {
             original.call(serverWorld, entity, x, y, z, power, destructionType);
         } else {
             Noop.noop();
         }
+        //#else
+        //$$ return Objects.equals(CarpetAMSAdditionSettings.preventEndSpikeRespawn, "false") ? original.call(serverWorld, entity, x, y, z, power, destructionType) : null;
+        //#endif
     }
 }

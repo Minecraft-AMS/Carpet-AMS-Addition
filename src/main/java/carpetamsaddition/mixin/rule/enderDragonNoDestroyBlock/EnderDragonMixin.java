@@ -26,7 +26,11 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.core.BlockPos;
+//#if MC>12006
 import net.minecraft.server.level.ServerLevel;
+//#else
+//$$ import net.minecraft.world.level.Level;
+//#endif
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,10 +43,21 @@ public abstract class EnderDragonMixin {
         method = "checkWalls",
         at = @At(
             value = "INVOKE",
+            //#if MC>12006
             target = "Lnet/minecraft/server/level/ServerLevel;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"
+            //#else
+            //$$ target = "Lnet/minecraft/world/level/Level;removeBlock(Lnet/minecraft/core/BlockPos;Z)Z"
+            //#endif
         )
     )
-    private boolean enderDragonNoDestroyBlock(ServerLevel serverLevel, BlockPos pos, boolean b, Operation<Boolean> original) {
+    private boolean enderDragonNoDestroyBlock(
+        //#if MC>12006
+        ServerLevel serverLevel,
+        //#else
+        //$$ Level serverLevel,
+        //#endif
+        BlockPos pos, boolean b, Operation<Boolean> original
+    ) {
         return CarpetAMSAdditionSettings.enderDragonNoDestroyBlock ? false : original.call(serverLevel, pos, b);
     }
 }

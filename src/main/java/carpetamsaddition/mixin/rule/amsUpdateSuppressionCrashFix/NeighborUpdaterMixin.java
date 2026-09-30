@@ -27,7 +27,9 @@ import carpetamsaddition.helpers.rule.amsUpdateSuppressionCrashFix.UpdateSuppres
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+//#if MC>12006
 import net.minecraft.world.level.redstone.Orientation;
+//#endif
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.redstone.NeighborUpdater;
@@ -51,7 +53,15 @@ public interface NeighborUpdaterMixin {
        ),
        locals = LocalCapture.CAPTURE_FAILHARD
     )
-    private static void tryNeighborUpdate(Level world, BlockState state, BlockPos pos, Block sourceBlock, Orientation orientation, boolean notify, CallbackInfo ci, Throwable throwable) {
+    private static void tryNeighborUpdate(
+        Level world, BlockState state, BlockPos pos, Block sourceBlock,
+        //#if MC>12006
+        Orientation orientation,
+        //#else
+        //$$ BlockPos orientation,
+        //#endif
+        boolean notify, CallbackInfo ci, Throwable throwable
+    ) {
         if (!Objects.equals(CarpetAMSAdditionSettings.amsUpdateSuppressionCrashFix, "false") && UpdateSuppressionException.isUpdateSuppression(throwable)) {
             UpdateSuppressionContext.sendMessageToServer(pos, world, throwable);
             throw new AMS_ThrowableSuppression(UpdateSuppressionContext.suppressionMessageText(pos, world, throwable).getString());

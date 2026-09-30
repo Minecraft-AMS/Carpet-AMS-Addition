@@ -32,10 +32,17 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(PrimedTnt.class)
 public abstract class PrimedTntMixin {
     @ModifyExpressionValue(
+        //#if MC>12006
         method = "<init>(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/Level;)V",
+        //#else
+        //$$ method = "explode",
+        //#endif
         at = @At(
             value = "CONSTANT",
             args = "floatValue=4.0F"
+            //#if MC<=12006
+            //$$ , ordinal = 1
+            //#endif
         )
     )
     private float modifyTntPower(float original) {
