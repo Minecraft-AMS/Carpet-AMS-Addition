@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "mc >= 26.3")
+@GameVersion(version = "Minecraft >= 26.3")
 @Mixin(ComposterBlock.class)
 public abstract class ComposterBlockMixin {
     @ModifyExpressionValue(
