@@ -109,6 +109,43 @@
             background: var(--surface)
             color: var(--muted)
 
+        .document-heading
+            display: grid
+            grid-template-columns: minmax(0, 1fr) max-content
+            align-items: center
+            column-gap: 16px
+
+            > .headerlink
+                position: absolute
+
+            .document-heading-title
+                min-width: 0
+                overflow-wrap: anywhere
+
+        .document-version-badge
+            justify-self: end
+            padding: 5px 10px
+            border: 1px solid var(--line)
+            border-radius: 6px
+            color: var(--muted)
+            font-family: "SFMono-Regular", Consolas, monospace
+            font-size: 13px
+            font-weight: 400
+            letter-spacing: 0
+            line-height: 1.4
+            white-space: nowrap
+
+        .document-source
+            margin-top: -.35em
+            color: var(--muted)
+            font-size: .82em
+
+            a
+                border-bottom: 1px solid transparent
+
+                &:hover
+                    border-bottom-color: currentColor
+
         mark, code:not(.hljs)
             padding: 2px 5px
             border-radius: 3px
@@ -393,8 +430,16 @@
     .post-details
         padding: 48px 0 64px
 
-    .post-content
+    .post-details .post-content
         font-size: 16px
+
+        .document-heading
+            grid-template-columns: minmax(0, 1fr)
+            row-gap: 8px
+
+        .document-version-badge
+            justify-self: start
+            font-size: 12px
 
     .post-details .resource-page
         gap: 22px

@@ -18,6 +18,38 @@
 
 &emsp;
 
+## Version and source notes in rules, commands, and loggers
+
+Use the following Markdown syntax on the English [rules](/en_us/Rules_en/), [commands](/en_us/Commands_en/), and [loggers](/en_us/Loggers_en/) pages:
+
+```md
+## exampleRule
+
+> Version: `Minecraft >= 1.21`
+
+Describe the rule here.
+
+> Ported from: [Project name](https://github.com/owner/repo)
+```
+
+For the Chinese [rules](/Rules/), [commands](/Commands/), and [loggers](/Loggers/) pages, use the corresponding Chinese labels:
+
+```md
+## 示例规则（exampleRule）
+
+> 版本：`Minecraft >= 1.21`
+
+这里是规则说明。
+
+> 移植自：[项目名称](https://github.com/owner/repo)
+```
+
+Use level-two headings (`##`) for rules, commands, and loggers. Place the version line immediately after the entry heading. Blank lines are fine, but no other content may come between them. The website displays it as a badge beside the heading; omit it if the entry has no version restriction. A source line can appear in the entry description and is displayed as a source link.
+
+Check the implementation's preprocessor conditions and actual supported versions before writing a range. The website recognizes the note format but does not verify that the range is correct.
+
+&emsp;
+
 ## Support Version
 
 ✔ Under maintenance
