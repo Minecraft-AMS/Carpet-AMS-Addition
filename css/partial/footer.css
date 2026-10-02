@@ -1,39 +1,40 @@
+.footer-wrapper {
+  border-top: 1px solid var(--line);
+}
 .footer-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  width: 1280px;
+  max-width: calc(100% - 64px);
+  margin: 0 auto;
+  padding: 25px 0;
 }
 .footer-meta {
-  font-size: 15px;
-  color: #0ff;
-  width: 100%;
-  margin: 0 0;
-  display: inline-flex;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  color: var(--muted);
+  font-size: 13px;
 }
 .footer-meta a {
-  color: #0ff;
-}
-.footer-meta a:hover {
-  color: #0ff;
-}
-.footer-meta > div:not(:last-child) {
-  margin-right: 20px;
+  color: var(--accent);
 }
 #top {
-  width: 30px;
-  height: 30px;
-  background: rgba(85,85,85,0.3) none repeat scroll 0% 0%;
   position: fixed;
-  bottom: 1%;
-  right: 3%;
+  right: 24px;
+  bottom: 24px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 50%;
   text-align: center;
-  cursor: pointer;
-  filter: invert(0%) !important; /* 使#top元素不受反转影响 */
+  line-height: 33px;
+  opacity: 0.9;
 }
 #top a {
-  display: block;
-  font-size: 25px;
-  line-height: 25px;
-  color: #0ff; /* 设置链接颜色 */
-  text-decoration: none;
+  color: var(--accent);
+}
+@media screen and (max-width: 760px) {
+  .footer-container {
+    width: calc(100% - 32px);
+  }
 }

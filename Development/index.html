@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -28,61 +28,126 @@
 
     <div class="body-container">
         <div class="header-wrapper"><header>
+    
+    
+    
+    
+    
     <div class="header-container">
-        <div class="header-menu-list">
+        <a class="site-brand" href="/" aria-label="Carpet AMS Addition">
+            <span>Carpet <strong>AMS</strong> Addition</span>
+        </a>
+        <nav class="header-menu-list" aria-label="Primary navigation">
             <ul>
             
+                
+                
                 <li>
-                    <a href="/">日志[logs]</a>
+                    <a href="/" data-i18n-cn="日志" data-i18n-en="Logs" data-url-cn="/" data-url-en="/">日志</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Rules">规则[Rules]</a>
+                    <a href="/Rules" data-i18n-cn="规则" data-i18n-en="Rules" data-url-cn="/Rules" data-url-en="/en_us/Rules_en/">规则</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Loggers">记录器[Loggers]</a>
+                    <a href="/Loggers" data-i18n-cn="记录器" data-i18n-en="Loggers" data-url-cn="/Loggers" data-url-en="/en_us/Loggers_en/">记录器</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Commands">指令[Commands]</a>
+                    <a href="/Commands" data-i18n-cn="指令" data-i18n-en="Commands" data-url-cn="/Commands" data-url-en="/en_us/Commands_en/">指令</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Development">开发[Development]</a>
+                    <a href="/Development" data-i18n-cn="开发" data-i18n-en="Development" data-url-cn="/Development" data-url-en="/en_us/Development_en/">开发</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Download">下载[Download]</a>
+                    <a href="/Download" data-i18n-cn="下载" data-i18n-en="Download" data-url-cn="/Download" data-url-en="/en_us/Download_en/">下载</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/OpenSource">开源[Open Source]</a>
+                    <a href="/OpenSource" data-i18n-cn="开源" data-i18n-en="Source" data-url-cn="/OpenSource" data-url-en="/en_us/OpenSource_en/">开源</a>
                 </li>
             
             </ul>
+        </nav>
+        <div class="header-controls">
+            <div class="segmented-control theme-control" role="group" aria-label="Theme">
+                <button type="button" data-set-theme="light" aria-label="浅色模式"><i class="fa-solid fa-sun"></i><span data-i18n-cn="浅色" data-i18n-en="Light">浅色</span></button>
+                <button type="button" data-set-theme="dark" aria-label="深色模式"><i class="fa-solid fa-moon"></i><span data-i18n-cn="深色" data-i18n-en="Dark">深色</span></button>
+            </div>
+            <div class="segmented-control language-control" role="group" aria-label="Language">
+                <button type="button" data-set-language="zh-CN" data-language-target="/Development" lang="zh-CN">中文</button>
+                <button type="button" data-set-language="en" data-language-target="/en_us/Development_en/" lang="en">EN</button>
+            </div>
         </div>
     </div>
 </header>
 </div>
         <div class="main-wrapper"><main>
+    
+    
+    
+    
+    
     <div class="main-container">
+        <div class="article-layout" data-article-layout>
         <div class="post-details">
             
-            <div class="post-content">
-                <h3 id="中文-English"><a href="#中文-English" class="headerlink" title="[ 中文 | English ]"></a>[ 中文 | <a href="/en_us/Development_en">English</a> ]</h3><h1 id="——-开-发-——"><a href="#——-开-发-——" class="headerlink" title="—— 开 发 ——"></a><center>—— 开 发 ——</center></h1><p>&emsp;</p>
-<ul>
-<li><p>主开发版本：<code>Minecraft 1.18.2</code></p>
+            <div class="post-title static-page-title">
+                <p class="eyebrow" data-i18n-cn="文档" data-i18n-en="Documentation">文档</p>
+                <h1 data-i18n-cn="开发" data-i18n-en="Development">开发</h1>
+            </div>
+            
+            
+            
+            <div class="post-content static-page-content">
+                <ul>
+<li><p>主开发版本：<code>Minecraft 1.21.11</code></p>
 </li>
 <li><p>使用 <a target="_blank" rel="noopener" href="https://github.com/ReplayMod/preprocessor">preprocessor</a> 在单一分支下对所有的Minecraft版本进行维护</p>
 </li>
-<li><p>如果你有好的点子可以提交 <code>feature request</code> 或在 <code>master</code> 分支下提交pr</p>
+<li><p>如果你有好的点子可以提交 <code>feature request</code> 或在 <code>dev</code> 分支下提交pr</p>
 </li>
 <li><p>由于英文水平太差，目前所有的英文翻译均来自 <a target="_blank" rel="noopener" href="https://openai.com/blog/chatgpt">Chat-GPT</a>（除了很久很久以前 <a target="_blank" rel="noopener" href="https://github.com/nirvanaxiao6">nirvanaxiao6</a> 撰写的第一篇英文文档）</p>
 </li>
 <li><p>该网站使用 <a href="%5BHexo%5D(https://hexo.io/zh-cn/index.html)">Hexo</a> 构建</p>
 </li>
 </ul>
+<p>&emsp;</p>
+<h2 id="规则、指令与记录器文档中的版本与来源标注"><a href="#规则、指令与记录器文档中的版本与来源标注" class="headerlink" title="规则、指令与记录器文档中的版本与来源标注"></a>规则、指令与记录器文档中的版本与来源标注</h2><p>编辑中文<a href="/Rules/">规则</a>、<a href="/Commands/">指令</a>或<a href="/Loggers/">记录器</a>文档时，使用以下 Markdown 写法：</p>
+<pre><code class="hljs md"><span class="hljs-section">## 示例规则（exampleRule）</span>
+
+<span class="hljs-quote">&gt; 版本：`Minecraft &gt;= 1.21`</span>
+
+这里是规则说明。
+
+<span class="hljs-quote">&gt; 移植自：[<span class="hljs-string">项目名称</span>](<span class="hljs-link">https://github.com/owner/repo</span>)</span></code></pre>
+
+<p>编辑英文<a href="/en_us/Rules_en/">规则</a>、<a href="/en_us/Commands_en/">指令</a>或<a href="/en_us/Loggers_en/">记录器</a>文档时，使用对应的英文标签：</p>
+<pre><code class="hljs md"><span class="hljs-section">## exampleRule</span>
+
+<span class="hljs-quote">&gt; Version: `Minecraft &gt;= 1.21`</span>
+
+Describe the rule here.
+
+<span class="hljs-quote">&gt; Ported from: [<span class="hljs-string">Project name</span>](<span class="hljs-link">https://github.com/owner/repo</span>)</span></code></pre>
+
+<p>规则、指令和记录器条目统一使用二级标题（<code>##</code>）。版本行必须紧跟在条目标题后面（可以有空行，但不能插入其他内容）。网页会将它显示为标题旁的版本徽标；仅在条目有版本限制时填写。移植来源行可放在条目的说明中，网页会将其显示为来源链接。</p>
+<p>请对照实现代码中的预处理条件与实际支持版本填写范围。网站只识别标注格式，不会自动验证版本范围是否正确。</p>
 <p>&emsp;</p>
 <h2 id="版本支持"><a href="#版本支持" class="headerlink" title="版本支持"></a>版本支持</h2><p>✔ 正在维护</p>
 <p>✖ 停止维护</p>
@@ -96,6 +161,11 @@
 </tr>
 </thead>
 <tbody><tr>
+<td align="center">26.3</td>
+<td align="center">✔</td>
+<td align="center">—</td>
+</tr>
+<tr>
 <td align="center">26.2</td>
 <td align="center">✔</td>
 <td align="center">—</td>
@@ -107,27 +177,37 @@
 </tr>
 <tr>
 <td align="center">26.1.1</td>
+<td align="center">✖</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3">Carpet-AMS-Addition-v26.3</a></td>
+</tr>
+<tr>
+<td align="center">26.1</td>
+<td align="center">✖</td>
+<td align="center"><a target="_blank" rel="noopener" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3">Carpet-AMS-Addition-v26.3</a></td>
+</tr>
+<tr>
+<td align="center"><strong><u>1.21.11(主)</u></strong></td>
 <td align="center">✔</td>
 <td align="center">—</td>
 </tr>
 <tr>
-<td align="center"><strong><u>26.1(主)</u></strong></td>
+<td align="center">1.21.8</td>
 <td align="center">✔</td>
 <td align="center">—</td>
 </tr>
 <tr>
-<td align="center">1.21.11</td>
+<td align="center">1.21.9 - 1.21.10</td>
 <td align="center">❓</td>
 <td align="center">—</td>
 </tr>
 <tr>
-<td align="center">1.21 - 1.21.10</td>
-<td align="center">✖</td>
+<td align="center">1.21 - 1.21.7</td>
+<td align="center">❓</td>
 <td align="center">—</td>
 </tr>
 <tr>
 <td align="center">1.20.6</td>
-<td align="center">❓</td>
+<td align="center">✔</td>
 <td align="center">—</td>
 </tr>
 <tr>
@@ -137,7 +217,7 @@
 </tr>
 <tr>
 <td align="center">1.19.4</td>
-<td align="center">❓</td>
+<td align="center">✔</td>
 <td align="center">—</td>
 </tr>
 <tr>
@@ -152,17 +232,17 @@
 </tr>
 <tr>
 <td align="center">1.18.2</td>
-<td align="center">❓</td>
+<td align="center">✔</td>
 <td align="center">—</td>
 </tr>
 <tr>
 <td align="center">1.17.1</td>
-<td align="center">❓</td>
+<td align="center">✔</td>
 <td align="center">—</td>
 </tr>
 <tr>
 <td align="center">1.16.5</td>
-<td align="center">❓</td>
+<td align="center">✔</td>
 <td align="center">—</td>
 </tr>
 <tr>
@@ -194,6 +274,13 @@
 
             </div>
         </div>
+        <aside class="page-toc" data-page-toc aria-label="Page outline" hidden>
+            <div class="page-toc-inner">
+                <p class="page-toc-title" data-i18n-cn="本页目录" data-i18n-en="On this page">本页目录</p>
+                <nav data-page-toc-links></nav>
+            </div>
+        </aside>
+        </div>
     </div>
 </main>
 
@@ -209,12 +296,12 @@
         <div class="footer-meta">
             
                 <div class="footer-meta-copyright">
-                    &copy; 2026 A Minecraft Server.
+                    &copy; 2026 A Minecraft Server
                 </div>
             
             
                 <div class="footer-meta-licenese">
-                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                    <span>License</span> <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
                 </div>
             
             
@@ -224,17 +311,15 @@
             
         </div>
     </div>
-</footer></div>
+</footer>
+</div>
     </div>
 
-    <!-- 动态线条背景 -->
     
 
-    <style>
-        body {
-            background-color: #000000;
-        }
-    </style>
+    
+<script src="/js/site.js"></script>
+
 
 </body>
 </html>

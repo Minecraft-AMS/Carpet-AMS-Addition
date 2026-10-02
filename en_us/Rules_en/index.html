@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -28,50 +28,100 @@
 
     <div class="body-container">
         <div class="header-wrapper"><header>
+    
+    
+    
+    
+    
     <div class="header-container">
-        <div class="header-menu-list">
+        <a class="site-brand" href="/" aria-label="Carpet AMS Addition">
+            <span>Carpet <strong>AMS</strong> Addition</span>
+        </a>
+        <nav class="header-menu-list" aria-label="Primary navigation">
             <ul>
             
+                
+                
                 <li>
-                    <a href="/">日志[logs]</a>
+                    <a href="/" data-i18n-cn="日志" data-i18n-en="Logs" data-url-cn="/" data-url-en="/">日志</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Rules">规则[Rules]</a>
+                    <a href="/Rules" data-i18n-cn="规则" data-i18n-en="Rules" data-url-cn="/Rules" data-url-en="/en_us/Rules_en/">规则</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Loggers">记录器[Loggers]</a>
+                    <a href="/Loggers" data-i18n-cn="记录器" data-i18n-en="Loggers" data-url-cn="/Loggers" data-url-en="/en_us/Loggers_en/">记录器</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Commands">指令[Commands]</a>
+                    <a href="/Commands" data-i18n-cn="指令" data-i18n-en="Commands" data-url-cn="/Commands" data-url-en="/en_us/Commands_en/">指令</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Development">开发[Development]</a>
+                    <a href="/Development" data-i18n-cn="开发" data-i18n-en="Development" data-url-cn="/Development" data-url-en="/en_us/Development_en/">开发</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Download">下载[Download]</a>
+                    <a href="/Download" data-i18n-cn="下载" data-i18n-en="Download" data-url-cn="/Download" data-url-en="/en_us/Download_en/">下载</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/OpenSource">开源[Open Source]</a>
+                    <a href="/OpenSource" data-i18n-cn="开源" data-i18n-en="Source" data-url-cn="/OpenSource" data-url-en="/en_us/OpenSource_en/">开源</a>
                 </li>
             
             </ul>
+        </nav>
+        <div class="header-controls">
+            <div class="segmented-control theme-control" role="group" aria-label="Theme">
+                <button type="button" data-set-theme="light" aria-label="浅色模式"><i class="fa-solid fa-sun"></i><span data-i18n-cn="浅色" data-i18n-en="Light">浅色</span></button>
+                <button type="button" data-set-theme="dark" aria-label="深色模式"><i class="fa-solid fa-moon"></i><span data-i18n-cn="深色" data-i18n-en="Dark">深色</span></button>
+            </div>
+            <div class="segmented-control language-control" role="group" aria-label="Language">
+                <button type="button" data-set-language="zh-CN" data-language-target="/Rules" lang="zh-CN">中文</button>
+                <button type="button" data-set-language="en" data-language-target="/en_us/Rules_en" lang="en">EN</button>
+            </div>
         </div>
     </div>
 </header>
 </div>
         <div class="main-wrapper"><main>
+    
+    
+    
+    
+    
     <div class="main-container">
+        <div class="article-layout" data-article-layout data-page-toc-enabled>
         <div class="post-details">
             
-            <div class="post-content">
-                <h3 id="中文-English"><a href="#中文-English" class="headerlink" title="[ 中文 | English ]"></a>[ <a href="/Rules">中文</a> | English ]</h3><h1 id="——-Rules-——"><a href="#——-Rules-——" class="headerlink" title="—— Rules ——"></a><center>—— Rules ——</center></h1><p>&emsp;</p>
-<h2 id="superBow"><a href="#superBow" class="headerlink" title="superBow"></a>superBow</h2><p>Let enchantments Infinity and Mending be compatible with each other on bow.</p>
+            <div class="post-title static-page-title">
+                <p class="eyebrow" data-i18n-cn="文档" data-i18n-en="Documentation">文档</p>
+                <h1 data-i18n-cn="规则" data-i18n-en="Rules">规则</h1>
+            </div>
+            
+            
+            
+            <div class="content-search document-search">
+                <label class="sr-only" for="document-search" data-i18n-cn="搜索当前文档" data-i18n-en="Search this document">搜索当前文档</label>
+                <input id="document-search" class="site-search" type="search" autocomplete="off" data-document-search data-i18n-placeholder-cn="搜索名称、指令或说明" data-i18n-placeholder-en="Search names, commands, or descriptions" placeholder="搜索名称、指令或说明">
+            </div>
+            <p class="search-empty" data-document-search-empty hidden data-i18n-cn="没有找到匹配内容。" data-i18n-en="No matching content found.">没有找到匹配内容。</p>
+            
+            <div class="post-content static-page-content" data-searchable-content>
+                <h2 id="superBow"><a href="#superBow" class="headerlink" title="superBow"></a>superBow</h2><p>Let enchantments Infinity and Mending be compatible with each other on bow.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -95,7 +145,9 @@
 <li><p><code>scheduledRandomTickStem</code>: Enable 0tick farm of twisting vines, weeping vines and kelp.</p>
 </li>
 </ul>
-<p>&lt;Ported from <a target="_blank" rel="noopener" href="https://github.com/hit-mc/OhMyVanillaMinecraft">OhMyVanillaMinecraft</a> &gt;</p>
+<blockquote>
+<p>Ported from: <a target="_blank" rel="noopener" href="https://github.com/hit-mc/OhMyVanillaMinecraft">OhMyVanillaMinecraft</a></p>
+</blockquote>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -268,7 +320,9 @@
 </li>
 </ul>
 <h2 id="sharedVillagerDiscounts"><a href="#sharedVillagerDiscounts" class="headerlink" title="sharedVillagerDiscounts"></a>sharedVillagerDiscounts</h2><p>Villagers cured from zombified villager will give trade discounts to every player.</p>
-<p>&lt;Ported from <a target="_blank" rel="noopener" href="https://github.com/totorewa/totos-carpet-tweaks">totos-carpet-tweaks</a>&gt;</p>
+<blockquote>
+<p>Ported from: <a target="_blank" rel="noopener" href="https://github.com/totorewa/totos-carpet-tweaks">totos-carpet-tweaks</a></p>
+</blockquote>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -339,7 +393,9 @@
 </li>
 </ul>
 <h2 id="creativeOneHitKill"><a href="#creativeOneHitKill" class="headerlink" title="creativeOneHitKill"></a>creativeOneHitKill</h2><p>When enabled, Allows players in Creative mode to kill entities in one hit, If the player is sneaking, other entities around the target get killed too.</p>
-<p>&lt;Ported from <a target="_blank" rel="noopener" href="https://github.com/Lunaar-SMP/lunaar-carpet-addons">lunaar-carpet-addons</a>&gt;</p>
+<blockquote>
+<p>Ported from: <a target="_blank" rel="noopener" href="https://github.com/Lunaar-SMP/lunaar-carpet-addons">lunaar-carpet-addons</a></p>
+</blockquote>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -542,8 +598,10 @@
 <li><p>Categroies: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code> , <code>EXPERIMENTAL</code></p>
 </li>
 </ul>
-<h2 id="ghastFireballExplosionDamageSourceFix"><a href="#ghastFireballExplosionDamageSourceFix" class="headerlink" title="ghastFireballExplosionDamageSourceFix"></a>ghastFireballExplosionDamageSourceFix</h2><p>Fix MC-193297 that the large fireball does not create explosion with correct damage source.</p>
-<p>&lt;Available for Minecraft &lt; 1.19.3&gt;</p>
+<h2 id="ghastFireballExplosionDamageSourceFix"><a href="#ghastFireballExplosionDamageSourceFix" class="headerlink" title="ghastFireballExplosionDamageSourceFix"></a>ghastFireballExplosionDamageSourceFix</h2><blockquote>
+<p>Version: <code>Minecraft &lt; 1.19.3</code></p>
+</blockquote>
+<p>Fix MC-193297 that the large fireball does not create explosion with correct damage source.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -629,10 +687,12 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="maxPlayerBlockInteractionRangeScope"><a href="#maxPlayerBlockInteractionRangeScope" class="headerlink" title="maxPlayerBlockInteractionRangeScope"></a>maxPlayerBlockInteractionRangeScope</h2><p>Change the scope of the “maxPlayerBlockInteractionRange” rule.</p>
+<h2 id="maxPlayerBlockInteractionRangeScope"><a href="#maxPlayerBlockInteractionRangeScope" class="headerlink" title="maxPlayerBlockInteractionRangeScope"></a>maxPlayerBlockInteractionRangeScope</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.20.5</code></p>
+</blockquote>
+<p>Change the scope of the “maxPlayerBlockInteractionRange” rule.</p>
 <p>[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.</p>
 <p>[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.</p>
-<p>&lt; Available for Minecraft &gt;&#x3D; 1.20.5 &gt;</p>
 <ul>
 <li><p>Type: <code>String</code></p>
 </li>
@@ -643,10 +703,12 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="maxPlayerEntityInteractionRangeScope"><a href="#maxPlayerEntityInteractionRangeScope" class="headerlink" title="maxPlayerEntityInteractionRangeScope"></a>maxPlayerEntityInteractionRangeScope</h2><p>Change the scope of the “maxPlayerEntityInteractionRange” rule.</p>
+<h2 id="maxPlayerEntityInteractionRangeScope"><a href="#maxPlayerEntityInteractionRangeScope" class="headerlink" title="maxPlayerEntityInteractionRangeScope"></a>maxPlayerEntityInteractionRangeScope</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.20.5</code></p>
+</blockquote>
+<p>Change the scope of the “maxPlayerEntityInteractionRange” rule.</p>
 <p>[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.</p>
 <p>[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.</p>
-<p>&lt; Available for Minecraft &gt;&#x3D; 1.20.5 &gt;</p>
 <ul>
 <li><p>Type: <code>String</code></p>
 </li>
@@ -919,8 +981,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
 </li>
 </ul>
-<h2 id="enderPearlSoundEffect"><a href="#enderPearlSoundEffect" class="headerlink" title="enderPearlSoundEffect"></a>enderPearlSoundEffect</h2><p>A sound effect will be played when the player uses an ender pearl for teleportation.</p>
-<p>&lt;Available for Minecraft &lt; 1.20&gt;</p>
+<h2 id="enderPearlSoundEffect"><a href="#enderPearlSoundEffect" class="headerlink" title="enderPearlSoundEffect"></a>enderPearlSoundEffect</h2><blockquote>
+<p>Version: <code>Minecraft &lt; 1.20</code></p>
+</blockquote>
+<p>A sound effect will be played when the player uses an ender pearl for teleportation.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1054,8 +1118,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code></p>
 </li>
 </ul>
-<h2 id="experimentalContentCheckDisabled"><a href="#experimentalContentCheckDisabled" class="headerlink" title="experimentalContentCheckDisabled"></a>experimentalContentCheckDisabled</h2><p>Allow playing Minecraft experimental content in the game by adding data packs  (need restart server). </p>
-<p>&lt; Available for Minecraft 1.19 - 1.21.1 &gt;</p>
+<h2 id="experimentalContentCheckDisabled"><a href="#experimentalContentCheckDisabled" class="headerlink" title="experimentalContentCheckDisabled"></a>experimentalContentCheckDisabled</h2><blockquote>
+<p>Version: <code>Minecraft 1.19–1.21.1</code></p>
+</blockquote>
+<p>Allow playing Minecraft experimental content in the game by adding data packs  (need restart server). </p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1077,8 +1143,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="safePointedDripstone"><a href="#safePointedDripstone" class="headerlink" title="safePointedDripstone"></a>safePointedDripstone</h2><p>When players land on pointed dripstone, they do not take additional damage from it.</p>
-<p>&lt; Available for Minecraft &gt;&#x3D; 1.17 &gt;</p>
+<h2 id="safePointedDripstone"><a href="#safePointedDripstone" class="headerlink" title="safePointedDripstone"></a>safePointedDripstone</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.17</code></p>
+</blockquote>
+<p>When players land on pointed dripstone, they do not take additional damage from it.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1089,8 +1157,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="pointedDripstoneCollisionBoxDisabled"><a href="#pointedDripstoneCollisionBoxDisabled" class="headerlink" title="pointedDripstoneCollisionBoxDisabled"></a>pointedDripstoneCollisionBoxDisabled</h2><p>Allow players to pass through pointed dripstone.</p>
-<p>&lt; Available for Minecraft &gt;&#x3D; 1.17 &gt;</p>
+<h2 id="pointedDripstoneCollisionBoxDisabled"><a href="#pointedDripstoneCollisionBoxDisabled" class="headerlink" title="pointedDripstoneCollisionBoxDisabled"></a>pointedDripstoneCollisionBoxDisabled</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.17</code></p>
+</blockquote>
+<p>Allow players to pass through pointed dripstone.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1134,8 +1204,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="easyGetPitcherPod"><a href="#easyGetPitcherPod" class="headerlink" title="easyGetPitcherPod"></a>easyGetPitcherPod</h2><p>Players can harvest a random amount of pitcher pods by planting pitcher (The maximum quantity is customizable, while the minimum quantity is fixed at 2).</p>
-<p>&lt; Available for Minecraft &gt;&#x3D; 1.20 &gt;</p>
+<h2 id="easyGetPitcherPod"><a href="#easyGetPitcherPod" class="headerlink" title="easyGetPitcherPod"></a>easyGetPitcherPod</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.20</code></p>
+</blockquote>
+<p>Players can harvest a random amount of pitcher pods by planting pitcher (The maximum quantity is customizable, while the minimum quantity is fixed at 2).</p>
 <ul>
 <li><p>Type: <code>int</code></p>
 </li>
@@ -1262,7 +1334,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="stackableDiscounts"><a href="#stackableDiscounts" class="headerlink" title="stackableDiscounts"></a>stackableDiscounts</h2><p>Reintroduce the stackable discounts feature in &lt;23w31a.</p>
+<h2 id="stackableDiscounts"><a href="#stackableDiscounts" class="headerlink" title="stackableDiscounts"></a>stackableDiscounts</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.20.2</code></p>
+</blockquote>
+<p>Reintroduce the stackable discounts feature in &lt;23w31a.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1409,8 +1484,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
 </li>
 </ul>
-<h2 id="stringDupeReintroduced"><a href="#stringDupeReintroduced" class="headerlink" title="stringDupeReintroduced"></a>stringDupeReintroduced</h2><p>Reintroduced the string dupe feature, you can use this rule to continue using the string farm.</p>
-<p>&lt; Available for Minecraft &gt;&#x3D; 1.21.2 &gt;</p>
+<h2 id="stringDupeReintroduced"><a href="#stringDupeReintroduced" class="headerlink" title="stringDupeReintroduced"></a>stringDupeReintroduced</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.21.2</code></p>
+</blockquote>
+<p>Reintroduced the string dupe feature, you can use this rule to continue using the string farm.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1512,8 +1589,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
 </li>
 </ul>
-<h2 id="itemEntityCreateNetherPortalDisabled"><a href="#itemEntityCreateNetherPortalDisabled" class="headerlink" title="itemEntityCreateNetherPortalDisabled"></a>itemEntityCreateNetherPortalDisabled</h2><p>Prevent item entities from creating portals when passing through Nether portals.</p>
-<p>&lt;Available for Minecraft &gt;&#x3D; 1.21&gt;</p>
+<h2 id="itemEntityCreateNetherPortalDisabled"><a href="#itemEntityCreateNetherPortalDisabled" class="headerlink" title="itemEntityCreateNetherPortalDisabled"></a>itemEntityCreateNetherPortalDisabled</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.21</code></p>
+</blockquote>
+<p>Prevent item entities from creating portals when passing through Nether portals.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1546,9 +1625,11 @@
 <li><p>Categroies: <code>AMS</code>, <code>COMMAND</code></p>
 </li>
 </ul>
-<h2 id="largeBundle"><a href="#largeBundle" class="headerlink" title="largeBundle"></a>largeBundle</h2><p>Let the bundle have a 9x3 or 9x6 UI, and right-click in the hand to open the UI.</p>
+<h2 id="largeBundle"><a href="#largeBundle" class="headerlink" title="largeBundle"></a>largeBundle</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.17</code></p>
+</blockquote>
+<p>Let the bundle have a 9x3 or 9x6 UI, and right-click in the hand to open the UI.</p>
 <p>This rule does not allow bundle and shulker boxes to be placed in bundle.</p>
-<p>&lt;Available for Minecraft &gt;&#x3D; 1.17.1&gt;</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1559,8 +1640,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="maxChainUpdateDepth"><a href="#maxChainUpdateDepth" class="headerlink" title="maxChainUpdateDepth"></a>maxChainUpdateDepth</h2><p>Modify max chain update depth, Set to “-1” to disable the rule.</p>
-<p>&lt;Available for Minecraft &gt;&#x3D; 1.19&gt;</p>
+<h2 id="maxChainUpdateDepth"><a href="#maxChainUpdateDepth" class="headerlink" title="maxChainUpdateDepth"></a>maxChainUpdateDepth</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.19</code></p>
+</blockquote>
+<p>Modify max chain update depth, Set to “-1” to disable the rule.</p>
 <ul>
 <li><p>Type: <code>int</code></p>
 </li>
@@ -1582,8 +1665,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="endPortalChunkLoadDisabled"><a href="#endPortalChunkLoadDisabled" class="headerlink" title="endPortalChunkLoadDisabled"></a>endPortalChunkLoadDisabled</h2><p>Entities passing through the End Portal will not cause chunk loading.</p>
-<p>&lt;Available for Minecraft &gt;&#x3D; 1.20.6&gt;</p>
+<h2 id="endPortalChunkLoadDisabled"><a href="#endPortalChunkLoadDisabled" class="headerlink" title="endPortalChunkLoadDisabled"></a>endPortalChunkLoadDisabled</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.21</code></p>
+</blockquote>
+<p>Entities passing through the End Portal will not cause chunk loading.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1594,8 +1679,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="endPortalChunkLoader"><a href="#endPortalChunkLoader" class="headerlink" title="endPortalChunkLoader"></a>endPortalChunkLoader</h2><p>Passing entities through the End Portal causes chunk loading, consistent with Minecraft &gt;&#x3D; 1.20.5.</p>
-<p>&lt;Available for Minecraft &lt; 1.20.6&gt;</p>
+<h2 id="endPortalChunkLoader"><a href="#endPortalChunkLoader" class="headerlink" title="endPortalChunkLoader"></a>endPortalChunkLoader</h2><blockquote>
+<p>Version: <code>Minecraft &lt; 1.20.6</code></p>
+</blockquote>
+<p>Passing entities through the End Portal causes chunk loading, consistent with Minecraft &gt;&#x3D; 1.20.5.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1652,8 +1739,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>AMS_NETWORK</code>, <code>COMMAND</code></p>
 </li>
 </ul>
-<h2 id="onlyPlayerCanCreateNetherPortal"><a href="#onlyPlayerCanCreateNetherPortal" class="headerlink" title="onlyPlayerCanCreateNetherPortal"></a>onlyPlayerCanCreateNetherPortal</h2><p>Only allow new portals to be generated when players pass through the Nether portal.</p>
-<p>&lt;Available for Minecraft &gt;&#x3D; 1.21&gt;</p>
+<h2 id="onlyPlayerCanCreateNetherPortal"><a href="#onlyPlayerCanCreateNetherPortal" class="headerlink" title="onlyPlayerCanCreateNetherPortal"></a>onlyPlayerCanCreateNetherPortal</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.21</code></p>
+</blockquote>
+<p>Only allow new portals to be generated when players pass through the Nether portal.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1664,8 +1753,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="preventServerPause"><a href="#preventServerPause" class="headerlink" title="preventServerPause"></a>preventServerPause</h2><p>Prevent server pause after 60s.</p>
-<p>&lt;Available for Minecraft &gt;&#x3D; 1.21.2&gt;</p>
+<h2 id="preventServerPause"><a href="#preventServerPause" class="headerlink" title="preventServerPause"></a>preventServerPause</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.21.2</code></p>
+</blockquote>
+<p>Prevent server pause after 60s.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1679,7 +1770,6 @@
 <h2 id="flippinCactusExtras"><a href="#flippinCactusExtras" class="headerlink" title="flippinCactusExtras"></a>flippinCactusExtras</h2><p>Enables flippinCactus rules to work on more blocks.</p>
 <p>Affected blocks:</p>
 <p>barrel, chiseled_bookshelf, crafter, shelf</p>
-<p>&lt;Available for Minecraft &gt;&#x3D; 1.21.2&gt;</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1690,8 +1780,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="experimentalMinecartSpeed"><a href="#experimentalMinecartSpeed" class="headerlink" title="experimentalMinecartSpeed"></a>experimentalMinecartSpeed</h2><p>Set the speed of the experimental minecart.</p>
-<p>&lt;Available for Minecraft &gt;&#x3D; 1.21.2&gt;</p>
+<h2 id="experimentalMinecartSpeed"><a href="#experimentalMinecartSpeed" class="headerlink" title="experimentalMinecartSpeed"></a>experimentalMinecartSpeed</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.21.2</code></p>
+</blockquote>
+<p>Set the speed of the experimental minecart.</p>
 <ul>
 <li><p>Type: <code>int</code></p>
 </li>
@@ -1702,10 +1794,12 @@
 <li><p>Categroies: <code>AMS</code>, <code>FEATURE</code>, <code>EXPERIMENTAL</code></p>
 </li>
 </ul>
-<h2 id="experimentalMinecartEnabled"><a href="#experimentalMinecartEnabled" class="headerlink" title="experimentalMinecartEnabled"></a>experimentalMinecartEnabled</h2><p>Enable experimental minecarts.</p>
+<h2 id="experimentalMinecartEnabled"><a href="#experimentalMinecartEnabled" class="headerlink" title="experimentalMinecartEnabled"></a>experimentalMinecartEnabled</h2><blockquote>
+<p>Version: <code>Minecraft &gt;= 1.21.2</code></p>
+</blockquote>
+<p>Enable experimental minecarts.</p>
 <p>When the server environment switches the rule setting, the server needs to be restarted</p>
 <p>When the client environment switches the rule settings, the client needs to be restarted</p>
-<p>&lt;Available for Minecraft &gt;&#x3D; 1.21.2&gt;</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1740,7 +1834,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
 </li>
 </ul>
-<h2 id="craftableBundle"><a href="#craftableBundle" class="headerlink" title="craftableBundle"></a>craftableBundle</h2><p>Bundle can be crafted using string and rabbit hide.<br>&lt;Available for Minecraft &gt;&#x3D; 1.17&gt;</p>
+<h2 id="craftableBundle"><a href="#craftableBundle" class="headerlink" title="craftableBundle"></a>craftableBundle</h2><blockquote>
+<p>Version: <code>Minecraft 1.17–1.21.1</code></p>
+</blockquote>
+<p>Bundle can be crafted using string and rabbit hide.</p>
 <ul>
 <li><p>Type: <code>String</code></p>
 </li>
@@ -1751,7 +1848,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
 </li>
 </ul>
-<h2 id="craftableSculkSensor"><a href="#craftableSculkSensor" class="headerlink" title="craftableSculkSensor"></a>craftableSculkSensor</h2><p>Sculk sensor can be crafted using deepslate, redstone and quartz.<br>&lt;Only available for Minecraft &#x3D;&#x3D; 1.17 or Minecraft &#x3D;&#x3D; 1.18&gt;</p>
+<h2 id="craftableSculkSensor"><a href="#craftableSculkSensor" class="headerlink" title="craftableSculkSensor"></a>craftableSculkSensor</h2><blockquote>
+<p>Version: <code>Minecraft 1.17–1.18</code></p>
+</blockquote>
+<p>Sculk sensor can be crafted using deepslate, redstone and quartz.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1795,7 +1895,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
 </li>
 </ul>
-<h2 id="betterCraftablePolishedBlackStoneButton"><a href="#betterCraftablePolishedBlackStoneButton" class="headerlink" title="betterCraftablePolishedBlackStoneButton"></a>betterCraftablePolishedBlackStoneButton</h2><p>Use deepslate to crafted polished_blackstone_button in minecraft.</p>
+<h2 id="betterCraftablePolishedBlackStoneButton"><a href="#betterCraftablePolishedBlackStoneButton" class="headerlink" title="betterCraftablePolishedBlackStoneButton"></a>betterCraftablePolishedBlackStoneButton</h2><blockquote>
+<p>Version: <code>Minecraft &gt; 1.17</code></p>
+</blockquote>
+<p>Use deepslate to crafted polished_blackstone_button in minecraft.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1817,8 +1920,10 @@
 <li><p>Categroies: <code>AMS</code>, <code>SURVIVAL</code>, <code>CRAFTING</code></p>
 </li>
 </ul>
-<h2 id="useNewLodestoneRecipe"><a href="#useNewLodestoneRecipe" class="headerlink" title="useNewLodestoneRecipe"></a>useNewLodestoneRecipe</h2><p>Use iron ingots to craft Lodestone.</p>
-<p>&lt;Available for Minecraft &lt; 1.21.5&gt;</p>
+<h2 id="useNewLodestoneRecipe"><a href="#useNewLodestoneRecipe" class="headerlink" title="useNewLodestoneRecipe"></a>useNewLodestoneRecipe</h2><blockquote>
+<p>Version: <code>Minecraft &lt; 1.21.5</code></p>
+</blockquote>
+<p>Use iron ingots to craft Lodestone.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1843,6 +1948,13 @@
 
             </div>
         </div>
+        <aside class="page-toc" data-page-toc aria-label="Page outline" hidden>
+            <div class="page-toc-inner">
+                <p class="page-toc-title" data-i18n-cn="本页目录" data-i18n-en="On this page">本页目录</p>
+                <nav data-page-toc-links></nav>
+            </div>
+        </aside>
+        </div>
     </div>
 </main>
 
@@ -1858,12 +1970,12 @@
         <div class="footer-meta">
             
                 <div class="footer-meta-copyright">
-                    &copy; 2026 A Minecraft Server.
+                    &copy; 2026 A Minecraft Server
                 </div>
             
             
                 <div class="footer-meta-licenese">
-                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                    <span>License</span> <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
                 </div>
             
             
@@ -1873,17 +1985,15 @@
             
         </div>
     </div>
-</footer></div>
+</footer>
+</div>
     </div>
 
-    <!-- 动态线条背景 -->
     
 
-    <style>
-        body {
-            background-color: #000000;
-        }
-    </style>
+    
+<script src="/js/site.js"></script>
+
 
 </body>
 </html>

@@ -1,12 +1,28 @@
 .body-container {
-  margin: 0 auto;
-  max-width: 98%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
-.body-container > div:not(:last-child) {
-  margin-bottom: 20px;
+.header-wrapper {
+  border-bottom: 1px solid var(--line);
 }
-.body-container p {
-  text-align: justify;
+.main-wrapper {
+  flex: 1;
+}
+.main-container {
+  width: 1280px;
+  max-width: calc(100% - 64px);
+  margin: 0 auto;
+}
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+@media screen and (max-width: 760px) {
+  .main-container {
+    width: calc(100% - 32px);
+  }
 }

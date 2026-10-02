@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" data-theme="dark">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
@@ -28,65 +28,115 @@
 
     <div class="body-container">
         <div class="header-wrapper"><header>
+    
+    
+    
+    
+    
     <div class="header-container">
-        <div class="header-menu-list">
+        <a class="site-brand" href="/" aria-label="Carpet AMS Addition">
+            <span>Carpet <strong>AMS</strong> Addition</span>
+        </a>
+        <nav class="header-menu-list" aria-label="Primary navigation">
             <ul>
             
+                
+                
                 <li>
-                    <a href="/">日志[logs]</a>
+                    <a href="/" data-i18n-cn="日志" data-i18n-en="Logs" data-url-cn="/" data-url-en="/">日志</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Rules">规则[Rules]</a>
+                    <a href="/Rules" data-i18n-cn="规则" data-i18n-en="Rules" data-url-cn="/Rules" data-url-en="/en_us/Rules_en/">规则</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Loggers">记录器[Loggers]</a>
+                    <a href="/Loggers" data-i18n-cn="记录器" data-i18n-en="Loggers" data-url-cn="/Loggers" data-url-en="/en_us/Loggers_en/">记录器</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Commands">指令[Commands]</a>
+                    <a href="/Commands" data-i18n-cn="指令" data-i18n-en="Commands" data-url-cn="/Commands" data-url-en="/en_us/Commands_en/">指令</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Development">开发[Development]</a>
+                    <a href="/Development" data-i18n-cn="开发" data-i18n-en="Development" data-url-cn="/Development" data-url-en="/en_us/Development_en/">开发</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/Download">下载[Download]</a>
+                    <a href="/Download" data-i18n-cn="下载" data-i18n-en="Download" data-url-cn="/Download" data-url-en="/en_us/Download_en/">下载</a>
                 </li>
             
+                
+                
                 <li>
-                    <a href="/OpenSource">开源[Open Source]</a>
+                    <a href="/OpenSource" data-i18n-cn="开源" data-i18n-en="Source" data-url-cn="/OpenSource" data-url-en="/en_us/OpenSource_en/">开源</a>
                 </li>
             
             </ul>
+        </nav>
+        <div class="header-controls">
+            <div class="segmented-control theme-control" role="group" aria-label="Theme">
+                <button type="button" data-set-theme="light" aria-label="浅色模式"><i class="fa-solid fa-sun"></i><span data-i18n-cn="浅色" data-i18n-en="Light">浅色</span></button>
+                <button type="button" data-set-theme="dark" aria-label="深色模式"><i class="fa-solid fa-moon"></i><span data-i18n-cn="深色" data-i18n-en="Dark">深色</span></button>
+            </div>
+            <div class="segmented-control language-control" role="group" aria-label="Language">
+                <button type="button" data-set-language="zh-CN" data-language-target="/Commands" lang="zh-CN">中文</button>
+                <button type="button" data-set-language="en" data-language-target="/en_us/Commands_en" lang="en">EN</button>
+            </div>
         </div>
     </div>
 </header>
 </div>
         <div class="main-wrapper"><main>
+    
+    
+    
+    
+    
     <div class="main-container">
+        <div class="article-layout" data-article-layout data-page-toc-enabled>
         <div class="post-details">
             
-            <div class="post-content">
-                <h3 id="中文-English"><a href="#中文-English" class="headerlink" title="[ 中文 | English ]"></a>[ <a href="/Commands">中文</a> | English ]</h3><h1 id="——-Commands-——"><a href="#——-Commands-——" class="headerlink" title="—— Commands ——"></a><center>—— Commands ——</center></h1><p>&emsp;</p>
-<h3 id="commandPlayerChunkLoadController"><a href="#commandPlayerChunkLoadController" class="headerlink" title="commandPlayerChunkLoadController"></a>commandPlayerChunkLoadController</h3><ul>
+            <div class="post-title static-page-title">
+                <p class="eyebrow" data-i18n-cn="文档" data-i18n-en="Documentation">文档</p>
+                <h1 data-i18n-cn="指令" data-i18n-en="Commands">指令</h1>
+            </div>
+            
+            
+            
+            <div class="content-search document-search">
+                <label class="sr-only" for="document-search" data-i18n-cn="搜索当前文档" data-i18n-en="Search this document">搜索当前文档</label>
+                <input id="document-search" class="site-search" type="search" autocomplete="off" data-document-search data-i18n-placeholder-cn="搜索名称、指令或说明" data-i18n-placeholder-en="Search names, commands, or descriptions" placeholder="搜索名称、指令或说明">
+            </div>
+            <p class="search-empty" data-document-search-empty hidden data-i18n-cn="没有找到匹配内容。" data-i18n-en="No matching content found.">没有找到匹配内容。</p>
+            
+            <div class="post-content static-page-content" data-searchable-content>
+                <h2 id="commandPlayerChunkLoadController"><a href="#commandPlayerChunkLoadController" class="headerlink" title="commandPlayerChunkLoadController"></a>commandPlayerChunkLoadController</h2><ul>
 <li><p><strong>&#x2F;playerChunkLoading [true&#x2F;false]</strong></p>
 <p>Control chunk loading of player. Can only manipulate yourself.</p>
 </li>
 </ul>
-<h3 id="commandAnvilInteractionDisabled"><a href="#commandAnvilInteractionDisabled" class="headerlink" title="commandAnvilInteractionDisabled"></a>commandAnvilInteractionDisabled</h3><ul>
+<h2 id="commandAnvilInteractionDisabled"><a href="#commandAnvilInteractionDisabled" class="headerlink" title="commandAnvilInteractionDisabled"></a>commandAnvilInteractionDisabled</h2><ul>
 <li><p><strong>&#x2F;anvilInteractionDisabled [true&#x2F;false]</strong></p>
 <p>Controls whether the player can interact with the anvil.</p>
 </li>
 </ul>
-<h3 id="amsUpdateSuppressionCrashFix"><a href="#amsUpdateSuppressionCrashFix" class="headerlink" title="amsUpdateSuppressionCrashFix"></a>amsUpdateSuppressionCrashFix</h3><ul>
+<h2 id="amsUpdateSuppressionCrashFix"><a href="#amsUpdateSuppressionCrashFix" class="headerlink" title="amsUpdateSuppressionCrashFix"></a>amsUpdateSuppressionCrashFix</h2><ul>
 <li><p><strong>&#x2F;amsUpdateSuppressionCrashFixForceMode [true&#x2F;false]</strong></p>
 <p>Control whether forced startup is enabled when the <code>customBlockUpdateSuppressor</code>  rule is enabled.</p>
 </li>
 </ul>
-<h3 id="commandCustomBlockBlastResistance"><a href="#commandCustomBlockBlastResistance" class="headerlink" title="commandCustomBlockBlastResistance"></a>commandCustomBlockBlastResistance</h3><ul>
+<h2 id="commandCustomBlockBlastResistance"><a href="#commandCustomBlockBlastResistance" class="headerlink" title="commandCustomBlockBlastResistance"></a>commandCustomBlockBlastResistance</h2><ul>
 <li><p><strong>&#x2F;customBlockBlastResistance set &lt;block&gt; &lt;resistance&gt;</strong></p>
 <p>Add or modify blocks and their blast resistance.</p>
 </li>
@@ -103,17 +153,17 @@
 <p>View the usage instructions.</p>
 </li>
 </ul>
-<h3 id="commandHere"><a href="#commandHere" class="headerlink" title="commandHere"></a>commandHere</h3><ul>
+<h2 id="commandHere"><a href="#commandHere" class="headerlink" title="commandHere"></a>commandHere</h2><ul>
 <li><p><strong>&#x2F;here</strong></p>
 <p>send the current dimension, coordinates, and corresponding overworld&#x2F;nether coordinates of your current location and give oneself a 30s glowing effect.</p>
 </li>
 </ul>
-<h3 id="commandWhere"><a href="#commandWhere" class="headerlink" title="commandWhere"></a>commandWhere</h3><ul>
+<h2 id="commandWhere"><a href="#commandWhere" class="headerlink" title="commandWhere"></a>commandWhere</h2><ul>
 <li><p><strong>&#x2F;where</strong></p>
 <p>get the specified player’s dimension, coordinates, and corresponding Overworld&#x2F;Nether coordinates and give the target player a 30s glowing effect.</p>
 </li>
 </ul>
-<h3 id="commandPlayerLeader"><a href="#commandPlayerLeader" class="headerlink" title="commandPlayerLeader"></a>commandPlayerLeader</h3><ul>
+<h2 id="commandPlayerLeader"><a href="#commandPlayerLeader" class="headerlink" title="commandPlayerLeader"></a>commandPlayerLeader</h2><ul>
 <li><p><strong>&#x2F;leader add &lt;player&gt;</strong></p>
 <p>Add a tour guide.</p>
 </li>
@@ -133,7 +183,7 @@
 <p>View the usage instructions.</p>
 </li>
 </ul>
-<h3 id="commandPacketInternetGroper"><a href="#commandPacketInternetGroper" class="headerlink" title="commandPacketInternetGroper"></a>commandPacketInternetGroper</h3><ul>
+<h2 id="commandPacketInternetGroper"><a href="#commandPacketInternetGroper" class="headerlink" title="commandPacketInternetGroper"></a>commandPacketInternetGroper</h2><ul>
 <li><p><strong>&#x2F;pings &lt;targetIpOrDomainName&gt; &lt;pingQuantity&gt;</strong></p>
 <p>Ping a specific host.</p>
 </li>
@@ -141,17 +191,17 @@
 <p>Interrupt the ping operation.</p>
 </li>
 </ul>
-<h3 id="commandGetSaveSize"><a href="#commandGetSaveSize" class="headerlink" title="commandGetSaveSize"></a>commandGetSaveSize</h3><ul>
+<h2 id="commandGetSaveSize"><a href="#commandGetSaveSize" class="headerlink" title="commandGetSaveSize"></a>commandGetSaveSize</h2><ul>
 <li><p><strong>&#x2F;getSaveSize</strong></p>
 <p>Get save size.</p>
 </li>
 </ul>
-<h3 id="commandGetSystemInfo"><a href="#commandGetSystemInfo" class="headerlink" title="commandGetSystemInfo"></a>commandGetSystemInfo</h3><ul>
+<h2 id="commandGetSystemInfo"><a href="#commandGetSystemInfo" class="headerlink" title="commandGetSystemInfo"></a>commandGetSystemInfo</h2><ul>
 <li><p><strong>&#x2F;getSystemInfo</strong></p>
 <p>Get the system information of the server.</p>
 </li>
 </ul>
-<h3 id="commandGoto"><a href="#commandGoto" class="headerlink" title="commandGoto"></a>commandGoto</h3><ul>
+<h2 id="commandGoto"><a href="#commandGoto" class="headerlink" title="commandGoto"></a>commandGoto</h2><ul>
 <li><p><strong>&#x2F;goto &lt;dimension&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt;</strong></p>
 <p>teleport to the specified dimension and coordinates.</p>
 </li>
@@ -159,7 +209,7 @@
 <p>Teleport to the corresponding coordinates of the current player location.</p>
 </li>
 </ul>
-<h3 id="commandCustomCommandPermissionLevel"><a href="#commandCustomCommandPermissionLevel" class="headerlink" title="commandCustomCommandPermissionLevel"></a>commandCustomCommandPermissionLevel</h3><ul>
+<h2 id="commandCustomCommandPermissionLevel"><a href="#commandCustomCommandPermissionLevel" class="headerlink" title="commandCustomCommandPermissionLevel"></a>commandCustomCommandPermissionLevel</h2><ul>
 <li><p><strong>&#x2F;customCommandPermissionLevel set &lt;command&gt; &lt;permissionLevel&gt;</strong></p>
 <p>Set the permission level of a command.</p>
 </li>
@@ -179,12 +229,12 @@
 <p>View the usage instructions.</p>
 </li>
 </ul>
-<h3 id="commandGetPlayerSkull"><a href="#commandGetPlayerSkull" class="headerlink" title="commandGetPlayerSkull"></a>commandGetPlayerSkull</h3><ul>
+<h2 id="commandGetPlayerSkull"><a href="#commandGetPlayerSkull" class="headerlink" title="commandGetPlayerSkull"></a>commandGetPlayerSkull</h2><ul>
 <li><p><strong>&#x2F;getPlayerSkull &lt;player&gt; &lt;count&gt;</strong></p>
 <p>Get the skull of a specified player.</p>
 </li>
 </ul>
-<h3 id="commandCustomMovableBlock"><a href="#commandCustomMovableBlock" class="headerlink" title="commandCustomMovableBlock"></a>commandCustomMovableBlock</h3><ul>
+<h2 id="commandCustomMovableBlock"><a href="#commandCustomMovableBlock" class="headerlink" title="commandCustomMovableBlock"></a>commandCustomMovableBlock</h2><ul>
 <li><p><strong>&#x2F;customMovableBlock add &lt;block&gt;</strong></p>
 <p>Added a movable block.</p>
 </li>
@@ -201,12 +251,12 @@
 <p>View the usage instructions.</p>
 </li>
 </ul>
-<h3 id="commandGetHeldItemID"><a href="#commandGetHeldItemID" class="headerlink" title="commandGetHeldItemID"></a>commandGetHeldItemID</h3><ul>
+<h2 id="commandGetHeldItemID"><a href="#commandGetHeldItemID" class="headerlink" title="commandGetHeldItemID"></a>commandGetHeldItemID</h2><ul>
 <li><p><strong>&#x2F;getHeldItemID</strong></p>
 <p>Get item ID of the player main hand item.</p>
 </li>
 </ul>
-<h3 id="commandCustomAntiFireItems"><a href="#commandCustomAntiFireItems" class="headerlink" title="commandCustomAntiFireItems"></a>commandCustomAntiFireItems</h3><ul>
+<h2 id="commandCustomAntiFireItems"><a href="#commandCustomAntiFireItems" class="headerlink" title="commandCustomAntiFireItems"></a>commandCustomAntiFireItems</h2><ul>
 <li><p><strong>&#x2F;customAntiFireItems add &lt;item&gt;</strong></p>
 <p>Added a anti fire item.</p>
 </li>
@@ -223,12 +273,12 @@
 <p>View the usage instructions.</p>
 </li>
 </ul>
-<h3 id="commandCarpetExtensionModWikiHyperlink"><a href="#commandCarpetExtensionModWikiHyperlink" class="headerlink" title="commandCarpetExtensionModWikiHyperlink"></a>commandCarpetExtensionModWikiHyperlink</h3><ul>
+<h2 id="commandCarpetExtensionModWikiHyperlink"><a href="#commandCarpetExtensionModWikiHyperlink" class="headerlink" title="commandCarpetExtensionModWikiHyperlink"></a>commandCarpetExtensionModWikiHyperlink</h2><ul>
 <li><p><strong>&#x2F;carpetExtensionModWikiHyperlink &lt;ExtensionName&gt;</strong></p>
 <p>Get the Wiki link for a carpet extension mod.</p>
 </li>
 </ul>
-<h3 id="commandCustomBlockHardness"><a href="#commandCustomBlockHardness" class="headerlink" title="commandCustomBlockHardness"></a>commandCustomBlockHardness</h3><ul>
+<h2 id="commandCustomBlockHardness"><a href="#commandCustomBlockHardness" class="headerlink" title="commandCustomBlockHardness"></a>commandCustomBlockHardness</h2><ul>
 <li><p><strong>&#x2F;customBlockHardness set &lt;block&gt; &lt;hardness&gt;</strong> </p>
 <p>Add or modify blocks and their hardness.</p>
 </li>
@@ -248,12 +298,12 @@
 <p>View the usage instructions.</p>
 </li>
 </ul>
-<h3 id="commandAtSomeOnePlayer"><a href="#commandAtSomeOnePlayer" class="headerlink" title="commandAtSomeOnePlayer"></a>commandAtSomeOnePlayer</h3><ul>
+<h2 id="commandAtSomeOnePlayer"><a href="#commandAtSomeOnePlayer" class="headerlink" title="commandAtSomeOnePlayer"></a>commandAtSomeOnePlayer</h2><ul>
 <li><p><strong>&#x2F;@ &lt;player&gt;</strong></p>
 <p>@ some one player.</p>
 </li>
 </ul>
-<h3 id="commandGetClientPlayerFps"><a href="#commandGetClientPlayerFps" class="headerlink" title="commandGetClientPlayerFps"></a>commandGetClientPlayerFps</h3><ul>
+<h2 id="commandGetClientPlayerFps"><a href="#commandGetClientPlayerFps" class="headerlink" title="commandGetClientPlayerFps"></a>commandGetClientPlayerFps</h2><ul>
 <li><p><strong>&#x2F;getClientPlayerFps &lt;player</strong>&gt;</p>
 <p>Get the FPS of the specified player.</p>
 </li>
@@ -261,7 +311,7 @@
 <p>View the usage instructions.</p>
 </li>
 </ul>
-<h3 id="commandSetPlayerPose"><a href="#commandSetPlayerPose" class="headerlink" title="commandSetPlayerPose"></a>commandSetPlayerPose</h3><ul>
+<h2 id="commandSetPlayerPose"><a href="#commandSetPlayerPose" class="headerlink" title="commandSetPlayerPose"></a>commandSetPlayerPose</h2><ul>
 <li><p><strong>&#x2F;playerPose &lt;player&gt; set &lt;pose&gt;</strong></p>
 <p>Set player pose.</p>
 </li>
@@ -272,7 +322,7 @@
 <p>View the usage instructions.</p>
 </li>
 </ul>
-<h3 id="commandPlayerNoNetherPortalTeleport"><a href="#commandPlayerNoNetherPortalTeleport" class="headerlink" title="commandPlayerNoNetherPortalTeleport"></a>commandPlayerNoNetherPortalTeleport</h3><ul>
+<h2 id="commandPlayerNoNetherPortalTeleport"><a href="#commandPlayerNoNetherPortalTeleport" class="headerlink" title="commandPlayerNoNetherPortalTeleport"></a>commandPlayerNoNetherPortalTeleport</h2><ul>
 <li><p><strong>&#x2F;playerNoNetherPortalTeleport globalMode [true&#x2F;false]</strong></p>
 <p>Set global mode.</p>
 </li>
@@ -298,6 +348,13 @@
 
             </div>
         </div>
+        <aside class="page-toc" data-page-toc aria-label="Page outline" hidden>
+            <div class="page-toc-inner">
+                <p class="page-toc-title" data-i18n-cn="本页目录" data-i18n-en="On this page">本页目录</p>
+                <nav data-page-toc-links></nav>
+            </div>
+        </aside>
+        </div>
     </div>
 </main>
 
@@ -313,12 +370,12 @@
         <div class="footer-meta">
             
                 <div class="footer-meta-copyright">
-                    &copy; 2026 A Minecraft Server.
+                    &copy; 2026 A Minecraft Server
                 </div>
             
             
                 <div class="footer-meta-licenese">
-                    Licensed under <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
+                    <span>License</span> <a target="_blank" rel="noopener" href="https://choosealicense.com/licenses/lgpl-3.0/">LGPL-3.0</a>
                 </div>
             
             
@@ -328,17 +385,15 @@
             
         </div>
     </div>
-</footer></div>
+</footer>
+</div>
     </div>
 
-    <!-- 动态线条背景 -->
     
 
-    <style>
-        body {
-            background-color: #000000;
-        }
-    </style>
+    
+<script src="/js/site.js"></script>
+
 
 </body>
 </html>
