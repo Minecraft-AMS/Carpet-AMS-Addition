@@ -25,8 +25,8 @@ Access the website to view all the relevant information about carpet-ams-additio
 |            26.3            |         ✔          |                                                            ---                                                            |
 |            26.2            |         ✔          |                                                            ---                                                            |
 |           26.1.2           |         ✔          |                                                            ---                                                            |
-|           26.1.1           |         ✔          |                                                            ---                                                            |
-|            26.1            |         ✔          |                                                            ---                                                            |
+|           26.1.1           |         ✖          |                                                            ---                                                            |
+|            26.1            |         ✖          |                                                            ---                                                            |
 | **<u>1.21.11(master)</u>** |         ✔          |                                                            ---                                                            |
 |           1.21.8           |         ✔          |                                                            ---                                                            |
 |      1.21.9 - 1.21.10      |         ❓          |                                                            ---                                                            |

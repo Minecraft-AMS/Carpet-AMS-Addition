@@ -24,8 +24,8 @@
 |         26.3          |  ✔   |                                                            ---                                                            |
 |         26.2          |  ✔   |                                                            ---                                                            |
 |        26.1.2         |  ✔   |                                                            ---                                                            |
-|        26.1.1         |  ✔   |           [Carpet-AMS-Addition-v26.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3)            |
-|         26.1          |  ✔   |           [Carpet-AMS-Addition-v26.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3)            |
+|        26.1.1         |  ✖   |           [Carpet-AMS-Addition-v26.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3)            |
+|         26.1          |  ✖   |           [Carpet-AMS-Addition-v26.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3)            |
 | **<u>1.21.11(主)</u>** |  ✔   |                                                            ---                                                            |
 |        1.21.8         |  ✔   |                                                            ---                                                            |
 |   1.21.9 - 1.21.10    |  ❓   |                                                            ---                                                            |
