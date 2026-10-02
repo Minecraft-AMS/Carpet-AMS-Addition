@@ -30,7 +30,9 @@ import carpetamsaddition.utils.RegexTools;
 
 import com.mojang.brigadier.CommandDispatcher;
 
+//#if MC>=11904
 import net.minecraft.commands.CommandBuildContext;
+//#endif
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.item.ItemArgument;
@@ -48,14 +50,23 @@ public class CustomAntiFireItemsCommandRegistry {
     private static final Translator tr = new Translator("command.customAntiFireItems");
     public static final List<String> CUSTOM_ANTI_FIRE_ITEMS = new ArrayList<>();
 
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
+    public static void register(
+        CommandDispatcher<CommandSourceStack> dispatcher
+        //#if MC>=11904
+        , CommandBuildContext commandRegistryAccess
+        //#endif
+    ) {
         dispatcher.register(
             Commands.literal("customAntiFireItems")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomAntiFireItems))
 
             // add
             .then(literal("add")
-            .then(argument("item", ItemArgument.item(commandRegistryAccess))
+            .then(argument("item", ItemArgument.item(
+                //#if MC>=11904
+                commandRegistryAccess
+                //#endif
+            ))
             .executes(context -> add(
                 context.getSource(),
                 ItemArgument.getItem(context, "item").createItemStack(
@@ -68,7 +79,11 @@ public class CustomAntiFireItemsCommandRegistry {
 
             // remove
             .then(literal("remove")
-            .then(argument("item", ItemArgument.item(commandRegistryAccess))
+            .then(argument("item", ItemArgument.item(
+                //#if MC>=11904
+                commandRegistryAccess
+                //#endif
+            ))
             .executes(context -> remove(
                 context.getSource(),
                 ItemArgument.getItem(context, "item").createItemStack(

@@ -30,11 +30,11 @@ import net.minecraft.world.level.ChunkPos;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft > 1.20.6")
+@GameVersion(version = "Minecraft >= 1.21.5")
 public class BlockChunkLoaderHelper {
-    private static TicketType NOTE_BLOCK_TICKET_TYPE;
-    private static TicketType PISTON_BLOCK_TICKET_TYPE;
-    private static TicketType BELL_BLOCK_TICKET_TYPE;
+    public static TicketType NOTE_BLOCK_TICKET_TYPE;
+    public static TicketType PISTON_BLOCK_TICKET_TYPE;
+    public static TicketType BELL_BLOCK_TICKET_TYPE;
 
     public static void addNoteBlockTicket(ServerLevel world, BlockPos blockPos) {
         addTicket(
@@ -75,13 +75,18 @@ public class BlockChunkLoaderHelper {
     private static void addTicket(ServerLevel world, ChunkPos chunkPos, TicketType ticketType) {
         ServerChunkCache chunkCache = world.getChunkSource();
         int loadRange = getLoadRange();
+        //#if MC<12105
+        //$$ chunkCache.addRegionTicket(ticketType, chunkPos, loadRange, chunkPos);
+        //#else
         chunkCache.addTicketWithRadius(ticketType, chunkPos, loadRange);
+        //#endif
+
         if (CarpetAMSAdditionSettings.blockChunkLoaderKeepWorldTickUpdate) {
             world.resetEmptyTime();
         }
     }
 
-    private static int getLoadTime() {
+    public static int getLoadTime() {
         return CarpetAMSAdditionSettings.blockChunkLoaderTimeController;
     }
 
@@ -89,7 +94,7 @@ public class BlockChunkLoaderHelper {
         return CarpetAMSAdditionSettings.blockChunkLoaderRangeController;
     }
 
-    private static TicketType registerTicketType(String id, int flags) {
+    public static TicketType registerTicketType(String id, int flags) {
         return TicketType.register(
             id, getLoadTime(),
             //#if MC>=12111
@@ -98,11 +103,5 @@ public class BlockChunkLoaderHelper {
             //$$ true, TicketType.TicketUse.LOADING_AND_SIMULATION
             //#endif
         );
-    }
-
-    public static void registerTicketTypeToMinecraft() {
-        NOTE_BLOCK_TICKET_TYPE = registerTicketType("note_block_loader", 15);
-        PISTON_BLOCK_TICKET_TYPE = registerTicketType("piston_block_loader", 15);
-        BELL_BLOCK_TICKET_TYPE = registerTicketType("bell_block_loader", 15);
     }
 }

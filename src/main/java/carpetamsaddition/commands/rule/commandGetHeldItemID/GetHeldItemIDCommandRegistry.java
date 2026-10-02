@@ -28,6 +28,7 @@ import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.RegexTools;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
@@ -49,14 +50,14 @@ public class GetHeldItemIDCommandRegistry {
         );
     }
 
-    private static int execute(CommandSourceStack source) {
+    private static int execute(CommandSourceStack source) throws CommandSyntaxException {
         String mainHandItemID = getHeldItemRegisterName(Objects.requireNonNull(source.getPlayer()));
-        MutableComponent message = buildMessage(mainHandItemID);
-        Messenger.tell(source, message);
+        Component message = buildMessage(mainHandItemID);
+        Messenger.tell(source, (MutableComponent) message);
         return 1;
     }
 
-    private static MutableComponent buildMessage(String itemID) {
+    private static Component buildMessage(String itemID) {
         return
             Messenger.c(
                 Messenger.f(Messenger.s(MSG_HEAD), Layout.AQUA),
@@ -66,7 +67,8 @@ public class GetHeldItemIDCommandRegistry {
 
     private static Component createCopyButton(String itemID) {
         return
-            Messenger.f(Messenger.s(" [C] ").setStyle(
+            Messenger.f(Messenger.style(
+                Messenger.s(" [C] "),
                 Messenger.simpleCopyButtonStyle(itemID, tr.tr("getHeldItemID.copy"), Layout.YELLOW)
             ), Layout.GREEN, Layout.BOLD);
     }

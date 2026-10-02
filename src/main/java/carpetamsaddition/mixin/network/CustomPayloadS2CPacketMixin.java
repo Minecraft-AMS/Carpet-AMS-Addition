@@ -20,36 +20,25 @@
 
 package carpetamsaddition.mixin.network;
 
-//#if MC<12005
-//$$ import carpetamsaddition.utils.compat.DummyClass;
-//#endif
-
-//#if MC>=12005
 import carpetamsaddition.network.AMS_CustomPayload;
 
+import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
-//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC>=12005
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
+
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-//#endif
 
-@Mixin(
-    //#if MC>=12005
-    ClientboundCustomPayloadPacket.class
-    //#else
-    //$$ DummyClass.class
-    //#endif
-)
+@GameVersion(version = "Minecraft >= 1.20.5")
+@Mixin(ClientboundCustomPayloadPacket.class)
 public abstract class CustomPayloadS2CPacketMixin {
-    //#if MC>=12005
     @ModifyArg(
         method = "<clinit>",
         at = @At(
@@ -62,5 +51,4 @@ public abstract class CustomPayloadS2CPacketMixin {
         types.add(new CustomPacketPayload.TypeAndCodec<>(AMS_CustomPayload.KEY, AMS_CustomPayload.CODEC));
         return Collections.unmodifiableList(types);
     }
-    //#endif
 }

@@ -1,0 +1,15 @@
+carpet.api.settings.CarpetRule carpet.settings.ParsedRule
+carpet.api.settings.CarpetRule value() carpet.settings.ParsedRule get()
+carpet.api.settings.RuleCategory carpet.settings.RuleCategory
+carpet.api.settings.SettingsManager carpet.settings.SettingsManager
+carpet.api.settings.Validator carpet.settings.Validator
+carpet.api.settings.SettingsManager getCarpetRule() carpet.settings.SettingsManager getRule()
+carpet.api.settings.SettingsManager registerRuleObserver() carpet.CarpetServer.settingsManager addRuleObserver()
+
+carpet.script.Module carpet.script.bundled.BundledModule
+carpet.helpers.BlockRotator flipBlock() flip_block()
+
+net.minecraft.core.registries.BuiltInRegistries net.minecraft.core.Registry
+net.minecraft.util.RandomSource java.util.Random
+net.minecraft.commands.CommandSourceStack getPlayer() net.minecraft.commands.CommandSourceStack getPlayerOrException()
+net.minecraft.network.chat.MutableComponent net.minecraft.network.chat.BaseComponent

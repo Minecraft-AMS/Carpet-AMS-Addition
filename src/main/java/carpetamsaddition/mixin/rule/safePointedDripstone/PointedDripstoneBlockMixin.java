@@ -28,6 +28,9 @@ import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+//#if MC<=12006
+//$$ import net.minecraft.world.damagesource.DamageSource;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -47,7 +50,11 @@ public abstract class PointedDripstoneBlockMixin {
             CallbackInfo ci
     ) {
         if (CarpetAMSAdditionSettings.safePointedDripstone && entity instanceof Player) {
+            //#if MC>=11904
             entity.causeFallDamage(fallDistance, 1.0F, world.damageSources().fall());
+            //#else
+            //$$ entity.causeFallDamage(fallDistance, 1.0F, DamageSource.FALL);
+            //#endif
             ci.cancel();
         }
     }

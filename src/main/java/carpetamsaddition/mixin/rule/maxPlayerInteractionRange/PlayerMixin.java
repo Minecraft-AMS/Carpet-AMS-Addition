@@ -30,8 +30,11 @@ import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.util.Objects;
 
+@GameVersion(version = "Minecraft >= 1.20.5")
 @Mixin(value = Player.class, priority = 1688)
 public abstract class PlayerMixin {
     @WrapOperation(

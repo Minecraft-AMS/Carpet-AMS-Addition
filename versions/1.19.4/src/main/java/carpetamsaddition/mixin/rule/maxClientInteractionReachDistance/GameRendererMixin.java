@@ -38,7 +38,7 @@ public abstract class GameRendererMixin {
     @ModifyConstant(method = "pick", constant = @Constant(doubleValue = 9.0D))
     private double modifySurvivalEntityPickRangeLimit(double original) {
         if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {
-            return Mth.square(CarpetAMSAdditionSettings.maxClientInteractionReachDistance);
+            return CarpetAMSAdditionSettings.maxClientInteractionReachDistance * CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
         }
 
         return original;

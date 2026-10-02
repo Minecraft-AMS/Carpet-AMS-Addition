@@ -35,12 +35,12 @@ public class ClickEventUtil {
     public static final ClickEvent.Action COPY_TO_CLIPBOARD = ClickEvent.Action.COPY_TO_CLIPBOARD;
 
     public static ClickEvent event(ClickEvent.Action action, Object value) {
-        if (action == OPEN_URL && value instanceof java.net.URI uri) {
-            return new ClickEvent(action, uri.toString());
+        if (action == OPEN_URL && value instanceof java.net.URI) {
+            return new ClickEvent(action, ((java.net.URI) value).toString());
         }
 
-        if (value instanceof String string) {
-            return new ClickEvent(action, string);
+        if (value instanceof String) {
+            return new ClickEvent(action, (String) value);
         }
 
         throw new IllegalArgumentException("Expected a String value for " + action + " action");

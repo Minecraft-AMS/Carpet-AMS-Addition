@@ -34,16 +34,16 @@ public class HoverEventUtil {
     public static final HoverEvent.Action<HoverEvent.EntityTooltipInfo> SHOW_ENTITY = HoverEvent.Action.SHOW_ENTITY;
 
     public static HoverEvent event(HoverEvent.Action<?> action, Object value) {
-        if (action == SHOW_TEXT && value instanceof Component component) {
-            return createEvent(SHOW_TEXT, component);
+        if (action == SHOW_TEXT && value instanceof Component) {
+            return createEvent(SHOW_TEXT, (Component) value);
         }
 
-        if (action == SHOW_ITEM && value instanceof ItemStack itemStack) {
-            return createEvent(SHOW_ITEM, new HoverEvent.ItemStackInfo(itemStack));
+        if (action == SHOW_ITEM && value instanceof ItemStack) {
+            return createEvent(SHOW_ITEM, new HoverEvent.ItemStackInfo((ItemStack) value));
         }
 
-        if (action == SHOW_ENTITY && value instanceof HoverEvent.EntityTooltipInfo entityInfo) {
-            return createEvent(SHOW_ENTITY, entityInfo);
+        if (action == SHOW_ENTITY && value instanceof HoverEvent.EntityTooltipInfo) {
+            return createEvent(SHOW_ENTITY, (HoverEvent.EntityTooltipInfo) value);
         }
 
         throw new IllegalArgumentException("Invalid action or value type");

@@ -27,38 +27,39 @@ import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.TicketType;
 import net.minecraft.world.level.ChunkPos;
-
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.util.Comparator;
 
-@GameVersion(version = "Minecraft <= 1.20.6")
+@GameVersion(version = "Minecraft < 1.21.5")
 public class BlockChunkLoaderHelper {
-    private static TicketType<ChunkPos> NOTE_BLOCK_TICKET_TYPE;
-    private static TicketType<ChunkPos> PISTON_BLOCK_TICKET_TYPE;
-    private static TicketType<ChunkPos> BELL_BLOCK_TICKET_TYPE;
+    public static TicketType<ChunkPos> NOTE_BLOCK_TICKET_TYPE;
+    public static TicketType<ChunkPos> PISTON_BLOCK_TICKET_TYPE;
+    public static TicketType<ChunkPos> BELL_BLOCK_TICKET_TYPE;
 
-    public static void addNoteBlockTicket(ServerLevel world, BlockPos blockPos) {
-        addTicket(world, new ChunkPos(blockPos), NOTE_BLOCK_TICKET_TYPE);
+    public static void addNoteBlockTicket(ServerLevel world, BlockPos pos) {
+        addTicket(world, new ChunkPos(pos), NOTE_BLOCK_TICKET_TYPE);
     }
 
-    public static void addPistonBlockTicket(ServerLevel world, BlockPos blockPos) {
-        addTicket(world, new ChunkPos(blockPos), PISTON_BLOCK_TICKET_TYPE);
+    public static void addPistonBlockTicket(ServerLevel world, BlockPos pos) {
+        addTicket(world, new ChunkPos(pos), PISTON_BLOCK_TICKET_TYPE);
     }
 
-    public static void addBellBlockTicket(ServerLevel world, BlockPos blockPos) {
-        addTicket(world, new ChunkPos(blockPos), BELL_BLOCK_TICKET_TYPE);
+    public static void addBellBlockTicket(ServerLevel world, BlockPos pos) {
+        addTicket(world, new ChunkPos(pos), BELL_BLOCK_TICKET_TYPE);
     }
 
     private static void addTicket(ServerLevel world, ChunkPos chunkPos, TicketType<ChunkPos> ticketType) {
         ServerChunkCache chunkCache = world.getChunkSource();
-        chunkCache.addRegionTicket(ticketType, chunkPos, getLoadRange(), chunkPos);
+        int loadRange = getLoadRange();
+        chunkCache.addRegionTicket(ticketType, chunkPos, loadRange, chunkPos);
+
         if (CarpetAMSAdditionSettings.blockChunkLoaderKeepWorldTickUpdate) {
             world.resetEmptyTime();
         }
     }
 
-    private static int getLoadTime() {
+    public static int getLoadTime() {
         return CarpetAMSAdditionSettings.blockChunkLoaderTimeController;
     }
 
@@ -66,13 +67,7 @@ public class BlockChunkLoaderHelper {
         return CarpetAMSAdditionSettings.blockChunkLoaderRangeController;
     }
 
-    private static TicketType<ChunkPos> registerTicketType(String id) {
+    public static TicketType<ChunkPos> registerTicketType(String id, int flag) {
         return TicketType.create(id, Comparator.comparingLong(ChunkPos::toLong), getLoadTime());
-    }
-
-    public static void registerTicketTypeToMinecraft() {
-        NOTE_BLOCK_TICKET_TYPE = registerTicketType("note_block_loader");
-        PISTON_BLOCK_TICKET_TYPE = registerTicketType("piston_block_loader");
-        BELL_BLOCK_TICKET_TYPE = registerTicketType("bell_block_loader");
     }
 }

@@ -27,44 +27,73 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+//#if MC<12111
+//$$ import com.mojang.authlib.GameProfile;
+//#endif
+
 //#if MC>=12111
 import net.minecraft.server.MinecraftServer;
+//#else
+//$$ import net.minecraft.server.players.GameProfileCache;
 //#endif
+
+//#if MC>=11904
 import net.minecraft.core.UUIDUtil;
+//#else
+//$$ import java.nio.charset.StandardCharsets;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+//#if MC<12111
+//$$ import java.util.Optional;
+//#endif
 import java.util.UUID;
 
 @Mixin(EntityPlayerMPFake.class)
 public abstract class Carpet_EntityPlayerMPFakeMixin {
+    //#if MC>=12111
     @WrapOperation(
         method = "createFake",
         at = @At(
             value = "INVOKE",
-            //#if MC>=12111
             target = "Lnet/minecraft/server/players/OldUsersConverter;convertMobOwnerIfNecessary(Lnet/minecraft/server/MinecraftServer;Ljava/lang/String;)Ljava/util/UUID;"
-            //#else
-            //$$ target = "Lnet/minecraft/core/UUIDUtil;createOfflinePlayerUUID(Ljava/lang/String;)Ljava/util/UUID;"
-            //#endif
         )
     )
-    private static UUID useOfflinePlayerUUID(
-        //#if MC>=12111
-        MinecraftServer server,
-        //#endif
-        String playerName,
-        Operation<UUID> original
-    ) {
+    private static UUID useOfflinePlayerUUID(MinecraftServer server, String playerName, Operation<UUID> original) {
         return
             CarpetAMSAdditionSettings.fakePlayerUseOfflinePlayerUUID ?
             UUIDUtil.createOfflinePlayerUUID(playerName) :
-            original.call(
-                //#if MC>=12111
-                server,
-                //#endif
-                playerName
-            );
+            original.call(server, playerName);
     }
+    //#elseif MC>=11904
+    //$$ @WrapOperation(
+    //$$     method = "createFake",
+    //$$     at = @At(
+    //$$         value = "INVOKE",
+    //$$         target = "Lnet/minecraft/server/players/GameProfileCache;get(Ljava/lang/String;)Ljava/util/Optional;"
+    //$$     )
+    //$$ )
+    //$$ private static Optional<GameProfile> useOfflinePlayerUUID(GameProfileCache cache, String playerName, Operation<Optional<GameProfile>> original) {
+    //$$     return
+    //$$         CarpetAMSAdditionSettings.fakePlayerUseOfflinePlayerUUID ?
+    //$$         Optional.of(new GameProfile(UUIDUtil.createOfflinePlayerUUID(playerName), playerName)) :
+    //$$         original.call(cache, playerName);
+    //$$ }
+    //#else
+    //$$ @WrapOperation(
+    //$$     method = "createFake",
+    //$$     at = @At(
+    //$$         value = "INVOKE",
+    //$$         target = "Lnet/minecraft/server/players/GameProfileCache;get(Ljava/lang/String;)Ljava/util/Optional;"
+    //$$     )
+    //$$ )
+    //$$ private static Optional<GameProfile> useOfflinePlayerUUID(GameProfileCache cache, String playerName, Operation<Optional<GameProfile>> original) {
+    //$$     return
+    //$$         CarpetAMSAdditionSettings.fakePlayerUseOfflinePlayerUUID ?
+    //$$         Optional.of(new GameProfile(UUID.nameUUIDFromBytes(("OfflinePlayer:" + playerName).getBytes(StandardCharsets.UTF_8)), playerName)) :
+    //$$         original.call(cache, playerName);
+    //$$ }
+    //#endif
 }

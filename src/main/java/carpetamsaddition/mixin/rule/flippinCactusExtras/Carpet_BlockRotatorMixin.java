@@ -61,11 +61,13 @@ public abstract class Carpet_BlockRotatorMixin {
                 newState = state.rotate(Rotation.CLOCKWISE_180);
             }
             //#endif
+            //#if MC>=12000
             else if (block instanceof ChiseledBookShelfBlock) {
                 Direction currentFacing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 Direction newFacing = currentFacing.getOpposite();
                 newState = state.setValue(BlockStateProperties.HORIZONTAL_FACING, newFacing);
             }
+            //#endif
             //#if MC>=12111
             else if (block instanceof ShelfBlock) {
                 Direction currentFacing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
@@ -81,7 +83,11 @@ public abstract class Carpet_BlockRotatorMixin {
             //#endif
 
             if (newState != null) {
+                //#if MC>=11904
                 world.setBlock(pos, newState, Block.UPDATE_CLIENTS | 1024);
+                //#else
+                //$$ world.setBlock(pos, newState, 2 | 1024);
+                //#endif
                 world.setBlocksDirty(pos, state, newState);
                 SoundEffectHelper.playFlipSound(player, world);
                 cir.setReturnValue(true);

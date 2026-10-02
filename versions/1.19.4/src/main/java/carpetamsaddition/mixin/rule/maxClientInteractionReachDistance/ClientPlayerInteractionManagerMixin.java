@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "mc < 1.20.5")
+@GameVersion(version = "Minecraft < 1.20.5")
 @Mixin(MultiPlayerGameMode.class)
 public abstract class ClientPlayerInteractionManagerMixin {
     @ModifyReturnValue(method = "getPickRange", at = @At("RETURN"))

@@ -9,6 +9,9 @@ plugins {
 preprocess {
 	preprocess.strictExtraMappings.set(false)
 
+	def mc11605 = createNode('1.16.5', 1_16_05, '')
+	def mc11701 = createNode('1.17.1', 1_17_01, '')
+	def mc11802 = createNode('1.18.2', 1_18_02, '')
 	def mc11904 = createNode('1.19.4', 1_19_04, '')
 	def mc12006 = createNode('1.20.6', 1_20_06, '')
 	def mc12108 = createNode('1.21.8', 1_21_08, '')
@@ -17,6 +20,9 @@ preprocess {
 	def mc260200 = createNode('26.2', 26_02_00, '')
 	def mc260300 = createNode('26.3', 26_03_00, '')
 
+    mc11701.link(mc11605, file('versions/mapping-1.17.1-1.16.5.txt'))
+    mc11802.link(mc11701, file('versions/mapping-1.18.2-1.17.1.txt'))
+    mc11904.link(mc11802, file('versions/mapping-1.19.4-1.18.2.txt'))
     mc12006.link(mc11904, file('versions/mapping-1.20.6-1.19.4.txt'))
     mc12108.link(mc12006, file('versions/mapping-1.21.8-1.20.6.txt'))
     mc12111.link(mc12108, file('versions/mapping-1.21.11-1.21.8.txt'))

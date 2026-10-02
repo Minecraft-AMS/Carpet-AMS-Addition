@@ -70,8 +70,10 @@ public class CarpetAMSAdditionCustomRecipes {
         ShapelessRecipeBuilder.create(CarpetAMSAdditionSettings.betterCraftableDispenser, "dispenser2")
         .addIngredient(BOW).addIngredient(DROPPER).output(DISPENSER, 1).build();
 
+        //#if MC>=11700
         ShapelessRecipeBuilder.create(CarpetAMSAdditionSettings.betterCraftablePolishedBlackStoneButton, "polished_blackstone_button")
         .addIngredient(DEEPSLATE).output(POLISHED_BLACKSTONE_BUTTON, 1).build();
+        //#endif
 
         // Mixin实现
         ShapelessRecipeBuilder.create(CarpetAMSAdditionSettings.craftableCarvedPumpkin, "carved_pumpkin")

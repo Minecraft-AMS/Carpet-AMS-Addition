@@ -26,6 +26,8 @@ import net.minecraft.network.FriendlyByteBuf;
 //#if MC<12005
 //$$ import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
 //$$ import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+//$$ import carpetamsaddition.mixin.network.CustomPayloadC2SPacketAccessor;
+//$$ import carpetamsaddition.mixin.network.CustomPayloadS2CPacketAccessor;
 //#endif
 
 import java.util.function.Function;
@@ -33,11 +35,11 @@ import java.util.function.Function;
 public class AMS_PayloadCodec {
     //#if MC<12005
     //$$ protected static AMS_CustomPayload decode(ServerboundCustomPayloadPacket packet) {
-    //$$     return decodePayload(packet.getData());
+    //$$     return decodePayload(((CustomPayloadC2SPacketAccessor) packet).getData());
     //$$ }
 
     //$$ protected static AMS_CustomPayload decode(ClientboundCustomPayloadPacket packet) {
-    //$$     return decodePayload(packet.getData());
+    //$$     return decodePayload(((CustomPayloadS2CPacketAccessor) packet).getData());
     //$$ }
     //#endif
 

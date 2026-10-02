@@ -35,6 +35,9 @@ public class InvokeFuzzModCommand {
     public static Component highlightCoordButton(String posText) {
         String cmd = "/coordCompass set " + posText.replace(",", "");
 
-        return Messenger.f(Messenger.s(" [+H]").withStyle(Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), Layout.YELLOW)), Layout.YELLOW, Layout.BOLD);
+        return Messenger.f(Messenger.style(
+            Messenger.s(" [+H]"),
+            Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), Layout.YELLOW)
+        ), Layout.YELLOW, Layout.BOLD);
     }
 }

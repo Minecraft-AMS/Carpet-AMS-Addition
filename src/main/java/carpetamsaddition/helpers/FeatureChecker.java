@@ -23,7 +23,9 @@ package carpetamsaddition.helpers;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
+//#if MC>12006
 import net.minecraft.world.flag.FeatureFlags;
+//#endif
 
 import org.jetbrains.annotations.Nullable;
 

@@ -34,7 +34,13 @@ import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(targets = "net.minecraft.world.entity.monster.EnderMan$EndermanTakeBlockGoal")
+@Mixin(
+    //#if MC>=260300
+    //$$ targets = "net.minecraft.world.entity.monster.Enderman$EndermanTakeBlockGoal"
+    //#else
+    targets = "net.minecraft.world.entity.monster.EnderMan$EndermanTakeBlockGoal"
+    //#endif
+)
 public abstract class EndermanTakeBlockGoalMixin {
     @WrapOperation(
         method = "tick()V",

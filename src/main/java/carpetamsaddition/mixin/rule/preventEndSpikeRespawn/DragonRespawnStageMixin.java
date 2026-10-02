@@ -42,11 +42,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import java.util.Objects;
 
 @Mixin(
-    targets =
-    //#if MC>12006
-    "net/minecraft/world/level/dimension/end/DragonRespawnStage$3"
+    //#if MC>=260102
+    //$$ targets ="net/minecraft/world/level/dimension/end/DragonRespawnStage$3"
     //#else
-    //$$ "net/minecraft/world/level/dimension/end/DragonRespawnAnimation$3"
+    targets = "net/minecraft/world/level/dimension/end/DragonRespawnAnimation$3"
     //#endif
 )
 public abstract class DragonRespawnStageMixin {
@@ -67,8 +66,10 @@ public abstract class DragonRespawnStageMixin {
             value = "INVOKE",
             //#if MC>12006
             target = "Lnet/minecraft/server/level/ServerLevel;explode(Lnet/minecraft/world/entity/Entity;DDDFLnet/minecraft/world/level/Level$ExplosionInteraction;)V"
-            //#else
+            //#elseif MC>=11904
             //$$ target = "Lnet/minecraft/server/level/ServerLevel;explode(Lnet/minecraft/world/entity/Entity;DDDFLnet/minecraft/world/level/Level$ExplosionInteraction;)Lnet/minecraft/world/level/Explosion;"
+            //#else
+            //$$ target = "Lnet/minecraft/server/level/ServerLevel;explode(Lnet/minecraft/world/entity/Entity;DDDFLnet/minecraft/world/level/Explosion$BlockInteraction;)Lnet/minecraft/world/level/Explosion;"
             //#endif
         )
     )
@@ -80,7 +81,11 @@ public abstract class DragonRespawnStageMixin {
         ServerLevel serverWorld,
         Entity entity,
         double x, double y, double z, float power,
+        //#if MC<11904
+        //$$ Explosion.BlockInteraction destructionType,
+        //#else
         Level.ExplosionInteraction destructionType,
+        //#endif
         //#if MC>12006
         Operation<Void> original
         //#else

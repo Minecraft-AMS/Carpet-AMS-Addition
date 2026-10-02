@@ -74,7 +74,9 @@ public abstract class BundleItemMixin {
                 },
                 stack.getHoverName()
             );
+            //#if MC>=11800
             world.playSound(user, user.blockPosition(), SoundEvents.BUNDLE_DROP_CONTENTS, SoundSource.PLAYERS, 1.5F, 1.35F);
+            //#endif
             user.openMenu(screenHandlerFactory);
             //#if MC>12006
             return InteractionResult.SUCCESS;

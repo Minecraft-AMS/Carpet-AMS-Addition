@@ -25,7 +25,9 @@ import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 import carpetamsaddition.utils.WorldUtil;
 
 import net.minecraft.world.level.block.BellBlock;
+//#if MC>=11700
 import net.minecraft.world.entity.Entity;
+//#endif
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -38,8 +40,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BellBlock.class)
 public abstract class BellBlockMixin {
-    @Inject(method = "attemptToRing(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z", at = @At("HEAD"))
-    private void ring(Entity entity, Level world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(
+        //#if MC>=11700
+        method = "attemptToRing(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z",
+        //#else
+        //$$ method = "attemptToRing(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z",
+        //#endif
+        at = @At("HEAD")
+    )
+    private void ring(
+        //#if MC>=11700
+        Entity entity,
+        //#endif
+        Level world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir
+    ) {
         if (CarpetAMSAdditionSettings.bellBlockChunkLoader && !WorldUtil.isClient(world)) {
             BlockChunkLoaderHelper.addBellBlockTicket((ServerLevel) world, pos);
         }

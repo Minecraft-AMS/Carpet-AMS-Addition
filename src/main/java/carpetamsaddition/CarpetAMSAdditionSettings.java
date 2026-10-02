@@ -20,7 +20,7 @@
 
 package carpetamsaddition;
 
-import carpet.api.settings.Rule;
+import carpetamsaddition.settings.Rule;
 
 import carpetamsaddition.observers.NeedRestartServerOrClientObserver;
 import carpetamsaddition.settings.MustSetDefault;
@@ -390,8 +390,10 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean fertilizableSmallFlower = false;
 
+    //#if MC>=11701
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean safePointedDripstone = false;
+    //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean pointedDripstoneCollisionBoxDisabled = false;
@@ -449,7 +451,7 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean headHunter = false;
 
-    //#if MC>11904
+    //#if MC>=12002
     @GameVersion(version = "Minecraft >= 1.20.2")
     @SuppressWarnings("unused")
     @Rule(
@@ -737,9 +739,12 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean betterCraftableDispenser = false;
 
+    //#if MC>=11700
+    @GameVersion(version = "Minecraft > 1.17")
     @RecipeRule
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean betterCraftablePolishedBlackStoneButton = false;
+    //#endif
 
     @RecipeRule
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)

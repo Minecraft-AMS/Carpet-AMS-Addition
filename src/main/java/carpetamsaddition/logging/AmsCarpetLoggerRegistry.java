@@ -35,7 +35,11 @@ public class AmsCarpetLoggerRegistry {
     }
 
     public static HUDLogger standardHUDLogger(String logName, String def, String [] options) {
+        //#if MC<11700
+        //$$ return new HUDLogger(getLoggerField(logName), logName, def, options);
+        //#else
         return new HUDLogger(getLoggerField(logName), logName, def, options, false);
+        //#endif
     }
 
     public static Field getLoggerField(String logName) {

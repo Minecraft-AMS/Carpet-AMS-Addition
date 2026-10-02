@@ -28,12 +28,14 @@ import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
 import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
 import carpetamsaddition.utils.Messenger;
+
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
+
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 
 import java.util.HashSet;
@@ -83,16 +85,16 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
         return extensionName;
     }
 
-    private static MutableComponent createOpenUrlButton(String url) {
-        return Messenger.s(getUrl(url)).setStyle(
+    private static Component createOpenUrlButton(String url) {
+        return Messenger.style(Messenger.s(getUrl(url)),
             Style.EMPTY.withColor(Layout.GREEN.getFormatting())
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.OPEN_URL, url))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, getCopyHoverText(url)))
         );
     }
 
-    private static MutableComponent getCopyHoverText(String url) {
-        return Messenger.f(tr.tr("click_to_jump").append(getUrl(url)), Layout.YELLOW);
+    private static Component getCopyHoverText(String url) {
+        return Messenger.f(Messenger.s(tr.tr("click_to_jump").append(getUrl(url)).getString()), Layout.YELLOW);
     }
 
     static {

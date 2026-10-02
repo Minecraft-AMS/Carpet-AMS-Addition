@@ -18,15 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*
- * This file is part of the Carpet AMS Addition project, licensed under the
- * GNU Lesser General Public License v3.0
- */
+package carpetamsaddition.mixin.rule.largeBundle;
 
-package carpetamsaddition.utils.compat;
+import carpetamsaddition.utils.compat.DummyClass;
 
-import net.minecraft.network.FriendlyByteBuf;
+import org.spongepowered.asm.mixin.Mixin;
 
-public interface CustomPayload {
-    void write(FriendlyByteBuf buf);
-}
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.17.1")
+@Mixin(DummyClass.class)
+public abstract class BundleItemMixin {}

@@ -55,7 +55,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
             }
         }
         //#else
-        //$$ if (packet.getIdentifier().equals(AMS_CustomPayload.CHANNEL_ID)) {
+        //$$ if (((CustomPayloadC2SPacketAccessor) packet).getIdentifier().equals(AMS_CustomPayload.CHANNEL_ID)) {
         //$$     AMS_CustomPayload payload = AMS_PayloadManager.decodeC2SPacket(packet);
         //$$     if (AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload)) {
         //$$         ci.cancel();

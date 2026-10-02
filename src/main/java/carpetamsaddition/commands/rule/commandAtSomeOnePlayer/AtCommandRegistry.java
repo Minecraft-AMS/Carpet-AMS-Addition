@@ -28,7 +28,11 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
 import net.minecraft.commands.arguments.EntityArgument;
+//#if MC<11700
+//$$ import net.minecraft.network.protocol.game.ClientboundSetTitlesPacket;
+//#else
 import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
+//#endif
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
@@ -55,7 +59,11 @@ public class AtCommandRegistry {
     private static int execute(ServerPlayer sourcePlayer, ServerPlayer targetPlayer, String text) {
         MutableComponent titleText = Messenger.f(tr.tr("title", PlayerUtil.getName(sourcePlayer)), Layout.AQUA);
         MutableComponent messageText = Messenger.s(String.format("<%s> %s", PlayerUtil.getName(sourcePlayer), text));
+        //#if MC<11700
+        //$$ targetPlayer.connection.send(new ClientboundSetTitlesPacket(ClientboundSetTitlesPacket.Type.TITLE, titleText));
+        //#else
         targetPlayer.connection.send(new ClientboundSetTitleTextPacket(titleText));
+        //#endif
         Messenger.sendServerMessage(MinecraftServerUtil.getServer(), messageText);
         EntityUtil.getEntityWorld(targetPlayer).playSound(null, targetPlayer.blockPosition(), SoundEvents.PLAYER_LEVELUP, SoundSource.PLAYERS, 1.0F, 1.0F);
         Messenger.sendServerMessage(

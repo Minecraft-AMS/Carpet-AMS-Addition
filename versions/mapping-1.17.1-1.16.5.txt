@@ -1,0 +1,2 @@
+com.google.gson.JsonParser parseReader() com.google.gson.JsonParser parse()
+net.minecraft.world.item.BucketItem emptyContents() net.minecraft.world.item.BucketItem emptyBucket()

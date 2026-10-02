@@ -29,6 +29,9 @@ import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.20.5")
 @Mixin(AttributeInstance.class)
 public interface AttributeInstanceInvoker {
     @Invoker("getAttribute")

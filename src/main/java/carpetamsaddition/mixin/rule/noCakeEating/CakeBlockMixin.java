@@ -33,12 +33,11 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(CakeBlock.class)
 public abstract class CakeBlockMixin {
     @ModifyReturnValue(
-        method =
-            //#if MC>=12005
-            "useWithoutItem",
-            //#else
-            //$$ "use",
-            //#endif
+        //#if MC>=12005
+        method = "useWithoutItem",
+        //#else
+        //$$ method = "use",
+        //#endif
         at = @At("RETURN")
     )
     private InteractionResult noEat(InteractionResult original) {

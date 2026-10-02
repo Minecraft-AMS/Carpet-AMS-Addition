@@ -20,7 +20,7 @@
 
 package carpetamsaddition.utils;
 
-import carpet.api.settings.Rule;
+import carpetamsaddition.settings.Rule;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.network.AMS_CustomPayload;
@@ -51,22 +51,40 @@ public class NetworkUtil {
         MinecraftServerUtil.getOnlinePlayers().forEach(player -> sendS2CPacket(player, payload, sendMode));
     }
 
+    @SuppressWarnings("EnhancedSwitchMigration")
     public static void sendS2CPacket(ServerPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
-        boolean shouldSend = switch (sendMode) {
-            case FORCE -> true;
-            case NEED_SUPPORT -> isSupportClient(player.getUUID()) && isClientPacketSupported(player.getUUID(), payload.getPacketId());
-        };
+        boolean shouldSend;
+        switch (sendMode) {
+            case FORCE:
+                shouldSend = true;
+                break;
+            case NEED_SUPPORT:
+                shouldSend = isSupportClient(player.getUUID()) && isClientPacketSupported(player.getUUID(), payload.getPacketId());
+                break;
+            default:
+                shouldSend = false;
+                break;
+        }
 
         if (shouldSend) {
             payload.sendS2CPacket(player);
         }
     }
 
+    @SuppressWarnings("EnhancedSwitchMigration")
     public static void sendC2SPacket(LocalPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
-        boolean shouldSend = switch (sendMode) {
-            case FORCE -> true;
-            case NEED_SUPPORT -> getServerSupportState() && isServerPacketSupported(payload.getPacketId());
-        };
+        boolean shouldSend;
+        switch (sendMode) {
+            case FORCE:
+                shouldSend = true;
+                break;
+            case NEED_SUPPORT:
+                shouldSend = getServerSupportState() && isServerPacketSupported(payload.getPacketId());
+                break;
+            default:
+                shouldSend = false;
+                break;
+        }
 
         if (shouldSend) {
             payload.sendC2SPacket(player);

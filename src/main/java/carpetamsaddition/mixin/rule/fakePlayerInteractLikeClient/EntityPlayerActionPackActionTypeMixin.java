@@ -74,7 +74,8 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
         );
 
         if (CarpetAMSAdditionSettings.fakePlayerInteractLikeClient) {
-            if (entity instanceof ArmorStand stand) {
+            if (entity instanceof ArmorStand) {
+                ArmorStand stand = (ArmorStand) entity;
                 ItemStack handItem = player.getItemInHand(hand);
                 if (!stand.isMarker() && handItem.getItem() != Items.NAME_TAG && !player.isSpectator()) {
                     return InteractionResult.PASS;
@@ -120,7 +121,8 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
                 if (!player.isSecondaryUseActive()) {
                     return InteractionResult.SUCCESS;
                 }
-            } else if (entity instanceof AbstractMinecart minecart) {
+            } else if (entity instanceof AbstractMinecart) {
+                AbstractMinecart minecart = (AbstractMinecart) entity;
                 if (!player.isSecondaryUseActive() && !minecart.isVehicle()) {
                     return InteractionResult.SUCCESS;
                 }

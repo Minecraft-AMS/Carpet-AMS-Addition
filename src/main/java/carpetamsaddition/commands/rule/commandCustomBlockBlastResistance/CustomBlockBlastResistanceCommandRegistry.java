@@ -34,7 +34,9 @@ import com.mojang.brigadier.arguments.FloatArgumentType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
+//#if MC>=11904
 import net.minecraft.commands.CommandBuildContext;
+//#endif
 import net.minecraft.commands.arguments.blocks.BlockStateArgument;
 
 import java.util.Map;
@@ -47,14 +49,23 @@ public class CustomBlockBlastResistanceCommandRegistry {
     private static final Translator tr = new Translator("command.customBlockBlastResistance");
     public static final Map<BlockState, Float> CUSTOM_BLOCK_BLAST_RESISTANCE_MAP = new ConcurrentHashMap<>();
 
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
+    public static void register(
+        CommandDispatcher<CommandSourceStack> dispatcher
+        //#if MC>=11904
+        , CommandBuildContext commandRegistryAccess
+        //#endif
+    ) {
         dispatcher.register(
             Commands.literal("customBlockBlastResistance")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomBlockBlastResistance))
 
             // set
             .then(literal("set")
-            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(
+                //#if MC>=11904
+                commandRegistryAccess
+                //#endif
+            ))
             .then(argument("resistance", FloatArgumentType.floatArg())
             .executes(context -> set(
                 context.getSource(),
@@ -64,7 +75,11 @@ public class CustomBlockBlastResistanceCommandRegistry {
 
             // remove
             .then(literal("remove")
-            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(
+                //#if MC>=11904
+                commandRegistryAccess
+                //#endif
+            ))
             .executes(context -> remove(
                 context.getSource(),
                 BlockStateArgument.getBlock(context, "block").getState()

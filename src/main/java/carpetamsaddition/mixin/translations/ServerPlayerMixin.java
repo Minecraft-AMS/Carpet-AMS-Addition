@@ -54,7 +54,11 @@ public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientL
         //#endif
         CallbackInfo ci
     ) {
+        //#if MC>=11800
         this.clientLanguage$AMS = information.language();
+        //#else
+        //$$ this.clientLanguage$AMS = ((ServerboundClientInformationPacketAccessor) information).getLanguage();
+        //#endif
     }
 
     @Override
@@ -62,7 +66,21 @@ public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientL
         return this.clientLanguage$AMS;
     }
 
-    @ModifyVariable(method = "sendSystemMessage(Lnet/minecraft/network/chat/Component;Z)V", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(
+        method = {
+            //#if MC>=11901
+            "sendSystemMessage(Lnet/minecraft/network/chat/Component;Z)V",
+            //#elseif MC>=11600
+            //$$ "displayClientMessage",
+            //$$ "sendMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/ChatType;Ljava/util/UUID;)V",
+            //#else
+            //$$ "displayClientMessage",
+            //$$ "sendMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/ChatType;)V",
+            //#endif
+        },
+        at = @At("HEAD"),
+        argsOnly = true
+    )
     private Component applyAMSTranslationToSystemMessage(Component message) {
         if (message instanceof MutableComponent) {
             message = AMSTranslations.translate((MutableComponent) message, (ServerPlayer) (Object) this);

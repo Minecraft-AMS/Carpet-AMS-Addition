@@ -43,7 +43,11 @@ public abstract class ServerPlayerMixin {
             !alive &&
             LeaderCommandRegistry.LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(newPlayer))
         ) {
+            //#if MC>=11700
             newPlayer.addEffect(LeaderCommandRegistry.HIGH_LIGHT, newPlayer);
+            //#else
+            //$$ newPlayer.addEffect(LeaderCommandRegistry.HIGH_LIGHT);
+            //#endif
         }
     }
 }

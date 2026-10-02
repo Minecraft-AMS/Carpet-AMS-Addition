@@ -11,11 +11,8 @@ import carpetamsaddition.utils.IdentifierUtil;
 
 //#if MC>=12005
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-//#else
-//$$ import carpetamsaddition.utils.compat.CustomPayload;
 //#endif
-
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.Identifier;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.client.player.LocalPlayer;
@@ -25,13 +22,7 @@ import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 //#endif
 
-public abstract class AMS_CustomPayload implements
-    //#if MC>=12005
-    CustomPacketPayload
-    //#else
-    //$$ CustomPayload
-    //#endif
-{
+public abstract class AMS_CustomPayload implements CustomPacketPayload {
     public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network/v1");
     //#if MC>=12005
     public static final CustomPacketPayload.Type<@NotNull AMS_CustomPayload> KEY = new CustomPacketPayload.Type<>(CHANNEL_ID);
