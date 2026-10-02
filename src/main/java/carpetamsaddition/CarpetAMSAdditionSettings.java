@@ -117,7 +117,10 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, CREATIVE})
     public static boolean creativeOneHitKill = false;
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL}, validators = LargeEnderChestRuleObserver.class)
+    @Rule(
+        categories = {AMS, FEATURE, SURVIVAL},
+        validators = LargeEnderChestRuleObserver.class
+    )
     public static boolean largeEnderChest = false;
 
     @Rule(categories = {AMS, FEATURE, OPTIMIZATION})

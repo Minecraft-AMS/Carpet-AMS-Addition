@@ -116,7 +116,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         LOGGER.info("{} v{} loaded! (Total rules: {})", fancyName, CarpetAMSAdditionMod.getVersion(), ruleCount);
         LOGGER.info("Open Source: https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
         LOGGER.info("Issues: https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
-        LOGGER.info("Wiki: https://minecraft-ams.github.io/carpetamsaddition/");
+        LOGGER.info("Wiki: https://carpet.mcams.club");
         CarpetRuleRegistrar.register(CarpetServer.settingsManager, CarpetAMSAdditionSettings.class);
     }
 
