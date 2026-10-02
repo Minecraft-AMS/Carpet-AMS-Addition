@@ -25,8 +25,8 @@ import carpet.CarpetSettings;
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.FileUtil;
+import carpetamsaddition.utils.messenger.Messenger;
 
-import carpetamsaddition.utils.Messenger;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
@@ -38,6 +38,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.TranslatableContents;
 //#endif
 import net.minecraft.server.level.ServerPlayer;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

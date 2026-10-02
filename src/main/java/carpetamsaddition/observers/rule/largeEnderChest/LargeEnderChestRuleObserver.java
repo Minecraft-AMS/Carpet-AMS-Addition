@@ -25,14 +25,14 @@ import carpet.api.settings.CarpetRule;
 import carpetamsaddition.settings.RuleObserver;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.MutableComponent;
 
 public class LargeEnderChestRuleObserver extends RuleObserver<Boolean> {
-    private static final Translator tr = new Translator("validator.largeEnderChest");
+    private static final Translator tr = new Translator("observer.largeEnderChest");
 
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {

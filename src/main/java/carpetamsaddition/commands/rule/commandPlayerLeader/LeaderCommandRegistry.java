@@ -27,6 +27,7 @@ import carpetamsaddition.utils.*;
 import carpetamsaddition.config.rule.commandLeader.LeaderConfig;
 import carpetamsaddition.commands.rule.commandWhere.WhereCommandRegistry;
 
+import carpetamsaddition.utils.messenger.Messenger;
 import com.google.common.collect.ImmutableSet;
 
 import com.mojang.brigadier.CommandDispatcher;

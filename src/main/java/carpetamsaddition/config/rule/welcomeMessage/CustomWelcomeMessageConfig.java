@@ -23,7 +23,7 @@ package carpetamsaddition.config.rule.welcomeMessage;
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import com.google.gson.*;
 

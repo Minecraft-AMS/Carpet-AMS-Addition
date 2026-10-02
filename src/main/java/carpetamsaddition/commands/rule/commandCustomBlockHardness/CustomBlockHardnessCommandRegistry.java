@@ -26,6 +26,7 @@ import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.Custom
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.*;
 
+import carpetamsaddition.utils.messenger.Messenger;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 

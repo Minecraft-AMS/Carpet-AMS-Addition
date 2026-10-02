@@ -25,7 +25,7 @@ import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.config.rule.commandCustomMovableBlock.CustomMovableBlockConfig;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.RegexTools;
 
 import com.mojang.brigadier.CommandDispatcher;

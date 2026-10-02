@@ -23,7 +23,7 @@ package carpetamsaddition.helpers.rule.fancyFakePlayerName;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.EntityUtil;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;

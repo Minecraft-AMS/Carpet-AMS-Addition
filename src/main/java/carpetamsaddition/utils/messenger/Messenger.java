@@ -18,11 +18,12 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.utils;
+package carpetamsaddition.utils.messenger;
 
+import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
 import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
-import carpetamsaddition.utils.compat.MessengerCompatFactory;
+import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -64,11 +65,7 @@ public class Messenger {
 
     @NotNull
     public static MutableComponent copy(MutableComponent text) {
-        //#if MC<11904
-        //$$ return (BaseComponent) text.copy();
-        //#else
-        return text.copy();
-        //#endif
+        return MessengerCompatFactory.copy(text);
     }
 
     @NotNull

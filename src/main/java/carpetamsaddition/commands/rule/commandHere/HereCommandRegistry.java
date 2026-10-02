@@ -26,7 +26,7 @@ import carpetamsaddition.helpers.rule.commandHere_commandWhere.CommandHereWhereH
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
 import net.minecraft.network.chat.Component;

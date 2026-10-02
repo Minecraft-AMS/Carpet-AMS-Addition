@@ -22,7 +22,7 @@ package carpetamsaddition.helpers.rule.amsUpdateSuppressionCrashFix;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.MinecraftServerUtil;
 import carpetamsaddition.utils.compat.DimensionWrapper;

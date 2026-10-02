@@ -27,7 +27,7 @@ import carpetamsaddition.commands.suggestionProviders.SetSuggestionProvider;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.config.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelConfig;
 
 import com.mojang.brigadier.CommandDispatcher;

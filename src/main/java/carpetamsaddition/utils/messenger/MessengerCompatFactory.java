@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.utils.compat;
+package carpetamsaddition.utils.messenger;
 
 import net.minecraft.commands.CommandSourceStack;
 //#if MC<11904
@@ -31,9 +31,12 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import org.jetbrains.annotations.NotNull;
 
 public class MessengerCompatFactory {
-    public static MutableComponent carpetCompoundText(Object... fields) {
+    private MessengerCompatFactory() {}
+
+    protected static MutableComponent carpetCompoundText(Object... fields) {
         //#if MC<11904
         //$$ return (BaseComponent) carpet.utils.Messenger.c(fields);
         //#else
@@ -41,7 +44,7 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    public static MutableComponent literalText(String text) {
+    protected static MutableComponent literalText(String text) {
         //#if MC<11904
         //$$ return new TextComponent(text);
         //#else
@@ -49,7 +52,7 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    public static MutableComponent translatableText(String key, Object... args) {
+    protected static MutableComponent translatableText(String key, Object... args) {
         //#if MC<11904
         //$$ return new TranslatableComponent(key, args);
         //#else
@@ -57,7 +60,7 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    public static void sendFeedback(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
+    protected static void sendFeedback(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
         //#if MC<=11904
         //$$ source.sendSuccess(text, broadcastToOps);
         //#else
@@ -65,7 +68,7 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    public static void sendPlayerMessage(ServerPlayer player, MutableComponent text, boolean overlay) {
+    protected static void sendPlayerMessage(ServerPlayer player, MutableComponent text, boolean overlay) {
         //#if MC<11904
         //$$ player.sendMessage(text, Util.NIL_UUID);
         //#else
@@ -73,7 +76,7 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    public static void sendPlayerMessage(Player player, MutableComponent text) {
+    protected static void sendPlayerMessage(Player player, MutableComponent text) {
         //#if MC>=260102
         //$$ player.sendSystemMessage(text);
         //#elseif MC<11904
@@ -83,11 +86,20 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    public static void sendServerMessage(MinecraftServer server, MutableComponent text) {
+    protected static void sendServerMessage(MinecraftServer server, MutableComponent text) {
         //#if MC<11904
         //$$ server.sendMessage(text, Util.NIL_UUID);
         //#else
         server.sendSystemMessage(text);
+        //#endif
+    }
+
+    @NotNull
+    public static MutableComponent copy(MutableComponent text) {
+        //#if MC<11904
+        //$$ return (BaseComponent) text.copy();
+        //#else
+        return text.copy();
         //#endif
     }
 }

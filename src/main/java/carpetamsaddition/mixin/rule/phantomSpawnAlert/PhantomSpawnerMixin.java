@@ -22,7 +22,7 @@ package carpetamsaddition.mixin.rule.phantomSpawnAlert;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.PlayerUtil;
 
 import com.llamalad7.mixinextras.sugar.Local;

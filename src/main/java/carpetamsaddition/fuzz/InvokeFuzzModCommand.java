@@ -22,7 +22,7 @@ package carpetamsaddition.fuzz;
 
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import net.minecraft.network.chat.Component;
 

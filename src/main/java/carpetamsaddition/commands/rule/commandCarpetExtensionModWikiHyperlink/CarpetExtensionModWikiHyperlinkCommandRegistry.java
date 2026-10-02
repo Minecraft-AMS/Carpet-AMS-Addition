@@ -27,7 +27,7 @@ import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
 import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -65,7 +65,6 @@ public class CarpetExtensionModWikiHyperlinkCommandRegistry {
         return 1;
     }
 
-    @SuppressWarnings("EnhancedSwitchMigration")
     private static String getUrl(String extensionName) {
         switch (extensionName) {
             case "Carpet-AMS-Addition": return "https://carpet.mcams.club/";

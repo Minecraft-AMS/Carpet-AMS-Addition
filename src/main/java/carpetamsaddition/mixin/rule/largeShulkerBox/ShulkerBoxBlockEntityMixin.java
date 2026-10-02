@@ -63,11 +63,10 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
     public abstract int getContainerSize();
 
     @Inject(
-        method =
         //#if MC<11700
-        //$$ "<init>()V",
+        //$$ method = "<init>()V",
         //#else
-        "<init>(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
+        method = "<init>(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
         //#endif
         at = @At("RETURN")
     )
@@ -78,11 +77,10 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
     }
 
     @Inject(
-        method =
         //#if MC<11700
-        //$$ "<init>(Lnet/minecraft/world/item/DyeColor;)V",
+        //$$ method = "<init>(Lnet/minecraft/world/item/DyeColor;)V",
         //#else
-        "<init>(Lnet/minecraft/world/item/DyeColor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
+        method = "<init>(Lnet/minecraft/world/item/DyeColor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
         //#endif
         at = @At("RETURN")
     )

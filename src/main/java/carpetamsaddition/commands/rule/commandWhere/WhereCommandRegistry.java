@@ -27,6 +27,7 @@ import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.*;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
+import carpetamsaddition.utils.messenger.Messenger;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

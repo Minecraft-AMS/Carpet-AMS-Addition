@@ -24,7 +24,7 @@ import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.logging.AbstractHUDLogger;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.chat.MutableComponent;

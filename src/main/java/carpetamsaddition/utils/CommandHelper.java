@@ -25,6 +25,7 @@ import carpetamsaddition.translations.Translator;
 import carpetamsaddition.mixin.rule.commandCustomCommandPermissionLevel.CommandNodeInvoker;
 import carpetamsaddition.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
 
+import carpetamsaddition.utils.messenger.Messenger;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.tree.CommandNode;
 import com.mojang.brigadier.tree.LiteralCommandNode;

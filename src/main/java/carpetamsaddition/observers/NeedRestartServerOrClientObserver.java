@@ -27,7 +27,7 @@ import carpetamsaddition.settings.RuleObserver;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.CarpetUtil;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.commands.CommandSourceStack;

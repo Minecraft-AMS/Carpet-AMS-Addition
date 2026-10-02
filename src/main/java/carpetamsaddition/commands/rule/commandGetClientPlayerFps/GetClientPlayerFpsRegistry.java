@@ -26,6 +26,7 @@ import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.*;
 import carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
 
+import carpetamsaddition.utils.messenger.Messenger;
 import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.commands.Commands;

@@ -28,6 +28,7 @@ import carpetamsaddition.network.payloads.handshake.RequestHandShakeS2CPayload;
 import carpetamsaddition.network.payloads.debug.RequestClientModVersionPayload_S2C;
 import carpetamsaddition.utils.*;
 
+import carpetamsaddition.utils.messenger.Messenger;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 

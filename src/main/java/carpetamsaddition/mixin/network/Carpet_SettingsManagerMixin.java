@@ -28,6 +28,7 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.*;
 
+import carpetamsaddition.utils.messenger.Messenger;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.MinecraftServer;
 
@@ -43,7 +44,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Map;
 import java.util.Objects;
 
-@SuppressWarnings({"LoggingSimilarMessage", "PatternVariableCanBeUsed"})
+@SuppressWarnings("LoggingSimilarMessage")
 @Mixin(SettingsManager.class)
 public abstract class Carpet_SettingsManagerMixin {
     @Final
