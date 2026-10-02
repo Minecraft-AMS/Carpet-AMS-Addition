@@ -688,6 +688,10 @@ carpetamsaddition:
       # 合成配方规则
       craftableEnchantedGoldenApples:
         desc: Enchanted Golden Apples can be crafted with 8 Gold Blocks again
+      craftableBundle:
+        desc: Crafted bundle in minecraft 1.17/1.18/1.19
+      craftableSculkSensor:
+        desc: Crafted sculk_sensor in minecraft 1.17/1.18
       betterCraftableBoneBlock:
         desc: Use nine bones to crafted three bone_blocks
       craftableElytra:
@@ -698,6 +702,8 @@ carpetamsaddition:
         desc: Use deepslate to crafted polished_blackstone_button in minecraft
       rottenFleshBurnedIntoLeather:
         desc: Rotten flesh can be burned into leather in a furnace
+      useNewLodestoneRecipe:
+        desc: Use iron ingots to craft Lodestone
       craftableCarvedPumpkin:
         desc: Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpkin reduces the shears durability by 1 (affected by unbreaking enchantments)
 

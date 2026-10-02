@@ -754,6 +754,27 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean craftableCarvedPumpkin = false;
 
+    //#if MC<12105
+    @GameVersion(version = "Minecraft < 1.21.5")
+    @RecipeRule
+    @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    public static boolean useNewLodestoneRecipe = false;
+    //#endif
+
+    //#if MC>=11700 && MC<12102
+    //$$ @GameVersion(version = "Minecraft 1.17 - 1.21.1")
+    //$$ @RecipeRule
+    //$$ @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    //$$ public static boolean craftableBundle = false;
+    //#endif
+
+    //#if MC<11900 && MC>=11700
+    //$$ @GameVersion(version = "Minecraft 1.17 - 1.18")
+    //$$ @RecipeRule
+    //$$ @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    //$$ public static boolean craftableSculkSensor = false;
+    //#endif
+
     public enum blueSkullProbability {
         VANILLA,
         SURELY,
