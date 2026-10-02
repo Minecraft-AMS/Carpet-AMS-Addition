@@ -38,7 +38,8 @@ When enabled, plants will execute codes related to growth in tileTick events pla
 
 - `scheduledRandomTickStem`: Enable 0tick farm of twisting vines, weeping vines and kelp.
 
-<Ported from [OhMyVanillaMinecraft](https://github.com/hit-mc/OhMyVanillaMinecraft) >
+
+> Ported from: [OhMyVanillaMinecraft](https://github.com/hit-mc/OhMyVanillaMinecraft)
 
 - Type: `boolean`
   
@@ -328,7 +329,8 @@ Blast resistence of every block will be set to 0.
 
 Villagers cured from zombified villager will give trade discounts to every player.
 
-<Ported from [totos-carpet-tweaks](https://github.com/totorewa/totos-carpet-tweaks)>
+
+> Ported from: [totos-carpet-tweaks](https://github.com/totorewa/totos-carpet-tweaks)
 
 - Type: `boolean`
   
@@ -446,7 +448,8 @@ When enabled, Players will be invulnerable.
 
 When enabled, Allows players in Creative mode to kill entities in one hit, If the player is sneaking, other entities around the target get killed too.
 
-<Ported from [lunaar-carpet-addons](https://github.com/Lunaar-SMP/lunaar-carpet-addons)>
+
+> Ported from: [lunaar-carpet-addons](https://github.com/Lunaar-SMP/lunaar-carpet-addons)
 
 - Type: `boolean`
   
@@ -784,9 +787,10 @@ Use the following command to control whether it is forcibly enabled when `custom
 
 ## ghastFireballExplosionDamageSourceFix
 
+> Version: `Minecraft < 1.19.3`
+
 Fix MC-193297 that the large fireball does not create explosion with correct damage source.
 
-<Available for Minecraft < 1.19.3>
 
 - Type: `boolean`
   
@@ -933,13 +937,14 @@ Changing a value in global mode requires the player to re-enter the game.
 
 ## maxPlayerBlockInteractionRangeScope
 
+> Version: `Minecraft >= 1.20.5`
+
 Change the scope of the "maxPlayerBlockInteractionRange" rule.
 
 [server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.
 
 [global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.
 
-< Available for Minecraft >= 1.20.5 >
 
 - Type: `String`
   
@@ -957,13 +962,14 @@ Change the scope of the "maxPlayerBlockInteractionRange" rule.
 
 ## maxPlayerEntityInteractionRangeScope
 
+> Version: `Minecraft >= 1.20.5`
+
 Change the scope of the "maxPlayerEntityInteractionRange" rule.
 
 [server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.
 
 [global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.
 
-< Available for Minecraft >= 1.20.5 >
 
 - Type: `String`
   
@@ -1410,9 +1416,10 @@ Using an Ender Pearl each time will spawn an Endermite.
 
 ## enderPearlSoundEffect
 
+> Version: `Minecraft < 1.20`
+
 A sound effect will be played when the player uses an ender pearl for teleportation.
 
-<Available for Minecraft < 1.20>
 
 - Type: `boolean`
   
@@ -1636,9 +1643,10 @@ Whenever you set the carpet rule, it will be automatically set to the default va
 
 ## experimentalContentCheckDisabled
 
+> Version: `Minecraft 1.19–1.21.1`
+
 Allow playing Minecraft experimental content in the game by adding data packs  (need restart server). 
 
-< Available for Minecraft 1.19 - 1.21.1 >
 
 - Type: `boolean`
   
@@ -1674,9 +1682,10 @@ Allow small flowers such as dandelion can also be ripened by bone meal.
 
 ## safePointedDripstone
 
+> Version: `Minecraft >= 1.17`
+
 When players land on pointed dripstone, they do not take additional damage from it.
 
-< Available for Minecraft >= 1.17 >
 
 - Type: `boolean`
   
@@ -1694,9 +1703,10 @@ When players land on pointed dripstone, they do not take additional damage from 
 
 ## pointedDripstoneCollisionBoxDisabled
 
+> Version: `Minecraft >= 1.17`
+
 Allow players to pass through pointed dripstone.
 
-< Available for Minecraft >= 1.17 >
 
 - Type: `boolean`
   
@@ -1768,9 +1778,10 @@ Iron golems will not drop flowers.
 
 ## easyGetPitcherPod
 
+> Version: `Minecraft >= 1.20`
+
 Players can harvest a random amount of pitcher pods by planting pitcher (The maximum quantity is customizable, while the minimum quantity is fixed at 2).
 
-< Available for Minecraft >= 1.20 >
 
 - Type: `int`
   
@@ -1980,7 +1991,10 @@ Customize the drop rate of netherite scrap from zombified piglin.
 
 ## stackableDiscounts
 
+> Version: `Minecraft >= 1.20.2`
+
 Reintroduce the stackable discounts feature in <23w31a.
+
 
 - Type: `boolean`
   
@@ -2222,9 +2236,10 @@ Use "/getHeldItemID" command to get item ID of the player main hand item.
 
 ## stringDupeReintroduced
 
+> Version: `Minecraft >= 1.21.2`
+
 Reintroduced the string dupe feature, you can use this rule to continue using the string farm.
 
-< Available for Minecraft >= 1.21.2 >
 
 - Type: `boolean`
   
@@ -2392,9 +2407,10 @@ Only OP players can spawn players on the whitelist, regardless of whether the wh
 
 ## itemEntityCreateNetherPortalDisabled
 
+> Version: `Minecraft >= 1.21`
+
 Prevent item entities from creating portals when passing through Nether portals.
 
-<Available for Minecraft \>= 1.21>
 
 - Type: `boolean`
   
@@ -2448,11 +2464,12 @@ Use `/@` command to @ some one player.
 
 ## largeBundle
 
+> Version: `Minecraft >= 1.17`
+
 Let the bundle have a 9x3 or 9x6 UI, and right-click in the hand to open the UI.
 
 This rule does not allow bundle and shulker boxes to be placed in bundle.
 
-&lt;Available for Minecraft >= 1.17.1&gt;
 
 - Type: `boolean`
   
@@ -2470,9 +2487,10 @@ This rule does not allow bundle and shulker boxes to be placed in bundle.
 
 ## maxChainUpdateDepth
 
+> Version: `Minecraft >= 1.19`
+
 Modify max chain update depth, Set to "-1" to disable the rule.
 
-&lt;Available for Minecraft >= 1.19&gt;
 
 - Type: `int`
   
@@ -2508,9 +2526,10 @@ Broadcast the news of who summoned the phantoms.
 
 ## endPortalChunkLoadDisabled
 
+> Version: `Minecraft >= 1.21`
+
 Entities passing through the End Portal will not cause chunk loading.
 
-&lt;Available for Minecraft >= 1.20.6&gt;
 
 - Type: `boolean`
   
@@ -2528,9 +2547,10 @@ Entities passing through the End Portal will not cause chunk loading.
 
 ## endPortalChunkLoader
 
+> Version: `Minecraft < 1.20.6`
+
 Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5.
 
-&lt;Available for Minecraft < 1.20.6&gt;
 
 - Type: `boolean`
   
@@ -2618,9 +2638,10 @@ Some commands for network communication testing.
 
 ## onlyPlayerCanCreateNetherPortal
 
+> Version: `Minecraft >= 1.21`
+
 Only allow new portals to be generated when players pass through the Nether portal.
 
-&lt;Available for Minecraft >= 1.21&gt;
 
 - Type: `boolean`
   
@@ -2638,9 +2659,10 @@ Only allow new portals to be generated when players pass through the Nether port
 
 ## preventServerPause
 
+> Version: `Minecraft >= 1.21.2`
+
 Prevent server pause after 60s.
 
-&lt;Available for Minecraft >= 1.21.2&gt;
 
 * Type: `boolean`
   
@@ -2664,7 +2686,6 @@ Affected blocks:
 
 barrel, chiseled_bookshelf, crafter, shelf
 
-&lt;Available for Minecraft >= 1.21.2&gt;
 
 - Type: `boolean`
   
@@ -2682,9 +2703,10 @@ barrel, chiseled_bookshelf, crafter, shelf
 
 ## experimentalMinecartSpeed
 
+> Version: `Minecraft >= 1.21.2`
+
 Set the speed of the experimental minecart.
 
-&lt;Available for Minecraft >= 1.21.2&gt;
 
 * Type: `int`
   
@@ -2702,13 +2724,14 @@ Set the speed of the experimental minecart.
 
 ## experimentalMinecartEnabled
 
+> Version: `Minecraft >= 1.21.2`
+
 Enable experimental minecarts.
 
 When the server environment switches the rule setting, the server needs to be restarted
 
 When the client environment switches the rule settings, the client needs to be restarted
 
-&lt;Available for Minecraft >= 1.21.2&gt;
 
 * Type: `boolean`
   
@@ -2766,8 +2789,10 @@ Enchanted gold apple can be crafted using gold block and apple, which is the ori
 
 ## craftableBundle
 
+> Version: `Minecraft 1.17–1.21.1`
+
 Bundle can be crafted using string and rabbit hide.
-<Available for Minecraft \>= 1.17>
+
 
 - Type: `String`
   
@@ -2785,8 +2810,10 @@ Bundle can be crafted using string and rabbit hide.
 
 ## craftableSculkSensor
 
+> Version: `Minecraft 1.17–1.18`
+
 Sculk sensor can be crafted using deepslate, redstone and quartz.
-<Only available for Minecraft == 1.17 or Minecraft == 1.18>
+
 
 - Type: `boolean`
   
@@ -2858,7 +2885,10 @@ Dispenser can be crafted more flexible. It can be crafted using bow and dropper,
 
 ## betterCraftablePolishedBlackStoneButton
 
+> Version: `Minecraft > 1.17`
+
 Use deepslate to crafted polished_blackstone_button in minecraft.
+
 
 - Type: `boolean`
   
@@ -2894,9 +2924,10 @@ Rotten flesh can be burned into leather in a furnace.
 
 ## useNewLodestoneRecipe
 
+> Version: `Minecraft < 1.21.5`
+
 Use iron ingots to craft Lodestone.
 
-<Available for Minecraft \< 1.21.5>
 
 - Type: `boolean`
   

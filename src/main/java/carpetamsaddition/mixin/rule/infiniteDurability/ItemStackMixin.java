@@ -30,7 +30,19 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
-    @ModifyVariable(method = "processDurabilityChange", at = @At("HEAD"), argsOnly = true, remap = false)
+    @ModifyVariable(
+        method =
+        //#if MC>12006
+        "processDurabilityChange",
+        //#elseif MC>=12005
+        //$$ "hurtAndBreak(ILnet/minecraft/util/RandomSource;Lnet/minecraft/server/level/ServerPlayer;Ljava/lang/Runnable;)V",
+        //#else
+        //$$ "hurt(ILnet/minecraft/util/RandomSource;Lnet/minecraft/server/level/ServerPlayer;)Z",
+        //#endif
+        at = @At("HEAD"),
+        argsOnly = true,
+        remap = false
+    )
     private int infiniteDurability(int amount) {
         return CarpetAMSAdditionSettings.infiniteDurability ? 0 : amount;
     }

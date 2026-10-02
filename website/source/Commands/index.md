@@ -1,20 +1,20 @@
 
-### 区块加载控制（commandPlayerChunkLoadController）
+## 区块加载控制（commandPlayerChunkLoadController）
 
 - **/playerChunkLoading [true/false]**
   开关玩家自身加载。
 
-### 禁用铁砧交互（commandAnvilInteractionDisabled)
+## 禁用铁砧交互（commandAnvilInteractionDisabled)
 
 - **/anvilInteractionDisabled [true/false]**
   控制玩家是否可与铁砧交互。
 
-### 更新抑制崩溃修复（amsUpdateSuppressionCrashFix）
+## 更新抑制崩溃修复（amsUpdateSuppressionCrashFix）
 
 - **/amsUpdateSuppressionCrashFixForceMode [true/false]**
   控制是否在开启 `自定义方块更新抑制器（customBlockUpdateSuppressor）` 规则开启时是否强制开启。
 
-### 自定义方块爆炸抗性（commandCustomBlockBlastResistance）
+## 自定义方块爆炸抗性（commandCustomBlockBlastResistance）
 
 - **/customBlockBlastResistance set <方块> <抗性>**
   添加或修改方块及其爆炸抗性。
@@ -39,17 +39,17 @@
 - **/customBlockBlastResistance help**
   查看使用说明。
 
-### 我在哪（commandHere）
+## 我在哪（commandHere）
 
 - **/here**
   发送当前自身所在维度、坐标、对应的主世界/下界坐标，同时给予自身30s的发光效果。
 
-### 你在哪（commandWhere）
+## 你在哪（commandWhere）
 
 - **/where**
   获取指定玩家所在维度、坐标、对应的主世界/下界坐标，同时给予目标玩家30s的发光效果。
 
-### 玩家导游（commandPlayerLeader）
+## 玩家导游（commandPlayerLeader）
 
 - **/leader add <玩家>**
   添加一名导游。
@@ -79,7 +79,7 @@
 - **/leader help**
   查看使用说明。
 
-### ping命令（commandPacketInternetGroper）
+## ping命令（commandPacketInternetGroper）
 
 - **/pings <目标IP/域名> <ping的次数>**
   ping某个主机。
@@ -89,17 +89,17 @@
 - **/pings stop**
   中断ping操作。
 
-### 获取存档大小（commandGetSaveSize）
+## 获取存档大小（commandGetSaveSize）
 
 - **/getSaveSize**
   获取存档大小。
 
-### 获取系统信息（commandGetSystemInfo）
+## 获取系统信息（commandGetSystemInfo）
 
 - **/getSystemInfo**
   获取服务器的系统信息。
 
-### goto命令（commandGoto）
+## goto命令（commandGoto）
 
 - **/goto <维度> <x> <y> <z>**
   传送到指定维度的指定坐标。
@@ -109,7 +109,7 @@
 - **/goto <维度>**
   传送至当前玩家所在位置的对应坐标。
 
-### 自定义命令权限等级（commandCustomCommandPermissionLevel）
+## 自定义命令权限等级（commandCustomCommandPermissionLevel）
 
 - **/customCommandPermissionLevel set <指令> <权限等级>**
   设置某个指令的权限等级。
@@ -139,12 +139,12 @@
 - **/customCommandPermissionLevel help**
   查看使用说明。
 
-### 获取玩家头颅（commandGetPlayerSkull）
+## 获取玩家头颅（commandGetPlayerSkull）
 
 - **/getPlayerSkull <玩家> <数量>** 
   获取指定玩家的头颅。
 
-### 自定义可移动方块（commandCustomMovableBlock）
+## 自定义可移动方块（commandCustomMovableBlock）
 
 - **/customMovableBlock add <方块注册名>**
   增加一个可移动方块。
@@ -169,12 +169,12 @@
 - **/customMovableBlock help**
   查看使用说明。
 
-### 获取主手物品ID（commandGetHeldItemID）
+## 获取主手物品ID（commandGetHeldItemID）
 
 - **/getHeldItemID**
   获取玩家主手物品的物品ID。
 
-### 自定义防火物品（commandCustomAntiFireItems）
+## 自定义防火物品（commandCustomAntiFireItems）
 
 - **/customAntiFireItems add <物品注册名>**
   增加一个防火物品。
@@ -199,12 +199,12 @@
 - **/customAntiFireItems help**
   查看使用说明。
 
-### 地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）
+## 地毯拓展模组Wiki超链接（commandCarpetExtensionModWikiHyperlink）
 
 - **/carpetExtensionModWikiHyperlink <拓展模组名>**
   获取某个Carpet拓展模组的Wiki链接。
 
-### 自定义方块硬度（commandCustomBlockHardness）
+## 自定义方块硬度（commandCustomBlockHardness）
 
 - **/customBlockHardness set <方块> <硬度>**
   添加或修改方块及其硬度。
@@ -234,14 +234,14 @@
 - **/customBlockHardness help**
   查看使用说明。
 
-### @玩家（commandAtSomeOnePlayer）
+## @玩家（commandAtSomeOnePlayer）
 
 - **/@ &lt;玩家**&gt;
   @某位玩家。
   
   
 
-### 获取客户端玩家FPS（commandGetClientPlayerFps）
+## 获取客户端玩家FPS（commandGetClientPlayerFps）
 
 - **/getClientPlayerFps <玩家>**
   获取指定玩家的FPS。
@@ -253,7 +253,7 @@
   
   
 
-### 设置玩家姿势（commandSetPlayerPose）
+## 设置玩家姿势（commandSetPlayerPose）
 
 - **/playerPose <玩家> set <姿势>**
   设置玩家姿势。
@@ -270,7 +270,7 @@
   
   
 
-### 下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）
+## 下界传送门不传送玩家（commandPlayerNoNetherPortalTeleport）
 
 - **/playerNoNetherPortalTeleport globalMode [true/false]**
   设置全局模式。

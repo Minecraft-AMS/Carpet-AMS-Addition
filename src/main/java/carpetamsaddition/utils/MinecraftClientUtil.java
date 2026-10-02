@@ -44,6 +44,10 @@ public class MinecraftClientUtil {
     }
 
     public static int getClientFps() {
+        //#if MC<=11802
+        //$$ return MinecraftInvoker.invokeGetFps();
+        //#else
         return ((MinecraftInvoker) getCurrentClient()).invokeGetFps();
+        //#endif
     }
 }

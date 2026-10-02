@@ -30,6 +30,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.20.5")
 @Mixin(RangedAttribute.class)
 public abstract class RangedAttributeMixin {
     @ModifyReturnValue(method = "sanitizeValue", at = @At("RETURN"))

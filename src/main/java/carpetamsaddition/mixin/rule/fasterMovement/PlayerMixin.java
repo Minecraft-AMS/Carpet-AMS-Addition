@@ -51,14 +51,25 @@ public abstract class PlayerMixin {
 
                 float speed = (float) player.getAttributeValue(Attributes.MOVEMENT_SPEED);
 
-                speed = switch (CarpetAMSAdditionSettings.fasterMovement) {
-                    case "Ⅰ" -> 0.2F;
-                    case "Ⅱ" -> 0.3F;
-                    case "Ⅲ" -> 0.4F;
-                    case "Ⅳ" -> 0.5F;
-                    case "Ⅴ" -> 0.6F;
-                    default -> speed;
-                };
+                switch (CarpetAMSAdditionSettings.fasterMovement) {
+                    case "Ⅰ":
+                        speed = 0.2F;
+                        break;
+                    case "Ⅱ":
+                        speed = 0.3F;
+                        break;
+                    case "Ⅲ":
+                        speed = 0.4F;
+                        break;
+                    case "Ⅳ":
+                        speed = 0.5F;
+                        break;
+                    case "Ⅴ":
+                        speed = 0.6F;
+                        break;
+                    default:
+                        break;
+                }
 
                 cir.setReturnValue(speed);
             }

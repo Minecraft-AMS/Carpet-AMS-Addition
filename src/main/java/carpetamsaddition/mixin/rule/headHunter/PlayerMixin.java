@@ -22,11 +22,15 @@ package carpetamsaddition.mixin.rule.headHunter;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.headHunter_commandGetPlayerSkull.SkullSkinHelper;
+//#if MC>12006
 import carpetamsaddition.utils.EntityUtil;
+//#endif
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+//#if MC>12006
 import net.minecraft.server.level.ServerLevel;
+//#endif
 import net.minecraft.world.item.Items;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,7 +52,11 @@ public abstract class PlayerMixin {
             Player player = (Player) (Object) this;
             ItemStack headStack = new ItemStack(Items.PLAYER_HEAD);
             SkullSkinHelper.writeNbtToPlayerSkull(player, headStack);
+            //#if MC>12006
             player.spawnAtLocation((ServerLevel) EntityUtil.getEntityWorld(player), headStack);
+            //#else
+            //$$ player.spawnAtLocation(headStack, 0.0F);
+            //#endif
         }
     }
 }

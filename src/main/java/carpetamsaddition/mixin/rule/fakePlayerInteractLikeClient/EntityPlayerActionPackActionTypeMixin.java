@@ -29,7 +29,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.player.Player;
+//#if MC>=12100
 import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
+//#endif
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -72,7 +74,8 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
         );
 
         if (CarpetAMSAdditionSettings.fakePlayerInteractLikeClient) {
-            if (entity instanceof ArmorStand stand) {
+            if (entity instanceof ArmorStand) {
+                ArmorStand stand = (ArmorStand) entity;
                 ItemStack handItem = player.getItemInHand(hand);
                 if (!stand.isMarker() && handItem.getItem() != Items.NAME_TAG && !player.isSpectator()) {
                     return InteractionResult.PASS;
@@ -83,6 +86,7 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
         return originalResult;
     }
 
+    //#if MC>=12100
     @WrapOperation(
         method = "execute(Lnet/minecraft/server/level/ServerPlayer;Lcarpet/helpers/EntityPlayerActionPack$Action;)Z",
         at = @At(
@@ -117,7 +121,8 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
                 if (!player.isSecondaryUseActive()) {
                     return InteractionResult.SUCCESS;
                 }
-            } else if (entity instanceof AbstractMinecart minecart) {
+            } else if (entity instanceof AbstractMinecart) {
+                AbstractMinecart minecart = (AbstractMinecart) entity;
                 if (!player.isSecondaryUseActive() && !minecart.isVehicle()) {
                     return InteractionResult.SUCCESS;
                 }
@@ -126,4 +131,5 @@ public abstract class EntityPlayerActionPackActionTypeMixin {
 
         return originalResult;
     }
+    //#endif
 }

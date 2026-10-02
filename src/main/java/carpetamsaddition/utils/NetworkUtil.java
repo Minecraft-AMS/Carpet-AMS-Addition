@@ -20,7 +20,7 @@
 
 package carpetamsaddition.utils;
 
-import carpet.api.settings.Rule;
+import carpetamsaddition.settings.Rule;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.network.AMS_CustomPayload;
@@ -28,6 +28,7 @@ import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.settings.AmsRuleCategory;
 
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.*;
@@ -51,22 +52,40 @@ public class NetworkUtil {
         MinecraftServerUtil.getOnlinePlayers().forEach(player -> sendS2CPacket(player, payload, sendMode));
     }
 
+    @SuppressWarnings("EnhancedSwitchMigration")
     public static void sendS2CPacket(ServerPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
-        boolean shouldSend = switch (sendMode) {
-            case FORCE -> true;
-            case NEED_SUPPORT -> isSupportClient(player.getUUID()) && isClientPacketSupported(player.getUUID(), payload.getPacketId());
-        };
+        boolean shouldSend;
+        switch (sendMode) {
+            case FORCE:
+                shouldSend = true;
+                break;
+            case NEED_SUPPORT:
+                shouldSend = isSupportClient(player.getUUID()) && isClientPacketSupported(player.getUUID(), payload.getPacketId());
+                break;
+            default:
+                shouldSend = false;
+                break;
+        }
 
         if (shouldSend) {
             payload.sendS2CPacket(player);
         }
     }
 
+    @SuppressWarnings("EnhancedSwitchMigration")
     public static void sendC2SPacket(LocalPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
-        boolean shouldSend = switch (sendMode) {
-            case FORCE -> true;
-            case NEED_SUPPORT -> getServerSupportState() && isServerPacketSupported(payload.getPacketId());
-        };
+        boolean shouldSend;
+        switch (sendMode) {
+            case FORCE:
+                shouldSend = true;
+                break;
+            case NEED_SUPPORT:
+                shouldSend = getServerSupportState() && isServerPacketSupported(payload.getPacketId());
+                break;
+            default:
+                shouldSend = false;
+                break;
+        }
 
         if (shouldSend) {
             payload.sendC2SPacket(player);
@@ -147,6 +166,14 @@ public class NetworkUtil {
 
     public static void executeOnServerThread(Runnable runnable) {
         Optional.of(MinecraftServerUtil.serverIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftServerUtil.getServer().execute(runnable));
+    }
+
+    public static String readBufString(FriendlyByteBuf buf) {
+        //#if MC<11700
+        //$$ return buf.readUtf(Short.MAX_VALUE);
+        //#else
+        return buf.readUtf();
+        //#endif
     }
 
     public static void collectAmsNetworkRuleNames() {

@@ -35,7 +35,11 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
+//#if MC>12006
 import net.minecraft.world.InteractionResult;
+//#else
+//$$ import net.minecraft.world.InteractionResultHolder;
+//#endif
 import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -50,7 +54,11 @@ import java.util.Optional;
 @Mixin(BundleItem.class)
 public abstract class BundleItemMixin {
     @WrapMethod(method = "use")
+    //#if MC>12006
     private InteractionResult onUse(Level world, Player user, InteractionHand hand, Operation<InteractionResult> original) {
+    //#else
+    //$$ private InteractionResultHolder<ItemStack> onUse(Level world, Player user, InteractionHand hand, Operation<InteractionResultHolder<ItemStack>> original) {
+    //#endif
         if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             ItemStack stack = user.getItemInHand(hand);
             SimpleMenuProvider screenHandlerFactory = new SimpleMenuProvider(
@@ -66,9 +74,15 @@ public abstract class BundleItemMixin {
                 },
                 stack.getHoverName()
             );
+            //#if MC>=11800
             world.playSound(user, user.blockPosition(), SoundEvents.BUNDLE_DROP_CONTENTS, SoundSource.PLAYERS, 1.5F, 1.35F);
+            //#endif
             user.openMenu(screenHandlerFactory);
+            //#if MC>12006
             return InteractionResult.SUCCESS;
+            //#else
+            //$$ return InteractionResultHolder.sidedSuccess(stack, world.isClientSide());
+            //#endif
         } else {
             return original.call(world, user, hand);
         }
@@ -82,9 +96,9 @@ public abstract class BundleItemMixin {
     }
 
     @Inject(method = "getBarWidth", at = @At("HEAD"), cancellable = true)
-    private void onGetItemBarStep(CallbackInfoReturnable<ItemStack> cir) {
+    private void onGetItemBarStep(CallbackInfoReturnable<Integer> cir) {
         if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
-            cir.setReturnValue(ItemStack.EMPTY);
+            cir.setReturnValue(0);
         }
     }
 
@@ -95,8 +109,21 @@ public abstract class BundleItemMixin {
         }
     }
 
-    @Inject(method = "dropContent(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;)Z", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method =
+        //#if MC>12006
+        "dropContent(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;)Z",
+        //#else
+        //$$ "dropContents(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/player/Player;)Z",
+        //#endif
+        at = @At("HEAD"),
+        cancellable = true
+    )
+    //#if MC<=12006
+    //$$ private static void onDropAllBundledItems(CallbackInfoReturnable<Boolean> cir) {
+    //#else
     private void onDropAllBundledItems(CallbackInfoReturnable<Boolean> cir) {
+    //#endif
         if (!Objects.equals(CarpetAMSAdditionSettings.largeBundle, "false")) {
             cir.setReturnValue(false);
         }

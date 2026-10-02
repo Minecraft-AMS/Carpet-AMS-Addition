@@ -22,6 +22,7 @@ package carpetamsaddition.network.payloads.rule.commandSetPlayerPose;
 
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.utils.MinecraftClientUtil;
+import carpetamsaddition.utils.NetworkUtil;
 import carpetamsaddition.utils.PacketByteBufExtras;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
@@ -40,7 +41,7 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
 
     public UpdatePlayerPosePayload_S2C(FriendlyByteBuf buf) {
         super(ID);
-        this.poseMap = PacketByteBufExtras.readMap(buf, b -> b.readUUID(), FriendlyByteBuf::readUtf);
+        this.poseMap = PacketByteBufExtras.readMap(buf, b -> b.readUUID(), NetworkUtil::readBufString);
         this.targetPlayerUuid = buf.readUUID();
     }
 

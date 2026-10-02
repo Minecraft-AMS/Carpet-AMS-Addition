@@ -27,7 +27,9 @@ import net.minecraft.world.entity.EntityType;
 //#if MC>=260200
 //$$ import net.minecraft.world.entity.EntityTypes;
 //#endif
+//#if MC>12006
 import net.minecraft.world.entity.EntitySpawnReason;
+//#endif
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.parrot.Parrot;
@@ -84,8 +86,10 @@ public abstract class ParrotMixin extends ShoulderRidingEntity {
         if (!Objects.equals(CarpetAMSAdditionSettings.breedableParrots, "none")) {
             //#if MC>=260200
             //$$ AgeableMob child = EntityTypes.PARROT.create(world, EntitySpawnReason.BREEDING);
-            //#else
+            //#elseif MC>12006
             AgeableMob child = EntityType.PARROT.create(world, EntitySpawnReason.BREEDING);
+            //#else
+            //$$ AgeableMob child = EntityType.PARROT.create(world);
             //#endif
 
             if (child != null) {

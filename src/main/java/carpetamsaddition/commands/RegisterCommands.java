@@ -45,7 +45,9 @@ import carpetamsaddition.commands.rule.commandPlayerChunkLoadController.PlayerCh
 import carpetamsaddition.commands.rule.commandGoto.GotoCommandRegistry;
 
 import net.minecraft.commands.CommandSourceStack;
+//#if MC>=11904
 import net.minecraft.commands.CommandBuildContext;
+//#endif
 
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -55,16 +57,36 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class RegisterCommands {
     private static final Queue<Runnable> AMS_CMD_QUEUE = new ConcurrentLinkedQueue<>();
 
-    public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher, final CommandBuildContext commandBuildContext) {
-        buildAmsCommandList(dispatcher, commandBuildContext);
+    public static void registerCommands(
+        CommandDispatcher<CommandSourceStack> dispatcher
+        //#if MC>=11904
+        , final CommandBuildContext commandBuildContext
+        //#endif
+    ) {
+        buildAmsCommandList(
+            dispatcher
+            //#if MC>=11904
+            , commandBuildContext
+            //#endif
+        );
         AMS_CMD_QUEUE.forEach(Runnable::run);
     }
 
-    private static void buildAmsCommandList(CommandDispatcher<CommandSourceStack> dispatcher, final CommandBuildContext commandBuildContext) {
+    private static void buildAmsCommandList(
+        CommandDispatcher<CommandSourceStack> dispatcher
+        //#if MC>=11904
+        , final CommandBuildContext commandBuildContext
+        //#endif
+    ) {
         AMS_CMD_QUEUE.add(() -> AmsUpdateSuppressionCrashFixCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> PlayerChunkLoadControllerCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> AnvilInteractionDisabledCommandRegistry.register(dispatcher));
-        AMS_CMD_QUEUE.add(() -> CustomBlockBlastResistanceCommandRegistry.register(dispatcher, commandBuildContext));
+        AMS_CMD_QUEUE.add(() -> CustomBlockBlastResistanceCommandRegistry.register(
+            dispatcher
+            //#if MC>=11904
+            , commandBuildContext
+            //#endif
+        ));
         AMS_CMD_QUEUE.add(() -> HereCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> WhereCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> LeaderCommandRegistry.register(dispatcher));
@@ -74,11 +96,26 @@ public class RegisterCommands {
         AMS_CMD_QUEUE.add(() -> GotoCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> CustomCommandPermissionLevelRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> GetPlayerSkullCommandRegistry.register(dispatcher));
-        AMS_CMD_QUEUE.add(() -> CustomMovableBlockCommandRegistry.register(dispatcher, commandBuildContext));
+        AMS_CMD_QUEUE.add(() -> CustomMovableBlockCommandRegistry.register(
+            dispatcher
+            //#if MC>=11904
+            , commandBuildContext
+            //#endif
+        ));
         AMS_CMD_QUEUE.add(() -> GetHeldItemIDCommandRegistry.register(dispatcher));
-        AMS_CMD_QUEUE.add(() -> CustomAntiFireItemsCommandRegistry.register(dispatcher, commandBuildContext));
+        AMS_CMD_QUEUE.add(() -> CustomAntiFireItemsCommandRegistry.register(
+            dispatcher
+            //#if MC>=11904
+            , commandBuildContext
+            //#endif
+        ));
         AMS_CMD_QUEUE.add(() -> CarpetExtensionModWikiHyperlinkCommandRegistry.register(dispatcher));
-        AMS_CMD_QUEUE.add(() -> CustomBlockHardnessCommandRegistry.register(dispatcher, commandBuildContext));
+        AMS_CMD_QUEUE.add(() -> CustomBlockHardnessCommandRegistry.register(
+            dispatcher
+            //#if MC>=11904
+            , commandBuildContext
+            //#endif
+        ));
         AMS_CMD_QUEUE.add(() -> AtCommandRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> GetClientPlayerFpsRegistry.register(dispatcher));
         AMS_CMD_QUEUE.add(() -> SetPlayerPoseCommandRegistry.register(dispatcher));

@@ -32,7 +32,9 @@ import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.commands.arguments.blocks.BlockStateArgument;
+//#if MC>=11904
 import net.minecraft.commands.CommandBuildContext;
+//#endif
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 
@@ -46,14 +48,23 @@ public class CustomMovableBlockCommandRegistry {
     private static final Translator tr = new Translator("command.customMovableBlock");
     public static final List<String> CUSTOM_MOVABLE_BLOCKS = new ArrayList<>();
 
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
+    public static void register(
+        CommandDispatcher<CommandSourceStack> dispatcher
+        //#if MC>=11904
+        , CommandBuildContext commandRegistryAccess
+        //#endif
+    ) {
         dispatcher.register(
             Commands.literal("customMovableBlock")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomMovableBlock))
 
             // add
             .then(literal("add")
-            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(
+                //#if MC>=11904
+                commandRegistryAccess
+                //#endif
+            ))
             .executes(context -> add(
                 context.getSource(),
                 BlockStateArgument.getBlock(context, "block").getState()
@@ -61,7 +72,11 @@ public class CustomMovableBlockCommandRegistry {
 
             // remove
             .then(literal("remove")
-            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(
+                //#if MC>=11904
+                commandRegistryAccess
+                //#endif
+            ))
             .executes(context -> remove(
                 context.getSource(),
                 BlockStateArgument.getBlock(context, "block").getState())

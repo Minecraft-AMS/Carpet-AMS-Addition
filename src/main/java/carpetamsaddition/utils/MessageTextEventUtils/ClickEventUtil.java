@@ -22,6 +22,8 @@ package carpetamsaddition.utils.MessageTextEventUtils;
 
 import net.minecraft.network.chat.ClickEvent;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +31,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
+@GameVersion(version = "Minecraft > 1.20.6")
 public class ClickEventUtil {
     public static final ClickEvent.Action OPEN_URL = ClickEvent.Action.OPEN_URL;
     public static final ClickEvent.Action OPEN_FILE = ClickEvent.Action.OPEN_FILE;

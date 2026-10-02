@@ -23,7 +23,9 @@ package carpetamsaddition.mixin.rule.regeneratingDragonEgg;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.Blocks;
+//#if MC>=12006
 import net.minecraft.core.BlockPos;
+//#endif
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.dimension.end.EndDragonFight;
@@ -42,9 +44,11 @@ import java.util.UUID;
 @Mixin(EndDragonFight.class)
 public abstract class EndDragonFightMixin {
 
+    //#if MC>=12006
     @Final
     @Shadow
     private BlockPos origin;
+    //#endif
 
     @Final
     @Shadow
@@ -73,8 +77,10 @@ public abstract class EndDragonFightMixin {
         ) {
             //#if MC>=260300
             //$$ this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, ((EnderDragonFightInvoker) this).invokeGetPodiumLocation(this.origin)), Blocks.DRAGON_EGG.defaultBlockState());
-            //#else
+            //#elseif MC>=12006
             this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(this.origin)), Blocks.DRAGON_EGG.defaultBlockState());
+            //#else
+            //$$ this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
             //#endif
         }
     }

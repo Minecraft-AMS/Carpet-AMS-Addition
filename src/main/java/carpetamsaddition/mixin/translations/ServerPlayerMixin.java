@@ -26,7 +26,11 @@ import carpetamsaddition.translations.ServerPlayerEntityWithClientLanguage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
+//#if MC>=12002
 import net.minecraft.server.level.ClientInformation;
+//#else
+//$$ import net.minecraft.network.protocol.game.ServerboundClientInformationPacket;
+//#endif
 import net.minecraft.server.level.ServerPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,8 +46,19 @@ public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientL
     private String clientLanguage$AMS = "en_US";
 
     @Inject(method = "updateOptions", at = @At("HEAD"))
-    private void getClientLanguage(ClientInformation information, CallbackInfo ci) {
+    private void getClientLanguage(
+        //#if MC>=12002
+        ClientInformation information,
+        //#else
+        //$$ ServerboundClientInformationPacket information,
+        //#endif
+        CallbackInfo ci
+    ) {
+        //#if MC>=11800
         this.clientLanguage$AMS = information.language();
+        //#else
+        //$$ this.clientLanguage$AMS = ((ServerboundClientInformationPacketAccessor) information).getLanguage();
+        //#endif
     }
 
     @Override
@@ -51,7 +66,21 @@ public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientL
         return this.clientLanguage$AMS;
     }
 
-    @ModifyVariable(method = "sendSystemMessage(Lnet/minecraft/network/chat/Component;Z)V", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(
+        method = {
+            //#if MC>=11901
+            "sendSystemMessage(Lnet/minecraft/network/chat/Component;Z)V",
+            //#elseif MC>=11600
+            //$$ "displayClientMessage",
+            //$$ "sendMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/ChatType;Ljava/util/UUID;)V",
+            //#else
+            //$$ "displayClientMessage",
+            //$$ "sendMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/ChatType;)V",
+            //#endif
+        },
+        at = @At("HEAD"),
+        argsOnly = true
+    )
     private Component applyAMSTranslationToSystemMessage(Component message) {
         if (message instanceof MutableComponent) {
             message = AMSTranslations.translate((MutableComponent) message, (ServerPlayer) (Object) this);

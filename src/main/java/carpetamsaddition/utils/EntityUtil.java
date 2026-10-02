@@ -28,7 +28,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class EntityUtil {
     public static Level getEntityWorld(@NotNull Entity entity) {
+        //#if MC>=11800
         return entity.level();
+        //#else
+        //$$ return entity.level;
+        //#endif
     }
 
     public static MinecraftServer getEntityServer(@NotNull Entity entity) {

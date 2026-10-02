@@ -20,21 +20,29 @@
 
 package carpetamsaddition.mixin.hooks.recipe;
 
+//#if MC>12006
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.crafting.RecipeManager;
+import org.spongepowered.asm.mixin.gen.Accessor;
+//#else
+//$$ import carpetamsaddition.utils.compat.DummyInterface;
+//#endif
 //#if MC>=260300
 //$$ import net.minecraft.world.item.crafting.RecipeMap;
 //#endif
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
 
+//#if MC>12006
 @Mixin(RecipeManager.class)
+//#else
+//$$ @Mixin(DummyInterface.class)
+//#endif
 public interface RecipeManagerAccessor {
     //#if MC>=260300
     //$$ @Accessor("recipes")
     //$$ RecipeMap carpet_ams_addition$getRecipeMap();
-    //#else
+    //#elseif MC>12006
     @Accessor("registries")
     HolderLookup.Provider getRegistries();
     //#endif

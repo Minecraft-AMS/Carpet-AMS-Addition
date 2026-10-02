@@ -54,7 +54,11 @@ public abstract class EndSpikeFeatureMixin {
         method= "placeSpike",
         at = @At(
             value = "INVOKE",
+            //#if MC>12006
             target = "Lnet/minecraft/world/entity/EntityType;create(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/EntitySpawnReason;)Lnet/minecraft/world/entity/Entity;"
+            //#else
+            //$$ target = "Lnet/minecraft/world/entity/EntityType;create(Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/entity/Entity;"
+            //#endif
         ),
         cancellable = true
     )

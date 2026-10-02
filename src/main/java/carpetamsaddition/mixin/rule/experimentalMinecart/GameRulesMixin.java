@@ -32,6 +32,9 @@ import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21.2")
 @Mixin(value = GameRules.class, priority = 168)
 public abstract class GameRulesMixin {
     @WrapOperation(

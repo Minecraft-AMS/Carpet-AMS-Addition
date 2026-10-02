@@ -48,10 +48,11 @@ import static net.minecraft.commands.Commands.literal;
 
 public class LeaderCommandRegistry {
     private static final Translator tr = new Translator("command.leader");
+    private static final int GLOWING_TIME = (int) Double.POSITIVE_INFINITY;
     private static final Set<Integer> suggestionIntervalOptions = ImmutableSet.of(20, 40, 80, 160, 320, 640, -1024);
     private static final Map<UUID, Integer> PLAYER_TICK_INTERVAL = new ConcurrentHashMap<>();
     private static final Map<UUID, Integer> PLAYER_TICK_COUNTER = new ConcurrentHashMap<>();
-    public static final MobEffectInstance HIGH_LIGHT = new MobEffectInstance(MobEffects.GLOWING, MobEffectInstance.INFINITE_DURATION);
+    public static final MobEffectInstance HIGH_LIGHT = new MobEffectInstance(MobEffects.GLOWING, GLOWING_TIME);
     public static final Map<String, UUID> LEADER_MAP = new ConcurrentHashMap<>();
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -246,7 +247,12 @@ public class LeaderCommandRegistry {
         }
 
         if (LeaderCommandRegistry.LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(player))) {
-            player.addEffect(LeaderCommandRegistry.HIGH_LIGHT, player);
+            player.addEffect(
+                LeaderCommandRegistry.HIGH_LIGHT
+                //#if MC>=11700
+                , player
+                //#endif
+            );
         }
     }
 

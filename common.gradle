@@ -85,7 +85,7 @@ loom {
 	runConfigs.all {
 		// to make sure it generates all "Minecraft Client (:subproject_name)" applications
 		ideConfigGenerated = true
-		runDir '../../run'
+		runDir "../../run/${project.name}"
 		vmArgs '-Dmixin.debug.export=true'
 	}
 
@@ -177,6 +177,7 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+	toolchain.languageVersion = JavaLanguageVersion.of(Math.max(21, JAVA_VERSION.ordinal() + 1))
 	sourceCompatibility = JAVA_VERSION
 	targetCompatibility = JAVA_VERSION
 }

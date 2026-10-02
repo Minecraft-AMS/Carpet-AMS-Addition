@@ -43,7 +43,7 @@ public class RequestClientModVersionPayload_C2S extends AMS_CustomPayload {
 
     public RequestClientModVersionPayload_C2S(FriendlyByteBuf buf) {
         super(ID);
-        this.version = buf.readUtf();
+        this.version = NetworkUtil.readBufString(buf);
         this.uuid = buf.readUUID();
     }
 

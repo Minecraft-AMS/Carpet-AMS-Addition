@@ -31,7 +31,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public record DimensionWrapper(ResourceKey<@NotNull Level> dimensionType) {
+public class DimensionWrapper {
+    private final ResourceKey<@NotNull Level> dimensionType;
+
+    public DimensionWrapper(ResourceKey<@NotNull Level> dimensionType) {
+        this.dimensionType = dimensionType;
+    }
     public static DimensionWrapper of(ResourceKey<@NotNull Level> dimensionType) {
         return new DimensionWrapper(dimensionType);
     }
@@ -68,6 +73,11 @@ public record DimensionWrapper(ResourceKey<@NotNull Level> dimensionType) {
 
         DimensionWrapper that = (DimensionWrapper) o;
         return Objects.equals(dimensionType, that.dimensionType);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.dimensionType.hashCode();
     }
 
     public String getIdentifierString() {

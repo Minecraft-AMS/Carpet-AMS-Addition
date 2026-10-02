@@ -32,7 +32,11 @@ import com.google.common.collect.Sets;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+//#if MC<11904
+//$$ import net.minecraft.network.chat.TranslatableComponent;
+//#else
 import net.minecraft.network.chat.contents.TranslatableContents;
+//#endif
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -86,7 +90,7 @@ public class AMSTranslations {
         return translation;
     }
 
-    @SuppressWarnings({"unchecked", "IfCanBeSwitch"})
+    @SuppressWarnings({"unchecked"})
     private static void buildTranslationMap(Map<String, String> translation, Map<String, Object> yaml, String prefix) {
         yaml.forEach((key, value) -> {
             String fullKey = prefix.isEmpty() ? key : prefix + "." + key;
@@ -121,7 +125,7 @@ public class AMSTranslations {
             return text;
         }
 
-        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS();
+        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
         String serverLang = AMSTranslations.getServerLanguage();
 
         if (CarpetAMSAdditionSettings.amsTranslationMode == CarpetAMSAdditionSettings.translationModes.SERVER) {
@@ -133,7 +137,13 @@ public class AMSTranslations {
 
     @NotNull
     private static MutableComponent translateTextComponent(@NotNull MutableComponent text, String lang) {
-        if (text.getContents() instanceof TranslatableContents translatableContents) {
+        //#if MC>=11904
+        if (text.getContents() instanceof TranslatableContents) {
+            TranslatableContents translatableContents = (TranslatableContents) text.getContents();
+        //#else
+        //$$ if (text instanceof TranslatableComponent) {
+        //$$     TranslatableComponent translatableContents = (TranslatableComponent) text;
+        //#endif
 
             String key = translatableContents.getKey();
 
@@ -148,8 +158,8 @@ public class AMSTranslations {
                         Object[] translatedArgs = new Object[args.length];
 
                         for (int i = 0; i < args.length; i++) {
-                            if (args[i] instanceof MutableComponent argComponent) {
-                                translatedArgs[i] = translateTextComponent(argComponent, lang);
+                            if (args[i] instanceof MutableComponent) {
+                                translatedArgs[i] = translateTextComponent((MutableComponent) args[i], lang);
                             } else {
                                 translatedArgs[i] = args[i];
                             }
@@ -158,11 +168,12 @@ public class AMSTranslations {
                         translated = String.format(translated, translatedArgs);
                     }
 
-                    MutableComponent newComponent = Messenger.s(translated).setStyle(text.getStyle());
+                    MutableComponent newComponent = Messenger.style(Messenger.s(translated), text.getStyle());
+                    newComponent.getSiblings().clear();
 
                     for (Component sibling : text.getSiblings()) {
-                        if (sibling instanceof MutableComponent mutableSibling) {
-                            newComponent.append(translateTextComponent(mutableSibling, lang));
+                        if (sibling instanceof MutableComponent) {
+                            newComponent.append(translateTextComponent((MutableComponent) sibling, lang));
                         } else {
                             newComponent.append(sibling);
                         }
@@ -177,8 +188,8 @@ public class AMSTranslations {
         result.getSiblings().clear();
 
         for (Component sibling : text.getSiblings()) {
-            if (sibling instanceof MutableComponent mutableSibling) {
-                result.append(translateTextComponent(mutableSibling, lang));
+            if (sibling instanceof MutableComponent) {
+                result.append(translateTextComponent((MutableComponent) sibling, lang));
             } else {
                 result.append(sibling);
             }

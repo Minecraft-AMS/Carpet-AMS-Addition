@@ -21,14 +21,31 @@
 package carpetamsaddition.network;
 
 import carpetamsaddition.network.payloads.AMS_UnknownPayload;
+import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
+//#if MC<12005
+//$$ import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+//$$ import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+//$$ import carpetamsaddition.mixin.network.CustomPayloadC2SPacketAccessor;
+//$$ import carpetamsaddition.mixin.network.CustomPayloadS2CPacketAccessor;
+//#endif
 
 import java.util.function.Function;
 
 public class AMS_PayloadCodec {
+    //#if MC<12005
+    //$$ protected static AMS_CustomPayload decode(ServerboundCustomPayloadPacket packet) {
+    //$$     return decodePayload(((CustomPayloadC2SPacketAccessor) packet).getData());
+    //$$ }
+
+    //$$ protected static AMS_CustomPayload decode(ClientboundCustomPayloadPacket packet) {
+    //$$     return decodePayload(((CustomPayloadS2CPacketAccessor) packet).getData());
+    //$$ }
+    //#endif
+
     protected static AMS_CustomPayload decodePayload(FriendlyByteBuf buf) {
-        String packetId = buf.readUtf();
+        String packetId = NetworkUtil.readBufString(buf);
         Function<FriendlyByteBuf, AMS_CustomPayload> constructor = AMS_PayloadManager.PAYLOAD_REGISTRY.get(packetId);
 
         if (constructor != null) {

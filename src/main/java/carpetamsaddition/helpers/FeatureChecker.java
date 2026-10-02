@@ -23,15 +23,20 @@ package carpetamsaddition.helpers;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.server.MinecraftServer;
+//#if MC>12006
 import net.minecraft.world.flag.FeatureFlags;
+//#endif
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FeatureChecker {
+    //#if MC>12006
     public static final AtomicBoolean EX_MINECART_FEATURE = new AtomicBoolean(false);
+    //#endif
 
+    //#if MC>12006
     public static boolean hasMinecartImprovements(@Nullable MinecraftServer server) {
         if (MinecraftServerUtil.serverIsRunning(server)) {
             return server.getWorldData().getDataConfiguration().enabledFeatures().contains(FeatureFlags.MINECART_IMPROVEMENTS);
@@ -39,4 +44,5 @@ public class FeatureChecker {
 
         return false;
     }
+    //#endif
 }

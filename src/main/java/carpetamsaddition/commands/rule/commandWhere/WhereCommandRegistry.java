@@ -28,6 +28,7 @@ import carpetamsaddition.utils.*;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -53,14 +54,14 @@ public class WhereCommandRegistry {
             .then(argument("player", EntityArgument.player())
             .executes(context -> sendMessage(
                 context.getSource().getServer(),
-                context.getSource().getPlayerOrException(),
+                context.getSource().getPlayer(),
                 EntityArgument.getPlayer(context, "player")
             )))
         );
     }
 
     private static int sendMessage(MinecraftServer minecraftServer, Player senderPlayer, Player targetPlayer) {
-        Messenger.tell(senderPlayer, message(targetPlayer));
+        Messenger.tell(senderPlayer, (MutableComponent) message(targetPlayer));
         sendWhoGetWhoMessage(minecraftServer, senderPlayer, targetPlayer);
         highlightPlayer(targetPlayer);
         return 1;
@@ -69,7 +70,7 @@ public class WhereCommandRegistry {
     // 用于与Leader命令联动
     public static void sendMessage(Player targetPlayer) {
         if (MinecraftServerUtil.serverIsRunning() && targetPlayer != null) {
-            Messenger.sendServerMessage(MinecraftServerUtil.getServer(), message(targetPlayer));
+            Messenger.sendServerMessage(MinecraftServerUtil.getServer(), (MutableComponent) message(targetPlayer));
         }
     }
 
@@ -105,12 +106,12 @@ public class WhereCommandRegistry {
         return otherPos;
     }
 
-    private static MutableComponent message(Player player) {
+    private static Component message(Player player) {
         DimensionWrapper dimension = DimensionWrapper.of(EntityUtil.getEntityWorld(player));
         String playerName = getPlayerName(player);
         String currentPos = getCurrentPos(player);
         String otherPos = getOtherPos(player);
-        MutableComponent message = Messenger.f(Messenger.s("Unknown dimension"), Layout.RED);
+        Component message = Messenger.f(Messenger.s("Unknown dimension"), Layout.RED);
         if (dimension.getValue() == Level.END) {
             message = Messenger.s(
                 String.format("§d[%s] §e%s §b@ §d[ %s ]", tr.tr("the_end").getString(), playerName, currentPos))
@@ -127,7 +128,7 @@ public class WhereCommandRegistry {
         return message;
     }
 
-    private static MutableComponent copyButton(String copyText, Layout buttonColor) {
+    private static Component copyButton(String copyText, Layout buttonColor) {
         String copyCoordText = copyText.replace(",", ""); // 1, 0, -24 -> 1 0 -24
         MutableComponent hoverText = null;
 
@@ -139,8 +140,10 @@ public class WhereCommandRegistry {
             hoverText = tr.tr("nether_button_hover");
         }
 
-        return Messenger.f(Messenger.s(" [C]").setStyle(
-            Messenger.simpleCopyButtonStyle(copyCoordText, Objects.requireNonNull(hoverText), Layout.YELLOW)), Layout.BOLD, buttonColor
+        return Messenger.f(Messenger.style(
+            Messenger.s(" [C]"),
+            Messenger.simpleCopyButtonStyle(copyCoordText, Objects.requireNonNull(hoverText), Layout.YELLOW)
+        ), Layout.BOLD, buttonColor
         );
     }
 }

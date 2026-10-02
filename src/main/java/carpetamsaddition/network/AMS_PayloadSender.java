@@ -22,15 +22,34 @@ package carpetamsaddition.network;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
+//#if MC>=12005
 import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
+//#else
+//$$ import io.netty.buffer.Unpooled;
+//$$ import net.minecraft.network.FriendlyByteBuf;
+//$$ import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+//$$ import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+//#endif
 
 public class AMS_PayloadSender {
     protected static void s2c(AMS_CustomPayload payload, ServerPlayer player) {
+        //#if MC>=12005
         player.connection.send(new ClientboundCustomPayloadPacket(payload));
+        //#else
+        //$$ FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+        //$$ payload.write(buf);
+        //$$ player.connection.send(new ClientboundCustomPayloadPacket(AMS_CustomPayload.CHANNEL_ID, buf));
+        //#endif
     }
 
     protected static void c2s(AMS_CustomPayload payload, LocalPlayer player) {
+        //#if MC>=12005
         player.connection.send(new ServerboundCustomPayloadPacket(payload));
+        //#else
+        //$$ FriendlyByteBuf buf = new FriendlyByteBuf(Unpooled.buffer());
+        //$$ payload.write(buf);
+        //$$ player.connection.send(new ServerboundCustomPayloadPacket(AMS_CustomPayload.CHANNEL_ID, buf));
+        //#endif
     }
 }

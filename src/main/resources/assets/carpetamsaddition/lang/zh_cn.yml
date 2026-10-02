@@ -830,6 +830,12 @@ carpetamsaddition:
       craftableEnchantedGoldenApples:
         name: 可合成附魔金苹果
         desc: 使用老版本的方式来合成附魔金苹果（8金块+1苹果）
+      craftableBundle:
+        name: 可合成收纳袋
+        desc: 玩家可以在Minecraft 1.17/1.18/1.19中合成收纳袋
+      craftableSculkSensor:
+        name: 可合成幽匿感测体
+        desc: 玩家可以在Minecraft 1.17/1.18中合成幽匿感测体
       betterCraftableBoneBlock:
         name: 更好的骨块合成
         desc: 使用9个骨头可以合成出3个骨块(一点都不卡！)
@@ -845,6 +851,9 @@ carpetamsaddition:
       rottenFleshBurnedIntoLeather:
         name: 腐肉烧皮革
         desc: 腐肉可以在熔炉中烧成皮革
+      useNewLodestoneRecipe:
+        name: 使用新的磁石配方
+        desc: 使用铁锭来合成磁石
       craftableCarvedPumpkin:
         name: 可合成南瓜头
         desc: 使用剪刀和南瓜合成南瓜头，每合成一个南瓜头剪刀-1耐久（受耐久附魔影响）

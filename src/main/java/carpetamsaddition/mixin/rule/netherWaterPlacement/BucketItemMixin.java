@@ -26,7 +26,9 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 
 import net.minecraft.world.entity.player.Player;
+//#if MC>12006
 import net.minecraft.world.entity.LivingEntity;
+//#endif
 import net.minecraft.world.item.BucketItem;
 
 import org.jetbrains.annotations.Nullable;
@@ -47,13 +49,25 @@ public abstract class BucketItemMixin {
             //#endif
         )
     )
-        //#if MC>=12111
-        private Object netherWaterPlacement(Object original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
+    //#if MC>=12111
+    private Object netherWaterPlacement(
+        Object original,
+    //#else
+    //$$ private boolean netherWaterPlacement(
+    //$$     boolean original,
+    //#endif
+        //#if MC>12006
+        @Local(argsOnly = true) @Nullable LivingEntity entity
         //#else
-        //$$ private boolean netherWaterPlacement(boolean original, @Local(argsOnly = true) @Nullable LivingEntity entity) {
+        //$$ @Local(argsOnly = true) @Nullable Player player
         //#endif
+    ) {
         if (CarpetAMSAdditionSettings.netherWaterPlacement) {
+            //#if MC>12006
             if (entity instanceof Player) {
+            //#else
+            //$$ if (player != null) {
+            //#endif
                 return false;
             }
         }

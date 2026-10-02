@@ -31,18 +31,30 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+//#if MC>12002
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#else
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#endif
 
 @Mixin(ShulkerBoxBlock.class)
 public abstract class ShulkerBoxBlockMixin {
     @Inject(method = "playerWillDestroy", at = @At("HEAD"), cancellable = true)
     private void onBreak(
         Level world, BlockPos pos, BlockState state, Player player,
+        //#if MC>12002
         CallbackInfoReturnable<BlockState> cir
+        //#else
+        //$$ CallbackInfo ci
+        //#endif
     ) {
         if (CarpetAMSAdditionSettings.creativeShulkerBoxDropsDisabled && player.isCreative()) {
             world.destroyBlock(pos, false);
+            //#if MC>12002
             cir.cancel();
+            //#else
+            //$$ ci.cancel();
+            //#endif
         }
     }
 }

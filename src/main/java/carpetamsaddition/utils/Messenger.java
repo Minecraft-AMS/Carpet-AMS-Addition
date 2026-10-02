@@ -22,8 +22,8 @@ package carpetamsaddition.utils;
 
 import carpetamsaddition.utils.MessageTextEventUtils.ClickEventUtil;
 import carpetamsaddition.utils.MessageTextEventUtils.HoverEventUtil;
+import carpetamsaddition.utils.compat.MessengerCompatFactory;
 
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.MinecraftServer;
@@ -39,11 +39,11 @@ import java.util.Objects;
 
 public class Messenger {
     public static MutableComponent c(Object... fields) {
-        return (MutableComponent) carpet.utils.Messenger.c(fields);
+        return MessengerCompatFactory.carpetCompoundText(fields);
     }
 
     public static MutableComponent s(Object text) {
-        return Component.literal(text.toString());
+        return MessengerCompatFactory.literalText(text.toString());
     }
 
     @NotNull
@@ -54,20 +54,31 @@ public class Messenger {
             chatFormattings[i] = formattings[i].getFormatting();
         }
 
-        return text.withStyle(chatFormattings);
+        text.withStyle(chatFormattings);
+        return text;
     }
 
     public static MutableComponent tr(String key, Object... args) {
-        return Component.translatable(key, args);
+        return MessengerCompatFactory.translatableText(key, args);
     }
 
     @NotNull
     public static MutableComponent copy(MutableComponent text) {
+        //#if MC<11904
+        //$$ return (BaseComponent) text.copy();
+        //#else
         return text.copy();
+        //#endif
+    }
+
+    @NotNull
+    public static MutableComponent style(MutableComponent text, Style style) {
+        text.setStyle(style);
+        return text;
     }
 
     private static void __tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
-        source.sendSuccess(() -> text, broadcastToOps);
+        MessengerCompatFactory.sendFeedback(source, text, broadcastToOps);
     }
 
     public static void tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
@@ -79,19 +90,15 @@ public class Messenger {
     }
 
     public static void tell(ServerPlayer player, MutableComponent text, Boolean overlay) {
-        player.sendSystemMessage(text, overlay);
+        MessengerCompatFactory.sendPlayerMessage(player, text, overlay);
     }
 
     public static void tell(ServerPlayer player, MutableComponent text) {
-        player.sendSystemMessage(text, false);
+        MessengerCompatFactory.sendPlayerMessage(player, text, false);
     }
 
     public static void tell(Player player, MutableComponent text) {
-        //#if MC>=260000
-        //$$ player.sendSystemMessage(text);
-        //#else
-        player.displayClientMessage(text, false);
-        //#endif
+        MessengerCompatFactory.sendPlayerMessage(player, text);
     }
 
     @NotNull
@@ -115,7 +122,7 @@ public class Messenger {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
 
         if (!onlyToPlayer) {
-            server.sendSystemMessage(text);
+            MessengerCompatFactory.sendServerMessage(server, text);
         }
 
         MinecraftServerUtil.getOnlinePlayers().forEach(player -> tell(player, text));

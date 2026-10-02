@@ -74,7 +74,11 @@ public class GetSaveSizeCommandRegistry {
 
     private static void saveWorld(CommandSourceStack source, MinecraftServer server) {
         if (server != null) {
+            //#if MC>=11800
             boolean saveAllSuccess = server.saveEverything(false, true, true);
+            //#else
+            //$$ boolean saveAllSuccess = server.saveAllChunks(false, true, true);
+            //#endif
             MutableComponent message = saveAllSuccess ? tr.tr("save_success_msg") : tr.tr("save_fail_msg");
             Messenger.tell(source, Messenger.f(message, Layout.GRAY));
         }

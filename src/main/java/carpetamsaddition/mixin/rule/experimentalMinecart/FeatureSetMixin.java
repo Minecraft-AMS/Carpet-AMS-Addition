@@ -32,6 +32,9 @@ import net.minecraft.world.flag.FeatureFlags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21.2")
 @Mixin(value = FeatureFlagSet.class, priority = 168)
 public abstract class FeatureSetMixin {
     @ModifyReturnValue(method = "of(Lnet/minecraft/world/flag/FeatureFlag;)Lnet/minecraft/world/flag/FeatureFlagSet;", at = @At("RETURN"))

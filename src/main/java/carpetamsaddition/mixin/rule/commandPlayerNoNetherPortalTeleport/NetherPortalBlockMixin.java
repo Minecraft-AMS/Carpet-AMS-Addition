@@ -39,16 +39,33 @@ import java.util.Objects;
 
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
-    @SuppressWarnings("SimplifiableConditionalExpression")
     @WrapOperation(
         method = "entityInside",
         at = @At(
             value = "INVOKE",
+            //#if MC>12006
             target = "Lnet/minecraft/world/entity/Entity;canUsePortal(Z)Z"
+            //#else
+            //$$ target = "Lnet/minecraft/world/entity/Entity;canChangeDimensions()Z"
+            //#endif
         )
     )
-    private boolean preventPlayerTeleport(Entity entity, boolean canUsePortals, Operation<Boolean> original) {
-        return shouldPreventTeleport(entity) ? false : original.call(entity, canUsePortals);
+    private boolean preventPlayerTeleport(
+        Entity entity,
+        //#if MC>12006
+        boolean canUsePortals,
+        //#endif
+        Operation<Boolean> original
+    ) {
+        if (shouldPreventTeleport(entity)) {
+            return false;
+        }
+
+        //#if MC>12006
+        return original.call(entity, canUsePortals);
+        //#else
+        //$$ return original.call(entity);
+        //#endif
     }
 
     @Unique

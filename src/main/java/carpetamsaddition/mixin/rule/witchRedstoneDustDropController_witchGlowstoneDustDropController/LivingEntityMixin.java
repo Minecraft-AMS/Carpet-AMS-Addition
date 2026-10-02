@@ -21,11 +21,13 @@
 package carpetamsaddition.mixin.rule.witchRedstoneDustDropController_witchGlowstoneDustDropController;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.utils.EntityUtil;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Witch;
+//#if MC>12006
 import net.minecraft.server.level.ServerLevel;
+//#endif
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -38,30 +40,73 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-    @Inject(method = "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V", at = @At("TAIL"))
-    private void customRedstoneDustDrop(CallbackInfo ci) {
+    @Inject(method =
+        //#if MC>12006
+        "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V",
+        //#else
+        //$$ "dropFromLootTable(Lnet/minecraft/world/damagesource/DamageSource;Z)V",
+        //#endif
+        at = @At("TAIL")
+    )
+    private void customRedstoneDustDrop(
+        //#if MC>12006
+        ServerLevel world,
+        //#endif
+        DamageSource source, boolean causedByPlayer, CallbackInfo ci
+    ) {
         if (CarpetAMSAdditionSettings.witchRedstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
-            ServerLevel world = (ServerLevel) EntityUtil.getEntityWorld(livingEntity);
             int redstoneCount = CarpetAMSAdditionSettings.witchRedstoneDustDropController;
-            compatWitchDropStack(Items.REDSTONE, redstoneCount, world, livingEntity);
+            compatWitchDropStack(Items.REDSTONE, redstoneCount,
+                //#if MC>12006
+                world,
+                //#endif
+                livingEntity
+            );
         }
     }
 
-    @Inject(method = "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V", at = @At("TAIL"))
-    private void customGlowstoneDustDrop(CallbackInfo ci) {
+    @Inject(method =
+        //#if MC>12006
+        "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V",
+        //#else
+        //$$ "dropFromLootTable(Lnet/minecraft/world/damagesource/DamageSource;Z)V",
+        //#endif
+        at = @At("TAIL")
+    )
+    private void customGlowstoneDustDrop(
+        //#if MC>12006
+        ServerLevel world,
+        //#endif
+        DamageSource source, boolean causedByPlayer, CallbackInfo ci
+    ) {
         if (CarpetAMSAdditionSettings.witchGlowstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
-            ServerLevel world = (ServerLevel) EntityUtil.getEntityWorld(livingEntity);
             int glowstoneCount = CarpetAMSAdditionSettings.witchGlowstoneDustDropController;
-            compatWitchDropStack(Items.GLOWSTONE_DUST, glowstoneCount, world, livingEntity);
+            compatWitchDropStack(Items.GLOWSTONE_DUST, glowstoneCount,
+                //#if MC>12006
+                world,
+                //#endif
+                livingEntity
+            );
         }
     }
 
     @Unique
-    private static void compatWitchDropStack(Item item, int count, ServerLevel world, LivingEntity livingEntity) {
+    private static void compatWitchDropStack(
+        Item item, int count,
+        //#if MC>12006
+        ServerLevel world,
+        //#endif
+        LivingEntity livingEntity
+    ) {
         if (livingEntity instanceof Witch) {
-            livingEntity.spawnAtLocation(world, new ItemStack(item, count));
+            livingEntity.spawnAtLocation(
+                //#if MC>12006
+                world,
+                //#endif
+                new ItemStack(item, count)
+            );
         }
     }
 }

@@ -1,24 +1,24 @@
 
-### commandPlayerChunkLoadController
+## commandPlayerChunkLoadController
 
 - **/playerChunkLoading [true/false]**
 
   Control chunk loading of player. Can only manipulate yourself.
 
 
-### commandAnvilInteractionDisabled
+## commandAnvilInteractionDisabled
 
 - **/anvilInteractionDisabled [true/false]**
 
   Controls whether the player can interact with the anvil.
 
-### amsUpdateSuppressionCrashFix
+## amsUpdateSuppressionCrashFix
 
 - **/amsUpdateSuppressionCrashFixForceMode [true/false]**
 
   Control whether forced startup is enabled when the `customBlockUpdateSuppressor`  rule is enabled.
 
-### commandCustomBlockBlastResistance
+## commandCustomBlockBlastResistance
 
 - **/customBlockBlastResistance set &lt;block&gt; &lt;resistance&gt;**
 
@@ -48,19 +48,19 @@
 
   View the usage instructions.
 
-### commandHere
+## commandHere
 
 - **/here**
 
   send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect.
 
-### commandWhere
+## commandWhere
 
 - **/where**
 
   get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect.
 
-### commandPlayerLeader
+## commandPlayerLeader
 
 - **/leader add &lt;player&gt;**
 
@@ -96,7 +96,7 @@
 
   View the usage instructions.
 
-### commandPacketInternetGroper
+## commandPacketInternetGroper
 
 - **/pings &lt;targetIpOrDomainName&gt; &lt;pingQuantity&gt;**
 
@@ -108,19 +108,19 @@
 
   Interrupt the ping operation.
 
-### commandGetSaveSize
+## commandGetSaveSize
 
 - **/getSaveSize**
 
   Get save size.
 
-### commandGetSystemInfo
+## commandGetSystemInfo
 
 - **/getSystemInfo**
 
   Get the system information of the server.
 
-### commandGoto
+## commandGoto
 
 - **/goto &lt;dimension&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt;**
 
@@ -132,7 +132,7 @@
 
   Teleport to the corresponding coordinates of the current player location.
 
-### commandCustomCommandPermissionLevel
+## commandCustomCommandPermissionLevel
 
 - **/customCommandPermissionLevel set &lt;command&gt; &lt;permissionLevel&gt;**
 
@@ -168,13 +168,13 @@
 
   View the usage instructions.
 
-### commandGetPlayerSkull
+## commandGetPlayerSkull
 
 - **/getPlayerSkull &lt;player&gt; &lt;count&gt;**
 
   Get the skull of a specified player.
 
-### commandCustomMovableBlock
+## commandCustomMovableBlock
 
 - **/customMovableBlock add &lt;block&gt;**
 
@@ -204,13 +204,13 @@
 
   View the usage instructions.
 
-### commandGetHeldItemID
+## commandGetHeldItemID
 
 - **/getHeldItemID**
 
   Get item ID of the player main hand item.
 
-### commandCustomAntiFireItems
+## commandCustomAntiFireItems
 
 - **/customAntiFireItems add &lt;item&gt;**
 
@@ -240,13 +240,13 @@
 
   View the usage instructions.
 
-### commandCarpetExtensionModWikiHyperlink
+## commandCarpetExtensionModWikiHyperlink
 
 - **/carpetExtensionModWikiHyperlink &lt;ExtensionName&gt;**
 
   Get the Wiki link for a carpet extension mod.
 
-### commandCustomBlockHardness
+## commandCustomBlockHardness
 
 - **/customBlockHardness set &lt;block&gt; &lt;hardness&gt;** 
 
@@ -282,13 +282,13 @@
 
   View the usage instructions.
 
-### commandAtSomeOnePlayer
+## commandAtSomeOnePlayer
 
 - **/@ &lt;player&gt;**
 
   @ some one player.
 
-### commandGetClientPlayerFps
+## commandGetClientPlayerFps
 
 - **/getClientPlayerFps &lt;player**&gt;
 
@@ -300,7 +300,7 @@
 
   View the usage instructions.
 
-### commandSetPlayerPose
+## commandSetPlayerPose
 
 - **/playerPose &lt;player&gt; set &lt;pose&gt;**
 
@@ -320,7 +320,7 @@
 
 
 
-### commandPlayerNoNetherPortalTeleport
+## commandPlayerNoNetherPortalTeleport
 
 - **/playerNoNetherPortalTeleport globalMode [true/false]**
 

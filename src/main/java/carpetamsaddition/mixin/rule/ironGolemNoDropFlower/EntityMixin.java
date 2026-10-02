@@ -33,7 +33,15 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @ModifyVariable(method = "spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(
+        //#if MC>12006
+        method = "spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;",
+        //#else
+        //$$ method = "spawnAtLocation(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;",
+        //#endif
+        at = @At("HEAD"),
+        argsOnly = true
+    )
     private ItemStack noDropPoppy(ItemStack itemStack) {
         Entity entity = (Entity) (Object) this;
         if (CarpetAMSAdditionSettings.ironGolemNoDropFlower && entity instanceof IronGolem && itemStack.getItem().equals(Items.POPPY)) {

@@ -24,7 +24,9 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.CommandHelper;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
+//#if MC>=12102
 import java.util.Set;
+//#endif
 
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -59,12 +61,22 @@ public class GotoCommandRegistry {
         int x = destinationPos.getX();
         int y = destinationPos.getY();
         int z = destinationPos.getZ();
+        //#if MC>=12102
         player.teleportTo(targetDimension, x, y, z, Set.of(), player.getViewXRot(1), 1, false);
+        //#else
+        //$$ player.teleportTo(targetDimension, x, y, z, player.getViewYRot(1), player.getViewXRot(1));
+        //#endif
         return 1;
     }
 
     private static int executeSimpleTeleport(ServerPlayer player, ServerLevel targetWorld) {
-        DimensionWrapper currentDimension = DimensionWrapper.of(player.level());
+        DimensionWrapper currentDimension = DimensionWrapper.of(
+            //#if MC>=12006
+            player.level()
+            //#else
+            //$$ player.level
+            //#endif
+        );
         DimensionWrapper targetDimension = DimensionWrapper.of(targetWorld);
         return executeTeleport(player, targetWorld, calculatePos(player, currentDimension, targetDimension));
     }

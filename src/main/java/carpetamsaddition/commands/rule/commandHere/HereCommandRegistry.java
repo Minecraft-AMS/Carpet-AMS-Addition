@@ -29,6 +29,7 @@ import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.Messenger;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -52,13 +53,13 @@ public class HereCommandRegistry {
             .executes(context -> sendMessage(
                 context.getSource(),
                 context.getSource().getServer(),
-                context.getSource().getPlayerOrException()
+                context.getSource().getPlayer()
             ))
         );
     }
 
     private static int sendMessage(CommandSourceStack source, MinecraftServer minecraftServer, Player player) {
-        Messenger.sendServerMessage(minecraftServer, message(source));
+        Messenger.sendServerMessage(minecraftServer, (MutableComponent) message(source));
         highlightPlayer(player);
         return 1;
     }
@@ -91,13 +92,13 @@ public class HereCommandRegistry {
     }
 
     @SuppressWarnings("DuplicatedCode")
-    private static MutableComponent message(CommandSourceStack source) {
+    private static Component message(CommandSourceStack source) {
 
         DimensionWrapper dimension = DimensionWrapper.of(source.getLevel());
         String playerName = getPlayerName(source);
         String currentPos = getCurrentPos(source);
         String otherPos = getOtherPos(source);
-        MutableComponent message = Messenger.f(Messenger.s("Unknown dimension"), Layout.RED);
+        Component message = Messenger.f(Messenger.s("Unknown dimension"), Layout.RED);
 
         if (dimension.getValue() == Level.END) {
             message = Messenger.s(
@@ -116,7 +117,7 @@ public class HereCommandRegistry {
         return message;
     }
 
-    private static MutableComponent copyButton(String copyText, Layout buttonColor) {
+    private static Component copyButton(String copyText, Layout buttonColor) {
         String copyCoordText = copyText.replace(",", ""); // 1, 0, -24 -> 1 0 -24
         MutableComponent hoverText = null;
 
@@ -128,8 +129,10 @@ public class HereCommandRegistry {
             hoverText = tr.tr("nether_button_hover");
         }
 
-        return Messenger.f(Messenger.s(" [C]").setStyle(
-            Messenger.simpleCopyButtonStyle(copyCoordText, Objects.requireNonNull(hoverText), Layout.YELLOW)), Layout.BOLD, buttonColor
+        return Messenger.f(Messenger.style(
+            Messenger.s(" [C]"),
+            Messenger.simpleCopyButtonStyle(copyCoordText, Objects.requireNonNull(hoverText), Layout.YELLOW)
+        ), Layout.BOLD, buttonColor
         );
     }
 }

@@ -26,14 +26,26 @@ import org.jetbrains.annotations.NotNull;
 
 public class CarpetUtil {
     public static String getRuleName(@NotNull CarpetRule<?> rule) {
+        //#if MC>=11904
         return rule.name();
+        //#else
+        //$$ return rule.name;
+        //#endif
     }
 
     public static String getRuleDefaultValue(@NotNull CarpetRule<?> rule) {
+        //#if MC>=11904
         return String.valueOf(rule.defaultValue());
+        //#else
+        //$$ return rule.defaultAsString;
+        //#endif
     }
 
     public static String getRuleCurrentValue(@NotNull CarpetRule<?> rule) {
+        //#if MC>=11904
         return String.valueOf(rule.value());
+        //#else
+        //$$ return rule.getAsString();
+        //#endif
     }
 }

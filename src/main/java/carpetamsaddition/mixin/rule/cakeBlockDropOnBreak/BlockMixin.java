@@ -34,13 +34,24 @@ import net.minecraft.world.level.Level;
 
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+//#if MC>12002
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#else
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#endif
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(Block.class)
 public abstract class BlockMixin {
     @Inject(method = "playerWillDestroy", at = @At("HEAD"))
-    private void onBreak(Level world, BlockPos pos, BlockState state, Player player, CallbackInfoReturnable<BlockState> cir) {
+    private void onBreak(
+        Level world, BlockPos pos, BlockState state, Player player,
+        //#if MC>12002
+        CallbackInfoReturnable<BlockState> cir
+        //#else
+        //$$ CallbackInfo ci
+        //#endif
+    ) {
         if (CarpetAMSAdditionSettings.cakeBlockDropOnBreak && state.getBlock() == Blocks.CAKE && state.getValue(CakeBlock.BITES) == 0) {
             if (!player.isCreative()) {
                 ItemStack cakeStack = new ItemStack(Items.CAKE);

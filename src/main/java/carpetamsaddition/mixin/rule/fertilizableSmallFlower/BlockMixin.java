@@ -27,32 +27,39 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+//#if MC>11605
 import net.minecraft.world.level.block.SporeBlossomBlock;
+//#endif
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.core.BlockPos;
+//#if MC>=11904
 import net.minecraft.world.level.LevelReader;
+//#else
+//$$ import net.minecraft.world.level.BlockGetter;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(FlowerBlock.class)
 public abstract class BlockMixin implements BonemealableBlock{
     @Override
-    public boolean isValidBonemealTarget(
-        LevelReader reader, BlockPos pos, BlockState state
-        //#if MC>=260300
-        //$$ , BonemealSource bonemealSource
-        //#endif
-    ) {
-        if (CarpetAMSAdditionSettings.fertilizableSmallFlower && (state.getBlock() instanceof FlowerBlock || state.getBlock() instanceof SporeBlossomBlock)) {
-            return true;
-        }
-
-        //#if MC>=260300
-        //$$ return this.isValidBonemealTarget(reader, pos, state, bonemealSource);
-        //#else
-        return this.isValidBonemealTarget(reader, pos, state);
-        //#endif
+    //#if MC>=260300
+    //$$ public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, BonemealSource bonemealSource) {
+    //#elseif MC>=12002
+    public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state) {
+    //#elseif MC>=11904
+    //$$ public boolean isValidBonemealTarget(LevelReader reader, BlockPos pos, BlockState state, boolean isClient) {
+    //#else
+    //$$ public boolean isValidBonemealTarget(BlockGetter reader, BlockPos pos, BlockState state, boolean isClient) {
+    //#endif
+        return
+            CarpetAMSAdditionSettings.fertilizableSmallFlower &&
+            //#if MC>11605
+            (state.getBlock() instanceof FlowerBlock || state.getBlock() instanceof SporeBlossomBlock);
+            //#else
+            //$$ state.getBlock() instanceof FlowerBlock;
+            //#endif
     }
 
     @Override
@@ -62,14 +69,13 @@ public abstract class BlockMixin implements BonemealableBlock{
         //$$ , BonemealSource bonemealSource
         //#endif
     ) {
-        if (CarpetAMSAdditionSettings.fertilizableSmallFlower && (state.getBlock() instanceof FlowerBlock || state.getBlock() instanceof SporeBlossomBlock)) {
-            return true;
-        }
-        //#if MC>=260300
-        //$$ return this.isBonemealSuccess(level, randomSource, pos, state, bonemealSource);
-        //#else
-        return this.isBonemealSuccess(level, randomSource, pos, state);
-        //#endif
+        return
+            CarpetAMSAdditionSettings.fertilizableSmallFlower &&
+            //#if MC>11605
+            (state.getBlock() instanceof FlowerBlock || state.getBlock() instanceof SporeBlossomBlock);
+            //#else
+            //$$ state.getBlock() instanceof FlowerBlock;
+            //#endif
     }
 
     @Override
@@ -79,14 +85,15 @@ public abstract class BlockMixin implements BonemealableBlock{
         //$$ , BonemealSource bonemealSource
         //#endif
     ) {
-        if (CarpetAMSAdditionSettings.fertilizableSmallFlower && (state.getBlock() instanceof FlowerBlock || state.getBlock() instanceof SporeBlossomBlock)) {
-            Block.popResource(level, pos, new ItemStack(state.getBlock(), 1));
-        } else {
-            //#if MC>=260300
-            //$$ this.performBonemeal(level, randomSource, pos, state, bonemealSource);
+        if (
+            CarpetAMSAdditionSettings.fertilizableSmallFlower &&
+            //#if MC>11605
+            (state.getBlock() instanceof FlowerBlock || state.getBlock() instanceof SporeBlossomBlock)
             //#else
-            this.performBonemeal(level, randomSource, pos, state);
+            //$$ state.getBlock() instanceof FlowerBlock
             //#endif
+        ) {
+            Block.popResource(level, pos, new ItemStack(state.getBlock(), 1));
         }
     }
 }

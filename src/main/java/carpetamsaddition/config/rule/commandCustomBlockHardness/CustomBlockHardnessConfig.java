@@ -62,7 +62,14 @@ public class CustomBlockHardnessConfig extends AbstractMapJsonConfig<String, Flo
         targetMap.clear();
         storageMap.forEach((blockId, hardness) -> {
             try {
-                BuiltInRegistries.BLOCK.get(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().defaultBlockState()).ifPresent(state -> targetMap.put(state, hardness));
+                //#if MC>=12102
+                BlockState state = BuiltInRegistries.BLOCK.get(IdentifierUtil.ofId(blockId)).map(entry -> entry.value().defaultBlockState()).orElse(null);
+                //#else
+                //$$ BlockState state = BuiltInRegistries.BLOCK.get(IdentifierUtil.ofId(blockId)).defaultBlockState();
+                //#endif
+                if (state != null) {
+                    targetMap.put(state, hardness);
+                }
             } catch (Exception e) {
                 CarpetAMSAdditionServer.LOGGER.error("Invalid block ID: {}", blockId, e);
             }

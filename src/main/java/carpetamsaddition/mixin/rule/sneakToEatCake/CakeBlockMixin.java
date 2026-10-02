@@ -38,17 +38,30 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(CakeBlock.class)
 public abstract class CakeBlockMixin {
     @WrapOperation(
+        //#if MC>=12005
         method = "useWithoutItem",
+        //#else
+        //$$ method = "use",
+        //#endif
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/level/block/CakeBlock;eat(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/InteractionResult;"
         )
     )
-    private InteractionResult tryEat(LevelAccessor world, BlockPos pos, BlockState state, Player player, Operation<InteractionResult> original) {
+    private InteractionResult tryEat(
+        //#if MC<11700
+        //$$ CakeBlock cake,
+        //#endif
+        LevelAccessor world, BlockPos pos, BlockState state, Player player, Operation<InteractionResult> original
+    ) {
         if (CarpetAMSAdditionSettings.sneakToEatCake && !player.isShiftKeyDown()) {
             return InteractionResult.FAIL;
         } else {
+            //#if MC<11700
+            //$$ return original.call(cake, world, pos, state, player);
+            //#else
             return original.call(world, pos, state, player);
+            //#endif
         }
     }
 }

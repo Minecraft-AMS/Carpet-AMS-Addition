@@ -19,7 +19,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v5
@@ -62,8 +62,11 @@ jobs:
         if: ${{ inputs.mixin_audit }}
         timeout-minutes: 10
         run: |
-          mkdir -p ./run
-          echo eula=true > ./run/eula.txt
+          for version_dir in versions/*/; do
+            run_dir="./run/$(basename "$version_dir")"
+            mkdir -p "$run_dir"
+            echo eula=true > "$run_dir/eula.txt"
+          done
           ./gradlew runMixinAudit
 
       - name: Publish with gradle

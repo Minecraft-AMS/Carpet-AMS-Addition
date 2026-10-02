@@ -20,7 +20,7 @@
 
 package carpetamsaddition;
 
-import carpet.api.settings.Rule;
+import carpetamsaddition.settings.Rule;
 
 import carpetamsaddition.observers.NeedRestartServerOrClientObserver;
 import carpetamsaddition.settings.MustSetDefault;
@@ -212,17 +212,23 @@ public class CarpetAMSAdditionSettings {
     )
     public static double maxPlayerEntityInteractionRange = -1.0D;
 
+    //#if MC>=12005
+    @GameVersion(version = "Minecraft >= 1.20.5")
     @Rule(
         options = {"server", "global"},
         categories = {AMS, FEATURE, SURVIVAL}
     )
     public static String maxPlayerBlockInteractionRangeScope = "server";
+    //#endif
 
+    //#if MC>=12005
+    @GameVersion(version = "Minecraft >= 1.20.5")
     @Rule(
         options = {"server", "global"},
         categories = {AMS, FEATURE, SURVIVAL}
     )
     public static String maxPlayerEntityInteractionRangeScope = "server";
+    //#endif
 
     @Rule(
         options = {"-1"},
@@ -384,8 +390,10 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean fertilizableSmallFlower = false;
 
+    //#if MC>=11701
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean safePointedDripstone = false;
+    //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean pointedDripstoneCollisionBoxDisabled = false;
@@ -402,6 +410,8 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean ironGolemNoDropFlower = false;
 
+    //#if MC>=12000
+    @GameVersion(version = "Minecraft >= 1.20")
     @Rule(
         options = {"0"},
         categories = {AMS, FEATURE, SURVIVAL},
@@ -409,6 +419,7 @@ public class CarpetAMSAdditionSettings {
         strict = false
     )
     public static int easyGetPitcherPod = 0;
+    //#endif
 
     @Rule(
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
@@ -440,6 +451,7 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean headHunter = false;
 
+    //#if MC>=12002
     @GameVersion(version = "Minecraft >= 1.20.2")
     @SuppressWarnings("unused")
     @Rule(
@@ -447,6 +459,7 @@ public class CarpetAMSAdditionSettings {
         validators = StackableDiscountRuleObserver.class
     )
     public static boolean stackableDiscounts = false;
+    //#endif
 
     @Rule(
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
@@ -504,8 +517,11 @@ public class CarpetAMSAdditionSettings {
     )
     public static String commandGetHeldItemID = "false";
 
+    //#if MC>=12102
+    @GameVersion(version = "Minecraft >= 1.21.2")
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean stringDupeReintroduced = false;
+    //#endif
 
     @Rule(
         options = "-1",
@@ -543,9 +559,11 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, COMMAND})
     public static boolean onlyOpCanSpawnRealPlayerInWhitelist = false;
 
+    //#if MC>=12100
     @GameVersion(version = "Minecraft >= 1.21")
     @Rule(categories = {AMS, FEATURE})
     public static boolean itemEntityCreateNetherPortalDisabled = false;
+    //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean powerfulExpMending = false;
@@ -556,34 +574,51 @@ public class CarpetAMSAdditionSettings {
     )
     public static String commandAtSomeOnePlayer = "false";
 
+    //#if MC>=11700
+    @GameVersion(version = "Minecraft >= 1.17")
     @Rule(
         options = {"false", "9x3", "9x6"},
         categories = {AMS, FEATURE, SURVIVAL}
     )
     public static String largeBundle = "false";
+    //#endif
 
+    //#if MC>=11900
+    @GameVersion(version = "Minecraft >= 1.19")
     @Rule(
         options = {"-1", "100000", "200000", "300000"},
         categories = {AMS, FEATURE, EXPERIMENTAL},
         strict = false
     )
     public static int maxChainUpdateDepth = -1;
+    //#endif
 
     @Rule(categories = {AMS, SURVIVAL})
     public static boolean phantomSpawnAlert = false;
 
+    //#if MC>=12005
+    @GameVersion(version = "Minecraft >= 1.20.5")
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean endPortalChunkLoadDisabled = false;
+    //#endif
 
+    //#if MC>=12100
+    @GameVersion(version = "Minecraft >= 1.21")
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean onlyPlayerCanCreateNetherPortal = false;
+    //#endif
 
+    //#if MC>=12102
+    @GameVersion(version = "Minecraft >= 1.21.2")
     @Rule(categories = {AMS, FEATURE})
-    public static boolean preventServerPause  = false;
+    public static boolean preventServerPause = false;
+    //#endif
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL, CREATIVE})
     public static boolean flippinCactusExtras = false;
 
+    //#if MC>=12102
+    @GameVersion(version = "Minecraft >= 1.21.2")
     @Rule(
         categories = {AMS, FEATURE, EXPERIMENTAL},
         options = {"-1", "1000"},
@@ -591,13 +626,17 @@ public class CarpetAMSAdditionSettings {
         strict = false
     )
     public static int experimentalMinecartSpeed = -1;
+    //#endif
 
+    //#if MC>=12102
+    @GameVersion(version = "Minecraft >= 1.21.2")
     @MustSetDefault
     @Rule(
         categories = {AMS, FEATURE, EXPERIMENTAL},
         validators = NeedRestartServerOrClientObserver.class
     )
     public static boolean experimentalMinecartEnabled = false;
+    //#endif
 
     @Rule(categories = AMS)
     public static translationModes amsTranslationMode = translationModes.CLIENT;
@@ -700,9 +739,12 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean betterCraftableDispenser = false;
 
+    //#if MC>=11700
+    @GameVersion(version = "Minecraft > 1.17")
     @RecipeRule
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean betterCraftablePolishedBlackStoneButton = false;
+    //#endif
 
     @RecipeRule
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
@@ -711,6 +753,27 @@ public class CarpetAMSAdditionSettings {
     @RecipeRule(desc = "Implemented in Mixin")
     @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
     public static boolean craftableCarvedPumpkin = false;
+
+    //#if MC<12105
+    @GameVersion(version = "Minecraft < 1.21.5")
+    @RecipeRule
+    @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    public static boolean useNewLodestoneRecipe = false;
+    //#endif
+
+    //#if MC>=11700 && MC<12102
+    //$$ @GameVersion(version = "Minecraft 1.17 - 1.21.1")
+    //$$ @RecipeRule
+    //$$ @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    //$$ public static boolean craftableBundle = false;
+    //#endif
+
+    //#if MC<11900 && MC>=11700
+    //$$ @GameVersion(version = "Minecraft 1.17 - 1.18")
+    //$$ @RecipeRule
+    //$$ @Rule(categories = {AMS, CRAFTING, SURVIVAL}, validators = RecipeRuleObserver.class)
+    //$$ public static boolean craftableSculkSensor = false;
+    //#endif
 
     public enum blueSkullProbability {
         VANILLA,

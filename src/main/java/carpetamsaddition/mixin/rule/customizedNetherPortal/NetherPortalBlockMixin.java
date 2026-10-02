@@ -27,8 +27,13 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.core.BlockPos;
+//#if MC>=12108
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
+//#else
+//$$ import net.minecraft.core.Direction;
+//$$ import net.minecraft.world.level.LevelAccessor;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -36,7 +41,15 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(NetherPortalBlock.class)
 public abstract class NetherPortalBlockMixin {
     @ModifyReturnValue(method = "updateShape", at = @At("RETURN"))
-    private BlockState noBreak(BlockState original, BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos) {
+    private BlockState noBreak(
+            BlockState original,
+            BlockState state,
+            //#if MC>=12108
+            LevelReader world, ScheduledTickAccess tickView, BlockPos pos
+            //#else
+            //$$ Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos
+            //#endif
+    ) {
         if (CarpetAMSAdditionSettings.customizedNetherPortal) {
             return world.getBlockState(pos);
         } else {

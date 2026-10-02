@@ -44,7 +44,12 @@ import java.util.Objects;
 @Mixin(NoteBlock.class)
 public abstract class NoteBlockMixin {
     @Inject(method = "playNote", at = @At("HEAD"))
-    private void playNoteMixin(Entity source, BlockState state, Level level, BlockPos pos, CallbackInfo ci) {
+    private void playNoteMixin(
+        //#if MC>11802
+        Entity source, BlockState state,
+        //#endif
+        Level level, BlockPos pos, CallbackInfo ci
+    ) {
         if (!Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "false")) {
             handleChunkLoading(level, pos);
         }
@@ -65,10 +70,10 @@ public abstract class NoteBlockMixin {
     }
 
     @Unique
-    private void loadChunkIfMatch(Level world, BlockPos blockPos, BlockState blockState, Block... blocks) {
+    private void loadChunkIfMatch(Level world, BlockPos pos, BlockState blockState, Block... blocks) {
         for (Block block : blocks) {
             if (blockState.getBlock().equals(block)) {
-                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, blockPos);
+                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, pos);
                 break;
             }
         }

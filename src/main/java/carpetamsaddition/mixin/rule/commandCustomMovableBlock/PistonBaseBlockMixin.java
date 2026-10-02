@@ -45,8 +45,13 @@ public abstract class PistonBaseBlockMixin {
     private static void MovableBlocks(BlockState state, Level world, BlockPos blockPos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomMovableBlock, "false") && CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS.contains(RegexTools.getBlockRegisterName(state))) {
             BlockEntity blockEntity = world.getBlockEntity(blockPos);
+            //#if MC>=11700
             boolean isBottomY = blockPos.getY() == world.getMinY();
             boolean isTopY = blockPos.getY() == world.getMaxY();
+            //#else
+            //$$ boolean isBottomY = blockPos.getY() == 0;
+            //$$ boolean isTopY = blockPos.getY() == 256;
+            //#endif
             if (!(blockEntity instanceof RandomizableContainerBlockEntity)) {
                 if (direction == Direction.DOWN && isBottomY) {
                     cir.setReturnValue(false);

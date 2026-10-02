@@ -30,8 +30,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.util.Objects;
 
+@GameVersion(version = "Minecraft >= 1.20.5")
 @Mixin(value = AttributeInstance.class, priority = 1688)
 public abstract class AttributeInstanceMixin implements AttributeInstanceInvoker {
     @ModifyReturnValue(method = "getBaseValue", at = @At("RETURN"))

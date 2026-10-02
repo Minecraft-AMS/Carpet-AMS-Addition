@@ -26,6 +26,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "mc < 1.21.11")
+@GameVersion(version = "Minecraft < 1.21.11")
 @Mixin(value = Player.class, priority = 1688)
 public abstract class PlayerMixin {}

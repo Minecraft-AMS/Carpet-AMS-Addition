@@ -30,6 +30,7 @@ import net.minecraft.world.entity.ai.gossip.GossipType;
 
 @SuppressWarnings("DataFlowIssue")
 public class StackableDiscountRuleObserver extends RuleObserver<Boolean> {
+    //#if MC>11904
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
         if (newValue) {
@@ -42,4 +43,8 @@ public class StackableDiscountRuleObserver extends RuleObserver<Boolean> {
             ((GossipTypeAccessor) (Object) GossipType.MAJOR_POSITIVE).setDecayPerTransfer(20);
         }
     }
+    //#else
+    //$$ @Override
+    //$$ public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {}
+    //#endif
 }

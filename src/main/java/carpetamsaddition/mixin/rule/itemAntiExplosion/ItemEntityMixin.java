@@ -32,7 +32,15 @@ import java.util.Objects;
 
 @Mixin(ItemEntity.class)
 public abstract class ItemEntityMixin {
-    @ModifyVariable(method = "hurtServer", at = @At("HEAD"), argsOnly = true)
+    @ModifyVariable(
+        //#if MC>12006
+        method = "hurtServer",
+        //#else
+        //$$ method = "hurt",
+        //#endif
+        at = @At("HEAD"),
+        argsOnly = true
+    )
     private float noDamage(float damage) {
         return !Objects.equals(CarpetAMSAdditionSettings.itemAntiExplosion, "false") ? 0 : damage;
     }

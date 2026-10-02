@@ -30,6 +30,9 @@ import net.minecraft.world.entity.vehicle.minecart.NewMinecartBehavior;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+@GameVersion(version = "Minecraft >= 1.21.2")
 @Mixin(value = NewMinecartBehavior.class, priority = 168)
 public abstract class ExperimentalMinecartControllerMixin implements MinecartControllerAccessor {
     @ModifyReturnValue(method = "getMaxSpeed", at = @At("RETURN"))

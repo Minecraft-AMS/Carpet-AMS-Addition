@@ -39,7 +39,11 @@ public abstract class ShulkerBulletMixin {
         method = "onHitEntity",
         at = @At(
             value = "INVOKE",
+            //#if MC>=12005
             target = "Lnet/minecraft/world/effect/MobEffectInstance;<init>(Lnet/minecraft/core/Holder;I)V"
+            //#else
+            //$$ target = "Lnet/minecraft/world/effect/MobEffectInstance;<init>(Lnet/minecraft/world/effect/MobEffect;I)V"
+            //#endif
         )
     )
     private int noLevitation(int effectDuration) {

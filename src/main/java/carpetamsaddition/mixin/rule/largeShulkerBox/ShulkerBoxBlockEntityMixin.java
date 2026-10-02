@@ -46,9 +46,15 @@ import static carpetamsaddition.CarpetAMSAdditionLazySettings.Rule.*;
 
 @Mixin(value = ShulkerBoxBlockEntity.class, priority = 1024)
 public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBlockEntity implements WorldlyContainer {
+    //#if MC<11700
+    //$$ protected ShulkerBoxBlockEntityMixin(BlockEntityType<?> blockEntityType) {
+    //$$     super(blockEntityType);
+    //$$ }
+    //#else
     protected ShulkerBoxBlockEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
     }
+    //#endif
 
     @Shadow
     private NonNullList<@NotNull ItemStack> itemStacks;
@@ -56,14 +62,30 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
     @Shadow
     public abstract int getContainerSize();
 
-    @Inject(method = "<init>(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("RETURN"))
+    @Inject(
+        method =
+        //#if MC<11700
+        //$$ "<init>()V",
+        //#else
+        "<init>(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
+        //#endif
+        at = @At("RETURN")
+    )
     private void init1(CallbackInfo ci) {
         if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
             this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
         }
     }
 
-    @Inject(method = "<init>(Lnet/minecraft/world/item/DyeColor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("RETURN"))
+    @Inject(
+        method =
+        //#if MC<11700
+        //$$ "<init>(Lnet/minecraft/world/item/DyeColor;)V",
+        //#else
+        "<init>(Lnet/minecraft/world/item/DyeColor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
+        //#endif
+        at = @At("RETURN")
+    )
     private void init2(CallbackInfo ci) {
         if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
             this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);

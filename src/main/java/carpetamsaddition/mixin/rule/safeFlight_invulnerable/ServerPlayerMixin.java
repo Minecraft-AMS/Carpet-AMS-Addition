@@ -23,9 +23,13 @@ package carpetamsaddition.mixin.rule.safeFlight_invulnerable;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.damagesource.DamageSource;
+//#if MC>=11904
 import net.minecraft.world.damagesource.DamageTypes;
+//#endif
 import net.minecraft.server.level.ServerPlayer;
+//#if MC>12006
 import net.minecraft.server.level.ServerLevel;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,13 +39,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin {
     @Inject(method = "isInvulnerableTo",at = @At("TAIL"), cancellable = true)
-    private void isInvulnerableTo(ServerLevel world, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+    private void isInvulnerableTo(
+        //#if MC>12006
+        ServerLevel world,
+        //#endif
+        DamageSource damageSource, CallbackInfoReturnable<Boolean> cir
+    ) {
+        //#if MC>=11904
         if (CarpetAMSAdditionSettings.safeFlight && damageSource.is(DamageTypes.FLY_INTO_WALL)) {
+        //#else
+        //$$ if (CarpetAMSAdditionSettings.safeFlight && damageSource.equals(DamageSource.FLY_INTO_WALL)) {
+        //#endif
             cir.setReturnValue(true);
             cir.cancel();
         }
 
+        //#if MC>=11904
         if (CarpetAMSAdditionSettings.invulnerable && !damageSource.is(DamageTypes.FELL_OUT_OF_WORLD)) {
+        //#else
+        //$$ if (CarpetAMSAdditionSettings.invulnerable && !damageSource.equals(DamageSource.OUT_OF_WORLD)) {
+        //#endif
             cir.setReturnValue(true);
             cir.cancel();
         }

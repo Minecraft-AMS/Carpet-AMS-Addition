@@ -28,18 +28,25 @@ import carpetamsaddition.utils.PlayerUtil;
 import com.llamalad7.mixinextras.sugar.Local;
 
 import net.minecraft.world.entity.monster.Phantom;
+//#if MC>=12006
 import net.minecraft.server.level.ServerPlayer;
+//#else
+//$$ import net.minecraft.world.entity.player.Player;
+//#endif
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.PhantomSpawner;
 
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+//#if MC>12006
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+//#else
+//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@SuppressWarnings("LocalMayUseName")
 @Mixin(PhantomSpawner.class)
 public abstract class PhantomSpawnerMixin {
     @Unique
@@ -49,17 +56,42 @@ public abstract class PhantomSpawnerMixin {
         method = "tick",
         at = @At(
             value = "INVOKE",
+            //#if MC>12006
             target = "Lnet/minecraft/world/entity/monster/Phantom;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;",
+            //#elseif MC>=12006
+            //$$ target = "Lnet/minecraft/world/entity/monster/Phantom;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;",
+            //#else
+            //$$ target = "Lnet/minecraft/server/level/ServerLevel;addFreshEntityWithPassengers(Lnet/minecraft/world/entity/Entity;)V",
+            //#endif
             shift = At.Shift.AFTER
         )
     )
+    //#if MC>=12111
     private void broadcastMessage(
-        ServerLevel world, boolean spawnMonsters,
-        //#if MC<12111
-        //$$ boolean b,
-        //#endif
-        CallbackInfo ci,
-        @Local ServerPlayer playerEntity, @Local Phantom phantom) {
+        ServerLevel world, boolean spawnMonsters, CallbackInfo ci,
+        @Local ServerPlayer playerEntity, @Local Phantom phantom
+    )
+    //#elseif MC>12006
+    //$$ private void broadcastMessage(
+    //$$     ServerLevel world, boolean spawnMonsters, boolean spawnAnimals,
+    //$$     CallbackInfo ci,
+    //$$     @Local ServerPlayer playerEntity, @Local Phantom phantom
+    //$$ )
+    //#elseif MC>=12006
+    //$$ private void broadcastMessage(
+    //$$     ServerLevel world, boolean spawnMonsters, boolean spawnAnimals,
+    //$$     CallbackInfoReturnable<Integer> cir,
+    //$$     @Local ServerPlayer playerEntity, @Local Phantom phantom
+    //$$ )
+    //#else
+    //$$ private void broadcastMessage(
+    //$$     ServerLevel world, boolean bl, boolean bl2,
+    //$$     CallbackInfoReturnable<Integer> cir,
+    //$$     @Local Player playerEntity,
+    //$$     @Local Phantom phantom
+    //$$ )
+    //#endif
+    {
         if (CarpetAMSAdditionSettings.phantomSpawnAlert && phantom != null) {
             MinecraftServer server = world.getServer();
             String playerName = PlayerUtil.getName(playerEntity);

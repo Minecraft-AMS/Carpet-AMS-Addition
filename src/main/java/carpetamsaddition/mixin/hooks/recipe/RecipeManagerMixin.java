@@ -22,24 +22,31 @@ package carpetamsaddition.mixin.hooks.recipe;
 
 import carpetamsaddition.CarpetAMSAdditionServer;
 
+//#if MC>12006
 import com.llamalad7.mixinextras.sugar.Local;
-
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeMap;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import java.util.SortedMap;
+//#else
+//$$ import com.google.gson.JsonElement;
+//$$ import net.minecraft.resources.ResourceLocation;
+//$$ import net.minecraft.world.item.crafting.RecipeManager;
+//$$ import org.spongepowered.asm.mixin.injection.ModifyVariable;
+//$$ import java.util.Map;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-import java.util.SortedMap;
 
 @GameVersion(version = "Minecraft < 26.3")
 @Mixin(value = RecipeManager.class, priority = 16888)
 public abstract class RecipeManagerMixin {
+    //#if MC>12006
     @Inject(
         method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;",
         at = @At(
@@ -50,4 +57,11 @@ public abstract class RecipeManagerMixin {
     private void addCustomRecipes(CallbackInfoReturnable<RecipeMap> cir, @Local SortedMap<Identifier, Recipe<?>> recipes) {
         CarpetAMSAdditionServer.getInstance().registerCustomRecipes(recipes, ((RecipeManagerAccessor) this).getRegistries());
     }
+    //#else
+    //$$ @ModifyVariable(method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At("HEAD"), argsOnly = true)
+    //$$ private Map<ResourceLocation, JsonElement> registerCustomRecipes(Map<ResourceLocation, JsonElement> map) {
+    //$$     CarpetAMSAdditionServer.getInstance().registerCustomRecipes(map);
+    //$$     return map;
+    //$$ }
+    //#endif
 }

@@ -35,7 +35,16 @@ import java.util.Objects;
 
 @Mixin(AnvilBlock.class)
 public abstract class AnvilBlockMixin {
-    @Inject(method = "useWithoutItem", at = @At("HEAD"), cancellable = true)
+    @Inject(
+        method =
+            //#if MC>=12005
+            "useWithoutItem",
+            //#else
+            //$$ "use",
+            //#endif
+        at = @At("HEAD"),
+        cancellable = true
+    )
     private void onUse(CallbackInfoReturnable<InteractionResult> cir) {
         if (!Objects.equals(CarpetAMSAdditionSettings.commandAnvilInteractionDisabled, "false") && AnvilInteractionDisabledCommandRegistry.anvilInteractionDisabled) {
             cir.setReturnValue( InteractionResult.FAIL);

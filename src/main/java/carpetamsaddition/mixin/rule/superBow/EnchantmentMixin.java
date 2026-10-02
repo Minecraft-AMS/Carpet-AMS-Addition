@@ -28,16 +28,18 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.Holder;
-
 import org.jetbrains.annotations.NotNull;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.util.Optional;
 import java.util.Set;
 
+@GameVersion(version = "Minecraft > 1.20.6")
 @Mixin(Enchantment.class)
 public abstract class EnchantmentMixin {
     @ModifyReturnValue(method = "areCompatible", at = @At("RETURN"))

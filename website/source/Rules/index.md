@@ -29,18 +29,19 @@
 - `scheduledRandomTickSugarCane`: 开启后，使计划刻事件可触发甘蔗的随机刻生长行为。
 
 - `scheduledRandomTickStem`: 开启后，使计划刻事件可触发海带、缠怨藤、垂泪藤的随机刻生长行为。
-  <该规则从 [OhMyVanillaMinecraft](https://github.com/hit-mc/OhMyVanillaMinecraft) 移植>
+
+> 移植自：[OhMyVanillaMinecraft](https://github.com/hit-mc/OhMyVanillaMinecraft)
 
 - 类型: `boolean`
-  
+
   
 
 - 默认值: `false`
-  
+
   
 
 - 参考选项: `false`, `true`
-  
+
   
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
@@ -277,7 +278,8 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 开启后，玩家将僵尸村民治疗为村民后的获得的折扣将共享给所有玩家。
 
-<该规则从 [totos-carpet-tweaks](https://github.com/totorewa/totos-carpet-tweaks) 移植>
+
+> 移植自：[totos-carpet-tweaks](https://github.com/totorewa/totos-carpet-tweaks)
 
 - 类型: `boolean`
   
@@ -395,7 +397,8 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 开启后，当玩家在创造模式下时可以做到一击必杀，当玩家处于潜行状态时，周围的实体也会被杀死。
 
-<该规则从 [lunaar-carpet-addons](https://github.com/Lunaar-SMP/lunaar-carpet-addons) 移植>
+
+> 移植自：[lunaar-carpet-addons](https://github.com/Lunaar-SMP/lunaar-carpet-addons)
 
 - 类型: `boolean`
   
@@ -734,9 +737,10 @@ no_blast_wave: 防爆且无冲击波，爆炸将不会推动掉落物
 
 ## 恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）
 
+> 版本：`Minecraft < 1.19.3`
+
 修复MC-193297中，恶魂火球爆炸时不会正确传递伤害源。
 
-<该规则 Minecraft < 1.19.3 可用>
 
 - 类型: `boolean`
   
@@ -882,13 +886,14 @@ global模式下修改值后需要玩家重新进入游戏。
 
 ## 最大玩家方块交互距离作用域（maxPlayerBlockInteractionRangeScope）
 
+> 版本：`Minecraft >= 1.20.5`
+
 更改maxPlayerBlockInteractionRange规则的作用域。
 
 [server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行。
 
 [global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离。
 
-<该规则 Minecraft >= 1.20.5 可用>
 
 - 类型: `String`
   
@@ -906,13 +911,14 @@ global模式下修改值后需要玩家重新进入游戏。
 
 ## 最大玩家实体交互距离作用域（maxPlayerEntityInteractionRangeScope）
 
+> 版本：`Minecraft >= 1.20.5`
+
 更改maxPlayerEntityInteractionRange规则的作用域。
 
 [server] - 需要客户端自己对交互距离进行修改，服务端仅对客户端修改放行。
 
 [global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离。
 
-<该规则 Minecraft >= 1.20.5 可用>
 
 - 类型: `String`
   
@@ -1360,9 +1366,10 @@ global模式下修改值后需要玩家重新进入游戏。
 
 ## 末影珍珠音效（enderPearlSoundEffect）
 
+> 版本：`Minecraft < 1.20`
+
 玩家在使用末影珍珠进行传送时会播放音效。
 
-<该规则 Minecraft < 1.20 可用>
 
 - 类型: `boolean`
   
@@ -1586,9 +1593,10 @@ json位置：
 
 ## 禁用实验性内容检查（experimentalContentCheckDisabled）
 
+> 版本：`Minecraft 1.19–1.21.1`
+
 允许在游戏中通过添加数据包来游玩Minecraft的实验性内容（需要重启服务器）。
 
-<该规则 Minecraft 1.19 - 1.21.1 可用>
 
 - 类型: `boolean`
   
@@ -1624,9 +1632,10 @@ json位置：
 
 ## 安全的滴水石锥（safePointedDripstone）
 
+> 版本：`Minecraft >= 1.17`
+
 玩家落在滴水石锥上时，不会受到它的附加伤害。
 
-<该规则 Minecraft >= 1.17 可用>
 
 - 类型: `boolean`
   
@@ -1644,9 +1653,10 @@ json位置：
 
 ## 禁用滴水石锥碰撞箱（pointedDripstoneCollisionBoxDisabled）
 
+> 版本：`Minecraft >= 1.17`
+
 开启后，玩家可以穿过滴水石锥。
 
-<该规则 Minecraft >= 1.17 可用>
 
 - 类型: `boolean`
   
@@ -1718,9 +1728,10 @@ json位置：
 
 ## 轻松获取瓶子草荚果（easyGetPitcherPod）
 
+> 版本：`Minecraft >= 1.20`
+
 玩家可以通过种植瓶子草来收获随机数量的瓶子草荚果（其最大数量是自定义的，最小数量为固定2个）。
 
-<该规则 Minecraft >= 1.20 可用>
 
 - 类型: `int`
   
@@ -1930,7 +1941,10 @@ json位置：
 
 ## 村民折扣叠加（stackableDiscounts）
 
+> 版本：`Minecraft >= 1.20.2`
+
 重新引入<23w31a的打骨折机制，让治疗村民的折扣可以叠加。
+
 
 - 类型: `boolean`
   
@@ -2190,9 +2204,10 @@ json位置：
 
 ## 重新引入拌线欺骗特性（stringDupeReintroduced）
 
+> 版本：`Minecraft >= 1.21.2`
+
 重新引入拌线欺骗特性，可以通过此规则来继续使用刷线机。
 
-<该规则 Minecraft >= 1.21.2 可用>
 
 - 类型: `boolean`
   
@@ -2360,9 +2375,10 @@ json位置：
 
 ## 禁止物品实体创建下界传送门（itemEntityCreateNetherPortalDisabled）
 
+> 版本：`Minecraft >= 1.21`
+
 让物品实体穿过下界传送门时不会创建传送门。
 
-<该规则 Minecraft >= 1.21 可用>
 
 - 类型: `boolean`
   
@@ -2416,11 +2432,12 @@ json位置：
 
 ## 大收纳袋（largeBundle）
 
+> 版本：`Minecraft >= 1.17`
+
 让收纳袋拥有一个`9x3`或`9x6`的UI，手持收纳袋右键即可打开UI。
 
 该规则不允许在收纳袋中放入收纳袋和潜影盒。
 
-<该规则 Minecraft >= 1.17.1 可用>
 
 - 类型: `String`
   
@@ -2438,9 +2455,10 @@ json位置：
 
 ## 最大链式更新深度（maxChainUpdateDepth）
 
+> 版本：`Minecraft >= 1.19`
+
 修改最大链式更新深度，设置为“-1”禁用规则。
 
-<该规则 Minecraft >= 1.19 可用>
 
 - 类型: `int`
   
@@ -2476,9 +2494,10 @@ json位置：
 
 ## 禁用末地门加载（endPortalChunkLoadDisabled）
 
+> 版本：`Minecraft >= 1.21`
+
 让实体穿过末地门不会发生区块加载。
 
-<该规则 Minecraft >= 1.20.6 可用>
 
 - 类型: `boolean`
   
@@ -2496,9 +2515,10 @@ json位置：
 
 ## 末地门加载器（endPortalChunkLoader）
 
+> 版本：`Minecraft < 1.20.6`
+
 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致。
 
-<该规则 Minecraft < 1.20.6 可用>
 
 - 类型: `boolean`
   
@@ -2594,9 +2614,10 @@ AMS网络协议的开关。
 
 ## 只有玩家可以生成地狱门（onlyPlayerCanCreateNetherPortal）
 
+> 版本：`Minecraft >= 1.21`
+
 只允许玩家穿过地狱门时生成新的地狱门。
 
-<该规则 Minecraft >= 1.21 可用>
 
 - 类型: `boolean`
   
@@ -2614,9 +2635,10 @@ AMS网络协议的开关。
 
 ## 防止服务器暂停（preventServerPause）
 
+> 版本：`Minecraft >= 1.21.2`
+
 防止服务器60s后暂停。
 
-<该规则 Minecraft >= 1.21.2 可用>
 
 - 类型: `boolean`
   
@@ -2656,11 +2678,12 @@ AMS网络协议的开关。
 
 ## 实验性矿车速度（experimentalMinecartSpeed）
 
+> 版本：`Minecraft >= 1.21.2`
+
 设置实验性矿车的速度。
 
 启用该规则将覆盖游戏规则
 
-<该规则 Minecraft >= 1.21.2 可用>
 
 - 类型: `int`
   
@@ -2678,13 +2701,15 @@ AMS网络协议的开关。
 
 ## 启用实验性矿车（experimentalMinecartEnabled）
 
+> 版本：`Minecraft >= 1.21.2`
+
 启用实验性矿车。
 
 服务器环境切换该规则设置时需要重启服务器
 
 客户端环境切换该规则设置时需要重启客户端
 
-<该规则 Minecraft >= 1.21.2 可用>
+
 
 - 类型: `boolean`
   
@@ -2761,7 +2786,10 @@ AMS网络协议的开关。
 
 ## 可合成收纳袋（craftableBundle）
 
-开启后，玩家可以在Minecraft 1.17/1.18/1.19中合成收纳袋。
+> 版本：`Minecraft 1.17–1.21.1`
+
+开启后，玩家可以合成收纳袋。
+
 
 - 类型: `boolean`
   
@@ -2779,7 +2807,10 @@ AMS网络协议的开关。
 
 ## 可合成幽匿感测体（craftableSculkSensor）
 
-开启后，玩家可以在Minecraft 1.17/1.18中合成幽匿感测体。
+> 版本：`Minecraft 1.17–1.18`
+
+开启后，玩家可以合成幽匿感测体。
+
 
 - 类型: `boolean`
   
@@ -2833,7 +2864,10 @@ AMS网络协议的开关。
 
 ## 更好的合成磨制黑石按钮（betterCraftablePolishedBlackStoneButton）
 
+> 版本：`Minecraft > 1.17`
+
 使用深板岩来合成磨制黑石按钮。
+
 
 - 类型: `boolean`
   
@@ -2869,9 +2903,10 @@ AMS网络协议的开关。
 
 ## 使用新的磁石配方（useNewLodestoneRecipe）
 
+> 版本：`Minecraft < 1.21.5`
+
 使用铁锭来合成磁石。
 
-<该规则 Minecraft < 1.21.5 可用>
 
 - 类型: `boolean`
   

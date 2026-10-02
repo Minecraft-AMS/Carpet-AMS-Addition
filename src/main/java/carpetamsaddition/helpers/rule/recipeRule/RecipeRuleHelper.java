@@ -33,11 +33,14 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.List;
 
 @SuppressWarnings("DuplicatedCode")
+@GameVersion(version = "Minecraft >= 1.20.2")
 public class RecipeRuleHelper {
     private static final String MOD_ID = CarpetAMSAdditionServer.compactName;
 
@@ -45,7 +48,13 @@ public class RecipeRuleHelper {
         if (MinecraftServerUtil.serverIsRunning(server) && hasActiveRecipeRule()) {
             Collection<RecipeHolder<?>> allRecipes = getServerRecipeManager(server).getRecipes();
             for (RecipeHolder<?> recipe : allRecipes) {
-                if (recipe.id().identifier().getNamespace().equals(MOD_ID) && !player.getRecipeBook().contains(recipe.id())) {
+                if (
+                    recipe.id()
+                    //#if MC>12006
+                    .identifier()
+                    //#endif
+                    .getNamespace().equals(MOD_ID) && !player.getRecipeBook().contains(recipe.id())
+                ) {
                     player.awardRecipes(List.of(recipe));
                 }
             }
@@ -60,7 +69,13 @@ public class RecipeRuleHelper {
                 reloadServerResources(server);
                 Collection<RecipeHolder<?>> allRecipes = getServerRecipeManager(server).getRecipes();
                 for (RecipeHolder<?> recipe : allRecipes) {
-                    if (recipe.id().identifier().getNamespace().equals(MOD_ID)) {
+                    if (
+                        recipe.id()
+                        //#if MC>12006
+                        .identifier()
+                        //#endif
+                        .getNamespace().equals(MOD_ID)
+                    ) {
                         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
                             if (!player.getRecipeBook().contains(recipe.id())) {
                                 player.awardRecipes(List.of(recipe));

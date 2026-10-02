@@ -45,13 +45,13 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
 
     public HandShakeS2CPayload(FriendlyByteBuf buf) {
         super(ID);
-        this.modVersion = buf.readUtf();
+        this.modVersion = NetworkUtil.readBufString(buf);
         this.isSupportServer = buf.readBoolean();
         int packetCount = buf.readVarInt();
         this.supportedPackets = new HashSet<>();
 
         for (int i = 0; i < packetCount; i++) {
-            this.supportedPackets.add(buf.readUtf());
+            this.supportedPackets.add(NetworkUtil.readBufString(buf));
         }
     }
 

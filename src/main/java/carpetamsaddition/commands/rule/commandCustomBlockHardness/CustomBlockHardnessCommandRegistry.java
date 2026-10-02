@@ -32,7 +32,9 @@ import com.mojang.brigadier.arguments.FloatArgumentType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.commands.arguments.blocks.BlockStateArgument;
+//#if MC>=11904
 import net.minecraft.commands.CommandBuildContext;
+//#endif
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.CommandSourceStack;
 
@@ -47,14 +49,23 @@ public class CustomBlockHardnessCommandRegistry {
     public static final Map<BlockState, Float> CUSTOM_BLOCK_HARDNESS_MAP = new ConcurrentHashMap<>();
     public static final Map<Block, Float> DEFAULT_HARDNESS_MAP = new ConcurrentHashMap<>();
 
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext commandRegistryAccess) {
+    public static void register(
+        CommandDispatcher<CommandSourceStack> dispatcher
+        //#if MC>=11904
+        , CommandBuildContext commandRegistryAccess
+        //#endif
+    ) {
         dispatcher.register(
             Commands.literal("customBlockHardness")
             .requires(source -> CommandHelper.canUseCommand(source, CarpetAMSAdditionSettings.commandCustomBlockHardness))
 
             // set
             .then(literal("set")
-            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(
+                //#if MC>=11904
+                commandRegistryAccess
+                //#endif
+            ))
             .then(argument("hardness", FloatArgumentType.floatArg())
             .executes(context -> set(
                 context.getSource(),
@@ -64,7 +75,11 @@ public class CustomBlockHardnessCommandRegistry {
 
             // remove
             .then(literal("remove")
-            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(
+                //#if MC>=11904
+                commandRegistryAccess
+                //#endif
+            ))
             .executes(context -> remove(
                 context.getSource(),
                 BlockStateArgument.getBlock(context, "block").getState()
@@ -84,7 +99,11 @@ public class CustomBlockHardnessCommandRegistry {
 
             // getDefaultHardness
             .then(literal("getDefaultHardness")
-            .then(argument("block", BlockStateArgument.block(commandRegistryAccess))
+            .then(argument("block", BlockStateArgument.block(
+                //#if MC>=11904
+                commandRegistryAccess
+                //#endif
+            ))
             .executes(context -> getDefaultHardness(
                 context.getSource(),
                 BlockStateArgument.getBlock(context, "block").getState().getBlock()

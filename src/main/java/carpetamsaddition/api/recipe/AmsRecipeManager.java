@@ -25,18 +25,20 @@ import carpetamsaddition.api.recipe.template.ShapelessRecipeTemplate;
 import carpetamsaddition.api.recipe.template.SmeltingRecipeTemplate;
 
 import com.google.gson.JsonElement;
+//#if MC>12006
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-
 import com.mojang.serialization.JsonOps;
-
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.core.HolderLookup;
+//#endif
 import net.minecraft.resources.Identifier;
+//#if MC>12006
 import org.jetbrains.annotations.NotNull;
+//#endif
 
 import java.util.HashMap;
 import java.util.List;
@@ -53,9 +55,15 @@ public class AmsRecipeManager {
         this.smeltingRecipes = builder.getSmeltingRecipeList();
     }
 
+    //#if MC>12006
     public void registerRecipes(Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup) {
         this.createRecipeJsonMap().forEach((id, json) -> addRecipe(map, wrapperLookup, id, json));
     }
+    //#else
+    //$$ public void registerRecipes(Map<ResourceLocation, JsonElement> map) {
+    //$$     map.putAll(this.createRecipeJsonMap());
+    //$$ }
+    //#endif
 
     public Map<Identifier, JsonElement> createRecipeJsonMap() {
         Map<Identifier, JsonElement> recipeMap = new HashMap<>();
@@ -63,6 +71,7 @@ public class AmsRecipeManager {
         return recipeMap;
     }
 
+    //#if MC>12006
     private void addRecipe(Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup, Identifier id, JsonElement json) {
         RecipeHolder<?> recipeEntry = this.deserializeRecipe(ResourceKey.create(Registries.RECIPE, id), json.getAsJsonObject(), wrapperLookup);
         map.put(id, recipeEntry.value());
@@ -79,6 +88,7 @@ public class AmsRecipeManager {
             .parse(registries.createSerializationContext(JsonOps.INSTANCE), json).getOrThrow(JsonParseException::new);
         return new RecipeHolder<>(key, recipe);
     }
+    //#endif
 
     private void registerAllRecipes(Map<Identifier, JsonElement> recipeMap) {
         shapelessRecipes.forEach(recipe -> recipe.addToRecipeMap(recipeMap));

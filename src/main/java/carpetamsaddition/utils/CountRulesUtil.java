@@ -20,7 +20,7 @@
 
 package carpetamsaddition.utils;
 
-import carpet.api.settings.Rule;
+import carpetamsaddition.settings.Rule;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 

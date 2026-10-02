@@ -22,6 +22,7 @@ package carpetamsaddition;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+import carpetamsaddition.settings.CarpetRuleRegistrar;
 
 import carpetamsaddition.api.recipe.AmsRecipeManager;
 import carpetamsaddition.api.recipe.AmsRecipeBuilder;
@@ -52,11 +53,21 @@ import com.mojang.brigadier.CommandDispatcher;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandSourceStack;
+//#if MC>=11904
 import net.minecraft.commands.CommandBuildContext;
+//#endif
 import net.minecraft.server.level.ServerPlayer;
+//#if MC>12006
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.core.HolderLookup;
+//#endif
+
+//#if MC<=12006
+//$$ import com.google.gson.JsonElement;
+//#endif
+
 import net.minecraft.resources.Identifier;
+
 //#if MC>=260300
 //$$ import com.google.gson.JsonElement;
 //$$ import net.minecraft.resources.FileToIdConverter;
@@ -106,7 +117,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         LOGGER.info("Open Source: https://github.com/Minecraft-AMS/Carpet-AMS-Addition");
         LOGGER.info("Issues: https://github.com/Minecraft-AMS/Carpet-AMS-Addition/issues");
         LOGGER.info("Wiki: https://minecraft-ams.github.io/carpetamsaddition/");
-        CarpetServer.settingsManager.parseSettingsClass(CarpetAMSAdditionSettings.class);
+        CarpetRuleRegistrar.register(CarpetServer.settingsManager, CarpetAMSAdditionSettings.class);
     }
 
     @Override
@@ -125,13 +136,34 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     }
 
     @Override
-    public void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher, final CommandBuildContext commandBuildContext) {
-        RegisterCommands.registerCommands(dispatcher, commandBuildContext);
+    public void registerCommands(
+        CommandDispatcher<CommandSourceStack> dispatcher
+        //#if MC>=11904
+        , final CommandBuildContext commandBuildContext
+        //#endif
+    ) {
+        RegisterCommands.registerCommands(
+            dispatcher
+            //#if MC>=11904
+            , commandBuildContext
+            //#endif
+        );
     }
 
-    public void registerCustomRecipes(Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup) {
+    public void registerCustomRecipes(
+        //#if MC>12006
+        Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup
+        //#else
+        //$$ Map<ResourceLocation, JsonElement> map
+        //#endif
+    ) {
+        AmsRecipeManager amsRecipeManager = new AmsRecipeManager(AmsRecipeBuilder.getInstance());
         this.rebuildCustomRecipes();
-        new AmsRecipeManager(AmsRecipeBuilder.getInstance()).registerRecipes(map, wrapperLookup);
+        //#if MC>12006
+        amsRecipeManager.registerRecipes(map, wrapperLookup);
+        //#else
+        //$$ amsRecipeManager.registerRecipes(map);
+        //#endif
     }
 
     //#if MC>=260300
@@ -184,9 +216,11 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         minecraftServer = server;
         serverStartTimeMillis = System.currentTimeMillis();
         CarpetAMSAdditionLazySettings.initRules();
+        //#if MC>12006
         if (FeatureChecker.hasMinecartImprovements(server)) {
             FeatureChecker.EX_MINECART_FEATURE.set(true);
         }
+        //#endif
     }
 
     @Override
@@ -214,7 +248,9 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         AMSTranslations.getTranslation(lang).forEach((key, value) -> {
             if (key.startsWith(prefix)) {
                 String newKey = key.substring(prefix.length());
+                //#if MC>=11900
                 newKey = "carpet." + newKey;
+                //#endif
                 trimmedTranslation.put(newKey, value);
             }
         });
