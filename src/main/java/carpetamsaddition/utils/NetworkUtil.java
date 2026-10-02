@@ -28,6 +28,7 @@ import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.settings.AmsRuleCategory;
 
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.*;
@@ -165,6 +166,14 @@ public class NetworkUtil {
 
     public static void executeOnServerThread(Runnable runnable) {
         Optional.of(MinecraftServerUtil.serverIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftServerUtil.getServer().execute(runnable));
+    }
+
+    public static String readBufString(FriendlyByteBuf buf) {
+        //#if MC<11700
+        //$$ return buf.readUtf(Short.MAX_VALUE);
+        //#else
+        return buf.readUtf();
+        //#endif
     }
 
     public static void collectAmsNetworkRuleNames() {

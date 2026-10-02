@@ -36,7 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft 1.16.5")
-@Mixin(ChunkMap.class)
+@Mixin(value = ChunkMap.class, priority = 168888)
 public abstract class ChunkMapMixin {
     @Shadow
     private Long2ObjectLinkedOpenHashMap<ChunkHolder> visibleChunkMap;

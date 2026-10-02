@@ -13,20 +13,21 @@
 package carpetamsaddition.mixin.rule.maxClientInteractionReachDistance;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.MathUtil;
+
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.util.Mth;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Constant;
-import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft < 1.20.5")
 @Mixin(value = GameRenderer.class, priority = 1688)
 public abstract class GameRendererMixin {
-    @ModifyConstant(method = "pick", constant = @Constant(doubleValue = 6.0D))
+    @ModifyExpressionValue(method = "pick", at = @At(value = "CONSTANT", args = "doubleValue=6.0D"))
     private double modifyCreativeEntityPickRange(double original) {
         if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {
             return CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
@@ -35,10 +36,10 @@ public abstract class GameRendererMixin {
         return original;
     }
 
-    @ModifyConstant(method = "pick", constant = @Constant(doubleValue = 9.0D))
+    @ModifyExpressionValue(method = "pick", at = @At(value = "CONSTANT", args = "doubleValue=9.0D"))
     private double modifySurvivalEntityPickRangeLimit(double original) {
         if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {
-            return CarpetAMSAdditionSettings.maxClientInteractionReachDistance * CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
+            return MathUtil.square(CarpetAMSAdditionSettings.maxClientInteractionReachDistance);
         }
 
         return original;

@@ -21,6 +21,7 @@
 package carpetamsaddition.network;
 
 import carpetamsaddition.network.payloads.AMS_UnknownPayload;
+import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
 //#if MC<12005
@@ -44,7 +45,7 @@ public class AMS_PayloadCodec {
     //#endif
 
     protected static AMS_CustomPayload decodePayload(FriendlyByteBuf buf) {
-        String packetId = buf.readUtf();
+        String packetId = NetworkUtil.readBufString(buf);
         Function<FriendlyByteBuf, AMS_CustomPayload> constructor = AMS_PayloadManager.PAYLOAD_REGISTRY.get(packetId);
 
         if (constructor != null) {

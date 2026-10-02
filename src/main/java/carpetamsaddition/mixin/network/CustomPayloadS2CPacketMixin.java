@@ -22,7 +22,6 @@ package carpetamsaddition.mixin.network;
 
 import carpetamsaddition.network.AMS_CustomPayload;
 
-import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 

@@ -21,10 +21,10 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
-import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.ItemCombinerMenu;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -38,7 +38,7 @@ public abstract class ItemCombinerMenuMixin {
     @ModifyExpressionValue(method = "method_24924", at = @At(value = "CONSTANT", args = "doubleValue=64.0D"))
     private double modifyStillValidDistance(double original) {
         if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange * CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange;
+            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange);
         } else {
             return original;
         }

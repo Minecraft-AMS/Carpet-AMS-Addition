@@ -21,10 +21,9 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import net.minecraft.util.Mth;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.*;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -43,7 +42,7 @@ public abstract class BlockEntityContainerMixin {
     @ModifyExpressionValue(method = "stillValid", at = @At(value = "CONSTANT", args = "doubleValue=64.0D"))
     private double modifyStillValidDistance(double constant) {
         if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange * CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange;
+            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange);
         }
 
         return constant;

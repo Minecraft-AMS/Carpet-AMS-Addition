@@ -21,12 +21,12 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.util.Mth;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -51,7 +51,7 @@ public abstract class GameRendererMixin {
     @ModifyExpressionValue(method = "pick", at = @At(value = "CONSTANT", args = "doubleValue=6.0D"))
     private double pick1(double constant) {
         if (CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange != -1.0D && this.minecraft.player != null) {
-            return CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange * CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
+            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange);
         }
         return constant;
     }
@@ -59,7 +59,7 @@ public abstract class GameRendererMixin {
     @ModifyExpressionValue(method = "pick", at = @At(value = "CONSTANT", args = "doubleValue=3.0D"))
     private double pick2(double constant) {
         if (CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange != -1.0D && this.minecraft.player != null) {
-            return CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange * CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
+            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange);
         } else {
             return constant;
         }
@@ -68,7 +68,7 @@ public abstract class GameRendererMixin {
     @ModifyExpressionValue(method = "pick", at = @At(value = "CONSTANT", args = "doubleValue=9.0D"))
     private double pick3(double constant) {
         if (CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange != -1.0D && this.minecraft.player != null) {
-            return CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange * CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
+            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange);
         } else {
             return constant;
         }

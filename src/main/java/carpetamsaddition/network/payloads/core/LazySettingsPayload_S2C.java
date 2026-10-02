@@ -23,6 +23,7 @@ package carpetamsaddition.network.payloads.core;
 import carpetamsaddition.CarpetAMSAdditionLazySettings;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
+import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -44,7 +45,7 @@ public class LazySettingsPayload_S2C extends AMS_CustomPayload {
         this.rules = EnumSet.noneOf(CarpetAMSAdditionLazySettings.Rule.class);
 
         for (int i = 0; i < size; i++) {
-            String ruleName = buf.readUtf();
+            String ruleName = NetworkUtil.readBufString(buf);
             CarpetAMSAdditionLazySettings.Rule rule = CarpetAMSAdditionLazySettings.Rule.valueOf(ruleName);
             rules.add(rule);
         }

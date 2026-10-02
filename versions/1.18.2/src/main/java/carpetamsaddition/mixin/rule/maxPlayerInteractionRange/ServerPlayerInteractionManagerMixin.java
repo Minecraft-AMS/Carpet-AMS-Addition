@@ -21,11 +21,11 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import net.minecraft.server.level.ServerPlayerGameMode;
-import net.minecraft.util.Mth;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,7 +44,7 @@ public abstract class ServerPlayerInteractionManagerMixin {
     )
     private double modifyBlockBreakDistance(double constant) {
         if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange * CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange;
+            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange);
         } else {
             return constant;
         }
