@@ -24,7 +24,6 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.api.command.AmsCommand;
 import carpetamsaddition.api.command.Arguments;
 import carpetamsaddition.api.command.CommandBuilder;
-import carpetamsaddition.api.command.CommandResult;
 import carpetamsaddition.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
@@ -53,6 +52,6 @@ public class AnvilInteractionDisabledCommand implements AmsCommand {
             Messenger.f(tr.tr("enable"), Layout.GREEN);
         Messenger.tell(source, message, true);
         ForceModeCommandConfig.saveConfigToJson(source.getServer());
-        return CommandResult.SUCCESS;
+        return 1;
     }
 }

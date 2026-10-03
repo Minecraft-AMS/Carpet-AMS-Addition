@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.utils.messageTextEventUtils;
+package carpetamsaddition.utils.messageTextEvent;
 
 import net.minecraft.network.chat.ClickEvent;
 

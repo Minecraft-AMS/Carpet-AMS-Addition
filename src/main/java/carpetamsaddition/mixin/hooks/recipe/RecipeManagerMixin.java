@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.hooks.recipe;
 
-import carpetamsaddition.CarpetAMSAdditionServer;
+import carpetamsaddition.api.recipe.AmsRecipeManager;
 
 //#if MC>12006
 import com.llamalad7.mixinextras.sugar.Local;
@@ -55,12 +55,12 @@ public abstract class RecipeManagerMixin {
         )
     )
     private void addCustomRecipes(CallbackInfoReturnable<RecipeMap> cir, @Local SortedMap<Identifier, Recipe<?>> recipes) {
-        CarpetAMSAdditionServer.getInstance().registerCustomRecipes(recipes, ((RecipeManagerAccessor) this).getRegistries());
+        AmsRecipeManager.registerCustomRecipes(recipes, ((RecipeManagerAccessor) this).getRegistries());
     }
     //#else
     //$$ @ModifyVariable(method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At("HEAD"), argsOnly = true)
     //$$ private Map<ResourceLocation, JsonElement> registerCustomRecipes(Map<ResourceLocation, JsonElement> map) {
-    //$$     CarpetAMSAdditionServer.getInstance().registerCustomRecipes(map);
+    //$$     AmsRecipeManager.registerCustomRecipes(map);
     //$$     return map;
     //$$ }
     //#endif

@@ -22,20 +22,20 @@ package carpetamsaddition;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+
 import carpetamsaddition.commands.AmsCommandRegistry;
 import carpetamsaddition.api.command.CommandRegistrationContext;
 import carpetamsaddition.settings.CarpetRuleRegistrar;
-
 import carpetamsaddition.api.recipe.AmsRecipeManager;
-import carpetamsaddition.api.recipe.AmsRecipeBuilder;
 import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommand;
 import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommand;
 import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommand;
 import carpetamsaddition.config.LoadConfigFromJson;
 import carpetamsaddition.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
+//#if MC>12006
 import carpetamsaddition.helpers.FeatureChecker;
+//#endif
 import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
-import carpetamsaddition.helpers.rule.recipeRule.RecipeRuleHelper;
 import carpetamsaddition.logging.AmsCarpetLoggerRegistry;
 import carpetamsaddition.network.payloads.core.LazySettingsPayload_S2C;
 import carpetamsaddition.network.payloads.handshake.HandShakeS2CPayload;
@@ -58,33 +58,9 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.CommandBuildContext;
 //#endif
 import net.minecraft.server.level.ServerPlayer;
-//#if MC>12006
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.core.HolderLookup;
-//#endif
-
-//#if MC<=12006
-//$$ import com.google.gson.JsonElement;
-//#endif
-
-import net.minecraft.resources.Identifier;
-
-//#if MC>=260300
-//$$ import com.google.gson.JsonElement;
-//$$ import net.minecraft.resources.FileToIdConverter;
-//$$ import net.minecraft.server.packs.PackResources;
-//$$ import net.minecraft.server.packs.resources.Resource;
-//$$ import net.minecraft.server.packs.resources.ResourceManager;
-//#endif
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-//#if MC>=260300
-//$$ import java.io.ByteArrayInputStream;
-//$$ import java.nio.charset.StandardCharsets;
-//$$ import java.util.HashMap;
-//#endif
 
 import java.util.Map;
 
@@ -152,48 +128,6 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         ));
     }
 
-    public void registerCustomRecipes(
-        //#if MC>12006
-        Map<Identifier, Recipe<?>> map, HolderLookup.Provider wrapperLookup
-        //#else
-        //$$ Map<ResourceLocation, JsonElement> map
-        //#endif
-    ) {
-        AmsRecipeManager amsRecipeManager = new AmsRecipeManager(AmsRecipeBuilder.getInstance());
-        this.rebuildCustomRecipes();
-        //#if MC>12006
-        amsRecipeManager.registerRecipes(map, wrapperLookup);
-        //#else
-        //$$ amsRecipeManager.registerRecipes(map);
-        //#endif
-    }
-
-    //#if MC>=260300
-    //$$ public Map<Identifier, JsonElement> buildCustomRecipeJson() {
-    //$$     this.rebuildCustomRecipes();
-    //$$     return new AmsRecipeManager(AmsRecipeBuilder.getInstance()).createRecipeJsonMap();
-    //$$ }
-    //#endif
-
-    //#if MC>=260300
-    //$$ public Map<Identifier, Resource> registerCustomRecipeResources(FileToIdConverter converter, ResourceManager resourceManager, Map<Identifier, Resource> original) {
-    //$$     Map<Identifier, JsonElement> customRecipes = this.buildCustomRecipeJson();
-    //$$     if (customRecipes.isEmpty()) {
-    //$$         return original;
-    //$$     }
-    //$$     Map<Identifier, Resource> recipes = new HashMap<>(original);
-    //$$     try (PackResources source = recipes.values().stream().findFirst().map(Resource::source).orElseGet(() -> resourceManager.listPacks().findFirst().orElseThrow())) {
-    //$$         customRecipes.forEach((id, json) -> recipes.put(converter.idToFile(id), new Resource(source, () -> new ByteArrayInputStream(json.toString().getBytes(StandardCharsets.UTF_8)))));
-    //$$     }
-    //$$     return recipes;
-    //$$ }
-    //#endif
-
-    private void rebuildCustomRecipes() {
-        AmsRecipeManager.clearRecipeListMemory(AmsRecipeBuilder.getInstance());
-        CarpetAMSAdditionCustomRecipes.getInstance().buildRecipes();
-    }
-
     public void sendS2CPacketOnHandShake(ServerPlayer player) {
         NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(CarpetAMSAdditionMod.getVersion(), NetworkUtil.getServerSupportState()), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommand.CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
@@ -205,7 +139,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     public void onPlayerLoggedIn(ServerPlayer player) {
         CustomWelcomeMessageConfig.getConfig().sendWelcomeMessage(player, MinecraftServerUtil.getServer());
         LeaderCommand.onPlayerLoggedIn(player);
-        RecipeRuleHelper.onPlayerLoggedIn(MinecraftServerUtil.getServer(), player);
+        AmsRecipeManager.onPlayerLoggedIn(MinecraftServerUtil.getServer(), player);
     }
 
     @Override
@@ -240,7 +174,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     public void afterServerLoadWorlds(MinecraftServer server) {
         LoadConfigFromJson.load(server);
         CommandHelper.updateAllCommandPermissions(server);
-        RecipeRuleHelper.reloadServerResources(server);
+        AmsRecipeManager.reloadServerResources(server);
     }
 
     @Override

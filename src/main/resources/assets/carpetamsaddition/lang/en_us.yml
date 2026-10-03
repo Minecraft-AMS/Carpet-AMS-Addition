@@ -511,6 +511,8 @@ carpetamsaddition:
           '0': 'After enabling the rule, use the "/customCommandPermissionLevel help" command to view the usage instructions'
       shulkerGolem:
         desc: A shulker can be summoned by placing a carved pumpkin on the shulker box
+      experimentalContentCheckDisabled:
+        desc: Allow playing Minecraft experimental content in the game by adding data packs (need restart server)
       headHunter:
         desc: When a player dies, they will drop their own skull
       commandGetPlayerSkull:

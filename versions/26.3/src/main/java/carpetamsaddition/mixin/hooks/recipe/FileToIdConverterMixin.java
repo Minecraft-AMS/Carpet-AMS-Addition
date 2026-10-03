@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.hooks.recipe;
 
-import carpetamsaddition.CarpetAMSAdditionServer;
+import carpetamsaddition.api.recipe.AmsRecipeManager;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.FileToIdConverter;
@@ -45,7 +45,7 @@ public abstract class FileToIdConverterMixin {
     private void addCustomRecipes(ResourceManager resourceManager, CallbackInfoReturnable<Map<Identifier, Resource>> cir) {
         FileToIdConverter converter = (FileToIdConverter) (Object) this;
         if (converter.prefix().equals(Registries.elementsDirPath(Registries.RECIPE))) {
-            cir.setReturnValue(CarpetAMSAdditionServer.getInstance().registerCustomRecipeResources(converter, resourceManager, cir.getReturnValue()));
+            cir.setReturnValue(AmsRecipeManager.registerCustomRecipes(converter, resourceManager, cir.getReturnValue()));
         }
     }
 }

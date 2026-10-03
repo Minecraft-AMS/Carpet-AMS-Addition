@@ -45,16 +45,10 @@ import carpetamsaddition.validators.rule.renewableNetherScrap.DropRateValidator;
 
 import carpetamsaddition.settings.RecipeRule;
 
-import java.lang.reflect.Field;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import static carpet.api.settings.RuleCategory.*;
 import static carpetamsaddition.settings.AmsRuleCategory.*;
 
 public class CarpetAMSAdditionSettings {
-    public static final Set<String> MUST_SET_DEFAULT_RULES = new LinkedHashSet<>();
-
     @Rule(categories = {AMS, FEATURE})
     public static boolean superBow = false;
 
@@ -633,6 +627,12 @@ public class CarpetAMSAdditionSettings {
     public static int experimentalMinecartSpeed = -1;
     //#endif
 
+    //#if MC>=11900 && MC<=12101
+    //$$ @GameVersion(version = "Minecraft 1.19 - 1.21.1")
+    //$$ @Rule(categories = {AMS, EXPERIMENTAL})
+    //$$ public static boolean experimentalContentCheckDisabled = false;
+    //#endif
+
     //#if MC>=12102
     @GameVersion(version = "Minecraft >= 1.21.2")
     @MustSetDefault
@@ -801,12 +801,4 @@ public class CarpetAMSAdditionSettings {
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
     public static boolean testRule = false;
-
-    static {
-        for (Field field : CarpetAMSAdditionSettings.class.getDeclaredFields()) {
-            if (field.isAnnotationPresent(MustSetDefault.class)) {
-                MUST_SET_DEFAULT_RULES.add(field.getName());
-            }
-        }
-    }
 }

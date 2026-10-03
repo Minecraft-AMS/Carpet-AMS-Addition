@@ -73,6 +73,8 @@
     "rule.endermanTeleportRandomlyDisabled.EnderManMixin",
     "rule.endPortalChunkLoadDisabled.EndPortalBlockMixin",
     "rule.enhancedWorldEater.BlockMixin",
+    "rule.experimentalContentCheckDisabled.FeatureSetMixin",
+    "rule.experimentalContentCheckDisabled.ToggleableFeatureMixin",
     "rule.experimentalMinecart.AbstractMinecartMixin",
     "rule.experimentalMinecart.ExperimentalMinecartControllerMixin",
     "rule.experimentalMinecart.FeatureSetMixin",
@@ -220,7 +222,7 @@
     "translations.ServerboundClientInformationPacketAccessor",
     "translations.ServerPlayerMixin",
     "translations.TranslatableTextMixin",
-    "util.settings.Carpet_SettingsManagerMixin"
+    "utils.settings.Carpet_SettingsManagerMixin"
   ],
   "client": [
     "hooks.client.MinecraftMixin",

@@ -20,26 +20,20 @@
 
 package carpetamsaddition.utils;
 
-import carpetamsaddition.settings.Rule;
-
-import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
-import carpetamsaddition.settings.AmsRuleCategory;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.*;
-import java.lang.reflect.Field;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NetworkUtil {
     private static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
-    public static final Set<String> AMS_NETWORK_RULE_NAMES = new LinkedHashSet<>();
     private static final Map<UUID, Set<String>> CLIENT_SUPPORTED_PACKETS = new ConcurrentHashMap<>();
     private static final Set<String> SERVER_SUPPORTED_PACKETS = ConcurrentHashMap.newKeySet();
 
@@ -52,7 +46,6 @@ public class NetworkUtil {
         MinecraftServerUtil.getOnlinePlayers().forEach(player -> sendS2CPacket(player, payload, sendMode));
     }
 
-    @SuppressWarnings("EnhancedSwitchMigration")
     public static void sendS2CPacket(ServerPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
         boolean shouldSend;
         switch (sendMode) {
@@ -72,7 +65,6 @@ public class NetworkUtil {
         }
     }
 
-    @SuppressWarnings("EnhancedSwitchMigration")
     public static void sendC2SPacket(LocalPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
         boolean shouldSend;
         switch (sendMode) {
@@ -176,17 +168,4 @@ public class NetworkUtil {
         //#endif
     }
 
-    public static void collectAmsNetworkRuleNames() {
-        for (Field field : CarpetAMSAdditionSettings.class.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Rule.class)) {
-                Rule ruleAnnotation = field.getAnnotation(Rule.class);
-                for (String category : ruleAnnotation.categories()) {
-                    if (category.equals(AmsRuleCategory.AMS_NETWORK)) {
-                        AMS_NETWORK_RULE_NAMES.add(field.getName());
-                        break;
-                    }
-                }
-            }
-        }
-    }
 }

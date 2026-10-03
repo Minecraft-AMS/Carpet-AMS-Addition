@@ -27,8 +27,8 @@ import carpetamsaddition.api.command.CommandBuilder;
 import carpetamsaddition.api.command.suggestionProviders.SetSuggestionProvider;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.messageTextEventUtils.ClickEventUtil;
-import carpetamsaddition.utils.messageTextEventUtils.HoverEventUtil;
+import carpetamsaddition.utils.messageTextEvent.ClickEventUtil;
+import carpetamsaddition.utils.messageTextEvent.HoverEventUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 
 import com.mojang.brigadier.suggestion.SuggestionProvider;

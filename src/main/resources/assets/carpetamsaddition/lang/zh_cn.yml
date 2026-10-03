@@ -596,6 +596,9 @@ carpetamsaddition:
       shulkerGolem:
         name: 潜影贝傀儡
         desc: 可以通过在潜影盒上放置一个雕刻南瓜来召唤一只潜影贝
+      experimentalContentCheckDisabled:
+        name: 禁用实验性内容检查
+        desc: 允许在游戏中通过添加数据包来游玩Minecraft的实验性内容（需要重启服务器）
       headHunter:
         name: 猎头
         desc: 当玩家死亡时他们会掉落一个自己的头颅

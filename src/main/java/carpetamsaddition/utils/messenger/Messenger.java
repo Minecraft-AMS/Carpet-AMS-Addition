@@ -21,8 +21,8 @@
 package carpetamsaddition.utils.messenger;
 
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.messageTextEventUtils.ClickEventUtil;
-import carpetamsaddition.utils.messageTextEventUtils.HoverEventUtil;
+import carpetamsaddition.utils.messageTextEvent.ClickEventUtil;
+import carpetamsaddition.utils.messageTextEvent.HoverEventUtil;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import net.minecraft.network.chat.MutableComponent;

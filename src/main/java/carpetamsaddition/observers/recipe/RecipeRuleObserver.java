@@ -22,7 +22,7 @@ package carpetamsaddition.observers.recipe;
 
 import carpet.api.settings.CarpetRule;
 
-import carpetamsaddition.helpers.rule.recipeRule.RecipeRuleHelper;
+import carpetamsaddition.api.recipe.AmsRecipeManager;
 import carpetamsaddition.settings.RuleObserver;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
@@ -31,6 +31,6 @@ import net.minecraft.commands.CommandSourceStack;
 public class RecipeRuleObserver extends RuleObserver<Boolean> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<Boolean> rule, Boolean oldValue, Boolean newValue) {
-        RecipeRuleHelper.onValueChange(MinecraftServerUtil.getServer());
+        AmsRecipeManager.reloadServerResources(MinecraftServerUtil.getServer());
     }
 }

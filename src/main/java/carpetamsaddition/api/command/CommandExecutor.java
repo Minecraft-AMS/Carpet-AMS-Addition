@@ -20,7 +20,6 @@ public interface CommandExecutor {
      * 执行指令逻辑
      *
      * @param context 当前指令执行上下文
-     * @return 指令结果值，通常使用 {@link CommandResult}
      * @throws CommandSyntaxException 当来源或参数不满足执行要求时抛出
      */
     int execute(CommandExecutionContext context) throws CommandSyntaxException;
