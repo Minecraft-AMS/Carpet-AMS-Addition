@@ -27,11 +27,21 @@ import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 
+/**
+ * 配方模板统一接口。
+ * 每种配方模板实现该接口后，即可将自身转为配方 JSON 并写入配方映射，
+ * 供 {@code AmsRecipeManager} 统一注入服务端配方表。
+ */
 public interface RecipeTemplateInterface {
+    /** 将本模板转换为配方 JSON 对象 */
     JsonObject toJson();
 
+    /** 以配方 ID 为键，将本模板对应的配方 JSON 写入目标映射 */
     void addToRecipeMap(Map<Identifier, JsonElement> recipeMap);
 
+    /**
+     * 兼容不同版本返回产物物品 ID 的 JSON 键名：
+     */
     default String compatResultItemIdKey() {
         //#if MC>=12005
         //$$ return "id";
