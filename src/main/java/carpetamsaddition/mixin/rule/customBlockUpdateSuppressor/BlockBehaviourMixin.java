@@ -23,7 +23,7 @@ package carpetamsaddition.mixin.rule.customBlockUpdateSuppressor;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.customBlockUpdateSuppressor.BlockUpdateSuppressorExceptionHelper;
 import carpetamsaddition.utils.RegexTools;
-import carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry;
+import carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommand;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 //#if MC>12006
@@ -54,7 +54,7 @@ public abstract class BlockBehaviourMixin {
         boolean notify, CallbackInfo ci
     ) {
         if (!Objects.equals(CarpetAMSAdditionSettings.customBlockUpdateSuppressor, "none")) {
-            if (AmsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode) {
+            if (AmsUpdateSuppressionCrashFixCommand.amsUpdateSuppressionCrashFixForceMode) {
                 CarpetAMSAdditionSettings.amsUpdateSuppressionCrashFix = "true";
             }
             String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); // Block{minecraft:bedrock} -> minecraft:bedrock

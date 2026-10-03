@@ -25,7 +25,7 @@ import carpetamsaddition.utils.MinecraftClientUtil;
 import carpetamsaddition.utils.NetworkUtil;
 import carpetamsaddition.utils.PacketByteBufExtras;
 import carpetamsaddition.network.AMS_PayloadManager;
-import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
+import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommand;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.client.player.LocalPlayer;
@@ -59,8 +59,8 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        SetPlayerPoseCommandRegistry.DO_POSE_MAP.clear();
-        SetPlayerPoseCommandRegistry.DO_POSE_MAP.putAll(this.poseMap);
+        SetPlayerPoseCommand.DO_POSE_MAP.clear();
+        SetPlayerPoseCommand.DO_POSE_MAP.putAll(this.poseMap);
 
         LocalPlayer player = MinecraftClientUtil.getCurrentPlayer();
 

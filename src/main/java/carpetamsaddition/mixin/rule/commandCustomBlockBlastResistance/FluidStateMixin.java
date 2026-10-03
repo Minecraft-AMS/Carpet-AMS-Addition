@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.commandCustomBlockBlastResistance;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
+import carpetamsaddition.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommand;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -39,7 +39,7 @@ public abstract class FluidStateMixin implements FluidStateInvoker {
     private float getBlastResistance(float original) {
         if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomBlockBlastResistance, "false") && CarpetAMSAdditionSettings.enhancedWorldEater == -1.0F) {
             BlockState fluidState = this.invokerGetBlockState().getBlock().defaultBlockState();
-            return CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.getOrDefault(fluidState, original);
+            return CustomBlockBlastResistanceCommand.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.getOrDefault(fluidState, original);
         } else {
             return original;
         }

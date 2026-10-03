@@ -23,7 +23,7 @@ package carpetamsaddition.network.payloads.rule.commandCustomBlockHardness;
 import carpetamsaddition.utils.PacketByteBufExtras;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.network.AMS_CustomPayload;
-import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
+import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommand;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -53,8 +53,8 @@ public class CustomBlockHardnessPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.clear();
-        CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.putAll(this.hardnessMap);
+        CustomBlockHardnessCommand.CUSTOM_BLOCK_HARDNESS_MAP.clear();
+        CustomBlockHardnessCommand.CUSTOM_BLOCK_HARDNESS_MAP.putAll(this.hardnessMap);
     }
 
     public static CustomBlockHardnessPayload_S2C create(Map<BlockState, Float> hardnessMap) {

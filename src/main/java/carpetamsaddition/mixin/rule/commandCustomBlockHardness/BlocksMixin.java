@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.commandCustomBlockHardness;
 
-import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
+import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommand;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -41,7 +41,7 @@ public abstract class BlocksMixin {
             //#else
             //$$ float hardness = block.defaultBlockState().getDestroySpeed(null, null);
             //#endif
-            CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.put(block, hardness);
+            CustomBlockHardnessCommand.DEFAULT_HARDNESS_MAP.put(block, hardness);
         }
     }
 }

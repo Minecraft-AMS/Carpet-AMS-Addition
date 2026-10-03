@@ -34,7 +34,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode;
+import static carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommand.amsUpdateSuppressionCrashFixForceMode;
 
 public class ForceModeCommandConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

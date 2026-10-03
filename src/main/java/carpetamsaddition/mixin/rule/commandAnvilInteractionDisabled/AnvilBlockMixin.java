@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.commandAnvilInteractionDisabled;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry;
+import carpetamsaddition.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommand;
 
 import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.InteractionResult;
@@ -46,7 +46,7 @@ public abstract class AnvilBlockMixin {
         cancellable = true
     )
     private void onUse(CallbackInfoReturnable<InteractionResult> cir) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.commandAnvilInteractionDisabled, "false") && AnvilInteractionDisabledCommandRegistry.anvilInteractionDisabled) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandAnvilInteractionDisabled, "false") && AnvilInteractionDisabledCommand.anvilInteractionDisabled) {
             cir.setReturnValue( InteractionResult.FAIL);
             cir.cancel();
         }

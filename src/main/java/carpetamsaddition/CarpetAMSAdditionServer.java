@@ -22,14 +22,15 @@ package carpetamsaddition;
 
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+import carpetamsaddition.commands.AmsCommandRegistry;
+import carpetamsaddition.api.command.CommandRegistrationContext;
 import carpetamsaddition.settings.CarpetRuleRegistrar;
 
 import carpetamsaddition.api.recipe.AmsRecipeManager;
 import carpetamsaddition.api.recipe.AmsRecipeBuilder;
-import carpetamsaddition.commands.RegisterCommands;
-import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
-import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
-import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
+import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommand;
+import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommand;
+import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommand;
 import carpetamsaddition.config.LoadConfigFromJson;
 import carpetamsaddition.config.rule.welcomeMessage.CustomWelcomeMessageConfig;
 import carpetamsaddition.helpers.FeatureChecker;
@@ -42,7 +43,7 @@ import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.Custom
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
 import carpetamsaddition.translations.AMSTranslations;
 import carpetamsaddition.translations.TranslationConstants;
-import carpetamsaddition.utils.CommandHelper;
+import carpetamsaddition.api.command.CommandHelper;
 import carpetamsaddition.utils.CountRulesUtil;
 import carpetamsaddition.utils.MinecraftServerUtil;
 import carpetamsaddition.utils.NetworkUtil;
@@ -127,7 +128,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
 
     @Override
     public void onTick(MinecraftServer server) {
-        LeaderCommandRegistry.tick();
+        LeaderCommand.tick();
     }
 
     @Override
@@ -142,12 +143,13 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         , final CommandBuildContext commandBuildContext
         //#endif
     ) {
-        RegisterCommands.registerCommands(
+        AmsCommandRegistry.registerAll(
+            new CommandRegistrationContext(
             dispatcher
             //#if MC>=11904
             , commandBuildContext
             //#endif
-        );
+        ));
     }
 
     public void registerCustomRecipes(
@@ -194,15 +196,15 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
 
     public void sendS2CPacketOnHandShake(ServerPlayer player) {
         NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(CarpetAMSAdditionMod.getVersion(), NetworkUtil.getServerSupportState()), NetworkUtil.SendMode.NEED_SUPPORT);
-        NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
-        NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommandRegistry.DO_POSE_MAP, player.getUUID()), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommand.CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommand.DO_POSE_MAP, player.getUUID()), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, LazySettingsPayload_S2C.create(CarpetAMSAdditionLazySettings.RULES), NetworkUtil.SendMode.NEED_SUPPORT);
     }
 
     @Override
     public void onPlayerLoggedIn(ServerPlayer player) {
         CustomWelcomeMessageConfig.getConfig().sendWelcomeMessage(player, MinecraftServerUtil.getServer());
-        LeaderCommandRegistry.onPlayerLoggedIn(player);
+        LeaderCommand.onPlayerLoggedIn(player);
         RecipeRuleHelper.onPlayerLoggedIn(MinecraftServerUtil.getServer(), player);
     }
 

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.network.payloads.debug;
 
-import carpetamsaddition.commands.debug.network.AmspCommandRegistry;
+import carpetamsaddition.commands.debug.network.AmspCommand;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.utils.NetworkUtil;
@@ -55,7 +55,7 @@ public class RequestClientModVersionPayload_C2S extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnServerThread(() -> AmspCommandRegistry.clientModVersion.put(this.uuid, this.version));
+        NetworkUtil.executeOnServerThread(() -> AmspCommand.clientModVersion.put(this.uuid, this.version));
     }
 
     public static RequestClientModVersionPayload_C2S create(String version, UUID uuid) {
