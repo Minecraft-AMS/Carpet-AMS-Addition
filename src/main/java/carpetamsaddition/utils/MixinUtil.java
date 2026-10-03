@@ -27,6 +27,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.MutableComponent;
 
 import org.jetbrains.annotations.Nullable;
+
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
 public class MixinUtil {

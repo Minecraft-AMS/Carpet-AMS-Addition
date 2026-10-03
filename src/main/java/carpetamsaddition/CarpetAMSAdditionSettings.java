@@ -393,13 +393,15 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean fertilizableSmallFlower = false;
 
-    //#if MC>=11701
+    //#if MC>=11700
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean safePointedDripstone = false;
     //#endif
 
+    //#if MC>=11700
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean pointedDripstoneCollisionBoxDisabled = false;
+    //#endif
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean foliageGenerateDisabled = false;

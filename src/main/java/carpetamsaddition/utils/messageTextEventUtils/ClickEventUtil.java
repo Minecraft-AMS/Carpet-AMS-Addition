@@ -18,11 +18,9 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.utils.MessageTextEventUtils;
+package carpetamsaddition.utils.messageTextEventUtils;
 
 import net.minecraft.network.chat.ClickEvent;
-
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -31,7 +29,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-@GameVersion(version = "Minecraft > 1.20.6")
 public class ClickEventUtil {
     public static final ClickEvent.Action OPEN_URL = ClickEvent.Action.OPEN_URL;
     public static final ClickEvent.Action OPEN_FILE = ClickEvent.Action.OPEN_FILE;
@@ -39,12 +36,27 @@ public class ClickEventUtil {
     public static final ClickEvent.Action SUGGEST_COMMAND = ClickEvent.Action.SUGGEST_COMMAND;
     public static final ClickEvent.Action CHANGE_PAGE = ClickEvent.Action.CHANGE_PAGE;
     public static final ClickEvent.Action COPY_TO_CLIPBOARD = ClickEvent.Action.COPY_TO_CLIPBOARD;
+    //#if MC>12006
     private static final Map<ClickEvent.Action, Function<Object, ClickEvent>> CLICK_EVENT_ACTION_MAP = new HashMap<>();
+    //#endif
 
     public static ClickEvent event(ClickEvent.Action action, Object value) {
+        //#if MC>12006
         return Optional.ofNullable(CLICK_EVENT_ACTION_MAP.get(action)).map(function -> function.apply(value)).orElseThrow(() -> new IllegalArgumentException("Invalid action or value type"));
+        //#else
+        //$$ if (action == OPEN_URL && value instanceof URI) {
+        //$$     return new ClickEvent(action, value.toString());
+        //$$ }
+        //$$
+        //$$ if (value instanceof String) {
+        //$$     return new ClickEvent(action, (String) value);
+        //$$ }
+        //$$
+        //$$ throw new IllegalArgumentException("Expected a String value for " + action + " action");
+        //#endif
     }
 
+    //#if MC>12006
     static {
         CLICK_EVENT_ACTION_MAP.put(ClickEvent.Action.OPEN_URL, value -> {
             if (value instanceof URI) {
@@ -65,4 +77,5 @@ public class ClickEventUtil {
         CLICK_EVENT_ACTION_MAP.put(ClickEvent.Action.CHANGE_PAGE, value -> new ClickEvent.ChangePage((Integer) value));
         CLICK_EVENT_ACTION_MAP.put(ClickEvent.Action.COPY_TO_CLIPBOARD, value -> new ClickEvent.CopyToClipboard((String) value));
     }
+    //#endif
 }

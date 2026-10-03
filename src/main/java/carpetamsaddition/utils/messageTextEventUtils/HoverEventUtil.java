@@ -18,7 +18,7 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.utils.MessageTextEventUtils;
+package carpetamsaddition.utils.messageTextEventUtils;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
@@ -28,25 +28,45 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.world.item.ItemStack;
 //#endif
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-@GameVersion(version = "Minecraft > 1.20.6")
 public class HoverEventUtil {
+    //#if MC>12006
     public static final HoverEvent.Action SHOW_TEXT = HoverEvent.Action.SHOW_TEXT;
     public static final HoverEvent.Action SHOW_ITEM = HoverEvent.Action.SHOW_ITEM;
     public static final HoverEvent.Action SHOW_ENTITY = HoverEvent.Action.SHOW_ENTITY;
     private static final Map<HoverEvent.Action, Function<Object, HoverEvent>> HOVER_EVENT_ACTION_MAP = new HashMap<>();
+    //#else
+    //$$ public static final HoverEvent.Action<Component> SHOW_TEXT = HoverEvent.Action.SHOW_TEXT;
+    //$$ public static final HoverEvent.Action<HoverEvent.ItemStackInfo> SHOW_ITEM = HoverEvent.Action.SHOW_ITEM;
+    //$$ public static final HoverEvent.Action<HoverEvent.EntityTooltipInfo> SHOW_ENTITY = HoverEvent.Action.SHOW_ENTITY;
+    //#endif
 
     public static HoverEvent event(HoverEvent.Action action, Object value) {
+        //#if MC>12006
         return Optional.ofNullable(HOVER_EVENT_ACTION_MAP.get(action)).map(function -> function.apply(value)).orElseThrow(() -> new IllegalArgumentException("Invalid action or value type"));
+        //#else
+        //$$ if (action == SHOW_TEXT && value instanceof Component) {
+        //$$     return createEvent(SHOW_TEXT, (Component) value);
+        //$$ }
+        //$$
+        //$$ if (action == SHOW_ITEM && value instanceof ItemStack) {
+        //$$     return createEvent(SHOW_ITEM, new HoverEvent.ItemStackInfo((ItemStack) value));
+        //$$ }
+        //$$
+        //$$ if (action == SHOW_ENTITY && value instanceof HoverEvent.EntityTooltipInfo) {
+        //$$     return createEvent(SHOW_ENTITY, (HoverEvent.EntityTooltipInfo) value);
+        //$$ }
+        //$$
+        //$$ throw new IllegalArgumentException("Invalid action or value type");
+        //#endif
     }
 
+    //#if MC>12006
     static {
         HOVER_EVENT_ACTION_MAP.put(SHOW_TEXT, value -> new HoverEvent.ShowText((Component) value));
         HOVER_EVENT_ACTION_MAP.put(
@@ -59,4 +79,9 @@ public class HoverEventUtil {
         );
         HOVER_EVENT_ACTION_MAP.put(SHOW_ENTITY, value -> new HoverEvent.ShowEntity((HoverEvent.EntityTooltipInfo) value));
     }
+    //#else
+    //$$ private static <T> HoverEvent createEvent(HoverEvent.Action<T> action, T value) {
+    //$$     return new HoverEvent(action, value);
+    //$$ }
+    //#endif
 }

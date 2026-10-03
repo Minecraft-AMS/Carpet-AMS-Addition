@@ -20,12 +20,12 @@
 
 package carpetamsaddition.config;
 
-import carpetamsaddition.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
-import carpetamsaddition.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommandRegistry;
-import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
-import carpetamsaddition.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
-import carpetamsaddition.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommandRegistry;
-import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
+import carpetamsaddition.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommand;
+import carpetamsaddition.commands.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceCommand;
+import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommand;
+import carpetamsaddition.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelCommand;
+import carpetamsaddition.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommand;
+import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommand;
 
 import carpetamsaddition.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
 import carpetamsaddition.config.rule.commandAntiFireItems.CustomAntiFireItemsConfig;
@@ -40,11 +40,11 @@ import net.minecraft.server.MinecraftServer;
 public class LoadConfigFromJson {
     public static void load(MinecraftServer server) {
         ForceModeCommandConfig.loadConfigFromJson(server);
-        CustomBlockBlastResistanceConfig.getInstance().loadBlockStates(CustomBlockBlastResistanceCommandRegistry.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP);
-        LeaderConfig.getInstance().loadFromJson(LeaderCommandRegistry.LEADER_MAP);
-        CustomCommandPermissionLevelConfig.getInstance().loadFromJson(CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP);
-        CustomMovableBlockConfig.getInstance().loadFromJson(CustomMovableBlockCommandRegistry.CUSTOM_MOVABLE_BLOCKS);
-        CustomAntiFireItemsConfig.getInstance().loadFromJson(CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS);
-        CustomBlockHardnessConfig.getInstance().loadBlockStates(CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP);
+        CustomBlockBlastResistanceConfig.getInstance().loadBlockStates(CustomBlockBlastResistanceCommand.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP);
+        LeaderConfig.getInstance().loadFromJson(LeaderCommand.LEADER_MAP);
+        CustomCommandPermissionLevelConfig.getInstance().loadFromJson(CustomCommandPermissionLevelCommand.COMMAND_PERMISSION_MAP);
+        CustomMovableBlockConfig.getInstance().loadFromJson(CustomMovableBlockCommand.CUSTOM_MOVABLE_BLOCKS);
+        CustomAntiFireItemsConfig.getInstance().loadFromJson(CustomAntiFireItemsCommand.CUSTOM_ANTI_FIRE_ITEMS);
+        CustomBlockHardnessConfig.getInstance().loadBlockStates(CustomBlockHardnessCommand.CUSTOM_BLOCK_HARDNESS_MAP);
     }
 }
