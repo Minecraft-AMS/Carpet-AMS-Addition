@@ -25,10 +25,13 @@ import carpet.api.settings.SettingsManager;
 
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.settings.AmsRuleCategory;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.*;
-
+import carpetamsaddition.utils.CarpetUtil;
+import carpetamsaddition.utils.Layout;
+import carpetamsaddition.utils.MinecraftServerUtil;
 import carpetamsaddition.utils.messenger.Messenger;
+
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.MinecraftServer;
 
@@ -47,6 +50,12 @@ import java.util.Objects;
 @SuppressWarnings("LoggingSimilarMessage")
 @Mixin(SettingsManager.class)
 public abstract class Carpet_SettingsManagerMixin {
+    @Unique
+    private static final String AMS_NETWORK_PROTOCOL = "amsNetworkProtocol";
+
+    @Unique
+    private static final Translator tr = new Translator("observer.amsNetworkProtocol");
+
     @Final
     @Shadow
     private Map<String, CarpetRule<?>> rules;
@@ -57,77 +66,58 @@ public abstract class Carpet_SettingsManagerMixin {
     @Shadow
     protected abstract int setDefault(CommandSourceStack source, CarpetRule<?> parsedRule, String value);
 
-    @Unique
-    private final Translator tr = new Translator("observer.amsNetworkProtocol");
-
-    @Inject(method = "<clinit>", at = @At("TAIL"))
-    private static void collectAmsNetworkRuleNames(CallbackInfo ci) {
-        NetworkUtil.collectAmsNetworkRuleNames();
-    }
-
     @Inject(method = "loadConfigurationFromConf", at = @At("TAIL"))
     private void resetAmsNetworkRulesOnLoadConfig(CallbackInfo ci) {
-        CarpetRule<?> amsNetworkProtocolRule = rules.get("amsNetworkProtocol");
-
-        if (amsNetworkProtocolRule == null) {
+        CarpetRule<?> protocolRule = this.rules.get(AMS_NETWORK_PROTOCOL);
+        Object protocolValue = protocolRule == null ? null : protocolRule.value();
+        if (!(protocolValue instanceof Boolean) || (Boolean) protocolValue) {
             return;
         }
 
-        Object ruleValue = amsNetworkProtocolRule.value();
+        CommandSourceStack source = this.server.createCommandSourceStack();
 
-        if (!(ruleValue instanceof Boolean)) {
-            return;
-        }
+        for (CarpetRule<?> rule : this.rules.values()) {
+            String ruleName = CarpetUtil.getRuleName(rule);
+            if (AMS_NETWORK_PROTOCOL.equals(ruleName) || !CarpetUtil.hasCategory(rule, AmsRuleCategory.AMS_NETWORK)) {
+                continue;
+            }
 
-        Boolean isAmsNetworkProtocolEnabled = (Boolean) ruleValue;
+            String defaultValue = CarpetUtil.getRuleDefaultValue(rule);
+            if (Objects.equals(CarpetUtil.getRuleCurrentValue(rule), defaultValue)) {
+                continue;
+            }
 
-        if (!isAmsNetworkProtocolEnabled) {
-            CommandSourceStack source = server.createCommandSourceStack();
-
-            for (String ruleName : NetworkUtil.AMS_NETWORK_RULE_NAMES) {
-                CarpetRule<?> targetRule = rules.get(ruleName);
-
-                if (targetRule == null) {
-                    continue;
-                }
-
-                if (targetRule.equals(amsNetworkProtocolRule)) {
-                    continue;
-                }
-
-                if (Objects.equals(CarpetUtil.getRuleCurrentValue(targetRule), CarpetUtil.getRuleDefaultValue(targetRule))) {
-                    continue;
-                }
-
-                try {
-                    this.setDefault(source, targetRule, CarpetUtil.getRuleDefaultValue(targetRule));
-                } catch (Exception e) {
-                    CarpetAMSAdditionServer.LOGGER.error("Failed to set {} rule to default value", ruleName);
-                }
+            try {
+                this.setDefault(source, rule, defaultValue);
+            } catch (Exception e) {
+                CarpetAMSAdditionServer.LOGGER.error("Failed to set {} rule to default value", ruleName);
             }
         }
     }
 
     @Inject(method = {"setRule", "setDefault"}, at = @At("HEAD"), cancellable = true)
     private void resetAmsNetworkRulesOnSetRule(CommandSourceStack source, CarpetRule<?> rule, String newValue, CallbackInfoReturnable<Integer> cir) {
-        CarpetRule<?> amsNetworkProtocolRule = rules.get("amsNetworkProtocol");
         String ruleName = CarpetUtil.getRuleName(rule);
+        String defaultValue = CarpetUtil.getRuleDefaultValue(rule);
 
-        if (!NetworkUtil.AMS_NETWORK_RULE_NAMES.contains(ruleName) || rule.equals(amsNetworkProtocolRule)) {
+        if (
+            CarpetAMSAdditionSettings.amsNetworkProtocol
+            || !MinecraftServerUtil.serverIsRunning()
+            || AMS_NETWORK_PROTOCOL.equals(ruleName)
+            || !CarpetUtil.hasCategory(rule, AmsRuleCategory.AMS_NETWORK)
+            || Objects.equals(newValue, defaultValue)
+        ) {
             return;
         }
 
-        if (!CarpetAMSAdditionSettings.amsNetworkProtocol && !Objects.equals(newValue, CarpetUtil.getRuleDefaultValue(rule)) && MinecraftServerUtil.serverIsRunning()) {
-            try {
-                rule.set(source, CarpetUtil.getRuleDefaultValue(rule));
-            } catch (Exception e) {
-                CarpetAMSAdditionServer.LOGGER.error("Failed to set {} rule to default value", ruleName);
-            }
-
-            Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", ruleName), Layout.YELLOW));
-
-            cir.setReturnValue(0);
-            cir.cancel();
+        try {
+            rule.set(source, defaultValue);
+        } catch (Exception e) {
+            CarpetAMSAdditionServer.LOGGER.error("Failed to set {} rule to default value", ruleName);
         }
+
+        Messenger.tell(source, Messenger.f(tr.tr("need_enable_protocol", ruleName), Layout.YELLOW));
+
+        cir.setReturnValue(0);
     }
 }

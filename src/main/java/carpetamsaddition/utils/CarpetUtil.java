@@ -48,4 +48,12 @@ public class CarpetUtil {
         //$$ return rule.getAsString();
         //#endif
     }
+
+    public static boolean hasCategory(@NotNull CarpetRule<?> rule, @NotNull String category) {
+        //#if MC>=11904
+        return rule.categories().contains(category);
+        //#else
+        //$$ return rule.categories.contains(category);
+        //#endif
+    }
 }

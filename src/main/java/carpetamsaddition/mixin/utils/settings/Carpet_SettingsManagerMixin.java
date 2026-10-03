@@ -18,13 +18,12 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.util.settings;
+package carpetamsaddition.mixin.utils.settings;
 
 import carpet.api.settings.CarpetRule;
 import carpet.api.settings.SettingsManager;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.utils.CarpetUtil;
+import carpetamsaddition.settings.AmsRuleMetadata;
 
 import net.minecraft.commands.CommandSourceStack;
 
@@ -41,7 +40,7 @@ public abstract class Carpet_SettingsManagerMixin {
 
     @Inject(method = "setRule", at = @At("RETURN"))
     private void isMustSetDefaultRule(CommandSourceStack source, CarpetRule<?> rule, String value, CallbackInfoReturnable<Integer> cir) {
-        if (CarpetAMSAdditionSettings.MUST_SET_DEFAULT_RULES.contains(CarpetUtil.getRuleName(rule))) {
+        if (AmsRuleMetadata.mustSetDefault(rule)) {
             this.setDefault(source, rule, value);
         }
     }

@@ -140,7 +140,7 @@ public class CarpetRuleRegistrar {
     //$$         }
     //$$     };
     //$$
-    //$$     this.rules.add(ParsedRuleAccessor.invokeConstructor(field, cmRule, this.settingsManager));
+    //$$     this.addRule(field, ParsedRuleAccessor.invokeConstructor(field, cmRule, this.settingsManager));
     //$$ }
     //#else
     private void parseRule(Field field, Rule rule) {
@@ -160,7 +160,7 @@ public class CarpetRuleRegistrar {
             parsedRuleConstructor.setAccessible(true);
             Object carpetRule = parsedRuleConstructor.newInstance(field, ruleAnnotation, this.settingsManager);
             if (carpetRule instanceof CarpetRule) {
-                this.rules.add((CarpetRule<?>) carpetRule);
+                this.addRule(field, (CarpetRule<?>) carpetRule);
             } else {
                 throw new ClassCastException("Failed to cast to CarpetRule.");
             }
@@ -173,6 +173,11 @@ public class CarpetRuleRegistrar {
         }
     }
     //#endif
+
+    private void addRule(Field field, CarpetRule<?> rule) {
+        this.rules.add(rule);
+        AmsRuleMetadata.register(rule, field.isAnnotationPresent(MustSetDefault.class), field.isAnnotationPresent(RecipeRule.class));
+    }
 
     private void registerToCarpet() {
         //#if MC<11904
