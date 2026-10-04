@@ -28,6 +28,8 @@ import carpetamsaddition.network.payloads.handshake.HandShakeC2SPayload;
 import carpetamsaddition.network.payloads.handshake.HandShakeS2CPayload;
 import carpetamsaddition.network.payloads.handshake.RequestHandShakeS2CPayload;
 import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
+import carpetamsaddition.network.payloads.rule.blockHardnessSyncProtocol.BlockHardnessSyncPayload_C2S;
+import carpetamsaddition.network.payloads.rule.blockHardnessSyncProtocol.BlockHardnessSyncPayload_S2C;
 import carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_C2S;
 import carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
@@ -57,6 +59,8 @@ public class AMS_PayloadManager {
         REQUEST_CLIENT_MOD_VERSION_C2S("request_client_mod_version_c2s"),
         REQUEST_HANDSHAKE_S2C("request_handshake_s2c"),
         SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness"),
+        BLOCK_HARDNESS_SYNC_PROTOCOL_C2S("block_hardness_sync_protocol_c2s"),
+        BLOCK_HARDNESS_SYNC_PROTOCOL_S2C("block_hardness_sync_protocol_s2c"),
         CLIENT_PLAYER_FPS_C2S("client_player_fps_c2s"),
         CLIENT_PLAYER_FPS_S2C("client_player_fps_s2c"),
         UPDATE_PLAYER_POSE_S2C("update_player_pose_s2c"),
@@ -81,11 +85,13 @@ public class AMS_PayloadManager {
         registerPayload(PacketId.HANDSHAKE_C2S.getId(), HandShakeC2SPayload::new);
         registerPayload(PacketId.CLIENT_PLAYER_FPS_C2S.getId(), ClientPlayerFpsPayload_C2S::new);
         registerPayload(PacketId.REQUEST_CLIENT_MOD_VERSION_C2S.getId(), RequestClientModVersionPayload_C2S::new);
+        registerPayload(PacketId.BLOCK_HARDNESS_SYNC_PROTOCOL_C2S.getId(), BlockHardnessSyncPayload_C2S::new);
 
         // S2C
         registerPayload(PacketId.HANDSHAKE_S2C.getId(), HandShakeS2CPayload::new);
         registerPayload(PacketId.REQUEST_HANDSHAKE_S2C.getId(), buf -> new RequestHandShakeS2CPayload());
         registerPayload(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId(), CustomBlockHardnessPayload_S2C::new);
+        registerPayload(PacketId.BLOCK_HARDNESS_SYNC_PROTOCOL_S2C.getId(), BlockHardnessSyncPayload_S2C::new);
         registerPayload(PacketId.CLIENT_PLAYER_FPS_S2C.getId(), ClientPlayerFpsPayload_S2C::new);
         registerPayload(PacketId.UPDATE_PLAYER_POSE_S2C.getId(), UpdatePlayerPosePayload_S2C::new);
         registerPayload(PacketId.REQUEST_CLIENT_MOD_VERSION_S2C.getId(), RequestClientModVersionPayload_S2C::new);
@@ -104,6 +110,7 @@ public class AMS_PayloadManager {
         chain.put(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
         chain.put(ClientPlayerFpsPayload_C2S.class, ClientPlayerFpsPayload_C2S::handle);
         chain.put(RequestClientModVersionPayload_C2S.class, RequestClientModVersionPayload_C2S::handle);
+        chain.put(BlockHardnessSyncPayload_C2S.class, BlockHardnessSyncPayload_C2S::handle);
     }
 
     // S2C
@@ -111,6 +118,7 @@ public class AMS_PayloadManager {
         chain.put(HandShakeS2CPayload.class, HandShakeS2CPayload::handle);
         chain.put(RequestHandShakeS2CPayload.class, RequestHandShakeS2CPayload::handle);
         chain.put(CustomBlockHardnessPayload_S2C.class, CustomBlockHardnessPayload_S2C::handle);
+        chain.put(BlockHardnessSyncPayload_S2C.class, BlockHardnessSyncPayload_S2C::handle);
         chain.put(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
         chain.put(ClientPlayerFpsPayload_S2C.class, ClientPlayerFpsPayload_S2C::handle);
         chain.put(UpdatePlayerPosePayload_S2C.class,  UpdatePlayerPosePayload_S2C::handle);

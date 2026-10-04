@@ -709,6 +709,9 @@ carpetamsaddition:
       amsNetworkProtocol:
         name: AMS网络协议
         desc: AMS网络协议的开关
+      blockHardnessSyncProtocol:
+        name: 方块硬度同步协议
+        desc: 将服务端方块硬度同步给客户端
       commandAmspDebug:
         name: AMSP网络协议Debug指令
         desc: 一些用于网络通信测试的指令

@@ -590,6 +590,8 @@ carpetamsaddition:
         desc: Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
       amsNetworkProtocol:
         desc: The switch of the AMS network protocol
+      blockHardnessSyncProtocol:
+        desc: Synchronize the server-side block hardness to the client
       commandAmspDebug:
         desc: Some commands for network communication testing
 #        extra:

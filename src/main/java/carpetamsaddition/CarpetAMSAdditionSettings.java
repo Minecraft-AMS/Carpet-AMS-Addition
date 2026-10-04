@@ -23,7 +23,7 @@ package carpetamsaddition;
 import carpetamsaddition.settings.Rule;
 
 import carpetamsaddition.observers.NeedRestartServerOrClientObserver;
-import carpetamsaddition.settings.MustSetDefault;
+import carpetamsaddition.settings.PersistAsDefault;
 import carpetamsaddition.validators.rule.experimentalMinecartSpeed.MaxSpeedRangeValidator;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
@@ -186,7 +186,7 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
-    @MustSetDefault
+    @PersistAsDefault
     @Rule(
         categories = {AMS, FEATURE, EXPERIMENTAL},
         validators = NeedRestartServerOrClientObserver.class
@@ -635,7 +635,7 @@ public class CarpetAMSAdditionSettings {
 
     //#if MC>=12102
     @GameVersion(version = "Minecraft >= 1.21.2")
-    @MustSetDefault
+    @PersistAsDefault
     @Rule(
         categories = {AMS, FEATURE, EXPERIMENTAL},
         validators = NeedRestartServerOrClientObserver.class
@@ -649,11 +649,15 @@ public class CarpetAMSAdditionSettings {
     /*
      * AMS网络协议规则
      */
+    @PersistAsDefault
     @Rule(
         validators = AmspRuleObserver.class,
         categories = {AMS, AMS_NETWORK}
     )
     public static boolean amsNetworkProtocol = false;
+
+    @Rule(categories = {AMS, FEATURE, SURVIVAL, AMS_NETWORK})
+    public static boolean blockHardnessSyncProtocol = false;
 
     @Rule(
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},

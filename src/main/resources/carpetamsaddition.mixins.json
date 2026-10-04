@@ -229,6 +229,8 @@
     "hooks.network.ClientPlayNetworkHandlerMixin",
     "hooks.network.MinecraftClientMixin",
     "network.ClientPlayNetworkHandlerMixin",
+    "rule.blockHardnessSyncProtocol.BlockStateBaseMixin",
+    "rule.blockHardnessSyncProtocol.MultiPlayerGameModeMixin",
     "rule.commandGetClientPlayerFPS.MinecraftInvoker",
     "rule.maxClientInteractionReachDistance.ClientPlayerInteractionManagerMixin",
     "rule.maxClientInteractionReachDistance.GameRendererMixin",
