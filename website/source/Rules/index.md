@@ -2748,6 +2748,24 @@ AMS网络协议的开关。
 
 - 分类: `AMS`
 
+## 方块硬度同步协议（blockHardnessSyncProtocol）
+
+将服务端方块硬度同步给客户端。
+
+- 类型: `boolean`
+
+  
+
+- 默认值: `false`
+
+  
+
+- 参考选项: `false`, `true`
+
+  
+
+- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。

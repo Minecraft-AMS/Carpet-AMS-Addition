@@ -2769,6 +2769,25 @@ Switch the translation mode of Carpet AMS Addition.
 
 * Categroies: `AMS`
 
+## blockHardnessSyncProtocol
+
+Synchronize the server-side block hardness to the client.
+
+
+- Type: `boolean`
+
+  
+
+- Default: `false`
+
+  
+
+- Suggested options: `false`, `true`
+
+  
+
+- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
