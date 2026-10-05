@@ -90,6 +90,10 @@ loom {
 	}
 
 	runs {
+		client {
+			programArgs "--username", "1024_byteeeee"
+		}
+
         mixinAudit {
             server()
             vmArgs '-Dcarpetamsaddition.mixin_audit=true'
