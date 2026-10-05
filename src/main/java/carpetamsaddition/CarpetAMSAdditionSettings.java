@@ -184,7 +184,7 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
-    @LazyRule
+    // @LazyRule
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static boolean largeShulkerBox = false;
 

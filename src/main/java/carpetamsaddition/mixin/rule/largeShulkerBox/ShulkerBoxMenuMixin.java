@@ -23,6 +23,7 @@ package carpetamsaddition.mixin.rule.largeShulkerBox;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -32,16 +33,27 @@ import net.minecraft.world.inventory.ShulkerBoxSlot;
 import org.jetbrains.annotations.Nullable;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = ShulkerBoxMenu.class, priority = 1024)
 public abstract class ShulkerBoxMenuMixin extends AbstractContainerMenu {
+    @Unique
+    private final boolean ams$largeMenu = CarpetAMSAdditionSettings.largeShulkerBox;
+
     protected ShulkerBoxMenuMixin(@Nullable MenuType<?> type, int syncId) {
         super(type, syncId);
+    }
+
+    @Inject(method = "stillValid", at = @At("HEAD"), cancellable = true)
+    private void closeMenuAfterRuleChange(Player player, CallbackInfoReturnable<Boolean> cir) {
+        if (this.ams$largeMenu != CarpetAMSAdditionSettings.largeShulkerBox) {
+            cir.setReturnValue(false);
+        }
     }
 
     @ModifyArg(
@@ -56,6 +68,7 @@ public abstract class ShulkerBoxMenuMixin extends AbstractContainerMenu {
         if (!CarpetAMSAdditionSettings.largeShulkerBox) {
             return type;
         }
+
         return MenuType.GENERIC_9x6;
     }
 
@@ -84,7 +97,7 @@ public abstract class ShulkerBoxMenuMixin extends AbstractContainerMenu {
             //#else
             //$$ target = "Lnet/minecraft/world/Container;startOpen(Lnet/minecraft/world/entity/player/Player;)V",
             //#endif
-                shift = At.Shift.AFTER
+            shift = At.Shift.AFTER
         )
     )
     protected void addingExtraSlots(int syncId, Inventory playerInventory, Container inventory, CallbackInfo ci) {

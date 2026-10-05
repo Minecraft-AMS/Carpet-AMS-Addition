@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.BlockPos;
@@ -45,6 +46,9 @@ import java.util.stream.IntStream;
 
 @Mixin(value = ShulkerBoxBlockEntity.class, priority = 1024)
 public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBlockEntity implements WorldlyContainer {
+    @Unique
+    private boolean ams$lastLargeShulkerBox = CarpetAMSAdditionSettings.largeShulkerBox;
+
     //#if MC<11700
     //$$ protected ShulkerBoxBlockEntityMixin(BlockEntityType<?> blockEntityType) {
     //$$     super(blockEntityType);
@@ -92,8 +96,40 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
     @Inject(method = "getContainerSize", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
         if (CarpetAMSAdditionSettings.largeShulkerBox) {
-            cir.setReturnValue(9 * 6);
-            cir.cancel();
+            int size = 9 * 6;
+            if (this.itemStacks.size() < size) {
+                NonNullList<@NotNull ItemStack> expandedItems = NonNullList.withSize(size, ItemStack.EMPTY);
+                for (int slot = 0; slot < this.itemStacks.size(); slot++) {
+                    expandedItems.set(slot, this.itemStacks.get(slot));
+                }
+                this.itemStacks = expandedItems;
+            }
+            cir.setReturnValue(size);
+        } else {
+            cir.setReturnValue(9 * 3);
+        }
+    }
+
+    //#if MC>=11700
+    @Inject(method = "tick", at = @At("HEAD"))
+    private static void updateComparatorOnRuleChange(Level level, BlockPos pos, BlockState state, ShulkerBoxBlockEntity box, CallbackInfo ci) {
+        if (!level.isClientSide()) {
+            ((ShulkerBoxBlockEntityMixin) (Object) box).ams$updateRuleState();
+        }
+    }
+    //#else
+    //$$ @Inject(method = "tick", at = @At("HEAD"))
+    //$$ private void updateComparatorOnRuleChange(CallbackInfo ci) {
+    //$$     if (this.level != null && !this.level.isClientSide()) this.ams$updateRuleState();
+    //$$ }
+    //#endif
+
+    @Unique
+    private void ams$updateRuleState() {
+        boolean enabled = CarpetAMSAdditionSettings.largeShulkerBox;
+        if (this.ams$lastLargeShulkerBox != enabled) {
+            this.ams$lastLargeShulkerBox = enabled;
+            this.setChanged();
         }
     }
 
