@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.largeShulkerBox;
 
-import carpetamsaddition.CarpetAMSAdditionLazySettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -42,7 +42,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.stream.IntStream;
 
-import static carpetamsaddition.CarpetAMSAdditionLazySettings.Rule.*;
 
 @Mixin(value = ShulkerBoxBlockEntity.class, priority = 1024)
 public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBlockEntity implements WorldlyContainer {
@@ -71,7 +70,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
         at = @At("RETURN")
     )
     private void init1(CallbackInfo ci) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
+        if (CarpetAMSAdditionSettings.largeShulkerBox) {
             this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
         }
     }
@@ -85,14 +84,14 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
         at = @At("RETURN")
     )
     private void init2(CallbackInfo ci) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
+        if (CarpetAMSAdditionSettings.largeShulkerBox) {
             this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
         }
     }
 
     @Inject(method = "getContainerSize", at = @At("HEAD"), cancellable = true)
     private void size(CallbackInfoReturnable<Integer> cir) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
+        if (CarpetAMSAdditionSettings.largeShulkerBox) {
             cir.setReturnValue(9 * 6);
             cir.cancel();
         }
@@ -100,7 +99,7 @@ public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBl
 
     @Inject(method = "getSlotsForFace", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
+        if (CarpetAMSAdditionSettings.largeShulkerBox) {
             int[] availableSlots = IntStream.range(0, getContainerSize()).toArray();
             cir.setReturnValue(availableSlots);
             cir.cancel();

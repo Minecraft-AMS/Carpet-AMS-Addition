@@ -176,7 +176,10 @@ public class CarpetRuleRegistrar {
 
     private void addRule(Field field, CarpetRule<?> rule) {
         this.rules.add(rule);
-        AmsRuleMetadata.register(rule, field.isAnnotationPresent(PersistAsDefault.class), field.isAnnotationPresent(RecipeRule.class));
+        AmsRuleMetadata.register(
+            rule, field, field.getAnnotation(Rule.class),
+            field.isAnnotationPresent(RecipeRule.class)
+        );
     }
 
     private void registerToCarpet() {

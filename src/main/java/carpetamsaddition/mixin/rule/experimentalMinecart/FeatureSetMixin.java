@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.experimentalMinecart;
 
-import carpetamsaddition.CarpetAMSAdditionLazySettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -39,7 +39,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class FeatureSetMixin {
     @ModifyReturnValue(method = "of(Lnet/minecraft/world/flag/FeatureFlag;)Lnet/minecraft/world/flag/FeatureFlagSet;", at = @At("RETURN"))
     private static FeatureFlagSet beVanilla(FeatureFlagSet original, @Local(argsOnly = true) FeatureFlag flag) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(CarpetAMSAdditionLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED) && flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
+        if (CarpetAMSAdditionSettings.experimentalMinecartEnabled && flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
             return FeatureFlagSet.of(FeatureFlags.VANILLA);
         } else {
             return original;
@@ -48,7 +48,7 @@ public abstract class FeatureSetMixin {
 
     @ModifyReturnValue(method = "contains", at = @At("RETURN"))
     private boolean includeExperimentalMinecart(boolean original, @Local(argsOnly = true) FeatureFlag flag) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(CarpetAMSAdditionLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED) && flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
+        if (CarpetAMSAdditionSettings.experimentalMinecartEnabled && flag.equals(FeatureFlags.MINECART_IMPROVEMENTS)) {
             return true;
         } else {
             return original;

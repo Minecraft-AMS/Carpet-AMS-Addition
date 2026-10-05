@@ -20,53 +20,54 @@
 
 package carpetamsaddition.network.payloads.core;
 
-import carpetamsaddition.CarpetAMSAdditionLazySettings;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
+import carpetamsaddition.settings.AmsRuleMetadata;
 import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
 
-import java.util.EnumSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class LazySettingsPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.LAZY_SETTINGS_S2C.getId();
-    private final EnumSet<CarpetAMSAdditionLazySettings.Rule> rules;
+    private static final int MAX_RULE_COUNT = 256;
+    private final Map<String, String> values;
 
-    public LazySettingsPayload_S2C(EnumSet<CarpetAMSAdditionLazySettings.Rule> rules) {
+    public LazySettingsPayload_S2C(Map<String, String> values) {
         super(ID);
-        this.rules = EnumSet.copyOf(rules);
+        this.values = values == null ? new LinkedHashMap<>() : new LinkedHashMap<>(values);
     }
 
     public LazySettingsPayload_S2C(FriendlyByteBuf buf) {
         super(ID);
 
         int size = buf.readVarInt();
-        this.rules = EnumSet.noneOf(CarpetAMSAdditionLazySettings.Rule.class);
-
+        if (size < 0 || size > MAX_RULE_COUNT) {
+            throw new IllegalArgumentException("Invalid lazy rule count: " + size);
+        }
+        this.values = new LinkedHashMap<>();
         for (int i = 0; i < size; i++) {
-            String ruleName = NetworkUtil.readBufString(buf);
-            CarpetAMSAdditionLazySettings.Rule rule = CarpetAMSAdditionLazySettings.Rule.valueOf(ruleName);
-            rules.add(rule);
+            this.values.put(NetworkUtil.readBufString(buf), NetworkUtil.readBufString(buf));
         }
     }
 
     @Override
     protected void writeData(FriendlyByteBuf buf) {
-        buf.writeVarInt(rules.size());
-
-        for (CarpetAMSAdditionLazySettings.Rule rule : rules) {
-            buf.writeUtf(rule.name());
+        buf.writeVarInt(values.size());
+        for (Map.Entry<String, String> entry : values.entrySet()) {
+            buf.writeUtf(entry.getKey());
+            buf.writeUtf(entry.getValue());
         }
     }
 
     @Override
     public void handle() {
-        CarpetAMSAdditionLazySettings.clear();
-        CarpetAMSAdditionLazySettings.addAll(this.rules);
+        AmsRuleMetadata.installClientLazyRuleValues(values);
     }
 
-    public static LazySettingsPayload_S2C create(EnumSet<CarpetAMSAdditionLazySettings.Rule> rules) {
-        return new LazySettingsPayload_S2C(rules);
+    public static LazySettingsPayload_S2C create(Map<String, String> values) {
+        return new LazySettingsPayload_S2C(values);
     }
 }

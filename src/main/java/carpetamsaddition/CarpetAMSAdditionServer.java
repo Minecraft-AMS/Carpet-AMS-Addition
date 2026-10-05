@@ -26,6 +26,7 @@ import carpet.CarpetServer;
 import carpetamsaddition.commands.AmsCommandRegistry;
 import carpetamsaddition.api.command.CommandRegistrationContext;
 import carpetamsaddition.settings.CarpetRuleRegistrar;
+import carpetamsaddition.settings.AmsRuleMetadata;
 import carpetamsaddition.api.recipe.AmsRecipeManager;
 import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommand;
 import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommand;
@@ -132,7 +133,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         NetworkUtil.sendS2CPacket(player, HandShakeS2CPayload.create(CarpetAMSAdditionMod.getVersion(), NetworkUtil.getServerSupportState()), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, CustomBlockHardnessPayload_S2C.create(CustomBlockHardnessCommand.CUSTOM_BLOCK_HARDNESS_MAP), NetworkUtil.SendMode.NEED_SUPPORT);
         NetworkUtil.sendS2CPacket(player, UpdatePlayerPosePayload_S2C.create(SetPlayerPoseCommand.DO_POSE_MAP, player.getUUID()), NetworkUtil.SendMode.NEED_SUPPORT);
-        NetworkUtil.sendS2CPacket(player, LazySettingsPayload_S2C.create(CarpetAMSAdditionLazySettings.RULES), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(player, LazySettingsPayload_S2C.create(AmsRuleMetadata.activeLazyRuleValues()), NetworkUtil.SendMode.NEED_SUPPORT);
     }
 
     @Override
@@ -151,7 +152,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     public void onServerLoaded(MinecraftServer server) {
         minecraftServer = server;
         serverStartTimeMillis = System.currentTimeMillis();
-        CarpetAMSAdditionLazySettings.initRules();
+        AmsRuleMetadata.activateLazyRules();
         //#if MC>12006
         if (FeatureChecker.hasMinecartImprovements(server)) {
             FeatureChecker.EX_MINECART_FEATURE.set(true);
@@ -161,6 +162,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
 
     @Override
     public void onServerClosed(MinecraftServer server) {
+        AmsRuleMetadata.deactivateLazyRules();
         NetworkUtil.clearClientSupport();
         FancyFakePlayerNameTeamController.removeBotTeam(server, CarpetAMSAdditionSettings.fancyFakePlayerName);
     }
@@ -181,6 +183,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     public Map<String, String> canHasTranslations(String lang) {
         Map<String, String> trimmedTranslation = Maps.newHashMap();
         String prefix = TranslationConstants.CARPET_TRANSLATIONS_KEY_PREFIX;
+
         AMSTranslations.getTranslation(lang).forEach((key, value) -> {
             if (key.startsWith(prefix)) {
                 String newKey = key.substring(prefix.length());
@@ -190,6 +193,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
                 trimmedTranslation.put(newKey, value);
             }
         });
+
         return trimmedTranslation;
     }
 }

@@ -12,7 +12,7 @@
     "hooks.recipe.RecipeManagerAccessor",
     "hooks.recipe.RecipeManagerMixin",
     "hooks.server.MinecraftServerMixin",
-    "network.Carpet_SettingsManagerMixin",
+    "setting.Carpet_SettingsManagerMixin",
     "network.CustomPayloadC2SPacketAccessor",
     "network.CustomPayloadC2SPacketMixin",
     "network.CustomPayloadS2CPacketAccessor",
@@ -221,8 +221,7 @@
     "translations.HUDControllerMixin",
     "translations.ServerboundClientInformationPacketAccessor",
     "translations.ServerPlayerMixin",
-    "translations.TranslatableTextMixin",
-    "utils.settings.Carpet_SettingsManagerMixin"
+    "translations.TranslatableTextMixin"
   ],
   "client": [
     "hooks.client.MinecraftMixin",

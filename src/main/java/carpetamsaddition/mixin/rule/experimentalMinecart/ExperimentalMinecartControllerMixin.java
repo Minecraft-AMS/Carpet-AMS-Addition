@@ -20,7 +20,6 @@
 
 package carpetamsaddition.mixin.rule.experimentalMinecart;
 
-import carpetamsaddition.CarpetAMSAdditionLazySettings;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -37,7 +36,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class ExperimentalMinecartControllerMixin implements MinecartControllerAccessor {
     @ModifyReturnValue(method = "getMaxSpeed", at = @At("RETURN"))
     private double setMaxSpeed(double original) {
-        if (CarpetAMSAdditionSettings.experimentalMinecartSpeed != -1.0D && CarpetAMSAdditionLazySettings.isEnabled(CarpetAMSAdditionLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
+        if (CarpetAMSAdditionSettings.experimentalMinecartSpeed != -1.0D && CarpetAMSAdditionSettings.experimentalMinecartEnabled) {
             return CarpetAMSAdditionSettings.experimentalMinecartSpeed * (this.getMinecart().isInWater() ? (double)0.5F : (double)1.0F) / (double)20.0F;
         } else {
             return original;

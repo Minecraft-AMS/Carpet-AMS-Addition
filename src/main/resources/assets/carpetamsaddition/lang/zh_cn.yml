@@ -222,13 +222,12 @@ carpetamsaddition:
       value_range: '设定的值必须为 0 - 1000 或 -1'
 
   observer:
-    largeEnderChest:
-      switch_tip: '<Carpet AMS Addition> 侦测到开启了大末影箱（largeEnderChest）规则，重新进入游戏后生效，为防止吞掉物品，建议将该规则设置为默认开启'
     amsNetworkProtocol:
       need_enable_protocol: '<Carpet AMS Addition> 已将 %s 重置为默认值，需要先启用 amsNetworkProtocol 规则'
-    need_restart_server_or_client:
-      is_client_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启客户端后生效'
-      is_server_message: '<Carpet AMS Addition> 侦测到规则：%s设置变化，重启服务器后生效'
+    lazy_rule:
+      saved: '规则%s已保存为%s，当前有效值仍为%s，重启服务器后应用'
+      removed: '规则%s的存档默认配置已移除，当前有效值仍为%s，下次启动使用启动默认配置'
+      invalid: '规则%s不接受值：%s，配置未修改'
 
   carpet_translations:
     category:

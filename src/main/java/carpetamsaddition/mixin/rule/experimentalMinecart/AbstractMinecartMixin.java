@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.experimentalMinecart;
 
-import carpetamsaddition.CarpetAMSAdditionLazySettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -36,7 +36,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class AbstractMinecartMixin {
     @ModifyReturnValue(method = "useExperimentalMovement", at = @At("RETURN"))
     private static boolean setExMinecartEnabled(boolean original) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(CarpetAMSAdditionLazySettings.Rule.EXPERIMENTAL_MINECART_ENABLED)) {
+        if (CarpetAMSAdditionSettings.experimentalMinecartEnabled) {
             return true;
         } else {
             return original;

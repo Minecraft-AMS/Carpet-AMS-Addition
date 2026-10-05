@@ -22,7 +22,7 @@ package carpetamsaddition;
 
 import carpetamsaddition.settings.Rule;
 
-import carpetamsaddition.observers.NeedRestartServerOrClientObserver;
+import carpetamsaddition.settings.LazyRule;
 import carpetamsaddition.settings.PersistAsDefault;
 import carpetamsaddition.validators.rule.experimentalMinecartSpeed.MaxSpeedRangeValidator;
 
@@ -31,7 +31,6 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import carpetamsaddition.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 import carpetamsaddition.observers.recipe.RecipeRuleObserver;
 import carpetamsaddition.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
-import carpetamsaddition.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
 import carpetamsaddition.observers.network.AmspRuleObserver;
 
 import carpetamsaddition.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
@@ -111,10 +110,9 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, CREATIVE})
     public static boolean creativeOneHitKill = false;
 
-    @Rule(
-        categories = {AMS, FEATURE, SURVIVAL},
-        validators = LargeEnderChestRuleObserver.class
-    )
+    @PersistAsDefault
+    @LazyRule
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean largeEnderChest = false;
 
     @Rule(categories = {AMS, FEATURE, OPTIMIZATION})
@@ -186,11 +184,8 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
-    @PersistAsDefault
-    @Rule(
-        categories = {AMS, FEATURE, EXPERIMENTAL},
-        validators = NeedRestartServerOrClientObserver.class
-    )
+    @LazyRule
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static boolean largeShulkerBox = false;
 
     @Rule(
@@ -635,11 +630,8 @@ public class CarpetAMSAdditionSettings {
 
     //#if MC>=12102
     @GameVersion(version = "Minecraft >= 1.21.2")
-    @PersistAsDefault
-    @Rule(
-        categories = {AMS, FEATURE, EXPERIMENTAL},
-        validators = NeedRestartServerOrClientObserver.class
-    )
+    @LazyRule
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static boolean experimentalMinecartEnabled = false;
     //#endif
 
