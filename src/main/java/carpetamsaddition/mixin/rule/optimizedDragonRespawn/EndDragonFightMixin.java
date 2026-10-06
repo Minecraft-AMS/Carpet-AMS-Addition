@@ -47,7 +47,7 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.util.List;
 
-@GameVersion(version = "mc < 26.1")
+@GameVersion(version = "Minecraft < 26.1")
 @Mixin(value = EndDragonFight.class, priority = 888)
 public abstract class EndDragonFightMixin {
 

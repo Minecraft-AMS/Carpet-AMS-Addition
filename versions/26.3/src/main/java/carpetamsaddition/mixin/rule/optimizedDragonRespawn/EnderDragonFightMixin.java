@@ -85,8 +85,8 @@ public abstract class EnderDragonFightMixin {
      */
     @WrapMethod(method = "findExitPortal")
     private @Nullable BlockPattern.BlockPatternMatch findEndPortal(Operation<BlockPattern.BlockPatternMatch> original) {
-        if(!CarpetAMSAdditionSettings.optimizedDragonRespawn) {
-            original.call();
+        if (!CarpetAMSAdditionSettings.optimizedDragonRespawn) {
+            return original.call();
         } else {
             int i, j;
 
@@ -94,7 +94,7 @@ public abstract class EnderDragonFightMixin {
                 for (j = cacheChunkIteratorZ; j <= 8; ++j) {
                     LevelChunk worldChunk = this.level.getChunk(i, j);
                     for (BlockEntity blockEntity : worldChunk.getBlockEntities().values()) {
-                        if (CarpetAMSAdditionSettings.optimizedDragonRespawn && blockEntity instanceof TheEndGatewayBlockEntity) {
+                        if (blockEntity instanceof TheEndGatewayBlockEntity) {
                             continue;
                         }
 
@@ -117,10 +117,11 @@ public abstract class EnderDragonFightMixin {
                 }
             }
             if (this.needsStateScanning || this.exitPortalLocation == null){
-                if(CarpetAMSAdditionSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
+                BlockPos podiumLocation = EnderDragonFight.getPodiumLocation(this.origin);
+                if (cacheOriginIteratorY != -1) {
                     i = cacheOriginIteratorY;
                 } else {
-                    i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, ((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin)).getY();
+                    i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, podiumLocation).getY();
                 }
 
                 boolean notFirstSearch = false;
@@ -128,13 +129,13 @@ public abstract class EnderDragonFightMixin {
                 for (j = i; j >= 0; --j) {
                     BlockPattern.BlockPatternMatch result2;
 
-                    if (CarpetAMSAdditionSettings.optimizedDragonRespawn && notFirstSearch) {
+                    if (notFirstSearch) {
                         result2 = BlockPatternHelper.partialSearchAround(
                             this.exitPortalPattern, this.level,
-                            new BlockPos(((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin).getX(), j, ((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin).getZ())
+                            new BlockPos(podiumLocation.getX(), j, podiumLocation.getZ())
                         );
                     } else {
-                        result2 = this.exitPortalPattern.find(this.level, new BlockPos(((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin).getX(), j, ((EnderDragonFightInvoker) this).invokeGetPodiumLocation(origin).getZ()));
+                        result2 = this.exitPortalPattern.find(this.level, new BlockPos(podiumLocation.getX(), j, podiumLocation.getZ()));
                     }
 
                     if (result2 != null) {

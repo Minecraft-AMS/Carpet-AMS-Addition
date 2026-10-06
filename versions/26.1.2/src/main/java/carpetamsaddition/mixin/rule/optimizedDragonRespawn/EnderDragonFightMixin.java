@@ -79,8 +79,8 @@ public abstract class EnderDragonFightMixin {
      */
     @WrapMethod(method = "findExitPortal")
     private @Nullable BlockPattern.BlockPatternMatch findEndPortal(Operation<BlockPattern.BlockPatternMatch> original) {
-        if(!CarpetAMSAdditionSettings.optimizedDragonRespawn) {
-            original.call();
+        if (!CarpetAMSAdditionSettings.optimizedDragonRespawn) {
+            return original.call();
         } else {
             int i, j;
 
@@ -88,7 +88,7 @@ public abstract class EnderDragonFightMixin {
                 for (j = cacheChunkIteratorZ; j <= 8; ++j) {
                     LevelChunk worldChunk = this.level.getChunk(i, j);
                     for (BlockEntity blockEntity : worldChunk.getBlockEntities().values()) {
-                        if (CarpetAMSAdditionSettings.optimizedDragonRespawn && blockEntity instanceof TheEndGatewayBlockEntity) {
+                        if (blockEntity instanceof TheEndGatewayBlockEntity) {
                             continue;
                         }
 
@@ -111,7 +111,7 @@ public abstract class EnderDragonFightMixin {
                 }
             }
             if (this.needsStateScanning || this.exitPortalLocation == null){
-                if(CarpetAMSAdditionSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
+                if (cacheOriginIteratorY != -1) {
                     i = cacheOriginIteratorY;
                 } else {
                     i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(BlockPos.ZERO)).getY();
@@ -122,7 +122,7 @@ public abstract class EnderDragonFightMixin {
                 for (j = i; j >= 0; --j) {
                     BlockPattern.BlockPatternMatch result2;
 
-                    if (CarpetAMSAdditionSettings.optimizedDragonRespawn && notFirstSearch) {
+                    if (notFirstSearch) {
                         result2 = BlockPatternHelper.partialSearchAround(
                             this.exitPortalPattern, this.level,
                             new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ())

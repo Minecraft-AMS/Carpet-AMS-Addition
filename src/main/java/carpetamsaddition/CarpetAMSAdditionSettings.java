@@ -111,7 +111,6 @@ public class CarpetAMSAdditionSettings {
     public static boolean creativeOneHitKill = false;
 
     @PersistAsDefault
-    @LazyRule
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean largeEnderChest = false;
 
@@ -184,7 +183,6 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
-    // @LazyRule
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static boolean largeShulkerBox = false;
 
@@ -648,6 +646,7 @@ public class CarpetAMSAdditionSettings {
     )
     public static boolean amsNetworkProtocol = false;
 
+    @PersistAsDefault
     @Rule(categories = {AMS, FEATURE, SURVIVAL, AMS_NETWORK})
     public static boolean blockHardnessSyncProtocol = false;
 
