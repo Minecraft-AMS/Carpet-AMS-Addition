@@ -47,23 +47,27 @@ public abstract class EnderChestBlockMixin {
     private static Component CONTAINER_TITLE;
 
     @WrapOperation(
+        //#if MC>=12006
         method = "useWithoutItem",
+        //#else
+        //$$ method = "use",
+        //#endif
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/world/entity/player/Player;openMenu(Lnet/minecraft/world/MenuProvider;)Ljava/util/OptionalInt;"
         ),
-        require = 0
+        require = 1
     )
 	private OptionalInt onUse(Player playerEntity, MenuProvider namedScreenHandlerFactory, Operation<OptionalInt> original) {
         if (CarpetAMSAdditionSettings.largeEnderChest) {
-            SimpleMenuProvider factory = new SimpleMenuProvider((syncId, playerInventory, playerEntityInner) ->
-                ChestMenu.sixRows(
-                    syncId, playerInventory, playerEntityInner.getEnderChestInventory()
-                ), CONTAINER_TITLE
+            SimpleMenuProvider factory = new SimpleMenuProvider(
+                (syncId, playerInventory, playerEntityInner) ->
+                ChestMenu.sixRows(syncId, playerInventory, playerEntityInner.getEnderChestInventory()), CONTAINER_TITLE
             );
+
             return playerEntity.openMenu(factory);
-        } else {
-            return original.call(playerEntity, namedScreenHandlerFactory);
         }
+
+        return original.call(playerEntity, namedScreenHandlerFactory);
     }
 }

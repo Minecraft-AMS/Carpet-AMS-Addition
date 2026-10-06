@@ -18,25 +18,34 @@
  * along with Carpet AMS Addition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.rule.largeEnderChest;
+package carpetamsaddition.helpers.rule.largeEnderChest;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.helpers.rule.largeEnderChest.LargeEnderChestInventory;
+import carpetamsaddition.mixin.rule.largeEnderChest.SimpleContainerAccessor;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.NonNullList;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
+import net.minecraft.world.item.ItemStack;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.jetbrains.annotations.NotNull;
 
-@Mixin(Player.class)
-public abstract class PlayerEntityMixin {
-    @Inject(method = "getEnderChestInventory", at = @At("RETURN"))
-    private void expandEnderChestWhenEnabled(CallbackInfoReturnable<PlayerEnderChestContainer> cir) {
-        if (CarpetAMSAdditionSettings.largeEnderChest) {
-            LargeEnderChestInventory.ensureCapacity(cir.getReturnValue());
+public final class LargeEnderChestInventory {
+    private static final int LARGE_SIZE = 9 * 6;
+
+    private LargeEnderChestInventory() {}
+
+    public static void ensureCapacity(PlayerEnderChestContainer inventory) {
+        int size = inventory.getContainerSize();
+        if (size >= LARGE_SIZE) {
+            return;
         }
+
+        NonNullList<@NotNull ItemStack> items = NonNullList.withSize(LARGE_SIZE, ItemStack.EMPTY);
+        for (int slot = 0; slot < size; slot++) {
+            items.set(slot, inventory.getItem(slot));
+        }
+
+        SimpleContainerAccessor accessor = (SimpleContainerAccessor) inventory;
+        accessor.setStacks(items);
+        accessor.setSize(LARGE_SIZE);
     }
 }

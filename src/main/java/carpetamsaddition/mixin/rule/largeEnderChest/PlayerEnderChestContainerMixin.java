@@ -23,20 +23,44 @@ package carpetamsaddition.mixin.rule.largeEnderChest;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.largeEnderChest.LargeEnderChestInventory;
 
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.PlayerEnderChestContainer;
+//#if MC>=12108
+import net.minecraft.world.ItemStackWithSlot;
+import net.minecraft.world.level.storage.ValueInput;
+//#else
+//$$ import net.minecraft.nbt.ListTag;
+//#endif
+
+//#if MC>=12006
+//$$ import net.minecraft.core.HolderLookup;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(Player.class)
-public abstract class PlayerEntityMixin {
-    @Inject(method = "getEnderChestInventory", at = @At("RETURN"))
-    private void expandEnderChestWhenEnabled(CallbackInfoReturnable<PlayerEnderChestContainer> cir) {
+@Mixin(PlayerEnderChestContainer.class)
+public abstract class PlayerEnderChestContainerMixin {
+    //#if MC>=12108
+    @Inject(method = "fromSlots", at = @At("HEAD"))
+    private void expandWhenEnabled(ValueInput.TypedInputList<ItemStackWithSlot> storedItems, CallbackInfo ci) {
         if (CarpetAMSAdditionSettings.largeEnderChest) {
-            LargeEnderChestInventory.ensureCapacity(cir.getReturnValue());
+            LargeEnderChestInventory.ensureCapacity((PlayerEnderChestContainer) (Object) this);
         }
     }
+    //#else
+    //$$ @Inject(method = "fromTag", at = @At("HEAD"))
+    //$$ private void expandWhenEnabled(
+    //$$     ListTag storedItems,
+    //#if MC>=12006
+    //$$     HolderLookup.Provider registries,
+    //#endif
+    //$$     CallbackInfo ci
+    //$$ ) {
+    //$$     if (CarpetAMSAdditionSettings.largeEnderChest) {
+    //$$         LargeEnderChestInventory.ensureCapacity((PlayerEnderChestContainer) (Object) this);
+    //$$     }
+    //$$ }
+    //#endif
 }
