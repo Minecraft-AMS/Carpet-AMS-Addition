@@ -62,17 +62,6 @@ public final class TicketTypeWrapper<T> {
     private static final int USE_FLAGS = FLAG_LOADING | FLAG_SIMULATION;
     private static final int ALL_FLAGS = FLAG_PERSIST | USE_FLAGS | FLAG_KEEP_DIMENSION_ACTIVE | FLAG_CAN_EXPIRE_IF_UNLOADED;
 
-    // 在添加票据时才计算等级，避免注册票据时提前初始化 ChunkStatus 及其注册表。
-    //#if MC>=12000 && MC<12105
-    //$$ private static int getLegacyFullLevel() {
-    //$$     return ChunkLevel.byStatus(FullChunkStatus.FULL);
-    //$$ }
-    //#elseif MC>=11800 && MC<12000
-    //$$ private static int getLegacyFullLevel() {
-    //$$     return ChunkMap.MAX_CHUNK_DISTANCE - ChunkStatus.maxDistance();
-    //$$ }
-    //#endif
-
     public enum TicketUse {
         LOADING(FLAG_LOADING),
         SIMULATION(FLAG_SIMULATION),
@@ -201,6 +190,16 @@ public final class TicketTypeWrapper<T> {
     //$$     } else {
     //$$         world.getChunkSource().addRegionTicket(this.ticketType, chunkPos, radius, key);
     //$$     }
+    //$$ }
+    //#endif
+
+    //#if MC>=12000 && MC<12105
+    //$$ private static int getLegacyFullLevel() {
+    //$$     return ChunkLevel.byStatus(FullChunkStatus.FULL);
+    //$$ }
+    //#elseif MC>=11800 && MC<12000
+    //$$ private static int getLegacyFullLevel() {
+    //$$     return ChunkMap.MAX_CHUNK_DISTANCE - ChunkStatus.maxDistance();
     //$$ }
     //#endif
 }
