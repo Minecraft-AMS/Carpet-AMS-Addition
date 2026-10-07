@@ -229,7 +229,7 @@ After 300 ticks without any players in the current dimension on the server, Mine
 
 ## blockChunkLoaderTimeController
 
-Used to control the loading time of block loader series rules.  (need restart server)
+Used to control the loading time of block loader series rules.
 
 Affected rules: 
 
@@ -251,7 +251,7 @@ noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader
 
 ## blockChunkLoaderRangeController
 
-Used to control the loading range of block loader series rules.  (need restart server)
+Used to control the loading range of block loader series rules.
 
 Affected rules: 
 

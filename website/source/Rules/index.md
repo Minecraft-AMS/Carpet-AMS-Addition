@@ -206,7 +206,7 @@
 
 ## 方块加载时长控制器（blockChunkLoaderTimeController）
 
-用于控制方块加载系列规则的加载时长（需要重启服务器）。
+用于控制方块加载系列规则的加载时长。
 
 受影响的规则：
 
@@ -214,7 +214,7 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 ## 方块加载范围控制器（blockChunkLoaderRangeController）
 
-用于控制方块加载系列规则的加载范围（需要重启服务器）。
+用于控制方块加载系列规则的加载范围。
 
 受影响的规则：
 
