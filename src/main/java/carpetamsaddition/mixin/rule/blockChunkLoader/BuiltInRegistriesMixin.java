@@ -22,6 +22,7 @@ package carpetamsaddition.mixin.rule.blockChunkLoader;
 
 import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
 
+import carpetamsaddition.utils.compat.TicketTypeWrapper;
 import net.minecraft.core.registries.BuiltInRegistries;
 //#if MC<11904
 //$$ import net.minecraft.core.Registry;
@@ -59,8 +60,17 @@ public abstract class BuiltInRegistriesMixin {
         //$$ CallbackInfoReturnable<ResourceKey<Registry<?>>> cir
         //#endif
     ) {
-        BlockChunkLoaderHelper.NOTE_BLOCK_TICKET_TYPE = BlockChunkLoaderHelper.registerTicketType("carpetamsaddition:note_block_loader", 15);
-        BlockChunkLoaderHelper.PISTON_BLOCK_TICKET_TYPE = BlockChunkLoaderHelper.registerTicketType("carpetamsaddition:piston_block_loader", 15);
-        BlockChunkLoaderHelper.BELL_BLOCK_TICKET_TYPE = BlockChunkLoaderHelper.registerTicketType("carpetamsaddition:bell_block_loader", 15);
+        BlockChunkLoaderHelper.NOTE_BLOCK_TICKET_TYPE = BlockChunkLoaderHelper.registerTicketType(
+            "carpetamsaddition:note_block_loader",
+            TicketTypeWrapper.FLAG_PERSIST | TicketTypeWrapper.FLAG_LOADING | TicketTypeWrapper.FLAG_SIMULATION | TicketTypeWrapper.FLAG_KEEP_DIMENSION_ACTIVE
+        );
+        BlockChunkLoaderHelper.PISTON_BLOCK_TICKET_TYPE = BlockChunkLoaderHelper.registerTicketType(
+            "carpetamsaddition:piston_block_loader",
+            TicketTypeWrapper.FLAG_PERSIST | TicketTypeWrapper.FLAG_LOADING | TicketTypeWrapper.FLAG_SIMULATION | TicketTypeWrapper.FLAG_KEEP_DIMENSION_ACTIVE
+        );
+        BlockChunkLoaderHelper.BELL_BLOCK_TICKET_TYPE = BlockChunkLoaderHelper.registerTicketType(
+            "carpetamsaddition:bell_block_loader",
+            TicketTypeWrapper.FLAG_PERSIST | TicketTypeWrapper.FLAG_LOADING | TicketTypeWrapper.FLAG_SIMULATION | TicketTypeWrapper.FLAG_KEEP_DIMENSION_ACTIVE
+        );
     }
 }

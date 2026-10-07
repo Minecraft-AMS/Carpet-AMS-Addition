@@ -21,87 +21,35 @@
 package carpetamsaddition.helpers.rule.blockChunkLoader;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.mixin.rule.blockChunkLoader.TicketTypeMixin;
+import carpetamsaddition.utils.compat.ChunkTicketTypeWrapper;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.TicketType;
-import net.minecraft.world.level.ChunkPos;
 
-import top.byteeeee.annotationtoolbox.annotation.GameVersion;
-
-@GameVersion(version = "Minecraft >= 1.21.5")
 public class BlockChunkLoaderHelper {
-    public static TicketType NOTE_BLOCK_TICKET_TYPE;
-    public static TicketType PISTON_BLOCK_TICKET_TYPE;
-    public static TicketType BELL_BLOCK_TICKET_TYPE;
+    /** 实际时长由 {@link TicketTypeMixin} 动态提供。 */
+    private static final int REGISTRATION_TIMEOUT_TICKS = 300;
+
+    public static ChunkTicketTypeWrapper NOTE_BLOCK_TICKET_TYPE;
+    public static ChunkTicketTypeWrapper PISTON_BLOCK_TICKET_TYPE;
+    public static ChunkTicketTypeWrapper BELL_BLOCK_TICKET_TYPE;
+
+    public static ChunkTicketTypeWrapper registerTicketType(String id, int flags) {
+        ChunkTicketTypeWrapper ticketType = ChunkTicketTypeWrapper.register(id, REGISTRATION_TIMEOUT_TICKS, flags);
+        ((BlockLoaderTicketTypeAccess) ticketType.getNativeType()).ams$enableBlockLoaderTimeout();
+        return ticketType;
+    }
 
     public static void addNoteBlockTicket(ServerLevel world, BlockPos blockPos) {
-        addTicket(
-            world,
-            //#if MC>=260000
-            //$$ ChunkPos.containing(blockPos),
-            //#else
-            new ChunkPos(blockPos),
-            //#endif
-            NOTE_BLOCK_TICKET_TYPE
-        );
+        NOTE_BLOCK_TICKET_TYPE.addTicket(world, blockPos, CarpetAMSAdditionSettings.blockChunkLoaderRangeController);
     }
 
     public static void addPistonBlockTicket(ServerLevel world, BlockPos blockPos) {
-        addTicket(
-            world,
-            //#if MC>=260000
-            //$$ ChunkPos.containing(blockPos),
-            //#else
-            new ChunkPos(blockPos),
-            //#endif
-            PISTON_BLOCK_TICKET_TYPE
-        );
+        PISTON_BLOCK_TICKET_TYPE.addTicket(world, blockPos, CarpetAMSAdditionSettings.blockChunkLoaderRangeController);
     }
 
     public static void addBellBlockTicket(ServerLevel world, BlockPos blockPos) {
-        addTicket(
-            world,
-            //#if MC>=260000
-            //$$ ChunkPos.containing(blockPos),
-            //#else
-            new ChunkPos(blockPos),
-            //#endif
-            BELL_BLOCK_TICKET_TYPE
-        );
-    }
-
-    private static void addTicket(ServerLevel world, ChunkPos chunkPos, TicketType ticketType) {
-        ServerChunkCache chunkCache = world.getChunkSource();
-        int loadRange = getLoadRange();
-        //#if MC<12105
-        //$$ chunkCache.addRegionTicket(ticketType, chunkPos, loadRange, chunkPos);
-        //#else
-        chunkCache.addTicketWithRadius(ticketType, chunkPos, loadRange);
-        //#endif
-
-        if (CarpetAMSAdditionSettings.blockChunkLoaderKeepWorldTickUpdate) {
-            world.resetEmptyTime();
-        }
-    }
-
-    public static int getLoadTime() {
-        return CarpetAMSAdditionSettings.blockChunkLoaderTimeController;
-    }
-
-    private static int getLoadRange() {
-        return CarpetAMSAdditionSettings.blockChunkLoaderRangeController;
-    }
-
-    public static TicketType registerTicketType(String id, int flags) {
-        return TicketType.register(
-            id, getLoadTime(),
-            //#if MC>=12111
-            flags
-            //#else
-            //$$ true, TicketType.TicketUse.LOADING_AND_SIMULATION
-            //#endif
-        );
+        BELL_BLOCK_TICKET_TYPE.addTicket(world, blockPos, CarpetAMSAdditionSettings.blockChunkLoaderRangeController);
     }
 }
