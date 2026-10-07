@@ -20,6 +20,8 @@
 
 package carpetamsaddition.api.recipe.template;
 
+import carpetamsaddition.api.recipe.AmsRecipeManager;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -30,7 +32,7 @@ import java.util.Map;
 /**
  * 配方模板统一接口。
  * 每种配方模板实现该接口后，即可将自身转为配方 JSON 并写入配方映射，
- * 供 {@code AmsRecipeManager} 统一注入服务端配方表。
+ * 供 {@link AmsRecipeManager} 统一注入服务端配方表。
  */
 public interface RecipeTemplateInterface {
     /** 将本模板转换为配方 JSON 对象 */
@@ -44,9 +46,9 @@ public interface RecipeTemplateInterface {
      */
     default String compatResultItemIdKey() {
         //#if MC>=12005
-        //$$ return "id";
+        return "id";
         //#else
-        return "item";
+        //$$ return "item";
         //#endif
     }
 }
