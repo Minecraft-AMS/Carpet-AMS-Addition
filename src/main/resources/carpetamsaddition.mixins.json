@@ -26,6 +26,7 @@
     "rule.blockChunkLoader.BuiltInRegistriesMixin",
     "rule.blockChunkLoader.NoteBlockMixin",
     "rule.blockChunkLoader.PistonBaseBlockMixin",
+    "rule.blockChunkLoader.TicketTypeMixin",
     "rule.blowUpEverything.BlockMixin",
     "rule.blueSkullController.WitherBossMixin",
     "rule.breedableParrots.ParrotMixin",
