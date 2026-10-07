@@ -678,12 +678,12 @@ carpetamsaddition:
       keepWorldTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction
       blockChunkLoaderTimeController:
-        desc: Used to control the loading time of block loader series rules (need restart server)
+        desc: Used to control the loading time of block loader series rules
         extra:
           '0': 'Affected rules: '
           '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
       blockChunkLoaderRangeController:
-        desc: Used to control the loading range of block loader series rules (need restart server)
+        desc: Used to control the loading range of block loader series rules
         extra:
           '0': 'Affected rules: '
           '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'

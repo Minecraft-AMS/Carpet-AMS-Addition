@@ -820,13 +820,13 @@ carpetamsaddition:
         desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制
       blockChunkLoaderTimeController:
         name: 方块加载时长控制器
-        desc: 用于控制方块加载系列规则的加载时长（需要重启服务器）
+        desc: 用于控制方块加载系列规则的加载时长
         extra:
           '0': '受影响的规则：'
           '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
       blockChunkLoaderRangeController:
         name: 方块加载范围控制器
-        desc: 用于控制方块加载系列规则的加载范围（需要重启服务器）
+        desc: 用于控制方块加载系列规则的加载范围
         extra:
           '0': '受影响的规则：'
           '1': 'noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader'
