@@ -64,7 +64,7 @@ public class LazySettingsPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        AmsRuleMetadata.installClientLazyRuleValues(values);
+        NetworkUtil.executeOnClientThread(() -> AmsRuleMetadata.installClientLazyRuleValues(values));
     }
 
     public static LazySettingsPayload_S2C create(Map<String, String> values) {
