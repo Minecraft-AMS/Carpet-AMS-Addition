@@ -114,13 +114,15 @@ public abstract class EndDragonFightMixin {
             if (this.needsStateScanning || this.portalLocation == null){
                 if(CarpetAMSAdditionSettings.optimizedDragonRespawn && cacheOriginIteratorY != -1) {
                     i = cacheOriginIteratorY;
-                }
-                else {
-                    //#if MC>=12006
-                    i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(BlockPos.ZERO)).getY();
-                    //#else
-                    //$$ i = this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION).getY();
-                    //#endif
+                } else {
+                    i = this.level.getHeightmapPos(
+                        Heightmap.Types.MOTION_BLOCKING,
+                        //#if MC>=12006
+                        EndPodiumFeature.getLocation(BlockPos.ZERO)
+                        //#else
+                        //$$ EndPodiumFeature.END_PODIUM_LOCATION
+                        //#endif
+                    ).getY();
                 }
 
                 boolean notFirstSearch = false;
@@ -129,17 +131,39 @@ public abstract class EndDragonFightMixin {
                     BlockPattern.BlockPatternMatch result2;
 
                     if (CarpetAMSAdditionSettings.optimizedDragonRespawn && notFirstSearch) {
-                        //#if MC>=12006
-                        result2 = BlockPatternHelper.partialSearchAround(this.exitPortalPattern, this.level, new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()));
-                        //#else
-                        //$$ result2 = BlockPatternHelper.partialSearchAround(this.exitPortalPattern, this.level, new BlockPos(EndPodiumFeature.END_PODIUM_LOCATION.getX(), j, EndPodiumFeature.END_PODIUM_LOCATION.getZ()));
-                        //#endif
+                        result2 = BlockPatternHelper.partialSearchAround(
+                            this.exitPortalPattern, this.level,
+                            new BlockPos(
+                                //#if MC>=12006
+                                EndPodiumFeature.getLocation(BlockPos.ZERO).getX(),
+                                //#else
+                                //$$ EndPodiumFeature.END_PODIUM_LOCATION.getX(),
+                                //#endif
+                                j,
+                                //#if MC>=12006
+                                EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()
+                                //#else
+                                //$$ EndPodiumFeature.END_PODIUM_LOCATION.getZ()
+                                //#endif
+                            )
+                        );
                     } else {
-                        //#if MC>=12006
-                        result2 = this.exitPortalPattern.find(this.level, new BlockPos(EndPodiumFeature.getLocation(BlockPos.ZERO).getX(), j, EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()));
-                        //#else
-                        //$$ result2 = this.exitPortalPattern.find(this.level, new BlockPos(EndPodiumFeature.END_PODIUM_LOCATION.getX(), j, EndPodiumFeature.END_PODIUM_LOCATION.getZ()));
-                        //#endif
+                        result2 = this.exitPortalPattern.find(
+                            this.level,
+                            new BlockPos(
+                                //#if MC>=12006
+                                EndPodiumFeature.getLocation(BlockPos.ZERO).getX(),
+                                //#else
+                                //$$ EndPodiumFeature.END_PODIUM_LOCATION.getX(),
+                                //#endif
+                                j,
+                                //#if MC>=12006
+                                EndPodiumFeature.getLocation(BlockPos.ZERO).getZ()
+                                //#else
+                                //$$ EndPodiumFeature.END_PODIUM_LOCATION.getZ()
+                                //#endif
+                            )
+                        );
                     }
 
                     if (result2 != null) {

@@ -110,6 +110,7 @@ public abstract class EnderDragonFightMixin {
                     }
                 }
             }
+            
             if (this.needsStateScanning || this.exitPortalLocation == null){
                 if (cacheOriginIteratorY != -1) {
                     i = cacheOriginIteratorY;
