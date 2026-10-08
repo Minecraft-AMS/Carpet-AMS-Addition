@@ -36,9 +36,9 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class ComposterBlockMixin {
     @ModifyExpressionValue(
         //#if MC>=260300
-        method = "addItem",
-        //#else
         //$$ method = "addLayer",
+        //#else
+        method = "addItem",
         //#endif
         at = @At(
             value = "INVOKE",
