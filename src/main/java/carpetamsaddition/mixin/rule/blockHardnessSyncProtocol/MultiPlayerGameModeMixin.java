@@ -24,6 +24,7 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.network.payloads.rule.blockHardnessSyncProtocol.BlockHardnessSyncPayload_C2S;
 import carpetamsaddition.utils.NetworkUtil;
 
+import carpetamsaddition.utils.PlayerUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
@@ -54,7 +55,7 @@ public abstract class MultiPlayerGameModeMixin {
 
             BlockState state = minecraft.level.getBlockState(pos);
             float clientHardness = state.getDestroySpeed(minecraft.level, pos);
-            NetworkUtil.sendC2SPacket(player, BlockHardnessSyncPayload_C2S.create(player.getUUID(), pos, clientHardness), NetworkUtil.SendMode.NEED_SUPPORT);
+            NetworkUtil.sendC2SPacket(player, BlockHardnessSyncPayload_C2S.create(PlayerUtil.getPlayerUUID(player), pos, clientHardness), NetworkUtil.SendMode.NEED_SUPPORT);
         }
     }
 }

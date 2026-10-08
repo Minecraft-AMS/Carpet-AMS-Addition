@@ -27,7 +27,7 @@ import carpetamsaddition.api.command.CommandBuilder;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.messenger.Messenger;
-import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
+import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.PlayerChunkLoading;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.commands.CommandSourceStack;
@@ -48,7 +48,7 @@ public class PlayerChunkLoadControllerCommand implements AmsCommand {
 
     private static int setPlayerInteraction(CommandSourceStack source, String playerName, boolean b) {
         Player player = source.getServer().getPlayerList().getPlayerByName(playerName);
-        ChunkLoading.setPlayerInteraction(playerName, b, true);
+        PlayerChunkLoading.setPlayerInteraction(playerName, b, true);
 
         if (player == null) {
             Messenger.tell(source, Messenger.f(tr.tr("no_player_specified"), Layout.RED, Layout.BOLD));
@@ -60,7 +60,7 @@ public class PlayerChunkLoadControllerCommand implements AmsCommand {
     }
 
     private static int listPlayerInteractions(CommandSourceStack source, String playerName) {
-        boolean playerInteractions = ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true);
+        boolean playerInteractions = PlayerChunkLoading.onlinePlayerMap.getOrDefault(playerName, true);
         Player player = source.getServer().getPlayerList().getPlayerByName(playerName);
 
         if (player == null) {

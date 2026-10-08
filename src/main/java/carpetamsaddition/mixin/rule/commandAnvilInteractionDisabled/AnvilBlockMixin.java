@@ -36,12 +36,11 @@ import java.util.Objects;
 @Mixin(AnvilBlock.class)
 public abstract class AnvilBlockMixin {
     @Inject(
-        method =
-            //#if MC>=12005
-            "useWithoutItem",
-            //#else
-            //$$ "use",
-            //#endif
+        //#if MC>=12005
+        method = "useWithoutItem",
+        //#else
+        //$$ method = "use",
+        //#endif
         at = @At("HEAD"),
         cancellable = true
     )

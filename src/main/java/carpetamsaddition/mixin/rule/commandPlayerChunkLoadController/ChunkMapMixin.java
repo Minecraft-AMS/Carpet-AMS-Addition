@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.commandPlayerChunkLoadController;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
+import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.PlayerChunkLoading;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.level.ChunkMap;
@@ -40,7 +40,7 @@ public abstract class ChunkMapMixin {
     private void doesNotGenerateChunks(ServerPlayer player, CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(CarpetAMSAdditionSettings.commandPlayerChunkLoadController, "false")) {
             String playerName = player.getName().getString();
-            if (!ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true)) {
+            if (!PlayerChunkLoading.onlinePlayerMap.getOrDefault(playerName, true)) {
                 cir.setReturnValue(true);
                 cir.cancel();
             }

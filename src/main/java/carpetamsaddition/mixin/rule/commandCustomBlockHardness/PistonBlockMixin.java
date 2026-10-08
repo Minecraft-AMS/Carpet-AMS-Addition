@@ -52,6 +52,7 @@ public abstract class PistonBlockMixin {
                 return -1.0F;
             }
         }
+
         return original.call(blockState, blockView, blockPos);
     }
 }

@@ -25,6 +25,7 @@ import carpet.CarpetServer;
 
 import carpetamsaddition.commands.AmsCommandRegistry;
 import carpetamsaddition.api.command.CommandRegistrationContext;
+import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.PlayerChunkLoading;
 import carpetamsaddition.settings.CarpetRuleRegistrar;
 import carpetamsaddition.settings.AmsRuleMetadata;
 import carpetamsaddition.api.recipe.AmsRecipeManager;
@@ -49,6 +50,7 @@ import carpetamsaddition.utils.CountRulesUtil;
 import carpetamsaddition.utils.MinecraftServerUtil;
 import carpetamsaddition.utils.NetworkUtil;
 
+import carpetamsaddition.utils.PlayerUtil;
 import com.google.common.collect.Maps;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -146,6 +148,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     @Override
     public void onPlayerLoggedOut(ServerPlayer player) {
         NetworkUtil.removeSupportClient(player.getUUID());
+        PlayerChunkLoading.resetStatus(PlayerUtil.getName(player));
     }
 
     @Override

@@ -27,7 +27,7 @@ import net.minecraft.server.level.ServerPlayer;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChunkLoading {
+public class PlayerChunkLoading {
     public static Map<String, Boolean> onlinePlayerMap = new HashMap<>();
 
     public static void setPlayerInteraction(String playerName, boolean b, boolean online) {
@@ -38,6 +38,10 @@ public class ChunkLoading {
         if (online) {
             onlinePlayerMap.put(playerName, b);
         }
+    }
+
+    public static void resetStatus(String playerName) {
+        onlinePlayerMap.remove(playerName);
     }
 
     protected static ServerPlayer playerFromName(String name) {

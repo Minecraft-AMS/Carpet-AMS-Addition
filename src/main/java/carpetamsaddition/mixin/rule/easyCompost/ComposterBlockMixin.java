@@ -35,13 +35,35 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @Mixin(ComposterBlock.class)
 public abstract class ComposterBlockMixin {
     @ModifyExpressionValue(
+        //#if MC>=260300
         method = "addItem",
+        //#else
+        //$$ method = "addLayer",
+        //#endif
         at = @At(
             value = "INVOKE",
+            //#if MC>=260300
+            //$$ target = "Lnet/minecraft/world/level/storage/loot/providers/number/ints/ResolvableInt;get(Lnet/minecraft/world/level/storage/loot/LootContext;I)I"
+            //#else
             target = "Lnet/minecraft/util/RandomSource;nextDouble()D"
+            //#endif
         )
     )
-    private static double easyCompost(double original) {
-        return CarpetAMSAdditionSettings.easyCompost ? -114514.114514D : original;
+    private static double easyCompost(
+        //#if MC>=260300
+        //$$ int original
+        //#else
+        double original
+        //#endif
+    ) {
+        if (CarpetAMSAdditionSettings.easyCompost) {
+            //#if MC>=260300
+            //$$ return 1;
+            //#else
+            return -114514.114514D;
+            //#endif
+        }
+
+        return original;
     }
 }
