@@ -22,59 +22,75 @@ package carpetamsaddition.mixin.rule.blockChunkLoader;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
+import carpetamsaddition.utils.BlockCondition;
 import carpetamsaddition.utils.WorldUtil;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
+
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.NoteBlock;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.state.BlockState;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
-@Mixin(NoteBlock.class)
+@Mixin(value = NoteBlock.class, priority = 168)
 public abstract class NoteBlockMixin {
-    @Inject(method = "playNote", at = @At("HEAD"))
-    private void playNoteMixin(
-        //#if MC>11802
-        Entity source, BlockState state,
-        //#endif
-        Level level, BlockPos pos, CallbackInfo ci
-    ) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "false")) {
-            handleChunkLoading(level, pos);
+    @Unique
+    private static final BlockCondition ams$boneBlockCondition = BlockCondition.at(Direction.UP, 1, state -> state.is(Blocks.BONE_BLOCK));
+    @Unique
+    private static final BlockCondition ams$witherSkeletonSkullCondition = BlockCondition.at(Direction.UP, 1, state -> state.is(Blocks.WITHER_SKELETON_SKULL) || state.is(Blocks.WITHER_SKELETON_WALL_SKULL));
+
+    @ModifyExpressionValue(
+        method = "playNote",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/level/block/state/BlockState;isAir()Z"
+        )
+    )
+    private boolean allowBoneBlock(boolean original, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos blockPos) {
+        if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "bone_block") && ams$boneBlockCondition.matches(level, blockPos)) {
+            return true;
         }
+
+        return original;
     }
 
-    @Unique
-    private void handleChunkLoading(Level level, BlockPos pos) {
-        if (!WorldUtil.isClient(level)) {
-            BlockState noteBlockUp = level.getBlockState(pos.above(1));
-            if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "note_block")) {
-                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) level, pos);
-            } else if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "bone_block")) {
-                loadChunkIfMatch(level, pos, noteBlockUp, Blocks.BONE_BLOCK);
-            } else if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "wither_skeleton_skull")) {
-                loadChunkIfMatch(level, pos, noteBlockUp, Blocks.WITHER_SKELETON_SKULL, Blocks.WITHER_SKELETON_WALL_SKULL);
-            }
+    @Inject(method = "triggerEvent", at = @At("HEAD"), cancellable = true)
+    private void onPlayNote(BlockState blockState, Level level, BlockPos blockPos, int i, int j, CallbackInfoReturnable<Boolean> cir) {
+        if (WorldUtil.isClient(level) || Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "false")) {
+            return;
         }
-    }
 
-    @Unique
-    private void loadChunkIfMatch(Level world, BlockPos pos, BlockState blockState, Block... blocks) {
-        for (Block block : blocks) {
-            if (blockState.getBlock().equals(block)) {
-                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) world, pos);
+        BlockCondition condition;
+        switch (CarpetAMSAdditionSettings.noteBlockChunkLoader) {
+            case "note_block":
+                BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) level, blockPos);
+                return;
+            case "bone_block":
+                condition = ams$boneBlockCondition;
                 break;
+            case "wither_skeleton_skull":
+                condition = ams$witherSkeletonSkullCondition;
+                break;
+            default:
+                return;
+        }
+
+        if (condition.matches(level, blockPos)) {
+            BlockChunkLoaderHelper.addNoteBlockTicket((ServerLevel) level, blockPos);
+            if (Objects.equals(CarpetAMSAdditionSettings.noteBlockChunkLoader, "bone_block")) {
+                cir.setReturnValue(false);
             }
         }
     }

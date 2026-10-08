@@ -22,13 +22,13 @@ package carpetamsaddition.mixin.rule.blockChunkLoader;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
+import carpetamsaddition.utils.BlockCondition;
 import carpetamsaddition.utils.WorldUtil;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,50 +41,39 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
-@Mixin(PistonBaseBlock.class)
+@Mixin(value = PistonBaseBlock.class, priority = 168)
 public abstract class PistonBaseBlockMixin {
+    @Unique
+    private static final BlockCondition ams$boneBlockCondition = BlockCondition.at(Direction.UP, 1, state -> state.is(Blocks.BONE_BLOCK));
+    @Unique
+    private static final BlockCondition ams$bedrockCondition = BlockCondition.at(Direction.DOWN, 1, state -> state.is(Blocks.BEDROCK));
+    @Unique
+    private static final BlockCondition ams$allCondition = BlockCondition.anyOf(ams$boneBlockCondition, ams$bedrockCondition);
+
     @Inject(method = "triggerEvent", at = @At("HEAD"))
     private void onSyncedBlockEvent(BlockState state, Level level, BlockPos pos, int i, int j, CallbackInfoReturnable<Boolean> cir) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.pistonBlockChunkLoader, "false")) {
-            handleChunkLoading(state, level, pos);
+        if (WorldUtil.isClient(level) || Objects.equals(CarpetAMSAdditionSettings.pistonBlockChunkLoader, "false")) {
+            return;
         }
-    }
 
-    @Unique
-    private void handleChunkLoading(BlockState state, Level world, BlockPos pos) {
-        if (!WorldUtil.isClient(world)) {
-            Direction direction = state.getValue(PistonBaseBlock.FACING);
-            BlockPos targetPos = pos.relative(direction);
-            BlockState pistonBlockUp = world.getBlockState(pos.above(1));
-            BlockState pistonBlockDown = world.getBlockState(pos.below(1));
-
-            if (optionIsBoneBlockOrAll()) {
-                loadChunkIfMatch(world, targetPos, pistonBlockUp, Blocks.BONE_BLOCK);
-            }
-
-            if (optionIsBedRockOrAll()) {
-                loadChunkIfMatch(world, targetPos, pistonBlockDown, Blocks.BEDROCK);
-            }
-        }
-    }
-
-    @Unique
-    private void loadChunkIfMatch(Level world, BlockPos targetPos, BlockState blockState, Block... blocks) {
-        for (Block block : blocks) {
-            if (blockState.is(block)) {
-                BlockChunkLoaderHelper.addPistonBlockTicket((ServerLevel) world, targetPos);
+        BlockCondition condition;
+        switch (CarpetAMSAdditionSettings.pistonBlockChunkLoader) {
+            case "bone_block":
+                condition = ams$boneBlockCondition;
                 break;
-            }
+            case "bedrock":
+                condition = ams$bedrockCondition;
+                break;
+            case "all":
+                condition = ams$allCondition;
+                break;
+            default:
+                return;
         }
-    }
 
-    @Unique
-    private boolean optionIsBoneBlockOrAll() {
-        return (Objects.equals(CarpetAMSAdditionSettings.pistonBlockChunkLoader, "bone_block") || Objects.equals(CarpetAMSAdditionSettings.pistonBlockChunkLoader, "all"));
-    }
-
-    @Unique
-    private boolean optionIsBedRockOrAll() {
-        return (Objects.equals(CarpetAMSAdditionSettings.pistonBlockChunkLoader, "bedrock") || Objects.equals(CarpetAMSAdditionSettings.pistonBlockChunkLoader, "all"));
+        if (condition.matches(level, pos)) {
+            BlockPos targetPos = pos.relative(state.getValue(PistonBaseBlock.FACING));
+            BlockChunkLoaderHelper.addPistonBlockTicket((ServerLevel) level, targetPos);
+        }
     }
 }

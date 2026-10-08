@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 
-@Mixin(BuiltInRegistries.class)
+@Mixin(value = BuiltInRegistries.class, priority = 16888)
 public abstract class BuiltInRegistriesMixin {
     @Inject(
         //#if MC>=11904

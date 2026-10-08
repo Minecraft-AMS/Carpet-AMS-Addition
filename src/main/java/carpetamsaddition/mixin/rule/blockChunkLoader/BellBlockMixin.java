@@ -38,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BellBlock.class)
+@Mixin(value = BellBlock.class, priority = 168)
 public abstract class BellBlockMixin {
     @Inject(
         //#if MC>=11700

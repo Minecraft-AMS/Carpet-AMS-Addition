@@ -31,7 +31,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
-@Mixin(TicketType.class)
+@Mixin(value = TicketType.class, priority = 168)
 public abstract class TicketTypeMixin implements BlockLoaderTicketTypeAccess {
     @Unique
     private boolean ams$useBlockLoaderTimeout = false;
