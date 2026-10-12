@@ -42,14 +42,31 @@ public class BlockChunkLoaderHelper {
     }
 
     public static void addNoteBlockTicket(ServerLevel world, BlockPos blockPos) {
-        NOTE_BLOCK_TICKET_TYPE.addTicket(world, blockPos, CarpetAMSAdditionSettings.blockChunkLoaderRangeController);
+        NOTE_BLOCK_TICKET_TYPE.addTicket(world, blockPos, getLoadRange());
     }
 
     public static void addPistonBlockTicket(ServerLevel world, BlockPos blockPos) {
-        PISTON_BLOCK_TICKET_TYPE.addTicket(world, blockPos, CarpetAMSAdditionSettings.blockChunkLoaderRangeController);
+        PISTON_BLOCK_TICKET_TYPE.addTicket(world, blockPos, getLoadRange());
     }
 
     public static void addBellBlockTicket(ServerLevel world, BlockPos blockPos) {
-        BELL_BLOCK_TICKET_TYPE.addTicket(world, blockPos, CarpetAMSAdditionSettings.blockChunkLoaderRangeController);
+        BELL_BLOCK_TICKET_TYPE.addTicket(world, blockPos, getLoadRange());
+    }
+
+    private static int getLoadRange() {
+        switch (CarpetAMSAdditionSettings.blockChunkLoaderRangeController) {
+            case "1x1":
+                return 2;
+            case "3x3":
+                return 3;
+            case "5x5":
+                return 4;
+            case "7x7":
+                return 5;
+            case "9x9":
+                return 6;
+            default:
+                throw new IllegalArgumentException("Unknown block chunk loader range: " + CarpetAMSAdditionSettings.blockChunkLoaderRangeController);
+        }
     }
 }

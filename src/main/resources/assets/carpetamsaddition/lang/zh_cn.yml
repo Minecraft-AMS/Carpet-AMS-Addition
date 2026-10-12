@@ -212,8 +212,6 @@ carpetamsaddition:
       value_range: '设定的值必须为 0 - 512 或 -1'
     blockChunkLoaderTimeController:
       value_range: '设定的值必须为 1 - 300'
-    blockChunkLoaderRangeController:
-      value_range: '设定的值必须为 1 - 32'
     easyGetPitcherPod:
       value_range: '设定的值必须为 1 - 100 或 0'
     renewableNetherScrap:

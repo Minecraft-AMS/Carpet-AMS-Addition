@@ -212,8 +212,6 @@ carpetamsaddition:
       value_range: 'The value must be 0 - 512 or -1'
     blockChunkLoaderTimeController:
       value_range: 'The value must be 1 - 300'
-    blockChunkLoaderRangeController:
-      value_range: 'The value must be 1 - 32'
     easyGetPitcherPod:
       value_range: 'The value must be 2 - 100 or 0'
     renewableNetherScrap:

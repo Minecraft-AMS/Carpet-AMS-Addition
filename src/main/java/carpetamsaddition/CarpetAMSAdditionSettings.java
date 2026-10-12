@@ -36,7 +36,6 @@ import carpetamsaddition.observers.network.AmspRuleObserver;
 import carpetamsaddition.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import carpetamsaddition.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
 import carpetamsaddition.validators.rule.blockChunkLoaderTimeController.MaxTimeValidator;
-import carpetamsaddition.validators.rule.commandPlayerChunkLoadController.MaxRangeValidator;
 import carpetamsaddition.validators.rule.enhancedWorldEater.BlastResistanceValidator;
 import carpetamsaddition.validators.rule.maxClientInteractionReachDistance.MaxClientInteractionReachDistanceValidator;
 import carpetamsaddition.validators.rule.easyGetPitcherPod.CountValidator;
@@ -707,12 +706,10 @@ public class CarpetAMSAdditionSettings {
     public static int blockChunkLoaderTimeController = 300;
 
     @Rule(
-        options = {"3"},
-        categories = {AMS, FEATURE, AMS_CHUNKLOADER},
-        validators = MaxRangeValidator.class,
-        strict = false
+        options = {"1x1", "3x3", "5x5", "7x7", "9x9"},
+        categories = {AMS, FEATURE, AMS_CHUNKLOADER}
     )
-    public static int blockChunkLoaderRangeController = 3;
+    public static String blockChunkLoaderRangeController = "3x3";
 
     @Rule(
         categories = {AMS, COMMAND, AMS_CHUNKLOADER},
