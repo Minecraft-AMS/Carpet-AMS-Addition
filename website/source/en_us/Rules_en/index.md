@@ -257,15 +257,15 @@ Affected rules:
 
 noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader
 
-- Type: `int`
+- Type: `String`
   
   
 
-- Default: `3`
+- Default: `3x3`
   
   
 
-- Suggested options: `1 - 32`
+- Suggested options: `1x1`, `3x3`, `5x5`, `7x7`, `9x9`
   
   
 

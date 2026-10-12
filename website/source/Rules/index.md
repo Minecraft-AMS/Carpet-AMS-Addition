@@ -220,6 +220,14 @@ noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
 noteBlockChunkLoader、pistonBlockChunkLoader、bellBlockChunkLoader
 
+- 类型: `String`
+
+- 默认值: `3x3`
+
+- 参考选项: `1x1`, `3x3`, `5x5`, `7x7`, `9x9`
+
+- 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
+
 ## 地狱可放水（netherWaterPlacement）
 
 开启后，玩家可通过使用水桶的方式在地狱维度中放置水源。
