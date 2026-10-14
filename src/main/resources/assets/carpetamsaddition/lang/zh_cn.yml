@@ -1,4 +1,7 @@
 carpetamsaddition:
+  messenger:
+    copy: '复制到剪切板'
+
   carpet:
     totalRules:
       version: '版本'
@@ -11,7 +14,6 @@ carpetamsaddition:
   rule:
     amsUpdateSuppressionCrashFix:
       msg: '更新抑制位置 @ %s -> [ %s ] | 原因：%s'
-      copy: '复制坐标到剪切板'
     welcomeMessage:
       modify_content_in: '在该路径下修改内容：'
       save_path: '[ 存档文件夹 ]'
@@ -21,13 +23,14 @@ carpetamsaddition:
       disable_command: '<Carpet AMS Addition> 由于已开启maxPlayerEntityInteractionRange规则，该改动不会生效'
     sendPlayerDeathLocation:
       location: '死亡位置'
-      copy: '复制坐标到剪切板'
     phantomSpawnAlert:
       msg: '§b<phantomSpawnAlert> §r§e%s §r§d召唤了幻翼 §r§e@ §r§a[ %s ]'
     experimentalMinecartSpeed:
       vanilla_command_disabled: '<Carpet AMS Addition> 该游戏规则已由 minecartMaxSpeed 地毯规则接管'
 
   command:
+    commandGetHeldItemID:
+      msg_head: '<commandGetHeldItemID> '
     blockChunkloader:
       saved: "已保存 %s 加载器配置"
       invalid: "操作失败，配置未修改：%s"
@@ -84,17 +87,11 @@ carpetamsaddition:
       overworld: '主世界'
       nether: '下界'
       the_end: '末地'
-      the_end_button_hover: '复制末地坐标'
-      overworld_button_hover: '复制主世界坐标'
-      nether_button_hover: '复制下界坐标'
     where:
       overworld: '主世界'
       nether: '下界'
       the_end: '末地'
       who_get_who: '%s 获取了 %s 的位置'
-      the_end_button_hover: '复制末地坐标'
-      overworld_button_hover: '复制主世界坐标'
-      nether_button_hover: '复制下界坐标'
     leader:
       add: '<commandPlayerLeader> %s 成为了导游'
       is_already_leader: '<commandPlayerLeader> %s 已经是一名导游'
@@ -109,6 +106,7 @@ carpetamsaddition:
         broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick> - 定时广播一名导游的坐标，时间设置为负数停止广播'
         list: '/leader list - 查看导游列表'
     ping:
+      msg_head: '<commandPacketInternetGroper> '
       stop_ping: '已中断ping操作'
       active_ping_is_null: '没有正在活动的ping操作'
       help:
@@ -151,9 +149,6 @@ carpetamsaddition:
         remove: '/customMovableBlock remove <方块注册名> - 删除一个可移动方块'
         removeAll: '/customMovableBlock removeAll - 删除所有添加的可移动方块'
         list: '/customMovableBlock list - 查看可移动方块列表'
-    commandGetHeldItemID:
-      getHeldItemID:
-        copy: '复制到剪切板'
     customAntiFireItems:
       add: '<customAntiFireItems> + %s'
       already_exists: "<customAntiFireItems> 已存在"

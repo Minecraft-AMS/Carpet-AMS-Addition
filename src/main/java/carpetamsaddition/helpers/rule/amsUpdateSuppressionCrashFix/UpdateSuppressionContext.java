@@ -40,11 +40,9 @@ public class UpdateSuppressionContext {
     public static void sendMessageToServer(BlockPos pos, Level world, Throwable cause) {
         if (!Objects.equals(CarpetAMSAdditionSettings.amsUpdateSuppressionCrashFix, "silence")) {
             final Component copyButton = copyButton(pos);
-            MutableComponent message = Messenger.f(suppressionMessageText(pos, world, cause), Layout.RED, Layout.ITALIC).append(copyButton);
-            Messenger.sendServerMessage(
-                MinecraftServerUtil.getServer(),
-                message
-            );
+            MutableComponent message = Messenger.f(suppressionMessageText(pos, world, cause), Layout.RED, Layout.ITALIC);
+            message.append(copyButton);
+            Messenger.sendServerMessage(MinecraftServerUtil.getServer(), message);
         }
     }
 
@@ -57,13 +55,11 @@ public class UpdateSuppressionContext {
 
     private static Component copyButton(BlockPos pos) {
 
-        return Messenger.f(Messenger.style(
-            Messenger.s(" [C] "),
-            Messenger.cpbtn(
-                getSuppressionPos(pos).replace(",", ""), // 1, 0, -24 -> 1 0 -24
-                tr.tr("copy"), Layout.YELLOW
-            )
-        ), Layout.GREEN, Layout.BOLD);
+        return Messenger.copyButton(
+            " [C] ",
+            getSuppressionPos(pos).replace(",", ""), // 1, 0, -24 -> 1 0 -24
+            Layout.GREEN, Layout.BOLD
+        );
     }
 
     private static String getSuppressionPos(BlockPos pos) {

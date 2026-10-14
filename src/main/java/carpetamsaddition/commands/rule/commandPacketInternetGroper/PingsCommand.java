@@ -40,7 +40,6 @@ import java.util.Map;
 
 public class PingsCommand implements AmsCommand {
     private static final Translator tr = new Translator("command.ping");
-    private static final String MSG_HEAD = "<commandPacketInternetGroper>";
     private static final Map<CommandSourceStack, PingThread> PING_THREADS = new HashMap<>();
 
     @Override
@@ -70,7 +69,7 @@ public class PingsCommand implements AmsCommand {
             InetAddress inetAddress = InetAddress.getByName(targetIpOrDomainName);
             if (isFirstPing) {
                 Messenger.tell(source, Messenger.c(
-                    Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                    Messenger.f(tr.tr("msg_head"), Layout.AQUA),
                     Messenger.f(Messenger.s("Ping "), Layout.YELLOW),
                     Messenger.f(Messenger.s(targetIpOrDomainName + " "), Layout.AQUA),
                     Messenger.f(Messenger.s("[ " + inetAddress.getHostAddress() + " ] ..."), Layout.YELLOW)
@@ -84,7 +83,7 @@ public class PingsCommand implements AmsCommand {
             if (isReachable) {
                 long delayTime = endTime - startTime;
                 Messenger.tell(source, Messenger.c(
-                    Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                    Messenger.f(tr.tr("msg_head"), Layout.AQUA),
                     Messenger.f(Messenger.s("Replay from "), Layout.DARK_GREEN),
                     Messenger.f(Messenger.s("[ " + inetAddress.getHostAddress() + " ]"), Layout.YELLOW),
                     Messenger.f(Messenger.s(" Time = " + delayTime + "ms"), Layout.DARK_GREEN)
@@ -93,7 +92,7 @@ public class PingsCommand implements AmsCommand {
                 return delayTime;
             } else {
                 Messenger.tell(source, Messenger.c(
-                    Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                    Messenger.f(tr.tr("msg_head"), Layout.AQUA),
                     Messenger.f(Messenger.s("Request time out."), Layout.DARK_RED)
                 ));
                 return 0;
@@ -109,12 +108,12 @@ public class PingsCommand implements AmsCommand {
         if (pingThread != null) {
             pingThread.setInterrupted();
             Messenger.tell(source, Messenger.c(
-                Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                Messenger.f(tr.tr("msg_head"), Layout.AQUA),
                 Messenger.f(tr.tr("stop_ping"), Layout.DARK_RED)
             ));
         } else {
             Messenger.tell(source, Messenger.c(
-                Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                Messenger.f(tr.tr("msg_head"), Layout.AQUA),
                 Messenger.f(tr.tr("active_ping_is_null"), Layout.DARK_RED)
             ));
         }
@@ -130,7 +129,7 @@ public class PingsCommand implements AmsCommand {
 
     private static void sendFinishMessage(CommandSourceStack source, int totalPings, int successfulPings, int failedPings, long averageDelay) {
         Messenger.tell(source, Messenger.c(
-            Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+            Messenger.f(tr.tr("msg_head"), Layout.AQUA),
             Messenger.f(Messenger.s(
                 "Sent = " + totalPings + ", Received = " + successfulPings
                     + ", Lost = " + failedPings + ", Average delay = " + averageDelay + "ms"

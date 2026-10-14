@@ -1,4 +1,7 @@
 carpetamsaddition:
+  messenger:
+    copy: 'Copy to clipboard'
+
   carpet:
     totalRules:
       version: 'version'
@@ -11,7 +14,6 @@ carpetamsaddition:
   rule:
     amsUpdateSuppressionCrashFix:
       msg: 'Update suppression location @ %s -> [ %s ] | reason: %s'
-      copy: 'copy coord to clipboard'
     welcomeMessage:
       modify_content_in: 'Modify the content in：'
       save_path: '[ save path ]'
@@ -21,13 +23,14 @@ carpetamsaddition:
       disable_command: '<Carpet AMS Addition> This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
     sendPlayerDeathLocation:
       location: 'death location'
-      copy: 'copy coord to clipboard'
     phantomSpawnAlert:
       msg: '§b<phantomSpawnAlert> §r§e%s §r§dsummoned phantoms §r§e@ §r§a[ %s ]'
     experimentalMinecartSpeed:
       vanilla_command_disabled: '<Carpet AMS Addition> The rules of the game have been taken over by the minecartMaxSpeed carpet rules'
 
   command:
+    commandGetHeldItemID:
+      msg_head: '<commandGetHeldItemID> '
     blockChunkloader:
       saved: "Saved configuration for the %s loader"
       invalid: "Operation failed; configuration unchanged: %s"
@@ -84,17 +87,11 @@ carpetamsaddition:
       overworld: 'overworld'
       nether: 'nether'
       the_end: 'the_end'
-      the_end_button_hover: 'copy end coord'
-      overworld_button_hover: 'copy overworld coord'
-      nether_button_hover: 'copy nether coord'
     where:
       overworld: 'overworld'
       nether: 'nether'
       the_end: 'the_end'
       who_get_who: '%s got %s location'
-      the_end_button_hover: 'copy end coord'
-      overworld_button_hover: 'copy overworld coord'
-      nether_button_hover: 'copy nether coord'
     leader:
       add: '<commandPlayerLeader> %s became a tour guide'
       is_already_leader: '<commandPlayerLeader> %s is already leader'
@@ -109,6 +106,7 @@ carpetamsaddition:
         broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick> - Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting'
         list: '/leader list - View tour guide list'
     ping:
+      msg_head: '<commandPacketInternetGroper> '
       stop_ping: 'Ping operation stopped.'
       active_ping_is_null: 'No active ping operation to stop.'
       help:
@@ -151,9 +149,6 @@ carpetamsaddition:
         remove: '/customMovableBlock remove <block> - Delete a movable block'
         removeAll: '/customMovableBlock removeAll - Removes all added movable blocks'
         list: '/customMovableBlock list - Check out the list of movable blocks'
-    commandGetHeldItemID:
-      getHeldItemID:
-        copy: 'Copy to clipboard'
     customAntiFireItems:
       add: '<customAntiFireItems> + %s'
       already_exists: "<customAntiFireItems> %s is already exists"

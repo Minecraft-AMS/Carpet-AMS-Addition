@@ -133,10 +133,20 @@ public class Messenger {
     }
 
     @NotNull
-    public static Style cpbtn(String copyText, MutableComponent hoverText, Layout... hoverTextFormattings) {
+    private static Style cpbtn(String copyText, MutableComponent hoverText) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(hoverText, hoverTextFormattings)));
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(hoverText, Layout.YELLOW)));
+    }
+
+    @NotNull
+    public static MutableComponent copyButton(String label, String copyText, Layout... labelFormattings) {
+        return copyButton(label, copyText, tr("carpetamsaddition.messenger.copy"), labelFormattings);
+    }
+
+    @NotNull
+    public static MutableComponent copyButton(String label, String copyText, MutableComponent hoverText, Layout... labelFormattings) {
+        return f(style(s(label), cpbtn(copyText, hoverText)), labelFormattings);
     }
 
     private static Style emptyStyle() {

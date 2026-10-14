@@ -39,7 +39,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.level.Level;
 
-import java.util.Objects;
 
 public class HereCommand implements AmsCommand {
     private static final Translator tr = new Translator("command.here");
@@ -132,19 +131,6 @@ public class HereCommand implements AmsCommand {
 
     private static Component copyButton(String copyText, Layout buttonColor) {
         String copyCoordText = copyText.replace(",", ""); // 1, 0, -24 -> 1 0 -24
-        MutableComponent hoverText = null;
-
-        if (buttonColor == Layout.LIGHT_PURPLE) {
-            hoverText = tr.tr("the_end_button_hover");
-        } else if (buttonColor == Layout.GREEN) {
-            hoverText = tr.tr("overworld_button_hover");
-        } else if (buttonColor == Layout.DARK_RED) {
-            hoverText = tr.tr("nether_button_hover");
-        }
-
-        return Messenger.f(Messenger.style(
-            Messenger.s(" [C]"),
-            Messenger.cpbtn(copyCoordText, Objects.requireNonNull(hoverText), Layout.YELLOW)
-        ), Layout.BOLD, buttonColor);
+        return Messenger.copyButton(" [C]", copyCoordText, Layout.BOLD, buttonColor);
     }
 }

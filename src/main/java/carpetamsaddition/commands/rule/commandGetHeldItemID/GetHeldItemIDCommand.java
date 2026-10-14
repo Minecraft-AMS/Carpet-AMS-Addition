@@ -28,16 +28,15 @@ import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.RegexTools;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 
-import java.util.Objects;
-
-public class GetHeldItemIDCommand implements AmsCommand {
+ public class GetHeldItemIDCommand implements AmsCommand {
     private static final Translator tr = new Translator("command.commandGetHeldItemID");
-    private static final String MSG_HEAD = "<commandGetHeldItemID> ";
 
     @Override
     public void define(CommandBuilder command) {
@@ -46,8 +45,8 @@ public class GetHeldItemIDCommand implements AmsCommand {
             .executes(c -> execute(c.source()));
     }
 
-    private static int execute(CommandSourceStack source) {
-        String mainHandItemID = getHeldItemRegisterName(Objects.requireNonNull(source.getPlayer()));
+    private static int execute(CommandSourceStack source) throws CommandSyntaxException {
+        String mainHandItemID = getHeldItemRegisterName(source.getPlayerOrException());
         Component message = buildMessage(mainHandItemID);
         Messenger.tell(source, (MutableComponent) message);
         return 1;
@@ -56,17 +55,13 @@ public class GetHeldItemIDCommand implements AmsCommand {
     private static Component buildMessage(String itemID) {
         return
             Messenger.c(
-                Messenger.f(Messenger.s(MSG_HEAD), Layout.AQUA),
+                Messenger.f(tr.tr("msg_head"), Layout.AQUA),
                 Messenger.f(Messenger.s(itemID), Layout.GREEN)
             ).append(createCopyButton(itemID));
     }
 
     private static Component createCopyButton(String itemID) {
-        return
-            Messenger.f(Messenger.style(
-                Messenger.s(" [C] "),
-                Messenger.cpbtn(itemID, tr.tr("getHeldItemID.copy"), Layout.YELLOW)
-            ), Layout.GREEN, Layout.BOLD);
+        return Messenger.copyButton(" [C] ", itemID, Layout.GREEN, Layout.BOLD);
     }
 
     private static String getHeldItemRegisterName(Player player) {
