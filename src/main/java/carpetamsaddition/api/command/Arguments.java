@@ -19,6 +19,7 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.blocks.BlockStateArgument;
+import net.minecraft.commands.arguments.blocks.BlockPredicateArgument;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.commands.arguments.DimensionArgument;
 import net.minecraft.commands.arguments.item.ItemArgument;
@@ -29,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * 内置类型化指令参数工厂。
@@ -198,6 +200,27 @@ public final class Arguments {
                 //#endif
             ),
             context -> BlockStateArgument.getBlock(context, name).getState()
+        );
+    }
+
+    /** 创建方块条件参数，由原版提供方块、状态、标签及 NBT 的解析和补全。 */
+    public static CommandArgument<String> blockPredicate(String name) {
+        return simple(
+            name,
+            context -> BlockPredicateArgument.blockPredicate(
+                //#if MC>=11904
+                context.buildContext()
+                //#endif
+            ),
+            context -> {
+                BlockPredicateArgument.getBlockPredicate(context, name);
+                for (com.mojang.brigadier.context.ParsedCommandNode<CommandSourceStack> node : context.getNodes()) {
+                    if (Objects.equals(name, node.getNode().getName())) {
+                        return node.getRange().get(context.getInput());
+                    }
+                }
+                throw new IllegalArgumentException("缺少方块条件参数: " + name);
+            }
         );
     }
 

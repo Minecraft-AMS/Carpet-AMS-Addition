@@ -66,10 +66,6 @@ public final class ChunkTicketTypeWrapper {
 
     public void addTicket(ServerLevel world, BlockPos blockPos, int radius) {
         addTicket(world, toChunkPos(blockPos), radius);
-
-        if (CarpetAMSAdditionSettings.blockChunkLoaderKeepWorldTickUpdate) {
-            world.resetEmptyTime();
-        }
     }
 
     public void addTicket(ServerLevel world, ChunkPos chunkPos, int radius) {

@@ -37,7 +37,7 @@ public class InvokeFuzzModCommand {
 
         return Messenger.f(Messenger.style(
             Messenger.s(" [+H]"),
-            Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), Layout.YELLOW)
+            Messenger.cmdbtn(cmd, tr.tr("highlightCoordButtonHoverText"), Layout.YELLOW)
         ), Layout.YELLOW, Layout.BOLD);
     }
 }

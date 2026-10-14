@@ -93,17 +93,38 @@ public class HereCommand implements AmsCommand {
         Component message = Messenger.f(Messenger.s("Unknown dimension"), Layout.RED);
 
         if (dimension.getValue() == Level.END) {
-            message = Messenger.s(
-                String.format("§d[%s] §e%s §b@ §d[ %s ]", tr.tr("the_end").getString(), playerName, currentPos))
-                .append(copyButton(currentPos, Layout.LIGHT_PURPLE)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
+            message = Messenger.c(
+                Messenger.f(Messenger.c(Messenger.s("["), tr.tr("the_end"), Messenger.s("] ")), Layout.LIGHT_PURPLE),
+                Messenger.f(Messenger.s(playerName), Layout.YELLOW),
+                Messenger.f(Messenger.s(" @ "), Layout.AQUA),
+                Messenger.f(Messenger.s("[ " + currentPos + " ]"), Layout.LIGHT_PURPLE)
+            )
+            .append(copyButton(currentPos, Layout.LIGHT_PURPLE))
+            .append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
         } else if (dimension.getValue() == Level.OVERWORLD) {
-            message = Messenger.s(
-                String.format("§2[%s] §e%s §b@ §2[ %s ] §b-> §4[ %s ]", tr.tr("overworld").getString(), playerName, currentPos, otherPos))
-                .append(copyButton(currentPos, Layout.GREEN)).append(copyButton(otherPos, Layout.DARK_RED)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
+            message = Messenger.c(
+                Messenger.f(Messenger.c(Messenger.s("["), tr.tr("overworld"), Messenger.s("] ")), Layout.DARK_GREEN),
+                Messenger.f(Messenger.s(playerName), Layout.YELLOW),
+                Messenger.f(Messenger.s(" @ "), Layout.AQUA),
+                Messenger.f(Messenger.s("[ " + currentPos + " ]"), Layout.DARK_GREEN),
+                Messenger.f(Messenger.s(" -> "), Layout.AQUA),
+                Messenger.f(Messenger.s("[ " + otherPos + " ]"), Layout.DARK_RED)
+            )
+            .append(copyButton(currentPos, Layout.GREEN))
+            .append(copyButton(otherPos, Layout.DARK_RED))
+            .append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
         } else if (dimension.getValue() == Level.NETHER) {
-            message = Messenger.s(
-                String.format("§4[%s] §e%s §b@ §4[ %s ] §b-> §2[ %s ]", tr.tr("nether").getString(), playerName, currentPos, otherPos))
-                .append(copyButton(currentPos, Layout.DARK_RED)).append(copyButton(otherPos, Layout.GREEN)).append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
+            message = Messenger.c(
+                Messenger.f(Messenger.c(Messenger.s("["), tr.tr("nether"), Messenger.s("] ")), Layout.DARK_RED),
+                Messenger.f(Messenger.s(playerName), Layout.YELLOW),
+                Messenger.f(Messenger.s(" @ "), Layout.AQUA),
+                Messenger.f(Messenger.s("[ " + currentPos + " ]"), Layout.DARK_RED),
+                Messenger.f(Messenger.s(" -> "), Layout.AQUA),
+                Messenger.f(Messenger.s("[ " + otherPos + " ]"), Layout.DARK_GREEN)
+            )
+            .append(copyButton(currentPos, Layout.DARK_RED))
+            .append(copyButton(otherPos, Layout.GREEN))
+            .append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
         }
 
         return message;
@@ -123,8 +144,7 @@ public class HereCommand implements AmsCommand {
 
         return Messenger.f(Messenger.style(
             Messenger.s(" [C]"),
-            Messenger.simpleCopyButtonStyle(copyCoordText, Objects.requireNonNull(hoverText), Layout.YELLOW)
-        ), Layout.BOLD, buttonColor
-        );
+            Messenger.cpbtn(copyCoordText, Objects.requireNonNull(hoverText), Layout.YELLOW)
+        ), Layout.BOLD, buttonColor);
     }
 }

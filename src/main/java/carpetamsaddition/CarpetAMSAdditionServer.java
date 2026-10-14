@@ -40,6 +40,7 @@ import carpetamsaddition.helpers.FeatureChecker;
 import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import carpetamsaddition.logging.AmsCarpetLoggerRegistry;
 import carpetamsaddition.network.payloads.core.LazySettingsPayload_S2C;
+import carpetamsaddition.config.rule.blockChunkLoader.BlockLoaderConfigStore;
 import carpetamsaddition.network.payloads.handshake.HandShakeS2CPayload;
 import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
@@ -49,8 +50,8 @@ import carpetamsaddition.api.command.CommandHelper;
 import carpetamsaddition.utils.CountRulesUtil;
 import carpetamsaddition.utils.MinecraftServerUtil;
 import carpetamsaddition.utils.NetworkUtil;
-
 import carpetamsaddition.utils.PlayerUtil;
+
 import com.google.common.collect.Maps;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -165,6 +166,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
 
     @Override
     public void onServerClosed(MinecraftServer server) {
+        BlockLoaderConfigStore.clear();
         AmsRuleMetadata.deactivateLazyRules();
         NetworkUtil.clearClientSupport();
         FancyFakePlayerNameTeamController.removeBotTeam(server, CarpetAMSAdditionSettings.fancyFakePlayerName);

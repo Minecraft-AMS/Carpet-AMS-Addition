@@ -28,6 +28,7 @@ import carpetamsaddition.commands.rule.commandCustomMovableBlock.CustomMovableBl
 import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommand;
 
 import carpetamsaddition.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
+import carpetamsaddition.config.rule.blockChunkLoader.BlockLoaderConfigStore;
 import carpetamsaddition.config.rule.commandAntiFireItems.CustomAntiFireItemsConfig;
 import carpetamsaddition.config.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceConfig;
 import carpetamsaddition.config.rule.commandCustomBlockHardness.CustomBlockHardnessConfig;
@@ -46,5 +47,6 @@ public class LoadConfigFromJson {
         CustomMovableBlockConfig.getInstance().loadFromJson(CustomMovableBlockCommand.CUSTOM_MOVABLE_BLOCKS);
         CustomAntiFireItemsConfig.getInstance().loadFromJson(CustomAntiFireItemsCommand.CUSTOM_ANTI_FIRE_ITEMS);
         CustomBlockHardnessConfig.getInstance().loadBlockStates(CustomBlockHardnessCommand.CUSTOM_BLOCK_HARDNESS_MAP);
+        BlockLoaderConfigStore.loadFromJson(server);
     }
 }

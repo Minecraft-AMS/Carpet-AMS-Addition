@@ -29,9 +29,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
-/**
- * 相对中心位置的方块条件
- */
 public final class BlockCondition {
     private final BiPredicate<BlockGetter, BlockPos> predicate;
 
@@ -41,7 +38,12 @@ public final class BlockCondition {
 
     /** 检查相对中心坐标偏移处的方块状态 */
     public static BlockCondition at(int x, int y, int z, Predicate<BlockState> predicate) {
-        return new BlockCondition((world, origin) -> predicate.test(world.getBlockState(origin.offset(x, y, z))));
+        return at(x, y, z, (world, pos) -> predicate.test(world.getBlockState(pos)));
+    }
+
+    /** 在坐标偏移处使用世界和目标坐标检查条件 */
+    public static BlockCondition at(int x, int y, int z, BiPredicate<BlockGetter, BlockPos> predicate) {
+        return new BlockCondition((world, origin) -> predicate.test(world, origin.offset(x, y, z)));
     }
 
     /** 检查指定世界方向和距离处的方块状态 */

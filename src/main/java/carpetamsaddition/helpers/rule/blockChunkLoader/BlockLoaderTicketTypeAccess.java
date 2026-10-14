@@ -21,5 +21,5 @@
 package carpetamsaddition.helpers.rule.blockChunkLoader;
 
 public interface BlockLoaderTicketTypeAccess {
-    void ams$enableBlockLoaderTimeout();
+    void ams$setLoaderType(LoaderType type);
 }

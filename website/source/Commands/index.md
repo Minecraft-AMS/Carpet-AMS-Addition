@@ -1,3 +1,94 @@
+## 自定义方块加载器（blockChunkloader）
+
+音符盒、活塞和钟共用 `/blockChunkloader`。先开启对应规则，再设置条件、时长和范围，最后使用 `enabled true` 启用加载器。
+
+| `<type>` | 方块 | 对应规则 |
+| --- | --- | --- |
+| `noteblock` | 音符盒 | `commandNoteblockChunkloader` |
+| `piston` | 活塞 | `commandPistonChunkloader` |
+| `bell` | 钟 | `commandBellChunkloader` |
+
+### 指令格式
+
+`<参数>` 需要替换为实际内容，`|` 表示任选其一，输入时不包含这些符号。`/blockChunkloader help` 查看帮助，`/blockChunkloader list` 查看可配置的加载器。
+
+下表中的指令均以 `/blockChunkloader <type>` 开头。
+
+| 子指令 | 用途 |
+| --- | --- |
+| `show` | 查看设置和条件 |
+| `enabled <true\|false>` | 启用或停用加载器 |
+| `time <time>` | 设置加载时长 |
+| `range <range>` | 设置强加载范围 |
+| `test <x> <y> <z>` | 检测指定位置的条件 |
+| `reset` | 恢复默认配置并停用加载器 |
+| `group create <name>` | 创建条件组 |
+| `group list` | 查看全部条件组 |
+| `group show <name>` | 查看指定组及其条件 |
+| `group mode <name> <all\|any>` | 设置组内全部满足或至少一条满足 |
+| `group enabled <name> <true\|false>` | 启用或停用组，保留组内条件 |
+| `group remove <name>` | 删除组及其条件 |
+| `group clear` | 删除所有组，重建空的 `default` 组 |
+| `condition add <group> direction <direction> <distance> <is\|not> <block>` | 按方向和距离添加条件 |
+| `condition add <group> offset <dx> <dy> <dz> <is\|not> <block>` | 按坐标偏移添加条件 |
+| `condition list <group>` | 查看组内条件和当前编号 |
+| `condition remove <group> <id>` | 按编号删除条件 |
+| `condition clear <group>` | 清空组内条件 |
+
+### 参数说明
+
+| 参数 | 含义 |
+| --- | --- |
+| `<time>` | 加载时长，1～300 游戏刻，默认 `300` |
+| `<range>` | 强加载区域大小，可选 `1x1`、`3x3`、`5x5`、`7x7`、`9x9`，默认 `3x3` |
+| `<name>` | 要创建或管理的条件组名称，例如 `default`、`my_group` |
+| `<group>` | 条件所属的已有组名称，默认可填写 `default` |
+| `all`、`any` | 组内全部条件满足或至少一条满足，默认为`all`全部条件满足 |
+| `<direction>` | `up` 上、`down` 下、`north` 北、`south` 南、`east` 东、`west` 西、`northeast` 东北、`northwest` 西北、`southeast` 东南、`southwest` 西南 |
+| `<distance>` | 距离，1～32 格，斜角按各轴计算，例如 `northeast 2` 表示东北方斜角 2 格 |
+| `<dx>`、`<dy>`、`<dz>` | 相对加载器的世界坐标偏移，各为 -32～32，正 X 向东、正 Y 向上、正 Z 向南 |
+| `is`、`not` | 要求指定位置匹配或不匹配方块条件 |
+| `<block>` | 方块 ID，例如 `minecraft:bone_block` |
+| `<id>` | 条件编号，编辑条件后会自动重新编号，删除前务必使用 `condition list` 查看并确认 |
+| `<x>`、`<y>`、`<z>` | 要测试的加载器位置，例如 `~ ~ ~` |
+
+条件组名允许使用英文字母、数字、下划线 `_` 和连字符 `-`，长度为 1～32 个字符。
+
+多个已启用的非空组必须全部满足，空组和停用组不参与判断，没有有效条件组时不限制触发。检测原点为音符盒、活塞底座或钟，加载中心为音符盒、钟自身的区块，或活塞头到达的区块。
+
+### 示例
+
+音符盒上方有骨块、同高度东北方斜角一格有金块、东北上方一格有钻石块，且西北方顶角上方一格有石头时，触发后强加载 `5x5` 区块，持续 `200` 游戏刻：
+
+```text
+# 开启音符盒加载器规则，要求 2 级配置权限，并保存规则设置
+/carpet setDefault commandNoteblockChunkloader ops
+
+# 恢复音符盒加载器的默认配置，此时加载器停用
+/blockChunkloader noteblock reset
+
+# 将加载时长设为 200 游戏刻
+/blockChunkloader noteblock time 200
+
+# 将强加载范围设为 5x5 区块
+/blockChunkloader noteblock range 5x5
+
+# 在 default 组添加条件：音符盒上方一格为骨块
+/blockChunkloader noteblock condition add default direction up 1 is minecraft:bone_block
+
+# 在 default 组添加条件：音符盒同高度东北方斜角一格为金块
+/blockChunkloader noteblock condition add default direction northeast 1 is minecraft:gold_block
+
+# 在 default 组添加条件：音符盒东北上方一格为钻石块
+/blockChunkloader noteblock condition add default offset 1 1 -1 is minecraft:diamond_block
+
+# 在 default 组添加条件：音符盒西北方顶角上方一格为石头，组内默认要求全部条件满足
+/blockChunkloader noteblock condition add default offset -1 1 -1 is minecraft:stone
+
+# 启用音符盒加载器，触发音符盒且条件满足时加载区块
+/blockChunkloader noteblock enabled true
+```
+
 
 ## 区块加载控制（commandPlayerChunkLoadController）
 

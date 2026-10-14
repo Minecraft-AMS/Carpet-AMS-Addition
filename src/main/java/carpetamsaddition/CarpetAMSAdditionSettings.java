@@ -35,7 +35,6 @@ import carpetamsaddition.observers.network.AmspRuleObserver;
 
 import carpetamsaddition.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import carpetamsaddition.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
-import carpetamsaddition.validators.rule.blockChunkLoaderTimeController.MaxTimeValidator;
 import carpetamsaddition.validators.rule.enhancedWorldEater.BlastResistanceValidator;
 import carpetamsaddition.validators.rule.maxClientInteractionReachDistance.MaxClientInteractionReachDistanceValidator;
 import carpetamsaddition.validators.rule.easyGetPitcherPod.CountValidator;
@@ -625,12 +624,11 @@ public class CarpetAMSAdditionSettings {
     //$$ public static boolean experimentalContentCheckDisabled = false;
     //#endif
 
-    //#if MC>=12102
     @GameVersion(version = "Minecraft >= 1.21.2")
+    @PersistAsDefault
     @LazyRule
     @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static boolean experimentalMinecartEnabled = false;
-    //#endif
 
     @Rule(categories = AMS)
     public static translationModes amsTranslationMode = translationModes.CLIENT;
@@ -677,39 +675,28 @@ public class CarpetAMSAdditionSettings {
      * 区块加载规则
      */
     @Rule(
-        options = {"bone_block", "wither_skeleton_skull", "note_block", "false"},
-        categories = {AMS, FEATURE, AMS_CHUNKLOADER}
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, COMMAND, AMS_CHUNKLOADER}
     )
-    public static String noteBlockChunkLoader = "false";
+    public static String commandNoteblockChunkloader = "false";
 
     @Rule(
-        options = {"bone_block", "bedrock", "all", "false"},
-        categories = {AMS, FEATURE, AMS_CHUNKLOADER}
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, COMMAND, AMS_CHUNKLOADER}
     )
-    public static String pistonBlockChunkLoader = "false";
+    public static String commandPistonChunkloader = "false";
 
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
-    public static boolean bellBlockChunkLoader = false;
+    @Rule(
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, COMMAND, AMS_CHUNKLOADER}
+    )
+    public static String commandBellChunkloader = "false";
 
     @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
     public static boolean blockChunkLoaderKeepWorldTickUpdate = false;
 
     @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
     public static boolean keepWorldTickUpdate = false;
-
-    @Rule(
-        options = {"300"},
-        categories = {AMS, FEATURE, AMS_CHUNKLOADER},
-        validators = MaxTimeValidator.class,
-        strict = false
-    )
-    public static int blockChunkLoaderTimeController = 300;
-
-    @Rule(
-        options = {"1x1", "3x3", "5x5", "7x7", "9x9"},
-        categories = {AMS, FEATURE, AMS_CHUNKLOADER}
-    )
-    public static String blockChunkLoaderRangeController = "3x3";
 
     @Rule(
         categories = {AMS, COMMAND, AMS_CHUNKLOADER},

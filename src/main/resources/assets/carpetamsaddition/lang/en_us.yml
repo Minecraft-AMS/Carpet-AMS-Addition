@@ -28,6 +28,31 @@ carpetamsaddition:
       vanilla_command_disabled: '<Carpet AMS Addition> The rules of the game have been taken over by the minecartMaxSpeed carpet rules'
 
   command:
+    blockChunkloader:
+      saved: "Saved configuration for the %s loader"
+      invalid: "Operation failed; configuration unchanged: %s"
+      missing_group: "Condition group not found: %s"
+      denied: "The corresponding rule is false or you lack permission to configure this loader"
+      show: "%s loader: enabled=%s, duration=%sgt, area=%s chunks"
+      group: "Condition group %s: "
+      group_enabled: "enabled"
+      group_disabled: "disabled"
+      group_mode: ", mode="
+      group_details: ", %s conditions"
+      condition: "#%s offset (dx,dy,dz) = (%s,%s,%s) "
+      test_group: "Condition group %s: "
+      test_condition: "Condition #%s: "
+      test_result: "Combined conditions match=%s"
+      unloaded: "The test position is in an unloaded chunk, conditions cannot be checked"
+      all: "all"
+      any: "any"
+      is: "is"
+      not: "is not"
+      match: "match"
+      fail: "no match"
+      unknown: "unknown"
+      help: "See the official website for usage instructions:"
+      help_hover: "Click to open"
     commandHelper:
       refresh_cmd_tree: '<Carpet AMS Addition> Command tree has been refreshed'
 
@@ -210,8 +235,6 @@ carpetamsaddition:
       value_range: 'The value must be 0 - 512 or -1'
     maxPlayerEntityInteractionRange:
       value_range: 'The value must be 0 - 512 or -1'
-    blockChunkLoaderTimeController:
-      value_range: 'The value must be 1 - 300'
     easyGetPitcherPod:
       value_range: 'The value must be 2 - 100 or 0'
     renewableNetherScrap:
@@ -645,47 +668,25 @@ carpetamsaddition:
         extra:
           '0': 'Command:'
           '1': '/playerChunkLoading true/false'
-      noteBlockChunkLoader:
-        desc: Load nearby 3x3 chunks for 15 seconds when a note block is triggered, You can use the rules of blockChunkLoaderTimeController and blockChunkLoaderRangeController to control their loading time and range
+      commandNoteblockChunkloader:
+        desc: Use commands to customize a note block chunk loader
         extra:
-          '0': '[bone_block] - When bone_block is on the note_block'
-          '1': '[wither_skeleton_skull] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall'
-          '2': '[note_block] - Only note_block'
-          '3': '[false] - Disable rule'
-          '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
-      bellBlockChunkLoader:
-        desc: Load nearby 3x3 chunks for 15 seconds when a bell is triggered, You can use the rules of blockChunkLoaderTimeController and blockChunkLoaderRangeController to control their loading time and range
+          '0': 'After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions'
+      commandBellChunkloader:
+        desc: Use commands to customize a bell chunk loader
         extra:
-          '0': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '1': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
-      pistonBlockChunkLoader:
-        desc:  Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head), You can use the rules of blockChunkLoaderTimeController and blockChunkLoaderRangeController to control their loading time and range
+          '0': 'After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions'
+      commandPistonChunkloader:
+        desc: Use commands to customize a piston chunk loader (centered on the piston head)
         extra:
-          '0': '[bone_block] - When bone_block is on the piston'
-          '1': '[bedrock] - When bedrock is under the piston'
-          '2': '[all] - When bone_block is on the piston or bedrock is under the piston'
-          '3': '[false] - Disable rule'
-          '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
+          '0': 'After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions'
       blockChunkLoaderKeepWorldTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded
         extra:
           '0': 'Affected rules: '
-          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
+          '1': 'commandNoteblockChunkloader, commandPistonChunkloader, commandBellChunkloader'
       keepWorldTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction
-      blockChunkLoaderTimeController:
-        desc: Used to control the loading time of block loader series rules
-        extra:
-          '0': 'Affected rules: '
-          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
-      blockChunkLoaderRangeController:
-        desc: Used to control the loading range of block loader series rules
-        extra:
-          '0': 'Affected rules: '
-          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
-
       # 合成配方规则
       craftableEnchantedGoldenApples:
         desc: Enchanted Golden Apples can be crafted with 8 Gold Blocks again

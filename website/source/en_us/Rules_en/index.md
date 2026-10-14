@@ -93,107 +93,44 @@ Command: /playerChunkLoading true/false
 
 - Categroies: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
-## noteBlockChunkLoader
+## commandNoteblockChunkloader
 
-When a note block is triggered by rising edge of redstone signal, the chunk which the note block located will be added a ticket with level 30 and type `note_block`, which will expire after 300gt. Note blocks that can be used to add ticket must meet the requirement set by the rule option, You can use the rules of `blockChunkLoaderTimeController` and `blockChunkLoaderRangeController` to control their loading time and range.
+Use commands to customize a note block chunk loader.
 
-the option is interpreted as follow:
-
-- `bone_block`: The note block must have a bone block just above it.
-  
-  
-
-- `wither_skeleton_skull` The note block must have a wither skeleton skull just above it. This skull can be either on the note block or attach to another block.
-  
-  
-
-- `note_block`: No special requirement for note blocks to add tickets. Warning: as many high frequency clock will use note block, please take it carefully as it may make some chunks loading permanently in an unexpect way.
-  
-  
-
-- `false`: Disable the rule.
-  
-  
+After enabling the rule, use the `/blockChunkloader help` command to view the usage instructions.
 
 - Type: `String`
-  
-  
-
 - Default: `false`
-  
-  
+- Suggested optionss: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
-- Suggested options: `bone_block`, `wither_skeleton_skull`, `note_block`, `false`
-  
-  
+## commandBellChunkloader
 
-- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+Use commands to customize a bell chunk loader.
 
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepWorldTickUpdate `or `keepWorldTickUpdate` rules to solve this issue.
-
-## bellBlockChunkLoader
-
-When a bell block is triggered by rising edge of redstone signal, the chunk which the bell block located will be added a ticket with level 30 and type `bell_block`, which will expire after 300gt. Bell blocks have no special requirement to add tickets, You can use the rules of `blockChunkLoaderTimeController` and `blockChunkLoaderRangeController` to control their loading time and range.
-
-- Type: `boolean`
-  
-  
-
-- Default: `false`
-  
-  
-
-- Suggested options: `false`, `true`
-  
-  
-
-- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
-
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepWorldTickUpdate `or `keepWorldTickUpdate `rules to solve this issue.
-
-## pistonBlockChunkLoader
-
-When a piston (also available for sticky piston) successfully push or pull its head, the chunk which the piston head (the moving block representing piston head) located will be added a ticket with level 30 and type `piston_block`, which will expire after 300gt. The ticket will be added at the tick when the moving block is created. Pistons that can be used to add ticket must meet the requirement set by the rule option, You can use the rules of `blockChunkLoaderTimeController` and `blockChunkLoaderRangeController` to control their loading time and range.
-
-the option is interpreted as follow:
-
-- `bone_block`: The piston must have a bone block just above it.
-  
-  
-
-- `bedrock`: The piston must have a bedrock just under it.
-  
-  
-
-- `all`: When boe_block is on the piston or bed rock is under the piston.
-  
-  
-
-- `false`: Disable the rule.
-
-Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension, You can enable the `blockChunkLoaderKeepWorldTickUpdate `or `keepWorldTickUpdate `rules to solve this issue.
-
-
+After enabling the rule, use the `/blockChunkloader help` command to view the usage instructions.
 
 - Type: `String`
-  
-  
-
 - Default: `false`
-  
-  
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
-- Suggested options: `bone_block`, `bedrock`, `all`, `false`
-  
-  
+## commandPistonChunkloader
 
-- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+Use commands to customize a piston chunk loader (centered on the piston head).
+
+After enabling the rule, use the `/blockChunkloader help` command to view the usage instructions.
+
+- Type: `String`
+- Default: `false`
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+- Categories: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
 ## blockChunkLoaderKeepWorldTickUpdate
 
 After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.
 
-Affected rules: `noteBlockChunkLoader`, `pistonBlockChunkLoader`, `bellBlockChunkLoader`
+Affected rules: `commandNoteblockChunkloader`, `commandPistonChunkloader`, `commandBellChunkloader`
 
 - Type: `boolean`
   
@@ -222,50 +159,6 @@ After 300 ticks without any players in the current dimension on the server, Mine
   
 
 - Suggested options: `false`, `true`
-  
-  
-
-- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
-
-## blockChunkLoaderTimeController
-
-Used to control the loading time of block loader series rules.
-
-Affected rules: 
-
-noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader
-
-- Type: `int`
-  
-  
-
-- Default: `300`
-  
-  
-
-- Suggested options: `1 - 300`
-  
-  
-
-- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
-
-## blockChunkLoaderRangeController
-
-Used to control the loading range of block loader series rules.
-
-Affected rules: 
-
-noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader
-
-- Type: `String`
-  
-  
-
-- Default: `3x3`
-  
-  
-
-- Suggested options: `1x1`, `3x3`, `5x5`, `7x7`, `9x9`
   
   
 

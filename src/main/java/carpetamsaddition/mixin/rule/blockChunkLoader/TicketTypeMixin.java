@@ -20,7 +20,8 @@
 
 package carpetamsaddition.mixin.rule.blockChunkLoader;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.blockChunkLoader.LoaderType;
+import carpetamsaddition.config.rule.blockChunkLoader.BlockLoaderConfigStore;
 import carpetamsaddition.helpers.rule.blockChunkLoader.BlockLoaderTicketTypeAccess;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -34,19 +35,15 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(value = TicketType.class, priority = 168)
 public abstract class TicketTypeMixin implements BlockLoaderTicketTypeAccess {
     @Unique
-    private boolean ams$useBlockLoaderTimeout = false;
+    private LoaderType ams$loaderType;
 
     @Override
-    public void ams$enableBlockLoaderTimeout() {
-        this.ams$useBlockLoaderTimeout = true;
+    public void ams$setLoaderType(LoaderType type) {
+        this.ams$loaderType = type;
     }
 
     @ModifyReturnValue(method = "timeout", at = @At("RETURN"))
     private long blockChunkLoaderTimeout(long original) {
-        if (this.ams$useBlockLoaderTimeout) {
-            return CarpetAMSAdditionSettings.blockChunkLoaderTimeController;
-        }
-
-        return original;
+        return this.ams$loaderType == null ? original : BlockLoaderConfigStore.get(this.ams$loaderType).time;
     }
 }

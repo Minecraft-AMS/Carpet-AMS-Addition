@@ -55,11 +55,11 @@ public class GetSaveSizeCommand implements AmsCommand {
         long size = getFolderSize(getSaveFolder(server));
         String sizeString = formatSize(size);
 
-        Messenger.tell(source, Messenger.s(String.format(
-            "§e%s §a§l§n%s",
-            tr.tr("size_msg").getString(),
-            sizeString
-        )));
+        Messenger.tell(source, Messenger.c(
+            Messenger.f(tr.tr("size_msg"), Layout.YELLOW),
+            Messenger.s(" "),
+            Messenger.f(Messenger.s(sizeString), Layout.GREEN, Layout.BOLD, Layout.UNDERLINE)
+        ));
 
         return 1;
     }

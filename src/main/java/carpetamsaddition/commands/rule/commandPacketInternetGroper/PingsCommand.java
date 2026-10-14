@@ -69,14 +69,12 @@ public class PingsCommand implements AmsCommand {
         try {
             InetAddress inetAddress = InetAddress.getByName(targetIpOrDomainName);
             if (isFirstPing) {
-                Messenger.tell(
-                    source, Messenger.s(
-                        String.format(
-                            "§b%s §ePing §b%s §e[ %s ] §e...",
-                            MSG_HEAD, targetIpOrDomainName, inetAddress.getHostAddress()
-                        )
-                    )
-                );
+                Messenger.tell(source, Messenger.c(
+                    Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                    Messenger.f(Messenger.s("Ping "), Layout.YELLOW),
+                    Messenger.f(Messenger.s(targetIpOrDomainName + " "), Layout.AQUA),
+                    Messenger.f(Messenger.s("[ " + inetAddress.getHostAddress() + " ] ..."), Layout.YELLOW)
+                ));
             }
 
             long startTime = System.currentTimeMillis();
@@ -85,18 +83,19 @@ public class PingsCommand implements AmsCommand {
 
             if (isReachable) {
                 long delayTime = endTime - startTime;
-                Messenger.tell(
-                    source, Messenger.s(
-                        String.format(
-                            "§b%s §2Replay from §e[ %s ]§2 Time = %dms",
-                            MSG_HEAD, inetAddress.getHostAddress(), delayTime
-                        )
-                    )
-                );
+                Messenger.tell(source, Messenger.c(
+                    Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                    Messenger.f(Messenger.s("Replay from "), Layout.DARK_GREEN),
+                    Messenger.f(Messenger.s("[ " + inetAddress.getHostAddress() + " ]"), Layout.YELLOW),
+                    Messenger.f(Messenger.s(" Time = " + delayTime + "ms"), Layout.DARK_GREEN)
+                ));
 
                 return delayTime;
             } else {
-                Messenger.tell(source, Messenger.s(String.format("§b%s §4Request time out.", MSG_HEAD)));
+                Messenger.tell(source, Messenger.c(
+                    Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                    Messenger.f(Messenger.s("Request time out."), Layout.DARK_RED)
+                ));
                 return 0;
             }
         } catch (IOException e) {
@@ -106,14 +105,18 @@ public class PingsCommand implements AmsCommand {
     }
 
     private static int stopPing(CommandSourceStack source) {
-        String stopPing = tr.tr("stop_ping").getString();
-        String activePingIsNull = tr.tr("active_ping_is_null").getString();
         PingThread pingThread = PING_THREADS.get(source);
         if (pingThread != null) {
             pingThread.setInterrupted();
-            Messenger.tell(source, Messenger.s(String.format("§b%s §4%s", MSG_HEAD, stopPing)));
+            Messenger.tell(source, Messenger.c(
+                Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                Messenger.f(tr.tr("stop_ping"), Layout.DARK_RED)
+            ));
         } else {
-            Messenger.tell(source, Messenger.s(String.format("§b%s §4%s", MSG_HEAD, activePingIsNull)));
+            Messenger.tell(source, Messenger.c(
+                Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+                Messenger.f(tr.tr("active_ping_is_null"), Layout.DARK_RED)
+            ));
         }
         return 1;
     }
@@ -126,14 +129,13 @@ public class PingsCommand implements AmsCommand {
     }
 
     private static void sendFinishMessage(CommandSourceStack source, int totalPings, int successfulPings, int failedPings, long averageDelay) {
-        Messenger.tell(
-            source, Messenger.s(
-                String.format(
-                    "§b%s §aSent = %d, Received = %d, Lost = %d, Average delay = %dms",
-                    MSG_HEAD, totalPings, successfulPings, failedPings, averageDelay
-                )
-            )
-        );
+        Messenger.tell(source, Messenger.c(
+            Messenger.f(Messenger.s(MSG_HEAD + " "), Layout.AQUA),
+            Messenger.f(Messenger.s(
+                "Sent = " + totalPings + ", Received = " + successfulPings
+                    + ", Lost = " + failedPings + ", Average delay = " + averageDelay + "ms"
+            ), Layout.GREEN)
+        ));
     }
 
     private static class PingThread extends Thread {

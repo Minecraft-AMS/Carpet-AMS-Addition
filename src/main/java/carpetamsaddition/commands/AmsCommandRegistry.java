@@ -11,6 +11,7 @@ import carpetamsaddition.api.command.AmsCommand;
 import carpetamsaddition.api.command.BrigadierCommandCompiler;
 import carpetamsaddition.api.command.CommandBuilder;
 import carpetamsaddition.api.command.CommandRegistrationContext;
+import carpetamsaddition.commands.rule.commandBlockChunkloader.BlockChunkloaderCommand;
 import carpetamsaddition.commands.debug.network.AmspCommand;
 import carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommand;
 import carpetamsaddition.commands.rule.commandAtSomeOnePlayer.AtCommand;
@@ -52,6 +53,7 @@ public final class AmsCommandRegistry {
     private static final List<AmsCommand> COMMANDS = Arrays.asList(
         new AmsUpdateSuppressionCrashFixCommand(),
         new AtCommand(),
+        new BlockChunkloaderCommand(),
         new AnvilInteractionDisabledCommand(),
         new CarpetExtensionModWikiHyperlinkCommand(),
         new CustomAntiFireItemsCommand(),
