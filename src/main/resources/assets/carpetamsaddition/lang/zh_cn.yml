@@ -814,12 +814,6 @@ carpetamsaddition:
         desc: 使用指令自定义活塞加载器（以活塞头到达的区块为中心）
         extra:
           '0': '开启规则后，使用"/blockChunkloader help"命令查看使用说明'
-      blockChunkLoaderKeepWorldTickUpdate:
-        name: 方块区块加载器保持实体更新
-        desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制
-        extra:
-          '0': '受影响的规则：'
-          '1': 'commandNoteblockChunkloader、commandPistonChunkloader、commandBellChunkloader'
       keepWorldTickUpdate:
         name: 保持实体更新
         desc: 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制

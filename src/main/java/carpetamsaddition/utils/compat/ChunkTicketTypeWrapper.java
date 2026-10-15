@@ -20,8 +20,6 @@
 
 package carpetamsaddition.utils.compat;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
@@ -71,8 +69,5 @@ public final class ChunkTicketTypeWrapper {
     public void addTicket(ServerLevel world, ChunkPos chunkPos, int radius) {
         this.ticketType.addTicket(world, chunkPos, radius, chunkPos);
 
-        if (CarpetAMSAdditionSettings.blockChunkLoaderKeepWorldTickUpdate) {
-            world.resetEmptyTime();
-        }
     }
 }

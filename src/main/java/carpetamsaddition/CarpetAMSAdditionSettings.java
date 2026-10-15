@@ -693,9 +693,6 @@ public class CarpetAMSAdditionSettings {
     public static String commandBellChunkloader = "false";
 
     @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
-    public static boolean blockChunkLoaderKeepWorldTickUpdate = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
     public static boolean keepWorldTickUpdate = false;
 
     @Rule(

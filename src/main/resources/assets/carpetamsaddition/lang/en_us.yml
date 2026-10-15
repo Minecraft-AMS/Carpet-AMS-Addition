@@ -675,11 +675,6 @@ carpetamsaddition:
         desc: Use commands to customize a piston chunk loader (centered on the piston head)
         extra:
           '0': 'After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions'
-      blockChunkLoaderKeepWorldTickUpdate:
-        desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded
-        extra:
-          '0': 'Affected rules: '
-          '1': 'commandNoteblockChunkloader, commandPistonChunkloader, commandBellChunkloader'
       keepWorldTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction
       # 合成配方规则
