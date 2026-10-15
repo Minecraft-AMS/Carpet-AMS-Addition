@@ -55,7 +55,7 @@ public abstract class RecipeManagerMixin {
         )
     )
     private void addCustomRecipes(CallbackInfoReturnable<RecipeMap> cir, @Local SortedMap<Identifier, Recipe<?>> recipes) {
-        AmsRecipeManager.registerCustomRecipes(recipes, ((RecipeManagerAccessor) this).getRegistries());
+        AmsRecipeManager.registerCustomRecipes(recipes, ((RecipeManagerAccessor) this).ams$getRegistries());
     }
     //#else
     //$$ @ModifyVariable(method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At("HEAD"), argsOnly = true)

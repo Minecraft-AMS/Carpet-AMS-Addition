@@ -26,12 +26,12 @@ import carpetamsaddition.api.recipe.builder.SmeltingRecipeBuilder;
 
 import static net.minecraft.world.item.Items.*;
 
-public class CarpetAMSAdditionCustomRecipes {
-    private static final CarpetAMSAdditionCustomRecipes INSTANCE = new CarpetAMSAdditionCustomRecipes();
+public class CarpetAMSAdditionRecipes {
+    private static final CarpetAMSAdditionRecipes INSTANCE = new CarpetAMSAdditionRecipes();
 
-    private CarpetAMSAdditionCustomRecipes() {}
+    private CarpetAMSAdditionRecipes() {}
 
-    public static CarpetAMSAdditionCustomRecipes getInstance() {
+    public static CarpetAMSAdditionRecipes getInstance() {
         return INSTANCE;
     }
 

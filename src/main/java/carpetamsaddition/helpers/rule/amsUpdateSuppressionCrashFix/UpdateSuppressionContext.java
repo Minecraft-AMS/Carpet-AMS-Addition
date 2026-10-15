@@ -54,12 +54,8 @@ public class UpdateSuppressionContext {
     }
 
     private static Component copyButton(BlockPos pos) {
-
-        return Messenger.copyButton(
-            " [C] ",
-            getSuppressionPos(pos).replace(",", ""), // 1, 0, -24 -> 1 0 -24
-            Layout.GREEN, Layout.BOLD
-        );
+        String coord = getSuppressionPos(pos).replace(",", ""); // 1, 0, -24 -> 1 0 -24
+        return Messenger.copyButton(" [C] ", coord, Layout.GREEN, Layout.BOLD);
     }
 
     private static String getSuppressionPos(BlockPos pos) {

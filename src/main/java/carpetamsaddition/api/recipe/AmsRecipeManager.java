@@ -20,7 +20,7 @@
 
 package carpetamsaddition.api.recipe;
 
-import carpetamsaddition.CarpetAMSAdditionCustomRecipes;
+import carpetamsaddition.CarpetAMSAdditionRecipes;
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.settings.AmsRuleMetadata;
 import carpetamsaddition.utils.MinecraftServerUtil;
@@ -65,11 +65,9 @@ import java.util.Map;
 
 /**
  * 自定义配方管理器。
- * 职责：
- * 1. 将 {@link AmsRecipeBuilder} 收集的配方模板统一转换为服务端配方 JSON 并注入配方表；
- * 2. 监听配方相关规则变化，异步重载服务器资源使新配方生效；
- * 3. 在玩家登录或重载完成后，自动补发玩家缺失的本模组配方。
- * 通过 reloadInProgress / reloadRequested 两个标志位合并并发的重载请求，避免重复重载。
+ * 将 {@link AmsRecipeBuilder} 收集的配方模板统一转换为服务端配方 JSON 并注入配方表；
+ * 监听配方相关规则变化，异步重载服务器资源使新配方生效；
+ * 在玩家登录或重载完成后，自动补发玩家缺失的本模组配方。
  */
 public final class AmsRecipeManager {
     private static final String MOD_ID = CarpetAMSAdditionServer.compactName;
@@ -99,7 +97,7 @@ public final class AmsRecipeManager {
         builder.getShapedRecipeList().clear();
         builder.getShapelessRecipeList().clear();
         builder.getSmeltingRecipeList().clear();
-        CarpetAMSAdditionCustomRecipes.getInstance().buildRecipes();
+        CarpetAMSAdditionRecipes.getInstance().buildRecipes();
     }
 
     //#if MC<260300
