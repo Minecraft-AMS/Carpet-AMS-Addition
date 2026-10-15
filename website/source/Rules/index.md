@@ -118,25 +118,6 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
-## 方块区块加载器保持实体更新（blockChunkLoaderKeepWorldTickUpdate）
-
-在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会让以下规则发生加载时绕过这个限制。
-受影响的规则：`commandNoteblockChunkloader`、`commandPistonChunkloader`、`commandBellChunkloader`
-
-- 类型: `boolean`
-  
-  
-
-- 默认值: `false`
-  
-  
-
-- 参考选项: `false`, `true`
-  
-  
-
-- 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
-
 ## 保持实体更新（keepWorldTickUpdate）
 
 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制。

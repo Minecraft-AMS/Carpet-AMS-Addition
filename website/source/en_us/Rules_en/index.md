@@ -126,26 +126,6 @@ After enabling the rule, use the `/blockChunkloader help` command to view the us
 - Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - Categories: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
-## blockChunkLoaderKeepWorldTickUpdate
-
-After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded.
-
-Affected rules: `commandNoteblockChunkloader`, `commandPistonChunkloader`, `commandBellChunkloader`
-
-- Type: `boolean`
-  
-  
-
-- Default: `false`
-  
-  
-
-- Suggested options: `false` , `true`
-  
-  
-
-- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
-
 ## keepWorldTickUpdate
 
 After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction.
