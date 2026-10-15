@@ -32,14 +32,14 @@ import carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS.ClientP
 import carpetamsaddition.utils.messenger.Messenger;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GetClientPlayerFpsCommand implements AmsCommand {
     private static final Translator tr = new Translator("command.getClientPlayerFps");
-    private static final Map<UUID, CommandSourceStack> pendingQueries = new ConcurrentHashMap<>();
+    private static final Map<ServerGamePacketListenerImpl, CommandSourceStack> pendingQueries = new ConcurrentHashMap<>();
     @Override
     public void define(CommandBuilder command) {
         command.name("getClientPlayerFps")
@@ -49,19 +49,25 @@ public class GetClientPlayerFpsCommand implements AmsCommand {
     }
 
     private static int requestFps(ServerPlayer targetPlayer, CommandSourceStack source) {
-        pendingQueries.put(targetPlayer.getUUID(), source);
-        NetworkUtil.sendS2CPacket(targetPlayer, ClientPlayerFpsPayload_S2C.create(targetPlayer.getUUID()), NetworkUtil.SendMode.NEED_SUPPORT);
+        pendingQueries.put(targetPlayer.connection, source);
+        NetworkUtil.sendS2CPacket(targetPlayer, ClientPlayerFpsPayload_S2C.create(), NetworkUtil.SendMode.NEED_SUPPORT);
         return 1;
     }
 
-    public static void sendFpsResult(UUID playerUuid, int fps) {
-        CommandSourceStack source = pendingQueries.remove(playerUuid);
-        if (source != null) {
-            ServerPlayer player = PlayerUtil.getServerPlayerEntity(playerUuid);
-            if (!FakePlayerHelper.isFakePlayer(player) && player != null) {
-                Messenger.tell(source, Messenger.f(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), Layout.GREEN));
-            }
+    public static void sendFpsResult(ServerPlayer player, int fps) {
+        CommandSourceStack source = pendingQueries.remove(player.connection);
+        if (source != null && !FakePlayerHelper.isFakePlayer(player)) {
+            Messenger.tell(source, Messenger.f(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), Layout.GREEN));
         }
+    }
+
+    public static void clearPlayerQueries(ServerPlayer player) {
+        pendingQueries.entrySet().removeIf(entry -> entry.getKey() == player.connection
+            || entry.getValue().getEntity() instanceof ServerPlayer && ((ServerPlayer) entry.getValue().getEntity()).connection == player.connection);
+    }
+
+    public static void clearQueries() {
+        pendingQueries.clear();
     }
 
     private static int help(CommandSourceStack source) {

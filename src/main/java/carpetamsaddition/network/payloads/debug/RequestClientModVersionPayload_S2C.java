@@ -29,26 +29,19 @@ import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
 
-import java.util.UUID;
+import carpetamsaddition.utils.Noop;
 
 public class RequestClientModVersionPayload_S2C extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.REQUEST_CLIENT_MOD_VERSION_S2C.getId();
 
-    private final UUID uuid;
 
-    public RequestClientModVersionPayload_S2C(UUID uuid) {
+    public RequestClientModVersionPayload_S2C() {
         super(ID);
-        this.uuid = uuid;
-    }
-
-    public RequestClientModVersionPayload_S2C(FriendlyByteBuf buf) {
-        super(ID);
-        this.uuid = buf.readUUID();
     }
 
     @Override
     protected void writeData(FriendlyByteBuf buf) {
-        buf.writeUUID(this.uuid);
+        Noop.noop();
     }
 
     @Override
@@ -56,13 +49,13 @@ public class RequestClientModVersionPayload_S2C extends AMS_CustomPayload {
         NetworkUtil.executeOnClientThread(
             () -> NetworkUtil.sendC2SPacket(
                 MinecraftClientUtil.getCurrentPlayer(),
-                RequestClientModVersionPayload_C2S.create(CarpetAMSAdditionServer.fancyName + " v" + CarpetAMSAdditionClient.getVersion(), this.uuid),
+                RequestClientModVersionPayload_C2S.create(CarpetAMSAdditionServer.fancyName + " v" + CarpetAMSAdditionClient.getVersion()),
                 NetworkUtil.SendMode.NEED_SUPPORT
             )
         );
     }
 
-    public static RequestClientModVersionPayload_S2C create(UUID uuid) {
-        return new RequestClientModVersionPayload_S2C(uuid);
+    public static RequestClientModVersionPayload_S2C create() {
+        return new RequestClientModVersionPayload_S2C();
     }
 }

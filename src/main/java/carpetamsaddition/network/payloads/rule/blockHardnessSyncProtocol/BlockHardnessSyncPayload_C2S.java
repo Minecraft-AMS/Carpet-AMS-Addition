@@ -23,62 +23,49 @@ package carpetamsaddition.network.payloads.rule.blockHardnessSyncProtocol;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.utils.NetworkUtil;
-import carpetamsaddition.utils.PlayerUtil;
+import carpetamsaddition.utils.EntityUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.UUID;
-
 public class BlockHardnessSyncPayload_C2S extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.BLOCK_HARDNESS_SYNC_PROTOCOL_C2S.getId();
-    private final UUID playerUuid;
     private final BlockPos pos;
     private final float clientHardness;
 
-    public BlockHardnessSyncPayload_C2S(UUID playerUuid, BlockPos pos, float clientHardness) {
+    public BlockHardnessSyncPayload_C2S(BlockPos pos, float clientHardness) {
         super(ID);
-        this.playerUuid = playerUuid;
         this.pos = pos;
         this.clientHardness = clientHardness;
     }
 
     public BlockHardnessSyncPayload_C2S(FriendlyByteBuf buf) {
         super(ID);
-        this.playerUuid = buf.readUUID();
         this.pos = buf.readBlockPos();
         this.clientHardness = buf.readFloat();
     }
 
     @Override
     protected void writeData(FriendlyByteBuf buf) {
-        buf.writeUUID(this.playerUuid);
         buf.writeBlockPos(this.pos);
         buf.writeFloat(this.clientHardness);
     }
 
-    @Override
-    public void handle() {
-        NetworkUtil.executeOnServerThread(() -> {
-            ServerPlayer player = PlayerUtil.getServerPlayerEntity(this.playerUuid);
-            //#if MC>=11802
-            BlockGetter level = ((Player) player).level();
-            //#else
-            //$$ BlockGetter level = player.level;
-            //#endif
+    public void handle(ServerPlayer sender) {
+        NetworkUtil.executeOnServerThread(sender, () -> {
+            BlockGetter level = EntityUtil.getEntityWorld(sender);
             BlockState state = level.getBlockState(this.pos);
             float serverHardness = state.getDestroySpeed(level, this.pos);
             if (Float.compare(this.clientHardness, serverHardness) != 0) {
-                NetworkUtil.sendS2CPacket(player, BlockHardnessSyncPayload_S2C.create(state, serverHardness), NetworkUtil.SendMode.NEED_SUPPORT);
+                NetworkUtil.sendS2CPacket(sender, BlockHardnessSyncPayload_S2C.create(state, serverHardness), NetworkUtil.SendMode.NEED_SUPPORT);
             }
         });
     }
 
-    public static BlockHardnessSyncPayload_C2S create(UUID playerUuid, BlockPos pos, float clientHardness) {
-        return new BlockHardnessSyncPayload_C2S(playerUuid, pos, clientHardness);
+    public static BlockHardnessSyncPayload_C2S create(BlockPos pos, float clientHardness) {
+        return new BlockHardnessSyncPayload_C2S(pos, clientHardness);
     }
 }

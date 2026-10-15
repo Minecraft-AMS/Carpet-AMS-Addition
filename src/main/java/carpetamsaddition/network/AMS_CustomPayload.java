@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 //#endif
 
 public abstract class AMS_CustomPayload implements CustomPacketPayload {
-    public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network/v1");
+    public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network/v2");
     //#if MC>=12005
     public static final CustomPacketPayload.Type<@NotNull AMS_CustomPayload> KEY = new CustomPacketPayload.Type<>(CHANNEL_ID);
     public static final StreamCodec<@NotNull FriendlyByteBuf, @NotNull AMS_CustomPayload> CODEC = CustomPacketPayload.codec(AMS_CustomPayload::write, AMS_PayloadCodec::decodePayload);
@@ -55,7 +55,13 @@ public abstract class AMS_CustomPayload implements CustomPacketPayload {
 
     protected abstract void writeData(FriendlyByteBuf buf);
 
-    protected abstract void handle();
+    protected void handle() {
+        throw new UnsupportedOperationException("This payload does not support client-side handling");
+    }
+
+    protected void handle(ServerPlayer sender) {
+        throw new UnsupportedOperationException("This payload does not support server-side handling");
+    }
 
     public final void sendC2SPacket(LocalPlayer player) {
         AMS_PayloadSender.c2s(this, player);

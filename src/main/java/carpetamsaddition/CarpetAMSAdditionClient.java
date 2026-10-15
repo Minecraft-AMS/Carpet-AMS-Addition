@@ -67,7 +67,7 @@ public class CarpetAMSAdditionClient implements ClientModInitializer {
 
     public void onGameJoin() {
         player = MinecraftClientUtil.getCurrentPlayer();
-        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(version, player.getUUID()), NetworkUtil.SendMode.FORCE);
+        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(version), NetworkUtil.SendMode.FORCE);
     }
 
     public void onDisconnect() {

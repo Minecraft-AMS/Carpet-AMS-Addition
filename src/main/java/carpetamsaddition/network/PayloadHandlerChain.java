@@ -20,16 +20,23 @@
 
 package carpetamsaddition.network;
 
+import net.minecraft.server.level.ServerPlayer;
+
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PayloadHandlerChain {
     private final Map<Class<? extends AMS_CustomPayload>, CovariantHandlerList<?>> PAYLOAD_HANDLERS = new ConcurrentHashMap<>();
 
     public <T extends AMS_CustomPayload> void put(Class<T> payloadClass, Consumer<T> handler) {
+        put(payloadClass, (payload, sender) -> handler.accept(payload));
+    }
+
+    public <T extends AMS_CustomPayload> void put(Class<T> payloadClass, BiConsumer<T, ServerPlayer> handler) {
         CovariantHandlerList<T> list = getOrCreate(payloadClass);
         list.addHandler(handler);
     }
@@ -56,64 +63,68 @@ public class PayloadHandlerChain {
     }
 
     public boolean handle(AMS_CustomPayload payload) {
+        return handle(payload, null);
+    }
+
+    public boolean handle(AMS_CustomPayload payload, ServerPlayer sender) {
         if (payload == null) {
             return false;
         }
 
         CovariantHandlerList<?> list = PAYLOAD_HANDLERS.get(payload.getClass());
 
-        return list != null && list.handle(payload);
+        return list != null && list.handle(payload, sender);
     }
 
     private static class CovariantHandlerList<T extends AMS_CustomPayload> {
         private final Class<T> type;
-        private final List<Consumer<T>> handlers = new ArrayList<>();
+        private final List<BiConsumer<T, ServerPlayer>> handlers = new ArrayList<>();
 
-        CovariantHandlerList(Class<T> type) {
+        private CovariantHandlerList(Class<T> type) {
             this.type = type;
         }
 
-        void addHandler(Consumer<T> handler) {
+        private void addHandler(BiConsumer<T, ServerPlayer> handler) {
             handlers.add(handler);
         }
 
-        boolean handle(AMS_CustomPayload payload) {
+        private boolean handle(AMS_CustomPayload payload, ServerPlayer sender) {
             if (!type.isInstance(payload)) {
                 return false;
             }
 
             T typed = type.cast(payload);
 
-            for (Consumer<T> handler : handlers) {
-                handler.accept(typed);
+            for (BiConsumer<T, ServerPlayer> handler : handlers) {
+                handler.accept(typed, sender);
             }
 
             return !handlers.isEmpty();
         }
 
-        boolean matchesType(Class<? extends AMS_CustomPayload> otherType) {
+        private boolean matchesType(Class<? extends AMS_CustomPayload> otherType) {
             return type.equals(otherType);
         }
 
-        <U extends AMS_CustomPayload> CovariantHandlerList<U> asType(Class<U> targetType) {
+        private <U extends AMS_CustomPayload> CovariantHandlerList<U> asType(Class<U> targetType) {
             if (!type.equals(targetType)) {
                 throw new ClassCastException("Cannot cast " + type + " to " + targetType);
             }
 
             CovariantHandlerList<U> result = new CovariantHandlerList<>(targetType);
 
-            for (Consumer<T> handler : handlers) {
+            for (BiConsumer<T, ServerPlayer> handler : handlers) {
                 result.addHandler(createBridgeConsumer(handler));
             }
 
             return result;
         }
 
-        private <U extends AMS_CustomPayload> Consumer<U> createBridgeConsumer(Consumer<T> originalHandler) {
-            return u -> {
+        private <U extends AMS_CustomPayload> BiConsumer<U, ServerPlayer> createBridgeConsumer(BiConsumer<T, ServerPlayer> originalHandler) {
+            return (u, sender) -> {
                 if (type.isInstance(u)) {
                     T t = type.cast(u);
-                    originalHandler.accept(t);
+                    originalHandler.accept(t, sender);
                 }
             };
         }

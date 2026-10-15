@@ -30,8 +30,6 @@ import carpetamsaddition.utils.Noop;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 
-import java.util.UUID;
-
 public class RequestHandShakeS2CPayload extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.REQUEST_HANDSHAKE_S2C.getId();
 
@@ -49,8 +47,7 @@ public class RequestHandShakeS2CPayload extends AMS_CustomPayload {
         NetworkUtil.executeOnClientThread(() -> {
             LocalPlayer player = MinecraftClientUtil.getCurrentPlayer();
             String modVersion = CarpetAMSAdditionClient.getVersion();
-            UUID uuid = player.getUUID();
-            NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(modVersion, uuid), NetworkUtil.SendMode.FORCE);
+            NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(modVersion), NetworkUtil.SendMode.FORCE);
         });
     }
 

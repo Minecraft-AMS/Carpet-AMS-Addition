@@ -24,6 +24,8 @@ import carpet.CarpetExtension;
 import carpet.CarpetServer;
 
 import carpetamsaddition.commands.AmsCommandRegistry;
+import carpetamsaddition.commands.debug.network.AmspCommand;
+import carpetamsaddition.commands.rule.commandGetClientPlayerFps.GetClientPlayerFpsCommand;
 import carpetamsaddition.api.command.CommandRegistrationContext;
 import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.PlayerChunkLoading;
 import carpetamsaddition.settings.CarpetRuleRegistrar;
@@ -148,7 +150,9 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
 
     @Override
     public void onPlayerLoggedOut(ServerPlayer player) {
-        NetworkUtil.removeSupportClient(player.getUUID());
+        NetworkUtil.removeSupportClient(player);
+        AmspCommand.clearPlayerQueries(player);
+        GetClientPlayerFpsCommand.clearPlayerQueries(player);
         PlayerChunkLoading.resetStatus(PlayerUtil.getName(player));
     }
 
@@ -169,6 +173,8 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         BlockLoaderConfigStore.clear();
         AmsRuleMetadata.deactivateLazyRules();
         NetworkUtil.clearClientSupport();
+        AmspCommand.clearQueries();
+        GetClientPlayerFpsCommand.clearQueries();
         FancyFakePlayerNameTeamController.removeBotTeam(server, CarpetAMSAdditionSettings.fancyFakePlayerName);
     }
 

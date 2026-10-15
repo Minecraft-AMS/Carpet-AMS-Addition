@@ -26,15 +26,17 @@ import carpetamsaddition.network.AMS_PayloadManager;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NetworkUtil {
-    private static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
+    private static final Set<ServerGamePacketListenerImpl> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
-    private static final Map<UUID, Set<String>> CLIENT_SUPPORTED_PACKETS = new ConcurrentHashMap<>();
+    private static final Map<ServerGamePacketListenerImpl, Set<String>> CLIENT_SUPPORTED_PACKETS = new ConcurrentHashMap<>();
     private static final Set<String> SERVER_SUPPORTED_PACKETS = ConcurrentHashMap.newKeySet();
 
     public enum SendMode {
@@ -53,7 +55,7 @@ public class NetworkUtil {
                 shouldSend = true;
                 break;
             case NEED_SUPPORT:
-                shouldSend = isSupportClient(player.getUUID()) && isClientPacketSupported(player.getUUID(), payload.getPacketId());
+                shouldSend = isSupportClient(player) && isClientPacketSupported(player, payload.getPacketId());
                 break;
             default:
                 shouldSend = false;
@@ -84,8 +86,8 @@ public class NetworkUtil {
         }
     }
 
-    public static boolean isClientPacketSupported(UUID clientUuid, String packetId) {
-        Set<String> supportedPackets = CLIENT_SUPPORTED_PACKETS.get(clientUuid);
+    public static boolean isClientPacketSupported(ServerPlayer player, String packetId) {
+        Set<String> supportedPackets = CLIENT_SUPPORTED_PACKETS.get(player.connection);
         return supportedPackets != null && supportedPackets.contains(packetId);
     }
 
@@ -93,12 +95,12 @@ public class NetworkUtil {
         return SERVER_SUPPORTED_PACKETS.contains(packetId);
     }
 
-    public static void setClientSupportedPackets(UUID clientUuid, Set<String> packetIds) {
-        CLIENT_SUPPORTED_PACKETS.put(clientUuid, new HashSet<>(packetIds));
+    public static void setClientSupportedPackets(ServerPlayer player, Set<String> packetIds) {
+        CLIENT_SUPPORTED_PACKETS.put(player.connection, new HashSet<>(packetIds));
     }
 
-    public static Set<String> getClientSupportedPackets(UUID clientUuid) {
-        return CLIENT_SUPPORTED_PACKETS.getOrDefault(clientUuid, Collections.emptySet());
+    public static Set<String> getClientSupportedPackets(ServerPlayer player) {
+        return CLIENT_SUPPORTED_PACKETS.getOrDefault(player.connection, Collections.emptySet());
     }
 
     public static void setServerSupportedPackets(Set<String> packetIds) {
@@ -114,16 +116,16 @@ public class NetworkUtil {
         return new HashSet<>(AMS_PayloadManager.PAYLOAD_REGISTRY.keySet());
     }
 
-    public static void removeClientSupportedPackets(UUID clientUuid) {
-        CLIENT_SUPPORTED_PACKETS.remove(clientUuid);
+    public static void removeClientSupportedPackets(ServerPlayer player) {
+        CLIENT_SUPPORTED_PACKETS.remove(player.connection);
     }
 
     public static void clearAllClientSupportedPackets() {
         CLIENT_SUPPORTED_PACKETS.clear();
     }
 
-    public static boolean isSupportClient(UUID uuid) {
-        return SUPPORT_CLIENT.contains(uuid);
+    public static boolean isSupportClient(ServerPlayer player) {
+        return SUPPORT_CLIENT.contains(player.connection);
     }
 
     public static void setServerSupport(boolean support) {
@@ -134,17 +136,17 @@ public class NetworkUtil {
         return SUPPORT_SERVER.get();
     }
 
-    public static Iterator<UUID> supportClientSetIterator() {
+    public static Iterator<ServerGamePacketListenerImpl> supportClientSetIterator() {
         return SUPPORT_CLIENT.iterator();
     }
 
-    public static void addSupportClient(UUID uuid) {
-        SUPPORT_CLIENT.add(uuid);
+    public static void addSupportClient(ServerPlayer player) {
+        SUPPORT_CLIENT.add(player.connection);
     }
 
-    public static void removeSupportClient(UUID uuid) {
-        SUPPORT_CLIENT.remove(uuid);
-        removeClientSupportedPackets(uuid);
+    public static void removeSupportClient(ServerPlayer player) {
+        SUPPORT_CLIENT.remove(player.connection);
+        removeClientSupportedPackets(player);
     }
 
     public static void clearClientSupport() {
@@ -160,6 +162,38 @@ public class NetworkUtil {
         Optional.of(MinecraftServerUtil.serverIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftServerUtil.getServer().execute(runnable));
     }
 
+    public static void executeOnServerThread(ServerPlayer sender, Runnable runnable) {
+        if (sender == null) {
+            return;
+        }
+
+        MinecraftServer server = MinecraftServerUtil.getServer();
+        ServerGamePacketListenerImpl connection = sender.connection;
+        if (!MinecraftServerUtil.serverIsRunning(server)) {
+            return;
+        }
+
+        server.execute(() -> {
+            if (!MinecraftServerUtil.serverIsRunning(server)
+                || sender.hasDisconnected() || sender.connection != connection
+                || server.getPlayerList().getPlayers().stream().noneMatch(player -> player == sender)) {
+                return;
+            }
+
+            //#if MC>=11904
+            if (!connection.isAcceptingMessages()) {
+                return;
+            }
+            //#else
+            //$$ if (!connection.connection.isConnected()) {
+            //$$     return;
+            //$$ }
+            //#endif
+
+            runnable.run();
+        });
+    }
+
     public static String readBufString(FriendlyByteBuf buf) {
         //#if MC<11700
         //$$ return buf.readUtf(Short.MAX_VALUE);
@@ -167,5 +201,4 @@ public class NetworkUtil {
         return buf.readUtf();
         //#endif
     }
-
 }

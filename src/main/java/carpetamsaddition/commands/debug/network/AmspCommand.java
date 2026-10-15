@@ -23,18 +23,20 @@ import carpetamsaddition.utils.messenger.Messenger;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.UUID;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 public class AmspCommand implements AmsCommand {
     private static final Translator tr = new Translator("command.amsp");
-    public static final Map<UUID, String> clientModVersion = new ConcurrentHashMap<>();
+    public static final Map<ServerGamePacketListenerImpl, String> clientModVersion = new ConcurrentHashMap<>();
+    private static final Set<ServerGamePacketListenerImpl> pendingClientVersions = ConcurrentHashMap.newKeySet();
 
     @Override
     public void define(CommandBuilder command) {
@@ -69,7 +71,7 @@ public class AmspCommand implements AmsCommand {
     }
 
     private static int showSupportClientList(CommandSourceStack source) {
-        Iterator<UUID> iterator = NetworkUtil.supportClientSetIterator();
+        Iterator<ServerGamePacketListenerImpl> iterator = NetworkUtil.supportClientSetIterator();
 
         if (!iterator.hasNext()) {
             Messenger.tell(source, Messenger.f(tr.tr("support_client_set_is_none"), Layout.YELLOW));
@@ -79,10 +81,8 @@ public class AmspCommand implements AmsCommand {
         Messenger.tell(source, Messenger.f(tr.tr("support_client_list_title"), Layout.AQUA));
 
         while (iterator.hasNext()) {
-            UUID uuid = iterator.next();
-            String strUuid = uuid.toString();
-            String playerName = PlayerUtil.getName(uuid);
-            MutableComponent text = Messenger.f(Messenger.s(strUuid + " - " + playerName), Layout.AQUA);
+            String playerName = PlayerUtil.getName(iterator.next().player);
+            MutableComponent text = Messenger.f(Messenger.s(playerName), Layout.AQUA);
             Messenger.tell(source, text);
         }
 
@@ -96,10 +96,11 @@ public class AmspCommand implements AmsCommand {
     }
 
     private static int showClientModVersion(CommandSourceStack source, ServerPlayer targetPlayer) {
-        UUID playerUuid = targetPlayer.getUUID();
-        clientModVersion.clear();
+        ServerGamePacketListenerImpl connection = targetPlayer.connection;
+        clientModVersion.remove(connection);
+        pendingClientVersions.add(connection);
 
-        NetworkUtil.sendS2CPacket(targetPlayer, RequestClientModVersionPayload_S2C.create(playerUuid), NetworkUtil.SendMode.NEED_SUPPORT);
+        NetworkUtil.sendS2CPacket(connection.player, RequestClientModVersionPayload_S2C.create(), NetworkUtil.SendMode.NEED_SUPPORT);
 
         final int[] retryCount = {0};
         final int maxRetries = 5;
@@ -108,16 +109,24 @@ public class AmspCommand implements AmsCommand {
             @Override
             public void run() {
                 NetworkUtil.executeOnServerThread(() -> {
-                    String version = clientModVersion.get(playerUuid);
+                    if (connection.player.hasDisconnected() || MinecraftServerUtil.getOnlinePlayers().stream().noneMatch(player -> player.connection == connection)) {
+                        pendingClientVersions.remove(connection);
+                        clientModVersion.remove(connection);
+                        return;
+                    }
+
+                    String version = clientModVersion.get(connection);
+
                     if (version != null) {
                         Messenger.tell(source, Messenger.f(tr.tr("client_mod_version_success_feedback", PlayerUtil.getName(targetPlayer), version), Layout.AQUA));
-                        clientModVersion.remove(playerUuid);
+                        clientModVersion.remove(connection);
                     } else if (retryCount[0] < maxRetries) {
                         retryCount[0]++;
                         Messenger.tell(source, Messenger.f(tr.tr("request_client_version", String.valueOf(retryCount[0])), Layout.YELLOW));
-                        NetworkUtil.sendS2CPacket(targetPlayer, RequestClientModVersionPayload_S2C.create(playerUuid), NetworkUtil.SendMode.NEED_SUPPORT);
+                        NetworkUtil.sendS2CPacket(connection.player, RequestClientModVersionPayload_S2C.create(), NetworkUtil.SendMode.NEED_SUPPORT);
                         CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(this);
                     } else {
+                        pendingClientVersions.remove(connection);
                         Messenger.tell(source, Messenger.f(tr.tr("client_mod_version_failed_feedback", String.valueOf(maxRetries)), Layout.RED));
                     }
                 });
@@ -129,14 +138,30 @@ public class AmspCommand implements AmsCommand {
         return 1;
     }
 
+    public static void receiveClientModVersion(ServerPlayer player, String version) {
+        if (pendingClientVersions.remove(player.connection)) {
+            clientModVersion.put(player.connection, version);
+        }
+    }
+
+    public static void clearPlayerQueries(ServerPlayer player) {
+        pendingClientVersions.remove(player.connection);
+        clientModVersion.remove(player.connection);
+    }
+
+    public static void clearQueries() {
+        pendingClientVersions.clear();
+        clientModVersion.clear();
+    }
+
     private static int showServerModVersion(CommandSourceStack source) {
         Messenger.tell(source, Messenger.f(tr.tr("server_mod_version_feedback", CarpetAMSAdditionServer.fancyName, CarpetAMSAdditionMod.getVersion()), Layout.AQUA));
         return 1;
     }
 
     private static int denyClientConnection(CommandSourceStack source, ServerPlayer targetPlayer) {
-        NetworkUtil.removeSupportClient(targetPlayer.getUUID());
-        Messenger.tell(source, Messenger.f(tr.tr("deny_client_feedback", PlayerUtil.getName(targetPlayer.getUUID())), Layout.LIGHT_PURPLE));
+        NetworkUtil.removeSupportClient(targetPlayer);
+        Messenger.tell(source, Messenger.f(tr.tr("deny_client_feedback", PlayerUtil.getName(targetPlayer)), Layout.LIGHT_PURPLE));
         return 1;
     }
 
