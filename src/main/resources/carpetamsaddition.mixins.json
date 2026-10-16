@@ -49,6 +49,7 @@
     "rule.commandPlayerLeader.ServerPlayerMixin",
     "rule.commandPlayerNoNetherPortalTeleport.NetherPortalBlockMixin",
     "rule.commandSetPlayerPose.EntityMixin",
+    "rule.commandSetPlayerPose.PlayerInvoker",
     "rule.craftableCarvedPumpkin.ShapelessRecipeMixin",
     "rule.creativeOneHitKill.EntityAccessorAndInvoker",
     "rule.creativeOneHitKill.PlayerAccessorAndInvoker",

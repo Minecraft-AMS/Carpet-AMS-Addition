@@ -126,7 +126,7 @@ public class AMSTranslations {
             return text;
         }
 
-        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
+        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).ams$getClientLanguage().toLowerCase();
         String serverLang = AMSTranslations.getServerLanguage();
 
         if (CarpetAMSAdditionSettings.amsTranslationMode == CarpetAMSAdditionSettings.translationModes.SERVER) {

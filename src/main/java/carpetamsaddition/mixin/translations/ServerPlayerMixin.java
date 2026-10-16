@@ -43,7 +43,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientLanguage {
     @Unique
-    private String clientLanguage$AMS = "en_US";
+    private String ams$clientLanguage = "en_US";
 
     @Inject(method = "updateOptions", at = @At("HEAD"))
     private void getClientLanguage(
@@ -55,15 +55,15 @@ public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientL
         CallbackInfo ci
     ) {
         //#if MC>=11800
-        this.clientLanguage$AMS = information.language();
+        this.ams$clientLanguage = information.language();
         //#else
-        //$$ this.clientLanguage$AMS = ((ServerboundClientInformationPacketAccessor) information).getLanguage();
+        //$$ this.ams$clientLanguage = ((ServerboundClientInformationPacketAccessor) information).ams$getLanguage();
         //#endif
     }
 
     @Override
-    public String getClientLanguage$AMS() {
-        return this.clientLanguage$AMS;
+    public String ams$getClientLanguage() {
+        return this.ams$clientLanguage;
     }
 
     @ModifyVariable(

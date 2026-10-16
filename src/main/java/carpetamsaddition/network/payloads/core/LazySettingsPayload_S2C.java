@@ -44,12 +44,15 @@ public class LazySettingsPayload_S2C extends AMS_CustomPayload {
         super(ID);
 
         int size = buf.readVarInt();
+
         if (size < 0 || size > MAX_RULE_COUNT) {
             throw new IllegalArgumentException("Invalid lazy rule count: " + size);
         }
+
         this.values = new LinkedHashMap<>();
+
         for (int i = 0; i < size; i++) {
-            this.values.put(NetworkUtil.readBufString(buf), NetworkUtil.readBufString(buf));
+            this.values.put(buf.readUtf(), buf.readUtf());
         }
     }
 

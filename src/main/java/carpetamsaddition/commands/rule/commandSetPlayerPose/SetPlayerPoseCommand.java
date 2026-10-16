@@ -31,13 +31,13 @@ import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.NetworkUtil;
 import carpetamsaddition.api.command.suggestionProviders.ListSuggestionProvider;
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
+import carpetamsaddition.mixin.rule.commandSetPlayerPose.PlayerInvoker;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SetPlayerPoseCommand implements AmsCommand {
@@ -57,16 +57,15 @@ public class SetPlayerPoseCommand implements AmsCommand {
 
     private static int set(ServerPlayer targetPlayer, String pose) {
         DO_POSE_MAP.put(targetPlayer.getUUID(), pose);
-        targetPlayer.setShiftKeyDown(true);
+        refreshPose(targetPlayer);
         broadcastSyncDatapack(targetPlayer);
-        triggerPoseUpdate(targetPlayer);
         return 1;
     }
 
     private static int stop(ServerPlayer targetPlayer) {
         DO_POSE_MAP.remove(targetPlayer.getUUID());
+        refreshPose(targetPlayer);
         broadcastSyncDatapack(targetPlayer);
-        triggerPoseUpdate(targetPlayer);
         return 1;
     }
 
@@ -89,10 +88,8 @@ public class SetPlayerPoseCommand implements AmsCommand {
         NetworkUtil.broadcastDataPack(UpdatePlayerPosePayload_S2C.create(DO_POSE_MAP, targetPlayer.getUUID()), NetworkUtil.SendMode.NEED_SUPPORT);
     }
 
-    private static void triggerPoseUpdate(ServerPlayer targetPlayer) {
-        targetPlayer.setShiftKeyDown(true);
-        Runnable stopSneaking = () -> targetPlayer.setShiftKeyDown(false);
-        Runnable stopSneakingOnServerThread = () -> NetworkUtil.executeOnServerThread(stopSneaking);
-        CompletableFuture.delayedExecutor(100, TimeUnit.MILLISECONDS).execute(stopSneakingOnServerThread);
+    public static void refreshPose(Player player) {
+        ((PlayerInvoker) player).ams$updatePlayerPose();
+        player.refreshDimensions();
     }
 }

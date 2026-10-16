@@ -24,7 +24,6 @@ import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
 
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
@@ -169,14 +168,18 @@ public class NetworkUtil {
 
         MinecraftServer server = MinecraftServerUtil.getServer();
         ServerGamePacketListenerImpl connection = sender.connection;
+
         if (!MinecraftServerUtil.serverIsRunning(server)) {
             return;
         }
 
         server.execute(() -> {
-            if (!MinecraftServerUtil.serverIsRunning(server)
-                || sender.hasDisconnected() || sender.connection != connection
-                || server.getPlayerList().getPlayers().stream().noneMatch(player -> player == sender)) {
+            if (
+                !MinecraftServerUtil.serverIsRunning(server) ||
+                sender.hasDisconnected() ||
+                sender.connection != connection ||
+                server.getPlayerList().getPlayers().stream().noneMatch(player -> player == sender)
+            ) {
                 return;
             }
 
@@ -192,13 +195,5 @@ public class NetworkUtil {
 
             runnable.run();
         });
-    }
-
-    public static String readBufString(FriendlyByteBuf buf) {
-        //#if MC<11700
-        //$$ return buf.readUtf(Short.MAX_VALUE);
-        //#else
-        return buf.readUtf();
-        //#endif
     }
 }

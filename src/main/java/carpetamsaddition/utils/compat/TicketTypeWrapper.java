@@ -100,6 +100,7 @@ public final class TicketTypeWrapper<T> {
 
     public static <T> TicketTypeWrapper<T> register(String id, long timeoutTicks, int flags, Comparator<T> comparator) {
         Objects.requireNonNull(comparator, "comparator");
+
         if (timeoutTicks < NO_TIMEOUT) {
             throw new IllegalArgumentException("Ticket timeout must be nonnegative: " + timeoutTicks);
         }

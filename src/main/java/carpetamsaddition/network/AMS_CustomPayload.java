@@ -8,6 +8,7 @@
 package carpetamsaddition.network;
 
 import carpetamsaddition.utils.IdentifierUtil;
+import carpetamsaddition.utils.compat.PreprocessPattern;
 
 //#if MC>=12005
 import net.minecraft.network.codec.StreamCodec;
@@ -69,5 +70,14 @@ public abstract class AMS_CustomPayload implements CustomPacketPayload {
 
     public final void sendS2CPacket(ServerPlayer player) {
         AMS_PayloadSender.s2c(this, player);
+    }
+
+    @PreprocessPattern
+    private static String readUtf(FriendlyByteBuf buf) {
+        //#if MC>=11700
+        return buf.readUtf();
+        //#else
+        //$$ return buf.readUtf(Short.MAX_VALUE);
+        //#endif
     }
 }

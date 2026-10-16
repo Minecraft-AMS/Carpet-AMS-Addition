@@ -44,6 +44,6 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public interface ServerboundClientInformationPacketAccessor {
     //#if MC<11800
     //$$ @Accessor("language")
-    //$$ String getLanguage();
+    //$$ String ams$getLanguage();
     //#endif
 }

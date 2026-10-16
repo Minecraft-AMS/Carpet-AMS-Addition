@@ -7,6 +7,7 @@ apply plugin: unobfuscated ? 'net.fabricmc.fabric-loom' : 'net.fabricmc.fabric-l
 apply plugin: 'com.replaymod.preprocess'
 
 preprocess {
+	patternAnnotation.set('carpetamsaddition.utils.compat.PreprocessPattern')
 }
 
 repositories {

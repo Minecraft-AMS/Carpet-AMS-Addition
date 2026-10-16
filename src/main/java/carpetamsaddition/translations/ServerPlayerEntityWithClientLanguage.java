@@ -21,5 +21,5 @@
 package carpetamsaddition.translations;
 
 public interface ServerPlayerEntityWithClientLanguage {
-    String getClientLanguage$AMS();
+    String ams$getClientLanguage();
 }
