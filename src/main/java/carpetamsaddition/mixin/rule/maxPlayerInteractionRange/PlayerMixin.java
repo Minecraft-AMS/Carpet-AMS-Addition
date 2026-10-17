@@ -24,8 +24,15 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.phys.AABB;
+//#if MC>=260102
+//$$ import net.minecraft.world.item.ItemStack;
+//#endif
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,6 +44,54 @@ import java.util.Objects;
 @GameVersion(version = "Minecraft >= 1.20.5")
 @Mixin(value = Player.class, priority = 1688)
 public abstract class PlayerMixin {
+    @WrapMethod(method = "isWithinBlockInteractionRange")
+    private boolean enforceBlockInteractionRange(BlockPos pos, double padding, Operation<Boolean> original) {
+        Player player = (Player) (Object) this;
+        double range = CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange;
+
+        if (player instanceof ServerPlayer && range != -1.0D && new AABB(pos).distanceToSqr(player.getEyePosition()) >= range * range) {
+            return false;
+        }
+
+        return original.call(pos, padding);
+    }
+
+    @WrapMethod(method = "isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z")
+    private boolean enforceEntityInteractionRange(AABB bounds, double padding, Operation<Boolean> original) {
+        Player player = (Player) (Object) this;
+        double range = CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
+
+        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= range * range) {
+            return false;
+        }
+
+        return original.call(bounds, padding);
+    }
+
+    //#if MC>=12111
+    @WrapMethod(method = "isWithinAttackRange")
+    private boolean enforceEntityAttackRange(
+        //#if MC>=260102
+        //$$ ItemStack stack,
+        //#endif
+        AABB bounds, double padding, Operation<Boolean> original
+    ) {
+        Player player = (Player) (Object) this;
+        double range = CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
+
+        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= range * range) {
+            return false;
+        }
+
+        return original.call(
+            //#if MC>=260102
+            //$$ stack,
+            //#endif
+            bounds, padding
+        );
+    }
+    //#endif
+
     @WrapOperation(
         method = "isWithinBlockInteractionRange",
         at = @At(
