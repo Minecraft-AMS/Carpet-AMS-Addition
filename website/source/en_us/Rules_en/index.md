@@ -2420,7 +2420,7 @@ Entities passing through the End Portal will not cause chunk loading.
 
 ## endPortalChunkLoader
 
-> Version: `Minecraft < 1.20.6`
+> Version: `Minecraft < 1.20.5`
 
 Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5.
 

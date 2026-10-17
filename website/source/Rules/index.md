@@ -2431,7 +2431,7 @@ json位置：
 
 ## 末地门加载器（endPortalChunkLoader）
 
-> 版本：`Minecraft < 1.20.6`
+> 版本：`Minecraft < 1.20.5`
 
 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致。
 

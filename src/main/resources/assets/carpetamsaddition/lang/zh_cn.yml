@@ -721,6 +721,9 @@ carpetamsaddition:
       endPortalChunkLoadDisabled:
         name: 禁用末地门加载
         desc: 让实体穿过末地门不会发生区块加载（Minecraft >= 1.20.6可用）
+      endPortalChunkLoader:
+        name: 末地门加载器
+        desc: 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致（Minecraft < 1.20.5可用）
       amsNetworkProtocol:
         name: AMS网络协议
         desc: AMS网络协议的开关

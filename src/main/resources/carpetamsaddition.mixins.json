@@ -73,6 +73,7 @@
     "rule.endermanPickUpDisabled.EndermanTakeBlockGoalMixin",
     "rule.endermanTeleportRandomlyDisabled.EnderManMixin",
     "rule.endPortalChunkLoadDisabled.EndPortalBlockMixin",
+    "rule.endPortalChunkLoader.EntityMixin",
     "rule.enhancedWorldEater.BlockMixin",
     "rule.experimentalContentCheckDisabled.FeatureSetMixin",
     "rule.experimentalContentCheckDisabled.ToggleableFeatureMixin",

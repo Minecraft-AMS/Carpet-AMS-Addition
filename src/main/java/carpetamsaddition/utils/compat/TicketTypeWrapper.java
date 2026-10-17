@@ -32,7 +32,6 @@ import net.minecraft.world.level.ChunkPos;
 //#endif
 
 import java.util.Comparator;
-import java.util.Objects;
 
 /**
  * 区块加载票兼容层，按版本转换用途和标志，不保证所有版本的能力完全等价。
@@ -98,9 +97,22 @@ public final class TicketTypeWrapper<T> {
         //#endif
     }
 
-    public static <T> TicketTypeWrapper<T> register(String id, long timeoutTicks, int flags, Comparator<T> comparator) {
-        Objects.requireNonNull(comparator, "comparator");
+    @SuppressWarnings("unused")
+    public static <T> TicketTypeWrapper<T> wrap(
+        //#if MC>=12105
+        TicketType ticketType
+        //#else
+        //$$ TicketType<T> ticketType
+        //#endif
+    ) {
+        //#if MC>=12111
+        return new TicketTypeWrapper<>(ticketType);
+        //#else
+        //$$ return new TicketTypeWrapper<>(ticketType, USE_FLAGS);
+        //#endif
+    }
 
+    public static <T> TicketTypeWrapper<T> register(String id, long timeoutTicks, int flags, @SuppressWarnings("unused") Comparator<T> comparator) {
         if (timeoutTicks < NO_TIMEOUT) {
             throw new IllegalArgumentException("Ticket timeout must be nonnegative: " + timeoutTicks);
         }
@@ -137,7 +149,6 @@ public final class TicketTypeWrapper<T> {
     //#endif
 
     public static <T> TicketTypeWrapper<T> register(String id, long timeoutTicks, boolean persist, TicketUse use, Comparator<T> comparator) {
-        Objects.requireNonNull(use, "use");
         return register(id, timeoutTicks, (persist ? FLAG_PERSIST : 0) | use.flags, comparator);
     }
 
@@ -168,8 +179,7 @@ public final class TicketTypeWrapper<T> {
         return this.ticketType;
     }
 
-    public void addTicket(ServerLevel world, ChunkPos chunkPos, int radius, T key) {
-        Objects.requireNonNull(key, "key");
+    public void addTicket(ServerLevel world, ChunkPos chunkPos, int radius, @SuppressWarnings("unused") T key) {
         //#if MC<12111
         //$$ if ((this.effectiveFlags & USE_FLAGS) == 0) {
         //$$     return;

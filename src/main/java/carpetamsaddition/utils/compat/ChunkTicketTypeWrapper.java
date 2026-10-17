@@ -68,6 +68,5 @@ public final class ChunkTicketTypeWrapper {
 
     public void addTicket(ServerLevel world, ChunkPos chunkPos, int radius) {
         this.ticketType.addTicket(world, chunkPos, radius, chunkPos);
-
     }
 }
