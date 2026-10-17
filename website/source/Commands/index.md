@@ -1,4 +1,4 @@
-## 自定义方块加载器（blockChunkloader）
+## 方块加载器（commandNoteblockChunkloader | commandPistonChunkloader | commandBellChunkloader）
 
 音符盒、活塞和钟共用 `/blockChunkloader`。先开启对应规则，再设置条件、时长和范围，最后使用 `enabled true` 启用加载器。
 

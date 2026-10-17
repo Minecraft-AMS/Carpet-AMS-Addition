@@ -1,4 +1,4 @@
-## blockChunkloaders
+## commandNoteblockChunkloader | commandPistonChunkloader | commandBellChunkloader
 
 Note blocks, pistons and bells share `/blockChunkloader`. Enable the corresponding rule, set conditions, duration and range, then use `enabled true` to enable the loader.
 
