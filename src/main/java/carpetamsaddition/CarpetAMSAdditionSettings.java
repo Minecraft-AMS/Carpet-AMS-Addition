@@ -701,6 +701,12 @@ public class CarpetAMSAdditionSettings {
     )
     public static String commandPlayerChunkLoadController = "false";
 
+    //#if MC<12005
+    //$$ @GameVersion(version = "Minecraft < 1.20.5")
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    //$$ public static boolean endPortalChunkLoader = false;
+    //#endif
+
     /*
      * 合成表规则
      */

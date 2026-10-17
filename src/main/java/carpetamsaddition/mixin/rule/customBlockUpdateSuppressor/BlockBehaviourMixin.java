@@ -57,7 +57,9 @@ public abstract class BlockBehaviourMixin {
             if (AmsUpdateSuppressionCrashFixCommand.amsUpdateSuppressionCrashFixForceMode) {
                 CarpetAMSAdditionSettings.amsUpdateSuppressionCrashFix = "true";
             }
+
             String blockName = RegexTools.getBlockRegisterName(state.getBlock().toString()); // Block{minecraft:bedrock} -> minecraft:bedrock
+
             if (Objects.equals(CarpetAMSAdditionSettings.customBlockUpdateSuppressor, blockName)) {
                 BlockUpdateSuppressorExceptionHelper.getInstance().throwThrowableSuppression();
             }

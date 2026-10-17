@@ -40,6 +40,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class GetClientPlayerFpsCommand implements AmsCommand {
     private static final Translator tr = new Translator("command.getClientPlayerFps");
     private static final Map<ServerGamePacketListenerImpl, CommandSourceStack> pendingQueries = new ConcurrentHashMap<>();
+
     @Override
     public void define(CommandBuilder command) {
         command.name("getClientPlayerFps")
@@ -62,8 +63,10 @@ public class GetClientPlayerFpsCommand implements AmsCommand {
     }
 
     public static void clearPlayerQueries(ServerPlayer player) {
-        pendingQueries.entrySet().removeIf(entry -> entry.getKey() == player.connection
-            || entry.getValue().getEntity() instanceof ServerPlayer && ((ServerPlayer) entry.getValue().getEntity()).connection == player.connection);
+        pendingQueries.entrySet().removeIf(
+            entry -> entry.getKey() == player.connection ||
+            entry.getValue().getEntity() instanceof ServerPlayer && ((ServerPlayer) entry.getValue().getEntity()).connection == player.connection
+        );
     }
 
     public static void clearQueries() {
