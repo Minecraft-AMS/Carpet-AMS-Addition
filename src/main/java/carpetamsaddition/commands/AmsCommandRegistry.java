@@ -42,10 +42,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * AMS 指令的显式注册表
- *
- * <p>新增 {@link AmsCommand} 实现后，需要将其实例加入 {@link #COMMANDS}
- * 注册时会构建所有指令，并检查重复的根指令名称</p>
+ * AMS 指令的注册表
  */
 public final class AmsCommandRegistry {
     private AmsCommandRegistry() {}
