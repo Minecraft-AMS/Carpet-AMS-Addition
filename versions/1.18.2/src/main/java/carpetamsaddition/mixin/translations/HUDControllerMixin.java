@@ -34,6 +34,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft <= 1.18.2")
+@SuppressWarnings("ModifyVariableMayUseName")
 @Mixin(HUDController.class)
 public abstract class HUDControllerMixin {
     @ModifyVariable(method = "addMessage", at = @At("HEAD"), argsOnly = true, remap = false)

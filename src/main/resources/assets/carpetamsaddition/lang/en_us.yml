@@ -24,7 +24,7 @@ carpetamsaddition:
     sendPlayerDeathLocation:
       location: 'death location'
     phantomSpawnAlert:
-      msg: '§b<phantomSpawnAlert> §r§e%s §r§dsummoned phantoms §r§e@ §r§a[ %s ]'
+      msg: '%s summoned phantoms %s'
     experimentalMinecartSpeed:
       vanilla_command_disabled: '<Carpet AMS Addition> The rules of the game have been taken over by the minecartMaxSpeed carpet rules'
 
@@ -124,8 +124,8 @@ carpetamsaddition:
       total_memory: 'Total Memory: %s'
       free_memory: 'Free Memory: %s'
     customCommandPermissionLevel:
-      modify_set: '<customCommandPermissionLevel> %s %d -> %d'
-      set: '<customCommandPermissionLevel> + %s/%d'
+      modify_set: '<customCommandPermissionLevel> %s %s -> %s'
+      set: '<customCommandPermissionLevel> + %s/%s'
       remove: '<customCommandPermissionLevel> - %s'
       not_found: '<customCommandPermissionLevel> Command: %s does not exist in the configuration file'
       cant_modify_self: '<customCommandPermissionLevel> You cannot modify the permissions of the command'

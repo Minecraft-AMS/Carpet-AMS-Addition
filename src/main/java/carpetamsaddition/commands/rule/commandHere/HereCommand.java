@@ -31,14 +31,12 @@ import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.level.Level;
-
 
 public class HereCommand implements AmsCommand {
     private static final Translator tr = new Translator("command.here");
@@ -51,7 +49,7 @@ public class HereCommand implements AmsCommand {
     }
 
     private static int sendMessage(CommandSourceStack source, MinecraftServer minecraftServer, Player player) {
-        Messenger.sendServerMessage(minecraftServer, (MutableComponent) message(source));
+        Messenger.sendServerMessage(minecraftServer, message(source));
         highlightPlayer(player);
         return 1;
     }

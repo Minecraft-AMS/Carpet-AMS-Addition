@@ -30,7 +30,6 @@ import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.PlayerUtil;
 
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.LinkedHashSet;
@@ -89,7 +88,7 @@ public class PlayerNoNetherPortalTeleportCommand implements AmsCommand {
 
     private static int list(CommandSourceStack source) {
         Messenger.tell(source, Messenger.f(tr.tr("list_title"), Layout.AQUA));
-        Messenger.tell(source, Messenger.f((MutableComponent) Messenger.dline(), Layout.AQUA));
+        Messenger.tell(source, Messenger.f(Messenger.dline(), Layout.AQUA));
 
         for (UUID player : NO_NETHER_PORTAL_TELEPORT_SET) {
             Messenger.tell(source, Messenger.f(Messenger.s(PlayerUtil.getName(player)), Layout.AQUA));
@@ -111,7 +110,7 @@ public class PlayerNoNetherPortalTeleportCommand implements AmsCommand {
     }
 
     private static int showGlobalModeState(CommandSourceStack source) {
-        String globalModeState = isGlobalMode ? "true" : "false";
+        String globalModeState = Boolean.toString(isGlobalMode);
         Messenger.tell(source, Messenger.f(tr.tr("globalMode_state", globalModeState), Layout.AQUA));
         return 1;
     }

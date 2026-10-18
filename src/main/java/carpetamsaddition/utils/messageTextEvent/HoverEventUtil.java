@@ -28,6 +28,8 @@ import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.world.item.ItemStack;
 //#endif
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -45,6 +47,15 @@ public class HoverEventUtil {
     //$$ public static final HoverEvent.Action<HoverEvent.ItemStackInfo> SHOW_ITEM = HoverEvent.Action.SHOW_ITEM;
     //$$ public static final HoverEvent.Action<HoverEvent.EntityTooltipInfo> SHOW_ENTITY = HoverEvent.Action.SHOW_ENTITY;
     //#endif
+
+    @Nullable
+    public static Component getText(@Nullable HoverEvent event) {
+        //#if MC>12006
+        return event instanceof HoverEvent.ShowText ? ((HoverEvent.ShowText) event).value() : null;
+        //#else
+        //$$ return event == null ? null : event.getValue(SHOW_TEXT);
+        //#endif
+    }
 
     public static HoverEvent event(HoverEvent.Action action, Object value) {
         //#if MC>12006

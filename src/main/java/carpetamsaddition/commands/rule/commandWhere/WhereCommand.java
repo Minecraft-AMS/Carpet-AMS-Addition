@@ -32,7 +32,6 @@ import carpetamsaddition.utils.compat.DimensionWrapper;
 
 import carpetamsaddition.utils.messenger.Messenger;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -52,7 +51,7 @@ public class WhereCommand implements AmsCommand {
     }
 
     private static int sendMessage(MinecraftServer minecraftServer, Player senderPlayer, Player targetPlayer) {
-        Messenger.tell(senderPlayer, (MutableComponent) message(targetPlayer));
+        Messenger.tell(senderPlayer, message(targetPlayer));
         sendWhoGetWhoMessage(minecraftServer, senderPlayer, targetPlayer);
         highlightPlayer(targetPlayer);
         return 1;
@@ -61,7 +60,7 @@ public class WhereCommand implements AmsCommand {
     // 用于与Leader命令联动
     public static void sendMessage(Player targetPlayer) {
         if (MinecraftServerUtil.serverIsRunning() && targetPlayer != null) {
-            Messenger.sendServerMessage(MinecraftServerUtil.getServer(), (MutableComponent) message(targetPlayer));
+            Messenger.sendServerMessage(MinecraftServerUtil.getServer(), message(targetPlayer));
         }
     }
 

@@ -25,6 +25,7 @@ import carpetamsaddition.utils.messageTextEvent.ClickEventUtil;
 import carpetamsaddition.utils.messageTextEvent.HoverEventUtil;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.MinecraftServer;
@@ -64,7 +65,7 @@ public class Messenger {
     }
 
     @NotNull
-    public static MutableComponent copy(MutableComponent text) {
+    public static MutableComponent copy(Component text) {
         return MessengerCompatFactory.copy(text);
     }
 
@@ -74,27 +75,27 @@ public class Messenger {
         return text;
     }
 
-    private static void __tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
+    private static void __tell(CommandSourceStack source, Component text, boolean broadcastToOps) {
         MessengerCompatFactory.sendFeedback(source, text, broadcastToOps);
     }
 
-    public static void tell(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
+    public static void tell(CommandSourceStack source, Component text, boolean broadcastToOps) {
         __tell(source, text, broadcastToOps);
     }
 
-    public static void tell(CommandSourceStack source, MutableComponent text) {
+    public static void tell(CommandSourceStack source, Component text) {
         tell(source, text, false);
     }
 
-    public static void tell(ServerPlayer player, MutableComponent text, Boolean overlay) {
+    public static void tell(ServerPlayer player, Component text, Boolean overlay) {
         MessengerCompatFactory.sendPlayerMessage(player, text, overlay);
     }
 
-    public static void tell(ServerPlayer player, MutableComponent text) {
+    public static void tell(ServerPlayer player, Component text) {
         MessengerCompatFactory.sendPlayerMessage(player, text, false);
     }
 
-    public static void tell(Player player, MutableComponent text) {
+    public static void tell(Player player, Component text) {
         MessengerCompatFactory.sendPlayerMessage(player, text);
     }
 
@@ -111,11 +112,11 @@ public class Messenger {
         return Messenger.s("===================================");
     }
 
-    public static void sendServerMessage(MinecraftServer server, MutableComponent text) {
+    public static void sendServerMessage(MinecraftServer server, Component text) {
         sendServerMessage(server, text, false);
     }
 
-    public static void sendServerMessage(MinecraftServer server, MutableComponent text, boolean onlyToPlayer) {
+    public static void sendServerMessage(MinecraftServer server, Component text, boolean onlyToPlayer) {
         Objects.requireNonNull(server, "Server is null, message not delivered !");
 
         if (!onlyToPlayer) {
@@ -126,17 +127,17 @@ public class Messenger {
     }
 
     @NotNull
-    public static Style cmdbtn(String command, MutableComponent hoverText, Layout... hoverTextFormattings) {
+    public static Style cmdbtn(String command, Component hoverText, Layout... hoverTextFormattings) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(hoverText, hoverTextFormattings)));
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(copy(hoverText), hoverTextFormattings)));
     }
 
     @NotNull
-    private static Style cpbtn(String copyText, MutableComponent hoverText) {
+    private static Style cpbtn(String copyText, Component hoverText) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(hoverText, Layout.YELLOW)));
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(copy(hoverText), Layout.YELLOW)));
     }
 
     @NotNull
@@ -145,7 +146,7 @@ public class Messenger {
     }
 
     @NotNull
-    public static MutableComponent copyButton(String label, String copyText, MutableComponent hoverText, Layout... labelFormattings) {
+    public static MutableComponent copyButton(String label, String copyText, Component hoverText, Layout... labelFormattings) {
         return f(style(s(label), cpbtn(copyText, hoverText)), labelFormattings);
     }
 

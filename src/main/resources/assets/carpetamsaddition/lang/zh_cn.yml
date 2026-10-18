@@ -24,7 +24,7 @@ carpetamsaddition:
     sendPlayerDeathLocation:
       location: '死亡位置'
     phantomSpawnAlert:
-      msg: '§b<phantomSpawnAlert> §r§e%s §r§d召唤了幻翼 §r§e@ §r§a[ %s ]'
+      msg: '%s 召唤了幻翼 %s'
     experimentalMinecartSpeed:
       vanilla_command_disabled: '<Carpet AMS Addition> 该游戏规则已由 minecartMaxSpeed 地毯规则接管'
 
@@ -124,8 +124,8 @@ carpetamsaddition:
       total_memory: '已分配内存: %s'
       free_memory: '可用内存: %s'
     customCommandPermissionLevel:
-      modify_set: '<customCommandPermissionLevel> %s %d -> %d'
-      set: '<customCommandPermissionLevel> + %s/%d'
+      modify_set: '<customCommandPermissionLevel> %s %s -> %s'
+      set: '<customCommandPermissionLevel> + %s/%s'
       remove: '<customCommandPermissionLevel> - %s'
       not_found: '<customCommandPermissionLevel> 指令: %s 不存在于配置文件中'
       cant_modify_self: '<customCommandPermissionLevel> 您不能修改该指令的权限'

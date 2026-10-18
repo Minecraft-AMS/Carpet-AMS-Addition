@@ -60,7 +60,7 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    protected static void sendFeedback(CommandSourceStack source, MutableComponent text, boolean broadcastToOps) {
+    protected static void sendFeedback(CommandSourceStack source, Component text, boolean broadcastToOps) {
         //#if MC<=11904
         //$$ source.sendSuccess(text, broadcastToOps);
         //#else
@@ -68,7 +68,7 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    protected static void sendPlayerMessage(ServerPlayer player, MutableComponent text, boolean overlay) {
+    protected static void sendPlayerMessage(ServerPlayer player, Component text, boolean overlay) {
         //#if MC<11904
         //$$ player.sendMessage(text, Util.NIL_UUID);
         //#else
@@ -76,7 +76,7 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    protected static void sendPlayerMessage(Player player, MutableComponent text) {
+    protected static void sendPlayerMessage(Player player, Component text) {
         //#if MC>=260102
         //$$ player.sendSystemMessage(text);
         //#elseif MC<11904
@@ -86,7 +86,7 @@ public class MessengerCompatFactory {
         //#endif
     }
 
-    protected static void sendServerMessage(MinecraftServer server, MutableComponent text) {
+    protected static void sendServerMessage(MinecraftServer server, Component text) {
         //#if MC<11904
         //$$ server.sendMessage(text, Util.NIL_UUID);
         //#else
@@ -95,7 +95,7 @@ public class MessengerCompatFactory {
     }
 
     @NotNull
-    public static MutableComponent copy(MutableComponent text) {
+    public static MutableComponent copy(Component text) {
         //#if MC<11904
         //$$ return (BaseComponent) text.copy();
         //#else
