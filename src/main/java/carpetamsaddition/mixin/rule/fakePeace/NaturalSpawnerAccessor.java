@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(NaturalSpawner.class)
 public interface NaturalSpawnerAccessor {
     @Accessor("MAGIC_NUMBER")
-    public static int ams$getMagicNumber() {
+    static int ams$getMagicNumber() {
         throw new AssertionError("Mixin accessor was not applied");
     }
 }
