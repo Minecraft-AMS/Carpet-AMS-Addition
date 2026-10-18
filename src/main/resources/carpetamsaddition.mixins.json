@@ -98,7 +98,7 @@
     "rule.fancyFakePlayerName.CarpetMod_PlayerCommandMixin",
     "rule.fancyFakePlayerName.PlayerManagerMixin",
     "rule.fasterMovement.PlayerMixin",
-    "rule.fertilizableSmallFlower.BlockMixin",
+    "rule.fertilizableSmallFlower.BoneMealItemMixin",
     "rule.flippinCactusExtras.Carpet_BlockRotatorMixin",
     "rule.flippinCactusSoundEffect.Carpet_BlockRotatorMixin",
     "rule.foliageGenerateDisabled.FoliagePlacerMixin",
