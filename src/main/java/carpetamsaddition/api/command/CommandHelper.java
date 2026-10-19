@@ -57,46 +57,38 @@ public final class CommandHelper {
 
     /**
      * 批量更新服务器所有命令的权限要求。
-     * 仅当规则 {@code commandCustomCommandPermissionLevel} 未设置为 "false" 时生效：
      * 遍历根命令节点的所有子命令，若该命令在自定义权限映射中，则应用自定义权限等级；
      * 否则回退到默认权限要求。更新完成后向在线玩家同步命令树，并广播刷新完成消息。
      */
     @SuppressWarnings("unchecked")
     public static void updateAllCommandPermissions(MinecraftServer server) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomCommandPermissionLevel, "false")) {
-            CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands().getDispatcher();
-            Commands serverCommandManager = server.getCommands();
+        if (Objects.equals(CarpetAMSAdditionSettings.commandCustomCommandPermissionLevel, "false")) {
+            return;
+        }
 
-            for (CommandNode<CommandSourceStack> node : dispatcher.getRoot().getChildren()) {
-                if (node instanceof LiteralCommandNode) {
-                    String commandName = ((LiteralCommandNode<?>) node).getLiteral();
-                    Predicate<CommandSourceStack> defaultRequirement = CustomCommandPermissionLevelCommand.DEFAULT_PERMISSION_MAP.get(commandName);
-                    if (CustomCommandPermissionLevelCommand.COMMAND_PERMISSION_MAP.containsKey(commandName)) {
-                        int level = CustomCommandPermissionLevelCommand.COMMAND_PERMISSION_MAP.get(commandName);
-                        ((CommandNodeInvoker<CommandSourceStack>) node).setRequirement(source -> hasPermissionLevel(source, level));
-                    } else if (defaultRequirement != null) {
-                        ((CommandNodeInvoker<CommandSourceStack>) node).setRequirement(defaultRequirement);
-                    }
-                }
+        Commands serverCommandManager = server.getCommands();
+        CommandDispatcher<CommandSourceStack> dispatcher = serverCommandManager.getDispatcher();
+
+        for (CommandNode<CommandSourceStack> node : dispatcher.getRoot().getChildren()) {
+            if (!(node instanceof LiteralCommandNode)) {
+                continue;
             }
 
-            MinecraftServerUtil.getOnlinePlayers().forEach(serverCommandManager::sendCommands);
-            Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), Layout.GRAY), true);
-        }
-    }
+            String commandName = node.getName();
+            Integer level = CustomCommandPermissionLevelCommand.COMMAND_PERMISSION_MAP.get(commandName);
 
-    /**
-     * 为指定命令设置新的权限等级要求。
-     * 若目标命令不存在则静默忽略，存在则用给定的权限等级重写其权限判定。
-     */
-    @SuppressWarnings("unchecked")
-    public static void setPermission(MinecraftServer server, String command, int permissionLevel) {
-        CommandDispatcher<CommandSourceStack> dispatcher = server.getCommands().getDispatcher();
-        CommandNode<CommandSourceStack> target = dispatcher.getRoot().getChild(command);
-
-        if (target != null) {
-            ((CommandNodeInvoker<CommandSourceStack>) target).setRequirement(source -> hasPermissionLevel(source, permissionLevel));
+            if (level != null) {
+                ((CommandNodeInvoker<CommandSourceStack>) node).setRequirement(source -> hasPermissionLevel(source, level));
+            } else {
+                Predicate<CommandSourceStack> defaultRequirement = CustomCommandPermissionLevelCommand.DEFAULT_PERMISSION_MAP.get(commandName);
+                if (defaultRequirement != null) {
+                    ((CommandNodeInvoker<CommandSourceStack>) node).setRequirement(defaultRequirement);
+                }
+            }
         }
+
+        MinecraftServerUtil.getOnlinePlayers().forEach(serverCommandManager::sendCommands);
+        Messenger.sendServerMessage(server, Messenger.f(tr.tr("refresh_cmd_tree"), Layout.GRAY), true);
     }
 
     /**

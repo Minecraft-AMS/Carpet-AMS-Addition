@@ -83,7 +83,6 @@ public class CustomCommandPermissionLevelCommand implements AmsCommand {
 
         COMMAND_PERMISSION_MAP.put(command, permissionLevel);
         saveToJson();
-        CommandHelper.setPermission(server, command, permissionLevel);
         CommandHelper.updateAllCommandPermissions(server);
 
         return 1;
