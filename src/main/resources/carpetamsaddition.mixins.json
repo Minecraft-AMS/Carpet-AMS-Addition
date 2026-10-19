@@ -4,6 +4,9 @@
   "package": "carpetamsaddition.mixin",
   "compatibilityLevel": "/*JAVA_VERSION*/",
   "mixins": [
+    "rule.commandLocationTag.BlockEntityMixin",
+    "rule.commandLocationTag.LevelChunkMixin",
+    "rule.commandLocationTag.SignBlockEntityAccessor",
     "carpet.HUDControllerMixin",
     "carpet.SettingsManagerMixin",
     "carpet.fix.CarpetServerMixin",

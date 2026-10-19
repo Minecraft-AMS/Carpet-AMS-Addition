@@ -2852,3 +2852,23 @@ Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpki
   
 
 - Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+
+## commandLocationTag
+
+Enable `/amsloc` to maintain a server-wide location directory using signs, showing names, dimensions and coordinates.
+
+By default, ordinary oak signs and oak wall signs are recognized: put `amsloc` on the first front-side line and a nonblank name on the second. Only the front is read, lines three and four are ignored. Editing or removing a sign updates the directory. Entries survive chunk unloading and are checked when the chunk loads again.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+
+
+
+- Categories: `AMS`, `COMMAND`, `FEATURE`

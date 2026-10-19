@@ -701,6 +701,9 @@ public class CarpetAMSAdditionSettings {
     )
     public static String commandPlayerChunkLoadController = "false";
 
+    @Rule(options = {"false", "true", "ops", "0", "1", "2", "3", "4"}, categories = {AMS, COMMAND, FEATURE})
+    public static String commandLocationTag = "false";
+
     //#if MC<12005
     //$$ @GameVersion(version = "Minecraft < 1.20.5")
     //$$ @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})

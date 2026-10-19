@@ -29,6 +29,36 @@ carpetamsaddition:
       vanilla_command_disabled: '<Carpet AMS Addition> The rules of the game have been taken over by the minecartMaxSpeed carpet rules'
 
   command:
+    amsloc:
+      title: 'Location tags'
+      help_list: '/amsloc list [page] - List locations'
+      help_dimension: '/amsloc list dimension <dimension> [page] - Filter by dimension'
+      help_info: '/amsloc info <id> - Show location details'
+      help_config: '/amsloc config - Show recognition settings'
+      help_marker: '/amsloc config marker <text> - Set first-line marker'
+      help_type: '/amsloc config sign <type> - Set sign type'
+      help_reset: '/amsloc config reset - Restore default settings'
+      help_rescan: '/amsloc rescan - Rescan loaded chunks in batches'
+      help_sign: 'Put the marker on the first front-side line and the name on the second; edits and removal update the directory.'
+      recognition: 'Marker: %s | sign type: %s'
+      list: 'Location tags · Page %s/%s · %s locations'
+      empty: 'No location tags found. Existing signs in unloaded chunks will be discovered when their chunks load.'
+      page_invalid: 'Page out of range; there are %s pages'
+      missing: 'This location tag does not exist'
+      details: '[Details]'
+      details_hover: 'Click to view the dimension and coordinates of %s'
+      previous_hover: 'Click to view the previous page (page %s)'
+      next_hover: 'Click to view the next page (page %s)'
+      previous: '[Previous]'
+      next: '[Next]'
+      overworld: '[Overworld]'
+      nether: '[Nether]'
+      end: '[End]'
+      invalid_sign: 'Invalid sign type; choose a type suggested for this Minecraft version'
+      invalid_marker: 'The marker must not be blank or contain a line break'
+      saved: 'Recognition settings saved. The directory has been cleared and loaded chunks queued for checking; other tags are rediscovered as chunks load'
+      save_failed: 'Save failed, settings unchanged. Check the server log'
+      rescan: 'Queued %s loaded chunks for checking'
     commandGetHeldItemID:
       msg_head: '<commandGetHeldItemID> '
     blockChunkloader:
@@ -253,6 +283,8 @@ carpetamsaddition:
       AMS_network: AMS_network
 
     rule:
+      commandLocationTag:
+        desc: Enable /amsloc to record and query locations across dimensions using signs; defaults to ordinary oak signs with amsloc on the first line
       superBow:
         desc: Enabling making super bows with both infinite and mending enchants
       sharedVillagerDiscounts:

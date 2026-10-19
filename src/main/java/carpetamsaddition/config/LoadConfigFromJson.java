@@ -35,6 +35,7 @@ import carpetamsaddition.config.rule.commandCustomBlockHardness.CustomBlockHardn
 import carpetamsaddition.config.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelConfig;
 import carpetamsaddition.config.rule.commandCustomMovableBlock.CustomMovableBlockConfig;
 import carpetamsaddition.config.rule.commandLeader.LeaderConfig;
+import carpetamsaddition.helpers.rule.commandLocationTag.LocationTagManager;
 
 import net.minecraft.server.MinecraftServer;
 
@@ -48,5 +49,6 @@ public class LoadConfigFromJson {
         CustomAntiFireItemsConfig.getInstance().loadFromJson(CustomAntiFireItemsCommand.CUSTOM_ANTI_FIRE_ITEMS);
         CustomBlockHardnessConfig.getInstance().loadBlockStates(CustomBlockHardnessCommand.CUSTOM_BLOCK_HARDNESS_MAP);
         BlockLoaderConfigStore.loadFromJson(server);
+        LocationTagManager.loadFromJson(server);
     }
 }

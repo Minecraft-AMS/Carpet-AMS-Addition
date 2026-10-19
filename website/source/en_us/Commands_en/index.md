@@ -454,3 +454,27 @@ Run each command below, lines starting with `#` are comments:
 - **/playerNoNetherPortalTeleport help**
 
   View the usage instructions.
+
+## Location tags (commandLocationTag)
+
+Enable with `/carpet commandLocationTag true`. Put `amsloc` on the first front-side line of an ordinary oak sign and a name on the second to add a shared location. The marker is matched exactly after trimming surrounding whitespace and is case-sensitive. Duplicate names are allowed; IDs distinguish entries.
+
+Rows show the ID, dimension, name and coordinates. IDs follow the globally sorted directory consecutively from 1 and are renumbered after additions, renames or deletions. Dimension filters retain global IDs; use the current ID for details. Details and pagination buttons have hover hints.
+
+| Command | Function |
+| --- | --- |
+| `/amsloc` or `/amsloc help` | Help, current recognition settings and documentation link |
+| `/amsloc list [page]` | Ten entries per page, sorted by name, dimension and coordinates |
+| `/amsloc list dimension <dimension> [page]` | Filter by dimension |
+| `/amsloc info <id>` | Show name, full dimension ID and coordinates |
+| `/amsloc config` | Show settings |
+| `/amsloc config marker <text>` | Change the first-line marker, including spaces |
+| `/amsloc config sign <type>` | Change sign type |
+| `/amsloc config reset` | Restore default recognition settings |
+| `/amsloc rescan` | Check loaded chunks in batches |
+
+Click coordinates to copy `x y z`. Details and pagination buttons execute queries. The directory does not teleport players.
+
+Sign suggestions reflect the current Minecraft version. For example, `minecraft:spruce_sign` covers both standing and wall spruce signs. `minecraft:oak_hanging_sign` covers ceiling and wall hanging oak signs and can only be selected in versions supporting them. The default ordinary oak type excludes hanging signs.
+
+Changing recognition settings clears the directory and queues loaded chunks for checking. Other entries are rediscovered when their chunks load. Rescanning never forces chunks to load. Maintain tags by editing or removing the actual signs; there are no commands for manually adding, renaming or deleting entries.

@@ -395,3 +395,16 @@
 
 - **/playerNoNetherPortalTeleport help**
   查看使用说明。
+
+## 位置标记（commandLocationTag）
+| 指令 | 功能 |
+| --- | --- |
+| `/amsloc` 或 `/amsloc help` | 帮助、当前识别条件和文档链接 |
+| `/amsloc list [page]` | 每页 10 条，按名称、维度和坐标排序 |
+| `/amsloc list dimension <dimension> [page]` | 按维度筛选 |
+| `/amsloc info <id>` | 查看名称、完整维度 ID 和坐标 |
+| `/amsloc config` | 查看配置 |
+| `/amsloc config marker <text>` | 修改第一行识别文本，可含空格 |
+| `/amsloc config sign <type>` | 修改告示牌类型 |
+| `/amsloc config reset` | 恢复默认识别条件 |
+| `/amsloc rescan` | 分批检查已加载区块 |

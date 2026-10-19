@@ -47,6 +47,7 @@ import carpetamsaddition.network.payloads.handshake.HandShakeS2CPayload;
 import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
 import carpetamsaddition.translations.AMSTranslations;
+import carpetamsaddition.helpers.rule.commandLocationTag.LocationTagManager;
 import carpetamsaddition.translations.TranslationConstants;
 import carpetamsaddition.api.command.CommandHelper;
 import carpetamsaddition.utils.CountRulesUtil;
@@ -110,6 +111,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
 
     @Override
     public void onTick(MinecraftServer server) {
+        LocationTagManager.tick(server);
         LeaderCommand.tick();
     }
 
@@ -170,6 +172,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
 
     @Override
     public void onServerClosed(MinecraftServer server) {
+        LocationTagManager.close(server);
         BlockLoaderConfigStore.clear();
         AmsRuleMetadata.deactivateLazyRules();
         NetworkUtil.clearClientSupport();

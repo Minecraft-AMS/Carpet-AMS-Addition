@@ -29,6 +29,36 @@ carpetamsaddition:
       vanilla_command_disabled: '<Carpet AMS Addition> 该游戏规则已由 minecartMaxSpeed 地毯规则接管'
 
   command:
+    amsloc:
+      title: '位置标记'
+      help_list: '/amsloc list [page] - 查看位置列表'
+      help_dimension: '/amsloc list dimension <dimension> [page] - 按维度查看'
+      help_info: '/amsloc info <id> - 查看标记详情'
+      help_config: '/amsloc config - 查看识别配置'
+      help_marker: '/amsloc config marker <text> - 设置第一行识别文本'
+      help_type: '/amsloc config sign <type> - 设置告示牌类型'
+      help_reset: '/amsloc config reset - 恢复默认识别配置'
+      help_rescan: '/amsloc rescan - 分批重新扫描已加载区块'
+      help_sign: '告示牌正面第一行填写识别文本，第二行填写名称；编辑或拆除后自动更新。'
+      recognition: '识别文本：%s | 告示牌类型：%s'
+      list: '位置标记 · 第 %s/%s 页 · 共 %s 处'
+      empty: '没有找到位置标记，未加载区块中的旧告示牌将在区块加载后被发现'
+      page_invalid: '页码超出范围，共 %s 页'
+      missing: '该位置标记不存在'
+      details: '[详情]'
+      details_hover: '点击查看 %s 的维度和坐标'
+      previous_hover: '点击查看上一页（第 %s 页）'
+      next_hover: '点击查看下一页（第 %s 页）'
+      previous: '[上一页]'
+      next: '[下一页]'
+      overworld: '[主世界]'
+      nether: '[下界]'
+      end: '[末地]'
+      invalid_sign: '无效的告示牌类型，请使用当前版本补全中提供的类型'
+      invalid_marker: '识别文本不能为空或包含换行'
+      saved: '识别配置已保存，目录已清空并开始重新检查已加载区块，其他标记随区块加载重新发现'
+      save_failed: '保存失败，配置未修改，请查看服务器日志'
+      rescan: '已安排检查 %s 个已加载区块'
     commandGetHeldItemID:
       msg_head: '<commandGetHeldItemID> '
     blockChunkloader:
@@ -253,6 +283,9 @@ carpetamsaddition:
       AMS_network: AMS_网络
 
     rule:
+      commandLocationTag:
+        name: 位置标记指令
+        desc: 启用/amsloc指令，用告示牌记录并查询跨维度位置；默认识别第一行为amsloc的普通橡木告示牌
       superBow:
         name: 超级弓
         desc: 让弓能同时打上无限和经验修补两种附魔
