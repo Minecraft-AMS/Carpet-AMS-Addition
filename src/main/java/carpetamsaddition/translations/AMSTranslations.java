@@ -138,9 +138,15 @@ public class AMSTranslations {
         return translateTextComponent(text, clientLang);
     }
 
-    @SuppressWarnings("PatternVariableCanBeUsed")
     @NotNull
     private static MutableComponent translateTextComponent(@NotNull Component text, String lang) {
+        return translateTextComponent(text, lang, Style.EMPTY);
+    }
+
+    @SuppressWarnings("PatternVariableCanBeUsed")
+    @NotNull
+    private static MutableComponent translateTextComponent(@NotNull Component text, String lang, Style parentStyle) {
+        Style style = translateStyle(text.getStyle(), lang).applyTo(parentStyle);
         //#if MC>=11904
         if (text.getContents() instanceof TranslatableContents) {
             TranslatableContents translatableContents = (TranslatableContents) text.getContents();
@@ -166,7 +172,7 @@ public class AMSTranslations {
 
                         for (int i = 0; i < args.length; i++) {
                             if (args[i] instanceof Component) {
-                                translatedArgs[i] = translateTextComponent((Component) args[i], lang);
+                                translatedArgs[i] = translateTextComponent((Component) args[i], lang, style);
                             } else {
                                 translatedArgs[i] = args[i];
                             }
@@ -178,11 +184,11 @@ public class AMSTranslations {
                         newComponent = Messenger.s(translated);
                     }
 
-                    Messenger.style(newComponent, translateStyle(text.getStyle(), lang));
+                    Messenger.style(newComponent, style);
                     newComponent.getSiblings().clear();
 
                     for (Component sibling : text.getSiblings()) {
-                        newComponent.append(translateTextComponent(sibling, lang));
+                        newComponent.append(translateTextComponent(sibling, lang, style));
                     }
 
                     return newComponent;
@@ -191,11 +197,11 @@ public class AMSTranslations {
         }
 
         MutableComponent result = Messenger.copy(text);
-        Messenger.style(result, translateStyle(text.getStyle(), lang));
+        Messenger.style(result, style);
         result.getSiblings().clear();
 
         for (Component sibling : text.getSiblings()) {
-            result.append(translateTextComponent(sibling, lang));
+            result.append(translateTextComponent(sibling, lang, style));
         }
 
         return result;
