@@ -35,6 +35,7 @@ import carpetamsaddition.utils.messageTextEvent.ClickEventUtil;
 import carpetamsaddition.utils.messageTextEvent.HoverEventUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
@@ -137,7 +138,7 @@ public final class LocationTagCommand implements AmsCommand {
         return entries.size();
     }
 
-    private int info(CommandExecutionContext context) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
+    private int info(CommandExecutionContext context) throws CommandSyntaxException {
         Entry entry = LocationTagManager.get(context.get(Arguments.integer("id")));
 
         if (entry == null) {

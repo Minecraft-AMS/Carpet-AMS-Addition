@@ -127,7 +127,7 @@ public final class LocationTagManager {
     }
 
     private static long chunkKey(int x, int z) {
-        return ((long) z << 32) | (x & 0xffffffffL);
+        return ((long) z << 32) | Integer.toUnsignedLong(x);
     }
 
     private static int chunkX(LevelChunk chunk) {
