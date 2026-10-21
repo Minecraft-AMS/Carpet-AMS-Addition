@@ -262,7 +262,7 @@
 
 ## 位置标记（commandLocationTag）
 
-通过 `/carpet commandLocationTag true` 启用。在普通橡木告示牌正面第一行填写 `amsloc`，第二至第四行填写名称：每行分别去掉首尾空白后，按顺序直接拼接，不添加空格、换行或其他分隔符。空行不影响拼接，拼接结果不能为空，只读取正面。例如，第二至第四行分别填写“末地”“刷怪”“塔”，名称为“末地刷怪塔”。
+在普通橡木告示牌正面第一行填写 `amsloc`（告示牌种类与标记可通过指令修改），第二至第四行填写名称，每行分别去掉首尾空白后，按顺序直接拼接，不添加空格、换行或其他分隔符。空行不影响拼接，只读取正面。
 
 | 指令 | 功能 |
 | --- | --- |
@@ -271,7 +271,7 @@
 | `/amsloc list dimension <dimension> [page]` | 按维度筛选 |
 | `/amsloc info <id>` | 查看名称、完整维度 ID 和坐标 |
 | `/amsloc config` | 查看配置 |
-| `/amsloc config marker <text>` | 修改第一行识别文本，可含空格 |
+| `/amsloc config marker <text>` | 修改第一行识别文本 |
 | `/amsloc config sign <type>` | 修改告示牌类型 |
 | `/amsloc config reset` | 恢复默认识别条件 |
-| `/amsloc rescan` | [分批检查已加载区块]() |
+| `/amsloc rescan` | 分批检查已加载区块 |

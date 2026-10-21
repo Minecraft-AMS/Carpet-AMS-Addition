@@ -262,11 +262,9 @@ Run each command below, lines starting with `#` are comments:
 | `/playerNoNetherPortalTeleport list` | View the blacklist. |
 | `/playerNoNetherPortalTeleport help` | View the usage instructions. |
 
-## Location tags (commandLocationTag)
+## commandLocationTag
 
-Enable with `/carpet commandLocationTag true`. Put `amsloc` on the first front-side line of an ordinary oak sign and write the name across lines 2–4. Each of those lines is trimmed individually, then joined in order without spaces, line breaks or other separators. Empty lines contribute nothing, and the resulting name must not be blank. Only the front is read. For example, lines containing `End`, `erman` and `Farm` produce the name `EndermanFarm`. The marker is matched exactly after trimming surrounding whitespace and is case-sensitive. Duplicate names are allowed; IDs distinguish entries.
-
-Rows show the ID, dimension, name and coordinates. IDs follow the globally sorted directory consecutively from 1 and are renumbered after additions, renames or deletions. Dimension filters retain global IDs; use the current ID for details. Details and pagination buttons have hover hints.
+On the front of a regular oak sign, enter `amsloc` on the first line (the sign type and marker can be modified via commands), and the name on lines two through four. Trim leading and trailing whitespace from each line, then concatenate them in order without spaces, line breaks, or other separators. Blank lines do not affect concatenation; only the front side is read.
 
 | Command | Function |
 | --- | --- |
@@ -275,13 +273,7 @@ Rows show the ID, dimension, name and coordinates. IDs follow the globally sorte
 | `/amsloc list dimension <dimension> [page]` | Filter by dimension |
 | `/amsloc info <id>` | Show name, full dimension ID and coordinates |
 | `/amsloc config` | Show settings |
-| `/amsloc config marker <text>` | Change the first-line marker, including spaces |
+| `/amsloc config marker <text>` | Change the first-line marker |
 | `/amsloc config sign <type>` | Change sign type |
 | `/amsloc config reset` | Restore default recognition settings |
 | `/amsloc rescan` | Check loaded chunks in batches |
-
-Click coordinates to copy `x y z`. Details and pagination buttons execute queries. The directory does not teleport players.
-
-Sign suggestions reflect the current Minecraft version. For example, `minecraft:spruce_sign` covers both standing and wall spruce signs. `minecraft:oak_hanging_sign` covers ceiling and wall hanging oak signs and can only be selected in versions supporting them. The default ordinary oak type excludes hanging signs.
-
-Changing recognition settings clears the directory and queues loaded chunks for checking. Other entries are rediscovered when their chunks load. Rescanning never forces chunks to load. Maintain tags by editing or removing the actual signs; there are no commands for manually adding, renaming or deleting entries.
