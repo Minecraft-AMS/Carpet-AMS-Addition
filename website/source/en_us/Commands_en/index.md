@@ -94,370 +94,177 @@ Run each command below, lines starting with `#` are comments:
 
 ## commandPlayerChunkLoadController
 
-- **/playerChunkLoading [true/false]**
-
-  Control chunk loading of player. Can only manipulate yourself.
-
+| Command | Function |
+| --- | --- |
+| `/playerChunkLoading [true/false]` | Control chunk loading of player. Can only manipulate yourself. |
 
 ## commandAnvilInteractionDisabled
 
-- **/anvilInteractionDisabled [true/false]**
-
-  Controls whether the player can interact with the anvil.
+| Command | Function |
+| --- | --- |
+| `/anvilInteractionDisabled [true/false]` | Controls whether the player can interact with the anvil. |
 
 ## amsUpdateSuppressionCrashFix
 
-- **/amsUpdateSuppressionCrashFixForceMode [true/false]**
-
-  Control whether forced startup is enabled when the `customBlockUpdateSuppressor`  rule is enabled.
+| Command | Function |
+| --- | --- |
+| `/amsUpdateSuppressionCrashFixForceMode [true/false]` | Control whether forced startup is enabled when the `customBlockUpdateSuppressor`  rule is enabled. |
 
 ## commandCustomBlockBlastResistance
 
-- **/customBlockBlastResistance set &lt;block&gt; &lt;resistance&gt;**
-
-  Add or modify blocks and their blast resistance.
-
-  
-
-- **/customBlockBlastResistance remove  &lt;block&gt; **
-
-  Remove a block from the list.
-
-  
-
-- **/customBlockBlastResistance removeAll**
-
-  Remove all blocks from the list.
-
-  
-
-- **/customBlockBlastResistance list**
-
-  Display all added blocks.
-
-
-
-- **/customBlockBlastResistance help**
-
-  View the usage instructions.
+| Command | Function |
+| --- | --- |
+| `/customBlockBlastResistance set <block> <resistance>` | Add or modify blocks and their blast resistance. |
+| `/customBlockBlastResistance remove  <block>` | Remove a block from the list. |
+| `/customBlockBlastResistance removeAll` | Remove all blocks from the list. |
+| `/customBlockBlastResistance list` | Display all added blocks. |
+| `/customBlockBlastResistance help` | View the usage instructions. |
 
 ## commandHere
 
-- **/here**
-
-  send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect.
+| Command | Function |
+| --- | --- |
+| `/here` | send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect. |
 
 ## commandWhere
 
-- **/where**
-
-  get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect.
+| Command | Function |
+| --- | --- |
+| `/where` | get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect. |
 
 ## commandPlayerLeader
 
-- **/leader add &lt;player&gt;**
-
-  Add a tour guide.
-
-
-
-- **/leader remove &lt;player&gt;**
-
-  remove a tour guide.
-
-
-
-- **/leader removeAll**
-
-  Remove all tour guide.
-
-
-
-- **/leader broadcastLeaderPos &lt;player&gt; interval &lt;tick&gt;**
-
-  Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting.
-
-
-
-- **/leader list**
-
-  View tour guide list.
-
-
-
-- **/leader help**
-
-  View the usage instructions.
+| Command | Function |
+| --- | --- |
+| `/leader add <player>` | Add a tour guide. |
+| `/leader remove <player>` | remove a tour guide. |
+| `/leader removeAll` | Remove all tour guide. |
+| `/leader broadcastLeaderPos <player> interval <tick>` | Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting. |
+| `/leader list` | View tour guide list. |
+| `/leader help` | View the usage instructions. |
 
 ## commandPacketInternetGroper
 
-- **/pings &lt;targetIpOrDomainName&gt; &lt;pingQuantity&gt;**
-
-  Ping a specific host.
-
-
-
-- **/pings stop**
-
-  Interrupt the ping operation.
+| Command | Function |
+| --- | --- |
+| `/pings <targetIpOrDomainName> <pingQuantity>` | Ping a specific host. |
+| `/pings stop` | Interrupt the ping operation. |
 
 ## commandGetSaveSize
 
-- **/getSaveSize**
-
-  Get save size.
+| Command | Function |
+| --- | --- |
+| `/getSaveSize` | Get save size. |
 
 ## commandGetSystemInfo
 
-- **/getSystemInfo**
-
-  Get the system information of the server.
+| Command | Function |
+| --- | --- |
+| `/getSystemInfo` | Get the system information of the server. |
 
 ## commandGoto
 
-- **/goto &lt;dimension&gt; &lt;x&gt; &lt;y&gt; &lt;z&gt;**
-
-  teleport to the specified dimension and coordinates.
-
-
-
-- **/goto &lt;dimension&gt;**
-
-  Teleport to the corresponding coordinates of the current player location.
+| Command | Function |
+| --- | --- |
+| `/goto <dimension> <x> <y> <z>` | teleport to the specified dimension and coordinates. |
+| `/goto <dimension>` | Teleport to the corresponding coordinates of the current player location. |
 
 ## commandCustomCommandPermissionLevel
 
-- **/customCommandPermissionLevel set &lt;command&gt; &lt;permissionLevel&gt;**
-
-  Set the permission level of a command.
-
-
-
-- **/customCommandPermissionLevel remove &lt;command&gt;**
-
-  Remove a modified command.
-
-
-
-- **/customCommandPermissionLevel removeAll**
-
-  Remove all modified commands.
-
-
-
-- **/customCommandPermissionLevel refresh**
-
-  Refresh command tree.
-
-
-
-- **/customCommandPermissionLevel list**
-
-  View the list of modified commands.
-
-
-
-- **/customCommandPermissionLevel help**
-
-  View the usage instructions.
+| Command | Function |
+| --- | --- |
+| `/customCommandPermissionLevel set <command> <permissionLevel>` | Set the permission level of a command. |
+| `/customCommandPermissionLevel remove <command>` | Remove a modified command. |
+| `/customCommandPermissionLevel removeAll` | Remove all modified commands. |
+| `/customCommandPermissionLevel refresh` | Refresh command tree. |
+| `/customCommandPermissionLevel list` | View the list of modified commands. |
+| `/customCommandPermissionLevel help` | View the usage instructions. |
 
 ## commandGetPlayerSkull
 
-- **/getPlayerSkull &lt;player&gt; &lt;count&gt;**
-
-  Get the skull of a specified player.
+| Command | Function |
+| --- | --- |
+| `/getPlayerSkull <player> <count>` | Get the skull of a specified player. |
 
 ## commandCustomMovableBlock
 
-- **/customMovableBlock add &lt;block&gt;**
-
-  Added a movable block.
-
-
-
-- **/customMovableBlock remove &lt;block&gt;**
-
-  Delete a movable block.
-
-
-
-- **/customMovableBlock removeAll**
-
-  Removes all added movable blocks.
-
-
-
-- **/customMovableBlock list**
-
-  Check out the list of movable blocks.
-
-
-
-- **/customMovableBlock help**
-
-  View the usage instructions.
+| Command | Function |
+| --- | --- |
+| `/customMovableBlock add <block>` | Added a movable block. |
+| `/customMovableBlock remove <block>` | Delete a movable block. |
+| `/customMovableBlock removeAll` | Removes all added movable blocks. |
+| `/customMovableBlock list` | Check out the list of movable blocks. |
+| `/customMovableBlock help` | View the usage instructions. |
 
 ## commandGetHeldItemID
 
-- **/getHeldItemID**
-
-  Get item ID of the player main hand item.
+| Command | Function |
+| --- | --- |
+| `/getHeldItemID` | Get item ID of the player main hand item. |
 
 ## commandCustomAntiFireItems
 
-- **/customAntiFireItems add &lt;item&gt;**
-
-  Added a anti fire item.
-
-
-
-- **/customAntiFireItems  remove &lt;block&gt;**
-
-  Delete a anti fire item.
-
-
-
-- **/customAntiFireItems removeAll**
-
-  Removes all added anti fire items.
-
-
-
-- **/customAntiFireItems  list**
-
-  Check out the list of anti fire item.
-
-
-
-- **/customAntiFireItems help**
-
-  View the usage instructions.
+| Command | Function |
+| --- | --- |
+| `/customAntiFireItems add <item>` | Added a anti fire item. |
+| `/customAntiFireItems  remove <block>` | Delete a anti fire item. |
+| `/customAntiFireItems removeAll` | Removes all added anti fire items. |
+| `/customAntiFireItems  list` | Check out the list of anti fire item. |
+| `/customAntiFireItems help` | View the usage instructions. |
 
 ## commandCarpetExtensionModWikiHyperlink
 
-- **/carpetExtensionModWikiHyperlink &lt;ExtensionName&gt;**
-
-  Get the Wiki link for a carpet extension mod.
+| Command | Function |
+| --- | --- |
+| `/carpetExtensionModWikiHyperlink <ExtensionName>` | Get the Wiki link for a carpet extension mod. |
 
 ## commandCustomBlockHardness
 
-- **/customBlockHardness set &lt;block&gt; &lt;hardness&gt;** 
-
-  Add or modify blocks and their hardness.
-
-  
-
-- **/customBlockHardness remove &lt;block&gt;**
-
-  Remove a block from the list.
-
-  
-
-- **/customBlockHardness removeAll**
-
-  Remove all blocks from the list.
-
-  
-
-- **/customBlockHardness getDefaultHardness**
-
-  Query the default hardness of blocks.
-
-
-
-- **/customBlockHardness list**
-
-  Display all added blocks.
-  
-  
-
-- **/customBlockHardness help**
-
-  View the usage instructions.
+| Command | Function |
+| --- | --- |
+| `/customBlockHardness set <block> <hardness>` | Add or modify blocks and their hardness. |
+| `/customBlockHardness remove <block>` | Remove a block from the list. |
+| `/customBlockHardness removeAll` | Remove all blocks from the list. |
+| `/customBlockHardness getDefaultHardness` | Query the default hardness of blocks. |
+| `/customBlockHardness list` | Display all added blocks. |
+| `/customBlockHardness help` | View the usage instructions. |
 
 ## commandAtSomeOnePlayer
 
-- **/@ &lt;player&gt;**
-
-  @ some one player.
+| Command | Function |
+| --- | --- |
+| `/@ <player>` | @ some one player. |
 
 ## commandGetClientPlayerFps
 
-- **/getClientPlayerFps &lt;player**&gt;
-
-  Get the FPS of the specified player.
-
-
-
-- **/getClientPlayerFps help**
-
-  View the usage instructions.
+| Command | Function |
+| --- | --- |
+| `/getClientPlayerFps <player>` | Get the FPS of the specified player. |
+| `/getClientPlayerFps help` | View the usage instructions. |
 
 ## commandSetPlayerPose
 
-- **/playerPose &lt;player&gt; set &lt;pose&gt;**
-
-  Set player pose.
-
-
-
-- **/playerPose &lt;player&gt; stop**
-
-  Stop posing.
-
-
-
-- **/playerPose help**
-
-  View the usage instructions.
-
-
+| Command | Function |
+| --- | --- |
+| `/playerPose <player> set <pose>` | Set player pose. |
+| `/playerPose <player> stop` | Stop posing. |
+| `/playerPose help` | View the usage instructions. |
 
 ## commandPlayerNoNetherPortalTeleport
 
-- **/playerNoNetherPortalTeleport globalMode [true/false]**
-
-  Set global mode.
-
-
-
-- **/playerNoNetherPortalTeleport globalMode**
-
-  View the global mode status.
-
-
-
-- **/playerNoNetherPortalTeleport add &lt;player&gt;**
-
-  Add a player to the blacklist.
-
-
-
-- **/playerNoNetherPortalTeleport remove &lt;player&gt;**
-
-  Remove a player from the blacklist.
-
-
-
-- **/playerNoNetherPortalTeleport clear**
-
-  Clear the blacklist.
-
-
-
-- **/playerNoNetherPortalTeleport list**
-
-  View the blacklist.
-
-
-
-- **/playerNoNetherPortalTeleport help**
-
-  View the usage instructions.
+| Command | Function |
+| --- | --- |
+| `/playerNoNetherPortalTeleport globalMode [true/false]` | Set global mode. |
+| `/playerNoNetherPortalTeleport globalMode` | View the global mode status. |
+| `/playerNoNetherPortalTeleport add <player>` | Add a player to the blacklist. |
+| `/playerNoNetherPortalTeleport remove <player>` | Remove a player from the blacklist. |
+| `/playerNoNetherPortalTeleport clear` | Clear the blacklist. |
+| `/playerNoNetherPortalTeleport list` | View the blacklist. |
+| `/playerNoNetherPortalTeleport help` | View the usage instructions. |
 
 ## Location tags (commandLocationTag)
 
-Enable with `/carpet commandLocationTag true`. Put `amsloc` on the first front-side line of an ordinary oak sign and a name on the second to add a shared location. The marker is matched exactly after trimming surrounding whitespace and is case-sensitive. Duplicate names are allowed; IDs distinguish entries.
+Enable with `/carpet commandLocationTag true`. Put `amsloc` on the first front-side line of an ordinary oak sign and write the name across lines 2–4. Each of those lines is trimmed individually, then joined in order without spaces, line breaks or other separators. Empty lines contribute nothing, and the resulting name must not be blank. Only the front is read. For example, lines containing `End`, `erman` and `Farm` produce the name `EndermanFarm`. The marker is matched exactly after trimming surrounding whitespace and is case-sensitive. Duplicate names are allowed; IDs distinguish entries.
 
 Rows show the ID, dimension, name and coordinates. IDs follow the globally sorted directory consecutively from 1 and are renumbered after additions, renames or deletions. Dimension filters retain global IDs; use the current ID for details. Details and pagination buttons have hover hints.
 

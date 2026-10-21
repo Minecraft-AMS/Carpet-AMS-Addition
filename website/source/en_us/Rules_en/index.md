@@ -2857,7 +2857,7 @@ Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpki
 
 Enable `/amsloc` to maintain a server-wide location directory using signs, showing names, dimensions and coordinates.
 
-By default, ordinary oak signs and oak wall signs are recognized: put `amsloc` on the first front-side line and a nonblank name on the second. Only the front is read, lines three and four are ignored. Editing or removing a sign updates the directory. Entries survive chunk unloading and are checked when the chunk loads again.
+By default, ordinary oak signs and oak wall signs are recognized: put `amsloc` on the first front-side line. Lines 2–4 are trimmed individually, then joined in order without spaces, line breaks or other separators to form the name. Empty lines contribute nothing, and the resulting name must not be blank. Only the front is read. Editing or removing a sign updates the directory. Entries survive chunk unloading and are checked when the chunk loads again.
 
 - Type: `String`
 
