@@ -274,4 +274,4 @@
 | `/amsloc config marker <text>` | 修改第一行识别文本，可含空格 |
 | `/amsloc config sign <type>` | 修改告示牌类型 |
 | `/amsloc config reset` | 恢复默认识别条件 |
-| `/amsloc rescan` | 分批检查已加载区块 |
+| `/amsloc rescan` | [分批检查已加载区块]() |

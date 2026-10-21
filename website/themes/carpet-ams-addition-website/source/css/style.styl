@@ -33,6 +33,9 @@
 *
     box-sizing: border-box
 
+[hidden]
+    display: none !important
+
 html
     scroll-behavior: smooth
     scrollbar-color: var(--muted) var(--surface)
@@ -55,6 +58,7 @@ html::-webkit-scrollbar-thumb:hover
     background: var(--accent)
 
 body
+    isolation: isolate
     margin: 0
     background: var(--page)
     color: var(--text)
@@ -70,11 +74,11 @@ a
 button
     font: inherit
 
-// Shared partial styles, including navigation, pagination, and full-width sticky article outlines, are bundled into this generated stylesheet.
-@import './partial/layout'
-@import './partial/header'
-@import './partial/index'
-@import './partial/footer'
-@import './partial/post'
-@import './partial/highlight'
-@import './partial/comments'
+// 以下划线开头的样式文件统一在此合并，不单独生成资源文件。
+@import './_partial/layout'
+@import './_partial/effects'
+@import './_partial/header'
+@import './_partial/index'
+@import './_partial/footer'
+@import './_partial/post'
+@import './_partial/highlight'

@@ -1,13 +1,63 @@
+# 主题配置；网站域名、分页和部署设置位于 _config.yml。
 favicon: images/icon.png
 
+appearance:
+  default_theme: system # 可选 system（跟随系统）、light（浅色）或 dark（深色）；优先使用访客保存的选择。
+  default_language: zh-CN # 可选 zh-CN（中文）或 en（英文）；中英文文档按页面地址确定语言。
+
+# 导航、中英文文档标题及语言切换的目标地址统一在此设置。
+# document 启用文档搜索和目录；force_toc 使标题较少的文档也显示目录。
 menu:
-  日志[logs]: /
-  规则[Rules]: /Rules
-  记录器[Loggers]: /Loggers
-  指令[Commands]: /Commands
-  开发[Development]: /Development
-  下载[Download]: /Download
-  开源[Open Source]: /OpenSource
+  - name_cn: 日志
+    name_en: Logs
+    path: /
+  - name_cn: 规则
+    name_en: Rules
+    path: /Rules
+    path_en: /en_us/Rules_en
+    document: true
+  - name_cn: 记录器
+    name_en: Loggers
+    path: /Loggers
+    path_en: /en_us/Loggers_en
+    document: true
+    force_toc: true
+  - name_cn: 指令
+    name_en: Commands
+    path: /Commands
+    path_en: /en_us/Commands_en
+    document: true
+  - name_cn: 开发
+    name_en: Development
+    path: /Development
+    path_en: /en_us/Development_en
+  - name_cn: 下载
+    name_en: Download
+    path: /Download
+    path_en: /en_us/Download_en
+  - name_cn: 开源
+    name_en: Source
+    title_en: Open Source
+    path: /OpenSource
+    path_en: /en_us/OpenSource_en
+
+search:
+  posts: true # 仅在搜索更新日志时加载共用的 post-search.json 索引。
+  documents: true
+
+toc:
+  enable: true
+  min_headings: 4 # 目录显示所需的最少标题数；菜单项设置 force_toc: true 时忽略此限制。
+  offset: 150 # 目录标题激活位置距视口顶部的偏移量，单位为像素。
+
+effects:
+  background: true
+  background_particles: 72 # 背景粒子数，取 0～300 的整数；0 表示关闭背景粒子。
+  background_particles_mobile: 24 # 视口宽度不超过 760 像素时使用的背景粒子数。
+  background_fps: 30 # 背景动画帧率，取 1～60 的整数。
+  clicks: true
+  click_duration: 560 # 点击动画时长，取 100～2000 的整数，单位为毫秒。
+  click_particles: 8 # 每次点击的粒子数，取 1～32 的整数。
 
 copyright:
   name: A Minecraft Server
@@ -16,29 +66,7 @@ license:
   name: LGPL-3.0
   url: https://choosealicense.com/licenses/lgpl-3.0/
 
-rss:
-  path: https://mcams.club/
-
-mathjax:
-  enable: false
-
-katex:
-  enable: false
-
-utterances:
-  enable: false
-  repo: owner/repo
-  issueTerm: pathname
-  theme: github-light
-
-analytics:
-  enable: false
-  gtag: G-XXXXXXXXXXXX
- 
-canvas_nest:
-  enable: false
-  color: '0，0，0'
-  pointColor: '0，0，0'
-  opacity: '0.8'
-  count: '99'
-  zIndex: '-1'
+footer_links:
+  - name_cn: 官网
+    name_en: Website
+    url: https://mcams.club/

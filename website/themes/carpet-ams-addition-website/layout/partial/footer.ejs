@@ -1,22 +1,16 @@
+<% const view = theme_view(page); %>
 <footer>
     <%- partial('top') %>
-    
     <div class="footer-container">
         <div class="footer-meta">
-            <% if (theme.copyright) { %>
-                <div class="footer-meta-copyright">
-                    &copy; <%= date(new Date(), 'YYYY') %> <%= theme.copyright.name || config.author %>
-                </div>
+            <% if (view.copyright) { %>
+            <div class="footer-meta-copyright">&copy; <%= date(new Date(), 'YYYY') %> <%= view.copyright.name || config.author %></div>
             <% } %>
-            <% if (theme.license) { %>
-                <div class="footer-meta-licenese">
-                    <span>License</span> <a href="<%- url_for(theme.license.url) %>"><%= theme.license.name %></a>
-                </div>
+            <% if (view.license) { %>
+            <div class="footer-meta-license"><span>License</span> <a href="<%= url_for(view.license.url) %>"><%= view.license.name %></a></div>
             <% } %>
-            <% if (theme.rss) { %>
-                <div class="footer-meta-rss">
-                    <a href="<%- url_for(theme.rss.path) %>"><i class="fa-solid fa-rss"></i></a>
-                </div>
+            <% for (const link of view.footer_links) { %>
+            <a href="<%= url_for(link.url) %>" data-i18n-cn="<%= link.name_cn %>" data-i18n-en="<%= link.name_en %>"><%= link.name_cn %></a>
             <% } %>
         </div>
     </div>
