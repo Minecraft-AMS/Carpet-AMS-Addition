@@ -2661,6 +2661,24 @@ Synchronize the server-side block hardness to the client.
 
 - Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`
 
+## commandLocationTag
+
+Enable `/amsloc` to maintain a server-wide location directory using signs, showing names, dimensions and coordinates.
+
+- Type: `String`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
+
+
+
+- Categories: `AMS`, `COMMAND`, `FEATURE`
+
 ## craftableEnchantedGoldApple
 
 Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
@@ -2852,23 +2870,3 @@ Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpki
   
 
 - Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
-
-## commandLocationTag
-
-Enable `/amsloc` to maintain a server-wide location directory using signs, showing names, dimensions and coordinates.
-
-By default, ordinary oak signs and oak wall signs are recognized: put `amsloc` on the first front-side line. Lines 2–4 are trimmed individually, then joined in order without spaces, line breaks or other separators to form the name. Empty lines contribute nothing, and the resulting name must not be blank. Only the front is read. Editing or removing a sign updates the directory. Entries survive chunk unloading and are checked when the chunk loads again.
-
-- Type: `String`
-
-
-
-- Default: `false`
-
-
-
-- Options: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
-
-
-
-- Categories: `AMS`, `COMMAND`, `FEATURE`

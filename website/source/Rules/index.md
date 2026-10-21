@@ -85,7 +85,7 @@
 
 - 分类: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
-## 音符盒方块加载器指令（commandNoteblockChunkloader）
+## 音符盒方块加载器（commandNoteblockChunkloader）
 
 使用指令自定义音符盒加载器。
 
@@ -96,7 +96,7 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
-## 钟方块加载器指令（commandBellChunkloader）
+## 钟方块加载器（commandBellChunkloader）
 
 使用指令自定义钟加载器。
 
@@ -107,7 +107,7 @@
 - 参考选项: `false`, `true`, `ops`, `0`, `1`, `2`, `3`, `4`
 - 分类: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
-## 活塞方块加载器指令（commandPistonChunkloader）
+## 活塞方块加载器（commandPistonChunkloader）
 
 使用指令自定义活塞加载器（以活塞头到达的区块为中心）。
 
@@ -2682,6 +2682,24 @@ AMS网络协议的开关。
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`
 
+## 位置标记（commandLocationTag）
+
+启用 `/amsloc` 指令，通过告示牌维护全服共享的位置目录，显示名称、维度和坐标。
+
+- 类型：`String`
+
+
+
+- 默认值：`false`
+
+
+
+- 参考选项：`false`、`true`、`ops`、`0`、`1`、`2`、`3`、`4`
+
+
+
+- 分类：`AMS`、`COMMAND`、`FEATURE`
+
 ## 可合成附魔金苹果（craftableEnchantedGoldenApples）
 
 开启后，可利用金块和苹果合成附魔金苹果，即恢复到15w44a前的表现。
@@ -2873,23 +2891,3 @@ AMS网络协议的开关。
   
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
-
-## 位置标记指令（commandLocationTag）
-
-启用 `/amsloc` 指令，通过告示牌维护全服共享的位置目录，显示名称、维度和坐标。
-
-默认识别普通橡木告示牌（含墙牌）：正面第一行填写 `amsloc`，第二至第四行分别去掉首尾空白后，按顺序直接拼接为名称，不添加空格、换行或其他分隔符。空行不影响拼接，拼接结果不能为空。只读取正面，编辑和拆除后自动更新，区块卸载保留记录，重新加载时校验。
-
-- 类型：`String`
-
-
-
-- 默认值：`false`
-
-
-
-- 参考选项：`false`、`true`、`ops`、`0`、`1`、`2`、`3`、`4`
-
-
-
-- 分类：`AMS`、`COMMAND`、`FEATURE`

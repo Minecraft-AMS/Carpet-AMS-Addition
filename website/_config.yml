@@ -4,8 +4,9 @@ author: 1024_byteeeee
 language: zh-cn
 url: https://carpet.mcams.club
 
-# 首页与归档每页的文章数；首页沿用插件默认的日期倒序。
-per_page: 20
+# 日志列表（首页）与归档每页的条目数；0 表示全部显示。
+# 修改后重启 hexo s；静态预览或部署前重新运行 hexo g。
+per_page: 30
 
 # 代码高亮；保留主题所用的 hljs 样式类。
 syntax_highlighter: highlight.js

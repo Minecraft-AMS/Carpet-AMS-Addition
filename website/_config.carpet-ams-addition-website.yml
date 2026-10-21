@@ -52,8 +52,8 @@ toc:
 
 effects:
   background: true
-  background_particles: 72 # 背景粒子数，取 0～300 的整数；0 表示关闭背景粒子。
-  background_particles_mobile: 24 # 视口宽度不超过 760 像素时使用的背景粒子数。
+  background_particles: 168 # 背景粒子数，取 0～300 的整数；0 表示关闭背景粒子。
+  background_particles_mobile: 88 # 视口宽度不超过 760 像素时使用的背景粒子数。
   background_fps: 30 # 背景动画帧率，取 1～60 的整数。
   clicks: true
   click_duration: 560 # 点击动画时长，取 100～2000 的整数，单位为毫秒。
