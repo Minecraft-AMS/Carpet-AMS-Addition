@@ -40,11 +40,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
-    @Inject(method =
+    @Inject(
         //#if MC>12006
-        "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V",
+        method = "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V",
         //#else
-        //$$ "dropFromLootTable(Lnet/minecraft/world/damagesource/DamageSource;Z)V",
+        //$$ method = "dropFromLootTable(Lnet/minecraft/world/damagesource/DamageSource;Z)V",
         //#endif
         at = @At("TAIL")
     )
@@ -57,7 +57,8 @@ public abstract class LivingEntityMixin {
         if (CarpetAMSAdditionSettings.witchRedstoneDustDropController != -1) {
             LivingEntity livingEntity = (LivingEntity) (Object) this;
             int redstoneCount = CarpetAMSAdditionSettings.witchRedstoneDustDropController;
-            compatWitchDropStack(Items.REDSTONE, redstoneCount,
+            compatWitchDropStack(
+                Items.REDSTONE, redstoneCount,
                 //#if MC>12006
                 world,
                 //#endif
@@ -66,11 +67,11 @@ public abstract class LivingEntityMixin {
         }
     }
 
-    @Inject(method =
+    @Inject(
         //#if MC>12006
-        "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V",
+        method = "dropFromLootTable(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;Z)V",
         //#else
-        //$$ "dropFromLootTable(Lnet/minecraft/world/damagesource/DamageSource;Z)V",
+        //$$ method = "dropFromLootTable(Lnet/minecraft/world/damagesource/DamageSource;Z)V",
         //#endif
         at = @At("TAIL")
     )
