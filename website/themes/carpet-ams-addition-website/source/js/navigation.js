@@ -95,6 +95,13 @@
     void navigate(url.href);
   });
   window.addEventListener('popstate', event => {
+    const current = new URL(renderedUrl);
+    const target = new URL(window.location.href);
+    // 原生锚点跳转也会触发此事件；仅锚点变化时保留浏览器的平滑滚动。
+    if (current.pathname === target.pathname && current.search === target.search) {
+      renderedUrl = window.location.href;
+      return;
+    }
     void navigate(window.location.href, { pop: true, scroll: event.state?.siteScroll });
   });
 })();
