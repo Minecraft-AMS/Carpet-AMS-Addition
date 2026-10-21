@@ -1,0 +1,172 @@
+.post-content .highlight
+    margin: 1.5em 0
+    overflow-x: auto
+    border: 1px solid var(--line)
+    border-radius: 8px
+    background: var(--code)
+    color: var(--text)
+
+    table
+        width: max-content
+        min-width: 100%
+        margin: 0
+        border: 0
+        font-size: 14px
+
+    td
+        padding: 0
+        border: 0
+        text-align: left
+        vertical-align: top
+
+    pre
+        margin: 0
+        padding: 14px 16px
+        font-family: "SFMono-Regular", Consolas, monospace
+        font-size: inherit
+        line-height: 1.7
+        white-space: pre
+        overflow-wrap: normal
+
+    code.hljs
+        padding: 0
+        overflow: visible
+        font: inherit
+
+    .gutter
+        position: sticky
+        left: 0
+        z-index: 1
+        width: 1%
+        border-right: 1px solid var(--line)
+        background: var(--surface)
+        color: var(--muted)
+        user-select: none
+
+        pre
+            text-align: right
+
+pre code.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em
+}
+
+code.hljs {
+    padding:3px 5px
+}
+
+.hljs {
+  color: var(--text);
+  background: var(--code);
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+  /* 语法高亮：关键字 */
+  color: var(--code-keyword);
+}
+
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+  /* 语法高亮：实体名 */
+  color: var(--code-title);
+}
+
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  /* 语法高亮：常量 */
+  color: var(--code-number);
+}
+
+.hljs-regexp,
+.hljs-string,
+.hljs-meta .hljs-string {
+  /* 语法高亮：字符串 */
+  color: var(--code-string);
+}
+
+.hljs-built_in,
+.hljs-symbol {
+  /* 语法高亮：变量 */
+  color: var(--code-number);
+}
+
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+  /* 语法高亮：注释 */
+  color: var(--muted);
+}
+
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+  /* 语法高亮：标签名 */
+  color: var(--accent);
+}
+
+.hljs-subst {
+  /* 语法高亮：导入修饰符 */
+  color: var(--text);
+}
+
+.hljs-section {
+  /* 语法高亮：标记标题 */
+  color: var(--accent-strong);
+  font-weight: bold;
+}
+
+.hljs-bullet {
+  /* 语法高亮：列表标记 */
+  color: var(--code-number);
+}
+
+.hljs-emphasis {
+  /* 语法高亮：斜体 */
+  color: var(--text);
+  font-style: italic;
+}
+
+.hljs-strong {
+  /* 语法高亮：粗体 */
+  color: var(--text);
+  font-weight: bold;
+}
+
+.hljs-addition {
+  /* 语法高亮：新增内容 */
+  color: var(--accent-strong);
+  background-color: var(--surface-soft);
+}
+
+.hljs-deletion {
+  /* 语法高亮：删除内容 */
+  color: var(--code-keyword);
+  background-color: var(--surface-soft);
+}
+
+.hljs-char.escape_,
+.hljs-link,
+.hljs-params,
+.hljs-property,
+.hljs-punctuation,
+.hljs-tag {
+  /* 以下语法元素不单独设置样式 */
+}
