@@ -20,6 +20,7 @@
 
 package carpetamsaddition.mixin.rule.commandLocationTag;
 
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.commandLocationTag.LocationTagManager;
 
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -29,15 +30,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Objects;
+
 @Mixin(LevelChunk.class)
 public abstract class LevelChunkMixin {
     @Inject(method = "setLoaded", at = @At("TAIL"))
     private void locationTagLoaded(boolean loaded, CallbackInfo ci) {
-        LocationTagManager.chunkLoaded((LevelChunk) (Object) this, loaded);
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandLocationTag, "false")) {
+            LocationTagManager.chunkLoaded((LevelChunk) (Object) this, loaded);
+        }
     }
 
     @Inject(method = {"setBlockEntity", "removeBlockEntity"}, at = @At("TAIL"))
     private void locationTagChanged(CallbackInfo ci) {
-        LocationTagManager.changed((LevelChunk) (Object) this);
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandLocationTag, "false")) {
+            LocationTagManager.changed((LevelChunk) (Object) this);
+        }
     }
 }

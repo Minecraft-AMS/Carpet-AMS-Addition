@@ -28,6 +28,7 @@ package carpetamsaddition.mixin.rule.commandLocationTag;
 import carpetamsaddition.utils.compat.DummyClass;
 //#endif
 import org.spongepowered.asm.mixin.Mixin;
+
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 @GameVersion(version = "Minecraft < 1.20")

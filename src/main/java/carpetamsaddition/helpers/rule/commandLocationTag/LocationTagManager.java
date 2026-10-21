@@ -53,7 +53,7 @@ public final class LocationTagManager {
     }
 
     public static boolean isEnabled() {
-        return !"false".equalsIgnoreCase(CarpetAMSAdditionSettings.commandLocationTag);
+        return !Objects.equals(CarpetAMSAdditionSettings.commandLocationTag, "false");
     }
 
     public static boolean available() {
@@ -191,7 +191,7 @@ public final class LocationTagManager {
         for (BlockEntity entity : chunk.getBlockEntities().values()) {
             if (entity instanceof SignBlockEntity && !entity.isRemoved() && LocationTagSignCompat.type(entity.getBlockState().getBlock()).equals(data.sign)) {
                 SignBlockEntity sign = (SignBlockEntity) entity;
-                String name = LocationTagSignCompat.line(sign, 1).trim();
+                String name = LocationTagSignCompat.line(sign, 1).trim() + LocationTagSignCompat.line(sign, 2).trim() + LocationTagSignCompat.line(sign, 3).trim();
                 if (LocationTagSignCompat.line(sign, 0).trim().equals(data.marker) && !name.isEmpty()) {
                     found.add(new LocationTagIndex.Entry(0, name, dimension, entity.getBlockPos().getX(), entity.getBlockPos().getY(), entity.getBlockPos().getZ()));
                 }

@@ -20,6 +20,7 @@
 
 package carpetamsaddition.mixin.rule.commandLocationTag;
 
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.rule.commandLocationTag.LocationTagManager;
 
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -29,10 +30,14 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Objects;
+
 @Mixin(BlockEntity.class)
 public abstract class BlockEntityMixin {
     @Inject(method = "setChanged()V", at = @At("TAIL"))
     private void locationTagChanged(CallbackInfo ci) {
-        LocationTagManager.changed((BlockEntity) (Object) this);
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandLocationTag, "false")) {
+            LocationTagManager.changed((BlockEntity) (Object) this);
+        }
     }
 }

@@ -39,7 +39,7 @@ carpetamsaddition:
       help_type: '/amsloc config sign <type> - 设置告示牌类型'
       help_reset: '/amsloc config reset - 恢复默认识别配置'
       help_rescan: '/amsloc rescan - 分批重新扫描已加载区块'
-      help_sign: '告示牌正面第一行填写识别文本，第二行填写名称，编辑或拆除后自动更新'
+      help_sign: '告示牌正面第一行填写识别文本，第二至第四行分别去掉首尾空白后直接拼接为名称，不加分隔符，拼接结果不能为空，编辑或拆除后自动更新'
       recognition: '识别文本：%s | 告示牌类型：%s'
       list: '位置标记 · 第 %s/%s 页 · 共 %s 处'
       empty: '没有找到位置标记，未加载区块中的旧告示牌将在区块加载后被发现'
