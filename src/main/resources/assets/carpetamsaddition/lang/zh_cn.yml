@@ -836,17 +836,17 @@ carpetamsaddition:
           '0': '指令:'
           '1': '/playerChunkLoading true/false'
       commandNoteblockChunkloader:
-        name: 音符盒方块加载器指令
+        name: 音符盒方块加载器
         desc: 使用指令自定义音符盒加载器
         extra:
           '0': '开启规则后，使用"/blockChunkloader help"命令查看使用说明'
       commandBellChunkloader:
-        name: 钟方块加载器指令
+        name: 钟方块加载器
         desc: 使用指令自定义钟加载器
         extra:
           '0': '开启规则后，使用"/blockChunkloader help"命令查看使用说明'
       commandPistonChunkloader:
-        name: 活塞方块加载器指令
+        name: 活塞方块加载器
         desc: 使用指令自定义活塞加载器（以活塞头到达的区块为中心）
         extra:
           '0': '开启规则后，使用"/blockChunkloader help"命令查看使用说明'
