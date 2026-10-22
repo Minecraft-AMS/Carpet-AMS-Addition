@@ -390,9 +390,6 @@ carpetamsaddition:
           '1': 'daylight detector, redstone dust, repeater'
       largeShulkerBox:
         desc: Doubles the size of your ShulkerBox
-        extra:
-          '0': 'When the server environment switches the rule setting, the server needs to be restarted'
-          '1': 'When the client environment switches the rule settings, the client needs to be restarted'
       maxPlayerBlockInteractionRange:
         desc: Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule
         extra:

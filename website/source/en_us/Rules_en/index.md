@@ -719,9 +719,6 @@ When players right-click on the redstone component, it will emit a sound
 
 Doubles the size of your ShulkerBox
 
-- When the server environment switches the rule setting, the server needs to be restarted
-- When the client environment switches the rule settings, the client needs to be restarted
-
 - Type: `boolean`
   
   
