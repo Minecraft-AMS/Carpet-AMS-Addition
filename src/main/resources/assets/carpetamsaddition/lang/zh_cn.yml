@@ -21,15 +21,17 @@ carpetamsaddition:
       modify_content_in: '在该路径下修改内容：'
       save_path: '[ 存档文件夹 ]'
     maxPlayerBlockInteractionRange:
-      disable_command: '<Carpet AMS Addition> 由于已开启maxPlayerBlockInteractionRange规则，该改动不会生效'
+      disable_command: '<AMSP> 由于已开启maxPlayerBlockInteractionRange规则，该改动不会生效'
     maxPlayerEntityInteractionRange:
-      disable_command: '<Carpet AMS Addition> 由于已开启maxPlayerEntityInteractionRange规则，该改动不会生效'
+      disable_command: '<AMSP> 由于已开启maxPlayerEntityInteractionRange规则，该改动不会生效'
     sendPlayerDeathLocation:
       location: '死亡位置'
     phantomSpawnAlert:
       msg: ' 召唤了幻翼 %s'
     experimentalMinecartSpeed:
-      vanilla_command_disabled: '<Carpet AMS Addition> 该游戏规则已由 minecartMaxSpeed 地毯规则接管'
+      vanilla_command_disabled: '<AMSP> 该游戏规则已由 minecartMaxSpeed 地毯规则接管'
+    realPlayerControlDisabled:
+      blocked: '<AMSP> 无法通过 /player 操作真实玩家'
 
   command:
     amsloc:
@@ -90,7 +92,7 @@ carpetamsaddition:
       help: "使用说明见官网："
       help_hover: "点击跳转"
     commandHelper:
-      refresh_cmd_tree: '<Carpet AMS Addition> 命令树已被刷新'
+      refresh_cmd_tree: '<AMSP> 命令树已被刷新'
 
     playerChunkLoading:
       no_player_specified: '<commandPlayerChunkLoadController> 没有指定任何玩家'
@@ -272,7 +274,7 @@ carpetamsaddition:
 
   observer:
     amsNetworkProtocol:
-      need_enable_protocol: '<Carpet AMS Addition> 已将 %s 重置为默认值，需要先启用 amsNetworkProtocol 规则'
+      need_enable_protocol: '<AMSP> 已将 %s 重置为默认值，需要先启用 amsNetworkProtocol 规则'
     lazy_rule:
       saved: '规则%s已保存为%s，当前有效值仍为%s，重启服务器后应用'
       removed: '规则%s的存档默认配置已移除，当前有效值仍为%s，下次启动使用启动默认配置'
@@ -734,6 +736,9 @@ carpetamsaddition:
       onlyOpCanSpawnRealPlayerInWhitelist:
         name: 仅OP可召唤白名单中的玩家
         desc: 只有OP玩家可以召唤在白名单中的玩家，无论白名单是否开启
+      realPlayerControlDisabled:
+        name: 真玩家控制保护
+        desc: 禁止通过Carpet的/player指令操作任何真玩家，包括操作者自己，OP和控制台也不能绕过，不影响假玩家
       itemEntityCreateNetherPortalDisabled:
         name: 禁止物品实体创建下界传送门
         desc: 让物品实体穿过下界传送门时不会创建传送门

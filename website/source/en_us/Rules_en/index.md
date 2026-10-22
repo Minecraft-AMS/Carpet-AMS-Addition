@@ -1,6 +1,6 @@
 ## superBow
 
-Let enchantments Infinity and Mending be compatible with each other on bow.
+Enabling making super bows with both infinite and mending enchants
 
 - Type: `boolean`
   
@@ -14,30 +14,17 @@ Let enchantments Infinity and Mending be compatible with each other on bow.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## scheduledRandomTickAllPlants
 
-When enabled, plants will execute codes related to growth in tileTick events planed by finding invaild position. Use to restore 0tick farms/force updates farm in higher version. you can also control specific plants to have force updates.
+Make all plants accepts scheduled tick as random tick
 
-- `scheduledRandomTickCactus`: Enable 0tick farm of cactus.
-  
-  
-
-- `scheduledRandomTickBamboo`: Enable 0tick farm of bamboo.
-  
-  
-
-- `scheduledRandomTickChorusFlower`: Enable 0tick farm of chorus flower.
-  
-  
-
-- `scheduledRandomTickSugarCane`: Enable 0tick farm of sugar cane.
-  
-  
-
-- `scheduledRandomTickStem`: Enable 0tick farm of twisting vines, weeping vines and kelp.
-
+- `scheduledRandomTickCactus`: Make cactus accepts scheduled tick as random tick
+- `scheduledRandomTickBamboo`: Make bamboo accepts scheduled tick as random tick
+- `scheduledRandomTickChorusFlower`: Make chorus flower accepts scheduled tick as random tick
+- `scheduledRandomTickSugarCane`: Make sugar cane accepts scheduled tick as random tick
+- `scheduledRandomTickStem`: Make stems accepts scheduled tick as random tick
 
 > Ported from: [OhMyVanillaMinecraft](https://github.com/hit-mc/OhMyVanillaMinecraft)
 
@@ -53,11 +40,11 @@ When enabled, plants will execute codes related to growth in tileTick events pla
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## optimizedDragonRespawn
 
-Greatly optimized the code related to dragon fight starting. Provide performance enhancement for endstone farm based on re-summoning of ender dragon. Warning: couldn't ensure same behavior as vanilla Minecraft after enabling this rule.
+Optimize dragon respawning
 
 - Type: `boolean`
   
@@ -71,13 +58,14 @@ Greatly optimized the code related to dragon fight starting. Provide performance
   
   
 
-- Categroies: `AMS`, `OPTIMIZATION`
+- Categories: `AMS`, `OPTIMIZATION`
 
 ## commandPlayerChunkLoadController
 
-Control chunkloading of player. Won't remove player detection of deminsion like main island loading in the end. Will be reset after player loging out to avoid [MC-157812](https://bugs.mojang.com/browse/MC-157812).
+Control chunk loading for players at any gamemodes
 
-Command: /playerChunkLoading true/false
+- Command:
+- /playerChunkLoading true/false
 
 - Type: `boolean`
   
@@ -91,13 +79,13 @@ Command: /playerChunkLoading true/false
   
   
 
-- Categroies: `AMS`, `COMMAND`, `AMS_chunkLoader`
+- Categories: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
 ## commandNoteblockChunkloader
 
-Use commands to customize a note block chunk loader.
+Use commands to customize a note block chunk loader
 
-After enabling the rule, use the `/blockChunkloader help` command to view the usage instructions.
+- After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions
 
 - Type: `String`
 - Default: `false`
@@ -106,9 +94,9 @@ After enabling the rule, use the `/blockChunkloader help` command to view the us
 
 ## commandBellChunkloader
 
-Use commands to customize a bell chunk loader.
+Use commands to customize a bell chunk loader
 
-After enabling the rule, use the `/blockChunkloader help` command to view the usage instructions.
+- After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions
 
 - Type: `String`
 - Default: `false`
@@ -117,9 +105,9 @@ After enabling the rule, use the `/blockChunkloader help` command to view the us
 
 ## commandPistonChunkloader
 
-Use commands to customize a piston chunk loader (centered on the piston head).
+Use commands to customize a piston chunk loader (centered on the piston head)
 
-After enabling the rule, use the `/blockChunkloader help` command to view the usage instructions.
+- After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions
 
 - Type: `String`
 - Default: `false`
@@ -128,7 +116,7 @@ After enabling the rule, use the `/blockChunkloader help` command to view the us
 
 ## keepWorldTickUpdate
 
-After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction.
+After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction
 
 - Type: `boolean`
   
@@ -142,11 +130,11 @@ After 300 ticks without any players in the current dimension on the server, Mine
   
   
 
-- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+- Categories: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
 ## netherWaterPlacement
 
-Player can place water source in the nether by using water bucket.
+Players can use water buckets to place water in nether
 
 - Type: `boolean`
   
@@ -160,11 +148,11 @@ Player can place water source in the nether by using water bucket.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## fakePeace
 
-No mob will spawn without change difficulty, Simulation fake Peace, You can customize the dimensions in which it works, or you can customize the combination and use "," to separate.
+Simulation fake Peace, You can customize the dimensions in which it works, or you can customize the combination and use "," to separate
 
 - Type: `boolean`
   
@@ -178,11 +166,11 @@ No mob will spawn without change difficulty, Simulation fake Peace, You can cust
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## blowUpEverything
 
-Blast resistence of every block will be set to 0.
+Set all blocks BlastResistance to 0
 
 - Type: `boolean`
   
@@ -196,12 +184,11 @@ Blast resistence of every block will be set to 0.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
 
 ## sharedVillagerDiscounts
 
-Villagers cured from zombified villager will give trade discounts to every player.
-
+Share villagers discount to all players
 
 > Ported from: [totos-carpet-tweaks](https://github.com/totorewa/totos-carpet-tweaks)
 
@@ -217,11 +204,11 @@ Villagers cured from zombified villager will give trade discounts to every playe
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## extinguishedCampfire
 
-Campfire will be extinguished by default when being placed.
+The campfire is extinguished when the player places it
 
 - Type: `boolean`
   
@@ -235,11 +222,11 @@ Campfire will be extinguished by default when being placed.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## safeFlight
 
-Hitting surface will cause no damage to player when flying with elytra.
+players don't get hurt by flying into walls
 
 - Type: `boolean`
   
@@ -253,19 +240,16 @@ Hitting surface will cause no damage to player when flying with elytra.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## customBlockUpdateSuppressor
 
-Customize a block to be an update suppressor (Not all blocks can be set as update suppressor).
+Customize a block to be an update suppressor (Not all blocks can be set as update suppressor)
 
-Command format:
-
-/carpet customBlockUpdateSuppressor minecraft:BlockName
-
-Use the following command to control whether the "amsUpdateSuppressionCrashFix" rule is automatically enabled when this rule is enabled: 
-
-/amsUpdateSuppressionCrashFixForceMode true/false
+- Command format:
+- /carpet customBlockUpdateSuppressor minecraft:BlockName
+- Use the following command to control whether the "amsUpdateSuppressionCrashFix" rule is automatically enabled when this rule is enabled:
+- /amsUpdateSuppressionCrashFixForceMode true/false
 
 - Type: `boolean`
   
@@ -279,11 +263,11 @@ Use the following command to control whether the "amsUpdateSuppressionCrashFix" 
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## infiniteTrades
 
-When enabled, villager trades will be prevented from locking up.
+Prevents villager trades from locking up
 
 - Type: `boolean`
   
@@ -297,11 +281,11 @@ When enabled, villager trades will be prevented from locking up.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## invulnerable
 
-When enabled, Players will be invulnerable.
+Players will be protected from all damage except Void Damage
 
 - Type: `boolean`
   
@@ -315,12 +299,11 @@ When enabled, Players will be invulnerable.
   
   
 
-- Categroies: `AMS` , `FEATURE`
+- Categories: `AMS` , `FEATURE`
 
 ## creativeOneHitKill
 
-When enabled, Allows players in Creative mode to kill entities in one hit, If the player is sneaking, other entities around the target get killed too.
-
+Allows players in Creative mode to kill entities in one hit, If the player is sneaking, other entities around the target get killed too
 
 > Ported from: [lunaar-carpet-addons](https://github.com/Lunaar-SMP/lunaar-carpet-addons)
 
@@ -336,11 +319,11 @@ When enabled, Allows players in Creative mode to kill entities in one hit, If th
   
   
 
-- Categroies: `AMS` , `FEATURE` , `CREATIVE`
+- Categories: `AMS` , `FEATURE` , `CREATIVE`
 
 ## largeEnderChest
 
-When enabled, Doubles the size of your EnderChest.
+Doubles the size of your EnderChest
 
 - Type: `boolean`
   
@@ -354,11 +337,11 @@ When enabled, Doubles the size of your EnderChest.
   
   
 
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+- Categories: `AMS` , `FEATURE` , `SURVIVAL`
 
 ## bambooModelNoOffset
 
-When enabled, The block model of bamboo will not generate offset.
+The block model of bamboo will not generate offset
 
 - Type: `boolean`
   
@@ -372,11 +355,11 @@ When enabled, The block model of bamboo will not generate offset.
   
   
 
-- Categroies: `AMS` , `FEATURE` , `OPTIMIZATION`
+- Categories: `AMS` , `FEATURE` , `OPTIMIZATION`
 
 ## bambooCollisionBoxDisabled
 
-When enabled, players can pass through bamboo.
+Allow players to pass through bamboo
 
 - Type: `boolean`
   
@@ -390,13 +373,13 @@ When enabled, players can pass through bamboo.
   
   
 
-- Categroies: `AMS` , `FEATURE`
+- Categories: `AMS` , `FEATURE`
 
 ## commandCustomAntiFireItems
 
-Use command to control whether any item is fireproof or not.
+Use command to control whether any item is fireproof or not
 
-After enabling the rules, use the `/customAntiFireItems help` command to view the usage instructions
+- After enabling the rule, use the "/customAntiFireItems help" command to view the usage instructions
 
 - Type: `String`
   
@@ -410,17 +393,15 @@ After enabling the rules, use the `/customAntiFireItems help` command to view th
   
   
 
-- Categroies: `AMS`, `FEATURE`, `COMMAND`
+- Categories: `AMS`, `FEATURE`, `COMMAND`
 
-## **itemAntiExplosion**
+## itemAntiExplosion
 
-When enabled, Dropped items will not be destroyed by explosions.
+Dropped items will not be destroyed by explosions
 
-false: Disable rule
-
-true: enable rule
-
-no_blast_wave: Explosion-proof and non-shockwave, the explosion will not push the item
+- [false] - Disable rule
+- [true] - Enable rule
+- [no_blast_wave] - Explosion-proof and non-shockwave, the explosion will not push the item
 
 - Type: `String`
   
@@ -434,11 +415,11 @@ no_blast_wave: Explosion-proof and non-shockwave, the explosion will not push th
   
   
 
-- Categroies: `AMS`, `FEATURE`, `TNT`
+- Categories: `AMS`, `FEATURE`, `TNT`
 
-## **creativeShulkerBoxDropsDisabled**
+## creativeShulkerBoxDropsDisabled
 
-When enabled, Breaking a shulker box with items in creative mode will not cause drops.
+Breaking a shulker box with items in creative mode will not cause drops
 
 - Type: `boolean`
   
@@ -452,13 +433,13 @@ When enabled, Breaking a shulker box with items in creative mode will not cause 
   
   
 
-- Categroies: `AMS`, `FEATURE`, `CREATIVE`
+- Categories: `AMS`, `FEATURE`, `CREATIVE`
 
 ## shulkerHitLevitationDisabled
 
-When enabled, When hit by a shulker, the player only takes damage and does not gain the levitation effect.
+When hit by a shulker, the player only takes damage and does not gain the levitation effect
 
-- Type `boolean`
+- Type: `boolean`
   
   
 
@@ -470,13 +451,13 @@ When enabled, When hit by a shulker, the player only takes damage and does not g
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## immuneShulkerBullet
 
-When enabled, Players are now completely immune to bullets fired by shulkers.
+Players are now completely immune to bullets fired by shulkers
 
-- Type `boolean`
+- Type: `boolean`
   
   
 
@@ -488,14 +469,15 @@ When enabled, Players are now completely immune to bullets fired by shulkers.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## blueSkullController
 
-When enabled，You can choose whether to have Withering always shoot blue skulls or never shoot blue skull.
-`SURELY`: Always shoot blue skulls。
-`NEVER`: Never shoot blue skull。
-`VANILLA`: VANILLA。
+Control the probability of wither and emitting blue skull
+
+- [SURELY] - Always shoot blue skulls
+- [NEVER] - Never shoot blue skull
+- [VANILLA] - VANILLA
 
 - Type: `enum`
   
@@ -509,11 +491,11 @@ When enabled，You can choose whether to have Withering always shoot blue skulls
   
   
 
-- Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
+- Categories: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 ## endermanTeleportRandomlyDisabled
 
-When enabled, Random teleportation by EnderMan is prohibited.
+Random teleportation by Enderman is prohibited
 
 - Type: `boolean`
   
@@ -527,13 +509,13 @@ When enabled, Random teleportation by EnderMan is prohibited.
   
   
 
-- Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
+- Categories: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 ## fasterMovement
 
-Five gears are provided to allow players to move faster.
+Five gears are provided to allow players to move faster
 
-> You can use fasterMovementController rule to control in which dimensions this rule is effective. By default, it is effective in all dimensions.
+- You can use fasterMovementController rule to control in which dimensions this rule is effective. By default, it is effective in all dimensions.
 
 - Type: `String`
   
@@ -547,11 +529,16 @@ Five gears are provided to allow players to move faster.
   
   
 
-- Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
+- Categories: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 ## fasterMovementController
 
 Used to control in which dimensions fasterMovement rule is effective.
+
+- [overworld] - Only effective in the Overworld
+- [nether] - Only effective in the Nether
+- [end] - Only effective in the End
+- [all] - Effective in all dimensions
 
 - Type: `enum`
   
@@ -565,11 +552,11 @@ Used to control in which dimensions fasterMovement rule is effective.
   
   
 
-- Categroies: `AMS` , `FEATURE` , `EXPERIMENTAL`
+- Categories: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
 ## easyWitherSkeletonSkullDrop
 
-When enabled, 100% Wither Skeleton Skull Drop.
+100% Wither Skeleton Skull Drop
 
 - Type: `boolean`
   
@@ -583,12 +570,13 @@ When enabled, 100% Wither Skeleton Skull Drop.
   
   
 
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+- Categories: `AMS` , `FEATURE` , `SURVIVAL`
 
 ## commandAnvilInteractionDisabled
 
-When enabled, Players cannot open the UI of the Anvil.
-Command: /anvilInteractionDisabledSwitch true/false
+Players cannot open the UI of the Anvil
+
+- Command: /anvilInteractionDisabled true/false
 
 - Type: `String`
   
@@ -602,13 +590,14 @@ Command: /anvilInteractionDisabledSwitch true/false
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
 
 ## preventAdministratorCheat
 
-Disable some command to prevent accidentally cheating.
+Disable some command to prevent accidentally cheating
 
-Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode, /gamerule
+- Affects command list:
+- /gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode, /gamerule
 
 - Type: `boolean`
   
@@ -622,27 +611,17 @@ Affects command list: /gamemode, /tp, /teleport, /give, /setblock, /summon, /dif
   
   
 
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
+- Categories: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
 
 ## amsUpdateSuppressionCrashFix
 
-When enabled, Update suppression does not cause the server to crash, while providing the coordinates and dimensions where the update suppression occurred.
+Prevent update suppression from causing server crashes, while providing the coordinates and dimensions where the update suppression occurred
 
-Use the following command to control whether it is forcibly enabled when `customBlockUpdateSuppressor ` is enabled, with a permission level of 2: 
-
-/amsUpdateSuppressionCrashFixForceMode true/false
-
-- `false`: Disable rule
-  
-  
-
-- `true`: Enable rule
-  
-  
-
-- `silence`: Enable but no send server messages
-  
-  
+- [false] - Disable rule
+- [true] - Enable rule
+- [silence] - Enable but no send server messages
+- Use the following command to control whether it is forcibly enabled when "customBlockUpdateSuppressor" is enabled, with a permission level of 2:
+- /amsUpdateSuppressionCrashFixForceMode true/false
 
 - Type: `String`
   
@@ -656,7 +635,7 @@ Use the following command to control whether it is forcibly enabled when `custom
   
   
 
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
+- Categories: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
 
 ## ghastFireballExplosionDamageSourceFix
 
@@ -681,7 +660,7 @@ Fix MC-193297 that the large fireball does not create explosion with correct dam
 
 ## cakeBlockDropOnBreak
 
-When enabled, When the cake is destroyed, it can drop cake (the cake will only drop when it is intact).
+When the cake is destroyed, it can drop cake (the cake will only drop when it is intact)
 
 - Type: `boolean`
   
@@ -695,11 +674,11 @@ When enabled, When the cake is destroyed, it can drop cake (the cake will only d
   
   
 
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+- Categories: `AMS` , `FEATURE` , `SURVIVAL`
 
 ## noCakeEating
 
-When enabled, Players are not allowed to consume cake.
+Players are not allowed to consume cake
 
 - Type: `boolean`
   
@@ -713,13 +692,14 @@ When enabled, Players are not allowed to consume cake.
   
   
 
-- Categroies: `AMS` , `FEATURE` , `SURVIVAL`
+- Categories: `AMS` , `FEATURE` , `SURVIVAL`
 
 ## redstoneComponentSound
 
-When enabled, When players right-click on the redstone component, it will emit a sound
+When players right-click on the redstone component, it will emit a sound
 
-Affected components: daylight detector, redstone dust, repeater
+- Affected components:
+- daylight detector, redstone dust, repeater
 
 - Type: `boolean`
   
@@ -733,20 +713,14 @@ Affected components: daylight detector, redstone dust, repeater
   
   
 
-- Categroies: `AMS` , `FEATURE`
+- Categories: `AMS` , `FEATURE`
 
 ## largeShulkerBox
 
-Doubles the size of your ShulkerBox.
-To use this rule, please follow the steps below:
+Doubles the size of your ShulkerBox
 
-1 - To ensure that no shulker boxes are loaded.
-
-2 - Enter the command: `/carpet setDefault largeShulkerBox true`, to turn on the rule.
-
-3 - Restart the server/single-player world.
-
-4 - Disabling the rule follows the same process.
+- When the server environment switches the rule setting, the server needs to be restarted
+- When the client environment switches the rule settings, the client needs to be restarted
 
 - Type: `boolean`
   
@@ -760,17 +734,15 @@ To use this rule, please follow the steps below:
   
   
 
-- Categroies: `AMS` , `FEATURE`, `EXPERIMENTAL`
+- Categories: `AMS` , `FEATURE`, `EXPERIMENTAL`
 
 ## maxPlayerBlockInteractionRange
 
-Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule.
+Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule
 
-When Minecraft >= 1.20.5, you can use the rule "maxPlayerBlockInteractionRangeScope" to modify its scope.
-
-Changing a value in global mode requires the player to re-enter the game.
-
-
+- The range of values: 0 - 512
+- When Minecraft >= 1.20.5, you can use the rule "maxPlayerBlockInteractionRangeScope" to modify its scope
+- Changing a value in global mode requires the player to re-enter the game
 
 - Type: `double`
   
@@ -784,15 +756,15 @@ Changing a value in global mode requires the player to re-enter the game.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## maxPlayerEntityInteractionRange
 
-Change the maximum entity interaction distance allowed by the server, set to "-1" to disable this rule.
+Change the maximum entity interaction distance allowed by the server, set to "-1" to disable this rule
 
-When Minecraft >= 1.20.5, you can use the rule "maxPlayerEntityInteractionRangeScope" to modify its scope.
-
-Changing a value in global mode requires the player to re-enter the game.
+- The range of values: 0 - 512
+- When Minecraft >= 1.20.5, you can use the rule "maxPlayerEntityInteractionRangeScope" to modify its scope
+- Changing a value in global mode requires the player to re-enter the game
 
 - Type: `double`
   
@@ -806,18 +778,16 @@ Changing a value in global mode requires the player to re-enter the game.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## maxPlayerBlockInteractionRangeScope
 
 > Version: `Minecraft >= 1.20.5`
 
-Change the scope of the "maxPlayerBlockInteractionRange" rule.
+Change the scope of the "maxPlayerBlockInteractionRange" rule
 
-[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.
-
-[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.
-
+- [server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client
+- [global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client
 
 - Type: `String`
   
@@ -831,18 +801,16 @@ Change the scope of the "maxPlayerBlockInteractionRange" rule.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## maxPlayerEntityInteractionRangeScope
 
 > Version: `Minecraft >= 1.20.5`
 
-Change the scope of the "maxPlayerEntityInteractionRange" rule.
+Change the scope of the "maxPlayerEntityInteractionRange" rule
 
-[server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client.
-
-[global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client.
-
+- [server] - The client needs to modify the interaction distance on its own, and the server only allows modifications made by the client
+- [global] - The distance modification will apply to both the server and the client simultaneously, eliminating the need for separate adjustments by the client
 
 - Type: `String`
   
@@ -856,13 +824,14 @@ Change the scope of the "maxPlayerEntityInteractionRange" rule.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## maxClientInteractionReachDistance
 
-Change the maximum interaction distance allowed by the client, set to `-1` to disable this rule.
+Change the maximum interaction distance allowed by the client, set to "-1" to disable this rule
 
-Need to disable the tweakBlockReachOverride feature in Tweakeroo.
+- The range of values: 0 - 512
+- Need to disable the tweakBlockReachOverride feature in Tweakeroo
 
 - Type: `double`
   
@@ -876,13 +845,13 @@ Need to disable the tweakBlockReachOverride feature in Tweakeroo.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## commandCustomMovableBlock
 
-Customize the non-pushable block to make it pushable (Container blocks are not supported, and if you need to push containers, you can use Carpet's movableBlockEntities rule).
+Customize the non-pushable block to make it pushable (Container blocks are not supported, and if you need to push containers, you can use Carpet's movableBlockEntities rule)
 
-After enabling the rules, use the `/customMovableBlock help` command to view the usage instructions
+- After enabling the rule, use the "/customMovableBlock help" command to view the usage instructions
 
 - Type: `String`
   
@@ -896,11 +865,11 @@ After enabling the rules, use the `/customMovableBlock help` command to view the
   
   
 
-- Categroies: `AMS`, `FEATURE`, `COMMAND`
+- Categories: `AMS`, `FEATURE`, `COMMAND`
 
 ## easyMaxLevelBeacon
 
-When enabled, Activate full-level beacon with just one base block.
+Activate full-level beacon with just one base block
 
 - Type: `boolean`
   
@@ -914,12 +883,13 @@ When enabled, Activate full-level beacon with just one base block.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## commandCustomBlockBlastResistance
 
-Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled).
-After enabling the rules, use the `/customBlockBlastResistance help` command to view the usage instructions.
+Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled)
+
+- After enabling the rule, use the "/customBlockBlastResistance help" command to view the usage instructions
 
 - Type: `String`
   
@@ -933,13 +903,13 @@ After enabling the rules, use the `/customBlockBlastResistance help` command to 
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`, `COMMAND`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`, `COMMAND`
 
 ## regeneratingDragonEgg
 
-When enabled，Every time a player defeats the Ender Dragon, a dragon egg will be generated.
+Every time a player defeats the Ender Dragon, a dragon egg will be generated
 
-> For Dnsolx eggs
+- For Dnsolx eggs
 
 - Type: `boolean`
   
@@ -953,15 +923,14 @@ When enabled，Every time a player defeats the Ender Dragon, a dragon egg will b
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## enhancedWorldEater
 
-Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the `customBlowUpBlock ` rule when enabled)
+Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the commandCustomBlockBlastResistance rule when enabled)
 
-Block list:
-
-Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway
+- Block list:
+- Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway
 
 - Type: `double`
   
@@ -975,11 +944,13 @@ Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Port
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL` `TNT`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL` `TNT`
 
 ## sneakToEditSign
 
-When enabled，Players can sneak with empty hands to edit already placed signs by using the interact key, In `Minecraft >= 1.20`, the behavior is such that players must sneak in order to edit a sign.
+Players can sneak with empty hands to edit already placed signs by using the interact key
+
+- In Minecraft >= 1.20, the behavior is such that players must sneak in order to edit a sign
 
 - Type: `boolean`
   
@@ -993,11 +964,11 @@ When enabled，Players can sneak with empty hands to edit already placed signs b
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## sneakToEatCake
 
-Players can only eat cake while sneaking.
+Players can only eat cake while sneaking
 
 - Type: `boolean`
 
@@ -1011,15 +982,14 @@ Players can only eat cake while sneaking.
 
 
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## fancyFakePlayerName
 
-Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn't need to be input when using the command, but the suffix is indeed present.
+Add green prefixes and suffixes to the fake player summoned by the carpet mod, the prefix doesn't need to be input when using the command, but the suffix is indeed present
 
-Note: This rule will create a team named with the value you input
-
-Example：1024_byteeeee -> [bot] 1024_byteeeee_bot
+- Note: This rule will create a team named with the value you input
+- Example：1024_byteeeee -> [bot] 1024_byteeeee_bot
 
 - Type: `String`
   
@@ -1033,11 +1003,11 @@ Example：1024_byteeeee -> [bot] 1024_byteeeee_bot
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## fakePlayerNoScoreboardCounter
 
-The scoreboard will hide the fake player.
+The scoreboard will hide the fake player
 
 - Type: `boolean`
   
@@ -1051,11 +1021,11 @@ The scoreboard will hide the fake player.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## noFamilyPlanning
 
-Allow players to continuously feed animals to breed them.
+Allow players to continuously feed animals to breed them
 
 - Type: `boolean`
   
@@ -1069,11 +1039,11 @@ Allow players to continuously feed animals to breed them.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## hopperSuctionDisabled
 
-When enabled，The hopper will not suck in items.
+The hopper will not suck in items
 
 - Type: `boolean`
   
@@ -1087,11 +1057,11 @@ When enabled，The hopper will not suck in items.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## noEnchantedGoldenAppleEating
 
-Prevent players from accidentally eating Enchanted Golden Apples.
+Prevent players from accidentally eating Enchanted Golden Apples
 
 - Type: `boolean`
   
@@ -1105,11 +1075,11 @@ Prevent players from accidentally eating Enchanted Golden Apples.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## useItemCooldownDisabled
 
-Remove cooldown time for using items.
+Remove cooldown time for using items
 
 - Type: `boolean`
   
@@ -1123,11 +1093,11 @@ Remove cooldown time for using items.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## flippinCactusSoundEffect
 
-When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing five different sound options, Setting it to 0 disables the sound effects).
+When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will produce sound effects (providing five different sound options, Setting it to 0 disables the sound effects)
 
 - Type: `int`
   
@@ -1141,11 +1111,11 @@ When the flippinCactus rule is enabled in the Carpet Mod, using the cactus will 
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## undyingCoral
 
-Prevent coral blocks and coral fans from dying.
+Prevent coral blocks and coral fans from dying
 
 - Type: `boolean`
   
@@ -1159,11 +1129,11 @@ Prevent coral blocks and coral fans from dying.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## enderDragonNoDestroyBlock
 
-Make the Ender Dragon unable to destroy any blocks.
+Make the Ender Dragon unable to destroy any blocks
 
 - Type: `boolean`
   
@@ -1177,11 +1147,11 @@ Make the Ender Dragon unable to destroy any blocks.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## easyCompost
 
-Make every composting successful.
+Make every composting successful
 
 - Type: `boolean`
   
@@ -1195,11 +1165,11 @@ Make every composting successful.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## easyMineDragonEgg
 
-Makes the dragon egg not teleport, Players can mine dragon eggs to collect them.
+Makes the dragon egg not teleport, Players can mine dragon eggs to collect them
 
 - Type: `boolean`
   
@@ -1213,11 +1183,11 @@ Makes the dragon egg not teleport, Players can mine dragon eggs to collect them.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## breedableParrots
 
-Customize a food to feed the parrots and breed them (You can also feed them with stones if you really want to).
+Customize a food to feed the parrots and breed them (You can also feed them with stones if you really want to)
 
 - Type: `boolean`
   
@@ -1231,11 +1201,23 @@ Customize a food to feed the parrots and breed them (You can also feed them with
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
+
+## kirinArm
+
+Allowing players to instantly mine all mineable blocks
+
+- Type: `boolean`
+
+- Default: `false`
+
+- Suggested options: `false`, `true`
+
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## sensibleEnderman
 
-Make Endermen only pick up watermelons and pumpkins.
+Make Endermen only pick up watermelons and pumpkins
 
 - Type: `boolean`
   
@@ -1249,11 +1231,11 @@ Make Endermen only pick up watermelons and pumpkins.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## endermanPickUpDisabled
 
-Preventing Endermen from picking up blocks.
+Preventing Endermen from picking up blocks
 
 - Type: `boolean`
   
@@ -1267,11 +1249,11 @@ Preventing Endermen from picking up blocks.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## mitePearl
 
-Using an Ender Pearl each time will spawn an Endermite.
+Using an Ender Pearl each time will spawn an Endermite
 
 - Type: `boolean`
   
@@ -1285,7 +1267,7 @@ Using an Ender Pearl each time will spawn an Endermite.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## enderPearlSoundEffect
 
@@ -1310,9 +1292,9 @@ A sound effect will be played when the player uses an ender pearl for teleportat
 
 ## commandHere
 
-Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect.
+Use the "/here" command to send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect
 
-When the client has installed `Carpet Org Addition`, they can click the `+H` button at the end of the message to highlight the waypoint, and use the `/highlight clear` command to remove the highlight.
+- When the client has installed Fuzz Mod, they can click the +H button at the end of the message to highlight the waypoint, and use the \"/coordCompass clear\" command to remove the highlight
 
 - Type: `String`
   
@@ -1326,13 +1308,13 @@ When the client has installed `Carpet Org Addition`, they can click the `+H` but
   
   
 
-- Categroies: `AMS`, `COMMAND`
+- Categories: `AMS`, `COMMAND`
 
 ## commandWhere
 
-Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect.
+Use the "/where" command to get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect
 
-When the client has installed `Carpet Org Addition`, they can click the `+H` button at the end of the message to highlight the waypoint, and use the `/highlight clear` command to remove the highlight.
+- When the client has installed Fuzz Mod, they can click the +H button at the end of the message to highlight the waypoint, and use the \"/coordCompass clear\" command to remove the highlight
 
 - Type: `String`
   
@@ -1346,23 +1328,15 @@ When the client has installed `Carpet Org Addition`, they can click the `+H` but
   
   
 
-- Categroies: `AMS`, `COMMAND`
+- Categories: `AMS`, `COMMAND`
 
 ## fakePlayerPickUpController
 
-Two modes are provided to control whether fake player can pick up items.
+Two modes are provided to control whether fake player can pick up items
 
 - [MainHandOnly] - Only the main hand can pick up items
-  
-  
-
 - [NoPickUp] - Unable to pick up items at all
-  
-  
-
 - [false] - Disable rule
-  
-  
 
 - Type: `String`
   
@@ -1376,13 +1350,13 @@ Two modes are provided to control whether fake player can pick up items.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## commandPlayerLeader
 
-Designate one or more players as guides, granting them a glowing effect.
+Designate one or more players as guides, granting them a glowing effect
 
-After enabling the rules, use the `/leader help` command to view the usage instructions
+- After enabling the rule, use the "/leader help" command to view the usage instructions
 
 - Type: `String`
   
@@ -1396,13 +1370,13 @@ After enabling the rules, use the `/leader help` command to view the usage instr
   
   
 
-- Categroies: `AMS`, `COMMAND`
+- Categories: `AMS`, `COMMAND`
 
 ## commandPacketInternetGroper
 
-player can use the "ping" command in the game.
+player can use the "ping" command in the game
 
-After enabling the rules, use the `/ping help` command to view the usage instructions
+- After enabling the rule, use the "/ping help" command to view the usage instructions
 
 - Type: `String`
   
@@ -1416,13 +1390,13 @@ After enabling the rules, use the `/ping help` command to view the usage instruc
   
   
 
-- Categroies: `AMS`, `COMMAND`
+- Categories: `AMS`, `COMMAND`
 
 ## commandPlayerNoNetherPortalTeleport
 
-Players cannot teleport through nether portals.
+Players cannot teleport through nether portals
 
-After enabling the rule, use the `/plerNoNetherPortalTeleport help` command to view the usage instructions
+- After enabling the rule, use the "/playerNoNetherPortalTeleport help" command to view the usage instructions
 
 - Type: `String`
   
@@ -1436,11 +1410,11 @@ After enabling the rule, use the `/plerNoNetherPortalTeleport help` command to v
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL` `COMMAND`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL` `COMMAND`
 
 ## infiniteDurability
 
-Use items without losing durability.
+Use items without losing durability
 
 - Type: `boolean`
   
@@ -1454,15 +1428,14 @@ Use items without losing durability.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## welcomeMessage
 
-When players join the server, send them a custom message (Use json files to customize messages).
+When players join the server, send them a custom message (Use json files to customize messages)
 
-json location:
-
-[ save path ]/carpetamsaddition/welcomeMessage.json
+- json location:
+- [ save path ]/carpetamsaddition/welcomeMessage.json
 
 - Type: `boolean`
   
@@ -1476,11 +1449,11 @@ json location:
   
   
 
-- Categroies: `AMS`
+- Categories: `AMS`
 
 ## commandGetSaveSize
 
-Use the "/getSaveSize" command to get the current save size.
+Use the "/getSaveSize" command to get the current save size
 
 - Type: `String`
   
@@ -1494,11 +1467,11 @@ Use the "/getSaveSize" command to get the current save size.
   
   
 
-- Categroies: `AMS`, `COMMAND`
+- Categories: `AMS`, `COMMAND`
 
 ## carpetAlwaysSetDefault
 
-Whenever you set the carpet rule, it will be automatically set to the default value.
+Whenever you set the carpet rule, it will be automatically set to the default value
 
 - Type: `boolean`
   
@@ -1512,14 +1485,13 @@ Whenever you set the carpet rule, it will be automatically set to the default va
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## experimentalContentCheckDisabled
 
 > Version: `Minecraft 1.19–1.21.1`
 
-Allow playing Minecraft experimental content in the game by adding data packs  (need restart server). 
-
+Allow playing Minecraft experimental content in the game by adding data packs (need restart server)
 
 - Type: `boolean`
   
@@ -1533,11 +1505,11 @@ Allow playing Minecraft experimental content in the game by adding data packs  (
   
   
 
-- Categroies: `AMS`, `EXPERIMENTAL`
+- Categories: `AMS`, `EXPERIMENTAL`
 
 ## fertilizableSmallFlower
 
-Allow small flowers such as dandelion can also be ripened by bone meal.
+Allow small flowers such as dandelion can also be ripened by bone meal
 
 - Type: `boolean`
   
@@ -1551,14 +1523,13 @@ Allow small flowers such as dandelion can also be ripened by bone meal.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## safePointedDripstone
 
 > Version: `Minecraft >= 1.17`
 
-When players land on pointed dripstone, they do not take additional damage from it.
-
+When players land on pointed dripstone, they do not take additional damage from it
 
 - Type: `boolean`
   
@@ -1572,14 +1543,13 @@ When players land on pointed dripstone, they do not take additional damage from 
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## pointedDripstoneCollisionBoxDisabled
 
 > Version: `Minecraft >= 1.17`
 
-Allow players to pass through pointed dripstone.
-
+Allow players to pass through pointed dripstone
 
 - Type: `boolean`
   
@@ -1593,11 +1563,11 @@ Allow players to pass through pointed dripstone.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## foliageGenerateDisabled
 
-The foliage will not generate in any way.
+The foliage will not generate in any way
 
 - Type: `boolean`
   
@@ -1611,11 +1581,11 @@ The foliage will not generate in any way.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## commandGetSystemInfo
 
-Use the "/getSystemInfo" command to get the system information of the server.
+Use the "/getSystemInfo" command to get the system information of the server
 
 - Type: `String`
   
@@ -1629,11 +1599,11 @@ Use the "/getSystemInfo" command to get the system information of the server.
   
   
 
-- Categroies: `AMS`, `COMMAND`
+- Categories: `AMS`, `COMMAND`
 
 ## ironGolemNoDropFlower
 
-Iron golems will not drop flowers.
+Iron golems will not drop flowers
 
 - Type: `boolean`
   
@@ -1647,14 +1617,15 @@ Iron golems will not drop flowers.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## easyGetPitcherPod
 
 > Version: `Minecraft >= 1.20`
 
-Players can harvest a random amount of pitcher pods by planting pitcher (The maximum quantity is customizable, while the minimum quantity is fixed at 2).
+Players can harvest a random amount of pitcher pods by planting pitcher (The maximum quantity is customizable, while the minimum quantity is fixed at 2)
 
+- The range of values: 2 - 100 or 0
 
 - Type: `int`
   
@@ -1668,11 +1639,13 @@ Players can harvest a random amount of pitcher pods by planting pitcher (The max
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## commandGoto
 
-Use the "/goto" command to teleport to the specified dimension and coordinates, When no coordinates are specified, it will teleport to the corresponding coordinates of the current player location.
+Use the "/goto" command to teleport to the specified dimension and coordinates
+
+- When no coordinates are specified, it will teleport to the corresponding coordinates of the current player location
 
 - Type: `String`
   
@@ -1686,21 +1659,17 @@ Use the "/goto" command to teleport to the specified dimension and coordinates, 
   
   
 
-- Categroies: `AMS`, `COMMAND`
+- Categories: `AMS`, `COMMAND`
 
 ## sendPlayerDeathLocation
 
-When a player dies, a message with their death coordinates and dimension will be broadcasted.
+When a player dies, a message with their death coordinates and dimension will be broadcasted
 
-When the client has installed `Carpet Org Addition`, they can click the `+H` button at the end of the message to highlight the waypoint, and use the `/highlight clear` command to remove the highlight.
-
-`false`: Disable rule.
-
-`all`: Always send messages.
-
-`realPlayerOnly`: Messages will only be sent when real players die.
-
-`fakePlayerOnly`: Messages will only be sent when fake players die.
+- [false] - Disable rule
+- [all] - Always send messages
+- [realPlayerOnly] - Messages will only be sent when real players die
+- [fakePlayerOnly] - Messages will only be sent when fake players die
+- When the client has installed Carpet Org Addition, they can click the +H button at the end of the message to highlight the waypoint, and use the /highlight clear command to remove the highlight
 
 - Type: `String`
   
@@ -1714,11 +1683,11 @@ When the client has installed `Carpet Org Addition`, they can click the `+H` but
   
   
 
-- Categroies: `AMS`, `SURVIVAL`
+- Categories: `AMS`, `SURVIVAL`
 
 ## perfectInvisibility
 
-When the player is invisible, they will be completely hidden from mobs, even when wearing a full set of armor.
+When the player is invisible, they will be completely hidden from mobs, even when wearing a full set of armor
 
 - Type: `boolean`
   
@@ -1732,11 +1701,11 @@ When the player is invisible, they will be completely hidden from mobs, even whe
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## sneakInvisibility
 
-When the player is sneak, they will be completely hidden from mobs, even when wearing a full set of armor.
+When the player is sneak, they will be completely hidden from mobs, even when wearing a full set of armor
 
 - Type: `boolean`
   
@@ -1750,13 +1719,13 @@ When the player is sneak, they will be completely hidden from mobs, even when we
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## commandCustomCommandPermissionLevel
 
-Customize the permission level of any commands.
+Customize the permission level of any commands
 
-After enabling the rules, use the `/customCommandPermissionLevel help` command to view the usage instructions.
+- After enabling the rule, use the "/customCommandPermissionLevel help" command to view the usage instructions
 
 - Type: `String`
   
@@ -1770,11 +1739,11 @@ After enabling the rules, use the `/customCommandPermissionLevel help` command t
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `COMMAND`
+- Categories: `AMS`, `SURVIVAL`, `COMMAND`
 
 ## shulkerGolem
 
-A shulker can be summoned by placing a carved pumpkin on the shulker box.
+A shulker can be summoned by placing a carved pumpkin on the shulker box
 
 - Type: `boolean`
   
@@ -1788,11 +1757,11 @@ A shulker can be summoned by placing a carved pumpkin on the shulker box.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## headHunter
 
-When a player dies, they will drop their own skull.
+When a player dies, they will drop their own skull
 
 - Type: `boolean`
   
@@ -1806,11 +1775,11 @@ When a player dies, they will drop their own skull.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## commandGetPlayerSkull
 
-Use the "/getPlayerSkull &lt;player&gt; &lt;count&gt;" command to get a player skull.
+Use the "/getPlayerSkull <player> <count>" command to get a player skull
 
 - Type: `String`
   
@@ -1824,11 +1793,11 @@ Use the "/getPlayerSkull &lt;player&gt; &lt;count&gt;" command to get a player 
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `COMMAND`
+- Categories: `AMS`, `SURVIVAL`, `COMMAND`
 
 ## quickVillagerLevelUp
 
-Each time the trading screen is opened, the villager will level up.
+Each time the trading screen is opened, the villager will level up
 
 - Type: `boolean`
   
@@ -1842,11 +1811,13 @@ Each time the trading screen is opened, the villager will level up.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## renewableNetheriteScrap
 
-Customize the drop rate of netherite scrap from zombified piglin.
+Customize the drop rate of netherite scrap from zombified piglin
+
+- The range of values: 0 - 1
 
 - Type: `Double`
   
@@ -1860,14 +1831,25 @@ Customize the drop rate of netherite scrap from zombified piglin.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
+
+## fakePlayerInteractLikeClient
+
+Fix some cases that fake player interact differently from the client
+
+- Type: `boolean`
+
+- Default: `false`
+
+- Suggested options: `false`, `true`
+
+- Categories: `AMS`, `FEATURE`, `BUGFIX`
 
 ## stackableDiscounts
 
 > Version: `Minecraft >= 1.20.2`
 
-Reintroduce the stackable discounts feature in <23w31a.
-
+Reintroduce the stackable discounts feature in <23w31a
 
 - Type: `boolean`
   
@@ -1881,17 +1863,15 @@ Reintroduce the stackable discounts feature in <23w31a.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## preventEndSpikeRespawn
 
-Prevent end spikes (obsidian spikes in the_end) from spawning.
+Prevent end spikes (obsidian spikes in the_end) from spawning
 
-[true] - Prohibited from generating
-
-[false] - Disable Rule
-
-[keepEndCrystal] - Preserve crystal generation
+- [true] - Prohibited from generating
+- [false] - Disable Rule
+- [keepEndCrystal] - Preserve crystal generation
 
 - Type: `String`
   
@@ -1905,11 +1885,11 @@ Prevent end spikes (obsidian spikes in the_end) from spawning.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## strongLeash
 
-The leash will not break due to excessive distance.
+The leash will not break due to excessive distance
 
 - Type: `boolean`
   
@@ -1923,11 +1903,11 @@ The leash will not break due to excessive distance.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## superZombieDoctor
 
-Players can use a Weakness Potion + Golden Apple to instantly convert a Zombie Villager into a Villager.
+Players can use a Weakness Potion + Golden Apple to instantly convert a Zombie Villager into a Villager
 
 - Type: `boolean`
   
@@ -1941,11 +1921,11 @@ Players can use a Weakness Potion + Golden Apple to instantly convert a Zombie V
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## fakePlayerUseOfflinePlayerUUID
 
-Let fake players use offline UUIDs.
+Let fake players use offline UUIDs
 
 - Type: `boolean`
   
@@ -1959,11 +1939,11 @@ Let fake players use offline UUIDs.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## superLeash
 
-Villagers and monsters can be leashed as well.
+Villagers and monsters can be leashed as well
 
 - Type: `boolean`
   
@@ -1977,11 +1957,11 @@ Villagers and monsters can be leashed as well.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## fullMoonEveryDay
 
-Full moon every day.
+Full moon every day
 
 - Type: `boolean`
   
@@ -1995,13 +1975,13 @@ Full moon every day.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## easyRefreshTrades
 
-When a villager has not made a deal with the player before, each time the trade screen is opened, the content sold by the villager will be refreshed.
+When a villager has not made a deal with the player before, each time the trade screen is opened, the content sold by the villager will be refreshed
 
-When the player is holding an emerald block in their main hand, the refresh will not be triggered.
+- When the player is holding an emerald block in their main hand, the refresh will not be triggered
 
 - Type: `boolean`
   
@@ -2015,11 +1995,11 @@ When the player is holding an emerald block in their main hand, the refresh will
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## jebSheepDropRandomColorWool
 
-When a sheep is named `jeb_`, shearing its wool will drop wool of a random color.
+When a sheep is named jeb_, shearing its wool will drop wool of a random color
 
 - Type: `boolean`
   
@@ -2033,11 +2013,11 @@ When a sheep is named `jeb_`, shearing its wool will drop wool of a random color
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## cryingObsidianNetherPortal
 
-Nether portals can be constructed using crying obsidian.
+Nether portals can be constructed using crying obsidian
 
 - Type: `boolean`
   
@@ -2051,11 +2031,11 @@ Nether portals can be constructed using crying obsidian.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## furnaceSmeltingTimeController
 
-The time required to control the smelting of items in the furnace (unit: Tick).
+The time required to control the smelting of items in the furnace (unit: Tick)
 
 - Type: `int`
   
@@ -2069,11 +2049,11 @@ The time required to control the smelting of items in the furnace (unit: Tick).
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## fakePlayerDefaultSurvivalMode
 
-When summoning fake players, they are default to survival mode anyway.
+When summoning fake players, they are default to survival mode anyway
 
 - Type: `boolean`
   
@@ -2087,11 +2067,11 @@ When summoning fake players, they are default to survival mode anyway.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## commandGetHeldItemID
 
-Use "/getHeldItemID" command to get item ID of the player main hand item.
+Use "/getHeldItemID" command to get item ID of the player main hand item
 
 - Type: `String`
   
@@ -2105,14 +2085,13 @@ Use "/getHeldItemID" command to get item ID of the player main hand item.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `COMMAND`
+- Categories: `AMS`, `SURVIVAL`, `COMMAND`
 
 ## stringDupeReintroduced
 
 > Version: `Minecraft >= 1.21.2`
 
-Reintroduced the string dupe feature, you can use this rule to continue using the string farm.
-
+Reintroduced the string dupe feature, you can use this rule to continue using the string farm
 
 - Type: `boolean`
   
@@ -2126,11 +2105,11 @@ Reintroduced the string dupe feature, you can use this rule to continue using th
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## witchRedstoneDustDropController
 
-Set the guaranteed minimum amount of Redstone Dust dropped by witches.
+Set the guaranteed minimum amount of Redstone Dust dropped by witches
 
 - Type: `int`
   
@@ -2144,11 +2123,11 @@ Set the guaranteed minimum amount of Redstone Dust dropped by witches.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## witchGlowstoneDustDropController
 
-Set the guaranteed minimum amount of Glowstone Dust dropped by witches.
+Set the guaranteed minimum amount of Glowstone Dust dropped by witches
 
 - Type: `int`
   
@@ -2162,11 +2141,11 @@ Set the guaranteed minimum amount of Glowstone Dust dropped by witches.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## tntPowerController
 
-Controls the explosive power of TNT, setting it to "-1" to disable the rule.
+Controls the explosive power of TNT, setting it to "-1" to disable the rule
 
 - Type: `double`
   
@@ -2180,11 +2159,11 @@ Controls the explosive power of TNT, setting it to "-1" to disable the rule.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
 
 ## meekEnderman
 
-You can casually glance at endermen.
+You can casually glance at endermen
 
 - Type: `boolean`
   
@@ -2198,11 +2177,11 @@ You can casually glance at endermen.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## customizedNetherPortal
 
-Fully customizable Nether portal. after enabled, the Nether portal blocks can be mined, and mining the Nether portal frame or the portal itself will not cause the nether portal to broken.
+Fully customizable Nether portal. after enabled, the Nether portal blocks can be mined, and mining the Nether portal frame or the portal itself will not cause the nether portal to broken
 
 - Type: `boolean`
   
@@ -2216,13 +2195,13 @@ Fully customizable Nether portal. after enabled, the Nether portal blocks can be
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## commandCarpetExtensionModWikiHyperlink
 
-Some commonly used Carpet extension wiki links are listed. You only need to use the `/carpetExtensionModWikiHyperlink <ExtensionName>` command to get the hyperlink in the chat box, and you can click the link to jump to it.
+Some commonly used Carpet extension wiki links are listed. You only need to use the "/carpetExtensionModWikiHyperlink <ExtensionName>" command to get the hyperlink in the chat box, and you can click the link to jump to it
 
-As the version is updated, the list of mods will be constantly adjusted.
+- As the version is updated, the list of mods will be constantly adjusted
 
 - Type: `String`
   
@@ -2236,15 +2215,14 @@ As the version is updated, the list of mods will be constantly adjusted.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `COMMAND`
+- Categories: `AMS`, `SURVIVAL`, `COMMAND`
 
 ## commandCustomBlockHardness
 
-Use command to customizing mining hardness for any block.
+Use command to customizing mining hardness for any block
 
-After enabling the rules, use the `/customBlockHardness help` command to view the usage instructions.
-
-When the `Carpet AMS Addition` is not installed on the client, this rule is completely unavailable.
+- After enabling the rule, use the "/customBlockBlastResistance helper" command to view the usage instructions
+- When the Carpet AMS Addition is not installed on the client, this rule is completely unavailable
 
 - Type: `String`
   
@@ -2258,11 +2236,11 @@ When the `Carpet AMS Addition` is not installed on the client, this rule is comp
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`, `COMMAND`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`, `COMMAND`
 
 ## onlyOpCanSpawnRealPlayerInWhitelist
 
-Only OP players can spawn players on the whitelist, regardless of whether the whitelist is enabled.
+Only OP players can spawn players on the whitelist, regardless of whether the whitelist is enabled
 
 - Type: `boolean`
   
@@ -2276,14 +2254,22 @@ Only OP players can spawn players on the whitelist, regardless of whether the wh
   
   
 
-- Categroies: `AMS`, `COMMAND`
+- Categories: `AMS`, `COMMAND`
+
+## realPlayerControlDisabled
+
+Prevent Carpet /player commands from controlling any real player, including the command sender. OPs and the console cannot bypass this protection. Fake players are unaffected
+
+- Type: `boolean`
+- Default: `false`
+- Suggested options: `false`, `true`
+- Categories: `AMS`, `COMMAND`
 
 ## itemEntityCreateNetherPortalDisabled
 
 > Version: `Minecraft >= 1.21`
 
-Prevent item entities from creating portals when passing through Nether portals.
-
+Prevent item entities from creating portals when passing through Nether portals
 
 - Type: `boolean`
   
@@ -2297,11 +2283,11 @@ Prevent item entities from creating portals when passing through Nether portals.
   
   
 
-- Categroies: `AMS`, `FEATURE`
+- Categories: `AMS`, `FEATURE`
 
 ## powerfulExpMending
 
-Allow items to receive the Mending effect simply by being in the backpack, without needing to be held in hand.
+Allow items to receive the Mending effect simply by being in the backpack, without needing to be held in hand
 
 - Type: `boolean`
   
@@ -2315,11 +2301,11 @@ Allow items to receive the Mending effect simply by being in the backpack, witho
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## commandAtSomeOnePlayer
 
-Use `/@` command to @ some one player.
+Use /@ command to @ some one player
 
 - Type: `String`
   
@@ -2333,16 +2319,15 @@ Use `/@` command to @ some one player.
   
   
 
-- Categroies: `AMS`, `COMMAND`
+- Categories: `AMS`, `COMMAND`
 
 ## largeBundle
 
 > Version: `Minecraft >= 1.17`
 
-Let the bundle have a 9x3 or 9x6 UI, and right-click in the hand to open the UI.
+Let the bundle have a 9x3 or 9x6 UI, and right-click in the hand to open the UI
 
-This rule does not allow bundle and shulker boxes to be placed in bundle.
-
+- This rule does not allow bundle and shulker boxes to be placed in bundle
 
 - Type: `boolean`
   
@@ -2356,14 +2341,13 @@ This rule does not allow bundle and shulker boxes to be placed in bundle.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## maxChainUpdateDepth
 
 > Version: `Minecraft >= 1.19`
 
-Modify max chain update depth, Set to "-1" to disable the rule.
-
+Modify max chain update depth, Set to "-1" to disable the rule
 
 - Type: `int`
   
@@ -2377,11 +2361,11 @@ Modify max chain update depth, Set to "-1" to disable the rule.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `EXPERIMENTAL`
+- Categories: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
 ## phantomSpawnAlert
 
-Broadcast the news of who summoned the phantoms.
+Broadcast the news of who summoned the phantoms
 
 - Type: `boolean`
   
@@ -2395,14 +2379,13 @@ Broadcast the news of who summoned the phantoms.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`
+- Categories: `AMS`, `SURVIVAL`
 
 ## endPortalChunkLoadDisabled
 
 > Version: `Minecraft >= 1.21`
 
-Entities passing through the End Portal will not cause chunk loading.
-
+Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
 
 - Type: `boolean`
   
@@ -2416,14 +2399,13 @@ Entities passing through the End Portal will not cause chunk loading.
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## endPortalChunkLoader
 
 > Version: `Minecraft < 1.20.5`
 
-Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5.
-
+Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5 (Available for Minecraft < 1.20.5)
 
 - Type: `boolean`
   
@@ -2437,11 +2419,11 @@ Passing entities through the End Portal causes chunk loading, consistent with Mi
   
   
 
-- Categroies: `AMS`, `FEATURE`, `AMS_chunkLoader`
+- Categories: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
 ## amsNetworkProtocol
 
-The switch of the AMS network protocol.
+The switch of the AMS network protocol
 
 - Type: `boolean`
   
@@ -2455,11 +2437,11 @@ The switch of the AMS network protocol.
   
   
 
-- Categroies: `AMS`, `AMS_NETWORK`
+- Categories: `AMS`, `AMS_NETWORK`
 
 ## incompatibleProtocolWarningDisabled
 
-Disable warnings sent to clients with an incompatible AMS network protocol. Only applies when amsNetworkProtocol is enabled.
+Disable warnings sent to clients with an incompatible AMS network protocol. Only applies when amsNetworkProtocol is enabled
 
 - Type: `boolean`
 
@@ -2473,13 +2455,13 @@ Disable warnings sent to clients with an incompatible AMS network protocol. Only
 
 
 
-- Categroies: `AMS`, `AMS_NETWORK`
+- Categories: `AMS`, `AMS_NETWORK`
 
 ## commandGetClientPlayerFps
 
-Use command to get the FPS of the specified player.
+Use command to get the FPS of the specified player
 
-After enabling the rule, use the "/getClientPlayerFps help" command to view the usage instructions
+- After enabling the rule, use the "/getClientPlayerFps help" command to view the usage instructions
 
 - Type: `String`
   
@@ -2493,13 +2475,13 @@ After enabling the rule, use the "/getClientPlayerFps help" command to view the 
   
   
 
-- Categroies: `AMS`, `AMS_NETWORK`, `COMMAND`
+- Categories: `AMS`, `AMS_NETWORK`, `COMMAND`
 
 ## commandSetPlayerPose
 
-Use command to set player pose.
+Use command to set player pose
 
-After enabling the rule, use the "/playerPose help" command to view the usage instructions
+- After enabling the rule, use the "/playerPose help" command to view the usage instructions
 
 - Type: `String`
   
@@ -2513,11 +2495,11 @@ After enabling the rule, use the "/playerPose help" command to view the usage in
   
   
 
-- Categroies: `AMS`, `AMS_NETWORK`, `COMMAND`
+- Categories: `AMS`, `AMS_NETWORK`, `COMMAND`
 
 ## commandAmspDebug
 
-Some commands for network communication testing.
+Some commands for network communication testing
 
 * Type: `String`
 
@@ -2525,14 +2507,13 @@ Some commands for network communication testing.
 
 * Suggested options: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
 
-* Categroies: `AMS`, `AMS_NETWORK`, `COMMAND`
+* Categories: `AMS`, `AMS_NETWORK`, `COMMAND`
 
 ## onlyPlayerCanCreateNetherPortal
 
 > Version: `Minecraft >= 1.21`
 
-Only allow new portals to be generated when players pass through the Nether portal.
-
+Only allow new portals to be generated when players pass through the Nether portal
 
 - Type: `boolean`
   
@@ -2546,14 +2527,13 @@ Only allow new portals to be generated when players pass through the Nether port
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## preventServerPause
 
 > Version: `Minecraft >= 1.21.2`
 
-Prevent server pause after 60s.
-
+Prevent server pause after 60s
 
 * Type: `boolean`
   
@@ -2567,16 +2547,14 @@ Prevent server pause after 60s.
   
   
 
-* Categroies: `AMS`, `FEATURE`
+* Categories: `AMS`, `FEATURE`
 
 ## flippinCactusExtras
 
-Enables flippinCactus rules to work on more blocks.
+Enables flippinCactus rules to work on more blocks
 
-Affected blocks:
-
-barrel, chiseled_bookshelf, crafter, shelf
-
+- Affected blocks:
+- barrel, chiseled_bookshelf, crafter, shelf
 
 - Type: `boolean`
   
@@ -2590,14 +2568,15 @@ barrel, chiseled_bookshelf, crafter, shelf
   
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
 ## experimentalMinecartSpeed
 
 > Version: `Minecraft >= 1.21.2`
 
-Set the speed of the experimental minecart.
+Set the speed of the experimental minecart
 
+- Enabling this rule will override the game rules
 
 * Type: `int`
   
@@ -2611,18 +2590,16 @@ Set the speed of the experimental minecart.
   
   
 
-* Categroies: `AMS`, `FEATURE`, `EXPERIMENTAL`
+* Categories: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
 ## experimentalMinecartEnabled
 
 > Version: `Minecraft >= 1.21.2`
 
-Enable experimental minecarts.
+Enable experimental minecarts
 
-When the server environment switches the rule setting, the server needs to be restarted
-
-When the client environment switches the rule settings, the client needs to be restarted
-
+- When the server environment switches the rule setting, the server needs to be restarted
+- When the client environment switches the rule settings, the client needs to be restarted
 
 * Type: `boolean`
   
@@ -2636,15 +2613,14 @@ When the client environment switches the rule settings, the client needs to be r
   
   
 
-* Categroies: `AMS`, `FEATURE`, `EXPERIMENTAL`
+* Categories: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
 ## amsTranslationMode
 
-Switch the translation mode of Carpet AMS Addition.
+Switch the translation mode of Carpet AMS Addition
 
-[client] - Prefer sending translated text to the client using the client’s own language
-
-[server] - Use the language set by the server for all translations
+- [client] - Prefer sending translated text to the client using the client’s own language
+- [server] - Use the language set by the server for all translations
 
 * Type: `enum`
   
@@ -2658,12 +2634,11 @@ Switch the translation mode of Carpet AMS Addition.
   
   
 
-* Categroies: `AMS`
+* Categories: `AMS`
 
 ## blockHardnessSyncProtocol
 
-Synchronize the server-side block hardness to the client.
-
+Synchronize the server-side block hardness to the client
 
 - Type: `boolean`
 
@@ -2677,11 +2652,11 @@ Synchronize the server-side block hardness to the client.
 
   
 
-- Categroies: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`
+- Categories: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`
 
 ## commandLocationTag
 
-Enable `/amsloc` to maintain a server-wide location directory using signs, showing names, dimensions and coordinates.
+Enable /amsloc to record and query locations across dimensions using signs; defaults to ordinary oak signs with amsloc on the first line
 
 - Type: `String`
 
@@ -2697,9 +2672,9 @@ Enable `/amsloc` to maintain a server-wide location directory using signs, showi
 
 - Categories: `AMS`, `COMMAND`, `FEATURE`
 
-## craftableEnchantedGoldApple
+## craftableEnchantedGoldenApples
 
-Enchanted gold apple can be crafted using gold block and apple, which is the original crafting recipe before 15w44a.
+Enchanted Golden Apples can be crafted with 8 Gold Blocks again
 
 - Type: `boolean`
   
@@ -2713,14 +2688,13 @@ Enchanted gold apple can be crafted using gold block and apple, which is the ori
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`
 
 ## craftableBundle
 
 > Version: `Minecraft 1.17–1.21.1`
 
-Bundle can be crafted using string and rabbit hide.
-
+Crafted bundle in minecraft 1.17/1.18/1.19
 
 - Type: `String`
   
@@ -2734,14 +2708,13 @@ Bundle can be crafted using string and rabbit hide.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`
 
 ## craftableSculkSensor
 
 > Version: `Minecraft 1.17–1.18`
 
-Sculk sensor can be crafted using deepslate, redstone and quartz.
-
+Crafted sculk_sensor in minecraft 1.17/1.18
 
 - Type: `boolean`
   
@@ -2755,11 +2728,11 @@ Sculk sensor can be crafted using deepslate, redstone and quartz.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`
 
 ## craftableElytra
 
-Elytra can be crafted using phantom membrane, saddle, stick and string.
+Add elytra recipes in minecraft
 
 - Type: `boolean`
   
@@ -2773,11 +2746,11 @@ Elytra can be crafted using phantom membrane, saddle, stick and string.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`
 
 ## betterCraftableBoneBlock
 
-Bone block can be crafted better. Directed use 9 bones to craft 3 bone blocks.
+Use nine bones to crafted three bone_blocks
 
 - Type: `boolean`
   
@@ -2791,11 +2764,11 @@ Bone block can be crafted better. Directed use 9 bones to craft 3 bone blocks.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`
 
 ## betterCraftableDispenser
 
-Dispenser can be crafted more flexible. It can be crafted using bow and dropper, or using raw material of bow and dropper.
+Better craftable dispenser
 
 - Type: `boolean`
   
@@ -2809,14 +2782,13 @@ Dispenser can be crafted more flexible. It can be crafted using bow and dropper,
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`
 
 ## betterCraftablePolishedBlackStoneButton
 
 > Version: `Minecraft > 1.17`
 
-Use deepslate to crafted polished_blackstone_button in minecraft.
-
+Use deepslate to crafted polished_blackstone_button in minecraft
 
 - Type: `boolean`
   
@@ -2830,11 +2802,11 @@ Use deepslate to crafted polished_blackstone_button in minecraft.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`
 
 ## rottenFleshBurnedIntoLeather
 
-Rotten flesh can be burned into leather in a furnace.
+Rotten flesh can be burned into leather in a furnace
 
 - Type: `boolean`
   
@@ -2848,14 +2820,13 @@ Rotten flesh can be burned into leather in a furnace.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`
 
 ## useNewLodestoneRecipe
 
 > Version: `Minecraft < 1.21.5`
 
-Use iron ingots to craft Lodestone.
-
+Use iron ingots to craft Lodestone
 
 - Type: `boolean`
   
@@ -2869,11 +2840,11 @@ Use iron ingots to craft Lodestone.
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`
 
 ## craftableCarvedPumpkin
 
-Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpkin reduces the shears durability by 1 (affected by unbreaking enchantments).
+Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpkin reduces the shears durability by 1 (affected by unbreaking enchantments)
 
 - Type: `boolean`
   
@@ -2887,4 +2858,4 @@ Using shears and a pumpkin to craft a carved pumpkin, each crafted carved pumpki
   
   
 
-- Categroies: `AMS`, `SURVIVAL`, `CRAFTING`
+- Categories: `AMS`, `SURVIVAL`, `CRAFTING`

@@ -633,6 +633,9 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = AMS)
     public static translationModes amsTranslationMode = translationModes.CLIENT;
 
+    @Rule(categories = {AMS, COMMAND})
+    public static boolean realPlayerControlDisabled = false;
+
     /*
      * AMS网络协议规则
      */
