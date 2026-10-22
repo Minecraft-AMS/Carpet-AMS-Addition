@@ -48,6 +48,7 @@ import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.Custom
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
 import carpetamsaddition.translations.AMSTranslations;
 import carpetamsaddition.helpers.rule.commandLocationTag.LocationTagManager;
+import carpetamsaddition.helpers.rule.largeShulkerBox.LargeShulkerBoxHelper;
 import carpetamsaddition.translations.TranslationConstants;
 import carpetamsaddition.api.command.CommandHelper;
 import carpetamsaddition.utils.CountRulesUtil;
@@ -111,6 +112,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
 
     @Override
     public void onTick(MinecraftServer server) {
+        LargeShulkerBoxHelper.tick(server);
         LocationTagManager.tick(server);
         LeaderCommand.tick();
     }

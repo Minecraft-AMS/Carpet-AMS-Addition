@@ -129,6 +129,7 @@
     "rule.largeEnderChest.PlayerEntityMixin",
     "rule.largeEnderChest.PlayerEnderChestContainerMixin",
     "rule.largeEnderChest.SimpleContainerAccessor",
+    "rule.largeShulkerBox.ChunkMapAccessor",
     "rule.largeShulkerBox.ServerGamePacketListenerImplMixin",
     "rule.largeShulkerBox.ShulkerBoxBlockEntityMixin",
     "rule.largeShulkerBox.ShulkerBoxMenuMixin",
