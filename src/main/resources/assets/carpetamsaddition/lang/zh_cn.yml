@@ -2,6 +2,9 @@ carpetamsaddition:
   messenger:
     copy: '复制到剪切板'
 
+  network:
+    incompatible_protocol: '<AMSP> 客户端网络协议（%s）与服务器（%s）不兼容，部分基于AMSP的规则将无法正常工作，请使用与服务器兼容的客户端模组版本'
+
   carpet:
     totalRules:
       version: '版本'
@@ -760,6 +763,9 @@ carpetamsaddition:
       amsNetworkProtocol:
         name: AMS网络协议
         desc: AMS网络协议的开关
+      incompatibleProtocolWarningDisabled:
+        name: 禁用网络协议不兼容警告
+        desc: 禁用发送给使用不兼容AMS网络协议的客户端的警告，仅在amsNetworkProtocol开启时生效
       blockHardnessSyncProtocol:
         name: 方块硬度同步协议
         desc: 将服务端方块硬度同步给客户端

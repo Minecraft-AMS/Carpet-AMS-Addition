@@ -7,6 +7,7 @@
 
 package carpetamsaddition.network;
 
+import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.utils.IdentifierUtil;
 import carpetamsaddition.utils.compat.PreprocessPattern;
 
@@ -24,7 +25,9 @@ import org.jetbrains.annotations.NotNull;
 //#endif
 
 public abstract class AMS_CustomPayload implements CustomPacketPayload {
-    public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network/v2");
+    public static final Identifier CHANNEL_ID = IdentifierUtil.of(CarpetAMSAdditionServer.compactName, "network/v2");
+    public static final String CHANNEL_ID_STRING = CHANNEL_ID.getNamespace() + ":" + CHANNEL_ID.getPath();
+    public static final String CHANNEL_NAMESPACE = CHANNEL_ID.getNamespace();
     //#if MC>=12005
     public static final CustomPacketPayload.Type<@NotNull AMS_CustomPayload> KEY = new CustomPacketPayload.Type<>(CHANNEL_ID);
     public static final StreamCodec<@NotNull FriendlyByteBuf, @NotNull AMS_CustomPayload> CODEC = CustomPacketPayload.codec(AMS_CustomPayload::write, AMS_PayloadCodec::decodePayload);

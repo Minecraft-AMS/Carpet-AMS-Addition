@@ -153,6 +153,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
     @Override
     public void onPlayerLoggedOut(ServerPlayer player) {
         NetworkUtil.removeSupportClient(player);
+        NetworkUtil.clearProtocolWarning(player);
         AmspCommand.clearPlayerQueries(player);
         GetClientPlayerFpsCommand.clearPlayerQueries(player);
         PlayerChunkLoading.resetStatus(PlayerUtil.getName(player));
@@ -176,6 +177,7 @@ public class CarpetAMSAdditionServer implements CarpetExtension {
         BlockLoaderConfigStore.clear();
         AmsRuleMetadata.deactivateLazyRules();
         NetworkUtil.clearClientSupport();
+        NetworkUtil.clearProtocolWarnings();
         AmspCommand.clearQueries();
         GetClientPlayerFpsCommand.clearQueries();
         FancyFakePlayerNameTeamController.removeBotTeam(server, CarpetAMSAdditionSettings.fancyFakePlayerName);

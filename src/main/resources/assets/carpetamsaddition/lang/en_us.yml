@@ -2,6 +2,9 @@ carpetamsaddition:
   messenger:
     copy: 'Copy to clipboard'
 
+  network:
+    incompatible_protocol: '<AMSP> Your client network protocol (%s) is incompatible with this server (%s). Some AMSP-based rules will not work correctly. Please use a client mod version compatible with this server'
+
   carpet:
     totalRules:
       version: 'version'
@@ -639,6 +642,8 @@ carpetamsaddition:
         desc: Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5 (Available for Minecraft < 1.20.5)
       amsNetworkProtocol:
         desc: The switch of the AMS network protocol
+      incompatibleProtocolWarningDisabled:
+        desc: Disable warnings sent to clients with an incompatible AMS network protocol. Only applies when amsNetworkProtocol is enabled
       blockHardnessSyncProtocol:
         desc: Synchronize the server-side block hardness to the client
       commandAmspDebug:
