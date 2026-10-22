@@ -55,14 +55,12 @@ public class BlockHardnessSyncPayload_C2S extends AMS_CustomPayload {
     }
 
     public void handle(ServerPlayer sender) {
-        NetworkUtil.executeOnServerThread(sender, () -> {
-            BlockGetter level = EntityUtil.getEntityWorld(sender);
-            BlockState state = level.getBlockState(this.pos);
-            float serverHardness = state.getDestroySpeed(level, this.pos);
-            if (Float.compare(this.clientHardness, serverHardness) != 0) {
-                NetworkUtil.sendS2CPacket(sender, BlockHardnessSyncPayload_S2C.create(state, serverHardness), NetworkUtil.SendMode.NEED_SUPPORT);
-            }
-        });
+        BlockGetter level = EntityUtil.getEntityWorld(sender);
+        BlockState state = level.getBlockState(this.pos);
+        float serverHardness = state.getDestroySpeed(level, this.pos);
+        if (Float.compare(this.clientHardness, serverHardness) != 0) {
+            NetworkUtil.sendS2CPacket(sender, BlockHardnessSyncPayload_S2C.create(state, serverHardness), NetworkUtil.SendMode.NEED_SUPPORT);
+        }
     }
 
     public static BlockHardnessSyncPayload_C2S create(BlockPos pos, float clientHardness) {

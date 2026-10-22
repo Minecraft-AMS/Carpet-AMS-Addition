@@ -38,6 +38,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@SuppressWarnings("PatternVariableCanBeUsed")
 @Mixin(ServerGamePacketListenerImpl.class)
 public abstract class ServerPlayNetworkHandlerMixin {
     @Shadow
@@ -54,7 +55,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
             AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
             if (
                 payload.type().id().equals(AMS_CustomPayload.CHANNEL_ID) &&
-                AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload, this.player)
+                AMS_PayloadManager.DispatcherGetter.getC2SDispatcher().dispatch(payload, this.player)
             ) {
                 ci.cancel();
             }
@@ -62,7 +63,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
         //#else
         //$$ if (((CustomPayloadC2SPacketAccessor) packet).getIdentifier().equals(AMS_CustomPayload.CHANNEL_ID)) {
         //$$     AMS_CustomPayload payload = AMS_PayloadManager.decodeC2SPacket(packet);
-        //$$     if (AMS_PayloadManager.HandlerChainGetter.getC2SHandlerChain().handle(payload, this.player)) {
+        //$$     if (AMS_PayloadManager.DispatcherGetter.getC2SDispatcher().dispatch(payload, this.player)) {
         //$$         ci.cancel();
         //$$     }
         //$$ }

@@ -44,11 +44,9 @@ public class RequestHandShakeS2CPayload extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() -> {
-            LocalPlayer player = MinecraftClientUtil.getCurrentPlayer();
-            String modVersion = CarpetAMSAdditionClient.getVersion();
-            NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(modVersion), NetworkUtil.SendMode.FORCE);
-        });
+        LocalPlayer player = MinecraftClientUtil.getCurrentPlayer();
+        String modVersion = CarpetAMSAdditionClient.getVersion();
+        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(modVersion), NetworkUtil.SendMode.FORCE);
     }
 
     public static RequestHandShakeS2CPayload create() {

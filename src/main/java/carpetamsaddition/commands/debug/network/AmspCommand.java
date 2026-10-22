@@ -22,6 +22,7 @@ import carpetamsaddition.utils.messenger.Messenger;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
@@ -96,6 +97,7 @@ public class AmspCommand implements AmsCommand {
     }
 
     private static int showClientModVersion(CommandSourceStack source, ServerPlayer targetPlayer) {
+        MinecraftServer server = source.getServer();
         ServerGamePacketListenerImpl connection = targetPlayer.connection;
         clientModVersion.remove(connection);
         pendingClientVersions.add(connection);
@@ -108,7 +110,11 @@ public class AmspCommand implements AmsCommand {
         Runnable checkAndRetry = new Runnable() {
             @Override
             public void run() {
-                NetworkUtil.executeOnServerThread(() -> {
+                if (!MinecraftServerUtil.serverIsRunning(server)) {
+                    return;
+                }
+
+                server.execute(() -> {
                     if (connection.player.hasDisconnected() || MinecraftServerUtil.getOnlinePlayers().stream().noneMatch(player -> player.connection == connection)) {
                         pendingClientVersions.remove(connection);
                         clientModVersion.remove(connection);

@@ -22,7 +22,6 @@ package carpetamsaddition.network.payloads.rule.commandSetPlayerPose;
 
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.utils.MinecraftClientUtil;
-import carpetamsaddition.utils.NetworkUtil;
 import carpetamsaddition.utils.PacketByteBufExtras;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommand;
@@ -61,29 +60,27 @@ public class UpdatePlayerPosePayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() -> {
-            Map<UUID, String> previousPoses = new HashMap<>(SetPlayerPoseCommand.DO_POSE_MAP);
-            SetPlayerPoseCommand.DO_POSE_MAP.clear();
-            SetPlayerPoseCommand.DO_POSE_MAP.putAll(this.poseMap);
+        Map<UUID, String> previousPoses = new HashMap<>(SetPlayerPoseCommand.DO_POSE_MAP);
+        SetPlayerPoseCommand.DO_POSE_MAP.clear();
+        SetPlayerPoseCommand.DO_POSE_MAP.putAll(this.poseMap);
 
-            ClientLevel level = MinecraftClientUtil.getCurrentClient().level;
-            if (level == null) {
-                return;
+        ClientLevel level = MinecraftClientUtil.getCurrentClient().level;
+        if (level == null) {
+            return;
+        }
+
+        for (Player player : level.players()) {
+            UUID uuid = player.getUUID();
+            if (!uuid.equals(this.targetPlayerUuid) && Objects.equals(previousPoses.get(uuid), this.poseMap.get(uuid))) {
+                continue;
             }
 
-            for (Player player : level.players()) {
-                UUID uuid = player.getUUID();
-                if (!uuid.equals(this.targetPlayerUuid) && Objects.equals(previousPoses.get(uuid), this.poseMap.get(uuid))) {
-                    continue;
-                }
-
-                if (player == MinecraftClientUtil.getCurrentPlayer()) {
-                    SetPlayerPoseCommand.refreshPose(player);
-                } else {
-                    player.refreshDimensions();
-                }
+            if (player == MinecraftClientUtil.getCurrentPlayer()) {
+                SetPlayerPoseCommand.refreshPose(player);
+            } else {
+                player.refreshDimensions();
             }
-        });
+        }
     }
 
     public static UpdatePlayerPosePayload_S2C create(Map<UUID, String> poseMap, UUID targetPlayerUuid) {

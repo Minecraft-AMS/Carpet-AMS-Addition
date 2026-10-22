@@ -69,20 +69,18 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
 
     @Override
     public void handle(ServerPlayer sender) {
-        NetworkUtil.executeOnServerThread(sender, () -> {
-            String playerName = PlayerUtil.getName(sender);
+        String playerName = PlayerUtil.getName(sender);
 
-            if (Objects.equals(this.modVersion, CarpetAMSAdditionMod.getVersion())) {
-                CarpetAMSAdditionServer.LOGGER.info("{} joined with matched carpet-ams-addition v{}", playerName, this.modVersion);
-            } else {
-                CarpetAMSAdditionServer.LOGGER.info("{} joined with mismatched carpet-ams-addition version (client: v{}, server: v{})", playerName, this.modVersion, CarpetAMSAdditionMod.getVersion());
-            }
+        if (Objects.equals(this.modVersion, CarpetAMSAdditionMod.getVersion())) {
+            CarpetAMSAdditionServer.LOGGER.info("{} joined with matched carpet-ams-addition v{}", playerName, this.modVersion);
+        } else {
+            CarpetAMSAdditionServer.LOGGER.info("{} joined with mismatched carpet-ams-addition version (client: v{}, server: v{})", playerName, this.modVersion, CarpetAMSAdditionMod.getVersion());
+        }
 
-            NetworkUtil.setClientSupportedPackets(sender, this.supportedPackets);
-            NetworkUtil.addSupportClient(sender);
+        NetworkUtil.setClientSupportedPackets(sender, this.supportedPackets);
+        NetworkUtil.addSupportClient(sender);
 
-            CarpetAMSAdditionServer.getInstance().sendS2CPacketOnHandShake(sender);
-        });
+        CarpetAMSAdditionServer.getInstance().sendS2CPacketOnHandShake(sender);
     }
 
     public static HandShakeC2SPayload create(String modVersion) {

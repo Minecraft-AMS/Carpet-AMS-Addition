@@ -23,7 +23,6 @@ package carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS;
 import carpetamsaddition.commands.rule.commandGetClientPlayerFps.GetClientPlayerFpsCommand;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
-import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -47,8 +46,9 @@ public class ClientPlayerFpsPayload_C2S extends AMS_CustomPayload {
         buf.writeInt(fps);
     }
 
+    @Override
     public void handle(ServerPlayer sender) {
-        NetworkUtil.executeOnServerThread(sender, () -> GetClientPlayerFpsCommand.sendFpsResult(sender, this.fps));
+        GetClientPlayerFpsCommand.sendFpsResult(sender, this.fps);
     }
 
     public static ClientPlayerFpsPayload_C2S create(int fps) {

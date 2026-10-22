@@ -23,7 +23,6 @@ package carpetamsaddition.network.payloads.core;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.settings.AmsRuleMetadata;
-import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -67,7 +66,7 @@ public class LazySettingsPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() -> AmsRuleMetadata.installClientLazyRuleValues(values));
+        AmsRuleMetadata.installClientLazyRuleValues(values);
     }
 
     public static LazySettingsPayload_S2C create(Map<String, String> values) {

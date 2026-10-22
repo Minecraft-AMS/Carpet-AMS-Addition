@@ -46,12 +46,10 @@ public class RequestClientModVersionPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(
-            () -> NetworkUtil.sendC2SPacket(
-                MinecraftClientUtil.getCurrentPlayer(),
-                RequestClientModVersionPayload_C2S.create(CarpetAMSAdditionServer.fancyName + " v" + CarpetAMSAdditionClient.getVersion()),
-                NetworkUtil.SendMode.NEED_SUPPORT
-            )
+        NetworkUtil.sendC2SPacket(
+            MinecraftClientUtil.getCurrentPlayer(),
+            RequestClientModVersionPayload_C2S.create(CarpetAMSAdditionServer.fancyName + " v" + CarpetAMSAdditionClient.getVersion()),
+            NetworkUtil.SendMode.NEED_SUPPORT
         );
     }
 

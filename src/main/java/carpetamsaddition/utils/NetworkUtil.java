@@ -25,7 +25,6 @@ import carpetamsaddition.network.AMS_PayloadManager;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 import java.util.*;
@@ -47,6 +46,7 @@ public class NetworkUtil {
         MinecraftServerUtil.getOnlinePlayers().forEach(player -> sendS2CPacket(player, payload, sendMode));
     }
 
+    @SuppressWarnings("EnhancedSwitchMigration")
     public static void sendS2CPacket(ServerPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
         boolean shouldSend;
         switch (sendMode) {
@@ -66,6 +66,7 @@ public class NetworkUtil {
         }
     }
 
+    @SuppressWarnings("EnhancedSwitchMigration")
     public static void sendC2SPacket(LocalPlayer player, AMS_CustomPayload payload, SendMode sendMode) {
         boolean shouldSend;
         switch (sendMode) {
@@ -151,49 +152,5 @@ public class NetworkUtil {
     public static void clearClientSupport() {
         SUPPORT_CLIENT.clear();
         clearAllClientSupportedPackets();
-    }
-
-    public static void executeOnClientThread(Runnable runnable) {
-        Optional.of(MinecraftClientUtil.clientIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftClientUtil.getCurrentClient().execute(runnable));
-    }
-
-    public static void executeOnServerThread(Runnable runnable) {
-        Optional.of(MinecraftServerUtil.serverIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftServerUtil.getServer().execute(runnable));
-    }
-
-    public static void executeOnServerThread(ServerPlayer sender, Runnable runnable) {
-        if (sender == null) {
-            return;
-        }
-
-        MinecraftServer server = MinecraftServerUtil.getServer();
-        ServerGamePacketListenerImpl connection = sender.connection;
-
-        if (!MinecraftServerUtil.serverIsRunning(server)) {
-            return;
-        }
-
-        server.execute(() -> {
-            if (
-                !MinecraftServerUtil.serverIsRunning(server) ||
-                sender.hasDisconnected() ||
-                sender.connection != connection ||
-                server.getPlayerList().getPlayers().stream().noneMatch(player -> player == sender)
-            ) {
-                return;
-            }
-
-            //#if MC>=11904
-            if (!connection.isAcceptingMessages()) {
-                return;
-            }
-            //#else
-            //$$ if (!connection.connection.isConnected()) {
-            //$$     return;
-            //$$ }
-            //#endif
-
-            runnable.run();
-        });
     }
 }

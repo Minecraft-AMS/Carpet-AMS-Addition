@@ -23,7 +23,6 @@ package carpetamsaddition.network.payloads.rule.blockHardnessSyncProtocol;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
 import carpetamsaddition.helpers.rule.blockHardnessSyncProtocol.BlockHardnessSyncCache;
-import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.block.Block;
@@ -54,11 +53,9 @@ public class BlockHardnessSyncPayload_S2C extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() -> {
-            if (this.state != null) {
-                BlockHardnessSyncCache.put(this.state, this.hardness);
-            }
-        });
+        if (this.state != null) {
+            BlockHardnessSyncCache.put(this.state, this.hardness);
+        }
     }
 
     public static BlockHardnessSyncPayload_S2C create(BlockState state, float hardness) {

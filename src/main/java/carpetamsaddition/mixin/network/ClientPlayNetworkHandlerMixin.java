@@ -37,6 +37,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@SuppressWarnings("PatternVariableCanBeUsed")
 @Mixin(
     //#if MC>=12005
     ClientCommonPacketListenerImpl.class
@@ -60,7 +61,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
             AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
             if (
                 payload.type().id().equals(AMS_CustomPayload.CHANNEL_ID) &&
-                AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)
+                AMS_PayloadManager.DispatcherGetter.getS2CDispatcher().dispatch(payload)
             ) {
                 ci.cancel();
             }
@@ -70,7 +71,7 @@ public abstract class ClientPlayNetworkHandlerMixin {
         //$$     FriendlyByteBuf data = packet.getData();
         //$$     try {
         //$$         AMS_CustomPayload payload = AMS_PayloadManager.decodeS2CPacket(packet);
-        //$$         if (AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)) {
+        //$$         if (AMS_PayloadManager.DispatcherGetter.getS2CDispatcher().dispatch(payload)) {
         //$$             ci.cancel();
         //$$         }
         //$$     } finally {
