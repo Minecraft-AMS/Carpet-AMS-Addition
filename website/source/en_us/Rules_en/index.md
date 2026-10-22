@@ -2457,6 +2457,24 @@ The switch of the AMS network protocol.
 
 - Categroies: `AMS`, `AMS_NETWORK`
 
+## incompatibleProtocolWarningDisabled
+
+Disable warnings sent to clients with an incompatible AMS network protocol. Only applies when amsNetworkProtocol is enabled.
+
+- Type: `boolean`
+
+
+
+- Default: `false`
+
+
+
+- Suggested options: `false`, `true`
+
+
+
+- Categroies: `AMS`, `AMS_NETWORK`
+
 ## commandGetClientPlayerFps
 
 Use command to get the FPS of the specified player.

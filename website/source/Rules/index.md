@@ -2468,6 +2468,24 @@ AMS网络协议的开关。
 
 - 分类: `AMS`, `AMS_NETWORK`
 
+## 禁用不兼容协议警告（incompatibleProtocolWarningDisabled）
+
+禁用发送给使用不兼容AMS网络协议的客户端的警告，仅在amsNetworkProtocol开启时生效。
+
+- 类型: `boolean`
+
+
+
+- 默认值: `false`
+
+
+
+- 参考选项: `false`, `true`
+
+
+
+- 分类: `AMS`, `AMS_NETWORK`
+
 ## 获取客户端玩家FPS（commandGetClientPlayerFps）
 
 使用指令获取指定客户端玩家的FPS。
