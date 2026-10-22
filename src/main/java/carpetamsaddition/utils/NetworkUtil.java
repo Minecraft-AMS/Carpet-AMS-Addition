@@ -235,7 +235,11 @@ public class NetworkUtil {
                 return;
             }
 
-            Messenger.tell(player, Messenger.f(tr.tr("incompatible_protocol", channelId.toString(), AMS_CustomPayload.CHANNEL_ID_STRING), Layout.RED));
+            Messenger.tell(player, Messenger.c(
+                Messenger.f(tr.tr("incompatible_protocol", channelId.toString(), AMS_CustomPayload.CHANNEL_ID_STRING), Layout.RED),
+                Messenger.endl(),
+                Messenger.f(tr.tr("incompatible_protocol_hint"), Layout.YELLOW)
+            ));
         });
     }
 }

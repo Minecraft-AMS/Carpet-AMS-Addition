@@ -4,6 +4,7 @@ carpetamsaddition:
 
   network:
     incompatible_protocol: '<AMSP> 客户端网络协议（%s）与服务器（%s）不兼容，部分基于AMSP的规则将无法正常工作，请使用与服务器兼容的客户端模组版本'
+    incompatible_protocol_hint: '你可以启用“禁用网络协议不兼容警告（incompatibleProtocolWarningDisabled）”规则来停止发送此警告'
 
   carpet:
     totalRules:

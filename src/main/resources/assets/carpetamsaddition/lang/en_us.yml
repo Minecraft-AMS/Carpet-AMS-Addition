@@ -4,6 +4,7 @@ carpetamsaddition:
 
   network:
     incompatible_protocol: '<AMSP> Your client network protocol (%s) is incompatible with this server (%s). Some AMSP-based rules will not work correctly. Please use a client mod version compatible with this server'
+    incompatible_protocol_hint: 'You can enable incompatibleProtocolWarningDisabled to stop sending this warning'
 
   carpet:
     totalRules:
