@@ -120,7 +120,8 @@ public class AMSTranslations {
 
     @Nullable
     public static String translateKeyToFormattedString(String lang, String key) {
-        return getTranslation(lang).get(key);
+        String translated = getTranslation(lang).get(key);
+        return translated != null ? translated : getTranslation(TranslationConstants.DEFAULT_LANGUAGE).get(key);
     }
 
     public static MutableComponent translate(Component text, ServerPlayer player) {
