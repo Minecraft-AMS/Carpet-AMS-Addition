@@ -23,21 +23,12 @@ package carpetamsaddition.mixin.rule.commandGetClientPlayerFPS;
 import net.minecraft.client.Minecraft;
 
 import org.spongepowered.asm.mixin.Mixin;
-//#if MC<=11802
-//$$ import org.spongepowered.asm.mixin.gen.Accessor;
-//#else
-import org.spongepowered.asm.mixin.gen.Invoker;
-//#endif
+import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(Minecraft.class)
-public interface MinecraftInvoker {
-    //#if MC<=11802
-    //$$ @Accessor("fps")
-    //$$ static int invokeGetFps() {
-    //$$     throw new AssertionError();
-    //$$ }
-    //#else
-    @Invoker("getFps")
-    int invokeGetFps();
-    //#endif
+public interface MinecraftAccessor {
+    @Accessor("fps")
+    static int getFps() {
+        throw new AssertionError();
+    }
 }
