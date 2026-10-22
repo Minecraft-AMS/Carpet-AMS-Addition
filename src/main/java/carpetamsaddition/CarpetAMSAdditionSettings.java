@@ -644,6 +644,10 @@ public class CarpetAMSAdditionSettings {
     public static boolean amsNetworkProtocol = false;
 
     @PersistAsDefault
+    @Rule(categories = {AMS, AMS_NETWORK})
+    public static boolean incompatibleProtocolWarningDisabled = false;
+
+    @PersistAsDefault
     @Rule(categories = {AMS, FEATURE, SURVIVAL, AMS_NETWORK})
     public static boolean blockHardnessSyncProtocol = false;
 
