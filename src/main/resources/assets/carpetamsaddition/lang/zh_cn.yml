@@ -290,7 +290,7 @@ carpetamsaddition:
 
     rule:
       commandLocationTag:
-        name: 位置标记指令
+        name: 位置标记
         desc: 启用/amsloc指令，用告示牌记录并查询跨维度位置；默认识别第一行为amsloc的普通橡木告示牌
       superBow:
         name: 超级弓

@@ -2666,7 +2666,7 @@ AMS网络协议的开关
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`
 
-## 位置标记指令（commandLocationTag）
+## 位置标记（commandLocationTag）
 
 启用/amsloc指令，用告示牌记录并查询跨维度位置；默认识别第一行为amsloc的普通橡木告示牌
 

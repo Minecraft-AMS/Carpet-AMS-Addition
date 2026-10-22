@@ -33,6 +33,9 @@
     document.querySelectorAll('[data-url-cn]').forEach((element) => {
       element.href = element.dataset[language === 'en' ? 'urlEn' : 'urlCn'];
     });
+    document.querySelectorAll('[data-label-cn]').forEach((element) => {
+      element.setAttribute('aria-label', element.dataset[language === 'en' ? 'labelEn' : 'labelCn']);
+    });
     document.querySelectorAll('[data-set-language]').forEach((button) => {
       const active = button.dataset.setLanguage === language;
       button.classList.toggle('is-active', active);
@@ -51,6 +54,14 @@
 
   // 使用事件委托处理新页面中的控件，避免切页后重复注册监听器。
   document.addEventListener('click', (event) => {
+    const scrollButton = event.target.closest('[data-scroll-edge]');
+    if (scrollButton) {
+      window.scrollTo({
+        top: scrollButton.dataset.scrollEdge === 'top' ? 0 : document.documentElement.scrollHeight,
+        behavior: 'smooth',
+      });
+      return;
+    }
     const themeButton = event.target.closest('[data-set-theme]');
     if (themeButton) {
       stored.theme = themeButton.dataset.setTheme;

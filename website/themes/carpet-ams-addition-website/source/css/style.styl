@@ -12,6 +12,8 @@
     --code-number: #6cb6ff
     --code-string: #96d0ff
     --code-title: #dcbdfb
+    --selection-bg: #315e55
+    --selection-text: #f0fff9
     color-scheme: dark
 
 :root[data-theme='light']
@@ -28,15 +30,25 @@
     --code-number: #175e9a
     --code-string: #286747
     --code-title: #684fb0
+    --selection-bg: #bfdfd2
+    --selection-text: #123c31
     color-scheme: light
 
 *
     box-sizing: border-box
 
+::selection
+    background: var(--selection-bg)
+    color: var(--selection-text)
+    text-shadow: none
+
 [hidden]
     display: none !important
 
 html
+    -webkit-text-size-adjust: 100%
+    text-size-adjust: 100%
+    -webkit-tap-highlight-color: transparent
     scroll-behavior: smooth
     scrollbar-color: var(--muted) var(--surface)
     scrollbar-width: thin
@@ -73,6 +85,10 @@ a
 
 button
     font: inherit
+
+hr, svg, .headerlink
+    -webkit-user-select: none
+    user-select: none
 
 // 以下划线开头的样式文件统一在此合并，不单独生成资源文件。
 @import './_partial/layout'

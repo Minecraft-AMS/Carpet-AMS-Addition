@@ -2,7 +2,7 @@
 favicon: images/icon.png
 
 appearance:
-  default_theme: system # 可选 system（跟随系统）、light（浅色）或 dark（深色）；优先使用访客保存的选择。
+  default_theme: dark # 可选 system（跟随系统）、light（浅色）或 dark（深色）；优先使用访客保存的选择。
   default_language: zh-CN # 可选 zh-CN（中文）或 en（英文）；中英文文档按页面地址确定语言。
 
 # 导航、中英文文档标题及语言切换的目标地址统一在此设置。

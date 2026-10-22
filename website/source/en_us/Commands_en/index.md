@@ -96,171 +96,171 @@ Run each command below, lines starting with `#` are comments:
 
 | Command | Function |
 | --- | --- |
-| `/playerChunkLoading [true/false]` | Control chunk loading of player. Can only manipulate yourself. |
+| `/playerChunkLoading [true/false]` | Control chunk loading of player; can only manipulate yourself |
 
 ## commandAnvilInteractionDisabled
 
 | Command | Function |
 | --- | --- |
-| `/anvilInteractionDisabled [true/false]` | Controls whether the player can interact with the anvil. |
+| `/anvilInteractionDisabled [true/false]` | Controls whether the player can interact with the anvil |
 
 ## amsUpdateSuppressionCrashFix
 
 | Command | Function |
 | --- | --- |
-| `/amsUpdateSuppressionCrashFixForceMode [true/false]` | Control whether forced startup is enabled when the `customBlockUpdateSuppressor`  rule is enabled. |
+| `/amsUpdateSuppressionCrashFixForceMode [true/false]` | Control whether forced startup is enabled when the `customBlockUpdateSuppressor`  rule is enabled |
 
 ## commandCustomBlockBlastResistance
 
 | Command | Function |
 | --- | --- |
-| `/customBlockBlastResistance set <block> <resistance>` | Add or modify blocks and their blast resistance. |
-| `/customBlockBlastResistance remove  <block>` | Remove a block from the list. |
-| `/customBlockBlastResistance removeAll` | Remove all blocks from the list. |
-| `/customBlockBlastResistance list` | Display all added blocks. |
-| `/customBlockBlastResistance help` | View the usage instructions. |
+| `/customBlockBlastResistance set <block> <resistance>` | Add or modify blocks and their blast resistance |
+| `/customBlockBlastResistance remove  <block>` | Remove a block from the list |
+| `/customBlockBlastResistance removeAll` | Remove all blocks from the list |
+| `/customBlockBlastResistance list` | Display all added blocks |
+| `/customBlockBlastResistance help` | View the usage instructions |
 
 ## commandHere
 
 | Command | Function |
 | --- | --- |
-| `/here` | send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect. |
+| `/here` | send the current dimension, coordinates, and corresponding overworld/nether coordinates of your current location and give oneself a 30s glowing effect |
 
 ## commandWhere
 
 | Command | Function |
 | --- | --- |
-| `/where` | get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect. |
+| `/where` | get the specified player's dimension, coordinates, and corresponding Overworld/Nether coordinates and give the target player a 30s glowing effect |
 
 ## commandPlayerLeader
 
 | Command | Function |
 | --- | --- |
-| `/leader add <player>` | Add a tour guide. |
-| `/leader remove <player>` | remove a tour guide. |
-| `/leader removeAll` | Remove all tour guide. |
-| `/leader broadcastLeaderPos <player> interval <tick>` | Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting. |
-| `/leader list` | View tour guide list. |
-| `/leader help` | View the usage instructions. |
+| `/leader add <player>` | Add a tour guide |
+| `/leader remove <player>` | remove a tour guide |
+| `/leader removeAll` | Remove all tour guide |
+| `/leader broadcastLeaderPos <player> interval <tick>` | Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting |
+| `/leader list` | View tour guide list |
+| `/leader help` | View the usage instructions |
 
 ## commandPacketInternetGroper
 
 | Command | Function |
 | --- | --- |
-| `/pings <targetIpOrDomainName> <pingQuantity>` | Ping a specific host. |
-| `/pings stop` | Interrupt the ping operation. |
+| `/pings <targetIpOrDomainName> <pingQuantity>` | Ping a specific host |
+| `/pings stop` | Interrupt the ping operation |
 
 ## commandGetSaveSize
 
 | Command | Function |
 | --- | --- |
-| `/getSaveSize` | Get save size. |
+| `/getSaveSize` | Get save size |
 
 ## commandGetSystemInfo
 
 | Command | Function |
 | --- | --- |
-| `/getSystemInfo` | Get the system information of the server. |
+| `/getSystemInfo` | Get the system information of the server |
 
 ## commandGoto
 
 | Command | Function |
 | --- | --- |
-| `/goto <dimension> <x> <y> <z>` | teleport to the specified dimension and coordinates. |
-| `/goto <dimension>` | Teleport to the corresponding coordinates of the current player location. |
+| `/goto <dimension> <x> <y> <z>` | teleport to the specified dimension and coordinates |
+| `/goto <dimension>` | Teleport to the corresponding coordinates of the current player location |
 
 ## commandCustomCommandPermissionLevel
 
 | Command | Function |
 | --- | --- |
-| `/customCommandPermissionLevel set <command> <permissionLevel>` | Set the permission level of a command. |
-| `/customCommandPermissionLevel remove <command>` | Remove a modified command. |
-| `/customCommandPermissionLevel removeAll` | Remove all modified commands. |
-| `/customCommandPermissionLevel refresh` | Refresh command tree. |
-| `/customCommandPermissionLevel list` | View the list of modified commands. |
-| `/customCommandPermissionLevel help` | View the usage instructions. |
+| `/customCommandPermissionLevel set <command> <permissionLevel>` | Set the permission level of a command |
+| `/customCommandPermissionLevel remove <command>` | Remove a modified command |
+| `/customCommandPermissionLevel removeAll` | Remove all modified commands |
+| `/customCommandPermissionLevel refresh` | Refresh command tree |
+| `/customCommandPermissionLevel list` | View the list of modified commands |
+| `/customCommandPermissionLevel help` | View the usage instructions |
 
 ## commandGetPlayerSkull
 
 | Command | Function |
 | --- | --- |
-| `/getPlayerSkull <player> <count>` | Get the skull of a specified player. |
+| `/getPlayerSkull <player> <count>` | Get the skull of a specified player |
 
 ## commandCustomMovableBlock
 
 | Command | Function |
 | --- | --- |
-| `/customMovableBlock add <block>` | Added a movable block. |
-| `/customMovableBlock remove <block>` | Delete a movable block. |
-| `/customMovableBlock removeAll` | Removes all added movable blocks. |
-| `/customMovableBlock list` | Check out the list of movable blocks. |
-| `/customMovableBlock help` | View the usage instructions. |
+| `/customMovableBlock add <block>` | Added a movable block |
+| `/customMovableBlock remove <block>` | Delete a movable block |
+| `/customMovableBlock removeAll` | Removes all added movable blocks |
+| `/customMovableBlock list` | Check out the list of movable blocks |
+| `/customMovableBlock help` | View the usage instructions |
 
 ## commandGetHeldItemID
 
 | Command | Function |
 | --- | --- |
-| `/getHeldItemID` | Get item ID of the player main hand item. |
+| `/getHeldItemID` | Get item ID of the player main hand item |
 
 ## commandCustomAntiFireItems
 
 | Command | Function |
 | --- | --- |
-| `/customAntiFireItems add <item>` | Added a anti fire item. |
-| `/customAntiFireItems  remove <block>` | Delete a anti fire item. |
-| `/customAntiFireItems removeAll` | Removes all added anti fire items. |
-| `/customAntiFireItems  list` | Check out the list of anti fire item. |
-| `/customAntiFireItems help` | View the usage instructions. |
+| `/customAntiFireItems add <item>` | Added a anti fire item |
+| `/customAntiFireItems  remove <block>` | Delete a anti fire item |
+| `/customAntiFireItems removeAll` | Removes all added anti fire items |
+| `/customAntiFireItems  list` | Check out the list of anti fire item |
+| `/customAntiFireItems help` | View the usage instructions |
 
 ## commandCarpetExtensionModWikiHyperlink
 
 | Command | Function |
 | --- | --- |
-| `/carpetExtensionModWikiHyperlink <ExtensionName>` | Get the Wiki link for a carpet extension mod. |
+| `/carpetExtensionModWikiHyperlink <ExtensionName>` | Get the Wiki link for a carpet extension mod |
 
 ## commandCustomBlockHardness
 
 | Command | Function |
 | --- | --- |
-| `/customBlockHardness set <block> <hardness>` | Add or modify blocks and their hardness. |
-| `/customBlockHardness remove <block>` | Remove a block from the list. |
-| `/customBlockHardness removeAll` | Remove all blocks from the list. |
-| `/customBlockHardness getDefaultHardness` | Query the default hardness of blocks. |
-| `/customBlockHardness list` | Display all added blocks. |
-| `/customBlockHardness help` | View the usage instructions. |
+| `/customBlockHardness set <block> <hardness>` | Add or modify blocks and their hardness |
+| `/customBlockHardness remove <block>` | Remove a block from the list |
+| `/customBlockHardness removeAll` | Remove all blocks from the list |
+| `/customBlockHardness getDefaultHardness` | Query the default hardness of blocks |
+| `/customBlockHardness list` | Display all added blocks |
+| `/customBlockHardness help` | View the usage instructions |
 
 ## commandAtSomeOnePlayer
 
 | Command | Function |
 | --- | --- |
-| `/@ <player>` | @ some one player. |
+| `/@ <player>` | @ some one player |
 
 ## commandGetClientPlayerFps
 
 | Command | Function |
 | --- | --- |
-| `/getClientPlayerFps <player>` | Get the FPS of the specified player. |
-| `/getClientPlayerFps help` | View the usage instructions. |
+| `/getClientPlayerFps <player>` | Get the FPS of the specified player |
+| `/getClientPlayerFps help` | View the usage instructions |
 
 ## commandSetPlayerPose
 
 | Command | Function |
 | --- | --- |
-| `/playerPose <player> set <pose>` | Set player pose. |
-| `/playerPose <player> stop` | Stop posing. |
-| `/playerPose help` | View the usage instructions. |
+| `/playerPose <player> set <pose>` | Set player pose |
+| `/playerPose <player> stop` | Stop posing |
+| `/playerPose help` | View the usage instructions |
 
 ## commandPlayerNoNetherPortalTeleport
 
 | Command | Function |
 | --- | --- |
-| `/playerNoNetherPortalTeleport globalMode [true/false]` | Set global mode. |
-| `/playerNoNetherPortalTeleport globalMode` | View the global mode status. |
-| `/playerNoNetherPortalTeleport add <player>` | Add a player to the blacklist. |
-| `/playerNoNetherPortalTeleport remove <player>` | Remove a player from the blacklist. |
-| `/playerNoNetherPortalTeleport clear` | Clear the blacklist. |
-| `/playerNoNetherPortalTeleport list` | View the blacklist. |
-| `/playerNoNetherPortalTeleport help` | View the usage instructions. |
+| `/playerNoNetherPortalTeleport globalMode [true/false]` | Set global mode |
+| `/playerNoNetherPortalTeleport globalMode` | View the global mode status |
+| `/playerNoNetherPortalTeleport add <player>` | Add a player to the blacklist |
+| `/playerNoNetherPortalTeleport remove <player>` | Remove a player from the blacklist |
+| `/playerNoNetherPortalTeleport clear` | Clear the blacklist |
+| `/playerNoNetherPortalTeleport list` | View the blacklist |
+| `/playerNoNetherPortalTeleport help` | View the usage instructions |
 
 ## commandLocationTag
 

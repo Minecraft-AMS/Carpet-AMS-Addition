@@ -2,8 +2,11 @@
     position: fixed
     inset: 0
     width: 100%
-    height: 100%
+    height: 100vh
+    height: 100lvh
     pointer-events: none
+    -webkit-user-select: none
+    user-select: none
 
 .site-effects-background
     z-index: 0
@@ -11,7 +14,3 @@
 
 .site-effects-clicks
     z-index: 2
-
-@media (prefers-reduced-motion: reduce)
-    .site-effects
-        display: none

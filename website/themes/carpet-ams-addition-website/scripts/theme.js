@@ -6,7 +6,13 @@ const path = require('node:path');
 const scriptVersions = new Map();
 const { stripHTML } = require('hexo-util');
 const { normalizeConfig, pageView } = require('./lib/config');
+const { highlightCommandBlocks } = require('./lib/minecraft-highlight');
 let settings;
+
+hexo.extend.filter.register('after_post_render', data => {
+  data.content = highlightCommandBlocks(data.content);
+  return data;
+});
 
 hexo.extend.filter.register('before_generate', () => {
   settings = normalizeConfig(hexo.theme.config);

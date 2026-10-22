@@ -1,5 +1,16 @@
+.article-page
+    flex: 1
+    display: flex
+    flex-direction: column
+
+    > .main-container
+        flex: 1
+        display: flex
+        flex-direction: column
+
 .article-layout
     position: relative
+    flex: 1
 
 .article-layout.has-page-toc
     width: calc(100% + 32px)
@@ -14,19 +25,21 @@
         margin: 0
 
 .page-toc
-    position: sticky
-    top: 34px
     width: 100%
     align-self: stretch
-    max-height: calc(100vh - 68px)
-    overflow-y: auto
-    padding: 4px 0 4px 20px
+    padding-left: 20px
     border-left: 1px solid var(--line)
 
     &[hidden]
         display: none
 
 .page-toc-inner
+    position: sticky
+    top: 34px
+    max-height: calc(100vh - 68px)
+    overflow-y: auto
+    padding: 4px 0
+
     .page-toc-title
         margin: 0 0 12px
         color: var(--muted)
@@ -82,6 +95,7 @@
     .post-content
         font-size: 17px
         line-height: 1.9
+        overflow-wrap: anywhere
 
         h1, h2, h3, h4, h5, h6
             margin: 2em 0 .65em

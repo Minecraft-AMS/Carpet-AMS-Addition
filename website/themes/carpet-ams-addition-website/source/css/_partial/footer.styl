@@ -17,22 +17,66 @@
     a
         color: var(--accent)
 
-#top
+.scroll-controls
     position: fixed
     right: 24px
-    bottom: 24px
-    width: 36px
-    height: 36px
-    border: 1px solid var(--line)
-    background: var(--surface)
-    border-radius: 50%
-    text-align: center
-    line-height: 33px
-    opacity: .9
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px))
+    z-index: 5
+    display: flex
+    flex-direction: column
+    align-items: center
 
-    a
-        color: var(--accent)
+    button
+        position: relative
+        display: grid
+        place-items: center
+        width: 38px
+        height: 38px
+        padding: 0
+        border: 0
+        border-radius: 7px
+        background: transparent
+        color: var(--muted)
+        opacity: .5
+        cursor: pointer
+        transition: opacity .18s ease, color .18s ease, transform .18s ease
+
+        &:hover, &:focus-visible
+            color: var(--text)
+            opacity: 1
+
+        &:focus-visible
+            outline: 2px solid var(--accent)
+            outline-offset: 2px
+
+        &:active
+            transform: scale(.93)
+
+        &::before
+            content: attr(aria-label)
+            position: absolute
+            right: calc(100% + 14px)
+            padding: 6px 10px
+            border: 1px solid var(--line)
+            border-radius: 7px
+            background: var(--surface)
+            color: var(--text)
+            font-size: 12px
+            line-height: 1.5
+            white-space: nowrap
+            pointer-events: none
+            opacity: 0
+            transform: translateX(4px)
+            transition: opacity .18s ease, transform .18s ease
+
+        &:hover::before, &:focus-visible::before
+            opacity: 1
+            transform: translateX(0)
 
 @media screen and (max-width: 760px)
     .footer-container
         width: calc(100% - 32px)
+
+    .scroll-controls
+        right: 16px
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px))

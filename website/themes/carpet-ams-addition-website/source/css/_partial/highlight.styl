@@ -5,13 +5,14 @@
     border-radius: 8px
     background: var(--code)
     color: var(--text)
+    font-size: 14px
 
     table
         width: max-content
         min-width: 100%
         margin: 0
         border: 0
-        font-size: 14px
+        font-size: inherit
 
     td
         padding: 0
@@ -42,9 +43,17 @@
         background: var(--surface)
         color: var(--muted)
         user-select: none
+        -webkit-user-select: none
 
         pre
             text-align: right
+
+@media screen and (max-width: 760px)
+    .post-content .highlight
+        font-size: 13px
+
+        pre
+            padding: 12px
 
 pre code.hljs {
     display: block;
@@ -170,3 +179,27 @@ code.hljs {
 .hljs-tag {
   /* 以下语法元素不单独设置样式 */
 }
+
+// Minecraft 指令；与现有明暗主题共用色板。
+.mc-command
+    color: var(--code-keyword)
+    font-weight: 600
+
+.mc-keyword, .mc-parameter
+    color: var(--code-title)
+
+.mc-number, .mc-literal
+    color: var(--code-number)
+
+.mc-selector, .mc-property
+    color: var(--accent-strong)
+
+.mc-resource
+    color: var(--accent)
+
+.mc-string
+    color: var(--code-string)
+
+.mc-comment
+    color: var(--muted)
+    font-style: italic

@@ -6,7 +6,6 @@
   if (!backgroundContext && !clickContext) return;
 
   const root = document.documentElement;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const smallScreen = window.matchMedia('(max-width: 760px)');
 
   const maxBursts = 8;
@@ -23,6 +22,7 @@
   const fragmentsPerClick = particleCount(clicks?.dataset.particleCount, 8);
   let width = 0;
   let height = 0;
+  let pixelRatio = 0;
   let particles = [];
   let bursts = [];
   let colors = [];
@@ -37,17 +37,28 @@
   };
 
   const resize = () => {
-    width = window.innerWidth;
-    height = window.innerHeight;
+    const surface = background || clicks;
+    const nextWidth = surface.clientWidth || window.innerWidth;
+    const nextHeight = surface.clientHeight || window.innerHeight;
     const scale = Math.min(window.devicePixelRatio || 1, 2);
+    const count = backgroundContext ? (smallScreen.matches ? mobileParticles : desktopParticles) : 0;
+    if (width === nextWidth && height === nextHeight && pixelRatio === scale && particles.length === count) return;
+    // 地址栏收起/展开时不重建画布；真正改变尺寸时保留粒子的运动状态。
+    for (const particle of particles) {
+      particle.x = particle.x / width * nextWidth;
+      particle.y = particle.y / height * nextHeight;
+    }
+    width = nextWidth;
+    height = nextHeight;
+    pixelRatio = scale;
     for (const [canvas, context] of [[background, backgroundContext], [clicks, clickContext]]) {
       if (!context) continue;
       canvas.width = Math.round(width * scale);
       canvas.height = Math.round(height * scale);
       context.setTransform(scale, 0, 0, scale, 0, 0);
     }
-    const count = smallScreen.matches ? mobileParticles : desktopParticles;
-    particles = backgroundContext ? Array.from({ length: count }, () => ({
+    particles.length = Math.min(particles.length, count);
+    while (particles.length < count) particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
       size: 2 + Math.random() * 4,
@@ -55,8 +66,7 @@
       phase: Math.random() * Math.PI * 2,
       age: Math.random() * 10,
       outlined: Math.random() > 0.7,
-    })) : [];
-    lastBackgroundFrame = null;
+    });
   };
 
   const drawBackground = (elapsed) => {
@@ -121,7 +131,7 @@
   };
 
   const start = () => {
-    if (frame === null && pageActive && !document.hidden && !reducedMotion.matches
+    if (frame === null && pageActive && !document.hidden
       && (particles.length || bursts.length)) {
       frame = requestAnimationFrame(animate);
     }
@@ -138,7 +148,6 @@
 
   const syncMotion = () => {
     stop();
-    if (reducedMotion.matches) backgroundContext?.clearRect(0, 0, width, height);
     start();
   };
 
@@ -151,7 +160,7 @@
     window.addEventListener('pointerup', (event) => {
       const origin = pointerStart;
       pointerStart = null;
-      if (!origin || origin.id !== event.pointerId || event.button !== 0 || reducedMotion.matches
+      if (!origin || origin.id !== event.pointerId || event.button !== 0
         || !pageActive || document.hidden || event.defaultPrevented) return;
       if (Math.hypot(event.clientX - origin.x, event.clientY - origin.y) > 6) return;
       bursts.push({
@@ -174,7 +183,6 @@
   window.addEventListener('pagehide', () => { pageActive = false; stop(); });
   window.addEventListener('pageshow', () => { pageActive = true; start(); });
   document.addEventListener('visibilitychange', syncMotion);
-  reducedMotion.addEventListener('change', syncMotion);
   new MutationObserver(readColors).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 
   readColors();
