@@ -47,12 +47,16 @@ public abstract class Carpet_PlayerCommandMixin {
         method = "cantManipulate",
         at = @At(
             value = "INVOKE",
+            //#if MC>=12006
             target = "Lnet/minecraft/commands/CommandSourceStack;getPlayer()Lnet/minecraft/server/level/ServerPlayer;"
+            //#else
+            //$$ target = "Lnet/minecraft/commands/CommandSourceStack;getPlayerOrException()Lnet/minecraft/server/level/ServerPlayer;"
+            //#endif
         ),
         cancellable = true
     )
     private static void realPlayerControlDisabled(CallbackInfoReturnable<Boolean> cir, @Local Player player) {
-        if (CarpetAMSAdditionSettings.realPlayerControlDisabled && !FakePlayerHelper.isFakePlayer(player)) {
+        if (CarpetAMSAdditionSettings.realPlayerControlDisabled && player != null && !FakePlayerHelper.isFakePlayer(player)) {
             Messenger.tell(player, Messenger.f(tr.tr("blocked"), Layout.RED));
             cir.setReturnValue(true);
         }
