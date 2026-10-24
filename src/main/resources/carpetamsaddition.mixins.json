@@ -4,10 +4,7 @@
   "package": "carpetamsaddition.mixin",
   "compatibilityLevel": "/*JAVA_VERSION*/",
   "mixins": [
-    "rule.enderPearlRestoreFix.ProjectileInvoker",
-    "rule.enderPearlRestoreFix.ServerPlayerMixin",
-    "rule.enderPearlRestoreFix.ServerLevelMixin",
-    "rule.enderPearlRestoreFix.PersistentEntitySectionManagerAccessor",
+    "rule.ghastFireballExplosionDamageSourceFix.LargeFireballMixin",
     "rule.destroyBlockPosWarningDisabled.ServerPlayerGameModeMixin",
     "rule.commandLocationTag.BlockEntityMixin",
     "rule.commandLocationTag.LevelChunkMixin",

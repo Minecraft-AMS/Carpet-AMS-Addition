@@ -18,14 +18,14 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.rule.enderPearlRestoreFix;
+package carpetamsaddition.mixin.rule.ghastFireballExplosionDamageSourceFix;
 
-import carpetamsaddition.utils.compat.DummyInterface;
+import carpetamsaddition.utils.compat.DummyClass;
 
 import org.spongepowered.asm.mixin.Mixin;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft >= 1.21.8")
-@Mixin(DummyInterface.class)
-public interface PersistentEntitySectionManagerAccessor {}
+@GameVersion(version = "Minecraft < 1.19.3")
+@Mixin(DummyClass.class)
+public abstract class LargeFireballMixin {}

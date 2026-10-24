@@ -18,40 +18,31 @@
  * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
  */
 
-package carpetamsaddition.mixin.rule.enderPearlRestoreFix;
+package carpetamsaddition.mixin.rule.ghastFireballExplosionDamageSourceFix;
 
-import carpetamsaddition.helpers.rule.enderPearlRestoreFix.EntitySectionLookup;
+import carpetamsaddition.CarpetAMSAdditionSettings;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.entity.EntitySectionStorage;
-import net.minecraft.world.level.entity.PersistentEntitySectionManager;
+import net.minecraft.world.entity.projectile.LargeFireball;
 
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-import java.util.UUID;
-
-@GameVersion(version = "Minecraft >= 1.21.8")
-@Mixin(ServerLevel.class)
-public abstract class ServerLevelMixin implements EntitySectionLookup {
-    @Shadow
-    @Final
-    private PersistentEntitySectionManager<Entity> entityManager;
-
-    @Override
-    @Unique
-    public boolean ams$isEntityLoaded(UUID uuid) {
-        return this.entityManager.isLoaded(uuid);
-    }
-
-    @Override
-    @Unique
-    public EntitySectionStorage<Entity> ams$getSectionStorage() {
-        return ((PersistentEntitySectionManagerAccessor) this.entityManager).ams$getSectionStorage();
+@GameVersion(version = "Minecraft < 1.19.3")
+@Mixin(LargeFireball.class)
+public abstract class LargeFireballMixin {
+    @ModifyArg(
+        method = "onHit(Lnet/minecraft/world/phys/HitResult;)V",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/level/Level;explode(Lnet/minecraft/world/entity/Entity;DDDFZLnet/minecraft/world/level/Explosion$BlockInteraction;)Lnet/minecraft/world/level/Explosion;"
+        ),
+        index = 0
+    )
+    private Entity fillUpExplosionOwner(Entity entity) {
+        return CarpetAMSAdditionSettings.ghastFireballExplosionDamageSourceFix ? (LargeFireball) (Object) this : entity;
     }
 }

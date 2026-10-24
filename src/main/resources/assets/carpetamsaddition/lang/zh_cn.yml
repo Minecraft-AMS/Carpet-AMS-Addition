@@ -819,14 +819,12 @@ carpetamsaddition:
       realPlayerControlDisabled:
         name: 真玩家控制保护
         desc: 禁止通过Carpet的/player指令操作任何真玩家
-      enderPearlRestoreFix:
-        name: 末影珍珠恢复修复
-        desc: 修复服务器重启后玩家登录时重复恢复末影珍珠导致的 UUID 冲突警告
-        extra:
-          '0': '当世界中已存在相同 UUID 且归属相同玩家的珍珠时，复用该珍珠并恢复玩家关联与区块加载票据'
       destroyBlockPosWarningDisabled:
         name: 禁用挖掘位置不匹配警告
         desc: 禁用服务端发出的“Mismatch in destroy block pos”警告
+      ghastFireballExplosionDamageSourceFix:
+        name: 恶魂火球爆炸伤害源修复
+        desc: 修复MC-193297中，恶魂火球爆炸时不会正确传递伤害源
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

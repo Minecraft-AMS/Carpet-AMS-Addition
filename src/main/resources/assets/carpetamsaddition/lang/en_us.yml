@@ -683,12 +683,10 @@ carpetamsaddition:
           '1': '[server] - Use the language set by the server for all translations'
       realPlayerControlDisabled:
         desc: 'Prevent Carpet /player commands from controlling any real player'
-      enderPearlRestoreFix:
-        desc: Fix duplicate UUID warnings caused by restoring ender pearls again when players log in after a server restart
-        extra:
-          '0': 'Reuse an existing pearl with the same UUID and owner, restoring its player association and chunk loading ticket'
       destroyBlockPosWarningDisabled:
         desc: Disable the server-side "Mismatch in destroy block pos" warning
+      ghastFireballExplosionDamageSourceFix:
+        desc: Fix MC-193297 where ghast fireball explosions do not correctly attribute their damage source
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

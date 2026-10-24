@@ -1846,22 +1846,6 @@ AMS网络协议的开关
 - 参考选项: `false`, `true`
 - 分类: `AMS`, `COMMAND`
 
-## 末影珍珠恢复修复（enderPearlRestoreFix）
-
-> 版本：`Minecraft >= 1.21.8`
-
-修复服务器重启后玩家登录时重复恢复末影珍珠导致的 UUID 冲突警告
-
-当世界中已存在相同 UUID 且归属相同玩家的珍珠时，复用该珍珠并恢复玩家关联与区块加载票据
-
-- 类型: `boolean`
-
-- 默认值: `false`
-
-- 参考选项: `false`, `true`
-
-- 分类: `AMS`, `BUGFIX`
-
 ## 禁用挖掘位置不匹配警告（destroyBlockPosWarningDisabled）
 
 禁用服务端发出的“Mismatch in destroy block pos”警告

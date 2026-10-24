@@ -459,7 +459,7 @@ Prevent update suppression from causing server crashes, while providing the coor
 
 > Version: `Minecraft < 1.19.3`
 
-Fix MC-193297 that the large fireball does not create explosion with correct damage source.
+Fix MC-193297 where ghast fireball explosions do not correctly attribute their damage source.
 
 - Type: `boolean`
 
@@ -1842,22 +1842,6 @@ Prevent Carpet /player commands from controlling any real player
 - Default: `false`
 - Suggested options: `false`, `true`
 - Categories: `AMS`, `COMMAND`
-
-## enderPearlRestoreFix
-
-> Version: `Minecraft >= 1.21.8`
-
-Fix duplicate UUID warnings caused by restoring ender pearls again when players log in after a server restart
-
-Reuse an existing pearl with the same UUID and owner, restoring its player association and chunk loading ticket
-
-- Type: `boolean`
-
-- Default: `false`
-
-- Suggested options: `false`, `true`
-
-- Categories: `AMS`, `BUGFIX`
 
 ## destroyBlockPosWarningDisabled
 

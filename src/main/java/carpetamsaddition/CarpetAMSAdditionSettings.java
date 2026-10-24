@@ -637,12 +637,14 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, COMMAND})
     public static boolean realPlayerControlDisabled = false;
 
-    @GameVersion(version = "Minecraft >= 1.21.8")
-    @Rule(categories = {AMS, BUGFIX})
-    public static boolean enderPearlRestoreFix = false;
-
     @Rule(categories = {AMS, FEATURE})
     public static boolean destroyBlockPosWarningDisabled = false;
+
+    //#if MC<11903
+    //$$ @GameVersion(version = "Minecraft < 1.19.3")
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL, BUGFIX})
+    //$$ public static boolean ghastFireballExplosionDamageSourceFix = false;
+    //#endif
 
     /*
      * AMS网络协议规则
