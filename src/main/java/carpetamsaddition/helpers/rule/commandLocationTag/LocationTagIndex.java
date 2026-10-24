@@ -38,8 +38,13 @@ public final class LocationTagIndex {
             this.z = z;
         }
 
-        public String positionKey() { return dimension + ":" + x + "," + y + "," + z; }
-        public String chunkKey() { return LocationTagIndex.chunkKey(dimension, x >> 4, z >> 4); }
+        public String positionKey() {
+            return dimension + ":" + x + "," + y + "," + z;
+        }
+
+        public String chunkKey() {
+            return LocationTagIndex.chunkKey(dimension, x >> 4, z >> 4);
+        }
     }
 
     private final Map<String, Entry> positions = new HashMap<>();
@@ -122,6 +127,7 @@ public final class LocationTagIndex {
         }
 
         needsNumbering |= changed;
+
         return changed;
     }
 
