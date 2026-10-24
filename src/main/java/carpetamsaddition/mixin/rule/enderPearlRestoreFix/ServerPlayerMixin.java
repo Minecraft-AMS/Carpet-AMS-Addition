@@ -21,10 +21,12 @@
 package carpetamsaddition.mixin.rule.enderPearlRestoreFix;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.enderPearlRestoreFix.EntitySectionLookup;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -35,12 +37,18 @@ import net.minecraft.world.entity.EntityProcessor;
 //$$ import java.util.function.Function;
 //#endif
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.entity.EntitySection;
+import net.minecraft.world.level.entity.EntitySectionStorage;
 import net.minecraft.world.level.storage.ValueInput;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
+
+import java.util.Iterator;
+import java.util.UUID;
 
 @GameVersion(version = "Minecraft >= 1.21.8")
 @Mixin(ServerPlayer.class)
@@ -76,7 +84,7 @@ public abstract class ServerPlayerMixin {
         //$$ Function<Entity, Entity> restore = entity -> {
         //#endif
             if (entity instanceof ThrownEnderpearl && ((ProjectileInvoker) entity).ams$invokeOwnedBy(player)) {
-                Entity existing = level.getEntity(entity.getUUID());
+                Entity existing = ams$findExistingEntity((ServerLevel) level, entity);
                 if (existing instanceof ThrownEnderpearl && !existing.isRemoved() && ((ProjectileInvoker) existing).ams$invokeOwnedBy(player)) {
                     ((ThrownEnderpearl) entity).setOwner(null);
                     player.deregisterEnderPearl((ThrownEnderpearl) entity);
@@ -93,5 +101,64 @@ public abstract class ServerPlayerMixin {
         };
 
         return original.call(input, level, reason, restore);
+    }
+
+    @Unique
+    private static Entity ams$findExistingEntity(ServerLevel level, Entity entity) {
+        UUID uuid = entity.getUUID();
+        Entity existing = level.getEntity(uuid);
+
+        if (existing != null) {
+            return existing;
+        }
+
+        EntitySectionLookup lookup = (EntitySectionLookup) level;
+
+        if (!lookup.ams$isEntityLoaded(uuid)) {
+            return null;
+        }
+
+        EntitySectionStorage<Entity> storage = lookup.ams$getSectionStorage();
+        //#if MC>=260000
+        //$$ long savedChunk = entity.chunkPosition().pack();
+        //#else
+        long savedChunk = entity.chunkPosition().toLong();
+        //#endif
+        existing = ams$findEntityInChunk(storage, savedChunk, uuid);
+
+        if (existing != null) {
+            return existing;
+        }
+
+        for (long chunk : storage.getAllChunksWithExistingSections()) {
+            if (chunk == savedChunk) {
+                continue;
+            }
+
+            existing = ams$findEntityInChunk(storage, chunk, uuid);
+
+            if (existing != null) {
+                return existing;
+            }
+        }
+
+        return null;
+    }
+
+    @Unique
+    private static Entity ams$findEntityInChunk(EntitySectionStorage<Entity> storage, long chunk, UUID uuid) {
+        Iterator<EntitySection<Entity>> sections = storage.getExistingSectionsInChunk(chunk).iterator();
+
+        while (sections.hasNext()) {
+            Iterator<Entity> entities = sections.next().getEntities().iterator();
+            while (entities.hasNext()) {
+                Entity entity = entities.next();
+                if (entity.getUUID().equals(uuid)) {
+                    return entity;
+                }
+            }
+        }
+
+        return null;
     }
 }

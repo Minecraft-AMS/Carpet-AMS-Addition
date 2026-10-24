@@ -215,8 +215,6 @@ public class AMSTranslations {
             return style;
         }
 
-        return style.withHoverEvent(HoverEventUtil.event(
-            HoverEventUtil.SHOW_TEXT, translateTextComponent(hoverText, lang)
-        ));
+        return style.withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, translateTextComponent(hoverText, lang)));
     }
 }
