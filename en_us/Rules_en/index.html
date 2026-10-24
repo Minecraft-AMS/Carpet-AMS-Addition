@@ -567,7 +567,7 @@
 <h2 id="ghastFireballExplosionDamageSourceFix"><a href="#ghastFireballExplosionDamageSourceFix" class="headerlink" title="ghastFireballExplosionDamageSourceFix"></a>ghastFireballExplosionDamageSourceFix</h2><blockquote>
 <p>Version: <code>Minecraft &lt; 1.19.3</code></p>
 </blockquote>
-<p>Fix MC-193297 that the large fireball does not create explosion with correct damage source.</p>
+<p>Fix MC-193297 where ghast fireball explosions do not correctly attribute their damage source.</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
 </li>
@@ -1888,21 +1888,6 @@
 <li>Default: <code>false</code></li>
 <li>Suggested options: <code>false</code>, <code>true</code></li>
 <li>Categories: <code>AMS</code>, <code>COMMAND</code></li>
-</ul>
-<h2 id="enderPearlRestoreFix"><a href="#enderPearlRestoreFix" class="headerlink" title="enderPearlRestoreFix"></a>enderPearlRestoreFix</h2><blockquote>
-<p>Version: <code>Minecraft &gt;= 1.21.8</code></p>
-</blockquote>
-<p>Fix duplicate UUID warnings caused by restoring ender pearls again when players log in after a server restart</p>
-<p>Reuse an existing pearl with the same UUID and owner, restoring its player association and chunk loading ticket</p>
-<ul>
-<li><p>Type: <code>boolean</code></p>
-</li>
-<li><p>Default: <code>false</code></p>
-</li>
-<li><p>Suggested options: <code>false</code>, <code>true</code></p>
-</li>
-<li><p>Categories: <code>AMS</code>, <code>BUGFIX</code></p>
-</li>
 </ul>
 <h2 id="destroyBlockPosWarningDisabled"><a href="#destroyBlockPosWarningDisabled" class="headerlink" title="destroyBlockPosWarningDisabled"></a>destroyBlockPosWarningDisabled</h2><p>Disable the server-side “Mismatch in destroy block pos” warning</p>
 <ul>
