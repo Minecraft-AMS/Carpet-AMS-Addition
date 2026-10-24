@@ -637,6 +637,13 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, COMMAND})
     public static boolean realPlayerControlDisabled = false;
 
+    @GameVersion(version = "Minecraft >= 1.21.8")
+    @Rule(categories = {AMS, BUGFIX})
+    public static boolean enderPearlRestoreFix = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean destroyBlockPosWarningDisabled = false;
+
     /*
      * AMS网络协议规则
      */
@@ -709,7 +716,10 @@ public class CarpetAMSAdditionSettings {
     )
     public static String commandPlayerChunkLoadController = "false";
 
-    @Rule(options = {"false", "true", "ops", "0", "1", "2", "3", "4"}, categories = {AMS, COMMAND, FEATURE})
+    @Rule(
+        options = {"false", "true", "ops", "0", "1", "2", "3", "4"},
+        categories = {AMS, COMMAND, FEATURE}
+    )
     public static String commandLocationTag = "false";
 
     //#if MC<12005

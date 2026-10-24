@@ -737,9 +737,6 @@ carpetamsaddition:
       onlyOpCanSpawnRealPlayerInWhitelist:
         name: 仅OP可召唤白名单中的玩家
         desc: 只有OP玩家可以召唤在白名单中的玩家，无论白名单是否开启
-      realPlayerControlDisabled:
-        name: 真玩家控制保护
-        desc: 禁止通过Carpet的/player指令操作任何真玩家，包括操作者自己，OP和控制台也不能绕过，不影响假玩家
       itemEntityCreateNetherPortalDisabled:
         name: 禁止物品实体创建下界传送门
         desc: 让物品实体穿过下界传送门时不会创建传送门
@@ -819,6 +816,17 @@ carpetamsaddition:
         extra:
           '0': '[client] - 优先使用客户端自己的语言向客户端发送翻译文本'
           '1': '[server] - 统一使用服务端设置的语言进行翻译'
+      realPlayerControlDisabled:
+        name: 真玩家控制保护
+        desc: 禁止通过Carpet的/player指令操作任何真玩家
+      enderPearlRestoreFix:
+        name: 末影珍珠恢复修复
+        desc: 修复服务器重启后玩家登录时重复恢复末影珍珠导致的 UUID 冲突警告
+        extra:
+          '0': '当世界中已存在相同 UUID 且归属相同玩家的珍珠时，复用该珍珠并恢复玩家关联与区块加载票据'
+      destroyBlockPosWarningDisabled:
+        name: 禁用挖掘位置不匹配警告
+        desc: 禁用服务端发出的“Mismatch in destroy block pos”警告
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:

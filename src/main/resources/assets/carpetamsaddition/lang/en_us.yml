@@ -682,7 +682,13 @@ carpetamsaddition:
           '0': '[client] - Prefer sending translated text to the client using the client’s own language'
           '1': '[server] - Use the language set by the server for all translations'
       realPlayerControlDisabled:
-        desc: 'Prevent Carpet /player commands from controlling any real player, including the command sender. OPs and the console cannot bypass this protection. Fake players are unaffected'
+        desc: 'Prevent Carpet /player commands from controlling any real player'
+      enderPearlRestoreFix:
+        desc: Fix duplicate UUID warnings caused by restoring ender pearls again when players log in after a server restart
+        extra:
+          '0': 'Reuse an existing pearl with the same UUID and owner, restoring its player association and chunk loading ticket'
+      destroyBlockPosWarningDisabled:
+        desc: Disable the server-side "Mismatch in destroy block pos" warning
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
