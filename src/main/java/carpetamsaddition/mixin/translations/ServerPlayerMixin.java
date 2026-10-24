@@ -24,7 +24,6 @@ import carpetamsaddition.translations.AMSTranslations;
 import carpetamsaddition.translations.ServerPlayerEntityWithClientLanguage;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 
 //#if MC>=12002
 import net.minecraft.server.level.ClientInformation;
@@ -43,7 +42,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ServerPlayer.class)
 public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientLanguage {
     @Unique
-    private String clientLanguage$AMS = "en_US";
+    private String ams$clientLanguage = "en_US";
 
     @Inject(method = "updateOptions", at = @At("HEAD"))
     private void getClientLanguage(
@@ -55,15 +54,15 @@ public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientL
         CallbackInfo ci
     ) {
         //#if MC>=11800
-        this.clientLanguage$AMS = information.language();
+        this.ams$clientLanguage = information.language();
         //#else
-        //$$ this.clientLanguage$AMS = ((ServerboundClientInformationPacketAccessor) information).getLanguage();
+        //$$ this.ams$clientLanguage = ((ServerboundClientInformationPacketAccessor) information).ams$getLanguage();
         //#endif
     }
 
     @Override
-    public String getClientLanguage$AMS() {
-        return this.clientLanguage$AMS;
+    public String ams$getClientLanguage() {
+        return this.ams$clientLanguage;
     }
 
     @ModifyVariable(
@@ -82,8 +81,9 @@ public abstract class ServerPlayerMixin implements ServerPlayerEntityWithClientL
         argsOnly = true
     )
     private Component applyAMSTranslationToSystemMessage(Component message) {
-        if (message instanceof MutableComponent) {
-            message = AMSTranslations.translate((MutableComponent) message, (ServerPlayer) (Object) this);
+        ServerPlayer player = (ServerPlayer) (Object) this;
+        if (player != null) {
+            return AMSTranslations.translate(message, player);
         }
 
         return message;

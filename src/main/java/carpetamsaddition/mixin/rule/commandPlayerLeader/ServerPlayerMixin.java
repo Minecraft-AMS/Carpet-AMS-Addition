@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.commandPlayerLeader;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommandRegistry;
+import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommand;
 import carpetamsaddition.utils.PlayerUtil;
 
 import net.minecraft.server.level.ServerPlayer;
@@ -41,12 +41,12 @@ public abstract class ServerPlayerMixin {
         if (
             !Objects.equals(CarpetAMSAdditionSettings.commandPlayerLeader, "false") &&
             !alive &&
-            LeaderCommandRegistry.LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(newPlayer))
+            LeaderCommand.LEADER_MAP.containsValue(PlayerUtil.getPlayerUUID(newPlayer))
         ) {
             //#if MC>=11700
-            newPlayer.addEffect(LeaderCommandRegistry.HIGH_LIGHT, newPlayer);
+            newPlayer.addEffect(LeaderCommand.HIGH_LIGHT, newPlayer);
             //#else
-            //$$ newPlayer.addEffect(LeaderCommandRegistry.HIGH_LIGHT);
+            //$$ newPlayer.addEffect(LeaderCommand.HIGH_LIGHT);
             //#endif
         }
     }

@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.commandCustomBlockHardness;
 
-import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
+import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommand;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -34,14 +34,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = Blocks.class, priority = 16888)
 public abstract class BlocksMixin {
     @Inject(method = "<clinit>", at = @At("RETURN"))
-    private static void registerCustomBlockHardness(CallbackInfo ci) {
+    private static void defaultHardnessCache(CallbackInfo ci) {
         for (Block block : BuiltInRegistries.BLOCK) {
             //#if MC>=11700
             float hardness = block.defaultDestroyTime();
             //#else
             //$$ float hardness = block.defaultBlockState().getDestroySpeed(null, null);
             //#endif
-            CustomBlockHardnessCommandRegistry.DEFAULT_HARDNESS_MAP.put(block, hardness);
+            CustomBlockHardnessCommand.DEFAULT_HARDNESS_MAP.put(block, hardness);
         }
     }
 }

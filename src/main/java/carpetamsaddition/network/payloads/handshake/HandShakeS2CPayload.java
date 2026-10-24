@@ -45,13 +45,13 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
 
     public HandShakeS2CPayload(FriendlyByteBuf buf) {
         super(ID);
-        this.modVersion = NetworkUtil.readBufString(buf);
+        this.modVersion = buf.readUtf();
         this.isSupportServer = buf.readBoolean();
         int packetCount = buf.readVarInt();
         this.supportedPackets = new HashSet<>();
 
         for (int i = 0; i < packetCount; i++) {
-            this.supportedPackets.add(NetworkUtil.readBufString(buf));
+            this.supportedPackets.add(buf.readUtf());
         }
     }
 
@@ -68,16 +68,14 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        NetworkUtil.executeOnClientThread(() -> {
-            if (this.modVersion.equals(CarpetAMSAdditionClient.getVersion())) {
-                CarpetAMSAdditionClient.LOGGER.info("You joined server with matched carpet-ams-addition v{}", this.modVersion);
-            } else {
-                CarpetAMSAdditionClient.LOGGER.info("You joined server with mismatched carpet-ams-addition version (client: v{}, server: v{})", CarpetAMSAdditionClient.getVersion(), this.modVersion);
-            }
+        if (this.modVersion.equals(CarpetAMSAdditionClient.getVersion())) {
+            CarpetAMSAdditionClient.LOGGER.info("You joined server with matched carpet-ams-addition v{}", this.modVersion);
+        } else {
+            CarpetAMSAdditionClient.LOGGER.info("You joined server with mismatched carpet-ams-addition version (client: v{}, server: v{})", CarpetAMSAdditionClient.getVersion(), this.modVersion);
+        }
 
-            NetworkUtil.setServerSupport(this.isSupportServer);
-            NetworkUtil.setServerSupportedPackets(this.supportedPackets);
-        });
+        NetworkUtil.setServerSupport(this.isSupportServer);
+        NetworkUtil.setServerSupportedPackets(this.supportedPackets);
     }
 
     public static HandShakeS2CPayload create(String modVersion, boolean isSupportServer) {

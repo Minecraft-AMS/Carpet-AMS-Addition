@@ -35,7 +35,7 @@ public abstract class PlayerMixin {
     @Inject(method = "awardStat(Lnet/minecraft/stats/Stat;)V", at = @At("HEAD"), cancellable = true)
     private void increaseStat(CallbackInfo ci) {
         if (CarpetAMSAdditionSettings.fakePlayerNoScoreboardCounter) {
-            Player player = (Player)(Object)this;
+            Player player = (Player) (Object) this;
             if (FakePlayerHelper.isFakePlayer(player)) {
                 ci.cancel();
             }

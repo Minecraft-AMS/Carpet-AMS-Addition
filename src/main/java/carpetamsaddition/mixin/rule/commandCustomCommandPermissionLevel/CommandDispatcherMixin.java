@@ -21,8 +21,8 @@
 package carpetamsaddition.mixin.rule.commandCustomCommandPermissionLevel;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.utils.CommandHelper;
-import carpetamsaddition.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelRegistry;
+import carpetamsaddition.api.command.CommandHelper;
+import carpetamsaddition.commands.rule.commandCustomCommandPermissionLevel.CustomCommandPermissionLevelCommand;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -41,7 +41,7 @@ import java.util.Objects;
 public abstract class CommandDispatcherMixin {
     @Inject(method = "register", at = @At("HEAD"), remap = false)
     private void saveDefaultRequirement(LiteralArgumentBuilder<CommandSourceStack> command, CallbackInfoReturnable<LiteralCommandNode<CommandSourceStack>> cir) {
-        CustomCommandPermissionLevelRegistry.DEFAULT_PERMISSION_MAP.putIfAbsent(command.getLiteral(), command.getRequirement());
+        CustomCommandPermissionLevelCommand.DEFAULT_PERMISSION_MAP.putIfAbsent(command.getLiteral(), command.getRequirement());
     }
 
     @Inject(
@@ -53,8 +53,8 @@ public abstract class CommandDispatcherMixin {
         remap = false
     )
     private void modifyPermissionLevel(LiteralArgumentBuilder<CommandSourceStack> command, CallbackInfoReturnable<LiteralCommandNode<CommandSourceStack>> cir) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomCommandPermissionLevel, "false") && CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.containsKey(command.getLiteral())) {
-            int level = CustomCommandPermissionLevelRegistry.COMMAND_PERMISSION_MAP.get(command.getLiteral());
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomCommandPermissionLevel, "false") && CustomCommandPermissionLevelCommand.COMMAND_PERMISSION_MAP.containsKey(command.getLiteral())) {
+            int level = CustomCommandPermissionLevelCommand.COMMAND_PERMISSION_MAP.get(command.getLiteral());
             command.requires(source -> CommandHelper.hasPermissionLevel(source, level));
         }
     }

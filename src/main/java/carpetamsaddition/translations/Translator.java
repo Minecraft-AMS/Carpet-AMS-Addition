@@ -20,7 +20,7 @@
 
 package carpetamsaddition.translations;
 
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import net.minecraft.network.chat.MutableComponent;
 

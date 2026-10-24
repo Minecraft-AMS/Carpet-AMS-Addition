@@ -1,0 +1,83 @@
+/*
+ * This file is part of the Carpet AMS Addition project, licensed under the
+ * GNU Lesser General Public License v3.0
+ *
+ * Copyright (C) 2024 A Minecraft Server and contributors
+ *
+ * Carpet AMS Addition is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Carpet AMS Addition is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Carpet AMS Addition. If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package carpetamsaddition.commands.rule.commandGoto;
+
+import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.api.command.AmsCommand;
+import carpetamsaddition.api.command.Arguments;
+import carpetamsaddition.api.command.CommandBuilder;
+import carpetamsaddition.utils.compat.DimensionWrapper;
+
+//#if MC>=12102
+import java.util.Set;
+//#endif
+
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+
+public class GotoCommand implements AmsCommand {
+    @Override
+    public void define(CommandBuilder command) {
+        command.name("goto")
+            .carpetRule(() -> CarpetAMSAdditionSettings.commandGoto)
+            .route(Arguments.dimension("dimension")).executes(c -> executeSimpleTeleport(c.player(), c.get(Arguments.dimension("dimension"))))
+            .route(Arguments.dimension("dimension"), Arguments.blockPos("destination")).executes(c -> executeTeleport(c.player(), c.get(Arguments.dimension("dimension")), c.get(Arguments.blockPos("destination"))));
+    }
+
+    private static int executeTeleport(ServerPlayer player, ServerLevel targetDimension, BlockPos destinationPos) {
+        int x = destinationPos.getX();
+        int y = destinationPos.getY();
+        int z = destinationPos.getZ();
+        //#if MC>=12102
+        player.teleportTo(targetDimension, x, y, z, Set.of(), player.getViewXRot(1), 1, false);
+        //#else
+        //$$ player.teleportTo(targetDimension, x, y, z, player.getViewYRot(1), player.getViewXRot(1));
+        //#endif
+        return 1;
+    }
+
+    private static int executeSimpleTeleport(ServerPlayer player, ServerLevel targetWorld) {
+        DimensionWrapper currentDimension = DimensionWrapper.of(
+            //#if MC>=12006
+            player.level()
+            //#else
+            //$$ player.level
+            //#endif
+        );
+        DimensionWrapper targetDimension = DimensionWrapper.of(targetWorld);
+        return executeTeleport(player, targetWorld, calculatePos(player, currentDimension, targetDimension));
+    }
+
+    private static BlockPos calculatePos(ServerPlayer player, DimensionWrapper currentDimension, DimensionWrapper targetDimension) {
+        if (currentDimension.getValue().equals(ServerLevel.OVERWORLD) && targetDimension.getValue().equals(ServerLevel.NETHER)) {
+            return createCompatPos(player.getX() / 8, player.getY(), player.getZ() / 8);
+        } else if (currentDimension.getValue().equals(ServerLevel.NETHER) && targetDimension.getValue().equals(ServerLevel.OVERWORLD)) {
+            return createCompatPos(player.getX() * 8, player.getY(), player.getZ() * 8);
+        } else {
+            return player.blockPosition();
+        }
+    }
+
+    public static BlockPos createCompatPos(double x, double y, double z) {
+        return new BlockPos((int) x, (int) y, (int) z);
+    }
+}

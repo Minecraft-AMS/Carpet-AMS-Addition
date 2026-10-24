@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.commandSetPlayerPose;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommandRegistry;
+import carpetamsaddition.commands.rule.commandSetPlayerPose.SetPlayerPoseCommand;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -48,7 +48,7 @@ public abstract class EntityMixin {
 
         if (!Objects.equals(CarpetAMSAdditionSettings.commandSetPlayerPose, "false") && entity instanceof Player) {
             Player player = (Player) entity;
-            String poseName = SetPlayerPoseCommandRegistry.DO_POSE_MAP.get(player.getUUID());
+            String poseName = SetPlayerPoseCommand.DO_POSE_MAP.get(player.getUUID());
             if (poseName != null) {
                 return POSE_MAPPING.getOrDefault(poseName, original);
             }

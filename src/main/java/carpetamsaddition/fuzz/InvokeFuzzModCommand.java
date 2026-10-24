@@ -22,7 +22,7 @@ package carpetamsaddition.fuzz;
 
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import net.minecraft.network.chat.Component;
 
@@ -37,7 +37,7 @@ public class InvokeFuzzModCommand {
 
         return Messenger.f(Messenger.style(
             Messenger.s(" [+H]"),
-            Messenger.simpleCmdButtonStyle(cmd, tr.tr("highlightCoordButtonHoverText"), Layout.YELLOW)
+            Messenger.cmdbtn(cmd, tr.tr("highlightCoordButtonHoverText"), Layout.YELLOW)
         ), Layout.YELLOW, Layout.BOLD);
     }
 }

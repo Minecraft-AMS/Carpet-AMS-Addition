@@ -7,7 +7,9 @@
 
 package carpetamsaddition.network;
 
+import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.utils.IdentifierUtil;
+import carpetamsaddition.utils.compat.PreprocessPattern;
 
 //#if MC>=12005
 import net.minecraft.network.codec.StreamCodec;
@@ -23,7 +25,9 @@ import org.jetbrains.annotations.NotNull;
 //#endif
 
 public abstract class AMS_CustomPayload implements CustomPacketPayload {
-    public static final Identifier CHANNEL_ID = IdentifierUtil.of("carpetamsaddition", "network/v1");
+    public static final Identifier CHANNEL_ID = IdentifierUtil.of(CarpetAMSAdditionServer.compactName, "network/v2");
+    public static final String CHANNEL_ID_STRING = CHANNEL_ID.getNamespace() + ":" + CHANNEL_ID.getPath();
+    public static final String CHANNEL_NAMESPACE = CHANNEL_ID.getNamespace();
     //#if MC>=12005
     public static final CustomPacketPayload.Type<@NotNull AMS_CustomPayload> KEY = new CustomPacketPayload.Type<>(CHANNEL_ID);
     public static final StreamCodec<@NotNull FriendlyByteBuf, @NotNull AMS_CustomPayload> CODEC = CustomPacketPayload.codec(AMS_CustomPayload::write, AMS_PayloadCodec::decodePayload);
@@ -55,7 +59,13 @@ public abstract class AMS_CustomPayload implements CustomPacketPayload {
 
     protected abstract void writeData(FriendlyByteBuf buf);
 
-    protected abstract void handle();
+    protected void handle() {
+        throw new UnsupportedOperationException("This payload does not support client-side handling");
+    }
+
+    protected void handle(ServerPlayer sender) {
+        throw new UnsupportedOperationException("This payload does not support server-side handling");
+    }
 
     public final void sendC2SPacket(LocalPlayer player) {
         AMS_PayloadSender.c2s(this, player);
@@ -63,5 +73,14 @@ public abstract class AMS_CustomPayload implements CustomPacketPayload {
 
     public final void sendS2CPacket(ServerPlayer player) {
         AMS_PayloadSender.s2c(this, player);
+    }
+
+    @PreprocessPattern
+    private static String readUtf(FriendlyByteBuf buf) {
+        //#if MC>=11700
+        return buf.readUtf();
+        //#else
+        //$$ return buf.readUtf(Short.MAX_VALUE);
+        //#endif
     }
 }

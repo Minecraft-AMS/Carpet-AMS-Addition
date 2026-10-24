@@ -20,13 +20,16 @@
 
 package carpetamsaddition.mixin.rule.largeShulkerBox;
 
-import carpetamsaddition.CarpetAMSAdditionLazySettings;
+import carpetamsaddition.CarpetAMSAdditionSettings;
+
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.BlockPos;
@@ -42,70 +45,118 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.stream.IntStream;
 
-import static carpetamsaddition.CarpetAMSAdditionLazySettings.Rule.*;
-
 @Mixin(value = ShulkerBoxBlockEntity.class, priority = 1024)
 public abstract class ShulkerBoxBlockEntityMixin extends RandomizableContainerBlockEntity implements WorldlyContainer {
-    //#if MC<11700
-    //$$ protected ShulkerBoxBlockEntityMixin(BlockEntityType<?> blockEntityType) {
-    //$$     super(blockEntityType);
-    //$$ }
-    //#else
-    protected ShulkerBoxBlockEntityMixin(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
-        super(blockEntityType, blockPos, blockState);
+    @Unique
+    private boolean ams$lastLargeShulkerBox = CarpetAMSAdditionSettings.largeShulkerBox;
+
+    @Unique
+    private int ams$sizeBeforeExpansion = -1;
+
+    protected ShulkerBoxBlockEntityMixin(
+        BlockEntityType<?> blockEntityType
+        //#if MC>=11700
+        , BlockPos blockPos, BlockState blockState
+        //#endif
+    ) {
+        super(
+            blockEntityType
+            //#if MC>=11700
+            , blockPos, blockState
+            //#endif
+        );
     }
-    //#endif
 
     @Shadow
     private NonNullList<@NotNull ItemStack> itemStacks;
 
     @Shadow
+    private int openCount;
+
+    @Shadow
     public abstract int getContainerSize();
 
-    @Inject(
-        method =
-        //#if MC<11700
-        //$$ "<init>()V",
-        //#else
-        "<init>(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
-        //#endif
-        at = @At("RETURN")
-    )
-    private void init1(CallbackInfo ci) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
-            this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
+    @ModifyReturnValue(method = "getContainerSize", at = @At("RETURN"))
+    private int size(int original) {
+        int currentSize = this.itemStacks.size();
+        if (CarpetAMSAdditionSettings.largeShulkerBox) {
+            int size = 9 * 6;
+
+            if (currentSize < size) {
+                NonNullList<@NotNull ItemStack> expandedItems = NonNullList.withSize(size, ItemStack.EMPTY);
+
+                for (int slot = 0; slot < currentSize; slot++) {
+                    expandedItems.set(slot, this.itemStacks.get(slot));
+                }
+
+                this.itemStacks = expandedItems;
+                this.ams$sizeBeforeExpansion = currentSize;
+            }
+
+            return Math.max(original, size);
         }
+
+        if (this.ams$sizeBeforeExpansion >= 0 && currentSize == 9 * 6) {
+            for (int slot = this.ams$sizeBeforeExpansion; slot < currentSize; slot++) {
+                this.itemStacks.set(slot, ItemStack.EMPTY);
+            }
+
+            if (this.openCount != 0) {
+                return original;
+            }
+
+            NonNullList<@NotNull ItemStack> originalItems = NonNullList.withSize(this.ams$sizeBeforeExpansion, ItemStack.EMPTY);
+
+            for (int slot = 0; slot < originalItems.size(); slot++) {
+                originalItems.set(slot, this.itemStacks.get(slot));
+            }
+
+            this.itemStacks = originalItems;
+            this.ams$sizeBeforeExpansion = -1;
+
+            return original == currentSize ? originalItems.size() : original;
+        }
+
+        return original;
     }
 
-    @Inject(
-        method =
-        //#if MC<11700
-        //$$ "<init>(Lnet/minecraft/world/item/DyeColor;)V",
-        //#else
-        "<init>(Lnet/minecraft/world/item/DyeColor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V",
-        //#endif
-        at = @At("RETURN")
-    )
-    private void init2(CallbackInfo ci) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
-            this.itemStacks = NonNullList.withSize(9 * 6, ItemStack.EMPTY);
+    //#if MC>=11700
+    @Inject(method = "tick", at = @At("HEAD"))
+    private static void onTick(Level level, BlockPos pos, BlockState state, ShulkerBoxBlockEntity box, CallbackInfo ci) {
+        if (!level.isClientSide()) {
+            ((ShulkerBoxBlockEntityMixin) (Object) box).ams$updateRuleState();
         }
     }
+    //#else
+    //$$ @Inject(method = "tick", at = @At("HEAD"))
+    //$$ private void updateComparatorOnRuleChange(CallbackInfo ci) {
+    //$$     if (this.level != null && !this.level.isClientSide()) {
+    //$$         this.ams$updateRuleState();
+    //$$     }
+    //$$ }
+    //#endif
 
-    @Inject(method = "getContainerSize", at = @At("HEAD"), cancellable = true)
-    private void size(CallbackInfoReturnable<Integer> cir) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
-            cir.setReturnValue(9 * 6);
-            cir.cancel();
+    @Unique
+    private void ams$updateRuleState() {
+        boolean enabled = CarpetAMSAdditionSettings.largeShulkerBox;
+        boolean ruleChanged = this.ams$lastLargeShulkerBox != enabled;
+        int previousSize = this.itemStacks.size();
+        if (ruleChanged || (!enabled && this.ams$sizeBeforeExpansion >= 0)) {
+            this.getContainerSize();
+            this.ams$lastLargeShulkerBox = enabled;
+            if (ruleChanged || previousSize != this.itemStacks.size()) {
+                this.setChanged();
+            }
         }
     }
 
     @Inject(method = "getSlotsForFace", at = @At("HEAD"), cancellable = true)
     private void getAvailableSlots(Direction side, CallbackInfoReturnable<int[]> cir) {
-        if (CarpetAMSAdditionLazySettings.isEnabled(LARGE_SHULKER_BOX)) {
-            int[] availableSlots = IntStream.range(0, getContainerSize()).toArray();
-            cir.setReturnValue(availableSlots);
-            cir.cancel();
+        if (CarpetAMSAdditionSettings.largeShulkerBox) {
+            int size = this.getContainerSize();
+            if (this.ams$sizeBeforeExpansion >= 0 && this.itemStacks.size() == 9 * 6) {
+                cir.setReturnValue(IntStream.range(0, size).toArray());
+            }
         }
     }
 }

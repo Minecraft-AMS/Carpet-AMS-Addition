@@ -25,19 +25,22 @@ import carpet.CarpetSettings;
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.FileUtil;
+import carpetamsaddition.utils.messageTextEvent.HoverEventUtil;
+import carpetamsaddition.utils.messenger.Messenger;
 
-import carpetamsaddition.utils.Messenger;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 //#if MC<11904
 //$$ import net.minecraft.network.chat.TranslatableComponent;
 //#else
 import net.minecraft.network.chat.contents.TranslatableContents;
 //#endif
 import net.minecraft.server.level.ServerPlayer;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -90,7 +93,7 @@ public class AMSTranslations {
         return translation;
     }
 
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({"unchecked", "IfCanBeSwitch"})
     private static void buildTranslationMap(Map<String, String> translation, Map<String, Object> yaml, String prefix) {
         yaml.forEach((key, value) -> {
             String fullKey = prefix.isEmpty() ? key : prefix + "." + key;
@@ -117,15 +120,16 @@ public class AMSTranslations {
 
     @Nullable
     public static String translateKeyToFormattedString(String lang, String key) {
-        return getTranslation(lang).get(key);
+        String translated = getTranslation(lang).get(key);
+        return translated != null ? translated : getTranslation(TranslationConstants.DEFAULT_LANGUAGE).get(key);
     }
 
-    public static MutableComponent translate(MutableComponent text, ServerPlayer player) {
+    public static MutableComponent translate(Component text, ServerPlayer player) {
         if (!(player instanceof ServerPlayerEntityWithClientLanguage)) {
-            return text;
+            return Messenger.copy(text);
         }
 
-        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).getClientLanguage$AMS().toLowerCase();
+        String clientLang = ((ServerPlayerEntityWithClientLanguage) player).ams$getClientLanguage().toLowerCase();
         String serverLang = AMSTranslations.getServerLanguage();
 
         if (CarpetAMSAdditionSettings.amsTranslationMode == CarpetAMSAdditionSettings.translationModes.SERVER) {
@@ -136,7 +140,14 @@ public class AMSTranslations {
     }
 
     @NotNull
-    private static MutableComponent translateTextComponent(@NotNull MutableComponent text, String lang) {
+    private static MutableComponent translateTextComponent(@NotNull Component text, String lang) {
+        return translateTextComponent(text, lang, Style.EMPTY);
+    }
+
+    @SuppressWarnings("PatternVariableCanBeUsed")
+    @NotNull
+    private static MutableComponent translateTextComponent(@NotNull Component text, String lang, Style parentStyle) {
+        Style style = translateStyle(text.getStyle(), lang).applyTo(parentStyle);
         //#if MC>=11904
         if (text.getContents() instanceof TranslatableContents) {
             TranslatableContents translatableContents = (TranslatableContents) text.getContents();
@@ -152,31 +163,33 @@ public class AMSTranslations {
                 String translated = translateKeyToFormattedString(lang, key);
 
                 if (translated != null && !translated.equals(key)) {
+
                     Object[] args = translatableContents.getArgs();
+                    MutableComponent newComponent;
+
                     if (args.length > 0) {
 
                         Object[] translatedArgs = new Object[args.length];
 
                         for (int i = 0; i < args.length; i++) {
-                            if (args[i] instanceof MutableComponent) {
-                                translatedArgs[i] = translateTextComponent((MutableComponent) args[i], lang);
+                            if (args[i] instanceof Component) {
+                                translatedArgs[i] = translateTextComponent((Component) args[i], lang, style);
                             } else {
                                 translatedArgs[i] = args[i];
                             }
                         }
 
-                        translated = String.format(translated, translatedArgs);
+                        newComponent = Messenger.tr(translated, translatedArgs);
+
+                    } else {
+                        newComponent = Messenger.s(translated);
                     }
 
-                    MutableComponent newComponent = Messenger.style(Messenger.s(translated), text.getStyle());
+                    Messenger.style(newComponent, style);
                     newComponent.getSiblings().clear();
 
                     for (Component sibling : text.getSiblings()) {
-                        if (sibling instanceof MutableComponent) {
-                            newComponent.append(translateTextComponent((MutableComponent) sibling, lang));
-                        } else {
-                            newComponent.append(sibling);
-                        }
+                        newComponent.append(translateTextComponent(sibling, lang, style));
                     }
 
                     return newComponent;
@@ -185,16 +198,23 @@ public class AMSTranslations {
         }
 
         MutableComponent result = Messenger.copy(text);
+        Messenger.style(result, style);
         result.getSiblings().clear();
 
         for (Component sibling : text.getSiblings()) {
-            if (sibling instanceof MutableComponent) {
-                result.append(translateTextComponent((MutableComponent) sibling, lang));
-            } else {
-                result.append(sibling);
-            }
+            result.append(translateTextComponent(sibling, lang, style));
         }
 
         return result;
+    }
+
+    private static Style translateStyle(Style style, String lang) {
+        Component hoverText = HoverEventUtil.getText(style.getHoverEvent());
+
+        if (hoverText == null) {
+            return style;
+        }
+
+        return style.withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, translateTextComponent(hoverText, lang)));
     }
 }

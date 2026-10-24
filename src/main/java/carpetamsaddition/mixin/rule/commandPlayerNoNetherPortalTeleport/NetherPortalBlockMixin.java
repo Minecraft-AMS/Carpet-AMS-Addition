@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.commandPlayerNoNetherPortalTeleport;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.commands.rule.commandPlayerNoNetherPortalTeleport.PlayerNoNetherPortalTeleportRegistry;
+import carpetamsaddition.commands.rule.commandPlayerNoNetherPortalTeleport.PlayerNoNetherPortalTeleportCommand;
 import carpetamsaddition.utils.PlayerUtil;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -78,6 +78,6 @@ public abstract class NetherPortalBlockMixin {
             return false;
         }
 
-        return PlayerNoNetherPortalTeleportRegistry.isGlobalMode || PlayerNoNetherPortalTeleportRegistry.NO_NETHER_PORTAL_TELEPORT_SET.contains(PlayerUtil.getPlayerUUID((Player) entity));
+        return PlayerNoNetherPortalTeleportCommand.isGlobalMode || PlayerNoNetherPortalTeleportCommand.NO_NETHER_PORTAL_TELEPORT_SET.contains(PlayerUtil.getPlayerUUID((Player) entity));
     }
 }

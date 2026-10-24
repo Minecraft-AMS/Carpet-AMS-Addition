@@ -22,13 +22,13 @@ package carpetamsaddition.mixin.network;
 
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
+import carpetamsaddition.utils.NetworkUtil;
 
 //#if MC>=12005
 import net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl;
 import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
 //#else
 //$$ import net.minecraft.client.multiplayer.ClientPacketListener;
-//$$ import net.minecraft.network.FriendlyByteBuf;
 //$$ import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
 //#endif
 
@@ -55,28 +55,17 @@ public abstract class ClientPlayNetworkHandlerMixin {
         cancellable = true
     )
     private void onCustomPayload(ClientboundCustomPayloadPacket packet, CallbackInfo ci) {
-        //#if MC>=12005
-        if (packet.payload() instanceof AMS_CustomPayload) {
-            AMS_CustomPayload payload = (AMS_CustomPayload) packet.payload();
-            if (
-                payload.type().id().equals(AMS_CustomPayload.CHANNEL_ID) &&
-                AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)
-            ) {
+        if (!AMS_CustomPayload.CHANNEL_ID.equals(NetworkUtil.getChannelId(packet))) {
+            return;
+        }
+
+        try {
+            AMS_CustomPayload payload = NetworkUtil.getAmsPayload(packet);
+            if (payload != null && AMS_PayloadManager.DispatcherGetter.getS2CDispatcher().dispatch(payload)) {
                 ci.cancel();
             }
+        } finally {
+            NetworkUtil.releasePayload(packet);
         }
-        //#else
-        //$$ if (packet.getIdentifier().equals(AMS_CustomPayload.CHANNEL_ID)) {
-        //$$     FriendlyByteBuf data = packet.getData();
-        //$$     try {
-        //$$         AMS_CustomPayload payload = AMS_PayloadManager.decodeS2CPacket(packet);
-        //$$         if (AMS_PayloadManager.HandlerChainGetter.getS2CHandlerChain().handle(payload)) {
-        //$$             ci.cancel();
-        //$$         }
-        //$$     } finally {
-        //$$         data.release();
-        //$$     }
-        //$$ }
-        //#endif
     }
 }

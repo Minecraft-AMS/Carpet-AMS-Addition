@@ -21,12 +21,13 @@
 package carpetamsaddition.utils;
 
 import carpetamsaddition.CarpetAMSAdditionServer;
-import static carpetamsaddition.utils.Messenger.*;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.MutableComponent;
 
 import org.jetbrains.annotations.Nullable;
+
 import org.spongepowered.asm.mixin.MixinEnvironment;
 
 public class MixinUtil {
@@ -36,7 +37,7 @@ public class MixinUtil {
 
         try {
             MixinEnvironment.getCurrentEnvironment().audit();
-            response = s("Mixin environment audited successfully");
+            response = Messenger.s("Mixin environment audited successfully");
             ok = true;
         } catch (Exception e) {
             CarpetAMSAdditionServer.LOGGER.error("Error when auditing mixin", e);

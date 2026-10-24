@@ -21,34 +21,78 @@
 package carpetamsaddition.mixin.rule.commandAnvilInteractionDisabled;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommandRegistry;
+import carpetamsaddition.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommand;
+import carpetamsaddition.utils.Noop;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.InteractionResult;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
+import java.util.OptionalInt;
 
 @Mixin(AnvilBlock.class)
 public abstract class AnvilBlockMixin {
-    @Inject(
-        method =
-            //#if MC>=12005
-            "useWithoutItem",
-            //#else
-            //$$ "use",
-            //#endif
-        at = @At("HEAD"),
-        cancellable = true
+    @ModifyReturnValue(
+        //#if MC>=12005
+        method = "useWithoutItem",
+        //#else
+        //$$ method = "use",
+        //#endif
+        at = @At("RETURN")
     )
-    private void onUse(CallbackInfoReturnable<InteractionResult> cir) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.commandAnvilInteractionDisabled, "false") && AnvilInteractionDisabledCommandRegistry.anvilInteractionDisabled) {
-            cir.setReturnValue( InteractionResult.FAIL);
-            cir.cancel();
+    private InteractionResult passUse(InteractionResult original) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandAnvilInteractionDisabled, "false") && AnvilInteractionDisabledCommand.anvilInteractionDisabled) {
+            return InteractionResult.PASS;
         }
+
+        return original;
+    }
+
+    @WrapOperation(
+        //#if MC>=12005
+        method = "useWithoutItem",
+        //#else
+        //$$ method = "use",
+        //#endif
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/player/Player;openMenu(Lnet/minecraft/world/MenuProvider;)Ljava/util/OptionalInt;"
+        )
+    )
+    private OptionalInt passOpenMenu(Player player, MenuProvider menuProvider, Operation<OptionalInt> original) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandAnvilInteractionDisabled, "false") && AnvilInteractionDisabledCommand.anvilInteractionDisabled) {
+            return OptionalInt.empty();
+        }
+
+        return original.call(player, menuProvider);
+    }
+
+    @WrapOperation(
+        //#if MC>=12005
+        method = "useWithoutItem",
+        //#else
+        //$$ method = "use",
+        //#endif
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/player/Player;awardStat(Lnet/minecraft/resources/Identifier;)V"
+        )
+    )
+    private void passAwardStat(Player player, Identifier identifier, Operation<Void> original) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandAnvilInteractionDisabled, "false") && AnvilInteractionDisabledCommand.anvilInteractionDisabled) {
+            Noop.noop();
+        }
+
+        original.call(player, identifier);
     }
 }

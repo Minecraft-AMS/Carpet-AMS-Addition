@@ -41,9 +41,9 @@ import org.spongepowered.asm.mixin.Mixin;
 public interface RecipeManagerAccessor {
     //#if MC>=260300
     //$$ @Accessor("recipes")
-    //$$ RecipeMap carpet_ams_addition$getRecipeMap();
+    //$$ RecipeMap ams$getRecipeMap();
     //#elseif MC>12006
     @Accessor("registries")
-    HolderLookup.Provider getRegistries();
+    HolderLookup.Provider ams$getRegistries();
     //#endif
 }

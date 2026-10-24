@@ -1,16 +1,14 @@
+<% const view = theme_view(page); %>
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <link rel="shortcut icon" href="<%= url_for(theme.favicon) %>" type="image/x-icon" />
-    <title>
-        <% if (page.title) { %>
-            <%= page.title %> |
-        <% } %> 
-        <%= config.title %>
-    </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="shortcut icon" href="<%= url_for(view.favicon) %>" type="image/x-icon" />
+    <% const titleCn = view.section ? view.section.title_cn : page.title; %>
+    <% const titleEn = view.section ? view.section.title_en : (page.title_en || page.title); %>
+    <title<% if (titleCn) { %> data-title-cn="<%= titleCn %> | <%= config.title %>" data-title-en="<%= titleEn %> | <%= config.title %>"<% } %>><%= (view.language === 'en' ? titleEn : titleCn) ? (view.language === 'en' ? titleEn : titleCn) + ' | ' : '' %><%= config.title %></title>
+    <script src="<%= theme_script('preferences.js') %>"></script>
     <%- css('css/style') %>
     <%- css('fontawesome/css/fontawesome.min') %>
     <%- css('fontawesome/css/brands.min') %>
     <%- css('fontawesome/css/solid.min') %>
-    <%- partial('partial/scripts/analytics.ejs') %>
 </head>

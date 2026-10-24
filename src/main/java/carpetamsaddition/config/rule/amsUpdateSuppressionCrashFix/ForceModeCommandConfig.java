@@ -34,7 +34,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommandRegistry.amsUpdateSuppressionCrashFixForceMode;
+import static carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommand.amsUpdateSuppressionCrashFixForceMode;
 
 public class ForceModeCommandConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -42,6 +42,7 @@ public class ForceModeCommandConfig {
     public static void saveConfigToJson(MinecraftServer server) {
         File configFile = new File(getPath(server));
         JsonObject json = new JsonObject();
+
         if (!configFile.getParentFile().exists()) {
             boolean dirsCreated = configFile.getParentFile().mkdirs();
             if (!dirsCreated) {
@@ -49,7 +50,9 @@ public class ForceModeCommandConfig {
                 return;
             }
         }
+
         json.addProperty("amsUpdateSuppressionCrashFixForceMode", amsUpdateSuppressionCrashFixForceMode);
+
         try (FileWriter writer = new FileWriter(configFile)) {
             GSON.toJson(json, writer);
         } catch (IOException e) {

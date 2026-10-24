@@ -26,7 +26,7 @@ import carpet.api.settings.SettingsManager;
 import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionMod;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import net.minecraft.commands.CommandSourceStack;
 

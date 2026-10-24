@@ -28,6 +28,11 @@ import net.minecraft.world.item.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 无序合成配方构建器。
+ * 原料之间没有摆放位置要求，通过链式 API 依次添加原料，
+ * 最终在 {@link #build()} 时转换为 ShapelessRecipeTemplate 注册到 {@link AmsRecipeBuilder}。
+ */
 public class ShapelessRecipeBuilder extends AbstractRecipeBuilder {
     private final List<Item> ingredients = new ArrayList<>();
 
@@ -35,20 +40,24 @@ public class ShapelessRecipeBuilder extends AbstractRecipeBuilder {
         super(enabled, recipeName);
     }
 
+    /** 创建无序合成配方构建器。 */
     public static ShapelessRecipeBuilder create(boolean enabled, String recipeName) {
         return new ShapelessRecipeBuilder(enabled, recipeName);
     }
 
+    /** 追加一种原料物品。 */
     public ShapelessRecipeBuilder addIngredient(Item item) {
         ingredients.add(item);
         return this;
     }
 
+    /** 构建并注册配方：未启用或未设置产物时跳过，将原料转为注册名列表后提交。 */
     @Override
     public void build() {
         if (!enabled || resultItem == null) {
             return;
         }
+
         ChainableList<String> ingredientList = new ChainableList<>();
         ingredients.forEach(item -> ingredientList.cAdd(item(item)));
         AmsRecipeBuilder.getInstance().addShapelessRecipe(recipeName, ingredientList, item(resultItem), resultCount);

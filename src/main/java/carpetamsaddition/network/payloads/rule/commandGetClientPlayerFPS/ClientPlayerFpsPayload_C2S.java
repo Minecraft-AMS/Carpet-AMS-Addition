@@ -20,44 +20,38 @@
 
 package carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS;
 
-import carpetamsaddition.commands.rule.commandGetClientPlayerFps.GetClientPlayerFpsRegistry;
+import carpetamsaddition.commands.rule.commandGetClientPlayerFps.GetClientPlayerFpsCommand;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
-import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
-
-import java.util.UUID;
+import net.minecraft.server.level.ServerPlayer;
 
 public class ClientPlayerFpsPayload_C2S extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.CLIENT_PLAYER_FPS_C2S.getId();
-    private final UUID playerUuid;
     private final int fps;
 
-    public ClientPlayerFpsPayload_C2S(UUID playerUuid, int fps) {
+    public ClientPlayerFpsPayload_C2S(int fps) {
         super(ID);
-        this.playerUuid = playerUuid;
         this.fps = fps;
     }
 
     public ClientPlayerFpsPayload_C2S(FriendlyByteBuf buf) {
         super(ID);
-        this.playerUuid = buf.readUUID();
         this.fps = buf.readInt();
     }
 
     @Override
     protected void writeData(FriendlyByteBuf buf) {
-        buf.writeUUID(playerUuid);
         buf.writeInt(fps);
     }
 
     @Override
-    public void handle() {
-        NetworkUtil.executeOnServerThread(() -> GetClientPlayerFpsRegistry.sendFpsResult(this.playerUuid, this.fps));
+    public void handle(ServerPlayer sender) {
+        GetClientPlayerFpsCommand.sendFpsResult(sender, this.fps);
     }
 
-    public static ClientPlayerFpsPayload_C2S create(UUID playerUuid, int fps) {
-        return new ClientPlayerFpsPayload_C2S(playerUuid, fps);
+    public static ClientPlayerFpsPayload_C2S create(int fps) {
+        return new ClientPlayerFpsPayload_C2S(fps);
     }
 }

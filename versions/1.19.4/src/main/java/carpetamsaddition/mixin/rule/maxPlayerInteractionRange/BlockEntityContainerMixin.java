@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@GameVersion(version = "Minecraft < 1.19")
+@GameVersion(version = "Minecraft <= 1.19")
 @Mixin({
     AbstractFurnaceBlockEntity.class,
     BrewingStandBlockEntity.class,

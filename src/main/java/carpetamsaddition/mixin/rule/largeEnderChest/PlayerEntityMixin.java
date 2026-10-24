@@ -21,25 +21,22 @@
 package carpetamsaddition.mixin.rule.largeEnderChest;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.largeEnderChest.LargeEnderChestInventory;
 
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.core.NonNullList;
+import net.minecraft.world.inventory.PlayerEnderChestContainer;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Player.class)
-public abstract class PlayerEntityMixin implements PlayerInvoker {
-	@Inject(method = "<init>", at = @At("TAIL"))
-	private void largeEnderChest(CallbackInfo ci) {
-		if (CarpetAMSAdditionSettings.largeEnderChest) {
-			final int LARGE_ENDERCHEST_SIZE = 9 * 6;
-			SimpleContainerAccessor simpleInventoryAccessor = (SimpleContainerAccessor) this.invokeGetEnderChestInventory();
-			simpleInventoryAccessor.setSize(LARGE_ENDERCHEST_SIZE);
-			simpleInventoryAccessor.setStacks(NonNullList.withSize(LARGE_ENDERCHEST_SIZE, ItemStack.EMPTY));
-		}
-	}
+public abstract class PlayerEntityMixin {
+    @Inject(method = "getEnderChestInventory", at = @At("RETURN"))
+    private void expandEnderChestWhenEnabled(CallbackInfoReturnable<PlayerEnderChestContainer> cir) {
+        if (CarpetAMSAdditionSettings.largeEnderChest) {
+            LargeEnderChestInventory.ensureCapacity(cir.getReturnValue());
+        }
+    }
 }

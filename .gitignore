@@ -31,5 +31,3 @@ bin/
 # fabric
 
 run/*
-!run/options.txt
-!run/eula.txt

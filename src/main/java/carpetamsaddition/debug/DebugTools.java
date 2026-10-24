@@ -20,7 +20,7 @@
 
 package carpetamsaddition.debug;
 
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
 import org.jetbrains.annotations.TestOnly;

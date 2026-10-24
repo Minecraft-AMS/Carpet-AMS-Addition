@@ -22,84 +22,64 @@ package carpetamsaddition.mixin.rule.phantomSpawnAlert;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.PlayerUtil;
+import carpetamsaddition.utils.Layout;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 
-import net.minecraft.world.entity.monster.Phantom;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.network.chat.MutableComponent;
 //#if MC>=12006
 import net.minecraft.server.level.ServerPlayer;
 //#else
 //$$ import net.minecraft.world.entity.player.Player;
 //#endif
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.levelgen.PhantomSpawner;
 
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-//#if MC>12006
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-//#else
-//$$ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-//#endif
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(PhantomSpawner.class)
 public abstract class PhantomSpawnerMixin {
     @Unique
-    private static final Translator translator = new Translator("rule.phantomSpawnAlert");
+    private static final Translator tr = new Translator("rule.phantomSpawnAlert");
 
-    @Inject(
+    @WrapOperation(
         method = "tick",
         at = @At(
             value = "INVOKE",
-            //#if MC>12006
-            target = "Lnet/minecraft/world/entity/monster/Phantom;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;",
-            //#elseif MC>=12006
-            //$$ target = "Lnet/minecraft/world/entity/monster/Phantom;finalizeSpawn(Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/world/DifficultyInstance;Lnet/minecraft/world/entity/MobSpawnType;Lnet/minecraft/world/entity/SpawnGroupData;)Lnet/minecraft/world/entity/SpawnGroupData;",
-            //#else
-            //$$ target = "Lnet/minecraft/server/level/ServerLevel;addFreshEntityWithPassengers(Lnet/minecraft/world/entity/Entity;)V",
-            //#endif
-            shift = At.Shift.AFTER
+            target = "Lnet/minecraft/server/level/ServerLevel;addFreshEntityWithPassengers(Lnet/minecraft/world/entity/Entity;)V"
         )
     )
-    //#if MC>=12111
     private void broadcastMessage(
-        ServerLevel world, boolean spawnMonsters, CallbackInfo ci,
-        @Local ServerPlayer playerEntity, @Local Phantom phantom
-    )
-    //#elseif MC>12006
-    //$$ private void broadcastMessage(
-    //$$     ServerLevel world, boolean spawnMonsters, boolean spawnAnimals,
-    //$$     CallbackInfo ci,
-    //$$     @Local ServerPlayer playerEntity, @Local Phantom phantom
-    //$$ )
-    //#elseif MC>=12006
-    //$$ private void broadcastMessage(
-    //$$     ServerLevel world, boolean spawnMonsters, boolean spawnAnimals,
-    //$$     CallbackInfoReturnable<Integer> cir,
-    //$$     @Local ServerPlayer playerEntity, @Local Phantom phantom
-    //$$ )
-    //#else
-    //$$ private void broadcastMessage(
-    //$$     ServerLevel world, boolean bl, boolean bl2,
-    //$$     CallbackInfoReturnable<Integer> cir,
-    //$$     @Local Player playerEntity,
-    //$$     @Local Phantom phantom
-    //$$ )
-    //#endif
-    {
-        if (CarpetAMSAdditionSettings.phantomSpawnAlert && phantom != null) {
-            MinecraftServer server = world.getServer();
-            String playerName = PlayerUtil.getName(playerEntity);
-            double x = phantom.getX();
-            double y = phantom.getY();
-            double z = phantom.getZ();
+        ServerLevel world, Entity entity, Operation<Void> original,
+        //#if MC>=12006
+        @Local ServerPlayer playerEntity
+        //#else
+        //$$ @Local Player playerEntity
+        //#endif
+    ) {
+        original.call(world, entity);
+
+        if (CarpetAMSAdditionSettings.phantomSpawnAlert && world.getEntity(entity.getId()) == entity) {
+            double x = entity.getX();
+            double y = entity.getY();
+            double z = entity.getZ();
             String coord = x + ", " + y + ", " + z;
-            Messenger.sendServerMessage(server, Messenger.s(translator.tr("msg", playerName, coord).getString()));
+            MutableComponent coordinateText = Messenger.c(
+                Messenger.f(Messenger.s("@ "), Layout.YELLOW),
+                Messenger.f(Messenger.s("[ " + coord + " ]"), Layout.GREEN)
+            );
+            Messenger.sendServerMessage(world.getServer(), Messenger.c(
+                Messenger.f(Messenger.s("<phantomSpawnAlert> "), Layout.AQUA),
+                Messenger.f(Messenger.s(PlayerUtil.getName(playerEntity)), Layout.YELLOW),
+                Messenger.f(tr.tr("msg", coordinateText), Layout.LIGHT_PURPLE)
+            ));
         }
     }
 }

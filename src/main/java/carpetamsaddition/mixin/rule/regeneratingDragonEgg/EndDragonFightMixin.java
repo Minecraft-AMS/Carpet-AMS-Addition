@@ -22,66 +22,33 @@ package carpetamsaddition.mixin.rule.regeneratingDragonEgg;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
-import net.minecraft.world.level.block.Blocks;
-//#if MC>=12006
-import net.minecraft.core.BlockPos;
-//#endif
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.server.level.ServerLevel;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+
 import net.minecraft.world.level.dimension.end.EndDragonFight;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.feature.EndPodiumFeature;
 
-import org.spongepowered.asm.mixin.Final;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.UUID;
 
 @Mixin(EndDragonFight.class)
 public abstract class EndDragonFightMixin {
-
-    //#if MC>=12006
-    @Final
-    @Shadow
-    private BlockPos origin;
-    //#endif
-
-    @Final
-    @Shadow
-    private ServerLevel level;
-
-    @Shadow
-    private UUID dragonUUID;
-
-    @Shadow
-    //#if MC>=260000
-    //$$ private boolean hasPreviouslyKilledDragon;
-    //#else
-    public abstract boolean hasPreviouslyKilledDragon();
-    //#endif
-
-    @Inject(method = "setDragonKilled", at = @At("HEAD"))
-    private void dragonKilled(EnderDragon dragon, CallbackInfo ci) {
-        if (
-            CarpetAMSAdditionSettings.regeneratingDragonEgg &&
+    @ModifyExpressionValue(
+        method = "setDragonKilled",
+        at = @At(
+            value = "FIELD",
             //#if MC>=260000
-            //$$ this.hasPreviouslyKilledDragon &&
+            //$$ target = "Lnet/minecraft/world/level/dimension/end/EnderDragonFight;hasPreviouslyKilledDragon:Z",
             //#else
-            this.hasPreviouslyKilledDragon() &&
+            target = "Lnet/minecraft/world/level/dimension/end/EndDragonFight;previouslyKilled:Z",
             //#endif
-            dragon.getUUID().equals(this.dragonUUID)
-        ) {
-            //#if MC>=260300
-            //$$ this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, ((EnderDragonFightInvoker) this).invokeGetPodiumLocation(this.origin)), Blocks.DRAGON_EGG.defaultBlockState());
-            //#elseif MC>=12006
-            this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.getLocation(this.origin)), Blocks.DRAGON_EGG.defaultBlockState());
-            //#else
-            //$$ this.level.setBlockAndUpdate(this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, EndPodiumFeature.END_PODIUM_LOCATION), Blocks.DRAGON_EGG.defaultBlockState());
-            //#endif
+            opcode = Opcodes.GETFIELD
+        )
+    )
+    private boolean generateEggAfterEachDragonDeath(boolean previouslyKilled) {
+        if (CarpetAMSAdditionSettings.regeneratingDragonEgg) {
+            return false;
         }
+
+        return previouslyKilled;
     }
 }

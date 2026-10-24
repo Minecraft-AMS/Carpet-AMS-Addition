@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.commandCustomBlockHardness;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommandRegistry;
+import carpetamsaddition.commands.rule.commandCustomBlockHardness.CustomBlockHardnessCommand;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
@@ -39,7 +39,7 @@ public abstract class BlockStateBaseMixin implements BlockStateBaseInvoker {
     private float modifyHardness(float original) {
         if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomBlockHardness, "false")) {
             BlockState blockState = this.invokerGetBlock().defaultBlockState();
-            return CustomBlockHardnessCommandRegistry.CUSTOM_BLOCK_HARDNESS_MAP.getOrDefault(blockState, original);
+            return CustomBlockHardnessCommand.CUSTOM_BLOCK_HARDNESS_MAP.getOrDefault(blockState, original);
         } else {
             return original;
         }

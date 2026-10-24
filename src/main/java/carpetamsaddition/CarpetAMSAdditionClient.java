@@ -21,7 +21,9 @@
 package carpetamsaddition;
 
 import carpetamsaddition.network.AMS_PayloadManager;
+import carpetamsaddition.settings.AmsRuleMetadata;
 import carpetamsaddition.network.payloads.handshake.HandShakeC2SPayload;
+import carpetamsaddition.helpers.rule.blockHardnessSyncProtocol.BlockHardnessSyncCache;
 import carpetamsaddition.utils.MinecraftClientUtil;
 import carpetamsaddition.utils.NetworkUtil;
 
@@ -65,12 +67,13 @@ public class CarpetAMSAdditionClient implements ClientModInitializer {
 
     public void onGameJoin() {
         player = MinecraftClientUtil.getCurrentPlayer();
-        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(version, player.getUUID()), NetworkUtil.SendMode.FORCE);
+        NetworkUtil.sendC2SPacket(player, HandShakeC2SPayload.create(version), NetworkUtil.SendMode.FORCE);
     }
 
     public void onDisconnect() {
         NetworkUtil.setServerSupport(false);
-        CarpetAMSAdditionLazySettings.RULES.clear();
+        AmsRuleMetadata.clearClientLazyRuleValues();
+        BlockHardnessSyncCache.clear();
     }
 
     public void onTick() {

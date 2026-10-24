@@ -27,6 +27,11 @@ import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 
+/**
+ * 烧炼配方模板。
+ * 保存烧炼原料、产物、经验值与烧炼时长信息，
+ * 可将其序列化为 minecraft:smelting 类型的配方 JSON。
+ */
 public class SmeltingRecipeTemplate implements RecipeTemplateInterface {
     private final Identifier recipeId;
     private final String ingredient;
@@ -34,6 +39,13 @@ public class SmeltingRecipeTemplate implements RecipeTemplateInterface {
     private final float experience;
     private final int cookingTime;
 
+    /**
+     * @param recipeId    配方唯一标识
+     * @param ingredient  烧炼原料物品注册名
+     * @param resultItem  烧炼产物物品注册名
+     * @param experience  烧炼产出的经验值
+     * @param cookingTime 烧炼所需时长（tick）
+     */
     public SmeltingRecipeTemplate(Identifier recipeId, String ingredient, String resultItem, float experience, int cookingTime) {
         this.recipeId = recipeId;
         this.ingredient = ingredient;
@@ -42,6 +54,7 @@ public class SmeltingRecipeTemplate implements RecipeTemplateInterface {
         this.cookingTime = cookingTime;
     }
 
+    /** 序列化为烧炼配方 JSON（ingredient / result / experience / cookingtime 结构）。 */
     @Override
     public JsonObject toJson() {
         JsonObject recipeJson = new JsonObject();
@@ -69,6 +82,7 @@ public class SmeltingRecipeTemplate implements RecipeTemplateInterface {
         return recipeJson;
     }
 
+    /** 以配方 ID 为键写入配方映射。 */
     @Override
     public void addToRecipeMap(Map<Identifier, JsonElement> recipeMap) {
         recipeMap.put(recipeId, toJson());

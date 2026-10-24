@@ -1,4 +1,11 @@
 carpetamsaddition:
+  messenger:
+    copy: 'Copy to clipboard'
+
+  network:
+    incompatible_protocol: '<AMSP> Your client network protocol (%s) is incompatible with this server (%s). Some AMSP-based rules will not work correctly. Please use a client mod version compatible with this server'
+    incompatible_protocol_hint: 'You can enable incompatibleProtocolWarningDisabled to stop sending this warning'
+
   carpet:
     totalRules:
       version: 'version'
@@ -11,25 +18,82 @@ carpetamsaddition:
   rule:
     amsUpdateSuppressionCrashFix:
       msg: 'Update suppression location @ %s -> [ %s ] | reason: %s'
-      copy: 'copy coord to clipboard'
     welcomeMessage:
       modify_content_in: 'Modify the content in：'
       save_path: '[ save path ]'
     maxPlayerBlockInteractionRange:
-      disable_command: '<Carpet AMS Addition> This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
+      disable_command: '<AMSP> This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
     maxPlayerEntityInteractionRange:
-      disable_command: '<Carpet AMS Addition> This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
+      disable_command: '<AMSP> This change will not take effect because the maxPlayerBlockInteractionRange rule is enabled'
     sendPlayerDeathLocation:
       location: 'death location'
-      copy: 'copy coord to clipboard'
     phantomSpawnAlert:
-      msg: '§b<phantomSpawnAlert> §r§e%s §r§dsummoned phantoms §r§e@ §r§a[ %s ]'
+      msg: ' summoned phantoms %s'
     experimentalMinecartSpeed:
-      vanilla_command_disabled: '<Carpet AMS Addition> The rules of the game have been taken over by the minecartMaxSpeed carpet rules'
+      vanilla_command_disabled: '<AMSP> The rules of the game have been taken over by the minecartMaxSpeed carpet rules'
+    realPlayerControlDisabled:
+      blocked: 'Real players cannot be controlled with /player'
 
   command:
+    amsloc:
+      title: 'Location tags'
+      help_list: '/amsloc list [page] - List locations'
+      help_dimension: '/amsloc list dimension <dimension> [page] - Filter by dimension'
+      help_info: '/amsloc info <id> - Show location details'
+      help_config: '/amsloc config - Show recognition settings'
+      help_marker: '/amsloc config marker <text> - Set first-line marker'
+      help_type: '/amsloc config sign <type> - Set sign type'
+      help_reset: '/amsloc config reset - Restore default settings'
+      help_rescan: '/amsloc rescan - Rescan loaded chunks in batches'
+      help_sign: 'Put the marker on the first front-side line. Lines 2–4 are trimmed individually and joined without separators to form a nonblank name. Editing or removing a sign updates the directory'
+      recognition: 'Marker: %s | sign type: %s'
+      list: 'Location tags · Page %s/%s · %s locations'
+      empty: 'No location tags found. Existing signs in unloaded chunks will be discovered when their chunks load.'
+      page_invalid: 'Page out of range; there are %s pages'
+      missing: 'This location tag does not exist'
+      details: '[Details]'
+      details_hover: 'Click to view the dimension and coordinates of %s'
+      previous_hover: 'Click to view the previous page (page %s)'
+      next_hover: 'Click to view the next page (page %s)'
+      previous: '[Previous]'
+      next: '[Next]'
+      overworld: '[Overworld]'
+      nether: '[Nether]'
+      end: '[End]'
+      invalid_sign: 'Invalid sign type, choose a type suggested for this Minecraft version'
+      invalid_marker: 'The marker must not be blank or contain a line break'
+      saved: 'Recognition settings saved. The directory has been cleared and loaded chunks queued for checking, other tags are rediscovered as chunks load'
+      save_failed: 'Save failed, settings unchanged. Check the server log'
+      rescan: 'Queued %s loaded chunks for checking'
+    commandGetHeldItemID:
+      msg_head: '<commandGetHeldItemID> '
+    blockChunkloader:
+      saved: "Saved configuration for the %s loader"
+      invalid: "Operation failed; configuration unchanged: %s"
+      missing_group: "Condition group not found: %s"
+      denied: "The corresponding rule is false or you lack permission to configure this loader"
+      show: "%s loader: enabled=%s, duration=%sgt, area=%s chunks"
+      group: "Condition group %s: "
+      group_enabled: "enabled"
+      group_disabled: "disabled"
+      group_mode: ", mode="
+      group_details: ", %s conditions"
+      condition: "#%s offset (dx,dy,dz) = (%s,%s,%s) "
+      test_group: "Condition group %s: "
+      test_condition: "Condition #%s: "
+      test_result: "Combined conditions match=%s"
+      unloaded: "The test position is in an unloaded chunk, conditions cannot be checked"
+      all: "all"
+      any: "any"
+      is: "is"
+      not: "is not"
+      match: "match"
+      fail: "no match"
+      unknown: "unknown"
+      help: "See the official website for usage instructions:"
+      help_hover: "Click to open"
     commandHelper:
-      refresh_cmd_tree: '<Carpet AMS Addition> Command tree has been refreshed'
+      refresh_cmd_tree: '<AMSP> Command tree has been refreshed'
 
     playerChunkLoading:
       no_player_specified: '<commandPlayerChunkLoadController> No player specified'
@@ -59,17 +123,11 @@ carpetamsaddition:
       overworld: 'overworld'
       nether: 'nether'
       the_end: 'the_end'
-      the_end_button_hover: 'copy end coord'
-      overworld_button_hover: 'copy overworld coord'
-      nether_button_hover: 'copy nether coord'
     where:
       overworld: 'overworld'
       nether: 'nether'
       the_end: 'the_end'
       who_get_who: '%s got %s location'
-      the_end_button_hover: 'copy end coord'
-      overworld_button_hover: 'copy overworld coord'
-      nether_button_hover: 'copy nether coord'
     leader:
       add: '<commandPlayerLeader> %s became a tour guide'
       is_already_leader: '<commandPlayerLeader> %s is already leader'
@@ -84,6 +142,7 @@ carpetamsaddition:
         broadcast_leader_pos: '/leader broadcastLeaderPos <player> interval <tick> - Broadcast the coordinates of a tour guide at regular intervals, The time is set to a negative number to stop broadcasting'
         list: '/leader list - View tour guide list'
     ping:
+      msg_head: '<commandPacketInternetGroper> '
       stop_ping: 'Ping operation stopped.'
       active_ping_is_null: 'No active ping operation to stop.'
       help:
@@ -101,8 +160,8 @@ carpetamsaddition:
       total_memory: 'Total Memory: %s'
       free_memory: 'Free Memory: %s'
     customCommandPermissionLevel:
-      modify_set: '<customCommandPermissionLevel> %s %d -> %d'
-      set: '<customCommandPermissionLevel> + %s/%d'
+      modify_set: '<customCommandPermissionLevel> %s %s -> %s'
+      set: '<customCommandPermissionLevel> + %s/%s'
       remove: '<customCommandPermissionLevel> - %s'
       not_found: '<customCommandPermissionLevel> Command: %s does not exist in the configuration file'
       cant_modify_self: '<customCommandPermissionLevel> You cannot modify the permissions of the command'
@@ -126,9 +185,6 @@ carpetamsaddition:
         remove: '/customMovableBlock remove <block> - Delete a movable block'
         removeAll: '/customMovableBlock removeAll - Removes all added movable blocks'
         list: '/customMovableBlock list - Check out the list of movable blocks'
-    commandGetHeldItemID:
-      getHeldItemID:
-        copy: 'Copy to clipboard'
     customAntiFireItems:
       add: '<customAntiFireItems> + %s'
       already_exists: "<customAntiFireItems> %s is already exists"
@@ -210,10 +266,6 @@ carpetamsaddition:
       value_range: 'The value must be 0 - 512 or -1'
     maxPlayerEntityInteractionRange:
       value_range: 'The value must be 0 - 512 or -1'
-    blockChunkLoaderTimeController:
-      value_range: 'The value must be 1 - 300'
-    blockChunkLoaderRangeController:
-      value_range: 'The value must be 1 - 32'
     easyGetPitcherPod:
       value_range: 'The value must be 2 - 100 or 0'
     renewableNetherScrap:
@@ -221,14 +273,13 @@ carpetamsaddition:
     experimentalMinecartSpeed:
       value_range: 'The value must be 0 - 1000 or -1'
 
-    observer:
-      largeEnderChest:
-        switch_tip: '<Carpet AMS Addition> The detection of the Large Ender Chest (largeEnderChest) rule has been enabled, and it will take effect after re-entering the game. To prevent items from being lost, it is recommended to set this rule to be enabled by default'
-      amsNetworkProtocol:
-        need_enable_protocol: '<Carpet AMS Addition> %s has been reset to the default value. The amsNetworkProtocol rule needs to be enabled first'
-      need_restart_server_or_client:
-        is_client_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the client'
-        is_server_message: '<Carpet AMS Addition> Rule detected: %s configuration changed, will take effect after restarting the server'
+  observer:
+    amsNetworkProtocol:
+      need_enable_protocol: '<AMSP> %s has been reset to the default value. The amsNetworkProtocol rule needs to be enabled first'
+    lazy_rule:
+      saved: 'Saved %s = %s. Its active value remains %s until the server restarts.'
+      removed: 'Removed the world override for %s. Its active value remains %s until restart.'
+      invalid: 'Invalid value for %s: %s. Configuration was not changed.'
 
   carpet_translations:
     category:
@@ -238,6 +289,8 @@ carpetamsaddition:
       AMS_network: AMS_network
 
     rule:
+      commandLocationTag:
+        desc: Enable /amsloc to record and query locations across dimensions using signs; defaults to ordinary oak signs with amsloc on the first line
       superBow:
         desc: Enabling making super bows with both infinite and mending enchants
       sharedVillagerDiscounts:
@@ -338,9 +391,6 @@ carpetamsaddition:
           '1': 'daylight detector, redstone dust, repeater'
       largeShulkerBox:
         desc: Doubles the size of your ShulkerBox
-        extra:
-          '0': 'When the server environment switches the rule setting, the server needs to be restarted'
-          '1': 'When the client environment switches the rule settings, the client needs to be restarted'
       maxPlayerBlockInteractionRange:
         desc: Change the maximum block interaction distance allowed by the server, set to "-1" to disable this rule
         extra:
@@ -511,6 +561,8 @@ carpetamsaddition:
           '0': 'After enabling the rule, use the "/customCommandPermissionLevel help" command to view the usage instructions'
       shulkerGolem:
         desc: A shulker can be summoned by placing a carved pumpkin on the shulker box
+      experimentalContentCheckDisabled:
+        desc: Allow playing Minecraft experimental content in the game by adding data packs (need restart server)
       headHunter:
         desc: When a player dies, they will drop their own skull
       commandGetPlayerSkull:
@@ -586,8 +638,14 @@ carpetamsaddition:
         desc: Broadcast the news of who summoned the phantoms
       endPortalChunkLoadDisabled:
         desc: Entities passing through the End Portal will not cause chunk loading (Available for Minecraft >= 1.20.6)
+      endPortalChunkLoader:
+        desc: Passing entities through the End Portal causes chunk loading, consistent with Minecraft >= 1.20.5 (Available for Minecraft < 1.20.5)
       amsNetworkProtocol:
         desc: The switch of the AMS network protocol
+      incompatibleProtocolWarningDisabled:
+        desc: Disable warnings sent to clients with an incompatible AMS network protocol. Only applies when amsNetworkProtocol is enabled
+      blockHardnessSyncProtocol:
+        desc: Synchronize the server-side block hardness to the client
       commandAmspDebug:
         desc: Some commands for network communication testing
 #        extra:
@@ -623,6 +681,12 @@ carpetamsaddition:
         extra:
           '0': '[client] - Prefer sending translated text to the client using the client’s own language'
           '1': '[server] - Use the language set by the server for all translations'
+      realPlayerControlDisabled:
+        desc: 'Prevent Carpet /player commands from controlling any real player'
+      destroyBlockPosWarningDisabled:
+        desc: Disable the server-side "Mismatch in destroy block pos" warning
+      ghastFireballExplosionDamageSourceFix:
+        desc: Fix MC-193297 where ghast fireball explosions do not correctly attribute their damage source
 
       # 计划刻催熟规则：
       scheduledRandomTickCactus:
@@ -644,47 +708,20 @@ carpetamsaddition:
         extra:
           '0': 'Command:'
           '1': '/playerChunkLoading true/false'
-      noteBlockChunkLoader:
-        desc: Load nearby 3x3 chunks for 15 seconds when a note block is triggered, You can use the rules of blockChunkLoaderTimeController and blockChunkLoaderRangeController to control their loading time and range
+      commandNoteblockChunkloader:
+        desc: Use commands to customize a note block chunk loader
         extra:
-          '0': '[bone_block] - When bone_block is on the note_block'
-          '1': '[wither_skeleton_skull] - When wither_skeleton_skull is on the note_block, either placed on the note block or hanging on the wall'
-          '2': '[note_block] - Only note_block'
-          '3': '[false] - Disable rule'
-          '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
-      bellBlockChunkLoader:
-        desc: Load nearby 3x3 chunks for 15 seconds when a bell is triggered, You can use the rules of blockChunkLoaderTimeController and blockChunkLoaderRangeController to control their loading time and range
+          '0': 'After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions'
+      commandBellChunkloader:
+        desc: Use commands to customize a bell chunk loader
         extra:
-          '0': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '1': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
-      pistonBlockChunkLoader:
-        desc:  Load nearby 3x3 chunks for 15 seconds when a piston is triggered (Centered on the piston head), You can use the rules of blockChunkLoaderTimeController and blockChunkLoaderRangeController to control their loading time and range
+          '0': 'After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions'
+      commandPistonChunkloader:
+        desc: Use commands to customize a piston chunk loader (centered on the piston head)
         extra:
-          '0': '[bone_block] - When bone_block is on the piston'
-          '1': '[bedrock] - When bedrock is under the piston'
-          '2': '[all] - When bone_block is on the piston or bedrock is under the piston'
-          '3': '[false] - Disable rule'
-          '4': 'Due to after 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, hoppers in chunks loaded by this rule will cease to function whenever there are no players in the current dimension.'
-          '5': 'You can enable the blockChunkLoaderKeepWorldTickUpdate or keepWorldTickUpdate rules to solve this issue.'
-      blockChunkLoaderKeepWorldTickUpdate:
-        desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will allow the following rules to bypass this restriction when they are loaded
-        extra:
-          '0': 'Affected rules: '
-          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
+          '0': 'After enabling the rule, use the "/blockChunkloader help" command to view the usage instructions'
       keepWorldTickUpdate:
         desc: After 300 ticks without any players in the current dimension on the server, Minecraft will stop entities updates, This rule will bypass this restriction
-      blockChunkLoaderTimeController:
-        desc: Used to control the loading time of block loader series rules (need restart server)
-        extra:
-          '0': 'Affected rules: '
-          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
-      blockChunkLoaderRangeController:
-        desc: Used to control the loading range of block loader series rules (need restart server)
-        extra:
-          '0': 'Affected rules: '
-          '1': 'noteBlockChunkLoader, pistonBlockChunkLoader, bellBlockChunkLoader'
-
       # 合成配方规则
       craftableEnchantedGoldenApples:
         desc: Enchanted Golden Apples can be crafted with 8 Gold Blocks again

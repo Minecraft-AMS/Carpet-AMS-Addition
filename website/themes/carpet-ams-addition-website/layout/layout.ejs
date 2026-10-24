@@ -1,22 +1,31 @@
+<% const view = theme_view(page); %>
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="<%= view.language %>" data-theme="<%= view.appearance.default_theme === 'light' ? 'light' : 'dark' %>"
+    data-default-theme="<%= view.appearance.default_theme %>" data-default-language="<%= view.appearance.default_language %>"
+    data-page-language="<%= view.pageLanguage %>">
 <%- partial('partial/head') %>
 <body>
-
+    <% if (view.effects.background) { %>
+    <canvas class="site-effects site-effects-background" data-background-effects aria-hidden="true"
+        data-particle-count="<%= view.effects.background_particles %>"
+        data-mobile-particle-count="<%= view.effects.background_particles_mobile %>"
+        data-fps="<%= view.effects.background_fps %>"></canvas>
+    <% } %>
+    <% if (view.effects.clicks) { %>
+    <canvas class="site-effects site-effects-clicks" data-click-effects aria-hidden="true"
+        data-duration="<%= view.effects.click_duration %>" data-particle-count="<%= view.effects.click_particles %>"></canvas>
+    <% } %>
     <div class="body-container">
         <div class="header-wrapper"><%- partial('partial/header') %></div>
         <div class="main-wrapper"><%- body %></div>
         <div class="footer-wrapper"><%- partial('partial/footer') %></div>
     </div>
-
-    <% if (theme.canvas_nest.enable){ %>
-        <script type="text/javascript" color="<%=theme.canvas_nest.color %>" opacity="<%=theme.canvas_nest.opacity %>" 
-            zIndex="<%=theme.canvas_nest.zIndex %>" count="<%=theme.canvas_nest.count %>" 
-            src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
-        </script>
+    <script src="<%= theme_script('site.js') %>" defer></script>
+    <script src="<%= theme_script('search.js') %>" defer></script>
+    <script src="<%= theme_script('document.js') %>" defer></script>
+    <script src="<%= theme_script('navigation.js') %>" defer></script>
+    <% if (view.effects.background || view.effects.clicks) { %>
+    <script src="<%= theme_script('effects.js') %>" defer></script>
     <% } %>
-
-    <%- js('js/site') %>
-
 </body>
 </html>

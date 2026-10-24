@@ -22,8 +22,8 @@ package carpetamsaddition;
 
 import carpetamsaddition.settings.Rule;
 
-import carpetamsaddition.observers.NeedRestartServerOrClientObserver;
-import carpetamsaddition.settings.MustSetDefault;
+import carpetamsaddition.settings.LazyRule;
+import carpetamsaddition.settings.PersistAsDefault;
 import carpetamsaddition.validators.rule.experimentalMinecartSpeed.MaxSpeedRangeValidator;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
@@ -31,13 +31,10 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 import carpetamsaddition.observers.rule.stackableDiscount.StackableDiscountRuleObserver;
 import carpetamsaddition.observers.recipe.RecipeRuleObserver;
 import carpetamsaddition.observers.rule.fancyFakePlayerName.FancyFakePlayerNameRuleObserver;
-import carpetamsaddition.observers.rule.largeEnderChest.LargeEnderChestRuleObserver;
 import carpetamsaddition.observers.network.AmspRuleObserver;
 
 import carpetamsaddition.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import carpetamsaddition.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
-import carpetamsaddition.validators.rule.blockChunkLoaderTimeController.MaxTimeValidator;
-import carpetamsaddition.validators.rule.commandPlayerChunkLoadController.MaxRangeValidator;
 import carpetamsaddition.validators.rule.enhancedWorldEater.BlastResistanceValidator;
 import carpetamsaddition.validators.rule.maxClientInteractionReachDistance.MaxClientInteractionReachDistanceValidator;
 import carpetamsaddition.validators.rule.easyGetPitcherPod.CountValidator;
@@ -45,16 +42,10 @@ import carpetamsaddition.validators.rule.renewableNetherScrap.DropRateValidator;
 
 import carpetamsaddition.settings.RecipeRule;
 
-import java.lang.reflect.Field;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import static carpet.api.settings.RuleCategory.*;
 import static carpetamsaddition.settings.AmsRuleCategory.*;
 
 public class CarpetAMSAdditionSettings {
-    public static final Set<String> MUST_SET_DEFAULT_RULES = new LinkedHashSet<>();
-
     @Rule(categories = {AMS, FEATURE})
     public static boolean superBow = false;
 
@@ -117,7 +108,8 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, CREATIVE})
     public static boolean creativeOneHitKill = false;
 
-    @Rule(categories = {AMS, FEATURE, SURVIVAL}, validators = LargeEnderChestRuleObserver.class)
+    @PersistAsDefault
+    @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean largeEnderChest = false;
 
     @Rule(categories = {AMS, FEATURE, OPTIMIZATION})
@@ -189,11 +181,8 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE})
     public static boolean redstoneComponentSound = false;
 
-    @MustSetDefault
-    @Rule(
-        categories = {AMS, FEATURE, EXPERIMENTAL},
-        validators = NeedRestartServerOrClientObserver.class
-    )
+    @PersistAsDefault
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
     public static boolean largeShulkerBox = false;
 
     @Rule(
@@ -390,13 +379,15 @@ public class CarpetAMSAdditionSettings {
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean fertilizableSmallFlower = false;
 
-    //#if MC>=11701
+    //#if MC>=11700
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean safePointedDripstone = false;
     //#endif
 
+    //#if MC>=11700
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean pointedDripstoneCollisionBoxDisabled = false;
+    //#endif
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean foliageGenerateDisabled = false;
@@ -628,27 +619,50 @@ public class CarpetAMSAdditionSettings {
     public static int experimentalMinecartSpeed = -1;
     //#endif
 
-    //#if MC>=12102
-    @GameVersion(version = "Minecraft >= 1.21.2")
-    @MustSetDefault
-    @Rule(
-        categories = {AMS, FEATURE, EXPERIMENTAL},
-        validators = NeedRestartServerOrClientObserver.class
-    )
-    public static boolean experimentalMinecartEnabled = false;
+    //#if MC>=11900 && MC<=12101
+    //$$ @GameVersion(version = "Minecraft 1.19 - 1.21.1")
+    //$$ @Rule(categories = {AMS, EXPERIMENTAL})
+    //$$ public static boolean experimentalContentCheckDisabled = false;
     //#endif
+
+    @GameVersion(version = "Minecraft >= 1.21.2")
+    @PersistAsDefault
+    @LazyRule
+    @Rule(categories = {AMS, FEATURE, EXPERIMENTAL})
+    public static boolean experimentalMinecartEnabled = false;
 
     @Rule(categories = AMS)
     public static translationModes amsTranslationMode = translationModes.CLIENT;
 
+    @Rule(categories = {AMS, COMMAND})
+    public static boolean realPlayerControlDisabled = false;
+
+    @Rule(categories = {AMS, FEATURE})
+    public static boolean destroyBlockPosWarningDisabled = false;
+
+    //#if MC<11903
+    //$$ @GameVersion(version = "Minecraft < 1.19.3")
+    //$$ @Rule(categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL, BUGFIX})
+    //$$ public static boolean ghastFireballExplosionDamageSourceFix = false;
+    //#endif
+
     /*
      * AMS网络协议规则
      */
+    @PersistAsDefault
     @Rule(
         validators = AmspRuleObserver.class,
         categories = {AMS, AMS_NETWORK}
     )
     public static boolean amsNetworkProtocol = false;
+
+    @PersistAsDefault
+    @Rule(categories = {AMS, AMS_NETWORK})
+    public static boolean incompatibleProtocolWarningDisabled = false;
+
+    @PersistAsDefault
+    @Rule(categories = {AMS, FEATURE, SURVIVAL, AMS_NETWORK})
+    public static boolean blockHardnessSyncProtocol = false;
 
     @Rule(
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
@@ -678,47 +692,43 @@ public class CarpetAMSAdditionSettings {
      * 区块加载规则
      */
     @Rule(
-        options = {"bone_block", "wither_skeleton_skull", "note_block", "false"},
-        categories = {AMS, FEATURE, AMS_CHUNKLOADER}
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, COMMAND, AMS_CHUNKLOADER}
     )
-    public static String noteBlockChunkLoader = "false";
+    public static String commandNoteblockChunkloader = "false";
 
     @Rule(
-        options = {"bone_block", "bedrock", "all", "false"},
-        categories = {AMS, FEATURE, AMS_CHUNKLOADER}
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, COMMAND, AMS_CHUNKLOADER}
     )
-    public static String pistonBlockChunkLoader = "false";
+    public static String commandPistonChunkloader = "false";
 
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
-    public static boolean bellBlockChunkLoader = false;
-
-    @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
-    public static boolean blockChunkLoaderKeepWorldTickUpdate = false;
+    @Rule(
+        options = {"0", "1", "2", "3", "4", "ops", "true", "false"},
+        categories = {AMS, COMMAND, AMS_CHUNKLOADER}
+    )
+    public static String commandBellChunkloader = "false";
 
     @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
     public static boolean keepWorldTickUpdate = false;
-
-    @Rule(
-        options = {"300"},
-        categories = {AMS, FEATURE, AMS_CHUNKLOADER},
-        validators = MaxTimeValidator.class,
-        strict = false
-    )
-    public static int blockChunkLoaderTimeController = 300;
-
-    @Rule(
-        options = {"3"},
-        categories = {AMS, FEATURE, AMS_CHUNKLOADER},
-        validators = MaxRangeValidator.class,
-        strict = false
-    )
-    public static int blockChunkLoaderRangeController = 3;
 
     @Rule(
         categories = {AMS, COMMAND, AMS_CHUNKLOADER},
         options = {"0", "1", "2", "3", "4", "ops", "true", "false"}
     )
     public static String commandPlayerChunkLoadController = "false";
+
+    @Rule(
+        options = {"false", "true", "ops", "0", "1", "2", "3", "4"},
+        categories = {AMS, COMMAND, FEATURE}
+    )
+    public static String commandLocationTag = "false";
+
+    //#if MC<12005
+    //$$ @GameVersion(version = "Minecraft < 1.20.5")
+    //$$ @Rule(categories = {AMS, FEATURE, AMS_CHUNKLOADER})
+    //$$ public static boolean endPortalChunkLoader = false;
+    //#endif
 
     /*
      * 合成表规则
@@ -796,12 +806,4 @@ public class CarpetAMSAdditionSettings {
     @SuppressWarnings("unused")
     @Rule(categories = AMS)
     public static boolean testRule = false;
-
-    static {
-        for (Field field : CarpetAMSAdditionSettings.class.getDeclaredFields()) {
-            if (field.isAnnotationPresent(MustSetDefault.class)) {
-                MUST_SET_DEFAULT_RULES.add(field.getName());
-            }
-        }
-    }
 }

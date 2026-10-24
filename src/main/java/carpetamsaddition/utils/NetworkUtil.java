@@ -20,32 +20,89 @@
 
 package carpetamsaddition.utils;
 
-import carpetamsaddition.settings.Rule;
-
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
-import carpetamsaddition.settings.AmsRuleCategory;
+import carpetamsaddition.translations.Translator;
+import carpetamsaddition.utils.messenger.Messenger;
 
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.FriendlyByteBuf;
+//#if MC>=12005
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket;
+import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
+//#else
+//$$ import carpetamsaddition.mixin.network.CustomPayloadC2SPacketAccessor;
+//$$ import net.minecraft.network.protocol.game.ClientboundCustomPayloadPacket;
+//$$ import net.minecraft.network.protocol.game.ServerboundCustomPayloadPacket;
+//#endif
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerGamePacketListenerImpl;
+
+import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.util.*;
-import java.lang.reflect.Field;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class NetworkUtil {
-    private static final Set<UUID> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
+    private static final Translator tr = new Translator("network");
+    private static final Set<ServerGamePacketListenerImpl> SUPPORT_CLIENT = ConcurrentHashMap.newKeySet();
     private static final AtomicBoolean SUPPORT_SERVER = new AtomicBoolean(false);
-    public static final Set<String> AMS_NETWORK_RULE_NAMES = new LinkedHashSet<>();
-    private static final Map<UUID, Set<String>> CLIENT_SUPPORTED_PACKETS = new ConcurrentHashMap<>();
+    private static final Map<ServerGamePacketListenerImpl, Set<String>> CLIENT_SUPPORTED_PACKETS = new ConcurrentHashMap<>();
     private static final Set<String> SERVER_SUPPORTED_PACKETS = ConcurrentHashMap.newKeySet();
+    private static final Set<ServerGamePacketListenerImpl> PROTOCOL_WARNED_CONNECTIONS = ConcurrentHashMap.newKeySet();
 
     public enum SendMode {
         FORCE,
         NEED_SUPPORT
+    }
+
+    // S2C
+    public static Identifier getChannelId(ClientboundCustomPayloadPacket packet) {
+        //#if MC>=12005
+        return packet.payload().type().id();
+        //#else
+        //$$ return packet.getIdentifier();
+        //#endif
+    }
+
+    // C2S
+    public static Identifier getChannelId(ServerboundCustomPayloadPacket packet) {
+        //#if MC>=12005
+        return packet.payload().type().id();
+        //#else
+        //$$ return ((CustomPayloadC2SPacketAccessor) packet).getIdentifier();
+        //#endif
+    }
+
+    // S2C
+    public static AMS_CustomPayload getAmsPayload(ClientboundCustomPayloadPacket packet) {
+        //#if MC>=12005
+        CustomPacketPayload payload = packet.payload();
+        return payload instanceof AMS_CustomPayload ? (AMS_CustomPayload) payload : null;
+        //#else
+        //$$ return AMS_PayloadManager.decodeS2CPacket(packet);
+        //#endif
+    }
+
+    // C2S
+    public static AMS_CustomPayload getAmsPayload(ServerboundCustomPayloadPacket packet) {
+        //#if MC>=12005
+        CustomPacketPayload payload = packet.payload();
+        return payload instanceof AMS_CustomPayload ? (AMS_CustomPayload) payload : null;
+        //#else
+        //$$ return AMS_PayloadManager.decodeC2SPacket(packet);
+        //#endif
+    }
+
+    // S2C
+    @GameVersion(version = "Minecraft < 1.20.5", desc = "packet.getData() 返回 FriendlyByteBuf，release() 释放当前持有的引用，避免缓冲区资源泄漏")
+    public static void releasePayload(@SuppressWarnings("unused") ClientboundCustomPayloadPacket packet) {
+        //#if MC<12005
+        //$$ packet.getData().release();
+        //#endif
     }
 
     public static void broadcastDataPack(AMS_CustomPayload payload, SendMode sendMode) {
@@ -60,7 +117,7 @@ public class NetworkUtil {
                 shouldSend = true;
                 break;
             case NEED_SUPPORT:
-                shouldSend = isSupportClient(player.getUUID()) && isClientPacketSupported(player.getUUID(), payload.getPacketId());
+                shouldSend = isSupportClient(player) && isClientPacketSupported(player, payload.getPacketId());
                 break;
             default:
                 shouldSend = false;
@@ -92,8 +149,8 @@ public class NetworkUtil {
         }
     }
 
-    public static boolean isClientPacketSupported(UUID clientUuid, String packetId) {
-        Set<String> supportedPackets = CLIENT_SUPPORTED_PACKETS.get(clientUuid);
+    public static boolean isClientPacketSupported(ServerPlayer player, String packetId) {
+        Set<String> supportedPackets = CLIENT_SUPPORTED_PACKETS.get(player.connection);
         return supportedPackets != null && supportedPackets.contains(packetId);
     }
 
@@ -101,12 +158,12 @@ public class NetworkUtil {
         return SERVER_SUPPORTED_PACKETS.contains(packetId);
     }
 
-    public static void setClientSupportedPackets(UUID clientUuid, Set<String> packetIds) {
-        CLIENT_SUPPORTED_PACKETS.put(clientUuid, new HashSet<>(packetIds));
+    public static void setClientSupportedPackets(ServerPlayer player, Set<String> packetIds) {
+        CLIENT_SUPPORTED_PACKETS.put(player.connection, new HashSet<>(packetIds));
     }
 
-    public static Set<String> getClientSupportedPackets(UUID clientUuid) {
-        return CLIENT_SUPPORTED_PACKETS.getOrDefault(clientUuid, Collections.emptySet());
+    public static Set<String> getClientSupportedPackets(ServerPlayer player) {
+        return CLIENT_SUPPORTED_PACKETS.getOrDefault(player.connection, Collections.emptySet());
     }
 
     public static void setServerSupportedPackets(Set<String> packetIds) {
@@ -122,16 +179,16 @@ public class NetworkUtil {
         return new HashSet<>(AMS_PayloadManager.PAYLOAD_REGISTRY.keySet());
     }
 
-    public static void removeClientSupportedPackets(UUID clientUuid) {
-        CLIENT_SUPPORTED_PACKETS.remove(clientUuid);
+    public static void removeClientSupportedPackets(ServerPlayer player) {
+        CLIENT_SUPPORTED_PACKETS.remove(player.connection);
     }
 
     public static void clearAllClientSupportedPackets() {
         CLIENT_SUPPORTED_PACKETS.clear();
     }
 
-    public static boolean isSupportClient(UUID uuid) {
-        return SUPPORT_CLIENT.contains(uuid);
+    public static boolean isSupportClient(ServerPlayer player) {
+        return SUPPORT_CLIENT.contains(player.connection);
     }
 
     public static void setServerSupport(boolean support) {
@@ -142,17 +199,17 @@ public class NetworkUtil {
         return SUPPORT_SERVER.get();
     }
 
-    public static Iterator<UUID> supportClientSetIterator() {
+    public static Iterator<ServerGamePacketListenerImpl> supportClientSetIterator() {
         return SUPPORT_CLIENT.iterator();
     }
 
-    public static void addSupportClient(UUID uuid) {
-        SUPPORT_CLIENT.add(uuid);
+    public static void addSupportClient(ServerPlayer player) {
+        SUPPORT_CLIENT.add(player.connection);
     }
 
-    public static void removeSupportClient(UUID uuid) {
-        SUPPORT_CLIENT.remove(uuid);
-        removeClientSupportedPackets(uuid);
+    public static void removeSupportClient(ServerPlayer player) {
+        SUPPORT_CLIENT.remove(player.connection);
+        removeClientSupportedPackets(player);
     }
 
     public static void clearClientSupport() {
@@ -160,33 +217,29 @@ public class NetworkUtil {
         clearAllClientSupportedPackets();
     }
 
-    public static void executeOnClientThread(Runnable runnable) {
-        Optional.of(MinecraftClientUtil.clientIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftClientUtil.getCurrentClient().execute(runnable));
+    public static void clearProtocolWarning(ServerPlayer player) {
+        PROTOCOL_WARNED_CONNECTIONS.remove(player.connection);
     }
 
-    public static void executeOnServerThread(Runnable runnable) {
-        Optional.of(MinecraftServerUtil.serverIsRunning()).filter(Boolean::booleanValue).ifPresent(b -> MinecraftServerUtil.getServer().execute(runnable));
+    public static void clearProtocolWarnings() {
+        PROTOCOL_WARNED_CONNECTIONS.clear();
     }
 
-    public static String readBufString(FriendlyByteBuf buf) {
-        //#if MC<11700
-        //$$ return buf.readUtf(Short.MAX_VALUE);
-        //#else
-        return buf.readUtf();
-        //#endif
-    }
-
-    public static void collectAmsNetworkRuleNames() {
-        for (Field field : CarpetAMSAdditionSettings.class.getDeclaredFields()) {
-            if (field.isAnnotationPresent(Rule.class)) {
-                Rule ruleAnnotation = field.getAnnotation(Rule.class);
-                for (String category : ruleAnnotation.categories()) {
-                    if (category.equals(AmsRuleCategory.AMS_NETWORK)) {
-                        AMS_NETWORK_RULE_NAMES.add(field.getName());
-                        break;
-                    }
-                }
+    public static void sendIncompatibleProtocolWarn(Identifier channelId, ServerPlayer player) {
+        EntityUtil.getEntityServer(player).execute(() -> {
+            if (CarpetAMSAdditionSettings.incompatibleProtocolWarningDisabled) {
+                return;
             }
-        }
+
+            if (player.hasDisconnected() || !PROTOCOL_WARNED_CONNECTIONS.add(player.connection)) {
+                return;
+            }
+
+            Messenger.tell(player, Messenger.c(
+                Messenger.f(tr.tr("incompatible_protocol", channelId.toString(), AMS_CustomPayload.CHANNEL_ID_STRING), Layout.RED),
+                Messenger.endl(),
+                Messenger.f(tr.tr("incompatible_protocol_hint"), Layout.YELLOW)
+            ));
+        });
     }
 }

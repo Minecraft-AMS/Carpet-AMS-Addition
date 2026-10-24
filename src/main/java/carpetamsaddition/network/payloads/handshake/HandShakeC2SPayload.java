@@ -32,38 +32,34 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
+import java.util.Objects;
 
 public class HandShakeC2SPayload extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.HANDSHAKE_C2S.getId();
     private final String modVersion;
-    private final UUID playerUuid;
     private final Set<String> supportedPackets;
 
-    public HandShakeC2SPayload(String modVersion, UUID playerUuid, Set<String> supportedPackets) {
+    public HandShakeC2SPayload(String modVersion, Set<String> supportedPackets) {
         super(ID);
         this.modVersion = modVersion;
-        this.playerUuid = playerUuid;
         this.supportedPackets = supportedPackets;
     }
 
     public HandShakeC2SPayload(FriendlyByteBuf buf) {
         super(ID);
 
-        this.modVersion = NetworkUtil.readBufString(buf);
-        this.playerUuid = buf.readUUID();
+        this.modVersion = buf.readUtf();
         int packetCount = buf.readVarInt();
         this.supportedPackets = new HashSet<>();
 
         for (int i = 0; i < packetCount; i++) {
-            this.supportedPackets.add(NetworkUtil.readBufString(buf));
+            this.supportedPackets.add(buf.readUtf());
         }
     }
 
     @Override
     protected void writeData(FriendlyByteBuf buf) {
         buf.writeUtf(this.modVersion);
-        buf.writeUUID(this.playerUuid);
         buf.writeVarInt(this.supportedPackets.size());
 
         for (String packetId : this.supportedPackets) {
@@ -72,30 +68,23 @@ public class HandShakeC2SPayload extends AMS_CustomPayload {
     }
 
     @Override
-    public void handle() {
-        NetworkUtil.executeOnServerThread(() -> {
-            ServerPlayer player = PlayerUtil.getServerPlayerEntity(this.playerUuid);
-            String playerName = player != null ? PlayerUtil.getName(player) : "Unknown Player";
+    public void handle(ServerPlayer sender) {
+        String playerName = PlayerUtil.getName(sender);
 
-            if (this.modVersion.equals(CarpetAMSAdditionMod.getVersion())) {
-                CarpetAMSAdditionServer.LOGGER.info("{} joined with matched carpet-ams-addition v{}", playerName, this.modVersion);
-            } else {
-                CarpetAMSAdditionServer.LOGGER.info("{} joined with mismatched carpet-ams-addition version (client: v{}, server: v{})", playerName, this.modVersion, CarpetAMSAdditionMod.getVersion());
-            }
+        if (Objects.equals(this.modVersion, CarpetAMSAdditionMod.getVersion())) {
+            CarpetAMSAdditionServer.LOGGER.info("{} joined with matched carpet-ams-addition v{}", playerName, this.modVersion);
+        } else {
+            CarpetAMSAdditionServer.LOGGER.info("{} joined with mismatched carpet-ams-addition version (client: v{}, server: v{})", playerName, this.modVersion, CarpetAMSAdditionMod.getVersion());
+        }
 
-            NetworkUtil.setClientSupportedPackets(this.playerUuid, this.supportedPackets);
-            NetworkUtil.addSupportClient(this.playerUuid);
+        NetworkUtil.setClientSupportedPackets(sender, this.supportedPackets);
+        NetworkUtil.addSupportClient(sender);
 
-            if (player != null) {
-                CarpetAMSAdditionServer.getInstance().sendS2CPacketOnHandShake(player);
-            } else {
-                CarpetAMSAdditionServer.LOGGER.warn("Could not find player entity for UUID: {}", this.playerUuid);
-            }
-        });
+        CarpetAMSAdditionServer.getInstance().sendS2CPacketOnHandShake(sender);
     }
 
-    public static HandShakeC2SPayload create(String modVersion, UUID playerUuid) {
+    public static HandShakeC2SPayload create(String modVersion) {
         Set<String> supportedPackets = NetworkUtil.getLocalSupportedPackets();
-        return new HandShakeC2SPayload(modVersion, playerUuid, supportedPackets);
+        return new HandShakeC2SPayload(modVersion, supportedPackets);
     }
 }

@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.commandCustomAntiFireItems;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommandRegistry;
+import carpetamsaddition.commands.rule.commandCustomAntiFireItems.CustomAntiFireItemsCommand;
 import carpetamsaddition.utils.RegexTools;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -39,7 +39,7 @@ public abstract class ItemEntityMixin implements ItemEntityInvoker {
     private boolean isFireImmune(boolean original) {
         if (
             !Objects.equals(CarpetAMSAdditionSettings.commandCustomAntiFireItems, "false") &&
-            CustomAntiFireItemsCommandRegistry.CUSTOM_ANTI_FIRE_ITEMS.contains(RegexTools.getItemRegisterName(this.invokeGetItem()))
+            CustomAntiFireItemsCommand.CUSTOM_ANTI_FIRE_ITEMS.contains(RegexTools.getItemRegisterName(this.invokeGetItem()))
         ) {
             return true;
         } else {

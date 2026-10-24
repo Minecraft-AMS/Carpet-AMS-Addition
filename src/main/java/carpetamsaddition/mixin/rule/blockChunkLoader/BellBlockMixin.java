@@ -21,8 +21,8 @@
 package carpetamsaddition.mixin.rule.blockChunkLoader;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
-import carpetamsaddition.utils.WorldUtil;
+import carpetamsaddition.helpers.rule.blockChunkLoader.LoaderType;
+import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderManager;
 
 import net.minecraft.world.level.block.BellBlock;
 //#if MC>=11700
@@ -38,7 +38,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BellBlock.class)
+import java.util.Objects;
+
+@Mixin(value = BellBlock.class, priority = 168)
 public abstract class BellBlockMixin {
     @Inject(
         //#if MC>=11700
@@ -52,10 +54,10 @@ public abstract class BellBlockMixin {
         //#if MC>=11700
         Entity entity,
         //#endif
-        Level world, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir
+        Level level, BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir
     ) {
-        if (CarpetAMSAdditionSettings.bellBlockChunkLoader && !WorldUtil.isClient(world)) {
-            BlockChunkLoaderHelper.addBellBlockTicket((ServerLevel) world, pos);
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandBellChunkloader, "false") && level instanceof ServerLevel) {
+            BlockChunkLoaderManager.trigger(LoaderType.BELL, (ServerLevel) level, pos, pos);
         }
     }
 }

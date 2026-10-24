@@ -24,6 +24,11 @@ import carpetamsaddition.utils.RegexTools;
 
 import net.minecraft.world.item.Item;
 
+/**
+ * 配方构建器的抽象基类。
+ * 统一承载三种配方共有的配置：是否启用、配方名称、产物物品与数量；
+ * 提供链式的 {@link #output(Item, int)} API 与将物品转为注册名的通用工具方法。
+ */
 public abstract class AbstractRecipeBuilder {
     protected final boolean enabled;
     protected final String recipeName;
@@ -35,15 +40,22 @@ public abstract class AbstractRecipeBuilder {
         this.recipeName = recipeName;
     }
 
+    /**
+     * 链式设置产物物品与数量。
+     *
+     * @return 当前构建器本身，便于继续链式调用
+     */
     public AbstractRecipeBuilder output(Item item, int count) {
         this.resultItem = item;
         this.resultCount = count;
         return this;
     }
 
+    /** 将物品转换为注册名（供生成配方 JSON 时使用） */
     protected String item(Item item) {
         return RegexTools.getItemRegisterName(item.getDefaultInstance());
     }
 
+    /** 由子类实现具体配方类型的构建逻辑（向 {@code AmsRecipeBuilder} 注册模板）。*/
     public abstract void build();
 }

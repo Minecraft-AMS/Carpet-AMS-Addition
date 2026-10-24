@@ -21,7 +21,7 @@
 package carpetamsaddition.utils;
 
 import carpetamsaddition.CarpetAMSAdditionClient;
-import carpetamsaddition.mixin.rule.commandGetClientPlayerFPS.MinecraftInvoker;
+import carpetamsaddition.mixin.rule.commandGetClientPlayerFPS.MinecraftAccessor;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -44,10 +44,6 @@ public class MinecraftClientUtil {
     }
 
     public static int getClientFps() {
-        //#if MC<=11802
-        //$$ return MinecraftInvoker.invokeGetFps();
-        //#else
-        return ((MinecraftInvoker) getCurrentClient()).invokeGetFps();
-        //#endif
+        return MinecraftAccessor.getFps();
     }
 }

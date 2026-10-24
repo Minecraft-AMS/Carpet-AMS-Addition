@@ -28,6 +28,11 @@ import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 
+/**
+ * 有序合成配方模板。
+ * 保存配方的图案（每行 3 字符）、字符到物品注册名的映射以及产物信息，
+ * 可将其序列化为 minecraft:crafting_shaped 类型的配方 JSON。
+ */
 public class ShapedRecipeTemplate implements RecipeTemplateInterface {
     private final Identifier recipeId;
     private final String[][] pattern;
@@ -35,6 +40,13 @@ public class ShapedRecipeTemplate implements RecipeTemplateInterface {
     private final String resultItem;
     private final int resultCount;
 
+    /**
+     * @param recipeId    配方唯一标识
+     * @param pattern     合成图案
+     * @param ingredients 图案字符到物品注册名的映射
+     * @param resultItem  产物物品注册名
+     * @param resultCount 产物数量
+     */
     public ShapedRecipeTemplate(Identifier recipeId, String[][] pattern, Map<Character, String> ingredients, String resultItem, int resultCount) {
         this.recipeId = recipeId;
         this.pattern = pattern;
@@ -43,6 +55,7 @@ public class ShapedRecipeTemplate implements RecipeTemplateInterface {
         this.resultCount = resultCount;
     }
 
+    /** 序列化为有序合成配方 JSON（pattern / key / result 结构）。 */
     @Override
     public JsonObject toJson() {
         JsonObject recipeJson = new JsonObject();
@@ -80,6 +93,7 @@ public class ShapedRecipeTemplate implements RecipeTemplateInterface {
         return recipeJson;
     }
 
+    /** 以配方 ID 为键写入配方映射。 */
     @Override
     public void addToRecipeMap(Map<Identifier, JsonElement> recipeMap) {
         recipeMap.put(recipeId, toJson());

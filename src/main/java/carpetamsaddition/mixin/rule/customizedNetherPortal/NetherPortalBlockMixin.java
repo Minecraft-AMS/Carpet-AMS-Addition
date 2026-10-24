@@ -42,13 +42,13 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class NetherPortalBlockMixin {
     @ModifyReturnValue(method = "updateShape", at = @At("RETURN"))
     private BlockState noBreak(
-            BlockState original,
-            BlockState state,
-            //#if MC>=12108
-            LevelReader world, ScheduledTickAccess tickView, BlockPos pos
-            //#else
-            //$$ Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos
-            //#endif
+        BlockState original,
+        BlockState state,
+        //#if MC>=12108
+        LevelReader world, ScheduledTickAccess tickView, BlockPos pos
+        //#else
+        //$$ Direction direction, BlockState neighborState, LevelAccessor world, BlockPos pos, BlockPos neighborPos
+        //#endif
     ) {
         if (CarpetAMSAdditionSettings.customizedNetherPortal) {
             return world.getBlockState(pos);

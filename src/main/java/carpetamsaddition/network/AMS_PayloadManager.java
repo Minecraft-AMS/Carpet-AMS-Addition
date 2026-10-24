@@ -28,6 +28,8 @@ import carpetamsaddition.network.payloads.handshake.HandShakeC2SPayload;
 import carpetamsaddition.network.payloads.handshake.HandShakeS2CPayload;
 import carpetamsaddition.network.payloads.handshake.RequestHandShakeS2CPayload;
 import carpetamsaddition.network.payloads.rule.commandCustomBlockHardness.CustomBlockHardnessPayload_S2C;
+import carpetamsaddition.network.payloads.rule.blockHardnessSyncProtocol.BlockHardnessSyncPayload_C2S;
+import carpetamsaddition.network.payloads.rule.blockHardnessSyncProtocol.BlockHardnessSyncPayload_S2C;
 import carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_C2S;
 import carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
 import carpetamsaddition.network.payloads.rule.commandSetPlayerPose.UpdatePlayerPosePayload_S2C;
@@ -46,8 +48,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class AMS_PayloadManager {
     public static final Map<String, Function<FriendlyByteBuf, AMS_CustomPayload>> PAYLOAD_REGISTRY = new ConcurrentHashMap<>();
-    private static final PayloadHandlerChain C2S_HANDLER_CHAIN = PayloadHandlerChainCreator.createC2SHandlerChain();
-    private static final PayloadHandlerChain S2C_HANDLER_CHAIN = PayloadHandlerChainCreator.createS2CHandlerChain();
+    private static final PayloadDispatcher C2S_DISPATCHER = PayloadDispatcherCreator.createC2SDispatcher();
+    private static final PayloadDispatcher S2C_DISPATCHER = PayloadDispatcherCreator.createS2CDispatcher();
 
     public enum PacketId {
         UNKNOWN("unknown"),
@@ -57,6 +59,8 @@ public class AMS_PayloadManager {
         REQUEST_CLIENT_MOD_VERSION_C2S("request_client_mod_version_c2s"),
         REQUEST_HANDSHAKE_S2C("request_handshake_s2c"),
         SYNC_CUSTOM_BLOCK_HARDNESS("sync_custom_block_hardness"),
+        BLOCK_HARDNESS_SYNC_PROTOCOL_C2S("block_hardness_sync_protocol_c2s"),
+        BLOCK_HARDNESS_SYNC_PROTOCOL_S2C("block_hardness_sync_protocol_s2c"),
         CLIENT_PLAYER_FPS_C2S("client_player_fps_c2s"),
         CLIENT_PLAYER_FPS_S2C("client_player_fps_s2c"),
         UPDATE_PLAYER_POSE_S2C("update_player_pose_s2c"),
@@ -81,14 +85,16 @@ public class AMS_PayloadManager {
         registerPayload(PacketId.HANDSHAKE_C2S.getId(), HandShakeC2SPayload::new);
         registerPayload(PacketId.CLIENT_PLAYER_FPS_C2S.getId(), ClientPlayerFpsPayload_C2S::new);
         registerPayload(PacketId.REQUEST_CLIENT_MOD_VERSION_C2S.getId(), RequestClientModVersionPayload_C2S::new);
+        registerPayload(PacketId.BLOCK_HARDNESS_SYNC_PROTOCOL_C2S.getId(), BlockHardnessSyncPayload_C2S::new);
 
         // S2C
         registerPayload(PacketId.HANDSHAKE_S2C.getId(), HandShakeS2CPayload::new);
         registerPayload(PacketId.REQUEST_HANDSHAKE_S2C.getId(), buf -> new RequestHandShakeS2CPayload());
         registerPayload(PacketId.SYNC_CUSTOM_BLOCK_HARDNESS.getId(), CustomBlockHardnessPayload_S2C::new);
-        registerPayload(PacketId.CLIENT_PLAYER_FPS_S2C.getId(), ClientPlayerFpsPayload_S2C::new);
+        registerPayload(PacketId.BLOCK_HARDNESS_SYNC_PROTOCOL_S2C.getId(), BlockHardnessSyncPayload_S2C::new);
+        registerPayload(PacketId.CLIENT_PLAYER_FPS_S2C.getId(), buf -> new ClientPlayerFpsPayload_S2C());
         registerPayload(PacketId.UPDATE_PLAYER_POSE_S2C.getId(), UpdatePlayerPosePayload_S2C::new);
-        registerPayload(PacketId.REQUEST_CLIENT_MOD_VERSION_S2C.getId(), RequestClientModVersionPayload_S2C::new);
+        registerPayload(PacketId.REQUEST_CLIENT_MOD_VERSION_S2C.getId(), buf -> new RequestClientModVersionPayload_S2C());
         registerPayload(PacketId.LAZY_SETTINGS_S2C.getId(), LazySettingsPayload_S2C::new);
 
         // Both
@@ -99,23 +105,25 @@ public class AMS_PayloadManager {
      * Register Payload Handlers
      */
     // C2S
-    private static void registerC2SHandlers(@NotNull PayloadHandlerChain chain) {
-        chain.put(HandShakeC2SPayload.class, HandShakeC2SPayload::handle);
-        chain.put(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
-        chain.put(ClientPlayerFpsPayload_C2S.class, ClientPlayerFpsPayload_C2S::handle);
-        chain.put(RequestClientModVersionPayload_C2S.class, RequestClientModVersionPayload_C2S::handle);
+    private static void registerC2SHandlers(@NotNull PayloadDispatcher dispatcher) {
+        dispatcher.register(AMS_UnknownPayload.class, (payload, sender) -> payload.handle());
+        dispatcher.register(HandShakeC2SPayload.class, (payload, sender) -> payload.handle(sender));
+        dispatcher.register(ClientPlayerFpsPayload_C2S.class, (payload, sender) -> payload.handle(sender));
+        dispatcher.register(RequestClientModVersionPayload_C2S.class, (payload, sender) -> payload.handle(sender));
+        dispatcher.register(BlockHardnessSyncPayload_C2S.class, (payload, sender) -> payload.handle(sender));
     }
 
     // S2C
-    private static void registerS2CHandlers(@NotNull PayloadHandlerChain chain) {
-        chain.put(HandShakeS2CPayload.class, HandShakeS2CPayload::handle);
-        chain.put(RequestHandShakeS2CPayload.class, RequestHandShakeS2CPayload::handle);
-        chain.put(CustomBlockHardnessPayload_S2C.class, CustomBlockHardnessPayload_S2C::handle);
-        chain.put(AMS_UnknownPayload.class, AMS_UnknownPayload::handle);
-        chain.put(ClientPlayerFpsPayload_S2C.class, ClientPlayerFpsPayload_S2C::handle);
-        chain.put(UpdatePlayerPosePayload_S2C.class,  UpdatePlayerPosePayload_S2C::handle);
-        chain.put(RequestClientModVersionPayload_S2C.class, RequestClientModVersionPayload_S2C::handle);
-        chain.put(LazySettingsPayload_S2C.class, LazySettingsPayload_S2C::handle);
+    private static void registerS2CHandlers(@NotNull PayloadDispatcher dispatcher) {
+        dispatcher.register(AMS_UnknownPayload.class, payload -> payload.handle());
+        dispatcher.register(HandShakeS2CPayload.class, payload -> payload.handle());
+        dispatcher.register(RequestHandShakeS2CPayload.class, payload -> payload.handle());
+        dispatcher.register(CustomBlockHardnessPayload_S2C.class, payload -> payload.handle());
+        dispatcher.register(BlockHardnessSyncPayload_S2C.class, payload -> payload.handle());
+        dispatcher.register(ClientPlayerFpsPayload_S2C.class, payload -> payload.handle());
+        dispatcher.register(UpdatePlayerPosePayload_S2C.class,  payload -> payload.handle());
+        dispatcher.register(RequestClientModVersionPayload_S2C.class, payload -> payload.handle());
+        dispatcher.register(LazySettingsPayload_S2C.class, payload -> payload.handle());
     }
 
     private static void registerPayload(String packetId, Function<FriendlyByteBuf, AMS_CustomPayload> constructor) {
@@ -132,27 +140,27 @@ public class AMS_PayloadManager {
     //$$ }
     //#endif
 
-    public static class HandlerChainGetter {
-        public static PayloadHandlerChain getC2SHandlerChain() {
-            return C2S_HANDLER_CHAIN;
+    public static class DispatcherGetter {
+        public static PayloadDispatcher getC2SDispatcher() {
+            return C2S_DISPATCHER;
         }
 
-        public static PayloadHandlerChain getS2CHandlerChain() {
-            return S2C_HANDLER_CHAIN;
+        public static PayloadDispatcher getS2CDispatcher() {
+            return S2C_DISPATCHER;
         }
     }
 
-    private static class PayloadHandlerChainCreator {
-        private static PayloadHandlerChain createC2SHandlerChain() {
-            PayloadHandlerChain chain = new PayloadHandlerChain();
-            registerC2SHandlers(chain);
-            return chain;
+    private static class PayloadDispatcherCreator {
+        private static PayloadDispatcher createC2SDispatcher() {
+            PayloadDispatcher dispatcher = new PayloadDispatcher();
+            registerC2SHandlers(dispatcher);
+            return dispatcher;
         }
 
-        private static PayloadHandlerChain createS2CHandlerChain() {
-            PayloadHandlerChain chain = new PayloadHandlerChain();
-            registerS2CHandlers(chain);
-            return chain;
+        private static PayloadDispatcher createS2CDispatcher() {
+            PayloadDispatcher dispatcher = new PayloadDispatcher();
+            registerS2CHandlers(dispatcher);
+            return dispatcher;
         }
     }
 }

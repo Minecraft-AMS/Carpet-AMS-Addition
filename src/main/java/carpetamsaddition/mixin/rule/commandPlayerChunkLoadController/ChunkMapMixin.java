@@ -21,29 +21,31 @@
 package carpetamsaddition.mixin.rule.commandPlayerChunkLoadController;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.ChunkLoading;
+import carpetamsaddition.helpers.rule.commandPlayerChunkLoadController.PlayerChunkLoading;
+import carpetamsaddition.utils.PlayerUtil;
 
-import net.minecraft.server.level.ServerPlayer;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
+
 import net.minecraft.server.level.ChunkMap;
+import net.minecraft.server.level.ServerPlayer;
 
 import org.spongepowered.asm.mixin.Mixin;
-
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
 @Mixin(ChunkMap.class)
 public abstract class ChunkMapMixin {
-    @Inject(method = "skipPlayer", at = @At("HEAD"), cancellable = true)
-    private void doesNotGenerateChunks(ServerPlayer player, CallbackInfoReturnable<Boolean> cir) {
+    @ModifyReturnValue(method = "skipPlayer", at = @At("RETURN"))
+    private boolean doesNotGenerateChunks(boolean original, @Local(argsOnly = true) ServerPlayer player) {
         if (!Objects.equals(CarpetAMSAdditionSettings.commandPlayerChunkLoadController, "false")) {
-            String playerName = player.getName().getString();
-            if (!ChunkLoading.onlinePlayerMap.getOrDefault(playerName, true)) {
-                cir.setReturnValue(true);
-                cir.cancel();
+            String playerName = PlayerUtil.getName(player);
+            if (!PlayerChunkLoading.onlinePlayerMap.getOrDefault(playerName, true)) {
+                return true;
             }
         }
+
+        return original;
     }
 }

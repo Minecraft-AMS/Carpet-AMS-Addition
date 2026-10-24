@@ -1,18 +1,10 @@
 - Main development version：`Minecraft 1.21.11`
 
-  
-
 - It uses [preprocessor](https://github.com/ReplayMod/preprocessor) to maintain all Minecraft versions on a single branch
-
-  
 
 - If you have good ideas, you can submit a `feature request` or submit a pull request on the `dev` branch
 
-  
-
 - Due to poor English proficiency, all English translations are currently provided by [Chat-GPT](https://openai.com/blog/chatgpt)（except for the very first English document written by [nirvanaxiao6](https://github.com/nirvanaxiao6) a long time ago）
-
-
 
 - The website is built using [Hexo]([Hexo](https://hexo.io/zh-cn/index.html))
 
@@ -67,8 +59,8 @@ Check the implementation's preprocessor conditions and actual supported versions
 |            26.1            |         ✖          |           [Carpet-AMS-Addition-v26.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3)            |
 | **<u>1.21.11(master)</u>** |         ✔          |                                                            ---                                                            |
 |           1.21.8           |         ✔          |                                                            ---                                                            |
-|      1.21.9 - 1.21.10      |         ❓          |                                                            ---                                                            |
-|       1.21 - 1.21.7        |         ❓          |                                                            ---                                                            |
+|      1.21.9 - 1.21.10      | ✖ | [Carpet-AMS-Addition-v26.3-legacy](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3-legacy) |
+|       1.21 - 1.21.7        | ✖ | [Carpet-AMS-Addition-v26.3-legacy](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3-legacy) |
 |           1.20.6           |         ✔          |                                                            ---                                                            |
 |       1.20 - 1.20.5        |         ✖          |  [Carpet-AMS-Addition-mc1.20-1.20.5-v2.54.0](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v2.54.0)   |
 |           1.19.4           |         ✔          |                                                            ---                                                            |
@@ -77,8 +69,9 @@ Check the implementation's preprocessor conditions and actual supported versions
 |           1.18.2           |         ✔          |                                                            ---                                                            |
 |           1.17.1           |         ✔          |                                                            ---                                                            |
 |           1.16.5           |         ✔          |                                                            ---                                                            |
-|           1.15.2           |         ❓          |                [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy)                 |
-|           1.14.4           |         ❓          |                [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy)                 |
+|           1.15.2           | ✖ | [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy) |
+|           1.14.4           | ✖ | [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy) |
+
 &emsp;
 
 ## Dependencies

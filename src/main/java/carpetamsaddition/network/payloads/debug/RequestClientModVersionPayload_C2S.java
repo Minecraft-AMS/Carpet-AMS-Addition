@@ -20,45 +20,38 @@
 
 package carpetamsaddition.network.payloads.debug;
 
-import carpetamsaddition.commands.debug.network.AmspCommandRegistry;
+import carpetamsaddition.commands.debug.network.AmspCommand;
 import carpetamsaddition.network.AMS_CustomPayload;
 import carpetamsaddition.network.AMS_PayloadManager;
-import carpetamsaddition.utils.NetworkUtil;
 
 import net.minecraft.network.FriendlyByteBuf;
-
-import java.util.UUID;
+import net.minecraft.server.level.ServerPlayer;
 
 public class RequestClientModVersionPayload_C2S extends AMS_CustomPayload {
     private static final String ID = AMS_PayloadManager.PacketId.REQUEST_CLIENT_MOD_VERSION_C2S.getId();
 
-    private final UUID uuid;
     private final String version;
 
-    public RequestClientModVersionPayload_C2S(String version, UUID uuid) {
+    public RequestClientModVersionPayload_C2S(String version) {
         super(ID);
         this.version = version;
-        this.uuid = uuid;
     }
 
     public RequestClientModVersionPayload_C2S(FriendlyByteBuf buf) {
         super(ID);
-        this.version = NetworkUtil.readBufString(buf);
-        this.uuid = buf.readUUID();
+        this.version = buf.readUtf();
     }
 
     @Override
     protected void writeData(FriendlyByteBuf buf) {
         buf.writeUtf(this.version);
-        buf.writeUUID(this.uuid);
     }
 
-    @Override
-    public void handle() {
-        NetworkUtil.executeOnServerThread(() -> AmspCommandRegistry.clientModVersion.put(this.uuid, this.version));
+    public void handle(ServerPlayer sender) {
+        AmspCommand.receiveClientModVersion(sender, this.version);
     }
 
-    public static RequestClientModVersionPayload_C2S create(String version, UUID uuid) {
-        return new RequestClientModVersionPayload_C2S(version, uuid);
+    public static RequestClientModVersionPayload_C2S create(String version) {
+        return new RequestClientModVersionPayload_C2S(version);
     }
 }

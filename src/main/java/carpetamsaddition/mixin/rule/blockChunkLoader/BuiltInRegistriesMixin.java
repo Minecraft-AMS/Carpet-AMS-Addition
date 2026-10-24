@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.blockChunkLoader;
 
-import carpetamsaddition.helpers.rule.blockChunkLoader.BlockChunkLoaderHelper;
+import carpetamsaddition.helpers.rule.blockChunkLoader.LoaderType;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 //#if MC<11904
@@ -34,7 +34,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 
-@Mixin(BuiltInRegistries.class)
+@Mixin(value = BuiltInRegistries.class, priority = 16888)
 public abstract class BuiltInRegistriesMixin {
     @Inject(
         //#if MC>=11904
@@ -59,8 +59,8 @@ public abstract class BuiltInRegistriesMixin {
         //$$ CallbackInfoReturnable<ResourceKey<Registry<?>>> cir
         //#endif
     ) {
-        BlockChunkLoaderHelper.NOTE_BLOCK_TICKET_TYPE = BlockChunkLoaderHelper.registerTicketType("carpetamsaddition:note_block_loader", 15);
-        BlockChunkLoaderHelper.PISTON_BLOCK_TICKET_TYPE = BlockChunkLoaderHelper.registerTicketType("carpetamsaddition:piston_block_loader", 15);
-        BlockChunkLoaderHelper.BELL_BLOCK_TICKET_TYPE = BlockChunkLoaderHelper.registerTicketType("carpetamsaddition:bell_block_loader", 15);
+        for (LoaderType type : LoaderType.values()) {
+            type.registerTicketType();
+        }
     }
 }

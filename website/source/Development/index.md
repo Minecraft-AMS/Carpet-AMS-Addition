@@ -1,18 +1,10 @@
 - 主开发版本：`Minecraft 1.21.11`
 
-  
-
 - 使用 [preprocessor](https://github.com/ReplayMod/preprocessor) 在单一分支下对所有的Minecraft版本进行维护
-
-  
 
 - 如果你有好的点子可以提交 `feature request` 或在 `dev` 分支下提交pr
 
-  
-
 - 由于英文水平太差，目前所有的英文翻译均来自 [Chat-GPT](https://openai.com/blog/chatgpt)（除了很久很久以前 [nirvanaxiao6](https://github.com/nirvanaxiao6) 撰写的第一篇英文文档）
-
-
 
 - 该网站使用 [Hexo]([Hexo](https://hexo.io/zh-cn/index.html)) 构建
 
@@ -67,8 +59,8 @@ Describe the rule here.
 |         26.1          |  ✖   |           [Carpet-AMS-Addition-v26.3](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3)            |
 | **<u>1.21.11(主)</u>** |  ✔   |                                                            ---                                                            |
 |        1.21.8         |  ✔   |                                                            ---                                                            |
-|   1.21.9 - 1.21.10    |  ❓   |                                                            ---                                                            |
-|     1.21 - 1.21.7     |  ❓   |                                                            ---                                                            |
+|   1.21.9 - 1.21.10    |  ✖   |    [Carpet-AMS-Addition-v26.3-legacy](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3-legacy)     |
+|     1.21 - 1.21.7     |  ✖   |    [Carpet-AMS-Addition-v26.3-legacy](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v26.3-legacy)     |
 |        1.20.6         |  ✔   |                                                            ---                                                            |
 |     1.20 - 1.20.5     |  ✖   |  [Carpet-AMS-Addition-mc1.20-1.20.5-v2.54.0](https://github.com/Minecraft-AMS/Carpet-AMS-Addition/releases/tag/v2.54.0)   |
 |        1.19.4         |  ✔   |                                                            ---                                                            |
@@ -77,8 +69,8 @@ Describe the rule here.
 |        1.18.2         |  ✔   |                                                            ---                                                            |
 |        1.17.1         |  ✔   |                                                            ---                                                            |
 |        1.16.5         |  ✔   |                                                            ---                                                            |
-|        1.15.2         |  ❓   |                [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy)                 |
-|        1.14.4         |  ❓   |                [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy)                 |
+|        1.15.2         |  ✖   |                [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy)                 |
+|        1.14.4         |  ✖   |                [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy)                 |
 
 &emsp;
 

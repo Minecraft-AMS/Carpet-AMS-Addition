@@ -1,11 +1,8 @@
-<main>
-    <% const staticPageTitles = { '/Rules': ['规则', 'Rules'], '/Loggers': ['记录器', 'Loggers'], '/Commands': ['指令', 'Commands'], '/Development': ['开发', 'Development'], '/Download': ['下载', 'Download'], '/OpenSource': ['开源', 'Open Source'], '/en_us/Rules_en': ['规则', 'Rules'], '/en_us/Loggers_en': ['记录器', 'Loggers'], '/en_us/Commands_en': ['指令', 'Commands'], '/en_us/Development_en': ['开发', 'Development'], '/en_us/Download_en': ['下载', 'Download'], '/en_us/OpenSource_en': ['开源', 'Open Source'] }; %>
-    <% const staticPageKey = ('/' + (page.path || '').replace(/index\.html$/, '')).replace(/\/$/, '') || '/'; %>
-    <% const staticPageTitle = staticPageTitles[staticPageKey]; %>
-    <% const searchableStaticPage = ['/Rules', '/Loggers', '/Commands', '/en_us/Rules_en', '/en_us/Loggers_en', '/en_us/Commands_en'].includes(staticPageKey); %>
-    <% const forcePageToc = ['/Loggers', '/en_us/Loggers_en'].includes(staticPageKey); %>
+<main class="article-page">
+    <% const view = theme_view(page); %>
+    <% const staticPageTitle = view.section ? [view.section.title_cn, view.section.title_en] : null; %>
     <div class="main-container">
-        <div class="article-layout" data-article-layout<%= searchableStaticPage ? ' data-page-toc-enabled' : '' %><%= forcePageToc ? ' data-force-page-toc' : '' %>>
+        <div class="article-layout" data-article-layout data-toc-min-headings="<%= view.toc.min_headings %>" data-toc-offset="<%= view.toc.offset %>"<%= view.showToc ? ' data-page-toc-enabled' : '' %><%= view.forceToc ? ' data-force-page-toc' : '' %>>
         <div class="post-details">
             <% if (staticPageTitle) { %>
             <div class="post-title static-page-title">
@@ -22,14 +19,14 @@
                 <i class="fa-solid fa-clock"></i>&nbsp;<span class="post-date"><%= date(page.date, 'YYYY/MM/DD') %></span>
             </div>
             <% } %>
-            <% if (searchableStaticPage) { %>
+            <% if (view.searchable) { %>
             <div class="content-search document-search">
                 <label class="sr-only" for="document-search" data-i18n-cn="搜索当前文档" data-i18n-en="Search this document">搜索当前文档</label>
                 <input id="document-search" class="site-search" type="search" autocomplete="off" data-document-search data-i18n-placeholder-cn="搜索名称、指令或说明" data-i18n-placeholder-en="Search names, commands, or descriptions" placeholder="搜索名称、指令或说明">
             </div>
             <p class="search-empty" data-document-search-empty hidden data-i18n-cn="没有找到匹配内容。" data-i18n-en="No matching content found.">没有找到匹配内容。</p>
             <% } %>
-            <div class="post-content<%= staticPageTitle ? ' static-page-content' : '' %>"<%= searchableStaticPage ? ' data-searchable-content' : '' %>>
+            <div class="post-content<%= staticPageTitle ? ' static-page-content' : '' %>"<%= view.searchable ? ' data-searchable-content' : '' %>>
                 <%- page.content %>
             </div>
         </div>
@@ -42,13 +39,3 @@
         </div>
     </div>
 </main>
-<% if (theme.utterances && theme.utterances.enable && page.comments) { %>
-<script src="https://utteranc.es/client.js"
-    repo="<%= theme.utterances.repo %>"
-    issue-term="<%= theme.utterances.issueTerm %>"
-    theme="<%= theme.utterances.theme %>"
-    crossorigin="anonymous"
-    async>
-</script>
-<% } %>
-<%- partial('partial/scripts/math') %>

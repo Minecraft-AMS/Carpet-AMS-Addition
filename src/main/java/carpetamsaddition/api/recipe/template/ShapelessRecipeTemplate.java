@@ -29,12 +29,27 @@ import net.minecraft.resources.Identifier;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 无序合成配方模板。
+ * 保存原料物品注册名列表与产物信息，
+ * 可将其序列化为 minecraft:crafting_shapeless 类型的配方 JSON（原料顺序无关）。
+ */
 public class ShapelessRecipeTemplate implements RecipeTemplateInterface {
+    /** 配方唯一标识 */
     private final Identifier recipeId;
+    /** 原料物品注册名列表 */
     private final List<String> ingredients;
+    /** 产物物品注册名 */
     private final String resultItem;
+    /** 产物数量 */
     private final int resultCount;
 
+    /**
+     * @param recipeId    配方唯一标识
+     * @param ingredients 原料物品注册名列表
+     * @param resultItem  产物物品注册名
+     * @param resultCount 产物数量
+     */
     public ShapelessRecipeTemplate(Identifier recipeId, List<String> ingredients, String resultItem, int resultCount) {
         this.recipeId = recipeId;
         this.ingredients = ingredients;
@@ -42,6 +57,7 @@ public class ShapelessRecipeTemplate implements RecipeTemplateInterface {
         this.resultCount = resultCount;
     }
 
+    /** 序列化为无序合成配方 JSON（ingredients / result 结构）。 */
     @Override
     public JsonObject toJson() {
         JsonObject recipeJson = new JsonObject();
@@ -68,6 +84,7 @@ public class ShapelessRecipeTemplate implements RecipeTemplateInterface {
         return recipeJson;
     }
 
+    /** 以配方 ID 为键写入配方映射。 */
     @Override
     public void addToRecipeMap(Map<Identifier, JsonElement> recipeMap) {
         recipeMap.put(recipeId, toJson());

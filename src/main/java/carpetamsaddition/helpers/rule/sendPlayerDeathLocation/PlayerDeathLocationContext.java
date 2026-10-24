@@ -24,7 +24,7 @@ import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.fuzz.InvokeFuzzModCommand;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.Messenger;
+import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
 import net.minecraft.network.chat.MutableComponent;
@@ -70,10 +70,9 @@ public class PlayerDeathLocationContext {
     }
 
     private static MutableComponent copyButton(ServerPlayer player) {
-        MutableComponent hoverText = Messenger.f(tr.tr("copy"), Layout.YELLOW);
         String copyCoordText = getPlayerPos(player).replace(",", ""); // 1, 0, -24 -> 1 0 -24
 
-        return Messenger.f(Messenger.style(Messenger.s(" [C]"), Messenger.simpleCopyButtonStyle(copyCoordText, hoverText, Layout.YELLOW)), Layout.GREEN, Layout.BOLD);
+        return Messenger.copyButton(" [C]", copyCoordText, Layout.GREEN, Layout.BOLD);
     }
 
     // Alex 死亡位置 @ minecraft:overworld -> [ 888, 20, 999 ]
