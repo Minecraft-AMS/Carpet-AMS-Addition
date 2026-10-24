@@ -1,18 +1,10 @@
 - 主开发版本：`Minecraft 1.21.11`
 
-  
-
 - 使用 [preprocessor](https://github.com/ReplayMod/preprocessor) 在单一分支下对所有的Minecraft版本进行维护
-
-  
 
 - 如果你有好的点子可以提交 `feature request` 或在 `dev` 分支下提交pr
 
-  
-
 - 由于英文水平太差，目前所有的英文翻译均来自 [Chat-GPT](https://openai.com/blog/chatgpt)（除了很久很久以前 [nirvanaxiao6](https://github.com/nirvanaxiao6) 撰写的第一篇英文文档）
-
-
 
 - 该网站使用 [Hexo]([Hexo](https://hexo.io/zh-cn/index.html)) 构建
 

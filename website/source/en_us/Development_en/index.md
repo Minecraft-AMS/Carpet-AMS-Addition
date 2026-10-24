@@ -1,18 +1,10 @@
 - Main development version：`Minecraft 1.21.11`
 
-  
-
 - It uses [preprocessor](https://github.com/ReplayMod/preprocessor) to maintain all Minecraft versions on a single branch
-
-  
 
 - If you have good ideas, you can submit a `feature request` or submit a pull request on the `dev` branch
 
-  
-
 - Due to poor English proficiency, all English translations are currently provided by [Chat-GPT](https://openai.com/blog/chatgpt)（except for the very first English document written by [nirvanaxiao6](https://github.com/nirvanaxiao6) a long time ago）
-
-
 
 - The website is built using [Hexo]([Hexo](https://hexo.io/zh-cn/index.html))
 

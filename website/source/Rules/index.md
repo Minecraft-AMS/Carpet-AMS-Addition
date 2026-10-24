@@ -3,16 +3,10 @@
 让弓能同时打上无限和经验修补两种附魔
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -21,24 +15,22 @@
 当所有作物方块收到计划刻时仍会给予生长随机刻
 
 - `scheduledRandomTickCactus`: 当仙人掌方块收到计划刻时仍会给予生长随机刻
+
 - `scheduledRandomTickBamboo`: 当竹子方块收到计划刻时仍会给予生长随机刻
+
 - `scheduledRandomTickChorusFlower`: 当紫颂花方块收到计划刻时仍会给予生长随机刻
+
 - `scheduledRandomTickSugarCane`: 当甘蔗方块收到计划刻时仍会给予生长随机刻
+
 - `scheduledRandomTickStem`: 当海带、缠怨藤、垂泪藤方块收到计划刻时仍会给予生长随机刻
 
 > 移植自：[OhMyVanillaMinecraft](https://github.com/hit-mc/OhMyVanillaMinecraft)
 
 - 类型: `boolean`
 
-  
-
 - 默认值: `false`
 
-  
-
 - 参考选项: `false`, `true`
-
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -47,16 +39,10 @@
 大幅度优化龙战定位末地门过程，为基于末地门的末地石农场设计
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `OPTIMIZATION`
 
@@ -68,16 +54,10 @@
 - /playerChunkLoading true/false
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `COMMAND`, `AMS_chunkLoader`
 
@@ -119,16 +99,10 @@
 在服务器当前维度没有玩家的300tick后，Minecraft会停止实体相关的更新，这条规则会绕过这个限制
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `AMS_chunkLoader`
 
@@ -137,16 +111,10 @@
 玩家可以在地狱使用水桶放置水
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -155,16 +123,10 @@
 伪和平，你可以自定义其生效的维度，也可以自定义生效的维度组合，使用“,”隔开即可
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`, `minecraft:overworld`, `minecraft:the_end`, `minecraft:the_nether`, `minecraft:the_end,minecraft:the_nether`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -173,16 +135,10 @@
 让所有方块的爆炸抗性为0
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
 
@@ -193,16 +149,10 @@
 > 移植自：[totos-carpet-tweaks](https://github.com/totorewa/totos-carpet-tweaks)
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -211,16 +161,10 @@
 当玩家放置篝火时，篝火处于熄灭状态
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -229,16 +173,10 @@
 玩家使用鞘翅飞行时不会因为撞到墙壁而受到伤害
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -252,16 +190,10 @@
 - /amsUpdateSuppressionCrashFixForceMode true/false
 
 - 类型: `String`
-  
-  
 
 - 默认值: `none`
-  
-  
 
 - 参考选项: `none`, `minecraft:bone_block`, `minecraft:diamond_ore`, `minecraft:magma_block`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -270,16 +202,10 @@
 防止村民交易被锁定
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -288,16 +214,10 @@
 玩家将免受除虚空伤害外的一切伤害
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -308,16 +228,10 @@
 > 移植自：[lunaar-carpet-addons](https://github.com/Lunaar-SMP/lunaar-carpet-addons)
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `CREATIVE`
 
@@ -326,16 +240,10 @@
 让你的末影箱容量增加一倍（与大箱子相同）
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -344,16 +252,10 @@
 让竹子的模型不会产生偏移
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `OPTIMIZATION`
 
@@ -362,16 +264,10 @@
 允许玩家穿过竹子
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -382,16 +278,10 @@
 - 开启规则后，使用"/customAntiFireItems help"命令查看使用说明
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `COMMAND`
 
@@ -404,16 +294,10 @@
 - [no_blast_wave] - 防爆且无冲击波，爆炸将不会推动掉落物
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`, `no_blast_wave`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `TNT`
 
@@ -422,16 +306,10 @@
 当玩家处于创造模式下时，破坏装有物品的潜影盒也不会产生掉落
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `CREATIVE`
 
@@ -440,16 +318,10 @@
 玩家被潜影贝击中时只会受到伤害而不会获得漂浮BUFF
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false` , `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -458,16 +330,10 @@
 玩家将完全免疫潜影贝发射的飞弹
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false` , `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -480,16 +346,10 @@
 - [VANILLA] - 原版表现
 
 - 类型: `String`
-  
-  
 
 - 默认值: `VANILLA`
-  
-  
 
 - 参考选项: `SURELY` , `NEVER` , `VANILLA` 
-  
-  
 
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
@@ -498,16 +358,10 @@
 禁止末影人随机传送
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false` , `true`
-  
-  
 
 - 分类: `AMS` , `FEATURE` , `EXPERIMENTAL`
 
@@ -518,16 +372,10 @@
 - 你可以使用fasterMovementController规则来控制该规则在哪个维度生效，默认所有维度生效
 
 - 类型: `String`
-  
-  
 
 - 默认值: `VANILLA`
-  
-  
 
 - 参考选项: `Ⅰ`, `Ⅱ`, `Ⅲ`, `Ⅳ`, `Ⅴ`, `VANILLA`
-  
-  
 
 - 分类: `AMS`, `FEATURE` , `EXPERIMENTAL`
 
@@ -541,16 +389,10 @@
 - [all] - 所有维度生效
 
 - 类型: `String`
-  
-  
 
 - 默认值: `all`
-  
-  
 
 - 参考选项: `overworld`, `nether`, `end`, `all`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
@@ -559,16 +401,10 @@
 击杀凋零骷髅会百分百掉落凋零骷髅头
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -579,16 +415,10 @@
 - 指令: /anvilInteractionDisabled true/false
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
 
@@ -600,16 +430,10 @@
 - /gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode, /gamerule
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
 
@@ -624,16 +448,10 @@
 - /amsUpdateSuppressionCrashFixForceMode true/false
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `EXPERIMENTAL`
 
@@ -643,18 +461,11 @@
 
 修复MC-193297中，恶魂火球爆炸时不会正确传递伤害源。
 
-
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `EXPERIMENTAL`, `BUGFIX`
 
@@ -663,16 +474,10 @@
 蛋糕在被破坏时可以掉落蛋糕（蛋糕是完整的情况下才会掉落）
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -681,16 +486,10 @@
 玩家不可以吃蛋糕
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -702,16 +501,10 @@
 - 阳光传感器、红石粉、中继器
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -723,16 +516,10 @@
 - 客户端环境切换该规则设置时需要重启客户端
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
@@ -745,16 +532,10 @@
 - global模式下修改值后需要玩家重新进入游戏
 
 - 类型: `double`
-  
-  
 
 - 默认值: `-1`
-  
-  
 
 - 参考选项: `0 - 512`, `-1`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -767,16 +548,10 @@
 - global模式下修改值后需要玩家重新进入游戏
 
 - 类型: `double`
-  
-  
 
 - 默认值: `-1`
-  
-  
 
 - 参考选项: `0 - 512`, `-1`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -790,16 +565,10 @@
 - [global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离
 
 - 类型: `String`
-  
-  
 
 - 默认值: `server`
-  
-  
 
 - 参考选项: `server`, `global`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -813,16 +582,10 @@
 - [global] - 距离的修改将同时应用于服务端和客户端，客户端无需单独修改交互距离
 
 - 类型: `String`
-  
-  
 
 - 默认值: `server`
-  
-  
 
 - 参考选项: `server`, `global`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -834,16 +597,10 @@
 - 需要关闭Tweakeroo的tweakBlockReachOverride功能
 
 - 类型: `double`
-  
-  
 
 - 默认值: `-1`
-  
-  
 
 - 参考选项: `0 - 512`, `-1`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -854,16 +611,10 @@
 - 开启规则后，使用"/customMovableBlock help"命令查看使用说明
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `COMMAND`
 
@@ -872,16 +623,10 @@
 只需一个底座方块就能激活满级信标
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -892,16 +637,10 @@
 - 开启规则后，使用"/customBlockBlastResistance help"命令查看使用说明
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`, `COMMAND`
 
@@ -912,16 +651,10 @@
 - 为了Dnsolx的蛋
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -933,16 +666,10 @@
 - 爆炸抗性 < 17.0F的方块、基岩、铁砧、末地传送门框架、末地传送门、折跃门
 
 - 类型: `double`
-  
-  
 
 - 默认值: `-1`
-  
-  
 
 - 参考选项:  `-1`, `0 - 16`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL` `TNT`
 
@@ -953,16 +680,10 @@
 - Minecraft >= 1.20时表现为必须潜行
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -972,15 +693,9 @@
 
 - 类型: `boolean`
 
-
-
 - 默认值: `false`
 
-
-
 - 参考选项: `false`, `true`
-
-
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -992,16 +707,10 @@
 - 例：1024_byteeeee -> [bot] 1024_byteeeee_bot
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `bot`, `fake_player`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -1010,16 +719,10 @@
 计分板将会屏蔽假人
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -1028,16 +731,10 @@
 允许玩家一直喂食动物来繁殖它们
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1046,16 +743,10 @@
 漏斗将不会吸入物品
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -1064,16 +755,10 @@
 防止玩家意外吃掉附魔金苹果
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1082,16 +767,10 @@
 让使用物品没有冷却时间
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1100,16 +779,10 @@
 在开启carpet mod的仙人掌扳手规则时，使用仙人掌扳手会发出声音（提供了五种不同音效，设置为 0 禁用音效）
 
 - 类型: `int`
-  
-  
 
 - 默认值: `0`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `5`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1118,16 +791,10 @@
 让珊瑚扇和珊瑚块不会因缺水失活
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -1136,16 +803,10 @@
 使末影龙不能破坏任何方块
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1154,16 +815,10 @@
 让每次堆肥都可以成功
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1172,16 +827,10 @@
 让龙蛋不会瞬移，玩家可以直接挖掉龙蛋来收集它
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1190,16 +839,10 @@
 自定义一种食物来喂食鹦鹉繁殖它们（你也可以用石头来喂它们，如果你真的这么想的话）
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -1220,16 +863,10 @@
 让末影人只会拾起西瓜和南瓜
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1238,16 +875,10 @@
 禁止末影人拾起方块
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1256,16 +887,10 @@
 每一次使用末影珍珠都会生成一只末影螨
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -1275,18 +900,11 @@
 
 玩家在使用末影珍珠进行传送时会播放音效。
 
-
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -1297,16 +915,10 @@
 - 当客户端安装了Fuzz模组时，可以单击消息末尾的+H按钮高亮路径点，使用\"/coordCompass clear\"命令来取消高亮
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `COMMAND`
 
@@ -1317,16 +929,10 @@
 - 当客户端安装了Fuzz模组时，可以单击消息末尾的+H按钮高亮路径点，使用\"/coordCompass clear\"命令来取消高亮
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `COMMAND`
 
@@ -1339,16 +945,10 @@
 - [false] - 禁用规则
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `MainHandOnly`, `NoPickUp`, `false`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1359,16 +959,10 @@
 - 开启规则后，使用"/leader help"命令查看使用说明
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `COMMAND`
 
@@ -1379,16 +973,10 @@
 - 开启规则后，使用"/ping help"命令查看使用说明
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `COMMAND`
 
@@ -1399,16 +987,10 @@
 - 开启规则后，使用"/playerNoNetherPortalTeleport help"命令查看使用说明
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL` `COMMAND`
 
@@ -1417,16 +999,10 @@
 使用物品不会丢失耐久
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1438,16 +1014,10 @@
 - [ 存档文件夹 ]/carpetamsaddition/welcomeMessage.json
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`
 
@@ -1456,16 +1026,10 @@
 使用 “/getSaveSize” 命令获取当前存档大小
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `COMMAND`
 
@@ -1474,16 +1038,10 @@
 每当你设置carpet规则时，都会自动设置为默认值
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -1494,16 +1052,10 @@
 允许在游戏中通过添加数据包来游玩Minecraft的实验性内容（需要重启服务器）
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `EXPERIMENTAL`
 
@@ -1512,16 +1064,10 @@
 使诸如蒲公英的小花也可以被骨粉催熟
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1532,16 +1078,10 @@
 玩家落在滴水石锥上时，不会受到它的附加伤害
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1552,16 +1092,10 @@
 允许玩家穿过滴水石锥
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1570,16 +1104,10 @@
 树叶不会以任何方式生成
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -1588,16 +1116,10 @@
 使用“/getSystemInfo”命令获取服务器的系统信息
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `COMMAND`
 
@@ -1606,16 +1128,10 @@
 铁傀儡不会掉落花
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1628,16 +1144,10 @@
 - 允许设定的范围：2 - 100 或 0
 
 - 类型: `int`
-  
-  
 
 - 默认值: `0`
-  
-  
 
 - 参考选项: `0 或 2 - 100`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1648,16 +1158,10 @@
 - 没有指定坐标时会传送至当前玩家所在位置的对应坐标
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `COMMAND`
 
@@ -1672,16 +1176,10 @@
 - 当客户端安装了Carpet Org Addition时，可以单击消息末尾的H按钮高亮路径点，使用/highlight clear命令来取消高亮
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `all`, `realPlayerOnly`, `fakePlayerOnly`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`
 
@@ -1690,16 +1188,10 @@
 当玩家拥有隐身效果时将对生物完全隐身，即使穿着全套盔甲
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1708,16 +1200,10 @@
 当玩家潜行时将对生物完全隐身，即使穿着全套盔甲
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1728,16 +1214,10 @@
 - 开启规则后，使用"/customCommandPermissionLevel help"命令查看使用说明
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `COMMAND`
 
@@ -1746,16 +1226,10 @@
 可以通过在潜影盒上放置一个雕刻南瓜来召唤一只潜影贝
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1764,16 +1238,10 @@
 当玩家死亡时他们会掉落一个自己的头颅
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1782,16 +1250,10 @@
 使用 “/getPlayerSkull <玩家名> <数量>” 命令来获取一名玩家的头颅
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `COMMAND`
 
@@ -1800,16 +1262,10 @@
 每次打开交易屏幕时村民都会升级
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1820,16 +1276,10 @@
 - 允许设定的范围：0 - 1
 
 - 类型: `Double`
-  
-  
 
 - 默认值: `0.0`
-  
-  
 
 - 参考选项: `0.0`, `0.01`, `0.1`, `1.0`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1840,16 +1290,10 @@
 重新引入<23w31a的打骨折机制，让治疗村民的折扣可以叠加
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1862,16 +1306,10 @@
 - [keepEndCrystal] - 保留水晶生成
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`, `keepEndCrystal`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1880,16 +1318,10 @@
 修复几个假人和盔甲架、矿车、船在特定情况下与客户端相应行为结果不一样的问题
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `BUGFIX`
 
@@ -1898,16 +1330,10 @@
 使拴绳不会因为距离过远而断裂
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1916,16 +1342,10 @@
 玩家可以使用虚弱药水 + 金苹果瞬间将僵尸村民转化为村民
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1934,16 +1354,10 @@
 让假玩家使用离线UUID
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1952,16 +1366,10 @@
 让村民与怪物同样可以被拴绳栓住
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1970,16 +1378,10 @@
 每天都是满月
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -1990,16 +1392,10 @@
 - 当玩家主手拿着绿宝石块时将不会触发刷新
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2008,16 +1404,10 @@
 当羊被命名为jeb_后，修剪羊毛会掉落随机颜色的羊毛
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2026,16 +1416,10 @@
 可以使用哭泣的黑曜石构建下界传送门
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2044,16 +1428,10 @@
 控制熔炉冶炼物品所需要的时间（单位：Tick）
 
 - 类型: `int`
-  
-  
 
 - 默认值: `-1`
-  
-  
 
 - 参考选项: `-1`, `-1 - ?`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2062,16 +1440,10 @@
 当召唤假人时，无论如何假人都默认为生存模式
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -2080,16 +1452,10 @@
 使用“/getHeldItemID”命令来获取玩家主手物品的物品ID
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `COMMAND`
 
@@ -2100,16 +1466,10 @@
 重新引入拌线骗特性，可以通过此规则来继续使用刷线机
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2118,16 +1478,10 @@
 设置女巫掉落红石粉的保底数量
 
 - 类型: `int`
-  
-  
 
 - 默认值: `-1`
-  
-  
 
 - 参考选项: `-1 - 999999`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2136,16 +1490,10 @@
 设置女巫掉落萤石粉的保底数量
 
 - 类型: `int`
-  
-  
 
 - 默认值: `-1`
-  
-  
 
 - 参考选项: `-1 - 999999`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2154,16 +1502,10 @@
 控制TNT的爆炸威力，设置为"-1"禁用规则
 
 - 类型: `double`
-  
-  
 
 - 默认值: `-1.0D`
-  
-  
 
 - 参考选项: `-1.0D - 999999D`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `TNT`
 
@@ -2172,16 +1514,10 @@
 你可以随便瞅末影人
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2190,16 +1526,10 @@
 完全自定义地狱门，开启后，地狱门方块将可以被挖掘且挖掘地狱门框架和地狱门都不会让整个地狱门破碎
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2210,16 +1540,10 @@
 - 随着版本更新该规则的拓展模组列表会不断调整
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `COMMAND`
 
@@ -2231,16 +1555,10 @@
 - 客户端没有安装Carpet AMS Addition时，该规则完全不可用
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`, `COMMAND`
 
@@ -2249,26 +1567,11 @@
 只有OP玩家可以召唤在白名单中的玩家，无论白名单是否开启
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
-- 分类: `AMS`, `COMMAND`
-
-## 真玩家控制保护（realPlayerControlDisabled）
-
-禁止通过Carpet的/player指令操作任何真玩家，包括操作者自己，OP和控制台也不能绕过，不影响假玩家
-
-- 类型: `boolean`
-- 默认值: `false`
-- 参考选项: `false`, `true`
 - 分类: `AMS`, `COMMAND`
 
 ## 禁止物品实体创建下界传送门（itemEntityCreateNetherPortalDisabled）
@@ -2278,16 +1581,10 @@
 让物品实体穿过下界传送门时不会创建传送门
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -2296,16 +1593,10 @@
 让物品只需要在背包内即可受到经验修补的效果，无需拿在手上
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2314,16 +1605,10 @@
 使用/@指令去@某位玩家
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `COMMAND`, `SURVIVAL`
 
@@ -2336,16 +1621,10 @@
 - 该规则不允许在收纳袋中放入收纳袋和潜影盒
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `9x3`, `9x6`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2356,16 +1635,10 @@
 修改最大链式更新深度，设置为“-1”禁用规则
 
 - 类型: `int`
-  
-  
 
 - 默认值: `-1`
-  
-  
 
 - 参考选项: `-1`, `100000`, `200000`, `300000`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
@@ -2374,16 +1647,10 @@
 广播谁召唤了幻翼的消息
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`
 
@@ -2394,16 +1661,10 @@
 让实体穿过末地门不会发生区块加载（Minecraft >= 1.20.6可用）
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2414,16 +1675,10 @@
 让实体穿过末地门时会发生区块加载，与Minecraft >= 1.20.5时保持一致（Minecraft < 1.20.5可用）
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `AMS_CHUNKLOADER`
 
@@ -2432,16 +1687,10 @@
 AMS网络协议的开关
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `AMS_NETWORK`
 
@@ -2451,15 +1700,9 @@ AMS网络协议的开关
 
 - 类型: `boolean`
 
-
-
 - 默认值: `false`
 
-
-
 - 参考选项: `false`, `true`
-
-
 
 - 分类: `AMS`, `AMS_NETWORK`
 
@@ -2470,16 +1713,10 @@ AMS网络协议的开关
 - 开启规则后，使用"/getClientPlayerFps help"命令查看使用说明
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `AMS_NETWORK`, `COMMAND`
 
@@ -2490,16 +1727,10 @@ AMS网络协议的开关
 - 开启规则后，使用"/playerPose help"命令查看使用说明
 
 - 类型: `String`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 - 分类: `AMS`, `AMS_NETWORK`, `COMMAND`
 
@@ -2508,16 +1739,10 @@ AMS网络协议的开关
 一些用于网络通信测试的指令
 
 * 类型: `String`
-  
-  
 
 * 默认值: `false`
-  
-  
 
 * 参考选项: `0`, `1`, `2`, `3`, `4`, `ops`, `true`, `false`
-  
-  
 
 * 分类: `AMS`, `AMS_NETWORK`, `COMMAND`
 
@@ -2528,16 +1753,10 @@ AMS网络协议的开关
 只允许玩家穿过地狱门时生成新的地狱门
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2548,16 +1767,10 @@ AMS网络协议的开关
 防止服务器60s后暂停
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`
 
@@ -2569,16 +1782,10 @@ AMS网络协议的开关
 - 木桶、雕文书架、合成器、展示架
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
@@ -2591,16 +1798,10 @@ AMS网络协议的开关
 - 启用该规则将覆盖游戏规则
 
 - 类型: `int`
-  
-  
 
 - 默认值: `-1`
-  
-  
 
 - 参考选项: `-1`, `1000`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
@@ -2614,16 +1815,10 @@ AMS网络协议的开关
 - 客户端环境切换该规则设置时需要重启客户端
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `FEATURE`, `EXPERIMENTAL`
 
@@ -2635,18 +1830,49 @@ AMS网络协议的开关
 - [server] - 统一使用服务端设置的语言进行翻译
 
 - 类型: `enum`
-  
-  
 
 - 默认值: `CLIENT`
-  
-  
 
 - 参考选项: `CLIENT`, `SERVER`
-  
-  
 
 - 分类: `AMS`
+
+## 真玩家控制保护（realPlayerControlDisabled）
+
+禁止通过Carpet的/player指令操作任何真玩家
+
+- 类型: `boolean`
+- 默认值: `false`
+- 参考选项: `false`, `true`
+- 分类: `AMS`, `COMMAND`
+
+## 末影珍珠恢复修复（enderPearlRestoreFix）
+
+> 版本：`Minecraft >= 1.21.8`
+
+修复服务器重启后玩家登录时重复恢复末影珍珠导致的 UUID 冲突警告
+
+当世界中已存在相同 UUID 且归属相同玩家的珍珠时，复用该珍珠并恢复玩家关联与区块加载票据
+
+- 类型: `boolean`
+
+- 默认值: `false`
+
+- 参考选项: `false`, `true`
+
+- 分类: `AMS`, `BUGFIX`
+
+## 禁用挖掘位置不匹配警告（destroyBlockPosWarningDisabled）
+
+禁用服务端发出的“Mismatch in destroy block pos”警告
+
+- 类型: `boolean`
+
+- 默认值: `false`
+
+- 参考选项: `false`, `true`
+
+- 分类: `AMS`, `FEATURE`
 
 ## 方块硬度同步协议（blockHardnessSyncProtocol）
 
@@ -2654,15 +1880,9 @@ AMS网络协议的开关
 
 - 类型: `boolean`
 
-  
-
 - 默认值: `false`
 
-  
-
 - 参考选项: `false`, `true`
-
-  
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `AMS_NETWORK`
 
@@ -2672,15 +1892,9 @@ AMS网络协议的开关
 
 - 类型：`String`
 
-
-
 - 默认值：`false`
 
-
-
 - 参考选项：`false`、`true`、`ops`、`0`、`1`、`2`、`3`、`4`
-
-
 
 - 分类：`AMS`、`COMMAND`、`FEATURE`
 
@@ -2689,16 +1903,10 @@ AMS网络协议的开关
 使用老版本的方式来合成附魔金苹果（8金块+1苹果）
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
 
@@ -2707,16 +1915,10 @@ AMS网络协议的开关
 使用9个骨头可以合成出3个骨块(一点都不卡！)
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
 
@@ -2727,16 +1929,10 @@ AMS网络协议的开关
 玩家可以在Minecraft 1.17/1.18/1.19中合成收纳袋
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
 
@@ -2747,16 +1943,10 @@ AMS网络协议的开关
 玩家可以在Minecraft 1.17/1.18中合成幽匿感测体
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
 
@@ -2765,16 +1955,10 @@ AMS网络协议的开关
 添加了鞘翅的合成配方
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false` , `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
 
@@ -2783,16 +1967,10 @@ AMS网络协议的开关
 使用更灵活的配方来合成发射器
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
 
@@ -2803,16 +1981,10 @@ AMS网络协议的开关
 使用深板岩来合成磨制黑石按钮
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
 
@@ -2821,16 +1993,10 @@ AMS网络协议的开关
 腐肉可以在熔炉中烧成皮革
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
 
@@ -2841,16 +2007,10 @@ AMS网络协议的开关
 使用铁锭来合成磁石
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`
 
@@ -2859,15 +2019,9 @@ AMS网络协议的开关
 使用剪刀和南瓜合成南瓜头，每合成一个南瓜头剪刀-1耐久（受耐久附魔影响）
 
 - 类型: `boolean`
-  
-  
 
 - 默认值: `false`
-  
-  
 
 - 参考选项: `false`, `true`
-  
-  
 
 - 分类: `AMS`, `SURVIVAL`, `CRAFTING`

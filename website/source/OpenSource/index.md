@@ -1,4 +1,3 @@
-
 <div class="resource-page">
   <a class="repository-panel" href="https://github.com/Minecraft-AMS/Carpet-AMS-Addition" target="_blank" rel="noopener noreferrer">
     <span class="repository-mark"><i class="fa-brands fa-github" aria-hidden="true"></i></span>

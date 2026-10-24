@@ -91,7 +91,6 @@ Run each command below, lines starting with `#` are comments:
 /blockChunkloader noteblock enabled true
 ```
 
-
 ## commandPlayerChunkLoadController
 
 | Command | Function |

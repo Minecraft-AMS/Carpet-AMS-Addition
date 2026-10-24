@@ -89,7 +89,6 @@
 /blockChunkloader noteblock enabled true
 ```
 
-
 ## 区块加载控制（commandPlayerChunkLoadController）
 
 | 指令 | 功能 |
