@@ -71,6 +71,7 @@ Check the implementation's preprocessor conditions and actual supported versions
 |           1.16.5           |         ✔          |                                                            ---                                                            |
 |           1.15.2           | ✖ | [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy) |
 |           1.14.4           | ✖ | [ Carpet-AMS-Addition-Legacy](https://github.com/1024-byteeeee/Carpet-AMS-Addition-Legacy) |
+
 &emsp;
 
 ## Dependencies
