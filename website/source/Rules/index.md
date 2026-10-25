@@ -1796,7 +1796,7 @@ AMS网络协议的开关
 - 参考选项: `false`, `true`
 - 分类: `AMS`, `COMMAND`
 
-## 禁用挖掘位置不匹配警告（destroyBlockPosWarningDisabled）
+## 禁用方块破坏位置警告（destroyBlockPosWarningDisabled）
 
 禁用服务端发出的“Mismatch in destroy block pos”警告
 
