@@ -26,6 +26,7 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
+import carpetamsaddition.utils.PlayerUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 
 import com.llamalad7.mixinextras.sugar.Local;
@@ -60,7 +61,7 @@ public abstract class Carpet_PlayerCommandMixin {
     )
     private static void realPlayerControlDisabled(CallbackInfoReturnable<Boolean> cir, @Local CommandSourceStack source) throws CommandSyntaxException {
         if (CarpetAMSAdditionSettings.realPlayerControlDisabled && source != null) {
-            Player player = source.getPlayerOrException();
+            Player player = PlayerUtil.getServerPlayerEntity(source);
             if (!FakePlayerHelper.isFakePlayer(player)) {
                 Messenger.tell(player, Messenger.f(tr.tr("blocked"), Layout.RED));
                 cir.setReturnValue(true);
