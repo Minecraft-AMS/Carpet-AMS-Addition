@@ -790,7 +790,7 @@ carpetamsaddition:
         name: 真玩家控制保护
         desc: 禁止通过Carpet的/player指令操作任何真玩家
       destroyBlockPosWarningDisabled:
-        name: 禁用挖掘位置不匹配警告
+        name: 禁用方块破坏位置警告
         desc: 禁用服务端发出的“Mismatch in destroy block pos”警告
       ghastFireballExplosionDamageSourceFix:
         name: 恶魂火球爆炸伤害源修复

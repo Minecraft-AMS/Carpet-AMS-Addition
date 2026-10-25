@@ -21,11 +21,13 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -44,51 +46,47 @@ import java.util.Objects;
 @GameVersion(version = "Minecraft >= 1.20.5")
 @Mixin(value = Player.class, priority = 1688)
 public abstract class PlayerMixin {
-    @WrapMethod(method = "isWithinBlockInteractionRange")
-    private boolean enforceBlockInteractionRange(BlockPos pos, double padding, Operation<Boolean> original) {
+    @ModifyReturnValue(method = "isWithinBlockInteractionRange", at = @At("RETURN"))
+    private boolean enforceBlockInteractionRange(boolean original, BlockPos pos, double padding) {
         Player player = (Player) (Object) this;
         double range = CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange;
 
-        if (player instanceof ServerPlayer && range != -1.0D && new AABB(pos).distanceToSqr(player.getEyePosition()) >= range * range) {
+        if (player instanceof ServerPlayer && range != -1.0D && padding != Container.DEFAULT_DISTANCE_BUFFER && new AABB(pos).distanceToSqr(player.getEyePosition()) >= MathUtil.square(range)) {
             return false;
         }
 
-        return original.call(pos, padding);
+        return original;
     }
 
-    @WrapMethod(method = "isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z")
-    private boolean enforceEntityInteractionRange(AABB bounds, double padding, Operation<Boolean> original) {
+    @ModifyReturnValue(method = "isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z", at = @At("RETURN"))
+    private boolean enforceEntityInteractionRange(boolean original, AABB bounds, double padding) {
         Player player = (Player) (Object) this;
         double range = CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
 
-        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= range * range) {
+        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= MathUtil.square(range)) {
             return false;
         }
 
-        return original.call(bounds, padding);
+        return original;
     }
 
     //#if MC>=12111
-    @WrapMethod(method = "isWithinAttackRange")
+    @ModifyReturnValue(method = "isWithinAttackRange", at = @At("RETURN"))
     private boolean enforceEntityAttackRange(
+        boolean original,
         //#if MC>=260102
         //$$ ItemStack stack,
         //#endif
-        AABB bounds, double padding, Operation<Boolean> original
+        AABB bounds, double padding
     ) {
         Player player = (Player) (Object) this;
         double range = CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
 
-        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= range * range) {
+        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= MathUtil.square(range)) {
             return false;
         }
 
-        return original.call(
-            //#if MC>=260102
-            //$$ stack,
-            //#endif
-            bounds, padding
-        );
+        return original;
     }
     //#endif
 
