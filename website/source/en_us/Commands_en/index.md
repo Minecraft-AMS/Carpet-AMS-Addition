@@ -103,12 +103,6 @@ Run each command below, lines starting with `#` are comments:
 | --- | --- |
 | `/anvilInteractionDisabled [true/false]` | Controls whether the player can interact with the anvil |
 
-## amsUpdateSuppressionCrashFix
-
-| Command | Function |
-| --- | --- |
-| `/amsUpdateSuppressionCrashFixForceMode [true/false]` | Control whether forced startup is enabled when the `customBlockUpdateSuppressor`  rule is enabled |
-
 ## commandCustomBlockBlastResistance
 
 | Command | Function |

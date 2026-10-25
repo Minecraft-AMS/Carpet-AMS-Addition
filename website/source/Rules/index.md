@@ -180,23 +180,6 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`
 
-## 自定义方块更新抑制器（customBlockUpdateSuppressor）
-
-自定义一个方块成为更新抑制器（不是所有的方块都能设置为更新抑制器）
-
-- 命令格式：
-- /carpet customBlockUpdateSuppressor minecraft:BlockName
-- 使用如下指令来控制是否在启用该规则时自动开启"amsUpdateSuppressionCrashFix"规则:
-- /amsUpdateSuppressionCrashFixForceMode true/false
-
-- 类型: `String`
-
-- 默认值: `none`
-
-- 参考选项: `none`, `minecraft:bone_block`, `minecraft:diamond_ore`, `minecraft:magma_block`
-
-- 分类: `AMS`, `FEATURE`
-
 ## 无限交易（infiniteTrades）
 
 防止村民交易被锁定
@@ -437,24 +420,6 @@
 
 - 分类: `AMS`, `FEATURE`, `SURVIVAL`, `COMMAND`
 
-## 更新抑制崩溃修复（amsUpdateSuppressionCrashFix）
-
-防止更新抑制导致服务器崩溃，同时提供发生更新抑制的坐标与维度
-
-- [false] - 禁用规则
-- [true] - 启用规则
-- [silence] - 启用但不发送服务器消息
-- 使用如下指令来控制其是否在"customBlockUpdateSuppressor"开启时强制启动，权限等级为2:
-- /amsUpdateSuppressionCrashFixForceMode true/false
-
-- 类型: `boolean`
-
-- 默认值: `false`
-
-- 参考选项: `false`, `true`
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL`, `EXPERIMENTAL`
-
 ## 恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）
 
 > 版本：`Minecraft < 1.19.3`
@@ -632,7 +597,7 @@
 
 ## 自定义方块爆炸抗性（commandCustomBlockBlastResistance）
 
-使用指令自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）
+使用指令自定义任何方块的爆炸抗性
 
 - 开启规则后，使用"/customBlockBlastResistance help"命令查看使用说明
 
@@ -657,21 +622,6 @@
 - 参考选项: `false`, `true`
 
 - 分类: `AMS`, `FEATURE`
-
-## 增强型世界吞噬者（enhancedWorldEater）
-
-通过自定义除以下方块的爆炸抗性来让世界吞噬者一路畅通（该规则开启时，自定义炸毁方块(commandCustomBlockBlastResistance)规则将不会生效）
-
-- 方块列表：
-- 爆炸抗性 < 17.0F的方块、基岩、铁砧、末地传送门框架、末地传送门、折跃门
-
-- 类型: `double`
-
-- 默认值: `-1`
-
-- 参考选项:  `-1`, `0 - 16`
-
-- 分类: `AMS`, `FEATURE`, `SURVIVAL` `TNT`
 
 ## 潜行编辑告示牌（sneakToEditSign）
 
