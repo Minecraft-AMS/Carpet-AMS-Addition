@@ -28,11 +28,11 @@ import net.minecraft.world.level.block.TripWireHookBlock;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Slice;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@SuppressWarnings("SimplifiableConditionalExpression")
-@GameVersion(version = "mc >= 1.21.2", desc = "https://bugs.mojang.com/browse/MC-59471")
+@GameVersion(version = "Minecraft >= 1.21.2", desc = "https://bugs.mojang.com/browse/MC-59471")
 @Mixin(TripWireHookBlock.class)
 public abstract class TripwireHookBlockMixin {
     @ModifyExpressionValue(
@@ -40,14 +40,22 @@ public abstract class TripwireHookBlockMixin {
         at = @At(
             value = "INVOKE",
             //#if MC>=260000
-            //$$ target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z",
+            //$$ target = "Lnet/minecraft/world/level/block/state/BlockState;is(Ljava/lang/Object;)Z"
             //#else
-            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z",
+            target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"
             //#endif
-            ordinal = 3
-        )
+        ),
+        slice = @Slice(
+            from = @At(
+                value = "INVOKE",
+                target = "Lnet/minecraft/world/level/block/TripWireHookBlock;notifyNeighbors(Lnet/minecraft/world/level/block/Block;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)V",
+                ordinal = 0
+            )
+        ),
+        require = 2,
+        allow = 3
     )
     private static boolean stringDupeReintroduced(boolean original) {
-        return CarpetAMSAdditionSettings.stringDupeReintroduced ? true : original;
+        return CarpetAMSAdditionSettings.stringDupeReintroduced || original;
     }
 }
