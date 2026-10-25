@@ -29,8 +29,7 @@ import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.PlayerUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 
-import com.llamalad7.mixinextras.sugar.Local;
-
+import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.minecraft.commands.CommandSourceStack;
@@ -59,9 +58,9 @@ public abstract class Carpet_PlayerCommandMixin {
         ),
         cancellable = true
     )
-    private static void realPlayerControlDisabled(CallbackInfoReturnable<Boolean> cir, @Local CommandSourceStack source) throws CommandSyntaxException {
-        if (CarpetAMSAdditionSettings.realPlayerControlDisabled && source != null) {
-            Player player = PlayerUtil.getServerPlayerEntity(source);
+    private static void realPlayerControlDisabled(CommandContext<CommandSourceStack> context, CallbackInfoReturnable<Boolean> cir) throws CommandSyntaxException {
+        if (CarpetAMSAdditionSettings.realPlayerControlDisabled && context.getSource() != null) {
+            Player player = PlayerUtil.getServerPlayerEntity(context);
             if (!FakePlayerHelper.isFakePlayer(player)) {
                 Messenger.tell(player, Messenger.f(tr.tr("blocked"), Layout.RED));
                 cir.setReturnValue(true);
