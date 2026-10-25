@@ -293,25 +293,6 @@
 <li><p>Categories: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="customBlockUpdateSuppressor"><a href="#customBlockUpdateSuppressor" class="headerlink" title="customBlockUpdateSuppressor"></a>customBlockUpdateSuppressor</h2><p>Customize a block to be an update suppressor (Not all blocks can be set as update suppressor)</p>
-<ul>
-<li><p>Command format:</p>
-</li>
-<li><p>&#x2F;carpet customBlockUpdateSuppressor minecraft:BlockName</p>
-</li>
-<li><p>Use the following command to control whether the “amsUpdateSuppressionCrashFix” rule is automatically enabled when this rule is enabled:</p>
-</li>
-<li><p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
-</li>
-<li><p>Type: <code>boolean</code></p>
-</li>
-<li><p>Default: <code>false</code></p>
-</li>
-<li><p>Suggested options: <code>none</code>, <code>minecraft:bone_block</code>, <code>minecraft:diamond_ore</code>, <code>minecraft:magma_block</code></p>
-</li>
-<li><p>Categories: <code>AMS</code>, <code>FEATURE</code></p>
-</li>
-</ul>
 <h2 id="infiniteTrades"><a href="#infiniteTrades" class="headerlink" title="infiniteTrades"></a>infiniteTrades</h2><p>Prevents villager trades from locking up</p>
 <ul>
 <li><p>Type: <code>boolean</code></p>
@@ -543,27 +524,6 @@
 <li><p>Categories: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code> , <code>COMMAND</code></p>
 </li>
 </ul>
-<h2 id="amsUpdateSuppressionCrashFix"><a href="#amsUpdateSuppressionCrashFix" class="headerlink" title="amsUpdateSuppressionCrashFix"></a>amsUpdateSuppressionCrashFix</h2><p>Prevent update suppression from causing server crashes, while providing the coordinates and dimensions where the update suppression occurred</p>
-<ul>
-<li><p>[false] - Disable rule</p>
-</li>
-<li><p>[true] - Enable rule</p>
-</li>
-<li><p>[silence] - Enable but no send server messages</p>
-</li>
-<li><p>Use the following command to control whether it is forcibly enabled when “customBlockUpdateSuppressor” is enabled, with a permission level of 2:</p>
-</li>
-<li><p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
-</li>
-<li><p>Type: <code>String</code></p>
-</li>
-<li><p>Default: <code>false</code></p>
-</li>
-<li><p>Suggested options: <code>false</code> , <code>true</code>, <code>silence</code></p>
-</li>
-<li><p>Categories: <code>AMS</code> , <code>FEATURE</code> , <code>SURVIVAL</code> , <code>EXPERIMENTAL</code></p>
-</li>
-</ul>
 <h2 id="ghastFireballExplosionDamageSourceFix"><a href="#ghastFireballExplosionDamageSourceFix" class="headerlink" title="ghastFireballExplosionDamageSourceFix"></a>ghastFireballExplosionDamageSourceFix</h2><blockquote>
 <p>Version: <code>Minecraft &lt; 1.19.3</code></p>
 </blockquote>
@@ -735,7 +695,7 @@
 <li><p>Categories: <code>AMS</code>, <code>FEATURE</code></p>
 </li>
 </ul>
-<h2 id="commandCustomBlockBlastResistance"><a href="#commandCustomBlockBlastResistance" class="headerlink" title="commandCustomBlockBlastResistance"></a>commandCustomBlockBlastResistance</h2><p>Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled)</p>
+<h2 id="commandCustomBlockBlastResistance"><a href="#commandCustomBlockBlastResistance" class="headerlink" title="commandCustomBlockBlastResistance"></a>commandCustomBlockBlastResistance</h2><p>Use commands to customize the explosion resistance of any block</p>
 <ul>
 <li><p>After enabling the rule, use the “&#x2F;customBlockBlastResistance help” command to view the usage instructions</p>
 </li>
@@ -759,21 +719,6 @@
 <li><p>Suggested options: <code>false</code>, <code>true</code></p>
 </li>
 <li><p>Categories: <code>AMS</code>, <code>FEATURE</code></p>
-</li>
-</ul>
-<h2 id="enhancedWorldEater"><a href="#enhancedWorldEater" class="headerlink" title="enhancedWorldEater"></a>enhancedWorldEater</h2><p>Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the commandCustomBlockBlastResistance rule when enabled)</p>
-<ul>
-<li><p>Block list:</p>
-</li>
-<li><p>Blocks with blast resistance &lt; 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway</p>
-</li>
-<li><p>Type: <code>double</code></p>
-</li>
-<li><p>Default: <code>-1</code></p>
-</li>
-<li><p>Suggested options: <code>-1</code> , <code>0 - 16</code></p>
-</li>
-<li><p>Categories: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code> <code>TNT</code></p>
 </li>
 </ul>
 <h2 id="sneakToEditSign"><a href="#sneakToEditSign" class="headerlink" title="sneakToEditSign"></a>sneakToEditSign</h2><p>Players can sneak with empty hands to edit already placed signs by using the interact key</p>

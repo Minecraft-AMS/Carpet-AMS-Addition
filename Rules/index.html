@@ -293,25 +293,6 @@
 <li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code></p>
 </li>
 </ul>
-<h2 id="自定义方块更新抑制器（customBlockUpdateSuppressor）"><a href="#自定义方块更新抑制器（customBlockUpdateSuppressor）" class="headerlink" title="自定义方块更新抑制器（customBlockUpdateSuppressor）"></a>自定义方块更新抑制器（customBlockUpdateSuppressor）</h2><p>自定义一个方块成为更新抑制器（不是所有的方块都能设置为更新抑制器）</p>
-<ul>
-<li><p>命令格式：</p>
-</li>
-<li><p>&#x2F;carpet customBlockUpdateSuppressor minecraft:BlockName</p>
-</li>
-<li><p>使用如下指令来控制是否在启用该规则时自动开启”amsUpdateSuppressionCrashFix”规则:</p>
-</li>
-<li><p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
-</li>
-<li><p>类型: <code>String</code></p>
-</li>
-<li><p>默认值: <code>none</code></p>
-</li>
-<li><p>参考选项: <code>none</code>, <code>minecraft:bone_block</code>, <code>minecraft:diamond_ore</code>, <code>minecraft:magma_block</code></p>
-</li>
-<li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
-</li>
-</ul>
 <h2 id="无限交易（infiniteTrades）"><a href="#无限交易（infiniteTrades）" class="headerlink" title="无限交易（infiniteTrades）"></a>无限交易（infiniteTrades）</h2><p>防止村民交易被锁定</p>
 <ul>
 <li><p>类型: <code>boolean</code></p>
@@ -543,27 +524,6 @@
 <li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>COMMAND</code></p>
 </li>
 </ul>
-<h2 id="更新抑制崩溃修复（amsUpdateSuppressionCrashFix）"><a href="#更新抑制崩溃修复（amsUpdateSuppressionCrashFix）" class="headerlink" title="更新抑制崩溃修复（amsUpdateSuppressionCrashFix）"></a>更新抑制崩溃修复（amsUpdateSuppressionCrashFix）</h2><p>防止更新抑制导致服务器崩溃，同时提供发生更新抑制的坐标与维度</p>
-<ul>
-<li><p>[false] - 禁用规则</p>
-</li>
-<li><p>[true] - 启用规则</p>
-</li>
-<li><p>[silence] - 启用但不发送服务器消息</p>
-</li>
-<li><p>使用如下指令来控制其是否在”customBlockUpdateSuppressor”开启时强制启动，权限等级为2:</p>
-</li>
-<li><p>&#x2F;amsUpdateSuppressionCrashFixForceMode true&#x2F;false</p>
-</li>
-<li><p>类型: <code>boolean</code></p>
-</li>
-<li><p>默认值: <code>false</code></p>
-</li>
-<li><p>参考选项: <code>false</code>, <code>true</code></p>
-</li>
-<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code>, <code>EXPERIMENTAL</code></p>
-</li>
-</ul>
 <h2 id="恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）"><a href="#恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）" class="headerlink" title="恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）"></a>恶魂火球爆炸伤害源修复（ghastFireballExplosionDamageSourceFix）</h2><blockquote>
 <p>版本：<code>Minecraft &lt; 1.19.3</code></p>
 </blockquote>
@@ -739,7 +699,7 @@
 <li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
 </li>
 </ul>
-<h2 id="自定义方块爆炸抗性（commandCustomBlockBlastResistance）"><a href="#自定义方块爆炸抗性（commandCustomBlockBlastResistance）" class="headerlink" title="自定义方块爆炸抗性（commandCustomBlockBlastResistance）"></a>自定义方块爆炸抗性（commandCustomBlockBlastResistance）</h2><p>使用指令自定义任何方块的爆炸抗性（强化版世界吞噬者(enhancedWorldEater)规则开启时该规则将不会生效）</p>
+<h2 id="自定义方块爆炸抗性（commandCustomBlockBlastResistance）"><a href="#自定义方块爆炸抗性（commandCustomBlockBlastResistance）" class="headerlink" title="自定义方块爆炸抗性（commandCustomBlockBlastResistance）"></a>自定义方块爆炸抗性（commandCustomBlockBlastResistance）</h2><p>使用指令自定义任何方块的爆炸抗性</p>
 <ul>
 <li><p>开启规则后，使用”&#x2F;customBlockBlastResistance help”命令查看使用说明</p>
 </li>
@@ -763,21 +723,6 @@
 <li><p>参考选项: <code>false</code>, <code>true</code></p>
 </li>
 <li><p>分类: <code>AMS</code>, <code>FEATURE</code></p>
-</li>
-</ul>
-<h2 id="增强型世界吞噬者（enhancedWorldEater）"><a href="#增强型世界吞噬者（enhancedWorldEater）" class="headerlink" title="增强型世界吞噬者（enhancedWorldEater）"></a>增强型世界吞噬者（enhancedWorldEater）</h2><p>通过自定义除以下方块的爆炸抗性来让世界吞噬者一路畅通（该规则开启时，自定义炸毁方块(commandCustomBlockBlastResistance)规则将不会生效）</p>
-<ul>
-<li><p>方块列表：</p>
-</li>
-<li><p>爆炸抗性 &lt; 17.0F的方块、基岩、铁砧、末地传送门框架、末地传送门、折跃门</p>
-</li>
-<li><p>类型: <code>double</code></p>
-</li>
-<li><p>默认值: <code>-1</code></p>
-</li>
-<li><p>参考选项:  <code>-1</code>, <code>0 - 16</code></p>
-</li>
-<li><p>分类: <code>AMS</code>, <code>FEATURE</code>, <code>SURVIVAL</code> <code>TNT</code></p>
 </li>
 </ul>
 <h2 id="潜行编辑告示牌（sneakToEditSign）"><a href="#潜行编辑告示牌（sneakToEditSign）" class="headerlink" title="潜行编辑告示牌（sneakToEditSign）"></a>潜行编辑告示牌（sneakToEditSign）</h2><p>玩家可以在潜行状态且双手为空时对已经放置的告示牌按使用键来编辑它</p>

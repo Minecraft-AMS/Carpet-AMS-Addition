@@ -164,7 +164,15 @@
 <p>开启后会在需要时扩展玩家末影箱容量，读取存档时也会预先扩容，打开界面不再要求重新进入游戏。</p>
 </li>
 <li><p><strong>升级至 AMSP v2</strong></p>
-<p>调整网络通道、握手与数据包分发，将数据包的主线程调度集中到分发层处理。<br>客户端协议不兼容时会收到提示；使用方块硬度同步、获取客户端 FPS 等网络功能时，请同步更新服务端和客户端模组。</p>
+<p>调整网络通道、握手与数据包分发，将数据包的主线程调度集中到分发层处理。<br>客户端协议不兼容时会收到提示，使用方块硬度同步、获取客户端 FPS 等网络功能时，请同步更新服务端和客户端模组。</p>
+</li>
+<li><p><strong>移除更新抑制崩溃修复（amsUpdateSuppressionCrashFix）</strong></p>
+<p>同时移除 <code>/amsUpdateSuppressionCrashFixForceMode</code> 指令及其配置读写。</p>
+</li>
+<li><p><strong>移除自定义方块更新抑制器（customBlockUpdateSuppressor）</strong></p>
+</li>
+<li><p><strong>移除增强型世界吞噬者（enhancedWorldEater）</strong></p>
+<p><strong>自定义方块爆炸抗性（commandCustomBlockBlastResistance）</strong> 不再受 <code>enhancedWorldEater</code> 限制。</p>
 </li>
 </ul>
 <h1 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h1><ul>
@@ -239,6 +247,14 @@
 </li>
 <li><p><strong>Upgraded to AMSP v2</strong></p>
 <p>Updated the network channel, handshake, and packet dispatching. Main-thread scheduling is now handled centrally by the dispatcher.<br>Clients receive a warning when their protocol is incompatible. Update both server and client installations when using features such as block hardness synchronization and client FPS queries.</p>
+</li>
+<li><p><strong>Removed amsUpdateSuppressionCrashFix</strong></p>
+<p>Also removed <code>/amsUpdateSuppressionCrashFixForceMode</code> and its configuration loading and saving.</p>
+</li>
+<li><p><strong>Removed customBlockUpdateSuppressor</strong></p>
+</li>
+<li><p><strong>Removed enhancedWorldEater</strong></p>
+<p><strong>commandCustomBlockBlastResistance</strong> is no longer restricted by <code>enhancedWorldEater</code>.</p>
 </li>
 </ul>
 <h1 id="Fixes"><a href="#Fixes" class="headerlink" title="Fixes"></a>Fixes</h1><ul>
