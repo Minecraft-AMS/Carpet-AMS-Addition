@@ -16,8 +16,6 @@ carpetamsaddition:
       highlightCoordButtonHoverText: 'Use fuzz mod to highlight waypoints, use /coordCompass clear to remove the highlight'
 
   rule:
-    amsUpdateSuppressionCrashFix:
-      msg: 'Update suppression location @ %s -> [ %s ] | reason: %s'
     welcomeMessage:
       modify_content_in: 'Modify the content in：'
       save_path: '[ save path ]'
@@ -101,9 +99,6 @@ carpetamsaddition:
       chunk_loading_true: '<commandPlayerChunkLoadController> chunk loading: true'
       chunk_loading_false: '<commandPlayerChunkLoadController> chunk_loading_false'
       help: '/playerChunkLoading [true/false] - Control chunk loading of player. Can only manipulate yourself'
-    amsUpdateSuppressionCrashFixForceMode:
-      lazy_mode: '[ lazy mode ]'
-      force_mode: '[ force mode ]'
     anvilInteractionDisabled:
       disable: '[ Anvil Interaction Disable ]'
       enable: '[ Anvil Interaction Enable ]'
@@ -258,8 +253,6 @@ carpetamsaddition:
       server_runtime: 'Server Runtime'
 
   validator:
-    enhancedWorldEater:
-      value_range: 'The value must be 0 - 16 or -1'
     maxClientInteractionReachDistance:
       value_range: 'The value must be 0 - 512 or -1'
     maxPlayerBlockInteractionRange:
@@ -307,13 +300,6 @@ carpetamsaddition:
         desc: Optimize dragon respawning
       safeFlight:
         desc: players don't get hurt by flying into walls
-      customBlockUpdateSuppressor:
-        desc: Customize a block to be an update suppressor (Not all blocks can be set as update suppressor)
-        extra:
-          '1': 'Command format:'
-          '2': '/carpet customBlockUpdateSuppressor minecraft:BlockName'
-          '3': 'Use the following command to control whether the "amsUpdateSuppressionCrashFix" rule is automatically enabled when this rule is enabled: '
-          '4': '/amsUpdateSuppressionCrashFixForceMode true/false'
       infiniteTrades:
         desc: Prevents villager trades from locking up
       invulnerable:
@@ -372,14 +358,6 @@ carpetamsaddition:
         extra:
           '0': 'Affects command list: '
           '1': '/gamemode, /tp, /teleport, /give, /setblock, /summon, /difficulty, /kill, /time, /weather, /fill, /setblock, /enchant, /experience, /advancement, /effect, /data, /defaultgamemode, /gamerule'
-      amsUpdateSuppressionCrashFix:
-        desc: Prevent update suppression from causing server crashes, while providing the coordinates and dimensions where the update suppression occurred
-        extra:
-          '0': '[false] - Disable rule'
-          '1': '[true] - Enable rule'
-          "2": '[silence] - Enable but no send server messages'
-          '3': 'Use the following command to control whether it is forcibly enabled when "customBlockUpdateSuppressor" is enabled, with a permission level of 2:'
-          '4': '/amsUpdateSuppressionCrashFixForceMode true/false'
       cakeBlockDropOnBreak:
         desc: When the cake is destroyed, it can drop cake (the cake will only drop when it is intact)
       noCakeEating:
@@ -425,18 +403,13 @@ carpetamsaddition:
       easyMaxLevelBeacon:
         desc: Activate full-level beacon with just one base block
       commandCustomBlockBlastResistance:
-        desc: Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled)
+        desc: Use commands to customize the explosion resistance of any block
         extra:
           '0': 'After enabling the rule, use the "/customBlockBlastResistance help" command to view the usage instructions'
       regeneratingDragonEgg:
         desc: Every time a player defeats the Ender Dragon, a dragon egg will be generated
         extra:
           '0': 'For Dnsolx eggs'
-      enhancedWorldEater:
-        desc: Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the commandCustomBlockBlastResistance rule when enabled)
-        extra:
-          '0': 'Block list:'
-          '1': 'Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway'
       sneakToEditSign:
         desc: Players can sneak with empty hands to edit already placed signs by using the interact key
         extra:

@@ -35,7 +35,6 @@ import carpetamsaddition.observers.network.AmspRuleObserver;
 
 import carpetamsaddition.validators.rule.maxPlayerBlockInteractionRange.MaxPlayerBlockInteractionRangeValidator;
 import carpetamsaddition.validators.rule.maxPlayerEntityInteractionRange.MaxPlayerEntityInteractionRangeValidator;
-import carpetamsaddition.validators.rule.enhancedWorldEater.BlastResistanceValidator;
 import carpetamsaddition.validators.rule.maxClientInteractionReachDistance.MaxClientInteractionReachDistanceValidator;
 import carpetamsaddition.validators.rule.easyGetPitcherPod.CountValidator;
 import carpetamsaddition.validators.rule.renewableNetherScrap.DropRateValidator;
@@ -91,13 +90,6 @@ public class CarpetAMSAdditionSettings {
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean safeFlight = false;
-
-    @Rule(
-        options = {"none", "minecraft:bone_block", "minecraft:diamond_ore", "minecraft:magma_block"},
-        categories = {AMS, FEATURE},
-        strict = false
-    )
-    public static String customBlockUpdateSuppressor = "none";
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean infiniteTrades = false;
@@ -165,12 +157,6 @@ public class CarpetAMSAdditionSettings {
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL, COMMAND})
     public static boolean preventAdministratorCheat = false;
-
-    @Rule(
-        options = {"false", "true", "silence"},
-        categories = {AMS, FEATURE, SURVIVAL, EXPERIMENTAL}
-    )
-    public static String amsUpdateSuppressionCrashFix = "false";
 
     @Rule(categories = {AMS, FEATURE, SURVIVAL})
     public static boolean cakeBlockDropOnBreak = false;
@@ -244,14 +230,6 @@ public class CarpetAMSAdditionSettings {
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean regeneratingDragonEgg = false;
-
-    @Rule(
-        options = {"-1"},
-        categories = {AMS, SURVIVAL, FEATURE, TNT},
-        validators = BlastResistanceValidator.class,
-        strict = false
-    )
-    public static double enhancedWorldEater = -1.0D;
 
     @Rule(categories = {AMS, FEATURE})
     public static boolean sneakToEditSign = false;

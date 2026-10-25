@@ -14,7 +14,6 @@ import carpetamsaddition.api.command.CommandRegistrationContext;
 import carpetamsaddition.commands.rule.commandBlockChunkloader.BlockChunkloaderCommand;
 import carpetamsaddition.commands.rule.commandLocationTag.LocationTagCommand;
 import carpetamsaddition.commands.debug.network.AmspCommand;
-import carpetamsaddition.commands.rule.amsUpdateSuppressionCrashFix.AmsUpdateSuppressionCrashFixCommand;
 import carpetamsaddition.commands.rule.commandAtSomeOnePlayer.AtCommand;
 import carpetamsaddition.commands.rule.commandAnvilInteractionDisabled.AnvilInteractionDisabledCommand;
 import carpetamsaddition.commands.rule.commandCarpetExtensionModWikiHyperlink.CarpetExtensionModWikiHyperlinkCommand;
@@ -49,7 +48,6 @@ public final class AmsCommandRegistry {
     private AmsCommandRegistry() {}
 
     private static final List<AmsCommand> COMMANDS = Arrays.asList(
-        new AmsUpdateSuppressionCrashFixCommand(),
         new AtCommand(),
         new BlockChunkloaderCommand(),
         new LocationTagCommand(),
