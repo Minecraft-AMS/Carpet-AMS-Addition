@@ -25,6 +25,7 @@ import carpetamsaddition.utils.messageTextEvent.ClickEventUtil;
 import carpetamsaddition.utils.messageTextEvent.HoverEventUtil;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
+import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -34,6 +35,7 @@ import net.minecraft.ChatFormatting;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,6 +48,49 @@ public class Messenger {
 
     public static MutableComponent s(Object text) {
         return MessengerCompatFactory.literalText(text.toString());
+    }
+
+    /** Formats integer coordinates without brackets, separated by a comma and a space. */
+    @NotNull
+    public static String formatPos(Vec3i pos) {
+        return formatPos(pos, ", ");
+    }
+
+    @NotNull
+    public static String formatPos(Vec3i pos, String separator) {
+        return formatPos(pos.getX(), pos.getY(), pos.getZ(), separator);
+    }
+
+    @NotNull
+    public static String formatPos(int x, int y, int z) {
+        return formatPos(x, y, z, ", ");
+    }
+
+    @NotNull
+    public static String formatPos(int x, int y, int z, String separator) {
+        Objects.requireNonNull(separator, "separator");
+        return x + separator + y + separator + z;
+    }
+
+    /** Formats floating-point coordinates without brackets or rounding. */
+    @NotNull
+    public static String formatPos(Vec3 pos) {
+        return formatPos(pos, ", ");
+    }
+
+    @NotNull
+    public static String formatPos(Vec3 pos, String separator) {
+        return formatPos(pos.x(), pos.y(), pos.z(), separator);
+    }
+
+    @NotNull
+    public static String formatPos(double x, double y, double z) {
+        return formatPos(x, y, z, ", ");
+    }
+
+    @NotNull
+    public static String formatPos(double x, double y, double z, String separator) {
+        return x + separator + y + separator + z;
     }
 
     @NotNull
