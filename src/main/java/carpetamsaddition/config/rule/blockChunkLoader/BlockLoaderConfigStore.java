@@ -20,8 +20,6 @@ import net.minecraft.world.level.storage.LevelResource;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.nio.file.AtomicMoveNotSupportedException;
 import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -83,21 +81,8 @@ public final class BlockLoaderConfigStore {
         }
 
         Files.createDirectories(path.getParent());
-        Path temporary = Files.createTempFile(path.getParent(), "block_chunkloader-", ".tmp");
-
-        try {
-            Files.write(temporary, GSON.toJson(data).getBytes(StandardCharsets.UTF_8));
-
-            try {
-                Files.move(temporary, path, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
-            } catch (AtomicMoveNotSupportedException e) {
-                Files.move(temporary, path, StandardCopyOption.REPLACE_EXISTING);
-            }
-
-            CONFIGS.put(type, config);
-        } finally {
-            Files.deleteIfExists(temporary);
-        }
+        Files.write(path, GSON.toJson(data).getBytes(StandardCharsets.UTF_8));
+        CONFIGS.put(type, config);
     }
 
     public static void clear() {
