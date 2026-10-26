@@ -26,11 +26,11 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.PlayerUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 
+import com.llamalad7.mixinextras.sugar.Local;
+
 import com.mojang.brigadier.context.CommandContext;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.player.Player;
@@ -58,13 +58,10 @@ public abstract class Carpet_PlayerCommandMixin {
         ),
         cancellable = true
     )
-    private static void realPlayerControlDisabled(CommandContext<CommandSourceStack> context, CallbackInfoReturnable<Boolean> cir) throws CommandSyntaxException {
-        if (CarpetAMSAdditionSettings.realPlayerControlDisabled && context.getSource() != null) {
-            Player player = PlayerUtil.getServerPlayerEntity(context);
-            if (!FakePlayerHelper.isFakePlayer(player)) {
-                Messenger.tell(player, Messenger.f(tr.tr("blocked"), Layout.RED));
-                cir.setReturnValue(true);
-            }
+    private static void realPlayerControlDisabled(CommandContext<CommandSourceStack> context, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 0) Player player) {
+        if (CarpetAMSAdditionSettings.realPlayerControlDisabled && !FakePlayerHelper.isFakePlayer(player)) {
+            Messenger.tell(context.getSource(), Messenger.f(tr.tr("blocked"), Layout.RED));
+            cir.setReturnValue(true);
         }
     }
 }
