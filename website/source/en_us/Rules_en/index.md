@@ -556,7 +556,6 @@ Change the scope of the "maxPlayerEntityInteractionRange" rule
 Change the maximum interaction distance allowed by the client, set to "-1" to disable this rule
 
 - The range of values: 0 - 512
-- Need to disable the tweakBlockReachOverride feature in Tweakeroo
 
 - Type: `double`
 

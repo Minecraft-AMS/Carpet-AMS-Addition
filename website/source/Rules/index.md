@@ -559,7 +559,6 @@
 更改客户端允许的最大交互距离，设置为“-1”禁用该规则
 
 - 允许设定的范围：0 - 512
-- 需要关闭Tweakeroo的tweakBlockReachOverride功能
 
 - 类型: `double`
 
