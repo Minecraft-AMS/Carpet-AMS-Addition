@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRangeHelper;
 import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -43,8 +43,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
         )
     )
     private double modifyBlockInteractionDistance(double constant) {
-        if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange);
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return MathUtil.square(InteractionRangeHelper.blockRange());
         } else {
             return constant;
         }
@@ -58,8 +58,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
         )
     )
     private double modifyEntityInteractionDistance(double constant) {
-        if (CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange != -1.0D) {
-            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange);
+        if (InteractionRangeHelper.entityRange() != -1.0D) {
+            return MathUtil.square(InteractionRangeHelper.entityRange());
         } else {
             return constant;
         }

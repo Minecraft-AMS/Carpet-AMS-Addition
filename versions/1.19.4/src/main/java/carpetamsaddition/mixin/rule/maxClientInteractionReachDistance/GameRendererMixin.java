@@ -27,6 +27,18 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft < 1.20.5")
 @Mixin(value = GameRenderer.class, priority = 1688)
 public abstract class GameRendererMixin {
+    @ModifyExpressionValue(
+        method = "pick",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;getPickRange()F"
+        )
+    )
+    private float overrideBlockPickRange(float original) {
+        double range = CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
+        return range != -1.0D ? (float) range : original;
+    }
+
     @ModifyExpressionValue(method = "pick", at = @At(value = "CONSTANT", args = "doubleValue=6.0D"))
     private double modifyCreativeEntityPickRange(double original) {
         if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {

@@ -395,7 +395,6 @@ carpetamsaddition:
         desc: Change the maximum interaction distance allowed by the client, set to "-1" to disable this rule
         extra:
           '0': 'The range of values: 0 - 512'
-          '1': 'Need to disable the tweakBlockReachOverride feature in Tweakeroo'
       commandCustomMovableBlock:
         desc: Customize the non-pushable block to make it pushable (Container blocks are not supported, and if you need to push containers, you can use Carpet's movableBlockEntities rule)
         extra:

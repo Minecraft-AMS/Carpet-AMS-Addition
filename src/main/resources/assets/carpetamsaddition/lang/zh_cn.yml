@@ -434,7 +434,6 @@ carpetamsaddition:
         desc: 更改客户端允许的最大交互距离，设置为“-1”禁用该规则
         extra:
           '0': '允许设定的范围：0 - 512'
-          '1': '需要关闭Tweakeroo的tweakBlockReachOverride功能'
       commandCustomMovableBlock:
         name: 自定义可移动方块
         desc: 可自定义的让不能被推动的方块变得能被推动（不支持容器方块，如果需要推动容器可以使用Carpet的movableBlockEntities规则）

@@ -32,7 +32,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.ChatFormatting;
-
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -50,7 +49,6 @@ public class Messenger {
         return MessengerCompatFactory.literalText(text.toString());
     }
 
-    /** Formats integer coordinates without brackets, separated by a comma and a space. */
     @NotNull
     public static String formatPos(Vec3i pos) {
         return formatPos(pos, ", ");
@@ -72,7 +70,6 @@ public class Messenger {
         return x + separator + y + separator + z;
     }
 
-    /** Formats floating-point coordinates without brackets or rounding. */
     @NotNull
     public static String formatPos(Vec3 pos) {
         return formatPos(pos, ", ");
@@ -172,17 +169,10 @@ public class Messenger {
     }
 
     @NotNull
-    public static Style cmdbtn(String command, Component hoverText, Layout... hoverTextFormattings) {
+    public static Style commandButton(String command, Component hoverText, Layout... hoverTextFormattings) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(copy(hoverText), hoverTextFormattings)));
-    }
-
-    @NotNull
-    private static Style cpbtn(String copyText, Component hoverText) {
-        return emptyStyle()
-            .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(copy(hoverText), Layout.YELLOW)));
     }
 
     @NotNull
@@ -191,8 +181,18 @@ public class Messenger {
     }
 
     @NotNull
+    public static MutableComponent copyButton(String copyText) {
+        return copyButton(" [C]", copyText, tr("carpetamsaddition.messenger.copy"), Layout.GREEN, Layout.BOLD);
+    }
+
+    @NotNull
     public static MutableComponent copyButton(String label, String copyText, Component hoverText, Layout... labelFormattings) {
-        return f(style(s(label), cpbtn(copyText, hoverText)), labelFormattings);
+        MutableComponent tooltip = Messenger.f(Messenger.copy(hoverText), Layout.YELLOW);
+        Style buttonStyle = Messenger.emptyStyle()
+            .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, tooltip));
+        MutableComponent button = Messenger.style(Messenger.s(label), buttonStyle);
+        return Messenger.f(button, labelFormattings);
     }
 
     private static Style emptyStyle() {

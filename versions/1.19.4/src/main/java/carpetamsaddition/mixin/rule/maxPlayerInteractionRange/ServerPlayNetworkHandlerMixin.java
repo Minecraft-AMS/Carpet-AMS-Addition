@@ -20,7 +20,7 @@
 
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRangeHelper;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -47,8 +47,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
         )
     )
     private double modifyBlockInteractionDistance(Operation<Double> original) {
-        if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return Mth.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange);
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return Mth.square(InteractionRangeHelper.blockRange());
         } else {
             return original.call();
         }
@@ -56,8 +56,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
     @ModifyExpressionValue(method = "handleUseItemOn", at = @At(value = "CONSTANT", args = "doubleValue=64.0D"))
     private double modifyBlockInteractionDistanceConstant(double constant) {
-        if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return Mth.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange);
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return Mth.square(InteractionRangeHelper.blockRange());
         } else {
             return constant;
         }
@@ -72,8 +72,8 @@ public abstract class ServerPlayNetworkHandlerMixin {
         )
     )
     private double modifyEntityInteractionDistance(Operation<Double> original) {
-        if (CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange != -1.0D) {
-            return Mth.square(CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange);
+        if (InteractionRangeHelper.entityRange() != -1.0D) {
+            return Mth.square(InteractionRangeHelper.entityRange());
         } else {
             return original.call();
         }

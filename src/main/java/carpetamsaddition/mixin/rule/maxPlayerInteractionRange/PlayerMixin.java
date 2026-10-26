@@ -21,11 +21,11 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRangeHelper;
 import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -38,55 +38,53 @@ import net.minecraft.world.phys.AABB;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.util.Objects;
 
 @GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(value = Player.class, priority = 1688)
+@Mixin(value = Player.class, priority = 168)
 public abstract class PlayerMixin {
-    @ModifyReturnValue(method = "isWithinBlockInteractionRange", at = @At("RETURN"))
-    private boolean enforceBlockInteractionRange(boolean original, BlockPos pos, double padding) {
+    @Inject(method = "isWithinBlockInteractionRange", at = @At("HEAD"), cancellable = true)
+    private void enforceBlockInteractionRange(BlockPos pos, double padding, CallbackInfoReturnable<Boolean> cir) {
         Player player = (Player) (Object) this;
-        double range = CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange;
+        double range = InteractionRangeHelper.blockRange();
 
-        if (player instanceof ServerPlayer && range != -1.0D && padding != Container.DEFAULT_DISTANCE_BUFFER && new AABB(pos).distanceToSqr(player.getEyePosition()) >= MathUtil.square(range)) {
-            return false;
+        if (player instanceof ServerPlayer && range != -1.0D) {
+            double limit = padding == Container.DEFAULT_DISTANCE_BUFFER ? range + padding : range;
+            if (new AABB(pos).distanceToSqr(player.getEyePosition()) >= MathUtil.square(limit)) {
+                cir.setReturnValue(false);
+            }
         }
-
-        return original;
     }
 
-    @ModifyReturnValue(method = "isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z", at = @At("RETURN"))
-    private boolean enforceEntityInteractionRange(boolean original, AABB bounds, double padding) {
+    @Inject(method = "isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z", at = @At("HEAD"), cancellable = true)
+    private void enforceEntityInteractionRange(AABB bounds, double padding, CallbackInfoReturnable<Boolean> cir) {
         Player player = (Player) (Object) this;
-        double range = CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
+        double range = InteractionRangeHelper.entityRange();
 
         if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= MathUtil.square(range)) {
-            return false;
+            cir.setReturnValue(false);
         }
-
-        return original;
     }
 
     //#if MC>=12111
-    @ModifyReturnValue(method = "isWithinAttackRange", at = @At("RETURN"))
-    private boolean enforceEntityAttackRange(
-        boolean original,
+    @Inject(method = "isWithinAttackRange", at = @At("HEAD"), cancellable = true)
+    private void enforceEntityAttackRange(
         //#if MC>=260102
         //$$ ItemStack stack,
         //#endif
-        AABB bounds, double padding
+        AABB bounds, double padding, CallbackInfoReturnable<Boolean> cir
     ) {
         Player player = (Player) (Object) this;
-        double range = CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
+        double range = InteractionRangeHelper.entityRange();
 
         if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= MathUtil.square(range)) {
-            return false;
+            cir.setReturnValue(false);
         }
-
-        return original;
     }
     //#endif
 
