@@ -67,13 +67,9 @@ public abstract class PhantomSpawnerMixin {
         original.call(world, entity);
 
         if (CarpetAMSAdditionSettings.phantomSpawnAlert && world.getEntity(entity.getId()) == entity) {
-            double x = entity.getX();
-            double y = entity.getY();
-            double z = entity.getZ();
-            String coord = x + ", " + y + ", " + z;
             MutableComponent coordinateText = Messenger.c(
                 Messenger.f(Messenger.s("@ "), Layout.YELLOW),
-                Messenger.f(Messenger.s("[ " + coord + " ]"), Layout.GREEN)
+                Messenger.f(Messenger.s("[ " + Messenger.formatPos(entity.getOnPos()) + " ]"), Layout.GREEN)
             );
             Messenger.sendServerMessage(world.getServer(), Messenger.c(
                 Messenger.f(Messenger.s("<phantomSpawnAlert> "), Layout.AQUA),

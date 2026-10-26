@@ -50,6 +50,16 @@ public class Messenger {
     }
 
     @NotNull
+    public static Vec3i toIntPos(Vec3 pos) {
+        return new Vec3i((int) pos.x(), (int) pos.y(), (int) pos.z());
+    }
+
+    @NotNull
+    public static Vec3 toIntPos(Vec3i pos) {
+        return new Vec3(pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    @NotNull
     public static String formatPos(Vec3i pos) {
         return formatPos(pos, ", ");
     }
@@ -66,7 +76,6 @@ public class Messenger {
 
     @NotNull
     public static String formatPos(int x, int y, int z, String separator) {
-        Objects.requireNonNull(separator, "separator");
         return x + separator + y + separator + z;
     }
 

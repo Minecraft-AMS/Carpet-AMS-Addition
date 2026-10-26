@@ -24,12 +24,12 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.api.command.AmsCommand;
 import carpetamsaddition.api.command.CommandBuilder;
 import carpetamsaddition.fuzz.InvokeFuzzModCommand;
-import carpetamsaddition.helpers.rule.commandHere_commandWhere.CommandHereWhereHelper;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
+import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -62,20 +62,15 @@ public class HereCommand implements AmsCommand {
         return source.getTextName();
     }
 
-    private static String getCurrentPos(CommandSourceStack source) {
-        int[] pos = CommandHereWhereHelper.getPos(source);
-        return String.format("%d, %d, %d", pos[0], pos[1], pos[2]);
-    }
-
-    private static String getOtherPos(CommandSourceStack source) {
+    private static Vec3i getOtherPos(CommandSourceStack source) {
         DimensionWrapper dimension = DimensionWrapper.of(source.getLevel());
-        int[] pos = CommandHereWhereHelper.getPos(source);
-        String otherPos = null;
+        Vec3i pos = Messenger.toIntPos(source.getPosition());
+        Vec3i otherPos = null;
 
         if (dimension.getValue() == Level.NETHER) {
-            otherPos = String.format("%d, %d, %d", pos[0] * 8, pos[1], pos[2] * 8);
+            otherPos = new Vec3i(pos.getX() * 8, pos.getY(), pos.getZ() * 8);
         } else if (dimension.getValue() == Level.OVERWORLD) {
-            otherPos = String.format("%d, %d, %d", pos[0] / 8, pos[1], pos[2] / 8);
+            otherPos = new Vec3i(pos.getX() / 8, pos.getY(), pos.getZ() / 8);
         }
 
         return otherPos;
@@ -85,8 +80,8 @@ public class HereCommand implements AmsCommand {
     private static Component message(CommandSourceStack source) {
         DimensionWrapper dimension = DimensionWrapper.of(source.getLevel());
         String playerName = getPlayerName(source);
-        String currentPos = getCurrentPos(source);
-        String otherPos = getOtherPos(source);
+        Vec3i currentPos = Messenger.toIntPos(source.getPosition());
+        Vec3i otherPos = getOtherPos(source);
         Component message = Messenger.f(Messenger.s("Unknown dimension"), Layout.RED);
 
         if (dimension.getValue() == Level.END) {
@@ -94,7 +89,7 @@ public class HereCommand implements AmsCommand {
                 Messenger.f(Messenger.c(Messenger.s("["), tr.tr("the_end"), Messenger.s("] ")), Layout.LIGHT_PURPLE),
                 Messenger.f(Messenger.s(playerName), Layout.YELLOW),
                 Messenger.f(Messenger.s(" @ "), Layout.AQUA),
-                Messenger.f(Messenger.s("[ " + currentPos + " ]"), Layout.LIGHT_PURPLE)
+                Messenger.f(Messenger.s("[ " + Messenger.formatPos(currentPos) + " ]"), Layout.LIGHT_PURPLE)
             )
             .append(copyButton(currentPos, Layout.LIGHT_PURPLE))
             .append(InvokeFuzzModCommand.highlightCoordButton(currentPos));
@@ -103,9 +98,9 @@ public class HereCommand implements AmsCommand {
                 Messenger.f(Messenger.c(Messenger.s("["), tr.tr("overworld"), Messenger.s("] ")), Layout.DARK_GREEN),
                 Messenger.f(Messenger.s(playerName), Layout.YELLOW),
                 Messenger.f(Messenger.s(" @ "), Layout.AQUA),
-                Messenger.f(Messenger.s("[ " + currentPos + " ]"), Layout.DARK_GREEN),
+                Messenger.f(Messenger.s("[ " + Messenger.formatPos(currentPos) + " ]"), Layout.DARK_GREEN),
                 Messenger.f(Messenger.s(" -> "), Layout.AQUA),
-                Messenger.f(Messenger.s("[ " + otherPos + " ]"), Layout.DARK_RED)
+                Messenger.f(Messenger.s("[ " + Messenger.formatPos(otherPos) + " ]"), Layout.DARK_RED)
             )
             .append(copyButton(currentPos, Layout.GREEN))
             .append(copyButton(otherPos, Layout.DARK_RED))
@@ -115,9 +110,9 @@ public class HereCommand implements AmsCommand {
                 Messenger.f(Messenger.c(Messenger.s("["), tr.tr("nether"), Messenger.s("] ")), Layout.DARK_RED),
                 Messenger.f(Messenger.s(playerName), Layout.YELLOW),
                 Messenger.f(Messenger.s(" @ "), Layout.AQUA),
-                Messenger.f(Messenger.s("[ " + currentPos + " ]"), Layout.DARK_RED),
+                Messenger.f(Messenger.s("[ " + Messenger.formatPos(currentPos) + " ]"), Layout.DARK_RED),
                 Messenger.f(Messenger.s(" -> "), Layout.AQUA),
-                Messenger.f(Messenger.s("[ " + otherPos + " ]"), Layout.DARK_GREEN)
+                Messenger.f(Messenger.s("[ " + Messenger.formatPos(otherPos) + " ]"), Layout.DARK_GREEN)
             )
             .append(copyButton(currentPos, Layout.DARK_RED))
             .append(copyButton(otherPos, Layout.GREEN))
@@ -127,8 +122,7 @@ public class HereCommand implements AmsCommand {
         return message;
     }
 
-    private static Component copyButton(String copyText, Layout buttonColor) {
-        String copyCoordText = copyText.replace(",", ""); // 1, 0, -24 -> 1 0 -24
-        return Messenger.copyButton(" [C]", copyCoordText, Layout.BOLD, buttonColor);
+    private static Component copyButton(Vec3i pos, Layout buttonColor) {
+        return Messenger.copyButton(" [C]", Messenger.formatPos(pos, " "), Layout.BOLD, buttonColor);
     }
 }

@@ -24,6 +24,7 @@ import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.messenger.Messenger;
 
+import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,8 +33,8 @@ public class InvokeFuzzModCommand {
     private static final Translator tr = new Translator("fuzz.command");
 
     @NotNull
-    public static Component highlightCoordButton(String posText) {
-        String cmd = "/coordCompass set " + posText.replace(",", "");
+    public static Component highlightCoordButton(Vec3i pos) {
+        String cmd = "/coordCompass set " + Messenger.formatPos(pos, " ");
 
         return Messenger.f(Messenger.style(
             Messenger.s(" [+H]"),

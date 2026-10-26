@@ -29,16 +29,13 @@ import carpetamsaddition.helpers.rule.commandLocationTag.LocationTagIndex.Entry;
 import carpetamsaddition.helpers.rule.commandLocationTag.LocationTagManager;
 import carpetamsaddition.helpers.rule.commandLocationTag.LocationTagSignCompat;
 import carpetamsaddition.translations.Translator;
-import carpetamsaddition.translations.AMSTranslations;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.messageTextEvent.ClickEventUtil;
-import carpetamsaddition.utils.messageTextEvent.HoverEventUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.server.level.ServerPlayer;
 
 import java.util.List;
 
@@ -112,7 +109,7 @@ public final class LocationTagCommand implements AmsCommand {
             row.append(Messenger.f(Messenger.s(entry.name + " "), Layout.YELLOW));
             row.append(coordinates(entry));
             row.append(Messenger.s(" "));
-            row.append(button(context, "details", "/amsloc info " + entry.id, "details_hover", entry.name));
+            row.append(button("details", "/amsloc info " + entry.id, "details_hover", entry.name));
             Messenger.tell(context.source(), row);
         }
 
@@ -120,7 +117,7 @@ public final class LocationTagCommand implements AmsCommand {
         MutableComponent navigation = Messenger.s("");
 
         if (page > 1) {
-            navigation.append(button(context, "previous", base + (page - 1), "previous_hover", page - 1));
+            navigation.append(button("previous", base + (page - 1), "previous_hover", page - 1));
         }
 
         if (page > 1 && page < pages) {
@@ -128,7 +125,7 @@ public final class LocationTagCommand implements AmsCommand {
         }
 
         if (page < pages) {
-            navigation.append(button(context, "next", base + (page + 1), "next_hover", page + 1));
+            navigation.append(button("next", base + (page + 1), "next_hover", page + 1));
         }
 
         if (pages > 1) {
@@ -158,31 +155,25 @@ public final class LocationTagCommand implements AmsCommand {
     }
 
     private static MutableComponent coordinates(Entry entry) {
-        String coordinates = entry.x + " " + entry.y + " " + entry.z;
+        String coordinates = Messenger.formatPos(entry.x, entry.y, entry.z, " ");
         return Messenger.copyButton("[ " + coordinates + " ]", coordinates, Layout.AQUA);
     }
 
     private static MutableComponent dimensionText(String dimension) {
         switch (dimension) {
-            case "minecraft:overworld": return Messenger.f(tr.tr("overworld"), Layout.DARK_GREEN);
-            case "minecraft:the_nether": return Messenger.f(tr.tr("nether"), Layout.DARK_RED);
-            case "minecraft:the_end": return Messenger.f(tr.tr("end"), Layout.LIGHT_PURPLE);
-            default: return Messenger.f(Messenger.s("[ " + dimension + " ]"), Layout.AQUA);
+            case "minecraft:overworld":
+                return Messenger.f(tr.tr("overworld"), Layout.DARK_GREEN);
+            case "minecraft:the_nether":
+                return Messenger.f(tr.tr("nether"), Layout.DARK_RED);
+            case "minecraft:the_end":
+                return Messenger.f(tr.tr("end"), Layout.LIGHT_PURPLE);
+            default:
+                return Messenger.f(Messenger.s("[ " + dimension + " ]"), Layout.AQUA);
         }
     }
 
-    private static MutableComponent button(CommandExecutionContext context, String labelKey, String command,
-        String hoverKey, Object... hoverArgs) {
-        MutableComponent hover = tr.tr(hoverKey, hoverArgs);
-
-        if (context.source().getEntity() instanceof ServerPlayer) {
-            hover = AMSTranslations.translate(hover, (ServerPlayer) context.source().getEntity());
-        }
-
-        Style style =
-            Style.EMPTY
-            .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, Messenger.f(hover, Layout.YELLOW)));
+    private static MutableComponent button(String labelKey, String command, String hoverKey, Object... hoverArgs) {
+        Style style = Messenger.commandButton(command, tr.tr(hoverKey, hoverArgs), Layout.YELLOW);
 
         return Messenger.f(Messenger.style(tr.tr(labelKey), style), Layout.GREEN);
     }

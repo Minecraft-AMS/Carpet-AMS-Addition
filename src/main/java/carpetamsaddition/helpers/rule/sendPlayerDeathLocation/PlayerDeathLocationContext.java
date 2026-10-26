@@ -24,6 +24,7 @@ import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.fuzz.InvokeFuzzModCommand;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
+import carpetamsaddition.utils.PlayerUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
@@ -38,8 +39,8 @@ public class PlayerDeathLocationContext {
     public static void sendMessage(MinecraftServer server, ServerPlayer player, Level world) {
         Messenger.sendServerMessage(server, Messenger.c(
             formatMessage(player, world),
-            Messenger.copyButton(" [C]", Messenger.formatPos(player.getOnPos(), " "), Layout.GREEN, Layout.BOLD),
-            InvokeFuzzModCommand.highlightCoordButton(Messenger.formatPos(player.getOnPos(), " "))
+            Messenger.copyButton(Messenger.formatPos(player.getOnPos(), " ")),
+            InvokeFuzzModCommand.highlightCoordButton(player.getOnPos())
         ));
     }
 
@@ -55,23 +56,12 @@ public class PlayerDeathLocationContext {
         }
     }
 
-    private static String getPlayerName(ServerPlayer player) {
-        return player.getName().getString();
-    }
-
-    private static DimensionWrapper getDimension(Level world) {
-        return DimensionWrapper.of(world);
-    }
-
     // Alex 死亡位置 @ minecraft:overworld -> [ 888, 20, 999 ]
     private static MutableComponent formatMessage(ServerPlayer player, Level world) {
-        String playerName = getPlayerName(player);
-        DimensionWrapper dimension = getDimension(world);
-
         return Messenger.f(Messenger.c(
-            Messenger.s(playerName + " "),
+            Messenger.s(PlayerUtil.getName(player) + " "),
             tr.tr("location"),
-            Messenger.s(" @ " + dimension + " -> [ " + Messenger.formatPos(player.getOnPos(), ", ") + " ]")
+            Messenger.s(" @ " + DimensionWrapper.of(world).getIdentifierString() + " -> [ " + Messenger.formatPos(player.getOnPos()) + " ]")
         ), Layout.RED);
     }
 }
