@@ -44,9 +44,9 @@ public abstract class RangedAttributeMixin {
             } else {
                 return original;
             }
-        } else {
-            return original;
         }
+
+        return original;
     }
 
     @ModifyReturnValue(method = "sanitizeValue", at = @At("RETURN"))
@@ -58,8 +58,8 @@ public abstract class RangedAttributeMixin {
             } else {
                 return original;
             }
-        } else {
-            return original;
         }
+
+        return original;
     }
 }

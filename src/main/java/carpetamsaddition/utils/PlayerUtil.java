@@ -20,6 +20,9 @@
 
 package carpetamsaddition.utils;
 
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.player.Player;
 //#if MC>=12111
 import net.minecraft.server.players.NameAndId;
@@ -51,6 +54,14 @@ public class PlayerUtil {
     @SuppressWarnings("unused")
     public static ServerPlayer getServerPlayerEntity(String name) {
         return MinecraftServerUtil.getServer().getPlayerList().getPlayerByName(name);
+    }
+
+    public static ServerPlayer getServerPlayerEntity(CommandSourceStack source) throws CommandSyntaxException {
+        return source.getPlayerOrException();
+    }
+
+    public static ServerPlayer getServerPlayerEntity(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        return context.getSource().getPlayerOrException();
     }
 
     public static UUID getPlayerUUID(Player player) {

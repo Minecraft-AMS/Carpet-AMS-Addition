@@ -20,16 +20,26 @@
 
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRangeHelper;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.server.level.ServerPlayerGameMode;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
+import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
 import net.minecraft.util.Mth;
 
 import org.objectweb.asm.Opcodes;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
@@ -37,6 +47,27 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft < 1.20.5")
 @Mixin(value = ServerPlayerGameMode.class, priority = 168)
 public abstract class ServerPlayerInteractionManagerMixin {
+    @Final
+    @Shadow
+    protected ServerPlayer player;
+
+    @Shadow
+    protected ServerLevel level;
+
+    @Inject(method = "handleBlockBreakAction", at = @At("HEAD"), cancellable = true)
+    private void enforceBlockBreakDistance(
+        BlockPos pos, ServerboundPlayerActionPacket.Action action, Direction direction, int worldHeight,
+        //#if MC>=11900
+        int sequence,
+        //#endif
+        CallbackInfo ci
+    ) {
+        if (action != ServerboundPlayerActionPacket.Action.ABORT_DESTROY_BLOCK && !InteractionRangeHelper.withinBlockRange(this.player, pos)) {
+            this.player.connection.send(new ClientboundBlockUpdatePacket(this.level, pos));
+            ci.cancel();
+        }
+    }
+
     @WrapOperation(
         method = "handleBlockBreakAction",
         at = @At(
@@ -46,8 +77,8 @@ public abstract class ServerPlayerInteractionManagerMixin {
         )
     )
     private double modifyBlockBreakDistance(Operation<Double> original) {
-        if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return Mth.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange);
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return Mth.square(InteractionRangeHelper.blockRange());
         } else {
             return original.call();
         }

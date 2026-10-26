@@ -21,11 +21,13 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRangeHelper;
+import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,59 +38,53 @@ import net.minecraft.world.phys.AABB;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
 import java.util.Objects;
 
 @GameVersion(version = "Minecraft >= 1.20.5")
-@Mixin(value = Player.class, priority = 1688)
+@Mixin(value = Player.class, priority = 168)
 public abstract class PlayerMixin {
-    @WrapMethod(method = "isWithinBlockInteractionRange")
-    private boolean enforceBlockInteractionRange(BlockPos pos, double padding, Operation<Boolean> original) {
+    @Inject(method = "isWithinBlockInteractionRange", at = @At("HEAD"), cancellable = true)
+    private void enforceBlockInteractionRange(BlockPos pos, double padding, CallbackInfoReturnable<Boolean> cir) {
         Player player = (Player) (Object) this;
-        double range = CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange;
+        double range = InteractionRangeHelper.blockRange();
 
-        if (player instanceof ServerPlayer && range != -1.0D && new AABB(pos).distanceToSqr(player.getEyePosition()) >= range * range) {
-            return false;
+        if (player instanceof ServerPlayer && range != -1.0D) {
+            double limit = padding == Container.DEFAULT_DISTANCE_BUFFER ? range + padding : range;
+            if (new AABB(pos).distanceToSqr(player.getEyePosition()) >= MathUtil.square(limit)) {
+                cir.setReturnValue(false);
+            }
         }
-
-        return original.call(pos, padding);
     }
 
-    @WrapMethod(method = "isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z")
-    private boolean enforceEntityInteractionRange(AABB bounds, double padding, Operation<Boolean> original) {
+    @Inject(method = "isWithinEntityInteractionRange(Lnet/minecraft/world/phys/AABB;D)Z", at = @At("HEAD"), cancellable = true)
+    private void enforceEntityInteractionRange(AABB bounds, double padding, CallbackInfoReturnable<Boolean> cir) {
         Player player = (Player) (Object) this;
-        double range = CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
+        double range = InteractionRangeHelper.entityRange();
 
-        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= range * range) {
-            return false;
+        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= MathUtil.square(range)) {
+            cir.setReturnValue(false);
         }
-
-        return original.call(bounds, padding);
     }
 
     //#if MC>=12111
-    @WrapMethod(method = "isWithinAttackRange")
-    private boolean enforceEntityAttackRange(
+    @Inject(method = "isWithinAttackRange", at = @At("HEAD"), cancellable = true)
+    private void enforceEntityAttackRange(
         //#if MC>=260102
         //$$ ItemStack stack,
         //#endif
-        AABB bounds, double padding, Operation<Boolean> original
+        AABB bounds, double padding, CallbackInfoReturnable<Boolean> cir
     ) {
         Player player = (Player) (Object) this;
-        double range = CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
+        double range = InteractionRangeHelper.entityRange();
 
-        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= range * range) {
-            return false;
+        if (player instanceof ServerPlayer && range != -1.0D && bounds.distanceToSqr(player.getEyePosition()) >= MathUtil.square(range)) {
+            cir.setReturnValue(false);
         }
-
-        return original.call(
-            //#if MC>=260102
-            //$$ stack,
-            //#endif
-            bounds, padding
-        );
     }
     //#endif
 

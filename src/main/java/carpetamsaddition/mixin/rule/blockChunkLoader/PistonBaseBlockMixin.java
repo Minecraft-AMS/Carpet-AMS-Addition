@@ -28,7 +28,7 @@ import java.util.Objects;
 public abstract class PistonBaseBlockMixin {
     @Inject(method = "triggerEvent", at = @At("HEAD"))
     private void onSyncedBlockEvent(BlockState state, Level level, BlockPos pos, int type, int data, CallbackInfoReturnable<Boolean> cir) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.commandBellChunkloader, "false") && level instanceof ServerLevel) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandPistonChunkloader, "false") && level instanceof ServerLevel) {
             BlockChunkLoaderManager.trigger(LoaderType.PISTON, (ServerLevel) level, pos, pos.relative(state.getValue(PistonBaseBlock.FACING)));
         }
     }

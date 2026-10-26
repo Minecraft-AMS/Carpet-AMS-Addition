@@ -180,23 +180,6 @@ players don't get hurt by flying into walls
 
 - Categories: `AMS`, `FEATURE`, `SURVIVAL`
 
-## customBlockUpdateSuppressor
-
-Customize a block to be an update suppressor (Not all blocks can be set as update suppressor)
-
-- Command format:
-- /carpet customBlockUpdateSuppressor minecraft:BlockName
-- Use the following command to control whether the "amsUpdateSuppressionCrashFix" rule is automatically enabled when this rule is enabled:
-- /amsUpdateSuppressionCrashFixForceMode true/false
-
-- Type: `boolean`
-
-- Default: `false`
-
-- Suggested options: `none`, `minecraft:bone_block`, `minecraft:diamond_ore`, `minecraft:magma_block`
-
-- Categories: `AMS`, `FEATURE`
-
 ## infiniteTrades
 
 Prevents villager trades from locking up
@@ -437,24 +420,6 @@ Disable some command to prevent accidentally cheating
 
 - Categories: `AMS` , `FEATURE` , `SURVIVAL` , `COMMAND`
 
-## amsUpdateSuppressionCrashFix
-
-Prevent update suppression from causing server crashes, while providing the coordinates and dimensions where the update suppression occurred
-
-- [false] - Disable rule
-- [true] - Enable rule
-- [silence] - Enable but no send server messages
-- Use the following command to control whether it is forcibly enabled when "customBlockUpdateSuppressor" is enabled, with a permission level of 2:
-- /amsUpdateSuppressionCrashFixForceMode true/false
-
-- Type: `String`
-
-- Default: `false`
-
-- Suggested options: `false` , `true`, `silence`
-
-- Categories: `AMS` , `FEATURE` , `SURVIVAL` , `EXPERIMENTAL`
-
 ## ghastFireballExplosionDamageSourceFix
 
 > Version: `Minecraft < 1.19.3`
@@ -591,7 +556,6 @@ Change the scope of the "maxPlayerEntityInteractionRange" rule
 Change the maximum interaction distance allowed by the client, set to "-1" to disable this rule
 
 - The range of values: 0 - 512
-- Need to disable the tweakBlockReachOverride feature in Tweakeroo
 
 - Type: `double`
 
@@ -629,7 +593,7 @@ Activate full-level beacon with just one base block
 
 ## commandCustomBlockBlastResistance
 
-Use commands to customize the explosion resistance of any block (this rule will not take effect when the enhancedWorldEater rule is enabled)
+Use commands to customize the explosion resistance of any block
 
 - After enabling the rule, use the "/customBlockBlastResistance help" command to view the usage instructions
 
@@ -654,21 +618,6 @@ Every time a player defeats the Ender Dragon, a dragon egg will be generated
 - Suggested options: `false`, `true`
 
 - Categories: `AMS`, `FEATURE`
-
-## enhancedWorldEater
-
-Make way for the WorldEater by customizing the explosion resistance of the blocks listed below (this rule will override the commandCustomBlockBlastResistance rule when enabled)
-
-- Block list:
-- Blocks with blast resistance < 17.0F, Bedrock, Anvil, End Portal Frame, End Portal, End Gateway
-
-- Type: `double`
-
-- Default: `-1`
-
-- Suggested options: `-1` , `0 - 16`
-
-- Categories: `AMS`, `FEATURE`, `SURVIVAL` `TNT`
 
 ## sneakToEditSign
 

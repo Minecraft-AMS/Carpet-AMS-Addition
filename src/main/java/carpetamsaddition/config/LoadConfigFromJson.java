@@ -27,7 +27,6 @@ import carpetamsaddition.commands.rule.commandCustomCommandPermissionLevel.Custo
 import carpetamsaddition.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommand;
 import carpetamsaddition.commands.rule.commandPlayerLeader.LeaderCommand;
 
-import carpetamsaddition.config.rule.amsUpdateSuppressionCrashFix.ForceModeCommandConfig;
 import carpetamsaddition.config.rule.blockChunkLoader.BlockLoaderConfigStore;
 import carpetamsaddition.config.rule.commandAntiFireItems.CustomAntiFireItemsConfig;
 import carpetamsaddition.config.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceConfig;
@@ -41,7 +40,6 @@ import net.minecraft.server.MinecraftServer;
 
 public class LoadConfigFromJson {
     public static void load(MinecraftServer server) {
-        ForceModeCommandConfig.loadConfigFromJson(server);
         CustomBlockBlastResistanceConfig.getInstance().loadBlockStates(CustomBlockBlastResistanceCommand.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP);
         LeaderConfig.getInstance().loadFromJson(LeaderCommand.LEADER_MAP);
         CustomCommandPermissionLevelConfig.getInstance().loadFromJson(CustomCommandPermissionLevelCommand.COMMAND_PERMISSION_MAP);

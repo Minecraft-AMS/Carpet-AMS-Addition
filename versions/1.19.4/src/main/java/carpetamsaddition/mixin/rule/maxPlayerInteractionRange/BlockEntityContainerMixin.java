@@ -21,9 +21,14 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
 import net.minecraft.world.level.block.entity.EnderChestBlockEntity;
@@ -43,9 +48,12 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 })
 public abstract class BlockEntityContainerMixin {
     @ModifyReturnValue(method = "stillValid", at = @At("RETURN"))
-    private boolean modifyStillValidDistance(boolean original) {
+    private boolean modifyStillValidDistance(boolean original, Player player) {
         if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return true;
+            BlockEntity blockEntity = (BlockEntity) (Object) this;
+            Level level = blockEntity.getLevel();
+            BlockPos pos = blockEntity.getBlockPos();
+            return level != null && level.getBlockEntity(pos) == blockEntity && player.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) <= MathUtil.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange + 4.0D);
         } else {
             return original;
         }

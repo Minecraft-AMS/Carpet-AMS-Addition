@@ -37,7 +37,7 @@ import java.util.*;
 public abstract class BlockMixin {
     @ModifyReturnValue(method = "getExplosionResistance", at = @At("RETURN"))
     private float getBlastResistance(float original) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomBlockBlastResistance, "false") && CarpetAMSAdditionSettings.enhancedWorldEater == -1.0F) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomBlockBlastResistance, "false")) {
             BlockState blockState = ((Block) (Object) this).defaultBlockState();
             return CustomBlockBlastResistanceCommand.CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.getOrDefault(blockState, original);
         } else {

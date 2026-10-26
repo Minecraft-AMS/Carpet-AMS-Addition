@@ -30,6 +30,9 @@ import carpetamsaddition.utils.messenger.Messenger;
 
 import com.llamalad7.mixinextras.sugar.Local;
 
+import com.mojang.brigadier.context.CommandContext;
+
+import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.entity.player.Player;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -55,9 +58,9 @@ public abstract class Carpet_PlayerCommandMixin {
         ),
         cancellable = true
     )
-    private static void realPlayerControlDisabled(CallbackInfoReturnable<Boolean> cir, @Local Player player) {
-        if (CarpetAMSAdditionSettings.realPlayerControlDisabled && player != null && !FakePlayerHelper.isFakePlayer(player)) {
-            Messenger.tell(player, Messenger.f(tr.tr("blocked"), Layout.RED));
+    private static void realPlayerControlDisabled(CommandContext<CommandSourceStack> context, CallbackInfoReturnable<Boolean> cir, @Local(ordinal = 0) Player player) {
+        if (CarpetAMSAdditionSettings.realPlayerControlDisabled && !FakePlayerHelper.isFakePlayer(player)) {
+            Messenger.tell(context.getSource(), Messenger.f(tr.tr("blocked"), Layout.RED));
             cir.setReturnValue(true);
         }
     }

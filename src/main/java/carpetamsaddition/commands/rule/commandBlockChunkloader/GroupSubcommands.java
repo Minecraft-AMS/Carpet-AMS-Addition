@@ -120,6 +120,10 @@ public class GroupSubcommands {
             return deny(context);
         }
 
+        if (!Objects.equals("all", value) && !Objects.equals("any", value)) {
+            return invalid(context, "mode");
+        }
+
         BlockLoaderConfig config = BlockLoaderConfigStore.copy(type);
         BlockLoaderConfig.Group group = findGroup(context, config, name);
 

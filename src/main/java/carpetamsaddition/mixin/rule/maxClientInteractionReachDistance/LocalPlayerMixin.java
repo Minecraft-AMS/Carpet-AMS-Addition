@@ -22,8 +22,7 @@ package carpetamsaddition.mixin.rule.maxClientInteractionReachDistance;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 
 import net.minecraft.client.player.LocalPlayer;
 
@@ -34,33 +33,33 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft >= 1.21.11")
 @Mixin(value = LocalPlayer.class, priority = 1688)
 public abstract class LocalPlayerMixin {
-    @WrapOperation(
+    @ModifyExpressionValue(
         method = "raycastHitResult",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/player/LocalPlayer;blockInteractionRange()D"
         )
     )
-    private double modifyBlockInteractionRange(LocalPlayer player, Operation<Double> original) {
+    private double modifyBlockInteractionRange(double original) {
         if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {
             return CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
         } else {
-            return original.call(player);
+            return original;
         }
     }
 
-    @WrapOperation(
+    @ModifyExpressionValue(
         method = "raycastHitResult",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/player/LocalPlayer;entityInteractionRange()D"
         )
     )
-    private double modifyEntityInteractionRange(LocalPlayer player, Operation<Double> original) {
+    private double modifyEntityInteractionRange(double original) {
         if (CarpetAMSAdditionSettings.maxClientInteractionReachDistance != -1.0D) {
             return CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
         } else {
-            return original.call(player);
+            return original;
         }
     }
 }

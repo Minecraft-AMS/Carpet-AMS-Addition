@@ -24,6 +24,7 @@ import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.fuzz.InvokeFuzzModCommand;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
+import carpetamsaddition.utils.PlayerUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
@@ -36,12 +37,10 @@ public class PlayerDeathLocationContext {
     private static final Translator tr = new Translator("rule.sendPlayerDeathLocation");
 
     public static void sendMessage(MinecraftServer server, ServerPlayer player, Level world) {
-        final MutableComponent copyButton = copyButton(player);
-        String message = formatMessage(player, world);
         Messenger.sendServerMessage(server, Messenger.c(
-            Messenger.f(Messenger.s(message), Layout.RED),
-            copyButton,
-            InvokeFuzzModCommand.highlightCoordButton(getPlayerPos(player).replace(",", ""))
+            formatMessage(player, world),
+            Messenger.copyButton(Messenger.formatPos(player.getOnPos(), " ")),
+            InvokeFuzzModCommand.highlightCoordButton(player.getOnPos())
         ));
     }
 
@@ -57,34 +56,12 @@ public class PlayerDeathLocationContext {
         }
     }
 
-    private static String getPlayerName(ServerPlayer player) {
-        return player.getName().getString();
-    }
-
-    private static DimensionWrapper getDimension(Level world) {
-        return DimensionWrapper.of(world);
-    }
-
-    private static String getPlayerPos(ServerPlayer player) {
-        return player.blockPosition().getX() + ", " + player.blockPosition().getY() + ", " + player.blockPosition().getZ();
-    }
-
-    private static MutableComponent copyButton(ServerPlayer player) {
-        String copyCoordText = getPlayerPos(player).replace(",", ""); // 1, 0, -24 -> 1 0 -24
-
-        return Messenger.copyButton(" [C]", copyCoordText, Layout.GREEN, Layout.BOLD);
-    }
-
     // Alex 死亡位置 @ minecraft:overworld -> [ 888, 20, 999 ]
-    private static String formatMessage(ServerPlayer player, Level world) {
-        String playerName = getPlayerName(player);
-        DimensionWrapper dimension = getDimension(world);
-        return String.format(
-            "%s %s @ %s -> [ %s ]",
-            playerName,
-            tr.tr("location").getString(),
-            dimension,
-            getPlayerPos(player)
-        );
+    private static MutableComponent formatMessage(ServerPlayer player, Level world) {
+        return Messenger.f(Messenger.c(
+            Messenger.s(PlayerUtil.getName(player) + " "),
+            tr.tr("location"),
+            Messenger.s(" @ " + DimensionWrapper.of(world).getIdentifierString() + " -> [ " + Messenger.formatPos(player.getOnPos()) + " ]")
+        ), Layout.RED);
     }
 }

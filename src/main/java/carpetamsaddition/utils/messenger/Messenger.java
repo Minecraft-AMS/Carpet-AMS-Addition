@@ -25,15 +25,16 @@ import carpetamsaddition.utils.messageTextEvent.ClickEventUtil;
 import carpetamsaddition.utils.messageTextEvent.HoverEventUtil;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
+import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.ChatFormatting;
-
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -46,6 +47,56 @@ public class Messenger {
 
     public static MutableComponent s(Object text) {
         return MessengerCompatFactory.literalText(text.toString());
+    }
+
+    @NotNull
+    public static Vec3i toIntPos(Vec3 pos) {
+        return new Vec3i((int) pos.x(), (int) pos.y(), (int) pos.z());
+    }
+
+    @NotNull
+    public static Vec3 toIntPos(Vec3i pos) {
+        return new Vec3(pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    @NotNull
+    public static String formatPos(Vec3i pos) {
+        return formatPos(pos, ", ");
+    }
+
+    @NotNull
+    public static String formatPos(Vec3i pos, String separator) {
+        return formatPos(pos.getX(), pos.getY(), pos.getZ(), separator);
+    }
+
+    @NotNull
+    public static String formatPos(int x, int y, int z) {
+        return formatPos(x, y, z, ", ");
+    }
+
+    @NotNull
+    public static String formatPos(int x, int y, int z, String separator) {
+        return x + separator + y + separator + z;
+    }
+
+    @NotNull
+    public static String formatPos(Vec3 pos) {
+        return formatPos(pos, ", ");
+    }
+
+    @NotNull
+    public static String formatPos(Vec3 pos, String separator) {
+        return formatPos(pos.x(), pos.y(), pos.z(), separator);
+    }
+
+    @NotNull
+    public static String formatPos(double x, double y, double z) {
+        return formatPos(x, y, z, ", ");
+    }
+
+    @NotNull
+    public static String formatPos(double x, double y, double z, String separator) {
+        return x + separator + y + separator + z;
     }
 
     @NotNull
@@ -127,17 +178,10 @@ public class Messenger {
     }
 
     @NotNull
-    public static Style cmdbtn(String command, Component hoverText, Layout... hoverTextFormattings) {
+    public static Style commandButton(String command, Component hoverText, Layout... hoverTextFormattings) {
         return emptyStyle()
             .withClickEvent(ClickEventUtil.event(ClickEventUtil.RUN_COMMAND, command))
             .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(copy(hoverText), hoverTextFormattings)));
-    }
-
-    @NotNull
-    private static Style cpbtn(String copyText, Component hoverText) {
-        return emptyStyle()
-            .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
-            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, f(copy(hoverText), Layout.YELLOW)));
     }
 
     @NotNull
@@ -146,8 +190,18 @@ public class Messenger {
     }
 
     @NotNull
+    public static MutableComponent copyButton(String copyText) {
+        return copyButton(" [C]", copyText, tr("carpetamsaddition.messenger.copy"), Layout.GREEN, Layout.BOLD);
+    }
+
+    @NotNull
     public static MutableComponent copyButton(String label, String copyText, Component hoverText, Layout... labelFormattings) {
-        return f(style(s(label), cpbtn(copyText, hoverText)), labelFormattings);
+        MutableComponent tooltip = Messenger.f(Messenger.copy(hoverText), Layout.YELLOW);
+        Style buttonStyle = Messenger.emptyStyle()
+            .withClickEvent(ClickEventUtil.event(ClickEventUtil.COPY_TO_CLIPBOARD, copyText))
+            .withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, tooltip));
+        MutableComponent button = Messenger.style(Messenger.s(label), buttonStyle);
+        return Messenger.f(button, labelFormattings);
     }
 
     private static Style emptyStyle() {

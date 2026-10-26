@@ -40,11 +40,11 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 })
 public abstract class BlockEntityContainerMixin {
     @ModifyExpressionValue(method = "stillValid", at = @At(value = "CONSTANT", args = "doubleValue=64.0D"))
-    private double modifyStillValidDistance(double constant) {
+    private double modifyStillValidDistance(double original) {
         if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange);
+            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange + 4.0D);
+        } else {
+            return original;
         }
-
-        return constant;
     }
 }
