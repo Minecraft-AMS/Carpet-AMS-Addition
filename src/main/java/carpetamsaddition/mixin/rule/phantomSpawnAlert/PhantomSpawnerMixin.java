@@ -31,7 +31,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 
 import net.minecraft.world.entity.Entity;
-import net.minecraft.network.chat.MutableComponent;
 //#if MC>=12006
 import net.minecraft.server.level.ServerPlayer;
 //#else
@@ -67,14 +66,12 @@ public abstract class PhantomSpawnerMixin {
         original.call(world, entity);
 
         if (CarpetAMSAdditionSettings.phantomSpawnAlert && world.getEntity(entity.getId()) == entity) {
-            MutableComponent coordinateText = Messenger.c(
-                Messenger.f(Messenger.s("@ "), Layout.YELLOW),
-                Messenger.f(Messenger.s("[ " + Messenger.formatPos(entity.getOnPos()) + " ]"), Layout.GREEN)
-            );
             Messenger.sendServerMessage(world.getServer(), Messenger.c(
                 Messenger.f(Messenger.s("<phantomSpawnAlert> "), Layout.AQUA),
                 Messenger.f(Messenger.s(PlayerUtil.getName(playerEntity)), Layout.YELLOW),
-                Messenger.f(tr.tr("msg", coordinateText), Layout.LIGHT_PURPLE)
+                Messenger.f(tr.tr("msg"), Layout.LIGHT_PURPLE),
+                Messenger.f(Messenger.s(" @ "), Layout.YELLOW),
+                Messenger.f(Messenger.s("[ " + Messenger.formatPos(entity.getOnPos()) + " ]"), Layout.GREEN)
             ));
         }
     }

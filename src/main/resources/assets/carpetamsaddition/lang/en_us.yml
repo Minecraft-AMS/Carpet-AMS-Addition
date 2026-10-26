@@ -26,7 +26,7 @@ carpetamsaddition:
     sendPlayerDeathLocation:
       location: 'death location'
     phantomSpawnAlert:
-      msg: ' summoned phantoms %s'
+      msg: ' summoned phantoms'
     experimentalMinecartSpeed:
       vanilla_command_disabled: '<AMSP> The rules of the game have been taken over by the minecartMaxSpeed carpet rules'
     realPlayerControlDisabled:

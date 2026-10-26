@@ -26,7 +26,7 @@ carpetamsaddition:
     sendPlayerDeathLocation:
       location: '死亡位置'
     phantomSpawnAlert:
-      msg: ' 召唤了幻翼 %s'
+      msg: ' 召唤了幻翼'
     experimentalMinecartSpeed:
       vanilla_command_disabled: '<AMSP> 该游戏规则已由 minecartMaxSpeed 地毯规则接管'
     realPlayerControlDisabled:
