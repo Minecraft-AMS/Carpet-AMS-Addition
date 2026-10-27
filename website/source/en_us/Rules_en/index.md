@@ -1640,7 +1640,7 @@ The switch of the AMS network protocol
 
 - Categories: `AMS`, `AMS_NETWORK`
 
-## incompatibleProtocolWarningDisabled
+## incompatibleNetworkProtocolWarningDisabled
 
 Disable warnings sent to clients with an incompatible AMS network protocol. Only applies when amsNetworkProtocol is enabled
 

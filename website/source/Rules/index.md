@@ -1643,7 +1643,7 @@ AMS网络协议的开关
 
 - 分类: `AMS`, `AMS_NETWORK`
 
-## 禁用网络协议不兼容警告（incompatibleProtocolWarningDisabled）
+## 禁用网络协议不兼容警告（incompatibleNetworkProtocolWarningDisabled）
 
 禁用发送给使用不兼容AMS网络协议的客户端的警告，仅在amsNetworkProtocol开启时生效
 
