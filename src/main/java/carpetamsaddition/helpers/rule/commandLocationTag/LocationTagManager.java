@@ -24,10 +24,13 @@ import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.config.rule.commandLocationTag.LocationTagConfig;
 import carpetamsaddition.config.rule.commandLocationTag.LocationTagConfigStore;
+import carpetamsaddition.mixin.rule.largeShulkerBox.ChunkMapAccessor;
 import carpetamsaddition.utils.compat.DimensionWrapper;
 
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -169,11 +172,25 @@ public final class LocationTagManager {
     }
 
     public static int rescan() {
+        if (!available || !isEnabled() || server == null) {
+            return 0;
+        }
+
+        LOADED.clear();
+        PENDING.clear();
         int count = 0;
 
-        for (Map.Entry<ServerLevel, Map<Long, LevelChunk>> world : LOADED.entrySet()) {
-            if (world.getKey().getServer() == server) {
-                for (LevelChunk chunk : world.getValue().values()) { changed(chunk); count++; }
+        for (ServerLevel level : server.getAllLevels()) {
+            ServerChunkCache chunks = level.getChunkSource();
+            long[] loadedChunks = ((ChunkMapAccessor) chunks.chunkMap).ams$getVisibleChunkMap().keySet().toLongArray();
+
+            for (long packedPos : loadedChunks) {
+                LevelChunk chunk = chunks.getChunkNow(ChunkPos.getX(packedPos), ChunkPos.getZ(packedPos));
+
+                if (chunk != null) {
+                    chunkLoaded(chunk, true);
+                    count++;
+                }
             }
         }
 
