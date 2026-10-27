@@ -636,7 +636,7 @@ public class CarpetAMSAdditionSettings {
 
     @PersistAsDefault
     @Rule(categories = {AMS, AMS_NETWORK})
-    public static boolean incompatibleProtocolWarningDisabled = false;
+    public static boolean incompatibleNetworkProtocolWarningDisabled = false;
 
     @PersistAsDefault
     @Rule(categories = {AMS, FEATURE, SURVIVAL, AMS_NETWORK})

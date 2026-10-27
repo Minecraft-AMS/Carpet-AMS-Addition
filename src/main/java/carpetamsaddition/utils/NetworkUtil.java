@@ -227,7 +227,7 @@ public class NetworkUtil {
 
     public static void sendIncompatibleProtocolWarn(Identifier channelId, ServerPlayer player) {
         EntityUtil.getEntityServer(player).execute(() -> {
-            if (CarpetAMSAdditionSettings.incompatibleProtocolWarningDisabled) {
+            if (CarpetAMSAdditionSettings.incompatibleNetworkProtocolWarningDisabled) {
                 return;
             }
 
