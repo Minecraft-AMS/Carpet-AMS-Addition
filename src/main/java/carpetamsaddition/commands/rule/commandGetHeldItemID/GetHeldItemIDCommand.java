@@ -26,10 +26,10 @@ import carpetamsaddition.api.command.CommandBuilder;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.messenger.Messenger;
-import carpetamsaddition.utils.RegexTools;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
@@ -56,14 +56,11 @@ import net.minecraft.network.chat.Component;
             Messenger.c(
                 Messenger.f(tr.tr("msg_head"), Layout.AQUA),
                 Messenger.f(Messenger.s(itemID), Layout.GREEN)
-            ).append(createCopyButton(itemID));
-    }
-
-    private static Component createCopyButton(String itemID) {
-        return Messenger.copyButton(" [C] ", itemID, Layout.GREEN, Layout.BOLD);
+            )
+            .append(Messenger.copyButton(itemID));
     }
 
     private static String getHeldItemRegisterName(Player player) {
-        return RegexTools.getItemRegisterName(player.getMainHandItem());
+        return BuiltInRegistries.ITEM.getKey(player.getMainHandItem().getItem()).toString();
     }
 }

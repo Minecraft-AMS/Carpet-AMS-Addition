@@ -20,8 +20,7 @@
 
 package carpetamsaddition.api.recipe.builder;
 
-import carpetamsaddition.utils.RegexTools;
-
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
 
 /**
@@ -53,7 +52,7 @@ public abstract class AbstractRecipeBuilder {
 
     /** 将物品转换为注册名（供生成配方 JSON 时使用） */
     protected String item(Item item) {
-        return RegexTools.getItemRegisterName(item.getDefaultInstance());
+        return BuiltInRegistries.ITEM.getKey(item).toString();
     }
 
     /** 由子类实现具体配方类型的构建逻辑（向 {@code AmsRecipeBuilder} 注册模板）。*/

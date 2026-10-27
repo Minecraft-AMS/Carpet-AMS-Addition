@@ -31,6 +31,8 @@ import carpetamsaddition.utils.*;
 
 import carpetamsaddition.utils.messenger.Messenger;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.commands.CommandSourceStack;
 
@@ -66,14 +68,14 @@ public class CustomBlockHardnessCommand implements AmsCommand {
             Messenger.tell(
                 source, Messenger.f(tr.tr(
                     "modify_set",
-                    RegexTools.getBlockRegisterName(state),
+                    Messenger.s(BuiltInRegistries.BLOCK.getKey(state.getBlock())),
                     oldHardness,
-                    RegexTools.getBlockRegisterName(state),
+                    Messenger.s(BuiltInRegistries.BLOCK.getKey(state.getBlock())),
                     hardness
                 ), Layout.GREEN, Layout.BOLD)
             );
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("set", RegexTools.getBlockRegisterName(state), hardness), Layout.GREEN, Layout.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("set", Messenger.s(BuiltInRegistries.BLOCK.getKey(state.getBlock())), hardness), Layout.GREEN, Layout.BOLD));
         }
         CUSTOM_BLOCK_HARDNESS_MAP.put(state, hardness);
         saveToJson();
@@ -87,10 +89,10 @@ public class CustomBlockHardnessCommand implements AmsCommand {
             CUSTOM_BLOCK_HARDNESS_MAP.remove(state);
             saveToJson();
             broadcastDataPack();
-            Messenger.tell(source, Messenger.f(tr.tr("remove", RegexTools.getBlockRegisterName(state), hardness), Layout.RED, Layout.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("remove", Messenger.s(BuiltInRegistries.BLOCK.getKey(state.getBlock())), hardness), Layout.RED, Layout.BOLD));
             return 1;
         } else {
-            Messenger.tell(source, Messenger.f(tr.tr("not_found", RegexTools.getBlockRegisterName(state)), Layout.RED, Layout.BOLD));
+            Messenger.tell(source, Messenger.f(tr.tr("not_found", Messenger.s(BuiltInRegistries.BLOCK.getKey(state.getBlock()))), Layout.RED, Layout.BOLD));
             return 0;
         }
     }
@@ -105,8 +107,8 @@ public class CustomBlockHardnessCommand implements AmsCommand {
 
     private static int getDefaultHardness(CommandSourceStack source, Block block) {
         float hardness = CustomBlockHardnessCommand.DEFAULT_HARDNESS_MAP.get(block);
-        String blockName = RegexTools.getBlockRegisterName(block.defaultBlockState());
-        Messenger.tell(source, Messenger.f(tr.tr("default_hardness", blockName, hardness), Layout.GREEN, Layout.BOLD));
+        Identifier blockName = BuiltInRegistries.BLOCK.getKey(block);
+        Messenger.tell(source, Messenger.f(tr.tr("default_hardness", Messenger.s(blockName), hardness), Layout.GREEN, Layout.BOLD));
         return 1;
     }
 
@@ -123,7 +125,7 @@ public class CustomBlockHardnessCommand implements AmsCommand {
             BlockState state = entry.getKey();
             float hardness = entry.getValue();
             Block block = state.getBlock();
-            String blockName = RegexTools.getBlockRegisterName(block.toString());
+            Identifier blockName = BuiltInRegistries.BLOCK.getKey(block);
             Messenger.tell(source, Messenger.f(Messenger.s(blockName + "/" + hardness), Layout.GREEN, Layout.BOLD));
         }
 

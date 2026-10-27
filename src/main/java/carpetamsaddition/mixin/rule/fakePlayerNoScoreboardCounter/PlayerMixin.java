@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.fakePlayerNoScoreboardCounter;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.helpers.FakePlayerHelper;
+import carpetamsaddition.utils.PlayerUtil;
 
 import net.minecraft.world.entity.player.Player;
 
@@ -36,7 +36,7 @@ public abstract class PlayerMixin {
     private void increaseStat(CallbackInfo ci) {
         if (CarpetAMSAdditionSettings.fakePlayerNoScoreboardCounter) {
             Player player = (Player) (Object) this;
-            if (FakePlayerHelper.isFakePlayer(player)) {
+            if (PlayerUtil.isFakePlayer(player)) {
                 ci.cancel();
             }
         }

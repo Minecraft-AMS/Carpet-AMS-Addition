@@ -23,9 +23,9 @@ package carpetamsaddition.mixin.rule.fancyFakePlayerName;
 import carpet.patches.EntityPlayerMPFake;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyFakePlayerNameTeamController;
 import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyNameHelper;
+import carpetamsaddition.utils.PlayerUtil;
 
 import net.minecraft.network.Connection;
 //#if MC>=12002
@@ -54,7 +54,7 @@ public abstract class PlayerManagerMixin {
     ) {
         if (
             !Objects.equals(CarpetAMSAdditionSettings.fancyFakePlayerName, "false") &&
-            FakePlayerHelper.isFakePlayer(player) &&
+            PlayerUtil.isFakePlayer(player) &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {
             FancyNameHelper.addBotTeamNamePrefix(player, CarpetAMSAdditionSettings.fancyFakePlayerName);
@@ -71,7 +71,7 @@ public abstract class PlayerManagerMixin {
     private void kickFakePlayerFromBotTeam(ServerPlayer player, CallbackInfo info) {
         if (
             !Objects.equals(CarpetAMSAdditionSettings.fancyFakePlayerName, "false") &&
-            FakePlayerHelper.isFakePlayer(player) &&
+            PlayerUtil.isFakePlayer(player) &&
             player.server.getScoreboard().getPlayerTeam(CarpetAMSAdditionSettings.fancyFakePlayerName) != null &&
             !((EntityPlayerMPFake) player).isAShadow
         ) {

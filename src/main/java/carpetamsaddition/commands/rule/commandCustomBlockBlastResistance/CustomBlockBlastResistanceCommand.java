@@ -27,9 +27,10 @@ import carpetamsaddition.api.command.CommandBuilder;
 import carpetamsaddition.config.rule.commandCustomBlockBlastResistance.CustomBlockBlastResistanceConfig;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
-import carpetamsaddition.utils.RegexTools;
 import carpetamsaddition.utils.messenger.Messenger;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -100,8 +101,8 @@ public class CustomBlockBlastResistanceCommand implements AmsCommand {
         Messenger.tell(source, Messenger.f(Messenger.c(tr.tr("list"), Messenger.endl(), Messenger.sline()), Layout.GREEN, Layout.BOLD));
 
         for (Map.Entry<BlockState, Float> entry : CUSTOM_BLOCK_BLAST_RESISTANCE_MAP.entrySet()) {
-            String blockName = getBlockRegisterName(entry.getKey());
-            Messenger.tell(source, Messenger.f(Messenger.s(blockName + " / " + entry.getValue()), Layout.GREEN));
+            MutableComponent blockName = getBlockRegisterName(entry.getKey());
+            Messenger.tell(source, Messenger.f(Messenger.c(blockName, Messenger.s(" / " + entry.getValue())), Layout.GREEN));
         }
 
         return 1;
@@ -118,8 +119,8 @@ public class CustomBlockBlastResistanceCommand implements AmsCommand {
         return 1;
     }
 
-    private static String getBlockRegisterName(BlockState state) {
-        return RegexTools.getBlockRegisterName(state);
+    private static MutableComponent getBlockRegisterName(BlockState state) {
+        return Messenger.s(BuiltInRegistries.BLOCK.getKey(state.getBlock()));
     }
 
     private static void saveToJson() {

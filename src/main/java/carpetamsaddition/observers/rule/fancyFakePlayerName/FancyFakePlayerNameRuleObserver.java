@@ -29,26 +29,24 @@ import carpetamsaddition.helpers.rule.fancyFakePlayerName.FancyNameHelper;
 import carpetamsaddition.settings.RuleObserver;
 import carpetamsaddition.utils.MinecraftServerUtil;
 
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
-
-import java.util.List;
-import java.util.Objects;
 
 public class FancyFakePlayerNameRuleObserver extends RuleObserver<String> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<String> rule, String oldValue, String newValue) {
-        if (MinecraftServerUtil.serverIsRunning()) {
-            MinecraftServer server = MinecraftServerUtil.getServer();
-            FancyFakePlayerNameTeamController.removeBotTeam(server, oldValue);
-            if (!Objects.equals(newValue, "false")) {
-                List<ServerPlayer> playerEntities = server.getPlayerList().getPlayers();
-                for (ServerPlayer player : playerEntities) {
-                    if (player instanceof EntityPlayerMPFake && !((EntityPlayerMPFake) player).isAShadow) {
-                        FancyNameHelper.addBotTeamNamePrefix(player, newValue);
-                    }
-                }
+        if (!MinecraftServerUtil.serverIsRunning()) {
+            return;
+        }
+
+        FancyFakePlayerNameTeamController.removeBotTeam(MinecraftServerUtil.getServer(), oldValue);
+        if ("false".equals(newValue)) {
+            return;
+        }
+
+        for (ServerPlayer player : MinecraftServerUtil.getOnlinePlayers()) {
+            if (player instanceof EntityPlayerMPFake && !((EntityPlayerMPFake) player).isAShadow) {
+                FancyNameHelper.addBotTeamNamePrefix(player, newValue);
             }
         }
     }

@@ -20,8 +20,9 @@
 
 package carpetamsaddition.helpers.rule.fancyFakePlayerName;
 
+import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.EntityUtil;
-import carpetamsaddition.utils.MinecraftServerUtil;
+import carpetamsaddition.utils.PlayerUtil;
 
 import net.minecraft.world.scores.Scoreboard;
 import net.minecraft.world.scores.PlayerTeam;
@@ -33,10 +34,10 @@ import java.util.Objects;
 public class FancyFakePlayerNameTeamController {
     public static void kickFakePlayerFromBotTeam(ServerPlayer player, String teamName) {
         Scoreboard scoreboard = EntityUtil.getEntityServer(player).getScoreboard();
-        String playerName = player.getGameProfile().name();
+        String playerName = PlayerUtil.getName(player);
         PlayerTeam currentTeam = scoreboard.getPlayersTeam(playerName);
-        PlayerTeam targetTeam = scoreboard.getPlayerTeam(teamName);
-        if (currentTeam != null && currentTeam.equals(targetTeam)) {
+
+        if (currentTeam != null && currentTeam.getName().equals(teamName)) {
             scoreboard.removePlayerFromTeam(playerName, currentTeam);
         }
     }
@@ -46,11 +47,15 @@ public class FancyFakePlayerNameTeamController {
     }
 
     public static void removeBotTeam(MinecraftServer server, String teamName) {
-        if (MinecraftServerUtil.serverIsRunning()) {
-            PlayerTeam fancyFakePlayerNameTeam = server.getScoreboard().getPlayerTeam(teamName);
-            if (!Objects.equals(teamName, "false") && fancyFakePlayerNameTeam != null) {
-                server.getScoreboard().removePlayerTeam(fancyFakePlayerNameTeam);
-            }
+        if (Objects.equals("false", CarpetAMSAdditionSettings.fancyFakePlayerName)) {
+            return;
+        }
+
+        Scoreboard scoreboard = server.getScoreboard();
+        PlayerTeam team = scoreboard.getPlayerTeam(teamName);
+
+        if (team != null) {
+            scoreboard.removePlayerTeam(team);
         }
     }
 }

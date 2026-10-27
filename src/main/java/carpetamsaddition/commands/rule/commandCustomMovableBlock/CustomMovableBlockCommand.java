@@ -28,8 +28,8 @@ import carpetamsaddition.translations.Translator;
 import carpetamsaddition.config.rule.commandCustomMovableBlock.CustomMovableBlockConfig;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.messenger.Messenger;
-import carpetamsaddition.utils.RegexTools;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.commands.CommandSourceStack;
 
@@ -121,6 +121,6 @@ public class CustomMovableBlockCommand implements AmsCommand {
     }
 
     private static String getBlockName(BlockState blockState) {
-        return RegexTools.getBlockRegisterName(blockState);
+        return BuiltInRegistries.BLOCK.getKey(blockState.getBlock()).toString();
     }
 }

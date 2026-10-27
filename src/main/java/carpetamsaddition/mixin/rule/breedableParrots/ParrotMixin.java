@@ -21,8 +21,8 @@
 package carpetamsaddition.mixin.rule.breedableParrots;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.utils.RegexTools;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 //#if MC>=260200
 //$$ import net.minecraft.world.entity.EntityTypes;
@@ -64,7 +64,7 @@ public abstract class ParrotMixin extends ShoulderRidingEntity {
     @Inject(method = "isFood", at = @At("HEAD"), cancellable = true)
     private void isBreedingItem(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (!Objects.equals(CarpetAMSAdditionSettings.breedableParrots, "none")) {
-            String item = RegexTools.getItemRegisterName(stack.getItem().toString());
+            String item = BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
             if (Objects.equals(CarpetAMSAdditionSettings.breedableParrots, item)) {
                 cir.setReturnValue(true);
             }

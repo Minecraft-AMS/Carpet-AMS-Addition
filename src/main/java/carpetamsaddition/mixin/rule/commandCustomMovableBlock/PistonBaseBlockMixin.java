@@ -22,8 +22,8 @@ package carpetamsaddition.mixin.rule.commandCustomMovableBlock;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.commands.rule.commandCustomMovableBlock.CustomMovableBlockCommand;
-import carpetamsaddition.utils.RegexTools;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.piston.PistonBaseBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -43,7 +43,7 @@ import java.util.Objects;
 public abstract class PistonBaseBlockMixin {
     @Inject(method = "isPushable", at = @At("HEAD"), cancellable = true)
     private static void MovableBlocks(BlockState state, Level world, BlockPos blockPos, Direction direction, boolean canBreak, Direction pistonDir, CallbackInfoReturnable<Boolean> cir) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomMovableBlock, "false") && CustomMovableBlockCommand.CUSTOM_MOVABLE_BLOCKS.contains(RegexTools.getBlockRegisterName(state))) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomMovableBlock, "false") && CustomMovableBlockCommand.CUSTOM_MOVABLE_BLOCKS.contains(BuiltInRegistries.BLOCK.getKey(state.getBlock()).toString())) {
             BlockEntity blockEntity = world.getBlockEntity(blockPos);
             //#if MC>=11700
             boolean isBottomY = blockPos.getY() == world.getMinY();
