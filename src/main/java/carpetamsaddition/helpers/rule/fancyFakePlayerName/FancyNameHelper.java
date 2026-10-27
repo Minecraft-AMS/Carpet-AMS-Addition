@@ -37,6 +37,8 @@ import net.minecraft.server.level.ServerPlayer;
 //$$ import java.util.Optional;
 //#endif
 
+import java.util.Objects;
+
 public class FancyNameHelper {
     public static void addBotTeamNamePrefix(ServerPlayer player, String teamName) {
         MinecraftServer server = EntityUtil.getEntityServer(player);
@@ -72,7 +74,7 @@ public class FancyNameHelper {
     public static String addBotNameSuffix(final CommandContext<?> context, final String name, String teamName) {
         String playerName = StringArgumentType.getString(context, name);
 
-        if (!"player".equals(name) || "false".equals(teamName)) {
+        if (!Objects.equals(name, "player") || Objects.equals(teamName, "false")) {
             return playerName;
         }
 

@@ -32,6 +32,8 @@ import carpetamsaddition.utils.MinecraftServerUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.Objects;
+
 public class FancyFakePlayerNameRuleObserver extends RuleObserver<String> {
     @Override
     public void onValueChange(CommandSourceStack source, CarpetRule<String> rule, String oldValue, String newValue) {
@@ -40,7 +42,7 @@ public class FancyFakePlayerNameRuleObserver extends RuleObserver<String> {
         }
 
         FancyFakePlayerNameTeamController.removeBotTeam(MinecraftServerUtil.getServer(), oldValue);
-        if ("false".equals(newValue)) {
+        if (Objects.equals(newValue, "false")) {
             return;
         }
 

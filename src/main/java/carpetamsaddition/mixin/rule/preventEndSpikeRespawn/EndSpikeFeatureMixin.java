@@ -35,6 +35,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Objects;
+
 @Mixin(SpikeFeature.class)
 public abstract class EndSpikeFeatureMixin {
     @WrapOperation(
@@ -45,7 +47,7 @@ public abstract class EndSpikeFeatureMixin {
         )
     )
     private void onSetBlockState(SpikeFeature endSpikeFeature, LevelWriter modifiableWorld, BlockPos blockPos, BlockState blockState, Operation<Void> original) {
-        if (CarpetAMSAdditionSettings.preventEndSpikeRespawn.equals("false")) {
+        if (Objects.equals(CarpetAMSAdditionSettings.preventEndSpikeRespawn, "false")) {
             original.call(endSpikeFeature, modifiableWorld, blockPos, blockState);
         }
     }
@@ -63,7 +65,7 @@ public abstract class EndSpikeFeatureMixin {
         cancellable = true
     )
     private void onSpawnEntity(CallbackInfo ci) {
-        if (CarpetAMSAdditionSettings.preventEndSpikeRespawn.equals("true")) {
+        if (Objects.equals(CarpetAMSAdditionSettings.preventEndSpikeRespawn, "true")) {
             ci.cancel();
         }
     }

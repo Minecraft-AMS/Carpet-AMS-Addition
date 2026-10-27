@@ -37,7 +37,7 @@ public class FancyFakePlayerNameTeamController {
         String playerName = PlayerUtil.getName(player);
         PlayerTeam currentTeam = scoreboard.getPlayersTeam(playerName);
 
-        if (currentTeam != null && currentTeam.getName().equals(teamName)) {
+        if (currentTeam != null && Objects.equals(currentTeam.getName(), teamName)) {
             scoreboard.removePlayerFromTeam(playerName, currentTeam);
         }
     }
@@ -47,7 +47,7 @@ public class FancyFakePlayerNameTeamController {
     }
 
     public static void removeBotTeam(MinecraftServer server, String teamName) {
-        if (Objects.equals("false", CarpetAMSAdditionSettings.fancyFakePlayerName)) {
+        if (Objects.equals(CarpetAMSAdditionSettings.fancyFakePlayerName, "false")) {
             return;
         }
 

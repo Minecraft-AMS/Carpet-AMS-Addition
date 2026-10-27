@@ -58,6 +58,7 @@ import org.jetbrains.annotations.NotNull;
 //$$ import java.io.ByteArrayInputStream;
 //$$ import java.nio.charset.StandardCharsets;
 //#endif
+import java.util.Objects;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -271,7 +272,7 @@ public final class AmsRecipeManager {
         List<Object> recipes = new ArrayList<>();
 
         for (Object recipe : server.getRecipeManager().getRecipes()) {
-            if (MOD_ID.equals(getRecipeIdentifier(recipe).getNamespace())) {
+            if (Objects.equals(getRecipeIdentifier(recipe).getNamespace(), MOD_ID)) {
                 recipes.add(recipe);
             }
         }

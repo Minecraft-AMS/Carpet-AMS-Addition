@@ -93,7 +93,7 @@ public class AMSTranslations {
         return translation;
     }
 
-    @SuppressWarnings({"unchecked", "IfCanBeSwitch"})
+    @SuppressWarnings("unchecked")
     private static void buildTranslationMap(Map<String, String> translation, Map<String, Object> yaml, String prefix) {
         yaml.forEach((key, value) -> {
             String fullKey = prefix.isEmpty() ? key : prefix + "." + key;
@@ -144,7 +144,6 @@ public class AMSTranslations {
         return translateTextComponent(text, lang, Style.EMPTY);
     }
 
-    @SuppressWarnings("PatternVariableCanBeUsed")
     @NotNull
     private static MutableComponent translateTextComponent(@NotNull Component text, String lang, Style parentStyle) {
         Style style = translateStyle(text.getStyle(), lang).applyTo(parentStyle);
@@ -162,7 +161,7 @@ public class AMSTranslations {
 
                 String translated = translateKeyToFormattedString(lang, key);
 
-                if (translated != null && !translated.equals(key)) {
+                if (translated != null && !Objects.equals(translated, key)) {
 
                     Object[] args = translatableContents.getArgs();
                     MutableComponent newComponent;

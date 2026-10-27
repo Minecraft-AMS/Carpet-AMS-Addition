@@ -40,6 +40,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Objects;
+
 @Mixin(ServerGamePacketListenerImpl.class)
 public abstract class ServerPlayNetworkHandlerMixin {
     @Shadow
@@ -53,7 +55,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
 
         Identifier packetChannelId = NetworkUtil.getChannelId(packet);
 
-        if (packetChannelId.getNamespace().equals(AMS_CustomPayload.CHANNEL_NAMESPACE) && !AMS_CustomPayload.CHANNEL_ID.equals(packetChannelId)) {
+        if (Objects.equals(packetChannelId.getNamespace(), AMS_CustomPayload.CHANNEL_NAMESPACE) && !AMS_CustomPayload.CHANNEL_ID.equals(packetChannelId)) {
             NetworkUtil.sendIncompatibleProtocolWarn(packetChannelId, player);
             return;
         }

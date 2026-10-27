@@ -27,6 +27,7 @@ import net.minecraft.commands.CommandSourceStack;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Constructor;
+import java.util.Objects;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -188,7 +189,7 @@ public final class AmsRuleMetadata {
     @SuppressWarnings({"unchecked", "rawtypes"})
     private static Object parseValue(Class<?> type, String value) {
         if (type == Boolean.TYPE || type == Boolean.class) {
-            if (!"true".equals(value) && !"false".equals(value)) {
+            if (!Objects.equals(value, "true") && !Objects.equals(value, "false")) {
                 throw new IllegalArgumentException("Expected true or false");
             }
             return Boolean.valueOf(value);

@@ -96,7 +96,6 @@ public final class LocationTagManager {
         }
     }
 
-    @SuppressWarnings("PatternVariableCanBeUsed")
     public static void chunkLoaded(LevelChunk chunk, boolean loaded) {
         if (!(chunk.getLevel() instanceof ServerLevel)) {
             return;
@@ -146,7 +145,6 @@ public final class LocationTagManager {
         //#endif
     }
 
-    @SuppressWarnings("PatternVariableCanBeUsed")
     public static void changed(LevelChunk chunk) {
         if (available && isEnabled() && chunk.getLevel() instanceof ServerLevel) {
             ServerLevel level = (ServerLevel) chunk.getLevel();
@@ -154,7 +152,6 @@ public final class LocationTagManager {
         }
     }
 
-    @SuppressWarnings("PatternVariableCanBeUsed")
     public static void changed(BlockEntity entity) {
         if (!(entity instanceof SignBlockEntity) || !(entity.getLevel() instanceof ServerLevel)) {
             return;
@@ -183,16 +180,15 @@ public final class LocationTagManager {
         return count;
     }
 
-    @SuppressWarnings("PatternVariableCanBeUsed")
     private static void scan(ServerLevel level, LevelChunk chunk) {
         List<LocationTagIndex.Entry> found = new ArrayList<>();
         String dimension = dimension(level);
 
         for (BlockEntity entity : chunk.getBlockEntities().values()) {
-            if (entity instanceof SignBlockEntity && !entity.isRemoved() && LocationTagSignCompat.type(entity.getBlockState().getBlock()).equals(data.sign)) {
+            if (entity instanceof SignBlockEntity && !entity.isRemoved() && Objects.equals(LocationTagSignCompat.type(entity.getBlockState().getBlock()), data.sign)) {
                 SignBlockEntity sign = (SignBlockEntity) entity;
                 String name = LocationTagSignCompat.line(sign, 1).trim() + LocationTagSignCompat.line(sign, 2).trim() + LocationTagSignCompat.line(sign, 3).trim();
-                if (LocationTagSignCompat.line(sign, 0).trim().equals(data.marker) && !name.isEmpty()) {
+                if (Objects.equals(LocationTagSignCompat.line(sign, 0).trim(), data.marker) && !name.isEmpty()) {
                     found.add(new LocationTagIndex.Entry(0, name, dimension, entity.getBlockPos().getX(), entity.getBlockPos().getY(), entity.getBlockPos().getZ()));
                 }
             }
