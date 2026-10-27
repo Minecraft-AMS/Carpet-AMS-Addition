@@ -32,6 +32,8 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
+import java.util.Objects;
+
 @GameVersion(version = "Minecraft >= 1.20.5")
 @Mixin(RangedAttribute.class)
 public abstract class RangedAttributeMixin {
@@ -39,7 +41,7 @@ public abstract class RangedAttributeMixin {
     private double modifyPlayerBlockInteractionMaxValue(double original, double value) {
         if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
             RangedAttribute clampedEntityAttribute = (RangedAttribute) (Object) this;
-            if (clampedEntityAttribute.getDescriptionId().equals(Attributes.BLOCK_INTERACTION_RANGE.value().getDescriptionId())) {
+            if (Objects.equals(clampedEntityAttribute.getDescriptionId(), Attributes.BLOCK_INTERACTION_RANGE.value().getDescriptionId())) {
                 return CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange;
             } else {
                 return original;
@@ -53,7 +55,7 @@ public abstract class RangedAttributeMixin {
     private double modifyPlayerEntityInteractionMaxValue(double original, double value) {
         if (CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange != -1.0D) {
             RangedAttribute clampedEntityAttribute = (RangedAttribute) (Object) this;
-            if (clampedEntityAttribute.getDescriptionId().equals(Attributes.ENTITY_INTERACTION_RANGE.value().getDescriptionId())) {
+            if (Objects.equals(clampedEntityAttribute.getDescriptionId(), Attributes.ENTITY_INTERACTION_RANGE.value().getDescriptionId())) {
                 return CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
             } else {
                 return original;

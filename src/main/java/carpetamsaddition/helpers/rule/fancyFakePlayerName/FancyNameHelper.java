@@ -20,9 +20,9 @@
 
 package carpetamsaddition.helpers.rule.fancyFakePlayerName;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.utils.EntityUtil;
 import carpetamsaddition.utils.Layout;
+import carpetamsaddition.utils.PlayerUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -42,45 +42,42 @@ import java.util.Objects;
 public class FancyNameHelper {
     public static void addBotTeamNamePrefix(ServerPlayer player, String teamName) {
         MinecraftServer server = EntityUtil.getEntityServer(player);
-        if (server != null) {
-            Scoreboard scoreboard = server.getScoreboard();
-            PlayerTeam team = scoreboard.getPlayerTeam(teamName);
 
-            if (team == null) {
-                team = FancyFakePlayerNameTeamController.addBotTeam(server, teamName);
-                team.setPlayerPrefix(Messenger.f(Messenger.s(String.format("[%s] ", teamName)), Layout.BOLD));
-                //#if MC>=260200
-                //$$ team.setColor(Optional.of(TeamColor.DARK_GREEN));
-                //#else
-                team.setColor(Layout.DARK_GREEN.getFormatting());
-                //#endif
-            }
-
-            String playerName = player.getGameProfile().name();
-            PlayerTeam currentTeam = scoreboard.getPlayersTeam(playerName);
-
-            if (currentTeam != null && currentTeam != team) {
-                scoreboard.removePlayerFromTeam(playerName, currentTeam);
-            }
-
-            if (currentTeam != team) {
-                scoreboard.addPlayerToTeam(playerName, team);
-            }
+        if (server == null) {
+            return;
         }
+
+        Scoreboard scoreboard = server.getScoreboard();
+        PlayerTeam team = scoreboard.getPlayerTeam(teamName);
+
+        if (team == null) {
+            team = FancyFakePlayerNameTeamController.addBotTeam(server, teamName);
+            team.setPlayerPrefix(Messenger.f(Messenger.s("[" + teamName + "] "), Layout.BOLD));
+            team.setColor(
+                //#if MC>=260200
+                //$$ Optional.of(TeamColor.DARK_GREEN)
+                //#else
+                Layout.DARK_GREEN.getFormatting()
+                //#endif
+            );
+        }
+
+        String playerName = PlayerUtil.getName(player);
+
+        if (scoreboard.getPlayersTeam(playerName) == team) {
+            return;
+        }
+
+        scoreboard.addPlayerToTeam(playerName, team);
     }
 
     public static String addBotNameSuffix(final CommandContext<?> context, final String name, String teamName) {
-        final String SUFFIX = "_" + CarpetAMSAdditionSettings.fancyFakePlayerName;
         String playerName = StringArgumentType.getString(context, name);
 
-        if (!name.equals("player")) {
-        	return playerName;
+        if (!Objects.equals(name, "player") || Objects.equals(teamName, "false")) {
+            return playerName;
         }
 
-        if (!Objects.equals(teamName, "false")) {
-            playerName = playerName + SUFFIX;
-        }
-
-        return playerName;
+        return playerName + "_" + teamName;
     }
 }

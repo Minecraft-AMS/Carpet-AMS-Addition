@@ -20,7 +20,7 @@ public final class BlockChunkLoaderManager {
 
     public static boolean matches(LoaderType type, ServerLevel world, BlockPos origin) {
         BlockLoaderConfig config = BlockLoaderConfigStore.get(type);
-        return !Objects.equals("false", type.permission()) && config.enabled && config.matches(world, origin);
+        return !Objects.equals(type.permission(), "false") && config.enabled && config.matches(world, origin);
     }
 
     public static void trigger(LoaderType type, ServerLevel world, BlockPos origin, BlockPos center) {

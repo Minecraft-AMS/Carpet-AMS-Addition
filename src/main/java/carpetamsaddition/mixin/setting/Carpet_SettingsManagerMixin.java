@@ -88,7 +88,6 @@ public abstract class Carpet_SettingsManagerMixin {
         }
     }
 
-    @SuppressWarnings("LocalMayUseName")
     @Inject(method = "setDefault", at = @At("HEAD"), cancellable = true)
     private void prepareLazyDefault(
         CommandSourceStack source, CarpetRule<?> rule, String newValue, CallbackInfoReturnable<Integer> cir,
@@ -191,7 +190,7 @@ public abstract class Carpet_SettingsManagerMixin {
 
         for (CarpetRule<?> rule : this.rules.values()) {
             String ruleName = CarpetUtil.getRuleName(rule);
-            if (AMS_NETWORK_PROTOCOL.equals(ruleName) || !CarpetUtil.hasCategory(rule, AmsRuleCategory.AMS_NETWORK)) {
+            if (Objects.equals(ruleName, AMS_NETWORK_PROTOCOL) || !CarpetUtil.hasCategory(rule, AmsRuleCategory.AMS_NETWORK)) {
                 continue;
             }
 
@@ -220,7 +219,7 @@ public abstract class Carpet_SettingsManagerMixin {
 
         String ruleName = CarpetUtil.getRuleName(rule);
 
-        if (AMS_NETWORK_PROTOCOL.equals(ruleName) || Objects.equals(newValue, CarpetUtil.getRuleDefaultValue(rule))) {
+        if (Objects.equals(ruleName, AMS_NETWORK_PROTOCOL) || Objects.equals(newValue, CarpetUtil.getRuleDefaultValue(rule))) {
             return false;
         }
 

@@ -24,7 +24,6 @@ import carpetamsaddition.CarpetAMSAdditionSettings;
 import carpetamsaddition.api.command.AmsCommand;
 import carpetamsaddition.api.command.Arguments;
 import carpetamsaddition.api.command.CommandBuilder;
-import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.*;
 import carpetamsaddition.network.payloads.rule.commandGetClientPlayerFPS.ClientPlayerFpsPayload_S2C;
@@ -57,7 +56,7 @@ public class GetClientPlayerFpsCommand implements AmsCommand {
 
     public static void sendFpsResult(ServerPlayer player, int fps) {
         CommandSourceStack source = pendingQueries.remove(player.connection);
-        if (source != null && !FakePlayerHelper.isFakePlayer(player)) {
+        if (source != null && !PlayerUtil.isFakePlayer(player)) {
             Messenger.tell(source, Messenger.f(tr.tr("feedback", PlayerUtil.getName(player), String.valueOf(fps)), Layout.GREEN));
         }
     }

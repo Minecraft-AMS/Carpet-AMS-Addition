@@ -35,6 +35,8 @@ import net.minecraft.world.level.BlockGetter;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import java.util.Objects;
+
 @Mixin(value = PistonBaseBlock.class, priority = 16888)
 public abstract class PistonBlockMixin {
     @WrapOperation(
@@ -45,7 +47,7 @@ public abstract class PistonBlockMixin {
         )
     )
     private static float noPush(BlockState blockState, BlockGetter blockView, BlockPos blockPos, Operation<Float> original) {
-        if (!CarpetAMSAdditionSettings.commandCustomBlockHardness.equals("false") ) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.commandCustomBlockHardness, "false")) {
             Block block = blockView.getBlockState(blockPos).getBlock();
             Float defaultHardness = CustomBlockHardnessCommand.DEFAULT_HARDNESS_MAP.get(block);
             if (defaultHardness != null && defaultHardness == -1.0F) {

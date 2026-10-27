@@ -40,6 +40,7 @@ public final class InteractionRangeHelper {
         return CarpetAMSAdditionSettings.maxPlayerEntityInteractionRange;
     }
 
+    //#if MC<12006
     @GameVersion(version = "Minecraft < 1.20.6")
     @SuppressWarnings("unused")
     public static boolean withinBlockRange(Player player, BlockPos pos) {
@@ -57,4 +58,5 @@ public final class InteractionRangeHelper {
             Mth.clamp(eye.z(), pos.getZ(), pos.getZ() + 1.0D)
         ) < MathUtil.square(range);
     }
+    //#endif
 }

@@ -51,6 +51,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
+import java.util.Objects;
 import java.util.Random;
 //#if MC>12006
 import java.util.function.BiConsumer;
@@ -113,30 +114,66 @@ public abstract class SheepMixin {
 
     @Unique
     private static boolean isJebSheep(Sheep sheepEntity) {
-        return sheepEntity.hasCustomName() && sheepEntity.getCustomName() != null && sheepEntity.getCustomName().getString().equals("jeb_");
+        return sheepEntity.hasCustomName() && sheepEntity.getCustomName() != null && Objects.equals(sheepEntity.getCustomName().getString(), "jeb_");
     }
 
     //#if MC>12006 && MC<260200
     @Unique
     private static Block getWoolBlockFromColor(DyeColor color) {
-        return switch (color) {
-            case WHITE -> Blocks.WHITE_WOOL;
-            case ORANGE -> Blocks.ORANGE_WOOL;
-            case MAGENTA -> Blocks.MAGENTA_WOOL;
-            case LIGHT_BLUE -> Blocks.LIGHT_BLUE_WOOL;
-            case YELLOW -> Blocks.YELLOW_WOOL;
-            case LIME -> Blocks.LIME_WOOL;
-            case PINK -> Blocks.PINK_WOOL;
-            case GRAY -> Blocks.GRAY_WOOL;
-            case LIGHT_GRAY -> Blocks.LIGHT_GRAY_WOOL;
-            case CYAN -> Blocks.CYAN_WOOL;
-            case PURPLE -> Blocks.PURPLE_WOOL;
-            case BLUE -> Blocks.BLUE_WOOL;
-            case BROWN -> Blocks.BROWN_WOOL;
-            case GREEN -> Blocks.GREEN_WOOL;
-            case RED -> Blocks.RED_WOOL;
-            case BLACK -> Blocks.BLACK_WOOL;
-        };
+        Block block;
+        switch (color) {
+            case WHITE:
+                block = Blocks.WHITE_WOOL;
+                break;
+            case ORANGE:
+                block = Blocks.ORANGE_WOOL;
+                break;
+            case MAGENTA:
+                block = Blocks.MAGENTA_WOOL;
+                break;
+            case LIGHT_BLUE:
+                block = Blocks.LIGHT_BLUE_WOOL;
+                break;
+            case YELLOW:
+                block = Blocks.YELLOW_WOOL;
+                break;
+            case LIME:
+                block = Blocks.LIME_WOOL;
+                break;
+            case PINK:
+                block = Blocks.PINK_WOOL;
+                break;
+            case GRAY:
+                block = Blocks.GRAY_WOOL;
+                break;
+            case LIGHT_GRAY:
+                block = Blocks.LIGHT_GRAY_WOOL;
+                break;
+            case CYAN:
+                block = Blocks.CYAN_WOOL;
+                break;
+            case PURPLE:
+                block = Blocks.PURPLE_WOOL;
+                break;
+            case BLUE:
+                block = Blocks.BLUE_WOOL;
+                break;
+            case BROWN:
+                block = Blocks.BROWN_WOOL;
+                break;
+            case GREEN:
+                block = Blocks.GREEN_WOOL;
+                break;
+            case RED:
+                block = Blocks.RED_WOOL;
+                break;
+            case BLACK:
+                block = Blocks.BLACK_WOOL;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown DyeColor: " + color);
+        }
+        return block;
     }
     //#endif
 }

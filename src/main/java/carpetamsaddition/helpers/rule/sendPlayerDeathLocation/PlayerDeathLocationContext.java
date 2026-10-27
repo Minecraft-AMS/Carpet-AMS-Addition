@@ -20,7 +20,6 @@
 
 package carpetamsaddition.helpers.rule.sendPlayerDeathLocation;
 
-import carpetamsaddition.helpers.FakePlayerHelper;
 import carpetamsaddition.fuzz.InvokeFuzzModCommand;
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
@@ -45,13 +44,13 @@ public class PlayerDeathLocationContext {
     }
 
     public static void realPlayerSendMessage(MinecraftServer server, ServerPlayer player, Level world) {
-        if (!FakePlayerHelper.isFakePlayer(player)) {
+        if (!PlayerUtil.isFakePlayer(player)) {
             sendMessage(server, player, world);
         }
     }
 
     public static void fakePlayerSendMessage(MinecraftServer server, ServerPlayer player, Level world) {
-        if (FakePlayerHelper.isFakePlayer(player)) {
+        if (PlayerUtil.isFakePlayer(player)) {
             sendMessage(server, player, world);
         }
     }

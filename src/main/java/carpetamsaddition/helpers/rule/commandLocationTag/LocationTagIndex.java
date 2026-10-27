@@ -96,14 +96,14 @@ public final class LocationTagIndex {
         boolean changed = false;
 
         for (Entry candidate : found) {
-            if (!candidate.chunkKey().equals(chunk)) {
+            if (!Objects.equals(candidate.chunkKey(), chunk)) {
                 throw new IllegalArgumentException("Location tag belongs to another chunk");
             }
 
             Entry old = positions.get(candidate.positionKey());
             remaining.remove(candidate.positionKey());
 
-            if (old != null && old.name.equals(candidate.name)) {
+            if (old != null && Objects.equals(old.name, candidate.name)) {
                 continue;
             }
 
@@ -154,7 +154,7 @@ public final class LocationTagIndex {
         List<Entry> result = new ArrayList<>();
 
         for (Entry entry : ordered) {
-            if (dimension == null || dimension.equals(entry.dimension)) {
+            if (dimension == null || Objects.equals(dimension, entry.dimension)) {
                 result.add(entry);
             }
         }

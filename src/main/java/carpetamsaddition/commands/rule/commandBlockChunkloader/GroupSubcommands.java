@@ -120,7 +120,7 @@ public class GroupSubcommands {
             return deny(context);
         }
 
-        if (!Objects.equals("all", value) && !Objects.equals("any", value)) {
+        if (!Objects.equals(value, "all") && !Objects.equals(value, "any")) {
             return invalid(context, "mode");
         }
 
@@ -131,7 +131,7 @@ public class GroupSubcommands {
             return 0;
         }
 
-        group.any = Objects.equals("any", value);
+        group.any = Objects.equals(value, "any");
 
         return save(context, type, config);
     }

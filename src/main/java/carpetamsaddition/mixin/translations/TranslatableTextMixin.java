@@ -31,6 +31,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
+import java.util.Objects;
+
 @Mixin(TranslatableContents.class)
 public abstract class TranslatableTextMixin {
 
@@ -52,7 +54,7 @@ public abstract class TranslatableTextMixin {
         )
     )
     private String applyAMSTranslation(String vanillaTranslatedFormattingString) {
-        if (this.key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX) && vanillaTranslatedFormattingString.equals(this.key)) {
+        if (this.key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX) && Objects.equals(vanillaTranslatedFormattingString, this.key)) {
             String amsTranslated = AMSTranslations.translateKeyToFormattedString(AMSTranslations.getServerLanguage(), this.key);
             if (amsTranslated != null) {
                 return amsTranslated;

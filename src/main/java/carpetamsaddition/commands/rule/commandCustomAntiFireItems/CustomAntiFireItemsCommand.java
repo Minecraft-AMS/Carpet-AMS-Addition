@@ -28,8 +28,8 @@ import carpetamsaddition.config.rule.commandAntiFireItems.CustomAntiFireItemsCon
 import carpetamsaddition.translations.Translator;
 import carpetamsaddition.utils.Layout;
 import carpetamsaddition.utils.messenger.Messenger;
-import carpetamsaddition.utils.RegexTools;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.world.item.ItemStack;
 
@@ -119,6 +119,6 @@ public class CustomAntiFireItemsCommand implements AmsCommand {
 
     @NotNull
     private static String getItemName(ItemStack stack) {
-        return RegexTools.getItemRegisterName(stack);
+        return BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
     }
 }

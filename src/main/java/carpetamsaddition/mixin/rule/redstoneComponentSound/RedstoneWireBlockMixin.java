@@ -58,7 +58,11 @@ public abstract class RedstoneWireBlockMixin {
         BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir
     ) {
         if (CarpetAMSAdditionSettings.redstoneComponentSound) {
+            //#if MC>=260400
+            //$$ SoundEvents.SAND.stepSound().ifPresent(sound -> world.playSound(player, pos, sound.value(), SoundSource.BLOCKS, 0.8f, 2.5f));
+            //#else
             world.playSound(player, pos, SoundEvents.SAND_STEP, SoundSource.BLOCKS, 0.8f, 2.5f);
+            //#endif
         }
     }
 }

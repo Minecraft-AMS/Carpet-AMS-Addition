@@ -21,7 +21,7 @@
 package carpetamsaddition.mixin.rule.fakePlayerPickUpController;
 
 import carpetamsaddition.CarpetAMSAdditionSettings;
-import carpetamsaddition.helpers.FakePlayerHelper;
+import carpetamsaddition.utils.PlayerUtil;
 
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +38,7 @@ import java.util.Objects;
 public abstract class ItemEntityMixin {
     @Inject(method = "playerTouch", at = @At("HEAD"), cancellable = true)
     private void onCanReplaceCurrentItem(Player player, CallbackInfo ci) {
-        if (!Objects.equals(CarpetAMSAdditionSettings.fakePlayerPickUpController, "false") && FakePlayerHelper.isFakePlayer(player)) {
+        if (!Objects.equals(CarpetAMSAdditionSettings.fakePlayerPickUpController, "false") && PlayerUtil.isFakePlayer(player)) {
             ItemStack mainHandStack = player.getMainHandItem();
             if (Objects.equals(CarpetAMSAdditionSettings.fakePlayerPickUpController, "MainHandOnly") && !mainHandStack.isEmpty()) {
                 ci.cancel();

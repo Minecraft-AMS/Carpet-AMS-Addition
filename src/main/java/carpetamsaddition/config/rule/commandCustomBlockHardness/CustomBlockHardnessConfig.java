@@ -24,7 +24,6 @@ import carpetamsaddition.CarpetAMSAdditionServer;
 import carpetamsaddition.config.template.AbstractMapJsonConfig;
 import carpetamsaddition.utils.IdentifierUtil;
 import carpetamsaddition.utils.MinecraftServerUtil;
-import carpetamsaddition.utils.RegexTools;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.server.MinecraftServer;
@@ -79,7 +78,7 @@ public class CustomBlockHardnessConfig extends AbstractMapJsonConfig<String, Flo
     public void saveBlockStates(Map<BlockState, Float> sourceMap) {
         Map<String, Float> storageMap = new HashMap<>();
         sourceMap.forEach((state, hardness) -> {
-            String blockId = RegexTools.getBlockRegisterName(state.getBlock().toString());
+            String blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock()).toString();
             storageMap.put(blockId, hardness);
         });
         super.saveToJson(storageMap);

@@ -27,6 +27,7 @@ import carpetamsaddition.network.AMS_PayloadManager;
 
 import net.minecraft.network.FriendlyByteBuf;
 
+import java.util.Objects;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -68,7 +69,7 @@ public class HandShakeS2CPayload extends AMS_CustomPayload {
 
     @Override
     public void handle() {
-        if (this.modVersion.equals(CarpetAMSAdditionClient.getVersion())) {
+        if (Objects.equals(this.modVersion, CarpetAMSAdditionClient.getVersion())) {
             CarpetAMSAdditionClient.LOGGER.info("You joined server with matched carpet-ams-addition v{}", this.modVersion);
         } else {
             CarpetAMSAdditionClient.LOGGER.info("You joined server with mismatched carpet-ams-addition version (client: v{}, server: v{})", CarpetAMSAdditionClient.getVersion(), this.modVersion);

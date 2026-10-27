@@ -20,6 +20,7 @@
 
 package carpetamsaddition.utils;
 
+import carpet.patches.EntityPlayerMPFake;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
@@ -51,7 +52,6 @@ public class PlayerUtil {
         return MinecraftServerUtil.getServer().getPlayerList().getPlayer(uuid);
     }
 
-    @SuppressWarnings("unused")
     public static ServerPlayer getServerPlayerEntity(String name) {
         return MinecraftServerUtil.getServer().getPlayerList().getPlayerByName(name);
     }
@@ -68,7 +68,6 @@ public class PlayerUtil {
         return player.getUUID();
     }
 
-    @SuppressWarnings("unused")
     public static Boolean isInWhitelist(Player player) {
         return MinecraftServerUtil.getServer().getPlayerList().getWhiteList().isWhiteListed(
             //#if MC>=12111
@@ -87,5 +86,13 @@ public class PlayerUtil {
         //#endif
     ) {
         return MinecraftServerUtil.getServer().getPlayerList().getWhiteList().isWhiteListed(gameProfile);
+    }
+
+    public static boolean isFakePlayer(Player player) {
+        return player instanceof EntityPlayerMPFake;
+    }
+
+    public static boolean isFakePlayer(ServerPlayer player) {
+        return player instanceof EntityPlayerMPFake;
     }
 }
