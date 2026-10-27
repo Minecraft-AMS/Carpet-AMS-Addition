@@ -31,11 +31,20 @@ import net.minecraft.server.level.TicketType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(value = TicketType.class, priority = 168)
 public abstract class TicketTypeMixin implements BlockLoaderTicketTypeAccess {
     @Unique
     private LoaderType ams$loaderType;
+
+    @Inject(method = "<clinit>", at = @At("TAIL"))
+    private static void addAmsTicketType(CallbackInfo ci) {
+        for (LoaderType type : LoaderType.values()) {
+            type.registerTicketType();
+        }
+    }
 
     @Override
     public void ams$setLoaderType(LoaderType type) {
