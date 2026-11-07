@@ -29,14 +29,15 @@ import carpetamsaddition.utils.messageTextEvent.HoverEventUtil;
 import carpetamsaddition.utils.messenger.Messenger;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 //#if MC<11904
+//$$ import net.minecraft.network.chat.BaseComponent;
 //$$ import net.minecraft.network.chat.TranslatableComponent;
 //#else
+import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.contents.TranslatableContents;
 //#endif
 import net.minecraft.server.level.ServerPlayer;
@@ -52,61 +53,63 @@ import java.util.*;
 
 public class AMSTranslations {
     private static final String LANG_DIR = String.format("assets/%s/lang", TranslationConstants.TRANSLATION_NAMESPACE);
-    public static final Map<String, Map<String, String>> translations = Maps.newLinkedHashMap();
-    public static final Set<String> languages = Sets.newHashSet();
+    private static final Map<String, Map<String, String>> translations = Maps.newLinkedHashMap();
 
     public static void loadTranslations() {
-        try {
-            List<String> availableLanguages = getAvailableLanguages();
-            availableLanguages.forEach(language -> {
-                try {
-                    Map<String, String> translation = loadTranslationForLanguage(language);
-                    translations.put(language, translation);
-                    languages.add(language);
-                } catch (IOException | YamlParseException e) {
-                    CarpetAMSAdditionServer.LOGGER.warn("Failed to load translation for language: {}", language, e);
-                }
-            });
-        } catch (IOException | YamlParseException e) {
-            CarpetAMSAdditionServer.LOGGER.warn("Failed to get available languages", e);
-        }
-    }
+        Map<String, Object> yaml = readTranslationYaml(LANG_DIR + "/meta/languages.yml");
 
-    private static List<String> getAvailableLanguages() throws IOException, YamlParseException {
-        String yamlData = FileUtil.readFile(LANG_DIR + "/meta/languages.yml");
-        Map<String, Object> yamlMap = TinyYamlParser.parse(yamlData);
-        Object languagesObj = yamlMap.getOrDefault("languages", new ArrayList<>());
-
-        if (languagesObj instanceof List) {
-            return TinyYamlParser.getNestedStringList(yamlMap, "languages");
+        if (yaml == null || !(yaml.get("languages") instanceof List)) {
+            return;
         }
 
-        return new ArrayList<>();
-    }
+        for (String language : TinyYamlParser.getNestedStringList(yaml, "languages")) {
+            Map<String, Object> languageYaml = readTranslationYaml(LANG_DIR + "/" + language + ".yml");
 
-    private static Map<String, String> loadTranslationForLanguage(String language) throws IOException, YamlParseException {
-        String path = LANG_DIR + "/" + language + ".yml";
-        String data = FileUtil.readFile(path);
-        Map<String, Object> yaml = TinyYamlParser.parse(data);
-        Map<String, String> translation = new LinkedHashMap<>();
-        buildTranslationMap(translation, yaml, "");
-        return translation;
-    }
-
-    @SuppressWarnings("unchecked")
-    private static void buildTranslationMap(Map<String, String> translation, Map<String, Object> yaml, String prefix) {
-        yaml.forEach((key, value) -> {
-            String fullKey = prefix.isEmpty() ? key : prefix + "." + key;
-            if (value instanceof String) {
-                translation.put(fullKey, (String) value);
-            } else if (value instanceof Map) {
-                buildTranslationMap(translation, (Map<String, Object>) value, fullKey);
-            } else if (value == null) {
-                translation.put(fullKey, "");
-            } else {
-                translation.put(fullKey, String.valueOf(value));
+            if (languageYaml == null) {
+                continue;
             }
-        });
+
+            Map<String, String> translation = new LinkedHashMap<>();
+            buildTranslationMap(translation, languageYaml);
+
+            translations.put(language, translation);
+        }
+    }
+
+    @Nullable
+    private static Map<String, Object> readTranslationYaml(String path) {
+        try {
+            return TinyYamlParser.parse(FileUtil.readFile(path));
+        } catch (IOException | YamlParseException e) {
+            CarpetAMSAdditionServer.LOGGER.warn("Failed to load translation YAML: {}", path, e);
+            return null;
+        }
+    }
+
+    private static void buildTranslationMap(Map<String, String> translation, Map<?, ?> yaml) {
+        Deque<YamlFrame> stack = new ArrayDeque<>();
+        stack.push(new YamlFrame(yaml, ""));
+
+        while (!stack.isEmpty()) {
+
+            YamlFrame frame = stack.peek();
+
+            if (!frame.entries.hasNext()) {
+                stack.pop();
+                continue;
+            }
+
+            Map.Entry<?, ?> entry = frame.entries.next();
+            String key = (String) entry.getKey();
+            String fullKey = frame.prefix.isEmpty() ? key : frame.prefix + "." + key;
+            Object value = entry.getValue();
+
+            if (value instanceof Map) {
+                stack.push(new YamlFrame((Map<?, ?>) value, fullKey));
+            } else {
+                translation.put(fullKey, Objects.toString(value, ""));
+            }
+        }
     }
 
     public static String getServerLanguage() {
@@ -124,9 +127,9 @@ public class AMSTranslations {
         return translated != null ? translated : getTranslation(TranslationConstants.DEFAULT_LANGUAGE).get(key);
     }
 
-    public static MutableComponent translate(Component text, ServerPlayer player) {
+    public static Component translate(Component text, ServerPlayer player) {
         if (!(player instanceof ServerPlayerEntityWithClientLanguage)) {
-            return Messenger.copy(text);
+            return text;
         }
 
         String clientLang = ((ServerPlayerEntityWithClientLanguage) player).ams$getClientLanguage().toLowerCase();
@@ -140,68 +143,89 @@ public class AMSTranslations {
     }
 
     @NotNull
-    private static MutableComponent translateTextComponent(@NotNull Component text, String lang) {
-        return translateTextComponent(text, lang, Style.EMPTY);
+    private static Component translateTextComponent(@NotNull Component text, String lang) {
+        return containsAMSTranslation(text) ? translateTextComponent(text, lang, Style.EMPTY) : text;
     }
 
-    @NotNull
-    private static MutableComponent translateTextComponent(@NotNull Component text, String lang, Style parentStyle) {
-        Style style = translateStyle(text.getStyle(), lang).applyTo(parentStyle);
-        //#if MC>=11904
-        if (text.getContents() instanceof TranslatableContents) {
-            TranslatableContents translatableContents = (TranslatableContents) text.getContents();
-        //#else
-        //$$ if (text instanceof TranslatableComponent) {
-        //$$     TranslatableComponent translatableContents = (TranslatableComponent) text;
-        //#endif
+    private static boolean containsAMSTranslation(Component text) {
+        if (!isNativeComponent(text)) {
+            return false;
+        }
 
-            String key = translatableContents.getKey();
-
+        String key = getTranslationKey(text);
+        if (key != null) {
             if (key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX)) {
-
-                String translated = translateKeyToFormattedString(lang, key);
-
-                if (translated != null && !Objects.equals(translated, key)) {
-
-                    Object[] args = translatableContents.getArgs();
-                    MutableComponent newComponent;
-
-                    if (args.length > 0) {
-
-                        Object[] translatedArgs = new Object[args.length];
-
-                        for (int i = 0; i < args.length; i++) {
-                            if (args[i] instanceof Component) {
-                                translatedArgs[i] = translateTextComponent((Component) args[i], lang, style);
-                            } else {
-                                translatedArgs[i] = args[i];
-                            }
-                        }
-
-                        newComponent = Messenger.tr(translated, translatedArgs);
-
-                    } else {
-                        newComponent = Messenger.s(translated);
-                    }
-
-                    Messenger.style(newComponent, style);
-                    newComponent.getSiblings().clear();
-
-                    for (Component sibling : text.getSiblings()) {
-                        newComponent.append(translateTextComponent(sibling, lang, style));
-                    }
-
-                    return newComponent;
+                return true;
+            }
+            for (Object arg : getTranslationArgs(text)) {
+                if (arg instanceof Component && containsAMSTranslation((Component) arg)) {
+                    return true;
                 }
             }
         }
 
-        MutableComponent result = Messenger.copy(text);
+        Component hoverText = HoverEventUtil.getText(text.getStyle().getHoverEvent());
+        if (hoverText != null && containsAMSTranslation(hoverText)) {
+            return true;
+        }
+
+        for (Component sibling : text.getSiblings()) {
+            if (containsAMSTranslation(sibling)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    @NotNull
+    private static Component translateTextComponent(@NotNull Component text, String lang, Style parentStyle) {
+        if (!isNativeComponent(text)) {
+            return text;
+        }
+
+        Style style = translateStyle(text.getStyle(), lang).applyTo(parentStyle);
+        String key = getTranslationKey(text);
+        MutableComponent result;
+
+        if (key == null) {
+            result = Messenger.copy(text);
+        } else {
+            Object[] args = getTranslationArgs(text);
+            Object[] translatedArgs = translateArguments(args, lang, style);
+            String translated = key.startsWith(TranslationConstants.TRANSLATION_KEY_PREFIX) ? translateKeyToFormattedString(lang, key) : null;
+            if (translated != null && !Objects.equals(translated, key)) {
+                result = args.length == 0 ? Messenger.s(translated) : Messenger.tr(translated, translatedArgs);
+            } else if (translatedArgs != args) {
+                result = withTranslationArgs(text, key, translatedArgs);
+            } else {
+                result = Messenger.copy(text);
+            }
+        }
+
         Messenger.style(result, style);
         result.getSiblings().clear();
 
         for (Component sibling : text.getSiblings()) {
             result.append(translateTextComponent(sibling, lang, style));
+        }
+
+        return result;
+    }
+
+    private static Object[] translateArguments(Object[] args, String lang, Style style) {
+        Object[] result = args;
+
+        for (int i = 0; i < args.length; i++) {
+            if (args[i] instanceof Component) {
+                Component translated = translateTextComponent((Component) args[i], lang, style);
+                if (translated != args[i]) {
+                    if (result == args) {
+                        result = Arrays.copyOf(args, args.length, Object[].class);
+                    }
+                    result[i] = translated;
+                }
+            }
         }
 
         return result;
@@ -214,6 +238,43 @@ public class AMSTranslations {
             return style;
         }
 
-        return style.withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, translateTextComponent(hoverText, lang)));
+        Component translated = translateTextComponent(hoverText, lang);
+
+        return translated == hoverText ? style : style.withHoverEvent(HoverEventUtil.event(HoverEventUtil.SHOW_TEXT, translated));
+    }
+
+    private static boolean isNativeComponent(Component text) {
+        //#if MC>=11904
+        return text instanceof MutableComponent;
+        //#else
+        //$$ return text instanceof BaseComponent;
+        //#endif
+    }
+
+    @Nullable
+    private static String getTranslationKey(Component text) {
+        //#if MC>=11904
+        ComponentContents contents = text.getContents();
+        return contents instanceof TranslatableContents ? ((TranslatableContents) contents).getKey() : null;
+        //#else
+        //$$ return text instanceof TranslatableComponent ? ((TranslatableComponent) text).getKey() : null;
+        //#endif
+    }
+
+    private static Object[] getTranslationArgs(Component text) {
+        //#if MC>=11904
+        return ((TranslatableContents) text.getContents()).getArgs();
+        //#else
+        //$$ return ((TranslatableComponent) text).getArgs();
+        //#endif
+    }
+
+    private static MutableComponent withTranslationArgs(Component text, String key, Object[] args) {
+        //#if MC>=11904
+        String fallback = ((TranslatableContents) text.getContents()).getFallback();
+        return MutableComponent.create(new TranslatableContents(key, fallback, args));
+        //#else
+        //$$ return new TranslatableComponent(key, args);
+        //#endif
     }
 }
