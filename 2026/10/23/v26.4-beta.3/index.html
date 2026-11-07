@@ -118,7 +118,7 @@
 <li><p><strong>真玩家控制保护（realPlayerControlDisabled）</strong></p>
 <p>禁止通过 Carpet 的 <code>/player</code> 指令操作任何真玩家。</p>
 </li>
-<li><p><strong>禁用网络协议不兼容警告（incompatibleProtocolWarningDisabled）</strong></p>
+<li><p><strong>禁用网络协议不兼容警告（incompatibleNetworkProtocolWarningDisabled）</strong></p>
 <p>禁用发送给使用不兼容 AMS 网络协议的客户端的警告，仅在 <code>amsNetworkProtocol</code> 开启时生效。<br>该规则只控制警告消息，不会使不兼容的客户端获得协议支持。</p>
 </li>
 <li><p><strong>禁用方块破坏位置警告（destroyBlockPosWarningDisabled）</strong></p>
@@ -176,6 +176,9 @@
 </li>
 </ul>
 <h1 id="修复"><a href="#修复" class="headerlink" title="修复"></a>修复</h1><ul>
+<li>修复最大玩家方块交互距离（maxPlayerBlockInteractionRange）可被Carpet的antiCheatDisabled绕过的问题。</li>
+<li>修复最大玩家实体交互距离（maxPlayerEntityInteractionRange）可被Carpet的antiCheatDisabled绕过的问题。</li>
+<li>调整客户端最大交互距离（maxClientInteractionReachDistance）的注入位置，在射线检测使用距离时应用规则值。</li>
 <li>修复服务端转换翻译文本时父子样式继承丢失，导致维度名称等文本颜色异常的问题，同时处理悬浮文本中的翻译。</li>
 <li>修复客户端语言既不是中文也不是英文时的翻译回退，使用英文翻译。</li>
 <li>修复 Minecraft &gt;&#x3D; 1.21.11 中配方规则不可用的问题，并调整配方重载与玩家配方同步。</li>
@@ -258,6 +261,9 @@
 </li>
 </ul>
 <h1 id="Fixes"><a href="#Fixes" class="headerlink" title="Fixes"></a>Fixes</h1><ul>
+<li>Fixed Carpet antiCheatDisabled bypassing maxPlayerBlockInteractionRange.</li>
+<li>Fixed Carpet antiCheatDisabled bypassing maxPlayerEntityInteractionRange.</li>
+<li>Updated maxClientInteractionReachDistance to apply its configured value where raycasting consumes the distance.</li>
 <li>Fixed lost parent-to-child style inheritance during server-side translation, which could cause incorrect colors in dimension names and other text. Hover text translation is also handled.</li>
 <li>Fixed translation fallback for client languages other than Chinese or English; English is now used.</li>
 <li>Fixed recipe rules not working in Minecraft &gt;&#x3D; 1.21.11, and updated recipe reloading and player recipe synchronization.</li>
