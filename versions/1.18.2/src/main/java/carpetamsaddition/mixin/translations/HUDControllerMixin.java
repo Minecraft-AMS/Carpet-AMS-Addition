@@ -40,7 +40,7 @@ public abstract class HUDControllerMixin {
     @ModifyVariable(method = "addMessage", at = @At("HEAD"), argsOnly = true, remap = false)
     private static BaseComponent applyAMSTranslationToHudLoggerMessage(BaseComponent hudMessage, ServerPlayer player, BaseComponent hudMessage_) {
         if (player != null) {
-            hudMessage = AMSTranslations.translate(hudMessage, player);
+            hudMessage = (BaseComponent) AMSTranslations.translate(hudMessage, player);
         }
 
         return hudMessage;
