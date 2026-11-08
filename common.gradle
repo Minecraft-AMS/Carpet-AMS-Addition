@@ -14,12 +14,15 @@ repositories {
 	maven {
 		url = 'https://api.modrinth.com/maven'
 	}
+
 	maven {
 		url = 'https://masa.dy.fi/maven'
 	}
+
 	maven {
 		url = 'https://jitpack.io'
 	}
+
     maven {
         url = 'https://maven.1024byteeeee.top:1024/releases'
     }
@@ -31,7 +34,8 @@ configurations {
 }
 
 dependencies {
-	def processDependency = { dep ->
+	DependencyHandler dependencyHandler = project.getDependencies()
+	Closure<Dependency> processDependency = { Dependency dep ->
 		// https://github.com/FabricMC/fabric-loader/issues/783
 		if (dep instanceof ModuleDependency) {
 			if (!(dep.group == 'net.fabricmc' && dep.name == 'fabric-loader')) {
@@ -42,14 +46,16 @@ dependencies {
 		return dep
 	}
 
-	def autoImplementation = {
-		Object... args -> processDependency(unobfuscated ? implementation(*args) : modImplementation(*args))
+	Closure<Dependency> autoImplementation = {
+		Object notation -> processDependency.call(dependencyHandler.add(unobfuscated ? 'implementation' : 'modImplementation', notation))
 	}
-	def autoRuntimeOnly = {
-		Object... args -> processDependency(unobfuscated ? runtimeOnly(*args) : modRuntimeOnly(*args))
+
+	Closure<Dependency> autoRuntimeOnly = {
+		Object notation -> processDependency.call(dependencyHandler.add(unobfuscated ? 'runtimeOnly' : 'modRuntimeOnly', notation))
 	}
-	def autoCompileOnly = {
-		Object... args -> processDependency(unobfuscated ? compileOnly(*args) : modCompileOnly(*args))
+
+	Closure<Dependency> autoCompileOnly = {
+		Object notation -> processDependency.call(dependencyHandler.add(unobfuscated ? 'compileOnly' : 'modCompileOnly', notation))
 	}
 
 	// loom
@@ -96,6 +102,7 @@ loom {
             vmArgs '-Dcarpetamsaddition.mixin_audit=true'
             ideConfigGenerated false
         }
+
         mixinAuditClient {
             client()
             vmArgs '-Dcarpetamsaddition.mixin_audit=true'
@@ -163,6 +170,7 @@ processResources {
 			"carpet_dependency": project.carpet_dependency,
 			"minecraft_dependency": project.minecraft_dependency,
 		]
+
 		expand valueMap
 	}
 
@@ -214,36 +222,44 @@ license {
 			padLines = false
 		}
 	}
+
 	mapping {
 		java = 'SLASHSTAR_STYLE_NEWLINE'
 	}
+
 	ext {
 		name = project.mod_name
 		author = 'A Minecraft Server'
 		year = Calendar.getInstance().get(Calendar.YEAR).toString()
 	}
 }
+
 classes.dependsOn licenseFormatMain
 testClasses.dependsOn licenseFormatTest
 
+SoftwareComponent javaComponent = project.components.named('java', SoftwareComponent).get()
+
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifactId = base.archivesName.get()
-            version = fullArtifactVersion
+        register('mavenJava', MavenPublication) {
+			MavenPublication publication ->
+            publication.from(javaComponent)
+            publication.artifactId = base.archivesName.get()
+            publication.version = fullArtifactVersion
         }
     }
 
     repositories {
         maven {
             url = fullArtifactVersion.endsWith("dev") ? "https://maven.1024byteeeee.top:1024/snapshots" : "https://maven.1024byteeeee.top:1024/releases"
-            credentials(PasswordCredentials) {
+
+			credentials(PasswordCredentials) {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")
             }
+
             authentication {
-                basic(BasicAuthentication)
+                create('basic', BasicAuthentication)
             }
         }
     }
