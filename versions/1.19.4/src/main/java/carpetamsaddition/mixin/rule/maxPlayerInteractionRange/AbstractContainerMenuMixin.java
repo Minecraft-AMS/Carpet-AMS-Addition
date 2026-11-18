@@ -20,10 +20,14 @@
 
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRangeHelper;
+import carpetamsaddition.utils.MathUtil;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -31,12 +35,30 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 
-@SuppressWarnings("SimplifiableConditionalExpression")
 @GameVersion(version = "Minecraft < 1.20.5")
 @Mixin(AbstractContainerMenu.class)
 public abstract class AbstractContainerMenuMixin {
-    @ModifyReturnValue(method = "stillValid(Lnet/minecraft/world/inventory/ContainerLevelAccess;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/block/Block;)Z", at = @At("RETURN"))
-    private static boolean stillValid(boolean original) {
-        return CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D ? true : original;
+    @WrapOperation(
+        method = "method_17696",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/player/Player;distanceToSqr(DDD)D"
+        )
+    )
+    private static double ams$playerToBlockAABB(Player player, double cx, double cy, double cz, Operation<Double> original) {
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return InteractionRangeHelper.aabbDistanceSqr(player.getEyePosition(1.0F), cx, cy, cz);
+        }
+
+        return original.call(player, cx, cy, cz);
+    }
+
+    @ModifyExpressionValue(method = "method_17696", at = @At(value = "CONSTANT", args = "doubleValue=64.0D"))
+    private static double stillValid(double original) {
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return MathUtil.square(InteractionRangeHelper.blockRange());
+        } else {
+            return original;
+        }
     }
 }

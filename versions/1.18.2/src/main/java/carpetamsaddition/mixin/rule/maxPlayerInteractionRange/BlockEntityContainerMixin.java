@@ -20,10 +20,13 @@
 
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
-import carpetamsaddition.CarpetAMSAdditionSettings;
+import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRangeHelper;
 import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.*;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,10 +42,25 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
     RandomizableContainerBlockEntity.class,
 })
 public abstract class BlockEntityContainerMixin {
+    @WrapOperation(
+        method = "stillValid",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/player/Player;distanceToSqr(DDD)D"
+        )
+    )
+    private double playerToBlockAABB(Player player, double cx, double cy, double cz, Operation<Double> original) {
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return InteractionRangeHelper.aabbDistanceSqr(player.getEyePosition(1.0F), cx, cy, cz);
+        }
+
+        return original.call(player, cx, cy, cz);
+    }
+
     @ModifyExpressionValue(method = "stillValid", at = @At(value = "CONSTANT", args = "doubleValue=64.0D"))
     private double modifyStillValidDistance(double original) {
-        if (CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange != -1.0D) {
-            return MathUtil.square(CarpetAMSAdditionSettings.maxPlayerBlockInteractionRange + 4.0D);
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return MathUtil.square(InteractionRangeHelper.blockRange());
         } else {
             return original;
         }

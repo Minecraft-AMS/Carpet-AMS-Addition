@@ -66,13 +66,7 @@ public abstract class ServerPlayerInteractionManagerMixin {
         }
     }
 
-    @ModifyExpressionValue(
-        method = "handleBlockBreakAction",
-        at = @At(
-            value = "CONSTANT",
-            args = "doubleValue=36.0D"
-        )
-    )
+    @ModifyExpressionValue(method = "handleBlockBreakAction", at = @At(value = "CONSTANT", args = "doubleValue=36.0D"))
     private double modifyBlockBreakDistance(double constant) {
         if (InteractionRangeHelper.blockRange() != -1.0D) {
             return MathUtil.square(InteractionRangeHelper.blockRange());

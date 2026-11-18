@@ -21,16 +21,20 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRangeHelper;
+import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
-import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 import org.objectweb.asm.Opcodes;
+
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
@@ -38,6 +42,39 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft < 1.20.5")
 @Mixin(value = ServerGamePacketListenerImpl.class, priority = 168)
 public abstract class ServerPlayNetworkHandlerMixin {
+    @Shadow
+    public ServerPlayer player;
+
+    @WrapOperation(
+        method = "handleUseItemOn",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/world/phys/Vec3;distanceToSqr(Lnet/minecraft/world/phys/Vec3;)D"
+        )
+    )
+    private double ams$eyeToBlockAABB(Vec3 eye, Vec3 center, Operation<Double> original) {
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return InteractionRangeHelper.aabbDistanceSqr(eye, center.x(), center.y(), center.z());
+        }
+
+        return original.call(eye, center);
+    }
+
+    @WrapOperation(
+        method = "handleUseItemOn",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/level/ServerPlayer;distanceToSqr(DDD)D"
+        )
+    )
+    private double ams$playerToBlockAABB(ServerPlayer player, double cx, double cy, double cz, Operation<Double> original) {
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return InteractionRangeHelper.aabbDistanceSqr(player.getEyePosition(1.0F), cx, cy, cz);
+        }
+
+        return original.call(player, cx, cy, cz);
+    }
+
     @WrapOperation(
         method = "handleUseItemOn",
         at = @At(
@@ -48,7 +85,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     )
     private double modifyBlockInteractionDistance(Operation<Double> original) {
         if (InteractionRangeHelper.blockRange() != -1.0D) {
-            return Mth.square(InteractionRangeHelper.blockRange());
+            return MathUtil.square(InteractionRangeHelper.blockRange());
         } else {
             return original.call();
         }
@@ -57,7 +94,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     @ModifyExpressionValue(method = "handleUseItemOn", at = @At(value = "CONSTANT", args = "doubleValue=64.0D"))
     private double modifyBlockInteractionDistanceConstant(double constant) {
         if (InteractionRangeHelper.blockRange() != -1.0D) {
-            return Mth.square(InteractionRangeHelper.blockRange());
+            return MathUtil.square(InteractionRangeHelper.blockRange());
         } else {
             return constant;
         }
@@ -73,7 +110,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
     )
     private double modifyEntityInteractionDistance(Operation<Double> original) {
         if (InteractionRangeHelper.entityRange() != -1.0D) {
-            return Mth.square(InteractionRangeHelper.entityRange());
+            return MathUtil.square(InteractionRangeHelper.entityRange());
         } else {
             return original.call();
         }

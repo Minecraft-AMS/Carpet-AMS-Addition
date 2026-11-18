@@ -24,10 +24,14 @@ import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRange
 import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 import top.byteeeee.annotationtoolbox.annotation.GameVersion;
@@ -35,6 +39,24 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 @GameVersion(version = "Minecraft < 1.19.4")
 @Mixin(value = ServerGamePacketListenerImpl.class, priority = 168)
 public abstract class ServerPlayNetworkHandlerMixin {
+    @Shadow
+    public ServerPlayer player;
+
+    @WrapOperation(
+        method = "handleUseItemOn",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/server/level/ServerPlayer;distanceToSqr(DDD)D"
+        )
+    )
+    private double ams$playerToBlockAABB(ServerPlayer player, double cx, double cy, double cz, Operation<Double> original) {
+        if (InteractionRangeHelper.blockRange() != -1.0D) {
+            return InteractionRangeHelper.aabbDistanceSqr(player.getEyePosition(1.0F), cx, cy, cz);
+        }
+
+        return original.call(player, cx, cy, cz);
+    }
+
     @ModifyExpressionValue(
         method = "handleUseItemOn",
         at = @At(

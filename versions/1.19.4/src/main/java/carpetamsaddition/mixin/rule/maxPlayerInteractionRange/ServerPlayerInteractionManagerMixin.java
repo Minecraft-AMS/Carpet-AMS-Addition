@@ -21,6 +21,7 @@
 package carpetamsaddition.mixin.rule.maxPlayerInteractionRange;
 
 import carpetamsaddition.helpers.rule.maxPlayerInteractionRange.InteractionRangeHelper;
+import carpetamsaddition.utils.MathUtil;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
@@ -32,7 +33,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket;
 import net.minecraft.network.protocol.game.ServerboundPlayerActionPacket;
-import net.minecraft.util.Mth;
 
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
@@ -78,7 +78,7 @@ public abstract class ServerPlayerInteractionManagerMixin {
     )
     private double modifyBlockBreakDistance(Operation<Double> original) {
         if (InteractionRangeHelper.blockRange() != -1.0D) {
-            return Mth.square(InteractionRangeHelper.blockRange());
+            return MathUtil.square(InteractionRangeHelper.blockRange());
         } else {
             return original.call();
         }

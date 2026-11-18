@@ -43,6 +43,16 @@ public final class InteractionRangeHelper {
     //#if MC<12006
     @GameVersion(version = "Minecraft < 1.20.6")
     @SuppressWarnings("unused")
+    public static double aabbDistanceSqr(Vec3 eye, double centerX, double centerY, double centerZ) {
+        return eye.distanceToSqr(
+            Mth.clamp(eye.x(), centerX - 0.5D, centerX + 0.5D),
+            Mth.clamp(eye.y(), centerY - 0.5D, centerY + 0.5D),
+            Mth.clamp(eye.z(), centerZ - 0.5D, centerZ + 0.5D)
+        );
+    }
+
+    @GameVersion(version = "Minecraft < 1.20.6")
+    @SuppressWarnings("unused")
     public static boolean withinBlockRange(Player player, BlockPos pos) {
         double range = blockRange();
 
@@ -52,11 +62,7 @@ public final class InteractionRangeHelper {
 
         Vec3 eye = player.getEyePosition(1.0F);
 
-        return eye.distanceToSqr(
-            Mth.clamp(eye.x(), pos.getX(), pos.getX() + 1.0D),
-            Mth.clamp(eye.y(), pos.getY(), pos.getY() + 1.0D),
-            Mth.clamp(eye.z(), pos.getZ(), pos.getZ() + 1.0D)
-        ) < MathUtil.square(range);
+        return aabbDistanceSqr(eye, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) < MathUtil.square(range);
     }
     //#endif
 }
