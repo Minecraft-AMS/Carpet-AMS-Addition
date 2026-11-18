@@ -23,7 +23,10 @@ import top.byteeeee.annotationtoolbox.annotation.GameVersion;
 public abstract class GameRendererMixin {
     @ModifyExpressionValue(
         method = "pick(F)V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;blockInteractionRange()D")
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/player/LocalPlayer;blockInteractionRange()D"
+        )
     )
     private double modifyBlockInteractionRange(double original) {
         double range = CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
@@ -32,7 +35,10 @@ public abstract class GameRendererMixin {
 
     @ModifyExpressionValue(
         method = "pick(F)V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/player/LocalPlayer;entityInteractionRange()D")
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/client/player/LocalPlayer;entityInteractionRange()D"
+        )
     )
     private double modifyEntityInteractionRange(double original) {
         double range = CarpetAMSAdditionSettings.maxClientInteractionReachDistance;
